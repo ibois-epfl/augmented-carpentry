@@ -1,0 +1,17 @@
+# conda python 3.9.12
+
+conda install python=3.9.12
+
+or to create env directly in anaconda
+conda create -n an_env python=3.9.12
+
+
+
+- dearpygui
+pip install dearpygui==1.6.2
+ 
+- opencv
+pip install opencv-contrib-python 
+
+- cython
+pip install cython==3.0.0a10  # pre-release
