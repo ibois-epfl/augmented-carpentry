@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.1.0)
-project(cc_project VERSION 0.1.0 LANGUAGES CXX)
+project(AC VERSION 0.1.0 LANGUAGES CXX)
 
 include(CTest)
 enable_testing()
@@ -27,8 +27,12 @@ message(STATUS "Is GLUT found: ${GLUT_FOUND}")
 message(STATUS "GLUT found at: ${GLUT_INCLUDE_DIR}")
 message("GLUT_LIB : ${GLUT_LIBRARIES}")
 
-# ImGUI
-set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
+# # ImGUI
+# set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
+
+# GLFW
+set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw)
+
 
 include_directories(${PROJECT_NAME}
                         ${OPENGL_INCLUDE_DIRS}
