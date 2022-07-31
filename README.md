@@ -1,3 +1,11 @@
 # augmented-carpentrty
 
-The repository is being refactored ..
+Repo containing the code for the custom-made AR engine for Augmented Carpentry.
+
+To run code:
+
+linux command line ez mode
+
+    ./configure.sh
+    ./build.sh
+    ./run.sh

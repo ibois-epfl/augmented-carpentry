@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./build/out/AC
+./build/bin/AC

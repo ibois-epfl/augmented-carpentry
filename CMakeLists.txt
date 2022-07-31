@@ -5,7 +5,7 @@ project(AC VERSION 0.1.0 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
@@ -21,28 +21,24 @@ message(STATUS "Is OpenGL found: ${OPENGL_FOUND}")
 message(STATUS "OpenGL found at: ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
-# GLUT
-find_package(GLUT REQUIRED)
-message(STATUS "Is GLUT found: ${GLUT_FOUND}")
-message(STATUS "GLUT found at: ${GLUT_INCLUDE_DIR}")
-message("GLUT_LIB : ${GLUT_LIBRARIES}")
 
 # # ImGUI
 # set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
 
 # GLFW
-set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw)
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
+set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
+add_subdirectory(deps/glfw)
 
 
-include_directories(${PROJECT_NAME}
-                        ${OPENGL_INCLUDE_DIRS}
-                        ${GLUT_INCLUDE_DIRS}
-                        ${IMGUI_DIR}
-                        )
+target_include_directories(${PROJECT_NAME} 
+    PUBLIC ${OPENGL_INCLUDE_DIRS} 
+    PUBLIC ${GLFW_INCLUDE_DIRS}
+)
 
 target_link_libraries(${PROJECT_NAME} 
                         ${OPENGL_LIBRARIES}
-                        ${GLUT_LIBRARIES}
+                        glfw
                         )
 
 
