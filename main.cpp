@@ -5,9 +5,11 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 
-#include <GLFW/glfw3.h>
+#include "GLFW/glfw3.h"
 
 // #include "../deps/imgui/imgui.h"
+
+#include "deps/imgui/imgui.h"
 
 void displayMe(void)
 {
