@@ -50,12 +50,10 @@ endif()
 if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/imgui/CMakeLists.txt")
     message(FATAL_ERROR "The file deps/imgui/CMakeLists.txt does not exist. Please update or add one.")
 endif()
-# if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/gflags/CMakeLists.txt")
-#     message(FATAL_ERROR "The file deps/gflags/CMakeLists.txt does not exist. Please update or add one.")
-# endif()
-# if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/glog/CMakeLists.txt")
-#     message(FATAL_ERROR "The file deps/glog/CMakeLists.txt does not exist. Please update or add one.")
-# endif()
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/spdlog/CMakeLists.txt")
+    message(FATAL_ERROR "The file deps/spdlog/CMakeLists.txt does not exist. Please update or add one.")
+endif()
+
 
 # TODO: See if you can add/link opengl3 locally
 # OpenGL
@@ -74,28 +72,24 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
 set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
 add_subdirectory(deps/glfw)
 
-# GFlags
-add_subdirectory(deps/gflags)
-# set(GFLAGS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/gflags/include)
-
-# # GLOG
-# set(gflags_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/gflags/cmake/config)  # DEBUG?
-# set(GLOG_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glog/src)
-# add_subdirectory(deps/glog)
-# message(STATUS "GLOG_INCLUDE_DIRS: ${GLOG_INCLUDE_DIRS}")
+# spdlog
+set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
+add_subdirectory(deps/spdlog)
+message(STATUS "spdlog lib header only library ${spdlog}")
 
 target_include_directories(${PROJECT_NAME} 
     PUBLIC ${OPENGL_INCLUDE_DIRS} 
     PUBLIC ${GLFW_INCLUDE_DIRS}
     PUBLIC ${IMGUI_DIRS}
-    # PUBLIC ${GLOG_INCLUDE_DIRS}
+    PUBLIC ${SPD_DIRS}
     )
 
 target_link_libraries(${PROJECT_NAME} 
                         ${OPENGL_LIBRARIES}
                         glfw
                         imgui
-                        # glog
+                        spdlog
+                        spdlog
                         )
 
 

@@ -12,6 +12,7 @@
 #include "deps/imgui/imgui_impl_glfw.h"
 #include "deps/imgui/imgui_impl_opengl3.h"
 
+#include "deps/spdlog/include/spdlog/spdlog.h"
 
 static void glfwErrorCallback(int error, const char* description)
 {
@@ -20,6 +21,7 @@ static void glfwErrorCallback(int error, const char* description)
 
 int main(int argc, char** argv)
 {
+    spdlog::info("Welcome to spdlog!");
 
     // <<<<<<<<<<<< glfw init <<<<<<<<<<<<
 
@@ -67,7 +69,6 @@ int main(int argc, char** argv)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    std::cout << "POP" << std::endl;  // DEBUG
 
 
     // Application main loop
@@ -108,7 +109,6 @@ int main(int argc, char** argv)
     glfwDestroyWindow(window);
     glfwTerminate();
 
-    std::cout << "Hello world!" << std::endl;
 
     return 0;
 }
