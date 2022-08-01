@@ -4,3 +4,6 @@
 [submodule "deps/imgui"]
 	path = deps/imgui
 	url = https://github.com/ibois-epfl/imgui.git
+[submodule "deps/spdlog"]
+	path = deps/spdlog
+	url = https://github.com/ibois-epfl/spdlog.git

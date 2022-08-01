@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.1.0)
 project(AC VERSION 0.1.0 LANGUAGES CXX)
 
+# TODO: test if CTest is installed?
 include(CTest)
 enable_testing()
 
@@ -42,13 +43,21 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+# TODO: write function for this check of CMakelists.txt in each submodule
 if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/glfw/CMakeLists.txt")
     message(FATAL_ERROR "The file deps/glfw/CMakeLists.txt does not exist. Please update or add one.")
 endif()
 if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/imgui/CMakeLists.txt")
     message(FATAL_ERROR "The file deps/imgui/CMakeLists.txt does not exist. Please update or add one.")
 endif()
+# if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/gflags/CMakeLists.txt")
+#     message(FATAL_ERROR "The file deps/gflags/CMakeLists.txt does not exist. Please update or add one.")
+# endif()
+# if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/glog/CMakeLists.txt")
+#     message(FATAL_ERROR "The file deps/glog/CMakeLists.txt does not exist. Please update or add one.")
+# endif()
 
+# TODO: See if you can add/link opengl3 locally
 # OpenGL
 set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
@@ -56,11 +65,7 @@ message(STATUS "Is OpenGL found: ${OPENGL_FOUND}")
 message(STATUS "OpenGL found at: ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
-
 # ImGUI
-# set(IMGUI_DIRs
-#     ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui
-#     ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui/backends)
 set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
 add_subdirectory(deps/imgui)
 
@@ -69,17 +74,28 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
 set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
 add_subdirectory(deps/glfw)
 
+# GFlags
+add_subdirectory(deps/gflags)
+# set(GFLAGS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/gflags/include)
+
+# # GLOG
+# set(gflags_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/gflags/cmake/config)  # DEBUG?
+# set(GLOG_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glog/src)
+# add_subdirectory(deps/glog)
+# message(STATUS "GLOG_INCLUDE_DIRS: ${GLOG_INCLUDE_DIRS}")
 
 target_include_directories(${PROJECT_NAME} 
     PUBLIC ${OPENGL_INCLUDE_DIRS} 
     PUBLIC ${GLFW_INCLUDE_DIRS}
-    PRIVATE ${IMGUI_DIRS}
+    PUBLIC ${IMGUI_DIRS}
+    # PUBLIC ${GLOG_INCLUDE_DIRS}
     )
 
 target_link_libraries(${PROJECT_NAME} 
                         ${OPENGL_LIBRARIES}
                         glfw
                         imgui
+                        # glog
                         )
 
 

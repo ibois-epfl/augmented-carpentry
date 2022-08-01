@@ -21,14 +21,16 @@ static void glfwErrorCallback(int error, const char* description)
 int main(int argc, char** argv)
 {
 
+    // <<<<<<<<<<<< glfw init <<<<<<<<<<<<
+
     // Create window with graphics context
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) exit(EXIT_FAILURE);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    // glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     GLFWwindow* window = glfwCreateWindow(1280, 720, "AugmentedCarpentry", nullptr, nullptr);
     if (window == NULL)
     {
@@ -40,6 +42,8 @@ int main(int argc, char** argv)
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
+
+    // >>>>>>>>>>>> glfw init >>>>>>>>>>>>
 
 
     // Setup Dear ImGui context
