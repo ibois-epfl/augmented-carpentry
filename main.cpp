@@ -14,14 +14,20 @@
 
 #include "deps/spdlog/include/spdlog/spdlog.h"
 
+#include "ACConfig.h"
+
+
 static void glfwErrorCallback(int error, const char* description)
 {
     spdlog::error("Glfw Error %d: %s", error, description);
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
     spdlog::set_pattern("%^[%l] %v%$");
+    spdlog::info("%s Version: %s.%s", argv[0], AC_VERSION_MAJOR, AC_VERSION_MINOR);
+
+
     spdlog::info("Starting glfw window and context...");
     const char* glsl_version = "#version 130"; // GL 3.0 + GLSL 130
     glfwSetErrorCallback(glfwErrorCallback);

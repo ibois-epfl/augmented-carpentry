@@ -1,16 +1,17 @@
 
 cmake_minimum_required(VERSION 3.1.0)
-project(AC VERSION 0.1.0 LANGUAGES CXX)
+project(AC VERSION 0.1 LANGUAGES CXX)
+
+configure_file(ACConfig.h.in ACConfig.h)
 
 # TODO: test if CTest is installed?
 include(CTest)
 enable_testing()
 
 add_executable(${PROJECT_NAME} main.cpp)
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 ##########################
 ## 3rd libs
@@ -77,6 +78,9 @@ set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
 add_subdirectory(deps/spdlog)
 message(STATUS "spdlog lib header only library ${spdlog}")
 
+# TODO: Add OpenCV
+
+
 target_include_directories(${PROJECT_NAME} 
     PUBLIC ${OPENGL_INCLUDE_DIRS} 
     PUBLIC ${GLFW_INCLUDE_DIRS}
@@ -91,7 +95,6 @@ target_link_libraries(${PROJECT_NAME}
                         spdlog
                         spdlog
                         )
-
 
 
 # CPack
