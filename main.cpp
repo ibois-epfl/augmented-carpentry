@@ -6,73 +6,105 @@
 #include <GL/gl.h>
 
 #include "GLFW/glfw3.h"
-
-// #include "../deps/imgui/imgui.h"
+#include "GLES2/gl2.h"  // <-- comes with OpenGL3 or needs to be added?
 
 #include "deps/imgui/imgui.h"
+#include "deps/imgui/imgui_impl_glfw.h"
+#include "deps/imgui/imgui_impl_opengl3.h"
 
-void displayMe(void)
+
+static void glfwErrorCallback(int error, const char* description)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_POLYGON);
-        glVertex3f(0.5, 0.0, 0.5);
-        glVertex3f(0.5, 0.0, 0.0);
-        glVertex3f(0.0, 0.5, 0.0);
-        glVertex3f(0.0, 0.0, 0.5);
-    glEnd();
-    glFlush();
+    fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
 int main(int argc, char** argv)
 {
-    // glutInit(&argc, argv);
-    // glutInitDisplayMode(GLUT_SINGLE);
-    // glutInitWindowSize(400, 300);
-    // glutInitWindowPosition(100, 100);
-    // glutCreateWindow("Hello world!");
-    // glutDisplayFunc(displayMe);
-    // glutMainLoop();
 
-    std::cout << "Hello world!" << std::endl;
-
-    GLFWwindow* window;
-    if(!glfwInit())
+    // Create window with graphics context
+    glfwSetErrorCallback(glfwErrorCallback);
+    if (!glfwInit()) exit(EXIT_FAILURE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "AugmentedCarpentry", nullptr, nullptr);
+    if (window == NULL)
     {
-        fprintf(stderr, "Failed to initialize GLFW\n");
-        exit(EXIT_FAILURE);
-    }
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
-    if(!window)
-    {
-        fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
+        std::cout << "[ERROR] Failed to create GLFW window" << std::endl;
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
-    //  Main loop
-    while(!glfwWindowShouldClose(window))
+
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1); // Enable vsync
+
+
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsLight();
+
+    // GL 3.0 + GLSL 130
+    const char* glsl_version = "#version 130";
+
+    // Setup Platform/Renderer backends
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+
+    // Our state
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+    std::cout << "POP" << std::endl;  // DEBUG
+
+
+    // Application main loop
+    while (!glfwWindowShouldClose(window))
     {
-        //  Get size of framebuffer
-        int width, height;
-        glfwGetFramebufferSize(window, &width, &height);
-        //  Set viewport
-        glViewport(0, 0, width, height);
-        //  Clear color buffer
-        glClear(GL_COLOR_BUFFER_BIT);
-        //  Draw one triangle
-        glBegin(GL_TRIANGLES);
-        glColor3f(1,0,0);
-        glVertex2f(-0.6,-0.75);
-        glColor3f(0,1,0);
-        glVertex2f(0.6,-0.75);
-        glColor3f(0,0,1);
-        glVertex2f(0,0.75);
-        glEnd();
-        //  Swap buffers
-        glfwSwapBuffers(window);
-        //  Poll for events
         glfwPollEvents();
+
+        // Beginning of frame: update Renderer + Platform backend, start Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        if (show_demo_window)
+            ImGui::ShowDemoWindow(&show_demo_window);
+
+
+        // // End of frame: render Dear ImGui
+        // ImGui::Render();
+        // ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        // Rendering
+        ImGui::Render();
+        int display_w, display_h;
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+        glClear(GL_COLOR_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        glfwSwapBuffers(window);
     }
+
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
+
+    std::cout << "Hello world!" << std::endl;
 
     return 0;
 }
