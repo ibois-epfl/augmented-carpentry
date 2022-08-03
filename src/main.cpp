@@ -27,7 +27,9 @@ inline static void glfwErrorCallback(int error, const char* description) {
 int main(int argc, char* argv[]) {
     AIAC::Log::Init();
 
+#ifdef AC_VERSION_MAJOR, AC_VERSION_MINOR, AC_VERSION_PATCH
     AIAC_CLI_INFO("augmented_carpentry V:{0}.{1}.{2}", AC_VERSION_MAJOR, AC_VERSION_MINOR, AC_VERSION_PATCH);
+#endif
 
     AIAC_CLI_INFO("Setting up glfw + GL3");
     const char* glsl_version = "#version 130";  // GL 3.0 + GLSL 130

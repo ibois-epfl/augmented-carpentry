@@ -19,10 +19,36 @@ add_executable(${PROJECT_NAME}
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 ####################################################
-## Add preprocessor definitions
+## GLOBAL 3rd libs
 ####################################################
 
+# TODO: See if you can add/link opengl3 locally
+# OpenGL
+set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
+find_package(OpenGL 4.6.0 REQUIRED)
 
+message(STATUS "OpenGL found at: ${OPENGL_INCLUDE_DIR}")
+message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
+
+execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO)
+string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
+message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
+
+
+
+# # TODO: Add OpenCV
+# find_package(OpenCV 2.5.5 REQUIRED)
+
+
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
+
+
+####################################################
+## Add preprocessor definitions
+####################################################
 
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
@@ -38,7 +64,7 @@ target_compile_definitions(${PROJECT_NAME}
     )
 
 ####################################################
-## 3rd libs
+## LOCAL 3rd libs (sub-modules)
 ####################################################
 
 # Check/Download first all the submodules
@@ -80,11 +106,16 @@ foreach(DEP ${DEPS})
             message(STATUS "${DEP} is a submodule, setting up options for GLFW")
             set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
             set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
+            target_include_directories(${PROJECT_NAME} PUBLIC ${GLFW_INCLUDE_DIRS})
         elseif(${DEP}=="imgui")
             set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
+            target_include_directories(${PROJECT_NAME} PUBLIC ${IMGUI_DIRS})
         elseif(${DEP}=="spdlog")
             set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
+            target_include_directories(${PROJECT_NAME} PUBLIC ${SPD_DIRS})
         endif()
+
+        target_link_libraries(${PROJECT_NAME} ${DEP})
 
     else()
         message(FATAL_ERROR "No CMakeLists.txt file found in ${DEP} folder. Exiting CMake...")
@@ -93,32 +124,6 @@ endforeach()
 
 
 
-
-# TODO: See if you can add/link opengl3 locally
-# OpenGL
-set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
-find_package(OpenGL REQUIRED)
-message(STATUS "Is OpenGL found: ${OPENGL_FOUND}")
-message(STATUS "OpenGL found at: ${OPENGL_INCLUDE_DIR}")
-message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
-
-# TODO: Add OpenCV
-
-
-target_include_directories(${PROJECT_NAME} 
-    PUBLIC ${OPENGL_INCLUDE_DIRS} 
-    PUBLIC ${GLFW_INCLUDE_DIRS}
-    PUBLIC ${IMGUI_DIRS}
-    PUBLIC ${SPD_DIRS}
-    )
-
-target_link_libraries(${PROJECT_NAME} 
-                        ${OPENGL_LIBRARIES}
-                        glfw
-                        imgui
-                        spdlog
-                        spdlog
-                        )
 
 
 # CPack

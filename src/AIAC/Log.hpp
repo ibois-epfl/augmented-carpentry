@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Core.hpp"
 
 #include "../../deps/spdlog/include/spdlog/spdlog.h"
@@ -25,7 +24,6 @@ namespace AIAC
         static std::shared_ptr<spdlog::logger> s_ClientLogger;
     };
 }
-
 
 #ifdef SILENT_LOGGING
     #define AIAC_CORE_INFO(...)                     SPDLOG_LOGGER_INFO(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
