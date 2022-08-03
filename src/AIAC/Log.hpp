@@ -27,7 +27,7 @@ namespace AIAC
 }
 
 
-#if SILENT_LOGGING
+#ifdef SILENT_LOGGING
     #define AIAC_CORE_INFO(...)                     SPDLOG_LOGGER_INFO(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
     #define AIAC_CORE_WARN(...)                     SPDLOG_LOGGER_WARN(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
     #define AIAC_CORE_DEBUG(...)                    SPDLOG_LOGGER_DEBUG(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
