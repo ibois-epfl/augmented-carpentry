@@ -16,7 +16,7 @@
 
 // #include "../../ACConfig.h"  // ???
 
-#include "AIAC/Core.hpp"
+#include "AIAC/CLI.hpp"
 #include "AIAC/Client.hpp"
 #include "AIAC/Log.hpp"
 
@@ -26,7 +26,7 @@
 
 inline static void glfwErrorCallback(int error, const char* description)
 {
-    AIAC_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+    AIAC_CLI_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
 int main(int argc, char* argv[])
@@ -37,18 +37,18 @@ int main(int argc, char* argv[])
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit())
     {
-        AIAC_CORE_CRITICAL("Failed to initialize glfw");
+        AIAC_CLI_CRITICAL("Failed to initialize glfw");
         exit(EXIT_FAILURE);
     }
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CLI_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     GLFWwindow* window = glfwCreateWindow(1280, 720, "augmented_carpentry", nullptr, nullptr);
     if (window == NULL)
     {
-        AIAC_CORE_CRITICAL("Failed to create GLFW window");
+        AIAC_CLI_CRITICAL("Failed to create GLFW window");
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     glfwSwapInterval(1); // Enable vsync
 
 
-    AIAC_CORE_INFO("Starting ImGUI...");
+    AIAC_CLI_INFO("Starting ImGUI...");
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    AIAC_CORE_INFO("Starting main loop...");
+    AIAC_CLI_INFO("Starting main loop...");
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
         glfwSwapBuffers(window);
     }
 
-    AIAC_CORE_INFO("Cleaning up ImGui. Glfw, Opengl3...");
+    AIAC_CLI_INFO("Cleaning up ImGui. Glfw, Opengl3...");
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
