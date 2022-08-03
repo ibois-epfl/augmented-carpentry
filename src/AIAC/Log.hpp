@@ -34,11 +34,11 @@ namespace AIAC
     #define AIAC_CORE_ERROR(...)                    SPDLOG_LOGGER_ERROR(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
     #define AIAC_CORE_CRITICAL(...)                 SPDLOG_LOGGER_CRITICAL(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
 
-    #define AIAC_CLI_INFO(...)                      SPDLOG_LOGGER_INFO(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
-    #define AIAC_CLI_WARN(...)                      SPDLOG_LOGGER_WARN(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
-    #define AIAC_CLI_DEBUG(...)                     SPDLOG_LOGGER_DEBUG(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
-    #define AIAC_CLI_ERROR(...)                     SPDLOG_LOGGER_ERROR(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
-    #define AIAC_CLI_CRITICAL(...)                  SPDLOG_LOGGER_CRITICAL(AIAC::Log::GetCoreLogger(), __VA_ARGS__)
+    #define AIAC_CLI_INFO(...)                      SPDLOG_LOGGER_INFO(AIAC::Log::GetClientLogger(), __VA_ARGS__)
+    #define AIAC_CLI_WARN(...)                      SPDLOG_LOGGER_WARN(AIAC::Log::GetClientLogger(), __VA_ARGS__)
+    #define AIAC_CLI_DEBUG(...)                     SPDLOG_LOGGER_DEBUG(AIAC::Log::GetClientLogger(), __VA_ARGS__)
+    #define AIAC_CLI_ERROR(...)                     SPDLOG_LOGGER_ERROR(AIAC::Log::GetClientLogger(), __VA_ARGS__)
+    #define AIAC_CLI_CRITICAL(...)                  SPDLOG_LOGGER_CRITICAL(AIAC::Log::GetClientLogger(), __VA_ARGS__)
 #else
     #define AIAC_CORE_INFO
     #define AIAC_CORE_WARN

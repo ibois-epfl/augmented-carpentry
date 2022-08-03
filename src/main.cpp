@@ -16,7 +16,7 @@
 
 // #include "../../ACConfig.h"  // ???
 
-#include "AIAC/Log.hpp"
+#include "AIAC/Core.hpp"
 #include "AIAC/Client.hpp"
 #include "AIAC/Log.hpp"
 
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
     }
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CLI_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     GLFWwindow* window = glfwCreateWindow(1280, 720, "augmented_carpentry", nullptr, nullptr);
