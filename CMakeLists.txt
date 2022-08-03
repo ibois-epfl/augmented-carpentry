@@ -2,8 +2,6 @@
 cmake_minimum_required(VERSION 3.1.0)
 project(AC VERSION 0.1.0 LANGUAGES CXX)
 
-configure_file(ACConfig.h.in ACConfig.h)
-
 include(CTest)
 enable_testing()
 
@@ -19,8 +17,6 @@ add_executable(${PROJECT_NAME}
     )
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
-
 
 ####################################################
 ## Add preprocessor definitions
@@ -34,6 +30,12 @@ if(SILENT_LOGGING)
     target_compile_definitions(${PROJECT_NAME} PUBLIC SILENT_LOGGING=true)
 endif()
 
+# pre-compile macros versions
+target_compile_definitions(${PROJECT_NAME}
+    PUBLIC AC_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
+    PUBLIC AC_VERSION_MINOR=${PROJECT_VERSION_MINOR}
+    PUBLIC AC_VERSION_PATCH=${PROJECT_VERSION_PATCH}
+    )
 
 ####################################################
 ## 3rd libs
