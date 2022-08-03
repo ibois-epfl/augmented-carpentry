@@ -16,7 +16,7 @@
 
 // #include "../../ACConfig.h"  // ???
 
-#include "AIAC/CLI.hpp"
+#include "AIAC/Log.hpp"
 #include "AIAC/Client.hpp"
 #include "AIAC/Log.hpp"
 
