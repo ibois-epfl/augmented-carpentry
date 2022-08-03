@@ -24,13 +24,20 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})  # ??
 
 
+####################################################
+## Add preprocessor definitions
+####################################################
+
+option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
+
+if(SILENT_LOGGING)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC SILENT_LOGGING=true)
+endif()
 
 
-
-
-##########################
+####################################################
 ## 3rd libs
-##########################
+####################################################
 
 # Check/Download first all the submodules
 find_package(Git QUIET)

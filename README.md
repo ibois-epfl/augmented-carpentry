@@ -2,10 +2,41 @@
 
 Repo containing the code for the custom-made AR engine for Augmented Carpentry.
 
-To run code:
+To configure/build/run code:
 
 ```bash
-    ./configure.sh
+    ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
     ./build.sh
     ./run.sh
+```
+
+<br />
+
+## Guide for contributors
+Here's you can find some documentations and guidelines to contribute to augmented_carpentry.
+
+### Logging
+To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. There are two types of logging: one for the *core* (everything related to SLAM or 3D engine, low-level component of the AR engine) and one for *client* (everything on the upper level such as UI, utilities, sockets, web loders, etc.)
+```c++
+// for core logging
+AIAC_CORE_INFO("test_core_info");
+AIAC_CORE_WARN("test_core_warn");
+AIAC_CORE_CRITICAL("test_core_critical");
+AIAC_CORE_DEBUG("test_core_debug");
+AIAC_CORE_ERROR("test_core_error");
+
+// for client logging
+AIAC_CLI_INFO("test_cli_info");
+AIAC_CLI_WARN("test_cli_warn");
+AIAC_CLI_CRITICAL("test_cli_critical");
+AIAC_CLI_DEBUG("test_cli_debug");
+AIAC_CLI_ERROR("test_cli_error");
+```
+The output is like so:
+```bash
+[source main.cpp] [function main] [line 32] [16:30:05] CORE: test
+```
+The logging can be silenced by setting OFF the option in the main `CMakeLists.txt` and do clean reconfiguration.
+```cmake
+option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 ```
