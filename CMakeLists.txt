@@ -1,10 +1,9 @@
 
 cmake_minimum_required(VERSION 3.1.0)
-project(AC VERSION 0.1 LANGUAGES CXX)
+project(AC VERSION 0.1.0 LANGUAGES CXX)
 
 configure_file(ACConfig.h.in ACConfig.h)
 
-# TODO: test if CTest is installed?
 include(CTest)
 enable_testing()
 
@@ -20,13 +19,14 @@ add_executable(${PROJECT_NAME}
     )
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})  # ??
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 
 ####################################################
 ## Add preprocessor definitions
 ####################################################
+
+
 
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 

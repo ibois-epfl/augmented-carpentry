@@ -14,7 +14,7 @@
 
 #include "../deps/spdlog/include/spdlog/spdlog.h"
 
-// #include "../../ACConfig.h"  // ???
+#include "ACConfig.h"
 
 #include "AIAC/Core.hpp"
 #include "AIAC/Client.hpp"
@@ -33,6 +33,9 @@ int main(int argc, char* argv[])
 {
     AIAC::Log::Init();
 
+    AIAC_CLI_INFO("augmented_carpentry V:{0}.{1}.{2}", AC_VERSION_MAJOR, AC_VERSION_MINOR, AC_VERSION_PATCH);
+
+    AIAC_CLI_INFO("Setting up glfw + GL3");
     const char* glsl_version = "#version 130"; // GL 3.0 + GLSL 130
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit())
