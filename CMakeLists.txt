@@ -8,10 +8,25 @@ configure_file(ACConfig.h.in ACConfig.h)
 include(CTest)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp)
+# Get hpp/cpp of AIAC module
+file(GLOB AIAC_SRC
+    "src/AIAC/*.hpp"
+    "src/AIAC/*.cpp"
+)
+
+add_executable(${PROJECT_NAME}
+    src/main.cpp
+    ${AIAC_SRC}
+    )
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})  # ??
+
+
+
+
+
 
 ##########################
 ## 3rd libs
@@ -23,11 +38,12 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     option(GIT_SUBMODULE "Check submodules during build" ON)
     if(GIT_SUBMODULE)
         message(STATUS "Submodule update with latest commit")
-        # check version of git
+
         execute_process(
             COMMAND ${GIT_EXECUTABLE} --version
             OUTPUT_VARIABLE GIT_VERSION_STRING
         )
+
         string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
         set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
         set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
@@ -44,16 +60,29 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-# TODO: write function for this check of CMakelists.txt in each submodule
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/glfw/CMakeLists.txt")
-    message(FATAL_ERROR "The file deps/glfw/CMakeLists.txt does not exist. Please update or add one.")
-endif()
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/imgui/CMakeLists.txt")
-    message(FATAL_ERROR "The file deps/imgui/CMakeLists.txt does not exist. Please update or add one.")
-endif()
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/spdlog/CMakeLists.txt")
-    message(FATAL_ERROR "The file deps/spdlog/CMakeLists.txt does not exist. Please update or add one.")
-endif()
+# add subdirectory() for each submodule + specific options for each(CMakeLists.txt needs to be present in each submodule)
+file(GLOB DEPS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/deps ${CMAKE_CURRENT_SOURCE_DIR}/deps/*)
+foreach(DEP ${DEPS})
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/${DEP}/CMakeLists.txt)
+
+        add_subdirectory(deps/${DEP})
+
+        if(${DEP}=="glfw")
+            message(STATUS "${DEP} is a submodule, setting up options for GLFW")
+            set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
+            set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
+        elseif(${DEP}=="imgui")
+            set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
+        elseif(${DEP}=="spdlog")
+            set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
+        endif()
+
+    else()
+        message(FATAL_ERROR "No CMakeLists.txt file found in ${DEP} folder. Exiting CMake...")
+    endif()
+endforeach()
+
+
 
 
 # TODO: See if you can add/link opengl3 locally
@@ -63,20 +92,6 @@ find_package(OpenGL REQUIRED)
 message(STATUS "Is OpenGL found: ${OPENGL_FOUND}")
 message(STATUS "OpenGL found at: ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
-
-# ImGUI
-set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
-add_subdirectory(deps/imgui)
-
-# GLFW
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
-set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
-add_subdirectory(deps/glfw)
-
-# spdlog
-set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
-add_subdirectory(deps/spdlog)
-message(STATUS "spdlog lib header only library ${spdlog}")
 
 # TODO: Add OpenCV
 
