@@ -68,6 +68,7 @@ message(STATUS "OpenCV version: ${OPENCV_VERSION}")
 message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
 message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 
+# TODO: if the TSlam is modified we need to recompile the whole repo and sudo make install again
 # TSlam
 find_package(TSlam REQUIRED)
 if(TSlam_FOUND)
@@ -142,7 +143,11 @@ foreach(DEP ${DEPS})
         elseif(${DEP}=="spdlog")
             set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
             target_include_directories(${PROJECT_NAME} PUBLIC ${SPD_DIRS})
+        elseif(${DEP}=="assimp")
+            set(ASSIMP_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/assimp/include/assimp)
+            target_include_directories(${PROJECT_NAME} PUBLIC ${ASSIMP_DIRS})
         endif()
+
         target_link_libraries(${PROJECT_NAME} ${DEP})
 
     else()
