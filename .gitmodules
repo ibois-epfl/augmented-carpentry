@@ -7,3 +7,6 @@
 [submodule "deps/spdlog"]
 	path = deps/spdlog
 	url = https://github.com/ibois-epfl/spdlog.git
+[submodule "deps/assimp"]
+	path = deps/assimp
+	url = https://github.com/assimp/assimp.git
