@@ -12,6 +12,10 @@ To configure/build/run code:
 
 <br />
 
+## STag PDFs
+Stags are prepared in PDFs batches of ~150 stripes. You can find them [here](https://drive.google.com/drive/folders/1jic85gclymiV9014zc3tuUgIBq8lTyZr?usp=sharing).
+They are made to be print as stickers. The code to generate them can be found at `TO-BE_DEFINED`.
+
 ## Guide for contributors
 Here's you can find some documentations and guidelines to contribute to augmented_carpentry.
 

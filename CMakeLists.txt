@@ -49,11 +49,11 @@ if(NOT OPENGL_FOUND AND UNIX)
 elseif(NOT OPENGL_FOUND AND (WIN32 OR MSVC))
     message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
 endif()
-message(STATUS "OpenGL found at: ${OPENGL_INCLUDE_DIR}")
-message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO)
 string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
 message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
+message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
+message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
 # OpenCV
 find_package(OpenCV 4.5.5 REQUIRED)
@@ -63,20 +63,32 @@ if (NOT OpenCV_FOUND AND UNIX)
 elseif(NOT OpenCV_FOUND AND (WIN32 OR MSVC))
     message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
 endif()
-message(STATUS "OpenCV found at: ${OpenCV_INCLUDE_DIRS}")
-message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 execute_process(COMMAND pkg-config --modversion opencv4 OUTPUT_VARIABLE OPENCV_VERSION)
 message(STATUS "OpenCV version: ${OPENCV_VERSION}")
+message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 
+# TSlam
+find_package(TSlam REQUIRED)
+if(TSlam_FOUND)
+    message(STATUS "TSlam version: ${TSlam_VERSION}")
+    message(STATUS "TSlam include dir: ${TSlam_INCLUDE_DIRS}")
+    message(STATUS "TSlam libraries dir: ${TSlam_LIB_DIR}")
+    message(STATUS "TSlam libraries: ${TSlam_LIBS}")
+else()
+    message(FATAL_ERROR "TSlam not found")
+endif()
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
+    PUBLIC ${TSlam_INCLUDE_DIRS}
     )
 
 target_link_libraries(${PROJECT_NAME} 
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
+    ${TSlam_LIBS}
     )
 
 
@@ -130,13 +142,7 @@ foreach(DEP ${DEPS})
         elseif(${DEP}=="spdlog")
             set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
             target_include_directories(${PROJECT_NAME} PUBLIC ${SPD_DIRS})
-        # elseif(${DEP}=="TSlam")
-        #     set(BUILD_GUI OFF CACHE BOOL "Build the GUI" FORCE)
-        #     set(BUILD_UTILS OFF CACHE BOOL "Build the utils" FORCE)
-        #     set(TSLAM_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/TSlam)
-        #     target_include_directories(${PROJECT_NAME} PUBLIC ${TSLAM_DIRS})
         endif()
-
         target_link_libraries(${PROJECT_NAME} ${DEP})
 
     else()
@@ -149,9 +155,8 @@ endforeach()
 # C-Packaging
 #------------------------------------------------------------------------------------------------------------
 
+# # CPack
+# set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+# set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
-# CPack
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-
-include(CPack)
+# include(CPack)

@@ -18,7 +18,6 @@
 #include "AIAC/Core.hpp"
 #include "AIAC/Log.hpp"
 
-#include <opencv2/opencv.hpp>
 
 // For more info on imgui structure:https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/main.cpp
 
@@ -27,9 +26,6 @@ inline static void glfwErrorCallback(int error, const char* description) {
 }
 
 int main(int argc, char* argv[]) {
-
-    // print version of opencv
-    std::cout << "OpenCV version: " << CV_VERSION << std::endl;
 
     AIAC::Log::Init();
 
@@ -83,14 +79,6 @@ int main(int argc, char* argv[]) {
         // >>>>>>>>>>>> OUR CODE GOES HERE >>>>>>>>>>>>
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
-
-
-        // open camera with opencv
-        // get image
-        // convert to opengl texture
-        // display texture in imgui
-
-
 
         // <<<<<<<<<<<< OUR CODE ENDS HERE <<<<<<<<<<<<
 
