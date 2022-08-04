@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.1.0)
-project(AC VERSION 0.1.0 LANGUAGES CXX)
+project(AC VERSION 0.1.0 LANGUAGES CXX C)
 
 include(CTest)
 enable_testing()
@@ -16,10 +16,11 @@ add_executable(${PROJECT_NAME}
     ${AIAC_SRC}
     )
 
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-########################################################################################################
-## Add preprocessor definitions
-########################################################################################################
+#------------------------------------------------------------------------------------------------------------
+# Add preprocessor definitions
+#------------------------------------------------------------------------------------------------------------
 
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
@@ -35,9 +36,9 @@ target_compile_definitions(${PROJECT_NAME}
     )
 
 
-########################################################################################################
-## GLOBAL 3rd libs
-########################################################################################################
+#------------------------------------------------------------------------------------------------------------
+# GLOBAL 3rd libs
+#------------------------------------------------------------------------------------------------------------
 
 # OpenGL
 set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
@@ -79,9 +80,9 @@ target_link_libraries(${PROJECT_NAME}
     )
 
 
-########################################################################################################
-## LOCAL 3rd libs (sub-modules)
-########################################################################################################
+#------------------------------------------------------------------------------------------------------------
+# LOCAL 3rd libs (sub-modules)
+#------------------------------------------------------------------------------------------------------------
 
 # Check/Download first all the submodules
 find_package(Git QUIET)
@@ -129,6 +130,11 @@ foreach(DEP ${DEPS})
         elseif(${DEP}=="spdlog")
             set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
             target_include_directories(${PROJECT_NAME} PUBLIC ${SPD_DIRS})
+        # elseif(${DEP}=="TSlam")
+        #     set(BUILD_GUI OFF CACHE BOOL "Build the GUI" FORCE)
+        #     set(BUILD_UTILS OFF CACHE BOOL "Build the utils" FORCE)
+        #     set(TSLAM_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/TSlam)
+        #     target_include_directories(${PROJECT_NAME} PUBLIC ${TSLAM_DIRS})
         endif()
 
         target_link_libraries(${PROJECT_NAME} ${DEP})
@@ -139,9 +145,9 @@ foreach(DEP ${DEPS})
 endforeach()
 
 
-########################################################################################################
-## C-Packaging
-########################################################################################################
+#------------------------------------------------------------------------------------------------------------
+# C-Packaging
+#------------------------------------------------------------------------------------------------------------
 
 
 # CPack
