@@ -1,18 +1,24 @@
 [submodule "deps/glfw"]
+	branch = master
 	path = deps/glfw
 	url = https://github.com/ibois-epfl/glfw.git
 [submodule "deps/imgui"]
+	branch = docking
 	path = deps/imgui
 	url = https://github.com/ibois-epfl/imgui.git
 [submodule "deps/spdlog"]
+	branch = v1.x
 	path = deps/spdlog
 	url = https://github.com/ibois-epfl/spdlog.git
 [submodule "deps/assimp"]
+	branch = master
 	path = deps/assimp
-	url = https://github.com/assimp/assimp.git
+	url = https://github.com/ibois-epfl/assimp.git
 [submodule "deps/rgb-camera-calibration"]
+	branch = main
 	path = deps/rgb-camera-calibration
 	url = https://github.com/ibois-epfl/rgb-camera-calibration.git
 [submodule "deps/TSlam"]
+	branch = main
 	path = deps/TSlam
 	url = https://github.com/ibois-epfl/TSlam.git
