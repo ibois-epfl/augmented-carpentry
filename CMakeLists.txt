@@ -124,16 +124,18 @@ if(TSlam_FOUND)
     message(STATUS "TSlam libraries: ${TSlam_LIBS}")
 endif()
 
+
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
     )
 
-target_link_libraries(${PROJECT_NAME} 
+target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
     ${TSlam_LIBS}
+    ${CMAKE_DL_LIBS} 
     glfw
     )
 
@@ -149,12 +151,6 @@ foreach(DEP ${DEPS})
 
         add_subdirectory(deps/${DEP})
 
-        # if(${DEP}=="glfw")
-        #     message(STATUS "${DEP} is a submodule, setting up options for GLFW")
-        #     set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
-        #     set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
-        #     target_include_directories(${PROJECT_NAME} PUBLIC ${GLFW_INCLUDE_DIRS})
-        #     target_link_libraries(${PROJECT_NAME} ${DEP})
         if(${DEP}=="imgui")
             set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
             target_include_directories(${PROJECT_NAME} PUBLIC ${IMGUI_DIRS})
@@ -175,6 +171,14 @@ foreach(DEP ${DEPS})
         message(WARNING "No CMakeLists.txt file found in ${DEP} folder.")
     endif()
 endforeach()
+
+
+#------------------------------------------------------------------------------------------------------------
+# Temporary Patches
+#------------------------------------------------------------------------------------------------------------
+
+# TODO: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
 
 
 #------------------------------------------------------------------------------------------------------------
