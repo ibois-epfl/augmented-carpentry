@@ -22,7 +22,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 # Add options
 #------------------------------------------------------------------------------------------------------------
 
-option(COMPILE_TSLAM "Compile TSlam in case it has been updated" OFF)
+option(COMPILE_TSLAM "Compile TSlam in case it has been updated" ON)
 
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
