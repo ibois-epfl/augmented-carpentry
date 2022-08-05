@@ -10,3 +10,9 @@
 [submodule "deps/assimp"]
 	path = deps/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "deps/rgb-camera-calibration"]
+	path = deps/rgb-camera-calibration
+	url = https://github.com/ibois-epfl/rgb-camera-calibration.git
+[submodule "deps/TSlam"]
+	path = deps/TSlam
+	url = https://github.com/ibois-epfl/TSlam.git

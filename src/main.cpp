@@ -8,7 +8,9 @@
 #include "../deps/imgui/imgui.h"
 #include "../deps/imgui/imgui_impl_glfw.h"
 #include "../deps/imgui/imgui_impl_opengl3.h"
+
 #include "../deps/spdlog/include/spdlog/spdlog.h"
+
 #include "GLES2/gl2.h"  // <-- comes with OpenGL3 or needs to be added?
 #include "GLFW/glfw3.h"
 
@@ -17,7 +19,6 @@
 #include "AIAC/Client.hpp"
 #include "AIAC/Core.hpp"
 #include "AIAC/Log.hpp"
-
 
 // For more info on imgui structure:https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/main.cpp
 

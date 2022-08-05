@@ -19,8 +19,10 @@ add_executable(${PROJECT_NAME}
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 #------------------------------------------------------------------------------------------------------------
-# Add preprocessor definitions
+# Add options
 #------------------------------------------------------------------------------------------------------------
+
+option(COMPILE_TSLAM "Compile TSlam in case it has been updated" OFF)
 
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
@@ -37,67 +39,10 @@ target_compile_definitions(${PROJECT_NAME}
 
 
 #------------------------------------------------------------------------------------------------------------
-# GLOBAL 3rd libs
+# Check and update git submodules
 #------------------------------------------------------------------------------------------------------------
 
-# OpenGL
-set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
-find_package(OpenGL REQUIRED)
-if(NOT OPENGL_FOUND AND UNIX)
-    message(WARNING "OpenGL not found, trying to install it...")
-    execute_process(COMMAND ./cmake/install_opengl.sh)
-elseif(NOT OPENGL_FOUND AND (WIN32 OR MSVC))
-    message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
-endif()
-execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO)
-string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
-message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
-message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
-message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
-
-# OpenCV
-find_package(OpenCV 4.5.5 REQUIRED)
-if (NOT OpenCV_FOUND AND UNIX)
-    message(WARNING "Right version of OpenCV not found, trying to install it...")
-    execute_process(COMMAND ./cmake/install_opencv_4_5_5.sh)
-elseif(NOT OpenCV_FOUND AND (WIN32 OR MSVC))
-    message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
-endif()
-execute_process(COMMAND pkg-config --modversion opencv4 OUTPUT_VARIABLE OPENCV_VERSION)
-message(STATUS "OpenCV version: ${OPENCV_VERSION}")
-message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
-message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
-
-# TODO: if the TSlam is modified we need to recompile the whole repo and sudo make install again
-# TSlam
-find_package(TSlam REQUIRED)
-if(TSlam_FOUND)
-    message(STATUS "TSlam version: ${TSlam_VERSION}")
-    message(STATUS "TSlam include dir: ${TSlam_INCLUDE_DIRS}")
-    message(STATUS "TSlam libraries dir: ${TSlam_LIB_DIR}")
-    message(STATUS "TSlam libraries: ${TSlam_LIBS}")
-else()
-    message(FATAL_ERROR "TSlam not found")
-endif()
-
-target_include_directories(${PROJECT_NAME}
-    PUBLIC ${OPENGL_INCLUDE_DIRS}
-    PUBLIC ${OpenCV_INCLUDE_DIRS}
-    PUBLIC ${TSlam_INCLUDE_DIRS}
-    )
-
-target_link_libraries(${PROJECT_NAME} 
-    ${OPENGL_LIBRARIES}
-    ${OpenCV_LIBS}
-    ${TSlam_LIBS}
-    )
-
-
-#------------------------------------------------------------------------------------------------------------
-# LOCAL 3rd libs (sub-modules)
-#------------------------------------------------------------------------------------------------------------
-
-# Check/Download first all the submodules
+# Download and update submodules with latest remote version
 find_package(Git QUIET)
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     option(GIT_SUBMODULE "Check submodules during build" ON)
@@ -125,6 +70,69 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+#------------------------------------------------------------------------------------------------------------
+# GLOBAL 3rd libs (NOT compatible with add_subdirectory())
+#------------------------------------------------------------------------------------------------------------
+
+# OpenGL
+set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
+find_package(OpenGL REQUIRED)
+if(NOT OPENGL_FOUND AND UNIX)
+    message(WARNING "OpenGL not found, trying to install it...")
+    execute_process(COMMAND ./cmake/install_opengl.sh)
+elseif(NOT OPENGL_FOUND AND (WIN32 OR MSVC))
+    message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
+endif()
+execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
+message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
+message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
+message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
+
+# OpenCV
+find_package(OpenCV 4.5.5 REQUIRED)
+if (NOT OpenCV_FOUND AND UNIX)
+    message(WARNING "Right version of OpenCV not found, trying to install it...")
+    execute_process(COMMAND ./cmake/install_opencv_4_5_5.sh)
+elseif(NOT OpenCV_FOUND AND (WIN32 OR MSVC))
+    message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
+endif()
+execute_process(COMMAND pkg-config --modversion opencv4 OUTPUT_VARIABLE OPENCV_VERSION)
+message(STATUS "OpenCV version: ${OPENCV_VERSION}")
+message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
+
+# TSlam
+find_package(TSlam REQUIRED)
+if(TSlam_FOUND AND NOT COMPILE_TSLAM)
+    message(STATUS "TSlam version: ${TSlam_VERSION}")
+    message(STATUS "TSlam include dir: ${TSlam_INCLUDE_DIRS}")
+    message(STATUS "TSlam libraries dir: ${TSlam_LIB_DIR}")
+    message(STATUS "TSlam libraries: ${TSlam_LIBS}")
+else()
+    message(WARNING "Re/Compiling TSlam...")
+    execute_process(COMMAND ./cmake/install_TSlam.sh
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC ${OPENGL_INCLUDE_DIRS}
+    PUBLIC ${OpenCV_INCLUDE_DIRS}
+    PUBLIC ${TSlam_INCLUDE_DIRS}
+    )
+
+target_link_libraries(${PROJECT_NAME} 
+    ${OPENGL_LIBRARIES}
+    ${OpenCV_LIBS}
+    ${TSlam_LIBS}
+    )
+
+
+#------------------------------------------------------------------------------------------------------------
+# LOCAL 3rd libs (compatible with add_subdirectory())
+#------------------------------------------------------------------------------------------------------------
+
 # add subdirectory() for each submodule + specific options for each(CMakeLists.txt needs to be present in each submodule)
 file(GLOB DEPS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/deps ${CMAKE_CURRENT_SOURCE_DIR}/deps/*)
 foreach(DEP ${DEPS})
@@ -137,21 +145,25 @@ foreach(DEP ${DEPS})
             set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
             set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
             target_include_directories(${PROJECT_NAME} PUBLIC ${GLFW_INCLUDE_DIRS})
+            target_link_libraries(${PROJECT_NAME} ${DEP})
         elseif(${DEP}=="imgui")
             set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
             target_include_directories(${PROJECT_NAME} PUBLIC ${IMGUI_DIRS})
+            target_link_libraries(${PROJECT_NAME} ${DEP})
         elseif(${DEP}=="spdlog")
             set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
             target_include_directories(${PROJECT_NAME} PUBLIC ${SPD_DIRS})
+            target_link_libraries(${PROJECT_NAME} ${DEP})
         elseif(${DEP}=="assimp")
             set(ASSIMP_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/assimp/include/assimp)
             target_include_directories(${PROJECT_NAME} PUBLIC ${ASSIMP_DIRS})
+            target_link_libraries(${PROJECT_NAME} ${DEP})
         endif()
 
         target_link_libraries(${PROJECT_NAME} ${DEP})
 
     else()
-        message(FATAL_ERROR "No CMakeLists.txt file found in ${DEP} folder. Exiting CMake...")
+        message(WARNING "No CMakeLists.txt file found in ${DEP} folder.")
     endif()
 endforeach()
 
