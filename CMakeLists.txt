@@ -22,7 +22,11 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 # Add options
 #------------------------------------------------------------------------------------------------------------
 
-option(COMPILE_TSLAM "Compile TSlam in case it has been updated" ON)
+# As a fresh new compile, put everything ON
+option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
+option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
+option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
+option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
@@ -75,14 +79,12 @@ endif()
 #------------------------------------------------------------------------------------------------------------
 
 # OpenGL
-set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
-find_package(OpenGL REQUIRED)
-if(NOT OPENGL_FOUND AND UNIX)
+if(UNIX AND INSTALL_OPENGL)
     message(WARNING "OpenGL not found, trying to install it...")
     execute_process(COMMAND ./cmake/install_opengl.sh)
-elseif(NOT OPENGL_FOUND AND (WIN32 OR MSVC))
-    message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
 endif()
+set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
+find_package(OpenGL REQUIRED)
 execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
@@ -90,22 +92,26 @@ message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
 message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
+#GLFW
+if(UNIX AND INSTALL_GLFW33)
+    execute_process(COMMAND ./cmake/install_glfw_3_3.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
+find_package(glfw3 3.3 REQUIRED)
+
 # OpenCV
-find_package(OpenCV 4.5.5 REQUIRED)
-if (NOT OpenCV_FOUND AND UNIX)
-    message(WARNING "OpenCV not found, trying to install it...")
+if (UNIX AND INSTALL_OPENCV455)
+    message(WARNING "Install OpenCV...")
     execute_process(COMMAND ./cmake/install_opencv_4_5_5.sh)
-elseif(OpenCV_FOUND)
+endif()
+find_package(OpenCV 4.5.5 REQUIRED)
+if(OpenCV_FOUND)
     message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
     message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
-elseif(OpenCV_FOUND AND ("${OPENCV_VERSION}" EQUAL "4.5.5"))
-    message(FATAL_ERROR "Wrong OpenCV version ${OPENCV_VERSION}, it hsould be 4.5.5")
-elseif(NOT OpenCV_FOUND AND (WIN32 OR MSVC))
-    message(FATAL_ERROR "augmented_carpentry does not support Windows yet.")
 endif()
 
 # TSlam
-if(COMPILE_TSLAM)
+if(UNIX AND INSTALL_TSLAM)
     message(WARNING "Re/Compiling TSlam...")
     execute_process(COMMAND ./cmake/install_TSlam.sh
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
@@ -128,6 +134,7 @@ target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
     ${TSlam_LIBS}
+    glfw
     )
 
 
@@ -142,13 +149,13 @@ foreach(DEP ${DEPS})
 
         add_subdirectory(deps/${DEP})
 
-        if(${DEP}=="glfw")
-            message(STATUS "${DEP} is a submodule, setting up options for GLFW")
-            set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
-            set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
-            target_include_directories(${PROJECT_NAME} PUBLIC ${GLFW_INCLUDE_DIRS})
-            target_link_libraries(${PROJECT_NAME} ${DEP})
-        elseif(${DEP}=="imgui")
+        # if(${DEP}=="glfw")
+        #     message(STATUS "${DEP} is a submodule, setting up options for GLFW")
+        #     set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
+        #     set(GLFW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/glfw/include)
+        #     target_include_directories(${PROJECT_NAME} PUBLIC ${GLFW_INCLUDE_DIRS})
+        #     target_link_libraries(${PROJECT_NAME} ${DEP})
+        if(${DEP}=="imgui")
             set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
             target_include_directories(${PROJECT_NAME} PUBLIC ${IMGUI_DIRS})
             target_link_libraries(${PROJECT_NAME} ${DEP})

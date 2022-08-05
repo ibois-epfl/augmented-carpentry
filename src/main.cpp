@@ -11,8 +11,8 @@
 
 #include "../deps/spdlog/include/spdlog/spdlog.h"
 
-#include "GLES2/gl2.h"  // <-- comes with OpenGL3 or needs to be added?
-#include "GLFW/glfw3.h"
+#include <GLES2/gl2.h>  // <-- comes with OpenGL3 or needs to be added?
+#include <GLFW/glfw3.h>
 
 // #include "ACConfig.h"
 
