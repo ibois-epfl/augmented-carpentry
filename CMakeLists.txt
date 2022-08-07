@@ -178,8 +178,9 @@ endforeach()
 #------------------------------------------------------------------------------------------------------------
 
 # TODO: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs)
-target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
-
+if(UNIX)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
+endif()
 
 #------------------------------------------------------------------------------------------------------------
 # C-Packaging
