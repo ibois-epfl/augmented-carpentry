@@ -10,11 +10,14 @@ file(GLOB AIAC_SRC
     "src/AIAC/*.hpp"
     "src/AIAC/*.cpp"
     )
+include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
     ${AIAC_SRC}
     )
+
+
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
