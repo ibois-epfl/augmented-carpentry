@@ -13,7 +13,7 @@ file(GLOB AIAC_SRC
 include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_executable(${PROJECT_NAME}
-    src/main.cpp
+    src/ACApp.cpp
     ${AIAC_SRC}
     )
 
