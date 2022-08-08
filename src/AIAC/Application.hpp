@@ -14,20 +14,35 @@
 
 namespace AIAC
 {
+    struct ApplicationSpecification
+        {
+            std::string name;
+            uint32_t winWidth;
+            uint32_t winHeight;
+            bool isFullscreen;
+        };
+
     class Application
     {
         public:
-            Application();
-            ~Application();
+            Application(const ApplicationSpecification& appSpec);
+            virtual ~Application();
 
             void Init();
             void Run();
             void Shutdown();
-        
+
+            static Application& Get() { return *_Instance; }
+            const ApplicationSpecification& GetSpecification() const { return _AppSpec; }
+
         private:
+            static ApplicationSpecification _AppSpec;
             bool _IsRunning = false;
             GLFWwindow* _Window = nullptr;
-            ImVec4 _WindowBackColor = ImVec4(0.f, 0.f, 0.f, 1.f);
+            ImVec4 _WindowBackColor;
+
+        private:
+            static Application* _Instance;
 
     };
 }

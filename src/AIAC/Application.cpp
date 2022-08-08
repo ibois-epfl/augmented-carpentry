@@ -8,8 +8,9 @@ inline static void glfwErrorCallback(int error, const char* description) {
 
 namespace AIAC
 {
-    Application::Application()
+    Application::Application(const ApplicationSpecification& appSpec)
     {
+        _AppSpec = appSpec;
         Init();
     }
 
@@ -53,11 +54,11 @@ namespace AIAC
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);  // GL_FALSE to set the full screen
+        glfwWindowHint(GLFW_RESIZABLE, _AppSpec.isFullscreen);  // GL_FALSE to set the full screen
 #endif
 
         AIAC_CLI_INFO("Creating window with graphic content");
-        _Window = glfwCreateWindow(1280, 720, "augmented_carpentry", nullptr, nullptr);
+        _Window = glfwCreateWindow(_AppSpec.winWidth, _AppSpec.winHeight, _AppSpec.name, nullptr, nullptr);
         if (_Window == NULL) {
             AIAC_CLI_CRITICAL("Failed to create GLFW window");
             glfwTerminate();
@@ -77,7 +78,7 @@ namespace AIAC
         ImGui_ImplGlfw_InitForOpenGL(_Window, true);
         ImGui_ImplOpenGL3_Init(glsl_version);
 
-        _WindowBackColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+        _WindowBackColor = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
 
         _IsRunning = true;
     }
