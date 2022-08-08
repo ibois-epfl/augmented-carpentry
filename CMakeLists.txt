@@ -9,7 +9,7 @@ enable_testing()
 file(GLOB AIAC_SRC
     "src/AIAC/*.hpp"
     "src/AIAC/*.cpp"
-)
+    )
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
@@ -73,6 +73,7 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         endif()
     endif()
 endif()
+
 
 #------------------------------------------------------------------------------------------------------------
 # GLOBAL 3rd libs (NOT compatible with add_subdirectory())
@@ -144,26 +145,15 @@ target_link_libraries(${PROJECT_NAME}
 # LOCAL 3rd libs (compatible with add_subdirectory())
 #------------------------------------------------------------------------------------------------------------
 
-# add subdirectory() for each submodule + specific options for each(CMakeLists.txt needs to be present in each submodule)
+# Include directory of all deps, add subdir and link (if CMakeLists.txt is present)
+set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
+target_include_directories(${PROJECT_NAME} PUBLIC ${DEPS_DIRS})
+
 file(GLOB DEPS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/deps ${CMAKE_CURRENT_SOURCE_DIR}/deps/*)
 foreach(DEP ${DEPS})
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/${DEP}/CMakeLists.txt)
 
         add_subdirectory(deps/${DEP})
-
-        if(${DEP}=="imgui")
-            set(IMGUI_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/imgui)
-            target_include_directories(${PROJECT_NAME} PUBLIC ${IMGUI_DIRS})
-            target_link_libraries(${PROJECT_NAME} ${DEP})
-        elseif(${DEP}=="spdlog")
-            set(SPD_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/spdlog/include/spdlog)
-            target_include_directories(${PROJECT_NAME} PUBLIC ${SPD_DIRS})
-            target_link_libraries(${PROJECT_NAME} ${DEP})
-        elseif(${DEP}=="assimp")
-            set(ASSIMP_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps/assimp/include/assimp)
-            target_include_directories(${PROJECT_NAME} PUBLIC ${ASSIMP_DIRS})
-            target_link_libraries(${PROJECT_NAME} ${DEP})
-        endif()
 
         target_link_libraries(${PROJECT_NAME} ${DEP})
 
@@ -177,7 +167,7 @@ endforeach()
 # Temporary Patches
 #------------------------------------------------------------------------------------------------------------
 
-# TODO: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs)
+# TODO: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs) --> test without
 if(UNIX)
     target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
 endif()
