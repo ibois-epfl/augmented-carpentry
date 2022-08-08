@@ -1,22 +1,19 @@
 #pragma once
 
+#include <stdint.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-
 #include <GLES2/gl2.h>
 #include <GLFW/glfw3.h>
-
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
-
-#include "AIAC/Log.hpp"
 
 namespace AIAC
 {
     struct ApplicationSpecification
         {
-            std::string name;
+            const char* name;
             uint32_t winWidth;
             uint32_t winHeight;
             bool isFullscreen;
@@ -30,19 +27,20 @@ namespace AIAC
 
             void Init();
             void Run();
+            void Close();
             void Shutdown();
 
-            static Application& Get() { return *_Instance; }
-            const ApplicationSpecification& GetSpecification() const { return _AppSpec; }
+            static Application& GetInstance() { return *m_Instance; }
+            const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
 
         private:
-            static ApplicationSpecification _AppSpec;
-            bool _IsRunning = false;
-            GLFWwindow* _Window = nullptr;
-            ImVec4 _WindowBackColor;
+            ApplicationSpecification m_AppSpec;
+            bool m_IsRunning = false;
+            GLFWwindow* m_Window = nullptr;
+            ImVec4 m_WindowBackColor;
 
         private:
-            static Application* _Instance;
+            static Application* m_Instance;
 
     };
 }

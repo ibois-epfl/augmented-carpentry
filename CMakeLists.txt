@@ -7,7 +7,7 @@ enable_testing()
 
 # Get hpp/cpp of AIAC module
 file(GLOB AIAC_SRC
-    "src/AIAC/*.hpp"
+    "src/AIAC/*.h"
     "src/AIAC/*.cpp"
     )
 include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
