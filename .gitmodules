@@ -1,5 +1,5 @@
 [submodule "deps/imgui"]
-	branch = docking
+	branch = release_1_88
 	path = deps/imgui
 	url = https://github.com/ibois-epfl/imgui.git
 [submodule "deps/spdlog"]

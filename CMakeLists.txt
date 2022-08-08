@@ -17,8 +17,6 @@ add_executable(${PROJECT_NAME}
     ${AIAC_SRC}
     )
 
-
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 #------------------------------------------------------------------------------------------------------------
@@ -68,6 +66,8 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
             message(FATAL_ERROR "Git version 1.8 or greater is required.")
         endif()
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
         execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
