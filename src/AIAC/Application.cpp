@@ -1,8 +1,6 @@
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
 
-extern bool g_ApplicationRunning;
-
 
 inline static void glfwErrorCallback(int error, const char* description) {
     AIAC_CLI_ERROR("GLFW Error ({0}): {1}", error, description);
@@ -144,8 +142,6 @@ namespace AIAC
 
         // Shutdown AIAC LOGGER ---------------------------------------------------------
         AIAC::Log::Shutdown();
-
-        g_ApplicationRunning = false;
     }
 
 }
