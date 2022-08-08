@@ -1,6 +1,10 @@
 # augmented-carpentry
 
-Repo containing the code for the custom-made AR engine for Augmented Carpentry.
+ARapp is a linux desktop application containing a custom-made framework for augmented carpentry.
+
+## TODOList
+
+> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth.
 
 ## Build
 We need a first to install TSlam:
