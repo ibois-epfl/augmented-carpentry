@@ -17,5 +17,7 @@ namespace AIAC
         virtual void OnUIRender() override;
         virtual void OnFrameFall() override;
         virtual void OnDetach() override;
+
+        int test_a = 333;  // TEST
     };
 }

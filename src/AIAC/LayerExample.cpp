@@ -6,6 +6,8 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+#include <iostream>
+
 namespace AIAC
 {
     void LayerExample::OnAttach()
@@ -14,7 +16,9 @@ namespace AIAC
         AIAC::Application& app = AIAC::Application::GetInstance();
         AIAC::ApplicationSpecification spec = app.GetSpecification();
 
-        app.LayerExampleRef = this;  // FIXME: find a way to add to Layer class 
+        // TEST
+        AIAC_INFO("LayerExample attached");
+        std::cout << app.GetLayer<AIAC::LayerCamera>()->test_a << std::endl;
     }
 
     void LayerExample::OnFrameAwake()
