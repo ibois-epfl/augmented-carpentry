@@ -59,11 +59,11 @@ namespace AIAC
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_RESIZABLE, m_AppSpec.isFullscreen);  // GL_FALSE to set the full screen
+        glfwWindowHint(GLFW_RESIZABLE, m_AppSpec.IsFullscreen);  // GL_FALSE to set the full screen
 #endif
 
         AIAC_INFO("Creating window with graphic content");
-        m_Window = glfwCreateWindow(m_AppSpec.winWidth, m_AppSpec.winHeight, m_AppSpec.name, nullptr, nullptr);
+        m_Window = glfwCreateWindow(m_AppSpec.WinWidth, m_AppSpec.WinHeight, m_AppSpec.Name, nullptr, nullptr);
         if (m_Window == NULL) {
             AIAC_CRITICAL("Failed to create GLFW window");
             glfwTerminate();

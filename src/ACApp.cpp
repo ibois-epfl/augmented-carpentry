@@ -16,104 +16,15 @@ These are different classes: e.g. UILayer.h, SLAMLayer.h, etc.
 5. Layer UI = render UI
 */
 
-// class ExampleLayer1 : public AIAC::Layer
-// {
-// public:
-//     virtual void OnAttach() override 
-//     {
-//         AIAC_INFO("ExampleLayer1 attached");
-//         AIAC::Application& app = AIAC::Application::GetInstance();
-//         AIAC::ApplicationSpecification spec = app.GetSpecification();
-//     }
-
-//     virtual void OnFrameAwake() override 
-//     {
-//         AIAC_INFO("ExampleLayer1 OnFrameAwake");
-//     }
-
-//     virtual void OnFrameStart() override 
-//     {
-//         AIAC_INFO("ExampleLayer1 frame start");
-//     }
-
-//     virtual void OnFrameEnd() override 
-//     {
-//         AIAC_INFO("ExampleLayer1 frame end");
-//     }
-
-//     virtual void OnUIRender() override
-//     {
-//         // draw viewport half screen
-//         ImGui::Begin("Hello ExampleLayer1");
-//         ImGui::Button("Button ExampleLayer1");
-//         ImGui::Text("This is my UI stuff for the ExampleLayer1");
-//         ImGui::End();
-//     }
-
-//     virtual void OnFrameFall() override 
-//     {
-//         AIAC_INFO("ExampleLayer1 is fall");
-//     }
-
-//     virtual void OnDetach() override
-//     {
-//         AIAC_INFO("ExampleLayer1 detached");
-//     }
-// };
-
-// class ExampleLayer2 : public AIAC::Layer
-// {
-// public:
-//     virtual void OnAttach() override 
-//     {
-//         AIAC_INFO("ExampleLayer2 attached");
-//     }
-
-//     virtual void OnFrameAwake() override 
-//     {
-//         AIAC_INFO("ExampleLayer2 OnFrameAwake");
-//         // AIAC_INFO(m_WindowHeight);
-//     }
-
-//     virtual void OnFrameStart() override 
-//     {
-//         AIAC_INFO("ExampleLayer2 frame start");
-//     }
-
-//     virtual void OnFrameEnd() override 
-//     {
-//         AIAC_INFO("ExampleLayer2 frame end");
-//     }
-
-//     virtual void OnUIRender() override
-//     {
-//         ImGui::Begin("Hello ExampleLayer2");
-//         ImGui::Button("Button ExampleLayer2");
-//         ImGui::Text("This is my UI stuff for the ExampleLayer2");
-//         ImGui::End();
-//     }
-
-//     virtual void OnFrameFall() override 
-//     {
-//         AIAC_INFO("ExampleLayer2 is fall");
-//     }
-
-//     virtual void OnDetach() override
-//     {
-//         AIAC_INFO("ExampleLayer2 detached");
-//     }
-// };
-
-
 
 
 int main(int argc, char* argv[]) {
 #ifdef __linux__
     AIAC::ApplicationSpecification appSpec;
-    appSpec.name = "augmented_carpentry";
-    appSpec.winWidth = 1280;
-    appSpec.winHeight = 720;
-    appSpec.isFullscreen = false;
+    appSpec.Name = "augmented_carpentry";
+    appSpec.WinWidth = 1280;
+    appSpec.WinHeight = 720;
+    appSpec.IsFullscreen = false;
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
 

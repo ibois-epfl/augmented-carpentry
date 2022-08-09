@@ -32,6 +32,12 @@ They are made to be print as stickers. The code to generate them can be found at
 ## Guide for contributors
 Here's you can find some documentations and guidelines to contribute to augmented_carpentry.
 
+### Naming convention
+```c++
+
+```
+
+
 ### Layers
 Layers are the main component of the framework. Each layer gets stacked and executed in that order. Each layer represents a different unit e.g. TSLAM, camera access, 3Drender, etc. Each layer has events where code can be injected in the loop and custom events.
 ```c++

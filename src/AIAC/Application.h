@@ -21,10 +21,10 @@ namespace AIAC
 {
     struct ApplicationSpecification
         {
-            const char* name;
-            uint32_t winWidth;
-            uint32_t winHeight;
-            bool isFullscreen;
+            const char* Name;
+            uint32_t WinWidth;
+            uint32_t WinHeight;
+            bool IsFullscreen;
         };
 
     class Application
@@ -40,7 +40,9 @@ namespace AIAC
         void PushLayer()
         {
             static_assert(std::is_base_of<AIAC::Layer, T>::value, "Pushed type is not subclass of Layer!");
-            m_LayerStack.emplace_back(std::make_shared<T>())->OnAttach();
+            std::shared_ptr<T> layer = std::make_shared<T>();
+            m_LayerStack.emplace_back(layer);
+            layer->OnAttach();
         }
         void PushLayer(const std::shared_ptr<AIAC::Layer>& layer) { m_LayerStack.emplace_back(layer); layer->OnAttach(); }
 
