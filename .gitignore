@@ -1,3 +1,11 @@
+## >>>>>>>>> imgui >>>>>>>>>
+
+# Layout for imgui
+imgui.ini
+
+## >>>>>>>>> vscode >>>>>>>>>
+
+# VScode config
 .vscode
 
 ## >>>>>>>>> cmake >>>>>>>>>
