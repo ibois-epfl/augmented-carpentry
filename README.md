@@ -36,6 +36,7 @@ Here's you can find some documentations and guidelines to contribute to augmente
 Here's the naming convention for this project:
 - `localVariable`: lowerCamelCase.
 - `m_PrivateVariable`: Hungarian notation with UpperCamelCase.
+- `APP_SPEC`: Constants with SNAKE_UPPER_CASE.
 - All the other things uses UpperCamelCase.
 
 Here's an example:

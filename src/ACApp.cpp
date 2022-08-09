@@ -16,20 +16,18 @@ These are different classes: e.g. UILayer.h, SLAMLayer.h, etc.
 5. Layer UI = render UI
 */
 
-
-
 int main(int argc, char* argv[]) {
 #ifdef __linux__
     AIAC::ApplicationSpecification appSpec;
     appSpec.Name = "augmented_carpentry";
     appSpec.WinWidth = 1280;
     appSpec.WinHeight = 720;
-    appSpec.IsFullscreen = false;
+    appSpec.IsResizable = true;
+    appSpec.WindowBackColor = ImVec4(1.00f, 0.00f, 1.00f, 1.00f);
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
 
-    acApp_ptr->PushLayer<AIAC::LayerExample>();
-    // acApp_ptr->PushLayer<ExampleLayer2>();
+    acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->Run();
 
