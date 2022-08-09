@@ -13,6 +13,8 @@ namespace AIAC
         AIAC_INFO("LayerExample attached");
         AIAC::Application& app = AIAC::Application::GetInstance();
         AIAC::ApplicationSpecification spec = app.GetSpecification();
+
+        app.LayerExampleRef = this;  // FIXME: find a way to add to Layer class 
     }
 
     void LayerExample::OnFrameAwake()

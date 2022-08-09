@@ -15,6 +15,7 @@ namespace AIAC
         : m_AppSpec(appSpec)
     {
         AIAC_ASSERT(!s_Instance, "Application already exists!");
+        s_Instance = this;
         Init();
     }
 

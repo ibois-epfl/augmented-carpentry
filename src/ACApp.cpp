@@ -27,11 +27,13 @@ int main(int argc, char* argv[]) {
     appSpec.IsFullscreen = false;
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
-
     acApp_ptr->PushLayer<AIAC::LayerExample>();
+    acApp_ptr->PushLayer<AIAC::LayerCamera>();
     // acApp_ptr->PushLayer<ExampleLayer2>();
 
     acApp_ptr->Run();
+
+    
 
     return 0;
 #else
