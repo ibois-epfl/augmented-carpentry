@@ -13,9 +13,12 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+#include "AIAC/Camera.h"
 #include "AIAC/Layer.h"
 #include "AIAC/Assert.h"
 
+#include "AIAC/LayerCamera.h"
+#include "AIAC/LayerExample.h"
 
 namespace AIAC
 {
@@ -45,6 +48,15 @@ namespace AIAC
             m_LayerStack.emplace_back(layer);
             layer->OnAttach();
         }
+
+
+        void PushLayer(const std::shared_ptr<AIAC::Layer>& layer) { m_LayerStack.emplace_back(layer); layer->OnAttach(); }
+        inline static Application& GetInstance() { return *s_Instance; }
+        inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
+
+
+        LayerExample* LayerExampleRef = nullptr;
+        LayerCamera* LayerCameraRef = nullptr;
 
     private:
         void Init();
