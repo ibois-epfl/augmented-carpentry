@@ -4,13 +4,13 @@
 
 namespace AIAC
 {
-    class LayerExample : public AIAC::Layer
+    class LayerCamera : public AIAC::Layer
     {
     public:
-        LayerExample() = default;
-        virtual ~LayerExample() = default;
+        LayerCamera() = default;
+        virtual ~LayerCamera() = default;
 
-        void OnAttach();
+        virtual void OnAttach();
         virtual void OnFrameAwake() override;
         virtual void OnFrameStart() override;
         virtual void OnFrameEnd() override;
