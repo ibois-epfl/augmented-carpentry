@@ -1,17 +1,20 @@
 #include "AIAC/Application.h"
+
 #include "AIAC/Log.h"
 
 
 inline static void glfwErrorCallback(int error, const char* description) {
-    AIAC_CLI_ERROR("GLFW Error ({0}): {1}", error, description);
+    AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
 
 namespace AIAC
 {
+    Application* Application::s_Instance = nullptr;
     Application::Application(const ApplicationSpecification& appSpec)
         : m_AppSpec(appSpec)
     {
+        AIAC_ASSERT(!s_Instance, "Application already exists!");
         Init();
     }
 
@@ -25,16 +28,17 @@ namespace AIAC
     {
         // Init AIAC LOGGER ---------------------------------------------------------
         AIAC::Log::Init();
+        AIAC_INFO("Log System initialised");
 
         // Init GLFW ----------------------------------------------------------------
-        AIAC_CLI_INFO("Setting up GL+GLSW window");
+        AIAC_INFO("Setting up GL+GLSW window");
         glfwSetErrorCallback(glfwErrorCallback);
             if (!glfwInit()) {
-                AIAC_CLI_CRITICAL("Failed to initialize glfw");
+                AIAC_CRITICAL("Failed to initialize glfw");
                 exit(EXIT_FAILURE);
             }
 
-        AIAC_CLI_INFO("Decide GL+GLSL versions");
+        AIAC_INFO("Decide GL+GLSL versions");
 #if defined(IMGUI_IMPL_OPENGL_ES2)
         // GL ES 2.0 + GLSL 100
         const char* glsl_version = "#version 100";
@@ -58,10 +62,10 @@ namespace AIAC
         glfwWindowHint(GLFW_RESIZABLE, m_AppSpec.isFullscreen);  // GL_FALSE to set the full screen
 #endif
 
-        AIAC_CLI_INFO("Creating window with graphic content");
+        AIAC_INFO("Creating window with graphic content");
         m_Window = glfwCreateWindow(m_AppSpec.winWidth, m_AppSpec.winHeight, m_AppSpec.name, nullptr, nullptr);
         if (m_Window == NULL) {
-            AIAC_CLI_CRITICAL("Failed to create GLFW window");
+            AIAC_CRITICAL("Failed to create GLFW window");
             glfwTerminate();
             exit(EXIT_FAILURE);
         }
@@ -69,7 +73,7 @@ namespace AIAC
         glfwSwapInterval(1);  // Enable vsync
 
         // Init IMGUI ---------------------------------------------------------------
-        AIAC_CLI_INFO("Starting ImGUI...");
+        AIAC_INFO("Starting ImGUI...");
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -81,33 +85,36 @@ namespace AIAC
 
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);
 
-        m_WindowBackColor = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
-
-        m_IsRunning = true;
+        m_WindowBackColor = ImVec4(1.00f, 0.00f, 1.00f, 1.00f);
     }
 
     void Application::Run()
     {
-        AIAC_CLI_INFO("Starting main loop...");
+        m_IsRunning = true;
+
         while (!glfwWindowShouldClose(m_Window))
         {
+            for (auto& layer : m_LayerStack)
+                layer->OnFrameAwake();
+
+
             glfwPollEvents();
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            
 
-            // >>>>>>>>>>>> OUR CODE GOES HERE >>>>>>>>>>>>
-            if (m_IsRunning)
-                ImGui::ShowDemoWindow(&m_IsRunning);
-                // AIAC::UI::ShowUI(&showDemoWindow);
+            for (auto& layer : m_LayerStack)
+                layer->OnFrameStart();
 
 
+            for (auto& layer : m_LayerStack)
+                layer->OnUIRender();
 
 
+            for (auto& layer : m_LayerStack)
+                layer->OnFrameEnd();
 
-            // <<<<<<<<<<<< OUR CODE ENDS HERE <<<<<<<<<<<<
 
             ImGui::Render();
             int displayW, displayH;
@@ -121,6 +128,10 @@ namespace AIAC
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(m_Window);
+
+
+            for (auto& layer : m_LayerStack)
+                layer->OnFrameFall();
         }
     }
 
@@ -131,16 +142,18 @@ namespace AIAC
 
     void Application::Shutdown()
     {
-        // Shutdown IMGUI ---------------------------------------------------------------
+        for (auto& layer : m_LayerStack)
+            layer->OnDetach();
+
+        m_LayerStack.clear();
+
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
 
-        // Shutdown GLFW/GL -------------------------------------------------------------
         glfwDestroyWindow(m_Window);
         glfwTerminate();
 
-        // Shutdown AIAC LOGGER ---------------------------------------------------------
         AIAC::Log::Shutdown();
     }
 

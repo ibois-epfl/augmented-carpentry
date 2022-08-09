@@ -1,6 +1,10 @@
 #pragma once
 
+#include <memory>
 #include <stdint.h>
+#include <vector>
+#include <type_traits>
+
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <GLES2/gl2.h>
@@ -8,6 +12,10 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+
+#include "AIAC/Layer.h"
+#include "AIAC/Assert.h"
+
 
 namespace AIAC
 {
@@ -21,26 +29,37 @@ namespace AIAC
 
     class Application
     {
-        public:
-            Application(const ApplicationSpecification& appSpec);
-            virtual ~Application();
+    public:
+        Application(const ApplicationSpecification& appSpec);
+        virtual ~Application();
 
-            void Init();
-            void Run();
-            void Close();
-            void Shutdown();
+        void Run();
+        void Close();
 
-            static Application& GetInstance() { return *m_Instance; }
-            const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
+        template<typename T>
+        void PushLayer()
+        {
+            static_assert(std::is_base_of<AIAC::Layer, T>::value, "Pushed type is not subclass of Layer!");
+            m_LayerStack.emplace_back(std::make_shared<T>())->OnAttach();
+        }
+        void PushLayer(const std::shared_ptr<AIAC::Layer>& layer) { m_LayerStack.emplace_back(layer); layer->OnAttach(); }
 
-        private:
-            ApplicationSpecification m_AppSpec;
-            bool m_IsRunning = false;
-            GLFWwindow* m_Window = nullptr;
-            ImVec4 m_WindowBackColor;
+        inline static Application& GetInstance() { return *s_Instance; }
+        inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
 
-        private:
-            static Application* m_Instance;
+    private:
+        void Init();
+        void Shutdown();
+
+    private:
+        ApplicationSpecification m_AppSpec;
+        bool m_IsRunning = false;
+        GLFWwindow* m_Window = nullptr;
+        ImVec4 m_WindowBackColor;
+
+        std::vector<std::shared_ptr<AIAC::Layer>> m_LayerStack;
+
+        static Application* s_Instance;
 
     };
 }
