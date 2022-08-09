@@ -44,7 +44,6 @@ namespace AIAC
             m_LayerStack.emplace_back(layer);
             layer->OnAttach();
         }
-        void PushLayer(const std::shared_ptr<AIAC::Layer>& layer) { m_LayerStack.emplace_back(layer); layer->OnAttach(); }
 
         inline static Application& GetInstance() { return *s_Instance; }
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
