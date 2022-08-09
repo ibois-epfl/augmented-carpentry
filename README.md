@@ -90,8 +90,6 @@ namespace AIAC
     public:
         virtual ~Layer() = default;
 
-        AIAC::Application& GetApplication() { return AIAC::Application::GetInstance(); }
-
         /// Is called when the layer is attached to the application.
         virtual void OnAttach() {}
 
