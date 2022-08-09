@@ -8,43 +8,43 @@
 
 namespace AIAC
 {
-    void ExampleLayer::OnAttach()
+    void LayerExample::OnAttach()
     {
-        AIAC_INFO("ExampleLayer attached");
+        AIAC_INFO("LayerExample attached");
         AIAC::Application& app = AIAC::Application::GetInstance();
         AIAC::ApplicationSpecification spec = app.GetSpecification();
     }
 
-    void ExampleLayer::OnFrameAwake()
+    void LayerExample::OnFrameAwake()
     {
-        AIAC_INFO("ExampleLayer OnFrameAwake");
+        AIAC_INFO("LayerExample OnFrameAwake");
     }
 
-    void ExampleLayer::OnFrameStart()
+    void LayerExample::OnFrameStart()
     {
-        AIAC_INFO("ExampleLayer frame start");
+        AIAC_INFO("LayerExample frame start");
     }
 
-    void ExampleLayer::OnFrameEnd()
+    void LayerExample::OnFrameEnd()
     {
-        AIAC_INFO("ExampleLayer frame end");
+        AIAC_INFO("LayerExample frame end");
     }
 
-    void ExampleLayer::OnUIRender()
+    void LayerExample::OnUIRender()
     {
-        ImGui::Begin("Hello ExampleLayer");
-        ImGui::Button("Button ExampleLayer");
-        ImGui::Text("This is my UI stuff for the ExampleLayer");
+        ImGui::Begin("Hello LayerExample");
+        ImGui::Button("Button LayerExample");
+        ImGui::Text("This is my UI stuff for the LayerExample");
         ImGui::End();
     }
 
-    void ExampleLayer::OnFrameFall()
+    void LayerExample::OnFrameFall()
     {
-        AIAC_INFO("ExampleLayer is fall");
+        AIAC_INFO("LayerExample is fall");
     }
 
-    void ExampleLayer::OnDetach()
+    void LayerExample::OnDetach()
     {
-        AIAC_INFO("ExampleLayer detached");
+        AIAC_INFO("LayerExample detached");
     }
 }

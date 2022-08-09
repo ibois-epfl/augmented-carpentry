@@ -9,13 +9,16 @@ enable_testing()
 file(GLOB AIAC_SRC
     "src/AIAC/*.h"
     "src/AIAC/*.cpp"
+    "src/AIAC.h"
     )
-include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_executable(${PROJECT_NAME}
     src/ACApp.cpp
     ${AIAC_SRC}
     )
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 

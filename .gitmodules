@@ -6,6 +6,7 @@
 	branch = v1.x
 	path = deps/spdlog
 	url = https://github.com/ibois-epfl/spdlog.git
+# FIXME : assimp is crashing the compilation
 # [submodule "deps/assimp"]
 # 	branch = master
 # 	path = deps/assimp

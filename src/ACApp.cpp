@@ -61,48 +61,48 @@ These are different classes: e.g. UILayer.h, SLAMLayer.h, etc.
 //     }
 // };
 
-class ExampleLayer2 : public AIAC::Layer
-{
-public:
-    virtual void OnAttach() override 
-    {
-        AIAC_INFO("ExampleLayer2 attached");
-    }
+// class ExampleLayer2 : public AIAC::Layer
+// {
+// public:
+//     virtual void OnAttach() override 
+//     {
+//         AIAC_INFO("ExampleLayer2 attached");
+//     }
 
-    virtual void OnFrameAwake() override 
-    {
-        AIAC_INFO("ExampleLayer2 OnFrameAwake");
-        // AIAC_INFO(m_WindowHeight);
-    }
+//     virtual void OnFrameAwake() override 
+//     {
+//         AIAC_INFO("ExampleLayer2 OnFrameAwake");
+//         // AIAC_INFO(m_WindowHeight);
+//     }
 
-    virtual void OnFrameStart() override 
-    {
-        AIAC_INFO("ExampleLayer2 frame start");
-    }
+//     virtual void OnFrameStart() override 
+//     {
+//         AIAC_INFO("ExampleLayer2 frame start");
+//     }
 
-    virtual void OnFrameEnd() override 
-    {
-        AIAC_INFO("ExampleLayer2 frame end");
-    }
+//     virtual void OnFrameEnd() override 
+//     {
+//         AIAC_INFO("ExampleLayer2 frame end");
+//     }
 
-    virtual void OnUIRender() override
-    {
-        ImGui::Begin("Hello ExampleLayer2");
-        ImGui::Button("Button ExampleLayer2");
-        ImGui::Text("This is my UI stuff for the ExampleLayer2");
-        ImGui::End();
-    }
+//     virtual void OnUIRender() override
+//     {
+//         ImGui::Begin("Hello ExampleLayer2");
+//         ImGui::Button("Button ExampleLayer2");
+//         ImGui::Text("This is my UI stuff for the ExampleLayer2");
+//         ImGui::End();
+//     }
 
-    virtual void OnFrameFall() override 
-    {
-        AIAC_INFO("ExampleLayer2 is fall");
-    }
+//     virtual void OnFrameFall() override 
+//     {
+//         AIAC_INFO("ExampleLayer2 is fall");
+//     }
 
-    virtual void OnDetach() override
-    {
-        AIAC_INFO("ExampleLayer2 detached");
-    }
-};
+//     virtual void OnDetach() override
+//     {
+//         AIAC_INFO("ExampleLayer2 detached");
+//     }
+// };
 
 
 
