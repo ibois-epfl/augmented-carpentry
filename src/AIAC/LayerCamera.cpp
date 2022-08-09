@@ -15,8 +15,6 @@ namespace AIAC
         AIAC_INFO("LayerCamera attached");
         AIAC::Application& app = AIAC::Application::GetInstance();
         AIAC::ApplicationSpecification spec = app.GetSpecification();
-
-        app.LayerCameraRef = this; 
     }
 
     void LayerCamera::OnFrameAwake()

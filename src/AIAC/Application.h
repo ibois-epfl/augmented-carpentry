@@ -49,26 +49,32 @@ namespace AIAC
             layer->OnAttach();
         }
 
+        template<typename T>
+        std::shared_ptr<T> GetLayer()
+        {
+            static_assert(std::is_base_of<AIAC::Layer, T>::value, "Pushed type is not subclass of Layer!");
+            for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+            {
+                if (std::dynamic_pointer_cast<T>(*it))
+                {
+                    return std::dynamic_pointer_cast<T>(*it);
+                }
+            }
+            AIAC_ERROR("Layer not found!");
+            AIAC_BREAK();
+            return nullptr;
+        }
 
-        void PushLayer(const std::shared_ptr<AIAC::Layer>& layer) { m_LayerStack.emplace_back(layer); layer->OnAttach(); }
-        inline static Application& GetInstance() { return *s_Instance; }
-        inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
-
-
-        LayerExample* LayerExampleRef = nullptr;
-        LayerCamera* LayerCameraRef = nullptr;
-
-    private:
-        void Init();
-        void Shutdown();
-
-    public:
         inline static Application& GetInstance() { return *s_Instance; }
 
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
 
         inline const ImVec4& GetWindowBackColor() const { return m_WindowBackColor; }
         inline void SetWindowBackColor(const ImVec4& color) { m_WindowBackColor = color; }
+
+    private:
+        void Init();
+        void Shutdown();
 
     private:
         ApplicationSpecification m_AppSpec;
