@@ -114,14 +114,19 @@ namespace AIAC
     };
 }
 ```
-Please note that each layer is responsible for its own UI pannel that can be put in `OnUIRender()`. Thus there is no UI layer for now at the end.
 
 ### Getting the main app
 There is one only app and it can be accessed from layers with:
 ```c++
 AIAC::Application& app = AIAC::Application::GetInstance();
 ```
-Once accessed as references pass all the variables that are needed for other layers.
+
+### Getting other layers' variables
+To get other layers' variables use a small query function from the Application class. In the case of accessing test_a of layerA from e.g. layerB:
+```c++
+AIAC::Application& app = AIAC::Application::GetInstance();
+app.GetLayer<AIAC::LayerA>()->test_a
+```
 
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
