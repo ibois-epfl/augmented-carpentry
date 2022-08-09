@@ -28,6 +28,8 @@ namespace AIAC
 
     void LayerUI::OnUIRender()
     {
+        IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
+        
         ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
         ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
         ImGui::ShowDemoWindow();
