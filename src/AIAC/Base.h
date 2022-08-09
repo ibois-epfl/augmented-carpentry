@@ -3,6 +3,10 @@
 
 #include <memory>
 
+#if __linux__
+    #define AIAC_BREAK() EXIT_FAILURE
+#endif
+
 #define AIAC_EXPAND_MACRO(x) x
 #define AIAC_STRINGIFY_MACRO(x) #x
 
