@@ -32,6 +32,50 @@ They are made to be print as stickers. The code to generate them can be found at
 ## Guide for contributors
 Here's you can find some documentations and guidelines to contribute to augmented_carpentry.
 
+### Layers
+Layers are the main component of the framework. Each layer gets stacked and executed in that order. Each layer represents a different unit e.g. TSLAM, camera access, 3Drender, etc. Each layer has events where code can be injected in the loop and custom events.
+```c++
+namespace AIAC
+{
+    class Layer
+    {
+    public:
+        virtual ~Layer() = default;
+
+        AIAC::Application& GetApplication() { return AIAC::Application::GetInstance(); }
+
+        /// Is called when the layer is attached to the application.
+        virtual void OnAttach() {}
+
+        /// Is calle before GLFW poll events, GL frame and Imgui Frame
+        virtual void OnFrameAwake() {}
+
+        /// Is called when frame starts
+        virtual void OnFrameStart() {}
+
+        /// Is called once per loop and takes care of everything related ot UI
+        virtual void OnUIRender() {}
+
+        /// Is called when frame ends
+        virtual void OnFrameEnd() {}
+
+        /// Is called when the GLFW, GL and Imgui frame is updated and rendered
+        virtual void OnFrameFall() {}
+
+        /// Is called when the layer is detached from the application (~app).
+        virtual void OnDetach() {}
+    };
+}
+```
+Please note that each layer is responsible for its own UI pannel that can be put in `OnUIRender()`. Thus there is no UI layer for now at the end.
+
+### Getting the main app
+There is one only app and it can be accessed from layers with:
+```c++
+AIAC::Application& app = AIAC::Application::GetInstance();
+```
+Once accessed as references pass all the variables that are needed for other layers.
+
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. There are two types of logging: one for the *core* (everything related to SLAM or 3D engine, low-level component of the AR engine) and one for *client* (everything on the upper level such as UI, utilities, sockets, web loders, etc.)
 ```c++
