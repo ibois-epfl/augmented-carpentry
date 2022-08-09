@@ -27,7 +27,8 @@ namespace AIAC
             const char* Name;
             uint32_t WinWidth;
             uint32_t WinHeight;
-            bool IsFullscreen;
+            bool IsResizable;
+            ImVec4 WindowBackColor;
         };
 
     class Application
@@ -47,9 +48,12 @@ namespace AIAC
             m_LayerStack.emplace_back(layer);
             layer->OnAttach();
         }
+
+
         void PushLayer(const std::shared_ptr<AIAC::Layer>& layer) { m_LayerStack.emplace_back(layer); layer->OnAttach(); }
         inline static Application& GetInstance() { return *s_Instance; }
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
+
 
         LayerExample* LayerExampleRef = nullptr;
         LayerCamera* LayerCameraRef = nullptr;
@@ -57,6 +61,14 @@ namespace AIAC
     private:
         void Init();
         void Shutdown();
+
+    public:
+        inline static Application& GetInstance() { return *s_Instance; }
+
+        inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
+
+        inline const ImVec4& GetWindowBackColor() const { return m_WindowBackColor; }
+        inline void SetWindowBackColor(const ImVec4& color) { m_WindowBackColor = color; }
 
     private:
         ApplicationSpecification m_AppSpec;

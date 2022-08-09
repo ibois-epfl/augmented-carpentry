@@ -29,13 +29,14 @@ namespace AIAC
 
     void LayerExample::OnFrameEnd()
     {
-        AIAC_CRITICAL("LayerExample frame end");
+        AIAC_INFO("LayerExample frame end");
     }
 
     void LayerExample::OnUIRender()
     {
         ImGui::Begin("Hello LayerExample");
-        ImGui::ShowDemoWindow();
+        ImGui::Button("Button LayerExample");
+        ImGui::Text("This is my UI stuff for the LayerExample");
         ImGui::End();
     }
 

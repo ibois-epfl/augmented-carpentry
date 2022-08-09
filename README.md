@@ -36,6 +36,7 @@ Here's you can find some documentations and guidelines to contribute to augmente
 Here's the naming convention for this project:
 - `localVariable`: lowerCamelCase.
 - `m_PrivateVariable`: Hungarian notation with UpperCamelCase.
+- `APP_SPEC`: Constants with SNAKE_UPPER_CASE.
 - All the other things uses UpperCamelCase.
 
 Here's an example:
@@ -90,8 +91,6 @@ namespace AIAC
     public:
         virtual ~Layer() = default;
 
-        AIAC::Application& GetApplication() { return AIAC::Application::GetInstance(); }
-
         /// Is called when the layer is attached to the application.
         virtual void OnAttach() {}
 
@@ -125,21 +124,13 @@ AIAC::Application& app = AIAC::Application::GetInstance();
 Once accessed as references pass all the variables that are needed for other layers.
 
 ### Logging
-To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. There are two types of logging: one for the *core* (everything related to SLAM or 3D engine, low-level component of the AR engine) and one for *client* (everything on the upper level such as UI, utilities, sockets, web loders, etc.)
+To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
 ```c++
-// for core logging
 AIAC_CORE_INFO("test_core_info");
 AIAC_CORE_WARN("test_core_warn");
 AIAC_CORE_CRITICAL("test_core_critical");
 AIAC_CORE_DEBUG("test_core_debug");
 AIAC_CORE_ERROR("test_core_error");
-
-// for client logging
-AIAC_CLI_INFO("test_cli_info");
-AIAC_CLI_WARN("test_cli_warn");
-AIAC_CLI_CRITICAL("test_cli_critical");
-AIAC_CLI_DEBUG("test_cli_debug");
-AIAC_CLI_ERROR("test_cli_error");
 ```
 The output is like so:
 ```bash
