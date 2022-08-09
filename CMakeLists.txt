@@ -29,10 +29,14 @@ option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 
+option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
+if(ENABLE_ASSERT)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE AIAC_ENABLE_ASSERTS=true)
+endif()
 if(SILENT_LOGGING)
-    target_compile_definitions(${PROJECT_NAME} PUBLIC SILENT_LOGGING=true)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE SILENT_LOGGING=true)
 endif()
 
 # pre-compile macros versions
