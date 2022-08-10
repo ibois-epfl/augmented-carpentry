@@ -20,5 +20,5 @@
 	path = deps/TSlam
 	url = https://github.com/ibois-epfl/TSlam.git
 [submodule "deps/stb"]
-	path = deps/stbi
+	path = deps/stb
 	url = https://github.com/ibois-epfl/stb.git
