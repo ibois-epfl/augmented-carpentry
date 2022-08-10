@@ -9,5 +9,7 @@
 
 #include "AIAC/Image.h"
 
+#include "AIAC/LayerCamera.h"
 #include "AIAC/LayerExample.h"
+#include "AIAC/LayerSlam.h"
 #include "AIAC/LayerUI.h"

@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
 
     acApp_ptr->PushLayer<AIAC::LayerCamera>();
     acApp_ptr->PushLayer<AIAC::LayerExample>();
+    acApp_ptr->PushLayer<AIAC::LayerSlam>();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->Run();
