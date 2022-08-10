@@ -2,17 +2,6 @@
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
 
-#include <GL/gl.h>
-// #include <GL/glew.h>
-#include <GL/glut.h>
-#include <GL/freeglut.h>
-#include <GLES2/gl2.h>
-#include <GLFW/glfw3.h>
-
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
-
 #include "stb/stb_image.h"
 #include "stb/stb_image_write.h"
 
@@ -25,70 +14,76 @@ inline static void glfwErrorCallback(int error, const char* description) {
 
 namespace AIAC
 {
-    /*
-    UI needs:
-    - one pane viewport
-    - one pane with Tabs for all layers
-    - one pane for 3D scene
-
-    UI todos:
-    - get the 
-    */
-
-   void LayerUI::OnAttach()
-   {
-         AIAC_INFO("LayerUI attached");
-        // load image from memory
-        // create new GL texture
-        // bind texture
-        // set texture parameters
-        // upload image data to texture
-        // unbind texture
-
-        GLuint texture;
+    bool LayerUI::LoadImgFromFile(const char* path, GLuint& glTextureID, int32_t img_mod) 
+    {
+        if (FILE *file = fopen(path, "r")) {
+            fclose(file);
+            AIAC_INFO("File exists");
+        } else {
+            AIAC_ERROR("File does not exist");
+            AIAC_BREAK();
+        }
 
         int width, height, nrChannels;
-        unsigned char* image = stbi_load("icons/logo_linux_gray_light.png.png", &width, &height, &nrChannels, 0);
+        stbi_set_flip_vertically_on_load(true);  // OpenGL flip images
+        unsigned char* image = stbi_load(path, &width, &height, &nrChannels, 0);
         if (image)
         {
-            glGenTextures(1, &texture);
-            glBindTexture(GL_TEXTURE_2D, texture);
+            glGenTextures(1, &glTextureID);
+            glBindTexture(GL_TEXTURE_2D, glTextureID);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
             glGenerateMipmap(GL_TEXTURE_2D);
         }
         else
         {
-            std::cout << "Failed to load texture" << std::endl;
+            AIAC_ERROR("Failed to load img from file");
+            return false;
         }
         stbi_image_free(image);
+        return true;
+    }
 
-        // Show image on background
+    void LayerUI::CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture)
+    {
+        int w, h;
+        glBindTexture(GL_TEXTURE_2D, glTextureID);
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
+        
+        imTexture.ID = (void*)(intptr_t)glTextureID;
+        imTexture.Size = ImVec2(w, h);
+    }
+    void LayerUI::CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size)
+    {
+        imTexture.ID = (void*)(intptr_t)glTextureID;
+        imTexture.Size = size;
+    }
 
 
+   static GLuint textureID;
 
-        // ImTextureID my_tex_id = (void*)(intptr_t)texture;
-        // ImVec2 my_tex_sz = ImVec2(16, 16);
-        // ImGui::Image(my_tex_id, my_tex_sz, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
-
-        // // Show imag
-
-
+   void LayerUI::OnAttach()
+   {
+        // LoadImgFromFile("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
    }
-
 
     void LayerUI::OnUIRender()
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
-        
-        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-        ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-        ImGui::ShowDemoWindow();
+        ImGui::Begin("Test window");
+
+        ImGui::Text("This is a test image");
+
+        ImTexture imTexture = {};
+        LoadImgFromFile("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
+        CvtGlTextureID2ImTexture(textureID, imTexture);
+        imTexture.Size = ImVec2(100, 100);
+        ImGui::Image(imTexture.ID, imTexture.Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+
         ImGui::End();
-
     }
-
 }
