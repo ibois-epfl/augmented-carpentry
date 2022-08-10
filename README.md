@@ -86,8 +86,10 @@ We use an [.ini]() file to store the config parameters of the application. The p
 // Just include this header
 #include "utils/ini.h"
 
-// Open file "config.ini"
-inih::Ini config("config.ini");
+// Open file "config.ini".
+// The second param indicate if the file need to be update when 
+// InsertEntry() and UpdateEntry() is called.
+inih::Ini config("config.ini", true);
 
 // InsertEntry(section, key, value)
 config.InsertEntry("section_test", "key1", -1);
@@ -116,11 +118,28 @@ cout << config.Get("section_test", "key1", -1) << endl;
 primeVector.push_back(13);
 config.UpdateEntry("section_test_vector", "prime_number", primeVector);
 
-// Write the ini
-config.Write();
+// Write the ini to the original file
+config.WriteToFile();
 // Write to another file
-config.Write("another_config_file.ini");
+config.WriteToFile("another_config_file.ini");
 
+```
+
+After running thie code above, you gets the following output:
+```
+-1
+I'm a string!
+2 3 5 7 11 
+999
+```
+with two identical `.ini` file contains:
+```
+[section_test]
+key1 = 999
+key2 = I'm a string!
+
+[section_test_vector]
+prime_number = 2 3 5 7 11 13
 ```
 
 ### Layers
