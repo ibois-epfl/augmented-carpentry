@@ -6,7 +6,12 @@
 
 namespace AIAC
 {
-    Camera::Camera(int id)
+    Camera::Camera()
+    {
+
+    }
+
+    void Camera::Open(int id)
     {
         m_VideoCapture = cv::VideoCapture(id);
         if(!m_VideoCapture.isOpened())
@@ -15,6 +20,8 @@ namespace AIAC
         }
         else
         {
+            m_IsOpened = true;
+            
             m_Width = m_VideoCapture.get(cv::CAP_PROP_FRAME_WIDTH);
             m_Height = m_VideoCapture.get(cv::CAP_PROP_FRAME_HEIGHT);
         }
