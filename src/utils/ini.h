@@ -226,20 +226,20 @@ class INIReader {
         std::string section) const;
 
     template <typename T = std::string>
-    T Get(const std::string& section, const std::string& name) const;
+    T Get(const std::string& section, const std::string& name) ;
 
     template <typename T>
     T Get(const std::string& section, const std::string& name,
-          T&& default_v) const;
+          T& default_v) ;
 
     template <typename T = std::string>
     std::vector<T> GetVector(const std::string& section,
-                             const std::string& name) const;
+                             const std::string& name);
 
     template <typename T>
     std::vector<T> GetVector(const std::string& section,
                              const std::string& name,
-                             const std::vector<T>& default_v) const;
+                             const std::vector<T>& default_v);
 
     template <typename T = std::string>
     void InsertEntry(const std::string& section, const std::string& name,
@@ -352,7 +352,7 @@ inline const std::unordered_map<std::string, std::string> INIReader::Get(
  */
 template <typename T>
 inline T INIReader::Get(const std::string& section,
-                        const std::string& name) const {
+                        const std::string& name) {
     auto const _section = Get(section);
     auto const _value = _section.find(name);
 
@@ -383,11 +383,11 @@ inline T INIReader::Get(const std::string& section,
  */
 template <typename T>
 inline T INIReader::Get(const std::string& section, const std::string& name,
-                        T&& default_v) const {
+                        T& default_v) {
     try {
         return Get<T>(section, name);
     } catch (std::runtime_error& e) {
-        INIReader::InsertEntry(section, name, std::to_string(default_v).c_str());
+        INIReader::InsertEntry(section, name, default_v);
         return default_v;
     }
 }
@@ -410,7 +410,7 @@ inline T INIReader::Get(const std::string& section, const std::string& name,
  */
 template <typename T>
 inline std::vector<T> INIReader::GetVector(const std::string& section,
-                                           const std::string& name) const {
+                                           const std::string& name) {
     std::string value = Get(section, name);
 
     std::istringstream out{value};
@@ -442,11 +442,11 @@ inline std::vector<T> INIReader::GetVector(const std::string& section,
 template <typename T>
 inline std::vector<T> INIReader::GetVector(
     const std::string& section, const std::string& name,
-    const std::vector<T>& default_v) const {
+    const std::vector<T>& default_v) {
     try {
         return GetVector<T>(section, name);
     } catch (std::runtime_error& e) {
-        INIReader::InsertEntry(section, name, *default_v);
+        INIReader::InsertEntry(section, name, default_v);
         return default_v;
     };
 }
@@ -557,7 +557,7 @@ class INIWriter {
    public:
     INIWriter(){};
     inline static void write(const std::string& filepath,
-                             const INIReader& reader) {
+                             INIReader& reader) {
         // if (struct stat buf; stat(filepath.c_str(), &buf) == 0) {
         //     throw std::runtime_error("file: " + filepath + " already exist.");
         // }
@@ -566,14 +566,82 @@ class INIWriter {
         if (!out.is_open()) {
             throw std::runtime_error("cannot open output file: " + filepath);
         }
-        for (const auto& section : reader.Sections()) {
+        for (auto& section : reader.Sections()) {
             out << "[" << section << "]\n";
-            for (const auto& key : reader.Keys(section)) {
-                out << key << "=" << reader.Get(section, key) << "\n";
+            for (auto& key : reader.Keys(section)) {
+                out << key << " = " << reader.Get(section, key) << "\n";
             }
+            out << "\n";
         }
         out.close();
     }
 };
+
+class Ini
+{
+public:
+    Ini(std::string filename, bool updateFile=true):
+        m_Filename(filename),
+        m_UpdateFile(updateFile)
+    {
+        m_IniReader = inih::INIReader(m_Filename);
+    }
+
+    template <typename T>
+    T Get(const std::string& section, const std::string& name, T&& default_v)
+    {
+        return m_IniReader.Get<T>(section, name, default_v);
+    }
+
+    template <typename T>
+    std::vector<T> GetVector(const std::string& section,
+                             const std::string& name,
+                             const std::vector<T>& default_v)
+    {
+        return m_IniReader.GetVector<T>(section, name, default_v);
+    }
+
+    template <typename T = std::string>
+    void InsertEntry(const std::string& section, const std::string& name, const T& v)
+    {
+        m_IniReader.InsertEntry(section, name, v);
+        if(m_UpdateFile) Write();
+    };
+
+    template <typename T = std::string>
+    void InsertEntry(const std::string& section, const std::string& name, const std::vector<T>& vs)
+    {
+        m_IniReader.InsertEntry(section, name, vs);
+        if(m_UpdateFile) Write();
+    };
+
+    template <typename T = std::string>
+    void UpdateEntry(const std::string& section, const std::string& name, const T& v)
+    {
+        m_IniReader.UpdateEntry(section, name, v);
+        if(m_UpdateFile) Write();
+    }
+
+    template <typename T = std::string>
+    void UpdateEntry(const std::string& section, const std::string& name,
+                     const std::vector<T>& vs)
+    {
+        m_IniReader.UpdateEntry(section, name, vs);
+        if(m_UpdateFile) Write();
+    };
+
+    void Write(std::string writeFilename="")
+    {
+        if(writeFilename.empty()) writeFilename = m_Filename;
+        inih::INIWriter::write(writeFilename, m_IniReader);
+    };
+
+private:
+    inih::INIReader m_IniReader;
+    std::string m_Filename;
+    bool m_UpdateFile;
+
+};
+
 }
 #endif /* __INIWRITER_H__ */
