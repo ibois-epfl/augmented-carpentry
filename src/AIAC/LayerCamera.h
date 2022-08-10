@@ -12,13 +12,8 @@ namespace AIAC
         LayerCamera() = default;
         virtual ~LayerCamera() = default;
 
-        virtual void OnAttach();
-        virtual void OnFrameAwake() override;
+        virtual void OnAttach() override;
         virtual void OnFrameStart() override;
-        virtual void OnFrameEnd() override;
-        virtual void OnUIRender() override;
-        virtual void OnFrameFall() override;
-        virtual void OnDetach() override;
 
         const AIAC::Image GetCurrentFrame() { return m_CurrentFrame; }
 

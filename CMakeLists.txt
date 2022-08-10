@@ -47,7 +47,7 @@ target_compile_definitions(${PROJECT_NAME}
     PUBLIC AC_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
     PUBLIC AC_VERSION_MINOR=${PROJECT_VERSION_MINOR}
     PUBLIC AC_VERSION_PATCH=${PROJECT_VERSION_PATCH}
-    )
+)
 
 
 #------------------------------------------------------------------------------------------------------------

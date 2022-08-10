@@ -15,10 +15,6 @@ namespace AIAC
         AIAC_INFO("LayerExample attached");
         AIAC::Application& app = AIAC::Application::GetInstance();
         AIAC::ApplicationSpecification spec = app.GetSpecification();
-
-        // TEST
-        AIAC_INFO("LayerExample attached");
-        std::cout << app.GetLayer<AIAC::LayerCamera>()->test_a << std::endl;
     }
 
     void LayerExample::OnFrameAwake()
