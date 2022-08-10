@@ -82,46 +82,53 @@ private:
 
 ### Config
 We use an [.ini]() file to store the config parameters of the application. The parser is derived from [this project]() but with some modification. Here's an example:
+- Declaration:
 ```cpp
 // Just include this header
-#include "utils/ini.h"
+#include "AIAC/Config.h"
 
 // Open file "config.ini".
 // The second param indicate if the file need to be update when 
 // InsertEntry() and UpdateEntry() is called.
+// The initialization happens in the very beginning of `ACApp.cpp`.
 inih::Ini config("config.ini", true);
+```
+
+- Usage
+```cpp
+AIAC::Config::Get<int>("section", "key1", 10);
 
 // InsertEntry(section, key, value)
-config.InsertEntry("section_test", "key1", -1);
+AIAC::Config::InsertEntry("section_test", "key1", -1);
 
 // Insert a vector
 vector<int> primeVector = {2, 3, 5, 7, 11};
-config.InsertEntry("section_test_vector", "prime_number", primeVector);
+AIAC::Config::InsertEntry("section_test_vector", "prime_number", primeVector);
 
 
 // Get<T>(section, key, default_value)
 // The entry will be created if not exist.
-cout << config.Get<int>("section_test", "key1", -1) << endl;
-cout << config.Get<string>("section_test", "key2", "I'm a string!") << endl;
+cout << AIAC::Config::Get<int>("section_test", "key1", -1) << endl;
+cout << AIAC::Config::Get<string>("section_test", "key2", "I'm a string!") << endl;
 
 // With vector, use GetVector() instead of Get(),
-for(auto n: config.GetVector<int>("section_test_vector", "prime_number", primeVector)){
+for(auto n: AIAC::Config::GetVector<int>("section_test_vector", "prime_number", primeVector)){
     cout << n << " ";
 }
 cout << endl;
 
 // Update an Entry
-config.UpdateEntry("section_test", "key1", 999);
-cout << config.Get("section_test", "key1", -1) << endl;
+AIAC::Config::UpdateEntry("section_test", "key1", 999);
+cout << AIAC::Config::Get("section_test", "key1", -1) << endl;
 
 // For update an vector entry, call the same function as normal
 primeVector.push_back(13);
-config.UpdateEntry("section_test_vector", "prime_number", primeVector);
+AIAC::Config::UpdateEntry("section_test_vector", "prime_number", primeVector);
 
 // Write the ini to the original file
-config.WriteToFile();
+AIAC::Config::WriteToFile();
 // Write to another file
-config.WriteToFile("another_config_file.ini");
+AIAC::Config::WriteToFile("another_config_file.ini");
 
 ```
 
