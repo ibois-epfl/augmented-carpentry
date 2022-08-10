@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-
+#include <opencv2/opencv.hpp>
 
 
 namespace AIAC
@@ -17,7 +17,7 @@ namespace AIAC
     }
 
 
-    bool LayerUI::LoadImgFromFile(const char* path, GLuint& glTextureID, int32_t img_mod) 
+    bool LayerUI::LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID, int32_t img_mod) 
     {
         if (FILE *file = fopen(path, "r")) {
             fclose(file);
@@ -65,6 +65,34 @@ namespace AIAC
         imTexture.ID = (void*)(intptr_t)glTextureID;
         imTexture.Size = size;
     }
+    void LayerUI::CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID)
+    {
+        if(cvMat.empty()) { AIAC_ERROR("cvMat empty"); AIAC_BREAK(); }
+        else
+        {
+            glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+            glGenTextures(1, &glTextureID);
+            glBindTexture(GL_TEXTURE_2D, glTextureID);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+            cv::cvtColor(cvMat, cvMat, cv::COLOR_RGB2BGR);
+
+            glTexImage2D(GL_TEXTURE_2D,
+                        0,
+                        GL_RGB,
+                        cvMat.cols,
+                        cvMat.rows,
+                        0,
+                        GL_RGB,
+                        GL_UNSIGNED_BYTE,
+                        cvMat.ptr());
+        }
+    } 
 
 
 
@@ -82,16 +110,14 @@ namespace AIAC
 
         ImGui::Text("This is a test image");
 
-        // define size and position of the window
-        // ImGui::SetWindowSize(ImVec2(400, 400));
-        // ImGui::SetWindowPos(ImVec2(-1, 400));
-
-        // show overlay with frame rate
-
-
 
         ImTexture imTexture = {};
-        LoadImgFromFile("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
+        LoadImgFromFile2GlTextureID("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
+        
+        // AIAC::Application::Get().GetLayerCamera()->
+
+
+
         CvtGlTextureID2ImTexture(textureID, imTexture);
         imTexture.Size = ImVec2(100, 100);
         ImGui::Image(imTexture.ID, imTexture.Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
