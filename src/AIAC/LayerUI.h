@@ -10,7 +10,7 @@ namespace AIAC
         LayerUI() = default;
         virtual ~LayerUI() = default;
 
-        // virtual void OnAttach() override;
+        virtual void OnAttach() override;
         virtual void OnUIRender() override;
         // virtual void OnDetach() override;
     };
