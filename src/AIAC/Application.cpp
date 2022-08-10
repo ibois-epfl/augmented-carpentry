@@ -27,11 +27,8 @@ namespace AIAC
 
     void Application::Init()
     {
-        // Init AIAC LOGGER ---------------------------------------------------------
         AIAC::Log::Init();
-        AIAC_INFO("Log System initialised");
 
-        // Init GLFW ----------------------------------------------------------------
         AIAC_INFO("Setting up GL+GLSW window");
         glfwSetErrorCallback(glfwErrorCallback);
             if (!glfwInit()) {

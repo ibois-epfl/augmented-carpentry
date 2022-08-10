@@ -17,18 +17,14 @@ namespace AIAC
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-        // ImGui::StyleColorsClassic();
         ImGui::StyleColorsLight();
-        // change color of window bg
         ImGuiStyle& style = ImGui::GetStyle();
         style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
 
         ImGui_ImplGlfw_InitForOpenGL(AIAC_APP().GetWindow(), true);
         ImGui_ImplOpenGL3_Init(AIAC_APP().GetGlslVersion());
 
-        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);
-
-        // m_WindowBackColor = AIAC_APP().GetSpecification().WindowBackColor;
+        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //FIXME: add to config
     }
 
     void LayerUI::OnFrameStart()
