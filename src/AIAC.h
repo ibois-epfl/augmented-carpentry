@@ -1,5 +1,9 @@
 #pragma once
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+
+
 #include "AIAC/Base.h"
 
 #include "AIAC/Application.h"
@@ -13,3 +17,4 @@
 #include "AIAC/LayerExample.h"
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerUI.h"
+#include "AIAC/LayerCamera.h"
