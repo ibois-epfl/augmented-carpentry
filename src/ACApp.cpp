@@ -18,7 +18,7 @@ These are different classes: e.g. UILayer.h, SLAMLayer.h, etc.
 int main(int argc, char* argv[]) {
 #ifdef __linux__
     // Init Config
-    AIAC::Config config("config.ini");
+    AIAC::Config config("config.ini", true);
 
     AIAC::ApplicationSpecification appSpec;
     appSpec.Name = "augmented_carpentry";
