@@ -12,28 +12,22 @@ namespace AIAC
 {
     void LayerExample::OnAttach()
     {
+        // To show how to get layers
         AIAC_INFO("LayerExample attached");
         AIAC::Application& app = AIAC::Application::GetInstance();
-        AIAC::ApplicationSpecification spec = app.GetSpecification();
-
-        // TEST
-        AIAC_INFO("LayerExample attached");
         std::cout << app.GetLayer<AIAC::LayerCamera>()->test_a << std::endl;
     }
 
     void LayerExample::OnFrameAwake()
     {
-        AIAC_INFO("LayerExample OnFrameAwake");
     }
 
     void LayerExample::OnFrameStart()
     {
-        AIAC_INFO("LayerExample frame start");
     }
 
     void LayerExample::OnFrameEnd()
     {
-        AIAC_INFO("LayerExample frame end");
     }
 
     void LayerExample::OnUIRender()
@@ -42,11 +36,9 @@ namespace AIAC
 
     void LayerExample::OnFrameFall()
     {
-        AIAC_INFO("LayerExample is fall");
     }
 
     void LayerExample::OnDetach()
     {
-        AIAC_INFO("LayerExample detached");
     }
 }

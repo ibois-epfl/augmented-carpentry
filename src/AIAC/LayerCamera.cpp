@@ -19,17 +19,14 @@ namespace AIAC
 
     void LayerCamera::OnFrameAwake()
     {
-        AIAC_INFO("LayerCamera OnFrameAwake");
     }
 
     void LayerCamera::OnFrameStart()
     {
-        AIAC_INFO("LayerCamera frame start");
     }
 
     void LayerCamera::OnFrameEnd()
     {
-        AIAC_INFO("LayerCamera frame end");
     }
 
     void LayerCamera::OnUIRender()
@@ -38,11 +35,9 @@ namespace AIAC
 
     void LayerCamera::OnFrameFall()
     {
-        AIAC_INFO("LayerCamera is fall");
     }
 
     void LayerCamera::OnDetach()
     {
-        AIAC_INFO("LayerCamera detached");
     }
 }
