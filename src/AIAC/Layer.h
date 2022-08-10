@@ -10,7 +10,7 @@ namespace AIAC
         virtual ~Layer() = default;
 
         /// Is called when the layer is attached to the application.
-        void OnAttach() {}
+        virtual void OnAttach() {}
 
         /// Is calle before GLFW poll events, GL frame and Imgui Frame
         virtual void OnFrameAwake() {}
