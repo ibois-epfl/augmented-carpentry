@@ -90,4 +90,6 @@ namespace AIAC
         static Application* s_Instance;
 
     };
+
+    #define AIAC_APP() AIAC::Application::GetInstance()
 }
