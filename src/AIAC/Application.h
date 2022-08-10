@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <vector>
 #include <type_traits>
+#include <typeindex>
+#include <typeinfo>
+#include <unordered_map>
 
 #include <GL/gl.h>
 #include <GL/glut.h>
@@ -45,6 +48,7 @@ namespace AIAC
         {
             static_assert(std::is_base_of<AIAC::Layer, T>::value, "Pushed type is not subclass of Layer!");
             std::shared_ptr<T> layer = std::make_shared<T>();
+            m_LayerMap[typeid(T)] = layer;
             m_LayerStack.emplace_back(layer);
             layer->OnAttach();
         }
@@ -53,12 +57,9 @@ namespace AIAC
         std::shared_ptr<T> GetLayer()
         {
             static_assert(std::is_base_of<AIAC::Layer, T>::value, "Pushed type is not subclass of Layer!");
-            for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+            if(std::dynamic_pointer_cast<T>(m_LayerMap[typeid(T)]))
             {
-                if (std::dynamic_pointer_cast<T>(*it))
-                {
-                    return std::dynamic_pointer_cast<T>(*it);
-                }
+                return std::dynamic_pointer_cast<T>(m_LayerMap[typeid(T)]);
             }
             AIAC_ERROR("Layer not found!");
             AIAC_BREAK();
@@ -83,6 +84,7 @@ namespace AIAC
         ImVec4 m_WindowBackColor;
 
         std::vector<std::shared_ptr<AIAC::Layer>> m_LayerStack;
+        std::unordered_map<std::type_index, std::shared_ptr<AIAC::Layer>> m_LayerMap;
 
         static Application* s_Instance;
 
