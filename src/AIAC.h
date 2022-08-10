@@ -1,8 +1,9 @@
 #pragma once
 
+#include "AIAC/Config.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
-
 
 #include "AIAC/Base.h"
 
