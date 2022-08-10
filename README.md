@@ -80,6 +80,48 @@ private:
 };
 ```
 
+### Config
+We use an [.ini]() file to store the config parameters of the application. The parser is derived from [this project]() but with some modification. Here's an example:
+```cpp
+// Just include this header
+#include "utils/ini.h"
+
+// Open file "config.ini"
+inih::Ini config("config.ini");
+
+// InsertEntry(section, key, value)
+config.InsertEntry("section_test", "key1", -1);
+
+// Insert a vector
+vector<int> primeVector = {2, 3, 5, 7, 11};
+config.InsertEntry("section_test_vector", "prime_number", primeVector);
+
+
+// Get<T>(section, key, default_value)
+// The entry will be created if not exist.
+cout << config.Get<int>("section_test", "key1", -1) << endl;
+cout << config.Get<string>("section_test", "key2", "I'm a string!") << endl;
+
+// With vector, use GetVector() instead of Get(),
+for(auto n: config.GetVector<int>("section_test_vector", "prime_number", primeVector)){
+    cout << n << " ";
+}
+cout << endl;
+
+// Update an Entry
+config.UpdateEntry("section_test", "key1", 999);
+cout << config.Get("section_test", "key1", -1) << endl;
+
+// For update an vector entry, call the same function as normal
+primeVector.push_back(13);
+config.UpdateEntry("section_test_vector", "prime_number", primeVector);
+
+// Write the ini
+config.Write();
+// Write to another file
+config.Write("another_config_file.ini");
+
+```
 
 ### Layers
 Layers are the main component of the framework. Each layer gets stacked and executed in that order. Each layer represents a different unit e.g. TSLAM, camera access, 3Drender, etc. Each layer has events where code can be injected in the loop and custom events.
