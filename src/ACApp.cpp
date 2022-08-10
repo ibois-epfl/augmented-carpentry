@@ -27,8 +27,8 @@ int main(int argc, char* argv[]) {
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
 
-    acApp_ptr->PushLayer<AIAC::LayerExample>();
     acApp_ptr->PushLayer<AIAC::LayerCamera>();
+    acApp_ptr->PushLayer<AIAC::LayerExample>();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->Run();

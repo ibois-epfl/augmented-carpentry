@@ -38,10 +38,6 @@ namespace AIAC
 
     void LayerExample::OnUIRender()
     {
-        ImGui::Begin("Hello LayerExample");
-        ImGui::Button("Button LayerExample");
-        ImGui::Text("This is my UI stuff for the LayerExample");
-        ImGui::End();
     }
 
     void LayerExample::OnFrameFall()
