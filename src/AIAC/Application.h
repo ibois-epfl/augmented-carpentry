@@ -20,6 +20,7 @@
 #include "AIAC/Layer.h"
 #include "AIAC/Assert.h"
 
+#include "AIAC/LayerSlam.h"
 #include "AIAC/LayerCamera.h"
 #include "AIAC/LayerExample.h"
 

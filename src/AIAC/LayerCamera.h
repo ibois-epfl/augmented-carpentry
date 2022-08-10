@@ -1,6 +1,8 @@
 #pragma once
 
 #include "AIAC/Layer.h"
+#include "AIAC/Image.h"
+#include "AIAC/Camera.h"
 
 namespace AIAC
 {
@@ -10,14 +12,15 @@ namespace AIAC
         LayerCamera() = default;
         virtual ~LayerCamera() = default;
 
-        virtual void OnAttach();
-        virtual void OnFrameAwake() override;
+        virtual void OnAttach() override;
         virtual void OnFrameStart() override;
-        virtual void OnFrameEnd() override;
-        virtual void OnUIRender() override;
-        virtual void OnFrameFall() override;
-        virtual void OnDetach() override;
 
-        int test_a = 333;  // TEST
+        const AIAC::Image GetCurrentFrame() { return m_CurrentFrame; }
+
+    public:
+        AIAC::Camera MainCamera;
+
+    private:
+        AIAC::Image m_CurrentFrame;
     };
 }

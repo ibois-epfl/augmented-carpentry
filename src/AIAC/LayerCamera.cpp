@@ -15,29 +15,21 @@ namespace AIAC
         AIAC_INFO("LayerCamera attached");
         AIAC::Application& app = AIAC::Application::GetInstance();
         AIAC::ApplicationSpecification spec = app.GetSpecification();
-    }
 
-    void LayerCamera::OnFrameAwake()
-    {
+        try
+        {
+            MainCamera.Open(0);
+        }
+        catch(const std::runtime_error& e)
+        {
+            AIAC_ERROR(e.what());
+        }
     }
 
     void LayerCamera::OnFrameStart()
     {
-    }
-
-    void LayerCamera::OnFrameEnd()
-    {
-    }
-
-    void LayerCamera::OnUIRender()
-    {
-    }
-
-    void LayerCamera::OnFrameFall()
-    {
-    }
-
-    void LayerCamera::OnDetach()
-    {
+        AIAC_INFO("LayerCamera frame start");
+        
+        m_CurrentFrame = MainCamera.GetNextFrame();
     }
 }
