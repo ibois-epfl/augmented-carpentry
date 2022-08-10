@@ -605,21 +605,21 @@ public:
     void InsertEntry(const std::string& section, const std::string& name, const T& v)
     {
         m_IniReader.InsertEntry(section, name, v);
-        if(m_UpdateFile) Write();
+        if(m_UpdateFile) WriteToFile();
     };
 
     template <typename T = std::string>
     void InsertEntry(const std::string& section, const std::string& name, const std::vector<T>& vs)
     {
         m_IniReader.InsertEntry(section, name, vs);
-        if(m_UpdateFile) Write();
+        if(m_UpdateFile) WriteToFile();
     };
 
     template <typename T = std::string>
     void UpdateEntry(const std::string& section, const std::string& name, const T& v)
     {
         m_IniReader.UpdateEntry(section, name, v);
-        if(m_UpdateFile) Write();
+        if(m_UpdateFile) WriteToFile();
     }
 
     template <typename T = std::string>
@@ -627,10 +627,10 @@ public:
                      const std::vector<T>& vs)
     {
         m_IniReader.UpdateEntry(section, name, vs);
-        if(m_UpdateFile) Write();
+        if(m_UpdateFile) WriteToFile();
     };
 
-    void Write(std::string writeFilename="")
+    void WriteToFile(std::string writeFilename="")
     {
         if(writeFilename.empty()) writeFilename = m_Filename;
         inih::INIWriter::write(writeFilename, m_IniReader);
