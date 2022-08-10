@@ -70,6 +70,8 @@ namespace AIAC
         inline static Application& GetInstance() { return *s_Instance; }
 
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
+        inline GLFWwindow* GetWindow() const { return m_Window; }
+        inline const char* GetGlslVersion() const { return m_GlslVersion; }
 
         inline const ImVec4& GetWindowBackColor() const { return m_WindowBackColor; }
         inline void SetWindowBackColor(const ImVec4& color) { m_WindowBackColor = color; }
@@ -81,16 +83,17 @@ namespace AIAC
     private:
         ApplicationSpecification m_AppSpec;
         bool m_IsRunning = false;
-        GLFWwindow* m_Window = nullptr;
+        GLFWwindow* m_Window;
+        const char* m_GlslVersion;
         ImVec4 m_WindowBackColor;
 
         std::vector<std::shared_ptr<AIAC::Layer>> m_LayerStack;
         std::unordered_map<std::type_index, std::shared_ptr<AIAC::Layer>> m_LayerMap;
 
         static Application* s_Instance;
-
     };
-
 }
 
 #define AIAC_APP() AIAC::Application::GetInstance()
+
+
