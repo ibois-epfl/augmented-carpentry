@@ -79,10 +79,11 @@ namespace AIAC
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-        ImGui::StyleColorsClassic();
+        // ImGui::StyleColorsClassic();
+        ImGui::StyleColorsLight();
         // change color of window bg
         ImGuiStyle& style = ImGui::GetStyle();
-        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 0.70f);
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
 
         ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
         ImGui_ImplOpenGL3_Init(GLSL_VERSION);
@@ -106,6 +107,8 @@ namespace AIAC
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
+
+
 
 
             for (auto& layer : m_LayerStack)

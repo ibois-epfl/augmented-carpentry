@@ -15,3 +15,4 @@
 
 #include "AIAC/LayerExample.h"
 #include "AIAC/LayerUI.h"
+#include "AIAC/LayerCamera.h"

@@ -8,12 +8,15 @@
 #include <iostream>
 
 
-inline static void glfwErrorCallback(int error, const char* description) {
-    AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
-    }
+
 
 namespace AIAC
 {
+    inline static void glfwErrorCallback(int error, const char* description) {
+    AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
+    }
+
+
     bool LayerUI::LoadImgFromFile(const char* path, GLuint& glTextureID, int32_t img_mod) 
     {
         if (FILE *file = fopen(path, "r")) {
@@ -64,6 +67,7 @@ namespace AIAC
     }
 
 
+
    static GLuint textureID;
 
    void LayerUI::OnAttach()
@@ -78,11 +82,26 @@ namespace AIAC
 
         ImGui::Text("This is a test image");
 
+        // define size and position of the window
+        // ImGui::SetWindowSize(ImVec2(400, 400));
+        // ImGui::SetWindowPos(ImVec2(-1, 400));
+
+        // show overlay with frame rate
+
+
+
         ImTexture imTexture = {};
         LoadImgFromFile("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
         CvtGlTextureID2ImTexture(textureID, imTexture);
         imTexture.Size = ImVec2(100, 100);
         ImGui::Image(imTexture.ID, imTexture.Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+
+
+        ImGui::Begin("Test window");
+
+        ImGui::Text("This is a test image");
+
+
 
         ImGui::End();
     }
