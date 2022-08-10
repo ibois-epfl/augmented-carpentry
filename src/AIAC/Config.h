@@ -24,7 +24,12 @@ public:
     inline static T Get(const std::string& section, const std::string& name, T&& default_v)
     {
         AIAC_ASSERT(s_Instance, "Config not initialized!");
-        return s_Instance->m_IniReader.Get<T>(section, name, default_v);
+        try {
+            return s_Instance->m_IniReader.Get<T>(section, name);
+        } catch (std::runtime_error& e) {
+            s_Instance->m_IniReader.InsertEntry(section, name, default_v);
+            return default_v;
+        }
     }
 
     template <typename T>
@@ -33,7 +38,12 @@ public:
                              const std::vector<T>& default_v)
     {
         AIAC_ASSERT(s_Instance, "Config not initialized!");
-        return s_Instance->m_IniReader.GetVector<T>(section, name, default_v);
+        try {
+            return s_Instance->m_IniReader.GetVector<T>(section, name);
+        } catch (std::runtime_error& e) {
+            s_Instance->m_IniReader.InsertEntry(section, name, default_v);
+            return default_v;
+        }
     }
 
     template <typename T = std::string>
