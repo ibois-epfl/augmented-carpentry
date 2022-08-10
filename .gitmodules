@@ -19,3 +19,6 @@
 	branch = main
 	path = deps/TSlam
 	url = https://github.com/ibois-epfl/TSlam.git
+[submodule "deps/stbi"]
+	path = deps/stbi
+	url = https://github.com/ibois-epfl/stb.git
