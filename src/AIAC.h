@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AIAC/Config.h"
+
 #include "AIAC/Base.h"
 
 #include "AIAC/Application.h"
