@@ -31,11 +31,12 @@ namespace AIAC
         // virtual void OnDetach() override;
 
     private:
-        bool LoadImgFromFile(const char* path, GLuint& glTextureID, int32_t img_mod);
+        bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID, int32_t img_mod);
 
         void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture);
         void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size);
-
+        
+        void CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID);
 
 
     };
