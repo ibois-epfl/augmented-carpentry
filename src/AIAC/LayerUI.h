@@ -24,11 +24,14 @@ namespace AIAC
         virtual ~LayerUI() = default;
 
         virtual void OnAttach() override;
+        virtual void OnFrameStart() override;
         virtual void OnUIRender() override;
-        // virtual void OnDetach() override;
-
+        virtual void OnFrameEnd() override;
+        virtual void OnFrameFall() override;
+        virtual void OnDetach() override;
+    
     private:
-        GLuint* m_CurrentFrameGlTextureID;
+        ImVec4 m_WindowBackColor;
 
     };
 }

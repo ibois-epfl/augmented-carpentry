@@ -1,6 +1,7 @@
 #include "AIAC/LayerUI.h"
 #include "AIAC/Log.h"
 #include "AIAC/Image.h"
+#include "AIAC/Application.h"
 
 #include "stb/stb_image.h"
 #include "stb/stb_image_write.h"
@@ -8,22 +9,34 @@
 #include <iostream>
 
 
-
 namespace AIAC
 {
-    inline static void glfwErrorCallback(int error, const char* description) {
-    AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
+    void LayerUI::OnAttach()
+    {
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+        // ImGui::StyleColorsClassic();
+        ImGui::StyleColorsLight();
+        // change color of window bg
+        ImGuiStyle& style = ImGui::GetStyle();
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
+
+        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP().GetWindow(), true);
+        ImGui_ImplOpenGL3_Init(AIAC_APP().GetGlslVersion());
+
+        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);
+
+        // m_WindowBackColor = AIAC_APP().GetSpecification().WindowBackColor;
     }
 
-
-
-
-   static GLuint textureID;
-
-   void LayerUI::OnAttach()
-   {
-        // LoadImgFromFile("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
-   }
+    void LayerUI::OnFrameStart()
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+    }
 
     void LayerUI::OnUIRender()
     {
@@ -62,5 +75,22 @@ namespace AIAC
 
 
         ImGui::End();
+    }
+
+    void LayerUI::OnFrameEnd()
+    {
+        ImGui::Render();
+    }
+
+    void LayerUI::OnFrameFall()
+    {
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    }
+
+    void LayerUI::OnDetach()
+    {
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
     }
 }
