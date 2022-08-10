@@ -29,14 +29,11 @@ namespace AIAC
 
     void LayerCamera::OnFrameEnd()
     {
-        AIAC_CRITICAL("LayerCamera frame end");
+        AIAC_INFO("LayerCamera frame end");
     }
 
     void LayerCamera::OnUIRender()
     {
-        ImGui::Begin("Hello LayerCamera");
-        ImGui::ShowDemoWindow();
-        ImGui::End();
     }
 
     void LayerCamera::OnFrameFall()
