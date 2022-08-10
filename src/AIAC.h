@@ -12,6 +12,7 @@
 #include "AIAC/Assert.h"
 
 #include "AIAC/Image.h"
+#include "AIAC/Camera.h"
 
 #include "AIAC/LayerCamera.h"
 #include "AIAC/LayerExample.h"
