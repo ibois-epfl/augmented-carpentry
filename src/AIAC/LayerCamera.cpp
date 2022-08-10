@@ -29,7 +29,7 @@ namespace AIAC
     void LayerCamera::OnFrameStart()
     {
         AIAC_INFO("LayerCamera frame start");
-
+        
         m_CurrentFrame = MainCamera.GetNextFrame();
     }
 }

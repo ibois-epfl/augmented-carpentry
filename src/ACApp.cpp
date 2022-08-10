@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     appSpec.WinWidth = 1280;
     appSpec.WinHeight = 720;
     appSpec.IsResizable = true;
-    appSpec.WindowBackColor = ImVec4(1.00f, 0.00f, 1.00f, 1.00f);
+    appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
 
