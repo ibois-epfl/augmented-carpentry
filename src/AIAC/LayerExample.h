@@ -10,7 +10,7 @@ namespace AIAC
         LayerExample() = default;
         virtual ~LayerExample() = default;
 
-        void OnAttach();
+        void OnAttach() override;
         virtual void OnFrameAwake() override;
         virtual void OnFrameStart() override;
         virtual void OnFrameEnd() override;

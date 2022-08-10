@@ -26,34 +26,10 @@ namespace AIAC
         }
     }
 
-    void LayerCamera::OnFrameAwake()
-    {
-        AIAC_INFO("LayerCamera OnFrameAwake");
-    }
-
     void LayerCamera::OnFrameStart()
     {
         AIAC_INFO("LayerCamera frame start");
 
         m_CurrentFrame = MainCamera.GetNextFrame();
-    }
-
-    void LayerCamera::OnFrameEnd()
-    {
-        AIAC_INFO("LayerCamera frame end");
-    }
-
-    void LayerCamera::OnUIRender()
-    {
-    }
-
-    void LayerCamera::OnFrameFall()
-    {
-        AIAC_INFO("LayerCamera is fall");
-    }
-
-    void LayerCamera::OnDetach()
-    {
-        AIAC_INFO("LayerCamera detached");
     }
 }

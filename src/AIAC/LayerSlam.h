@@ -13,13 +13,8 @@ namespace AIAC
         LayerSlam() = default;
         ~LayerSlam() = default;
 
-        void OnAttach();
-        virtual void OnFrameAwake() override;
+        void OnAttach() override;
         virtual void OnFrameStart() override;
-        virtual void OnFrameEnd() override;
-        virtual void OnUIRender() override;
-        virtual void OnFrameFall() override;
-        virtual void OnDetach() override;
         
         cv::Mat GetCamPose();
 

@@ -22,11 +22,6 @@ namespace AIAC
         Slam.setInstancing(true);
     }
 
-    void LayerSlam::OnFrameAwake()
-    {
-        AIAC_INFO("LayerSlam OnFrameAwake");
-    }
-
     void LayerSlam::OnFrameStart()
     {
         AIAC_INFO("LayerSlam frame start");
@@ -36,26 +31,7 @@ namespace AIAC
                 ->GetCurrentFrame().GetCvMat();
         
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
-        
+
         AIAC_INFO(m_IsTracked);
-    }
-
-    void LayerSlam::OnFrameEnd()
-    {
-        AIAC_INFO("LayerSlam frame end");
-    }
-
-    void LayerSlam::OnUIRender()
-    {
-    }
-
-    void LayerSlam::OnFrameFall()
-    {
-        AIAC_INFO("LayerSlam is fall");
-    }
-
-    void LayerSlam::OnDetach()
-    {
-        AIAC_INFO("LayerSlam detached");
     }
 }
