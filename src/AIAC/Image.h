@@ -4,6 +4,16 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <GL/freeglut.h>
+#include <GLES2/gl2.h>
+#include <GLFW/glfw3.h>
+
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
 #include <opencv2/opencv.hpp>
 
 namespace AIAC
@@ -15,6 +25,20 @@ namespace AIAC
         RGBA,
         GRAYSCALE
     };
+    
+    enum class ImageType
+    {
+        None = 0,
+        CV_MAT,
+        GL_TEXTURE_ID,
+        IM_TEXTURE
+    };
+
+    struct ImTexture
+        {
+            ImTextureID ID;
+            ImVec2 Size;
+        };
 
     class Image
     {
@@ -22,19 +46,32 @@ namespace AIAC
         Image();
         Image(cv::Mat cvImg);
         Image(AIAC::Image &img);
-        Image(const char* path);
+        Image(const char* path, ImageType imageType);
         ~Image();
 
-        cv::Mat GetCvMat() const { return m_Data; }
+        inline std::string_view GetPath() const { return m_Path; }
+        inline cv::Mat GetCvMat() const { return m_CvMat; }
+        inline GLuint GetGlTextureID() const { return m_GlTextureID; }
+        inline ImTexture GetImTexture() const { return m_ImTexture; }
 
         void UpdateData(cv::Mat cvImg);
 
         void operator=(cv::Mat cvImg){ UpdateData(cvImg); }
 
+        void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture);
+        void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size);
+        void CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID);
+
+        bool LoadImgFromFile2CvMat(const char* path, cv::Mat& cvMat);
+        bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID);
+        bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture);
+
     private:
         const char* m_Path;
         
-        cv::Mat m_Data = cv::Mat();
+        cv::Mat m_CvMat = cv::Mat();
+        GLuint m_GlTextureID;
+        ImTexture m_ImTexture;
 
         uint32_t m_Width = 0, m_Height = 0;
         ImageFormat m_Format = ImageFormat::None;
@@ -43,4 +80,5 @@ namespace AIAC
     friend void operator>>(cv::VideoCapture cap, AIAC::Image &img);
  
     };
+
 }

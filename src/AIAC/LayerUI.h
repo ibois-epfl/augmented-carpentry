@@ -12,14 +12,11 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+#include <opencv2/opencv.hpp>
+
+
 namespace AIAC
 {
-    struct ImTexture
-        {
-            ImTextureID ID;
-            ImVec2 Size;
-        };
-
     class LayerUI : public AIAC::Layer
     {
     public:
@@ -31,13 +28,7 @@ namespace AIAC
         // virtual void OnDetach() override;
 
     private:
-        bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID, int32_t img_mod);
-
-        void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture);
-        void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size);
-        
-        void CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID);
-
+        GLuint* m_CurrentFrameGlTextureID;
 
     };
 }
