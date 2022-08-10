@@ -1,0 +1,85 @@
+#include <string>
+
+#include "AIAC/Log.h"
+#include "AIAC/Assert.h"
+
+#include "utils/Ini.h"
+
+namespace AIAC{
+
+class Config
+{
+public:
+    Config(std::string filename, bool updateFile=true):
+        m_Filename(filename),
+        m_UpdateFile(updateFile)
+    {
+        AIAC_ASSERT(!s_Instance, "Config already exists!");
+        s_Instance = this;
+
+        m_IniReader = inih::INIReader(m_Filename);
+    }
+
+    template <typename T>
+    inline static T Get(const std::string& section, const std::string& name, T&& default_v)
+    {
+        AIAC_ASSERT(s_Instance, "Config not initialized!");
+        return s_Instance->m_IniReader.Get<T>(section, name, default_v);
+    }
+
+    template <typename T>
+    inline static std::vector<T> GetVector(const std::string& section,
+                             const std::string& name,
+                             const std::vector<T>& default_v)
+    {
+        AIAC_ASSERT(s_Instance, "Config not initialized!");
+        return s_Instance->m_IniReader.GetVector<T>(section, name, default_v);
+    }
+
+    template <typename T = std::string>
+    inline static void InsertEntry(const std::string& section, const std::string& name, const T& v)
+    {
+        AIAC_ASSERT(s_Instance != NULL, "Config not initialized!");
+        s_Instance->m_IniReader.InsertEntry(section, name, v);
+        if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
+    };
+
+    template <typename T = std::string>
+    inline static void InsertEntry(const std::string& section, const std::string& name, const std::vector<T>& vs)
+    {
+        AIAC_ASSERT(s_Instance != NULL, "Config not initialized!");
+        s_Instance->m_IniReader.InsertEntry(section, name, vs);
+        if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
+    };
+
+    template <typename T = std::string>
+    inline static void UpdateEntry(const std::string& section, const std::string& name, const T& v)
+    {
+        AIAC_ASSERT(s_Instance != NULL, "Config not initialized!");
+        s_Instance->m_IniReader.UpdateEntry(section, name, v);
+        if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
+    }
+
+    template <typename T = std::string>
+    inline static void UpdateEntry(const std::string& section, const std::string& name,
+                     const std::vector<T>& vs)
+    {
+        AIAC_ASSERT(s_Instance, "Config not initialized!");
+        s_Instance->m_IniReader.UpdateEntry(section, name, vs);
+        if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
+    };
+
+    inline static void WriteToFile(std::string writeFilename="")
+    {
+        if(writeFilename.empty()) writeFilename = s_Instance->m_Filename;
+        inih::INIWriter::write(writeFilename, s_Instance->m_IniReader);
+    };
+
+private:
+    inih::INIReader m_IniReader;
+    std::string m_Filename;
+    bool m_UpdateFile;
+
+    static Config* s_Instance;
+};
+}
