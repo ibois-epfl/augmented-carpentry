@@ -91,5 +91,6 @@ namespace AIAC
 
     };
 
-    #define AIAC_APP() AIAC::Application::GetInstance()
 }
+
+#define AIAC_APP() AIAC::Application::GetInstance()
