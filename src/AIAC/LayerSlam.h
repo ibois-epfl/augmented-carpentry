@@ -1,31 +1,33 @@
 #pragma once
 
+#include <opencv2/opencv.hpp>
+
+#include "tslam.h"
 #include "AIAC/Layer.h"
-#include "AIAC/Image.h"
-#include "AIAC/Camera.h"
 
 namespace AIAC
 {
-    class LayerCamera : public AIAC::Layer
+    class LayerSlam : public AIAC::Layer
     {
     public:
-        LayerCamera() = default;
-        virtual ~LayerCamera() = default;
+        LayerSlam() = default;
+        ~LayerSlam() = default;
 
-        virtual void OnAttach();
+        void OnAttach();
         virtual void OnFrameAwake() override;
         virtual void OnFrameStart() override;
         virtual void OnFrameEnd() override;
         virtual void OnUIRender() override;
         virtual void OnFrameFall() override;
         virtual void OnDetach() override;
-
-        const AIAC::Image GetCurrentFrame() { return m_CurrentFrame; }
+        
+        cv::Mat GetCamPose();
 
     public:
-        AIAC::Camera MainCamera;
+        tslam::TSlam Slam;
 
     private:
-        AIAC::Image m_CurrentFrame;
+        cv::Mat m_CamPose = cv::Mat();
+        bool m_IsTracked = false;
     };
 }
