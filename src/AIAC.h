@@ -20,3 +20,4 @@
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerUI.h"
 #include "AIAC/LayerCamera.h"
+#include "AIAC/LayerRender.h"
