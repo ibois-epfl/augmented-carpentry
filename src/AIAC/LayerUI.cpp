@@ -43,8 +43,6 @@ namespace AIAC
         StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
         StackPane(PaneUI("Camera",    true,   std::bind(&SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",      true,   std::bind(&SetPaneUISlam)      ));
-
-
     }
 
     void LayerUI::OnFrameStart()
@@ -57,13 +55,33 @@ namespace AIAC
     void LayerUI::OnUIRender()
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
+        // Main Pannel
         ImGui::Begin("augmented_carpentry", m_IsOpen);
 
         ShowIntroUI();
 
         for (auto& pane : m_PaneUIStack) pane->Show();
 
-        ImGui::End();
+
+        // ImGui::End();
+
+        // // 3D Scene Viewport
+        // ImGui::Begin("bla", m_IsOpen);
+
+        // Image frame = AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame();
+        // AIAC::ImTexture imTexture = frame.GetImTexture();
+        // frame.CvtCvMat2ImTexture(frame.GetCvMat(), imTexture);
+        // // ImGui::Image(AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().ID,
+        // //              AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().Size);
+
+
+        // // ImGui::BeginChild("3DSceneViewport", ImVec2(0, 0), true);
+        // // ImGui::EndChild();
+
+        // ImGui::End();
+
+
+
     }
 
     void LayerUI::OnFrameEnd()
@@ -90,7 +108,7 @@ namespace AIAC
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
     }
-
+    
 
     void LayerUI::SetPaneUIExample()
     {
