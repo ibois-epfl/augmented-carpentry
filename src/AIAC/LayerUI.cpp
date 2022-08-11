@@ -43,7 +43,6 @@ namespace AIAC
         StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
         StackPane(PaneUI("Camera",    true,   std::bind(&SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",      true,   std::bind(&SetPaneUISlam)      ));
-        StackPane(PaneUI("TESTT",      true,   std::bind(&SetPaneUISlam)      ));
 
 
     }
@@ -59,7 +58,6 @@ namespace AIAC
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
         ImGui::Begin("augmented_carpentry", m_IsOpen);
-
 
         ShowIntroUI();
 
