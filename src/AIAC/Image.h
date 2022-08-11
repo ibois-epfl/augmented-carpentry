@@ -4,17 +4,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include <GL/gl.h>
-#include <GL/glut.h>
-#include <GL/freeglut.h>
-#include <GLES2/gl2.h>
-#include <GLFW/glfw3.h>
-
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
-
 #include <opencv2/opencv.hpp>
+
+#include "AIAC/GlHeader.h"
+
 
 namespace AIAC
 {

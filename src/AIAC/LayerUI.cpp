@@ -63,7 +63,7 @@ namespace AIAC
         for (auto& pane : m_PaneUIStack) pane->Show();
 
 
-        // ImGui::End();
+        ImGui::End();
 
         // // 3D Scene Viewport
         // ImGui::Begin("bla", m_IsOpen);
@@ -82,15 +82,7 @@ namespace AIAC
 
 
 
-    }
-
-    void LayerUI::OnFrameEnd()
-    {
         ImGui::Render();
-    }
-
-    void LayerUI::OnFrameFall()
-    {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
@@ -108,7 +100,7 @@ namespace AIAC
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
     }
-    
+
 
     void LayerUI::SetPaneUIExample()
     {
