@@ -64,16 +64,20 @@ namespace AIAC
         for (auto& pane : m_PaneUIStack) pane->Show();
 
         ImGui::End();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
     }
 
     void LayerUI::OnFrameEnd()
     {
-        ImGui::Render();
+        
     }
 
     void LayerUI::OnFrameFall()
     {
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        
     }
 
     void LayerUI::OnDetach()

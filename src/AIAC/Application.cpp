@@ -71,6 +71,12 @@ namespace AIAC
         glfwSwapInterval(1);  // Enable vsync
         
         m_WindowBackColor = m_AppSpec.WindowBackColor;
+
+        // init glew
+        glewExperimental = true; // Needed for core profile
+        if (glewInit() != GLEW_OK) {
+            throw std::runtime_error("Failed to initialize GLEW\n");
+        }
     }
 
     void Application::Run()
@@ -90,14 +96,6 @@ namespace AIAC
                 layer->OnFrameStart();
 
 
-            for (auto& layer : m_LayerStack)
-                layer->OnUIRender();
-
-
-            for (auto& layer : m_LayerStack)
-                layer->OnFrameEnd();
-
-
             int displayW, displayH;
             glfwGetFramebufferSize(m_Window, &displayW, &displayH);
             glViewport(0, 0, displayW, displayH);
@@ -109,11 +107,19 @@ namespace AIAC
 
 
             for (auto& layer : m_LayerStack)
-                layer->OnFrameFall();
-            
+                layer->OnUIRender();
+
 
             glfwSwapBuffers(m_Window);
 
+            
+            for (auto& layer : m_LayerStack)
+                layer->OnFrameEnd();
+
+
+            for (auto& layer : m_LayerStack)
+                layer->OnFrameFall();
+            
         }
     }
 
