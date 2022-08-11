@@ -7,14 +7,17 @@
 namespace AIAC
 {
     Image::Image() {}
+
     Image::Image(cv::Mat cvImg)
     {
         UpdateData(cvImg);
     }
+
     Image::Image(AIAC::Image &img)
     {
         UpdateData(img.m_CvMat);
     }
+
     Image::Image(const char* path, ImageType imageType)
         :m_Path(path)
     {
@@ -33,6 +36,26 @@ namespace AIAC
             break;
         }
     }
+
+    Image::Image(const char* path, ImageType imageType, ImVec2 size)
+        :m_Path(path)
+    {
+        switch (imageType)
+        {
+        case ImageType::CV_MAT:
+            LoadImgFromFile2CvMat(path, m_CvMat);
+            break;
+        case ImageType::GL_TEXTURE_ID:
+            LoadImgFromFile2GlTextureID(path, m_GlTextureID);
+            break;
+        case ImageType::IM_TEXTURE:
+            LoadImgFromFile2ImTexture(path, m_ImTexture, size);
+            break;
+        default:
+            break;
+        }
+    }
+
     Image::~Image() {}
     
     void Image::UpdateData(cv::Mat cvImg)
@@ -71,11 +94,13 @@ namespace AIAC
         imTexture.ID = (void*)(intptr_t)glTextureID;
         imTexture.Size = ImVec2(w, h);
     }
+
     void Image::CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size)
     {
         imTexture.ID = (void*)(intptr_t)glTextureID;
         imTexture.Size = size;
     }
+
     void Image::CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID)
     {
         if(cvMat.empty()) { AIAC_ERROR("cvMat empty"); return; }
@@ -104,7 +129,21 @@ namespace AIAC
                         GL_UNSIGNED_BYTE,
                         cvMat.ptr());
         }
-    } 
+    }
+    
+    void Image::CvtCvMat2ImTexture()
+    {
+        // if cvmat is empty, return
+        if(m_CvMat.empty()) { AIAC_ERROR("cvMat empty"); return ; }
+        CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
+        CvtGlTextureID2ImTexture(m_GlTextureID, m_ImTexture);
+    }
+
+    void Image::CvtCvMat2ImTexture(cv::Mat& cvMat, ImTexture& imTexture)
+    {
+        CvtCvMat2GlTextureID(cvMat, m_GlTextureID);
+        CvtGlTextureID2ImTexture(m_GlTextureID, imTexture);
+    }
 
     bool Image::LoadImgFromFile2CvMat(const char* path, cv::Mat& cvMat)
     {
@@ -117,6 +156,7 @@ namespace AIAC
         m_CvMat = cvMat;
         return true;
     }
+
     bool Image::LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID) 
     {
         if (FILE *file = fopen(path, "r")) {
@@ -149,6 +189,7 @@ namespace AIAC
         stbi_image_free(image);
         return true;
     }
+
     bool Image::LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture)
     {
         if (LoadImgFromFile2GlTextureID(path, m_GlTextureID))
@@ -160,4 +201,14 @@ namespace AIAC
         return false;
     }
 
+    bool Image::LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture, ImVec2 size)
+    {
+        if (LoadImgFromFile2GlTextureID(path, m_GlTextureID))
+        {
+            CvtGlTextureID2ImTexture(m_GlTextureID, imTexture, size);
+            return true;
+        }
+        AIAC_ERROR("Failed to load img from file as ImTexture");
+        return false;
+    }
 }

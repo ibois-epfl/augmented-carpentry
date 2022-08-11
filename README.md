@@ -196,6 +196,28 @@ AIAC::Application& app = AIAC::Application::GetInstance();
 app.GetLayer<AIAC::LayerA>()->test_a
 ```
 
+### UI
+For every new layer you can create a new collapsable pannel in the main UI. To do so follow the next steps.
+
+Create a new function (declare it in `LayerUI.h > Class LayerUI` and implement it in `LayerUI.cpp`) and start calling `ImGui` methods from there, put everythin you need for the UI there. This is the only place where you will write UI for your pane, like so:
+```c++
+void LayerUI::SetPaneUICamera()
+    {
+        ImGui::Text("This layer is responsible for the physical camera.");
+        AIAC::Camera& camera = AIAC_APP().GetLayer<AIAC::LayerCamera>()->MainCamera;
+        ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
+        ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
+    }
+```
+Next copy past the template function in `LayerUI.cpp` and reference the function you created:
+```c++
+//                 Label               Collapse              PaneContent
+StackPane(PaneUI("Example",              true,       std::bind(&SetPaneUIExample)         ));
+StackPane(PaneUI("Camera",               true,       std::bind(&SetPaneUICamera)          ));
+StackPane(PaneUI("Slam",                 true,       std::bind(&SetPaneUISlam)            ));
+StackPane(PaneUI("<your-new-name>",      true,       std::bind(&YourNewContainerMethod)   ));
+```
+
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
 ```c++
