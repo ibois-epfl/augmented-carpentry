@@ -1,8 +1,6 @@
 #pragma once
 
-#ifndef __GLHEADER_H__
-#define __GLHEADER_H__
-
+// <GL/glew.h> has to be included before <GLFW/glfw3.h>
 #include <GL/glew.h>
 
 #include <GL/glut.h>
@@ -12,5 +10,3 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
-
-#endif

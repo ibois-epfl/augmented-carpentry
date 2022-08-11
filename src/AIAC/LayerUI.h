@@ -1,10 +1,10 @@
 #pragma once
 
+#include <opencv2/opencv.hpp>
+
 #include "AIAC/Layer.h"
 
-#include "AIAC/GlHeader.h"
-
-#include <opencv2/opencv.hpp>
+#include "GlHeader.h"
 
 
 namespace AIAC
