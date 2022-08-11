@@ -1,5 +1,10 @@
 # augmented-carpentry
 
+<p>
+    <img src="./assets/iamges/logo_linux_gray_light.png" width="200">
+</p>
+
+
 ARapp is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
