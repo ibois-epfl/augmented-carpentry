@@ -5,6 +5,8 @@ project(AC VERSION 0.1.0 LANGUAGES CXX C)
 include(CTest)
 enable_testing()
 
+set(CMAKE_CXX_STANDARD 17)
+
 # Get hpp/cpp of AIAC module
 file(GLOB AIAC_SRC
     "src/AIAC/*.h"
