@@ -188,12 +188,14 @@ There is one only app and it can be accessed from layers with:
 ```c++
 AIAC::Application& app = AIAC::Application::GetInstance();
 ```
-
+or easier with a macro
+```c++
+AIAC_APP()
+```
 ### Getting other layers' variables
 To get other layers' variables use a small query function from the Application class. In the case of accessing test_a of layerA from e.g. layerB:
 ```c++
-AIAC::Application& app = AIAC::Application::GetInstance();
-app.GetLayer<AIAC::LayerA>()->test_a
+AIAC_APP().GetLayer<AIAC::LayerA>()->test_a
 ```
 
 ### UI
