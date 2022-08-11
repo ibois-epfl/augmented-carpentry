@@ -221,15 +221,15 @@ StackPane(PaneUI("<your-new-name>",      true,       std::bind(&YourNewContainer
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
 ```c++
-AIAC_CORE_INFO("test_core_info");
-AIAC_CORE_WARN("test_core_warn");
-AIAC_CORE_CRITICAL("test_core_critical");
-AIAC_CORE_DEBUG("test_core_debug");
-AIAC_CORE_ERROR("test_core_error");
+AIAC_INFO("test_core_info");
+AIAC_WARN("test_core_warn");
+AIAC_CRITICAL("test_core_critical");
+AIAC_DEBUG("test_core_debug");
+AIAC_ERROR("test_core_error");
 ```
 The output is like so:
 ```bash
-[source main.cpp] [function main] [line 32] [16:30:05] CORE: test
+[source main.cpp] [function main] [line 32] [16:30:05] APP: test
 ```
 The logging can be silenced by setting OFF the option in the main `CMakeLists.txt` and do clean reconfiguration.
 ```cmake
