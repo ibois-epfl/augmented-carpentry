@@ -35,10 +35,10 @@ namespace AIAC
     };
 
     struct ImTexture
-        {
-            ImTextureID ID;
-            ImVec2 Size;
-        };
+    {
+        ImTextureID ID;
+        ImVec2 Size;
+    };
 
     class Image
     {
