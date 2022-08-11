@@ -1,6 +1,4 @@
 #include "AIAC/LayerUI.h"
-#include "AIAC/Log.h"
-#include "AIAC/Image.h"
 #include "AIAC/Application.h"
 
 #include "stb/stb_image.h"
@@ -8,9 +6,9 @@
 
 #include <iostream>
 
-
 namespace AIAC
 {
+
     void LayerUI::OnAttach()
     {
         IMGUI_CHECKVERSION();
@@ -21,10 +19,32 @@ namespace AIAC
         ImGuiStyle& style = ImGui::GetStyle();
         style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
 
+        style.WindowRounding = 4.0f;
+        style.ChildRounding = 4.0f;
+        style.FrameRounding = 4.0f;
+        style.PopupRounding = 4.0f;
+        style.ScrollbarRounding = 4.0f;
+        style.GrabRounding = 4.0f;
+        style.TabRounding = 4.0f;
+
         ImGui_ImplGlfw_InitForOpenGL(AIAC_APP().GetWindow(), true);
         ImGui_ImplOpenGL3_Init(AIAC_APP().GetGlslVersion());
 
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //FIXME: add to config
+
+        m_IsOpen = new bool(true);
+
+        m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE, ImVec2(60, 60));
+
+        AIAC_INFO("m_Logo ImTexture width = {0}", m_Logo.GetImTexture().Size.x);
+        AIAC_INFO("m_Logo ImTexture height = {0}", m_Logo.GetImTexture().Size.y);
+
+        //                 Label    Collapse          PaneContent
+        StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
+        StackPane(PaneUI("Camera",    true,   std::bind(&SetPaneUICamera)    ));
+        StackPane(PaneUI("Slam",      true,   std::bind(&SetPaneUISlam)      ));
+
+
     }
 
     void LayerUI::OnFrameStart()
@@ -37,38 +57,11 @@ namespace AIAC
     void LayerUI::OnUIRender()
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
-        ImGui::Begin("Test window");
+        ImGui::Begin("augmented_carpentry", m_IsOpen);
 
-        ImGui::Text("This is a test image");
+        ShowIntroUI();
 
-
-        AIAC::ImTexture imTexture = {};
-        // LoadImgFromFile2GlTextureID("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", textureID, GL_RGBA);
-        
-        AIAC::Image logo = AIAC::Image("/home/as/augmented-carpentry/icons/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE);
-
-
-
-        // AIAC::Image currentFrame = AIAC::Application::GetInstance().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame();
-        // cv::Mat cvMat = currentFrame.GetCvMat();
-
-        // CvtCvMat2GlTextureID(cvMat, textureID);
-        // CvtGlTextureID2ImTexture(textureID, imTexture);
-
-
-
-
-        // imTexture.Size = ImVec2(100, 100);
-        ImGui::Image(logo.GetImTexture().ID, logo.GetImTexture().Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
-
-        // ImGui::Image(imTexture.ID, imTexture.Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
-
-
-        ImGui::Begin("Test window");
-
-        ImGui::Text("This is a test image");
-
-
+        for (auto& pane : m_PaneUIStack) pane->Show();
 
         ImGui::End();
     }
@@ -89,4 +82,32 @@ namespace AIAC
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
     }
+
+
+    void LayerUI::ShowIntroUI()
+    {
+        ImGui::Image(m_Logo.GetImTexture().ID, m_Logo.GetImTexture().Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        ImGui::SameLine();
+        ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
+    }
+
+
+    void LayerUI::SetPaneUIExample()
+    {
+        ImGui::Text("This is a test message for the example layer");
+    }
+
+    void LayerUI::SetPaneUICamera()
+    {
+        ImGui::Text("This layer is responsible for the physical camera.");
+        AIAC::Camera& camera = AIAC_APP().GetLayer<AIAC::LayerCamera>()->MainCamera;
+        ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
+        ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
+    }
+
+    void LayerUI::SetPaneUISlam()
+    {
+        //TODO: fill with debug info for SLAM
+    }
+
 }
