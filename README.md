@@ -1,7 +1,7 @@
 # augmented-carpentry
 
 <p>
-    <img src="./assets/iamges/logo_linux_gray_light.png" width="200">
+    <img src="./assets/images/logo_linux_gray_light.png" width="200">
 </p>
 
 
