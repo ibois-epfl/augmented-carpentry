@@ -40,12 +40,19 @@ namespace AIAC
         Image(cv::Mat cvImg);
         Image(AIAC::Image &img);
         Image(const char* path, ImageType imageType);
+        Image(const char* path, ImageType imageType, ImVec2 size);
         ~Image();
+
+        inline bool HasCvMat() { return m_CvMat.empty(); }
+        inline bool HasGlTextureID() { return m_GlTextureID != 0; }
+        inline bool HasImTexture() { return m_ImTexture.Size.x != 0 || m_ImTexture.Size.y != 0; }
 
         inline std::string_view GetPath() const { return m_Path; }
         inline cv::Mat GetCvMat() const { return m_CvMat; }
         inline GLuint GetGlTextureID() const { return m_GlTextureID; }
-        inline ImTexture GetImTexture() const { return m_ImTexture; }
+        inline ImTexture GetImTexture() { return m_ImTexture; }
+
+        inline void SetImTextureSize(ImVec2 size) { m_ImTexture.Size = size; }
 
         void UpdateData(cv::Mat cvImg);
 
@@ -54,17 +61,20 @@ namespace AIAC
         void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture);
         void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size);
         void CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID);
+        void CvtCvMat2ImTexture();
+        void CvtCvMat2ImTexture(cv::Mat& cvMat, ImTexture& imTexture);
 
         bool LoadImgFromFile2CvMat(const char* path, cv::Mat& cvMat);
         bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID);
         bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture);
+        bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture, ImVec2 size);
 
     private:
         const char* m_Path;
         
         cv::Mat m_CvMat = cv::Mat();
-        GLuint m_GlTextureID;
-        ImTexture m_ImTexture;
+        GLuint m_GlTextureID = 0;
+        ImTexture m_ImTexture = { 0, ImVec2(0, 0) };
 
         uint32_t m_Width = 0, m_Height = 0;
         ImageFormat m_Format = ImageFormat::None;

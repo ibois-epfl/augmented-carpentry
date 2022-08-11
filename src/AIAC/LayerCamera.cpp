@@ -8,10 +8,6 @@ namespace AIAC
 {
     void LayerCamera::OnAttach()
     {
-        AIAC_INFO("LayerCamera attached");
-        AIAC::Application& app = AIAC::Application::GetInstance();
-        AIAC::ApplicationSpecification spec = app.GetSpecification();
-
         try
         {
             MainCamera.Open(0);
@@ -24,8 +20,6 @@ namespace AIAC
 
     void LayerCamera::OnFrameStart()
     {
-        AIAC_INFO("LayerCamera frame start");
-        
         m_CurrentFrame = MainCamera.GetNextFrame();
     }
 }

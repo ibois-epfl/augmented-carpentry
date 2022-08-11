@@ -196,18 +196,40 @@ AIAC::Application& app = AIAC::Application::GetInstance();
 app.GetLayer<AIAC::LayerA>()->test_a
 ```
 
+### UI
+For every new layer you can create a new collapsable pannel in the main UI. To do so follow the next steps.
+
+Create a new function (declare it in `LayerUI.h > Class LayerUI` and implement it in `LayerUI.cpp`) and start calling `ImGui` methods from there, put everythin you need for the UI there. This is the only place where you will write UI for your pane, like so:
+```c++
+void LayerUI::SetPaneUICamera()
+    {
+        ImGui::Text("This layer is responsible for the physical camera.");
+        AIAC::Camera& camera = AIAC_APP().GetLayer<AIAC::LayerCamera>()->MainCamera;
+        ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
+        ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
+    }
+```
+Next copy past the template function in `LayerUI.cpp` and reference the function you created:
+```c++
+//                 Label               Collapse              PaneContent
+StackPane(PaneUI("Example",              true,       std::bind(&SetPaneUIExample)         ));
+StackPane(PaneUI("Camera",               true,       std::bind(&SetPaneUICamera)          ));
+StackPane(PaneUI("Slam",                 true,       std::bind(&SetPaneUISlam)            ));
+StackPane(PaneUI("<your-new-name>",      true,       std::bind(&YourNewContainerMethod)   ));
+```
+
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
 ```c++
-AIAC_CORE_INFO("test_core_info");
-AIAC_CORE_WARN("test_core_warn");
-AIAC_CORE_CRITICAL("test_core_critical");
-AIAC_CORE_DEBUG("test_core_debug");
-AIAC_CORE_ERROR("test_core_error");
+AIAC_INFO("test_core_info");
+AIAC_WARN("test_core_warn");
+AIAC_CRITICAL("test_core_critical");
+AIAC_DEBUG("test_core_debug");
+AIAC_ERROR("test_core_error");
 ```
 The output is like so:
 ```bash
-[source main.cpp] [function main] [line 32] [16:30:05] CORE: test
+[source main.cpp] [function main] [line 32] [16:30:05] APP: test
 ```
 The logging can be silenced by setting OFF the option in the main `CMakeLists.txt` and do clean reconfiguration.
 ```cmake

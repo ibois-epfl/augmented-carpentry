@@ -13,10 +13,6 @@ namespace AIAC
 
     void LayerSlam::OnAttach()
     {
-        // AIAC_INFO("LayerSlam attached");
-        // AIAC::Application& app = AIAC::Application::GetInstance();
-        // AIAC::ApplicationSpecification spec = app.GetSpecification();
-
         AIAC_INFO(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
 
         Slam.setMap(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
