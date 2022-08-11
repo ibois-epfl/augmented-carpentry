@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB AIAC_SRC
     "src/AIAC/*.h"
     "src/AIAC/*.cpp"
+    "src/utils/*"
     "src/AIAC.h"
     )
 
@@ -142,13 +143,18 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
+    PUBLIC ${glm_INCLUDE_DIRS}
+    PUBLIC ${glew_INCLUDE_DIRS}
+    PUBLIC deps/glm/
+
     )
 
 target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
     ${TSlam_LIBS}
-    ${CMAKE_DL_LIBS} 
+    ${CMAKE_DL_LIBS}
+    glew
     glfw
     )
 
