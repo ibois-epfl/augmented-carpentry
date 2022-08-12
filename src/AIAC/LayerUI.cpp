@@ -73,8 +73,8 @@ namespace AIAC
         AIAC::ImTexture frameImTexture = frame.GetImTexture();
         // AIAC::ImTexture frameImTexture = frame.GetImTexture();
 
-        AIAC_INFO("frameImTexture width = {0}", frameImTexture.Size.x);
-        AIAC_INFO("frameImTexture height = {0}", frameImTexture.Size.y);
+        // AIAC_INFO("frameImTexture width = {0}", frameImTexture.Size.x);
+        // AIAC_INFO("frameImTexture height = {0}", frameImTexture.Size.y);
 
         ImGui::Image(frameImTexture.ID, frameImTexture.Size);
 
