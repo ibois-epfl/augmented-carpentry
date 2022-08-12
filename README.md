@@ -1,5 +1,10 @@
 # augmented-carpentry
 
+<p>
+    <img src="./assets/images/logo_linux_gray_light.png" width="200">
+</p>
+
+
 ARapp is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
@@ -188,12 +193,14 @@ There is one only app and it can be accessed from layers with:
 ```c++
 AIAC::Application& app = AIAC::Application::GetInstance();
 ```
-
+or easier with a macro
+```c++
+AIAC_APP()
+```
 ### Getting other layers' variables
 To get other layers' variables use a small query function from the Application class. In the case of accessing test_a of layerA from e.g. layerB:
 ```c++
-AIAC::Application& app = AIAC::Application::GetInstance();
-app.GetLayer<AIAC::LayerA>()->test_a
+AIAC_APP().GetLayer<AIAC::LayerA>()->test_a
 ```
 
 ### UI
@@ -221,15 +228,15 @@ StackPane(PaneUI("<your-new-name>",      true,       std::bind(&YourNewContainer
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
 ```c++
-AIAC_CORE_INFO("test_core_info");
-AIAC_CORE_WARN("test_core_warn");
-AIAC_CORE_CRITICAL("test_core_critical");
-AIAC_CORE_DEBUG("test_core_debug");
-AIAC_CORE_ERROR("test_core_error");
+AIAC_INFO("test_core_info");
+AIAC_WARN("test_core_warn");
+AIAC_CRITICAL("test_core_critical");
+AIAC_DEBUG("test_core_debug");
+AIAC_ERROR("test_core_error");
 ```
 The output is like so:
 ```bash
-[source main.cpp] [function main] [line 32] [16:30:05] CORE: test
+[source main.cpp] [function main] [line 32] [16:30:05] APP: test
 ```
 The logging can be silenced by setting OFF the option in the main `CMakeLists.txt` and do clean reconfiguration.
 ```cmake
