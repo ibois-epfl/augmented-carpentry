@@ -30,6 +30,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 #------------------------------------------------------------------------------------------------------------
 
 # As a fresh new compile, put everything ON
+option(INSTALL_ASSIMP "Install assimp with dpkg" ON)
 option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
 option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
@@ -91,6 +92,14 @@ endif()
 #------------------------------------------------------------------------------------------------------------
 # GLOBAL 3rd libs (NOT compatible with add_subdirectory())
 #------------------------------------------------------------------------------------------------------------
+
+# Assimp
+if(UNIX AND INSTALL_ASSIMP)
+    message(STATUS "Installing assimp")
+    execute_process(COMMAND sudo apt-get install libassimp-dev)
+endif()
+
+
 
 # OpenGL
 if(UNIX AND INSTALL_OPENGL)
