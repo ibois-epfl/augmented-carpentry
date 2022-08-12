@@ -1,8 +1,12 @@
 #!/bin/bash
 
 if [ -d build ]; then
-    # make -j$($(nproc)-1) -C build
-    make -j10 -C build
+    # if nproc smaller than 4
+    if [ $(nproc) -lt 6 ]; then
+        make -j4 -C build
+    else
+        make -j$($(nproc)-2) -C build
+    fi
 
 else
     echo "[ERROR] The build output dir does not exist. Run configure.sh first."
