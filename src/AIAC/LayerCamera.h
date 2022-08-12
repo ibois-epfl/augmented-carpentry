@@ -15,12 +15,12 @@ namespace AIAC
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
-        const AIAC::Image GetCurrentFrame() { return m_CurrentFrame; }
+        // const AIAC::Image GetCurrentFrame() { return m_CurrentFrame; }
 
     public:
         AIAC::Camera MainCamera;
 
-    private:
-        AIAC::Image m_CurrentFrame;
+    // private:
+    //     AIAC::Image m_CurrentFrame;
     };
 }

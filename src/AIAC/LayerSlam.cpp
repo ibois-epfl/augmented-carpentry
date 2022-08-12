@@ -23,14 +23,12 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
-        // AIAC_INFO("LayerSlam frame start");
-
-        // cv::Mat currentFrame =
-        //     AIAC::Application::GetInstance().GetLayer<AIAC::LayerCamera>()
-        //         ->GetCurrentFrame().GetCvMat();
+        cv::Mat currentFrame =
+            AIAC::Application::GetInstance().GetLayer<AIAC::LayerCamera>()->MainCamera
+                .GetCurrentFrame().GetCvMat();
         
-        // m_IsTracked = Slam.process(currentFrame, m_CamPose);
+        m_IsTracked = Slam.process(currentFrame, m_CamPose);
 
-        // AIAC_INFO(m_IsTracked);
+        AIAC_INFO(m_IsTracked);
     }
 }

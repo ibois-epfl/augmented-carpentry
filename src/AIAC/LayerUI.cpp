@@ -36,8 +36,7 @@ namespace AIAC
 
         m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE, ImVec2(60, 60));
 
-        AIAC_INFO("m_Logo ImTexture width = {0}", m_Logo.GetImTexture().Size.x);
-        AIAC_INFO("m_Logo ImTexture height = {0}", m_Logo.GetImTexture().Size.y);
+        
 
         //                 Label    Collapse          PaneContent
         StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
@@ -65,20 +64,27 @@ namespace AIAC
 
         ImGui::End();
 
-        // // 3D Scene Viewport
-        // ImGui::Begin("bla", m_IsOpen);
+        // 3D Scene Viewport
+        ImGui::Begin("scene_viewport", m_IsOpen);
 
-        // Image frame = AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame();
-        // AIAC::ImTexture imTexture = frame.GetImTexture();
+        Image frame =
+            AIAC_APP().GetLayer<AIAC::LayerCamera>()
+                ->MainCamera.GetCurrentFrame();
+        AIAC::ImTexture frameImTexture = frame.GetImTexture();
+
+        AIAC_INFO("frameImTexture width = {0}", frameImTexture.Size.x);
+        AIAC_INFO("frameImTexture height = {0}", frameImTexture.Size.y);
+
         // frame.CvtCvMat2ImTexture(frame.GetCvMat(), imTexture);
-        // // ImGui::Image(AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().ID,
-        // //              AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().Size);
+
+        // ImGui::Image(AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().ID,
+        //              AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().Size);
 
 
-        // // ImGui::BeginChild("3DSceneViewport", ImVec2(0, 0), true);
-        // // ImGui::EndChild();
+        // ImGui::BeginChild("3DSceneViewport", ImVec2(0, 0), true);
+        // ImGui::EndChild();
 
-        // ImGui::End();
+        ImGui::End();
 
 
 
