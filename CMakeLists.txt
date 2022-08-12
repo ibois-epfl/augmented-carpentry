@@ -30,10 +30,11 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 #------------------------------------------------------------------------------------------------------------
 
 # As a fresh new compile, put everything ON
-option(INSTALL_ASSIMP "Install assimp with dpkg" ON)
+
 option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
 option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
+option(INSTALL_ASSIMP "Install assimp with dpkg" ON)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 
 option(ENABLE_ASSERT "Enable assertion in code" ON)
@@ -93,14 +94,6 @@ endif()
 # GLOBAL 3rd libs (NOT compatible with add_subdirectory())
 #------------------------------------------------------------------------------------------------------------
 
-# Assimp
-if(UNIX AND INSTALL_ASSIMP)
-    message(STATUS "Installing assimp")
-    execute_process(COMMAND sudo apt-get install libassimp-dev)
-endif()
-
-
-
 # OpenGL
 if(UNIX AND INSTALL_OPENGL)
     message(WARNING "OpenGL not found, trying to install it...")
@@ -133,6 +126,15 @@ if(OpenCV_FOUND)
     message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 endif()
 
+# Assimp
+if(UNIX AND INSTALL_ASSIMP)
+    message(STATUS "Installing assimp")
+    execute_process(COMMAND sudo apt-get install libassimp-dev)
+endif()
+find_package(assimp 5.2.0 REQUIRED)
+message(STATUS "Assimp include dir: ${ASSIMP_INCLUDE_DIRS}")
+message(STATUS "Assimp lib dir: ${ASSIMP_LIBRARIES}")
+
 # TSlam
 if(UNIX AND INSTALL_TSLAM)
     message(WARNING "Re/Compiling TSlam...")
@@ -152,6 +154,7 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
+    PUBLIC ${ASSIMP_INCLUDE_DIRS}
     )
 
 target_link_libraries(${PROJECT_NAME}
@@ -160,6 +163,7 @@ target_link_libraries(${PROJECT_NAME}
     ${TSlam_LIBS}
     ${CMAKE_DL_LIBS}
     glfw
+    assimp
     )
 
 
