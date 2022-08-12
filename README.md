@@ -200,7 +200,7 @@ AIAC_APP
 ### Getting other layers' variables
 To get other layers' variables use a small query function from the Application class. In the case of accessing test_a of layerA from e.g. layerB:
 ```c++
-AIAC_APP().GetLayer<AIAC::LayerA>()->test_a
+AIAC_APP.GetLayer<AIAC::LayerA>()->test_a
 ```
 
 ### UI
@@ -211,7 +211,7 @@ Create a new function (declare it in `LayerUI.h > Class LayerUI` and implement i
 void LayerUI::SetPaneUICamera()
     {
         ImGui::Text("This layer is responsible for the physical camera.");
-        AIAC::Camera& camera = AIAC_APP().GetLayer<AIAC::LayerCamera>()->MainCamera;
+        AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
         ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
         ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
     }
