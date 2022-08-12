@@ -195,7 +195,7 @@ AIAC::Application& app = AIAC::Application::GetInstance();
 ```
 or easier with a macro
 ```c++
-AIAC_APP()
+AIAC_APP
 ```
 ### Getting other layers' variables
 To get other layers' variables use a small query function from the Application class. In the case of accessing test_a of layerA from e.g. layerB:
