@@ -11,6 +11,9 @@ imgui.ini
 # VScode config
 .vscode
 
+# clion config
+.idea
+
 ## >>>>>>>>> cmake >>>>>>>>>
 
 # Compiled Object files
