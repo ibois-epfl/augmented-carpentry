@@ -8,14 +8,6 @@
 #include <typeinfo>
 #include <unordered_map>
 
-#include <GL/gl.h>
-#include <GL/glut.h>
-#include <GLES2/gl2.h>
-#include <GLFW/glfw3.h>
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
-
 #include "AIAC/Camera.h"
 #include "AIAC/Layer.h"
 #include "AIAC/Assert.h"

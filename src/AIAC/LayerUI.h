@@ -1,23 +1,14 @@
 #pragma once
 
-#include "AIAC/Image.h"
-#include "AIAC/Log.h"
-
-#include <GL/freeglut.h>
-#include <GL/gl.h>
-#include <GL/glut.h>
-#include <GLES2/gl2.h>
-#include <GLFW/glfw3.h>
-
+#include <memory>
 #include <opencv2/opencv.hpp>
 
 #include "AIAC/Layer.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
 
-#include <memory>
+#include "AIAC/Image.h"
+#include "AIAC/Log.h"
 
+#include "GlHeader.h"
 
 namespace AIAC {
 
@@ -55,8 +46,6 @@ namespace AIAC {
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
         virtual void OnUIRender() override;
-        virtual void OnFrameEnd() override;
-        virtual void OnFrameFall() override;
         virtual void OnDetach() override;
 
         void ShowIntroUI();

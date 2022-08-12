@@ -41,6 +41,7 @@ namespace AIAC
     {
         AIAC::Image nextFrame;
         m_VideoCapture >> nextFrame;
+        m_CurrentFrame = nextFrame;
         return nextFrame;
     }
 }
