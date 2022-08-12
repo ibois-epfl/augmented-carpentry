@@ -32,7 +32,6 @@ namespace AIAC
         // Get a handle for our "MVP" uniform
         MatrixID = glGetUniformLocation(programID, "MVP");
 
-        // Projection matrix : 45 Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
         Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
         
         // Camera matrix
@@ -56,6 +55,7 @@ namespace AIAC
         glGenBuffers(1, &vertexbuffer);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
     }
 
     void LayerRender::OnFrameAwake()
@@ -70,7 +70,7 @@ namespace AIAC
 		// Use our shader
 		
 		// Swap buffers
-		// glfwSwapBuffers(AIAC_APP().GetWindow());
+		// glfwSwapBuffers(AIAC_APP.GetWindow());
 		// glfwPollEvents();
     }
 
@@ -86,7 +86,7 @@ namespace AIAC
         // MVP[1][1] += 0.01f;
         // MVP[2][2] += 0.01f;
 
-        glm::mat4 camPose = AIAC_APP().GetLayer<LayerSlam>()->GetCamPoseGlm();
+        glm::mat4 camPose = AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glm::mat4 finalPose = camPose;
 
         finalPose[0][1] *= 0.1f;
