@@ -2,8 +2,12 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
+
 #include "tslam.h"
 #include "AIAC/Layer.h"
+
 
 namespace AIAC
 {
@@ -16,7 +20,8 @@ namespace AIAC
         void OnAttach() override;
         virtual void OnFrameStart() override;
         
-        cv::Mat GetCamPose();
+        inline const cv::Mat GetCamPoseCv() { return m_CamPose; }
+        glm::mat4 GetCamPoseGlm();
 
     public:
         tslam::TSlam Slam;
