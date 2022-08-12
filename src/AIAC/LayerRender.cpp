@@ -27,7 +27,7 @@ namespace AIAC
         glBindVertexArray(VertexArrayID);
 
         // Create and compile our GLSL program from the shaders
-        programID = LoadShaders( "/home/tpp/Downloads/ogl-master/tutorial03_matrices/SimpleTransform.vertexshader", "/home/tpp/ogl-master/tutorial02_red_triangle/SimpleFragmentShader.fragmentshader" );
+        programID = LoadShaders("assets/opengl/SimpleTransform.vertexshader", "assets/opengl/SimpleFragmentShader.fragmentshader");
 
         // Get a handle for our "MVP" uniform
         MatrixID = glGetUniformLocation(programID, "MVP");

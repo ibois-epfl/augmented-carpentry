@@ -15,7 +15,6 @@ namespace AIAC
     void LayerSlam::OnAttach()
     {
         AIAC_INFO(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
-
         Slam.setMap(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
         Slam.setVocabulary(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
         Slam.setCamParams(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
