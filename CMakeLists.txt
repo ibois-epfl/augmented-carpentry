@@ -131,7 +131,7 @@ if(UNIX AND INSTALL_ASSIMP)
     message(STATUS "Installing assimp")
     execute_process(COMMAND sudo apt-get install libassimp-dev)
 endif()
-find_package(assimp 5.2.0 REQUIRED)
+find_package(assimp 5.0.0 REQUIRED)
 message(STATUS "Assimp include dir: ${ASSIMP_INCLUDE_DIRS}")
 message(STATUS "Assimp lib dir: ${ASSIMP_LIBRARIES}")
 
