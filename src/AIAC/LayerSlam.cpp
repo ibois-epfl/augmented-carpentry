@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+
 namespace AIAC
 {
     // TODO: maybe we should define these const somewhere else?
@@ -14,6 +15,7 @@ namespace AIAC
     void LayerSlam::OnAttach()
     {
         AIAC_INFO(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
+#include "glm/gtc/type_ptr.hpp"
 
         Slam.setMap(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
         Slam.setVocabulary(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
@@ -25,12 +27,22 @@ namespace AIAC
     {
         // AIAC_INFO("LayerSlam frame start");
 
-        // cv::Mat currentFrame =
-        //     AIAC::Application::GetInstance().GetLayer<AIAC::LayerCamera>()
-        //         ->GetCurrentFrame().GetCvMat();
+        cv::Mat currentFrame = AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetCvMat();
         
-        // m_IsTracked = Slam.process(currentFrame, m_CamPose);
+        m_IsTracked = Slam.process(currentFrame, m_CamPose);
 
-        // AIAC_INFO(m_IsTracked);
+        AIAC_INFO(m_IsTracked);
+        cout << "\n" << m_CamPose << endl;;
+    }
+
+    glm::mat4 LayerSlam::GetCamPoseGlm()
+    {
+        glm::mat4 glmmat;
+        if (m_CamPose.cols != 4 ||m_CamPose.rows != 4 ||m_CamPose.type() != CV_32FC1) {
+            throw std::invalid_argument("GetCamPose() error.");
+        }
+        memcpy(glm::value_ptr(glmmat),m_CamPose.data, 16 * sizeof(float));
+        glmmat = glm::transpose(glmmat);
+        return glmmat;
     }
 }
