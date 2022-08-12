@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 #include "AIAC/Camera.h"
+#include "AIAC/Log.h"
 
 namespace AIAC
 {
@@ -39,9 +40,10 @@ namespace AIAC
 
     const AIAC::Image Camera::GetNextFrame()
     {
-        AIAC::Image nextFrame;
-        m_VideoCapture >> nextFrame;
-        m_CurrentFrame = nextFrame;
-        return nextFrame;
+        if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
+        // AIAC::Image nextFrame;
+        // m_VideoCapture >> nextFrame;
+        m_VideoCapture >> m_CurrentFrame;
+        return m_CurrentFrame;
     }
 }

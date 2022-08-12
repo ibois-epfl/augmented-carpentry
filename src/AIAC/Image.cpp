@@ -63,6 +63,9 @@ namespace AIAC
         m_CvMat = cvImg;
         m_Width = cvImg.rows;
         m_Height = cvImg.cols;
+        
+        CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
+        CvtGlTextureID2ImTexture(m_GlTextureID, m_ImTexture);
 
         switch (cvImg.channels())
         {
