@@ -26,11 +26,12 @@ namespace AIAC
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
 
-
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+    }
 
-        AIAC_INFO(m_IsTracked);
-        cout << "\n" << m_CamPose << endl;;
+    void LayerSlam::OnUIRender()
+    {
+
     }
 
     glm::mat4 LayerSlam::GetCamPoseGlm()

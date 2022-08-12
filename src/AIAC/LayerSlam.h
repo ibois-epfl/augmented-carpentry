@@ -19,7 +19,9 @@ namespace AIAC
 
         void OnAttach() override;
         virtual void OnFrameStart() override;
-        
+        virtual void OnUIRender() override;
+
+        inline const bool IsTracked() { return m_IsTracked; }
         inline const cv::Mat GetCamPoseCv() { return m_CamPose; }
         glm::mat4 GetCamPoseGlm();
 
