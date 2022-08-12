@@ -26,9 +26,9 @@ namespace AIAC
         cv::Mat currentFrame =
             AIAC::Application::GetInstance().GetLayer<AIAC::LayerCamera>()->MainCamera
                 .GetCurrentFrame().GetCvMat();
-        
+
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
 
-        AIAC_INFO(m_IsTracked);
+        // AIAC_INFO(m_IsTracked);  //FIXME: this goes in the UIpane
     }
 }

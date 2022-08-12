@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "AIAC/GlHeader.h"
+#include "AIAC/Log.h"
 
 
 namespace AIAC
@@ -50,7 +51,7 @@ namespace AIAC
         inline std::string_view GetPath() const { return m_Path; }
         inline cv::Mat GetCvMat() { return m_CvMat; }
         inline GLuint GetGlTextureID() { return m_GlTextureID; }
-        inline ImTexture GetImTexture() { return m_ImTexture; }
+        inline ImTexture GetImTexture() { if(!HasImTexture()) AIAC_ERROR("Image Class has no ImTexture."); return m_ImTexture; }
 
         inline void SetImTextureSize(ImVec2 size) { m_ImTexture.Size = size; }
 
