@@ -128,7 +128,9 @@ namespace AIAC
 
     void LayerUI::SetPaneUISlam()
     {
-        //TODO: fill with debug info for SLAM
+        ImGui::Text("Tracked: %s", AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked() ? "Yes" : "No");
+        std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
+        ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
     }
 
 }
