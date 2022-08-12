@@ -61,7 +61,6 @@ namespace AIAC
 
         for (auto& pane : m_PaneUIStack) pane->Show();
 
-
         ImGui::End();
 
         // 3D Scene Viewport
@@ -70,10 +69,14 @@ namespace AIAC
         Image frame =
             AIAC_APP().GetLayer<AIAC::LayerCamera>()
                 ->MainCamera.GetCurrentFrame();
+        frame.CvtCvMat2ImTexture();
         AIAC::ImTexture frameImTexture = frame.GetImTexture();
+        // AIAC::ImTexture frameImTexture = frame.GetImTexture();
 
         AIAC_INFO("frameImTexture width = {0}", frameImTexture.Size.x);
         AIAC_INFO("frameImTexture height = {0}", frameImTexture.Size.y);
+
+        ImGui::Image(frameImTexture.ID, frameImTexture.Size);
 
         // frame.CvtCvMat2ImTexture(frame.GetCvMat(), imTexture);
 

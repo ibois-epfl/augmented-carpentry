@@ -48,9 +48,9 @@ namespace AIAC
         inline bool HasImTexture() { return m_ImTexture.Size.x != 0 || m_ImTexture.Size.y != 0; }
 
         inline std::string_view GetPath() const { return m_Path; }
-        inline cv::Mat& GetCvMat() { return m_CvMat; }
-        inline GLuint& GetGlTextureID() { return m_GlTextureID; }
-        inline ImTexture& GetImTexture() { return m_ImTexture; }
+        inline cv::Mat GetCvMat() { return m_CvMat; }
+        inline GLuint GetGlTextureID() { return m_GlTextureID; }
+        inline ImTexture GetImTexture() { return m_ImTexture; }
 
         inline void SetImTextureSize(ImVec2 size) { m_ImTexture.Size = size; }
 

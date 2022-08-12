@@ -64,8 +64,8 @@ namespace AIAC
         m_Width = cvImg.rows;
         m_Height = cvImg.cols;
         
-        CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
-        CvtGlTextureID2ImTexture(m_GlTextureID, m_ImTexture);
+        // CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
+        // CvtGlTextureID2ImTexture(m_GlTextureID, m_ImTexture);
 
         switch (cvImg.channels())
         {
@@ -109,7 +109,7 @@ namespace AIAC
         if(cvMat.empty()) { AIAC_ERROR("cvMat empty"); return; }
         else
         {   
-            cv::flip(cvMat, cvMat, 0);  // OpenGL flip images by default
+            // cv::flip(cvMat, cvMat, 0);  // OpenGL flip images by default?
             glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
             glGenTextures(1, &glTextureID);
             glBindTexture(GL_TEXTURE_2D, glTextureID);
@@ -136,7 +136,6 @@ namespace AIAC
     
     void Image::CvtCvMat2ImTexture()
     {
-        // if cvmat is empty, return
         if(m_CvMat.empty()) { AIAC_ERROR("cvMat empty"); return ; }
         CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
         CvtGlTextureID2ImTexture(m_GlTextureID, m_ImTexture);
