@@ -27,17 +27,18 @@ namespace AIAC
         style.GrabRounding = 4.0f;
         style.TabRounding = 4.0f;
 
-        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP().GetWindow(), true);
-        ImGui_ImplOpenGL3_Init(AIAC_APP().GetGlslVersion());
+        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow(), true);
+        ImGui_ImplOpenGL3_Init(AIAC_APP.GetGlslVersion());
 
-        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //FIXME: add to config
+        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //TODO: add to config
 
         m_IsOpen = new bool(true);
 
+        // Load images from memory
         m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE, ImVec2(60, 60));
+        m_DebugImgPlaceHolder = AIAC::Image("assets/images/placeholder_3d_scene.png", AIAC::ImageType::IM_TEXTURE);
 
-        
-
+        // Set panes UI for layers
         //                 Label    Collapse          PaneContent
         StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
         StackPane(PaneUI("Camera",    true,   std::bind(&SetPaneUICamera)    ));
@@ -54,45 +55,12 @@ namespace AIAC
     void LayerUI::OnUIRender()
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
-        // Main Pannel
-        ImGui::Begin("augmented_carpentry", m_IsOpen);
-
-        ShowIntroUI();
-
-        for (auto& pane : m_PaneUIStack) pane->Show();
-
-        ImGui::End();
-
-        // 3D Scene Viewport
-        ImGui::Begin("scene_viewport", m_IsOpen);
-
-        Image frame =
-            AIAC_APP().GetLayer<AIAC::LayerCamera>()
-                ->MainCamera.GetCurrentFrame();
-        frame.CvtCvMat2ImTexture();
-        AIAC::ImTexture frameImTexture = frame.GetImTexture();
-        // AIAC::ImTexture frameImTexture = frame.GetImTexture();
-
-        // AIAC_INFO("frameImTexture width = {0}", frameImTexture.Size.x);
-        // AIAC_INFO("frameImTexture height = {0}", frameImTexture.Size.y);
-
-        ImGui::Image(frameImTexture.ID, frameImTexture.Size);
-
-        // frame.CvtCvMat2ImTexture(frame.GetCvMat(), imTexture);
-
-        // ImGui::Image(AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().ID,
-        //              AIAC_APP().GetLayer<AIAC::LayerCamera>()->GetCurrentFrame().GetImTexture().Size);
+        
+        ShowMainUI();
+        ShowSceneViewport();
 
 
-        // ImGui::BeginChild("3DSceneViewport", ImVec2(0, 0), true);
-        // ImGui::EndChild();
-
-        ImGui::End();
-
-
-
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        RenderUI();
     }
 
     void LayerUI::OnDetach()
@@ -102,14 +70,43 @@ namespace AIAC
         ImGui::DestroyContext();
     }
 
-
-    void LayerUI::ShowIntroUI()
+    void LayerUI::RenderUI()
     {
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    }
+
+
+    void LayerUI::ShowMainUI()
+    {
+        ImGui::Begin("augmented_carpentry", m_IsOpen);
         ImGui::Image(m_Logo.GetImTexture().ID, m_Logo.GetImTexture().Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
+        
+        for (auto& pane : m_PaneUIStack) pane->Show();
+        
+        ImGui::End();
     }
 
+    void LayerUI::ShowSceneViewport()
+    {
+        ImGui::Begin("scene_viewport", m_IsOpen);
+
+        ImGui::Text("PLACEHOLDER for importer UI");
+
+        ImGui::Dummy(ImVec2(0.0f, 10.0f));
+
+        ImGui::Text("3D viewer with fix camera");
+
+        ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+        ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+        m_SceneViewportImTexture = m_DebugImgPlaceHolder.GetImTexture();  // DEBUG
+        ImGui::Image(m_SceneViewportImTexture.ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        ImGui::EndChild();
+        
+        ImGui::End();
+    }
 
     void LayerUI::SetPaneUIExample()
     {
@@ -119,9 +116,14 @@ namespace AIAC
     void LayerUI::SetPaneUICamera()
     {
         ImGui::Text("This layer is responsible for the physical camera.");
-        AIAC::Camera& camera = AIAC_APP().GetLayer<AIAC::LayerCamera>()->MainCamera;
+        AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
         ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
         ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
+
+        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
+        frame.CvtCvMat2ImTexture();
+        AIAC::ImTexture frameImTexture = frame.GetImTexture();
+        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
     }
 
     void LayerUI::SetPaneUISlam()

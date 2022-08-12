@@ -48,7 +48,10 @@ namespace AIAC {
         virtual void OnUIRender() override;
         virtual void OnDetach() override;
 
-        void ShowIntroUI();
+        void RenderUI();
+
+        void ShowMainUI();
+        void ShowSceneViewport();
 
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         static void SetPaneUIExample();
@@ -59,7 +62,12 @@ namespace AIAC {
 
     private:
         ImVec4 m_WindowBackColor;
+
         AIAC::Image m_Logo;
+        AIAC::Image m_DebugImgPlaceHolder;
+
+        AIAC::ImTexture m_SceneViewportImTexture;
+        AIAC::ImTexture m_ARCameraViewportImTexture;
 
         bool* m_IsOpen = nullptr;
 
