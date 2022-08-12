@@ -32,6 +32,10 @@ namespace AIAC
         // Get a handle for our "MVP" uniform
         MatrixID = glGetUniformLocation(programID, "MVP");
 
+<<<<<<< HEAD
+=======
+        // Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+>>>>>>> 4e51a3b00831c9034fc221abf5a039320d802d19
         Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
         
         // Camera matrix
