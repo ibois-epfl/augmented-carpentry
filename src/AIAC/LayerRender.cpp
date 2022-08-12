@@ -5,10 +5,18 @@
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "utils/shader.hpp"
+
+// only for test
+#include "glm/gtc/type_ptr.hpp"
 
 GLuint programID;
 GLuint vertexbuffer;
+GLuint MatrixID;
+glm::mat4 Projection;
+glm::mat4 View, Model, MVP;
 
 namespace AIAC
 {
@@ -19,7 +27,25 @@ namespace AIAC
         glBindVertexArray(VertexArrayID);
 
         // Create and compile our GLSL program from the shaders
-        programID = LoadShaders( "/home/tpp/ogl-master/tutorial02_red_triangle/SimpleVertexShader.fragmentshader", "/home/tpp/ogl-master/tutorial02_red_triangle/SimpleFragmentShader.fragmentshader" );
+        programID = LoadShaders( "/home/tpp/Downloads/ogl-master/tutorial03_matrices/SimpleTransform.vertexshader", "/home/tpp/ogl-master/tutorial02_red_triangle/SimpleFragmentShader.fragmentshader" );
+
+        // Get a handle for our "MVP" uniform
+        MatrixID = glGetUniformLocation(programID, "MVP");
+
+        // Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+        Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+        
+        // Camera matrix
+        View       = glm::lookAt(
+                            glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+                            glm::vec3(0,0,0), // and looks at the origin
+                            glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+                    );
+        // Model matrix : an identity matrix (model will be at the origin)
+        Model      = glm::mat4(1.0f);
+        // Our ModelViewProjection : multiplication of our 3 matrices
+        MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
+
 
         static const GLfloat g_vertex_buffer_data[] = { 
             -1.0f, -1.0f, 0.0f,
@@ -30,6 +56,7 @@ namespace AIAC
         glGenBuffers(1, &vertexbuffer);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
     }
 
     void LayerRender::OnFrameAwake()
@@ -56,6 +83,34 @@ namespace AIAC
     {
         glUseProgram(programID);
 
+        // MVP[0][0] += 0.01f;
+        // MVP[1][1] += 0.01f;
+        // MVP[2][2] += 0.01f;
+
+        glm::mat4 camPose = AIAC_APP().GetLayer<LayerSlam>()->GetCamPoseGlm();
+        glm::mat4 finalPose = camPose;
+
+        finalPose[0][1] *= 0.1f;
+        finalPose[0][2] *= 0.1f;
+
+        finalPose[1][0] *= 0.1f;
+        finalPose[1][2] *= 0.1f;
+
+        finalPose[2][0] *= 0.1f;
+        finalPose[2][1] *= 0.1f;
+
+        finalPose[3][0] *= 0.1f;
+        finalPose[3][1] *= 0.1f;
+        finalPose[3][2] *= 0.1f;
+
+        cv::Mat cvmat = cv::Mat(4, 4, CV_32F);
+        memcpy(cvmat.data, glm::value_ptr(finalPose), 16 * sizeof(float));
+        cvmat = cvmat.t();
+
+        cout << cvmat << endl;
+
+        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &finalPose[0][0]);
+
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -72,7 +127,6 @@ namespace AIAC
 		glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 
 		glDisableVertexAttribArray(0);
-
     }
 
     void LayerRender::OnFrameFall()

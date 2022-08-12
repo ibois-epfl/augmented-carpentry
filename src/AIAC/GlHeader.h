@@ -1,7 +1,8 @@
 #pragma once
 
 // <GL/glew.h> has to be included before <GLFW/glfw3.h>
-#include <GL/glew.h>
+// #include <GL/glew.h>
+#include "glew/include/GL/glew.h"
 
 #include <GL/glut.h>
 #include <GL/freeglut.h>
