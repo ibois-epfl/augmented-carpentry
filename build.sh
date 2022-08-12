@@ -7,7 +7,6 @@ if [ -d build ]; then
     else
         make -j$($(nproc)-2) -C build
     fi
-
 else
     echo "[ERROR] The build output dir does not exist. Run configure.sh first."
     exit 1
