@@ -13,6 +13,8 @@ file(GLOB AIAC_SRC
     "src/AIAC/*.cpp"
     "src/utils/*"
     "src/AIAC.h"
+    "src/AIAC/EventSys/*.h"
+    "src/AIAC/EventSys/*.cpp"
     )
 
 add_executable(${PROJECT_NAME}
@@ -34,7 +36,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
 option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
-option(INSTALL_ASSIMP "Install assimp with dpkg" ON)
+option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 
 option(ENABLE_ASSERT "Enable assertion in code" ON)
