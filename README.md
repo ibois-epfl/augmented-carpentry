@@ -1,4 +1,4 @@
-# augmented-carpentry
+# Augmented Carpentry
 
 <p>
     <img src="./assets/images/logo_linux_gray_light.png" width="200">
@@ -9,9 +9,9 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 
 ## TODOList
 
-> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth.
+> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth. First we implement a "blocking event system"(we raise and dispatch the event immediately), next a "polling event system" (we ask the sys if a condition is met).
 
-> We need to adapt basic mouse-click to desktop app with touch screen.
+> MINOR: set a borderless window on the touch screen directly and automatically (maybe with a check if the touch display is present).
 
 ## Set touch monitor
 
