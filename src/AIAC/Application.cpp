@@ -1,3 +1,5 @@
+#include "aiacpch.h"
+
 #include "AIAC/Application.h"
 
 #include "AIAC/Log.h"

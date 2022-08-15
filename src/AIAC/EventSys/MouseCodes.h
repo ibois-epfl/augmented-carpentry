@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 namespace AIAC
 {
     using MouseCode = uint16_t;

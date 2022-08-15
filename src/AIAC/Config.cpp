@@ -1,3 +1,5 @@
+#include "aiacpch.h"
+
 #include "AIAC/Config.h"
 
 namespace AIAC
