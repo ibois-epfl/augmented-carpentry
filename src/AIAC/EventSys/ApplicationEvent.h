@@ -2,7 +2,6 @@
 
 #include "AIAC/EventSys/Event.h"
 
-#include <sstream>
 
 namespace AIAC
 {

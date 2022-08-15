@@ -1,10 +1,11 @@
+#include "aiacpch.h"
+
 #include "AIAC/LayerUI.h"
 #include "AIAC/Application.h"
 
 #include "stb/stb_image.h"
 #include "stb/stb_image_write.h"
 
-#include <iostream>
 
 namespace AIAC
 {
@@ -43,6 +44,7 @@ namespace AIAC
         StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
         StackPane(PaneUI("Camera",    true,   std::bind(&SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",      true,   std::bind(&SetPaneUISlam)      ));
+
     }
 
     void LayerUI::OnFrameStart()
@@ -58,7 +60,6 @@ namespace AIAC
         
         ShowMainUI();
         ShowSceneViewport();
-
 
         RenderUI();
     }

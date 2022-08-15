@@ -3,7 +3,6 @@
 #include "AIAC/EventSys/Event.h"
 #include "AIAC/EventSys/MouseCodes.h"
 
-#include <sstream>
 
 namespace AIAC
 {

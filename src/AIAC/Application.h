@@ -1,13 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <stdint.h>
-#include <vector>
-#include <type_traits>
-#include <typeindex>
-#include <typeinfo>
-#include <unordered_map>
-
 #include "AIAC/Camera.h"
 #include "AIAC/Layer.h"
 #include "AIAC/Assert.h"

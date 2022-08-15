@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <opencv2/opencv.hpp>
 
 #include "AIAC/Layer.h"
@@ -58,10 +57,8 @@ namespace AIAC {
         static void SetPaneUICamera();
         static void SetPaneUISlam();
 
-
-
     private:
-        ImVec4 m_WindowBackColor;
+        int m_testSlider = 0;
 
         AIAC::Image m_Logo;
         AIAC::Image m_DebugImgPlaceHolder;

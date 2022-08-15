@@ -1,10 +1,10 @@
+#include "aiacpch.h"
+
 #include "AIAC/Config.h"
 
 #include "AIAC/LayerSlam.h"
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
-
-#include <iostream>
 
 
 namespace AIAC

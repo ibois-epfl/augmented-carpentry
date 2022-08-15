@@ -1,11 +1,5 @@
 #pragma once
 
-#include <string_view>
-#include <stdint.h>
-#include <stdlib.h>
-
-#include <opencv2/opencv.hpp>
-
 #include "AIAC/GlHeader.h"
 #include "AIAC/Log.h"
 

@@ -2,17 +2,13 @@
 
 #include "AIAC/Base.h"
 
-#include <string>
-#include <functional>
-
-
 namespace AIAC 
 {
     enum class EventType
     {
         None = 0,
         WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-        // AppTick, AppUpdate, AppRender,
+        AppTick, AppUpdate, AppRender,
         MouseButtonPressed, MouseButtonReleased, MouseMoved
     };
 

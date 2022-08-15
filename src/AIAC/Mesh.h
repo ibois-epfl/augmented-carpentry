@@ -1,4 +1,4 @@
-#include <memory>
+#pragma once
 #include "GlHeader.h"
 
 // Include AssImp
