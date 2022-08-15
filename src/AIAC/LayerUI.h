@@ -4,6 +4,8 @@
 
 #include "AIAC/Image.h"
 #include "AIAC/Log.h"
+#include "AIAC/EventSys/MouseEvent.h"
+#include "AIAC/EventSys/ApplicationEvent.h"
 
 #include "GlHeader.h"
 
@@ -54,6 +56,14 @@ namespace AIAC {
         static void SetPaneUIExample();
         static void SetPaneUICamera();
         static void SetPaneUISlam();
+    
+    private:
+        void OnEvent(AIAC::Event& e);
+        bool OnMouseMovedEvent(AIAC::MouseMovedEvent& e);
+        bool OnMouseButtonPressedEvent(AIAC::MouseButtonPressedEvent& e);
+        bool OnMouseButtonReleasedEvent(AIAC::MouseButtonReleasedEvent& e);
+        bool OnWindowResizedEvent(AIAC::WindowResizedEvent& e);
+        bool OnWindowClosedEvent(AIAC::WindowClosedEvent& e);
 
     private:
         int m_testSlider = 0;
@@ -66,9 +76,6 @@ namespace AIAC {
 
         bool* m_IsOpen = nullptr;
 
-        // make a vector of PaneUI objects
         std::vector<std::shared_ptr<PaneUI>> m_PaneUIStack;
-
-        // std::vector<std::shared_ptr<PaneUI<std::function<void()>>>> m_PaneUIs;
     };
 }

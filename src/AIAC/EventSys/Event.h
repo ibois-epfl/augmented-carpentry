@@ -7,8 +7,9 @@ namespace AIAC
     enum class EventType
     {
         None = 0,
-        WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-        AppTick, AppUpdate, AppRender,
+        WindowClose, WindowResize, 
+        WindowFocus, WindowLostFocus, WindowMoved,
+        // AppTick, AppUpdate, AppRender,
         MouseButtonPressed, MouseButtonReleased, MouseMoved
     };
 
@@ -18,7 +19,8 @@ namespace AIAC
         EventCategoryApplication = BIT(0),
         EventCategoryInput       = BIT(1),
         EventCategoryMouse       = BIT(2),
-        EventCategoryMouseButton = BIT(3)
+        EventCategoryMouseButton = BIT(3),
+        EventCategoryWindow      = BIT(4)
     };
 
     #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\

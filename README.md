@@ -248,10 +248,10 @@ void LayerUI::SetPaneUICamera()
 Next copy past the template function in `LayerUI.cpp` and reference the function you created:
 ```c++
 //                 Label               Collapse              PaneContent
-StackPane(PaneUI("Example",              true,       std::bind(&SetPaneUIExample)         ));
-StackPane(PaneUI("Camera",               true,       std::bind(&SetPaneUICamera)          ));
-StackPane(PaneUI("Slam",                 true,       std::bind(&SetPaneUISlam)            ));
-StackPane(PaneUI("<your-new-name>",      true,       std::bind(&YourNewContainerMethod)   ));
+StackPane(PaneUI("Example",              true,       AIAC_BIND_EVENT_FN(SetPaneUIExample)         ));
+StackPane(PaneUI("Camera",               true,       AIAC_BIND_EVENT_FN(SetPaneUICamera)          ));
+StackPane(PaneUI("Slam",                 true,       AIAC_BIND_EVENT_FN(SetPaneUISlam)            ));
+StackPane(PaneUI("<your-new-name>",      true,       AIAC_BIND_EVENT_FN(YourNewContainerMethod)   ));
 ```
 
 ### Logging
