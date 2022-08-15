@@ -11,6 +11,8 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 
 > We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth.
 
+> We need to adapt basic mouse-click to desktop app with touch screen.
+
 ## Build
 We need a first to install TSlam:
 
