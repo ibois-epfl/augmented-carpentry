@@ -29,8 +29,6 @@ namespace AIAC
 
     void Application::Init()
     {
-        AIAC::Log::Init();
-
         AIAC_INFO("Setting up GL+GLSW window");
         glfwSetErrorCallback(glfwErrorCallback);
             if (!glfwInit()) {
