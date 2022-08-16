@@ -13,8 +13,6 @@ file(GLOB AIAC_SRC
     "src/AIAC/*.cpp"
     "src/utils/*"
     "src/AIAC.h"
-    "src/AIAC/EventSys/*.h"
-    "src/AIAC/EventSys/*.cpp"
     )
 
 add_executable(${PROJECT_NAME}

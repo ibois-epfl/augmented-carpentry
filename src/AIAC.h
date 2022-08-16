@@ -12,10 +12,6 @@
 #include "AIAC/Log.h"
 #include "AIAC/Assert.h"
 
-#include "AIAC/EventSys/Event.h"
-#include "AIAC/EventSys/MouseEvent.h"
-#include "AIAC/EventSys/ApplicationEvent.h"
-
 #include "AIAC/Image.h"
 #include "AIAC/Camera.h"
 
