@@ -58,10 +58,13 @@ namespace AIAC
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
         
+
         ShowMainUI();
         ShowSceneViewport();
 
-        RenderUI();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
     void LayerUI::OnDetach()
@@ -69,12 +72,6 @@ namespace AIAC
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-    }
-
-    void LayerUI::RenderUI()
-    {
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
 
@@ -112,6 +109,25 @@ namespace AIAC
     void LayerUI::SetPaneUIExample()
     {
         ImGui::Text("This is a test message for the example layer");
+        ImGuiIO& io = ImGui::GetIO();
+        if (ImGui::Button("Test"))
+        {
+            // io.MousePos.x = io.MousePos.y = -1;
+            // ImGui::GetIO().MouseDown[0] = true;
+            AIAC_INFO("Test button pressed");
+        }
+
+        
+        // print mouse position
+        // std::cout << "Mouse pos: " << io.MousePos.x << " " << io.MousePos.y << std::endl;
+
+        // raise an event if mouse is double clicked
+        if (ImGui::IsMouseDoubleClicked(0))
+        {
+            AIAC_INFO("Mouse double clicked");
+
+        }
+
     }
 
     void LayerUI::SetPaneUICamera()
@@ -135,47 +151,5 @@ namespace AIAC
     }
 
 
-    void LayerUI::OnEvent(AIAC::Event& event)
-    {
-        EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<AIAC::MouseMovedEvent>(AIAC_BIND_EVENT_FN(LayerUI::OnMouseMovedEvent));
-        dispatcher.Dispatch<AIAC::MouseButtonPressedEvent>(AIAC_BIND_EVENT_FN(LayerUI::OnMouseButtonPressedEvent));
-        dispatcher.Dispatch<AIAC::MouseButtonReleasedEvent>(AIAC_BIND_EVENT_FN(LayerUI::OnMouseButtonReleasedEvent));
-        dispatcher.Dispatch<AIAC::WindowResizedEvent>(AIAC_BIND_EVENT_FN(LayerUI::OnWindowResizedEvent));
-        dispatcher.Dispatch<AIAC::WindowClosedEvent>(AIAC_BIND_EVENT_FN(LayerUI::OnWindowClosedEvent));
-    }
-
-    bool LayerUI::OnMouseMovedEvent(AIAC::MouseMovedEvent& e)
-    {
-        ImGui::GetIO().MousePos = ImVec2(e.GetX(), e.GetY());
-        return false;
-    }
-
-    bool LayerUI::OnMouseButtonPressedEvent(AIAC::MouseButtonPressedEvent& e)
-    {
-        ImGui::GetIO().MouseDown[e.GetMouseButton()] = true;
-        return false;
-    }
-
-    bool LayerUI::OnMouseButtonReleasedEvent(AIAC::MouseButtonReleasedEvent& e)
-    {
-        ImGui::GetIO().MouseDown[e.GetMouseButton()] = false;
-        return false;
-    }
-
-    bool LayerUI::OnWindowResizedEvent(AIAC::WindowResizedEvent& e)
-    {
-        ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
-        io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-        glViewport(0, 0, e.GetWidth(), e.GetHeight());
-        return false;
-    }
-
-    bool LayerUI::OnWindowClosedEvent(AIAC::WindowClosedEvent& e)
-    {
-        m_IsOpen = new bool(false);
-        return false;
-    }
 
 }

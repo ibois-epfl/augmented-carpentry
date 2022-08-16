@@ -4,8 +4,6 @@
 
 #include "AIAC/Image.h"
 #include "AIAC/Log.h"
-#include "AIAC/EventSys/MouseEvent.h"
-#include "AIAC/EventSys/ApplicationEvent.h"
 
 #include "GlHeader.h"
 
@@ -47,8 +45,6 @@ namespace AIAC {
         virtual void OnUIRender() override;
         virtual void OnDetach() override;
 
-        void RenderUI();
-
         void ShowMainUI();
         void ShowSceneViewport();
 
@@ -57,14 +53,6 @@ namespace AIAC {
         static void SetPaneUICamera();
         static void SetPaneUISlam();
     
-    private:
-        void OnEvent(AIAC::Event& e);
-        bool OnMouseMovedEvent(AIAC::MouseMovedEvent& e);
-        bool OnMouseButtonPressedEvent(AIAC::MouseButtonPressedEvent& e);
-        bool OnMouseButtonReleasedEvent(AIAC::MouseButtonReleasedEvent& e);
-        bool OnWindowResizedEvent(AIAC::WindowResizedEvent& e);
-        bool OnWindowClosedEvent(AIAC::WindowClosedEvent& e);
-
     private:
         int m_testSlider = 0;
 
