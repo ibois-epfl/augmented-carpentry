@@ -1,11 +1,11 @@
 #!/bin/bash
 
-BUILD_ALL_PROCESSORS = true
+is_max_processor_build=true
 
 while getopts ":c" opt; do
     case $opt in
         c)  # make with default number of processors
-            BUILD_ALL_PROCESSORS=false
+            is_max_processor_build=false
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -15,7 +15,7 @@ while getopts ":c" opt; do
 done
 
 
-if [BUILD_ALL_PROCESSORS]; then
+if $is_max_processor_build ; then
     echo "[INFO] Building with make nbr max processors"
     if [ -d build ]; then
         # if nproc smaller than 4
