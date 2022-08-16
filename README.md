@@ -15,46 +15,17 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 
 ## Set touch monitor
 
-The prototype is tested on a touch screen 7inch HDMI LCD (B) (WaveShare WS170120) and a laptop running Ubuntu 20/22.04 LTS. To config the touch screen on the pc follow ![these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(B)).
-Next, to calibrate the screen and map the touch inputs on Ubuntu run the following commands to identify the device id:
-```bash
-xinput
+The prototype is tested on a touch screen 7inch HDMI LCD (B) (WaveShare WS170120) and a laptop running Ubuntu 20/22.04 LTS. To config the touch screen on the pc follow ![these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(B)). Be sure to switch the display on, plug the mini-USB and finally plug the HDMI cable.
+
+Set the display properties in the `config.ini` properties (to find them run the commands `xinput`  for the name and `xrandr` for the connection type).
+```c++
+[MonitorSpecs]
+monitor_name = WaveShare WS170120
+monitor_link_t = HDMI
+monitor_resolution = 800x480
 ```
-This will be the output, take the id of the screen:
-```bash
-(base) as@as-Legion-7-16ACHg6:~$ xinput
-⎡ Virtual core pointer                    	id=2	[master pointer  (3)]
-⎜   ↳ Virtual core XTEST pointer              	id=4	[slave  pointer  (2)]
-⎜   ↳ MSFT0001:00 04F3:317C Mouse             	id=15	[slave  pointer  (2)]
-⎜   ↳ MSFT0001:00 04F3:317C Touchpad          	id=16	[slave  pointer  (2)]
-⎜   ↳ Logitech MX Anywhere 3                  	id=10	[slave  pointer  (2)]
-⎜   ↳ ITE Tech. Inc. ITE Device(8258) Keyboard	id=12	[slave  pointer  (2)]
-⎜   ↳ MX Anywhere 3 Mouse                     	id=19	[slave  pointer  (2)]
-⎜   ↳ WaveShare WS170120                      	id=20	[slave  pointer  (2)]  <--- this one
-⎣ Virtual core keyboard                   	id=3	[master keyboard (2)]
-    ↳ Virtual core XTEST keyboard             	id=5	[slave  keyboard (3)]
-    ↳ ITE Tech. Inc. ITE Device(8258) Wireless Radio Control	id=13	[slave 
-```
-Next,
-```bash
-xrandr
-```
-The output is the following and you can see that we have a connection of type HDMI-0:
-```bash
-Screen 0: minimum 8 x 8, current 3360 x 1600, maximum 32767 x 32767
-DP-0 disconnected (normal left inverted right x axis y axis)
-DP-1 disconnected (normal left inverted right x axis y axis)
-DP-2 disconnected (normal left inverted right x axis y axis)
-DP-3 disconnected (normal left inverted right x axis y axis)
-HDMI-0 connected 800x480+2560+0 (normal left inverted right x axis y axis) 108mm x 68mm  <--- this one
-   800x480       65.68*+
-DP-4 connected primary 2560x1600+0+0 (normal left inverted right x axis y axis) 344mm x 215mm
-   2560x1600     60.00*+ 165.00  
-```
-Next, to map the device correctly run the command with the correct id:
-```bash
-xinput map-to-output 20 HDMI-0
-```
+**You can build AS with the touch screen or on a non-touch screen.** To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` in the `CMakeLists.txt`:
+
 
 ## Build
 We need a first to install TSlam:
