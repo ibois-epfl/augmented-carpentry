@@ -182,6 +182,9 @@ key2 = I'm a string!
 [section_test_vector]
 prime_number = 2 3 5 7 11 13
 ```
+### Pre-Compiled headers
+AC uses a precompile header `aiacpch.h` to the project to shorten compilation time for headers that you rarely modify such as stdb library, opencv etc.. Add to `aiacpch.h` every big header you do not use often.
+Include at the very top `#include "aiacpch.h"` of every `.cpp` file.
 
 ### Layers
 Layers are the main component of the framework. Each layer gets stacked and executed in that order. Each layer represents a different unit e.g. TSLAM, camera access, 3Drender, etc. Each layer has events where code can be injected in the loop and custom events.
