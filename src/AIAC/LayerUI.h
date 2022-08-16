@@ -34,7 +34,6 @@ namespace AIAC {
     };
 
 
-
     class LayerUI : public AIAC::Layer {
     public:
         LayerUI() = default;

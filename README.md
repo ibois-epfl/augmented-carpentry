@@ -35,9 +35,25 @@ This will be the output, take the id of the screen:
     ↳ Virtual core XTEST keyboard             	id=5	[slave  keyboard (3)]
     ↳ ITE Tech. Inc. ITE Device(8258) Wireless Radio Control	id=13	[slave 
 ```
+Next,
+```bash
+xrandr
+```
+The output is the following and you can see that we have a connection of type HDMI-0:
+```bash
+Screen 0: minimum 8 x 8, current 3360 x 1600, maximum 32767 x 32767
+DP-0 disconnected (normal left inverted right x axis y axis)
+DP-1 disconnected (normal left inverted right x axis y axis)
+DP-2 disconnected (normal left inverted right x axis y axis)
+DP-3 disconnected (normal left inverted right x axis y axis)
+HDMI-0 connected 800x480+2560+0 (normal left inverted right x axis y axis) 108mm x 68mm  <--- this one
+   800x480       65.68*+
+DP-4 connected primary 2560x1600+0+0 (normal left inverted right x axis y axis) 344mm x 215mm
+   2560x1600     60.00*+ 165.00  
+```
 Next, to map the device correctly run the command with the correct id:
 ```bash
-xinput map-to-output 20 VGA1
+xinput map-to-output 20 HDMI-0
 ```
 
 ## Build
