@@ -138,16 +138,16 @@ namespace AIAC
 //        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboId);
 
 
-
-        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                               GL_TEXTURE_2D, m_OverlayFrameBuffer, 0);
-        glBlitFramebuffer(0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
+//
+//        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+//                               GL_TEXTURE_2D, m_OverlayFrameBuffer, 0);
+//        glBlitFramebuffer(0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
+//                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
+//                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
 //        glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 
 
-        glDeleteFramebuffers(1, &readFboIdFrame);
+//        glDeleteFramebuffers(1, &readFboIdFrame);
 
     }
 }
