@@ -11,23 +11,21 @@ namespace AIAC
 
         void Init();
 
-        inline std::string ImportMonitorName();
-        inline std::string ImportMonitorLinkType();
-        inline std::string ImportMonitorResolution();
+        inline std::string ImportMonitorNameFromConfig();
+        inline std::string ImportMonitorLinkTypeFromConfig();
+        inline std::string ImportMonitorResolutionFromConfig();
+        void ImportParamFromConfig();
+
         void ParseResolution2Int32_t()
             {
                 m_ResW = std::stoi(m_Resolution.substr(0, m_Resolution.find('x')));
                 m_ResH = std::stoi(m_Resolution.substr(m_Resolution.find('x') + 1));
             }
-        
-        void ImportParamFromConfig();
 
-        bool FindMonitorID();
-
-        bool Check4MonitorNbr();
-        bool Check4MonitorRes();
-
-        bool MapMonitor();
+        bool FindMonitorID();       // Linux-based only
+        bool Check4MonitorNbr();    // Linux-based only
+        bool Check4MonitorRes();    // Linux-based only
+        bool MapMonitor();          // Linux-based only
 
         inline static Monitor& GetInstance() { return *s_Instance; }
         inline bool IsTouch() const { return m_IsTouch; }
