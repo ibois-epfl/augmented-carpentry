@@ -18,9 +18,6 @@ namespace AIAC
         /// Is called when frame starts
         virtual void OnFrameStart() {}
 
-        /// Is called once per loop and takes care of everything related ot UI
-        virtual void OnUIRender() {}
-
         /// Is called when frame ends
         virtual void OnFrameEnd() {}
 

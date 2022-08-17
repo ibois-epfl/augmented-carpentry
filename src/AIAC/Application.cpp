@@ -58,15 +58,8 @@ namespace AIAC
 
             m_Window->OnUpdate();
 
-            // // TODO: this should go to Render.h / this becomes OnRender()
-            // glViewport(0, 0, m_Window->GetWidth(), m_Window->GetHeight());
-            // glClearColor(m_AppSpec.WindowBackColor.x * m_AppSpec.WindowBackColor.w,
-            //              m_AppSpec.WindowBackColor.y * m_AppSpec.WindowBackColor.w,
-            //              m_AppSpec.WindowBackColor.z * m_AppSpec.WindowBackColor.w,
-            //              m_AppSpec.WindowBackColor.w);
-            // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            // // glEnable(GL_DEPTH_TEST);
-
+            // TODO: this should go to Render.h / this becomes OnRender()
+            // Render->OnRender();
 
             for (auto& layer : m_LayerStack)
                 layer->OnUIRender();
