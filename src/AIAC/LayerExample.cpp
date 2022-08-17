@@ -26,10 +26,6 @@ namespace AIAC
     {
     }
 
-    void LayerExample::OnUIRender()
-    {
-    }
-
     void LayerExample::OnFrameFall()
     {
     }

@@ -14,7 +14,6 @@ namespace AIAC
         virtual void OnFrameAwake() override;
         virtual void OnFrameStart() override;
         virtual void OnFrameEnd() override;
-        virtual void OnUIRender() override;
         virtual void OnFrameFall() override;
         virtual void OnDetach() override;
     };
