@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AIAC/GlHeader.h"
+
 #include "AIAC/Config.h"
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -10,6 +12,7 @@
 #include "AIAC/Assert.h"
 
 #include "AIAC/Monitor.h"
+#include "AIAC/Window.h"
 
 #include "AIAC/Application.h"
 #include "AIAC/Layer.h"
