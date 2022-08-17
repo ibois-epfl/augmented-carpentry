@@ -17,10 +17,10 @@ int main(int argc, char* argv[]) {
 
     // Init Application
     AIAC::ApplicationSpecification appSpec;
-    appSpec.Name = "augmented_carpentry";
+    appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
     appSpec.WinWidth = 800;
     appSpec.WinHeight = 480;
-    appSpec.IsResizable = true;
+    appSpec.IsResizable = false;
     appSpec.VSync = true;
     appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 

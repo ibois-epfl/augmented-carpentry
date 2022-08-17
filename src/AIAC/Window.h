@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AIAC/GlHeader.h" // TODO: double check if correct
+#include "AIAC/GlHeader.h"
 
 
 namespace AIAC
@@ -19,8 +19,7 @@ namespace AIAC
                     bool vSync = true,
                     bool isResizable = true)
             : Title(title), Width(width), Height(height), VSync(vSync), IsResizable(isResizable)
-        {
-        }
+        {}
     };
 
 
@@ -31,6 +30,7 @@ namespace AIAC
         virtual ~Window();
 
         void OnUpdate();
+        void OnBufferSwap();
         void Shutdown();
 
         bool IsOpen();
@@ -64,7 +64,6 @@ namespace AIAC
             bool IsResizable;
         } m_Data;
 
-        int m_DisplayW;
-        int m_DisplayH;
+        int m_DisplayW, m_DisplayH;
     };
 }
