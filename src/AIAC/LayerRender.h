@@ -1,6 +1,11 @@
 #pragma once
 
+#include "glm/glm.hpp"
+
+#include "AIAC/Mesh.h"
+#include "AIAC/GlHeader.h"
 #include "AIAC/Layer.h"
+
 
 namespace AIAC
 {
@@ -12,5 +17,14 @@ namespace AIAC
 
         void OnAttach() override;
         virtual void OnUIRender() override;
+
+    public:
+        std::vector<AIAC::Mesh> Meshes;
+
+    private:
+        GLuint m_ProgramId;
+        GLuint m_MatrixId;
+
+        glm::mat4 m_ProjMatrix;
     };
 }

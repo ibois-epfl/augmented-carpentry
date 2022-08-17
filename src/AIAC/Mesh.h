@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include "GlHeader.h"
 
@@ -9,11 +11,6 @@
 #include "glm/glm.hpp"
 
 namespace AIAC{
-class PlyLoader
-{
-
-};
-
 class Mesh
 {
 public:
@@ -27,13 +24,15 @@ public:
     void Draw();
 
 public:
-    std::vector<unsigned short> Indices;
+    std::vector<uint8_t> Indices;
 	std::vector<glm::vec3> Vertices;
 	std::vector<glm::vec2> UVs;
 	std::vector<glm::vec3> Normals;
+    std::vector<glm::vec3> Edges;
 
 private:
     GLuint m_Vertexbuffer;
+    GLuint m_EdgeBuffer;
 };
 
 }
