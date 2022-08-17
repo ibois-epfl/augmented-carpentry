@@ -14,15 +14,14 @@ int main(int argc, char* argv[]) {
     // Init Monitor
     std::unique_ptr<AIAC::Monitor> monitor = std::unique_ptr<AIAC::Monitor>(new AIAC::Monitor());
     AIAC_INFO("Is monitor touch {0}", monitor->IsTouch());
-    AIAC_INFO("ResWidth {0}", monitor->GetResWidth());
-    AIAC_INFO("ResHeight {0}", monitor->GetResHeight());
 
     // Init Application
     AIAC::ApplicationSpecification appSpec;
     appSpec.Name = "augmented_carpentry";
-    appSpec.WinWidth = 1280;
-    appSpec.WinHeight = 720;
+    appSpec.WinWidth = 800;
+    appSpec.WinHeight = 480;
     appSpec.IsResizable = true;
+    appSpec.VSync = true;
     appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
