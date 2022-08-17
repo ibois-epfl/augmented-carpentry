@@ -1,7 +1,5 @@
 #pragma once
 
-#include <opencv2/opencv.hpp>
-
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 

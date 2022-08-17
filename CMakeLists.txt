@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.16.)
 project(AC VERSION 0.1.0 LANGUAGES CXX C)
 
 include(CTest)
@@ -26,18 +26,30 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sr
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 #------------------------------------------------------------------------------------------------------------
+# Pre compiled headers
+#------------------------------------------------------------------------------------------------------------
+
+target_precompile_headers(${PROJECT_NAME} PRIVATE src/aiacpch.h)
+
+#------------------------------------------------------------------------------------------------------------
 # Add options
 #------------------------------------------------------------------------------------------------------------
 
-# As a fresh new compile, put everything ON
+# *As a fresh new compile, put everything ON
+# -------------------- COMPILE OPTIONS -----------------------------
 option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
 option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
+option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
-
+# -------------------- PREPROCESSOR VAR OPTIONS --------------------
+option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 
+if(DEPLOY_ON_TOUCH)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE AIAC_DEPLOY_ON_TOUCH=true)
+endif()
 if(ENABLE_ASSERT)
     target_compile_definitions(${PROJECT_NAME} PRIVATE AIAC_ENABLE_ASSERTS=true)
 endif()
@@ -124,6 +136,15 @@ if(OpenCV_FOUND)
     message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 endif()
 
+# Assimp
+if(UNIX AND INSTALL_ASSIMP)
+    message(STATUS "Installing assimp")
+    execute_process(COMMAND sudo apt-get install libassimp-dev)
+endif()
+find_package(assimp 5.0.0 REQUIRED)
+message(STATUS "Assimp include dir: ${ASSIMP_INCLUDE_DIRS}")
+message(STATUS "Assimp lib dir: ${ASSIMP_LIBRARIES}")
+
 # TSlam
 if(UNIX AND INSTALL_TSLAM)
     message(WARNING "Re/Compiling TSlam...")
@@ -143,6 +164,7 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
+    PUBLIC ${ASSIMP_INCLUDE_DIRS}
     )
 
 target_link_libraries(${PROJECT_NAME}
@@ -151,6 +173,7 @@ target_link_libraries(${PROJECT_NAME}
     ${TSlam_LIBS}
     ${CMAKE_DL_LIBS}
     glfw
+    assimp
     )
 
 

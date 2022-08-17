@@ -1,6 +1,5 @@
 #pragma once
 
-#include <opencv2/opencv.hpp>
 #include "AIAC/Image.h"
 
 namespace AIAC

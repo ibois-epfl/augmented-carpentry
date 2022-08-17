@@ -6,11 +6,6 @@
 	branch = v1.x
 	path = deps/spdlog
 	url = https://github.com/ibois-epfl/spdlog.git
-# FIXME : assimp is crashing the compilation
-# [submodule "deps/assimp"]
-# 	branch = master
-# 	path = deps/assimp
-# 	url = https://github.com/ibois-epfl/assimp.git
 [submodule "deps/rgb-camera-calibration"]
 	branch = main
 	path = deps/rgb-camera-calibration
@@ -28,6 +23,3 @@
 [submodule "deps/glew"]
 	path = deps/glew
 	url = https://github.com/ibois-epfl/glew.git
-[submodule "deps/assimp"]
-	path = deps/assimp
-	url = https://github.com/ibois-epfl/assimp.git

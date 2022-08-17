@@ -1,3 +1,5 @@
+#include "aiacpch.h"
+
 #include "AIAC/Image.h"
 
 #include "stb/stb_image.h"

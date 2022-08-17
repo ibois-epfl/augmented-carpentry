@@ -1,4 +1,4 @@
-#include <iostream>
+#include "aiacpch.h"
 
 #include "AIAC/LayerRender.h"
 
@@ -33,11 +33,12 @@ namespace AIAC
         m_MatrixId = glGetUniformLocation(m_ProgramId, "MVP");
 
         // Init projection matrix
-        int displayW, displayH;
-        glfwGetFramebufferSize(AIAC_APP.GetWindow(), &displayW, &displayH);
+        // int displayW, displayH;
+        AIAC_APP.GetWindow()->OnUpdate();
+        // glfwGetFramebufferSize(AIAC_APP.GetWindow()->GetGLFWWindow(), &displayW, &displayH);
         glm::mat4 perspectiveProjMatrix = glm::perspective(
                                     AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetFov().second,
-                                    (float)displayW / (float)displayH,
+                                    (float)AIAC_APP.GetWindow()->GetDisplayW() / (float)AIAC_APP.GetWindow()->GetDisplayH(),
                                     0.01f,
                                     100.0f );
 
@@ -63,7 +64,7 @@ namespace AIAC
         glBindTexture(GL_TEXTURE_2D, renderedTexture);
 
         // Give an empty image to OpenGL ( the last "0" )
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, displayW, displayH, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(), 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
 
         // Poor filtering. Needed !
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -73,7 +74,7 @@ namespace AIAC
         GLuint depthrenderbuffer;
         glGenRenderbuffers(1, &depthrenderbuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, displayW, displayH);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
 
         // Set "renderedTexture" as our colour attachement #0
@@ -91,12 +92,12 @@ namespace AIAC
     void LayerRender::OnUIRender()
     {
         // Render to our framebuffer
-        int displayW, displayH;
-        glfwGetFramebufferSize(AIAC_APP.GetWindow(), &displayW, &displayH);
+        // int displayW, displayH;
+        // glfwGetFramebufferSize(AIAC_APP.GetWindow()->GetGLFWWindow(), &displayW, &displayH);
 
         // Render to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, m_OverlayFrameBuffer);
-        glViewport(0,0,displayW,displayH); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Render on the whole framebuffer, complete from the lower left corner to the upper right
 
         // Clear the screen
         glClearColor(0.0f,0.0f,0.0f,0.0f);
@@ -132,7 +133,7 @@ namespace AIAC
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureId(), 0);
         glBlitFramebuffer(0, 0, 640, 480,
-                          0, 0, displayW, displayH,
+                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
 //        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboId);
 
@@ -140,8 +141,8 @@ namespace AIAC
 
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                GL_TEXTURE_2D, m_OverlayFrameBuffer, 0);
-        glBlitFramebuffer(0, 0, displayW, displayH,
-                          0, 0, displayW, displayH,
+        glBlitFramebuffer(0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
+                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
 //        glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 

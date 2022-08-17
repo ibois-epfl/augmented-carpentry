@@ -1,7 +1,7 @@
+#include "aiacpch.h"
+
 #include "Mesh.h"
 
-// for test only
-#include <iostream>
 using namespace std;
 
 namespace AIAC

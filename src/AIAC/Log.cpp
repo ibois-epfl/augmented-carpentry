@@ -1,6 +1,6 @@
+#include "aiacpch.h"
+
 #include "AIAC/Log.h"
-
-
 
 namespace AIAC
 {

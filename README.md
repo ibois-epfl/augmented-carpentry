@@ -1,4 +1,4 @@
-# augmented-carpentry
+# Augmented Carpentry
 
 <p>
     <img src="./assets/images/logo_linux_gray_light.png" width="200">
@@ -9,7 +9,23 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 
 ## TODOList
 
-> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth.
+> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth. First we implement a "blocking event system"(we raise and dispatch the event immediately), next a "polling event system" (we ask the sys if a condition is met).
+
+> MINOR: set a borderless window on the touch screen directly and automatically (maybe with a check if the touch display is present).
+
+## Set touch monitor
+
+The prototype is tested on a touch screen 7inch HDMI LCD (B) (WaveShare WS170120) and a laptop running Ubuntu 20/22.04 LTS. To config the touch screen on the pc follow ![these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(B)). Be sure to switch the display on, plug the mini-USB and finally plug the HDMI cable.
+
+Set the display properties in the `config.ini` properties (to find them run the commands `xinput`  for the name and `xrandr` for the connection type).
+```c++
+[MonitorSpecs]
+monitor_name = WaveShare WS170120
+monitor_link_t = HDMI
+monitor_resolution = 800x480
+```
+**You can build AS with the touch screen or on a non-touch screen.** To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` in the `CMakeLists.txt`:
+
 
 ## Build
 We need a first to install TSlam:
@@ -22,7 +38,7 @@ To build the rest:
 To run the code:
 ```bash
 ./run.sh
-```
+
 
 <br />
 
@@ -153,6 +169,9 @@ key2 = I'm a string!
 [section_test_vector]
 prime_number = 2 3 5 7 11 13
 ```
+### Pre-Compiled headers
+AC uses a precompile header `aiacpch.h` to the project to shorten compilation time for headers that you rarely modify such as stdb library, opencv etc.. Add to `aiacpch.h` every big header you do not use often.
+Include at the very top `#include "aiacpch.h"` of every `.cpp` file.
 
 ### Layers
 Layers are the main component of the framework. Each layer gets stacked and executed in that order. Each layer represents a different unit e.g. TSLAM, camera access, 3Drender, etc. Each layer has events where code can be injected in the loop and custom events.
@@ -219,10 +238,10 @@ void LayerUI::SetPaneUICamera()
 Next copy past the template function in `LayerUI.cpp` and reference the function you created:
 ```c++
 //                 Label               Collapse              PaneContent
-StackPane(PaneUI("Example",              true,       std::bind(&SetPaneUIExample)         ));
-StackPane(PaneUI("Camera",               true,       std::bind(&SetPaneUICamera)          ));
-StackPane(PaneUI("Slam",                 true,       std::bind(&SetPaneUISlam)            ));
-StackPane(PaneUI("<your-new-name>",      true,       std::bind(&YourNewContainerMethod)   ));
+StackPane(PaneUI("Example",              true,       AIAC_BIND_EVENT_FN(SetPaneUIExample)         ));
+StackPane(PaneUI("Camera",               true,       AIAC_BIND_EVENT_FN(SetPaneUICamera)          ));
+StackPane(PaneUI("Slam",                 true,       AIAC_BIND_EVENT_FN(SetPaneUISlam)            ));
+StackPane(PaneUI("<your-new-name>",      true,       AIAC_BIND_EVENT_FN(YourNewContainerMethod)   ));
 ```
 
 ### Logging

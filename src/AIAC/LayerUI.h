@@ -1,8 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <opencv2/opencv.hpp>
-
 #include "AIAC/Layer.h"
 
 #include "AIAC/Image.h"
@@ -37,7 +34,6 @@ namespace AIAC {
     };
 
 
-
     class LayerUI : public AIAC::Layer {
     public:
         LayerUI() = default;
@@ -48,8 +44,6 @@ namespace AIAC {
         virtual void OnUIRender() override;
         virtual void OnDetach() override;
 
-        void RenderUI();
-
         void ShowMainUI();
         void ShowSceneViewport();
 
@@ -57,11 +51,9 @@ namespace AIAC {
         static void SetPaneUIExample();
         static void SetPaneUICamera();
         static void SetPaneUISlam();
-
-
-
+    
     private:
-        ImVec4 m_WindowBackColor;
+        int m_testSlider = 0;
 
         AIAC::Image m_Logo;
         AIAC::Image m_DebugImgPlaceHolder;
@@ -71,9 +63,6 @@ namespace AIAC {
 
         bool* m_IsOpen = nullptr;
 
-        // make a vector of PaneUI objects
         std::vector<std::shared_ptr<PaneUI>> m_PaneUIStack;
-
-        // std::vector<std::shared_ptr<PaneUI<std::function<void()>>>> m_PaneUIs;
     };
 }

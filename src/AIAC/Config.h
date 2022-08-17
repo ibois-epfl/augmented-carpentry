@@ -21,6 +21,18 @@ public:
     }
 
     template <typename T>
+    inline static T Get(const std::string& section, const std::string& name)
+    {
+        AIAC_ASSERT(s_Instance, "Config not initialized!");
+        try {
+            return s_Instance->m_IniReader.Get<T>(section, name);
+        } catch (std::runtime_error& e) {
+            AIAC_ERROR("Failed to get value from config: {0}", e.what());
+            return nullptr;
+        }
+    }
+
+    template <typename T>
     inline static T Get(const std::string& section, const std::string& name, T&& default_v)
     {
         AIAC_ASSERT(s_Instance, "Config not initialized!");

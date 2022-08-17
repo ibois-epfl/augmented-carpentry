@@ -1,3 +1,5 @@
+#include "aiacpch.h"
+
 #include "AIAC/LayerUI.h"
 #include "AIAC/Application.h"
 
@@ -5,7 +7,6 @@
 #include "stb/stb_image_write.h"
 #include "LayerRender.h"
 
-#include <iostream>
 
 namespace AIAC
 {
@@ -28,8 +29,10 @@ namespace AIAC
         style.GrabRounding = 4.0f;
         style.TabRounding = 4.0f;
 
-        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow(), true);
-        ImGui_ImplOpenGL3_Init(AIAC_APP.GetGlslVersion());
+        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow()->GetGLFWWindow(), true);
+        ImGui_ImplOpenGL3_Init(AIAC_APP.GetWindow()->GetGlslVersion());
+
+        std::cout << "WINDOW type: " << typeid(AIAC_APP.GetWindow()).name() << std::endl;
 
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //TODO: add to config
 
@@ -41,9 +44,10 @@ namespace AIAC
 
         // Set panes UI for layers
         //                 Label    Collapse          PaneContent
-        StackPane(PaneUI("Example",   true,   std::bind(&SetPaneUIExample)   ));
-        StackPane(PaneUI("Camera",    true,   std::bind(&SetPaneUICamera)    ));
-        StackPane(PaneUI("Slam",      true,   std::bind(&SetPaneUISlam)      ));
+        StackPane(PaneUI("Example",   true,   AIAC_BIND_EVENT_FN(SetPaneUIExample)   ));
+        StackPane(PaneUI("Camera",    true,   AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Slam",      true,   AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+
     }
 
     void LayerUI::OnFrameStart()
@@ -57,11 +61,32 @@ namespace AIAC
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
         
+
+        // ShowMainUI();
+        // ShowSceneViewport();
+
+        // TODO: implement borderless window
+        // ImGui::SetNextWindowSizeConstraints(ImVec2(0, 0), ImVec2(FLT_MAX, FLT_MAX));
+        // ImGui::SetNextWindowPos(ImVec2(0, 0));
+        // ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y));
+        // ImGui::Begin("scene_viewport", m_IsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoBackground);
+        
+        // Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
+        // frame.CvtCvMat2ImTexture();
+        // AIAC::ImTexture frameImTexture = frame.GetImTexture();
+        // ImGui::Image(frameImTexture.ID, ImVec2(ImGui::GetIO().DisplaySize.x,  ImGui::GetIO().DisplaySize.y));
+        
+        
+        // ImGui::End();
+
         ShowMainUI();
         ShowSceneViewport();
 
 
-        RenderUI();
+
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
     void LayerUI::OnDetach()
@@ -69,12 +94,6 @@ namespace AIAC
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-    }
-
-    void LayerUI::RenderUI()
-    {
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
 
@@ -112,6 +131,25 @@ namespace AIAC
     void LayerUI::SetPaneUIExample()
     {
         ImGui::Text("This is a test message for the example layer");
+        ImGuiIO& io = ImGui::GetIO();
+        if (ImGui::Button("Test"))
+        {
+            // io.MousePos.x = io.MousePos.y = -1;
+            // ImGui::GetIO().MouseDown[0] = true;
+            AIAC_INFO("Test button pressed");
+        }
+
+        
+        // print mouse position
+        // std::cout << "Mouse pos: " << io.MousePos.x << " " << io.MousePos.y << std::endl;
+
+        // raise an event if mouse is double clicked
+        if (ImGui::IsMouseDoubleClicked(0))
+        {
+            AIAC_INFO("Mouse double clicked");
+
+        }
+
     }
 
     void LayerUI::SetPaneUICamera()
@@ -133,5 +171,7 @@ namespace AIAC
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
     }
+
+
 
 }
