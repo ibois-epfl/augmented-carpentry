@@ -34,7 +34,7 @@ namespace AIAC
 
         // Init projection matrix
         int displayW, displayH;
-        glfwGetFramebufferSize(AIAC_APP.GetWindow(), &displayW, &displayH);
+        glfwGetFramebufferSize(AIAC_APP.GetWindow().GetGLFWWindow(), &displayW, &displayH);
         glm::mat4 perspectiveProjMatrix = glm::perspective(
                                     AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetFov().second,
                                     (float)displayW / (float)displayH,
@@ -92,7 +92,7 @@ namespace AIAC
     {
         // Render to our framebuffer
         int displayW, displayH;
-        glfwGetFramebufferSize(AIAC_APP.GetWindow(), &displayW, &displayH);
+        glfwGetFramebufferSize(AIAC_APP.GetWindow().GetGLFWWindow(), &displayW, &displayH);
 
         // Render to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, m_OverlayFrameBuffer);
