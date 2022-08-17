@@ -31,11 +31,6 @@ namespace AIAC
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
     }
 
-    void LayerSlam::OnUIRender()
-    {
-
-    }
-
     glm::mat4 LayerSlam::GetCamPoseGlm()
     {
         glm::mat4 glmMat;

@@ -41,7 +41,7 @@ namespace AIAC {
 
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
-        virtual void OnUIRender() override;
+        void OnUIRender();
         virtual void OnDetach() override;
 
         void ShowMainUI();

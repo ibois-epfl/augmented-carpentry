@@ -89,7 +89,7 @@ namespace AIAC
 //            return false;
     }
 
-    void LayerRender::OnUIRender()
+    void LayerRender::OnRender()
     {
         // Render to our framebuffer
         // int displayW, displayH;

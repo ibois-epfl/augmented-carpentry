@@ -2,6 +2,8 @@
 
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
+#include "AIAC/LayerUI.h"
+#include "AIAC/LayerRender.h"
 
 
 // inline static void glfwErrorCallback(int error, const char* description) {
@@ -60,9 +62,8 @@ namespace AIAC
 
             // TODO: this should go to Render.h / this becomes OnRender()
             // Render->OnRender();
-
-            for (auto& layer : m_LayerStack)
-                layer->OnUIRender();
+            GetLayer<AIAC::LayerRender>()->OnRender();
+            GetLayer<AIAC::LayerUI>()->OnUIRender();
 
 
             for (auto& layer : m_LayerStack)
