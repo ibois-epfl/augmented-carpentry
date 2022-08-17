@@ -1,3 +1,5 @@
+#include "aiacpch.h"
+
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <stdexcept>
@@ -9,10 +11,7 @@
 
 namespace AIAC
 {
-    Camera::Camera()
-    {
-
-    }
+    Camera::Camera() {}
 
     void Camera::Open(int id)
     {

@@ -1,8 +1,8 @@
+#include "aiacpch.h"
+
 #include "AIAC/LayerExample.h"
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
-
-#include <iostream>
 
 namespace AIAC
 {

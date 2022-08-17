@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #if __linux__
     #define AIAC_BREAK() EXIT_FAILURE
 #endif

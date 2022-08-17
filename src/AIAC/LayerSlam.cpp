@@ -1,13 +1,12 @@
+#include "aiacpch.h"
+
 #include "AIAC/Config.h"
 
 #include "AIAC/LayerSlam.h"
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
 
-#include <iostream>
-
 //for test
-#include "opencv2/opencv.hpp"
 #include "glm/gtx/string_cast.hpp"
 
 namespace AIAC

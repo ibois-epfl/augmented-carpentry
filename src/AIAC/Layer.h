@@ -29,5 +29,6 @@ namespace AIAC
 
         /// Is called when the layer is detached from the application (~app).
         virtual void OnDetach() {}
+
     };
 }

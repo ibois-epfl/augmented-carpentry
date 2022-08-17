@@ -1,11 +1,12 @@
-#include "AIAC/Application.h"
+#include "aiacpch.h"
 
+#include "AIAC/Application.h"
 #include "AIAC/Log.h"
 
 
-inline static void glfwErrorCallback(int error, const char* description) {
-    AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
-}
+// inline static void glfwErrorCallback(int error, const char* description) {
+//     AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
+// }
 
 
 namespace AIAC
@@ -29,57 +30,16 @@ namespace AIAC
 
     void Application::Init()
     {
-        AIAC::Log::Init();
+        m_Window = new AIAC::Window(
+            AIAC::WindowProps(
+                m_AppSpec.Name,
+                m_AppSpec.WinWidth,
+                m_AppSpec.WinHeight,
+                m_AppSpec.IsResizable,
+                m_AppSpec.VSync
+            ));
 
-        AIAC_INFO("Setting up GL+GLSW window");
-        glfwSetErrorCallback(glfwErrorCallback);
-            if (!glfwInit()) {
-                AIAC_CRITICAL("Failed to initialize glfw");
-                exit(EXIT_FAILURE);
-            }
-
-        AIAC_INFO("Decide GL+GLSL versions");
-#if defined(IMGUI_IMPL_OPENGL_ES2)
-        // GL ES 2.0 + GLSL 100
-        m_GlslVersion GLSL_VERSION = "#version 100";
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-        glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-#elif defined(__APPLE__)
-        // GL 3.2 + GLSL 150
-        m_GlslVersion GLSL_VERSION = "#version 150";
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
-#else
-        // GL 3.0 + GLSL 130
-        m_GlslVersion = "#version 130";
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_RESIZABLE, m_AppSpec.IsResizable);  // GL_FALSE to set the full screen
-#endif
-
-        AIAC_INFO("Creating window with graphic content");
-        m_Window = glfwCreateWindow(m_AppSpec.WinWidth, m_AppSpec.WinHeight, m_AppSpec.Name, nullptr, nullptr);
-        if (m_Window == NULL) {
-            AIAC_CRITICAL("Failed to create GLFW window");
-            glfwTerminate();
-            exit(EXIT_FAILURE);
-        }
-        glfwMakeContextCurrent(m_Window);
-        glfwSwapInterval(1);  // Enable vsync
-        
-        m_WindowBackColor = m_AppSpec.WindowBackColor;
-
-        // init glew
-        glewExperimental = true; // Needed for core profile
-        if (glewInit() != GLEW_OK) {
-            throw std::runtime_error("Failed to initialize GLEW\n");
-        }
-
+        // TODO: Move to Render
         glGenVertexArrays(1, &VertexArrayID);
         glBindVertexArray(VertexArrayID);
     }
@@ -88,43 +48,37 @@ namespace AIAC
     {
         m_IsRunning = true;
 
-        while (!glfwWindowShouldClose(m_Window))
+        while (m_Window->IsOpen())
         {
             for (auto& layer : m_LayerStack)
                 layer->OnFrameAwake();
 
-
-            glfwPollEvents();
-
-
             for (auto& layer : m_LayerStack)
                 layer->OnFrameStart();
 
+            m_Window->OnUpdate();
 
-            int displayW, displayH;
-            glfwGetFramebufferSize(m_Window, &displayW, &displayH);
-            glViewport(0, 0, displayW, displayH);
-            glClearColor(m_WindowBackColor.x * m_WindowBackColor.w,
-                         m_WindowBackColor.y * m_WindowBackColor.w,
-                         m_WindowBackColor.z * m_WindowBackColor.w,
-                         m_WindowBackColor.w);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glEnable(GL_DEPTH_TEST);
+            // // TODO: this should go to Render.h / this becomes OnRender()
+            // glViewport(0, 0, m_Window->GetWidth(), m_Window->GetHeight());
+            // glClearColor(m_AppSpec.WindowBackColor.x * m_AppSpec.WindowBackColor.w,
+            //              m_AppSpec.WindowBackColor.y * m_AppSpec.WindowBackColor.w,
+            //              m_AppSpec.WindowBackColor.z * m_AppSpec.WindowBackColor.w,
+            //              m_AppSpec.WindowBackColor.w);
+            // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            // // glEnable(GL_DEPTH_TEST);
+
 
             for (auto& layer : m_LayerStack)
                 layer->OnUIRender();
 
 
-            glfwSwapBuffers(m_Window);
-
-            
             for (auto& layer : m_LayerStack)
                 layer->OnFrameEnd();
 
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();
-            
+
         }
     }
 
@@ -140,12 +94,10 @@ namespace AIAC
 
         m_LayerStack.clear();
 
-        // ImGui_ImplOpenGL3_Shutdown();
-        // ImGui_ImplGlfw_Shutdown();
-        // ImGui::DestroyContext();
+        // glfwDestroyWindow(m_Window);
+        // glfwTerminate();
 
-        glfwDestroyWindow(m_Window);
-        glfwTerminate();
+        m_Window->Shutdown();
 
         AIAC::Log::Shutdown();
     }
