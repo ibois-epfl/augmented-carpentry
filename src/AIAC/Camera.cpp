@@ -2,8 +2,10 @@
 #include <cmath>
 #include <stdexcept>
 
+#include "AIAC/Config.h"
 #include "AIAC/Camera.h"
 #include "AIAC/Log.h"
+#include "utils/utils.h"
 
 namespace AIAC
 {
@@ -26,16 +28,40 @@ namespace AIAC
             m_Width = m_VideoCapture.get(cv::CAP_PROP_FRAME_WIDTH);
             m_Height = m_VideoCapture.get(cv::CAP_PROP_FRAME_HEIGHT);
         }
+
+        // load camera params
+        auto filePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
+        int tmp;
+        LoadCameraParams(filePath, tmp, tmp, m_CameraMatrix, m_DistortionCoef);
     }
 
     void Camera::SetCalibrationParams(cv::Mat cameraMatrix, cv::Mat distortionCoef)
     {
         m_CameraMatrix = cameraMatrix;
         m_DistortionCoef = distortionCoef;
+        UpdateFov();
+    }
 
+    inline void Camera::UpdateFov(){
         // Update fov at the same time
-        m_FovX = 2 * atan(m_Width / 2 / cameraMatrix.at<float>(0, 0));
-        m_FovY = 2 * atan(m_Height / 2 / cameraMatrix.at<float>(1, 1));
+        m_FovX = 2 * atan(m_Width / 2 / m_CameraMatrix.at<float>(0, 0));
+        m_FovY = 2 * atan(m_Height / 2 / m_CameraMatrix.at<float>(1, 1));
+    }
+
+    bool Camera::LoadCameraParams(const std::string &filePath, int &w, int &h, cv::Mat &cameraMatrix, cv::Mat &distortionCoef){
+        cv::FileStorage fs(filePath, cv::FileStorage::READ);
+        if(!fs.isOpened()){
+            throw std::runtime_error(std::string(__FILE__)+"LoadCameraParams() could not open file:" + filePath);
+        }
+
+        fs["image_width"] >> w;
+        fs["image_height"] >> h;
+        fs["distortion_coefficients"] >> distortionCoef;
+        fs["camera_matrix"] >> cameraMatrix;
+
+        UpdateFov();
+
+        return true;
     }
 
     const AIAC::Image Camera::GetNextFrame()
