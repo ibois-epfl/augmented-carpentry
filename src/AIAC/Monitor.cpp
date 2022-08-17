@@ -20,7 +20,7 @@ namespace AIAC
 
     void Monitor::Init()
     {
-        #ifdef AIAC_DEPLOY_ON_TOUCH
+#ifdef AIAC_DEPLOY_ON_TOUCH
             m_IsTouch = true;
             ImportParamFromConfig();
             if (!FindMonitorID())      { AIAC_ERROR("Monitor ID not found."); EXIT_FAILURE; }
@@ -29,13 +29,13 @@ namespace AIAC
             if (!Check4MonitorRes())   { AIAC_ERROR("Resolution monitor does not match config. "); EXIT_FAILURE; }
 
             if (!MapMonitor())         { AIAC_ERROR("Monitor mapping failed."); EXIT_FAILURE; }
-        #else
+#else
             m_IsTouch = false;
             m_MonitorName = "Non-touchMonitor";
             m_MonitorLinkType = "Non-touchLinkType";
             m_Resolution = ImportMonitorResolutionFromConfig();
             ParseResolution2Int32_t();
-        #endif
+#endif
     }
 
     inline std::string Monitor::ImportMonitorNameFromConfig() { return  AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_name", "WaveShare WS170120"); }
@@ -53,7 +53,7 @@ namespace AIAC
 
     bool Monitor::FindMonitorID()
     {
-        #if __linux__
+#if __linux__
             const char* command = "xinput";
 
             if ( m_Fpipe = (FILE*)popen(command, "r") )
@@ -79,12 +79,12 @@ namespace AIAC
                 EXIT_FAILURE;
             }
             return true;
-        #endif
+#endif
     }
 
     bool Monitor::Check4MonitorNbr()
     {
-        #if __linux__
+#if __linux__
             const char* command = "xrandr";
 
             if ( m_Fpipe = (FILE*)popen(command, "r") )
@@ -105,12 +105,12 @@ namespace AIAC
                 EXIT_FAILURE;
             }
             return true;
-        #endif
+#endif
     }
 
     bool Monitor::Check4MonitorRes()
     {
-        #if __linux__
+#if __linux__
             const char* command = "xrandr";
 
             if ( m_Fpipe = (FILE*)popen(command, "r") )
@@ -129,12 +129,12 @@ namespace AIAC
                 EXIT_FAILURE;
             }
             return false;
-        #endif
+#endif
     }
 
     bool Monitor::MapMonitor()
     {
-        #if __linux__
+#if __linux__
             std::string commandMto = "xinput map-to-output ";
             commandMto += std::to_string(m_TouchMonitorId);
             commandMto += " ";
@@ -154,6 +154,6 @@ namespace AIAC
                     return false;
                 }
             return true;
-        #endif
+#endif
     }
 }

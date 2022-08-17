@@ -58,6 +58,8 @@ namespace AIAC
             // TODO: this should go to Render.h / this becomes OnRender()
             // Render->OnRender();
             GetLayer<AIAC::LayerRender>()->OnRender();
+
+
             GetLayer<AIAC::LayerUI>()->OnUIRender();
 
 
@@ -65,8 +67,14 @@ namespace AIAC
                 layer->OnFrameEnd();
 
 
+            m_Window->OnBufferSwap();
+            
+
+
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();
+
+
 
         }
     }
@@ -82,9 +90,6 @@ namespace AIAC
             layer->OnDetach();
 
         m_LayerStack.clear();
-
-        // glfwDestroyWindow(m_Window);
-        // glfwTerminate();
 
         m_Window->Shutdown();
 
