@@ -26,26 +26,34 @@ namespace AIAC
 
     void Monitor::Init()
     {
-        ImportParamFromConfig();
+        #ifdef AIAC_DEPLOY_ON_TOUCH
+            m_IsTouch = true;
+            ImportParamFromConfig();
+            if (!FindMonitorID())      { AIAC_ERROR("Monitor ID not found."); exit(EXIT_FAILURE); }
 
-        if (!FindMonitorID())      { AIAC_ERROR("Monitor ID not found."); return; }
+            if (!Check4MonitorNbr())   { AIAC_ERROR("Multiple monitors not supported."); exit(EXIT_FAILURE); }
+            if (!Check4MonitorRes())   { AIAC_ERROR("Resolution monitor does not match config. "); exit(EXIT_FAILURE); }
 
-        if (!Check4MonitorNbr())   { AIAC_ERROR("Multiple monitors not supported."); return; }
-        if (!Check4MonitorRes())   { AIAC_ERROR("Resolution monitor does not match config. "); return; }
-
-        if (!MapMonitor())         { AIAC_ERROR("Monitor mapping failed."); return; }
+            if (!MapMonitor())         { AIAC_ERROR("Monitor mapping failed."); exit(EXIT_FAILURE); }
+        #else
+            m_IsTouch = false;
+            m_MonitorName = "Non-touchMonitor";
+            m_MonitorLinkType = "Non-touchLinkType";
+            m_Resolution = ImportMonitorResolution();
+            ParseResolution2Int32_t();
+        #endif
     }
 
+    inline std::string Monitor::ImportMonitorName() { return  AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_name", "WaveShare WS170120"); }
+    inline std::string Monitor::ImportMonitorLinkType() { return AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_link_t", "HDMI"); }
+    inline std::string Monitor::ImportMonitorResolution(){ return AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_resolution", "800x400"); }
 
     void Monitor::ImportParamFromConfig()
     {
-        m_TouchMonitorName = AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_name", "WaveShare WS170120");
-        m_TouchMonitorLinkType = AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_link_t", "HDMI");
-        m_TouchResolution = AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_resolution", "800x400");
-
-        AIAC_INFO("Monitor name from config: {0}", m_TouchMonitorName);
-        AIAC_INFO("Monitor link type from config: {0}", m_TouchMonitorLinkType);
-        AIAC_INFO("Monitor resolution from config: {0}", m_TouchResolution);
+        m_MonitorName = ImportMonitorName();
+        m_MonitorLinkType = ImportMonitorLinkType();
+        m_Resolution = ImportMonitorResolution();
+        ParseResolution2Int32_t();
     }
 
 
@@ -57,7 +65,7 @@ namespace AIAC
         {
             while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
             {
-                if (strstr(m_Buffer, m_TouchMonitorName.c_str()))
+                if (strstr(m_Buffer, m_MonitorName.c_str()))
                 {
                     char* monitor_id_ptr = strstr(m_Buffer, "id=");
                     monitor_id_ptr = strchr(monitor_id_ptr, '=') + 1;
@@ -86,7 +94,7 @@ namespace AIAC
         {
             int monitor_linked_count_of_type = 0;
             while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe)) {
-                if (strstr(m_Buffer, m_TouchMonitorLinkType.c_str()))
+                if (strstr(m_Buffer, m_MonitorLinkType.c_str()))
                 {
                     monitor_linked_count_of_type++;
                     if (monitor_linked_count_of_type > 1) return false;
@@ -111,8 +119,8 @@ namespace AIAC
             int monitor_linked_count_of_type = 0;
             while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
             {
-                std::cout << m_TouchResolution << std::endl;
-                if (strstr(m_Buffer, m_TouchResolution.c_str()))  return true;
+                std::cout << m_Resolution << std::endl;
+                if (strstr(m_Buffer, m_Resolution.c_str()))  return true;
             }
             pclose(m_Fpipe);
         }
@@ -129,7 +137,7 @@ namespace AIAC
         std::string commandMto = "xinput map-to-output ";
         commandMto += std::to_string(m_TouchMonitorId);
         commandMto += " ";
-        commandMto += m_TouchMonitorLinkType;
+        commandMto += m_MonitorLinkType;
         std::string commandMtoId0 = commandMto + "-0";
         std::string commandMtoId1 = commandMto + "-1";
 
@@ -141,7 +149,7 @@ namespace AIAC
             }
         if (commandMto_result != 0)
             {
-                AIAC_CRITICAL("Monitor failed to map to {0}", m_TouchMonitorLinkType);
+                AIAC_CRITICAL("Monitor failed to map to {0}", m_MonitorLinkType);
                 return false;
             }
         return true;

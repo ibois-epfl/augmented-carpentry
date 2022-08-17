@@ -14,6 +14,8 @@ int main(int argc, char* argv[]) {
     // Init Monitor
     std::unique_ptr<AIAC::Monitor> monitor = std::unique_ptr<AIAC::Monitor>(new AIAC::Monitor());
     AIAC_INFO("Is monitor touch {0}", monitor->IsTouch());
+    AIAC_INFO("ResWidth {0}", monitor->GetResWidth());
+    AIAC_INFO("ResHeight {0}", monitor->GetResHeight());
 
     // Init Application
     AIAC::ApplicationSpecification appSpec;
