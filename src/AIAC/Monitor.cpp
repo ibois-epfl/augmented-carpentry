@@ -14,13 +14,7 @@ namespace AIAC
         AIAC_ASSERT(!s_Instance, "Monitor already exists!");
         s_Instance = this;
 
-        #ifdef AIAC_DEPLOY_ON_TOUCH
-            m_IsTouch = true;
-            Init();
-        #else
-            AIAC_INFO("AC is built for NON-touch monitor.");
-            m_IsTouch = false;
-        #endif
+        Init();
     }
 
 
@@ -59,105 +53,107 @@ namespace AIAC
 
     bool Monitor::FindMonitorID()
     {
-        const char* command = "xinput";
+        #if __linux__
+            const char* command = "xinput";
 
-        if ( m_Fpipe = (FILE*)popen(command, "r") )
-        {
-            while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
+            if ( m_Fpipe = (FILE*)popen(command, "r") )
             {
-                if (strstr(m_Buffer, m_MonitorName.c_str()))
+                while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
                 {
-                    char* monitor_id_ptr = strstr(m_Buffer, "id=");
-                    monitor_id_ptr = strchr(monitor_id_ptr, '=') + 1;
-                    monitor_id_ptr[3] = '\0';
-                    m_TouchMonitorId = atoi(monitor_id_ptr);
-                    break;
+                    if (strstr(m_Buffer, m_MonitorName.c_str()))
+                    {
+                        char* monitor_id_ptr = strstr(m_Buffer, "id=");
+                        monitor_id_ptr = strchr(monitor_id_ptr, '=') + 1;
+                        monitor_id_ptr[3] = '\0';
+                        m_TouchMonitorId = atoi(monitor_id_ptr);
+                        break;
+                    }
                 }
-            }
-            pclose(m_Fpipe);
+                pclose(m_Fpipe);
 
-            if (m_TouchMonitorId == -1) return false;
-        }
-        else
-        {
-            AIAC_ERROR("popen() failed");
-            exit(EXIT_FAILURE);
-        }
-        return true;
+                if (m_TouchMonitorId == -1) return false;
+            }
+            else
+            {
+                AIAC_ERROR("popen() failed");
+                exit(EXIT_FAILURE);
+            }
+            return true;
+        #endif
     }
 
     bool Monitor::Check4MonitorNbr()
     {
-        const char* command = "xrandr";
+        #if __linux__
+            const char* command = "xrandr";
 
-        if ( m_Fpipe = (FILE*)popen(command, "r") )
-        {
-            int monitor_linked_count_of_type = 0;
-            while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe)) {
-                if (strstr(m_Buffer, m_MonitorLinkType.c_str()))
-                {
-                    monitor_linked_count_of_type++;
-                    if (monitor_linked_count_of_type > 1) return false;
+            if ( m_Fpipe = (FILE*)popen(command, "r") )
+            {
+                int monitor_linked_count_of_type = 0;
+                while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe)) {
+                    if (strstr(m_Buffer, m_MonitorLinkType.c_str()))
+                    {
+                        monitor_linked_count_of_type++;
+                        if (monitor_linked_count_of_type > 1) return false;
+                    }
                 }
+                pclose(m_Fpipe);
             }
-            pclose(m_Fpipe);
-        }
-        else
-        {
-            AIAC_ERROR("popen() failed");
-            exit(EXIT_FAILURE);
-        }
-        return true;
+            else
+            {
+                AIAC_ERROR("popen() failed");
+                exit(EXIT_FAILURE);
+            }
+            return true;
+        #endif
     }
 
     bool Monitor::Check4MonitorRes()
     {
-        const char* command = "xrandr";
+        #if __linux__
+            const char* command = "xrandr";
 
-        if ( m_Fpipe = (FILE*)popen(command, "r") )
-        {
-            int monitor_linked_count_of_type = 0;
-            while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
+            if ( m_Fpipe = (FILE*)popen(command, "r") )
             {
-                std::cout << m_Resolution << std::endl;
-                if (strstr(m_Buffer, m_Resolution.c_str()))  return true;
+                int monitor_linked_count_of_type = 0;
+                while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
+                {
+                    std::cout << m_Resolution << std::endl;
+                    if (strstr(m_Buffer, m_Resolution.c_str()))  return true;
+                }
+                pclose(m_Fpipe);
             }
-            pclose(m_Fpipe);
-        }
-        else
-        {
-            AIAC_ERROR("popen() failed");
-            exit(EXIT_FAILURE);
-        }
-        return false;
+            else
+            {
+                AIAC_ERROR("popen() failed");
+                exit(EXIT_FAILURE);
+            }
+            return false;
+        #endif
     }
 
     bool Monitor::MapMonitor()
     {
-        std::string commandMto = "xinput map-to-output ";
-        commandMto += std::to_string(m_TouchMonitorId);
-        commandMto += " ";
-        commandMto += m_MonitorLinkType;
-        std::string commandMtoId0 = commandMto + "-0";
-        std::string commandMtoId1 = commandMto + "-1";
+        #if __linux__
+            std::string commandMto = "xinput map-to-output ";
+            commandMto += std::to_string(m_TouchMonitorId);
+            commandMto += " ";
+            commandMto += m_MonitorLinkType;
+            std::string commandMtoId0 = commandMto + "-0";
+            std::string commandMtoId1 = commandMto + "-1";
 
-        int commandMto_result = system(commandMtoId0.c_str());
-        if (commandMto_result != 0)
-            {
-                AIAC_WARN("{} with index 0 failed", commandMtoId0);
-                commandMto_result = system(commandMtoId1.c_str());
-            }
-        if (commandMto_result != 0)
-            {
-                AIAC_CRITICAL("Monitor failed to map to {0}", m_MonitorLinkType);
-                return false;
-            }
-        return true;
+            int commandMto_result = system(commandMtoId0.c_str());
+            if (commandMto_result != 0)
+                {
+                    AIAC_WARN("{} with index 0 failed", commandMtoId0);
+                    commandMto_result = system(commandMtoId1.c_str());
+                }
+            if (commandMto_result != 0)
+                {
+                    AIAC_CRITICAL("Monitor failed to map to {0}", m_MonitorLinkType);
+                    return false;
+                }
+            return true;
+        #endif
     }
-
-
-
-
-
-
 }
