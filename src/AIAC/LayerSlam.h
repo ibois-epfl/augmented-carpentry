@@ -22,6 +22,7 @@ namespace AIAC
         inline const bool IsTracked() { return m_IsTracked; }
         inline const cv::Mat GetCamPoseCv() { return m_CamPose; }
         glm::mat4 GetCamPoseGlm();
+        glm::mat4 GetInvCamPoseGlm();
 
     public:
         tslam::TSlam Slam;

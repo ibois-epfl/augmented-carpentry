@@ -44,7 +44,7 @@ namespace AIAC
 
         inline std::string_view GetPath() const { return m_Path; }
         inline cv::Mat GetCvMat() { return m_CvMat; }
-        inline GLuint GetGlTextureID() { return m_GlTextureID; }
+        inline GLuint GetGlTextureId() { UpdateGlTextureId(); return m_GlTextureID; }
         inline ImTexture GetImTexture() { if(!HasImTexture()) AIAC_ERROR("Image Class has no ImTexture."); return m_ImTexture; }
 
         inline void SetImTextureSize(ImVec2 size) { m_ImTexture.Size = size; }
@@ -56,8 +56,10 @@ namespace AIAC
         void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture);
         void CvtGlTextureID2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size);
         void CvtCvMat2GlTextureID(cv::Mat& cvMat, GLuint& glTextureID);
-        void CvtCvMat2ImTexture();
         void CvtCvMat2ImTexture(cv::Mat& cvMat, ImTexture& imTexture);
+
+        void CvtCvMat2ImTexture();
+        void UpdateGlTextureId();
 
         bool LoadImgFromFile2CvMat(const char* path, cv::Mat& cvMat);
         bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID);
