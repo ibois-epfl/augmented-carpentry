@@ -9,8 +9,6 @@ namespace AIAC
         Monitor();
         virtual ~Monitor() = default;
 
-        void Init();
-
         inline std::string ImportMonitorNameFromConfig();
         inline std::string ImportMonitorLinkTypeFromConfig();
         inline std::string ImportMonitorResolutionFromConfig();
@@ -35,6 +33,9 @@ namespace AIAC
         inline int32_t GetResWidth() const { return m_ResW; }
         inline int32_t GetResHeight() const { return m_ResH; }
         inline int32_t GetMonitorID() const { return m_TouchMonitorId; }
+    
+    private:
+        void Init();
 
     private:
         static Monitor* s_Instance;
