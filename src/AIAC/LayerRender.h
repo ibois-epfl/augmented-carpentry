@@ -18,6 +18,8 @@ namespace AIAC
         void OnAttach() override;
         virtual void OnUIRender() override;
 
+        GLuint GetOverlayBuffer() { return m_OverlayFrameBuffer; }
+
     public:
         std::vector<AIAC::Mesh> Meshes;
 
@@ -26,5 +28,7 @@ namespace AIAC
         GLuint m_MatrixId;
 
         glm::mat4 m_ProjMatrix;
+
+        GLuint m_OverlayFrameBuffer;
     };
 }

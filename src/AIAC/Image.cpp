@@ -119,7 +119,7 @@ namespace AIAC
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-            cv::cvtColor(cvMat, cvMat, cv::COLOR_RGB2BGR);
+            cv::cvtColor(cvMat, cvMat, cv::COLOR_BGR2RGB);
 
             glTexImage2D(GL_TEXTURE_2D,
                         0,
@@ -138,6 +138,12 @@ namespace AIAC
         if(m_CvMat.empty()) { AIAC_ERROR("cvMat empty"); return ; }
         CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
         CvtGlTextureID2ImTexture(m_GlTextureID, m_ImTexture);
+    }
+
+    void Image::UpdateGlTextureId()
+    {
+        if(m_CvMat.empty()) { AIAC_ERROR("cvMat empty"); return ; }
+        CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
     }
 
     void Image::CvtCvMat2ImTexture(cv::Mat& cvMat, ImTexture& imTexture)
