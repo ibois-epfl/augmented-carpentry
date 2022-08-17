@@ -10,6 +10,8 @@ inline static void glfwErrorCallback(int error, const char* description) {
 
 namespace AIAC
 {
+    GLuint VertexArrayID;
+
     Application* Application::s_Instance = nullptr;
     Application::Application(const ApplicationSpecification& appSpec)
         : m_AppSpec(appSpec)
@@ -77,6 +79,9 @@ namespace AIAC
         if (glewInit() != GLEW_OK) {
             throw std::runtime_error("Failed to initialize GLEW\n");
         }
+
+        glGenVertexArrays(1, &VertexArrayID);
+        glBindVertexArray(VertexArrayID);
     }
 
     void Application::Run()
@@ -103,8 +108,8 @@ namespace AIAC
                          m_WindowBackColor.y * m_WindowBackColor.w,
                          m_WindowBackColor.z * m_WindowBackColor.w,
                          m_WindowBackColor.w);
-            glClear(GL_COLOR_BUFFER_BIT);
-
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glEnable(GL_DEPTH_TEST);
 
             for (auto& layer : m_LayerStack)
                 layer->OnUIRender();

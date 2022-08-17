@@ -6,6 +6,9 @@
 
 #include <iostream>
 
+//for test
+#include "opencv2/opencv.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 namespace AIAC
 {
@@ -17,7 +20,7 @@ namespace AIAC
         AIAC_INFO(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
         Slam.setMap(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
         Slam.setVocabulary(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
-        Slam.setCamParams(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
+        Slam.setCamParams(AIAC::Config::Get<string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
         Slam.setInstancing(true);
     }
 
@@ -36,12 +39,42 @@ namespace AIAC
 
     glm::mat4 LayerSlam::GetCamPoseGlm()
     {
-        glm::mat4 glmmat;
+        glm::mat4 glmMat;
         if (m_CamPose.cols != 4 ||m_CamPose.rows != 4 ||m_CamPose.type() != CV_32FC1) {
             throw std::invalid_argument("GetCamPose() error.");
         }
-        memcpy(glm::value_ptr(glmmat),m_CamPose.data, 16 * sizeof(float));
-        glmmat = glm::transpose(glmmat);
-        return glmmat;
+//        cv::Mat m_CamPoseInv = m_CamPose.clone().inv();
+        memcpy(glm::value_ptr(glmMat), m_CamPose.data, 16 * sizeof(float));
+        glmMat = glm::transpose(glmMat);
+        return glmMat;
+    }
+
+    glm::mat4 LayerSlam::GetInvCamPoseGlm()
+    {
+        glm::mat4 glmMat;
+        if (m_CamPose.cols != 4 ||m_CamPose.rows != 4 ||m_CamPose.type() != CV_32FC1) {
+            throw std::invalid_argument("GetInvCamPose() error.");
+        }
+        memcpy(glm::value_ptr(glmMat),m_CamPose.data, 16 * sizeof(float));
+        glmMat = glm::transpose(glmMat);
+
+        glm::mat3 RT;
+        glm::vec3 d;
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                RT[i][j] = glmMat[i][j]; // Transpose is inverse(R) because R is rotation matrix
+            }
+            d[i] = glmMat[3][i];
+        }
+        d = -RT * d;
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                glmMat[i][j] = RT[i][j];
+            }
+            glmMat[3][i] = d[i];
+        }
+        glmMat[3][3] = 1.0f;
+
+        return glmMat;
     }
 }
