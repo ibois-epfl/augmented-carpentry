@@ -6,11 +6,6 @@
 #include "AIAC/LayerRender.h"
 
 
-// inline static void glfwErrorCallback(int error, const char* description) {
-//     AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
-// }
-
-
 namespace AIAC
 {
     GLuint VertexArrayID;
