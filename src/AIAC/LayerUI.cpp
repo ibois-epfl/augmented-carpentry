@@ -29,8 +29,10 @@ namespace AIAC
         style.GrabRounding = 4.0f;
         style.TabRounding = 4.0f;
 
-        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow().GetGLFWWindow(), true);
-        ImGui_ImplOpenGL3_Init(AIAC_APP.GetWindow().GetGlslVersion());
+        ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow()->GetGLFWWindow(), true);
+        ImGui_ImplOpenGL3_Init(AIAC_APP.GetWindow()->GetGlslVersion());
+
+        std::cout << "WINDOW type: " << typeid(AIAC_APP.GetWindow()).name() << std::endl;
 
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //TODO: add to config
 
