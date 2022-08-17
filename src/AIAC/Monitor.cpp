@@ -23,12 +23,12 @@ namespace AIAC
         #ifdef AIAC_DEPLOY_ON_TOUCH
             m_IsTouch = true;
             ImportParamFromConfig();
-            if (!FindMonitorID())      { AIAC_ERROR("Monitor ID not found."); exit(EXIT_FAILURE); }
+            if (!FindMonitorID())      { AIAC_ERROR("Monitor ID not found."); EXIT_FAILURE; }
 
-            if (!Check4MonitorNbr())   { AIAC_ERROR("Multiple monitors not supported."); exit(EXIT_FAILURE); }
-            if (!Check4MonitorRes())   { AIAC_ERROR("Resolution monitor does not match config. "); exit(EXIT_FAILURE); }
+            if (!Check4MonitorNbr())   { AIAC_ERROR("Multiple monitors not supported."); EXIT_FAILURE; }
+            if (!Check4MonitorRes())   { AIAC_ERROR("Resolution monitor does not match config. "); EXIT_FAILURE; }
 
-            if (!MapMonitor())         { AIAC_ERROR("Monitor mapping failed."); exit(EXIT_FAILURE); }
+            if (!MapMonitor())         { AIAC_ERROR("Monitor mapping failed."); EXIT_FAILURE; }
         #else
             m_IsTouch = false;
             m_MonitorName = "Non-touchMonitor";
@@ -76,7 +76,7 @@ namespace AIAC
             else
             {
                 AIAC_ERROR("popen() failed");
-                exit(EXIT_FAILURE);
+                EXIT_FAILURE;
             }
             return true;
         #endif
@@ -102,7 +102,7 @@ namespace AIAC
             else
             {
                 AIAC_ERROR("popen() failed");
-                exit(EXIT_FAILURE);
+                EXIT_FAILURE;
             }
             return true;
         #endif
@@ -126,7 +126,7 @@ namespace AIAC
             else
             {
                 AIAC_ERROR("popen() failed");
-                exit(EXIT_FAILURE);
+                EXIT_FAILURE;
             }
             return false;
         #endif
