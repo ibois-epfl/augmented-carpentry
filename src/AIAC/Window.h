@@ -41,17 +41,17 @@ namespace AIAC
         void SetVSync(bool enabled);
         inline bool IsVSync() const { return m_Data.VSync; }
 
-        inline GLFWwindow* GetGLFWWindow() { return m_Window; }
+        inline GLFWwindow* GetGLFWWindow() { return m_GLFWWindow; }
         inline const char* GetGlslVersion() { return m_GlslVersion; }
 
         inline int GetDisplayW() { return m_DisplayW; }
         inline int GetDisplayH() { return m_DisplayH; }
-    
+
     private:
         void Init(const WindowProps& props);
 
     private:
-        GLFWwindow* m_Window;
+        GLFWwindow* m_GLFWWindow;
         const char* m_GlslVersion;
         bool m_IsWindowOpen;
 
@@ -64,6 +64,7 @@ namespace AIAC
             bool IsResizable;
         } m_Data;
 
-        int m_DisplayW, m_DisplayH;
+        int m_DisplayW;
+        int m_DisplayH;
     };
 }

@@ -30,7 +30,12 @@ namespace AIAC
             AIAC_ASSERT(glfwInit(), "Could not initialize GLFW!");
         } else AIAC_CRITICAL("Multiple windows not supported."); EXIT_FAILURE;
 
-        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title, nullptr, nullptr);
+        m_GLFWWindow = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title, nullptr, nullptr);
+        if (m_GLFWWindow == NULL) {
+            AIAC_CRITICAL("Failed to create GLFW window");
+            glfwTerminate();
+            exit(EXIT_FAILURE);
+        }
         ++s_GLFWWindowCount;
 
         #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -56,13 +61,7 @@ namespace AIAC
             glfwWindowHint(GLFW_RESIZABLE, props.IsResizable);  // GL_FALSE to set the full screen
         #endif
 
-        m_Window = glfwCreateWindow(props.Width, props.Height, props.Title, nullptr, nullptr);
-        if (m_Window == NULL) {
-            AIAC_CRITICAL("Failed to create GLFW window");
-            glfwTerminate();
-            exit(EXIT_FAILURE);
-        }
-        glfwMakeContextCurrent(m_Window);
+        glfwMakeContextCurrent(m_GLFWWindow);
         SetVSync(props.VSync);
 
         glewExperimental = true;
@@ -75,7 +74,7 @@ namespace AIAC
 
     void Window::Shutdown()
     {
-        glfwDestroyWindow(m_Window);
+        glfwDestroyWindow(m_GLFWWindow);
         --s_GLFWWindowCount;
         if (s_GLFWWindowCount == 0)
         {
@@ -85,14 +84,14 @@ namespace AIAC
 
     bool Window::IsOpen()
     {
-        return !(glfwWindowShouldClose(m_Window));
+        return !(glfwWindowShouldClose(m_GLFWWindow));
     }
 
     void Window::OnUpdate()
     {
         glfwPollEvents();
-        glfwGetFramebufferSize(m_Window, &m_DisplayW, &m_DisplayH);
-        glfwSwapBuffers(m_Window);
+        glfwGetFramebufferSize(m_GLFWWindow, &m_DisplayW, &m_DisplayH);
+        glfwSwapBuffers(m_GLFWWindow);
     }
 
     void Window::SetVSync(bool enabled)

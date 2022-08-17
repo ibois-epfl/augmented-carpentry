@@ -57,7 +57,7 @@ namespace AIAC
         inline static Application& GetInstance() { return *s_Instance; }
 
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
-        inline AIAC::Window& GetWindow() const { return *m_Window; }
+        inline AIAC::Window* GetWindow() { return m_Window; }
 
     private:
         void Init();
