@@ -11,6 +11,8 @@
 
 namespace AIAC
 {
+    GLuint VertexArrayID;
+
     Application* Application::s_Instance = nullptr;
     Application::Application(const ApplicationSpecification& appSpec)
         : m_AppSpec(appSpec)
@@ -36,6 +38,11 @@ namespace AIAC
                 m_AppSpec.IsResizable,
                 m_AppSpec.VSync
             ));
+        
+
+        // TODO: Move to Render
+        glGenVertexArrays(1, &VertexArrayID);
+        glBindVertexArray(VertexArrayID);
     }
 
     void Application::Run()
@@ -58,8 +65,8 @@ namespace AIAC
                          m_AppSpec.WindowBackColor.y * m_AppSpec.WindowBackColor.w,
                          m_AppSpec.WindowBackColor.z * m_AppSpec.WindowBackColor.w,
                          m_AppSpec.WindowBackColor.w);
-            glClear(GL_COLOR_BUFFER_BIT);
-
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glEnable(GL_DEPTH_TEST);
 
             for (auto& layer : m_LayerStack)
                 layer->OnUIRender();
