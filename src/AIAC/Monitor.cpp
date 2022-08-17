@@ -33,20 +33,20 @@ namespace AIAC
             m_IsTouch = false;
             m_MonitorName = "Non-touchMonitor";
             m_MonitorLinkType = "Non-touchLinkType";
-            m_Resolution = ImportMonitorResolution();
+            m_Resolution = ImportMonitorResolutionFromConfig();
             ParseResolution2Int32_t();
         #endif
     }
 
-    inline std::string Monitor::ImportMonitorName() { return  AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_name", "WaveShare WS170120"); }
-    inline std::string Monitor::ImportMonitorLinkType() { return AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_link_t", "HDMI"); }
-    inline std::string Monitor::ImportMonitorResolution(){ return AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_resolution", "800x400"); }
+    inline std::string Monitor::ImportMonitorNameFromConfig() { return  AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_name", "WaveShare WS170120"); }
+    inline std::string Monitor::ImportMonitorLinkTypeFromConfig() { return AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_link_t", "HDMI"); }
+    inline std::string Monitor::ImportMonitorResolutionFromConfig(){ return AIAC::Config::Get<std::string>("MonitorSpecs", "monitor_resolution", "800x400"); }
 
     void Monitor::ImportParamFromConfig()
     {
-        m_MonitorName = ImportMonitorName();
-        m_MonitorLinkType = ImportMonitorLinkType();
-        m_Resolution = ImportMonitorResolution();
+        m_MonitorName = ImportMonitorNameFromConfig();
+        m_MonitorLinkType = ImportMonitorLinkTypeFromConfig();
+        m_Resolution = ImportMonitorResolutionFromConfig();
         ParseResolution2Int32_t();
     }
 
