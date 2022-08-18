@@ -24,6 +24,8 @@ namespace AIAC
         std::vector<AIAC::Mesh> Meshes;
 
     private:
+        float m_CamW, m_CamH;
+
         GLuint m_ProgramId;
         GLuint m_MatrixId;
 

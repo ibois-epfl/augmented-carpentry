@@ -28,6 +28,7 @@ namespace AIAC
 
     private:
         cv::Mat m_CamPose = cv::Mat();
+        cv::Mat m_LastTrackedCamPose = cv::Mat::eye(4, 4, CV_32FC1);
         bool m_IsTracked = false;
     };
 }
