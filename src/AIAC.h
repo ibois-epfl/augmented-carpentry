@@ -11,7 +11,7 @@
 #include "AIAC/Log.h"
 #include "AIAC/Assert.h"
 
-#include "AIAC/Monitor.h"
+#include "AIAC/MonitorConfig.h"
 #include "AIAC/Window.h"
 
 #include "AIAC/Application.h"

@@ -17,7 +17,7 @@ namespace AIAC
                     uint32_t width = 800,
                     uint32_t height = 480,
                     bool vSync = true,
-                    bool isResizable = true)
+                    bool isResizable = false)
             : Title(title), Width(width), Height(height), VSync(vSync), IsResizable(isResizable)
         {}
     };
