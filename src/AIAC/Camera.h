@@ -17,7 +17,7 @@ namespace AIAC
         inline void UpdateFov();
 
         const AIAC::Image GetNextFrame();
-        inline AIAC::Image GetCurrentFrame() { return m_CurrentFrame; }
+        inline AIAC::Image &GetCurrentFrame() { return m_CurrentFrame; }
 
         inline const uint32_t GetWidth() const { return m_Width; }
         inline const uint32_t GetHeight() const { return m_Height; }

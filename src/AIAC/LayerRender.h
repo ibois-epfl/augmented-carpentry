@@ -17,6 +17,7 @@ namespace AIAC
 
         void OnAttach() override;
         virtual void OnUIRender() override;
+        virtual void OnFrameEnd() override;
 
         GLuint GetOverlayBuffer() { return m_OverlayFrameBuffer; }
 

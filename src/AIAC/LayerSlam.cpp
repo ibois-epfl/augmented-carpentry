@@ -29,6 +29,7 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+//        cout << m_CamPose << endl;
     }
 
     void LayerSlam::OnUIRender()
