@@ -14,9 +14,11 @@ class Mesh
 public:
     Mesh() = default;
     Mesh(const char* path) { Load(path); };
+    Mesh(std::string path) { Load(path); };
     ~Mesh() = default;
 
     bool Load(const char* path);
+    bool Load(std::string path);
 
     GLuint GetGLBuffer();
     void Draw();

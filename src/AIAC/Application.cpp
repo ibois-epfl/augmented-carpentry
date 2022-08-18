@@ -57,6 +57,8 @@ namespace AIAC
 
             // TODO: this should go to Render.h / this becomes OnRender()
             // Render->OnRender();
+
+
             GetLayer<AIAC::LayerRender>()->OnRender();
 
 

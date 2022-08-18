@@ -57,7 +57,9 @@ namespace AIAC
         }
     }
 
-    Image::~Image() {}
+    Image::~Image() {
+        DeleteGlTexture();
+    }
     
     void Image::UpdateData(cv::Mat cvImg)
     {
@@ -110,7 +112,7 @@ namespace AIAC
         if(cvMat.empty()) { AIAC_ERROR("cvMat empty"); return; }
         else
         {   
-            // cv::flip(cvMat, cvMat, 0);  // OpenGL flip images by default?
+            cv::flip(cvMat, cvMat, 0);  // OpenGL flip images by default?
             glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
             glGenTextures(1, &glTextureID);
             glBindTexture(GL_TEXTURE_2D, glTextureID);
@@ -121,7 +123,7 @@ namespace AIAC
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-            cv::cvtColor(cvMat, cvMat, cv::COLOR_BGR2RGB);
+            cv::cvtColor(cvMat, cvMat, cv::COLOR_RGB2BGR);
 
             glTexImage2D(GL_TEXTURE_2D,
                         0,
@@ -145,6 +147,7 @@ namespace AIAC
     void Image::UpdateGlTextureId()
     {
         if(m_CvMat.empty()) { AIAC_ERROR("cvMat empty"); return ; }
+        if(m_GlTextureID != 0) { glDeleteTextures(1, &m_GlTextureID); }
         CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
     }
 
