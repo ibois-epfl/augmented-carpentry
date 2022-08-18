@@ -11,9 +11,9 @@ int main(int argc, char* argv[]) {
     // Init Config
     AIAC::Config config("config.ini", true);
 
-    // Init MonitorConfig
-    std::unique_ptr<AIAC::MonitorConfig> MonitorConfig = std::unique_ptr<AIAC::MonitorConfig>(new AIAC::MonitorConfig());
-    AIAC_INFO("Is MonitorConfig touch {0}", MonitorConfig->IsTouch());
+    // // Init MonitorConfig
+    // std::unique_ptr<AIAC::MonitorConfig> MonitorConfig = std::unique_ptr<AIAC::MonitorConfig>(new AIAC::MonitorConfig());
+    // AIAC_INFO("Is MonitorConfig touch {0}", MonitorConfig->IsTouch());
 
     // Init Application
     AIAC::ApplicationSpecification appSpec;

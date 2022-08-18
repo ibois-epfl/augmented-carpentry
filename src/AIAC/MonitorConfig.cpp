@@ -38,9 +38,9 @@ namespace AIAC
 #endif
     }
 
-    inline std::string MonitorConfig::ImportMonitorConfigNameFromConfig() { return  AIAC::Config::Get<std::string>("MonitorConfigSpecs", "MonitorConfig_name", "WaveShare WS170120"); }
-    inline std::string MonitorConfig::ImportMonitorConfigLinkTypeFromConfig() { return AIAC::Config::Get<std::string>("MonitorConfigSpecs", "MonitorConfig_link_t", "HDMI"); }
-    inline std::string MonitorConfig::ImportMonitorConfigResolutionFromConfig(){ return AIAC::Config::Get<std::string>("MonitorConfigSpecs", "MonitorConfig_resolution", "800x400"); }
+    inline std::string MonitorConfig::ImportMonitorConfigNameFromConfig() { return  AIAC::Config::Get<std::string>("MonitorSpecs", "Monitor_name", "WaveShare WS170120"); }
+    inline std::string MonitorConfig::ImportMonitorConfigLinkTypeFromConfig() { return AIAC::Config::Get<std::string>("MonitorSpecs", "Monitor_link_t", "HDMI"); }
+    inline std::string MonitorConfig::ImportMonitorConfigResolutionFromConfig(){ return AIAC::Config::Get<std::string>("MonitorSpecs", "Monitor_resolution", "800x400"); }
 
     void MonitorConfig::ImportParamFromConfig()
     {
@@ -118,8 +118,7 @@ namespace AIAC
                 int MonitorConfig_linked_count_of_type = 0;
                 while (fgets(m_Buffer, sizeof(m_Buffer), m_Fpipe))
                 {
-                    std::cout << m_Resolution << std::endl;
-                    if (strstr(m_Buffer, m_Resolution.c_str()))  return true;
+                    if (strstr(m_Buffer, m_Resolution.c_str())) return true;
                 }
                 pclose(m_Fpipe);
             }
