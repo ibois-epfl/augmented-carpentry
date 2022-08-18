@@ -210,14 +210,10 @@ namespace AIAC
         return false;
     }
 
-    bool Image::LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture, ImVec2 size)
+    unsigned char* Image::LoadImgFromFile2UImage(const char* path)
     {
-        if (LoadImgFromFile2GlTextureID(path, m_GlTextureID))
-        {
-            CvtGlTextureID2ImTexture(m_GlTextureID, imTexture, size);
-            return true;
-        }
-        AIAC_ERROR("Failed to load img from file as ImTexture");
-        return false;
+        int width, height, nrChannels;
+        unsigned char* image = stbi_load(path, &width, &height, &nrChannels, 0);
+        if (!image) AIAC_ERROR("Failed to load img from file"); return nullptr;
     }
 }
