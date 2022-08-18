@@ -40,6 +40,7 @@ public:
             return s_Instance->m_IniReader.Get<T>(section, name);
         } catch (std::runtime_error& e) {
             s_Instance->m_IniReader.InsertEntry(section, name, default_v);
+            if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
             return default_v;
         }
     }
@@ -54,6 +55,7 @@ public:
             return s_Instance->m_IniReader.GetVector<T>(section, name);
         } catch (std::runtime_error& e) {
             s_Instance->m_IniReader.InsertEntry(section, name, default_v);
+            if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
             return default_v;
         }
     }

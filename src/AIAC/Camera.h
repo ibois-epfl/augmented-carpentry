@@ -19,6 +19,9 @@ namespace AIAC
         const AIAC::Image GetNextFrame();
         inline AIAC::Image &GetCurrentFrame() { return m_CurrentFrame; }
 
+        inline const cv::Mat GetCameraMatrix() { return m_CameraMatrix; }
+        inline const cv::Mat GetDistortionCoef() { return m_DistortionCoef; }
+
         inline const uint32_t GetWidth() const { return m_Width; }
         inline const uint32_t GetHeight() const { return m_Height; }
         inline const std::pair<float, float> GetFov() const { return std::make_pair(m_FovX, m_FovY); }
