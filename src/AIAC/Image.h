@@ -65,7 +65,7 @@ namespace AIAC
         bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID);
         bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture);
         bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture, ImVec2 size);
-        bool LoadImgFromFile2UImage(const char* path, unsigned char*& m_uImage);
+        // static unsigned char* LoadImgFromFile2UImage(const char* path);
 
     private:
         const char* m_Path;
