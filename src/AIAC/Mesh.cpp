@@ -47,6 +47,10 @@ namespace AIAC
         return true;
     }
 
+    bool Mesh::Load(std::string path){
+        return Load(path.c_str());
+    }
+
     GLuint Mesh::GetGLBuffer() {
         return m_Vertexbuffer;
     }
@@ -83,6 +87,9 @@ namespace AIAC
                 (void*) nullptr     // array buffer offset
         );
         glDrawArrays(GL_LINES, 0, (GLsizei)Edges.size());
+
+        glDeleteBuffers(1, &m_Vertexbuffer);
+        glDeleteBuffers(1, &m_EdgeBuffer);
     }
 } // namespace AIAC
 

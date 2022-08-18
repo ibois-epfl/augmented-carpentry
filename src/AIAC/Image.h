@@ -44,8 +44,10 @@ namespace AIAC
 
         inline std::string_view GetPath() const { return m_Path; }
         inline cv::Mat GetCvMat() { return m_CvMat; }
-        inline GLuint GetGlTextureId() { UpdateGlTextureId(); return m_GlTextureID; }
         inline ImTexture GetImTexture() { if(!HasImTexture()) AIAC_ERROR("Image Class has no ImTexture."); return m_ImTexture; }
+
+        inline GLuint GetGlTextureId() { UpdateGlTextureId(); return m_GlTextureID; }
+        inline void DeleteGlTexture() { glDeleteTextures(1, &m_GlTextureID); m_GlTextureID = 0;}
 
         inline void SetImTextureSize(ImVec2 size) { m_ImTexture.Size = size; }
 
