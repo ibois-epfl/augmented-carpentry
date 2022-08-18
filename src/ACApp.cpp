@@ -11,16 +11,16 @@ int main(int argc, char* argv[]) {
     // Init Config
     AIAC::Config config("config.ini", true);
 
-    // Init Monitor
-    std::unique_ptr<AIAC::Monitor> monitor = std::unique_ptr<AIAC::Monitor>(new AIAC::Monitor());
-    AIAC_INFO("Is monitor touch {0}", monitor->IsTouch());
+    // // Init MonitorConfig
+    // std::unique_ptr<AIAC::MonitorConfig> MonitorConfig = std::unique_ptr<AIAC::MonitorConfig>(new AIAC::MonitorConfig());
+    // AIAC_INFO("Is MonitorConfig touch {0}", MonitorConfig->IsTouch());
 
     // Init Application
     AIAC::ApplicationSpecification appSpec;
-    appSpec.Name = "augmented_carpentry";
+    appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
     appSpec.WinWidth = 800;
     appSpec.WinHeight = 480;
-    appSpec.IsResizable = true;
+    appSpec.IsResizable = false;
     appSpec.VSync = true;
     appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 

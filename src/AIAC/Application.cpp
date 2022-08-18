@@ -2,11 +2,8 @@
 
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
-
-
-// inline static void glfwErrorCallback(int error, const char* description) {
-//     AIAC_ERROR("GLFW Error ({0}): {1}", error, description);
-// }
+#include "AIAC/LayerUI.h"
+#include "AIAC/LayerRender.h"
 
 
 namespace AIAC
@@ -61,16 +58,25 @@ namespace AIAC
             // TODO: this should go to Render.h / this becomes OnRender()
             // Render->OnRender();
 
-            for (auto& layer : m_LayerStack)
-                layer->OnUIRender();
+
+            GetLayer<AIAC::LayerRender>()->OnRender();
+
+
+            GetLayer<AIAC::LayerUI>()->OnUIRender();
 
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameEnd();
 
 
+            m_Window->OnBufferSwap();
+            
+
+
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();
+
+
 
         }
     }
@@ -86,9 +92,6 @@ namespace AIAC
             layer->OnDetach();
 
         m_LayerStack.clear();
-
-        // glfwDestroyWindow(m_Window);
-        // glfwTerminate();
 
         m_Window->Shutdown();
 
