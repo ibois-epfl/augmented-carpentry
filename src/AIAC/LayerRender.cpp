@@ -16,6 +16,7 @@
 // only for test
 #include "glm/gtc/type_ptr.hpp"
 #include "AIAC/Mesh.h"
+GLuint frameTexObj;
 
 namespace AIAC
 {
@@ -37,11 +38,10 @@ namespace AIAC
         AIAC_APP.GetWindow()->OnUpdate();
         // glfwGetFramebufferSize(AIAC_APP.GetWindow()->GetGLFWWindow(), &displayW, &displayH);
         glm::mat4 perspectiveProjMatrix = glm::perspective(
-                                    glm::radians(22.0f),
+                                    glm::radians(28.0f),
                                     (float)AIAC_APP.GetWindow()->GetDisplayW() / (float)AIAC_APP.GetWindow()->GetDisplayH(),
                                     0.01f,
-                                    100.0f );
-
+                                    100.0f);
         // opencv and opengl has different direction on y and z axis
         glm::mat4 scalarMatrix(1.0f);
         scalarMatrix[1][1] = -1;
@@ -88,38 +88,25 @@ namespace AIAC
 //        if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 //            return false;
     }
-
+    int counter = 0;
     void LayerRender::OnUIRender()
     {
         // Render to our framebuffer
-        // int displayW, displayH;
-        // glfwGetFramebufferSize(AIAC_APP.GetWindow()->GetGLFWWindow(), &displayW, &displayH);
-
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//
-//        glEnable(GL_BLEND);
-//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//        glBlendEquation(GL_FUNC_ADD);
 
         GLuint readFboIdFrame = 0;
         glGenFramebuffers(1, &readFboIdFrame);
         glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
-
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureId(), 0);
+
         glBlitFramebuffer(0, 0, 640, 480,
                           0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
-
+        glDeleteFramebuffers(1, &readFboIdFrame);
 
         // Render to our framebuffer
-//        glBindFramebuffer(GL_FRAMEBUFFER, m_OverlayFrameBuffer);
         glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Render on the whole framebuffer, complete from the lower left corner to the upper right
-
-        // Clear the screen
-//        glClearColor(0.0f,0.0f,0.0f,0.0f);
-//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
 
         glUseProgram(m_ProgramId);
 
@@ -134,38 +121,11 @@ namespace AIAC
         }
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        //////////////////////////////////////////////////////
-        // Combine the camera frame with the rendered frame //
-        //////////////////////////////////////////////////////
-        // Bind Back to default framebuffer
-//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//
-//        glEnable(GL_BLEND);
-//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//        glBlendEquation(GL_FUNC_ADD);
-//
-//        GLuint readFboIdFrame = 0;
-//        glGenFramebuffers(1, &readFboIdFrame);
-//        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
-//
-//        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-//                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureId(), 0);
-//        glBlitFramebuffer(0, 0, 640, 480,
-//                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-//                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
-//        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboId);
+    }
 
-
-
-//        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-//                               GL_TEXTURE_2D, m_OverlayFrameBuffer, 0);
-//        glBlitFramebuffer(0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-//                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-//                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
-//        glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
-
-
-//        glDeleteFramebuffers(1, &readFboIdFrame);
-
+    void LayerRender::OnFrameEnd()
+    {
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().DeleteGlTexture();
+        glDeleteTextures(1, &frameTexObj);
     }
 }

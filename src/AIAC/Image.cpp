@@ -57,7 +57,9 @@ namespace AIAC
         }
     }
 
-    Image::~Image() {}
+    Image::~Image() {
+        DeleteGlTexture();
+    }
     
     void Image::UpdateData(cv::Mat cvImg)
     {
@@ -145,6 +147,7 @@ namespace AIAC
     void Image::UpdateGlTextureId()
     {
         if(m_CvMat.empty()) { AIAC_ERROR("cvMat empty"); return ; }
+        if(m_GlTextureID != 0) { glDeleteTextures(1, &m_GlTextureID); }
         CvtCvMat2GlTextureID(m_CvMat, m_GlTextureID);
     }
 
