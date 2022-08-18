@@ -138,8 +138,4 @@ namespace AIAC
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     }
-
-    void LayerRender::OnFrameEnd()
-    {
-    }
 }
