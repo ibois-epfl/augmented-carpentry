@@ -223,4 +223,13 @@ namespace AIAC
         AIAC_ERROR("Failed to load img from file as ImTexture");
         return false;
     }
+
+    // unsigned char* Image::LoadImgFromFile2UImage(const char* path)
+    // {
+    //     int width, height, nrChannels;
+    //     unsigned char* image = stbi_load(path, &width, &height, &nrChannels, 0);
+    //     // if (image) AIAC_ERROR("Failed to load img from file"); return nullptr;
+    //     stbi_image_free(image);
+    //     return image;
+    // }
 }

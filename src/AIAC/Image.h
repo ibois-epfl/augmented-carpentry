@@ -67,6 +67,7 @@ namespace AIAC
         bool LoadImgFromFile2GlTextureID(const char* path, GLuint& glTextureID);
         bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture);
         bool LoadImgFromFile2ImTexture(const char* path, ImTexture& imTexture, ImVec2 size);
+        // static unsigned char* LoadImgFromFile2UImage(const char* path);
 
     private:
         const char* m_Path;
@@ -74,6 +75,7 @@ namespace AIAC
         cv::Mat m_CvMat = cv::Mat();
         GLuint m_GlTextureID = 0;
         ImTexture m_ImTexture = { 0, ImVec2(0, 0) };
+        unsigned char* m_uImage = nullptr;
 
         uint32_t m_Width = 0, m_Height = 0;
         ImageFormat m_Format = ImageFormat::None;

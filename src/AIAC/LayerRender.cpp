@@ -105,7 +105,7 @@ namespace AIAC
 
     }
 
-    void LayerRender::OnUIRender()
+    void LayerRender::OnRender()
     {
         // Render to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

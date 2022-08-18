@@ -16,9 +16,8 @@ namespace AIAC
         virtual ~LayerRender() = default;
 
         void OnAttach() override;
-        virtual void OnUIRender() override;
-        virtual void OnFrameEnd() override;
 
+        void OnRender();
         GLuint GetOverlayBuffer() { return m_OverlayFrameBuffer; }
 
     public:
