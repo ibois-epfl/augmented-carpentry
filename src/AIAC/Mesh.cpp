@@ -47,6 +47,10 @@ namespace AIAC
         return true;
     }
 
+    bool Mesh::Load(std::string path){
+        return Load(path.c_str());
+    }
+
     GLuint Mesh::GetGLBuffer() {
         return m_Vertexbuffer;
     }
