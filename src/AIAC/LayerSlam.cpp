@@ -29,6 +29,8 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+
+        if(m_IsTracked) { m_LastTrackedCamPose = m_CamPose; }
     }
 
     void LayerSlam::OnUIRender()
@@ -39,11 +41,10 @@ namespace AIAC
     glm::mat4 LayerSlam::GetCamPoseGlm()
     {
         glm::mat4 glmMat;
-        if (m_CamPose.cols != 4 ||m_CamPose.rows != 4 ||m_CamPose.type() != CV_32FC1) {
+        if (m_LastTrackedCamPose.cols != 4 ||m_LastTrackedCamPose.rows != 4 ||m_LastTrackedCamPose.type() != CV_32FC1) {
             throw std::invalid_argument("GetCamPose() error.");
         }
-//        cv::Mat m_CamPoseInv = m_CamPose.clone().inv();
-        memcpy(glm::value_ptr(glmMat), m_CamPose.data, 16 * sizeof(float));
+        memcpy(glm::value_ptr(glmMat), m_LastTrackedCamPose.data, 16 * sizeof(float));
         glmMat = glm::transpose(glmMat);
         return glmMat;
     }
