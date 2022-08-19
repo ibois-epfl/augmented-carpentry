@@ -914,7 +914,7 @@ struct IGFD_Thumbnail_Info
 
 #ifdef __cplusplus
 
-#include <deps/imgui/imgui.h>
+#include <imgui/imgui.h>
 
 #include <cfloat>
 #include <utility>
