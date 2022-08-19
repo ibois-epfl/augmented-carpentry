@@ -60,15 +60,10 @@ namespace AIAC
 
         // Load meshes
 
-        std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", defaultMeshPaths);
-        for(auto path : meshPaths) {
-            Meshes.emplace_back(path);
-        }
+        ReloadMeshes();
 
-
-//        Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb.ply");
-//        Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb_mesh.ply");
+        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb.ply");
+        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb_mesh.ply");
 
 
         // Init framebuffer
@@ -108,6 +103,15 @@ namespace AIAC
 
     }
 
+    void Renderer::ReloadMeshes()
+    {
+        std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
+        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", defaultMeshPaths);
+        for(auto path : meshPaths) {
+            Meshes.emplace_back(path);
+        }
+    }
+
     void Renderer::OnRender()
     {
         // Renderer to our framebuffer
@@ -117,7 +121,7 @@ namespace AIAC
         glGenFramebuffers(1, &readFboIdFrame);
         glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureId(), 0);
+                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
 
         glBlitFramebuffer(0, 0, m_CamW, m_CamH,
                           0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
