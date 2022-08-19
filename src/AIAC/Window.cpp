@@ -49,15 +49,15 @@ namespace AIAC
 
 
 #ifdef AIAC_DEPLOY_ON_TOUCH
-        m_TouchMonitor = AIAC::TouchMonitor();
+        m_TouchMonitor = new AIAC::TouchMonitor();
 
-        const GLFWvidmode* mode = glfwGetVideoMode(m_TouchMonitor.GetGLFWMonitor());
+        const GLFWvidmode* mode = glfwGetVideoMode(m_TouchMonitor->GetGLFWMonitor());
         glfwWindowHint(GLFW_RED_BITS, mode->redBits);
         glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
         glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
         
-        m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, props.Title, m_TouchMonitor.GetGLFWMonitor(), NULL);
+        m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, props.Title, m_TouchMonitor->GetGLFWMonitor(), NULL);
 
 #else
         m_GLFWWindow = glfwCreateWindow(props.Width, props.Height, props.Title, NULL, NULL);
