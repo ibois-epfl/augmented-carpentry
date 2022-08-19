@@ -23,3 +23,7 @@
 [submodule "deps/glew"]
 	path = deps/glew
 	url = https://github.com/ibois-epfl/glew.git
+[submodule "deps/imguiFileDialog"]
+	branch = Lib_Only
+	path = deps/imguiFileDialog
+	url = https://github.com/ibois-epfl/ImGuiFileDialog.git
