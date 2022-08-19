@@ -5,13 +5,10 @@
 int main(int argc, char* argv[]) {
 #ifdef __linux__
 
-    // Init Log sys
     AIAC::Log::Init();
 
-    // Init Config
     AIAC::Config config("config.ini", true);
 
-    // Init Application
     AIAC::ApplicationSpecification appSpec;
     appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
     appSpec.WinWidth = 800;
@@ -22,15 +19,14 @@ int main(int argc, char* argv[]) {
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
 
-    // Stack layers
+    acApp_ptr->GetWindow()->Init();
+
     acApp_ptr->PushLayer<AIAC::LayerCamera>();
-    acApp_ptr->PushLayer<AIAC::LayerExample>();
     acApp_ptr->PushLayer<AIAC::LayerSlam>();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->GetRenderer()->Init();
 
-    // RUn AC
     acApp_ptr->Run();
 
     return 0;
