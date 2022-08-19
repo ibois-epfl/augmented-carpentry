@@ -34,7 +34,7 @@ namespace AIAC
 
         std::cout << "WINDOW type: " << typeid(AIAC_APP.GetWindow()).name() << std::endl;
 
-        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 16.0f);  //TODO: add to config
+        io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 14.0f);  // default
 
         m_IsOpen = new bool(true);
 
@@ -60,24 +60,9 @@ namespace AIAC
     void LayerUI::OnUIRender()
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
-        
 
-        // ShowMainUI();
-        // ShowSceneViewport();
 
-        // TODO: implement borderless window
-        // ImGui::SetNextWindowSizeConstraints(ImVec2(0, 0), ImVec2(FLT_MAX, FLT_MAX));
-        // ImGui::SetNextWindowPos(ImVec2(0, 0));
-        // ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y));
-        // ImGui::Begin("scene_viewport", m_IsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoBackground);
-        
-        // Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
-        // frame.CvtCvMat2ImTexture();
-        // AIAC::ImTexture frameImTexture = frame.GetImTexture();
-        // ImGui::Image(frameImTexture.ID, ImVec2(ImGui::GetIO().DisplaySize.x,  ImGui::GetIO().DisplaySize.y));
-        
-        
-        // ImGui::End();
+
 
         ShowMainUI();
         ShowSceneViewport();

@@ -52,7 +52,7 @@ namespace AIAC
         void Init(const WindowProps& props);
 
     private:
-        AIAC::TouchMonitor m_TouchMonitor;
+        AIAC::TouchMonitor* m_TouchMonitor;
 
         GLFWwindow* m_GLFWWindow;
         const char* m_GlslVersion;
