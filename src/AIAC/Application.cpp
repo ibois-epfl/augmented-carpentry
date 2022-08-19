@@ -35,6 +35,7 @@ namespace AIAC
                 m_AppSpec.IsResizable,
                 m_AppSpec.VSync
             ));
+        AIAC_INFO("Application initialized!");
 
         // TODO: Move to Render
         glGenVertexArrays(1, &VertexArrayID);
