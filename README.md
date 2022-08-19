@@ -1,7 +1,7 @@
 # Augmented Carpentry
 
 [<img src="https://github.com/aiekick/ImGuiFileDialog/workflows/Linux/badge.svg"/>](https://github.com/aiekick/ImGuiFileDialog/actions?query=workflow%3ALinux)
-[<img src="https://badge-size.herokuapp.com/{username}/{repo}/{branch}/{filename}"/>]([https://github.com/aiekick/ImGuiFileDialog/actions?query=workflow%3ALinux](https://badge-size.herokuapp.com/{username}/{repo}/{branch}/{filename}))
+[<img src="https://badge-size.herokuapp.com/ibois-epfl/augmented-carpentry/main"/>](https://badge-size.herokuapp.com/ibois-epfl/augmented-carpentry/main))
 
  	
 
