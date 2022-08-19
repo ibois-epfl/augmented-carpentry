@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AIAC/Camera.h"
+#include "AIAC/Renderer.h"
 
 #include "AIAC/Assert.h"
 #include "AIAC/Window.h"
@@ -54,6 +55,8 @@ namespace AIAC
             return nullptr;
         }
 
+        inline Renderer* GetRenderer() { return m_Renderer; }
+
         inline static Application& GetInstance() { return *s_Instance; }
 
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
@@ -71,6 +74,8 @@ namespace AIAC
 
         std::vector<std::shared_ptr<AIAC::Layer>> m_LayerStack;
         std::unordered_map<std::type_index, std::shared_ptr<AIAC::Layer>> m_LayerMap;
+
+        Renderer* m_Renderer;
 
         static Application* s_Instance;
     };
