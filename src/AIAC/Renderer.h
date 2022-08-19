@@ -19,6 +19,8 @@ namespace AIAC
         void OnRender();
         GLuint GetOverlayBuffer() { return m_OverlayFrameBuffer; }
 
+        void ReloadMeshes();
+
     public:
         std::vector<AIAC::Mesh> Meshes;
 
