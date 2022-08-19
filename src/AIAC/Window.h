@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AIAC/GlHeader.h"
+#include "AIAC/TouchMonitor.h"
 
 
 namespace AIAC
@@ -51,6 +52,8 @@ namespace AIAC
         void Init(const WindowProps& props);
 
     private:
+        AIAC::TouchMonitor m_TouchMonitor;
+
         GLFWwindow* m_GLFWWindow;
         const char* m_GlslVersion;
         bool m_IsWindowOpen;
