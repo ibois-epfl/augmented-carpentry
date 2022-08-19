@@ -1,6 +1,6 @@
 #include "aiacpch.h"
 
-#include "AIAC/LayerRender.h"
+#include "AIAC/Renderer.h"
 
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
@@ -16,8 +16,11 @@
 
 namespace AIAC
 {
-    void LayerRender::OnAttach()
+    void Renderer::Init()
     {
+        GLuint VertexArrayID;
+        glGenVertexArrays(1, &VertexArrayID);
+        glBindVertexArray(VertexArrayID);
 
         // Create and compile our GLSL program from the shaders
         std::string vertexFilePath = "assets/opengl/SimpleTransform.vertexshader";
@@ -58,7 +61,7 @@ namespace AIAC
         // Load meshes
 
         std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Render", "MeshPaths", defaultMeshPaths);
+        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", defaultMeshPaths);
         for(auto path : meshPaths) {
             Meshes.emplace_back(path);
         }
@@ -105,9 +108,9 @@ namespace AIAC
 
     }
 
-    void LayerRender::OnRender()
+    void Renderer::OnRender()
     {
-        // Render to our framebuffer
+        // Renderer to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         GLuint readFboIdFrame = 0;
@@ -121,8 +124,8 @@ namespace AIAC
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
         glDeleteFramebuffers(1, &readFboIdFrame);
 
-        // Render to our framebuffer
-        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+        // Renderer to our framebuffer
+        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
 
         glUseProgram(m_ProgramId);
 
