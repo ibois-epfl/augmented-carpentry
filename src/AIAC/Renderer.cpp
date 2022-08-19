@@ -1,6 +1,6 @@
 #include "aiacpch.h"
 
-#include "AIAC/LayerRender.h"
+#include "AIAC/Renderer.h"
 
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
@@ -16,8 +16,11 @@
 
 namespace AIAC
 {
-    void LayerRender::OnAttach()
+    void Renderer::Init()
     {
+        GLuint VertexArrayID;
+        glGenVertexArrays(1, &VertexArrayID);
+        glBindVertexArray(VertexArrayID);
 
         // Create and compile our GLSL program from the shaders
         std::string vertexFilePath = "assets/opengl/SimpleTransform.vertexshader";
@@ -57,15 +60,10 @@ namespace AIAC
 
         // Load meshes
 
-        std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Render", "MeshPaths", defaultMeshPaths);
-        for(auto path : meshPaths) {
-            Meshes.emplace_back(path);
-        }
+        ReloadMeshes();
 
-
-//        Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb.ply");
-//        Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb_mesh.ply");
+        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb.ply");
+        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb_mesh.ply");
 
 
         // Init framebuffer
@@ -105,24 +103,33 @@ namespace AIAC
 
     }
 
-    void LayerRender::OnRender()
+    void Renderer::ReloadMeshes()
     {
-        // Render to our framebuffer
+        std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
+        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", defaultMeshPaths);
+        for(auto path : meshPaths) {
+            Meshes.emplace_back(path);
+        }
+    }
+
+    void Renderer::OnRender()
+    {
+        // Renderer to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         GLuint readFboIdFrame = 0;
         glGenFramebuffers(1, &readFboIdFrame);
         glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureId(), 0);
+                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
 
         glBlitFramebuffer(0, 0, m_CamW, m_CamH,
                           0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
         glDeleteFramebuffers(1, &readFboIdFrame);
 
-        // Render to our framebuffer
-        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+        // Renderer to our framebuffer
+        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
 
         glUseProgram(m_ProgramId);
 
