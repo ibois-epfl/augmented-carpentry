@@ -1,9 +1,6 @@
 # Augmented Carpentry
 
 [<img src="https://github.com/aiekick/ImGuiFileDialog/workflows/Linux/badge.svg"/>](https://github.com/aiekick/ImGuiFileDialog/actions?query=workflow%3ALinux)
-[<img src="https://badge-size.herokuapp.com/ibois-epfl/augmented-carpentry/main"/>](https://badge-size.herokuapp.com/ibois-epfl/augmented-carpentry/main))
-
- 	
 
 <p>
     <img src="./assets/images/logo_linux_gray_light.png" width="200">
