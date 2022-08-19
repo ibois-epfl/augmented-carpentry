@@ -5,7 +5,7 @@
 
 #include "stb/stb_image.h"
 #include "stb/stb_image_write.h"
-#include "LayerRender.h"
+#include "Renderer.h"
 
 
 namespace AIAC
@@ -39,8 +39,11 @@ namespace AIAC
         m_IsOpen = new bool(true);
 
         // Load images from memory
-        m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE, ImVec2(60, 60));
-        m_DebugImgPlaceHolder = AIAC::Image("assets/images/placeholder_3d_scene.png", AIAC::ImageType::IM_TEXTURE);
+        m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png");
+        m_DebugImgPlaceHolder = AIAC::Image("assets/images/placeholder_3d_scene.png");
+
+//        m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE, ImVec2(60, 60));
+//        m_DebugImgPlaceHolder = AIAC::Image("assets/images/placeholder_3d_scene.png", AIAC::ImageType::IM_TEXTURE);
 
         // Set panes UI for layers
         //                 Label    Collapse          PaneContent
@@ -85,7 +88,7 @@ namespace AIAC
     void LayerUI::ShowMainUI()
     {
         ImGui::Begin("augmented_carpentry", m_IsOpen);
-        ImGui::Image(m_Logo.GetImTexture().ID, m_Logo.GetImTexture().Size, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        ImGui::Image(m_Logo.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
         
@@ -145,7 +148,6 @@ namespace AIAC
         ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
 
         Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
-        frame.CvtCvMat2ImTexture();
         AIAC::ImTexture frameImTexture = frame.GetImTexture();
         ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
     }

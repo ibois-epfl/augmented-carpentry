@@ -3,7 +3,6 @@
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
 #include "AIAC/LayerUI.h"
-#include "AIAC/LayerRender.h"
 
 
 namespace AIAC
@@ -37,9 +36,7 @@ namespace AIAC
             ));
         AIAC_INFO("Application initialized!");
 
-        // TODO: Move to Render
-        glGenVertexArrays(1, &VertexArrayID);
-        glBindVertexArray(VertexArrayID);
+        m_Renderer = new Renderer(); // The real Init() is after layer pushed.
     }
 
     void Application::Run()
@@ -56,12 +53,7 @@ namespace AIAC
 
             m_Window->OnUpdate();
 
-            // TODO: this should go to Render.h / this becomes OnRender()
-            // Render->OnRender();
-
-
-            GetLayer<AIAC::LayerRender>()->OnRender();
-
+            m_Renderer->OnRender();
 
             GetLayer<AIAC::LayerUI>()->OnUIRender();
 
@@ -72,7 +64,6 @@ namespace AIAC
 
             m_Window->OnBufferSwap();
             
-
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();

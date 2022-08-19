@@ -9,16 +9,17 @@
 
 namespace AIAC
 {
-    class LayerRender : public AIAC::Layer
+    class Renderer
     {
     public:
-        LayerRender() = default;
-        virtual ~LayerRender() = default;
+        Renderer() = default;
+        virtual ~Renderer() = default;
 
-        void OnAttach() override;
-
+        void Init();
         void OnRender();
         GLuint GetOverlayBuffer() { return m_OverlayFrameBuffer; }
+
+        void ReloadMeshes();
 
     public:
         std::vector<AIAC::Mesh> Meshes;
