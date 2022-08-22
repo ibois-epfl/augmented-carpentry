@@ -9,7 +9,6 @@
 #include "AIAC/Layer.h"
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerCamera.h"
-#include "AIAC/LayerExample.h"
 
 namespace AIAC
 {
@@ -56,11 +55,11 @@ namespace AIAC
         }
 
         inline Renderer* GetRenderer() { return m_Renderer; }
+        inline AIAC::Window* GetWindow() { return m_Window; }
 
         inline static Application& GetInstance() { return *s_Instance; }
 
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
-        inline AIAC::Window* GetWindow() { return m_Window; }
 
     private:
         void Init();
@@ -68,14 +67,15 @@ namespace AIAC
 
     private:
         ApplicationSpecification m_AppSpec;
+
         AIAC::Window* m_Window;
+        Renderer* m_Renderer;
 
         bool m_IsRunning = false;
 
         std::vector<std::shared_ptr<AIAC::Layer>> m_LayerStack;
         std::unordered_map<std::type_index, std::shared_ptr<AIAC::Layer>> m_LayerMap;
 
-        Renderer* m_Renderer;
 
         static Application* s_Instance;
     };

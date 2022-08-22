@@ -30,6 +30,8 @@ namespace AIAC
         Window(const WindowProps& props);
         virtual ~Window();
 
+        void Init();
+
         void OnUpdate();
         void OnBufferSwap();
         void Shutdown();
@@ -49,9 +51,6 @@ namespace AIAC
         inline int GetDisplayH() { return m_DisplayH; }
 
     private:
-        void Init(const WindowProps& props);
-
-    private:
         AIAC::TouchMonitor* m_TouchMonitor;
 
         GLFWwindow* m_GLFWWindow;
@@ -65,7 +64,7 @@ namespace AIAC
             uint32_t Height;
             bool VSync;
             bool IsResizable;
-        } m_Data;
+        } m_Data = {};
 
         int m_DisplayW, m_DisplayH;
     };
