@@ -19,7 +19,11 @@ namespace AIAC
 
     Window::Window(const WindowProps& props)
     {
-        Init(props);
+        m_Data.Title = props.Title;
+        m_Data.Width = props.Width;
+        m_Data.Height = props.Height;
+        m_Data.VSync = props.VSync;
+        m_Data.IsResizable = props.IsResizable;
     }
 
     Window::~Window()
@@ -27,7 +31,7 @@ namespace AIAC
         Shutdown();
     }
 
-    void Window::Init(const WindowProps& props)
+    void Window::Init()
     {
         if(s_GLFWWindowCount == 0)
         {
@@ -44,7 +48,7 @@ namespace AIAC
         glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_FALSE);
 #else
         glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_TRUE);
-        glfwWindowHint(GLFW_RESIZABLE, props.IsResizable);
+        glfwWindowHint(GLFW_RESIZABLE, m_Data.IsResizable);
 #endif
 
 
@@ -57,10 +61,10 @@ namespace AIAC
         glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
         
-        m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, props.Title, m_TouchMonitor->GetGLFWMonitor(), NULL);
+        m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, m_Data.Title, m_TouchMonitor->GetGLFWMonitor(), NULL);
 
 #else
-        m_GLFWWindow = glfwCreateWindow(props.Width, props.Height, props.Title, NULL, NULL);
+        m_GLFWWindow = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title, NULL, NULL);
 #endif
         if (m_GLFWWindow == NULL) {
             AIAC_CRITICAL("Failed to create GLFW window");
@@ -78,7 +82,7 @@ namespace AIAC
 
 
         glfwMakeContextCurrent(m_GLFWWindow);
-        SetVSync(props.VSync);
+        SetVSync(m_Data.VSync);
 
 
         glewExperimental = true;
