@@ -23,3 +23,7 @@
 [submodule "deps/glew"]
 	path = deps/glew
 	url = https://github.com/ibois-epfl/glew.git
+[submodule "deps/eventpp"]
+	branch = master
+	path = deps/eventpp
+	url = https://github.com/ibois-epfl/eventpp.git

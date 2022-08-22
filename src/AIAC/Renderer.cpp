@@ -45,8 +45,8 @@ namespace AIAC
         float perspectiveProjMatrixData[16] = {
                  2 * fovX / camW, 0,   (camW - 2 * cX + 2 * x0) / camW,  0,
                  0,   2 * fovY / camH, (-camH + 2 * cY + 2 * y0) / camH, 0,
-                 0,   0,              (-zF - zN)/(zF - zN),            -2 * zF * zN / (zF - zN),
-                0,  0,               -1,                              0
+                 0,   0,               (-zF - zN)/(zF - zN),             -2 * zF * zN / (zF - zN),
+                 0,  0,                -1,                               0
         };
 
         glm::mat4 perspectiveProjMatrix = glm::transpose(glm::make_mat4(perspectiveProjMatrixData));

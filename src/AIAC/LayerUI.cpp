@@ -11,6 +11,8 @@
 #include "AIAC/UI/ClrPalette.h"
 #include "AIAC/UI/CustomLogos.h"
 
+#include "eventpp/callbacklist.h"
+
 namespace AIAC
 {
 
@@ -155,22 +157,6 @@ namespace AIAC
         ImGui::Text("Import files:");
         ImGui::BeginChild("slam_info_child", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
-        if (ImGui::Button("Open camera calib"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
-
-        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib")) 
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-            // action
-            /* write here what to do with the file path */
-            // TODO: Raise event for SLAM
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
-        ImGui::SameLine();
         if (ImGui::Button("Open SLAM map"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
@@ -182,15 +168,15 @@ namespace AIAC
             std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
             // action
             /* write here what to do with the file path */
-            // TODO: Raise event for SLAM
+            // TODO: Raise event to restart SLAM
             }
             ImGuiFileDialog::Instance()->Close();
         }
         ImGui::SameLine();
-        if (ImGui::Button("Open 3dModel"))
-            ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply", ".");
+        if (ImGui::Button("Open Vocab"))
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("Choose3dModel")) 
+        if (ImGuiFileDialog::Instance()->Display("ChooseVocab")) 
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
@@ -198,10 +184,43 @@ namespace AIAC
             std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
             // action
             /* write here what to do with the file path */
-            // TODO: Raise event for SLAM
+            // TODO: Raise event for SLAM to restart
             }
             ImGuiFileDialog::Instance()->Close();
         }
+        ImGui::SameLine();
+        if (ImGui::Button("Open camera calib"))
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
+
+        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib")) 
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+            // action
+            /* write here what to do with the file path */
+            // TODO: Raise event for SLAM to restart
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+        // FIXME: 3Dmodel import is this decoupled from SLAM layer?
+        // ImGui::SameLine();
+        // if (ImGui::Button("Open 3dModel"))
+        //     ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply", ".");
+
+        // if (ImGuiFileDialog::Instance()->Display("Choose3dModel")) 
+        // {
+        //     if (ImGuiFileDialog::Instance()->IsOk())
+        //     {
+        //     std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+        //     std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+        //     // action
+        //     /* write here what to do with the file path */
+        //     // TODO: Raise event for SLAM to restart
+        //     }
+        //     ImGuiFileDialog::Instance()->Close();
+        // }
         ImGui::PopStyleColor();
         ImGui::EndChild();
 
