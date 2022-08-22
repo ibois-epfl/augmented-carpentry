@@ -11,7 +11,7 @@
 #include "AIAC/Log.h"
 #include "AIAC/Assert.h"
 
-#include "AIAC/MonitorConfig.h"
+#include "AIAC/TouchMonitor.h"
 #include "AIAC/Window.h"
 
 #include "AIAC/Application.h"
@@ -21,7 +21,6 @@
 #include "AIAC/Camera.h"
 
 #include "AIAC/LayerCamera.h"
-#include "AIAC/LayerExample.h"
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerUI.h"
 #include "AIAC/LayerCamera.h"
