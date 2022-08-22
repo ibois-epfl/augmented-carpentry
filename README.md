@@ -3,7 +3,7 @@
 [<img src="https://github.com/aiekick/ImGuiFileDialog/workflows/Linux/badge.svg"/>](https://github.com/aiekick/ImGuiFileDialog/actions?query=workflow%3ALinux)
 
 <p>
-    <img src="./assets/images/logo_linux_gray_light.png" width="200">
+    <img src="./assets/images/logos/logo_linux_gray_light.png" width="200">
 </p>
 
 
