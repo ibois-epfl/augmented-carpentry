@@ -59,16 +59,7 @@ namespace AIAC
         m_ProjMatrix = perspectiveProjMatrix * scalarMatrix;
 
         // Load meshes
-
         ReloadMeshes();
-
-        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb.ply");
-        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb_mesh.ply");
-
-
-        // Init framebuffer
-        glGenFramebuffers(1, &m_OverlayFrameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_OverlayFrameBuffer);
 
         GLuint renderedTexture;
         glGenTextures(1, &renderedTexture);
@@ -105,12 +96,80 @@ namespace AIAC
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
+        m_InitGlobalView();
+    }
+
+    void Renderer::m_InitGlobalView() {
+        glGenFramebuffers(1, &m_GlobalViewFrameBuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
+
+        // The texture we're going to render to
+        glGenTextures(1, &m_GlobalViewTexture);
+
+        // "Bind" the newly created texture : all future texture functions will modify this texture
+        glBindTexture(GL_TEXTURE_2D, m_GlobalViewTexture);
+
+        // Give an empty image to OpenGL ( the last "0" )
+        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, 640, 480, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+
+        // Poor filtering. Needed !
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        // The depth buffer
+        GLuint depthrenderbuffer;
+        glGenRenderbuffers(1, &depthrenderbuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 640, 480);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
+
+        // Set "renderedTexture" as our colour attachement #0
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GlobalViewTexture, 0);
+
+        // Set the list of draw buffers.
+        GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+        glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
+
+        // build camera visualization object, which is a pyramid
+        float bW = 1.0f / 2, bH = 0.75f / 2, h = 0.5f;
+        m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back(-bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back(-bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
+
+        m_GlobalProjMatrix = glm::perspective(
+                glm::radians(45.0f),
+                4.0f / 3.0f, 0.1f,100.0f
+        );
+
+        m_GlobalCamMatrix = glm::lookAt(
+                glm::vec3(30, 30, 30), // the position of your camera, in world space
+                PointCloudMap.BoundingBoxCenter,   // where you want to look at, in world space
+                glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
+        );
     }
 
     void Renderer::ReloadMeshes()
     {
-        std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", defaultMeshPaths);
+        auto pointCloudMapPath = AIAC::Config::Get<string>("Renderer", "PointCloudMapPath", "assets/tslam/examplePointCloud.ply");
+        auto digitalModelPath = AIAC::Config::Get<string>("Renderer", "DigitalModelPath", "assets/tslam/example3dModel.ply");
+
+        PointCloudMap = Mesh(pointCloudMapPath);
+        DigitalModel = Mesh(digitalModelPath);
+
+        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", {});
         for(auto path : meshPaths) {
             Meshes.emplace_back(path);
         }
@@ -143,11 +202,48 @@ namespace AIAC
 
         // Draw the triangle !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        for (auto& mesh : Meshes) {
-            mesh.Draw();
-            mesh.DrawBoundingBoxEdges(glm::vec4(1.0, 0, 0, 1.0));
+        glm::vec4 edgeColor;
+        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
+            if(ShowPointCloudMap){
+                PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+            }
+            if(ShowDigitalModel){
+                DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+                DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+            }
+            for (auto& mesh : Meshes) {
+                mesh.DrawEdges(m_DefaultEdgeColor);
+            }
         }
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+        m_RenderGlobalView();
+    }
+
+    void Renderer::m_RenderGlobalView() {
+        glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
+        glClearColor(1.0, 1.0, 1.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // visualize map
+        glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+
+        PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+        DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+        DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+        for (auto& mesh : Meshes) {
+            mesh.DrawEdges(m_DefaultEdgeColor);
+        }
+
+        // visualize camera
+        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+
+        // Bind back to the main framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     }
 }

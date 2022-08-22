@@ -1,7 +1,7 @@
 #include "GlUtils.h"
 
 namespace AIAC {
-    void DrawPoint3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize) {
+    void DrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize) {
         GLuint vbo;
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -43,12 +43,12 @@ namespace AIAC {
         glDeleteBuffers(1, &colorBuffer);
     }
 
-    void DrawPoint3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize) {
+    void DrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize) {
         std::vector<glm::vec4> colors(vertices.size(), color);
-        DrawPoint3d(vertices, std::move(colors), pointSize);
+        DrawPoints3d(vertices, std::move(colors), pointSize);
     }
 
-    void DrawLine3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors) {
+    void DrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors) {
         GLuint vbo;
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -86,12 +86,12 @@ namespace AIAC {
         glDeleteBuffers(1, &colorBuffer);
     }
 
-    void DrawLine3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color) {
+    void DrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color) {
         std::vector<glm::vec4> colors(edges.size(), color);
-        DrawLine3d(edges, colors);
+        DrawLines3d(edges, colors);
     }
 
-    void DrawTriangle3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors){
+    void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors){
         GLuint elementBuffer;
         glGenBuffers(1, &elementBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer);
@@ -138,8 +138,8 @@ namespace AIAC {
         glDeleteBuffers(1, &colorBuffer);
 
     }
-    void DrawTriangle3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &color){
+    void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &color){
         std::vector<glm::vec4> colors(vertices.size(), color);
-        DrawTriangle3d(vertices, indices, colors);
+        DrawTriangles3d(vertices, indices, colors);
     }
 }
