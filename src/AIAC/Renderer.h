@@ -29,6 +29,9 @@ namespace AIAC
         AIAC::Mesh DigitalModel;
         std::vector<AIAC::Mesh> Meshes;
 
+        bool ShowPointCloudMap = true;
+        bool ShowDigitalModel = true;
+
     private:
         void m_InitGlobalView();
         void m_RenderGlobalView();

@@ -51,6 +51,7 @@ namespace AIAC {
         static void SetPaneUIExample();
         static void SetPaneUICamera();
         static void SetPaneUISlam();
+        static void SetPaneUIRender();
     
     private:
         int m_testSlider = 0;
