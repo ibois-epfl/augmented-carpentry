@@ -1,11 +1,6 @@
 ## >>>>>>>>> tslam assets >>>>>>>>>
 assets/tslam/*.map
 
-## >>>>>>>>> imgui >>>>>>>>>
-
-# Layout for imgui
-imgui.ini
-
 ## >>>>>>>>> vscode >>>>>>>>>
 
 # VScode config
