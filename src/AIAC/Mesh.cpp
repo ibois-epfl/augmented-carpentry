@@ -17,11 +17,53 @@ namespace AIAC
         }
         const aiMesh* mesh = scene->mMeshes[0]; // here we use only the 1st mesh
 
+
+
         // Fill vertices positions
         Vertices.reserve(mesh->mNumVertices);
         for(unsigned int i=0; i<mesh->mNumVertices; i++){
             aiVector3D pos = mesh->mVertices[i];
-            Vertices.emplace_back(pos.x*1, pos.y*1 , pos.z*1);
+            Vertices.emplace_back(pos.x, pos.y , pos.z);
+
+            BoundingBoxX.first = min(BoundingBoxX.first, pos.x);
+            BoundingBoxX.second = max(BoundingBoxX.second, pos.x);
+            BoundingBoxY.first = min(BoundingBoxY.first, pos.y);
+            BoundingBoxY.second = max(BoundingBoxY.second, pos.y);
+            BoundingBoxZ.first = min(BoundingBoxZ.first, pos.z);
+            BoundingBoxZ.second = max(BoundingBoxZ.second, pos.z);
+        }
+
+        BoundingBoxCenter = glm::vec3(
+                (BoundingBoxX.first + BoundingBoxX.second) / 2.0f,
+                (BoundingBoxY.first + BoundingBoxY.second) / 2.0f,
+                (BoundingBoxZ.first + BoundingBoxZ.second) / 2.0f);
+
+        // Build Bounding Box
+        /*000*/ BoundingBox[0] = glm::vec3(BoundingBoxX.first, BoundingBoxY.first, BoundingBoxZ.first);
+        /*001*/ BoundingBox[1] = glm::vec3(BoundingBoxX.first, BoundingBoxY.first, BoundingBoxZ.second);
+        /*010*/ BoundingBox[2] = glm::vec3(BoundingBoxX.first, BoundingBoxY.second, BoundingBoxZ.first);
+        /*011*/ BoundingBox[3] = glm::vec3(BoundingBoxX.first, BoundingBoxY.second, BoundingBoxZ.second);
+        /*100*/ BoundingBox[4] = glm::vec3(BoundingBoxX.second, BoundingBoxY.first, BoundingBoxZ.first);
+        /*101*/ BoundingBox[5] = glm::vec3(BoundingBoxX.second, BoundingBoxY.first, BoundingBoxZ.second);
+        /*110*/ BoundingBox[6] = glm::vec3(BoundingBoxX.second, BoundingBoxY.second, BoundingBoxZ.first);
+        /*111*/ BoundingBox[7] = glm::vec3(BoundingBoxX.second, BoundingBoxY.second, BoundingBoxZ.second);
+
+        int edges[] = {
+            0, 1,
+            0, 2,
+            0, 4,
+            1, 3,
+            1, 5,
+            2, 3,
+            2, 6,
+            3, 7,
+            4, 5,
+            4, 6,
+            5, 7,
+            6, 7
+        };
+        for(int edge: edges) {
+            BoundingBoxEdges.emplace_back(Vertices[edge]);
         }
 
         // Fill face indices
@@ -43,6 +85,7 @@ namespace AIAC
             Edges.emplace_back(Vertices[pC]);
             Edges.emplace_back(Vertices[pA]);
         }
+
         // The "scene" pointer will be deleted automatically by "importer"
         return true;
     }
@@ -51,14 +94,25 @@ namespace AIAC
         return Load(path.c_str());
     }
 
-    GLuint Mesh::GetGLBuffer() {
-        return m_Vertexbuffer;
+    void Mesh::Draw() {
+        DrawPoints3d(Vertices, glm::vec4(0.9, 0.9, 0.9, 0.2), 1);
+        DrawTriangles3d(Vertices, Indices, glm::vec4(0.6, 0.35, 0.2, 0.3));
     }
 
-    void Mesh::Draw() {
-        DrawPoint3d(Vertices, glm::vec4(0.9, 0.9, 0.9, 0.2), 1);
-        DrawLine3d(Edges, glm::vec4(1, 1, 0, 0.5));
-        DrawTriangle3d(Vertices, Indices, glm::vec4(0.6, 0.35, 0.2, 0.3));
+    void Mesh::DrawBoundingBoxEdges(glm::vec4 color) {
+        DrawLines3d(BoundingBoxEdges, color);
+    }
+
+    void Mesh::DrawVertices(glm::vec4 color, GLfloat pointSize) {
+        DrawPoints3d(Vertices, color, pointSize);
+    }
+
+    void Mesh::DrawEdges(glm::vec4 color) {
+        DrawLines3d(Edges, color);
+    }
+
+    void Mesh::DrawFaces(glm::vec4 color) {
+        DrawTriangles3d(Vertices, Indices, color);
     }
 } // namespace AIAC
 

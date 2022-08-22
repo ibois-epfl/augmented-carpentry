@@ -54,6 +54,7 @@ namespace AIAC {
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         static void SetPaneUICamera();
         static void SetPaneUISlam();
+        static void SetPaneUIRender();
     
     private:
         int m_testSlider = 0;

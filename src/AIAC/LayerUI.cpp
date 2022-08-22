@@ -50,12 +50,13 @@ namespace AIAC
         //                 Label       Collapse             PaneContent
         StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
 
         // TODO: add config for file dialog widget
         //TODO: add vertical menu bar
 
-
         m_IsOpen = new bool(true);
+
     }
 
     void LayerUI::OnFrameStart()
@@ -231,6 +232,11 @@ namespace AIAC
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
     }
 
+    void LayerUI::SetPaneUIRender()
+    {
+        ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
+        ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+    }
 
 
 }

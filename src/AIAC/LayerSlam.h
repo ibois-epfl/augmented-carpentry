@@ -23,6 +23,8 @@ namespace AIAC
         glm::mat4 GetCamPoseGlm();
         glm::mat4 GetInvCamPoseGlm();
 
+        void GetCamPoseInObjCoord(cv::Mat &rotationMatrix, cv::Mat &tvec);
+
     public:
         tslam::TSlam Slam;
 
