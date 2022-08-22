@@ -17,12 +17,17 @@ namespace AIAC
 
         void Init();
         void OnRender();
-        GLuint GetOverlayBuffer() { return m_OverlayFrameBuffer; }
 
         void ReloadMeshes();
 
+        GLuint GetGlobalView() { return m_GlobalViewTexture; };
+
     public:
         std::vector<AIAC::Mesh> Meshes;
+
+    private:
+        void m_InitGlobalView();
+        void m_RenderGlobalView();
 
     private:
         float m_CamW, m_CamH;
@@ -32,6 +37,7 @@ namespace AIAC
 
         glm::mat4 m_ProjMatrix;
 
-        GLuint m_OverlayFrameBuffer;
+        GLuint m_GlobalViewFrameBuffer;
+        GLuint m_GlobalViewTexture;
     };
 }
