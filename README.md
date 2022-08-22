@@ -1,5 +1,7 @@
 # Augmented Carpentry
 
+[<img src="https://github.com/aiekick/ImGuiFileDialog/workflows/Linux/badge.svg"/>](https://github.com/aiekick/ImGuiFileDialog/actions?query=workflow%3ALinux)
+
 <p>
     <img src="./assets/images/logo_linux_gray_light.png" width="200">
 </p>
@@ -44,7 +46,7 @@ To run the code:
 
 ## STag PDFs
 Stags are prepared in PDFs batches of ~150 stripes. You can find them [here](https://drive.google.com/drive/folders/1jic85gclymiV9014zc3tuUgIBq8lTyZr?usp=sharing).
-They are made to be print as stickers. The code to generate them can be found at `TO-BE_DEFINED`.
+They are made to be print as stickers. The code to generate them can be found ![here](https://github.com/ibois-epfl/TSlam/tree/main/stag_util).
 
 
 <br />

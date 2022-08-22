@@ -15,27 +15,12 @@ namespace AIAC
         RGBA,
         GRAYSCALE
     };
-    
-    enum class ImageType
-    {
-        None = 0,
-        CV_MAT,
-        GL_TEXTURE_ID,
-        IM_TEXTURE
-    };
 
     struct ImTexture
     {
         ImTextureID ID;
         ImVec2 Size;
     };
-
-//    class GlObj{
-//    public:
-//        GlObj() { Instance = 0; };
-//        ~GlObj() { glDeleteTextures(1, &Instance); };
-//        GLuint Instance;
-//    };
 
     class Image
     {
@@ -86,6 +71,7 @@ namespace AIAC
  
     };
 
+    // Utility functions
     void CvtCvMat2GlTextureObj(cv::Mat& cvMat, GLuint& glTextureObj, GLint glInternalFormat = GL_RGB);
     void CvtGlTextureObj2ImTexture(GLuint glTextureID, ImTexture& imTexture, ImVec2 size = ImVec2(0, 0));
     void CvtCvMat2ImTexture(cv::Mat& cvMat, ImTexture& imTexture, GLuint &glTextureObj, GLint glInternalFormat);

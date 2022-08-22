@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AIAC/GlHeader.h"
+#include "AIAC/TouchMonitor.h"
 
 
 namespace AIAC
@@ -29,6 +30,8 @@ namespace AIAC
         Window(const WindowProps& props);
         virtual ~Window();
 
+        void Init();
+
         void OnUpdate();
         void OnBufferSwap();
         void Shutdown();
@@ -48,9 +51,8 @@ namespace AIAC
         inline int GetDisplayH() { return m_DisplayH; }
 
     private:
-        void Init(const WindowProps& props);
+        AIAC::TouchMonitor* m_TouchMonitor;
 
-    private:
         GLFWwindow* m_GLFWWindow;
         const char* m_GlslVersion;
         bool m_IsWindowOpen;
@@ -62,7 +64,7 @@ namespace AIAC
             uint32_t Height;
             bool VSync;
             bool IsResizable;
-        } m_Data;
+        } m_Data = {};
 
         int m_DisplayW, m_DisplayH;
     };

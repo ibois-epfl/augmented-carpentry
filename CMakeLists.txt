@@ -43,7 +43,7 @@ option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
 option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
-option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" ON)
+option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 

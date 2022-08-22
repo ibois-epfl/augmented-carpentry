@@ -26,8 +26,8 @@ namespace AIAC
 
     void Application::Init()
     {
-        m_Window = new AIAC::Window(
-            AIAC::WindowProps(
+        m_Window = new Window(
+            WindowProps(
                 m_AppSpec.Name,
                 m_AppSpec.WinWidth,
                 m_AppSpec.WinHeight,
@@ -35,7 +35,7 @@ namespace AIAC
                 m_AppSpec.VSync
             ));
 
-        m_Renderer = new Renderer(); // The real Init() is after layer pushed.
+        m_Renderer = new Renderer();
     }
 
     void Application::Run()
