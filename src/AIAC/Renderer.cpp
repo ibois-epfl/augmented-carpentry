@@ -145,6 +145,7 @@ namespace AIAC
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         for (auto& mesh : Meshes) {
             mesh.Draw();
+            mesh.DrawBoundingBoxEdges(glm::vec4(1.0, 0, 0, 1.0));
         }
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
