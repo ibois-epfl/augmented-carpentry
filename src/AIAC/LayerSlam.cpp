@@ -43,29 +43,36 @@ namespace AIAC
         return glmMat;
     }
 
+    void LayerSlam::GetCamPoseInObjCoord(cv::Mat &rotMat, cv::Mat &tvec){
+        rotMat(cv::Rect(0, 0, 3, 3)) = m_LastTrackedCamPose(cv::Rect(0, 0, 3, 3)).t();
+        tvec(cv::Rect(0, 0, 3, 1)) = m_LastTrackedCamPose(cv::Rect(3, 0, 3, 1));
+        tvec = -rotMat * tvec;
+    }
+
     glm::mat4 LayerSlam::GetInvCamPoseGlm()
     {
         glm::mat4 glmMat;
-        if (m_CamPose.cols != 4 ||m_CamPose.rows != 4 ||m_CamPose.type() != CV_32FC1) {
-            throw std::invalid_argument("GetInvCamPose() error.");
+        if (m_LastTrackedCamPose.cols != 4 ||m_LastTrackedCamPose.rows != 4 ||m_LastTrackedCamPose.type() != CV_32FC1) {
+            throw std::invalid_argument("GetCamPose() error.");
         }
-        memcpy(glm::value_ptr(glmMat),m_CamPose.data, 16 * sizeof(float));
+        memcpy(glm::value_ptr(glmMat), m_LastTrackedCamPose.data, 16 * sizeof(float));
         glmMat = glm::transpose(glmMat);
 
-        glm::mat3 RT;
-        glm::vec3 d;
+        glm::mat3 RT; // rotation matrix
+        glm::vec3 tvec; // transpose vector
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                RT[i][j] = glmMat[i][j]; // Transpose is inverse(R) because R is rotation matrix
+                RT[i][j] = glmMat[j][i]; // Transpose is inverse(R) because R is rotation matrix
             }
-            d[i] = glmMat[3][i];
+            tvec[i] = glmMat[3][i];
         }
-        d = -RT * d;
+
+        tvec = -RT * tvec;
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 glmMat[i][j] = RT[i][j];
             }
-            glmMat[3][i] = d[i];
+            glmMat[3][i] = tvec[i];
         }
         glmMat[3][3] = 1.0f;
 
