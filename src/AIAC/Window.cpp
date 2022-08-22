@@ -73,17 +73,14 @@ namespace AIAC
         }
         ++s_GLFWWindowCount;
 
-
         GLFWimage logo[1];
-        logo[0].pixels = stbi_load((AIAC::Config::Get<std::string>("AIAC", "IconPath")).c_str(),
+        logo[0].pixels = stbi_load("assets/images/logos/logo_linux_gray_light.png",
         &logo[0].width, &logo[0].height, 0, 4);
         glfwSetWindowIcon(m_GLFWWindow, 1, logo); 
         stbi_image_free(logo[0].pixels);
 
-
         glfwMakeContextCurrent(m_GLFWWindow);
         SetVSync(m_Data.VSync);
-
 
         glewExperimental = true;
         if (glewInit() != GLEW_OK)
