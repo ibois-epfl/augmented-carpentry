@@ -22,9 +22,4 @@
 
 #include <stdlib.h>
 
-#include "AIAC/Base.h"
-
-#include "AIAC/Log.h"
-
 #include <opencv2/opencv.hpp>
-

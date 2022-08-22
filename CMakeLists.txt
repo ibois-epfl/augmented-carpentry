@@ -13,6 +13,8 @@ file(GLOB AIAC_SRC
     "src/AIAC/*.cpp"
     "src/AIAC/UI/*.h"
     "src/AIAC/UI/*.cpp"
+    "src/AIAC/EventSys/*.h"
+    "src/AIAC/EventSys/*.cpp"
     "src/utils/*"
     "src/AIAC.h"
     )

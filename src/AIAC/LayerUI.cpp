@@ -41,7 +41,6 @@ namespace AIAC
 
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 14.0f);  // default
 
-        m_IsOpen = new bool(true);
 
         // Load images from memory
         m_LogoBlack = AIAC::Image(AIAC_LOGO_BLACK);
@@ -55,6 +54,8 @@ namespace AIAC
         // TODO: add config for file dialog widget
         //TODO: add vertical menu bar
 
+
+        m_IsOpen = new bool(true);
     }
 
     void LayerUI::OnFrameStart()
