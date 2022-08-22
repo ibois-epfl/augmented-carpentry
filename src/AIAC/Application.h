@@ -61,8 +61,6 @@ namespace AIAC
 
         inline const ApplicationSpecification& GetSpecification() const { return m_AppSpec; }
 
-        // inline static void Close() { s_Instance->Shutdown(); }
-
     private:
         void Init();
         void Shutdown();
