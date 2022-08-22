@@ -21,8 +21,13 @@ public:
     bool Load(const char* path);
     bool Load(std::string path);
 
-    GLuint GetGLBuffer();
+    glm::vec3 GetBboxCenter() { return BoundingBoxCenter; };
+
     void Draw();
+    void DrawVertices(glm::vec4 color, GLfloat pointSize);
+    void DrawEdges(glm::vec4 color);
+    void DrawFaces(glm::vec4 color);
+    void DrawBoundingBoxEdges(glm::vec4 color);
 
 public:
     std::vector<uint32_t> Indices;
@@ -30,6 +35,13 @@ public:
 	std::vector<glm::vec2> UVs;
 	std::vector<glm::vec3> Normals;
     std::vector<glm::vec3> Edges;
+
+    std::map<int, glm::vec3> BoundingBox;
+    std::pair<float, float> BoundingBoxX = {std::numeric_limits<float>::max(), std::numeric_limits<float>::min()};
+    std::pair<float, float> BoundingBoxY = {std::numeric_limits<float>::max(), std::numeric_limits<float>::min()};
+    std::pair<float, float> BoundingBoxZ = {std::numeric_limits<float>::max(), std::numeric_limits<float>::min()};
+    glm::vec3 BoundingBoxCenter;
+    std::vector<glm::vec3> BoundingBoxEdges;
 
 private:
     GLuint m_Vertexbuffer;
