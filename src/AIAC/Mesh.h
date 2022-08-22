@@ -1,5 +1,6 @@
 #pragma once
 #include "GlHeader.h"
+#include "GlUtils.h"
 
 // Include AssImp
 #include "assimp/Importer.hpp"      // C++ importer interface
@@ -24,7 +25,7 @@ public:
     void Draw();
 
 public:
-    std::vector<uint8_t> Indices;
+    std::vector<uint32_t> Indices;
 	std::vector<glm::vec3> Vertices;
 	std::vector<glm::vec2> UVs;
 	std::vector<glm::vec3> Normals;

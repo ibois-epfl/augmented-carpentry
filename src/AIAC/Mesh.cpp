@@ -56,40 +56,9 @@ namespace AIAC
     }
 
     void Mesh::Draw() {
-        glGenBuffers(1, &m_Vertexbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, m_Vertexbuffer);
-        glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(glm::vec3), &Vertices[0], GL_STATIC_DRAW);
-
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, m_Vertexbuffer);
-        glVertexAttribPointer(
-                0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-                3,                  // size
-                GL_FLOAT,           // type
-                GL_FALSE,           // normalized?
-                0,                  // stride
-                (void*) nullptr     // array buffer offset
-        );
-        glDrawArrays(GL_POINTS, 0, (GLsizei)Vertices.size());
-
-        glGenBuffers(1, &m_EdgeBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, m_EdgeBuffer);
-        glBufferData(GL_ARRAY_BUFFER, Edges.size() * sizeof(glm::vec3), &Edges[0], GL_STATIC_DRAW);
-
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, m_EdgeBuffer);
-        glVertexAttribPointer(
-                0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-                3,                  // size
-                GL_FLOAT,           // type
-                GL_FALSE,           // normalized?
-                0,                  // stride
-                (void*) nullptr     // array buffer offset
-        );
-        glDrawArrays(GL_LINES, 0, (GLsizei)Edges.size());
-
-        glDeleteBuffers(1, &m_Vertexbuffer);
-        glDeleteBuffers(1, &m_EdgeBuffer);
+        DrawPoint3d(Vertices, glm::vec4(0.9, 0.9, 0.9, 0.2), 1);
+        DrawLine3d(Edges, glm::vec4(1, 1, 0, 0.5));
+        DrawTriangle3d(Vertices, Indices, glm::vec4(0.6, 0.35, 0.2, 0.3));
     }
 } // namespace AIAC
 
