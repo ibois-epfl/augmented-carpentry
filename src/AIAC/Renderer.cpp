@@ -59,11 +59,7 @@ namespace AIAC
         m_ProjMatrix = perspectiveProjMatrix * scalarMatrix;
 
         // Load meshes
-
         ReloadMeshes();
-
-        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb.ply");
-        // Meshes.emplace_back("/home/tpp/UCOSlam-IBOIS/build/utils/long_new_param_comb_mesh.ply");
 
         GLuint renderedTexture;
         glGenTextures(1, &renderedTexture);
@@ -133,12 +129,47 @@ namespace AIAC
         // Set the list of draw buffers.
         GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
         glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
+
+        // build camera visualization object, which is a pyramid
+        float bW = 1.0f / 2, bH = 0.75f / 2, h = 0.5f;
+        m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(-bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back(-bW,  bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back(-bW, -bH, 0);
+        m_CamVisualizationEdges.emplace_back(  0,   0,-h);
+        m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
+
+        m_GlobalProjMatrix = glm::perspective(
+                glm::radians(45.0f),
+                4.0f / 3.0f, 0.1f,100.0f
+        );
+
+        m_GlobalCamMatrix = glm::lookAt(
+                glm::vec3(30, 30, 30), // the position of your camera, in world space
+                PointCloudMap.BoundingBoxCenter,   // where you want to look at, in world space
+                glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
+        );
     }
 
     void Renderer::ReloadMeshes()
     {
-        std::vector<std::string> defaultMeshPaths = {"assets/tslam/example3dModel.ply", "assets/tslam/examplePointCloud.ply"};
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", defaultMeshPaths);
+        auto pointCloudMapPath = AIAC::Config::Get<string>("Renderer", "PointCloudMapPath", "assets/tslam/examplePointCloud.ply");
+        auto digitalModelPath = AIAC::Config::Get<string>("Renderer", "DigitalModelPath", "assets/tslam/example3dModel.ply");
+
+        PointCloudMap = Mesh(pointCloudMapPath);
+        DigitalModel = Mesh(digitalModelPath);
+
+        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", {});
         for(auto path : meshPaths) {
             Meshes.emplace_back(path);
         }
@@ -171,9 +202,15 @@ namespace AIAC
 
         // Draw the triangle !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        for (auto& mesh : Meshes) {
-            mesh.Draw();
-            mesh.DrawBoundingBoxEdges(glm::vec4(1.0, 0, 0, 1.0));
+        glm::vec4 edgeColor;
+        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
+            PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+            DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+            DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+
+            for (auto& mesh : Meshes) {
+                mesh.DrawEdges(m_DefaultEdgeColor);
+            }
         }
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
@@ -185,47 +222,22 @@ namespace AIAC
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glm::mat4 CameraMatrix = glm::lookAt(
-                glm::vec3(30, 30, 30), // the position of your camera, in world space
-                Meshes[0].BoundingBoxCenter,   // where you want to look at, in world space
-                glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
-        );
-
-        glm::mat4 projectionMatrix = glm::perspective(
-                glm::radians(45.0f), // The vertical Field of View, in radians: the amount of "zoom". Think "camera lens". Usually between 90° (extra wide) and 30° (quite zoomed in)
-                4.0f / 3.0f,       // Aspect Ratio. Depends on the size of your window. Notice that 4/3 == 800/600 == 1280/960, sounds familiar ?
-                0.1f,              // Near clipping plane. Keep as big as possible, or you'll get precision issues.
-                100.0f             // Far clipping plane. Keep as little as possible.
-        );
-
-        auto camPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
-        vector<glm::vec3> camPosition;
-        camPosition.emplace_back(glm::vec3(camPose[3][0], camPose[3][1], camPose[3][2]));
-
-        vector<glm::vec3> rectangle;
-        rectangle.emplace_back(glm::vec3(0, 0, 0));
-        rectangle.emplace_back(glm::vec3(1, 0, 0));
-        rectangle.emplace_back(glm::vec3(1, 0, 0));
-        rectangle.emplace_back(glm::vec3(1, 1, 0));
-        rectangle.emplace_back(glm::vec3(1, 1, 0));
-        rectangle.emplace_back(glm::vec3(0, 1, 0));
-        rectangle.emplace_back(glm::vec3(0, 1, 0));
-        rectangle.emplace_back(glm::vec3(0, 0, 0));
-
-        glm::mat4 finalPoseMatrix1 = projectionMatrix * CameraMatrix * camPose;
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix1[0][0]);
-
-        DrawLines3d(rectangle, glm::vec4(0, 0, 1, 1));
-
-        glm::mat4 finalPoseMatrix = projectionMatrix * CameraMatrix;
+        // visualize map
+        glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        DrawPoints3d(camPosition, glm::vec4(0, 0, 1, 1), 5);
-
+        PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+        DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+        DigitalModel.DrawFaces(m_DigitalModelFaceColor);
         for (auto& mesh : Meshes) {
-            mesh.DrawVertices(glm::vec4(1.0, 0, 0, 1.0), 0.5);
-            mesh.DrawBoundingBoxEdges(glm::vec4(1.0, 0.0, 0.0, 1.0));
+            mesh.DrawEdges(m_DefaultEdgeColor);
         }
+
+        // visualize camera
+        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
