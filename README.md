@@ -222,6 +222,9 @@ AIAC_APP.GetLayer<AIAC::LayerA>()->test_a
 ```
 
 ### UI
+UI is mainly built in ImGui. We wrap some of the functions and add custom functionalities.
+
+#### Panes
 For every new layer you can create a new collapsable pannel in the main UI. To do so follow the next steps.
 
 Create a new function (declare it in `LayerUI.h > Class LayerUI` and implement it in `LayerUI.cpp`) and start calling `ImGui` methods from there, put everythin you need for the UI there. This is the only place where you will write UI for your pane, like so:
@@ -241,6 +244,25 @@ StackPane(PaneUI("Example",              true,       AIAC_BIND_EVENT_FN(SetPaneU
 StackPane(PaneUI("Camera",               true,       AIAC_BIND_EVENT_FN(SetPaneUICamera)          ));
 StackPane(PaneUI("Slam",                 true,       AIAC_BIND_EVENT_FN(SetPaneUISlam)            ));
 StackPane(PaneUI("<your-new-name>",      true,       AIAC_BIND_EVENT_FN(YourNewContainerMethod)   ));
+```
+
+#### File Dialog
+The file dialog widget we use is implemented as *singleton* from [this repo](https://github.com/aiekick/ImGuiFileDialog). This means that only one file dialog widget can be opened at once (it is possible to implement it as multiple instance if needed). If you need to select a file from local system, here's the snippet:
+```c++
+if (ImGui::Button("Open 3dModel"))
+            ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply", ".");
+
+        if (ImGuiFileDialog::Instance()->Display("Choose3dModel")) 
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+            // action
+            /* write here what to do with the file path */
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
 ```
 
 ### Logging
