@@ -204,10 +204,13 @@ namespace AIAC
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glm::vec4 edgeColor;
         if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
-            PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-            DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-            DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-
+            if(ShowPointCloudMap){
+                PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+            }
+            if(ShowDigitalModel){
+                DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+                DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+            }
             for (auto& mesh : Meshes) {
                 mesh.DrawEdges(m_DefaultEdgeColor);
             }

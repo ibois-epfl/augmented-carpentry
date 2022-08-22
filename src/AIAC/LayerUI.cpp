@@ -50,7 +50,7 @@ namespace AIAC
         StackPane(PaneUI("Example",   true,   AIAC_BIND_EVENT_FN(SetPaneUIExample)   ));
         StackPane(PaneUI("Camera",    true,   AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",      true,   AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-
+        StackPane(PaneUI("Render",    true,   AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
     }
 
     void LayerUI::OnFrameStart()
@@ -159,6 +159,11 @@ namespace AIAC
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
     }
 
+    void LayerUI::SetPaneUIRender()
+    {
+        ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
+        ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+    }
 
 
 }
