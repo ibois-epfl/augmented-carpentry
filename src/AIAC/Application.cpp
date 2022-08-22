@@ -75,6 +75,7 @@ namespace AIAC
     void Application::Close()
     {
         m_IsRunning = false;
+        Shutdown();
     }
 
     void Application::Shutdown()
@@ -87,6 +88,8 @@ namespace AIAC
         m_Window->Shutdown();
 
         AIAC::Log::Shutdown();
+
+        exit(EXIT_SUCCESS);
     }
 
 }

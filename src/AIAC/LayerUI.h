@@ -6,6 +6,9 @@
 #include "AIAC/Log.h"
 
 #include "GlHeader.h"
+#include "AIAC/UI/ImGuiFileDialog.h"
+
+
 
 namespace AIAC {
 
@@ -44,19 +47,19 @@ namespace AIAC {
         void OnUIRender();
         virtual void OnDetach() override;
 
+        void ShowMenuBar();
         void ShowMainUI();
-        void ShowSceneViewport();
+        void ShowSceneViewport();  //TODO: set fix camera in 3d scene and pass buffer
 
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
-        static void SetPaneUIExample();
         static void SetPaneUICamera();
         static void SetPaneUISlam();
     
     private:
         int m_testSlider = 0;
 
-        AIAC::Image m_Logo;
-        AIAC::Image m_DebugImgPlaceHolder;
+        AIAC::Image m_LogoBlack;
+        AIAC::Image m_LogoLightGray;
 
         AIAC::ImTexture m_SceneViewportImTexture;
         AIAC::ImTexture m_ARCameraViewportImTexture;
@@ -64,5 +67,7 @@ namespace AIAC {
         bool* m_IsOpen = nullptr;
 
         std::vector<std::shared_ptr<PaneUI>> m_PaneUIStack;
+
+
     };
 }

@@ -24,6 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#include "aiacpch.h"
 
 #include "ImGuiFileDialog.h"
 
@@ -809,6 +810,8 @@ namespace IGFD
 		ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
 		bool edited = ImGui::InputText("##InputImGuiFileDialogSearchField", puSearchBuffer, MAX_FILE_DIALOG_NAME_BUFFER);
 		if (ImGui::GetItemID() == ImGui::GetActiveID())
+			/* ADD HERE TOUCH */
+			std::cout << "Search bar selected" << std::endl;  // DEBUG
 			puSearchInputIsActive = true;
 		ImGui::PopItemWidth();
 		if (edited)
@@ -4030,7 +4033,7 @@ namespace IGFD
 		}
 #endif // USE_THUMBNAILS
 
-		prFileDialogInternal.puSearchManager.DrawSearchBar(prFileDialogInternal);
+		// prFileDialogInternal.puSearchManager.DrawSearchBar(prFileDialogInternal);  //TODO: AIAC: implement virtual touch keybord
 	}
 
 	void IGFD::FileDialog::prDrawContent()

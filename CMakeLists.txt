@@ -11,6 +11,8 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB AIAC_SRC
     "src/AIAC/*.h"
     "src/AIAC/*.cpp"
+    "src/AIAC/UI/*.h"
+    "src/AIAC/UI/*.cpp"
     "src/utils/*"
     "src/AIAC.h"
     )

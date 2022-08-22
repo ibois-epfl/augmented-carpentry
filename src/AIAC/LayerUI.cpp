@@ -3,10 +3,13 @@
 #include "AIAC/LayerUI.h"
 #include "AIAC/Application.h"
 
-#include "stb/stb_image.h"
-#include "stb/stb_image_write.h"
-#include "Renderer.h"
+#include "AIAC/Image.h"
+#include "AIAC/Renderer.h"
 
+#include "AIAC/UI/ImGuiFileDialog.h"
+
+#include "AIAC/UI/ClrPalette.h"
+#include "AIAC/UI/CustomLogos.h"
 
 namespace AIAC
 {
@@ -19,7 +22,9 @@ namespace AIAC
 
         ImGui::StyleColorsLight();
         ImGuiStyle& style = ImGui::GetStyle();
+        style.Colors[ImGuiCol_MenuBarBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.05f);
         style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
+        style.ScrollbarSize = 20.0f;
 
         style.WindowRounding = 4.0f;
         style.ChildRounding = 4.0f;
@@ -32,24 +37,21 @@ namespace AIAC
         ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow()->GetGLFWWindow(), true);
         ImGui_ImplOpenGL3_Init(AIAC_APP.GetWindow()->GetGlslVersion());
 
-        std::cout << "WINDOW type: " << typeid(AIAC_APP.GetWindow()).name() << std::endl;
-
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 14.0f);  // default
 
         m_IsOpen = new bool(true);
 
         // Load images from memory
-        m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png");
-        m_DebugImgPlaceHolder = AIAC::Image("assets/images/placeholder_3d_scene.png");
-
-//        m_Logo = AIAC::Image("assets/images/logo_linux_gray_light.png", AIAC::ImageType::IM_TEXTURE, ImVec2(60, 60));
-//        m_DebugImgPlaceHolder = AIAC::Image("assets/images/placeholder_3d_scene.png", AIAC::ImageType::IM_TEXTURE);
+        m_LogoBlack = AIAC::Image(AIAC_LOGO_BLACK);
+        m_LogoLightGray = AIAC::Image(AIAC_LOGO_LIGHT_GRAY);
 
         // Set panes UI for layers
-        //                 Label    Collapse          PaneContent
-        StackPane(PaneUI("Example",   true,   AIAC_BIND_EVENT_FN(SetPaneUIExample)   ));
-        StackPane(PaneUI("Camera",    true,   AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Slam",      true,   AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        //                 Label       Collapse             PaneContent
+        StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+
+        // TODO: add config for file dialog widget
+        //TODO: add vertical menu bar
 
     }
 
@@ -64,14 +66,11 @@ namespace AIAC
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
-
-
+        ShowMenuBar();
 
         ShowMainUI();
+
         ShowSceneViewport();
-
-
-
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -79,16 +78,38 @@ namespace AIAC
 
     void LayerUI::OnDetach()
     {
+        ImGui::EndMainMenuBar();
+
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
     }
 
+    void LayerUI::ShowMenuBar()
+    {
+        // set menu bar as transparent
+
+        if (ImGui::BeginMainMenuBar())
+        {
+            ImGui::Image(m_LogoBlack.GetImTexture().ID, ImVec2(18, 18), ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::SameLine();
+
+            if (ImGui::BeginMenu("App"))
+            {
+                if (ImGui::MenuItem("Close"))
+                {
+                    *m_IsOpen = false;
+                    AIAC_APP.Close();
+                }
+            }
+            ImGui::EndMenu();
+        }
+    }
 
     void LayerUI::ShowMainUI()
     {
         ImGui::Begin("augmented_carpentry", m_IsOpen);
-        ImGui::Image(m_Logo.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        ImGui::Image(m_LogoLightGray.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
         
@@ -109,36 +130,13 @@ namespace AIAC
 
         ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-        m_SceneViewportImTexture = m_DebugImgPlaceHolder.GetImTexture();  // DEBUG
-        ImGui::Image(m_SceneViewportImTexture.ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        ImGui::Image(m_LogoLightGray.GetImTexture().ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        
         ImGui::EndChild();
         
         ImGui::End();
     }
 
-    void LayerUI::SetPaneUIExample()
-    {
-        ImGui::Text("This is a test message for the example layer");
-        ImGuiIO& io = ImGui::GetIO();
-        if (ImGui::Button("Test"))
-        {
-            // io.MousePos.x = io.MousePos.y = -1;
-            // ImGui::GetIO().MouseDown[0] = true;
-            AIAC_INFO("Test button pressed");
-        }
-
-        
-        // print mouse position
-        // std::cout << "Mouse pos: " << io.MousePos.x << " " << io.MousePos.y << std::endl;
-
-        // raise an event if mouse is double clicked
-        if (ImGui::IsMouseDoubleClicked(0))
-        {
-            AIAC_INFO("Mouse double clicked");
-
-        }
-
-    }
 
     void LayerUI::SetPaneUICamera()
     {
@@ -154,7 +152,61 @@ namespace AIAC
 
     void LayerUI::SetPaneUISlam()
     {
+        ImGui::Text("Import files:");
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+        if (ImGui::Button("Open camera calib"))
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
+
+        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib")) 
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+            // action
+            /* write here what to do with the file path */
+            // TODO: Raise event for SLAM
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Open SLAM map"))
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
+
+        if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap")) 
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+            // action
+            /* write here what to do with the file path */
+            // TODO: Raise event for SLAM
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Open 3dModel"))
+            ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply", ".");
+
+        if (ImGuiFileDialog::Instance()->Display("Choose3dModel")) 
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+            // action
+            /* write here what to do with the file path */
+            // TODO: Raise event for SLAM
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+        ImGui::PopStyleColor();
+        ImGui::EndChild();
+
         ImGui::Text("Tracked: %s", AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked() ? "Yes" : "No");
+
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
     }

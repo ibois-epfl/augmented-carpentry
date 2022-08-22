@@ -224,6 +224,22 @@ AIAC_APP.GetLayer<AIAC::LayerA>()->test_a
 ### UI
 UI is mainly built in ImGui. We wrap some of the functions and add custom functionalities.
 
+#### Logos
+Logos addresses/data is store in `CustomLogos.h`. As an example:
+```c++
+#define AIAC_LOGO_LIGHT_GRAY "assets/images/logos/logo_linux_gray_light.png"
+```
+E.g. to consume it:
+```c++
+m_LogoBlack = AIAC::Image(AIAC_LOGO_BLACK);
+```
+
+#### Colors
+Colors macros can be found/add in the header `ClrPalette.h` with the following definition style:
+```c++
+#define AIAC_UI_DARK_GREY ImVec4(0.2f, 0.2f, 0.2f, 1.0f)
+```
+
 #### Panes
 For every new layer you can create a new collapsable pannel in the main UI. To do so follow the next steps.
 
@@ -250,7 +266,7 @@ StackPane(PaneUI("<your-new-name>",      true,       AIAC_BIND_EVENT_FN(YourNewC
 The file dialog widget we use is implemented as *singleton* from [this repo](https://github.com/aiekick/ImGuiFileDialog). This means that only one file dialog widget can be opened at once (it is possible to implement it as multiple instance if needed). If you need to select a file from local system, here's the snippet:
 ```c++
 if (ImGui::Button("Open 3dModel"))
-            ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply", ".");
+            ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply, .obj", ".");
 
         if (ImGuiFileDialog::Instance()->Display("Choose3dModel")) 
         {
