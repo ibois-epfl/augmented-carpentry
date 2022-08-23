@@ -106,8 +106,9 @@ namespace AIAC
                     *m_IsOpen = false;
                     AIAC_EBUS->EnqueueEvent(std::make_shared<AppCloseEvent>());
                 }
+                ImGui::EndMenu();
             }
-            ImGui::EndMenu();
+            ImGui::EndMainMenuBar();
         }
     }
 
@@ -125,20 +126,72 @@ namespace AIAC
 
     void LayerUI::ShowSceneViewport()
     {
-        ImGui::Begin("scene_viewport", m_IsOpen);
+        ImGui::Begin("Scene Viewport", m_IsOpen);
 
-        ImGui::Text("PLACEHOLDER for importer UI");
+//        ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-        ImGui::Dummy(ImVec2(0.0f, 10.0f));
-
-        ImGui::Text("3D viewer with fix camera");
-
-        ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-        ImGui::Image(m_LogoLightGray.GetImTexture().ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
-        
-        ImGui::EndChild();
-        
+        viewportSize.y -= (ImGui::GetTextLineHeight() + 10);
+        AIAC_APP.GetRenderer()->SetGlobalViewSize(viewportSize.x, viewportSize.y);
+
+        if(ImGui::IsMouseDragging(0, 0.0f)) {
+            if(m_IsMouseLDown){
+                if(m_AdjustTarget == AdjustTarget::SCALE){
+                    ImVec2 mousePos = ImGui::GetMousePos();
+                    AIAC_APP.GetRenderer()->UpdateGlobalViewCameraScale(mousePos.x - m_LastMouseLPos.x - mousePos.y + m_LastMouseLPos.y);
+                    m_LastMouseLPos = mousePos;
+                } else {
+                    ImVec2 mousePos = ImGui::GetMousePos();
+                    AIAC_APP.GetRenderer()->UpdateGlobalViewCameraRotation(mousePos.x - m_LastMouseLPos.x, mousePos.y - m_LastMouseLPos.y);
+                    m_LastMouseLPos = mousePos;
+                }
+            }
+        }
+        if(ImGui::IsMouseDragging(1, 0.0f)) {
+            if(m_IsMouseRDown){
+                ImVec2 mousePos = ImGui::GetMousePos();
+                AIAC_APP.GetRenderer()->UpdateGlobalViewCameraTranslation(mousePos.x - m_LastMouseRPos.x, mousePos.y - m_LastMouseRPos.y);
+                m_LastMouseRPos = mousePos;
+            }
+        }
+
+        CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetGlobalView(), m_SceneViewportImTexture);
+        ImGui::ImageButton(m_SceneViewportImTexture.ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
+        if(ImGui::IsItemHovered()) {
+            if(ImGui::IsMouseDown(0)) {
+                if(!m_IsMouseLDown){
+                    m_IsMouseLDown = true;
+                    m_AdjustTarget = AdjustTarget::TRANSLATION;
+                    m_LastMouseLPos = ImGui::GetMousePos();
+                }
+            }
+            if(ImGui::IsMouseDown(1)) {
+                if(!m_IsMouseRDown){
+                    m_IsMouseRDown = true;
+                    m_AdjustTarget = AdjustTarget::ROTATION;
+                    m_LastMouseRPos = ImGui::GetMousePos();
+                }
+            }
+        }
+        if(ImGui::IsMouseReleased(0)){
+            m_IsMouseLDown = false;
+        }
+        if(ImGui::IsMouseReleased(1)){
+            m_IsMouseRDown = false;
+        }
+//        ImGui::EndChild();
+
+        ImGui::Button("Scale");
+        if(ImGui::IsItemHovered()) {
+            if(ImGui::IsMouseDown(0)) {
+                if(!m_IsMouseLDown){
+                    m_AdjustTarget = AdjustTarget::SCALE;
+                    m_IsMouseLDown = true;
+                    m_LastMouseLPos = ImGui::GetMousePos();
+                }
+            }
+        }
+
         ImGui::End();
     }
 
@@ -163,7 +216,7 @@ namespace AIAC
         if (ImGui::Button("Open SLAM map"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap")) 
+        if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
@@ -176,7 +229,7 @@ namespace AIAC
         if (ImGui::Button("Open Vocab"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseVocab")) 
+        if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
@@ -189,7 +242,7 @@ namespace AIAC
         if (ImGui::Button("Open camera calib"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib")) 
+        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {

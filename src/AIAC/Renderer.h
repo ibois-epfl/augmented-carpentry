@@ -23,6 +23,10 @@ namespace AIAC
         void ReloadMeshes();
 
         GLuint GetGlobalView() { return m_GlobalViewTexture; };
+        void SetGlobalViewSize(float w, float h);
+        void UpdateGlobalViewCameraTranslation(double diffX, double diffY);
+        void UpdateGlobalViewCameraRotation(double diffX, double diffY);
+        void UpdateGlobalViewCameraScale(double diff);
 
     public:
         AIAC::Mesh PointCloudMap;
@@ -48,6 +52,7 @@ namespace AIAC
         GLuint m_GlobalViewTexture;
         glm::mat4 m_GlobalCamMatrix;
         glm::mat4 m_GlobalProjMatrix;
+        float m_GlobalViewWidth=400, m_GlobalViewHeight=300;
 
         std::vector<glm::vec3> m_CamVisualizationEdges;
 

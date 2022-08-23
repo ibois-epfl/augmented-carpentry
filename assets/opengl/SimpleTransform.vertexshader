@@ -6,10 +6,14 @@ layout(location = 0) in vec3 vertexPosition_modelspace;
 // Values that stay constant for the whole mesh.
 uniform mat4 MVP;
 
+in vec4 color;
+out vec4 color_from_vshader;
+
 void main(){
 
 	// Output position of the vertex, in clip space : MVP * position
 	gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
-
+	color_from_vshader = color;
+	
 }
 

@@ -12,7 +12,6 @@
 
 namespace AIAC {
 
-    
     class PaneUI
     {
     public:
@@ -64,6 +63,15 @@ namespace AIAC {
 
         AIAC::ImTexture m_SceneViewportImTexture;
         AIAC::ImTexture m_ARCameraViewportImTexture;
+
+        ImVec2 m_LastMouseLPos, m_LastMouseRPos;
+        bool m_IsMouseLDown = false, m_IsMouseRDown = false;
+
+        enum class AdjustTarget {
+            SCALE,
+            ROTATION,
+            TRANSLATION
+        } m_AdjustTarget = AdjustTarget::SCALE;
 
         bool* m_IsOpen = nullptr;
 
