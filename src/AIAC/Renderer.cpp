@@ -214,6 +214,7 @@ namespace AIAC
             for (auto& mesh : Meshes) {
                 mesh.DrawEdges(m_DefaultEdgeColor);
             }
+            DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 

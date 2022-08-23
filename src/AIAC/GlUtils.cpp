@@ -153,7 +153,7 @@ namespace AIAC {
         DrawPoints3d(mapPoints, color, 1.0f);
 
         std::vector<glm::vec3> markerEdges(map->map_markers.size() * 4 * 2);
-        std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, color);
+        std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, BLUE);
         for(const auto& mapMarker: map->map_markers){
             auto points = mapMarker.second.get3DPoints();
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
@@ -163,16 +163,16 @@ namespace AIAC {
             }
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
 
-            markerEdgeColors.emplace_back(RED);
-            markerEdgeColors.emplace_back(RED);
             markerEdgeColors.emplace_back(BLUE);
             markerEdgeColors.emplace_back(BLUE);
-            markerEdgeColors.emplace_back(GREEN);
-            markerEdgeColors.emplace_back(GREEN);
+            markerEdgeColors.emplace_back(BLUE);
+            markerEdgeColors.emplace_back(BLUE);
             markerEdgeColors.emplace_back(YELLOW);
             markerEdgeColors.emplace_back(YELLOW);
+            markerEdgeColors.emplace_back(YELLOW);
+            markerEdgeColors.emplace_back(YELLOW);
+
         }
         DrawLines3d(markerEdges, markerEdgeColors);
-
     }
 }
