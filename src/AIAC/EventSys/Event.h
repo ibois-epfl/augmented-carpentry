@@ -6,7 +6,6 @@
 #include "eventpp/include/eventpp/eventpolicies.h"
 
 
-
 namespace AIAC
 {
     enum class EventType
@@ -30,8 +29,8 @@ namespace AIAC
     class Event
     {
     public:
-        explicit Event(const EventType type, const EventCategory category = EventCategory::None)
-            : m_Type(type), m_Category(category)
+        explicit Event(const EventType type, const EventCategory category = EventCategory::None, int32_t priority = 0)
+            : m_Type(type), m_Category(category), m_Priority(priority)
         {}
         virtual ~Event() = default;
 
@@ -41,12 +40,25 @@ namespace AIAC
     private:
         EventType m_Type;
         EventCategory m_Category;
+        int32_t m_Priority;
     };
 
     using EventPointer = std::shared_ptr<Event>;
 
+    struct EventCompare
+    {
+        template <typename T>
+        bool operator() (const T & a, const T & b) const
+        {
+            return a->GetPriority() > b->GetPriority();
+        }
+    };
+
     struct EventPolicy
     {
+        template <typename Item>
+        using PrioriQueueListtyQueue = std::priority_queue<Item, std::vector<Item>, EventCompare>;
+
         static EventType GetEvent(const EventPointer& event) {
             return event->GetType();
         }
