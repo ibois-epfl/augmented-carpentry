@@ -48,6 +48,8 @@ namespace AIAC
             m_EventQueue.dispatch(sharedPtrEvent->GetType(), sharedPtrEvent);
         }
 
+        inline bool IsEventQueueEmpty() const { return m_EventQueue.emptyQueue(); }
+
     private:
         EQ m_EventQueue;
     };

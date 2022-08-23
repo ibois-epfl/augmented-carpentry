@@ -46,7 +46,8 @@ namespace AIAC
 
         while (m_Window->IsOpen())
         {
-            m_EventBus->ProcessQueue();
+            if(!m_EventBus->IsEventQueueEmpty())
+                m_EventBus->ProcessQueue();
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameAwake();

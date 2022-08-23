@@ -370,7 +370,6 @@ m_EventQueue.appendListener(EventType::ExampleCalled, [](const EventPointer& eve
             });
 ```
 
-
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 
 ```c++
