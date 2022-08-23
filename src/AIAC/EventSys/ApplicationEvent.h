@@ -8,7 +8,7 @@ namespace AIAC
     {
     public:
         explicit AppCloseEvent()
-            : Event(EventType::AppClose)
+            : Event(EventType::AppClose, EventCategory::EventCategoryApplication)
         {}
 
         void OnAppClose();
