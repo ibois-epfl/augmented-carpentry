@@ -104,7 +104,7 @@ namespace AIAC
                 if (ImGui::MenuItem("Close"))
                 {
                     *m_IsOpen = false;
-                    AIAC_APP.Close();
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<AppCloseEvent>());
                 }
             }
             ImGui::EndMenu();
@@ -168,13 +168,7 @@ namespace AIAC
             if (ImGuiFileDialog::Instance()->IsOk())
             {
             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-            // action
-            /* write here what to do with the file path */
-            // TODO: Raise event to restart SLAM
-            // AIAC_EBUS->EnqueueEvent(EventType::SLAMMapLoaded, std::make_shared<SLAMMapLoadedEvent>(filePath));
-            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePath));
-
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
             }
             ImGuiFileDialog::Instance()->Close();
         }
@@ -187,11 +181,7 @@ namespace AIAC
             if (ImGuiFileDialog::Instance()->IsOk())
             {
             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-            // action
-            /* write here what to do with the file path */
-            // TODO: Raise event for SLAM to restart
-            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePath));
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
             }
             ImGuiFileDialog::Instance()->Close();
         }
@@ -204,31 +194,10 @@ namespace AIAC
             if (ImGuiFileDialog::Instance()->IsOk())
             {
             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-            // action
-            /* write here what to do with the file path */
-            // TODO: Raise event for SLAM to restart
-            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePath));
+            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
             }
             ImGuiFileDialog::Instance()->Close();
         }
-        // FIXME: 3Dmodel import is this decoupled from SLAM layer?
-        // ImGui::SameLine();
-        // if (ImGui::Button("Open 3dModel"))
-        //     ImGuiFileDialog::Instance()->OpenDialog("Choose3dModel", "Open 3dModel", ".ply", ".");
-
-        // if (ImGuiFileDialog::Instance()->Display("Choose3dModel")) 
-        // {
-        //     if (ImGuiFileDialog::Instance()->IsOk())
-        //     {
-        //     std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-        //     std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-        //     // action
-        //     /* write here what to do with the file path */
-        //     // TODO: Raise event for SLAM to restart
-        //     }
-        //     ImGuiFileDialog::Instance()->Close();
-        // }
         ImGui::PopStyleColor();
         ImGui::EndChild();
 

@@ -29,9 +29,9 @@ namespace AIAC
         }
 
         // load camera params
-        auto filePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
+        m_CalibParamPath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
         int tmp;
-        LoadCameraParams(filePath, tmp, tmp, m_CameraMatrix, m_DistortionCoef);
+        LoadCameraParams(m_CalibParamPath, tmp, tmp, m_CameraMatrix, m_DistortionCoef);
     }
 
     void Camera::SetCalibrationParams(cv::Mat cameraMatrix, cv::Mat distortionCoef)
@@ -70,5 +70,12 @@ namespace AIAC
         // m_VideoCapture >> nextFrame;
         m_VideoCapture >> m_CurrentFrame;
         return m_CurrentFrame;
+    }
+
+    void Camera::SetCalibrationFilePath(const std::string &filePath)
+    {
+        m_CalibParamPath = filePath;
+        int tmp;
+        LoadCameraParams(m_CalibParamPath, tmp, tmp, m_CameraMatrix, m_DistortionCoef);
     }
 }

@@ -23,8 +23,6 @@ namespace AIAC
         glm::mat4 GetCamPoseGlm();
         glm::mat4 GetInvCamPoseGlm();
 
-        inline void DummyRestart(std::string filePath) const { std::cout << filePath << std::endl; }  // test
-
         void GetCamPoseInObjCoord(cv::Mat &rotationMatrix, cv::Mat &tvec);
 
     public:

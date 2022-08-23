@@ -71,8 +71,6 @@ namespace AIAC
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();
 
-
-
         }
     }
 

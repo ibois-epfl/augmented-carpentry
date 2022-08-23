@@ -101,6 +101,12 @@ private:
     int m_PrivateVariable; // m_VariableName for normal variable
     static int s_Instance; // s_VariableName for static variable
 };
+
+// Start headers with 
+#pragma once
+
+// Start declarations with precompiled headers
+#include "aiacpch.h"
 ```
 
 ### Config
@@ -154,7 +160,6 @@ AIAC::Config::WriteToFile();
 AIAC::Config::WriteToFile("another_config_file.ini");
 
 ```
-
 After running thie code above, you gets the following output:
 ```
 -1
@@ -280,6 +285,79 @@ if (ImGui::Button("Open 3dModel"))
             ImGuiFileDialog::Instance()->Close();
         }
 ```
+
+### Event System
+We implement a *bus*-like event system based on the [observer pattern](https://sourcemaking.com/design_patterns/observer/cpp/3) and the [tppevent repo](https://github.com/ibois-epfl/eventpp). All the event files are contained in the dir `AIAC/EventSys`.
+
+#### How to raise events
+The event *bus* is stored in the Application. You can raise events from other files in two ways, either *synchronusly*, the event will be fired immediately with:
+```c++
+AIAC_EBUS->DispatchEvent(std::make_shared<SmtHappenedEvent>(param))
+```
+Or *a-synchronusly*, the event will be stored in the *bus* queue and executed in the main loop, before any layer frame calls:
+```c++
+IAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+```
+> Note that you need to pass a `std::shared_ptr<Event>` to the event raisers.
+
+#### How to add events
+First Add the event type in `Event.h` if it does not exist already:
+```c++
+enum class EventType
+    {
+        None = 0,
+        AppClose,
+        SLAMMapLoaded, SLAMVocabularyLoaded,
+        CameraCalibrationLoaded,
+        ExampleCalled  // <-- example
+        /* add types of events here */
+    };
+```
+Next, create a new event file with a class that inherits from `class Event`, as an example `ExampleEvent.h`:
+```c++
+namespace AIAC
+{
+    class ExampleCalledEvent : public Event
+    {
+    public:
+        explicit ExampleCalledEvent(const std::string param)
+            : Event(EventType::ExampleCalled), m_Param(param)
+        {}
+
+        void OnExampleCalled();
+
+    private:
+        std::string m_Param;
+    };
+}
+```
+Do not forget to add the header to `AIAC.h` in the correct order.
+``` c++
+#include "AIAC/EventSys/Event.h"
+#include "AIAC/EventSys/ExampleEvent.h"
+/* >> add types of events here << */
+#include "AIAC/EventSys/EventBus.h"
+```
+In the declaration you can access layers via `AIAC_APP` as usual:
+```c++
+namespace AIAC
+{
+    void ExampleCalledEvent::OnExampleCalled()
+    {
+        AIAC_APP.GetLayer<LayerName>()->Func(m_Param);
+    }
+}
+```
+Finally you just need to add a listener to the `Init()` function of `EventBus.h`:
+```c++
+#include "AIAC/EventSys/ExampleEvent.h"
+
+m_EventQueue.appendListener(EventType::ExampleCalled, [](const EventPointer& event) {
+                auto& slamEvent = static_cast<ExampleCalledEvent&>(*event);
+                slamEvent.OnExampleCalled();
+            });
+```
+
 
 ### Logging
 To log use the following MACROS. All the code is contained in `Log.hpp` and `Log.cpp`. 

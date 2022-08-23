@@ -3,6 +3,7 @@
 #include "AIAC/EventSys/Event.h"
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/EventSys/CameraEvent.h"
+#include "AIAC/EventSys/ApplicationEvent.h"
 
 
 namespace AIAC
@@ -27,12 +28,12 @@ namespace AIAC
                 auto& cameraEvent = static_cast<CameraCalibrationLoadedEvent&>(*event);
                 cameraEvent.OnCameraCalibrationLoaded();
             });
+            m_EventQueue.appendListener(EventType::AppClose, [](const EventPointer& event) {
+                auto& appEvent = static_cast<AppCloseEvent&>(*event);
+                appEvent.OnAppClose();
+            });
         }
 
-        void EnqueueEvent(const EventType & type, const EventPointer& sharedPtrEvent)
-        {
-            m_EventQueue.enqueue(type, sharedPtrEvent);
-        }
         void EnqueueEvent(const EventPointer& sharedPtrEvent)
         {
             m_EventQueue.enqueue(sharedPtrEvent->GetType(), sharedPtrEvent);
@@ -42,9 +43,9 @@ namespace AIAC
         void ProcessQueue() { m_EventQueue.process(); }
 
         // Synchronus
-        void DispatchEvent(const EventType & type, const EventPointer& sharedPtrEvent)
+        void DispatchEvent(const EventPointer& sharedPtrEvent)
         {
-            m_EventQueue.dispatch(type, sharedPtrEvent);
+            m_EventQueue.dispatch(sharedPtrEvent->GetType(), sharedPtrEvent);
         }
 
     private:
