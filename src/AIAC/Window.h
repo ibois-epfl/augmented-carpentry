@@ -2,8 +2,6 @@
 
 #include "AIAC/GlHeader.h"
 #include "AIAC/TouchMonitor.h"
-
-
 namespace AIAC
 {
     struct WindowProps
@@ -49,6 +47,10 @@ namespace AIAC
 
         inline int GetDisplayW() { return m_DisplayW; }
         inline int GetDisplayH() { return m_DisplayH; }
+
+//    private:
+//        static void m_MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+//        static void m_MouseMoveCallback(GLFWwindow* window, double x, double y);
 
     private:
         AIAC::TouchMonitor* m_TouchMonitor;

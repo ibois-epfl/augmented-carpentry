@@ -65,6 +65,9 @@ namespace AIAC {
         AIAC::ImTexture m_SceneViewportImTexture;
         AIAC::ImTexture m_ARCameraViewportImTexture;
 
+        ImVec2 m_LastMouseLPos, m_LastMouseRPos;
+        bool m_IsMouseLDown = false, m_IsMouseRDown = false;
+
         bool* m_IsOpen = nullptr;
 
         std::vector<std::shared_ptr<PaneUI>> m_PaneUIStack;

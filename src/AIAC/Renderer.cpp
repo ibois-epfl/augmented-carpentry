@@ -156,7 +156,7 @@ namespace AIAC
 
         m_GlobalCamMatrix = glm::lookAt(
                 glm::vec3(30, 30, 30), // the position of your camera, in world space
-                PointCloudMap.BoundingBoxCenter,   // where you want to look at, in world space
+                DigitalModel.BoundingBoxCenter,   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
     }
@@ -218,6 +218,19 @@ namespace AIAC
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         m_RenderGlobalView();
+    }
+
+    void Renderer::UpdateGlobalViewCameraRotation(double diffX, double diffY){
+        auto t1 = glm::translate(glm::mat4(1),-DigitalModel.BoundingBoxCenter);
+        auto rx = glm::rotate(glm::mat4(1), float(-diffX / 100), glm::vec3(0,1,0));
+        auto ry = glm::rotate(glm::mat4(1), float(-diffY / 100), glm::vec3(1,0,0));
+        auto t2 = glm::translate(glm::mat4(1), DigitalModel.BoundingBoxCenter);
+        m_GlobalCamMatrix = m_GlobalCamMatrix * t2 * rx * ry * t1;
+    }
+
+    void Renderer::UpdateGlobalViewCameraTranslation(double diffX, double diffY){
+        m_GlobalCamMatrix[3][0] += float(diffX) / 10;
+        m_GlobalCamMatrix[3][1] -= float(diffY) / 10;
     }
 
     void Renderer::m_RenderGlobalView() {
