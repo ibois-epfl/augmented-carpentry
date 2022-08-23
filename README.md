@@ -111,7 +111,7 @@ private:
 
 ### Config
 We use an [.ini]() file to store the config parameters of the application. The parser is derived from [this project]() but with some modification. Here's an example:
-- Declaration:
+#### Declaration
 ```cpp
 // Just include this header
 #include "AIAC/Config.h"
@@ -123,7 +123,7 @@ We use an [.ini]() file to store the config parameters of the application. The p
 inih::Ini config("config.ini", true);
 ```
 
-- Usage
+#### Usage
 ```cpp
 AIAC::Config::Get<int>("section", "key1", 10);
 
@@ -287,7 +287,7 @@ if (ImGui::Button("Open 3dModel"))
 ```
 
 ### Event System
-We implement a *bus*-like event system based on the [observer pattern](https://sourcemaking.com/design_patterns/observer/cpp/3) and the [tppevent repo](https://github.com/ibois-epfl/eventpp). All the event files are contained in the dir `AIAC/EventSys`.
+We implement a *bus*-like event system based on the [observer pattern](https://sourcemaking.com/design_patterns/observer/cpp/3) and the [tppevent repo](https://github.com/ibois-epfl/eventpp). It is not *multi-threaded* but it can be modified as such. All the event files are contained in the dir `AIAC/EventSys`.
 
 #### How to raise events
 The event *bus* is stored in the Application. You can raise events from other files in two ways, either *synchronusly*, the event will be fired immediately with:
