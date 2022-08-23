@@ -110,7 +110,7 @@ namespace AIAC
         glBindTexture(GL_TEXTURE_2D, m_GlobalViewTexture);
 
         // Give an empty image to OpenGL ( the last "0" )
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, 640, 480, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_GlobalViewWidth, m_GlobalViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
 
         // Poor filtering. Needed !
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -120,7 +120,7 @@ namespace AIAC
         GLuint depthrenderbuffer;
         glGenRenderbuffers(1, &depthrenderbuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 640, 480);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_GlobalViewWidth, m_GlobalViewHeight);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
 
         // Set "renderedTexture" as our colour attachement #0
@@ -150,13 +150,13 @@ namespace AIAC
         m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
 
         m_GlobalProjMatrix = glm::perspective(
-                glm::radians(45.0f),
-                4.0f / 3.0f, 0.1f,100.0f
+                glm::radians(35.0f),
+                m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,100.0f
         );
 
         m_GlobalCamMatrix = glm::lookAt(
-                glm::vec3(30, 30, 30), // the position of your camera, in world space
-                PointCloudMap.BoundingBoxCenter,   // where you want to look at, in world space
+                glm::vec3(50, 50, 50), // the position of your camera, in world space
+                DigitalModel.BoundingBoxCenter,   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
     }
@@ -220,6 +220,32 @@ namespace AIAC
         m_RenderGlobalView();
     }
 
+    void Renderer::SetGlobalViewSize(float w, float h) {
+        m_GlobalViewWidth = w;
+        m_GlobalViewHeight = h;
+        m_GlobalProjMatrix = glm::perspective(
+                glm::radians(50.0f),
+                m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,300.0f
+        );
+    }
+
+    void Renderer::UpdateGlobalViewCameraRotation(double diffX, double diffY){
+        auto t1 = glm::translate(glm::mat4(1),-DigitalModel.BoundingBoxCenter);
+        auto rx = glm::rotate(glm::mat4(1), float(-diffX / 100), glm::vec3(0,1,0));
+        auto ry = glm::rotate(glm::mat4(1), float(-diffY / 100), glm::vec3(1,0,0));
+        auto t2 = glm::translate(glm::mat4(1), DigitalModel.BoundingBoxCenter);
+        m_GlobalCamMatrix = m_GlobalCamMatrix * t2 * rx * ry * t1;
+    }
+
+    void Renderer::UpdateGlobalViewCameraTranslation(double diffX, double diffY){
+        m_GlobalCamMatrix[3][0] += float(diffX) / 10;
+        m_GlobalCamMatrix[3][1] -= float(diffY) / 10;
+    }
+
+    void Renderer::UpdateGlobalViewCameraScale(double diff) {
+        m_GlobalCamMatrix[3][2] += float(diff) / 10;
+    }
+
     void Renderer::m_RenderGlobalView() {
         glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
         glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -244,6 +270,5 @@ namespace AIAC
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
     }
 }
