@@ -11,9 +11,14 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 
 ## TODOList
 
-> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth. First we implement a "blocking event system"(we raise and dispatch the event immediately), next a "polling event system" (we ask the sys if a condition is met).
+> - [ ] Starting to design the Dfab engine for live calculations
+> - [ ] Add readme for render API how to use
+> - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
+> - [ ] Add Mapping subprogram + UI
+> - [ ] Implement padding for 3D scene viewer
+> - [ ] Test if changing map on the go breaks the slam or not
 
-> MINOR: set a borderless window on the touch screen directly and automatically (maybe with a check if the touch display is present).
+<br />
 
 ## Set touch monitor
 
@@ -28,6 +33,15 @@ monitor_resolution = 800x480
 ```
 **You can build AS with the touch screen or on a non-touch screen.** To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` in the `CMakeLists.txt`:
 
+<br />
+
+## STag PDFs
+Stags are prepared in PDFs batches of ~150 stripes. You can find them [here](https://drive.google.com/drive/folders/1jic85gclymiV9014zc3tuUgIBq8lTyZr?usp=sharing).
+They are made to be print as stickers. The code to generate them can be found ![here](https://github.com/ibois-epfl/TSlam/tree/main/stag_util).
+
+
+<br />
+
 
 ## Build
 We need a first to install TSlam:
@@ -41,13 +55,6 @@ To run the code:
 ```bash
 ./run.sh
 ```
-
-<br />
-
-## STag PDFs
-Stags are prepared in PDFs batches of ~150 stripes. You can find them [here](https://drive.google.com/drive/folders/1jic85gclymiV9014zc3tuUgIBq8lTyZr?usp=sharing).
-They are made to be print as stickers. The code to generate them can be found ![here](https://github.com/ibois-epfl/TSlam/tree/main/stag_util).
-
 
 <br />
 
