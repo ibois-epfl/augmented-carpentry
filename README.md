@@ -6,6 +6,7 @@
     <img src="./assets/images/logos/logo_linux_gray_light.png" width="200">
 </p>
 
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ibois-epfl)](https://github.com/anuraghazra/github-readme-stats)
 
 ARapp is a linux desktop application containing a custom-made framework for augmented carpentry.
 
