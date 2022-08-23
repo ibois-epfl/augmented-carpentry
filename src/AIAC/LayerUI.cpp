@@ -105,8 +105,9 @@ namespace AIAC
                     *m_IsOpen = false;
                     AIAC_APP.Close();
                 }
+                ImGui::EndMenu();
             }
-            ImGui::EndMenu();
+            ImGui::EndMainMenuBar();
         }
     }
 
