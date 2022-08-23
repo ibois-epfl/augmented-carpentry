@@ -394,3 +394,71 @@ The logging can be silenced by setting OFF the option in the main `CMakeLists.tx
 ```cmake
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 ```
+
+### Renderer API
+The renderer API is implemented in `GlUtils.h`, which provides an easier way to draw 3d objects with OpenGL.
+There are 3 types of object that can be drawn: `Point`, `Line`, and `Triangle`.
+#### Point
+```c++
+void DrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize);
+void DrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize);
+```
+- `vertices`: A vector of 3d points, indicate the position of the vertices.
+- `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the `vertices`. 
+- `pointSize`: The size of the point.
+
+- Line
+```c++
+void DrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors);
+void DrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color);
+
+/* 
+ * (0, 1, 0) --- (1, 0, 0)
+ *     |             |
+ *     |             |
+ *     |             |
+ * (0, 0, 0) --- (0, 0, 1)
+ * 
+ * If you want to draw a square like this, you should construct the `edges` as:
+ * [
+ *    (0, 0, 0), (0, 0, 1),
+ *    (0, 0, 1), (1, 0, 0),
+ *    (1, 0, 0), (0, 1, 0),
+ *    (0, 1, 0), (0, 0, 0)
+ * ]
+ * 
+ * */
+```
+- `edges`: A vector of the edge's end-points.
+- `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the `edges`.
+
+- Triangle
+```c++
+void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors);
+void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &colors);
+/* 
+ * P2(0, 1, 0) --- P3(1, 0, 0)
+ *     |            /    |
+ *     |          /      |
+ *     |        /        |
+ *     |      /          |
+ *     |    /            |
+ * P0(0, 0, 0) --- P1(0, 0, 1)
+ * 
+ * If you want to draw a mesh of square like this, you should construct the `edges` as:
+ * [
+ *    (0, 0, 0), // P0
+ *    (0, 0, 1), // P1
+ *    (1, 0, 0), // P2
+ *    (0, 1, 0), // P3
+ * ]
+ * with `indices`:
+ * [
+ *     0, 1, 3, // Right-bottom triangle
+ *     3, 2, 0  // Left-top triangle
+ * ]
+ * */
+```
+- `vertices`: A vector of 3d points, indicate the position of the vertices.
+- `indices`: A vector of all triangle's indices.
+- `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the vertices.
