@@ -10,6 +10,9 @@
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerCamera.h"
 
+#include "AIAC/EventSys/EventBus.h"
+
+
 namespace AIAC
 {
     struct ApplicationSpecification
@@ -54,8 +57,9 @@ namespace AIAC
             return nullptr;
         }
 
-        inline Renderer* GetRenderer() { return m_Renderer; }
-        inline AIAC::Window* GetWindow() { return m_Window; }
+        inline AIAC::Window*& GetWindow() { return m_Window; }
+        inline Renderer*& GetRenderer() { return m_Renderer; }
+        inline EventBus*& GetEventBus() { return m_EventBus; }
 
         inline static Application& GetInstance() { return *s_Instance; }
 
@@ -68,7 +72,8 @@ namespace AIAC
     private:
         ApplicationSpecification m_AppSpec;
 
-        AIAC::Window* m_Window;
+        Window* m_Window;
+        EventBus* m_EventBus;
         Renderer* m_Renderer;
 
         bool m_IsRunning = false;
@@ -82,5 +87,6 @@ namespace AIAC
 }
 
 #define AIAC_APP AIAC::Application::GetInstance()
+#define AIAC_EBUS AIAC_APP.GetEventBus()
 
 

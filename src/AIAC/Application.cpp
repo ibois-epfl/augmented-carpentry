@@ -36,6 +36,8 @@ namespace AIAC
             ));
 
         m_Renderer = new Renderer();
+
+        m_EventBus = new EventBus();
     }
 
     void Application::Run()
@@ -44,6 +46,8 @@ namespace AIAC
 
         while (m_Window->IsOpen())
         {
+            m_EventBus->ProcessQueue();
+
             for (auto& layer : m_LayerStack)
                 layer->OnFrameAwake();
 

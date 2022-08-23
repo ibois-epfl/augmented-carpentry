@@ -1,36 +1,35 @@
-// #pragma once
-
-// #include "AIAC/EventSys/Event.h"
+#pragma once
 
 
-// namespace AIAC
-// {
-//     class SLAMEvent : public Event
-//     {
-//     public:
-//         explicit SLAMEvent(const std::string mapPath)
-//             : Event(EventType::SLAMMapLoaded), m_MapPath(mapPath)
-//         {}
-//         explicit SLAMEvent(const std::string vocabularyPath)
-//             : Event(EventType::SLAMVocabularyLoaded), m_VocabularyPath(vocabularyPath)
-//         {}
-//         explicit SLAMEvent(const std::string cameraCalibrationPath)
-//             : Event(EventType::CameraCalibrationLoaded), m_CameraCalibrationPath(cameraCalibrationPath)
-//         {}
+// #include "AIAC/LayerSlam.h"
+#include "AIAC/EventSys/Event.h"
 
-//         inline const std::string& GetMapPath() const { return m_MapPath; }
-//         inline const std::string& GetVocabularyPath() const { return m_VocabularyPath; }
-//         inline const std::string& GetCameraCalibrationPath() const { return m_CameraCalibrationPath; }
 
-//         AIAC_EQ.AppendListener(EventType::SLAMMapLoaded, [](const EventPointer& event)
-//         {
-//             const auto& slamEvent = std::static_pointer_cast<SLAMEvent>(event);
-//             AIAC_LOG(Info, "SLAM map loaded: {}", slamEvent->GetMapPath());
-//         };
+namespace AIAC
+{
+    class SLAMMapLoadedEvent : public Event
+    {
+    public:
+        explicit SLAMMapLoadedEvent(const std::string filePath)
+            : Event(EventType::SLAMMapLoaded), m_FilePath(filePath)
+        {}
 
-//     private:
-//         std::string m_MapPath;
-//         std::string m_VocabularyPath;
-//         std::string m_CameraCalibrationPath;
-//     };
-// }
+        void OnSLAMMapLoaded();
+
+    private:
+        std::string m_FilePath;
+    };
+
+    class SLAMVocabularyLoadedEvent : public Event
+    {
+    public:
+        explicit SLAMVocabularyLoadedEvent(const std::string filePath)
+            : Event(EventType::SLAMVocabularyLoaded), m_FilePath(filePath)
+        {}
+
+        void OnSLAMVocabularyLoaded();
+    
+    private:
+        std::string m_FilePath;
+    };
+}
