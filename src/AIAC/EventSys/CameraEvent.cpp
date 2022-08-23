@@ -7,7 +7,8 @@ namespace AIAC
 {
     void CameraCalibrationLoadedEvent::OnCameraCalibrationLoaded()
     {
-        AIAC_APP.GetLayer<LayerSlam>()->DummyRestart(m_FilePath);
-        AIAC_WARN(m_FilePath);
+        AIAC_INFO("Camera calibration file changed to: {}", m_FilePath);
+        AIAC_APP.GetLayer<LayerCamera>()->MainCamera.SetCalibrationFilePath(m_FilePath);
+        AIAC_APP.GetLayer<LayerSlam>()->Slam.setCamParams(m_FilePath);
     }
 }

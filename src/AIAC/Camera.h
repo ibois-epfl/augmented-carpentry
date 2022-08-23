@@ -19,6 +19,8 @@ namespace AIAC
         const AIAC::Image GetNextFrame();
         inline AIAC::Image &GetCurrentFrame() { return m_CurrentFrame; }
 
+        inline const std::string GetCalibrationFilePath() const { return m_CalibParamPath; }
+        void SetCalibrationFilePath(const std::string &filePath);
         inline const cv::Mat GetCameraMatrix() { return m_CameraMatrix; }
         inline const cv::Mat GetDistortionCoef() { return m_DistortionCoef; }
 
@@ -29,6 +31,7 @@ namespace AIAC
         bool IsOpened() const { return m_IsOpened; }
 
     private:
+        std::string m_CalibParamPath;
         Image m_CurrentFrame;
 
         uint32_t m_Width, m_Height;
