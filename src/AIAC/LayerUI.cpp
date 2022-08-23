@@ -1,5 +1,7 @@
 #include "aiacpch.h"
 
+#include "AIAC/EventSys/EventBus.h"
+
 #include "AIAC/LayerUI.h"
 #include "AIAC/Application.h"
 
@@ -11,7 +13,7 @@
 #include "AIAC/UI/ClrPalette.h"
 #include "AIAC/UI/CustomLogos.h"
 
-#include "eventpp/callbacklist.h"
+
 
 namespace AIAC
 {
@@ -56,7 +58,6 @@ namespace AIAC
         //TODO: add vertical menu bar
 
         m_IsOpen = new bool(true);
-
     }
 
     void LayerUI::OnFrameStart()
@@ -171,6 +172,9 @@ namespace AIAC
             // action
             /* write here what to do with the file path */
             // TODO: Raise event to restart SLAM
+            // AIAC_EBUS->EnqueueEvent(EventType::SLAMMapLoaded, std::make_shared<SLAMMapLoadedEvent>(filePath));
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePath));
+
             }
             ImGuiFileDialog::Instance()->Close();
         }
@@ -187,6 +191,7 @@ namespace AIAC
             // action
             /* write here what to do with the file path */
             // TODO: Raise event for SLAM to restart
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePath));
             }
             ImGuiFileDialog::Instance()->Close();
         }
@@ -203,6 +208,7 @@ namespace AIAC
             // action
             /* write here what to do with the file path */
             // TODO: Raise event for SLAM to restart
+            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePath));
             }
             ImGuiFileDialog::Instance()->Close();
         }

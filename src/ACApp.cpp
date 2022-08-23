@@ -1,7 +1,6 @@
 #include "aiacpch.h"
 #include "AIAC.h"
 
-
 int main(int argc, char* argv[]) {
 #ifdef __linux__
 
@@ -26,6 +25,8 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->GetRenderer()->Init();
+
+    acApp_ptr->GetEventBus()->Init();
 
     acApp_ptr->Run();
 
