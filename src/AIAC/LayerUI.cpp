@@ -124,22 +124,25 @@ namespace AIAC
 
     void LayerUI::ShowSceneViewport()
     {
-        ImGui::Begin("scene_viewport", m_IsOpen);
+        ImGui::Begin("Scene Viewport", m_IsOpen);
 
-        ImGui::Text("PLACEHOLDER for importer UI");
+//        ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-        ImGui::Dummy(ImVec2(0.0f, 10.0f));
-
-        ImGui::Text("3D viewer with fix camera");
-
-        ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+        viewportSize.y -= (ImGui::GetTextLineHeight() + 10);
+        AIAC_APP.GetRenderer()->SetGlobalViewSize(viewportSize.x, viewportSize.y);
 
         if(ImGui::IsMouseDragging(0, 0.0f)) {
             if(m_IsMouseLDown){
-                ImVec2 mousePos = ImGui::GetMousePos();
-                AIAC_APP.GetRenderer()->UpdateGlobalViewCameraRotation(mousePos.x - m_LastMouseLPos.x, mousePos.y - m_LastMouseLPos.y);
-                m_LastMouseLPos = mousePos;
+                if(m_AdjustTarget == AdjustTarget::SCALE){
+                    ImVec2 mousePos = ImGui::GetMousePos();
+                    AIAC_APP.GetRenderer()->UpdateGlobalViewCameraScale(mousePos.x - m_LastMouseLPos.x - mousePos.y + m_LastMouseLPos.y);
+                    m_LastMouseLPos = mousePos;
+                } else {
+                    ImVec2 mousePos = ImGui::GetMousePos();
+                    AIAC_APP.GetRenderer()->UpdateGlobalViewCameraRotation(mousePos.x - m_LastMouseLPos.x, mousePos.y - m_LastMouseLPos.y);
+                    m_LastMouseLPos = mousePos;
+                }
             }
         }
         if(ImGui::IsMouseDragging(1, 0.0f)) {
@@ -156,12 +159,14 @@ namespace AIAC
             if(ImGui::IsMouseDown(0)) {
                 if(!m_IsMouseLDown){
                     m_IsMouseLDown = true;
+                    m_AdjustTarget = AdjustTarget::TRANSLATION;
                     m_LastMouseLPos = ImGui::GetMousePos();
                 }
             }
             if(ImGui::IsMouseDown(1)) {
                 if(!m_IsMouseRDown){
                     m_IsMouseRDown = true;
+                    m_AdjustTarget = AdjustTarget::ROTATION;
                     m_LastMouseRPos = ImGui::GetMousePos();
                 }
             }
@@ -172,9 +177,19 @@ namespace AIAC
         if(ImGui::IsMouseReleased(1)){
             m_IsMouseRDown = false;
         }
+//        ImGui::EndChild();
 
-        ImGui::EndChild();
-        
+        ImGui::Button("Scale");
+        if(ImGui::IsItemHovered()) {
+            if(ImGui::IsMouseDown(0)) {
+                if(!m_IsMouseLDown){
+                    m_AdjustTarget = AdjustTarget::SCALE;
+                    m_IsMouseLDown = true;
+                    m_LastMouseLPos = ImGui::GetMousePos();
+                }
+            }
+        }
+
         ImGui::End();
     }
 
