@@ -325,7 +325,7 @@ enum EventCategory
         /* add event category here */
     };
 ```
-Next, create a new event file with a class that inherits from `class Event`, as an example `ExampleEvent.h`:
+Next, create a new event file with a class that inherits from `class Event`, as an example `ExampleEvent.h`. Remeber to add to the parent constructor *(a)* EventType, *(b)* EventCategory and *(c)* (accessory, by default 0) the prority at which the event needs to be executed, the bigger the number the sooner in the queue it will be fired:
 ```c++
 namespace AIAC
 {
