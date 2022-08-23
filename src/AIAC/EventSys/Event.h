@@ -50,6 +50,10 @@ namespace AIAC
         static EventType GetEvent(const EventPointer& event) {
             return event->GetType();
         }
+
+        static EventCategory GetCategory(const EventPointer& event) {
+            return event->GetCategory();
+        }
     };
 
 }
