@@ -9,7 +9,7 @@ namespace AIAC
     {
     public:
         explicit SLAMMapLoadedEvent(const std::string filePath)
-            : Event(EventType::SLAMMapLoaded), m_FilePath(filePath)
+            : Event(EventType::SLAMMapLoaded, EventCategory::EventCategorySLAM), m_FilePath(filePath)
         {}
 
         void OnSLAMMapLoaded();
@@ -22,7 +22,7 @@ namespace AIAC
     {
     public:
         explicit SLAMVocabularyLoadedEvent(const std::string filePath)
-            : Event(EventType::SLAMVocabularyLoaded), m_FilePath(filePath)
+            : Event(EventType::SLAMVocabularyLoaded, EventCategory::EventCategorySLAM), m_FilePath(filePath)
         {}
 
         void OnSLAMVocabularyLoaded();

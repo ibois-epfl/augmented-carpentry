@@ -313,6 +313,18 @@ enum class EventType
         /* add types of events here */
     };
 ```
+And a category in the same file:
+```c++
+enum EventCategory
+    {
+        None = 0,
+        EventCategoryApplication =              BIT(0),
+        EventCategorySLAM =                     BIT(1),
+        EventCategoryCamera =                   BIT(2),
+        EventCategoryExample =                  BIT(3)  // <-- example
+        /* add event category here */
+    };
+```
 Next, create a new event file with a class that inherits from `class Event`, as an example `ExampleEvent.h`:
 ```c++
 namespace AIAC
@@ -321,7 +333,7 @@ namespace AIAC
     {
     public:
         explicit ExampleCalledEvent(const std::string param)
-            : Event(EventType::ExampleCalled), m_Param(param)
+            : Event(EventType::ExampleCalled, EventCategory::EventCategoryExample), m_Param(param)
         {}
 
         void OnExampleCalled();

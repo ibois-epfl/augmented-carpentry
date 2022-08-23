@@ -18,47 +18,29 @@ namespace AIAC
         /* add types of events here */
     };
 
-    // enum EventCategory
-    // {
-    //     None = 0,
-    //     EventCategoryApplication = BIT(0),
-    //     EventCategorySLAM = BIT(1)
-    //     /* add event category here */
-    // };
-
-
-// #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
-//                                 virtual EventType GetType() const override { return GetStaticType(); }\
-//                                 virtual const char* GetName() const override { return #type; }
-// #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
-
-
-    // class Event
-    // {
-    // public:
-    //     virtual ~Event() = default;
-
-    //     virtual EventType GetType() const = 0;
-    //     virtual const char* GetName() const = 0;
-    //     virtual int GetCategoryFlags() const = 0;
-    //     virtual std::string ToString() const { return GetName(); }
-
-    //     inline bool IsInCategory(EventCategory category) const
-    //     {
-    //         return GetCategoryFlags() & category;
-    //     }
-    // };
+    enum EventCategory
+    {
+        None = 0,
+        EventCategoryApplication =              BIT(0),
+        EventCategorySLAM =                     BIT(1),
+        EventCategoryCamera =                   BIT(2)
+        /* add event category here */
+    };
 
     class Event
     {
     public:
-        explicit Event(const EventType type) : m_Type(type) {}
+        explicit Event(const EventType type, const EventCategory category = EventCategory::None)
+            : m_Type(type), m_Category(category)
+        {}
         virtual ~Event() = default;
 
         EventType GetType() const { return m_Type; }
+        EventCategory GetCategory() const { return m_Category; }
 
     private:
         EventType m_Type;
+        EventCategory m_Category;
     };
 
     using EventPointer = std::shared_ptr<Event>;
@@ -69,67 +51,5 @@ namespace AIAC
             return event->GetType();
         }
     };
-
-
-
-
-    // using EQ = eventpp::EventQueue<EventType, void(const EventPointer&), EventPolicy>;
-    // class EventBus
-    // {
-    // public:
-
-    //     EventBus()
-    //     { 
-    //         s_Instance = this;
-    //     }
-
-    //     ~EventBus()
-    //     {
-    //         s_Instance = nullptr;
-    //     }
-
-    //     inline static EventBus& GetInstance() { return *s_Instance; } //???
-    //     inline EQ& GetEventQueue() const { return m_EventQueue; }
-
-    //     template<typename T>
-    //     void AppendListener(std::function<void(const EventPointer&)> listener)
-    //     {
-    //         m_EventQueue.appendListener(T, listener);
-    //     }
-
-    //     template<typename T>
-    //     void AppendListener(std::function<void(const EventPointer&)> listener)
-    //     {
-    //         m_EventQueue.appendListener(T::GetStaticType(), listener);
-    //     }
-
-    //     template<typename T>
-    //     void Enqueue(const T& sharedPtrEvent)
-    //     {
-    //         m_EventQueue.enqueue(sharedPtrEvent);
-    //     }
-
-    //     // Asynchronus
-    //     void ProcessQueue() { m_EventQueue.process(); }
-
-    //     // Synchronus
-    //     template<typename T>
-    //     void Dispatch(const T& sharedPtrEvent)
-    //     {
-    //         m_EventQueue.dispatch(sharedPtrEvent);
-    //     }
-
-    //     template<typename T>
-    //     void Dispatch(const EventType & type, const T& sharedPtrEvent)
-    //     {
-    //         m_EventQueue.dispatch(type, sharedPtrEvent);
-    //     }
-
-    // private:
-    //     static EventBus* s_Instance;
-    //     static EQ m_EventQueue;
-    // };
-
-    // #define AIAC_EBUS AIAC::EventBus::GetInstance()
 
 }
