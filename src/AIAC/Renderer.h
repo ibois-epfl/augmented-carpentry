@@ -23,6 +23,8 @@ namespace AIAC
         void ReloadMeshes();
 
         GLuint GetGlobalView() { return m_GlobalViewTexture; };
+        void UpdateGlobalViewCameraTranslation(double diffX, double diffY);
+        void UpdateGlobalViewCameraRotation(double diffX, double diffY);
 
     public:
         AIAC::Mesh PointCloudMap;

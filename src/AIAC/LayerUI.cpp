@@ -109,8 +109,45 @@ namespace AIAC
 
         ImGui::BeginChild("scene_viewport_child", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+
+        if(ImGui::IsMouseDragging(0, 0.0f)) {
+            if(m_IsMouseLDown){
+                ImVec2 mousePos = ImGui::GetMousePos();
+                AIAC_APP.GetRenderer()->UpdateGlobalViewCameraRotation(mousePos.x - m_LastMouseLPos.x, mousePos.y - m_LastMouseLPos.y);
+                m_LastMouseLPos = mousePos;
+            }
+        }
+        if(ImGui::IsMouseDragging(1, 0.0f)) {
+            if(m_IsMouseRDown){
+                ImVec2 mousePos = ImGui::GetMousePos();
+                AIAC_APP.GetRenderer()->UpdateGlobalViewCameraTranslation(mousePos.x - m_LastMouseRPos.x, mousePos.y - m_LastMouseRPos.y);
+                m_LastMouseRPos = mousePos;
+            }
+        }
+
         CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetGlobalView(), m_SceneViewportImTexture);
-        ImGui::Image(m_SceneViewportImTexture.ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+        ImGui::ImageButton(m_SceneViewportImTexture.ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
+        if(ImGui::IsItemHovered()) {
+            if(ImGui::IsMouseDown(0)) {
+                if(!m_IsMouseLDown){
+                    m_IsMouseLDown = true;
+                    m_LastMouseLPos = ImGui::GetMousePos();
+                }
+            }
+            if(ImGui::IsMouseDown(1)) {
+                if(!m_IsMouseRDown){
+                    m_IsMouseRDown = true;
+                    m_LastMouseRPos = ImGui::GetMousePos();
+                }
+            }
+        }
+        if(ImGui::IsMouseReleased(0)){
+            m_IsMouseLDown = false;
+        }
+        if(ImGui::IsMouseReleased(1)){
+            m_IsMouseRDown = false;
+        }
+
         ImGui::EndChild();
         
         ImGui::End();

@@ -11,6 +11,8 @@
 namespace AIAC
 {
     static uint8_t s_GLFWWindowCount = 0;
+    static bool s_IsMouseButtonPressed = false;
+    static struct Position { double x, y; } s_CursorPos;
 
     static void GLFWErrorCallback(int error, const char* description)
     {
@@ -91,6 +93,9 @@ namespace AIAC
             AIAC_CRITICAL("Failed to initialize GLEW");
             exit(EXIT_FAILURE);
         }
+
+//        glfwSetMouseButtonCallback(m_GLFWWindow, m_MouseButtonCallback);
+//        glfwSetCursorPosCallback(m_GLFWWindow, m_MouseMoveCallback);
     }
 
     void Window::Shutdown()
@@ -127,4 +132,29 @@ namespace AIAC
             glfwSwapInterval(0);
         m_Data.VSync = enabled;
     }
+
+//    void Window::m_MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+//    {
+//        if (button == GLFW_MOUSE_BUTTON_LEFT) {
+//            if(GLFW_PRESS == action){
+//                s_IsMouseButtonPressed = true;
+//                double x;
+//                double y;
+//                glfwGetCursorPos(window, &x, &y);
+//                s_CursorPos = { x, y };
+//            }
+//            else if(GLFW_RELEASE == action)
+//                s_IsMouseButtonPressed = false;
+//        }
+//    }
+//
+//    void Window::m_MouseMoveCallback(GLFWwindow* window, double x, double y)
+//    {
+//        if(s_IsMouseButtonPressed)
+//        {
+//            double x_diff = x - s_CursorPos.x;
+//            double y_diff = y - s_CursorPos.y;
+//            s_CursorPos = { x, y };
+//        }
+//    }
 }
