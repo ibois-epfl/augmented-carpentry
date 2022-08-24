@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AIAC/Camera.h"
-#include "AIAC/Renderer.h"
+#include "AIAC/Render/Renderer.h"
 
 #include "AIAC/Assert.h"
 #include "AIAC/Window.h"
