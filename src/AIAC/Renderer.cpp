@@ -96,10 +96,11 @@ namespace AIAC
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
-        m_InitGlobalView();
+        InitMappingView();
+        InitGlobalView();
     }
 
-    void Renderer::m_InitGlobalView() {
+    void Renderer::InitGlobalView() {
         glGenFramebuffers(1, &m_GlobalViewFrameBuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
 
@@ -161,6 +162,38 @@ namespace AIAC
         );
     }
 
+    void Renderer::InitMappingView() {
+        glGenFramebuffers(1, &m_MappingViewFrameBuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, m_MappingViewFrameBuffer);
+
+        // The texture we're going to render to
+        glGenTextures(1, &m_MappingViewTexture);
+
+        // "Bind" the newly created texture : all future texture functions will modify this texture
+        glBindTexture(GL_TEXTURE_2D, m_MappingViewTexture);
+
+        // Give an empty image to OpenGL ( the last "0" )
+        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_MappingViewWidth, m_MappingViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+
+        // Poor filtering. Needed !
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        // The depth buffer
+        GLuint depthrenderbuffer;
+        glGenRenderbuffers(1, &depthrenderbuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_MappingViewWidth, m_MappingViewHeight);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
+
+        // Set "renderedTexture" as our colour attachement #0
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_MappingViewTexture, 0);
+
+        // Set the list of draw buffers.
+        GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+        glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
+    }
+
     void Renderer::ReloadMeshes()
     {
         auto pointCloudMapPath = AIAC::Config::Get<string>("Renderer", "PointCloudMapPath", "assets/tslam/examplePointCloud.ply");
@@ -177,22 +210,17 @@ namespace AIAC
 
     void Renderer::OnRender()
     {
+        RenderGlobalView();
+
+        if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
+            RenderMappingView();
+            return;
+        }
+
         // Renderer to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        GLuint readFboIdFrame = 0;
-        glGenFramebuffers(1, &readFboIdFrame);
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
-        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
-
-        glBlitFramebuffer(0, 0, m_CamW, m_CamH,
-                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
-        glDeleteFramebuffers(1, &readFboIdFrame);
-
-        // Renderer to our framebuffer
-        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
+        RenderCameraFrame();
 
         glUseProgram(m_ProgramId);
 
@@ -218,7 +246,7 @@ namespace AIAC
         }
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        m_RenderGlobalView();
+
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -247,7 +275,7 @@ namespace AIAC
         m_GlobalCamMatrix[3][2] += float(diff) / 10;
     }
 
-    void Renderer::m_RenderGlobalView() {
+    void Renderer::RenderGlobalView() {
         glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -256,9 +284,13 @@ namespace AIAC
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-        DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-        DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+        if(ShowPointCloudMap){
+            PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+        }
+        if(ShowDigitalModel){
+            DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+            DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+        }
         for (auto& mesh : Meshes) {
             mesh.DrawEdges(m_DefaultEdgeColor);
         }
@@ -273,5 +305,38 @@ namespace AIAC
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    void Renderer::RenderMappingView() {
+        glBindFramebuffer(GL_FRAMEBUFFER, m_MappingViewFrameBuffer);
+        glClearColor(1.0, 1.0, 1.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        RenderCameraFrame();
+
+        // visualize map
+        glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+
+        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+
+        // Bind back to the main framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    void Renderer::RenderCameraFrame() {
+        GLuint readFboIdFrame = 0;
+        glGenFramebuffers(1, &readFboIdFrame);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
+        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
+
+        glBlitFramebuffer(0, 0, m_CamW, m_CamH,
+                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
+                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
+        glDeleteFramebuffers(1, &readFboIdFrame);
+
+        // Renderer to our framebuffer
+        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
     }
 }
