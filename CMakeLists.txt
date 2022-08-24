@@ -15,6 +15,8 @@ file(GLOB AIAC_SRC
     "src/AIAC/UI/*.cpp"
     "src/AIAC/EventSys/*.h"
     "src/AIAC/EventSys/*.cpp"
+    "src/AIAC/GoSys/*.h"
+    "src/AIAC/GoSys/*.cpp"
     "src/utils/*"
     "src/AIAC.h"
     )
