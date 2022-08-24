@@ -10,14 +10,20 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 
 ## TODOList
 
-> - [ ] Starting to design the Dfab engine for live calculations
-> - [ ] Add readme for render API how to use
+> - [x] Add readme for render API how to use
 > - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
 > - [ ] Add Mapping subprogram + UI
 > - [x] Implement padding for 3D scene viewer
 > - [ ] Test if changing map on the go breaks the slam or not
 > - [ ] Add the function "DrawText" to the RenderAPI in `GlUtils.h`
+> - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
 > - [ ] Document with videos and snapshots the tracaking system and the mapping
+
+<p>
+    <img src="./docs/NextPAC_v1.png" width="400">
+</p>
+
+
 
 <br />
 
