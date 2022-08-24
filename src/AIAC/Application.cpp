@@ -65,9 +65,7 @@ namespace AIAC
             for (auto& layer : m_LayerStack)
                 layer->OnFrameEnd();
 
-
             m_Window->OnBufferSwap();
-            
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();

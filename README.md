@@ -16,6 +16,8 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 > - [ ] Add Mapping subprogram + UI
 > - [ ] Implement padding for 3D scene viewer
 > - [ ] Test if changing map on the go breaks the slam or not
+> - [ ] Add the function "DrawText" to the RenderAPI in `GlUtils.h`
+> - [ ] Document with videos and snapshots the tracaking system and the mapping
 
 <br />
 
@@ -339,7 +341,7 @@ namespace AIAC
     {
     public:
         explicit ExampleCalledEvent(const std::string param)
-            : Event(EventType::ExampleCalled, EventCategory::EventCategoryExample), m_Param(param)
+            : Event(EventType::ExampleCalled, EventCategory::EventCategoryExample, 100), m_Param(param)
         {}
 
         void OnExampleCalled();
