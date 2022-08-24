@@ -78,4 +78,11 @@ namespace AIAC
 
         return glmMat;
     }
+
+    void LayerSlam::StartMapping()
+    {
+        m_IsMapping = true;
+        Slam.clearMap();
+        Slam.setInstancing(false);
+    }
 }

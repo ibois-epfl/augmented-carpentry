@@ -35,6 +35,7 @@ namespace AIAC {
         bool m_IsCollapsed;
     };
 
+    extern bool m_IsSwitchedToMappging, m_IsSavingMap;
 
     class LayerUI : public AIAC::Layer {
     public:
@@ -50,11 +51,17 @@ namespace AIAC {
         void ShowMainUI();
         void ShowSceneViewport();  //TODO: set fix camera in 3d scene and pass buffer
 
+        void ShowMappingPopup();
+        void ShowSaveMapFileDialog();
+
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         static void SetPaneUICamera();
-        static void SetPaneUISlam();
+        void SetPaneUISlam();
         static void SetPaneUIRender();
-    
+
+    private:
+        void SetGlobalViewUI(ImVec2 viewportSize);
+
     private:
         int m_testSlider = 0;
 
@@ -62,6 +69,7 @@ namespace AIAC {
         AIAC::Image m_LogoLightGray;
 
         AIAC::ImTexture m_SceneViewportImTexture;
+        AIAC::ImTexture m_MappingViewImTexture;
         AIAC::ImTexture m_ARCameraViewportImTexture;
 
         ImVec2 m_LastMouseLPos, m_LastMouseRPos;
