@@ -19,8 +19,9 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 > - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
 > - [ ] Document with videos and snapshots the tracaking system and the mapping
 
+Scheme for the last implementation of AC's main structure:
 <p>
-    <img src="./docs/NextPAC_v1.png" width="400">
+    <img src="./docs/NextPAC_v1.png" width="600">
 </p>
 
 
