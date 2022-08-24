@@ -220,15 +220,9 @@ namespace AIAC
 
     void LayerUI::SetPaneUISlam()
     {
-        if(ImGui::Button("Start Mapping")){
-            AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
-            AIAC_APP.GetRenderer()->StartMapping();
-            m_IsSwitchedToMappging = true;
-        }
-
-        ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+        ImGui::Text("Import files:");
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 56), true, ImGuiWindowFlags_HorizontalScrollbar);
         if (ImGui::Button("Open SLAM map"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
@@ -293,13 +287,29 @@ namespace AIAC
         //     }
         //     ImGuiFileDialog::Instance()->Close();
         // }
-        ImGui::PopStyleColor();
+
         ImGui::EndChild();
+
+        ImGui::Text("Mapping Functions:");
+        ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+            if(ImGui::Button("Start Mapping")){
+                AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
+                AIAC_APP.GetRenderer()->StartMapping();
+                m_IsSwitchedToMappging = true;
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Combine Map")){
+
+            }
+        ImGui::EndChild();
+
 
         ImGui::Text("Tracked: %s", AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked() ? "Yes" : "No");
 
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
+
+        ImGui::PopStyleColor();
     }
 
     void LayerUI::SetPaneUIRender()
