@@ -230,12 +230,10 @@ namespace AIAC
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
-            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-            // action
-
-            /* write here what to do with the file path */
-            // TODO: Raise event to restart SLAM
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+                // action
+                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName);
             }
             ImGuiFileDialog::Instance()->Close();
         }
