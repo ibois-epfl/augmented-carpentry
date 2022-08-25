@@ -15,8 +15,6 @@
 
 namespace AIAC
 {
-    bool m_IsSavingMap = false, m_IsSwitchedToMappging = false;
-
     void LayerUI::OnAttach()
     {
         IMGUI_CHECKVERSION();
@@ -76,16 +74,18 @@ namespace AIAC
             if(m_IsSavingMap){
                 ShowSaveMapFileDialog();
             }
-            if(m_IsSwitchedToMappging){
-                m_IsSwitchedToMappging = false;
-            }
         } else {
             ShowMenuBar();
             ShowMainUI();
             ShowSceneViewport();
+
+            if(m_IsCombiningMap){
+                ShowCombineMapPopup();
+                if(m_CombMapParams.IsSelectingFile){
+                    ShowMapFileDialog(m_CombMapParams.FilePathTarget);
+                }
+            }
         }
-
-
 
 
         ImGui::Render();
@@ -233,6 +233,7 @@ namespace AIAC
             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
             std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
             // action
+
             /* write here what to do with the file path */
             // TODO: Raise event to restart SLAM
             }
@@ -295,11 +296,10 @@ namespace AIAC
             if(ImGui::Button("Start Mapping")){
                 AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
                 AIAC_APP.GetRenderer()->StartMapping();
-                m_IsSwitchedToMappging = true;
             }
             ImGui::SameLine();
             if(ImGui::Button("Combine Map")){
-
+                m_IsCombiningMap = true;
             }
         ImGui::EndChild();
 
@@ -362,6 +362,56 @@ namespace AIAC
             }
         ImGui::End();
     }
+    void LayerUI::ShowCombineMapPopup()
+    {
+//        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.3, ImGui::GetIO().DisplaySize.y * 0.3));
+
+        ImGui::Begin("Combine map", nullptr);
+            ImGui::PushItemWidth(-1);
+
+            ImGui::Text("Select File:");
+            if(ImGui::Button("Map 1", ImVec2(60, 0))){
+                m_CombMapParams.IsSelectingFile = true;
+                m_CombMapParams.FilePathTarget = m_CombMapParams.MapPathA;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("In Map 1", m_CombMapParams.MapPathA, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+
+            if(ImGui::Button("Map 2", ImVec2(60, 0))){
+                m_CombMapParams.IsSelectingFile = true;
+                m_CombMapParams.FilePathTarget = m_CombMapParams.MapPathB;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("In Map 2", m_CombMapParams.MapPathB, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+
+            if(ImGui::Button("Output", ImVec2(60, 0))){
+                m_CombMapParams.IsSelectingFile = true;
+                m_CombMapParams.FilePathTarget = m_CombMapParams.OutputPath;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("In Output Path", m_CombMapParams.OutputPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+            ImGui::PopItemWidth();
+
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            ImGui::SameLine(ImGui::GetWindowWidth() - 176);
+            if(ImGui::Button("Cancel", ImVec2(80, 0))){ m_IsCombiningMap = false; }
+            ImGui::SameLine();
+            if(ImGui::Button("Confirm", ImVec2(80, 0))){
+                if(strlen(m_CombMapParams.MapPathA) == 0 || strlen(m_CombMapParams.MapPathB) == 0 || strlen(m_CombMapParams.OutputPath) == 0){
+                    AIAC_ERROR("Path not selected.");
+
+                } else {
+                    AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
+                            m_CombMapParams.MapPathA, m_CombMapParams.MapPathB, m_CombMapParams.OutputPath,
+                            true, true, nullptr, 2);
+                    memset(m_CombMapParams.MapPathA, 0, PATH_BUF_SIZE * 3);
+                    m_IsCombiningMap = false;
+                }
+            }
+
+        ImGui::End();
+    }
     void LayerUI::ShowSaveMapFileDialog()
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
@@ -379,6 +429,25 @@ namespace AIAC
             }
             ImGuiFileDialog::Instance()->Close();
             m_IsSavingMap = false;
+        }
+    }
+    void LayerUI::ShowMapFileDialog(char *path)
+    {
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+        ImGuiFileDialog::Instance()->OpenDialog("ChooseMapPath", "Choose Map Path", ".map", ".");
+        if (ImGuiFileDialog::Instance()->Display("ChooseMapPath"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+
+                AIAC_INFO("Select: {0}", filePathName.c_str());
+                memset(path, 0, PATH_BUF_SIZE);
+                memcpy(path, filePathName.c_str(), filePathName.length());
+            }
+            ImGuiFileDialog::Instance()->Close();
+            m_CombMapParams.IsSelectingFile = false;
         }
     }
 
