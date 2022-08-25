@@ -22,11 +22,17 @@ namespace AIAC
 
         void ReloadMeshes();
 
-        GLuint GetGlobalView() { return m_GlobalViewTexture; };
+        GLuint GetGlobalView() const { return m_GlobalViewTexture; };
         void SetGlobalViewSize(float w, float h);
         void UpdateGlobalViewCameraTranslation(double diffX, double diffY);
         void UpdateGlobalViewCameraRotation(double diffX, double diffY);
         void UpdateGlobalViewCameraScale(double diff);
+
+        GLuint GetMappingView() const { return m_MappingViewTexture; };
+        void SetMappingViewSize(float w, float h);
+
+        void StartMapping() { Meshes.clear(); ShowDigitalModel = false; ShowPointCloudMap = false; }
+        void StopMapping() { ReloadMeshes(); ShowDigitalModel = true; ShowPointCloudMap = true; }
 
     public:
         AIAC::Mesh PointCloudMap;
@@ -37,8 +43,12 @@ namespace AIAC
         bool ShowDigitalModel = true;
 
     private:
-        void m_InitGlobalView();
-        void m_RenderGlobalView();
+        void InitGlobalView();
+        void InitMappingView();
+        void RenderGlobalView();
+        void RenderMappingView();
+
+        void RenderCameraFrame();
 
     private:
         float m_CamW, m_CamH;
@@ -48,11 +58,17 @@ namespace AIAC
 
         glm::mat4 m_ProjMatrix;
 
+        // Global view
         GLuint m_GlobalViewFrameBuffer;
         GLuint m_GlobalViewTexture;
         glm::mat4 m_GlobalCamMatrix;
         glm::mat4 m_GlobalProjMatrix;
         float m_GlobalViewWidth=400, m_GlobalViewHeight=300;
+
+        // Mapping view
+        GLuint m_MappingViewFrameBuffer;
+        GLuint m_MappingViewTexture;
+        float m_MappingViewWidth=640, m_MappingViewHeight=480;
 
         std::vector<glm::vec3> m_CamVisualizationEdges;
 

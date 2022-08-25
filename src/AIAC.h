@@ -14,6 +14,10 @@
 #include "AIAC/TouchMonitor.h"
 #include "AIAC/Window.h"
 
+#include "AIAC/EventSys/Event.h"
+#include "AIAC/EventSys/SLAMEvent.h"
+
+#include "AIAC/Application.h"
 #include "AIAC/Layer.h"
 
 #include "AIAC/Image.h"
@@ -23,7 +27,7 @@
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerUI.h"
 #include "AIAC/LayerCamera.h"
-#include "AIAC/Renderer.h"
+#include "AIAC/Render/Renderer.h"
 
 #include "AIAC/EventSys/Event.h"
 #include "AIAC/EventSys/SLAMEvent.h"

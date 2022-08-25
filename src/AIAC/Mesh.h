@@ -1,6 +1,6 @@
 #pragma once
 #include "GlHeader.h"
-#include "GlUtils.h"
+#include "AIAC/Render/GlUtils.h"
 
 // Include AssImp
 #include "assimp/Importer.hpp"      // C++ importer interface
