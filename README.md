@@ -15,10 +15,14 @@ ARapp is a linux desktop application containing a custom-made framework for augm
 > - [ ] Add Mapping subprogram + UI
 > - [x] Implement padding for 3D scene viewer
 > - [ ] Test if changing map on the go breaks the slam or not
-> - [ ] Add the function "DrawText" to the RenderAPI in `GlUtils.h`
+
 > - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
-> - [ ] Document with videos and snapshots the tracaking system and the mapping
 > - [ ] Add a function DrawCircle() to the RenderAPI
+> - [ ] Add a function DrawCylinder() to the RenderAPI
+> - [ ] Add a function DrawPolyline() to the RenderAPI
+> - [ ] Add a function DrawText() to the RenderAPI
+
+> - [ ] Document with videos and snapshots the tracaking system and the mapping
 
 Scheme for the last implementation of AC's main structure:
 <p>
