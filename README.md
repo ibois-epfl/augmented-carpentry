@@ -21,6 +21,7 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [ ] Add a function DrawCylinder() to the RenderAPI
 > - [ ] Add a function DrawPolyline() to the RenderAPI
 > - [ ] Add a function DrawText() to the RenderAPI
+> - [ ] Add a function DrawTriangle() to the RenderAPI
 
 > - [ ] Document with videos and snapshots the tracaking system and the mapping
 
