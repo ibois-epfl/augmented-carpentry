@@ -77,7 +77,6 @@ namespace AIAC {
                 (void *) nullptr     // array buffer offset
         );
 
-
         glDrawArrays(GL_LINES, 0, (GLsizei) edges.size());
 
         glDisableVertexAttribArray(0);
@@ -143,14 +142,14 @@ namespace AIAC {
         DrawTriangles3d(vertices, indices, colors);
     }
 
-    void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color) {
+    void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
         std::vector<glm::vec3> mapPoints(map->map_points.size());
         for(const auto& mapPoint: map->map_points){
             if(mapPoint.isValid()){
                 mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
             }
         }
-        DrawPoints3d(mapPoints, color, 1.0f);
+        DrawPoints3d(mapPoints, YELLOW, pointSize);
 
         std::vector<glm::vec3> markerEdges(map->map_markers.size() * 4 * 2);
         std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, BLUE);
@@ -163,16 +162,17 @@ namespace AIAC {
             }
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
 
+            markerEdgeColors.emplace_back(RED);
+            markerEdgeColors.emplace_back(RED);
+            markerEdgeColors.emplace_back(RED);
+            markerEdgeColors.emplace_back(RED);
             markerEdgeColors.emplace_back(BLUE);
             markerEdgeColors.emplace_back(BLUE);
             markerEdgeColors.emplace_back(BLUE);
             markerEdgeColors.emplace_back(BLUE);
-            markerEdgeColors.emplace_back(YELLOW);
-            markerEdgeColors.emplace_back(YELLOW);
-            markerEdgeColors.emplace_back(YELLOW);
-            markerEdgeColors.emplace_back(YELLOW);
 
         }
+
         DrawLines3d(markerEdges, markerEdgeColors);
     }
 }
