@@ -25,6 +25,10 @@
 #include "AIAC/LayerCamera.h"
 #include "AIAC/Renderer.h"
 
+#include "AIAC/GOSys/GOPrimitive.h"
+#include "AIAC/GOSys/GOCollection.h"
+#include "AIAC/GOSys/GOContext.h"
+
 #include "AIAC/EventSys/Event.h"
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/EventSys/CameraEvent.h"

@@ -57,9 +57,9 @@ namespace AIAC
             return nullptr;
         }
 
-        inline AIAC::Window*& GetWindow() { return m_Window; }
-        inline Renderer*& GetRenderer() { return m_Renderer; }
-        inline EventBus*& GetEventBus() { return m_EventBus; }
+        inline AIAC::Window*& GetWindow() { return m_Window; }  //FIXME: bad practice to return reference of internal variable
+        inline Renderer*& GetRenderer() { return m_Renderer; }  //FIXME: bad practice to return reference of internal variable
+        inline EventBus*& GetEventBus() { return m_EventBus; }  //FIXME: bad practice to return reference of internal variable
 
         inline static Application& GetInstance() { return *s_Instance; }
 
