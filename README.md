@@ -1,19 +1,37 @@
 # Augmented Carpentry
 
-[<img src="https://github.com/aiekick/ImGuiFileDialog/workflows/Linux/badge.svg"/>](https://github.com/aiekick/ImGuiFileDialog/actions?query=workflow%3ALinux)
+[<img src="https://github.com/aiekick/ImGuiFileDialog/workflows/Linux/badge.svg"/>](https://github.com/ibois-epfl/augmented-carpentry)
 
 <p>
     <img src="./assets/images/logos/logo_linux_gray_light.png" width="200">
 </p>
 
-
 ARapp is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
 
-> We need an EventSystem, ideally called every frame. Collect the events, dispatch them and solve them seperately. E.g.: when to stop for drilling/cutting or give feedbacks of depth. First we implement a "blocking event system"(we raise and dispatch the event immediately), next a "polling event system" (we ask the sys if a condition is met).
+> - [x] Add readme for render API how to use
+> - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
+> - [ ] Add Mapping subprogram + UI
+> - [x] Implement padding for 3D scene viewer
+> - [ ] Test if changing map on the go breaks the slam or not
 
-> MINOR: set a borderless window on the touch screen directly and automatically (maybe with a check if the touch display is present).
+> - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
+> - [ ] Add a function DrawCircle() to the RenderAPI
+> - [ ] Add a function DrawCylinder() to the RenderAPI
+> - [ ] Add a function DrawPolyline() to the RenderAPI
+> - [ ] Add a function DrawText() to the RenderAPI
+
+> - [ ] Document with videos and snapshots the tracaking system and the mapping
+
+Scheme for the last implementation of AC's main structure:
+<p>
+    <img src="./docs/NextPAC_v1.png" width="600">
+</p>
+
+
+
+<br />
 
 ## Set touch monitor
 
@@ -28,6 +46,15 @@ monitor_resolution = 800x480
 ```
 **You can build AS with the touch screen or on a non-touch screen.** To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` in the `CMakeLists.txt`:
 
+<br />
+
+## STag PDFs
+Stags are prepared in PDFs batches of ~150 stripes. You can find them [here](https://drive.google.com/drive/folders/1jic85gclymiV9014zc3tuUgIBq8lTyZr?usp=sharing).
+They are made to be print as stickers. The code to generate them can be found ![here](https://github.com/ibois-epfl/TSlam/tree/main/stag_util).
+
+
+<br />
+
 
 ## Build
 We need a first to install TSlam:
@@ -41,13 +68,6 @@ To run the code:
 ```bash
 ./run.sh
 ```
-
-<br />
-
-## STag PDFs
-Stags are prepared in PDFs batches of ~150 stripes. You can find them [here](https://drive.google.com/drive/folders/1jic85gclymiV9014zc3tuUgIBq8lTyZr?usp=sharing).
-They are made to be print as stickers. The code to generate them can be found ![here](https://github.com/ibois-epfl/TSlam/tree/main/stag_util).
-
 
 <br />
 
@@ -333,7 +353,7 @@ namespace AIAC
     {
     public:
         explicit ExampleCalledEvent(const std::string param)
-            : Event(EventType::ExampleCalled, EventCategory::EventCategoryExample), m_Param(param)
+            : Event(EventType::ExampleCalled, EventCategory::EventCategoryExample, 100), m_Param(param)
         {}
 
         void OnExampleCalled();
