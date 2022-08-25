@@ -285,8 +285,6 @@ namespace AIAC
 
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
-
-        ImGui::PopStyleColor();
     }
 
     void LayerUI::SetPaneUIRender()
