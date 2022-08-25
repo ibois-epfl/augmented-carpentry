@@ -6,6 +6,8 @@
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
 
+#include "utils/utils.h"
+
 //for test
 #include "glm/gtx/string_cast.hpp"
 
@@ -16,9 +18,9 @@ namespace AIAC
 
     void LayerSlam::OnAttach()
     {
-        Slam.setMap(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"));
-        Slam.setVocabulary(AIAC::Config::Get<string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
-        Slam.setCamParams(AIAC::Config::Get<string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
+        Slam.setMap(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"), true);
+        Slam.setVocabulary(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
+        Slam.setCamParams(AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
         Slam.setInstancing(true);
     }
 
