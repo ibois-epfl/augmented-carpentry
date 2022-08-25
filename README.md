@@ -16,6 +16,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Implement padding for 3D scene viewer
 > - [x] Test if changing map on the go breaks the slam or not
 
+> - [ ] Make the Camera of the viewport bigger
+
 > - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
 > - [ ] Add a function DrawCircle() to the RenderAPI
 > - [ ] Add a function DrawCylinder() to the RenderAPI
