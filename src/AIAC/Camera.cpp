@@ -83,12 +83,16 @@ namespace AIAC
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
         // AIAC::Image nextFrame;
         // m_VideoCapture >> nextFrame;
-        m_VideoCapture >> m_CurrentFrame;
+        cv::Mat tmpMat;
+        m_VideoCapture >> tmpMat;
+
         if(!m_IsCameraParamMatched){
-            cv::Mat tmp;
-            cv::resize(m_CurrentFrame.GetCvMat(), tmp, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
-            m_CurrentFrame = tmp;
+            cv::resize(tmpMat, tmpMat, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
         }
+        if(ToFlipRBChannel){
+            cv::cvtColor(tmpMat, tmpMat, cv::COLOR_BGR2RGB);
+        }
+        m_CurrentFrame = tmpMat;
         return m_CurrentFrame;
     }
 
