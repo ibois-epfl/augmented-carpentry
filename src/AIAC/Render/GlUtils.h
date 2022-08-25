@@ -1,6 +1,4 @@
-#pragma  once
-
-#include <vector>
+#pragma once
 
 #include "AIAC/GlHeader.h"
 
@@ -9,14 +7,14 @@
 #include "glm/glm.hpp"
 
 namespace AIAC {
-    const static glm::vec4 BLACK   = glm::vec4(0, 0, 0, 1);
-    const static glm::vec4 RED     = glm::vec4(1, 0, 0, 1);
-    const static glm::vec4 GREEN   = glm::vec4(0, 1, 0, 1);
-    const static glm::vec4 BLUE    = glm::vec4(0, 0, 1, 1);
-    const static glm::vec4 YELLOW  = glm::vec4(1, 1, 0, 1);
-    const static glm::vec4 MAGENTA = glm::vec4(1, 0, 1, 1);
-    const static glm::vec4 CYAN    = glm::vec4(0, 1, 1, 1);
-    const static glm::vec4 WHITE   = glm::vec4(1, 1, 1, 1);
+    const static glm::vec4 GL_BLACK   = glm::vec4(0, 0, 0, 1);
+    const static glm::vec4 GL_RED     = glm::vec4(1, 0, 0, 1);
+    const static glm::vec4 GL_GREEN   = glm::vec4(0, 1, 0, 1);
+    const static glm::vec4 GL_BLUE    = glm::vec4(0, 0, 1, 1);
+    const static glm::vec4 GL_YELLOW  = glm::vec4(1, 1, 0, 1);
+    const static glm::vec4 GL_MAGENTA = glm::vec4(1, 0, 1, 1);
+    const static glm::vec4 GL_CYAN    = glm::vec4(0, 1, 1, 1);
+    const static glm::vec4 GL_WHITE   = glm::vec4(1, 1, 1, 1);
 
     /**
      * @brief Draw multiple points
