@@ -6,6 +6,7 @@
 #include "AIAC/Log.h"
 #include "AIAC/Config.h"
 
+#include "AIAC/Render/RenderAPI.h"
 #include "glm/glm.hpp"
 #include "glm/gtx/string_cast.hpp"
 #define GLM_ENABLE_EXPERIMENTAL
@@ -244,14 +245,17 @@ namespace AIAC
             }
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
+
+        DrawTest();
+
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
-        m_GlobalViewWidth = w;
-        m_GlobalViewHeight = h;
+        m_GlobalViewWidth = w * 20;
+        m_GlobalViewHeight = h * 20;
         m_GlobalProjMatrix = glm::perspective(
                 glm::radians(50.0f),
                 m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,300.0f
@@ -302,6 +306,9 @@ namespace AIAC
         glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+
+
+        DrawTest();
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

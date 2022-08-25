@@ -30,9 +30,6 @@ namespace AIAC
 
         bool IsOpened() const { return m_IsOpened; }
 
-    public:
-        bool ToFlipRBChannel = false;
-
     private:
         std::string m_CalibParamPath;
         Image m_CurrentFrame;

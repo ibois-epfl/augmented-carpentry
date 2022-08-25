@@ -31,6 +31,7 @@ namespace AIAC
 
     public:
         tslam::TSlam Slam;
+        bool ToEnhance = true;
 
     private:
         cv::Mat m_CamPose = cv::Mat();

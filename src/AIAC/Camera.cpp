@@ -60,6 +60,11 @@ namespace AIAC
         fs["distortion_coefficients"] >> m_CameraParam.CameraMatrix;
         fs["camera_matrix"] >> m_CameraParam.DistortionCoef;
 
+        if (m_CameraParam.Width != m_Width || m_CameraParam.Height != m_Height){
+            m_IsCameraParamMatched = false;
+            AIAC_ERROR("Mismatched Camera and Camera Parameter.");
+        }
+
         m_Width = m_CameraParam.Width;
         m_Height = m_CameraParam.Height;
 
@@ -67,11 +72,6 @@ namespace AIAC
         fs["image_height"] >> h;
         fs["distortion_coefficients"] >> distortionCoef;
         fs["camera_matrix"] >> cameraMatrix;
-
-        if (w != m_Width || h != m_Height){
-            m_IsCameraParamMatched = false;
-            AIAC_ERROR("Mismatched Camera and Camera Parameter.");
-        }
 
         UpdateFov();
 
@@ -89,9 +89,7 @@ namespace AIAC
         if(!m_IsCameraParamMatched){
             cv::resize(tmpMat, tmpMat, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
         }
-        if(ToFlipRBChannel){
-            cv::cvtColor(tmpMat, tmpMat, cv::COLOR_BGR2RGB);
-        }
+
         m_CurrentFrame = tmpMat;
         return m_CurrentFrame;
     }

@@ -141,38 +141,4 @@ namespace AIAC {
         std::vector<glm::vec4> colors(vertices.size(), color);
         DrawTriangles3d(vertices, indices, colors);
     }
-
-    void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
-        std::vector<glm::vec3> mapPoints(map->map_points.size());
-        for(const auto& mapPoint: map->map_points){
-            if(mapPoint.isValid()){
-                mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
-            }
-        }
-        DrawPoints3d(mapPoints, YELLOW, pointSize);
-
-        std::vector<glm::vec3> markerEdges(map->map_markers.size() * 4 * 2);
-        std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, BLUE);
-        for(const auto& mapMarker: map->map_markers){
-            auto points = mapMarker.second.get3DPoints();
-            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
-            for(int i = 1 ; i < 4; i++){
-                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
-                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
-            }
-            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
-
-            markerEdgeColors.emplace_back(RED);
-            markerEdgeColors.emplace_back(RED);
-            markerEdgeColors.emplace_back(RED);
-            markerEdgeColors.emplace_back(RED);
-            markerEdgeColors.emplace_back(BLUE);
-            markerEdgeColors.emplace_back(BLUE);
-            markerEdgeColors.emplace_back(BLUE);
-            markerEdgeColors.emplace_back(BLUE);
-
-        }
-
-        DrawLines3d(markerEdges, markerEdgeColors);
-    }
 }
