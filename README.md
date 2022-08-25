@@ -6,7 +6,7 @@
     <img src="./assets/images/logos/logo_linux_gray_light.png" width="200">
 </p>
 
-ARapp is a linux desktop application containing a custom-made framework for augmented carpentry.
+AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
 
