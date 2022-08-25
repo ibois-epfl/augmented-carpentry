@@ -180,6 +180,7 @@ target_link_libraries(${PROJECT_NAME}
     ${CMAKE_DL_LIBS}
     glfw
     assimp
+    GLU
     )
 
 

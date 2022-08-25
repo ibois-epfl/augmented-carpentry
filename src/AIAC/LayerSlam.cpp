@@ -29,6 +29,34 @@ namespace AIAC
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
 
+//        if(undistort){
+//            cv::remap(in_image,auxImage,undistMap[0],undistMap[1],cv::INTER_CUBIC);
+//            in_image=auxImage;
+//            image_params.Distorsion.setTo(cv::Scalar::all(0));
+//        }
+
+        if(ToEnhance){
+            //Get Intensity image
+            cv::Mat Lab_image;
+            cvtColor(currentFrame, Lab_image, cv::COLOR_BGR2Lab);
+            std::vector<cv::Mat> Lab_planes(3);
+            cv::split(Lab_image, Lab_planes);  // now we have the L image in lab_planes[0]
+
+            // apply the CLAHE algorithm to the L channel
+            cv::Ptr<cv::CLAHE> clahe = cv::createCLAHE();
+            clahe->setClipLimit(4);
+            // clahe->setTilesGridSize(cv::Size(10, 10));
+            cv::Mat clahe_L;
+            clahe->apply(Lab_planes[0], clahe_L);
+
+            // Merge the color planes back into a Lab image
+            clahe_L.copyTo(Lab_planes[0]);
+            cv::merge(Lab_planes, Lab_image);
+
+            // convert back to RGB
+            cv::cvtColor(Lab_image, currentFrame, cv::COLOR_Lab2BGR);
+        }
+
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
 
         if(m_IsTracked) { m_LastTrackedCamPose = m_CamPose; }
