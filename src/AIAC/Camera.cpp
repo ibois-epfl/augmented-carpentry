@@ -26,6 +26,8 @@ namespace AIAC
             
             m_Width = m_VideoCapture.get(cv::CAP_PROP_FRAME_WIDTH);
             m_Height = m_VideoCapture.get(cv::CAP_PROP_FRAME_HEIGHT);
+
+            AIAC_INFO("Camera Resolution: {0}x{1}.", m_Width, m_Height);
         }
 
         // load camera params
@@ -53,6 +55,19 @@ namespace AIAC
             throw std::runtime_error(std::string(__FILE__)+"LoadCameraParams() could not open file:" + filePath);
         }
 
+        fs["image_width"] >> m_CameraParam.Width;
+        fs["image_height"] >> m_CameraParam.Height;
+        fs["distortion_coefficients"] >> m_CameraParam.CameraMatrix;
+        fs["camera_matrix"] >> m_CameraParam.DistortionCoef;
+
+        if (m_CameraParam.Width != m_Width || m_CameraParam.Height != m_Height){
+            m_IsCameraParamMatched = false;
+            AIAC_ERROR("Mismatched Camera and Camera Parameter.");
+        }
+
+        m_Width = m_CameraParam.Width;
+        m_Height = m_CameraParam.Height;
+
         fs["image_width"] >> w;
         fs["image_height"] >> h;
         fs["distortion_coefficients"] >> distortionCoef;
@@ -68,7 +83,14 @@ namespace AIAC
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
         // AIAC::Image nextFrame;
         // m_VideoCapture >> nextFrame;
-        m_VideoCapture >> m_CurrentFrame;
+        cv::Mat tmpMat;
+        m_VideoCapture >> tmpMat;
+
+        if(!m_IsCameraParamMatched){
+            cv::resize(tmpMat, tmpMat, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
+        }
+
+        m_CurrentFrame = tmpMat;
         return m_CurrentFrame;
     }
 
