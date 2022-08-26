@@ -307,7 +307,6 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-
         DrawTest();
 
         // Bind back to the main framebuffer
