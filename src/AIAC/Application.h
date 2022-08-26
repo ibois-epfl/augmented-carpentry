@@ -9,8 +9,15 @@
 #include "AIAC/Layer.h"
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerCamera.h"
+#include "AIAC/LayerModel.h"
+#include "AIAC/LayerToolhead.h"
+#include "AIAC/LayerInstructor.h"
+#include "AIAC/LayerFeedback.h"
 
 #include "AIAC/EventSys/EventBus.h"
+
+#include "AIAC/GOSys/GO.h"
+
 
 
 namespace AIAC
@@ -60,6 +67,7 @@ namespace AIAC
         inline AIAC::Window*& GetWindow() { return m_Window; }  //FIXME: bad practice to return reference of internal variable
         inline Renderer*& GetRenderer() { return m_Renderer; }  //FIXME: bad practice to return reference of internal variable
         inline EventBus*& GetEventBus() { return m_EventBus; }  //FIXME: bad practice to return reference of internal variable
+        inline GORegistry* GetGORegistry() { return m_GORegistry; }  //FIXME: bad practice to return reference of internal variable
 
         inline static Application& GetInstance() { return *s_Instance; }
 
@@ -75,12 +83,12 @@ namespace AIAC
         Window* m_Window;
         EventBus* m_EventBus;
         Renderer* m_Renderer;
+        GORegistry* m_GORegistry;
 
         bool m_IsRunning = false;
 
         std::vector<std::shared_ptr<AIAC::Layer>> m_LayerStack;
         std::unordered_map<std::type_index, std::shared_ptr<AIAC::Layer>> m_LayerMap;
-
 
         static Application* s_Instance;
     };
@@ -88,5 +96,7 @@ namespace AIAC
 
 #define AIAC_APP AIAC::Application::GetInstance()
 #define AIAC_EBUS AIAC_APP.GetEventBus()
+#define AIAC_GOREG AIAC_APP.GetGORegistry()
+
 
 
