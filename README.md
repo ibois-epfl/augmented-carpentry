@@ -12,15 +12,18 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [x] Add readme for render API how to use
 > - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
-> - [ ] Add Mapping subprogram + UI
+> - [x] Add Mapping subprogram + UI
 > - [x] Implement padding for 3D scene viewer
-> - [ ] Test if changing map on the go breaks the slam or not
+> - [x] Test if changing map on the go breaks the slam or not
+
+> - [ ] Make the Camera of the viewport bigger
 
 > - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
 > - [ ] Add a function DrawCircle() to the RenderAPI
 > - [ ] Add a function DrawCylinder() to the RenderAPI
 > - [ ] Add a function DrawPolyline() to the RenderAPI
 > - [ ] Add a function DrawText() to the RenderAPI
+> - [ ] Add a function DrawTriangle() to the RenderAPI
 
 > - [ ] Document with videos and snapshots the tracaking system and the mapping
 

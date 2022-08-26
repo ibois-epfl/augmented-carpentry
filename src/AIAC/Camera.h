@@ -39,5 +39,12 @@ namespace AIAC
         cv::VideoCapture m_VideoCapture;
         cv::Mat m_CameraMatrix, m_DistortionCoef;
         bool m_IsOpened = false;
+
+        struct CameraParam{
+            int Width, Height;
+            cv::Mat CameraMatrix, DistortionCoef;
+        } m_CameraParam;
+
+        bool m_IsCameraParamMatched = true;
     };
 }
