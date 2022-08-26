@@ -1,4 +1,4 @@
-#pragmae once
+#pragma once
 
 namespace AIAC
 {
