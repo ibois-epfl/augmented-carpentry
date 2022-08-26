@@ -28,19 +28,19 @@ namespace AIAC
         // // // print the content of the registry
         // // cout << AIAC_GOREG->Count() << endl;
         // auto aa = AIAC_GOREG->GetGO<GOPoint>(id);
-        auto aa = AIAC_GOREG->GetGO(id);
+        // auto aa = AIAC_GOREG->GetGO(id);
 
-        // use std::visit to get the GO from the registry
-
-
-        // get GOPoint from variant
-        std::visit([](auto&& arg) {
-            cout << "type: " << arg->GetGOType() << endl;
-        }, aa);
+        // // use std::visit to get the GO from the registry
 
 
-        cout << typeid(aa).name() << endl;
-        // cout << aa->X() << endl;
+        // // get GOPoint from variant
+        // std::visit([](auto&& arg) {
+        //     cout << "type: " << arg->GetGOType() << endl;
+        // }, aa);
+
+
+        // cout << typeid(aa).name() << endl;
+        // // cout << aa->X() << endl;
 
 
         // cout << AIAC_GOREG->Count() << endl;

@@ -43,40 +43,42 @@ namespace AIAC
             m_GOMap.erase(id);
         }
 
-        std::variant<std::shared_ptr<GOPrimitive>,
-                        std::shared_ptr<GOPoint>,
-                        std::shared_ptr<GOLine>,
-                        std::shared_ptr<GOCircle>,
-                        std::shared_ptr<GOCylinder>,
-                        std::shared_ptr<GOPolyline>,
-                        std::shared_ptr<GOTriangle>,
-                        std::shared_ptr<GOMesh>,
-                        std::shared_ptr<GOText>> GetGO(const uint32_t& id)
-        {
-            GOType t =  m_GOMap[id]->GetGOType();
-            switch (t)
-            {
-                case GOType::GOTypePoint:
-                    return std::dynamic_pointer_cast<GOPoint>(m_GOMap[id]);
-                case GOType::GOTypeLine:
-                    return std::dynamic_pointer_cast<GOLine>(m_GOMap[id]);
-                case GOType::GOTypeCircle:
-                    return std::dynamic_pointer_cast<GOCircle>(m_GOMap[id]);
-                case GOType::GOTypeCylinder:
-                    return std::dynamic_pointer_cast<GOCylinder>(m_GOMap[id]);
-                case GOType::GOTypePolyline:
-                    return std::dynamic_pointer_cast<GOPolyline>(m_GOMap[id]);
-                case GOType::GOTypeTriangle:
-                    return std::dynamic_pointer_cast<GOTriangle>(m_GOMap[id]);
-                case GOType::GOTypeMesh:
-                    return std::dynamic_pointer_cast<GOMesh>(m_GOMap[id]);
-                case GOType::GOTypeText:
-                    return std::dynamic_pointer_cast<GOText>(m_GOMap[id]);
-                default:
-                    AIAC_WARN("Unknown type not casted from GOPrimitive.");
-                    return std::shared_ptr<GOPrimitive>();
-            }
-        }
+        // enum class ErrorCode { None = 0, NotFound = 1, NotCasted = 2 };
+
+        // std::variant<ErrorCode,
+        //             std::shared_ptr<GOPoint>,
+        //             std::shared_ptr<GOLine>,
+        //             std::shared_ptr<GOCircle>,
+        //             std::shared_ptr<GOCylinder>,
+        //             std::shared_ptr<GOPolyline>,
+        //             std::shared_ptr<GOTriangle>,
+        //             std::shared_ptr<GOMesh>,
+        //             std::shared_ptr<GOText>> GetGO(const uint32_t& id)
+        // {
+        //     GOType t =  m_GOMap[id]->GetGOType();
+        //     switch (t)
+        //     {
+        //         case GOType::GOTypePoint:
+        //             return std::dynamic_pointer_cast<GOPoint>(m_GOMap[id]);
+        //         case GOType::GOTypeLine:
+        //             return std::dynamic_pointer_cast<GOLine>(m_GOMap[id]);
+        //         case GOType::GOTypeCircle:
+        //             return std::dynamic_pointer_cast<GOCircle>(m_GOMap[id]);
+        //         case GOType::GOTypeCylinder:
+        //             return std::dynamic_pointer_cast<GOCylinder>(m_GOMap[id]);
+        //         case GOType::GOTypePolyline:
+        //             return std::dynamic_pointer_cast<GOPolyline>(m_GOMap[id]);
+        //         case GOType::GOTypeTriangle:
+        //             return std::dynamic_pointer_cast<GOTriangle>(m_GOMap[id]);
+        //         case GOType::GOTypeMesh:
+        //             return std::dynamic_pointer_cast<GOMesh>(m_GOMap[id]);
+        //         case GOType::GOTypeText:
+        //             return std::dynamic_pointer_cast<GOText>(m_GOMap[id]);
+        //         default:
+        //             AIAC_WARN("Unknown type not casted from GOPrimitive.");
+        //             return std::shared_ptr<GOPrimitive>();
+        //     }
+        // }
 
 
 
