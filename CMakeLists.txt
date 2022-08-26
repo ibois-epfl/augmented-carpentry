@@ -52,7 +52,7 @@ option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
 option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
 option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
-option(INSTALL_TSLAM "Install TSlam in case it has been updated" ON)
+option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
@@ -185,6 +185,7 @@ target_link_libraries(${PROJECT_NAME}
     ${CMAKE_DL_LIBS}
     glfw
     assimp
+    GLU
     )
 
 
