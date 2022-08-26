@@ -11,7 +11,7 @@
 #include "glm/gtx/string_cast.hpp"
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtc/matrix_transform.hpp"
-#include "utils/shader.hpp"
+#include "Shader.hpp"
 
 #include "utils/utils.h"
 
@@ -211,6 +211,8 @@ namespace AIAC
 
     void Renderer::OnRender()
     {
+        glUseProgram(m_ProgramId);
+
         RenderGlobalView();
 
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
@@ -222,8 +224,6 @@ namespace AIAC
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         RenderCameraFrame();
-
-        glUseProgram(m_ProgramId);
 
         // Get Cam pose
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
@@ -246,8 +246,8 @@ namespace AIAC
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
 
-        DrawTest();
-
+        DrawTest(true, finalPoseMatrix);
+        glUseProgram(m_ProgramId);
         // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
@@ -307,7 +307,8 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-        DrawTest();
+        DrawTest(true, finalPoseMatrix);
+        glUseProgram(m_ProgramId);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
