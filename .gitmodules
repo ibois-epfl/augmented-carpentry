@@ -27,3 +27,6 @@
 	branch = master
 	path = deps/eventpp
 	url = https://github.com/ibois-epfl/eventpp.git
+[submodule "deps/freetype"]
+	path = deps/freetype
+	url = https://gitlab.freedesktop.org/freetype/freetype

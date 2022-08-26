@@ -15,13 +15,10 @@ file(GLOB AIAC_SRC
     "src/AIAC/UI/*.cpp"
     "src/AIAC/EventSys/*.h"
     "src/AIAC/EventSys/*.cpp"
-<<<<<<< HEAD
     "src/AIAC/GoSys/*.h"
     "src/AIAC/GoSys/*.cpp"
-=======
-    "src/AIAC/Render/*.h"
+    "src/AIAC/Render/*.h*"
     "src/AIAC/Render/*.cpp"
->>>>>>> 1fcbc7874a8b4be5f5defbdd4ce6da7996fc3911
     "src/utils/*"
     "src/AIAC.h"
     )
