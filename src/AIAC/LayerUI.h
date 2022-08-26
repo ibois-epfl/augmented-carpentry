@@ -35,37 +35,24 @@ namespace AIAC {
     class LayerUI : public AIAC::Layer {
     public:
         LayerUI() = default;
-
         virtual ~LayerUI() = default;
 
         virtual void OnAttach() override;
-
         virtual void OnFrameStart() override;
-
         void OnUIRender();
-
         virtual void OnDetach() override;
 
         void ShowMenuBar();
-
         void ShowMainUI();
-
-        void ShowSceneViewport();  //TODO: set fix camera in 3d scene and pass buffer
-
+        void ShowSceneViewport();
         void ShowCombineMapPopup();
-
         void ShowMappingPopup();
-
         void ShowSaveMapFileDialog();
-
         void ShowMapFileDialog(char *path);
 
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
-
         void SetPaneUICamera();
-
         void SetPaneUISlam();
-
         void SetPaneUIRender();
 
     private:

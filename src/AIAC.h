@@ -17,21 +17,22 @@
 #include "AIAC/EventSys/Event.h"
 #include "AIAC/EventSys/SLAMEvent.h"
 
-#include "AIAC/Application.h"
-#include "AIAC/Layer.h"
-
 #include "AIAC/Image.h"
 #include "AIAC/Camera.h"
 
+#include "AIAC/Layer.h"
 #include "AIAC/LayerCamera.h"
 #include "AIAC/LayerSlam.h"
 #include "AIAC/LayerUI.h"
 #include "AIAC/LayerCamera.h"
+#include "AIAC/LayerModel.h"
+#include "AIAC/LayerToolhead.h"
+#include "AIAC/LayerInstructor.h"
+#include "AIAC/LayerFeedback.h"
+
 #include "AIAC/Render/Renderer.h"
 
-#include "AIAC/GOSys/GOPrimitive.h"
-#include "AIAC/GOSys/GOCollection.h"
-#include "AIAC/GOSys/GOContext.h"
+#include "AIAC/GOSys/GO.h"
 
 #include "AIAC/EventSys/Event.h"
 #include "AIAC/EventSys/SLAMEvent.h"

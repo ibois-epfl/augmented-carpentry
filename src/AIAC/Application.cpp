@@ -35,9 +35,11 @@ namespace AIAC
                 m_AppSpec.VSync
             ));
 
-        m_Renderer = new Renderer();
-
         m_EventBus = new EventBus();
+
+        m_GORegistry = new GORegistry();
+
+        m_Renderer = new Renderer();
     }
 
     void Application::Run()

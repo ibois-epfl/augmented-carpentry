@@ -20,7 +20,6 @@ namespace AIAC
 
     void LayerCamera::OnFrameStart()
     {
-        // m_CurrentFrame = MainCamera.GetNextFrame();
         MainCamera.GetNextFrame();
     }
 }

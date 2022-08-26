@@ -1,4 +1,4 @@
-#include "aiacp"
+#include "aiacpch.h"
 #include "GlUtils.h"
 
 namespace AIAC {
@@ -150,10 +150,10 @@ namespace AIAC {
                 mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
             }
         }
-        DrawPoints3d(mapPoints, GL_YELLOW, pointSize);
+        DrawPoints3d(mapPoints, OGL_YELLOW, pointSize);
 
         std::vector<glm::vec3> markerEdges(map->map_markers.size() * 4 * 2);
-        std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, GL_BLUE);
+        std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, OGL_BLUE);
         for(const auto& mapMarker: map->map_markers){
             auto points = mapMarker.second.get3DPoints();
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
@@ -163,14 +163,14 @@ namespace AIAC {
             }
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
 
-            markerEdgeColors.emplace_back(GL_RED);
-            markerEdgeColors.emplace_back(GL_RED);
-            markerEdgeColors.emplace_back(GL_RED);
-            markerEdgeColors.emplace_back(GL_RED);
-            markerEdgeColors.emplace_back(GL_BLUE);
-            markerEdgeColors.emplace_back(GL_BLUE);
-            markerEdgeColors.emplace_back(GL_BLUE);
-            markerEdgeColors.emplace_back(GL_BLUE);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+            markerEdgeColors.emplace_back(OGL_BLUE);
 
         }
 
