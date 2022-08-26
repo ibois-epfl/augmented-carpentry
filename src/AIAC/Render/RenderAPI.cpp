@@ -1,7 +1,8 @@
 #include "RenderAPI.h"
 #include "AIAC/Log.h"
 
-#include <glm/gtx/string_cast.hpp>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 namespace AIAC
 {
@@ -143,9 +144,10 @@ namespace AIAC
         DrawPoints3d(points, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), 5.0f);
     }
 
-    void DrawTest(bool t){
-        DrawCylinder(glm::vec3(0, 20, 0), glm::vec3(3, 3, 3), 5,
-                     glm::vec4(.80f, 0.0f, 0.0f, .50f), glm::vec4(0.0f, 0.0f, 0.0f, .50f),
-                     24);
+
+
+    void DrawTest(bool t, glm::mat4 projection){
+        TextRenderer textRenderer;
+        textRenderer.RenderText("Hello World", 0, 0, 0.1, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), projection);
     }
 }
