@@ -24,6 +24,7 @@ namespace AIAC
             static_assert(std::is_base_of<AIAC::GOPrimitive, T>::value, "Pushed type is not subclass of GOPrimitive!");
             m_GOMap.emplace(go->GetId(), go);
         }
+
         template<typename T>
         void Register(const uint32_t& id, std::shared_ptr<T> go)
         {
@@ -43,63 +44,68 @@ namespace AIAC
             m_GOMap.erase(id);
         }
 
-        // enum class ErrorCode { None = 0, NotFound = 1, NotCasted = 2 };
-
-        // std::variant<ErrorCode,
-        //             std::shared_ptr<GOPoint>,
-        //             std::shared_ptr<GOLine>,
-        //             std::shared_ptr<GOCircle>,
-        //             std::shared_ptr<GOCylinder>,
-        //             std::shared_ptr<GOPolyline>,
-        //             std::shared_ptr<GOTriangle>,
-        //             std::shared_ptr<GOMesh>,
-        //             std::shared_ptr<GOText>> GetGO(const uint32_t& id)
-        // {
-        //     GOType t =  m_GOMap[id]->GetGOType();
-        //     switch (t)
-        //     {
-        //         case GOType::GOTypePoint:
-        //             return std::dynamic_pointer_cast<GOPoint>(m_GOMap[id]);
-        //         case GOType::GOTypeLine:
-        //             return std::dynamic_pointer_cast<GOLine>(m_GOMap[id]);
-        //         case GOType::GOTypeCircle:
-        //             return std::dynamic_pointer_cast<GOCircle>(m_GOMap[id]);
-        //         case GOType::GOTypeCylinder:
-        //             return std::dynamic_pointer_cast<GOCylinder>(m_GOMap[id]);
-        //         case GOType::GOTypePolyline:
-        //             return std::dynamic_pointer_cast<GOPolyline>(m_GOMap[id]);
-        //         case GOType::GOTypeTriangle:
-        //             return std::dynamic_pointer_cast<GOTriangle>(m_GOMap[id]);
-        //         case GOType::GOTypeMesh:
-        //             return std::dynamic_pointer_cast<GOMesh>(m_GOMap[id]);
-        //         case GOType::GOTypeText:
-        //             return std::dynamic_pointer_cast<GOText>(m_GOMap[id]);
-        //         default:
-        //             AIAC_WARN("Unknown type not casted from GOPrimitive.");
-        //             return std::shared_ptr<GOPrimitive>();
-        //     }
-        // }
+        template<typename T>
+        std::shared_ptr<T> GetGO(const uint32_t& id)
+        {
+            static_assert(std::is_base_of<AIAC::GOPrimitive, T>::value, "Type to get is not subclass of GOPrimitive!");
+            auto it = m_GOMap[id];
+            // check if the static poitner cast succed
+            if (it != nullptr)
+            {
+                try
+                {
+                    return std::static_pointer_cast<T>(it);
+                }
+                catch (const std::bad_cast& e)
+                {
+                    AIAC_ERROR("Bad cast exception: {}", e.what());
+                    return nullptr;
+                }
+            }
+            else { AIAC_ERROR("Could not get GO with id: {}", id); return nullptr; }
+        }
 
 
-
-
-
-
-        std::shared_ptr<GOPoint> GetGOPoint(const uint32_t& id) { return std::dynamic_pointer_cast<GOPoint>(m_GOMap[id]); }
-        std::shared_ptr<GOLine> GetGOLine(const uint32_t& id) { return std::dynamic_pointer_cast<GOLine>(m_GOMap[id]); }
-        std::shared_ptr<GOCircle> GetGOCircle(const uint32_t& id) { return std::dynamic_pointer_cast<GOCircle>(m_GOMap[id]); }
-        std::shared_ptr<GOCylinder> GetGOCylinder(const uint32_t& id) { return std::dynamic_pointer_cast<GOCylinder>(m_GOMap[id]); }
-        std::shared_ptr<GOPolyline> GetGOPolyline(const uint32_t& id) { return std::dynamic_pointer_cast<GOPolyline>(m_GOMap[id]); }
-        std::shared_ptr<GOTriangle> GetGOTriangle(const uint32_t& id) { return std::dynamic_pointer_cast<GOTriangle>(m_GOMap[id]); }
-        std::shared_ptr<GOMesh> GetGOMesh(const uint32_t& id) { return std::dynamic_pointer_cast<GOMesh>(m_GOMap[id]); }
-        std::shared_ptr<GOText> GetGOText(const uint32_t& id) { return std::dynamic_pointer_cast<GOText>(m_GOMap[id]); }
-
-
-
-
-
-
-
+        void GetAllGOs(std::vector<std::shared_ptr<GOPoint>>& points,
+                        std::vector<std::shared_ptr<GOLine>>& lines,
+                        std::vector<std::shared_ptr<GOCircle>>& circles,
+                        std::vector<std::shared_ptr<GOCylinder>>& cylinders,
+                        std::vector<std::shared_ptr<GOPolyline>>& polylines,
+                        std::vector<std::shared_ptr<GOTriangle>>& triangles,
+                        std::vector<std::shared_ptr<GOText>>& texts)
+        {
+            for (auto& go : m_GOMap)
+            {
+                if (go.second->GetType() == GOTypeFlags::_GOPoint)
+                {
+                    points.push_back(std::static_pointer_cast<GOPoint>(go.second));
+                }
+                else if (go.second->GetType() == GOTypeFlags::_GOLine)
+                {
+                    lines.push_back(std::static_pointer_cast<GOLine>(go.second));
+                }
+                else if (go.second->GetType() == GOTypeFlags::_GOCircle)
+                {
+                    circles.push_back(std::static_pointer_cast<GOCircle>(go.second));
+                }
+                else if (go.second->GetType() == GOTypeFlags::_GOCylinder)
+                {
+                    cylinders.push_back(std::static_pointer_cast<GOCylinder>(go.second));
+                }
+                else if (go.second->GetType() == GOTypeFlags::_GOPolyline)
+                {
+                    polylines.push_back(std::static_pointer_cast<GOPolyline>(go.second));
+                }
+                else if (go.second->GetType() == GOTypeFlags::_GOTriangle)
+                {
+                    triangles.push_back(std::static_pointer_cast<GOTriangle>(go.second));
+                }
+                else if (go.second->GetType() == GOTypeFlags::_GOText)
+                {
+                    texts.push_back(std::static_pointer_cast<GOText>(go.second));
+                }
+            }
+        }
 
         inline void Clear() { m_GOMap.clear(); }
         inline uint32_t CheckIfKeyExists(uint32_t key) { return m_GOMap.count(key); }

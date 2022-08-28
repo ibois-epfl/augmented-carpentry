@@ -20,7 +20,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <variant>  //TODO: to be confirmed if we use variant
+#include <variant>
 
 #include <stdlib.h>
 
