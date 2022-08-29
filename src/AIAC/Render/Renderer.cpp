@@ -247,8 +247,8 @@ namespace AIAC
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
 
-        DrawTest(true, finalPoseMatrix);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        DrawTest(true, m_ProjMatrix);
+//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glUseProgram(m_ProgramId);
     }
 
