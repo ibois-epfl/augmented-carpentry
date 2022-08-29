@@ -17,6 +17,8 @@ namespace AIAC
 
         bool LoadGOMesh(const char* path, GOMesh& goMesh);
 
+        bool CvtAssimpMeshToGOMesh(const aiMesh* mesh, GOMesh& goMesh);
+
         void CvtAssimpMeshVerticesToGlmVector(const aiMesh* mesh, std::vector<glm::vec3>& glmVertices);
         void CvtAssimpMeshFacesToGlmVector(const aiMesh* mesh, std::vector<uint32_t>& glmIndices);
         void CvtAssimpMeshNormalsToGlmVector(const aiMesh* mesh, std::vector<glm::vec3>& glmNormals);

@@ -10,7 +10,7 @@ namespace AIAC
     bool DLoader::LoadGOMesh(const char* path, GOMesh& goMesh)
     {
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(path, ASSIMP_LOAD_FLAGS);  // aiProcess_JoinIdenticalVertices
+        const aiScene* scene = importer.ReadFile(path, ASSIMP_LOAD_FLAGS);
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
             AIAC_ERROR("Assimp failed to load {0}", importer.GetErrorString());
@@ -19,6 +19,13 @@ namespace AIAC
         const aiMesh* mesh = scene->mMeshes[0];
         unsigned int numVerticecs = mesh->mNumVertices;
 
+        CvtAssimpMeshToGOMesh(mesh, goMesh);
+
+        return true;
+    }
+
+    bool DLoader::CvtAssimpMeshToGOMesh(const aiMesh* mesh, GOMesh& goMesh)
+    {
         std::vector<glm::vec3> glmVertices;
         CvtAssimpMeshVerticesToGlmVector(mesh, glmVertices);
         goMesh.SetVertices(glmVertices);
