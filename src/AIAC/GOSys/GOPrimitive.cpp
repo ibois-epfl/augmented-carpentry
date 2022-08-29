@@ -8,7 +8,7 @@
 // TODO: find a better pattern for adding the object from constructor to the registry 
 namespace AIAC
 {
-    GOPrimitive::GOPrimitive(GOCategory category = GOCategoryNone, bool isVisible = true, glm::vec4 color = glm::vec4(1, 1, 1, 1))
+    GOPrimitive::GOPrimitive(GOCategory category, bool isVisible, glm::vec4 color)
         : m_Category(category), m_IsVisible(isVisible), m_Color(color), m_State(false), m_Type(GOTypeFlags::_GOPrimitive)
     {
         m_Id = GenerateId();

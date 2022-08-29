@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 3.16.)
 project(AC VERSION 0.1.0 LANGUAGES CXX C)
 
@@ -15,9 +14,9 @@ file(GLOB AIAC_SRC
     "src/AIAC/UI/*.cpp"
     "src/AIAC/EventSys/*.h"
     "src/AIAC/EventSys/*.cpp"
-    "src/AIAC/GoSys/*.h"
-    "src/AIAC/GoSys/*.cpp"
-    "src/AIAC/Render/*.h*"
+    "src/AIAC/GOSys/*.h"
+    "src/AIAC/GOSys/*.cpp"
+    "src/AIAC/Render/*.h"
     "src/AIAC/Render/*.cpp"
     "src/utils/*"
     "src/AIAC.h"
