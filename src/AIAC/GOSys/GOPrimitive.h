@@ -214,15 +214,24 @@ namespace AIAC
     class GOMesh : public GOPrimitive
     {
     public:
+        GOMesh();
         GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
         virtual ~GOMesh() = default;
 
         const std::vector<glm::vec3> GetVertices() const { return m_Vertices; }
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
+        const std::vector<glm::vec3> GetNormals() const { return m_Normals; }
+        const std::vector<glm::vec4> GetColors() const { return m_Colors; }
+        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; }
+        void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; }
+        void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
+        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; }
 
     private:
         std::vector<glm::vec3> m_Vertices;
         std::vector<uint32_t> m_Indices;
+        std::vector<glm::vec3> m_Normals;
+        std::vector<glm::vec4> m_Colors;
     };
 
 

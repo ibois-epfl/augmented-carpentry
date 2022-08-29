@@ -9,6 +9,7 @@
 
 #include "glm/glm.hpp"
 
+//FIXME:: do we still need this class?
 namespace AIAC{
 class Mesh
 {
