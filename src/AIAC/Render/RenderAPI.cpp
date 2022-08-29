@@ -290,11 +290,7 @@ namespace AIAC
     }
 
     void DrawMesh(const GOMesh& goMesh) {
-        vector<glm::vec3> vertices; vertices.reserve(goMesh.GetVertices().size());
-        for(const auto& vertex: goMesh.GetVertices()){
-            vertices.emplace_back(vertex);
-        }
-        DrawTriangles3d(vertices, goMesh.GetIndices(), goMesh.GetColor());
+        DrawTriangles3d(goMesh.GetVertices(), goMesh.GetIndices(), goMesh.GetColor());
     }
 
     void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes) {
@@ -313,14 +309,14 @@ namespace AIAC
     }
 
     void DrawTest(bool t, glm::mat4 projection){
-        std::vector<std::shared_ptr<GOPoint>> points;
-        std::vector<std::shared_ptr<GOLine>> lines;
-        std::vector<std::shared_ptr<GOCircle>> circles;
-        std::vector<std::shared_ptr<GOCylinder>> cylinders;
-        std::vector<std::shared_ptr<GOPolyline>> polylines;
-        std::vector<std::shared_ptr<GOTriangle>> triangles;
-        std::vector<std::shared_ptr<GOText>> texts;
-        AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, texts);
+//        std::vector<std::shared_ptr<GOPoint>> points;
+//        std::vector<std::shared_ptr<GOLine>> lines;
+//        std::vector<std::shared_ptr<GOCircle>> circles;
+//        std::vector<std::shared_ptr<GOCylinder>> cylinders;
+//        std::vector<std::shared_ptr<GOPolyline>> polylines;
+//        std::vector<std::shared_ptr<GOTriangle>> triangles;
+//        std::vector<std::shared_ptr<GOText>> texts;
+//        AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, texts);
 
 //        DrawPoints(points);
 //        DrawLines(lines);
@@ -329,6 +325,8 @@ namespace AIAC
 
 //        DrawCylinders(cylinders);
 //        DrawCircles(circles);
+
+//        textRenderer.RenderText("Hello World", 0, 0, 40, glm::vec3(1, 0, 0));
 
     }
 

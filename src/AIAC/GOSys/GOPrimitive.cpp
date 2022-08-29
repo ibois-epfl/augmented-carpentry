@@ -71,8 +71,8 @@ namespace AIAC
     }
 
 
-    GOMesh::GOMesh(std::vector<GOPoint> points, std::vector<uint32_t> indices)
-        : m_Points(points), m_Indices(indices)
+    GOMesh::GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
+        : m_Vertices(vertices), m_Indices(indices)
     {
         m_Type = GOTypeFlags::_GOMesh;
         AIAC_GOREG->Register(m_Id, std::make_shared<GOMesh>(*this));
