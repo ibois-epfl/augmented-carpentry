@@ -100,6 +100,8 @@ namespace AIAC
         inline float GetSize() const { return m_Size; }
         inline void SetSize(float size) { m_Size = size; }
 
+        explicit operator glm::vec3() const { return m_Position; }
+
     private:
         glm::vec3 m_Position;
         float m_Size = 1.0f;
@@ -214,6 +216,9 @@ namespace AIAC
     public:
         GOMesh(std::vector<GOPoint> points, std::vector<uint32_t> indices);
         virtual ~GOMesh() = default;
+
+        std::vector<GOPoint> GetVertices() const { return m_Points; }
+        std::vector<uint32_t> GetIndices() const { return m_Indices; }
 
     private:
         std::vector<GOPoint> m_Points;

@@ -1,3 +1,5 @@
+// TODO: cache base cylinder and sphere meshes
+
 #include "RenderAPI.h"
 #include "AIAC/Log.h"
 
@@ -287,12 +289,18 @@ namespace AIAC
         }
     }
 
-    void DrawMesh(GOMesh goMesh) {
-
+    void DrawMesh(const GOMesh& goMesh) {
+        vector<glm::vec3> vertices; vertices.reserve(goMesh.GetVertices().size());
+        for(const auto& vertex: goMesh.GetVertices()){
+            vertices.emplace_back(vertex);
+        }
+        DrawTriangles3d(vertices, goMesh.GetIndices(), goMesh.GetColor());
     }
 
-    void DrawMeshes(std::vector<GOMesh> goMeshes) {
-
+    void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes) {
+        for (auto &goMesh: goMeshes) {
+            DrawMesh(*goMesh);
+        }
     }
 
     void DrawText(GOText goText){
@@ -320,7 +328,8 @@ namespace AIAC
 //        DrawTriangles(triangles);
 
 //        DrawCylinders(cylinders);
-        DrawCircles(circles);
+//        DrawCircles(circles);
+
     }
 
 
