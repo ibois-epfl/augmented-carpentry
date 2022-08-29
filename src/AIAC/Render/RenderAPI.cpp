@@ -303,8 +303,8 @@ namespace AIAC
     }
 
     void DrawText(GOText goText){
-        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
-        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
+//        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
+//        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
     }
 
     void DrawTexts(std::vector<GOText> goTexts) {
@@ -330,8 +330,8 @@ namespace AIAC
 //        DrawCircles(circles);
 
 //        textRenderer.RenderText("Hello World", 0, 0, 40, glm::vec3(1, 0, 0));
-        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
-        textRenderer.RenderText("goText.GetText()", 0, 0, 0.1, glm::vec3(0,0,0), projection);
+//        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
+//        textRenderer.RenderText("goText.GetText()", 0, 0, 0.1, glm::vec4(0,0,0,0.5), projection);
     }
 
 

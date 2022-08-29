@@ -248,7 +248,7 @@ namespace AIAC
         }
 
         DrawTest(true, m_ProjMatrix);
-//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glUseProgram(m_ProgramId);
     }
 

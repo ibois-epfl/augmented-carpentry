@@ -12,17 +12,16 @@
 namespace AIAC{
 
     void TextRenderer::Init() {
-        glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        glm::mat4 projection = glm::ortho(0.0f, 300.0f, 0.0f, 200.0f);
+//        glm::mat4 projection = glm::ortho(0.0f, 300.0f, 0.0f, 200.0f);
 
-        shaderProgram = LoadShaders(
+        m_ShaderProgram = LoadShaders(
                 "assets/opengl/TextShader.vs",
                 "assets/opengl/TextShader.fs");
 
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+//        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 
         // FreeType
@@ -101,21 +100,32 @@ namespace AIAC{
         // configure VAO/VBO for texture quads
         // -----------------------------------
         glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
         glBindVertexArray(VAO);
+
+        glGenBuffers(1, &VBO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
 
         m_Initialized = true;
+
+        AIAC_INFO("TextRenderer initialized");
     }
 
-    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color, glm::mat4 projection)
+    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection)
     {
-        // TODO: replace project with the right one
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glEnable(GL_ALPHA_TEST);
+        glAlphaFunc(GL_GREATER, 0.5f);
+
+        // TODO: replace projection with the right one
 //        glm::mat4 projection(1.0f);
         glm::mat4 noRotProjection = projection;
         noRotProjection[0][1] = 0.0f;
@@ -134,9 +144,9 @@ namespace AIAC{
 //        noRotProjection[3][1] = 0.0f;
 //        noRotProjection[3][2] = 0.0f;
         // activate corresponding render state
-        glUseProgram(shaderProgram);
-        glUniform3f(glGetUniformLocation(shaderProgram, "textColor"), color.x, color.y, color.z);
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(noRotProjection));
+        glUseProgram(m_ShaderProgram);
+        glUniform3f(glGetUniformLocation(m_ShaderProgram, "textColor"), color.x, color.y, color.z);
+        glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(noRotProjection));
 
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);
