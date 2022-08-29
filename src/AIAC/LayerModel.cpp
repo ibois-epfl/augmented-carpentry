@@ -34,7 +34,7 @@ namespace AIAC
         std::shared_ptr<GOTriangle> triangle1 = std::make_shared<GOTriangle>(GOTriangle(*pt1, *pt2, *pt3));
         std::shared_ptr<GOTriangle> triangle2 = std::make_shared<GOTriangle>(GOTriangle(*pt2, *pt3, *pt1));
         std::shared_ptr<GOTriangle> triangle3 = std::make_shared<GOTriangle>(GOTriangle(*pt3, *pt1, *pt2));
-        std::shared_ptr<GOMesh> mesh1 = std::make_shared<GOMesh>(std::vector<GOPoint>{*pt1, *pt2, *pt3}, std::vector<uint32_t>{0,1,2});
+        std::shared_ptr<GOMesh> mesh1 = std::make_shared<GOMesh>(std::vector<glm::vec3>{*pt1, *pt2, *pt3}, std::vector<uint32_t>{0,1,2});
         std::shared_ptr<GOText> text1 = std::make_shared<GOText>(GOText("Hello World1", *pt1, 0.5f));
         std::shared_ptr<GOText> text2 = std::make_shared<GOText>(GOText("Hello World2", *pt2, 0.5f));
         std::shared_ptr<GOText> text3 = std::make_shared<GOText>(GOText("Hello World3", *pt3, 0.5f));

@@ -100,7 +100,7 @@ namespace AIAC
         inline float GetSize() const { return m_Size; }
         inline void SetSize(float size) { m_Size = size; }
 
-        explicit operator glm::vec3() const { return m_Position; }
+        operator glm::vec3() const { return m_Position; }
 
     private:
         glm::vec3 m_Position;
@@ -181,10 +181,6 @@ namespace AIAC
         inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
-        // m_Points:
-        // P0 ------------- P1
-        //  |                \
-        //  ----m_IsClosed---P2
         std::vector<GOPoint> m_Points;
         bool m_IsClosed = true;
         float m_Thickness = GOThickness::Default;
@@ -214,14 +210,14 @@ namespace AIAC
     class GOMesh : public GOPrimitive
     {
     public:
-        GOMesh(std::vector<GOPoint> points, std::vector<uint32_t> indices);
+        GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
         virtual ~GOMesh() = default;
 
-        std::vector<GOPoint> GetVertices() const { return m_Points; }
-        std::vector<uint32_t> GetIndices() const { return m_Indices; }
+        const std::vector<glm::vec3> GetVertices() const { return m_Vertices; }
+        const std::vector<uint32_t> GetIndices() const { return m_Indices; }
 
     private:
-        std::vector<GOPoint> m_Points;
+        std::vector<glm::vec3> m_Vertices;
         std::vector<uint32_t> m_Indices;
     };
 

@@ -17,6 +17,8 @@
 
 namespace AIAC
 {
+    extern TextRenderer textRenderer;
+
     void Renderer::Init()
     {
         GLuint VertexArrayID;
@@ -246,10 +248,8 @@ namespace AIAC
         }
 
         DrawTest(true, finalPoseMatrix);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glUseProgram(m_ProgramId);
-        // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
