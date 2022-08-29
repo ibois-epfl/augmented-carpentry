@@ -10,11 +10,16 @@ namespace AIAC
 {
     class TextRenderer {
     public:
-        TextRenderer() { Init(); };
+        TextRenderer() = default;
         ~TextRenderer() = default;
 
         void Init();
 
+        bool IsInitialized() const { return m_Initialized; }
+
+        void RenderText(std::string text, float x, float y, float scale, glm::vec3 color, glm::mat4 projection);
+
+    public:
         struct Character {
             unsigned int TextureID;  // ID handle of the glyph texture
             glm::ivec2   Size;       // Size of glyph
@@ -27,6 +32,7 @@ namespace AIAC
 
         GLuint shaderProgram;
 
-        void RenderText(std::string text, float x, float y, float scale, glm::vec3 color, glm::mat4 projection);
+    private:
+        bool m_Initialized = false;
     };
 }
