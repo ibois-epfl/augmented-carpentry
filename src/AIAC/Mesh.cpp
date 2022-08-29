@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//FIXME:: do we still need this class?
 namespace AIAC
 {
     bool Mesh::Load(const char * path){

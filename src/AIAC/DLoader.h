@@ -1,5 +1,10 @@
 #pragma once
 
+#include "AIAC/GOSys/GO.h"
+
+#include "assimp/Importer.hpp"      // C++ importer interface
+#include "assimp/scene.h"           // Output data structure
+#include "assimp/postprocess.h"     // Post processing flags
 
 
 namespace AIAC
@@ -10,6 +15,11 @@ namespace AIAC
         DLoader() = default;
         ~DLoader() = default;
 
-        bool LoadMesh(const char* path);
+        bool LoadGOMesh(const char* path, GOMesh& goMesh);
+
+        void CvtAssimpMeshVerticesToGlmVector(const aiMesh* mesh, std::vector<glm::vec3>& glmVertices);
+        void CvtAssimpMeshFacesToGlmVector(const aiMesh* mesh, std::vector<uint32_t>& glmIndices);
+        void CvtAssimpMeshNormalsToGlmVector(const aiMesh* mesh, std::vector<glm::vec3>& glmNormals);
+        void CvtAssimpMeshColorsToGlmVector(const aiMesh* mesh, std::vector<glm::vec3>& glmColors);
     };
 }

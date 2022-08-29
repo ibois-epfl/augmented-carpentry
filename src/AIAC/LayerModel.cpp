@@ -39,8 +39,9 @@ namespace AIAC
         GOText text3 = GOText("Hello World3", pt3, 0.5f);
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
 
-        // DLoader dloader = LoadMesh();
-        // dloader.Load("assets/models/drill_scaled_1000.obj");
+        DLoader dloader = DLoader();
+        GOMesh meshT = GOMesh();
+        dloader.LoadGOMesh("assets/models/drill_scaled_1000.obj", meshT);
 
 
     }
