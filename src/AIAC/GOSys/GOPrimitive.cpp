@@ -8,7 +8,7 @@
 // TODO: find a better pattern for adding the object from constructor to the registry 
 namespace AIAC
 {
-    GOPrimitive::GOPrimitive(GOCategory category = GOCategoryNone, bool isVisible = true, glm::vec4 color = glm::vec4(1, 1, 1, 1))
+    GOPrimitive::GOPrimitive(GOCategory category, bool isVisible, glm::vec4 color)
         : m_Category(category), m_IsVisible(isVisible), m_Color(color), m_State(false), m_Type(GOTypeFlags::_GOPrimitive)
     {
         m_Id = GenerateId();
@@ -30,7 +30,6 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOPoint;
         AIAC_GOREG->Register(m_Id, std::make_shared<GOPoint>(*this));
     }
-
 
     GOLine::GOLine(GOPoint p1, GOPoint p2)
         : m_PStart(p1), m_PEnd(p2)
@@ -72,8 +71,8 @@ namespace AIAC
     }
 
 
-    GOMesh::GOMesh(std::vector<GOPoint> points, std::vector<uint32_t> indices)
-        : m_Points(points), m_Indices(indices)
+    GOMesh::GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
+        : m_Vertices(vertices), m_Indices(indices)
     {
         m_Type = GOTypeFlags::_GOMesh;
         AIAC_GOREG->Register(m_Id, std::make_shared<GOMesh>(*this));

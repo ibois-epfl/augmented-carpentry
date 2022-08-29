@@ -49,7 +49,7 @@ namespace AIAC
         {
             static_assert(std::is_base_of<AIAC::GOPrimitive, T>::value, "Type to get is not subclass of GOPrimitive!");
             auto it = m_GOMap[id];
-            // check if the static poitner cast succed
+            // check if the static pointer cast succeed
             if (it != nullptr)
             {
                 try
