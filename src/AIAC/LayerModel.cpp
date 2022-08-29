@@ -33,7 +33,7 @@ namespace AIAC
         GOTriangle triangle1 = GOTriangle(pt1, pt2, pt3);
         GOTriangle triangle2 = GOTriangle(pt2, pt3, pt1);
         GOTriangle triangle3 = GOTriangle(pt3, pt1, pt2);
-        GOMesh mesh1 = GOMesh(std::vector<GOPoint>{pt1, pt2, pt3}, std::vector<uint32_t>{0,1,2});
+        GOMesh mesh1 = GOMesh(std::vector<glm::vec3>{pt1, pt2, pt3}, std::vector<uint32_t>{0,1,2});
         GOText text1 = GOText("Hello World1", pt1, 0.5f);
         GOText text2 = GOText("Hello World2", pt2, 0.5f);
         GOText text3 = GOText("Hello World3", pt3, 0.5f);

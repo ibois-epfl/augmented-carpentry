@@ -1,8 +1,11 @@
 #pragma once
 
+#include <utility>
+
 #include "AIAC/Base.h"
 #include "glm/glm.hpp"
 
+//FIXME: delete or keep thickness member variable
 
 namespace AIAC
 {
@@ -29,13 +32,13 @@ namespace AIAC
         _GOText,
     };
 
-
-    // struct GOThickness
-    // {
-    //     static constexpr float Default            = 0.5f;
-    //     static constexpr float Thin               = 0.1f;
-    //     static constexpr float Thick              = 1.0f;
-    // };
+    // TODO: change name to weigth
+    struct GOThickness
+    {
+        static constexpr float Default            = 0.5f;
+        static constexpr float Thin               = 0.1f;
+        static constexpr float Thick              = 1.0f;
+    };
 
 
     enum GOCategory
@@ -51,7 +54,9 @@ namespace AIAC
     class GOPrimitive
     {
     public:
-        GOPrimitive(GOCategory category, bool isVisible, glm::vec4 color);
+        explicit GOPrimitive(GOCategory category = GOCategoryNone,
+                             bool isVisible = true,
+                             glm::vec4 color = glm::vec4(0, 0, 0, 1));
         // ~GOPrimitive();
         virtual ~GOPrimitive() = default;
 
@@ -60,7 +65,7 @@ namespace AIAC
 
         inline GOCategory GetCategory() const { return m_Category; }
         inline bool GetVisibility() { return m_IsVisible; }
-        inline glm::vec4 GetColor() { return m_Color; }
+        inline glm::vec4 GetColor() const { return m_Color; }
         inline bool GetState() { return m_State; }
         inline GOTypeFlags GetType() { return m_Type; }
 
@@ -94,11 +99,16 @@ namespace AIAC
         inline void SetY(float y) { m_Position.y = y; }
         inline void SetZ(float z) { m_Position.z = z; }
 
-        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
-    
+        inline float GetSize() const { return m_Size; }
+        inline void SetSize(float size) { m_Size = size; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }  //TODO: reverse to thickness
+
+        operator glm::vec3() const { return m_Position; }
+
     private:
         glm::vec3 m_Position;
-        // float m_Thickness = GOThickness::Default;
+        float m_Size = 1.0f;
+        // float m_Thickness = GOThickness::Default;  //TODO:: reverse to thickness 
     };
 
 
@@ -126,10 +136,18 @@ namespace AIAC
         GOCircle(GOPoint center, float radius);
         virtual ~GOCircle() = default;
 
+        inline glm::vec3 GetNormal() const { return m_Normal; }
+        inline GOPoint GetCenter() const { return m_Center; }
+        inline float GetRadius() const { return m_Radius; }
+        inline glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
+
+        // TODO: What is this for?
         // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         GOPoint m_Center;
+        glm::vec3 m_Normal = glm::vec3(0, 0, 1);
+        glm::vec4 m_EdgeColor = glm::vec4(1, 0, 0, 1);
         float m_Radius;
         // float m_Thickness = GOThickness::Default;
     };
@@ -141,10 +159,16 @@ namespace AIAC
         GOCylinder(GOPoint p1, GOPoint p2, float radius);
         virtual ~GOCylinder() = default;
 
+        GOPoint GetPStart() const { return m_PStart; }
+        GOPoint GetPEnd() const { return m_PEnd; }
+        float GetRadius() const { return m_Radius; }
+        glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
+
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;
         float m_Radius;
+        glm::vec4 m_EdgeColor = glm::vec4(1, 1, 1, 1);
     };
 
 
@@ -154,11 +178,16 @@ namespace AIAC
         GOPolyline(std::vector<GOPoint> points);
         virtual ~GOPolyline() = default;
 
-        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        inline const std::vector<GOPoint> &GetPoints() const { return m_Points; }
+
+        inline bool IsClosed() const { return m_IsClosed; }
+
+        inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         std::vector<GOPoint> m_Points;
-        // float m_Thickness = GOThickness::Default;
+        bool m_IsClosed = true;
+        float m_Thickness = GOThickness::Default;
     };
 
 
@@ -168,24 +197,31 @@ namespace AIAC
         GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3);
         virtual ~GOTriangle() = default;
 
-        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        const std::vector<glm::vec3> GetVertices() const {
+            return std::vector<glm::vec3>{m_P1.GetPosition(), m_P2.GetPosition(), m_P3.GetPosition()};
+        }
+
+        inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         GOPoint m_P1;
         GOPoint m_P2;
         GOPoint m_P3;
-        // float m_Thickness = GOThickness::Default;
+        float m_Thickness = GOThickness::Default;
     };
 
 
     class GOMesh : public GOPrimitive
     {
     public:
-        GOMesh(std::vector<GOPoint> points, std::vector<uint32_t> indices);
+        GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
         virtual ~GOMesh() = default;
 
+        const std::vector<glm::vec3> GetVertices() const { return m_Vertices; }
+        const std::vector<uint32_t> GetIndices() const { return m_Indices; }
+
     private:
-        std::vector<GOPoint> m_Points;
+        std::vector<glm::vec3> m_Vertices;
         std::vector<uint32_t> m_Indices;
     };
 
@@ -196,11 +232,12 @@ namespace AIAC
         GOText(std::string text, GOPoint anchor, double size);
         virtual ~GOText() = default;
 
+        std::string GetText() const { return m_Text; }
         // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
-        std::string m_Text;
         GOPoint m_Anchor;
+        std::string m_Text;
         double m_Size;
         // float m_Thickness = GOThickness::Default;
     };

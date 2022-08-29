@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AIAC/GlHeader.h"
+#include "GlHeader.h"
 
 
 namespace AIAC

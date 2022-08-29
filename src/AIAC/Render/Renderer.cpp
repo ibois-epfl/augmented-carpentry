@@ -11,12 +11,14 @@
 #include "glm/gtx/string_cast.hpp"
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtc/matrix_transform.hpp"
-#include "utils/shader.hpp"
+#include "Shader.hpp"
 
 #include "utils/utils.h"
 
 namespace AIAC
 {
+    extern TextRenderer textRenderer;
+
     void Renderer::Init()
     {
         GLuint VertexArrayID;
@@ -24,11 +26,10 @@ namespace AIAC
         glBindVertexArray(VertexArrayID);
 
         // Create and compile our GLSL program from the shaders
-        std::string vertexFilePath = "assets/opengl/SimpleTransform.vertexshader";
-        std::string fragmentFilePath = "assets/opengl/SingleColor.fragmentshader";
-        assert(IsFileExist(vertexFilePath));
-        assert(IsFileExist(fragmentFilePath));
-        m_ProgramId = LoadShaders(vertexFilePath.c_str(), fragmentFilePath.c_str());
+        char* vertexFilePath = (char*)"assets/opengl/SimpleTransform.vs";
+        char* fragmentFilePath = (char*)"assets/opengl/SingleColor.fs";
+
+        m_ProgramId = LoadShaders(vertexFilePath, fragmentFilePath);
 
         // Get a handle for our "MVP" uniform
         m_MatrixId = glGetUniformLocation(m_ProgramId, "MVP");
@@ -44,10 +45,10 @@ namespace AIAC
         float cX = cameraMatrix.at<float>(0,2);
         float cY = cameraMatrix.at<float>(1,2);
         float perspectiveProjMatrixData[16] = {
-                 2 * fovX / camW, 0,   (camW - 2 * cX + 2 * x0) / camW,  0,
-                 0,   2 * fovY / camH, (-camH + 2 * cY + 2 * y0) / camH, 0,
-                 0,   0,               (-zF - zN)/(zF - zN),             -2 * zF * zN / (zF - zN),
-                 0,  0,                -1,                               0
+                 2 * fovX / camW,    0, ( camW - 2 * cX + 2 * x0) / camW,                         0,
+                 0,    2 * fovY / camH, (-camH + 2 * cY + 2 * y0) / camH,                         0,
+                 0,                  0,             (-zF - zN)/(zF - zN),  -2 * zF * zN / (zF - zN),
+                 0,                  0,                               -1,                         0
         };
 
         glm::mat4 perspectiveProjMatrix = glm::transpose(glm::make_mat4(perspectiveProjMatrixData));
@@ -211,6 +212,8 @@ namespace AIAC
 
     void Renderer::OnRender()
     {
+        glUseProgram(m_ProgramId);
+
         RenderGlobalView();
 
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
@@ -222,8 +225,6 @@ namespace AIAC
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         RenderCameraFrame();
-
-        glUseProgram(m_ProgramId);
 
         // Get Cam pose
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
@@ -246,11 +247,9 @@ namespace AIAC
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
 
-        DrawTest();
-
-        // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
+        DrawTest(true, finalPoseMatrix);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glUseProgram(m_ProgramId);
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -307,8 +306,8 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-
-        DrawTest();
+        DrawTest(true, finalPoseMatrix);
+        glUseProgram(m_ProgramId);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
