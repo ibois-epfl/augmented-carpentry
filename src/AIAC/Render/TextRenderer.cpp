@@ -12,8 +12,6 @@
 namespace AIAC{
 
 
-    FT_Library ft;
-    FT_Face face;
 
     void TextRenderer::Init() {
         glEnable(GL_CULL_FACE);
@@ -31,20 +29,22 @@ namespace AIAC{
 
         // FreeType
         // --------
-        // All functions return a value different than 0 whenever an error occurred
+        // All functions return a value different from 0 whenever an error occurred
+        FT_Library ft;
         if (FT_Init_FreeType(&ft)) {
             std::cerr << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
             throw(std::runtime_error("ERROR::FREETYPE: Could not init FreeType Library"));
         }
 
         // find path to font
-        std::string font_name = "/home/tpp/Downloads/Antonio-Bold.ttf";
+        std::string font_name = "assets/fonts/Antonio-Bold.ttf";
         if (font_name.empty()) {
             std::cerr << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
             throw(std::runtime_error("ERROR::FREETYPE: Failed to load font_name"));
         }
 
         // load font as face
+        FT_Face face;
         if (FT_New_Face(ft, font_name.c_str(), 0, &face)) {
             std::cerr << "ERROR::FREETYPE: Failed to load font" << std::endl;
             throw(std::runtime_error("ERROR::FREETYPE: Failed to load font"));
@@ -112,7 +112,7 @@ namespace AIAC{
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
 
-
+        m_Initialized = true;
     }
 
     void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color, glm::mat4 projection)
@@ -146,8 +146,6 @@ namespace AIAC{
                     { xpos + w, ypos,       1.0f, 1.0f },
                     { xpos + w, ypos + h,   1.0f, 0.0f }
             };
-            // render glyph texture over quad
-            AIAC_INFO("Rendering character: {0}", ch.TextureID);
             glBindTexture(GL_TEXTURE_2D, ch.TextureID);
             // update content of VBO memory
             glBindBuffer(GL_ARRAY_BUFFER, VBO);

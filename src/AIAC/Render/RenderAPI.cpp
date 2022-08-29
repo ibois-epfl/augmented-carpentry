@@ -6,6 +6,8 @@
 
 namespace AIAC
 {
+    static TextRenderer textRenderer;
+
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
         std::vector<glm::vec3> mapPoints(map->map_points.size());
         for(const auto& mapPoint: map->map_points){
@@ -40,11 +42,7 @@ namespace AIAC
         DrawLines3d(markerEdges, markerEdgeColors);
     }
 
-    struct CylinderPole {
-        GLfloat x, z;
-    };
-
-    glm::vec3 getTransformed(glm::mat4 transformMat, float x, float y, float z){
+    glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z){
         glm::vec4 point(x, y, z, 1);
         point = transformMat * point;
         return {point.x, point.y, point.z};
@@ -88,11 +86,11 @@ namespace AIAC
         vertices.emplace_back(x1); // 0
         vertices.emplace_back(x2); // 1
 
-        vertices.emplace_back(getTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z)); // 2
-        vertices.emplace_back(getTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z)); // 3
+        vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z)); // 2
+        vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z)); // 3
 
-        capContourBase.push_back(getTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
-        capContourTop.push_back(getTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
+        capContourBase.push_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
+        capContourTop.push_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
 
         int baseCenterIdx = 0;
         int topCenterIdx = 1;
@@ -102,13 +100,13 @@ namespace AIAC
         int curTopVertexIdx = 5;
 
         for(int i = 1; i < sectorNum; i++){
-            capContourBase.emplace_back(getTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
-            capContourBase.emplace_back(getTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
-            capContourTop.emplace_back(getTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
-            capContourTop.emplace_back(getTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+            capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+            capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+            capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+            capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
 
-            vertices.emplace_back(getTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
-            vertices.emplace_back(getTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+            vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+            vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
 
             indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
             indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
@@ -129,8 +127,8 @@ namespace AIAC
         indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
         indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
 
-        capContourBase.emplace_back(getTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
-        capContourTop.emplace_back(getTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
+        capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
+        capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
 
         for(auto vid: indices){
             flattenedIndices.push_back((uint)vid.x);
@@ -145,9 +143,8 @@ namespace AIAC
     }
 
 
-
     void DrawTest(bool t, glm::mat4 projection){
-        TextRenderer textRenderer;
+        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
         textRenderer.RenderText("Hello World", 0, 0, 0.1, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), projection);
     }
 }
