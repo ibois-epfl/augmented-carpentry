@@ -24,6 +24,7 @@ namespace AIAC
         mesh->mNumVertices;
         mesh->mVertices;
         mesh->mNumFaces;
+        mesh->mFaces;
         mesh->mNormals;
         mesh->mColors;
         
