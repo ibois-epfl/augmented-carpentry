@@ -411,6 +411,54 @@ The logging can be silenced by setting OFF the option in the main `CMakeLists.tx
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 ```
 
+### GO System
+The **G**eometric **O**bject System allows to add objects to the 3D scene before to render them. Having a geometric entity prior to the OpenGL Render allows to calculates relations between geometries to obtain live feedbacks (e.g. drilling depth). Files can be found in `/GOSys`.
+
+The GOSystem is composed of two components:
+- `GOPrimitives.h/cpp` (like `GOPoint`, `GOLine`, `GOText`, etc)
+- `GORegistry.h/cpp` (which stores all the GOs)
+
+
+#### Add GOs
+
+To use GOs include the header `"AIAC/GOSys/GO.h"` to the file.
+To create an object:
+```c++
+GOPoint pt = GOPoint(glm::vec3(1, 1, 1))
+```
+The constructor of each GO is automatically adding a shared pointer of the object to the `GORegistry`. The `GORegistry` (hold by the main `Application.h`) stores the GO dynamic pointers in a map:
+```c++
+inline static std::map<uint32_t, std::shared_ptr<GOPrimitive>> m_GOMap;
+```
+The map has to recive only smart pointers to avoid [object slicing](https://stackoverflow.com/questions/274626/what-is-object-slicing) since we pass heirs of `GOPrimitive`.
+
+#### Get a GO from the GORegistry
+You can access and modify and GO from the Registry at any moment and place. Note that to do now you have to know the id of the GO you want and its GOType.
+```c++
+AIAC_GOREG->GetGO<GOPoint>(id)
+```
+
+#### Get all the GOs from the GORegistry
+Technically only the Render would want to get all the GOs once the main thread loop comes to its end:
+```c++
+std::vector<std::shared_ptr<GOPoint>> points;
+std::vector<std::shared_ptr<GOLine>> lines;
+std::vector<std::shared_ptr<GOCircle>> circles;
+std::vector<std::shared_ptr<GOCylinder>> cylinders;
+std::vector<std::shared_ptr<GOPolyline>> polylines;
+std::vector<std::shared_ptr<GOTriangle>> triangles;
+std::vector<std::shared_ptr<GOMesh>> meshes;
+std::vector<std::shared_ptr<GOText>> texts;
+AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, meshes, texts);
+```
+
+#### Drop GO from the GORegistry
+To get rid of a GO from the registry:
+```c++
+AIAC_GOREG->Unregister(id)
+```
+
+
 ### Renderer API
 The renderer API is implemented in `GlUtils.h`, which provides an easier way to draw 3d objects with OpenGL.
 There are 3 types of object that can be drawn: `Point`, `Line`, and `Triangle`.
