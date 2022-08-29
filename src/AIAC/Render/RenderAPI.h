@@ -38,8 +38,8 @@ namespace AIAC
     void DrawTriangle(const GOTriangle& goTriangle);
     void DrawTriangles(const std::vector<std::shared_ptr<GOTriangle>>& goTriangles);
 
-    void DrawMesh(GOMesh goMesh);
-    void DrawMeshes(std::vector<GOMesh> goMeshes);
+    void DrawMesh(const GOMesh& goMesh);
+    void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes);
 
     void DrawText(GOText goText);
     void DrawTexts(std::vector<GOText> goTexts);

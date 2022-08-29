@@ -31,7 +31,6 @@ namespace AIAC
         AIAC_GOREG->Register(m_Id, std::make_shared<GOPoint>(*this));
     }
 
-
     GOLine::GOLine(GOPoint p1, GOPoint p2)
         : m_PStart(p1), m_PEnd(p2)
     {
