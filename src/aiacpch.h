@@ -20,8 +20,6 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <variant>
-
 #include <stdlib.h>
 
 #include <opencv2/opencv.hpp>

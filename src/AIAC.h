@@ -19,6 +19,7 @@
 
 #include "AIAC/Image.h"
 #include "AIAC/Camera.h"
+#include "AIAC/DLoader.h"
 
 #include "AIAC/Layer.h"
 #include "AIAC/LayerCamera.h"
