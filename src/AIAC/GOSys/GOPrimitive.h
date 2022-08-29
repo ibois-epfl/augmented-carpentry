@@ -6,14 +6,15 @@
 
 namespace AIAC
 {
-    enum GOFlags
-    {
-        GO_Flag_None = 0,
-        GO_Flag_Highlighted,
-        GO_Flag_Selected,
-        GO_Flag_Visible,
-        GO_Flag_Enabled,
-    };
+    // TODO: implement flag system
+    // enum GOFlags
+    // {
+    //     GO_Flag_None = 0,
+    //     GO_Flag_Highlighted,
+    //     GO_Flag_Selected,
+    //     GO_Flag_Visible,
+    //     GO_Flag_Enabled,
+    // };
 
     enum GOTypeFlags
     {
@@ -29,12 +30,12 @@ namespace AIAC
     };
 
 
-    struct GOThickness
-    {
-        static constexpr float Default            = 0.5f;
-        static constexpr float Thin               = 0.1f;
-        static constexpr float Thick              = 1.0f;
-    };
+    // struct GOThickness
+    // {
+    //     static constexpr float Default            = 0.5f;
+    //     static constexpr float Thin               = 0.1f;
+    //     static constexpr float Thick              = 1.0f;
+    // };
 
 
     enum GOCategory
@@ -93,11 +94,11 @@ namespace AIAC
         inline void SetY(float y) { m_Position.y = y; }
         inline void SetZ(float z) { m_Position.z = z; }
 
-        inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
     
     private:
         glm::vec3 m_Position;
-        float m_Thickness = GOThickness::Default;
+        // float m_Thickness = GOThickness::Default;
     };
 
 
@@ -110,12 +111,12 @@ namespace AIAC
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
 
-        inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;
-        float m_Thickness = GOThickness::Default;
+        // float m_Thickness = GOThickness::Default;
     };
 
 
@@ -125,12 +126,12 @@ namespace AIAC
         GOCircle(GOPoint center, float radius);
         virtual ~GOCircle() = default;
 
-        inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         GOPoint m_Center;
         float m_Radius;
-        float m_Thickness = GOThickness::Default;
+        // float m_Thickness = GOThickness::Default;
     };
 
 
@@ -153,11 +154,11 @@ namespace AIAC
         GOPolyline(std::vector<GOPoint> points);
         virtual ~GOPolyline() = default;
 
-        inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         std::vector<GOPoint> m_Points;
-        float m_Thickness = GOThickness::Default;
+        // float m_Thickness = GOThickness::Default;
     };
 
 
@@ -167,13 +168,13 @@ namespace AIAC
         GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3);
         virtual ~GOTriangle() = default;
 
-        inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         GOPoint m_P1;
         GOPoint m_P2;
         GOPoint m_P3;
-        float m_Thickness = GOThickness::Default;
+        // float m_Thickness = GOThickness::Default;
     };
 
 
@@ -195,12 +196,12 @@ namespace AIAC
         GOText(std::string text, GOPoint anchor, double size);
         virtual ~GOText() = default;
 
-        inline void SetThickness(float thickness) { m_Thickness = thickness; }
+        // inline void SetThickness(float thickness) { m_Thickness = thickness; }
 
     private:
         std::string m_Text;
         GOPoint m_Anchor;
         double m_Size;
-        float m_Thickness = GOThickness::Default;
+        // float m_Thickness = GOThickness::Default;
     };
 }

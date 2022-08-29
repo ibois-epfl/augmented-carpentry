@@ -66,6 +66,16 @@ namespace AIAC
         }
 
 
+        /**
+         * @brief Get the All GOs by category, it should be run once per loop by the Render.
+         * @param points A vector of all GOPoints to pass as reference.
+         * @param lines A vector of all GOLines to pass as reference.
+         * @param circles A vector of all GOCircles to pass as reference.
+         * @param cylinders A vector of all GOCylinders to pass as reference.
+         * @param polylines A vector of all GOPolylines to pass as reference.
+         * @param triangles A vector of all GOTriangles to pass as reference.
+         * @param texts A vector of all GOTexts to pass as reference.
+         */
         void GetAllGOs(std::vector<std::shared_ptr<GOPoint>>& points,
                         std::vector<std::shared_ptr<GOLine>>& lines,
                         std::vector<std::shared_ptr<GOCircle>>& circles,
@@ -74,37 +84,41 @@ namespace AIAC
                         std::vector<std::shared_ptr<GOTriangle>>& triangles,
                         std::vector<std::shared_ptr<GOText>>& texts)
         {
-            for (auto& go : m_GOMap)
+            try
             {
-                if (go.second->GetType() == GOTypeFlags::_GOPoint)
+                for (auto& go : m_GOMap)
                 {
-                    points.push_back(std::static_pointer_cast<GOPoint>(go.second));
-                }
-                else if (go.second->GetType() == GOTypeFlags::_GOLine)
-                {
-                    lines.push_back(std::static_pointer_cast<GOLine>(go.second));
-                }
-                else if (go.second->GetType() == GOTypeFlags::_GOCircle)
-                {
-                    circles.push_back(std::static_pointer_cast<GOCircle>(go.second));
-                }
-                else if (go.second->GetType() == GOTypeFlags::_GOCylinder)
-                {
-                    cylinders.push_back(std::static_pointer_cast<GOCylinder>(go.second));
-                }
-                else if (go.second->GetType() == GOTypeFlags::_GOPolyline)
-                {
-                    polylines.push_back(std::static_pointer_cast<GOPolyline>(go.second));
-                }
-                else if (go.second->GetType() == GOTypeFlags::_GOTriangle)
-                {
-                    triangles.push_back(std::static_pointer_cast<GOTriangle>(go.second));
-                }
-                else if (go.second->GetType() == GOTypeFlags::_GOText)
-                {
-                    texts.push_back(std::static_pointer_cast<GOText>(go.second));
+                    if (go.second->GetType() == GOTypeFlags::_GOPoint)
+                    {
+                        points.push_back(std::static_pointer_cast<GOPoint>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOLine)
+                    {
+                        lines.push_back(std::static_pointer_cast<GOLine>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOCircle)
+                    {
+                        circles.push_back(std::static_pointer_cast<GOCircle>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOCylinder)
+                    {
+                        cylinders.push_back(std::static_pointer_cast<GOCylinder>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOPolyline)
+                    {
+                        polylines.push_back(std::static_pointer_cast<GOPolyline>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOTriangle)
+                    {
+                        triangles.push_back(std::static_pointer_cast<GOTriangle>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOText)
+                    {
+                        texts.push_back(std::static_pointer_cast<GOText>(go.second));
+                    }
                 }
             }
+            catch (const std::bad_cast& e) { AIAC_ERROR("Bad cast exception: {}", e.what()); }
         }
 
         inline void Clear() { m_GOMap.clear(); }

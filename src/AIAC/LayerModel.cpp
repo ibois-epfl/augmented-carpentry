@@ -3,7 +3,7 @@
 #include "AIAC/LayerModel.h"
 #include "AIAC/GOSys/GO.h"
 #include "AIAC/Application.h"
-
+#include "AIAC/DLoader.h"
 
 //TODO: add the 3D model importer
 
@@ -16,45 +16,37 @@ namespace AIAC
         // TODO: erase once the render parsing is done
         // there is no need for shared_ptr anymore, because the GO is registered in the registry at construction
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
-        std::shared_ptr<GOPoint> pt1 = std::make_shared<GOPoint>(GOPoint(glm::vec3(1, 1, 1)));
-        std::shared_ptr<GOPoint> pt2 = std::make_shared<GOPoint>(GOPoint(glm::vec3(2, 2, 2)));
-        std::shared_ptr<GOPoint> pt3 = std::make_shared<GOPoint>(GOPoint(glm::vec3(3, 3, 3)));
-        std::shared_ptr<GOLine> line1 = std::make_shared<GOLine>(GOLine(*pt1, *pt2));
-        std::shared_ptr<GOLine> line2 = std::make_shared<GOLine>(GOLine(*pt2, *pt3));
-        std::shared_ptr<GOLine> line3 = std::make_shared<GOLine>(GOLine(*pt3, *pt1));
-        std::shared_ptr<GOCircle> circle1 = std::make_shared<GOCircle>(GOCircle(*pt1, 0.5f));
-        std::shared_ptr<GOCircle> circle2 = std::make_shared<GOCircle>(GOCircle(*pt2, 0.5f));
-        std::shared_ptr<GOCircle> circle3 = std::make_shared<GOCircle>(GOCircle(*pt3, 0.5f));
-        std::shared_ptr<GOCylinder> cylinder1 = std::make_shared<GOCylinder>(GOCylinder(*pt1, *pt2, 0.5f));
-        std::shared_ptr<GOCylinder> cylinder2 = std::make_shared<GOCylinder>(GOCylinder(*pt2, *pt3, 0.5f));
-        std::shared_ptr<GOCylinder> cylinder3 = std::make_shared<GOCylinder>(GOCylinder(*pt3, *pt1, 0.5f));
-        std::shared_ptr<GOPolyline> polyline1 = std::make_shared<GOPolyline>(std::vector<GOPoint>{*pt1, *pt2, *pt3});
-        std::shared_ptr<GOPolyline> polyline2 = std::make_shared<GOPolyline>(std::vector<GOPoint>{*pt2, *pt3, *pt1});
-        std::shared_ptr<GOPolyline> polyline3 = std::make_shared<GOPolyline>(std::vector<GOPoint>{*pt3, *pt1, *pt2});
-        std::shared_ptr<GOTriangle> triangle1 = std::make_shared<GOTriangle>(GOTriangle(*pt1, *pt2, *pt3));
-        std::shared_ptr<GOTriangle> triangle2 = std::make_shared<GOTriangle>(GOTriangle(*pt2, *pt3, *pt1));
-        std::shared_ptr<GOTriangle> triangle3 = std::make_shared<GOTriangle>(GOTriangle(*pt3, *pt1, *pt2));
-        std::shared_ptr<GOMesh> mesh1 = std::make_shared<GOMesh>(std::vector<GOPoint>{*pt1, *pt2, *pt3}, std::vector<uint32_t>{0,1,2});
-        std::shared_ptr<GOText> text1 = std::make_shared<GOText>(GOText("Hello World1", *pt1, 0.5f));
-        std::shared_ptr<GOText> text2 = std::make_shared<GOText>(GOText("Hello World2", *pt2, 0.5f));
-        std::shared_ptr<GOText> text3 = std::make_shared<GOText>(GOText("Hello World3", *pt3, 0.5f));
+        GOPoint pt1 = GOPoint(glm::vec3(1, 1, 1));
+        GOPoint pt2 = GOPoint(glm::vec3(2, 2, 2));
+        GOPoint pt3 = GOPoint(glm::vec3(3, 3, 3));
+        GOLine line = GOLine(pt1, pt2);
+        GOLine line2 = GOLine(pt2, pt3);
+        GOCircle circle1 = GOCircle(pt1, 0.5f);
+        GOCircle circle2 = GOCircle(pt2, 0.5f);
+        GOCircle circle3 = GOCircle(pt3, 0.5f);
+        GOCylinder cylinder1 = GOCylinder(pt1, pt2, 0.5f);
+        GOCylinder cylinder2 = GOCylinder(pt2, pt3, 0.5f);
+        GOCylinder cylinder3 = GOCylinder(pt3, pt1, 0.5f);
+        GOPolyline polyline1 = GOPolyline(std::vector<GOPoint>{pt1, pt2, pt3});
+        GOPolyline polyline2 = GOPolyline(std::vector<GOPoint>{pt2, pt3, pt1});
+        GOPolyline polyline3 = GOPolyline(std::vector<GOPoint>{pt3, pt1, pt2});
+        GOTriangle triangle1 = GOTriangle(pt1, pt2, pt3);
+        GOTriangle triangle2 = GOTriangle(pt2, pt3, pt1);
+        GOTriangle triangle3 = GOTriangle(pt3, pt1, pt2);
+        GOMesh mesh1 = GOMesh(std::vector<GOPoint>{pt1, pt2, pt3}, std::vector<uint32_t>{0,1,2});
+        GOText text1 = GOText("Hello World1", pt1, 0.5f);
+        GOText text2 = GOText("Hello World2", pt2, 0.5f);
+        GOText text3 = GOText("Hello World3", pt3, 0.5f);
+        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
 
-
-        // // EXAMPLE how to get the GO from the registry in render
-        // std::vector<std::shared_ptr<GOPoint>> points;
-        // std::vector<std::shared_ptr<GOLine>> lines;
-        // std::vector<std::shared_ptr<GOCircle>> circles;
-        // std::vector<std::shared_ptr<GOCylinder>> cylinders;
-        // std::vector<std::shared_ptr<GOPolyline>> polylines;
-        // std::vector<std::shared_ptr<GOTriangle>> triangles;
-        // std::vector<std::shared_ptr<GOText>> texts;
-        // AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, texts);
-
+        DLoader dloader = DLoader();
+        dloader.Load("assets/models/drill_scaled_1000.obj");
 
 
     }
     void LayerModel::OnFrameStart()
     {
+
 
     }
 }
