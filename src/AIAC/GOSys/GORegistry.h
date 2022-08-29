@@ -32,13 +32,6 @@ namespace AIAC
             m_GOMap.emplace(id, go);
         }
 
-        template<typename T>
-        void Unregister(std::shared_ptr<T> go)
-        {
-            static_assert(std::is_base_of<AIAC::GOPrimitive, T>::value, "Type to remove is not subclass of GOPrimitive!");
-            m_GOMap.erase(go->GetId());
-        }
-
         inline void Unregister(const uint32_t& id)
         {
             m_GOMap.erase(id);
@@ -82,6 +75,7 @@ namespace AIAC
                         std::vector<std::shared_ptr<GOCylinder>>& cylinders,
                         std::vector<std::shared_ptr<GOPolyline>>& polylines,
                         std::vector<std::shared_ptr<GOTriangle>>& triangles,
+                        std::vector<std::shared_ptr<GOMesh>>& meshes,
                         std::vector<std::shared_ptr<GOText>>& texts)
         {
             try
@@ -111,6 +105,10 @@ namespace AIAC
                     else if (go.second->GetType() == GOTypeFlags::_GOTriangle)
                     {
                         triangles.push_back(std::static_pointer_cast<GOTriangle>(go.second));
+                    }
+                    else if (go.second->GetType() == GOTypeFlags::_GOMesh)
+                    {
+                        meshes.push_back(std::static_pointer_cast<GOMesh>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOText)
                     {

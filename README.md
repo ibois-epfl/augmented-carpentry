@@ -439,7 +439,7 @@ AIAC_GOREG->GetGO<GOPoint>(id)
 ```
 
 #### Get all the GOs from the GORegistry
-Technically only the Render would want to get all the GOs once the main thread loop comes to its end:
+If you want get all the GOs (do not use this function often since you will allocate memor for the vectors):
 ```c++
 std::vector<std::shared_ptr<GOPoint>> points;
 std::vector<std::shared_ptr<GOLine>> lines;
