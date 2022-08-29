@@ -11,8 +11,6 @@
 
 namespace AIAC{
 
-
-
     void TextRenderer::Init() {
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
@@ -21,8 +19,8 @@ namespace AIAC{
         glm::mat4 projection = glm::ortho(0.0f, 300.0f, 0.0f, 200.0f);
 
         shaderProgram = LoadShaders(
-                "/home/tpp/augmented-carpentry/src/AIAC/Render/TextShader.vs",
-                "/home/tpp/augmented-carpentry/src/AIAC/Render/TextShader.fs");
+                "assets/opengl/TextShader.vs",
+                "assets/opengl/TextShader.fs");
 
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -115,8 +113,11 @@ namespace AIAC{
         m_Initialized = true;
     }
 
-    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color, glm::mat4 projection)
+    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
     {
+        //TODO: replace project with the right one
+        glm::mat4 projection(1.0f);
+
         // activate corresponding render state
         glUseProgram(shaderProgram);
         glUniform3f(glGetUniformLocation(shaderProgram, "textColor"), color.x, color.y, color.z);

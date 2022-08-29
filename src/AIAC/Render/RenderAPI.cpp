@@ -3,6 +3,7 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include "AIAC/Application.h"
 
 namespace AIAC
 {
@@ -142,9 +143,185 @@ namespace AIAC
         DrawPoints3d(points, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), 5.0f);
     }
 
+    void DrawGOPrimitive(GOPrimitive goPrimitive) {
+
+    }
+
+    void DrawPoint(const GOPoint& goPoint) {
+        vector<glm::vec3> point(1, goPoint.GetPosition());
+        DrawPoints3d(point, goPoint.GetColor(), goPoint.GetSize());
+    }
+
+    // TODO: For both Line and Points:
+    // TODO: Try to use cache to avoid re-construction of the vector (if slow, otherwise no needed?)
+    // TODO: different pointSize
+    void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints) {
+        vector<glm::vec3> points;
+        vector<glm::vec4> colors;
+        for (const auto &goPoint: goPoints) {
+            points.emplace_back(goPoint->GetPosition());
+            colors.emplace_back(goPoint->GetColor());
+        }
+        DrawPoints3d(points, colors, 5.0f);
+    }
+
+    void DrawLine(const GOLine& goLine) {
+        vector<glm::vec3> vertices(2);
+        vertices[0] = goLine.GetPStart().GetPosition();
+        vertices[1] = goLine.GetPEnd().GetPosition();
+        DrawLines3d(vertices, goLine.GetColor());
+    }
+
+    void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines) {
+        vector<glm::vec3> vertices(goLines.size() * 2);
+        vector<glm::vec4> colors(goLines.size());
+        for (const auto &goLine: goLines) {
+            vertices.emplace_back(goLine->GetPStart().GetPosition());
+            vertices.emplace_back(goLine->GetPEnd().GetPosition());
+            colors.emplace_back(goLine->GetColor());
+            colors.emplace_back(goLine->GetColor());
+        }
+        DrawLines3d(vertices, colors);
+    }
+
+    void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum) {
+        std::vector<glm::vec3> vertices; vertices.reserve(sectorNum + 1);
+        std::vector<glm::vec3> edges;    edges.reserve(2 * sectorNum);
+        std::vector<uint32_t> indices;  indices.reserve(3 * sectorNum);
+        vertices.emplace_back(center);
+
+        glm::vec3 newX = glm::cross(normal, glm::vec3(0, 1, 0));
+        glm::vec3 newZ = glm::cross(newX, normal);
+
+        glm::mat4 transformMat;
+
+        transformMat[0] = glm::vec4(newX, 0);
+        transformMat[1] = glm::vec4(normal, 0);
+        transformMat[2] = glm::vec4(newZ, 0);
+        transformMat[3] = glm::vec4(center, 1);
+
+        for (int i = 0; i < sectorNum; ++i){
+            GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
+            glm::vec3 vertex = transformMat * glm::vec4(
+                    static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
+                    0,
+                    static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
+                    1
+            );
+            vertices.emplace_back(vertex);
+        }
+
+        for (int i = 1; i < sectorNum; ++i){
+            indices.emplace_back(0);
+            indices.emplace_back(i);
+            indices.emplace_back(i + 1);
+        }
+        indices.emplace_back(0);
+        indices.emplace_back(sectorNum);
+        indices.emplace_back(1);
+
+        for (int i = 1; i < sectorNum; ++i){
+            edges.emplace_back(vertices[i]);
+            edges.emplace_back(vertices[i + 1]);
+        }
+        edges.emplace_back(vertices[sectorNum]);
+        edges.emplace_back(vertices[1]);
+
+        DrawTriangles3d(vertices, indices, color);
+        DrawLines3d(edges, edgeColor);
+    }
+
+    void DrawCircle(const GOCircle& goCircle) {
+        DrawCircle(goCircle.GetCenter().GetPosition(), goCircle.GetNormal(), goCircle.GetRadius(),
+                   goCircle.GetColor(), goCircle.GetEdgeColor(), max(24, int(goCircle.GetRadius() * 3)));
+    }
+
+    void DrawCircles(const std::vector<std::shared_ptr<GOCircle>>& goCircles) {
+        for (const auto &goCircle: goCircles) {
+            DrawCircle(*goCircle);
+        }
+    }
+
+    void DrawCylinder(const GOCylinder& goCylinder) {
+        DrawCylinder(goCylinder.GetPStart().GetPosition(), goCylinder.GetPEnd().GetPosition(),
+                     goCylinder.GetRadius(), goCylinder.GetColor(), goCylinder.GetEdgeColor());
+    }
+
+    void DrawCylinders(const std::vector<std::shared_ptr<GOCylinder>>& goCylinders) {
+        for (const auto &goCylinder: goCylinders) {
+            DrawCylinder(*goCylinder);
+        }
+    }
+
+    void DrawPolyline(const GOPolyline& goPolyline) {
+        vector<glm::vec3> vertices(goPolyline.GetPoints().size() * 2);
+        vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+        for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
+            vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+            vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+        }
+        vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
+
+        if(goPolyline.IsClosed()){
+            vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
+            vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+        }
+        DrawLines3d(vertices, goPolyline.GetColor());
+    }
+
+    void DrawPolylines(const std::vector<std::shared_ptr<GOPolyline>>& goPolylines) {
+        for(const auto& goPolyline: goPolylines){
+            DrawPolyline(*goPolyline);
+        }
+    }
+
+    void DrawTriangle(const GOTriangle& goTriangle) {
+        vector<glm::vec3> vertices = goTriangle.GetVertices();
+        vector<uint32_t> indices{0, 1, 2};
+        DrawTriangles3d(vertices, indices, goTriangle.GetColor());
+    }
+
+    void DrawTriangles(const std::vector<std::shared_ptr<GOTriangle>>& goTriangles) {
+        for (const auto &goTriangle: goTriangles) {
+            DrawTriangle(*goTriangle);
+        }
+    }
+
+    void DrawMesh(GOMesh goMesh) {
+
+    }
+
+    void DrawMeshes(std::vector<GOMesh> goMeshes) {
+
+    }
+
+    void DrawText(GOText goText){
+        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
+        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor());
+    }
+
+    void DrawTexts(std::vector<GOText> goTexts) {
+
+    }
 
     void DrawTest(bool t, glm::mat4 projection){
-        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
-        textRenderer.RenderText("Hello World", 0, 0, 0.1, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), projection);
+        std::vector<std::shared_ptr<GOPoint>> points;
+        std::vector<std::shared_ptr<GOLine>> lines;
+        std::vector<std::shared_ptr<GOCircle>> circles;
+        std::vector<std::shared_ptr<GOCylinder>> cylinders;
+        std::vector<std::shared_ptr<GOPolyline>> polylines;
+        std::vector<std::shared_ptr<GOTriangle>> triangles;
+        std::vector<std::shared_ptr<GOText>> texts;
+        AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, texts);
+
+//        DrawPoints(points);
+//        DrawLines(lines);
+//        DrawPolylines(polylines);
+//        DrawTriangles(triangles);
+
+//        DrawCylinders(cylinders);
+        DrawCircles(circles);
     }
+
+
 }
