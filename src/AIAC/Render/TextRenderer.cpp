@@ -113,15 +113,30 @@ namespace AIAC{
         m_Initialized = true;
     }
 
-    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
+    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color, glm::mat4 projection)
     {
-        //TODO: replace project with the right one
-        glm::mat4 projection(1.0f);
-
+        // TODO: replace project with the right one
+//        glm::mat4 projection(1.0f);
+        glm::mat4 noRotProjection = projection;
+        noRotProjection[0][1] = 0.0f;
+        noRotProjection[0][2] = 0.0f;
+        noRotProjection[1][0] = 0.0f;
+        noRotProjection[1][2] = 0.0f;
+        noRotProjection[2][0] = 0.0f;
+        noRotProjection[2][1] = 0.0f;
+        noRotProjection[0][0] = 1.0f;
+        noRotProjection[1][1] = 1.0f;
+        noRotProjection[2][2] = 1.0f;
+        noRotProjection[0][3] = 0.0f;
+        noRotProjection[1][3] = 0.0f;
+        noRotProjection[2][3] = 0.0f;
+//        noRotProjection[3][0] = 0.0f;
+//        noRotProjection[3][1] = 0.0f;
+//        noRotProjection[3][2] = 0.0f;
         // activate corresponding render state
         glUseProgram(shaderProgram);
         glUniform3f(glGetUniformLocation(shaderProgram, "textColor"), color.x, color.y, color.z);
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(noRotProjection));
 
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);

@@ -154,20 +154,23 @@ namespace AIAC
         DrawPoints3d(point, goPoint.GetColor(), goPoint.GetSize());
     }
 
-    // TODO: For both Line and Points:
-    // TODO: Try to use cache to avoid re-construction of the vector (if slow, otherwise no needed?)
-    // TODO: different pointSize
+    // TODO: For both Line and Points: Try to use cache to avoid re-construction of the vector (if slow, otherwise no needed)
+    // TODO: Draw all point at once (if possible)
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints) {
-        vector<glm::vec3> points;
-        vector<glm::vec4> colors;
-        for (const auto &goPoint: goPoints) {
-            points.emplace_back(goPoint->GetPosition());
-            colors.emplace_back(goPoint->GetColor());
+        for(const auto& goPoint: goPoints){
+            DrawPoint(*goPoint);
         }
-        DrawPoints3d(points, colors, 5.0f);
+//        vector<glm::vec3> points;
+//        vector<glm::vec4> colors;
+//        for (const auto &goPoint: goPoints) {
+//            points.emplace_back(goPoint->GetPosition());
+//            colors.emplace_back(goPoint->GetColor());
+//        }
+//        DrawPoints3d(points, colors, 5.0f);
     }
 
     void DrawLine(const GOLine& goLine) {
+        // TODO: thickness of line
         vector<glm::vec3> vertices(2);
         vertices[0] = goLine.GetPStart().GetPosition();
         vertices[1] = goLine.GetPEnd().GetPosition();
@@ -301,7 +304,7 @@ namespace AIAC
 
     void DrawText(GOText goText){
         if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
-        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor());
+        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
     }
 
     void DrawTexts(std::vector<GOText> goTexts) {
@@ -327,7 +330,8 @@ namespace AIAC
 //        DrawCircles(circles);
 
 //        textRenderer.RenderText("Hello World", 0, 0, 40, glm::vec3(1, 0, 0));
-
+        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
+        textRenderer.RenderText("goText.GetText()", 0, 0, 0.1, glm::vec3(0,0,0), projection);
     }
 
 
