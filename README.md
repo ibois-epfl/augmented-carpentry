@@ -411,7 +411,8 @@ The logging can be silenced by setting OFF the option in the main `CMakeLists.tx
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
 ```
 
-### GO System
+<!-- TODO: change the constructor and change docu>
+<!-- ### GO System
 The **G**eometric **O**bject System allows to add objects to the 3D scene before to render them. Having a geometric entity prior to the OpenGL Render allows to calculates relations between geometries to obtain live feedbacks (e.g. drilling depth). Files can be found in `/GOSys`.
 
 The GOSystem is composed of two components:
@@ -456,7 +457,7 @@ AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, m
 To get rid of a GO from the registry:
 ```c++
 AIAC_GOREG->Unregister(id)
-```
+``` -->
 
 
 ### Renderer API
