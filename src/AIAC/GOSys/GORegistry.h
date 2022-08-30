@@ -119,6 +119,14 @@ namespace AIAC
             catch (const std::bad_cast& e) { AIAC_ERROR("Bad cast exception: {}", e.what()); }
         }
 
+        void GetAllGOs(std::vector<std::shared_ptr<GOPrimitive>>& gos)
+        {
+            for (auto& go : m_GOMap)
+            {
+                gos.push_back(go.second);
+            }
+        }
+
         inline void Clear() { m_GOMap.clear(); }
         inline uint32_t CheckIfKeyExists(uint32_t key) { return m_GOMap.count(key); }
         inline uint32_t Count() const { return m_GOMap.size(); }

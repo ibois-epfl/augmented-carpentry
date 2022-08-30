@@ -15,7 +15,8 @@ namespace AIAC
 
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize);
 
-    void DrawGOPrimitive(GOPrimitive goPrimitive);
+    void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
+    void DrawGO(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
 
     void DrawPoint(const GOPoint& goPoint);
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints);
