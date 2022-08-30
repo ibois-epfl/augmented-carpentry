@@ -54,7 +54,7 @@ namespace AIAC
     public:
         explicit GOPrimitive(GOCategory category = GOCategoryNone,
                              bool isVisible = true,
-                             glm::vec4 color = glm::vec4(0, 0, 0, 0.5));
+                             glm::vec4 color = glm::vec4(0, 0, 0, 1));
         // ~GOPrimitive();
         virtual ~GOPrimitive() = default;
 
@@ -115,7 +115,7 @@ namespace AIAC
     class GOLine : public GOPrimitive
     {
     public:
-        GOLine(GOPoint p1, GOPoint p2);
+        GOLine(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
         virtual ~GOLine() = default;
 
         inline GOPoint GetPStart() const { return m_PStart; }

@@ -19,10 +19,8 @@ namespace AIAC
         GOPoint pt1 = GOPoint(glm::vec3(1, 1, 1));
         GOPoint pt2 = GOPoint(glm::vec3(20, 50, 20));
         GOPoint pt3 = GOPoint(glm::vec3(30, 30, 30));
-        GOLine line = GOLine(pt1, pt2);
-        GOLine line2 = GOLine(pt1, pt3);
-        line.SetWeight(4.0);
-        line2.SetWeight(16.0);
+        GOLine line = GOLine(pt1, pt2, 96.0f);
+        GOLine line2 = GOLine(pt1, pt3, 95.0f);
         GOCircle circle1 = GOCircle(pt1, 0.5f);
         GOCircle circle2 = GOCircle(pt2, 0.5f);
         GOCircle circle3 = GOCircle(pt3, 0.5f);
