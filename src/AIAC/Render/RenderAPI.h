@@ -16,15 +16,18 @@ namespace AIAC
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize);
 
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
-    void DrawGO(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
+    void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
 
     void DrawPoint(const GOPoint& goPoint);
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints);
 
+    // void DrawLine(const GOPoint &p1, const GOPoint &p2);
+    void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight = GOWeight::Default, const glm::vec4 &color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    void DrawLines(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, float weight);
     void DrawLine(const GOLine& goLine);
     void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines);
 
-    void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum = 24);
+    void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum = 24);
     void DrawCircle(const GOCircle& goCircle);
     void DrawCircles(const std::vector<std::shared_ptr<GOCircle>>& goCircles);
 

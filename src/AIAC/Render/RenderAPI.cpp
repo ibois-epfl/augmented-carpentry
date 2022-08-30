@@ -8,10 +8,12 @@
 #include FT_FREETYPE_H
 #include "AIAC/Application.h"
 
+const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
+
 namespace AIAC
 {
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
-        std::vector<glm::vec3> mapPoints(map->map_points.size());
+        std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
         for(const auto& mapPoint: map->map_points){
             if(mapPoint.isValid()){
                 mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
@@ -19,8 +21,8 @@ namespace AIAC
         }
         DrawPoints3d(mapPoints, OGL_YELLOW, pointSize);
 
-        std::vector<glm::vec3> markerEdges(map->map_markers.size() * 4 * 2);
-        std::vector<glm::vec4> markerEdgeColors(map->map_markers.size() * 4 * 2, OGL_BLUE);
+        std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
+        std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
         for(const auto& mapMarker: map->map_markers){
             auto points = mapMarker.second.get3DPoints();
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
@@ -56,10 +58,6 @@ namespace AIAC
         glm::vec3 x1 = baseCenter, x2 = topCenter;
         glm::vec3 norm = glm::normalize(x2 - x1);
         GLfloat h = glm::length(x2 - x1);
-
-        vector<glm::vec3> points;
-        points.emplace_back(x1);
-        points.emplace_back(x2);
 
         glm::vec3 newX = glm::cross(norm, glm::vec3(0, 1, 0));
         glm::vec3 newZ = glm::cross(newX, norm);
@@ -141,7 +139,6 @@ namespace AIAC
         DrawTriangles3d(vertices, flattenedIndices, color);
         DrawLines3d(capContourBase, edgeColor);
         DrawLines3d(capContourTop, edgeColor);
-        DrawPoints3d(points, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), 5.0f);
     }
 
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive) {
@@ -170,7 +167,7 @@ namespace AIAC
         }
     }
 
-    void DrawGO(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive){
+    void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive){
         for(auto& go: goPrimitive){
             DrawGO(go);
         }
@@ -181,32 +178,52 @@ namespace AIAC
         DrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
     }
 
-    // TODO: Try to use cache to avoid re-construction of the vector (if slow, otherwise no needed)
-    // TODO: Draw all point at once (if possible)
+    // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
+    // TODO: Draw all point with different size at once (if possible)
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints) {
         for(const auto& goPoint: goPoints){
             DrawPoint(*goPoint);
         }
-//        vector<glm::vec3> points;
-//        vector<glm::vec4> colors;
-//        for (const auto &goPoint: goPoints) {
-//            points.emplace_back(goPoint->GetPosition());
-//            colors.emplace_back(goPoint->GetColor());
-//        }
-//        DrawPoints3d(points, colors, 5.0f);
     }
 
-    int WeightToNumVertices(float weight){
-        if(weight <= 3){
+    int getSectorNum(float weight){
+        if(weight <= 12){
             return 6;
         }
-        if(weight <= 12){
+        if(weight <= 24){
             return 12;
         }
-        if(weight <= 24){
+        if(weight <= 96){
             return 24;
         }
         return 36;
+    }
+
+    void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color){
+        if(weight <= 0){
+            return;
+        }
+        if(weight == 1.0f){
+            vector<glm::vec3> line;
+            line.emplace_back(p1);
+            line.emplace_back(p2);
+            DrawLines3d(line, color);
+            return;
+        }
+        DrawCylinder(p1, p2, weight * WEIGHT_TO_CYLINDER_RADIUS_RATE,
+                     color, glm::vec4(0,0,0,0), getSectorNum(weight));
+    }
+
+    void DrawLines(const vector<glm::vec3> &vertices, const glm::vec4 &color, float weight){
+        if(weight <= 0){
+            return;
+        }
+        if(weight == 1.0f){
+            DrawLines3d(vertices, color);
+            return;
+        }
+        DrawCylinder(vertices[0], vertices[1], weight * WEIGHT_TO_CYLINDER_RADIUS_RATE,
+                     color, glm::vec4(0,0,0,0), getSectorNum(weight));
     }
 
     void DrawLine(const GOLine& goLine) {
@@ -221,8 +238,8 @@ namespace AIAC
             DrawLines3d(vertices, goLine.GetColor());
         } else {
             DrawCylinder(goLine.GetPStart().GetPosition(), goLine.GetPEnd().GetPosition(),
-                         goLine.GetWeight(), goLine.GetColor(), glm::vec4(0, 0, 0, 0),
-                         WeightToNumVertices(goLine.GetWeight()));
+                         goLine.GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE, goLine.GetColor(), glm::vec4(0, 0, 0, 0),
+                         getSectorNum(goLine.GetWeight()));
         }
     }
 
@@ -241,17 +258,17 @@ namespace AIAC
                 colors.emplace_back(goLine->GetColor());
             } else {
                 DrawCylinder(goLine->GetPStart().GetPosition(), goLine->GetPEnd().GetPosition(),
-                             goLine->GetWeight(), goLine->GetColor(), glm::vec4(0, 0, 0, 0),
-                             WeightToNumVertices(goLine->GetWeight()));
+                             goLine->GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE, goLine->GetColor(), glm::vec4(0, 0, 0, 0),
+                             getSectorNum(goLine->GetWeight()));
             }
         }
         DrawLines3d(vertices, colors);
     }
 
-    void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum) {
+    void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum) {
         std::vector<glm::vec3> vertices; vertices.reserve(sectorNum + 1);
-        std::vector<glm::vec3> edges;    edges.reserve(2 * sectorNum);
-        std::vector<uint32_t> indices;  indices.reserve(3 * sectorNum);
+        std::vector<glm::vec3> edges; edges.reserve(2 * sectorNum);
+        std::vector<uint32_t> indices; indices.reserve(3 * sectorNum);
         vertices.emplace_back(center);
 
         glm::vec3 newX = glm::cross(normal, glm::vec3(0, 1, 0));
@@ -284,6 +301,8 @@ namespace AIAC
         indices.emplace_back(sectorNum);
         indices.emplace_back(1);
 
+        DrawTriangles3d(vertices, indices, color);
+
         for (int i = 1; i < sectorNum; ++i){
             edges.emplace_back(vertices[i]);
             edges.emplace_back(vertices[i + 1]);
@@ -291,8 +310,7 @@ namespace AIAC
         edges.emplace_back(vertices[sectorNum]);
         edges.emplace_back(vertices[1]);
 
-        DrawTriangles3d(vertices, indices, color);
-        DrawLines3d(edges, edgeColor);
+        DrawLines(edges, edgeColor, edgeWeight);
     }
 
     void DrawCircle(const GOCircle& goCircle) {
@@ -300,7 +318,7 @@ namespace AIAC
             return;
         }
         DrawCircle(goCircle.GetCenter().GetPosition(), goCircle.GetNormal(), goCircle.GetRadius(),
-                   goCircle.GetColor(), goCircle.GetEdgeColor(), max(24, int(goCircle.GetRadius() * 3)));
+                   goCircle.GetColor(), goCircle.GetEdgeColor(), goCircle.GetWeight(), getSectorNum(goCircle.GetRadius()));
     }
 
     void DrawCircles(const std::vector<std::shared_ptr<GOCircle>>& goCircles) {
@@ -333,7 +351,7 @@ namespace AIAC
         if(!goPolyline.IsVisible()){
             return;
         }
-        vector<glm::vec3> vertices(goPolyline.GetPoints().size() * 2);
+        vector<glm::vec3> vertices; vertices.reserve(goPolyline.GetPoints().size() * 2);
         vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
         for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
             vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
@@ -345,7 +363,8 @@ namespace AIAC
             vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
             vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
         }
-        DrawLines3d(vertices, goPolyline.GetColor());
+
+        DrawLines(vertices, goPolyline.GetColor(), goPolyline.GetWeight());
     }
 
     void DrawPolylines(const std::vector<std::shared_ptr<GOPolyline>>& goPolylines) {
