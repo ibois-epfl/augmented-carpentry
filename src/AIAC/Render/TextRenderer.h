@@ -34,4 +34,6 @@ namespace AIAC
         bool m_Initialized = false;
         GLuint m_ShaderProgram;
     };
+
+    static TextRenderer textRenderer;
 }

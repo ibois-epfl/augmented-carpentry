@@ -12,17 +12,23 @@
 namespace AIAC{
 
     void TextRenderer::Init() {
+        // configure VAO/VBO for texture quads
+        // -----------------------------------
+
+//        GLint prevVAO;
+//        glGetIntegerv(GL_VERTEX_ARRAY_BINDING, (GLint*)&prevVAO);
+
+//        glGenVertexArrays(1, &VAO);
+//        glBindVertexArray(VAO);
+
+//        glBindVertexArray(prevVAO);
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-//        glm::mat4 projection = glm::ortho(0.0f, 300.0f, 0.0f, 200.0f);
 
         m_ShaderProgram = LoadShaders(
                 "assets/opengl/TextShader.vs",
                 "assets/opengl/TextShader.fs");
-
-//        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
 
         // FreeType
         // --------
@@ -92,16 +98,6 @@ namespace AIAC{
             glBindTexture(GL_TEXTURE_2D, 0);
         }
 
-        // destroy FreeType once we're finished
-        FT_Done_Face(face);
-        FT_Done_FreeType(ft);
-
-
-        // configure VAO/VBO for texture quads
-        // -----------------------------------
-        glGenVertexArrays(1, &VAO);
-        glBindVertexArray(VAO);
-
         glGenBuffers(1, &VBO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
@@ -110,7 +106,10 @@ namespace AIAC{
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
+
+        // destroy FreeType once we're finished
+        FT_Done_Face(face);
+        FT_Done_FreeType(ft);
 
         m_Initialized = true;
 
@@ -122,34 +121,43 @@ namespace AIAC{
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        glEnable(GL_ALPHA_TEST);
-        glAlphaFunc(GL_GREATER, 0.5f);
-
         // TODO: replace projection with the right one
-//        glm::mat4 projection(1.0f);
-        glm::mat4 noRotProjection = projection;
-        noRotProjection[0][1] = 0.0f;
-        noRotProjection[0][2] = 0.0f;
-        noRotProjection[1][0] = 0.0f;
-        noRotProjection[1][2] = 0.0f;
-        noRotProjection[2][0] = 0.0f;
-        noRotProjection[2][1] = 0.0f;
-        noRotProjection[0][0] = 1.0f;
-        noRotProjection[1][1] = 1.0f;
-        noRotProjection[2][2] = 1.0f;
-        noRotProjection[0][3] = 0.0f;
-        noRotProjection[1][3] = 0.0f;
-        noRotProjection[2][3] = 0.0f;
-//        noRotProjection[3][0] = 0.0f;
-//        noRotProjection[3][1] = 0.0f;
-//        noRotProjection[3][2] = 0.0f;
+        //        glm::mat4 noRotProjection(projection);
+        //        noRotProjection[0][1] = 0.0f;
+        //        noRotProjection[0][2] = 0.0f;
+        //        noRotProjection[1][0] = 0.0f;
+        //        noRotProjection[1][2] = 0.0f;
+        //        noRotProjection[2][0] = 0.0f;
+        //        noRotProjection[2][1] = 0.0f;
+        //        noRotProjection[0][0] = 1.0f;
+        //        noRotProjection[1][1] = 1.0f;
+        //        noRotProjection[2][2] = 1.0f;
+        //        noRotProjection[0][3] = 0.0f;
+        //        noRotProjection[1][3] = 0.0f;
+        //        noRotProjection[2][3] = 0.0f;
+
+        glm::mat4 noRotProjection(1.0f);
+        noRotProjection[3][0] = projection[3][0];
+        noRotProjection[3][1] = projection[3][1];
+        noRotProjection[3][2] = projection[3][2];
+
         // activate corresponding render state
+        GLint prevShaderProgram;
+        glGetIntegerv(GL_CURRENT_PROGRAM, &prevShaderProgram);
+        GLint prevTexture2D;
+        glGetIntegerv(GL_TEXTURE_BINDING_2D, &prevTexture2D);
+        GLint prevBindBuffer;
+        glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &prevBindBuffer);
+
         glUseProgram(m_ShaderProgram);
         glUniform3f(glGetUniformLocation(m_ShaderProgram, "textColor"), color.x, color.y, color.z);
         glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(noRotProjection));
 
+        glGenBuffers(1, &VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+
         glActiveTexture(GL_TEXTURE0);
-        glBindVertexArray(VAO);
 
         // iterate through all characters
         std::string::const_iterator c;
@@ -173,6 +181,7 @@ namespace AIAC{
                     { xpos + w, ypos + h,   1.0f, 0.0f }
             };
             glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+
             // update content of VBO memory
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
@@ -183,9 +192,10 @@ namespace AIAC{
             // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
             x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
         }
-        glBindVertexArray(0);
-        glBindTexture(GL_TEXTURE_2D, 0);
 
+//        glBindBuffer(GL_ARRAY_BUFFER, prevBindBuffer);
+//        glBindTexture(GL_TEXTURE_2D, prevTexture2D);
+//        glUseProgram(prevShaderProgram);
     }
 }
 
