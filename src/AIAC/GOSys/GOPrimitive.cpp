@@ -28,7 +28,8 @@ namespace AIAC
         : m_Position(position)
     {
         m_Type = GOTypeFlags::_GOPoint;
-        AIAC_GOREG->Register(m_Id, std::make_shared<GOPoint>(*this));
+        // AIAC_GOREG->Register(m_Id, std::make_shared<GOPoint>(*this));
+        // AIAC_GOREG->Register(m_Id, shared_from_this());
     }
 
     GOLine::GOLine(GOPoint p1, GOPoint p2)
