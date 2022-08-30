@@ -14,14 +14,13 @@ namespace AIAC{
     void TextRenderer::Init() {
         // configure VAO/VBO for texture quads
         // -----------------------------------
+        // GLint prevVAO;
+        // glGetIntegerv(GL_VERTEX_ARRAY_BINDING, (GLint*)&prevVAO);
 
-//        GLint prevVAO;
-//        glGetIntegerv(GL_VERTEX_ARRAY_BINDING, (GLint*)&prevVAO);
+        // glGenVertexArrays(1, &VAO);
+        // glBindVertexArray(VAO);
 
-//        glGenVertexArrays(1, &VAO);
-//        glBindVertexArray(VAO);
-
-//        glBindVertexArray(prevVAO);
+        // glBindVertexArray(prevVAO);
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -193,9 +192,9 @@ namespace AIAC{
             x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
         }
 
-//        glBindBuffer(GL_ARRAY_BUFFER, prevBindBuffer);
-//        glBindTexture(GL_TEXTURE_2D, prevTexture2D);
-//        glUseProgram(prevShaderProgram);
+        // glBindBuffer(GL_ARRAY_BUFFER, prevBindBuffer);
+        // glBindTexture(GL_TEXTURE_2D, prevTexture2D);
+        // glUseProgram(prevShaderProgram);
     }
 }
 

@@ -30,10 +30,9 @@ namespace AIAC
         _GOText,
     };
 
-    // TODO: change name to weigth
     struct GOWeight
     {
-        static constexpr float Default            = 0.5f;
+        static constexpr float Default            = 1.0f;
         static constexpr float Thin               = 0.1f;
         static constexpr float Thick              = 1.0f;
     };
@@ -54,7 +53,7 @@ namespace AIAC
     public:
         explicit GOPrimitive(GOCategory category = GOCategoryNone,
                              bool isVisible = true,
-                             glm::vec4 color = glm::vec4(0, 0, 0, 1));
+                             glm::vec4 color = glm::vec4(0, 0, 0, 0.5));
         // ~GOPrimitive();
         virtual ~GOPrimitive() = default;
 
@@ -121,18 +120,9 @@ namespace AIAC
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
 
-        // inline void setWeight(float weight) { m_Weight = weight; }
-        // void operator=(const GOLine& other){
-        //     std::cout << "operator=" << std::endl;
-        // }
-        // void operator()(const GOLine& other){
-        //     std::cout << "operator()" << std::endl;
-        // }
-
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;
-        // float m_Weight = GOWeight::Default;
     };
 
 
@@ -147,15 +137,11 @@ namespace AIAC
         inline float GetRadius() const { return m_Radius; }
         inline glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
-        // TODO: What is this for?
-        // inline void setWeight(float weight) { m_Weight = weight; }
-
     private:
         GOPoint m_Center;
         glm::vec3 m_Normal = glm::vec3(0, 0, 1);
         glm::vec4 m_EdgeColor = glm::vec4(1, 0, 0, 1);
         float m_Radius;
-        // float m_Weight = GOWeight::Default;
     };
 
 
@@ -174,7 +160,7 @@ namespace AIAC
         GOPoint m_PStart;
         GOPoint m_PEnd;
         float m_Radius;
-        glm::vec4 m_EdgeColor = glm::vec4(1, 1, 1, 1);
+        glm::vec4 m_EdgeColor = glm::vec4(0, 1, 1, 1);
     };
 
 
@@ -248,12 +234,10 @@ namespace AIAC
         virtual ~GOText() = default;
 
         std::string GetText() const { return m_Text; }
-        // inline void setWeight(float weight) { m_Weight = weight; }
 
     private:
         GOPoint m_Anchor;
         std::string m_Text;
         double m_Size;
-        // float m_Weight = GOWeight::Default;
     };
 }

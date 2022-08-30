@@ -19,12 +19,12 @@ namespace AIAC
         GOPoint pt1 = GOPoint(glm::vec3(1, 1, 1));
         GOPoint pt2 = GOPoint(glm::vec3(20, 50, 20));
         GOPoint pt3 = GOPoint(glm::vec3(30, 30, 30));
-        GOLine line = GOLine(pt1, pt2, 96.0f);
-        GOLine line2 = GOLine(pt1, pt3, 95.0f);
+        GOLine line = GOLine(pt1, pt2, 96.0);
+        GOLine line2 = GOLine(pt1, pt3, 3.0f);
         GOCircle circle1 = GOCircle(pt1, 0.5f);
         GOCircle circle2 = GOCircle(pt2, 0.5f);
         GOCircle circle3 = GOCircle(pt3, 0.5f);
-        GOCylinder cylinder1 = GOCylinder(pt1, pt2, 0.5f);
+        GOCylinder cylinder1 = GOCylinder(pt1, pt2, 20.0f);
         GOCylinder cylinder2 = GOCylinder(pt2, pt3, 0.5f);
         GOCylinder cylinder3 = GOCylinder(pt3, pt1, 0.5f);
         GOPolyline polyline1 = GOPolyline(std::vector<GOPoint>{pt1, pt2, pt3});
