@@ -22,14 +22,14 @@ namespace AIAC {
      * @param colors A RGBA(0~1.0) color, a vector with the same size of the `vertices`.
      * @param pointSize The size of the point.
      * */
-    extern void DrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize=1.0f);
+    extern void glDrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize=1.0f);
     /**
      * @brief Draw multiple points
      * @param vertices A vector of 3d points, indicate the position of the vertices.
      * @param colors A RGBA(0~1.0) color.
      * @param pointSize The size of the point.
      * */
-    extern void DrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize=1.0f);
+    extern void glDrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize=1.0f);
 
     /**
      * Draw multiple lines
@@ -52,13 +52,13 @@ namespace AIAC {
      * @param vertices A vector of 3d points, indicate the position of the vertices.
      * @param colors A RGBA(0~1.0) color, a vector with the same size of the `vertices`.
      * */
-    extern void DrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors);
+    extern void glDrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors);
     /**
     * @brief Draw multiple points
     * @param vertices A vector of 3d points, indicate the position of the vertices.
     * @param colors A RGBA(0~1.0) color.
     * */
-    extern void DrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color);
+    extern void glDrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color);
 
     /**
      * P2(0, 1, 0) --- P3(1, 0, 0)
@@ -87,14 +87,14 @@ namespace AIAC {
      * @param indices A vector of all triangle's indices.
      * @param colors: A RGBA(0~1.0) color, a vector with the same size of the vertices.
      * */
-    extern void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors);
+    extern void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors);
     /**
      * @brief Draw multiple Triangles
      * @param vertices A vector of 3d points, indicate the position of the vertices.
      * @param indices A vector of all triangle's indices.
      * @param colors: A RGBA(0~1.0) color, a vector with the same size of the vertices.
      * */
-    extern void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &colors);
+    extern void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &colors);
 
     /**
      * @brief Draw TSlam map

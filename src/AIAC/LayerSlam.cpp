@@ -13,7 +13,6 @@
 
 namespace AIAC
 {
-    // TODO: maybe we should define these const somewhere else?
     const std::string TSLAM_CONF_SEC = "TSlam"; 
 
     void LayerSlam::OnAttach()

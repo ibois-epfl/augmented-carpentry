@@ -4,7 +4,7 @@
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Application.h"
 
-
+// FIXME: bug of reference to instance
 // TODO: find a better pattern for adding the object from constructor to the registry 
 namespace AIAC
 {
@@ -32,9 +32,10 @@ namespace AIAC
         // AIAC_GOREG->Register(m_Id, shared_from_this());
     }
 
-    GOLine::GOLine(GOPoint p1, GOPoint p2)
+    GOLine::GOLine(GOPoint p1, GOPoint p2, float weight)
         : m_PStart(p1), m_PEnd(p2)
     {
+        m_Weight = weight;
         m_Type = GOTypeFlags::_GOLine;
         AIAC_GOREG->Register(m_Id, std::make_shared<GOLine>(*this));
     }
