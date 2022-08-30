@@ -17,7 +17,7 @@ namespace AIAC
 
         bool IsInitialized() const { return m_Initialized; }
 
-        void RenderText(std::string text, float x, float y, float scale, glm::vec3 color);
+        void RenderText(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection);
 
     public:
         struct Character {
@@ -30,9 +30,10 @@ namespace AIAC
         std::map<char, Character> Characters;
         unsigned int VAO, VBO;
 
-        GLuint shaderProgram;
-
     private:
         bool m_Initialized = false;
+        GLuint m_ShaderProgram;
     };
+
+    static TextRenderer textRenderer;
 }

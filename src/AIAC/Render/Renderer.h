@@ -53,7 +53,8 @@ namespace AIAC
     private:
         float m_CamW, m_CamH;
 
-        GLuint m_ProgramId;
+        GLuint m_VAO;
+        GLuint m_BasicShaderProgram;
         GLuint m_MatrixId;
 
         glm::mat4 m_ProjMatrix;

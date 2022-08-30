@@ -9,8 +9,6 @@
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
-
-> - [x] Add readme for render API how to use
 > - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
 > - [x] Add Mapping subprogram + UI
 > - [x] Implement padding for 3D scene viewer
@@ -18,12 +16,16 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [ ] Make the Camera of the viewport bigger
 
-> - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
-> - [ ] Add a function DrawCircle() to the RenderAPI
-> - [ ] Add a function DrawCylinder() to the RenderAPI
-> - [ ] Add a function DrawPolyline() to the RenderAPI
+> - [ ] Edit the readme for render API how to use it
+> - [x] Refactor the Render part, put everything in one folder and extract/rename render API header.
+> - [x] Add a function DrawCircle() to the RenderAPI
+> - [x] Add a function DrawCylinder() to the RenderAPI
+> - [x] Add a function DrawPolyline() to the RenderAPI
+> - [x] Add a function DrawTriangle() to the RenderAPI
 > - [ ] Add a function DrawText() to the RenderAPI
-> - [ ] Add a function DrawTriangle() to the RenderAPI
+>   - [ ] Fix the textRender, which is either not shown or overriding the scene
+> - [ ] Cache objects in RenderAPI for speed up (option)
+> - 
 
 > - [ ] Document with videos and snapshots the tracaking system and the mapping
 
@@ -461,21 +463,24 @@ AIAC_GOREG->Unregister(id)
 
 
 ### Renderer API
-The renderer API is implemented in `GlUtils.h`, which provides an easier way to draw 3d objects with OpenGL.
-There are 3 types of object that can be drawn: `Point`, `Line`, and `Triangle`.
-#### Point
+The renderer API is separated into two parts:
+1. `GlUtils.h`: Provides a convenient interface to interact with OpenGL, can draw 3 types of object: `Point`, `Line`, and `Triangle`
+2. `RenderAPI.h`: A high level API for drawing `GO` and other shapes, including `Slam Map`, `Circle`, `Cylinder`, `Mesh`, and `Text`.
+
+#### GlUtils.h
+##### Point
 ```c++
-void DrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize);
-void DrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize);
+void glDrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize);
+void glDrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize);
 ```
 - `vertices`: A vector of 3d points, indicate the position of the vertices.
 - `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the `vertices`. 
 - `pointSize`: The size of the point.
 
-- Line
+##### Line
 ```c++
-void DrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors);
-void DrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color);
+void glDrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors);
+void glDrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color);
 
 /* 
  * (0, 1, 0) --- (1, 0, 0)
@@ -497,10 +502,10 @@ void DrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color);
 - `edges`: A vector of the edge's end-points.
 - `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the `edges`.
 
-- Triangle
+##### Triangle
 ```c++
-void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors);
-void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &colors);
+void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors);
+void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &colors);
 /* 
  * P2(0, 1, 0) --- P3(1, 0, 0)
  *     |            /    |
@@ -527,3 +532,74 @@ void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<u
 - `vertices`: A vector of 3d points, indicate the position of the vertices.
 - `indices`: A vector of all triangle's indices.
 - `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the vertices.
+
+#### RenderAPI.h
+##### GO
+An implicit type casting is implemented, simply call the `DrawGo` function:
+```c++
+void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
+void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
+```
+Otherwise, if you know the type you want to draw, you can also use the specific function:
+```c++
+// All function follows this structure:
+void DrawType(const GOType& goType);
+void DrawTypes(const std::vector<std::shared_ptr<GOType>>& goTypes);
+
+// For example, GOLine can be drawn with
+void DrawLine(const GOLine& goLine);
+void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines);
+```
+
+##### Slam Map
+```c++
+void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize);
+```
+- `map`: The map itself.
+- `color`: The color of the point clouds.
+- `pointSize`: The point cloud's size.
+
+`other shapes`
+
+##### Line
+Draw a line base on two glm::vec3.
+```c++
+void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight = GOWeight::Default, const glm::vec4 &color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+```
+* `p1` First point.
+* `p2` Second point.
+* `weight` Weight of the line.
+* `color` RGBA Color of the line.
+
+Draw multiple lines.
+```c++
+void DrawLines(const vector<glm::vec3> &vertices, float weight, const glm::vec4 &color);
+```
+* `vertices` A vector of glm::vec3. If you have line [p1, p2] and [p2, p3], the vector should be construct as [p1, p2, p2, p3, ...]
+* `weight` Weight of the line.
+* `color` RGBA Color of the line.
+*/
+
+##### Circle
+```c++
+void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum = 24);
+```
+* `center` Center of the circle.
+* `normal` The normal of plane on which the circle lays.
+* `radius` Radius of the circle.
+* `color` RGBA Color of the face.
+* `edgeColor` RGBA Color of the edge.
+* `edgeWeight` Weight of the edge.
+* `sectorNum` Number of sectors, can be derived from `GetSectorNum(radius)`.
+
+##### Cylinder
+Draw a Cylinder, this is also used for drawing lines with heavy weight (>1.0f).
+```c++
+void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum = 24);
+```
+* `baseCenter` Base center (bottom) of the cylinder.
+* `topCenter` Top center (top) of the cylinder.
+* `radius` Radius of the cylinder; For drawing line, radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE.
+* `color` Color of the cylinder.
+* `edgeColor` The color of the edges of the caps.
+* `sectorNum` Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value.
