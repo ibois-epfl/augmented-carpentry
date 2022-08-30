@@ -248,10 +248,6 @@ namespace AIAC
             }
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
-
-        DrawTest(true, m_ProjMatrix);
-//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//        glUseProgram(m_BasicShaderProgram);
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -306,10 +302,9 @@ namespace AIAC
         auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
         glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+        glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-        DrawTest(true, finalPoseMatrix);
-        glUseProgram(m_BasicShaderProgram);
+        // DrawTest(true, finalPoseMatrix);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

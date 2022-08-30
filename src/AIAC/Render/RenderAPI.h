@@ -42,7 +42,7 @@ namespace AIAC
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints);
 
     /**
-     * @brief Draw Point base on two glm::vec3.
+     * @brief Draw a line on two glm::vec3.
      * @param p1 First point.
      * @param p2 Second point.
      * @param weight Weight of the line.

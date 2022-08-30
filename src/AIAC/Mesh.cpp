@@ -96,24 +96,24 @@ namespace AIAC
     }
 
     void Mesh::Draw() {
-        DrawPoints3d(Vertices, glm::vec4(0.9, 0.9, 0.9, 0.2), 1);
-        DrawTriangles3d(Vertices, Indices, glm::vec4(0.6, 0.35, 0.2, 0.3));
+        glDrawPoints3d(Vertices, glm::vec4(0.9, 0.9, 0.9, 0.2), 1);
+        glDrawTriangles3d(Vertices, Indices, glm::vec4(0.6, 0.35, 0.2, 0.3));
     }
 
     void Mesh::DrawBoundingBoxEdges(glm::vec4 color) {
-        DrawLines3d(BoundingBoxEdges, color);
+        glDrawLines3d(BoundingBoxEdges, color);
     }
 
     void Mesh::DrawVertices(glm::vec4 color, GLfloat pointSize) {
-        DrawPoints3d(Vertices, color, pointSize);
+        glDrawPoints3d(Vertices, color, pointSize);
     }
 
     void Mesh::DrawEdges(glm::vec4 color) {
-        DrawLines3d(Edges, color);
+        glDrawLines3d(Edges, color);
     }
 
     void Mesh::DrawFaces(glm::vec4 color) {
-        DrawTriangles3d(Vertices, Indices, color);
+        glDrawTriangles3d(Vertices, Indices, color);
     }
 } // namespace AIAC
 
