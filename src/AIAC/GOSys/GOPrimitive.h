@@ -74,6 +74,7 @@ namespace AIAC
         inline float GetWeight() const { return m_Weight; }
         inline void SetWeight(float weight) { m_Weight = weight; }
 
+
     protected:
         uint32_t m_Id;
         GOCategory m_Category;
@@ -121,6 +122,12 @@ namespace AIAC
         inline GOPoint GetPEnd() const { return m_PEnd; }
 
         // inline void setWeight(float weight) { m_Weight = weight; }
+        // void operator=(const GOLine& other){
+        //     std::cout << "operator=" << std::endl;
+        // }
+        // void operator()(const GOLine& other){
+        //     std::cout << "operator()" << std::endl;
+        // }
 
     private:
         GOPoint m_PStart;

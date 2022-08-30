@@ -17,11 +17,11 @@ namespace AIAC
         // there is no need for shared_ptr anymore, because the GO is registered in the registry at construction
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
         GOPoint pt1 = GOPoint(glm::vec3(1, 1, 1));
-        GOPoint pt2 = GOPoint(glm::vec3(20, 5, 2));
-        GOPoint pt3 = GOPoint(glm::vec3(30, 3, 5));
+        GOPoint pt2 = GOPoint(glm::vec3(20, 50, 20));
+        GOPoint pt3 = GOPoint(glm::vec3(30, 30, 30));
         GOLine line = GOLine(pt1, pt2);
         GOLine line2 = GOLine(pt1, pt3);
-        line.SetWeight(15.0);
+        line.SetWeight(4.0);
         line2.SetWeight(16.0);
         GOCircle circle1 = GOCircle(pt1, 0.5f);
         GOCircle circle2 = GOCircle(pt2, 0.5f);
