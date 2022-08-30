@@ -303,7 +303,7 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText){
+    void DrawText(const GOText& goText) {
         textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
     }
 
@@ -335,7 +335,9 @@ namespace AIAC
 
 //        textRenderer.RenderText("Hello World", 0, 0, 40, glm::vec3(1, 0, 0));
 //        textRenderer.RenderText("goText.GetText()", 0, 0, 1, glm::vec4(0,0,0,0.5), projection);
-        DrawTexts(texts);
+//        DrawTexts(texts);
+//        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
+//        textRenderer.RenderText("goText.GetText()", 0, 0, 0.1, glm::vec4(0,0,0,0.5), projection);
     }
 
 
