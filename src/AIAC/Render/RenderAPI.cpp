@@ -12,6 +12,12 @@ const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
 
 namespace AIAC
 {
+    /**
+     * @brief Render Slam map on the current frame.
+     * @param map A tslam map to be rendered.
+     * @param color PointCloud's color.
+     * @param pointSize PointCloud's size.
+     */
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
         std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
         for(const auto& mapPoint: map->map_points){
@@ -46,12 +52,28 @@ namespace AIAC
         DrawLines3d(markerEdges, markerEdgeColors);
     }
 
+    /**
+     * @brief Combine 3 points into a glm::vec3 and transform it based on the given transformation matrix.
+     * @param transformMat A 4x4 transformation matrix.
+     * @param x X coordinate.
+     * @param y Y coordinate.
+     * @param z Z coordinate.
+     */
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z){
         glm::vec4 point(x, y, z, 1);
         point = transformMat * point;
         return {point.x, point.y, point.z};
     }
 
+    /**
+     * @brief Draw a Cylinder, this is also used for drawing lines with heavy weight (>1.0f).
+     * @param baseCenter Base center (bottom) of the cylinder.
+     * @param topCenter Top center (top) of the cylinder.
+     * @param radius Radius of the cylinder; For drawing line, radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE.
+     * @param color Color of the cylinder.
+     * @param edgeColor The color of the edges of the caps.
+     * @param sectorNum Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value.
+     */
     void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
         std::vector<CylinderPole> cylinderPoles; // vector of structs
 
@@ -141,6 +163,10 @@ namespace AIAC
         DrawLines3d(capContourTop, edgeColor);
     }
 
+    /**
+     * @brief Draw a GOPrimitive.
+     * @param goPrimitive Object to draw.
+     */
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive) {
         if(!goPrimitive->IsVisible()){
             return;
@@ -167,6 +193,10 @@ namespace AIAC
         }
     }
 
+    /**
+     * @brief Draw multiple GOPrimitive.
+     * @param goPrimitive A vector of GOPrimitive to draw.
+     */
     void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive){
         for(auto& go: goPrimitive){
             DrawGO(go);
@@ -186,19 +216,26 @@ namespace AIAC
         }
     }
 
-    int getSectorNum(float weight){
-        if(weight <= 12){
+    int getSectorNum(float radius){
+        if(radius <= 3){
             return 6;
         }
-        if(weight <= 24){
+        if(radius <= 12){
             return 12;
         }
-        if(weight <= 96){
+        if(radius <= 24){
             return 24;
         }
         return 36;
     }
 
+    /**
+     * @brief Draw Point base on two glm::vec3.
+     * @param p1 First point.
+     * @param p2 Second point.
+     * @param weight Weight of the line.
+     * @param color RGBA Color of the line.
+     */
     void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color){
         if(weight <= 0){
             return;
@@ -210,11 +247,18 @@ namespace AIAC
             DrawLines3d(line, color);
             return;
         }
-        DrawCylinder(p1, p2, weight * WEIGHT_TO_CYLINDER_RADIUS_RATE,
-                     color, glm::vec4(0,0,0,0), getSectorNum(weight));
+        float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+        DrawCylinder(p1, p2, radius,
+                     color, glm::vec4(0,0,0,0), getSectorNum(radius));
     }
 
-    void DrawLines(const vector<glm::vec3> &vertices, const glm::vec4 &color, float weight){
+    /**
+     * @brief Draw multiple lines.
+     * @param vertices A vector of glm::vec3. If you have line [p1, p2] and [p2, p3], the vector should be construct as [p1, p2, p2, p3, ...]
+     * @param weight Weight of the line.
+     * @param color RGBA Color of the line.
+     */
+    void DrawLines(const vector<glm::vec3> &vertices, float weight, const glm::vec4 &color){
         if(weight <= 0){
             return;
         }
@@ -222,8 +266,9 @@ namespace AIAC
             DrawLines3d(vertices, color);
             return;
         }
-        DrawCylinder(vertices[0], vertices[1], weight * WEIGHT_TO_CYLINDER_RADIUS_RATE,
-                     color, glm::vec4(0,0,0,0), getSectorNum(weight));
+        float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+        DrawCylinder(vertices[0], vertices[1], radius,
+                     color, glm::vec4(0,0,0,0), getSectorNum(radius));
     }
 
     void DrawLine(const GOLine& goLine) {
@@ -237,9 +282,10 @@ namespace AIAC
             vertices[1] = goLine.GetPEnd().GetPosition();
             DrawLines3d(vertices, goLine.GetColor());
         } else {
+            float radius = goLine.GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
             DrawCylinder(goLine.GetPStart().GetPosition(), goLine.GetPEnd().GetPosition(),
-                         goLine.GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE, goLine.GetColor(), glm::vec4(0, 0, 0, 0),
-                         getSectorNum(goLine.GetWeight()));
+                         radius, goLine.GetColor(), glm::vec4(0, 0, 0, 0),
+                         getSectorNum(radius));
         }
     }
 
@@ -257,14 +303,25 @@ namespace AIAC
                 colors.emplace_back(goLine->GetColor());
                 colors.emplace_back(goLine->GetColor());
             } else {
+                float radius = goLine->GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
                 DrawCylinder(goLine->GetPStart().GetPosition(), goLine->GetPEnd().GetPosition(),
-                             goLine->GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE, goLine->GetColor(), glm::vec4(0, 0, 0, 0),
-                             getSectorNum(goLine->GetWeight()));
+                             radius, goLine->GetColor(), glm::vec4(0, 0, 0, 0),
+                             getSectorNum(radius));
             }
         }
         DrawLines3d(vertices, colors);
     }
 
+    /**
+     * @brief Draw a single circle.
+     * @param center Center of the circle.
+     * @param normal The normal of plane on which the circle lays.
+     * @param radius Radius of the circle.
+     * @param color RGBA Color of the face.
+     * @param edgeColor RGBA Color of the edge.
+     * @param edgeWeight Weight of the edge.
+     * @param sectorNum Number of sectors, can be derived from GetSectorNum(radius).
+     */
     void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum) {
         std::vector<glm::vec3> vertices; vertices.reserve(sectorNum + 1);
         std::vector<glm::vec3> edges; edges.reserve(2 * sectorNum);
@@ -310,7 +367,7 @@ namespace AIAC
         edges.emplace_back(vertices[sectorNum]);
         edges.emplace_back(vertices[1]);
 
-        DrawLines(edges, edgeColor, edgeWeight);
+        DrawLines(edges, edgeWeight, edgeColor);
     }
 
     void DrawCircle(const GOCircle& goCircle) {
@@ -364,7 +421,7 @@ namespace AIAC
             vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
         }
 
-        DrawLines(vertices, goPolyline.GetColor(), goPolyline.GetWeight());
+        DrawLines(vertices, goPolyline.GetWeight(), goPolyline.GetColor());
     }
 
     void DrawPolylines(const std::vector<std::shared_ptr<GOPolyline>>& goPolylines) {
