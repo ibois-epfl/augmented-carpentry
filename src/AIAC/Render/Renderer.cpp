@@ -1,6 +1,7 @@
 #include "aiacpch.h"
 
 #include "AIAC/Render/Renderer.h"
+#include "TextRenderer.h"
 
 #include "AIAC/Application.h"
 #include "AIAC/Log.h"
@@ -17,22 +18,21 @@
 
 namespace AIAC
 {
-    extern TextRenderer textRenderer;
+//    extern TextRenderer textRenderer;
 
     void Renderer::Init()
     {
-        GLuint VertexArrayID;
-        glGenVertexArrays(1, &VertexArrayID);
-        glBindVertexArray(VertexArrayID);
+        glGenVertexArrays(1, &m_VAO);
+        glBindVertexArray(m_VAO);
 
         // Create and compile our GLSL program from the shaders
         char* vertexFilePath = (char*)"assets/opengl/SimpleTransform.vs";
         char* fragmentFilePath = (char*)"assets/opengl/SingleColor.fs";
 
-        m_ProgramId = LoadShaders(vertexFilePath, fragmentFilePath);
+        m_BasicShaderProgram = LoadShaders(vertexFilePath, fragmentFilePath);
 
         // Get a handle for our "MVP" uniform
-        m_MatrixId = glGetUniformLocation(m_ProgramId, "MVP");
+        m_MatrixId = glGetUniformLocation(m_BasicShaderProgram, "MVP");
 
         // Calculate Perspective Projection Matrix based on camera intrinsic parameters
         // Reference: https://strawlab.org/2011/11/05/augmented-reality-with-OpenGL/
@@ -97,6 +97,8 @@ namespace AIAC
         // Save variable for later use
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
+
+        textRenderer.Init();
 
         InitMappingView();
         InitGlobalView();
@@ -212,7 +214,7 @@ namespace AIAC
 
     void Renderer::OnRender()
     {
-        glUseProgram(m_ProgramId);
+        glUseProgram(m_BasicShaderProgram);
 
         RenderGlobalView();
 
@@ -248,8 +250,8 @@ namespace AIAC
         }
 
         DrawTest(true, m_ProjMatrix);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glUseProgram(m_ProgramId);
+//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//        glUseProgram(m_BasicShaderProgram);
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -307,7 +309,7 @@ namespace AIAC
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
         DrawTest(true, finalPoseMatrix);
-        glUseProgram(m_ProgramId);
+        glUseProgram(m_BasicShaderProgram);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

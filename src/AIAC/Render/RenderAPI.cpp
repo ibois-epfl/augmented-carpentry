@@ -1,6 +1,7 @@
 // TODO: cache base cylinder and sphere meshes
 
 #include "RenderAPI.h"
+#include "TextRenderer.h"
 #include "AIAC/Log.h"
 
 #include <ft2build.h>
@@ -9,7 +10,7 @@
 
 namespace AIAC
 {
-    static TextRenderer textRenderer;
+//    extern TextRenderer *textRenderer;
 
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
         std::vector<glm::vec3> mapPoints(map->map_points.size());
@@ -302,24 +303,26 @@ namespace AIAC
         }
     }
 
-    void DrawText(GOText goText){
-//        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
-//        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
+    void DrawText(const GOText& goText){
+        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
     }
 
-    void DrawTexts(std::vector<GOText> goTexts) {
-
+    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts) {
+        for (auto &goText: goTexts) {
+            DrawText(*goText);
+        }
     }
 
     void DrawTest(bool t, glm::mat4 projection){
-//        std::vector<std::shared_ptr<GOPoint>> points;
-//        std::vector<std::shared_ptr<GOLine>> lines;
-//        std::vector<std::shared_ptr<GOCircle>> circles;
-//        std::vector<std::shared_ptr<GOCylinder>> cylinders;
-//        std::vector<std::shared_ptr<GOPolyline>> polylines;
-//        std::vector<std::shared_ptr<GOTriangle>> triangles;
-//        std::vector<std::shared_ptr<GOText>> texts;
-//        AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, texts);
+        std::vector<std::shared_ptr<GOPoint>> points;
+        std::vector<std::shared_ptr<GOLine>> lines;
+        std::vector<std::shared_ptr<GOCircle>> circles;
+        std::vector<std::shared_ptr<GOCylinder>> cylinders;
+        std::vector<std::shared_ptr<GOPolyline>> polylines;
+        std::vector<std::shared_ptr<GOTriangle>> triangles;
+        std::vector<std::shared_ptr<GOMesh>> meshes;
+        std::vector<std::shared_ptr<GOText>> texts;
+        AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, meshes, texts);
 
 //        DrawPoints(points);
 //        DrawLines(lines);
@@ -328,10 +331,11 @@ namespace AIAC
 
 //        DrawCylinders(cylinders);
 //        DrawCircles(circles);
+//        DrawMeshes(meshes);
 
 //        textRenderer.RenderText("Hello World", 0, 0, 40, glm::vec3(1, 0, 0));
-//        if(!textRenderer.IsInitialized()){ textRenderer.Init(); }
-//        textRenderer.RenderText("goText.GetText()", 0, 0, 0.1, glm::vec4(0,0,0,0.5), projection);
+//        textRenderer.RenderText("goText.GetText()", 0, 0, 1, glm::vec4(0,0,0,0.5), projection);
+        DrawTexts(texts);
     }
 
 
