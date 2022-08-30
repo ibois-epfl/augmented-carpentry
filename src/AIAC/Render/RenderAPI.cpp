@@ -234,15 +234,12 @@ namespace AIAC
                 continue;
             }
             // if weight is 1.0f, put into the vector and draw altogether at once; else, draw as cylinder immediately
-            cout << goLine->GetWeight() << endl;
             if(goLine->GetWeight() <= 1.0f){
-                cout << "Drawing line as line" << endl;
                 vertices.emplace_back(goLine->GetPStart().GetPosition());
                 vertices.emplace_back(goLine->GetPEnd().GetPosition());
                 colors.emplace_back(goLine->GetColor());
                 colors.emplace_back(goLine->GetColor());
             } else {
-                cout << "Drawing line as cylinder" << endl;
                 DrawCylinder(goLine->GetPStart().GetPosition(), goLine->GetPEnd().GetPosition(),
                              goLine->GetWeight(), goLine->GetColor(), glm::vec4(0, 0, 0, 0),
                              WeightToNumVertices(goLine->GetWeight()));
