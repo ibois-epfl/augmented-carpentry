@@ -37,10 +37,10 @@ namespace AIAC
 
     enum GOCategory
     {
-        GOCategoryNone            = BIT(0),
-        GOCategoryHole            = BIT(1),
-        GOCategoryCut             = BIT(2),
-        GOCategoryVolume          = BIT(3)
+        GOCategoryNone                            = BIT(0),
+        GOCategoryHole                            = BIT(1),
+        GOCategoryCut                             = BIT(2),
+        GOCategoryVolume                          = BIT(3)
     };
 
 
