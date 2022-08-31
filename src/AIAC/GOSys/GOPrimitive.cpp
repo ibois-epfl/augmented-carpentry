@@ -60,7 +60,7 @@ namespace AIAC
 
     std::shared_ptr<GOPoint> GOPoint::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOPoint>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOPoint>(id);
     }
 
 
@@ -81,7 +81,7 @@ namespace AIAC
 
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOLine>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOLine>(id);
     }
 
 
@@ -101,7 +101,7 @@ namespace AIAC
 
     std::shared_ptr<GOCircle> GOCircle::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOCircle>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOCircle>(id);
     }
 
 
@@ -121,7 +121,7 @@ namespace AIAC
 
     std::shared_ptr<GOCylinder> GOCylinder::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOCylinder>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOCylinder>(id);
     }
 
 
@@ -141,7 +141,7 @@ namespace AIAC
 
     std::shared_ptr<GOPolyline> GOPolyline::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOPolyline>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOPolyline>(id);
     }
 
 
@@ -161,7 +161,7 @@ namespace AIAC
 
     std::shared_ptr<GOTriangle> GOTriangle::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOTriangle>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOTriangle>(id);
     }
 
 
@@ -194,7 +194,7 @@ namespace AIAC
 
     std::shared_ptr<GOMesh> GOMesh::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOMesh>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOMesh>(id);
     }
 
 
@@ -215,6 +215,6 @@ namespace AIAC
 
     std::shared_ptr<GOText> GOText::Get(const uint32_t& id)
     {
-        return std::dynamic_pointer_cast<GOText>(AIAC_GOREG->Get(id));
+        return AIAC_GOREG->GetGO<GOText>(id);
     }
 }
