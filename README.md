@@ -421,6 +421,7 @@ To add, remove or get Geometric Objects (GO) from any layer:
 uint32_t idPt1 = GOPoint::Add(1, 1, 1);  // create a point
 auto pt1 = GOPoint::Get(idPt1);                     // get the point
 float x = pt1->X();                                 // access GO properties
+auto pts = GOPoint::GetAll();                       // access all GO of one type
 GOPoint::Remove(idPt1);                             // remove the point from registry
 ```
 

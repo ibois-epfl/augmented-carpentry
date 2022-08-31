@@ -92,6 +92,7 @@ namespace AIAC
         virtual ~GOPoint() = default;
 
         static std::shared_ptr<GOPoint> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOPoint>> GetAll();
 
         inline glm::vec3 GetPosition() const { return m_Position; }
         inline void SetPosition(glm::vec3 position) { m_Position = position; }
@@ -120,6 +121,7 @@ namespace AIAC
         virtual ~GOLine() = default;
 
         static std::shared_ptr<GOLine> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOLine>> GetAll();
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
@@ -139,6 +141,7 @@ namespace AIAC
         virtual ~GOCircle() = default;
 
         static std::shared_ptr<GOCircle> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOCircle>> GetAll();
 
         inline glm::vec3 GetNormal() const { return m_Normal; }
         inline GOPoint GetCenter() const { return m_Center; }
@@ -162,6 +165,7 @@ namespace AIAC
         virtual ~GOCylinder() = default;
 
         static std::shared_ptr<GOCylinder> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOCylinder>> GetAll();
 
         GOPoint GetPStart() const { return m_PStart; }
         GOPoint GetPEnd() const { return m_PEnd; }
@@ -185,6 +189,7 @@ namespace AIAC
         virtual ~GOPolyline() = default;
 
         static std::shared_ptr<GOPolyline> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOPolyline>> GetAll();
 
         inline const std::vector<GOPoint> &GetPoints() const { return m_Points; }
 
@@ -208,6 +213,7 @@ namespace AIAC
         virtual ~GOTriangle() = default;
 
         static std::shared_ptr<GOTriangle> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOTriangle>> GetAll();
 
         const std::vector<glm::vec3> GetVertices() const {
             return std::vector<glm::vec3>{m_P1.GetPosition(), m_P2.GetPosition(), m_P3.GetPosition()};
@@ -234,6 +240,7 @@ namespace AIAC
         virtual ~GOMesh() = default;
 
         static std::shared_ptr<GOMesh> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOMesh>> GetAll();
 
         const std::vector<glm::vec3> GetVertices() const { return m_Vertices; }
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
@@ -261,6 +268,7 @@ namespace AIAC
         virtual ~GOText() = default;
 
         static std::shared_ptr<GOText> Get(const uint32_t& id);
+        static std::vector<std::shared_ptr<GOText>> GetAll();
 
         std::string GetText() const { return m_Text; }
 

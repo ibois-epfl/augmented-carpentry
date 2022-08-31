@@ -17,7 +17,11 @@ namespace AIAC
             Clear();
         }
     
-        // register with a template which accepts heirs of the class GOPrimitive
+        /**
+         * @brief Add a GO to the registry.
+         * @param id Id of the object to register.
+         * @param go Smart pointer to the object to register.
+         */
         template<typename T>
         void Register(std::shared_ptr<T> go)
         {
@@ -25,6 +29,11 @@ namespace AIAC
             m_GOMap.emplace(go->GetId(), go);
         }
 
+        /**
+         * @brief Add a GO to the registry with a given id.
+         * @param id Id of the object to register.
+         * @param go Smart pointer to the object to register.
+         */
         template<typename T>
         void Register(const uint32_t& id, std::shared_ptr<T> go)
         {
@@ -32,6 +41,10 @@ namespace AIAC
             m_GOMap.emplace(id, go);
         }
 
+        /**
+         * @brief Erase the GO from the register.
+         * @param id Id of the object to erase from the register.
+         */
         inline void Unregister(const uint32_t& id)
         {
             m_GOMap.erase(id);
@@ -122,16 +135,38 @@ namespace AIAC
             catch (const std::bad_cast& e) { AIAC_ERROR("Bad cast exception: {}", e.what()); }
         }
 
-        void GetAllGOs(std::vector<std::shared_ptr<GOPrimitive>>& gos)
+        /**
+         * @brief Get all GOs of a specific type in the registry.
+         */
+        template<typename T>
+        std::vector<std::shared_ptr<T>> GetAllGOs()
         {
+            static_assert(std::is_base_of<AIAC::GOPrimitive, T>::value, "Type to get is not subclass of GOPrimitive!");
+            std::vector<std::shared_ptr<T>> goVector;
             for (auto& go : m_GOMap)
             {
-                gos.push_back(go.second);
+                if (go.second->GetType() == GOTypeFlags::_GOPoint)
+                {
+                    goVector.push_back(std::dynamic_pointer_cast<T>(go.second));
+                }
             }
+            return goVector;
         }
 
+        /**
+         * @brief Clear the registry from all the entries.
+         */
         inline void Clear() { m_GOMap.clear(); }
+        
+        /**
+         * @brief Check if a GO is in the registry by id.
+         * @param id Id of the object to check.
+         */
         inline uint32_t CheckIfKeyExists(uint32_t key) { return m_GOMap.count(key); }
+
+        /**
+         * @brief Get the total number of GOs in the registry.
+         */
         inline uint32_t Count() const { return m_GOMap.size(); }
 
     private:
