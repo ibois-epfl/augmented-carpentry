@@ -37,16 +37,10 @@ namespace AIAC
             m_GOMap.erase(id);
         }
 
-        std::shared_ptr<GOPrimitive> Get(const uint32_t& id)
-        {
-            auto it = m_GOMap[id];
-            if (it != nullptr)
-            {
-                return it;
-            }
-            else { AIAC_ERROR("Could not get GO with id: {}", id); return nullptr; }
-        }
-
+        /**
+         * @brief Retrieve the GO pointer from the registry by index and template as GOObject.
+         * @param id Id of the object when created.
+         */
         template<typename T>
         std::shared_ptr<T> GetGO(const uint32_t& id)
         {
