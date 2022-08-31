@@ -4,8 +4,7 @@
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Application.h"
 
-// FIXME: bug of reference to instance
-// TODO: find a better pattern for adding the object from constructor to the registry 
+
 namespace AIAC
 {
     GOPrimitive::GOPrimitive(GOCategory category, bool isVisible, glm::vec4 color)
@@ -63,6 +62,11 @@ namespace AIAC
         return AIAC_GOREG->GetGO<GOPoint>(id);
     }
 
+    std::vector<std::shared_ptr<GOPoint>> GOPoint::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOPoint>();
+    }
+
 
     GOLine::GOLine(GOPoint p1, GOPoint p2, float weight)
         : m_PStart(p1), m_PEnd(p2)
@@ -82,6 +86,11 @@ namespace AIAC
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOLine>(id);
+    }
+
+    std::vector<std::shared_ptr<GOLine>> GOLine::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOLine>();
     }
 
 
@@ -104,6 +113,11 @@ namespace AIAC
         return AIAC_GOREG->GetGO<GOCircle>(id);
     }
 
+    std::vector<std::shared_ptr<GOCircle>> GOCircle::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOCircle>();
+    }
+
 
     GOCylinder::GOCylinder(GOPoint p1, GOPoint p2, float radius)
         : m_PStart(p1), m_PEnd(p2), m_Radius(radius)
@@ -122,6 +136,11 @@ namespace AIAC
     std::shared_ptr<GOCylinder> GOCylinder::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOCylinder>(id);
+    }
+
+    std::vector<std::shared_ptr<GOCylinder>> GOCylinder::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOCylinder>();
     }
 
 
@@ -144,6 +163,11 @@ namespace AIAC
         return AIAC_GOREG->GetGO<GOPolyline>(id);
     }
 
+    std::vector<std::shared_ptr<GOPolyline>> GOPolyline::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOPolyline>();
+    }
+
 
     GOTriangle::GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3)
         : m_P1(p1), m_P2(p2), m_P3(p3)
@@ -162,6 +186,11 @@ namespace AIAC
     std::shared_ptr<GOTriangle> GOTriangle::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOTriangle>(id);
+    }
+
+    std::vector<std::shared_ptr<GOTriangle>> GOTriangle::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOTriangle>();
     }
 
 
@@ -197,6 +226,11 @@ namespace AIAC
         return AIAC_GOREG->GetGO<GOMesh>(id);
     }
 
+    std::vector<std::shared_ptr<GOMesh>> GOMesh::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOMesh>();
+    }
+
 
     GOText::GOText(std::string text, GOPoint anchor, double size)
         : m_Text(text), m_Anchor(anchor), m_Size(size)
@@ -216,5 +250,10 @@ namespace AIAC
     std::shared_ptr<GOText> GOText::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOText>(id);
+    }
+
+    std::vector<std::shared_ptr<GOText>> GOText::GetAll()
+    {
+        return AIAC_GOREG->GetAllGOs<GOText>();
     }
 }
