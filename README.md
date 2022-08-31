@@ -418,7 +418,7 @@ To add, remove or get Geometric Objects (GO) from any layer:
 ```c++
 #include "AIAC/GOSys/GO.h"
 
-uint32_t idPt1 = GOPoint::Add(glm::vec3(2, 2, 2));  // create a point
+uint32_t idPt1 = GOPoint::Add(1, 1, 1);  // create a point
 auto pt1 = GOPoint::Get(idPt1);                     // get the point
 float x = pt1->X();                                 // access GO properties
 GOPoint::Remove(idPt1);                             // remove the point from registry
