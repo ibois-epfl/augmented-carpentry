@@ -1,20 +1,18 @@
 #pragma once
 
-#include <utility>
-
+// #include <utility>
 #include "AIAC/Base.h"
+// #include "AIAC/Application.h"
 #include "glm/glm.hpp"
 
 namespace AIAC
 {
     // TODO: implement flag system
-    // enum GOFlags
+    // enum GOStateFlags
     // {
-    //     GO_Flag_None = 0,
-    //     GO_Flag_Highlighted,
-    //     GO_Flag_Selected,
-    //     GO_Flag_Visible,
-    //     GO_Flag_Enabled,
+    //     GOFlagNone = 0,
+    //     GOFlagSelected,
+    //     GOFlagVisible,
     // };
 
     enum GOTypeFlags
@@ -37,7 +35,6 @@ namespace AIAC
         static constexpr float Thick              = 1.0f;
     };
 
-
     enum GOCategory
     {
         GOCategoryNone            = BIT(0),
@@ -47,15 +44,14 @@ namespace AIAC
     };
 
 
-
     class GOPrimitive
     {
     public:
         explicit GOPrimitive(GOCategory category = GOCategoryNone,
                              bool isVisible = true,
                              glm::vec4 color = glm::vec4(0, 0, 0, 0.5));
-        // ~GOPrimitive();
         virtual ~GOPrimitive() = default;
+        static void Remove(const uint32_t& id);
 
         uint32_t GenerateId();
         inline const uint32_t GetId() const { return m_Id; }
@@ -73,7 +69,6 @@ namespace AIAC
         inline float GetWeight() const { return m_Weight; }
         inline void SetWeight(float weight) { m_Weight = weight; }
 
-
     protected:
         uint32_t m_Id;
         GOCategory m_Category;
@@ -83,14 +78,18 @@ namespace AIAC
         GOTypeFlags m_Type;
         float m_Weight = GOWeight::Default;
     };
-    using GOPrimitivePointer = std::shared_ptr<GOPrimitive>;
+
 
 
     class GOPoint : public GOPrimitive
     {
     public:
         GOPoint(glm::vec3 position);
+        static uint32_t Add(glm::vec3 position);
+
         virtual ~GOPoint() = default;
+
+        static std::shared_ptr<GOPoint> Get(const uint32_t& id);
 
         inline glm::vec3 GetPosition() const { return m_Position; }
         inline void SetPosition(glm::vec3 position) { m_Position = position; }
@@ -107,7 +106,6 @@ namespace AIAC
 
     private:
         glm::vec3 m_Position;
-
     };
 
 
@@ -115,7 +113,11 @@ namespace AIAC
     {
     public:
         GOLine(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
+        static uint32_t Add(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
+        
         virtual ~GOLine() = default;
+
+        static std::shared_ptr<GOLine> Get(const uint32_t& id);
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
@@ -130,7 +132,11 @@ namespace AIAC
     {
     public:
         GOCircle(GOPoint center, float radius);
+        static uint32_t Add(GOPoint center, float radius);
+        
         virtual ~GOCircle() = default;
+
+        static std::shared_ptr<GOCircle> Get(const uint32_t& id);
 
         inline glm::vec3 GetNormal() const { return m_Normal; }
         inline GOPoint GetCenter() const { return m_Center; }
@@ -149,7 +155,11 @@ namespace AIAC
     {
     public:
         GOCylinder(GOPoint p1, GOPoint p2, float radius);
+        static uint32_t Add(GOPoint p1, GOPoint p2, float radius);
+
         virtual ~GOCylinder() = default;
+
+        static std::shared_ptr<GOCylinder> Get(const uint32_t& id);
 
         GOPoint GetPStart() const { return m_PStart; }
         GOPoint GetPEnd() const { return m_PEnd; }
@@ -168,7 +178,11 @@ namespace AIAC
     {
     public:
         GOPolyline(std::vector<GOPoint> points);
+        static uint32_t Add(std::vector<GOPoint> points);
+
         virtual ~GOPolyline() = default;
+
+        static std::shared_ptr<GOPolyline> Get(const uint32_t& id);
 
         inline const std::vector<GOPoint> &GetPoints() const { return m_Points; }
 
@@ -187,7 +201,11 @@ namespace AIAC
     {
     public:
         GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3);
+        static uint32_t Add(GOPoint p1, GOPoint p2, GOPoint p3);
+
         virtual ~GOTriangle() = default;
+
+        static std::shared_ptr<GOTriangle> Get(const uint32_t& id);
 
         const std::vector<glm::vec3> GetVertices() const {
             return std::vector<glm::vec3>{m_P1.GetPosition(), m_P2.GetPosition(), m_P3.GetPosition()};
@@ -208,7 +226,12 @@ namespace AIAC
     public:
         GOMesh();
         GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
+        static uint32_t Add();
+        static uint32_t Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
+
         virtual ~GOMesh() = default;
+
+        static std::shared_ptr<GOMesh> Get(const uint32_t& id);
 
         const std::vector<glm::vec3> GetVertices() const { return m_Vertices; }
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
@@ -231,7 +254,11 @@ namespace AIAC
     {
     public:
         GOText(std::string text, GOPoint anchor, double size);
+        static uint32_t Add(std::string text, GOPoint anchor, double size);
+
         virtual ~GOText() = default;
+
+        static std::shared_ptr<GOText> Get(const uint32_t& id);
 
         std::string GetText() const { return m_Text; }
 

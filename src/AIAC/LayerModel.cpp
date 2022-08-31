@@ -13,66 +13,32 @@ namespace AIAC
     
     void LayerModel::OnAttach()
     {
-        // TODO: erase once the render parsing is done
-        // there is no need for shared_ptr anymore, because the GO is registered in the registry at construction
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
-        GOPoint pt1 = GOPoint(glm::vec3(1, 1, 1));
-        GOPoint pt2 = GOPoint(glm::vec3(20, 50, 20));
-        GOPoint pt3 = GOPoint(glm::vec3(30, 30, 30));
-        GOLine line = GOLine(pt1, pt2, 96.0);
-        GOLine line2 = GOLine(pt1, pt3, 3.0f);
-        GOCircle circle1 = GOCircle(pt1, 0.5f);
-        GOCircle circle2 = GOCircle(pt2, 0.5f);
-        GOCircle circle3 = GOCircle(pt3, 0.5f);
-        GOCylinder cylinder1 = GOCylinder(pt1, pt2, 20.0f);
-        GOCylinder cylinder2 = GOCylinder(pt2, pt3, 0.5f);
-        GOCylinder cylinder3 = GOCylinder(pt3, pt1, 0.5f);
-        GOPolyline polyline1 = GOPolyline(std::vector<GOPoint>{pt1, pt2, pt3});
-        GOPolyline polyline2 = GOPolyline(std::vector<GOPoint>{pt2, pt3, pt1});
-        GOPolyline polyline3 = GOPolyline(std::vector<GOPoint>{pt3, pt1, pt2});
-        GOTriangle triangle1 = GOTriangle(pt1, pt2, pt3);
-        GOTriangle triangle2 = GOTriangle(pt2, pt3, pt1);
-        GOTriangle triangle3 = GOTriangle(pt3, pt1, pt2);
-        GOMesh mesh1 = GOMesh(std::vector<glm::vec3>{pt1, pt2, pt3}, std::vector<uint32_t>{0,1,2});
-        GOText text1 = GOText("Hello World1", pt1, 0.5f);
-        GOText text2 = GOText("Hello World2", pt2, 0.5f);
-        GOText text3 = GOText("Hello World3", pt3, 0.5f);
+        uint32_t idPt1 = GOPoint::Add(glm::vec3(1, 1, 1));
+        uint32_t idPt2 = GOPoint::Add(glm::vec3(20, 50, 20));
+        uint32_t idPt3 = GOPoint::Add(glm::vec3(30, 30, 30));
+        auto pt1 = GOPoint::Get(idPt1);
+        auto pt2 = GOPoint::Get(idPt2);
+        auto pt3 = GOPoint::Get(idPt3);
+        uint32_t line = GOLine::Add(*pt1, *pt2, 96.0f);
+        uint32_t line2 = GOLine::Add(*pt1, *pt3, 3.0f);
+        uint32_t circle1 = GOCircle::Add(*pt1, 30.5f);
+        uint32_t circle2 = GOCircle::Add(*pt2, 0.5f);
+        uint32_t circle3 = GOCircle::Add(*pt3, 0.5f);
+        uint32_t cylinder1 = GOCylinder::Add(*pt1, *pt2, 0.5f);
+        uint32_t cylinder2 = GOCylinder::Add(*pt2, *pt3, 0.5f);
+        uint32_t cylinder3 = GOCylinder::Add(*pt3, *pt1, 0.5f);
+        uint32_t polyline1 = GOPolyline::Add(std::vector<GOPoint>{*pt1, *pt2, *pt3});
+        uint32_t polyline2 = GOPolyline::Add(std::vector<GOPoint>{*pt2, *pt3, *pt1});
+        uint32_t polyline3 = GOPolyline::Add(std::vector<GOPoint>{*pt3, *pt1, *pt2});
+        uint32_t triangle1 = GOTriangle::Add(*pt1, *pt2, *pt3);
+        uint32_t triangle2 = GOTriangle::Add(*pt2, *pt3, *pt1);
+        uint32_t triangle3 = GOTriangle::Add(*pt3, *pt1, *pt2);
+        uint32_t mesh1 = GOMesh::Add(std::vector<glm::vec3>{*pt1, *pt2, *pt3}, std::vector<uint32_t>{0,1,2});
+        uint32_t text1 = GOText::Add("Hello World1", *pt1, 0.5f);
+        uint32_t text2 = GOText::Add("Hello World2", *pt2, 0.5f);
+        uint32_t text3 = GOText::Add("Hello World3", *pt3, 0.5f);
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
-
-        // uint32_t idPt1 = pt1.GetId();
-
-        // pt1.SetX(5);
-
-        // auto ptrPt1 = AIAC_GOREG->GetGO<GOPoint>(idPt1);
-
-        // std::cout << "ptrPt1->GetX() = " << ptrPt1->X() << std::endl;
-
-
-        // GOPoint pt3 = GOPoint(glm::vec3(3, 3, 3));
-        // GOLine line = GOLine(pt1, pt2);
-        // GOLine line2 = GOLine(pt2, pt3);
-        // GOCircle circle1 = GOCircle(pt1, 0.5f);
-        // GOCircle circle2 = GOCircle(pt2, 0.5f);
-        // GOCircle circle3 = GOCircle(pt3, 0.5f);
-        // GOCylinder cylinder1 = GOCylinder(pt1, pt2, 0.5f);
-        // GOCylinder cylinder2 = GOCylinder(pt2, pt3, 0.5f);
-        // GOCylinder cylinder3 = GOCylinder(pt3, pt1, 0.5f);
-        // GOPolyline polyline1 = GOPolyline(std::vector<GOPoint>{pt1, pt2, pt3});
-        // GOPolyline polyline2 = GOPolyline(std::vector<GOPoint>{pt2, pt3, pt1});
-        // GOPolyline polyline3 = GOPolyline(std::vector<GOPoint>{pt3, pt1, pt2});
-        // GOTriangle triangle1 = GOTriangle(pt1, pt2, pt3);
-        // GOTriangle triangle2 = GOTriangle(pt2, pt3, pt1);
-        // GOTriangle triangle3 = GOTriangle(pt3, pt1, pt2);
-        // GOMesh mesh1 = GOMesh(std::vector<glm::vec3>{pt1, pt2, pt3}, std::vector<uint32_t>{0,1,2});
-        // GOText text1 = GOText("Hello World1", pt1, 0.5f);
-        // GOText text2 = GOText("Hello World2", pt2, 0.5f);
-        // GOText text3 = GOText("Hello World3", pt3, 0.5f);
-        // // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
-
-        // DLoader dloader = DLoader();
-        // GOMesh meshT = GOMesh();
-        // dloader.LoadGOMesh("assets/models/drill_scaled_1000.obj", meshT);
-
 
     }
     void LayerModel::OnFrameStart()

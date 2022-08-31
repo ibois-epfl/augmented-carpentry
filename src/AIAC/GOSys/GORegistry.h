@@ -37,6 +37,16 @@ namespace AIAC
             m_GOMap.erase(id);
         }
 
+        std::shared_ptr<GOPrimitive> Get(const uint32_t& id)
+        {
+            auto it = m_GOMap[id];
+            if (it != nullptr)
+            {
+                return it;
+            }
+            else { AIAC_ERROR("Could not get GO with id: {}", id); return nullptr; }
+        }
+
         template<typename T>
         std::shared_ptr<T> GetGO(const uint32_t& id)
         {
@@ -47,7 +57,7 @@ namespace AIAC
             {
                 try
                 {
-                    return std::static_pointer_cast<T>(it);
+                    return std::dynamic_pointer_cast<T>(it);
                 }
                 catch (const std::bad_cast& e)
                 {
@@ -57,7 +67,6 @@ namespace AIAC
             }
             else { AIAC_ERROR("Could not get GO with id: {}", id); return nullptr; }
         }
-
 
         /**
          * @brief Get the All GOs by category, it should be run once per loop by the Render.
@@ -84,35 +93,35 @@ namespace AIAC
                 {
                     if (go.second->GetType() == GOTypeFlags::_GOPoint)
                     {
-                        points.push_back(std::static_pointer_cast<GOPoint>(go.second));
+                        points.push_back(std::dynamic_pointer_cast<GOPoint>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOLine)
                     {
-                        lines.push_back(std::static_pointer_cast<GOLine>(go.second));
+                        lines.push_back(std::dynamic_pointer_cast<GOLine>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOCircle)
                     {
-                        circles.push_back(std::static_pointer_cast<GOCircle>(go.second));
+                        circles.push_back(std::dynamic_pointer_cast<GOCircle>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOCylinder)
                     {
-                        cylinders.push_back(std::static_pointer_cast<GOCylinder>(go.second));
+                        cylinders.push_back(std::dynamic_pointer_cast<GOCylinder>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOPolyline)
                     {
-                        polylines.push_back(std::static_pointer_cast<GOPolyline>(go.second));
+                        polylines.push_back(std::dynamic_pointer_cast<GOPolyline>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOTriangle)
                     {
-                        triangles.push_back(std::static_pointer_cast<GOTriangle>(go.second));
+                        triangles.push_back(std::dynamic_pointer_cast<GOTriangle>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOMesh)
                     {
-                        meshes.push_back(std::static_pointer_cast<GOMesh>(go.second));
+                        meshes.push_back(std::dynamic_pointer_cast<GOMesh>(go.second));
                     }
                     else if (go.second->GetType() == GOTypeFlags::_GOText)
                     {
-                        texts.push_back(std::static_pointer_cast<GOText>(go.second));
+                        texts.push_back(std::dynamic_pointer_cast<GOText>(go.second));
                     }
                 }
             }
