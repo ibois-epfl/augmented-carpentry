@@ -57,9 +57,8 @@ They are made to be print as stickers. The code to generate them can be found ![
 
 
 ## Build
-We need a first to install TSlam:
+If it is the first time you are installing AC, set all the dependecies options in the `CMakeLists.txt` file to **ON**.
 
-To build the rest:
 ```bash
     ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
     ./build.sh
