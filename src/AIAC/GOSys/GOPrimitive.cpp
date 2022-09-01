@@ -29,29 +29,31 @@ namespace AIAC
     }
 
 
-    GOPoint::GOPoint(float x, float y, float z)
+    GOPoint::GOPoint(float x, float y, float z, float weight)
     {
         m_Position = glm::vec3(x, y, z);
         m_Type = GOTypeFlags::_GOPoint;
+        m_Weight = weight;
     }
 
-    GOPoint::GOPoint(glm::vec3 position)
+    GOPoint::GOPoint(glm::vec3 position, float weight)
         : m_Position(position)
     {
         m_Type = GOTypeFlags::_GOPoint;
+        m_Weight = weight;
     }
 
-    uint32_t GOPoint::Add(float x, float y, float z)
+    uint32_t GOPoint::Add(float x, float y, float z, float weight)
     {
-        auto ptrGO = std::make_shared<GOPoint>(x, y, z);
+        auto ptrGO = std::make_shared<GOPoint>(x, y, z, weight);
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
     }
 
-    uint32_t GOPoint::Add(glm::vec3 position)
+    uint32_t GOPoint::Add(glm::vec3 position, float weight)
     {
-        auto ptrGO = std::make_shared<GOPoint>(position);
+        auto ptrGO = std::make_shared<GOPoint>(position, weight);
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
