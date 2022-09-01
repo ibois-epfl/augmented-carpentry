@@ -16,7 +16,7 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [ ] Make the Camera of the viewport bigger
 
-> - [ ] Edit the readme for render API how to use it
+> - [x] Edit the readme for render API how to use it
 > - [x] Refactor the Render part, put everything in one folder and extract/rename render API header.
 > - [x] Add a function DrawCircle() to the RenderAPI
 > - [x] Add a function DrawCylinder() to the RenderAPI
@@ -25,9 +25,6 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [ ] Add a function DrawText() to the RenderAPI
 >   - [ ] Fix the textRender, which is either not shown or overriding the scene
 > - [ ] Cache objects in RenderAPI for speed up (option)
-> - 
-
-> - [ ] Document with videos and snapshots the tracaking system and the mapping
 
 Scheme for the last implementation of AC's main structure:
 <p>
@@ -89,6 +86,12 @@ Here's the naming convention for this project:
 
 Here's an example:
 ```c++
+// next line graph style
+void Foo()
+{
+    /* content */
+}
+
 // structure name uses UpperCamelCase
 struct AnExampleStruct
 {
@@ -428,8 +431,8 @@ GOPoint::Remove(idPt1);                             // remove the point from reg
 The **G**eometric **O**bject System allows to add objects to the 3D scene before to render them. Having a geometric entity prior to the OpenGL Render allows to calculates relations between geometries to obtain live feedbacks (e.g. drilling depth). Files can be found in `/GOSys`.
 
 The GOSystem is composed of two components:
-- `GOPrimitives.h/cpp` (like `GOPoint`, `GOLine`, `GOText`, etc)
-- `GORegistry.h/cpp` (which stores all the GOs in a map object, note that it has to recive only smart pointers to avoid [object slicing](https://stackoverflow.com/questions/274626/what-is-object-slicing) since we pass heirs of `GOPrimitive`.)
+- `GOPrimitives.h/cpp` (a library which stores `GOPoint`, `GOLine`, `GOText`, etc)
+- `GORegistry.h/cpp` (an API which interacts with the map. Note that it has to recive only smart pointers to avoid [object slicing](https://stackoverflow.com/questions/274626/what-is-object-slicing) since we pass heirs of `GOPrimitive`.)
 
 
 
@@ -506,7 +509,7 @@ void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector
 
 #### RenderAPI.h
 ##### GO
-An implicit type casting is implemented, simply call the `DrawGo` function:
+An implicit type casting is implemented, simply call the `DrawGo` function in the `Render.cpp`'s function `OnRender()`:
 ```c++
 void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
 void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);

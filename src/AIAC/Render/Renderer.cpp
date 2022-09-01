@@ -18,7 +18,7 @@
 
 namespace AIAC
 {
-//    extern TextRenderer textRenderer;
+    // extern TextRenderer textRenderer;  // TODO: implement text renderer
 
     void Renderer::Init()
     {
@@ -104,7 +104,8 @@ namespace AIAC
         InitGlobalView();
     }
 
-    void Renderer::InitGlobalView() {
+    void Renderer::InitGlobalView()
+    {
         glGenFramebuffers(1, &m_GlobalViewFrameBuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
 
@@ -166,7 +167,8 @@ namespace AIAC
         );
     }
 
-    void Renderer::InitMappingView() {
+    void Renderer::InitMappingView()
+    {
         glGenFramebuffers(1, &m_MappingViewFrameBuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, m_MappingViewFrameBuffer);
 
@@ -248,6 +250,7 @@ namespace AIAC
             }
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
+
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -304,7 +307,7 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-        // DrawTest(true, finalPoseMatrix);
+        DrawAllGOs(finalPoseMatrix);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

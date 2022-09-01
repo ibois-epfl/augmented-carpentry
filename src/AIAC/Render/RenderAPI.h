@@ -28,6 +28,13 @@ namespace AIAC
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize);
 
     /**
+     * @brief Draw all the GOs present in the GORegistry.
+     * 
+     * @param projection OpenGL projection matrix.
+     */
+    void DrawAllGOs(glm::mat4 projection = glm::mat4(1.0f));
+
+    /**
      * @brief Draw a GOPrimitive.
      * @param goPrimitive Object to draw.
      */
@@ -98,6 +105,4 @@ namespace AIAC
 
     void DrawText(const GOText& goText);
     void DrawTexts(std::vector<GOText> goTexts);
-
-    void DrawTest(bool t = true, glm::mat4 projection = glm::mat4(1.0f));
 }
