@@ -104,9 +104,9 @@ namespace AIAC
         glDrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
     }
 
-    // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints)
     {
+        // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
         for(const auto& goPoint: goPoints){
             if(!goPoint->IsVisible()){
                 return;

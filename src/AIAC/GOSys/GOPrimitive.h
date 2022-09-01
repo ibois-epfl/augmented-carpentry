@@ -84,10 +84,10 @@ namespace AIAC
     class GOPoint : public GOPrimitive
     {
     public:
-        GOPoint(float x, float y, float z);
-        GOPoint(glm::vec3 position);
-        static uint32_t Add(float x, float y, float z);
-        static uint32_t Add(glm::vec3 position);
+        GOPoint(float x, float y, float z, float weight = GOWeight::Default);
+        GOPoint(glm::vec3 position, float weight = GOWeight::Default);
+        static uint32_t Add(float x, float y, float z, float weight = GOWeight::Default);
+        static uint32_t Add(glm::vec3 position, float weight = GOWeight::Default);
 
         virtual ~GOPoint() = default;
 
