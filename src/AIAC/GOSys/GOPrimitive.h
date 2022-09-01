@@ -7,7 +7,7 @@
 
 namespace AIAC
 {
-    // TODO: implement flag system
+    // TODO: implement flag system if needed
     // enum GOStateFlags
     // {
     //     GOFlagNone = 0,
@@ -80,7 +80,7 @@ namespace AIAC
     };
 
 
-
+    // TODO: create new Add() constructor wich takes a shared_ptr GO and GO
     class GOPoint : public GOPrimitive
     {
     public:

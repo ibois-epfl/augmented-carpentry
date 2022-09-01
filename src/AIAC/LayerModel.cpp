@@ -20,6 +20,7 @@ namespace AIAC
         auto pt1 = GOPoint::Get(idPt1);
         auto pt2 = GOPoint::Get(idPt2);
         auto pt3 = GOPoint::Get(idPt3);
+
         // uint32_t line = GOLine::Add(*pt1, *pt2, 3.0f);
         // uint32_t line2 = GOLine::Add(*pt1, *pt3, 3.0f);
         // uint32_t circle1 = GOCircle::Add(*pt1, 30.5f);
