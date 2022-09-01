@@ -14,9 +14,9 @@ namespace AIAC
     void LayerModel::OnAttach()
     {
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
-        uint32_t idPt1 = GOPoint::Add(glm::vec3(1, 1, 1));
-        uint32_t idPt2 = GOPoint::Add(glm::vec3(20, 50, 20));
-        uint32_t idPt3 = GOPoint::Add(glm::vec3(30, 30, 30));
+        uint32_t idPt1 = GOPoint::Add(100, 100, 100);
+        uint32_t idPt2 = GOPoint::Add(20, 50, 20);
+        uint32_t idPt3 = GOPoint::Add(30, 30, 30);
         auto pt1 = GOPoint::Get(idPt1);
         auto pt2 = GOPoint::Get(idPt2);
         auto pt3 = GOPoint::Get(idPt3);
@@ -25,7 +25,7 @@ namespace AIAC
         uint32_t circle1 = GOCircle::Add(*pt1, 30.5f);
         uint32_t circle2 = GOCircle::Add(*pt2, 0.5f);
         uint32_t circle3 = GOCircle::Add(*pt3, 0.5f);
-        uint32_t cylinder1 = GOCylinder::Add(*pt1, *pt2, 0.5f);
+        uint32_t cylinder1 = GOCylinder::Add(*pt1, *pt2, 1000.5f);
         uint32_t cylinder2 = GOCylinder::Add(*pt2, *pt3, 0.5f);
         uint32_t cylinder3 = GOCylinder::Add(*pt3, *pt1, 0.5f);
         uint32_t polyline1 = GOPolyline::Add(std::vector<GOPoint>{*pt1, *pt2, *pt3});
@@ -39,6 +39,9 @@ namespace AIAC
         uint32_t text2 = GOText::Add("Hello World2", *pt2, 0.5f);
         uint32_t text3 = GOText::Add("Hello World3", *pt3, 0.5f);
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
+
+        uint32_t count = AIAC_GOREG->Count();
+        std::cout << "count = " << count << std::endl;
 
     }
     void LayerModel::OnFrameStart()
