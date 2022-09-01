@@ -76,7 +76,7 @@ namespace AIAC
         }
 
         /**
-         * @brief Get the All GOs by category, it should be run once per loop by the Render.
+         * @brief Get the All GOs by category.
          * @param points A vector of all GOPoints to pass as reference.
          * @param lines A vector of all GOLines to pass as reference.
          * @param circles A vector of all GOCircles to pass as reference.
@@ -151,6 +151,22 @@ namespace AIAC
                 }
             }
             return goVector;
+        }
+
+        /**
+         * @brief Get the All GOs as primitives.
+         * @param goVector A reference vector to load with all the GOPrimitives.
+         */
+        void GetAllGOs(std::vector<std::shared_ptr<GOPrimitive>>& goVector)
+        {
+            try
+            {
+                for (auto& go : m_GOMap)
+                {
+                    goVector.push_back(go.second);
+                }
+            }
+            catch (const std::bad_cast& e) { AIAC_ERROR("Bad cast exception: {}", e.what()); }
         }
 
         /**
