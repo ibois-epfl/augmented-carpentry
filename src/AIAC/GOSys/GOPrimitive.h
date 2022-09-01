@@ -80,7 +80,6 @@ namespace AIAC
     };
 
 
-    // TODO: create new Add() constructor wich takes a shared_ptr GO and GO
     class GOPoint : public GOPrimitive
     {
     private:
@@ -88,6 +87,15 @@ namespace AIAC
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
 
     public:
+        /**
+         * @brief Add GOPoint to the scene.
+         * 
+         * @param x X coordinate of the point.
+         * @param y Y coordinate of the point.
+         * @param z Z coordinate of the point.
+         * @param weight Weight of the point.
+         * @return uint32_t Id of the point.
+         */
         static uint32_t Add(float x, float y, float z, float weight = GOWeight::Default);
         static uint32_t Add(glm::vec3 position, float weight = GOWeight::Default);
 
@@ -122,6 +130,14 @@ namespace AIAC
         GOLine(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
 
     public:
+        /**
+         * @brief Add GOLine to the scene.
+         * 
+         * @param p1 First point of the line.
+         * @param p2 Second point of the line.
+         * @param weight Weight of the line.
+         * @return uint32_t Id of the line.
+         */
         static uint32_t Add(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
         
         virtual ~GOLine() = default;
@@ -144,6 +160,13 @@ namespace AIAC
         GOCircle(GOPoint center, float radius);
 
     public:
+        /**
+         * @brief Add GOCircle to the scene.
+         * 
+         * @param center Center of the circle.
+         * @param radius Radius of the circle.
+         * @return uint32_t Id of the circle.
+         */
         static uint32_t Add(GOPoint center, float radius);
         
         virtual ~GOCircle() = default;
@@ -170,6 +193,14 @@ namespace AIAC
         GOCylinder(GOPoint p1, GOPoint p2, float radius);
 
     public:
+        /**
+         * @brief Add GOCylinder to the scene.
+         * 
+         * @param p1 First point of the cylinder.
+         * @param p2 Second point of the cylinder.
+         * @param radius Radius of the cylinder.
+         * @return uint32_t Id of the cylinder.
+         */
         static uint32_t Add(GOPoint p1, GOPoint p2, float radius);
 
         virtual ~GOCylinder() = default;
@@ -196,6 +227,12 @@ namespace AIAC
         GOPolyline(std::vector<GOPoint> points);
 
     public:
+        /**
+         * @brief Add GOPolyline to the scene.
+         * 
+         * @param points Points of the polyline.
+         * @return uint32_t Id of the polyline.
+         */
         static uint32_t Add(std::vector<GOPoint> points);
 
         virtual ~GOPolyline() = default;
@@ -222,6 +259,14 @@ namespace AIAC
         GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3);
 
     public:
+        /**
+         * @brief Add GOTriangle to the scene.
+         * 
+         * @param p1 First point of the triangle.
+         * @param p2 Second point of the triangle.
+         * @param p3 Third point of the triangle.
+         * @return uint32_t Id of the triangle.
+         */
         static uint32_t Add(GOPoint p1, GOPoint p2, GOPoint p3);
 
         virtual ~GOTriangle() = default;
@@ -250,7 +295,18 @@ namespace AIAC
         GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
 
     public:
+        /**
+         * @brief Add empty GOMesh to the scene.
+         */
         static uint32_t Add();
+
+        /**
+         * @brief Add GOMesh to the scene.
+         * 
+         * @param vertices Vertices of the mesh.
+         * @param indices Indices of the mesh.
+         * @return uint32_t Id of the mesh.
+         */
         static uint32_t Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
 
         virtual ~GOMesh() = default;
@@ -281,6 +337,14 @@ namespace AIAC
         GOText(std::string text, GOPoint anchor, double size);
 
     public:
+        /**
+         * @brief Add GOText to the scene.
+         * 
+         * @param text Text of the text.
+         * @param anchor Anchor of the text.
+         * @param size Size of the text.
+         * @return uint32_t Id of the text.
+         */
         static uint32_t Add(std::string text, GOPoint anchor, double size);
 
         virtual ~GOText() = default;
