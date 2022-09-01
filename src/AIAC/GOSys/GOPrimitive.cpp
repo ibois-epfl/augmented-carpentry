@@ -45,7 +45,7 @@ namespace AIAC
 
     uint32_t GOPoint::Add(float x, float y, float z, float weight)
     {
-        auto ptrGO = std::make_shared<GOPoint>(x, y, z, weight);
+        auto ptrGO = std::make_shared<GOPoint>(GOPoint(x, y, z, weight));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -53,7 +53,7 @@ namespace AIAC
 
     uint32_t GOPoint::Add(glm::vec3 position, float weight)
     {
-        auto ptrGO = std::make_shared<GOPoint>(position, weight);
+        auto ptrGO = std::make_shared<GOPoint>(GOPoint(position, weight));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -79,7 +79,7 @@ namespace AIAC
 
     uint32_t GOLine::Add(GOPoint p1, GOPoint p2, float weight)
     {
-        auto ptrGO = std::make_shared<GOLine>(p1, p2, weight);
+        auto ptrGO = std::make_shared<GOLine>(GOLine(p1, p2, weight));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -104,7 +104,7 @@ namespace AIAC
 
     uint32_t GOCircle::Add(GOPoint center, float radius)
     {
-        auto ptrGO = std::make_shared<GOCircle>(center, radius);
+        auto ptrGO = std::make_shared<GOCircle>(GOCircle(center, radius));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -129,7 +129,7 @@ namespace AIAC
 
     uint32_t GOCylinder::Add(GOPoint p1, GOPoint p2, float radius)
     {
-        auto ptrGO = std::make_shared<GOCylinder>(p1, p2, radius);
+        auto ptrGO = std::make_shared<GOCylinder>(GOCylinder(p1, p2, radius));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -154,7 +154,7 @@ namespace AIAC
 
     uint32_t GOPolyline::Add(std::vector<GOPoint> points)
     {
-        auto ptrGO = std::make_shared<GOPolyline>(points);
+        auto ptrGO = std::make_shared<GOPolyline>(GOPolyline(points));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -179,7 +179,7 @@ namespace AIAC
 
     uint32_t GOTriangle::Add(GOPoint p1, GOPoint p2, GOPoint p3)
     {
-        auto ptrGO = std::make_shared<GOTriangle>(p1, p2, p3);
+        auto ptrGO = std::make_shared<GOTriangle>(GOTriangle(p1, p2, p3));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -209,7 +209,7 @@ namespace AIAC
 
     uint32_t GOMesh::Add()
     {
-        auto ptrGO = std::make_shared<GOMesh>();
+        auto ptrGO = std::make_shared<GOMesh>(GOMesh());
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -217,7 +217,7 @@ namespace AIAC
 
     uint32_t GOMesh::Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
     {
-        auto ptrGO = std::make_shared<GOMesh>(vertices, indices);
+        auto ptrGO = std::make_shared<GOMesh>(GOMesh(vertices, indices));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -243,7 +243,7 @@ namespace AIAC
 
     uint32_t GOText::Add(std::string text, GOPoint anchor, double size)
     {
-        auto ptrGO = std::make_shared<GOText>(text, anchor, size);
+        auto ptrGO = std::make_shared<GOText>(GOText(text, anchor, size));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;

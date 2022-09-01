@@ -16,6 +16,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [ ] Find a way to sync SLAM maps and data
 
+> - [ ] Add pop up program to calibrate camera
+
 > - [ ] Make the Camera of the viewport bigger
 
 > - [x] Edit the readme for render API how to use it
@@ -429,6 +431,7 @@ float x = pt1->X();                                 // access GO properties
 auto pts = GOPoint::GetAll();                       // access all GO of one type
 GOPoint::Remove(idPt1);                             // remove the point from registry
 ```
+Note the the Constructor for each GO is private, the only way to instance it is to use the `Add()` static function.
 
 The **G**eometric **O**bject System allows to add objects to the 3D scene before to render them. Having a geometric entity prior to the OpenGL Render allows to calculates relations between geometries to obtain live feedbacks (e.g. drilling depth). Files can be found in `/GOSys`.
 
