@@ -213,17 +213,7 @@ endforeach()
 # Temporary Patches
 #------------------------------------------------------------------------------------------------------------
 
-# TODO: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs) --> test without
+# FIXME: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs) --> test without
 if(UNIX)
     target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
 endif()
-
-#------------------------------------------------------------------------------------------------------------
-# C-Packaging
-#------------------------------------------------------------------------------------------------------------
-
-# # CPack
-# set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-# set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-
-# include(CPack)
