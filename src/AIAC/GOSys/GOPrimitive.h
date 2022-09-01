@@ -83,9 +83,11 @@ namespace AIAC
     // TODO: create new Add() constructor wich takes a shared_ptr GO and GO
     class GOPoint : public GOPrimitive
     {
-    public:
+    private:
         GOPoint(float x, float y, float z, float weight = GOWeight::Default);
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
+
+    public:
         static uint32_t Add(float x, float y, float z, float weight = GOWeight::Default);
         static uint32_t Add(glm::vec3 position, float weight = GOWeight::Default);
 
@@ -106,6 +108,8 @@ namespace AIAC
         inline void setWeight(float weight) { m_Weight = weight; }
 
         operator glm::vec3() const { return m_Position; }
+    
+    
 
     private:
         glm::vec3 m_Position;
@@ -114,8 +118,10 @@ namespace AIAC
 
     class GOLine : public GOPrimitive
     {
-    public:
+    private:
         GOLine(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
+
+    public:
         static uint32_t Add(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
         
         virtual ~GOLine() = default;
@@ -134,8 +140,10 @@ namespace AIAC
 
     class GOCircle : public GOPrimitive
     {
-    public:
+    private:
         GOCircle(GOPoint center, float radius);
+
+    public:
         static uint32_t Add(GOPoint center, float radius);
         
         virtual ~GOCircle() = default;
@@ -158,8 +166,10 @@ namespace AIAC
 
     class GOCylinder : public GOPrimitive
     {
-    public:
+    private:
         GOCylinder(GOPoint p1, GOPoint p2, float radius);
+
+    public:
         static uint32_t Add(GOPoint p1, GOPoint p2, float radius);
 
         virtual ~GOCylinder() = default;
@@ -182,8 +192,10 @@ namespace AIAC
 
     class GOPolyline : public GOPrimitive
     {
-    public:
+    private:
         GOPolyline(std::vector<GOPoint> points);
+
+    public:
         static uint32_t Add(std::vector<GOPoint> points);
 
         virtual ~GOPolyline() = default;
@@ -206,8 +218,10 @@ namespace AIAC
 
     class GOTriangle : public GOPrimitive
     {
-    public:
+    private:
         GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3);
+
+    public:
         static uint32_t Add(GOPoint p1, GOPoint p2, GOPoint p3);
 
         virtual ~GOTriangle() = default;
@@ -231,9 +245,11 @@ namespace AIAC
 
     class GOMesh : public GOPrimitive
     {
-    public:
+    private:
         GOMesh();
         GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
+
+    public:
         static uint32_t Add();
         static uint32_t Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
 
@@ -261,8 +277,10 @@ namespace AIAC
 
     class GOText : public GOPrimitive
     {
-    public:
+    private:
         GOText(std::string text, GOPoint anchor, double size);
+
+    public:
         static uint32_t Add(std::string text, GOPoint anchor, double size);
 
         virtual ~GOText() = default;
