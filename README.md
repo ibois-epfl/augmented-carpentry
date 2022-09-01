@@ -68,3 +68,6 @@ To run the code:
 ```bash
 ./run.sh
 ```
+
+## How to contribute
+Please have a look at the `contributing.md" file. There you will find all the set of rules and the main softwarer documentation to contribute.
