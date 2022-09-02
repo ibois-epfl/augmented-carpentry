@@ -272,8 +272,7 @@ namespace AIAC
     }
 
     void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
-        
-        std::cout << "DrawCylinder" << std::endl;  // TODO: test cylinder
+
         std::vector<CylinderPole> cylinderPoles; // vector of structs
 
         glm::vec3 x1 = baseCenter, x2 = topCenter;

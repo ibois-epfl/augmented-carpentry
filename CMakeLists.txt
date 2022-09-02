@@ -23,20 +23,22 @@ file(GLOB AIAC_SRC
     )
 
 add_executable(${PROJECT_NAME}
-    src/ACApp.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ACApp.cpp
     ${AIAC_SRC}
     )
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
-
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
+    )
 
 #------------------------------------------------------------------------------------------------------------
 # Pre compiled headers
 #------------------------------------------------------------------------------------------------------------
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE src/aiacpch.h)
+
 
 #------------------------------------------------------------------------------------------------------------
 # Add options
@@ -53,6 +55,17 @@ option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
+# -------------------- TEST OPTIONS --------------------------------
+option(TEST_PLATFORM "Test if the platform where the software is built is correct." ON)  # TODO: remove test
+option(TEST_GRAPHICS "Test launching opengl with gllfw window." ON)
+
+
+# pre-compile variables
+target_compile_definitions(${PROJECT_NAME}
+    PUBLIC AC_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
+    PUBLIC AC_VERSION_MINOR=${PROJECT_VERSION_MINOR}
+    PUBLIC AC_VERSION_PATCH=${PROJECT_VERSION_PATCH}
+)
 
 if(DEPLOY_ON_TOUCH)
     target_compile_definitions(${PROJECT_NAME} PRIVATE AIAC_DEPLOY_ON_TOUCH=true)
@@ -62,48 +75,6 @@ if(ENABLE_ASSERT)
 endif()
 if(SILENT_LOGGING)
     target_compile_definitions(${PROJECT_NAME} PRIVATE SILENT_LOGGING=true)
-endif()
-
-# pre-compile macros versions
-target_compile_definitions(${PROJECT_NAME}
-    PUBLIC AC_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
-    PUBLIC AC_VERSION_MINOR=${PROJECT_VERSION_MINOR}
-    PUBLIC AC_VERSION_PATCH=${PROJECT_VERSION_PATCH}
-)
-
-
-#------------------------------------------------------------------------------------------------------------
-# Check and update git submodules
-#------------------------------------------------------------------------------------------------------------
-
-# Download and update submodules with latest remote version
-find_package(Git QUIET)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if(GIT_SUBMODULE)
-        message(STATUS "Submodule update with latest commit")
-
-        execute_process(
-            COMMAND ${GIT_EXECUTABLE} --version
-            OUTPUT_VARIABLE GIT_VERSION_STRING
-        )
-        string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
-        set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
-        set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
-        set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
-
-        if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
-            message(FATAL_ERROR "Git version 1.8 or greater is required.")
-        endif()
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif()
-    endif()
 endif()
 
 
@@ -184,6 +155,40 @@ target_link_libraries(${PROJECT_NAME}
     GLU
     )
 
+#------------------------------------------------------------------------------------------------------------
+# Check and update git submodules
+#------------------------------------------------------------------------------------------------------------
+
+# Download and update submodules with latest remote version
+find_package(Git QUIET)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if(GIT_SUBMODULE)
+        message(STATUS "Submodule update with latest commit")
+
+        execute_process(
+            COMMAND ${GIT_EXECUTABLE} --version
+            OUTPUT_VARIABLE GIT_VERSION_STRING
+        )
+        string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
+        set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
+        set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
+        set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
+
+        if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
+            message(FATAL_ERROR "Git version 1.8 or greater is required.")
+        endif()
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+            message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+        endif()
+    endif()
+endif()
+
 
 #------------------------------------------------------------------------------------------------------------
 # LOCAL 3rd libs (compatible with add_subdirectory())
@@ -216,4 +221,17 @@ endforeach()
 # FIXME: to be replaced for healthier solution (without it doesnt indlue -ldl, math gcc libs) --> test without
 if(UNIX)
     target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
+endif()
+
+
+#------------------------------------------------------------------------------------------------------------
+# CTest (unit tests)
+#------------------------------------------------------------------------------------------------------------
+
+# Testing adds
+if (TEST_PLATFORM)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/platform)
+endif()
+if(TEST_GRAPHICS)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/graphics)
 endif()
