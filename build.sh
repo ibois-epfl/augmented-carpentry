@@ -35,3 +35,4 @@ else
     fi
 fi
 
+#TODO: add testing before building, otherwise stops (here or in CMake?)

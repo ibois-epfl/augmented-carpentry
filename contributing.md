@@ -503,3 +503,46 @@ void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLflo
 * `color` Color of the cylinder.
 * `edgeColor` The color of the edges of the caps.
 * `sectorNum` Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value.
+
+
+### CTesting
+When necessary, c++ testing is done by using CTest. Important/critical features (e.g., correcting functioning of graphics with OpenGL and Glfw) needs testing to be written (this is usefull for e.g., GitHub Actions). Such tests can be extracted from the main source code and integrated in a seperate section: cmake testing.
+
+To add a new test do as follow.
+
+First create a new sub-folder in the folder `./test` as `./test/exampletest`.
+Here add a console cpp file called `tester.cpp` which returns 0 or 1 and add a new `CMakeLists.txt` as such:
+```cmake
+add_executable(example_test tester.cpp)
+
+/* <-- 
+Insert here linking necessary for the executable
+Note that if you already found packages in the head CMakeLists file
+you can simply use the macros here.
+--> */
+
+add_test(NAME "ExampleTest" COMMAND "example_test" <argv-here> WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+```
+In the `./test`'s `CMakeLists.txt` add the created sub-directory:
+```cmake
+if (TEST_EXAMPLE)
+    add_subdirectory(exampletest)
+endif()
+```
+Finally add an option in the main `CMakeLists.txt` describing the test:
+```cmake
+include(CTest)
+# ...
+option(TEST_EXAMPLE "Test to test something important." ON)
+# ...
+if(TEST_EXAMPLE)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/exampletest)
+endif()
+```
+
+Next, `./configure.sh -c` and `./build.sh` and:
+```bash
+cd ./build
+ctest -N    # <--- to see how many tests there are
+ctest -V    # <--- run the tests
+```
