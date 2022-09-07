@@ -6,7 +6,6 @@
     <img src="./assets/images/logos/logo_linux_gray_light.png" width="200">
 </p>
 
-![Alt](https://repobeats.axiom.co/api/embed/d8c1521749d2bb0caae0af25f47fd9810f148f71.svg "Repobeats analytics image")
 
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
