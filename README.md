@@ -19,7 +19,7 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [ ] Add pop up program to calibrate camera
 
-> - [ ] Make the Camera of the viewport bigger
+> - [x] Make the Camera of the viewport bigger (Defined in `Renderer.cpp:139`)
 
 > - [x] Edit the readme for render API how to use it
 > - [x] Refactor the Render part, put everything in one folder and extract/rename render API header.
