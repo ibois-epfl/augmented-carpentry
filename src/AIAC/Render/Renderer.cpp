@@ -98,11 +98,12 @@ namespace AIAC
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
-        textRenderer.Init();
+        textRenderer.Init(m_VAO); // here is where the bug is
 
         InitMappingView();
         InitGlobalView();
     }
+
 
     void Renderer::InitGlobalView() {
         glGenFramebuffers(1, &m_GlobalViewFrameBuffer);
@@ -136,7 +137,8 @@ namespace AIAC
         glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
 
         // build camera visualization object, which is a pyramid
-        float bW = 1.0f / 2, bH = 0.75f / 2, h = 0.5f;
+        const float CAMERA_SIZE_W = 1.6, CAMERA_SIZE_H = 1.2;
+        float bW = CAMERA_SIZE_W / 2, bH = CAMERA_SIZE_H / 2, h = 0.5f;
         m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
         m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
         m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
@@ -216,14 +218,18 @@ namespace AIAC
     {
         glUseProgram(m_BasicShaderProgram);
 
+        // The global view is needed in both mapping and inference
         RenderGlobalView();
 
+        // During mapping, a overlay panel is opened, so we only render things on it
+        // and stop updating the main scene.
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderMappingView();
             return;
         }
 
-        // Renderer to our framebuffer
+        // Change the render target to the main scene
+        // TODO: probably it will be better to use a stack to tackle such scene switch?
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         RenderCameraFrame();
@@ -232,7 +238,7 @@ namespace AIAC
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        // Draw the triangle !
+        // Draw the essential objects: map, point cloud map and digital model !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glm::vec4 edgeColor;
         if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
@@ -249,7 +255,9 @@ namespace AIAC
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
 
-        DrawTest(true, m_ProjMatrix);
+        textRenderer.RenderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec4(0.5, 0.8f, 0.2f,1.0f), glm::mat4(1.0f));
+        textRenderer.RenderText("(C) LearnOpenGL.com", 540.0f, 500.0f, 0.5f, glm::vec4(0.3, 0.7f, 0.9f,1.0f), glm::mat4(1.0f));
+
 //        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 //        glUseProgram(m_BasicShaderProgram);
     }
@@ -308,7 +316,13 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-        DrawTest(true, finalPoseMatrix);
+        // TODO: delete text test
+//        glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+//        textRenderer.RenderText("test", 40.0, 30.0, 1, glm::vec4(1, 1,0,1), glm::mat4(1.0f));
+//        textRenderer.RenderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec4(0.5, 0.8f, 0.2f,1.0f), glm::mat4(1.0f));
+//        textRenderer.RenderText("(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec4(0.3, 0.7f, 0.9f,1.0f), glm::mat4(1.0f));
+//        DrawTest(true, finalPoseMatrix);
+
         glUseProgram(m_BasicShaderProgram);
 
         // Bind back to the main framebuffer

@@ -164,7 +164,7 @@ namespace AIAC
     }
 
     /**
-     * @brief Draw a GOPrimitive.
+     * @brief Draw a GOPrimitive based on the type.
      * @param goPrimitive Object to draw.
      */
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive) {
@@ -186,15 +186,15 @@ namespace AIAC
                 DrawTriangle(*std::static_pointer_cast<GOTriangle>(goPrimitive)); break;
             case _GOMesh:
                 DrawMesh(*std::static_pointer_cast<GOMesh>(goPrimitive)); break;
-            case _GOText:
-                DrawText(*std::static_pointer_cast<GOText>(goPrimitive)); break;
+//            case _GOText:
+//                DrawText(*std::static_pointer_cast<GOText>(goPrimitive)); break;
             default:
                 break;
         }
     }
 
     /**
-     * @brief Draw multiple GOPrimitive.
+     * @brief Draw multiple GOPrimitive based on the type.
      * @param goPrimitive A vector of GOPrimitive to draw.
      */
     void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive){
@@ -467,9 +467,11 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText) {
+    void DrawText(const GOText& goText, glm::mat4 projectionMatrix) {
         // TODO: Fix this
-//        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
+//        glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+
+//        textRenderer.RenderText("test", 400.0, 300.0, 1, glm::vec4(1, 1,0,1), projectionMatrix);
     }
 
     void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts) {
@@ -501,10 +503,13 @@ namespace AIAC
         std::vector<std::shared_ptr<GOMesh>> meshes;
         std::vector<std::shared_ptr<GOText>> texts;
         AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, meshes, texts);
+
+        GOText text1 = GOText("test", pt1, 10);
+        DrawText(text1, projection);
 //
 //        cout << points.size();
 //        DrawPoints(points);
-        DrawLines(lines);
+//        DrawLines(lines);
 //        DrawPolylines(polylines);
 //        DrawTriangles(triangles);
 //

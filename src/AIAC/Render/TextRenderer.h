@@ -13,7 +13,7 @@ namespace AIAC
         TextRenderer() = default;
         ~TextRenderer() = default;
 
-        void Init();
+        void Init(GLuint VAO);
 
         bool IsInitialized() const { return m_Initialized; }
 
@@ -28,11 +28,11 @@ namespace AIAC
         };
 
         std::map<char, Character> Characters;
-        unsigned int VAO, VBO;
 
     private:
         bool m_Initialized = false;
         GLuint m_ShaderProgram;
+        GLuint m_VAO, m_VBO;
     };
 
     static TextRenderer textRenderer;
