@@ -98,7 +98,7 @@ namespace AIAC
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
-        textRenderer.Init(m_VAO); // here is where the bug is
+        textRenderer.Init(m_VAO);
 
         InitMappingView();
         InitGlobalView();
@@ -255,8 +255,8 @@ namespace AIAC
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
 
-        textRenderer.RenderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec4(0.5, 0.8f, 0.2f,1.0f), glm::mat4(1.0f));
-        textRenderer.RenderText("(C) LearnOpenGL.com", 540.0f, 500.0f, 0.5f, glm::vec4(0.3, 0.7f, 0.9f,1.0f), glm::mat4(1.0f));
+        textRenderer.RenderTextOnScreen("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec4(0.5, 0.8f, 0.2f,0.6f), glm::mat4(1.0f));
+        textRenderer.RenderTextOnScreen("(C) LearnOpenGL.com", 540.0f, 500.0f, 0.5f, glm::vec4(0.3, 0.7f, 0.9f,0.6f), glm::mat4(1.0f));
 
 //        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 //        glUseProgram(m_BasicShaderProgram);
@@ -316,16 +316,8 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
 
-        // TODO: delete text test
-//        glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-//        textRenderer.RenderText("test", 40.0, 30.0, 1, glm::vec4(1, 1,0,1), glm::mat4(1.0f));
-//        textRenderer.RenderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec4(0.5, 0.8f, 0.2f,1.0f), glm::mat4(1.0f));
-//        textRenderer.RenderText("(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec4(0.3, 0.7f, 0.9f,1.0f), glm::mat4(1.0f));
-//        DrawTest(true, finalPoseMatrix);
-
-        glUseProgram(m_BasicShaderProgram);
-
         // Bind back to the main framebuffer
+        glUseProgram(m_BasicShaderProgram);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 

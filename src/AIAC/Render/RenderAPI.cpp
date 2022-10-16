@@ -467,18 +467,16 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText, glm::mat4 projectionMatrix) {
-        // TODO: Fix this
-//        glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-
-//        textRenderer.RenderText("test", 400.0, 300.0, 1, glm::vec4(1, 1,0,1), projectionMatrix);
+    void DrawText(const GOText& goText) {
     }
 
     void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts) {
-        // TODO: Fix this
-//        for (auto &goText: goTexts) {
-//            DrawText(*goText);
-//        }
+        for (auto &goText: goTexts) {
+            if(!goText->IsVisible()){
+                continue;
+            }
+            DrawText(*goText);
+        }
     }
 
     void DrawTest(bool t, glm::mat4 projection){
@@ -505,7 +503,7 @@ namespace AIAC
         AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, meshes, texts);
 
         GOText text1 = GOText("test", pt1, 10);
-        DrawText(text1, projection);
+        DrawText(text1);
 //
 //        cout << points.size();
 //        DrawPoints(points);
