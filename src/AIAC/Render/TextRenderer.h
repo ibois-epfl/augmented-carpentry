@@ -17,7 +17,7 @@ namespace AIAC
 
         bool IsInitialized() const { return m_Initialized; }
 
-        void RenderText(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection);
+        void RenderTextOnScreen(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection);
 
     public:
         struct Character {

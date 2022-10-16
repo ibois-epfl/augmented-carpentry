@@ -84,19 +84,6 @@ namespace AIAC{
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
 
-        // TODO: Above is checked
-
-        // configure VAO/VBO for texture quads
-        // -----------------------------------
-
-        //        GLint prevVAO;
-        //        glGetIntegerv(GL_VERTEX_ARRAY_BINDING, (GLint*)&prevVAO);
-
-        //        glGenVertexArrays(1, &VAO);
-        //        glBindVertexArray(VAO);
-
-        //        glBindVertexArray(prevVAO);
-
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -104,20 +91,30 @@ namespace AIAC{
                 "assets/opengl/TextShader.vs",
                 "assets/opengl/TextShader.fs");
 
-//        glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &m_VBO);
-        glBindVertexArray(m_VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(m_VAO);
         m_Initialized = true;
     }
 
-    void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection)
+    /**
+     * @brief Render text
+     * @param text Text to show
+     * @param x X-axis, (0, 0) is the left-bottom corner
+     * @param y Y-axis, (0, 0) is the left-bottom corner
+     * @param color Text color
+     * @param projection Currently unused
+     */
+    void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection)
     {
+        glm::mat4 orthoProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+
+        GLint prevProgram;
+        glGetIntegerv(GL_PROGRAM, &prevProgram);
+        glUseProgram(m_ShaderProgram);
+        glUniform4f(glGetUniformLocation(m_ShaderProgram, "textColor"), color.r, color.g, color.b, color.a);
+        glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
+
+        glActiveTexture(GL_TEXTURE0);
+
         glBindVertexArray(m_VAO);
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
@@ -125,21 +122,8 @@ namespace AIAC{
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-//        glBindVertexArray(m_VAO);
-
-//        std::cout << "RenderText called" << std::endl;
-//        glDisable(GL_BLEND);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        glm::mat4 orthoProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-
-        glUseProgram(m_ShaderProgram);
-        glUniform3f(glGetUniformLocation(m_ShaderProgram, "textColor"), color.x, color.y, color.z);
-        glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
-
-        glActiveTexture(GL_TEXTURE0);
-        glBindVertexArray(m_VAO);
 
         // iterate through all characters
         std::string::const_iterator c;
@@ -157,7 +141,6 @@ namespace AIAC{
                     { xpos,     ypos + h,   0.0f, 0.0f },
                     { xpos,     ypos,       0.0f, 1.0f },
                     { xpos + w, ypos,       1.0f, 1.0f },
-
                     { xpos,     ypos + h,   0.0f, 0.0f },
                     { xpos + w, ypos,       1.0f, 1.0f },
                     { xpos + w, ypos + h,   1.0f, 0.0f }
@@ -174,85 +157,11 @@ namespace AIAC{
             x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
         }
 
+        // restore previous state
         glBindTexture(GL_TEXTURE_2D, 0);
+        glUseProgram(prevProgram);
 
         return;
-
-        // TODO: replace projection with the right one
-        //        glm::mat4 noRotProjection(projection);
-        //        noRotProjection[0][1] = 0.0f;
-        //        noRotProjection[0][2] = 0.0f;
-        //        noRotProjection[1][0] = 0.0f;
-        //        noRotProjection[1][2] = 0.0f;
-        //        noRotProjection[2][0] = 0.0f;
-        //        noRotProjection[2][1] = 0.0f;
-        //        noRotProjection[0][0] = 1.0f;
-        //        noRotProjection[1][1] = 1.0f;
-        //        noRotProjection[2][2] = 1.0f;
-        //        noRotProjection[0][3] = 0.0f;
-        //        noRotProjection[1][3] = 0.0f;
-        //        noRotProjection[2][3] = 0.0f;
-
-//        glm::mat4 noRotProjection(1.0f);
-//        noRotProjection[3][0] = projection[3][0];
-//        noRotProjection[3][1] = projection[3][1];
-//        noRotProjection[3][2] = projection[3][2];
-//
-//        // activate corresponding render state
-//        GLint prevShaderProgram;
-//        glGetIntegerv(GL_CURRENT_PROGRAM, &prevShaderProgram);
-//        GLint prevTexture2D;
-//        glGetIntegerv(GL_TEXTURE_BINDING_2D, &prevTexture2D);
-//        GLint prevBindBuffer;
-//        glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &prevBindBuffer);
-//
-//        glUseProgram(m_ShaderProgram);
-//        glUniform3f(glGetUniformLocation(m_ShaderProgram, "textColor"), color.x, color.y, color.z);
-//        glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(noRotProjection));
-//
-//        glGenBuffers(1, &VBO);
-//        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-//        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-//
-//        glActiveTexture(GL_TEXTURE0);
-//
-//        // iterate through all characters
-//        std::string::const_iterator c;
-//        for (c = text.begin(); c != text.end(); c++)
-//        {
-//            Character ch = Characters[*c];
-//
-//            float xpos = x + ch.Bearing.x * scale;
-//            float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-//
-//            float w = ch.Size.x * scale;
-//            float h = ch.Size.y * scale;
-//            // update VBO for each character
-//            float vertices[6][4] = {
-//                    { xpos,     ypos + h,   0.0f, 0.0f },
-//                    { xpos,     ypos,       0.0f, 1.0f },
-//                    { xpos + w, ypos,       1.0f, 1.0f },
-//
-//                    { xpos,     ypos + h,   0.0f, 0.0f },
-//                    { xpos + w, ypos,       1.0f, 1.0f },
-//                    { xpos + w, ypos + h,   1.0f, 0.0f }
-//            };
-//            glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-//
-//            // update content of VBO memory
-//            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-//            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-//            glBindBuffer(GL_ARRAY_BUFFER, 0);
-//
-//            // render quad
-//            glDrawArrays(GL_TRIANGLES, 0, 6);
-//            // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-//            x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
-//        }
-
-//        glBindBuffer(GL_ARRAY_BUFFER, prevBindBuffer);
-//        glBindTexture(GL_TEXTURE_2D, prevTexture2D);
-//        glUseProgram(prevShaderProgram);
     }
 }
 
