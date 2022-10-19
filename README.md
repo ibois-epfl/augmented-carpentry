@@ -15,6 +15,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Implement padding for 3D scene viewer
 > - [x] Test if changing map on the go breaks the slam or not
 
+> - [ ] Write a sub-program to calibrate the camera and export the correct format in xml
+
 > - [ ] Find a way to sync SLAM maps and data
 
 > - [ ] Add pop up program to calibrate camera
