@@ -18,8 +18,6 @@
 
 namespace AIAC
 {
-//    extern TextRenderer textRenderer;
-
     void Renderer::Init()
     {
         glGenVertexArrays(1, &m_VAO);
@@ -98,7 +96,8 @@ namespace AIAC
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
-        textRenderer.Init(m_VAO);
+        // Initialize the static interface of TextRenderer
+        TextRenderer::Init(m_VAO);
 
         InitMappingView();
         InitGlobalView();
@@ -255,11 +254,9 @@ namespace AIAC
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
 
-        textRenderer.RenderTextOnScreen("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec4(0.5, 0.8f, 0.2f,0.6f), glm::mat4(1.0f));
-        textRenderer.RenderTextOnScreen("(C) LearnOpenGL.com", 540.0f, 500.0f, 0.5f, glm::vec4(0.3, 0.7f, 0.9f,0.6f), glm::mat4(1.0f));
+//        textRenderer.RenderTextOnScreen("This is sample text", 25.0f, 25.0f, glm::vec4(0.5, 0.8f, 0.2f,0.6f));
+//        textRenderer.RenderTextOnScreen("(C) LearnOpenGL.com", 540.0f, 500.0f, glm::vec4(0.3, 0.7f, 0.9f,0.6f));
 
-//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//        glUseProgram(m_BasicShaderProgram);
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -315,6 +312,10 @@ namespace AIAC
         glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+
+//        cout << &textRenderer << endl;
+//        textRenderer.RenderTextOnScreen("test2", -0.0f, 0.000003f, glm::vec4(0,0,0,1));
+        DrawText(GOText("test", GOPoint(DigitalModel.GetBboxCenter()), 1), finalPoseMatrix);
 
         // Bind back to the main framebuffer
         glUseProgram(m_BasicShaderProgram);
