@@ -247,7 +247,10 @@ namespace AIAC
         GOText(std::string text, GOPoint anchor, double size);
         virtual ~GOText() = default;
 
-        std::string GetText() const { return m_Text; }
+        inline const std::string GetText() const { return m_Text; }
+        inline const GOPoint GetAnchor() const { return m_Anchor; }
+        inline const double GetTextSize() const { return m_Size; }
+
         // inline void setWeight(float weight) { m_Weight = weight; }
 
     private:

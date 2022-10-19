@@ -8,16 +8,13 @@
 #include FT_FREETYPE_H
 #include "AIAC/Application.h"
 
-const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
+#include "glm/gtx/string_cast.hpp"
 
 namespace AIAC
 {
-    /**
-     * @brief Render Slam map on the current frame.
-     * @param map A tslam map to be rendered.
-     * @param color PointCloud's color.
-     * @param pointSize PointCloud's size.
-     */
+    const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
+    extern TextRenderer textRenderer;
+
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize) {
         std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
         for(const auto& mapPoint: map->map_points){
@@ -52,28 +49,12 @@ namespace AIAC
         DrawLines3d(markerEdges, markerEdgeColors);
     }
 
-    /**
-     * @brief Combine 3 points into a glm::vec3 and transform it based on the given transformation matrix.
-     * @param transformMat A 4x4 transformation matrix.
-     * @param x X coordinate.
-     * @param y Y coordinate.
-     * @param z Z coordinate.
-     */
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z){
         glm::vec4 point(x, y, z, 1);
         point = transformMat * point;
         return {point.x, point.y, point.z};
     }
 
-    /**
-     * @brief Draw a Cylinder, this is also used for drawing lines with heavy weight (>1.0f).
-     * @param baseCenter Base center (bottom) of the cylinder.
-     * @param topCenter Top center (top) of the cylinder.
-     * @param radius Radius of the cylinder; For drawing line, radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE.
-     * @param color Color of the cylinder.
-     * @param edgeColor The color of the edges of the caps.
-     * @param sectorNum Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value.
-     */
     void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
         std::vector<CylinderPole> cylinderPoles; // vector of structs
 
@@ -163,10 +144,6 @@ namespace AIAC
         DrawLines3d(capContourTop, edgeColor);
     }
 
-    /**
-     * @brief Draw a GOPrimitive based on the type.
-     * @param goPrimitive Object to draw.
-     */
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive) {
         if(!goPrimitive->IsVisible()){
             return;
@@ -193,10 +170,6 @@ namespace AIAC
         }
     }
 
-    /**
-     * @brief Draw multiple GOPrimitive based on the type.
-     * @param goPrimitive A vector of GOPrimitive to draw.
-     */
     void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive){
         for(auto& go: goPrimitive){
             DrawGO(go);
@@ -208,8 +181,8 @@ namespace AIAC
         DrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
     }
 
-    // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
-    // TODO: Draw all point with different size at once (if possible)
+    // @TODO Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
+    // @TODO Draw all point with different size at once (if possible)
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints) {
         for(const auto& goPoint: goPoints){
             DrawPoint(*goPoint);
@@ -229,13 +202,6 @@ namespace AIAC
         return 36;
     }
 
-    /**
-     * @brief Draw Point base on two glm::vec3.
-     * @param p1 First point.
-     * @param p2 Second point.
-     * @param weight Weight of the line.
-     * @param color RGBA Color of the line.
-     */
     void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color){
         if(weight <= 0){
             return;
@@ -252,12 +218,6 @@ namespace AIAC
                      color, glm::vec4(0,0,0,0), getSectorNum(radius));
     }
 
-    /**
-     * @brief Draw multiple lines.
-     * @param vertices A vector of glm::vec3. If you have line [p1, p2] and [p2, p3], the vector should be construct as [p1, p2, p2, p3, ...]
-     * @param weight Weight of the line.
-     * @param color RGBA Color of the line.
-     */
     void DrawLines(const vector<glm::vec3> &vertices, float weight, const glm::vec4 &color){
         if(weight <= 0){
             return;
@@ -312,16 +272,6 @@ namespace AIAC
         DrawLines3d(vertices, colors);
     }
 
-    /**
-     * @brief Draw a single circle.
-     * @param center Center of the circle.
-     * @param normal The normal of plane on which the circle lays.
-     * @param radius Radius of the circle.
-     * @param color RGBA Color of the face.
-     * @param edgeColor RGBA Color of the edge.
-     * @param edgeWeight Weight of the edge.
-     * @param sectorNum Number of sectors, can be derived from GetSectorNum(radius).
-     */
     void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum) {
         std::vector<glm::vec3> vertices; vertices.reserve(sectorNum + 1);
         std::vector<glm::vec3> edges; edges.reserve(2 * sectorNum);
@@ -467,7 +417,13 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText) {
+    void DrawText(const GOText& goText, const glm::mat4 cameraProjection) {
+//        TextRenderer::GetInstance().RenderTextOnScreen("test inside drawText", -0.0f, 0.000003f, glm::vec4(0,0,0,1));
+        glm::vec4 axis = cameraProjection * glm::vec4(goText.GetAnchor().GetPosition(), 1.0);
+        cout << glm::to_string(axis) << endl;
+//        cout << &textRenderer << endl;
+//        textRenderer.RenderTextOnScreen("test inside drawText", -0.0f, 0.000003f, glm::vec4(0,0,0,1));
+        textRenderer.RenderTextOnScreen(goText.GetText(), axis.x, axis.y, glm::vec4(0,0,0,1));
     }
 
     void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts) {
@@ -475,7 +431,7 @@ namespace AIAC
             if(!goText->IsVisible()){
                 continue;
             }
-            DrawText(*goText);
+//            DrawText(*goText);
         }
     }
 
@@ -503,7 +459,7 @@ namespace AIAC
         AIAC_GOREG->GetAllGOs(points, lines, circles, cylinders, polylines, triangles, meshes, texts);
 
         GOText text1 = GOText("test", pt1, 10);
-        DrawText(text1);
+//        DrawText(text1);
 //
 //        cout << points.size();
 //        DrawPoints(points);

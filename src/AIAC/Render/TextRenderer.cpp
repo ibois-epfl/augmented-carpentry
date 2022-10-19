@@ -11,8 +11,15 @@
 
 namespace AIAC{
 
+    TextRenderer* TextRenderer::s_instance = nullptr;
+    bool TextRenderer::s_Initialized;
+    GLuint TextRenderer::s_ShaderProgram;
+    GLuint TextRenderer::s_VAO, TextRenderer::s_VBO;
+    std::map<char, Character> TextRenderer::Characters;
+
     void TextRenderer::Init(GLuint VAO) {
-        m_VAO = VAO;
+        s_instance = new TextRenderer();
+        s_instance->s_VAO = VAO;
         // Load FreeType
         // --------
         // All functions return a value different from 0 whenever an error occurred
@@ -74,7 +81,7 @@ namespace AIAC{
                     glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
                     static_cast<unsigned int>(face->glyph->advance.x)
             };
-            Characters.insert(std::pair<char, Character>(c, character));
+            s_instance->Characters.insert(std::pair<char, Character>(c, character));
         }
 
         // disable byte-alignment restriction
@@ -87,12 +94,13 @@ namespace AIAC{
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        m_ShaderProgram = LoadShaders(
+        s_instance->s_ShaderProgram = LoadShaders(
                 "assets/opengl/TextShader.vs",
                 "assets/opengl/TextShader.fs");
 
-        glGenBuffers(1, &m_VBO);
-        m_Initialized = true;
+        glGenBuffers(1, &(s_instance->s_VBO));
+        s_instance->s_Initialized = true;
+
     }
 
     /**
@@ -101,22 +109,25 @@ namespace AIAC{
      * @param x X-axis, (0, 0) is the left-bottom corner
      * @param y Y-axis, (0, 0) is the left-bottom corner
      * @param color Text color
-     * @param projection Currently unused
      */
-    void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection)
+    void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, glm::vec4 color, float scale)
     {
+        if(!s_Initialized){
+            throw new std::runtime_error("Try to render text before init.");
+        }
+
         glm::mat4 orthoProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 
         GLint prevProgram;
         glGetIntegerv(GL_PROGRAM, &prevProgram);
-        glUseProgram(m_ShaderProgram);
-        glUniform4f(glGetUniformLocation(m_ShaderProgram, "textColor"), color.r, color.g, color.b, color.a);
-        glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
+        glUseProgram(s_ShaderProgram);
+        glUniform4f(glGetUniformLocation(s_ShaderProgram, "textColor"), color.r, color.g, color.b, color.a);
+        glUniformMatrix4fv(glGetUniformLocation(s_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
 
-        glBindVertexArray(m_VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+        glBindVertexArray(s_VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, s_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
@@ -148,7 +159,7 @@ namespace AIAC{
             // render glyph texture over quad
             glBindTexture(GL_TEXTURE_2D, ch.TextureID);
             // update content of VBO memory
-            glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+            glBindBuffer(GL_ARRAY_BUFFER, s_VBO);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             // render quad
@@ -160,8 +171,6 @@ namespace AIAC{
         // restore previous state
         glBindTexture(GL_TEXTURE_2D, 0);
         glUseProgram(prevProgram);
-
-        return;
     }
 }
 
