@@ -4,6 +4,7 @@
 
 #include <map>
 #include <iostream>
+#include <utility>
 
 #include "TextRenderer.h"
 #include "glm/gtc/type_ptr.hpp"
@@ -17,9 +18,11 @@ namespace AIAC{
     GLuint TextRenderer::s_VAO, TextRenderer::s_VBO;
     std::map<char, Character> TextRenderer::Characters;
 
-    void TextRenderer::Init(GLuint VAO) {
+    void TextRenderer::Init() {
         s_instance = new TextRenderer();
-        s_instance->s_VAO = VAO;
+
+        glGenVertexArrays(1, &s_VAO);
+
         // Load FreeType
         // --------
         // All functions return a value different from 0 whenever an error occurred
@@ -103,25 +106,21 @@ namespace AIAC{
 
     }
 
-    /**
-     * @brief Render text
-     * @param text Text to show
-     * @param x X-axis, (0, 0) is the left-bottom corner
-     * @param y Y-axis, (0, 0) is the left-bottom corner
-     * @param color Text color
-     */
-    void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, glm::vec4 color, float scale)
+    void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, float w, float h, glm::vec4 color, float scale){
+        RenderText(std::move(text), glm::vec3(x, y, 0), w, h, color, scale);
+    }
+
+    void TextRenderer::RenderText(std::string text, glm::vec3 position, float w, float h, glm::vec4 color, float scale)
     {
         if(!s_Initialized){
-            throw new std::runtime_error("Try to render text before init.");
+            throw std::runtime_error("Try to render text before init.");
         }
-
-        glm::mat4 orthoProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 
         GLint prevProgram;
         glGetIntegerv(GL_PROGRAM, &prevProgram);
         glUseProgram(s_ShaderProgram);
         glUniform4f(glGetUniformLocation(s_ShaderProgram, "textColor"), color.r, color.g, color.b, color.a);
+        glm::mat4 orthoProjection = glm::ortho(0.0f, w, 0.0f, h);
         glUniformMatrix4fv(glGetUniformLocation(s_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
@@ -138,6 +137,12 @@ namespace AIAC{
 
         // iterate through all characters
         std::string::const_iterator c;
+//        glm::vec4 positionOnScreen = projection * glm::vec4(position, 1.0f);
+//        float x = positionOnScreen.x;
+//        float y = positionOnScreen.y;
+        float x = position.x;
+        float y = position.y;
+
         for (c = text.begin(); c != text.end(); c++)
         {
             Character ch = Characters[*c];

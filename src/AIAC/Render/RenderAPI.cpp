@@ -178,6 +178,7 @@ namespace AIAC
 
     void DrawPoint(const GOPoint& goPoint) {
         vector<glm::vec3> point(1, goPoint.GetPosition());
+        cout << glm::to_string(goPoint.GetColor()) << endl;
         DrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
     }
 
@@ -418,12 +419,8 @@ namespace AIAC
     }
 
     void DrawText(const GOText& goText, const glm::mat4 cameraProjection) {
-//        TextRenderer::GetInstance().RenderTextOnScreen("test inside drawText", -0.0f, 0.000003f, glm::vec4(0,0,0,1));
-        glm::vec4 axis = cameraProjection * glm::vec4(goText.GetAnchor().GetPosition(), 1.0);
-        cout << glm::to_string(axis) << endl;
-//        cout << &textRenderer << endl;
-//        textRenderer.RenderTextOnScreen("test inside drawText", -0.0f, 0.000003f, glm::vec4(0,0,0,1));
-        textRenderer.RenderTextOnScreen(goText.GetText(), axis.x, axis.y, glm::vec4(0,0,0,1));
+//        glm::vec4 axis = cameraProjection * glm::vec4(goText.GetAnchor().GetPosition(), 1.0);
+//        textRenderer.RenderText(goText.GetText(), goText.GetAnchor(), glm::vec4(0,0,0,1), 0.2, cameraProjection);
     }
 
     void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts) {
@@ -431,7 +428,6 @@ namespace AIAC
             if(!goText->IsVisible()){
                 continue;
             }
-//            DrawText(*goText);
         }
     }
 

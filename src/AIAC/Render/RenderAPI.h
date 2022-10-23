@@ -38,6 +38,10 @@ namespace AIAC
      */
     void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
 
+    /**
+     * @brief Draw a GOPoint
+     * @param goPoint The point to draw.
+     */
     void DrawPoint(const GOPoint& goPoint);
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints);
 
