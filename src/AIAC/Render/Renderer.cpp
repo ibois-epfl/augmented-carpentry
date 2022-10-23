@@ -97,7 +97,7 @@ namespace AIAC
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
         // Initialize the static interface of TextRenderer
-        TextRenderer::Init(m_VAO);
+        TextRenderer::Init();
 
         InitMappingView();
         InitGlobalView();
@@ -161,8 +161,8 @@ namespace AIAC
         );
 
         m_GlobalCamMatrix = glm::lookAt(
-                glm::vec3(50, 50, 50), // the position of your camera, in world space
-                DigitalModel.BoundingBoxCenter,   // where you want to look at, in world space
+                glm::vec3(50, 50, 50),   // the position of your camera, in world space
+                DigitalModel.GetBboxCenter(),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
     }
@@ -220,7 +220,7 @@ namespace AIAC
         // The global view is needed in both mapping and inference
         RenderGlobalView();
 
-        // During mapping, a overlay panel is opened, so we only render things on it
+        // During mapping, an overlay panel is opened, so we only render things on it
         // and stop updating the main scene.
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderMappingView();
@@ -233,7 +233,7 @@ namespace AIAC
 
         RenderCameraFrame();
 
-        // Get Cam pose
+        // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
@@ -253,15 +253,11 @@ namespace AIAC
             }
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
-
-//        textRenderer.RenderTextOnScreen("This is sample text", 25.0f, 25.0f, glm::vec4(0.5, 0.8f, 0.2f,0.6f));
-//        textRenderer.RenderTextOnScreen("(C) LearnOpenGL.com", 540.0f, 500.0f, glm::vec4(0.3, 0.7f, 0.9f,0.6f));
-
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
-        m_GlobalViewWidth = w * 20;
-        m_GlobalViewHeight = h * 20;
+        m_GlobalViewWidth = w;
+        m_GlobalViewHeight = h;
         m_GlobalProjMatrix = glm::perspective(
                 glm::radians(50.0f),
                 m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,300.0f
@@ -291,6 +287,8 @@ namespace AIAC
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // visualize map
+        cout << "proj " << glm::to_string(m_GlobalProjMatrix) << endl;
+        cout << "cam " << glm::to_string(m_GlobalCamMatrix) << endl;
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
@@ -308,14 +306,47 @@ namespace AIAC
         DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
 
         // visualize camera
-        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
-        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+//        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+//        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+//        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+//        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+//        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-//        cout << &textRenderer << endl;
-//        textRenderer.RenderTextOnScreen("test2", -0.0f, 0.000003f, glm::vec4(0,0,0,1));
-        DrawText(GOText("test", GOPoint(DigitalModel.GetBboxCenter()), 1), finalPoseMatrix);
+        cout << m_GlobalViewWidth << " " << m_GlobalViewHeight << endl;
+
+        auto p = GOPoint(DigitalModel.GetBboxCenter());
+        p.SetColor(glm::vec4(0,0,0,1));
+        p.setWeight(15.0f);
+        DrawPoint(p);
+
+        cout << "DigitalModel's Bbox center relate to projection:" << endl;
+//        cout << glm::to_string(DigitalModel.GetBboxCenter()) << endl;
+//        GLdouble objX = DigitalModel.GetBboxCenter().x, objY = DigitalModel.GetBboxCenter().y, objZ = DigitalModel.GetBboxCenter().z;
+//        GLdouble winX, winY, winZ;
+//        GLdouble model, proj;
+//        GLint view;
+//        glGetDoublev(GL_MODELVIEW_MATRIX, &model);
+//        glGetDoublev(GL_PROJECTION_MATRIX, &proj);
+//        glGetIntegerv(GL_VIEWPORT, &view);
+//
+//        gluProject(objX, objY, objZ, &model, &proj, &view, &winX, &winY, &winZ);
+//        cout << "winX:" << winX << " winY:" << winY << " winZ:" << winZ << endl
+
+        cout << "GlobalCamMatrix:" << glm::to_string(m_GlobalCamMatrix) << endl;
+        auto coordCameraView = m_GlobalCamMatrix * glm::vec4(DigitalModel.GetBboxCenter(), 1.0f);
+        cout << "coordCameraView:" << glm::to_string(coordCameraView) << endl;
+        auto coordFinalView = m_GlobalProjMatrix * coordCameraView;
+        cout << "coordFinalView:" << glm::to_string(coordFinalView) << endl;
+        coordFinalView.w = -coordCameraView.z;
+        if (coordFinalView.w != 0){
+            coordFinalView.w = 1.0 / coordFinalView.w;
+            coordFinalView.x *= coordFinalView.w;
+            coordFinalView.y *= coordFinalView.w;
+            coordFinalView.z *= coordFinalView.w;
+        }
+        cout << "norm coordFinalView:" << glm::to_string(coordFinalView) << endl;
+        TextRenderer::RenderTextOnScreen("center", coordFinalView.x, coordFinalView.y, m_GlobalViewWidth, m_GlobalViewHeight, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+//        DrawText(GOText("test", GOPoint(DigitalModel.GetBboxCenter()), 1), m_GlobalCamMatrix);
 
         // Bind back to the main framebuffer
         glUseProgram(m_BasicShaderProgram);
