@@ -142,4 +142,16 @@ namespace AIAC {
         std::vector<glm::vec4> colors(vertices.size(), color);
         DrawTriangles3d(vertices, indices, colors);
     }
+    glm::vec2 GetProjectAxisOnScreen(const glm::vec3 position, const glm::mat4 cameraMat, const glm::mat4 projectionMat, const int h, const int w){
+        auto coordCameraView = cameraMat * glm::vec4(position, 1.0f);
+        auto coordFinalView = projectionMat * coordCameraView;
+        coordFinalView.w = -coordCameraView.z;
+        if (coordFinalView.w != 0){
+            coordFinalView.w = 1.0 / coordFinalView.w;
+            coordFinalView.x *= coordFinalView.w;
+            coordFinalView.y *= coordFinalView.w;
+            coordFinalView.z *= coordFinalView.w;
+        }
+        // TODO: times w and h and return the vector
+    }
 }

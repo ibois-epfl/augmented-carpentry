@@ -33,6 +33,16 @@ namespace AIAC
         static void Init();
 
         /**
+         * @brief Render text in the 3D space, but always facing the screen
+         * @param text Text to show
+         * @param position The anchor of the text
+         * @param finalProjection The final MVP projection of the scene to show
+         * @param color Text color
+         * @param scale Text scale, default = 1.0f
+         */
+        void RenderTextOn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 finalProjection, float scale);
+
+        /**
          * @brief Render text that is parallel to the screen
          * @param text Text to show
          * @param x X-axis, (0, 0) is the left-bottom corner
