@@ -185,11 +185,10 @@ namespace AIAC
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
         // The depth buffer
-        GLuint depthrenderbuffer;
-        glGenRenderbuffers(1, &depthrenderbuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
+        glGenRenderbuffers(1, &m_GlobalViewDepthBuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_MappingViewWidth, m_MappingViewHeight);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
 
         // Set "renderedTexture" as our colour attachement #0
         glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_MappingViewTexture, 0);
@@ -256,6 +255,7 @@ namespace AIAC
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
+        cout << w << " " << h << endl;
         m_GlobalViewWidth = w;
         m_GlobalViewHeight = h;
         m_GlobalProjMatrix = glm::perspective(
@@ -283,12 +283,32 @@ namespace AIAC
 
     void Renderer::RenderGlobalView() {
         glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
+        glViewport(0, 0, m_GlobalViewWidth, m_GlobalViewHeight);
+
+        // "Bind" the newly created texture : all future texture functions will modify this texture
+        glBindTexture(GL_TEXTURE_2D, m_GlobalViewTexture);
+
+        // Give an empty image to OpenGL ( the last "0" )
+        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_GlobalViewWidth, m_GlobalViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+
+        // Poor filtering. Needed !
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        // The depth buffer
+        glBindRenderbuffer(GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_GlobalViewWidth, m_GlobalViewHeight);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
+
+        // Set "renderedTexture" as our colour attachment #0
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GlobalViewTexture, 0);
+
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+
         // visualize map
-        cout << "proj " << glm::to_string(m_GlobalProjMatrix) << endl;
-        cout << "cam " << glm::to_string(m_GlobalCamMatrix) << endl;
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
@@ -306,11 +326,11 @@ namespace AIAC
         DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
 
         // visualize camera
-//        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
-//        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
-//        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-//        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
-//        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+        DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         cout << m_GlobalViewWidth << " " << m_GlobalViewHeight << endl;
 
@@ -332,6 +352,7 @@ namespace AIAC
 //        gluProject(objX, objY, objZ, &model, &proj, &view, &winX, &winY, &winZ);
 //        cout << "winX:" << winX << " winY:" << winY << " winZ:" << winZ << endl
 
+        // below is the testing code for rendering text in 3d
         cout << "GlobalCamMatrix:" << glm::to_string(m_GlobalCamMatrix) << endl;
         auto coordCameraView = m_GlobalCamMatrix * glm::vec4(DigitalModel.GetBboxCenter(), 1.0f);
         cout << "coordCameraView:" << glm::to_string(coordCameraView) << endl;
@@ -345,8 +366,9 @@ namespace AIAC
             coordFinalView.z *= coordFinalView.w;
         }
         cout << "norm coordFinalView:" << glm::to_string(coordFinalView) << endl;
-        TextRenderer::RenderTextOnScreen("center", coordFinalView.x, coordFinalView.y, m_GlobalViewWidth, m_GlobalViewHeight, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-//        DrawText(GOText("test", GOPoint(DigitalModel.GetBboxCenter()), 1), m_GlobalCamMatrix);
+
+        TextRenderer::RenderTextOnScreen("ffffff", coordFinalView.x, coordFinalView.y, m_GlobalViewWidth, m_GlobalViewHeight, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+//        DrawText(GOText("test", GOPoint(DigitalModel.GetBboxCenter()), 10), m_GlobalCamMatrix);
 
         // Bind back to the main framebuffer
         glUseProgram(m_BasicShaderProgram);

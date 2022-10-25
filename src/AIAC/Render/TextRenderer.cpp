@@ -106,6 +106,10 @@ namespace AIAC{
 
     }
 
+    void TextRenderer::RenderTextOn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 finalProjection, float scale){
+        return;
+    }
+
     void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, float w, float h, glm::vec4 color, float scale){
         RenderText(std::move(text), glm::vec3(x, y, 0), w, h, color, scale);
     }

@@ -102,4 +102,14 @@ namespace AIAC {
      * @param color The color of the point cloud
      * */
     extern void DrawSlamMap(const std::shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize=1);
+
+    /**
+     * @brief Get a 3d point's projection on the screen
+     * @param position The 3d point's position in the 3D space
+     * @param cameraMat The camera matrix (camMat * projectionMat = final MVP)
+     * @param projectionMat The projection matrix (camMat * projectionMat = final MVP)
+     * @param h The height of the screen
+     * @param w The width of the screen
+     * */
+    extern glm::vec2 GetProjectAxisOnScreen(const glm::vec3 position, const glm::mat4 cameraMat, const glm::mat4 projectionMat, const int h, const int w);
 }

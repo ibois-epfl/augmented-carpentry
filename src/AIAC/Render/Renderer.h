@@ -62,6 +62,7 @@ namespace AIAC
         // Global view
         GLuint m_GlobalViewFrameBuffer;
         GLuint m_GlobalViewTexture;
+        GLuint m_GlobalViewDepthBuffer;
         glm::mat4 m_GlobalCamMatrix;
         glm::mat4 m_GlobalProjMatrix;
         float m_GlobalViewWidth=400, m_GlobalViewHeight=300;
