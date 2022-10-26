@@ -352,7 +352,7 @@ float x = pt1->X();                                 // access GO properties
 auto pts = GOPoint::GetAll();                       // access all GO of one type
 GOPoint::Remove(idPt1);                             // remove the point from registry
 ```
-Note the the Constructor for each GO is private, the only way to instance it is to use the `Add()` static function.
+Note the the Constructor for each GO is private, the only way to instance it is to use the `Add()` static function. The reason why we decided to adopt this "registry" pattern is because all GO object need to be created as a smart pointer to be copied into a GOregistry. We must be sure that every GOObject is subscribed to the GORegistry. A normal c++ constructor cannot create the smart pointer of the create object, hence the Add() function does this for us.  All the next layers will retrive those smart pointers from the GOregistry and eventually modify them. And finally the render will go through the GOregistry and "bake" (render) all the GO geometries.
 
 The **G**eometric **O**bject System allows to add objects to the 3D scene before to render them. Having a geometric entity prior to the OpenGL Render allows to calculates relations between geometries to obtain live feedbacks (e.g. drilling depth). Files can be found in `/GOSys`.
 
