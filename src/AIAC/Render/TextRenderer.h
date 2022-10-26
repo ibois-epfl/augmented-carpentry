@@ -36,8 +36,10 @@ namespace AIAC
          * @brief Render text in the 3D space, but always facing the screen
          * @param text Text to show
          * @param position The anchor of the text
-         * @param finalProjection The final MVP projection of the scene to show
          * @param color Text color
+         * @param projection The final MVP projection of the scene to show
+         * @param w Width of the Screen
+         * @param h Height of the Screen
          * @param scale Text scale, default = 1.0f
          */
         static void RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 projection, float w, float h, float scale=1.0f);
@@ -45,22 +47,12 @@ namespace AIAC
         /**
          * @brief Render text that is parallel to the screen
          * @param text Text to show
-         * @param x X-axis, (0, 0) is the left-bottom corner
-         * @param y Y-axis, (0, 0) is the left-bottom corner
-         * @param w Width of the Screen
-         * @param h Height of the Screen
+         * @param x X-axis, (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
+         * @param y Y-axis, (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
+         * @param windowWidth Width of the Screen
+         * @param windowHeight Height of the Screen
          * @param color Text color
          * @param scale Text scale, default = 1.0f
-         */
-//        static void RenderTextOnScreen(std::string text, float x, float y, float w, float h, glm::vec4 color, float scale=1.0f);
-
-        /**
-         * @brief Render text that is parallel to the screen
-         * @param text Text to show
-         * @param position Position of the left-bottom corner of the text in the 3D space.
-         * @param color Text color
-         * @param scale Scale of the text, default = 1.0f
-         * @param projection Projection matrix
          */
         static void RenderText(std::string text, float x, float y, float windowWidth, float windowHeight, glm::vec4 color, float scale=1.0f);
         /**
