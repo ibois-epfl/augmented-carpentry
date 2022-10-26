@@ -18,8 +18,6 @@
 
 namespace AIAC
 {
-    // extern TextRenderer textRenderer;  // TODO: implement text renderer
-
     void Renderer::Init()
     {
         glGenVertexArrays(1, &m_VAO);
@@ -98,11 +96,13 @@ namespace AIAC
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
-        textRenderer.Init();
+        // Initialize the static interface of TextRenderer
+        TextRenderer::Init();
 
         InitMappingView();
         InitGlobalView();
     }
+
 
     void Renderer::InitGlobalView()
     {
@@ -137,7 +137,8 @@ namespace AIAC
         glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
 
         // build camera visualization object, which is a pyramid
-        float bW = 1.0f / 2, bH = 0.75f / 2, h = 0.5f;
+        const float CAMERA_SIZE_W = 1.6, CAMERA_SIZE_H = 1.2;
+        float bW = CAMERA_SIZE_W / 2, bH = CAMERA_SIZE_H / 2, h = 0.5f;
         m_CamVisualizationEdges.emplace_back( bW,  bH, 0);
         m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
         m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
@@ -161,8 +162,8 @@ namespace AIAC
         );
 
         m_GlobalCamMatrix = glm::lookAt(
-                glm::vec3(50, 50, 50), // the position of your camera, in world space
-                DigitalModel.BoundingBoxCenter,   // where you want to look at, in world space
+                glm::vec3(20, 20, 20),   // the position of your camera, in world space
+                DigitalModel.GetBboxCenter(),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
     }
@@ -186,11 +187,10 @@ namespace AIAC
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
         // The depth buffer
-        GLuint depthrenderbuffer;
-        glGenRenderbuffers(1, &depthrenderbuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
+        glGenRenderbuffers(1, &m_GlobalViewDepthBuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_MappingViewWidth, m_MappingViewHeight);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
 
         // Set "renderedTexture" as our colour attachement #0
         glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_MappingViewTexture, 0);
@@ -218,23 +218,27 @@ namespace AIAC
     {
         glUseProgram(m_BasicShaderProgram);
 
+        // The global view is needed in both mapping and inference
         RenderGlobalView();
 
+        // During mapping, an overlay panel is opened, so we only render things on it
+        // and stop updating the main scene.
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderMappingView();
             return;
         }
 
-        // Renderer to our framebuffer
+        // Change the render target to the main scene
+        // TODO: probably it will be better to use a stack to tackle such scene switch?
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         RenderCameraFrame();
 
-        // Get Cam pose
+        // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        // Draw the triangle !
+        // Draw the essential objects: map, point cloud map and digital model !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glm::vec4 edgeColor;
         if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
@@ -250,12 +254,11 @@ namespace AIAC
             }
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
-
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
-        m_GlobalViewWidth = w * 20;
-        m_GlobalViewHeight = h * 20;
+        m_GlobalViewWidth = w;
+        m_GlobalViewHeight = h;
         m_GlobalProjMatrix = glm::perspective(
                 glm::radians(50.0f),
                 m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,300.0f
@@ -281,6 +284,26 @@ namespace AIAC
 
     void Renderer::RenderGlobalView() {
         glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
+        glViewport(0, 0, m_GlobalViewWidth, m_GlobalViewHeight);
+
+        // "Bind" the newly created texture : all future texture functions will modify this texture
+        glBindTexture(GL_TEXTURE_2D, m_GlobalViewTexture);
+
+        // Give an empty image to OpenGL ( the last "0" )
+        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_GlobalViewWidth, m_GlobalViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+
+        // Poor filtering. Needed !
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        // The depth buffer
+        glBindRenderbuffer(GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_GlobalViewWidth, m_GlobalViewHeight);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
+
+        // Set "renderedTexture" as our colour attachment #0
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GlobalViewTexture, 0);
+
         glClearColor(1.0, 1.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -306,10 +329,21 @@ namespace AIAC
         glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
         glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
+        // Draw All objects
         DrawAllGOs(finalPoseMatrix);
 
+        TextRenderer::RenderTextIn3DSpace(
+                "center",
+                DigitalModel.GetBboxCenter(),
+                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),
+                finalPoseMatrix,
+                m_GlobalViewWidth,
+                m_GlobalViewHeight);
+
         // Bind back to the main framebuffer
+        glUseProgram(m_BasicShaderProgram);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 

@@ -1,8 +1,8 @@
 #pragma once
 
-// #include <utility>
+#include <utility>
+
 #include "AIAC/Base.h"
-// #include "AIAC/Application.h"
 #include "glm/glm.hpp"
 
 namespace AIAC
@@ -89,7 +89,7 @@ namespace AIAC
     public:
         /**
          * @brief Add GOPoint to the scene.
-         * 
+         *
          * @param x X coordinate of the point.
          * @param y Y coordinate of the point.
          * @param z Z coordinate of the point.
@@ -116,8 +116,6 @@ namespace AIAC
         inline void setWeight(float weight) { m_Weight = weight; }
 
         operator glm::vec3() const { return m_Position; }
-    
-    
 
     private:
         glm::vec3 m_Position;
@@ -132,14 +130,14 @@ namespace AIAC
     public:
         /**
          * @brief Add GOLine to the scene.
-         * 
+         *
          * @param p1 First point of the line.
          * @param p2 Second point of the line.
          * @param weight Weight of the line.
          * @return uint32_t Id of the line.
          */
         static uint32_t Add(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
-        
+
         virtual ~GOLine() = default;
 
         static std::shared_ptr<GOLine> Get(const uint32_t& id);
@@ -162,13 +160,13 @@ namespace AIAC
     public:
         /**
          * @brief Add GOCircle to the scene.
-         * 
+         *
          * @param center Center of the circle.
          * @param radius Radius of the circle.
          * @return uint32_t Id of the circle.
          */
         static uint32_t Add(GOPoint center, float radius);
-        
+
         virtual ~GOCircle() = default;
 
         static std::shared_ptr<GOCircle> Get(const uint32_t& id);
@@ -352,7 +350,11 @@ namespace AIAC
         static std::shared_ptr<GOText> Get(const uint32_t& id);
         static std::vector<std::shared_ptr<GOText>> GetAll();
 
-        std::string GetText() const { return m_Text; }
+        inline const std::string GetText() const { return m_Text; }
+        inline const GOPoint GetAnchor() const { return m_Anchor; }
+        inline const double GetTextSize() const { return m_Size; }
+
+        // inline void setWeight(float weight) { m_Weight = weight; }
 
     private:
         GOPoint m_Anchor;

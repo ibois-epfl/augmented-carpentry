@@ -8,32 +8,66 @@
 
 namespace AIAC
 {
+    // Character stores a character's texture and property
+    struct Character {
+        unsigned int TextureID;  // ID handle of the glyph texture
+        glm::ivec2   Size;       // Size of glyph
+        glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
+        unsigned int Advance;    // Offset to advance to next glyph
+    };
+
+    // Since a TextRenderer has to hold the information of the font (i.e. a list of "struct Character"),
+    // it is wrapped into a class that exporting a static global instance.
+    // The initialization `Init(G)` has to be called before any rendering happening (now it's in `Renderer.Init()`).
+    // When you want to render a text through the TextRenderer directly, use something like:
+    // `TextRenderer::GetInstance().RenderTextOnScreen()` to get the static instance and render the text.
     class TextRenderer {
+
     public:
         TextRenderer() = default;
         ~TextRenderer() = default;
 
-        void Init();
+        /**
+         * @brief Initialize the static TextRenderer instance
+         */
+        static void Init();
 
-        bool IsInitialized() const { return m_Initialized; }
+        /**
+         * @brief Render text in the 3D space, but always facing the screen
+         * @param text Text to show
+         * @param position The anchor of the text
+         * @param color Text color
+         * @param projection The final MVP projection of the scene to show
+         * @param w Width of the Screen
+         * @param h Height of the Screen
+         * @param scale Text scale, default = 1.0f
+         */
+        static void RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 projection, float w, float h, float scale=1.0f);
 
-        void RenderText(std::string text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection);
+        /**
+         * @brief Render text that is parallel to the screen
+         * @param text Text to show
+         * @param x X-axis, (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
+         * @param y Y-axis, (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
+         * @param windowWidth Width of the Screen
+         * @param windowHeight Height of the Screen
+         * @param color Text color
+         * @param scale Text scale, default = 1.0f
+         */
+        static void RenderText(std::string text, float x, float y, float windowWidth, float windowHeight, glm::vec4 color, float scale=1.0f);
+        /**
+         * @brief Get the static instance of the TextRenderer
+         * @return The global instance of TextRenderer
+         */
+        inline static TextRenderer& GetInstance() { return *s_instance; }
 
     public:
-        struct Character {
-            unsigned int TextureID;  // ID handle of the glyph texture
-            glm::ivec2   Size;       // Size of glyph
-            glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
-            unsigned int Advance;    // Offset to advance to next glyph
-        };
-
-        std::map<char, Character> Characters;
-        unsigned int VAO, VBO;
+        static std::map<char, Character> Characters;
 
     private:
-        bool m_Initialized = false;
-        GLuint m_ShaderProgram;
+        static bool s_Initialized;
+        static GLuint s_ShaderProgram;
+        static GLuint s_VAO, s_VBO;
+        static TextRenderer* s_instance;
     };
-
-    static TextRenderer textRenderer;
 }

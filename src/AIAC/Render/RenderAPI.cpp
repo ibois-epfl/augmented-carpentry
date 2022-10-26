@@ -8,10 +8,10 @@
 #include FT_FREETYPE_H
 #include "AIAC/Application.h"
 
-const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
-
 namespace AIAC
 {
+    const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
+
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
     {
         std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
@@ -82,7 +82,8 @@ namespace AIAC
             case _GOMesh:
                 DrawMesh(*std::dynamic_pointer_cast<GOMesh>(goPrimitive)); break;
             case _GOText:
-                DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
+//                throw std::runtime_error("DrawGO: GOText is not supported");
+
             default:
                 break;
         }
@@ -449,16 +450,25 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText) {
-        // FIXME: Fix the textRender, which is either not shown or overriding the scene)
-        //        textRenderer.RenderText(goText.GetText(), 0, 0, 0.1, goText.GetColor(), glm::mat4(1.0f));
+
+    void DrawText(const GOText& goText, const glm::mat4& projection, const float windowWidth, const float windowHeight) {
+        TextRenderer::RenderTextIn3DSpace(
+                goText.GetText(),
+                goText.GetAnchor(),
+                goText.GetColor(),
+                projection,
+                windowWidth,
+                windowHeight);
+
     }
 
     void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts)
     {
-        // FIXME: implement text
-        for (auto &goText: goTexts) {
-            DrawText(*goText);
-        }
+        // FIXME: Detect current view port size and projection matrix?
+        //        for (auto &goText: goTexts) {
+        //            DrawText(*goText);
+        //        }
     }
+
+
 }

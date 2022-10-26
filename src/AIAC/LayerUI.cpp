@@ -171,7 +171,8 @@ namespace AIAC
             m_LastMouseRPos = mousePos;
         }
 
-        CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetGlobalView(), m_SceneViewportImTexture);
+        CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetGlobalView(), m_SceneViewportImTexture, viewportSize);
+
         ImGui::ImageButton(m_SceneViewportImTexture.ID, viewportSize, ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
         if(ImGui::IsItemHovered()) {
             if(ImGui::IsMouseDown(0) && !m_IsMouseLDown) {
