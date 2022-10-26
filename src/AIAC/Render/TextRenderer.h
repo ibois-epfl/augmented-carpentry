@@ -47,6 +47,7 @@ namespace AIAC
          */
         static void RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, float scale=1.0f);
 
+    private:
         /**
          * @brief Render text that is parallel to the screen
          * @param text Text to show
@@ -56,11 +57,6 @@ namespace AIAC
          * @param scale Text scale, default = 1.0f
          */
         static void RenderText(std::string text, float x, float y, glm::vec4 color, float scale=1.0f);
-        /**
-         * @brief Get the static instance of the TextRenderer
-         * @return The global instance of TextRenderer
-         */
-        inline static TextRenderer& GetInstance() { return *s_instance; }
 
     public:
         static std::map<char, Character> Characters;

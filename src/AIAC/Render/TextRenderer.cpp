@@ -34,7 +34,7 @@ namespace AIAC{
         }
 
         // find path to font
-        std::string font_name = "assets/fonts/Antonio-Bold.ttf";
+        std::string font_name = "assets/fonts/UbuntuMono-R.ttf";
         if (font_name.empty()) {
             std::cerr << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
             throw(std::runtime_error("ERROR::FREETYPE: Failed to load font_name"));

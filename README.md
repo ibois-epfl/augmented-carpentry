@@ -30,8 +30,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Add a function DrawCylinder() to the RenderAPI
 > - [x] Add a function DrawPolyline() to the RenderAPI
 > - [x] Add a function DrawTriangle() to the RenderAPI
-> - [ ] Add a function DrawText() to the RenderAPI
->   - [ ] Fix the textRender, which is either not shown or overriding the scene
+> - [x] Add a function DrawText() to the RenderAPI
+> - [x] Fix the textRender, which is either not shown or overriding the scene
 > - [ ] Cache objects in RenderAPI for speed up (option)
 
 

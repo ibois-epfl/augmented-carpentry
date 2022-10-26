@@ -322,6 +322,7 @@ namespace AIAC
         void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; }
         void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
         void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; }
+        // FIXME: Override the SetColor function for Mesh
 
     private:
         std::vector<glm::vec3> m_Vertices;
@@ -356,8 +357,6 @@ namespace AIAC
         inline const std::string GetText() const { return m_Text; }
         inline const GOPoint GetAnchor() const { return m_Anchor; }
         inline const double GetTextSize() const { return m_Size; }
-
-        // inline void setWeight(float weight) { m_Weight = weight; }
 
     private:
         GOPoint m_Anchor;
