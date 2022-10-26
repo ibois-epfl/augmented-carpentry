@@ -17,6 +17,7 @@ namespace AIAC{
     GLuint TextRenderer::s_ShaderProgram;
     GLuint TextRenderer::s_VAO, TextRenderer::s_VBO;
     std::map<char, Character> TextRenderer::Characters;
+    glm::mat4 TextRenderer::s_Projection = glm::mat4(1.0f);
 
     void TextRenderer::Init() {
         s_instance = new TextRenderer();
@@ -106,31 +107,50 @@ namespace AIAC{
 
     }
 
-    void TextRenderer::RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 projection, float w, float h, float scale){
-        auto coordProj = projection * glm::vec4(position, 1.0f);
+    void TextRenderer::RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, float scale)
+    {
+        if(!s_Initialized){
+            throw std::runtime_error("Try to render text before init.");
+        }
+
+        if(s_Projection == glm::mat4(1.0f)){
+            AIAC_WARN("Projection matrix is not set.");
+        }
+
+        GLint viewport[4];
+        glGetIntegerv( GL_VIEWPORT, viewport);
+        int w = viewport[2];
+        int h = viewport[3];
+
+        auto coordProj = s_Projection * glm::vec4(position, 1.0f);
         if (coordProj.w != 0){
             coordProj.w = 1.0 / coordProj.w;
             coordProj.x *= coordProj.w;
             coordProj.y *= coordProj.w;
             coordProj.z *= coordProj.w;
         }
-        RenderText(text,
-                   (coordProj.x / 2 + 0.5) * w, (coordProj.y / 2 + 0.5) * h,
-                   w, h, color,
-                   scale * coordProj.w * 10);
+        if(scale * coordProj.w * 10 > 0) {
+            RenderText(text,
+                       (coordProj.x / 2 + 0.5) * w, (coordProj.y / 2 + 0.5) * h,
+                       color,
+                       scale * coordProj.w * 10);
+        }
     }
 
-    void TextRenderer::RenderText(std::string text, float x, float y, float windowWidth, float windowHeight, glm::vec4 color, float scale)
+    void TextRenderer::RenderText(std::string text, float x, float y, glm::vec4 color, float scale)
     {
         if(!s_Initialized){
             throw std::runtime_error("Try to render text before init.");
         }
 
+        GLint viewport[4];
+        glGetIntegerv( GL_VIEWPORT, viewport);
+
         GLint prevProgram;
         glGetIntegerv(GL_PROGRAM, &prevProgram);
         glUseProgram(s_ShaderProgram);
         glUniform4f(glGetUniformLocation(s_ShaderProgram, "textColor"), color.r, color.g, color.b, color.a);
-        glm::mat4 orthoProjection = glm::ortho(0.0f, windowWidth, 0.0f, windowHeight);
+        glm::mat4 orthoProjection = glm::ortho(0.0f, float(viewport[2]), 0.0f, float(viewport[3]));
         glUniformMatrix4fv(glGetUniformLocation(s_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
 
         glActiveTexture(GL_TEXTURE0);

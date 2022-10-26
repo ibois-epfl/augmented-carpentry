@@ -36,9 +36,9 @@ namespace AIAC
         uint32_t triangle2 = GOTriangle::Add(*pt2, *pt3, *pt1);
         uint32_t triangle3 = GOTriangle::Add(*pt3, *pt1, *pt2);
         uint32_t mesh1 = GOMesh::Add(std::vector<glm::vec3>{*pt1, *pt2, *pt3}, std::vector<uint32_t>{0,1,2});
-        uint32_t text1 = GOText::Add("Hello World1", *pt1, 0.5f);
-        uint32_t text2 = GOText::Add("Hello World2", *pt2, 0.5f);
-        uint32_t text3 = GOText::Add("Hello World3", *pt3, 0.5f);
+        uint32_t text1 = GOText::Add("Hello World1", *pt1, 1.0f);
+        uint32_t text2 = GOText::Add("Hello World2", *pt2, 1.0f);
+        uint32_t text3 = GOText::Add("Hello World3", *pt3, 1.0f);
         // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
 
     }

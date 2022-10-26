@@ -331,16 +331,11 @@ namespace AIAC
         glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
+        // TextRenderer::SetProjection(finalPoseMatrix); // This is not needed if using DrawAllGOs()
+        // GOText::Add("center", DigitalModel.GetBboxCenter(), 1.0f);
+
         // Draw All objects
         DrawAllGOs(finalPoseMatrix);
-
-        TextRenderer::RenderTextIn3DSpace(
-                "center",
-                DigitalModel.GetBboxCenter(),
-                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),
-                finalPoseMatrix,
-                m_GlobalViewWidth,
-                m_GlobalViewHeight);
 
         // Bind back to the main framebuffer
         glUseProgram(m_BasicShaderProgram);

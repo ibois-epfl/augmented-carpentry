@@ -249,6 +249,14 @@ namespace AIAC
         return idGO;
     }
 
+    uint32_t GOText::Add(std::string text, glm::vec3 anchor, double size)
+    {
+        auto ptrGO = std::make_shared<GOText>(GOText(text, anchor, size));
+        uint32_t idGO = ptrGO->GetId();
+        AIAC_GOREG->Register(idGO, ptrGO);
+        return idGO;
+    }
+
     std::shared_ptr<GOText> GOText::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOText>(id);

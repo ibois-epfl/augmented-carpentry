@@ -33,28 +33,29 @@ namespace AIAC
         static void Init();
 
         /**
+         * @brief set the projection matrix for rendering text in 3D space
+         */
+        static inline void SetProjection(glm::mat4 projection) { s_Projection = projection; }
+
+        /**
          * @brief Render text in the 3D space, but always facing the screen
          * @param text Text to show
          * @param position The anchor of the text
          * @param color Text color
          * @param projection The final MVP projection of the scene to show
-         * @param w Width of the Screen
-         * @param h Height of the Screen
          * @param scale Text scale, default = 1.0f
          */
-        static void RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 projection, float w, float h, float scale=1.0f);
+        static void RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, float scale=1.0f);
 
         /**
          * @brief Render text that is parallel to the screen
          * @param text Text to show
          * @param x X-axis, (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
          * @param y Y-axis, (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
-         * @param windowWidth Width of the Screen
-         * @param windowHeight Height of the Screen
          * @param color Text color
          * @param scale Text scale, default = 1.0f
          */
-        static void RenderText(std::string text, float x, float y, float windowWidth, float windowHeight, glm::vec4 color, float scale=1.0f);
+        static void RenderText(std::string text, float x, float y, glm::vec4 color, float scale=1.0f);
         /**
          * @brief Get the static instance of the TextRenderer
          * @return The global instance of TextRenderer
@@ -69,5 +70,6 @@ namespace AIAC
         static GLuint s_ShaderProgram;
         static GLuint s_VAO, s_VBO;
         static TextRenderer* s_instance;
+        static glm::mat4 s_Projection;
     };
 }

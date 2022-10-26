@@ -49,9 +49,11 @@ namespace AIAC
 
     void DrawAllGOs(glm::mat4 projection)
     {
-               std::vector<std::shared_ptr<GOPrimitive>> gos;
-               AIAC_GOREG->GetAllGOs(gos);
-               DrawGOs(gos);
+        TextRenderer::SetProjection(projection);
+
+        std::vector<std::shared_ptr<GOPrimitive>> gos;
+        AIAC_GOREG->GetAllGOs(gos);
+        DrawGOs(gos);
     }
 
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
@@ -82,7 +84,7 @@ namespace AIAC
             case _GOMesh:
                 DrawMesh(*std::dynamic_pointer_cast<GOMesh>(goPrimitive)); break;
             case _GOText:
-//                throw std::runtime_error("DrawGO: GOText is not supported");
+                DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
 
             default:
                 break;
@@ -451,24 +453,27 @@ namespace AIAC
     }
 
 
-    void DrawText(const GOText& goText, const glm::mat4& projection, const float windowWidth, const float windowHeight) {
+    void DrawText(const GOText& goText, const glm::mat4& projection) {
+        if(projection != glm::mat4(1.0f)){
+            TextRenderer::SetProjection(projection);
+        }
         TextRenderer::RenderTextIn3DSpace(
                 goText.GetText(),
                 goText.GetAnchor(),
                 goText.GetColor(),
-                projection,
-                windowWidth,
-                windowHeight);
+                goText.GetTextSize());
 
     }
 
-    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts)
-    {
-        // FIXME: Detect current view port size and projection matrix?
-        //        for (auto &goText: goTexts) {
-        //            DrawText(*goText);
-        //        }
+    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts, const glm::mat4& projection) {
+        if(projection != glm::mat4(1.0f)){
+            TextRenderer::SetProjection(projection);
+        }
+        for (auto &goText: goTexts) {
+            if(!goText->IsVisible()){
+                continue;
+            }
+            DrawText(*goText, projection);
+        }
     }
-
-
 }

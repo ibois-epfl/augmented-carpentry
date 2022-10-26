@@ -119,6 +119,8 @@ namespace AIAC
 
     private:
         glm::vec3 m_Position;
+
+    friend class GOText;
     };
 
 
@@ -344,6 +346,7 @@ namespace AIAC
          * @return uint32_t Id of the text.
          */
         static uint32_t Add(std::string text, GOPoint anchor, double size);
+        static uint32_t Add(std::string text, glm::vec3 anchor, double size);
 
         virtual ~GOText() = default;
 
@@ -360,5 +363,6 @@ namespace AIAC
         GOPoint m_Anchor;
         std::string m_Text;
         double m_Size;
+
     };
 }
