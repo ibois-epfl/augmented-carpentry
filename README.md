@@ -16,7 +16,7 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Implement padding for 3D scene viewer
 > - [x] Test if changing map on the go breaks the slam or not
 
-> - [ ] Make the Camera of the viewport bigger
+> - [x] Make the Camera of the viewport bigger
 
 > - [ ] Refactor the Render part, put everything in one folder and extract/rename render API header.
 > - [ ] Add a function DrawCircle() to the RenderAPI
@@ -459,8 +459,8 @@ AIAC_GOREG->Unregister(id)
 ```
 
 
-### Renderer API
-The renderer API is implemented in `GlUtils.h`, which provides an easier way to draw 3d objects with OpenGL.
+### OpenGL Utilities
+The OpenGL Utilities is implemented in `GlUtils.h`, which provides an easier way to draw 3d objects with OpenGL.
 There are 3 types of object that can be drawn: `Point`, `Line`, and `Triangle`.
 #### Point
 ```c++
@@ -526,3 +526,43 @@ void DrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<u
 - `vertices`: A vector of 3d points, indicate the position of the vertices.
 - `indices`: A vector of all triangle's indices.
 - `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the vertices.
+
+### Render API
+Render API is a collection of functions that are used for rendering 3D objects (mainly for rendering GO primitives
+and the map). These functions can be call directly as long as `RenderAPI.h`is included.
+
+For each GO primitives, a corresponding function is provided. For example, `DrawPoint()` is for`GOPoint` and `DrawMesh`
+is for `GOMesh`. Otherwise, you can also call the one-fits-all function (except for `GOText`) `DrawGO()` and `DrawGOs()`, which
+detects the type of the GO primitive automatically.
+
+
+### Text Rendering
+Rendering text through OpenGL is quite tricky. The `TextRenderer.h` is here to handle this.
+The `TextRenderer` **has to be initialized**, after that, static functions can be call for rendering texts.
+```c++
+void Renderer::Init() {
+    ...
+    TextRenderer::Init()
+    ...
+}
+
+void myFunction() {
+    // Rendering text at (0, 3, 0)
+    TextRenderer::RenderTextIn3DSpace(
+                "center",                           // Text to show
+                glm::vec3(0.0f, 3.0f, 0.0f),        // Position in 3D space
+                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),  // Color
+                finalPoseMatrix,                    // The MVP projection of the scene
+                canvasWidth,                        // The width of the canvas
+                canvasHeight);                      // The height of the canvas
+    
+    // Rendering the text on a fixed position on the screen.
+    // (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
+    TextRenderer::RenderText(
+            "center",                               // Text to show
+            150.0f, 150.0f,                         // Position on the screen
+            300.0f, 300.0f,                         // Width and height of the canvas
+            glm::vec4(0.0f, 0.0f, 0.0f, 0.7f));     // Color
+}
+
+```

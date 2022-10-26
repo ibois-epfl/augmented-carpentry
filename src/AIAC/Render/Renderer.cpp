@@ -336,13 +336,17 @@ namespace AIAC
         p.setWeight(3.0f);
         DrawPoint(p);
 
-        TextRenderer::RenderTextIn3DSpace(
-                "center",
-                DigitalModel.GetBboxCenter(),
-                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),
-                finalPoseMatrix,
-                m_GlobalViewWidth,
-                m_GlobalViewHeight);
+//        TextRenderer::RenderTextIn3DSpace(
+//                "center",
+//                DigitalModel.GetBboxCenter(),
+//                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),
+//                finalPoseMatrix,
+//                m_GlobalViewWidth,
+//                m_GlobalViewHeight);
+
+        auto centerText = GOText("center", DigitalModel.GetBboxCenter(), 1.0);
+        centerText.SetColor(glm::vec4(0,0,0,0.7));
+        DrawText(centerText, finalPoseMatrix, m_GlobalViewWidth, m_GlobalViewHeight);
 
         // Bind back to the main framebuffer
         glUseProgram(m_BasicShaderProgram);

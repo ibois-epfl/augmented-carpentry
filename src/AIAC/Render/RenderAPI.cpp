@@ -163,8 +163,9 @@ namespace AIAC
                 DrawTriangle(*std::static_pointer_cast<GOTriangle>(goPrimitive)); break;
             case _GOMesh:
                 DrawMesh(*std::static_pointer_cast<GOMesh>(goPrimitive)); break;
-//            case _GOText:
-//                DrawText(*std::static_pointer_cast<GOText>(goPrimitive)); break;
+            case _GOText:
+                throw std::runtime_error("DrawGO: GOText is not supported");
+
             default:
                 break;
         }
@@ -417,9 +418,15 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText, const glm::mat4 cameraProjection) {
-//        glm::vec4 axis = cameraProjection * glm::vec4(goText.GetAnchor().GetPosition(), 1.0);
-//        textRenderer.RenderText(goText.GetText(), goText.GetAnchor(), glm::vec4(0,0,0,1), 0.2, cameraProjection);
+    void DrawText(const GOText& goText, const glm::mat4& projection, const float windowWidth, const float windowHeight) {
+        TextRenderer::RenderTextIn3DSpace(
+                goText.GetText(),
+                goText.GetAnchor(),
+                goText.GetColor(),
+                projection,
+                windowWidth,
+                windowHeight);
+
     }
 
     void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts) {
