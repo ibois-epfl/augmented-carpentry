@@ -466,21 +466,20 @@ void Renderer::Init() {
 }
 
 void myFunction() {
+    // First setting the current projection matrix
+    TextRenderer::SetProjection(projection); // The MVP projection of the scene
+    
     // Rendering text at (0, 3, 0)
     TextRenderer::RenderTextIn3DSpace(
                 "center",                           // Text to show
                 glm::vec3(0.0f, 3.0f, 0.0f),        // Position in 3D space
-                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),  // Color
-                finalPoseMatrix,                    // The MVP projection of the scene
-                canvasWidth,                        // The width of the canvas
-                canvasHeight);                      // The height of the canvas
+                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f)); // Color
     
     // Rendering the text on a fixed position on the screen.
     // (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
     TextRenderer::RenderText(
             "center",                               // Text to show
             150.0f, 150.0f,                         // Position on the screen
-            300.0f, 300.0f,                         // Width and height of the canvas
             glm::vec4(0.0f, 0.0f, 0.0f, 0.7f));     // Color
 }
 

@@ -107,6 +107,6 @@ namespace AIAC
     void DrawMesh(const GOMesh& goMesh);
     void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes);
 
-    void DrawText(const GOText& goText, const glm::mat4& projection, const float windowWidth, const float windowHeight);
-    void DrawTexts(std::vector<GOText> goTexts);
+    void DrawText(const GOText& goText, const glm::mat4& projection = glm::mat4(1.0f));
+    void DrawTexts(std::vector<GOText> goTexts, const glm::mat4& projection = glm::mat4(1.0f));
 }
