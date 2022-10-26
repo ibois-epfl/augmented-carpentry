@@ -47,6 +47,7 @@ namespace AIAC {
         void ShowSceneViewport();
         void ShowCombineMapPopup();
         void ShowMappingPopup();
+        void ShowCamCalibPopup();
         void ShowSaveMapFileDialog();
         void ShowMapFileDialog(char *path);
 

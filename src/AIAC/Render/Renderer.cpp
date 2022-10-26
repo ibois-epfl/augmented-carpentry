@@ -20,9 +20,6 @@ namespace AIAC
 {
     void Renderer::Init()
     {
-        glGenVertexArrays(1, &m_VAO);
-        glBindVertexArray(m_VAO);
-
         // Create and compile our GLSL program from the shaders
         char* vertexFilePath = (char*)"assets/opengl/SimpleTransform.vs";
         char* fragmentFilePath = (char*)"assets/opengl/SingleColor.fs";
@@ -48,7 +45,6 @@ namespace AIAC
                  0,                  0,             (-zF - zN)/(zF - zN),  -2 * zF * zN / (zF - zN),
                  0,                  0,                               -1,                         0
         };
-
         glm::mat4 perspectiveProjMatrix = glm::transpose(glm::make_mat4(perspectiveProjMatrixData));
 
         // opencv and opengl has different direction on y and z axis
@@ -58,47 +54,20 @@ namespace AIAC
 
         m_ProjMatrix = perspectiveProjMatrix * scalarMatrix;
 
+
         // Load meshes
         ReloadMeshes();
 
-        GLuint renderedTexture;
-        glGenTextures(1, &renderedTexture);
-
-        // "Bind" the newly created texture : all future texture functions will modify this texture
-        glBindTexture(GL_TEXTURE_2D, renderedTexture);
-
-        // Give an empty image to OpenGL ( the last "0" )
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(), 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-        // Poor filtering. Needed !
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-        // The depth buffer
-        GLuint depthrenderbuffer;
-        glGenRenderbuffers(1, &depthrenderbuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
-
-        // Set "renderedTexture" as our colour attachment #0
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, renderedTexture, 0);
-
-        // Set the list of draw buffers.
-        GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
-        glDrawBuffers(1, DrawBuffers);
-
-        // Enable alpha channel for transparency
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
 
         // Save variable for later use
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
 
+
         // Initialize the static interface of TextRenderer
         TextRenderer::Init();
 
+        // Initialize sub views
         InitMappingView();
         InitGlobalView();
     }
@@ -106,35 +75,7 @@ namespace AIAC
 
     void Renderer::InitGlobalView()
     {
-        glGenFramebuffers(1, &m_GlobalViewFrameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
-
-        // The texture we're going to render to
-        glGenTextures(1, &m_GlobalViewTexture);
-
-        // "Bind" the newly created texture : all future texture functions will modify this texture
-        glBindTexture(GL_TEXTURE_2D, m_GlobalViewTexture);
-
-        // Give an empty image to OpenGL ( the last "0" )
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_GlobalViewWidth, m_GlobalViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-        // Poor filtering. Needed !
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-        // The depth buffer
-        GLuint depthrenderbuffer;
-        glGenRenderbuffers(1, &depthrenderbuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_GlobalViewWidth, m_GlobalViewHeight);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
-
-        // Set "renderedTexture" as our colour attachement #0
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GlobalViewTexture, 0);
-
-        // Set the list of draw buffers.
-        GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
-        glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
+        m_GlobalView.Init();
 
         // build camera visualization object, which is a pyramid
         const float CAMERA_SIZE_W = 1.6, CAMERA_SIZE_H = 1.2;
@@ -158,7 +99,7 @@ namespace AIAC
 
         m_GlobalProjMatrix = glm::perspective(
                 glm::radians(35.0f),
-                m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,100.0f
+                float(m_GlobalView.GetW()) / float(m_GlobalView.GetH()), 0.1f, 100.0f
         );
 
         m_GlobalCamMatrix = glm::lookAt(
@@ -170,34 +111,7 @@ namespace AIAC
 
     void Renderer::InitMappingView()
     {
-        glGenFramebuffers(1, &m_MappingViewFrameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, m_MappingViewFrameBuffer);
-
-        // The texture we're going to render to
-        glGenTextures(1, &m_MappingViewTexture);
-
-        // "Bind" the newly created texture : all future texture functions will modify this texture
-        glBindTexture(GL_TEXTURE_2D, m_MappingViewTexture);
-
-        // Give an empty image to OpenGL ( the last "0" )
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_MappingViewWidth, m_MappingViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-        // Poor filtering. Needed !
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-        // The depth buffer
-        glGenRenderbuffers(1, &m_GlobalViewDepthBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_MappingViewWidth, m_MappingViewHeight);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
-
-        // Set "renderedTexture" as our colour attachement #0
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_MappingViewTexture, 0);
-
-        // Set the list of draw buffers.
-        GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
-        glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
+        m_MappingView.Init();
     }
 
     void Renderer::ReloadMeshes()
@@ -216,8 +130,6 @@ namespace AIAC
 
     void Renderer::OnRender()
     {
-        glUseProgram(m_BasicShaderProgram);
-
         // The global view is needed in both mapping and inference
         RenderGlobalView();
 
@@ -228,40 +140,14 @@ namespace AIAC
             return;
         }
 
-        // Change the render target to the main scene
-        // TODO: probably it will be better to use a stack to tackle such scene switch?
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-        RenderCameraFrame();
-
-        // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
-        glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
-
-        // Draw the essential objects: map, point cloud map and digital model !
-        // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glm::vec4 edgeColor;
-        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
-            if(ShowPointCloudMap){
-                PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-            }
-            if(ShowDigitalModel){
-                DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-                DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-            }
-            for (auto& mesh : Meshes) {
-                mesh.DrawEdges(m_DefaultEdgeColor);
-            }
-            DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
-        }
+        RenderMainView();
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
-        m_GlobalViewWidth = w;
-        m_GlobalViewHeight = h;
+        m_GlobalView.SetSize(w, h);
         m_GlobalProjMatrix = glm::perspective(
                 glm::radians(50.0f),
-                m_GlobalViewWidth / m_GlobalViewHeight, 0.1f,300.0f
+                w / h, 0.1f,300.0f
         );
     }
 
@@ -283,29 +169,7 @@ namespace AIAC
     }
 
     void Renderer::RenderGlobalView() {
-        glBindFramebuffer(GL_FRAMEBUFFER, m_GlobalViewFrameBuffer);
-        glViewport(0, 0, m_GlobalViewWidth, m_GlobalViewHeight);
-
-        // "Bind" the newly created texture : all future texture functions will modify this texture
-        glBindTexture(GL_TEXTURE_2D, m_GlobalViewTexture);
-
-        // Give an empty image to OpenGL ( the last "0" )
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, m_GlobalViewWidth, m_GlobalViewHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-        // Poor filtering. Needed !
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-        // The depth buffer
-        glBindRenderbuffer(GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_GlobalViewWidth, m_GlobalViewHeight);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_GlobalViewDepthBuffer);
-
-        // Set "renderedTexture" as our colour attachment #0
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GlobalViewTexture, 0);
-
-        glClearColor(1.0, 1.0, 1.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        m_GlobalView.Activate();
 
         // visualize map
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
@@ -331,9 +195,6 @@ namespace AIAC
         glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        // TextRenderer::SetProjection(finalPoseMatrix); // This is not needed if using DrawAllGOs()
-        // GOText::Add("center", DigitalModel.GetBboxCenter(), 1.0f);
-
         // Draw All objects
         DrawAllGOs(finalPoseMatrix);
 
@@ -343,9 +204,7 @@ namespace AIAC
     }
 
     void Renderer::RenderMappingView() {
-        glBindFramebuffer(GL_FRAMEBUFFER, m_MappingViewFrameBuffer);
-        glClearColor(1.0, 1.0, 1.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        m_MappingView.Activate();
 
         RenderCameraFrame();
 
@@ -357,6 +216,31 @@ namespace AIAC
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    void Renderer::RenderMainView() {
+        RenderCameraFrame();
+
+        // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
+        glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+
+        // Draw the essential objects: map, point cloud map and digital model !
+        // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glm::vec4 edgeColor;
+        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
+            if(ShowPointCloudMap){
+                PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+            }
+            if(ShowDigitalModel){
+                DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+                DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+            }
+            for (auto& mesh : Meshes) {
+                mesh.DrawEdges(m_DefaultEdgeColor);
+            }
+            DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+        }
     }
 
     void Renderer::RenderCameraFrame() {
