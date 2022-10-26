@@ -161,7 +161,7 @@ namespace AIAC
         );
 
         m_GlobalCamMatrix = glm::lookAt(
-                glm::vec3(50, 50, 50),   // the position of your camera, in world space
+                glm::vec3(20, 20, 20),   // the position of your camera, in world space
                 DigitalModel.GetBboxCenter(),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
@@ -255,7 +255,6 @@ namespace AIAC
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
-        cout << w << " " << h << endl;
         m_GlobalViewWidth = w;
         m_GlobalViewHeight = h;
         m_GlobalProjMatrix = glm::perspective(
@@ -332,43 +331,18 @@ namespace AIAC
         DrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        cout << m_GlobalViewWidth << " " << m_GlobalViewHeight << endl;
-
         auto p = GOPoint(DigitalModel.GetBboxCenter());
-        p.SetColor(glm::vec4(0,0,0,1));
-        p.setWeight(15.0f);
+        p.SetColor(glm::vec4(0,0,0,0.7));
+        p.setWeight(3.0f);
         DrawPoint(p);
 
-        cout << "DigitalModel's Bbox center relate to projection:" << endl;
-//        cout << glm::to_string(DigitalModel.GetBboxCenter()) << endl;
-//        GLdouble objX = DigitalModel.GetBboxCenter().x, objY = DigitalModel.GetBboxCenter().y, objZ = DigitalModel.GetBboxCenter().z;
-//        GLdouble winX, winY, winZ;
-//        GLdouble model, proj;
-//        GLint view;
-//        glGetDoublev(GL_MODELVIEW_MATRIX, &model);
-//        glGetDoublev(GL_PROJECTION_MATRIX, &proj);
-//        glGetIntegerv(GL_VIEWPORT, &view);
-//
-//        gluProject(objX, objY, objZ, &model, &proj, &view, &winX, &winY, &winZ);
-//        cout << "winX:" << winX << " winY:" << winY << " winZ:" << winZ << endl
-
-        // below is the testing code for rendering text in 3d
-        cout << "GlobalCamMatrix:" << glm::to_string(m_GlobalCamMatrix) << endl;
-        auto coordCameraView = m_GlobalCamMatrix * glm::vec4(DigitalModel.GetBboxCenter(), 1.0f);
-        cout << "coordCameraView:" << glm::to_string(coordCameraView) << endl;
-        auto coordFinalView = m_GlobalProjMatrix * coordCameraView;
-        cout << "coordFinalView:" << glm::to_string(coordFinalView) << endl;
-        coordFinalView.w = -coordCameraView.z;
-        if (coordFinalView.w != 0){
-            coordFinalView.w = 1.0 / coordFinalView.w;
-            coordFinalView.x *= coordFinalView.w;
-            coordFinalView.y *= coordFinalView.w;
-            coordFinalView.z *= coordFinalView.w;
-        }
-        cout << "norm coordFinalView:" << glm::to_string(coordFinalView) << endl;
-
-        TextRenderer::RenderTextOnScreen("ffffff", coordFinalView.x, coordFinalView.y, m_GlobalViewWidth, m_GlobalViewHeight, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-//        DrawText(GOText("test", GOPoint(DigitalModel.GetBboxCenter()), 10), m_GlobalCamMatrix);
+        TextRenderer::RenderTextIn3DSpace(
+                "center",
+                DigitalModel.GetBboxCenter(),
+                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),
+                finalPoseMatrix,
+                m_GlobalViewWidth,
+                m_GlobalViewHeight);
 
         // Bind back to the main framebuffer
         glUseProgram(m_BasicShaderProgram);
