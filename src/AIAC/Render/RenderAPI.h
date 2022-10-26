@@ -45,6 +45,10 @@ namespace AIAC
      */
     void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
 
+    /**
+     * @brief Draw a GOPoint
+     * @param goPoint The point to draw.
+     */
     void DrawPoint(const GOPoint& goPoint);
     void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints);
 
@@ -103,6 +107,6 @@ namespace AIAC
     void DrawMesh(const GOMesh& goMesh);
     void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes);
 
-    void DrawText(const GOText& goText);
+    void DrawText(const GOText& goText, const glm::mat4& projection, const float windowWidth, const float windowHeight);
     void DrawTexts(std::vector<GOText> goTexts);
 }

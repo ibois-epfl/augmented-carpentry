@@ -434,8 +434,11 @@ void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector
 - `colors`: A RGBA(0~1.0) color, can be either a single `glm::vec4` or a vector with the same size of the vertices.
 
 #### RenderAPI.h
+Render API is a collection of functions that are used for rendering 3D objects (GO primitives and the map).
+These functions can be call directly as long as `RenderAPI.h`is included.
+
 ##### GO
-An implicit type casting is implemented, simply call the `DrawGo` function in the `Render.cpp`'s function `OnRender()`:
+An implicit type casting is implemented, simply call the `DrawGO` function in the `Render.cpp`'s function `OnRender()`:
 ```c++
 void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
 void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
@@ -449,6 +452,38 @@ void DrawTypes(const std::vector<std::shared_ptr<GOType>>& goTypes);
 // For example, GOLine can be drawn with
 void DrawLine(const GOLine& goLine);
 void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines);
+```
+
+
+#### TextRenderer.h
+Rendering text through OpenGL is quite tricky. The `TextRenderer.h` is here to handle this.
+The `TextRenderer` **has to be initialized**, after that, static functions can be call for rendering texts.
+```c++
+void Renderer::Init() {
+    ...
+    TextRenderer::Init()
+    ...
+}
+
+void myFunction() {
+    // Rendering text at (0, 3, 0)
+    TextRenderer::RenderTextIn3DSpace(
+                "center",                           // Text to show
+                glm::vec3(0.0f, 3.0f, 0.0f),        // Position in 3D space
+                glm::vec4(0.0f, 0.0f, 0.0f, 0.7f),  // Color
+                finalPoseMatrix,                    // The MVP projection of the scene
+                canvasWidth,                        // The width of the canvas
+                canvasHeight);                      // The height of the canvas
+    
+    // Rendering the text on a fixed position on the screen.
+    // (0, 0) is the left-bottom corner and (windowWidth, windowHeight) is the right-top corner
+    TextRenderer::RenderText(
+            "center",                               // Text to show
+            150.0f, 150.0f,                         // Position on the screen
+            300.0f, 300.0f,                         // Width and height of the canvas
+            glm::vec4(0.0f, 0.0f, 0.0f, 0.7f));     // Color
+}
+
 ```
 
 ##### Slam Map
