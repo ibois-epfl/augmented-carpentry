@@ -214,6 +214,28 @@ namespace AIAC
         ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
         ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
 
+        ImGui::BeginChild("camera_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+            if(ImGui::Button("Start Calibration")){
+                AIAC_APP.GetRenderer()->StartCamCalib();
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Open Calib File")) {
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
+            }
+            if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+
+            ImGui::PopStyleColor();
+        ImGui::EndChild();
+
         Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
         AIAC::ImTexture frameImTexture = frame.GetImTexture();
         ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
@@ -277,7 +299,7 @@ namespace AIAC
             if(ImGui::Button("Combine Map")){
                 m_IsCombiningMap = true;
             }
-        ImGui::PopStyleColor();
+            ImGui::PopStyleColor();
         ImGui::EndChild();
 
         ImGui::Checkbox("Enhance Photo", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToEnhance);
@@ -302,6 +324,7 @@ namespace AIAC
         ImGui::Begin("Mapping", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
             CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetMappingView(), m_MappingViewImTexture);
+            // TODO: use config to store the size, and set glViewPort before rendering
             ImGui::ImageButton(m_MappingViewImTexture.ID, ImVec2(600, 442), ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
 
             ImGui::SameLine();
@@ -339,6 +362,52 @@ namespace AIAC
             }
         ImGui::End();
     }
+
+    void LayerUI::ShowCamCalibPopup()
+    {
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y));
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        ImGui::Begin("Camera Calibration", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
+
+        CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetMappingView(), m_MappingViewImTexture);
+        ImGui::ImageButton(m_MappingViewImTexture.ID, ImVec2(600, 442), ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
+
+        ImGui::SameLine();
+        ImGui::BeginChild("mapping_info_child", ImVec2(0, 0), false);
+        ImVec2 sideBarViewportSize = ImGui::GetContentRegionAvail();
+        ImGui::BeginChild("global_view", ImVec2(sideBarViewportSize.x, sideBarViewportSize.x * 3 / 4 + 20), true);
+        ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+        viewportSize = ImVec2(viewportSize.x, viewportSize.y - 24);
+        AIAC_APP.GetRenderer()->SetGlobalViewSize(viewportSize.x, viewportSize.y);
+        SetGlobalViewUI(viewportSize);
+        ImGui::EndChild();
+
+        sideBarViewportSize = ImGui::GetContentRegionAvail();
+        ImGui::BeginChild("mapping_menu", sideBarViewportSize, true);
+        ImGui::Text("Map Points: %u", AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->map_points.size());
+        ImGui::Text("Map Markers: %lu", AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->map_markers.size());
+        if(ImGui::Button("Save")){
+            m_IsSavingMap = true;
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("Cancel")){
+            AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
+            AIAC_APP.GetRenderer()->StopMapping();
+            m_IsSavingMap = false;
+        }
+        ImGui::EndChild();
+        ImGui::EndChild();
+
+        if (ImGui::BeginPopupContextWindow())
+        {
+            if (ImGui::Selectable("Clear"))
+            {
+            }
+            ImGui::EndPopup();
+        }
+        ImGui::End();
+    }
+
     void LayerUI::ShowCombineMapPopup()
     {
 //        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.3, ImGui::GetIO().DisplaySize.y * 0.3));

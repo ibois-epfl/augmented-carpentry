@@ -25,7 +25,7 @@ file(GLOB AIAC_SRC
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ACApp.cpp
     ${AIAC_SRC}
-    )
+        src/AIAC/Render/Viewport.cpp src/AIAC/Render/Viewport.h)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
