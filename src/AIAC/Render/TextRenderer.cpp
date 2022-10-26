@@ -54,7 +54,7 @@ namespace AIAC{
         for (unsigned char c = 0; c < 128; c++) {
             // Load character glyph
             if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-                std::cout << "ERROR::FREETYPE: Failed to load Glyph" << std::endl;
+                std::cerr << "ERROR::FREETYPE: Failed to load Glyph" << std::endl;
                 continue;
             }
             // generate texture
@@ -106,15 +106,21 @@ namespace AIAC{
 
     }
 
-    void TextRenderer::RenderTextOn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 finalProjection, float scale){
-        return;
+    void TextRenderer::RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 projection, float w, float h, float scale){
+        auto coordProj = projection * glm::vec4(position, 1.0f);
+        if (coordProj.w != 0){
+            coordProj.w = 1.0 / coordProj.w;
+            coordProj.x *= coordProj.w;
+            coordProj.y *= coordProj.w;
+            coordProj.z *= coordProj.w;
+        }
+        RenderText(text,
+                   (coordProj.x / 2 + 0.5) * w, (coordProj.y / 2 + 0.5) * h,
+                   w, h, color,
+                   scale * coordProj.w * 10);
     }
 
-    void TextRenderer::RenderTextOnScreen(std::string text, float x, float y, float w, float h, glm::vec4 color, float scale){
-        RenderText(std::move(text), glm::vec3(x, y, 0), w, h, color, scale);
-    }
-
-    void TextRenderer::RenderText(std::string text, glm::vec3 position, float w, float h, glm::vec4 color, float scale)
+    void TextRenderer::RenderText(std::string text, float x, float y, float windowWidth, float windowHeight, glm::vec4 color, float scale)
     {
         if(!s_Initialized){
             throw std::runtime_error("Try to render text before init.");
@@ -124,14 +130,14 @@ namespace AIAC{
         glGetIntegerv(GL_PROGRAM, &prevProgram);
         glUseProgram(s_ShaderProgram);
         glUniform4f(glGetUniformLocation(s_ShaderProgram, "textColor"), color.r, color.g, color.b, color.a);
-        glm::mat4 orthoProjection = glm::ortho(0.0f, w, 0.0f, h);
+        glm::mat4 orthoProjection = glm::ortho(0.0f, windowWidth, 0.0f, windowHeight);
         glUniformMatrix4fv(glGetUniformLocation(s_ShaderProgram, "projection"), 1, GL_FALSE, &orthoProjection[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
 
         glBindVertexArray(s_VAO);
         glBindBuffer(GL_ARRAY_BUFFER, s_VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, nullptr, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -141,11 +147,6 @@ namespace AIAC{
 
         // iterate through all characters
         std::string::const_iterator c;
-//        glm::vec4 positionOnScreen = projection * glm::vec4(position, 1.0f);
-//        float x = positionOnScreen.x;
-//        float y = positionOnScreen.y;
-        float x = position.x;
-        float y = position.y;
 
         for (c = text.begin(); c != text.end(); c++)
         {

@@ -40,7 +40,7 @@ namespace AIAC
          * @param color Text color
          * @param scale Text scale, default = 1.0f
          */
-        void RenderTextOn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 finalProjection, float scale);
+        static void RenderTextIn3DSpace(std::string text, glm::vec3 position, glm::vec4 color, glm::mat4 projection, float w, float h, float scale=1.0f);
 
         /**
          * @brief Render text that is parallel to the screen
@@ -52,7 +52,7 @@ namespace AIAC
          * @param color Text color
          * @param scale Text scale, default = 1.0f
          */
-        static void RenderTextOnScreen(std::string text, float x, float y, float w, float h, glm::vec4 color, float scale=1.0f);
+//        static void RenderTextOnScreen(std::string text, float x, float y, float w, float h, glm::vec4 color, float scale=1.0f);
 
         /**
          * @brief Render text that is parallel to the screen
@@ -62,8 +62,7 @@ namespace AIAC
          * @param scale Scale of the text, default = 1.0f
          * @param projection Projection matrix
          */
-        static void RenderText(std::string text, glm::vec3 position, float w, float h, glm::vec4 color, float scale=1.0f);
-
+        static void RenderText(std::string text, float x, float y, float windowWidth, float windowHeight, glm::vec4 color, float scale=1.0f);
         /**
          * @brief Get the static instance of the TextRenderer
          * @return The global instance of TextRenderer

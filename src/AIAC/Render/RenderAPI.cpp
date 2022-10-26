@@ -178,7 +178,6 @@ namespace AIAC
 
     void DrawPoint(const GOPoint& goPoint) {
         vector<glm::vec3> point(1, goPoint.GetPosition());
-        cout << glm::to_string(goPoint.GetColor()) << endl;
         DrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
     }
 
