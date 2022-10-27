@@ -9,7 +9,7 @@ Here's the naming convention for this project:
 - `type m_PrivateVariable`: Hungarian notation with UpperCamelCase for private class members.
 - `static type s_StaticVariable`: Hungarian notation with UpperCamelCase for static members of class.
 - `APP_SPEC`: Constants with SNAKE_UPPER_CASE.
-- All the other things uses UpperCamelCase.
+- All the other naming uses UpperCamelCase.
 
 Here's an example:
 ```c++
