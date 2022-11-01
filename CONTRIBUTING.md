@@ -2,6 +2,19 @@
 ## Guide for contributors
 Here's you can find some documentations and guidelines to contribute to augmented_carpentry.
 
+### GitHub commit convetion
+All commits need to be labeled with a tag among these:
+```
+git commit -m "ADD:<description>"         <--- for adding new elements
+git commit -m "FIX:<description>"         <--- for fixing (errors, typos)
+git commit -m "MILESTONE:<description>"   <--- for capping moment in development
+git commit -m "UPDATE:<description>"      <--- for moddification to the same file
+git commit -m "MISC:<description>"        <--- for any other reasons to be described
+git commit -m "WIP:<description>"         <--- for not finished work
+git commit -m "REFACTOR:<description>"    <--- for refactored code
+git commit -m "MERGE:<description>"       <--- for merging operations
+```
+
 ### Naming convention
 Here's the naming convention for this project:
 - `localVariable`: lowerCamelCase.
