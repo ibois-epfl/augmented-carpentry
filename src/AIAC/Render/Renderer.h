@@ -50,10 +50,12 @@ namespace AIAC
         void RenderMainView();
 
         void InitGlobalView();
-        void InitMappingView();
+        void InitMappingView() { m_MappingView.Init(); }
+        void InitCamCalibView() { m_CamCalibView.Init(); }
+
         void RenderGlobalView();
         void RenderMappingView();
-
+        void RenderCamCalibView();
 
         void RenderCameraFrame();
 
@@ -70,7 +72,11 @@ namespace AIAC
         glm::mat4 m_GlobalCamMatrix;
         glm::mat4 m_GlobalProjMatrix;
 
+        // Mapping view
         Viewport m_MappingView;
+
+        // Camera calib view
+        Viewport m_CamCalibView;
 
         std::vector<glm::vec3> m_CamVisualizationEdges;
 
