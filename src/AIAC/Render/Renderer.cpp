@@ -70,6 +70,9 @@ namespace AIAC
         // Initialize sub views
         InitMappingView();
         InitGlobalView();
+        InitCamCalibView();
+
+        m_MappingView.SetSize(600, 442);
     }
 
 
@@ -109,11 +112,6 @@ namespace AIAC
         );
     }
 
-    void Renderer::InitMappingView()
-    {
-        m_MappingView.Init();
-    }
-
     void Renderer::ReloadMeshes()
     {
         auto pointCloudMapPath = AIAC::Config::Get<string>("Renderer", "PointCloudMapPath", "assets/tslam/examplePointCloud.ply");
@@ -130,16 +128,16 @@ namespace AIAC
 
     void Renderer::OnRender()
     {
-        // The global view is needed in both mapping and inference
-        RenderGlobalView();
-
         // During mapping, an overlay panel is opened, so we only render things on it
         // and stop updating the main scene.
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
+            RenderGlobalView();
             RenderMappingView();
             return;
         }
 
+        // Default, render the main scene
+        RenderGlobalView();
         RenderMainView();
     }
 
@@ -213,6 +211,15 @@ namespace AIAC
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+
+        // Bind back to the main framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    void Renderer::RenderCamCalibView() {
+        m_CamCalibView.Activate();
+
+        RenderCameraFrame();
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
