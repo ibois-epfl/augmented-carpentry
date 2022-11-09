@@ -6,31 +6,42 @@ void AIAC::LayerCameraCalib::OnAttach() {
 }
 
 void AIAC::LayerCameraCalib::OnFrameStart() {
-    if (!m_isCalibrating) {
+    if (!m_IsCalibrating) {
         return;
     }
 
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     JustCaptured = false;
-    if (AutoCapture && m_isCalibrating && clock() - prevCaptureTimestamp > Delay * 1e-3 * CLOCKS_PER_SEC) {
+    if (AutoCapture && m_IsCapturing && std::chrono::duration_cast<std::chrono::milliseconds>(now - prevCaptureTimestamp).count() > Delay) {
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetCvMat().copyTo(currentFrame);
         m_CameraCalibrator.AddImage(currentFrame);
-        prevCaptureTimestamp = clock();
+        prevCaptureTimestamp = now;
         JustCaptured = true;
         AIAC_INFO("Captured frame: {0} / {1}", m_CameraCalibrator.GetImageAmount(), numOfFrame);
     }
 
-    if(m_CameraCalibrator.GetImageAmount() > numOfFrame) {
-        m_CameraCalibrator.RunCalibration();
-        m_CameraCalibrator.Save(SaveFilename);
-        AIAC_INFO("Calibration finished");
-        m_isCalibrating = false;
+    if(m_CameraCalibrator.GetImageAmount() >= numOfFrame) {
+        try {
+            if(m_CameraCalibrator.RunCalibration()){
+                m_CameraCalibrator.Save(SaveFilename);
+                AIAC_INFO("Calibration finished, file saves to");
+            }
+        } catch (std::exception const& err){
+            AIAC_ERROR(err.what());
+        }
+        m_IsCapturing = false;
+        m_CameraCalibrator.ClearImages();
     }
 }
 
 void AIAC::LayerCameraCalib::StartCalibration() {
-        AIAC_INFO("Starting calibration");
-        m_isCalibrating = true;
-        m_CameraCalibrator.ClearImages();
-        prevCaptureTimestamp = 0;
+    AIAC_INFO("Starting calibration");
+    m_IsCalibrating = true;
+    Clear();
+}
+
+void AIAC::LayerCameraCalib::Clear() {
+    m_CameraCalibrator.ClearImages();
+    prevCaptureTimestamp = std::chrono::steady_clock::now();
 }

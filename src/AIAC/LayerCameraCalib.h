@@ -16,22 +16,26 @@ namespace AIAC
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
+        void Clear();
         void StartCalibration();
-        void StopCalibration() { m_isCalibrating = false;};
-        bool IsCalibrating() { return m_isCalibrating; }
+        void StopCalibration() { m_IsCalibrating = false;};
+        bool IsCalibrating() { return m_IsCalibrating; }
+        void StartCapturing() { Clear(); m_IsCapturing = true; }
+        bool IsCapturing() { return m_IsCapturing; }
         void SetSaveFilename(const std::string& filename) { SaveFilename = filename; }
         CameraCalibrator &GetCameraCalibrator() { return m_CameraCalibrator; }
 
     public:
         bool AutoCapture = true;
-        int Delay = 1200;
+        int Delay = 2000;
         bool JustCaptured = false;
         int numOfFrame = 20;
         std::string SaveFilename = "calibration.yml";
 
     private:
         CameraCalibrator m_CameraCalibrator;
-        bool m_isCalibrating = false;
-        clock_t prevCaptureTimestamp = 0;
+        bool m_IsCalibrating = false;
+        bool m_IsCapturing = false;
+        std::chrono::steady_clock::time_point prevCaptureTimestamp = std::chrono::steady_clock::now();
     };
 }
