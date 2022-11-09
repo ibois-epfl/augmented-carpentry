@@ -412,15 +412,14 @@ namespace AIAC
                 if(ImGui::Button(">")){
                     m_IsChoosingCamCalibFileSavePath = true;
                 }
-                ImGui::SameLine();
+
                 char tmpSavePath[PATH_BUF_SIZE];
                 strcpy(tmpSavePath, AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->SaveFilename.c_str());
                 ImGui::InputText("Save Path", tmpSavePath, PATH_BUF_SIZE);
                 AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->SaveFilename = tmpSavePath;
 
                 if(ImGui::Button("Start")){
-                    AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->StartCalibration();
-                    AIAC_APP.GetRenderer()->StartCamCalib();
+                    AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->StartCapturing();
                 }
                 ImGui::SameLine();
                 if(ImGui::Button("Exit")){

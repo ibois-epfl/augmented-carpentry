@@ -27,9 +27,14 @@ namespace AIAC {
     }
 
 //! [board_corners]
-    void CameraCalibrator::RunCalibration(cv::Mat *imgForDisplay) {
+    bool CameraCalibrator::RunCalibration(cv::Mat *imgForDisplay) {
         ValidateAndUpdateFlag();
         DetectPattern(imgForDisplay);
+
+        if (imagePoints.size() < 2) {
+            throw std::runtime_error("Not enough points to run calibration");
+            return false;
+        }
 
         //! [fixed_aspect]
         cameraMatrix = Mat::eye(3, 3, CV_64F);

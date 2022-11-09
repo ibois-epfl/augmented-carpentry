@@ -23,10 +23,10 @@ namespace AIAC{
         ~CameraCalibrator() {};
 
         void AddImage(const cv::Mat& image);
-        void RunCalibration(cv::Mat *imgForDisplay = nullptr);
+        bool RunCalibration(cv::Mat *imgForDisplay = nullptr);
         void Save(const std::string& filename);
         int GetImageAmount() const { return imageList.size(); }
-        void ClearImages() { imageList.clear(); }
+        void ClearImages() { imageList.clear(); imagePoints.clear(); }
 
     private:
         void ValidateAndUpdateFlag();
