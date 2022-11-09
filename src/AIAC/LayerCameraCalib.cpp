@@ -25,7 +25,7 @@ void AIAC::LayerCameraCalib::OnFrameStart() {
         try {
             if(m_CameraCalibrator.RunCalibration()){
                 m_CameraCalibrator.Save(SaveFilename);
-                AIAC_INFO("Calibration finished, file saves to");
+                AIAC_INFO("Calibration finished, file is saved to {0}", SaveFilename);
             }
         } catch (std::exception const& err){
             AIAC_ERROR(err.what());

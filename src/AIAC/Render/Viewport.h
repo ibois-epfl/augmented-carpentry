@@ -9,7 +9,7 @@ namespace AIAC{
         Viewport() = default;
         ~Viewport() = default;
 
-        void Init();
+        void Init(int w, int h);
         void Activate();
         GLuint GetTexture() const { return m_Texture; };
         void SetSize(int w, int h) { m_W = w; m_H = h; };
@@ -21,7 +21,7 @@ namespace AIAC{
         GLuint m_FrameBuffer;
         GLuint m_Texture;
         GLuint m_DepthBuffer;
-        GLuint m_W=400;
-        GLuint m_H=300;
+        GLuint m_W;
+        GLuint m_H;
     };
 }

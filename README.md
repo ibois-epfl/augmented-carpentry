@@ -36,6 +36,7 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [ ] We have to check (or at least catch) the error that may occur due to the incompatible camera parameter and SLAM map after camera calibration.
 > - [ ] Undistort Camera view
+> - [ ] Bug when selecting path & filename to "save" (can't type)
 
 <br />
 
