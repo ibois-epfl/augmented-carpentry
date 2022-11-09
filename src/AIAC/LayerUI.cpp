@@ -378,25 +378,33 @@ namespace AIAC
         ImGui::ImageButton(m_CamCalibViewImTexture.ID, ImVec2(600, 442), ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
 
         ImGui::SameLine();
-        ImGui::BeginChild("mapping_info_child", ImVec2(0, 0), false); {
+        ImGui::BeginChild("cam_calib_info_child", ImVec2(0, 0), false); {
             ImVec2 sideBarViewportSize = ImGui::GetContentRegionAvail();
-            ImGui::BeginChild("mapping_menu", sideBarViewportSize, true); {
-                ImGui::Checkbox("Use Fisheye", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().useFisheye);
-
+            ImGui::BeginChild("calib_param", ImVec2(sideBarViewportSize.x, 132), true);
+            {
                 ImGui::Text("Board Size:");
 
                 ImGui::Text("Width");
                 ImGui::SameLine();
-                ImGui::InputInt("Board Width", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().boardSize.width);
+                ImGui::InputInt("Board Width",
+                                &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().boardSize.width);
 
                 ImGui::Text("Height");
                 ImGui::SameLine();
-                ImGui::InputInt("Board Height", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().boardSize.height);
+                ImGui::InputInt("Board Height",
+                                &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().boardSize.height);
 
                 ImGui::Text("Square Size");
                 ImGui::SameLine();
-                ImGui::InputFloat(" Square Size", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().squareSize);
+                ImGui::InputFloat(" Square Size",
+                                  &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().squareSize);
 
+                ImGui::Checkbox("Use Fisheye",
+                                &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().useFisheye);
+
+            } ImGui::EndChild();
+            ImGui::BeginChild("capture_setting", ImVec2(sideBarViewportSize.x, 108), true);
+            {
                 ImGui::Checkbox("Auto Capture", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->AutoCapture);
 
                 ImGui::Text("Delay");
@@ -407,12 +415,25 @@ namespace AIAC
                 ImGui::SameLine();
                 ImGui::InputInt("Num Of Frame", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->numOfFrame);
 
+                stringstream ss;
+                if (AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->IsCapturing()) {
+                    ss << "Capturing: "
+                        << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().GetImageAmount() << "/"
+                        << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->numOfFrame;
+                } else {
+                    ss << "Click Start to Capture";
+                }
+                ImGui::Text(ss.str().c_str());
 
+            }ImGui::EndChild();
+            sideBarViewportSize = ImGui::GetContentRegionAvail();
+            ImGui::BeginChild("menu", sideBarViewportSize, true);
+            {
                 // Save Path
                 if(ImGui::Button(">")){
                     m_IsChoosingCamCalibFileSavePath = true;
                 }
-
+                ImGui::SameLine();
                 char tmpSavePath[PATH_BUF_SIZE];
                 strcpy(tmpSavePath, AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->SaveFilename.c_str());
                 ImGui::InputText("Save Path", tmpSavePath, PATH_BUF_SIZE);

@@ -53,14 +53,15 @@ namespace AIAC
         void RenderMainView();
 
         void InitGlobalView();
-        void InitMappingView() { m_MappingView.Init(); }
-        void InitCamCalibView() { m_CamCalibView.Init(); }
+        void InitMappingView() { m_MappingView.Init(600, 442); }
+        void InitCamCalibView() { m_CamCalibView.Init(600, 442); }
 
         void RenderGlobalView();
         void RenderMappingView();
         void RenderCamCalibView();
 
         void RenderCameraFrame();
+        void RenderCameraFrame(int w, int h);
 
     private:
         float m_CamW, m_CamH;

@@ -5,7 +5,10 @@
 #include "Viewport.h"
 
 namespace AIAC {
-    void Viewport::Init() {
+    void Viewport::Init(int w, int h) {
+        m_W = w;
+        m_H = h;
+
         glGenFramebuffers(1, &m_FrameBuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
 

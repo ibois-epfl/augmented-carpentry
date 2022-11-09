@@ -79,7 +79,7 @@ namespace AIAC
 
     void Renderer::InitGlobalView()
     {
-        m_GlobalView.Init();
+        m_GlobalView.Init(400, 300);
 
         // build camera visualization object, which is a pyramid
         const float CAMERA_SIZE_W = 1.6, CAMERA_SIZE_H = 1.2;
@@ -225,7 +225,7 @@ namespace AIAC
     void Renderer::RenderCamCalibView() {
         m_CamCalibView.Activate();
 
-        RenderCameraFrame();
+        RenderCameraFrame(600, 442);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -270,5 +270,27 @@ namespace AIAC
 
         // Renderer to our framebuffer
         glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
+    }
+
+    void Renderer::RenderCameraFrame(int w, int h) {
+        if ( w <= 0 || h <= 0 ){
+            stringstream ss;
+            ss << "Renderer::RenderCameraFrame: invalid size: (" << w << "," << h << ")";
+            throw std::runtime_error(ss.str());
+        }
+
+        GLuint readFboIdFrame = 0;
+        glGenFramebuffers(1, &readFboIdFrame);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
+        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
+
+        glBlitFramebuffer(0, 0, m_CamW, m_CamH,
+                          0, 0, w, h,
+                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
+        glDeleteFramebuffers(1, &readFboIdFrame);
+
+        // Renderer to our framebuffer
+        glViewport(0,0,w,h); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
     }
 }

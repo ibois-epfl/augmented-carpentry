@@ -33,14 +33,15 @@ namespace AIAC
         ~Image();
 
         void UpdateData(cv::Mat cvImg);
+        void Resize(int newWidth, int newHeight) { cv::resize(m_CvMat, m_CvMat, cv::Size(newWidth, newHeight)); }
 
         // General Getters
         inline bool HasGlTextureObj() { return m_GlTextureObj != 0; }
         inline bool HasImTexture() { return m_ImTexture.Size.x != 0 || m_ImTexture.Size.y != 0; }
 
         inline std::string_view GetPath() const { return m_Path; }
-        inline int GetWidth() const { return m_Width; }
-        inline int GetHeight() const { return m_Height; }
+        inline int GetWidth() const { return m_CvMat.rows ; }
+        inline int GetHeight() const { return m_CvMat.cols; }
         inline const cv::Mat GetCvMat() const { return m_CvMat; }
 
         // Image Getter of different types and corresponding helpers
@@ -62,7 +63,6 @@ namespace AIAC
         GLuint m_GlTextureObj = 0;
         ImTexture m_ImTexture = { 0, ImVec2(0, 0) };
 
-        int m_Width = 0, m_Height = 0;
         ImageFormat m_Format = ImageFormat::None;
 
         bool m_DataUpdatedAfterGenImTexture, m_DataUpdatedAfterGenGlTexture;

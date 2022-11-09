@@ -20,8 +20,6 @@ namespace AIAC
     void Image::UpdateData(cv::Mat cvImg)
     {
         cvImg.copyTo(m_CvMat);
-        m_Width = cvImg.rows;
-        m_Height = cvImg.cols;
 
         switch (cvImg.channels())
         {
