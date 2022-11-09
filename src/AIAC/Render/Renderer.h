@@ -29,14 +29,17 @@ namespace AIAC
         void UpdateGlobalViewCameraRotation(double diffX, double diffY);
         void UpdateGlobalViewCameraScale(double diff);
 
+        // Mapping View
+        void StartMapping() { Meshes.clear(); ShowDigitalModel = false; ShowPointCloudMap = false; }
+        void StopMapping() { ReloadMeshes(); ShowDigitalModel = true; ShowPointCloudMap = true; }
         GLuint GetMappingView() const { return m_MappingView.GetTexture(); };
         void SetMappingViewSize(float w, float h);
 
+        // CamCalib view
         void StartCamCalib() { Meshes.clear(); ShowDigitalModel = false; ShowPointCloudMap = false; }
         void StopCamCalib() { ReloadMeshes(); ShowDigitalModel = true; ShowPointCloudMap = true; }
-
-        void StartMapping() { Meshes.clear(); ShowDigitalModel = false; ShowPointCloudMap = false; }
-        void StopMapping() { ReloadMeshes(); ShowDigitalModel = true; ShowPointCloudMap = true; }
+        GLuint GetCamCalibView() const { return m_CamCalibView.GetTexture(); };
+        void SetCamCalibViewSize(float w, float h);
 
     public:
         AIAC::Mesh PointCloudMap;

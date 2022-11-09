@@ -34,6 +34,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Fix the textRender, which is either not shown or overriding the scene
 > - [ ] Cache objects in RenderAPI for speed up (option)
 
+> - [ ] We have to check (or at least catch) the error that may occur due to the incompatible camera parameter and SLAM map after camera calibration.
+> - [ ] Undistort Camera view
 
 <br />
 

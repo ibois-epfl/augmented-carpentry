@@ -15,6 +15,7 @@
 #include "Shader.hpp"
 
 #include "utils/utils.h"
+#include "AIAC/LayerCameraCalib.h"
 
 namespace AIAC
 {
@@ -133,6 +134,11 @@ namespace AIAC
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderGlobalView();
             RenderMappingView();
+            return;
+        }
+
+        if(AIAC_APP.GetLayer<LayerCameraCalib>()->IsCalibrating()) {
+            RenderCamCalibView();
             return;
         }
 

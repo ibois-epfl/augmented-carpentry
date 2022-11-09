@@ -45,11 +45,14 @@ namespace AIAC {
         void ShowMenuBar();
         void ShowMainUI();
         void ShowSceneViewport();
+
         void ShowCombineMapPopup();
         void ShowMappingPopup();
-        void ShowCamCalibPopup();
         void ShowSaveMapFileDialog();
         void ShowMapFileDialog(char *path);
+
+        void ShowCamCalibPopup();
+        void ShowSaveCamCalibFileDialog();
 
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         void SetPaneUICamera();
@@ -67,6 +70,7 @@ namespace AIAC {
 
         AIAC::ImTexture m_SceneViewportImTexture;
         AIAC::ImTexture m_MappingViewImTexture;
+        AIAC::ImTexture m_CamCalibViewImTexture;
         AIAC::ImTexture m_ARCameraViewportImTexture;
 
         ImVec2 m_LastMouseLPos, m_LastMouseRPos;
@@ -93,5 +97,7 @@ namespace AIAC {
             char *FilePathTarget;
         } m_CombMapParams;
 
+        // Cam Calib
+        bool m_IsChoosingCamCalibFileSavePath = false;
     };
 }
