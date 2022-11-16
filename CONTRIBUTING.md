@@ -15,7 +15,7 @@ git commit -m "REFACTOR:<description>"    <--- for refactored code
 git commit -m "MERGE:<description>"       <--- for merging operations
 ```
 
-### Naming convention
+### Naming & synthax convention
 Here's the naming convention for this project:
 - `localVariable`: lowerCamelCase.
 - `type PrivateVariable`: public member of a class
@@ -26,6 +26,9 @@ Here's the naming convention for this project:
 
 Here's an example:
 ```c++
+// do not use using namespace std; we specify the namespace everytime
+std::foo()
+
 // next line graph style
 void Foo()
 {
