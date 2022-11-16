@@ -33,6 +33,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 > - [ ] Double check if `Dloader.h` is working somewhere or need refactoring/suppression
 
+> - [ ] Double check if `Dloader.h` is working somewhere or need refactoring/suppression
+
 > - [ ] Add `this->properties` as rule in contributing guide and refactor all the code
 
 [//]: # (> - [x] Make the Camera of the viewport bigger &#40;Defined in `Renderer.cpp:139`&#41;)
