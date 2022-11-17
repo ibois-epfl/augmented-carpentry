@@ -12,6 +12,7 @@ AR app is a linux desktop application containing a custom-made framework for aug
 ## TODOList
 > - [ ] when we create the output yaml map we should not the calibration file and/or the camera model since this files is calibration-dependent
 > - [ ] create find package for TSlam instead install it locally
+> - [ ] for the reporitories we roked in IBOIS for the gitsubmodules, be sure that nobody can do modifications
 
 > - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
 > - [x] Add Mapping subprogram + UI
