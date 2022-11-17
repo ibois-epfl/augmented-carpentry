@@ -10,6 +10,8 @@
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
+> - [ ] create find package for TSlam instead install it locally
+
 > - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
 > - [x] Add Mapping subprogram + UI
 > - [x] Implement padding for 3D scene viewer
