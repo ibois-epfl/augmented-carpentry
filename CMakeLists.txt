@@ -7,7 +7,7 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 17)
 
 # Get hpp/cpp of AIAC module
-file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the correct way
+file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the correct way. Or try oarget include directories only.
     "src/AIAC/*.h"
     "src/AIAC/*.cpp"
     "src/AIAC/UI/*.h"
