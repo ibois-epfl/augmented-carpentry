@@ -11,6 +11,12 @@ AR app is a linux desktop application containing a custom-made framework for aug
 
 ## TODOList
 > - [ ] when we create the output yaml map we should not the calibration file and/or the camera model since this files is calibration-dependent
+> - [ ] create find package for TSlam instead install it locally
+
+> - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
+> - [x] Add Mapping subprogram + UI
+> - [x] Implement padding for 3D scene viewer
+> - [x] Test if changing map on the go breaks the slam or not
 
 > - [ ] (*important*) vanilla tslam runs way smoother. We might have bottleneck in the AC software since we bleed frames. We should set a profiler and see where we can optimize.
 
