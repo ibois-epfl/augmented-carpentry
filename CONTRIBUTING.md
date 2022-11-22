@@ -73,6 +73,9 @@ private:
     static int s_Instance; // s_VariableName for static variable
 };
 
+// To access class's members use the following synthax:
+this->m_member
+
 // Start headers with 
 #pragma once
 
