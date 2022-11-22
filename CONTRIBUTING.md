@@ -72,7 +72,7 @@ private:
     static int s_Instance; // s_VariableName for static variable
 };
 
-// To access class's members use the following synthax:
+// To access class's members outside it's definition (.hh) use the following synthax:
 this->m_member
 
 // Start headers with 
