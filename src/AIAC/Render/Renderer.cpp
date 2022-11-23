@@ -263,7 +263,7 @@ namespace AIAC
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
 
-        glBlitFramebuffer(0, 0, m_CamW, m_CamH,
+        glBlitFramebuffer(0, 0, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetWidth() , AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetHeight(),
                           0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
         glDeleteFramebuffers(1, &readFboIdFrame);
@@ -285,7 +285,7 @@ namespace AIAC
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
 
-        glBlitFramebuffer(0, 0, m_CamW, m_CamH,
+        glBlitFramebuffer(0, 0, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetWidth() , AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetHeight(),
                           0, 0, w, h,
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
         glDeleteFramebuffers(1, &readFboIdFrame);

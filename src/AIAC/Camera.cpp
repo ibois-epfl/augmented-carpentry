@@ -81,17 +81,26 @@ namespace AIAC
     const AIAC::Image Camera::GetNextFrame()
     {
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
-        // AIAC::Image nextFrame;
-        // m_VideoCapture >> nextFrame;
-        cv::Mat tmpMat;
-        m_VideoCapture >> tmpMat;
 
+        cv::Mat frame;
+        m_VideoCapture >> frame;
+
+        // raw frame
+        m_RawCurrentFrame = frame;
+        // undistorted frame
+        cv::Mat resizedFrame, calibratedFrame;
         if(!m_IsCameraParamMatched){
-            cv::resize(tmpMat, tmpMat, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
+            cv::resize(frame, resizedFrame, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
+        } else {
+            frame.copyTo(resizedFrame);
         }
+        cv::undistort(resizedFrame, calibratedFrame, m_CameraMatrix, m_DistortionCoef);
+        cv::imshow("calibrated", calibratedFrame);
+        cv::waitKey(1);
 
-        m_CurrentFrame = tmpMat;
-        return m_CurrentFrame;
+        m_CalibratedCurrentFrame = calibratedFrame;
+
+        return m_RawCurrentFrame;
     }
 
     void Camera::SetCalibrationFilePath(const std::string &filePath)
