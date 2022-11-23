@@ -17,9 +17,8 @@ namespace AIAC
         inline void UpdateFov();
 
         const AIAC::Image GetNextFrame();
-        // TODO: add undistortion to GetCurrentFrame()
-        inline AIAC::Image &GetCurrentFrame() { return m_CurrentFrame; }
-        inline AIAC::Image &GetRawCurrentFrame() { return m_CurrentFrame; }
+        inline AIAC::Image &GetCurrentFrame() { return m_CalibratedCurrentFrame; }
+        inline AIAC::Image &GetRawCurrentFrame() { return m_RawCurrentFrame; }
 
         inline const std::string GetCalibrationFilePath() const { return m_CalibParamPath; }
         void SetCalibrationFilePath(const std::string &filePath);
@@ -34,7 +33,8 @@ namespace AIAC
 
     private:
         std::string m_CalibParamPath;
-        Image m_CurrentFrame;
+        Image m_RawCurrentFrame;
+        Image m_CalibratedCurrentFrame;
 
         uint32_t m_Width, m_Height;
         float m_FovX = -1.0f, m_FovY = -1.0f;
