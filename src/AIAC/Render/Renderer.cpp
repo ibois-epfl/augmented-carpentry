@@ -30,6 +30,24 @@ namespace AIAC
         // Get a handle for our "MVP" uniform
         m_MatrixId = glGetUniformLocation(m_BasicShaderProgram, "MVP");
 
+        // init the projection matrix based on the camera parameters
+        InitProjMatrix();
+
+        // Load meshes
+        ReloadMeshes();
+
+        // Initialize the static interface of TextRenderer
+        TextRenderer::Init();
+
+        // Initialize sub views
+        InitMappingView();
+        InitGlobalView();
+        InitCamCalibView();
+
+        m_MappingView.SetSize(600, 442);
+    }
+
+    void Renderer::InitProjMatrix(){
         // Calculate Perspective Projection Matrix based on camera intrinsic parameters
         // Reference: https://strawlab.org/2011/11/05/augmented-reality-with-OpenGL/
         cv::Mat cameraMatrix = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetCameraMatrix();
@@ -41,10 +59,10 @@ namespace AIAC
         float cX = cameraMatrix.at<float>(0,2);
         float cY = cameraMatrix.at<float>(1,2);
         float perspectiveProjMatrixData[16] = {
-                 2 * fovX / camW,    0, ( camW - 2 * cX + 2 * x0) / camW,                         0,
-                 0,    2 * fovY / camH, (-camH + 2 * cY + 2 * y0) / camH,                         0,
-                 0,                  0,             (-zF - zN)/(zF - zN),  -2 * zF * zN / (zF - zN),
-                 0,                  0,                               -1,                         0
+                2 * fovX / camW,    0, ( camW - 2 * cX + 2 * x0) / camW,                         0,
+                0,    2 * fovY / camH, (-camH + 2 * cY + 2 * y0) / camH,                         0,
+                0,                  0,             (-zF - zN)/(zF - zN),  -2 * zF * zN / (zF - zN),
+                0,                  0,                               -1,                         0
         };
         glm::mat4 perspectiveProjMatrix = glm::transpose(glm::make_mat4(perspectiveProjMatrixData));
 
@@ -55,25 +73,9 @@ namespace AIAC
 
         m_ProjMatrix = perspectiveProjMatrix * scalarMatrix;
 
-
-        // Load meshes
-        ReloadMeshes();
-
-
         // Save variable for later use
         m_CamW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         m_CamH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
-
-
-        // Initialize the static interface of TextRenderer
-        TextRenderer::Init();
-
-        // Initialize sub views
-        InitMappingView();
-        InitGlobalView();
-        InitCamCalibView();
-
-        m_MappingView.SetSize(600, 442);
     }
 
 
@@ -210,7 +212,7 @@ namespace AIAC
     void Renderer::RenderMappingView() {
         m_MappingView.Activate();
 
-        RenderCameraFrame();
+        RenderCameraFrame(600, 442);
 
         // visualize map
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
@@ -225,14 +227,14 @@ namespace AIAC
     void Renderer::RenderCamCalibView() {
         m_CamCalibView.Activate();
 
-        RenderCameraFrame(600, 442);
+        RenderCameraFrame(600, 442, true);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
     void Renderer::RenderMainView() {
-        RenderCameraFrame();
+        RenderCameraFrame(AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
 
         // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
@@ -256,41 +258,35 @@ namespace AIAC
         }
     }
 
-    void Renderer::RenderCameraFrame() {
-        GLuint readFboIdFrame = 0;
-        glGenFramebuffers(1, &readFboIdFrame);
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
-        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
-
-        glBlitFramebuffer(0, 0, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetWidth() , AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetHeight(),
-                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
-                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
-        glDeleteFramebuffers(1, &readFboIdFrame);
-
-        // Renderer to our framebuffer
-        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
-    }
-
-    void Renderer::RenderCameraFrame(int w, int h) {
+    void Renderer::RenderCameraFrame(int w, int h, bool useRawFrame) {
         if ( w <= 0 || h <= 0 ){
             stringstream ss;
             ss << "Renderer::RenderCameraFrame: invalid size: (" << w << "," << h << ")";
             throw std::runtime_error(ss.str());
         }
 
+        GLuint frameGlTextureObj;
+        if(useRawFrame){
+            frameGlTextureObj = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetGlTextureObj();
+        } else {
+            frameGlTextureObj = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj();
+        }
+
+
         GLuint readFboIdFrame = 0;
         glGenFramebuffers(1, &readFboIdFrame);
         glBindFramebuffer(GL_READ_FRAMEBUFFER, readFboIdFrame);
         glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                               GL_TEXTURE_2D, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj(), 0);
+                               GL_TEXTURE_2D, frameGlTextureObj, 0);
 
         glBlitFramebuffer(0, 0, AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetWidth() , AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetHeight(),
+//                          0, 0, AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH(),
                           0, 0, w, h,
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
         glDeleteFramebuffers(1, &readFboIdFrame);
 
         // Renderer to our framebuffer
+//        glViewport(0,0,AIAC_APP.GetWindow()->GetDisplayW(),AIAC_APP.GetWindow()->GetDisplayH()); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
         glViewport(0,0,w,h); // Renderer on the whole framebuffer, complete from the lower left corner to the upper right
     }
 }

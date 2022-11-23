@@ -240,17 +240,13 @@ namespace AIAC
 
             ImGui::PopStyleColor();
         ImGui::EndChild();
-
-//        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
-//        AIAC::ImTexture frameImTexture = frame.GetImTexture(ImVec2(800, 480));
-//        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
     }
 
     void LayerUI::SetPaneUISlam()
     {
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 56), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
         if (ImGui::Button("Open SLAM map"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
@@ -278,19 +274,20 @@ namespace AIAC
             }
             ImGuiFileDialog::Instance()->Close();
         }
-        ImGui::SameLine();
-        if (ImGui::Button("Open camera calib"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
+//        ImGui::SameLine();
+//        if (ImGui::Button("Open camera calib"))
+//            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
+//
+//        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
+//        {
+//            if (ImGuiFileDialog::Instance()->IsOk())
+//            {
+//            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+//            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+//            }
+//            ImGuiFileDialog::Instance()->Close();
+//        }
 
         ImGui::EndChild();
 
