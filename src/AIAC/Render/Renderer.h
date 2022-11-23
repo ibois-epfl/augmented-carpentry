@@ -19,6 +19,7 @@ namespace AIAC
         virtual ~Renderer() = default;
 
         void Init();
+        void InitProjMatrix();
         void OnRender();
 
         void ReloadMeshes();
@@ -60,8 +61,7 @@ namespace AIAC
         void RenderMappingView();
         void RenderCamCalibView();
 
-        void RenderCameraFrame();
-        void RenderCameraFrame(int w, int h);
+        void RenderCameraFrame(int w, int h, bool useRawFrame = false);
 
     private:
         float m_CamW, m_CamH;

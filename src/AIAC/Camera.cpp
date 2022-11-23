@@ -8,6 +8,7 @@
 #include "AIAC/Camera.h"
 #include "AIAC/Log.h"
 #include "utils/utils.h"
+#include "Application.h"
 
 namespace AIAC
 {
@@ -95,8 +96,6 @@ namespace AIAC
             frame.copyTo(resizedFrame);
         }
         cv::undistort(resizedFrame, calibratedFrame, m_CameraMatrix, m_DistortionCoef);
-        cv::imshow("calibrated", calibratedFrame);
-        cv::waitKey(1);
 
         m_CalibratedCurrentFrame = calibratedFrame;
 
