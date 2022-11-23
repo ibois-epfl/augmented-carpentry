@@ -241,9 +241,9 @@ namespace AIAC
             ImGui::PopStyleColor();
         ImGui::EndChild();
 
-        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
-        AIAC::ImTexture frameImTexture = frame.GetImTexture();
-        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
+//        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
+//        AIAC::ImTexture frameImTexture = frame.GetImTexture(ImVec2(800, 480));
+//        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
     }
 
     void LayerUI::SetPaneUISlam()
