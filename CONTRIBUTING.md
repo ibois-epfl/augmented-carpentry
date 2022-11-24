@@ -83,6 +83,16 @@ this->m_member
 #include "aiacpch.h"
 ```
 
+### Doxygen
+For documentation we use the [*JavaDoc" convention](https://doxygen.nl/manual/docblocks.html):
+```c++
+/**
+ * @brief fill a vector of TSPlanes from a yaml file containing their corners data
+ * @param filename path to the map.yaml file
+ * @param planes vector of TSPlane objects
+ */
+```
+
 ### Config
 We use an [.ini]() file to store the config parameters of the application. The parser is derived from [this project]() but with some modification. Here's an example:
 #### Declaration
