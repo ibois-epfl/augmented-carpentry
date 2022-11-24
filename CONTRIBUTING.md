@@ -60,7 +60,6 @@ public:
 public:
     int PublicVariable;
 
-
 // Private member function block
 private:
     // member functions use UpperCamelCase
@@ -72,9 +71,6 @@ private:
     int m_PrivateVariable; // m_VariableName for normal variable
     static int s_Instance; // s_VariableName for static variable
 };
-
-// To access class's members outside it's definition (.hh) use the following synthax:
-this->m_member
 
 // Start headers with 
 #pragma once
