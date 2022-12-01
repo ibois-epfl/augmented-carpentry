@@ -26,7 +26,8 @@ namespace AIAC
     void LayerSlam::OnFrameStart()
     {
         cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        // TODO: we should not run undistorted wrapping twice
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetCvMat().copyTo(currentFrame);
 
 //        if(undistort){
 //            cv::remap(in_image,auxImage,undistMap[0],undistMap[1],cv::INTER_CUBIC);
