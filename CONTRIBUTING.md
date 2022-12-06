@@ -80,7 +80,8 @@ private:
 ```
 
 ### Doxygen
-For documentation we use the [*JavaDoc" convention](https://doxygen.nl/manual/docblocks.html):
+For documentation we use the [*JavaDoc" convention](https://doxygen.nl/manual/docblocks.html).
+Follow [this guide for documenting the code](https://developer.lsst.io/cpp/api-docs.html).
 ```c++
 /**
  * @brief fill a vector of TSPlanes from a yaml file containing their corners data
