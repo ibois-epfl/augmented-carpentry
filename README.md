@@ -76,6 +76,17 @@ They are made to be print as stickers. The code to generate them can be found ![
 
 
 ## Build
+Cloning the repo with submodules
+```bash
+git clone --recursive git@github.com:ibois-epfl/TSlam.git
+```
+or
+```bash
+git clone git@github.com:ibois-epfl/TSlam.git
+git submodule sync
+git pull --recurse-submodules
+```
+
 If it is the first time you are installing AC, set all the dependecies options in the `CMakeLists.txt` file to **ON**.
 
 ```bash
