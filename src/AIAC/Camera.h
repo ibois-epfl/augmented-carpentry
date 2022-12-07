@@ -21,7 +21,7 @@ namespace AIAC
         inline AIAC::Image &GetRawCurrentFrame() { return m_RawCurrentFrame; }
 
         inline const std::string GetCalibrationFilePath() const { return m_CalibParamPath; }
-        void SetCalibrationFilePath(const std::string &filePath);
+        void SetCalibrationFilePathAndLoad(const std::string &filePath);
         inline const cv::Mat GetCameraMatrix() { return m_CameraMatrix; }
         inline const cv::Mat GetDistortionCoef() { return m_DistortionCoef; }
 
