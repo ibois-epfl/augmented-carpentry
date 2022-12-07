@@ -25,7 +25,12 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        if(!ToProcess){
+            return;
+        }
+
         cv::Mat currentFrame;
+
         // TODO: we should not run undistorted wrapping twice
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetCvMat().copyTo(currentFrame);
 
@@ -58,7 +63,6 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
-
         if(m_IsTracked) { m_LastTrackedCamPose = m_CamPose; }
     }
 
@@ -111,6 +115,7 @@ namespace AIAC
 
     void LayerSlam::StartMapping()
     {
+        ToProcess = true;
         m_IsMapping = true;
         Slam.clearMap();
         Slam.setInstancing(false);
