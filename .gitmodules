@@ -1,32 +1,32 @@
 [submodule "deps/imgui"]
 	branch = release_1_88
 	path = deps/imgui
-	url = https://github.com/ibois-epfl/imgui.git
+	url = git@github.com:ibois-epfl/imgui.git
 [submodule "deps/spdlog"]
 	branch = v1.x
 	path = deps/spdlog
-	url = https://github.com/ibois-epfl/spdlog.git
+	url = git@github.com:ibois-epfl/spdlog.git
 [submodule "deps/rgb-camera-calibration"]
 	branch = main
 	path = deps/rgb-camera-calibration
-	url = https://github.com/ibois-epfl/rgb-camera-calibration.git
+	url = git@github.com:ibois-epfl/rgb-camera-calibration.git
 [submodule "deps/TSlam"]
 	branch = main
 	path = deps/TSlam
 	url = git@github.com:ibois-epfl/TSlam.git
 [submodule "deps/stb"]
 	path = deps/stb
-	url = https://github.com/ibois-epfl/stb.git
+	url = git@github.com:ibois-epfl/stb.git
 [submodule "deps/glm"]
 	path = deps/glm
-	url = https://github.com/ibois-epfl/glm.git
+	url = git@github.com:ibois-epfl/glm.git
 [submodule "deps/glew"]
 	path = deps/glew
-	url = https://github.com/ibois-epfl/glew.git
+	url = git@github.com:ibois-epfl/glew.git
 [submodule "deps/eventpp"]
 	branch = master
 	path = deps/eventpp
-	url = https://github.com/ibois-epfl/eventpp.git
+	url = git@github.com:ibois-epfl/eventpp.git
 [submodule "deps/freetype"]
 	path = deps/freetype
 	url = https://gitlab.freedesktop.org/freetype/freetype
