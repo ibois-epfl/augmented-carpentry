@@ -37,14 +37,14 @@ namespace AIAC {
         }
 
         //! [fixed_aspect]
-        cameraMatrix = Mat::eye(3, 3, CV_64F);
+        cameraMatrix = Mat::eye(3, 3, CV_32F);
         if (!useFisheye && calibFlag & CALIB_FIX_ASPECT_RATIO)
             cameraMatrix.at<double>(0, 0) = aspectRatio;
         //! [fixed_aspect]
         if (useFisheye) {
-            distCoeffs = Mat::zeros(4, 1, CV_64F);
+            distCoeffs = Mat::zeros(4, 1, CV_32F);
         } else {
-            distCoeffs = Mat::zeros(8, 1, CV_64F);
+            distCoeffs = Mat::zeros(8, 1, CV_32F);
         }
 
         vector<vector<Point3f> > objectPoints(1);
@@ -58,15 +58,15 @@ namespace AIAC {
         double rms;
 
         if (useFisheye) {
-            rms = fisheye::calibrate(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs,
-                                     rvecs, tvecs, calibFlag);
+            fisheye::calibrate(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs,
+                               rvecs, tvecs, calibFlag);
         } else {
             int iFixedPoint = -1;
             if (useFixedPoint)
                 iFixedPoint = boardSize.width - 1;
-            rms = calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
-                                    cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
-                                    calibFlag | CALIB_USE_LU);
+            calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
+                              cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
+                              calibFlag | CALIB_USE_LU);
         }
 
     }
@@ -170,6 +170,8 @@ namespace AIAC {
         cv::FileStorage fs(filename, FileStorage::WRITE);
         fs << "image_width" << imageSize.width;
         fs << "image_height" << imageSize.height;
+        cameraMatrix.convertTo(cameraMatrix, CV_32F);
+        distCoeffs.convertTo(distCoeffs, CV_32F);
         fs << "camera_matrix" << cameraMatrix;
         fs << "distortion_coefficients" << distCoeffs;
         fs.release();

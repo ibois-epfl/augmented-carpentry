@@ -16,12 +16,13 @@ void AIAC::LayerCameraCalib::OnFrameStart() {
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetCvMat().copyTo(currentFrame);
         m_CameraCalibrator.AddImage(currentFrame);
+
         prevCaptureTimestamp = now;
         JustCaptured = true;
-        AIAC_INFO("Captured frame: {0} / {1}", m_CameraCalibrator.GetImageAmount(), numOfFrame);
+        AIAC_INFO("Captured frame: {0} / {1}", m_CameraCalibrator.GetImageAmount(), NumOfFrame);
     }
 
-    if(m_CameraCalibrator.GetImageAmount() >= numOfFrame) {
+    if(m_CameraCalibrator.GetImageAmount() >= NumOfFrame) {
         try {
             if(m_CameraCalibrator.RunCalibration()){
                 m_CameraCalibrator.Save(SaveFilename);
