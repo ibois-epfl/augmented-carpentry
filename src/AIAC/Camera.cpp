@@ -45,7 +45,7 @@ namespace AIAC
     }
 
     inline void Camera::UpdateFov(){
-        // Update fov at the same time
+        // Update fov at the same timse
         m_FovX = 2 * atan(m_Width / 2 / m_CameraMatrix.at<float>(0, 0));
         m_FovY = 2 * atan(m_Height / 2 / m_CameraMatrix.at<float>(1, 1));
     }

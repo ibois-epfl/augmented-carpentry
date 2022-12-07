@@ -257,7 +257,7 @@ namespace AIAC
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
                 std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
                 // action
-                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName);
+                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
             }
             ImGuiFileDialog::Instance()->Close();
         }
@@ -410,13 +410,13 @@ namespace AIAC
 
                 ImGui::Text("Num of Frames");
                 ImGui::SameLine();
-                ImGui::InputInt("Num Of Frame", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->numOfFrame);
+                ImGui::InputInt("Num Of Frame", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->NumOfFrame);
 
                 stringstream ss;
                 if (AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->IsCapturing()) {
                     ss << "Capturing: "
                         << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().GetImageAmount() << "/"
-                        << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->numOfFrame;
+                        << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->NumOfFrame;
                 } else {
                     ss << "Click Start to Capture";
                 }

@@ -11,7 +11,7 @@ namespace AIAC
     {
     public:
         LayerCameraCalib() = default;
-        virtual ~LayerCameraCalib() = default;
+        ~LayerCameraCalib() override = default;
 
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
@@ -19,18 +19,18 @@ namespace AIAC
         void Clear();
         void StartCalibration();
         void StopCalibration() { m_IsCalibrating = false;};
-        bool IsCalibrating() { return m_IsCalibrating; }
+        bool IsCalibrating() const { return m_IsCalibrating; }
         void StartCapturing() { Clear(); m_IsCapturing = true; }
-        bool IsCapturing() { return m_IsCapturing; }
+        bool IsCapturing() const { return m_IsCapturing; }
         void SetSaveFilename(const std::string& filename) { SaveFilename = filename; }
         CameraCalibrator &GetCameraCalibrator() { return m_CameraCalibrator; }
 
     public:
         bool AutoCapture = true;
-        int Delay = 2000;
         bool JustCaptured = false;
-        int numOfFrame = 20;
-        std::string SaveFilename = "calibration.yml";
+        int Delay = 2000;
+        int NumOfFrame = 25;
+        std::string SaveFilename = "assets/tslam/calibration.yml";
 
     private:
         CameraCalibrator m_CameraCalibrator;
