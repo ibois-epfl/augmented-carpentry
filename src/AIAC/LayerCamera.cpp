@@ -10,7 +10,7 @@ namespace AIAC
     {
         try
         {
-            MainCamera.Open(0);
+            MainCamera.Open(4);
         }
         catch(const std::runtime_error& e)
         {
