@@ -17,9 +17,15 @@ namespace AIAC
 
     void LayerSlam::OnAttach()
     {
-        Slam.setMap(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"), true);
-        Slam.setVocabulary(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
+        // load camera calibration file (mainly for distortion matrix)
         Slam.setCamParams(AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
+
+        // load map, the camera matrix will be replaced by the one in the map
+        auto pathToMapFile = AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map");
+        AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+
+        // load vocabulary
+        Slam.setVocabulary(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
         Slam.setInstancing(true);
     }
 
@@ -30,15 +36,19 @@ namespace AIAC
         }
 
         cv::Mat currentFrame;
+        cv::Mat resizedFrame;
 
         // TODO: we should not run undistorted wrapping twice
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetCvMat().copyTo(currentFrame);
+        auto targetSize = Slam.imageParams.CamSize;
+        cv::resize(currentFrame, resizedFrame, targetSize);
+        currentFrame = resizedFrame;
 
-//        if(undistort){
-//            cv::remap(in_image,auxImage,undistMap[0],undistMap[1],cv::INTER_CUBIC);
-//            in_image=auxImage;
-//            image_params.Distorsion.setTo(cv::Scalar::all(0));
-//        }
+        //if(undistort){
+        //    cv::remap(in_image,auxImage,undistMap[0],undistMap[1],cv::INTER_CUBIC);
+        //    in_image=auxImage;
+        //    image_params.Distorsion.setTo(cv::Scalar::all(0));
+        //}
 
         if(ToEnhance){
             //Get Intensity image

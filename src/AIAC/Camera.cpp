@@ -25,29 +25,36 @@ namespace AIAC
         {
             m_IsOpened = true;
             
-            m_Width = m_VideoCapture.get(cv::CAP_PROP_FRAME_WIDTH);
-            m_Height = m_VideoCapture.get(cv::CAP_PROP_FRAME_HEIGHT);
+            m_PhysicalWidth = m_VideoCapture.get(cv::CAP_PROP_FRAME_WIDTH);
+            m_PhysicalHeight = m_VideoCapture.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-            AIAC_INFO("Camera Resolution: {0}x{1}.", m_Width, m_Height);
+            AIAC_INFO("Camera Resolution: {0}x{1}.", m_PhysicalWidth, m_PhysicalHeight);
         }
 
         // load camera params
-        m_CalibParamPath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
-        int tmp;
-        LoadCameraParams(m_CalibParamPath, tmp, tmp, m_CameraMatrix, m_DistortionCoef);
+        m_CalibFilePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
+        InitCameraParamsFromFile(m_CalibFilePath);
     }
 
-    void Camera::SetCalibrationParams(cv::Mat cameraMatrix, cv::Mat distortionCoef)
-    {
-        m_CameraMatrix = cameraMatrix;
-        m_DistortionCoef = distortionCoef;
-        UpdateFov();
+    void Camera::InitCameraParamsFromFile(const std::string &filePath) {
+        int w, h;
+        cv::Mat cameraMatrix;
+
+        LoadCameraParams(filePath, w, h, cameraMatrix, m_DistortionCoef);
+
+        if(!m_IsCamMatrixInit){
+            m_ParamWidth = w;
+            m_ParamHeight = h;
+            m_CameraMatrix = cameraMatrix;
+
+            m_IsPhysicalAndParamWidthHeightMatched = (m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight);
+        }
     }
 
     inline void Camera::UpdateFov(){
         // Update fov at the same time
-        m_FovX = 2 * atan(m_Width / 2 / m_CameraMatrix.at<float>(0, 0));
-        m_FovY = 2 * atan(m_Height / 2 / m_CameraMatrix.at<float>(1, 1));
+        m_FovX = 2 * atan(m_ParamWidth / 2 / GetCameraMatrix().at<float>(0, 0));
+        m_FovY = 2 * atan(m_ParamHeight / 2 / GetCameraMatrix().at<float>(1, 1));
     }
 
     bool Camera::LoadCameraParams(const std::string &filePath, int &w, int &h, cv::Mat &cameraMatrix, cv::Mat &distortionCoef){
@@ -56,25 +63,22 @@ namespace AIAC
             throw std::runtime_error(std::string(__FILE__)+"LoadCameraParams() could not open file:" + filePath);
         }
 
-        fs["image_width"] >> m_CameraParam.Width;
-        fs["image_height"] >> m_CameraParam.Height;
-        fs["distortion_coefficients"] >> m_CameraParam.CameraMatrix;
-        fs["camera_matrix"] >> m_CameraParam.DistortionCoef;
-
-        if (m_CameraParam.Width != m_Width || m_CameraParam.Height != m_Height){
-            m_IsCameraParamMatched = false;
-            AIAC_ERROR("Mismatched Camera and Camera Parameter.");
-        }
-
-        m_Width = m_CameraParam.Width;
-        m_Height = m_CameraParam.Height;
-
         fs["image_width"] >> w;
         fs["image_height"] >> h;
         fs["distortion_coefficients"] >> distortionCoef;
         fs["camera_matrix"] >> cameraMatrix;
 
-        UpdateFov();
+//        fs["image_width"] >> m_ParamWidth;
+//        fs["image_height"] >> m_ParamHeight;
+//        fs["camera_matrix"] >> m_CameraMatrix;
+//        fs["distortion_coefficients"] >> m_DistortionCoef;
+//
+//        if (m_ParamWidth != m_PhysicalWidth || m_ParamHeight != m_PhysicalHeight){
+//            m_IsPhysicalAndParamWidthHeightMatched = false;
+//            AIAC_ERROR("Mismatched Camera and Camera Parameter.");
+//        }
+//
+//        UpdateFov();
 
         return true;
     }
@@ -90,22 +94,40 @@ namespace AIAC
         m_RawCurrentFrame = frame;
         // undistorted frame
         cv::Mat resizedFrame, calibratedFrame;
-        if(!m_IsCameraParamMatched){
-            cv::resize(frame, resizedFrame, cv::Size(m_CameraParam.Width, m_CameraParam.Height));
+        if(!m_IsPhysicalAndParamWidthHeightMatched){
+            cv::resize(frame, resizedFrame, cv::Size(m_ParamWidth, m_ParamHeight));
         } else {
             frame.copyTo(resizedFrame);
         }
-        cv::undistort(resizedFrame, calibratedFrame, m_CameraMatrix, m_DistortionCoef);
+        cv::undistort(resizedFrame, calibratedFrame, GetCameraMatrix(), m_DistortionCoef);
 
         m_CalibratedCurrentFrame = calibratedFrame;
 
-        return m_RawCurrentFrame;
+        return m_CalibratedCurrentFrame;
     }
 
-    void Camera::SetCalibrationFilePathAndLoad(const std::string &filePath)
+    void Camera::UpdateCameraParamFromFile(const std::string &filePath)
     {
-        m_CalibParamPath = filePath;
-        int tmp;
-        LoadCameraParams(m_CalibParamPath, tmp, tmp, m_CameraMatrix, m_DistortionCoef);
+        m_IsCamMatrixInit = true;
+        m_CalibFilePath = filePath;
+        LoadCameraParams(m_CalibFilePath, m_ParamWidth, m_ParamHeight, m_CameraMatrix, m_DistortionCoef);
+        m_IsPhysicalAndParamWidthHeightMatched = (m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight);
+
+        stringstream ss;
+        ss << "Camera Parameter Updated (using config file): \n" << m_CameraMatrix;
+        AIAC_INFO(ss.str());
+    }
+
+    void Camera::UpdateCameraParamFromSlamMap(const int paramWidth, const int paramHeight, const cv::Mat &cameraMatrix) {
+        m_IsCamMatrixInit = true;
+        m_ParamWidth = paramWidth;
+        m_ParamHeight = paramHeight;
+        m_CameraMatrix = cameraMatrix;
+        UpdateFov();
+        m_IsPhysicalAndParamWidthHeightMatched = (m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight);
+
+        stringstream ss;
+        ss << "Camera Parameter Updated (using slam map): \n" << m_CameraMatrix;
+        AIAC_INFO(ss.str());
     }
 }
