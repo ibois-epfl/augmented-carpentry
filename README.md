@@ -22,12 +22,12 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Implement padding for 3D scene viewer
 > - [x] Test if changing map on the go breaks the slam or not
 
-> - [ ] Write a sub-program to calibrate the camera and export the correct format in xml
+> - [x] Write a sub-program to calibrate the camera and export the correct format in xml
 
 > - [ ] Find a way to sync SLAM maps and data
 > - [x] Make the Camera of the viewport bigger
 
-> - [ ] Add pop up program to calibrate camera
+> - [x] Add pop up program to calibrate camera
 
 > - [ ] Double check if `Dloader.h` is working somewhere or need refactoring/suppression
 
@@ -45,8 +45,8 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [x] Fix the textRender, which is either not shown or overriding the scene
 > - [ ] Cache objects in RenderAPI for speed up (option)
 
-> - [ ] We have to check (or at least catch) the error that may occur due to the incompatible camera parameter and SLAM map after camera calibration.
-> - [ ] Undistort Camera view
+> - [x] We have to check (or at least catch) the error that may occur due to the incompatible camera parameter and SLAM map after camera calibration.
+> - [x] Undistort Camera view
 > - [ ] Bug when selecting path & filename to "save" (can't type)
 > - [ ] Make the viewport size a config (now is fixed in the code)
 
