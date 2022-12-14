@@ -36,6 +36,7 @@ namespace AIAC
         inline const std::pair<float, float> GetFov() const { return std::make_pair(m_FovX, m_FovY); }
 
         bool IsOpened() const { return m_IsOpened; }
+        bool IsPhysicalAndParamWidthHeightMatched() const { return m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight; }
 
     private:
         bool m_IsCamMatrixInit = false;
@@ -51,12 +52,5 @@ namespace AIAC
 
         cv::VideoCapture m_VideoCapture;
         bool m_IsOpened = false;
-
-//        struct CameraParam{
-//            int Width, Height;
-//            cv::Mat CameraMatrix, DistortionCoef;
-//        } m_CameraParam;
-
-        bool m_IsPhysicalAndParamWidthHeightMatched = true;
     };
 }

@@ -23,6 +23,9 @@ namespace AIAC
         AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.height = paramHeight;
         AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.width = paramWidth;
 
+        // update projection matrix
+        AIAC_APP.GetRenderer()->InitProjMatrix();
+
         // TODO: Clean up the loaded mesh
     }
 

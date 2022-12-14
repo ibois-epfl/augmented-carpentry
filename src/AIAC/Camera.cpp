@@ -46,8 +46,6 @@ namespace AIAC
             m_ParamWidth = w;
             m_ParamHeight = h;
             m_CameraMatrix = cameraMatrix;
-
-            m_IsPhysicalAndParamWidthHeightMatched = (m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight);
         }
     }
 
@@ -94,7 +92,7 @@ namespace AIAC
         m_RawCurrentFrame = frame;
         // undistorted frame
         cv::Mat resizedFrame, calibratedFrame;
-        if(!m_IsPhysicalAndParamWidthHeightMatched){
+        if(!IsPhysicalAndParamWidthHeightMatched()){
             cv::resize(frame, resizedFrame, cv::Size(m_ParamWidth, m_ParamHeight));
         } else {
             frame.copyTo(resizedFrame);
@@ -111,7 +109,6 @@ namespace AIAC
         m_IsCamMatrixInit = true;
         m_CalibFilePath = filePath;
         LoadCameraParams(m_CalibFilePath, m_ParamWidth, m_ParamHeight, m_CameraMatrix, m_DistortionCoef);
-        m_IsPhysicalAndParamWidthHeightMatched = (m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight);
 
         stringstream ss;
         ss << "Camera Parameter Updated (using config file): \n" << m_CameraMatrix;
@@ -124,7 +121,6 @@ namespace AIAC
         m_ParamHeight = paramHeight;
         m_CameraMatrix = cameraMatrix;
         UpdateFov();
-        m_IsPhysicalAndParamWidthHeightMatched = (m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight);
 
         stringstream ss;
         ss << "Camera Parameter Updated (using slam map): \n" << m_CameraMatrix;

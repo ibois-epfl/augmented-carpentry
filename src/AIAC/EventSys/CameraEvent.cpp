@@ -15,6 +15,9 @@ namespace AIAC
         // we need to stop the SLAM process, or it will crash
         AIAC_APP.GetLayer<LayerSlam>()->ToProcess = false;
 
+        // update projection matrix
+        AIAC_APP.GetRenderer()->InitProjMatrix();
+
         // TODO: Clean up the loaded mesh
     }
 }
