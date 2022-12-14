@@ -352,7 +352,7 @@ namespace AIAC
                         m_IsSavingMap = true;
                     }
                     ImGui::SameLine();
-                    if(ImGui::Button("Cancel")){
+                    if(ImGui::Button("Exit")){
                         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
                         AIAC_APP.GetRenderer()->StopMapping();
                         m_IsSavingMap = false;
