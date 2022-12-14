@@ -19,7 +19,7 @@ namespace AIAC
         m_VideoCapture = cv::VideoCapture(id);
         if(!m_VideoCapture.isOpened())
         {
-            throw std::runtime_error("Camera can't be opened");
+            throw std::runtime_error("Camera can't be opened.");
         }
         else
         {

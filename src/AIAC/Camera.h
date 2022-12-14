@@ -31,6 +31,8 @@ namespace AIAC
         inline const cv::Mat GetCameraMatrix() { return m_CameraMatrix;};
         inline const cv::Mat GetDistortionCoef() { return m_DistortionCoef; }
 
+        inline const uint32_t GetRawWidth() const {return m_PhysicalWidth; }
+        inline const uint32_t GetRawHeight() const {return m_PhysicalHeight; }
         inline const uint32_t GetWidth() const { return m_ParamWidth; }
         inline const uint32_t GetHeight() const { return m_ParamHeight; }
         inline const std::pair<float, float> GetFov() const { return std::make_pair(m_FovX, m_FovY); }
