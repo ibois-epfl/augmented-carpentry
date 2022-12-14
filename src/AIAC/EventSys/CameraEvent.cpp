@@ -5,20 +5,16 @@
 
 namespace AIAC
 {
-    void CameraCalibrationLoadedEvent::OnCameraCalibrationLoaded()
+    void CameraCalibrationLoadedEvent::OnCameraCalibrationFileLoaded()
     {
         AIAC_INFO("Camera calibration file changed to: {}", m_FilePath);
-        AIAC_APP.GetLayer<LayerCamera>()->MainCamera.SetCalibrationFilePathAndLoad(m_FilePath);
+        AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromFile(m_FilePath);
         AIAC_APP.GetLayer<LayerSlam>()->Slam.setCamParams(m_FilePath);
 
-        float newFovX = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetCameraMatrix().at<float>(0, 0);
-        float mapFovX = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.fx();
+        // Since the camera calibration file has changed, making it uncompilable with the previous SLAM map
+        // we need to stop the SLAM process, or it will crash
+        AIAC_APP.GetLayer<LayerSlam>()->ToProcess = false;
 
-        if (fabs(mapFovX - newFovX) > 10) {
-            AIAC_WARN("Camera params aren't consist between map (" + to_string(mapFovX) +") and camera(" + to_string(newFovX) + ")");
-            AIAC_APP.GetLayer<LayerSlam>()->ToProcess = false;
-        }
-
-        AIAC_APP.GetRenderer()->InitProjMatrix();
+        // TODO: Clean up the loaded mesh
     }
 }
