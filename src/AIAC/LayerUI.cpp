@@ -213,10 +213,22 @@ namespace AIAC
 
     void LayerUI::SetPaneUICamera()
     {
-        ImGui::Text("This layer is responsible for the physical camera.");
+        string currentItem = AIAC_APP.GetLayer<LayerCamera>()->GetCurrentDevice();
+        static const char* previewValue = currentItem.c_str();
+        if(ImGui::BeginCombo("is Opened", previewValue)){
+            for (auto& devicePath : AIAC_APP.GetLayer<LayerCamera>()->AvailableDevices) {
+                bool is_selected = (currentItem == devicePath);
+                if (ImGui::Selectable(devicePath.c_str(), is_selected)){
+                    AIAC_APP.GetLayer<LayerCamera>()->SetCurrentDevice(devicePath);
+                }
+                if (is_selected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
+        }
+
         AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
-        ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
-        ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
+        ImGui::Text("Resolution: (%d x %d) > (%d x %d)", camera.GetRawWidth(), camera.GetRawHeight(), camera.GetWidth(), camera.GetHeight());
 
         ImGui::BeginChild("camera_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
@@ -425,7 +437,7 @@ namespace AIAC
                 } else {
                     ss << "Click Start to Capture";
                 }
-                ImGui::Text(ss.str().c_str());
+                ImGui::Text("%s", ss.str().c_str());
 
             }ImGui::EndChild();
             sideBarViewportSize = ImGui::GetContentRegionAvail();
