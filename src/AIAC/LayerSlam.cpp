@@ -20,6 +20,7 @@ namespace AIAC
         // load camera calibration file (mainly for distortion matrix)
         Slam.setCamParams(AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
         Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
+        Slam.systemParams.enableLoopClosure = false;
 
         // load map, the camera matrix will be replaced by the one in the map
         auto pathToMapFile = AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map");
