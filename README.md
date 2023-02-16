@@ -18,39 +18,41 @@ AR app is a linux desktop application containing a custom-made framework for aug
 > - [ ] for the reporitories we roked in IBOIS for the gitsubmodules, be sure that nobody can do modifications
 
 > - [ ] Design AC custom 3D file for import of execution 3D models (only points and lines)
-> - [x] Add Mapping subprogram + UI
-> - [x] Implement padding for 3D scene viewer
-> - [x] Test if changing map on the go breaks the slam or not
 
-> - [x] Write a sub-program to calibrate the camera and export the correct format in xml
+[//]: # (> - [x] Add Mapping subprogram + UI)
+[//]: # (> - [x] Implement padding for 3D scene viewer)
+[//]: # (> - [x] Test if changing map on the go breaks the slam or not)
+
+[//]: # (> - [x] Write a sub-program to calibrate the camera and export the correct format in xml)
 
 > - [ ] Find a way to sync SLAM maps and data
-> - [x] Make the Camera of the viewport bigger
 
-> - [x] Add pop up program to calibrate camera
+[//]: # (> - [x] Make the Camera of the viewport bigger)
+
+[//]: # (> - [x] Add pop up program to calibrate camera)
 
 > - [ ] Double check if `Dloader.h` is working somewhere or need refactoring/suppression
 
 > - [ ] Add `this->properties` as rule in contributing guide and refactor all the code
 
-> - [x] Make the Camera of the viewport bigger (Defined in `Renderer.cpp:139`)
+[//]: # (> - [x] Make the Camera of the viewport bigger &#40;Defined in `Renderer.cpp:139`&#41;)
 
-> - [x] Edit the readme for render API how to use it
-> - [x] Refactor the Render part, put everything in one folder and extract/rename render API header.
-> - [x] Add a function DrawCircle() to the RenderAPI
-> - [x] Add a function DrawCylinder() to the RenderAPI
-> - [x] Add a function DrawPolyline() to the RenderAPI
-> - [x] Add a function DrawTriangle() to the RenderAPI
-> - [x] Add a function DrawText() to the RenderAPI
-> - [x] Fix the textRender, which is either not shown or overriding the scene
+[//]: # (> - [x] Edit the readme for render API how to use it)
+[//]: # (> - [x] Refactor the Render part, put everything in one folder and extract/rename render API header.)
+[//]: # (> - [x] Add a function DrawCircle&#40;&#41; to the RenderAPI)
+[//]: # (> - [x] Add a function DrawCylinder&#40;&#41; to the RenderAPI)
+[//]: # (> - [x] Add a function DrawPolyline&#40;&#41; to the RenderAPI)
+[//]: # (> - [x] Add a function DrawTriangle&#40;&#41; to the RenderAPI)
+[//]: # (> - [x] Add a function DrawText&#40;&#41; to the RenderAPI)
+[//]: # (> - [x] Fix the textRender, which is either not shown or overriding the scene)
 > - [ ] Cache objects in RenderAPI for speed up (option)
 
-> - [x] We have to check (or at least catch) the error that may occur due to the incompatible camera parameter and SLAM map after camera calibration.
-> - [x] Undistort Camera view
+[//]: # (> - [x] We have to check &#40;or at least catch&#41; the error that may occur due to the incompatible camera parameter and SLAM map after camera calibration.)
+[//]: # (> - [x] Undistort Camera view)
 > - [ ] Bug when selecting path & filename to "save" (can't type)
 > - [ ] Make the viewport size a config (now is fixed in the code)
 
-<br />
+> - [ ] Load Mesh from UI
 
 ## Set touch monitor
 
