@@ -6,6 +6,64 @@
     <img src="./assets/images/logos/logo_linux_gray_mc.png" width="200">
 </p>
 
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       HB internship planning
+    axisFormat %Y-%m
+
+    Start                                                  :milestone, 2023-06-01, 0d
+
+    section Vocation
+    days off                                               :crit, off, 2023-06-05, 5d
+
+    section Eval refinement
+    (1)Evaluation pipeline for 3d model                       :active, epf3m, 2023-06-12, 5d
+    (2)Batch pipeline for all dataset                         :bpfad, after epf3m, 6d
+
+    section TSlamV2
+    (4)troubleshooting of bugs from V1                        :domsv2, after bpfad 2023-08-01, 15d
+    
+    section AC-TSlam integration
+    (5)Integration of simple .ply mesh import                 :iomi, 2023-06-25, 2d
+    (6)Refinement of visualization of object interlocking     :rovooi, after iomi, 15d
+    (7)Smoke dev for TSlam in AC                              :stftia, after rovooi, 4d
+
+    section AC-Rhino designer
+    (8a)plug-in Rhino8 import slam/export .auca               :pirte, after stftia, 25d
+    (8b)importer AC of .auca (instruct, visuals)              :iaoa, after stftia, 25d
+
+    End                                                       :milestone, 2023-08-14, 0d
+```
+
+## HB description working packages
+- [ ] **(1) Evaluation pipeline for 3d model**: in the folder `eval\compute_model_metrics.py`, the script needs to evaluate the error in the reconstructed model from the tslam with its scanned ground truth. The stage for the working packages are the following:
+  - [ ] clean out the gtg data in Rhino to reconstruct a perfect gt point cloud model
+  - [ ] in the py script:
+    - [ ] import gt model (*pcdGt*) and run the reconstruction for the dataset to obtain a `.ply` model
+    - [ ] populate the tslam mesh model to obtain a pointcloud (*pcdTs*)
+    - [ ] register and refine the realignement (e.g., umeyama + icp) of the two pcd
+    - [ ] apply a Horn distance calculation to get the mean error
+    - [ ] output a table + graph of the mean error (same style as the tslam evaluation)
+
+- [ ] **(2) Batch pipeline for all dataset**: the entire evaluation for the tslam and model evaluation needs to be resumed in a `.sh` script that:
+  - [ ] if it doesn't exist it downloads the zenodo dataset
+  - [ ] run the compute of the pose, eval tracking and model for the entire dataset
+  - [ ] (optional) it should be easy to be used on the machine downstairs and all the visualisations should be there
+
+- [ ] **(3) Troubleshooting of bugs from V1**: the remaining bugs from the tslam should be investigate and troubleshooted to get to a v2 (e.g. drift away, mapping crashing and low speed, etc). If not all solved a list of the remaining bugs should be compiled.
+
+- [ ] **(4) Integration of simple .ply mesh import**: integrate a general ply importer for tslam mesh.ply export to work on the correct visualization with the AC visualization geometry and rendering system.
+
+- [ ] **(6) Refinement of visualization of object interlocking**: the alignment of the visualized object in the live feedback must be as perfect as possible. Investigate the quality and what we can improve (e.g. better calibration for the camera, etc)
+
+- [ ] **(7) Smoke dev for TSlam in AC**: we have to be sure that the tslam is not breaking AC during fabrication and all the features of TSlam are integrated:
+  - [ ] (optional) multi thread TSlam layer
+  - [ ] implement a system that preven the fail of TSlam to shut down the entire AC
+  - [ ] be sure that all the functionalities of TSlam have an interface (mapping, running, rebooting)
+  - [ ] write a test for AC on a video turning min. 1h with tslam on.
+
+- [ ] **(8a-b) Plug-in Rhino8 import slam/export .auca + importer AC of .auca (instruct, visuals)**: we need to build a plug in on Rhino to draw on the imported reconstruction of tslam and export them in the same transformation a file that reads all the metadata draw (planes and axis for cuts and drills) by the import of AC.
 
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
