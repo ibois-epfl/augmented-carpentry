@@ -41,7 +41,7 @@ gantt
     End                                                       :milestone, ender, 2023-08-14, 0d
 ```
 
-## HB description working packages
+## NC description working packages
 - [ ] **(1) dataset**: the dataset needs to be finished and uploaded on zenodo. Here's the upcomong tasks:
   - [ ] chainsaw blade to scan
   - [ ] long drillb its (x2) to scan
