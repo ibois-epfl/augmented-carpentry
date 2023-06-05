@@ -24,7 +24,7 @@ gantt
     (3)API Ttool library refactoring                             :apirefct, after util, 10d
 
     section Ttool-AC integration
-    (4)Ttool layer                                               :ttollay, after apirefct, 10d
+    (4)Ttool layer                                               :ttollay, after apirefct, 20d
     (5)Fabrication testing + unit testing                        :ftref, after ttollay, 5d
 
     section ML 2D dev
