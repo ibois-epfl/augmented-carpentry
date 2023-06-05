@@ -46,6 +46,8 @@ gantt
   - [ ] chainsaw blade to scan
   - [ ] long drillb its (x2) to scan
   - [ ] refactor and reorder the dataset
+  - [ ] add to the dataset: circular sawblade, saber sawblade, (optional) drillbit, check if it exists
+  - [ ] refactor dataset nameing: <englishname>_<widthmm>_<lengthmm> (e.g. spadedrill_25_115)
   - [ ] integrate downloading procedures in AC and TTool
 
 - [ ] **(2) utilities**: all utilities for the documentation of the developement needs to be implemented:
