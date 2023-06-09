@@ -19,7 +19,7 @@ gantt
     day off                                                   :crit, milestone, 2023-06-16
 
     section TTool standalone dev
-    (1)dataset                                                   :active, dtset, 2023-06-05, 5d
+    (1)dataset                                                   :crit, dtset, 2023-06-05, 10d
     (2)utilities (video export + visuals)                        :active, util, after dtset, 5d
     (3)API Ttool library refactoring                             :apirefct, after util, 10d
 
