@@ -10,7 +10,7 @@ using namespace std;
 #include <stdlib.h>
 #include <string.h>
 
-#include "glew/include/GL/glew.h"
+#include <GL/glew.h>
 
 #include "Shader.hpp"
 #include "utils/utils.h"
