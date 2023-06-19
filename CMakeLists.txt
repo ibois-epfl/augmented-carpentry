@@ -6,6 +6,9 @@ enable_testing()
 
 set(CMAKE_CXX_STANDARD 17)
 
+#TODO: check for Opencv 4.5.5 that cannot be installed or detected
+
+
 # Get hpp/cpp of AIAC module
 file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the correct way. Or try oarget include directories only.
     "src/AIAC/*.h"
@@ -107,7 +110,7 @@ if (UNIX AND INSTALL_OPENCV455)
     message(WARNING "Install OpenCV...")
     execute_process(COMMAND ./cmake/install_opencv_4_5_5.sh)
 endif()
-find_package(OpenCV 4.5.5 REQUIRED)
+find_package(OpenCV 4.5.5 REQUIRED)   # FIXME: 4.5.5 not found (?)
 if(OpenCV_FOUND)
     message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
     message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
