@@ -20,7 +20,7 @@
 [submodule "deps/glm"]
 	path = deps/glm
 	url = git@github.com:ibois-epfl/glm.git
-[submodule "deps/glew"]
+[submodule "deps/glewAC"]
 	path = deps/glewAC
 	url = git@github.com:ibois-epfl/glewAC.git
 [submodule "deps/eventpp"]
