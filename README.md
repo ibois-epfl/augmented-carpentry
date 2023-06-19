@@ -84,6 +84,7 @@ gantt
 
     section Vocation
     days off                                               :crit, off, 2023-06-05, 5d
+    conference                                             :crit, off, 2023-07-05, 3d
 
     section Eval refinement
     (1)Evaluation pipeline for 3d model                       :active, epf3m, 2023-06-12, 5d
@@ -105,14 +106,14 @@ gantt
 ```
 
 ## HB description working packages
-- [ ] **(1) Evaluation pipeline for 3d model**: in the folder `eval\compute_model_metrics.py`, the script needs to evaluate the error in the reconstructed model from the tslam with its scanned ground truth. The stage for the working packages are the following:
-  - [ ] clean out the gtg data in Rhino to reconstruct a perfect gt point cloud model
-  - [ ] in the py script:
-    - [ ] import gt model (*pcdGt*) and run the reconstruction for the dataset to obtain a `.ply` model
-    - [ ] populate the tslam mesh model to obtain a pointcloud (*pcdTs*)
-    - [ ] register and refine the realignement (e.g., umeyama + icp) of the two pcd
-    - [ ] apply a Horn distance calculation to get the mean error
-    - [ ] output a table + graph of the mean error (same style as the tslam evaluation)
+- [x] **(1) Evaluation pipeline for 3d model**: in the folder `eval\compute_model_metrics.py`, the script needs to evaluate the error in the reconstructed model from the tslam with its scanned ground truth. The stage for the working packages are the following:
+  - [x] clean out the gtg data in Rhino to reconstruct a perfect gt point cloud model
+  - [x] in the py script:
+    - [x] ~~import gt model (*pcdGt*) and run the reconstruction for the dataset to obtain a `.ply` model~~ => manually, in Rhino
+    - [x] ~~populate the tslam mesh model to obtain a pointcloud (*pcdTs*)~~ => manually, in Rhino
+    - [x] ~~register and refine the realignement (e.g., umeyama + icp) of the two pcd~~ => manually, in Rhino
+    - [x] apply ~~Horn distance calculation~~ nearest neighbor distance to get the mean error
+    - [x] output a table + graph of the mean error (same style as the tslam evaluation)
 
 - [ ] **(2) Batch pipeline for all dataset**: the entire evaluation for the tslam and model evaluation needs to be resumed in a `.sh` script that:
   - [ ] if it doesn't exist it downloads the zenodo dataset
