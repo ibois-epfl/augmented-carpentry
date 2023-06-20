@@ -334,6 +334,20 @@ namespace AIAC
     {
         ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+        if(ImGui::Button("Load Digital Model")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+        }
+        if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                // TODO: Add ply to renderer
+//                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+
     }
 
     void LayerUI::ShowMappingPopup()

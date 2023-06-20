@@ -117,13 +117,13 @@ namespace AIAC
 
     void Renderer::ReloadMeshes()
     {
-        auto pointCloudMapPath = AIAC::Config::Get<string>("Renderer", "PointCloudMapPath", "assets/tslam/examplePointCloud.ply");
-        auto digitalModelPath = AIAC::Config::Get<string>("Renderer", "DigitalModelPath", "assets/tslam/example3dModel.ply");
+        auto pointCloudMapPath = AIAC::Config::Get<string>(AIAC::Config::SEC_RENDERER, AIAC::Config::PCD_MAP_PATH, "assets/tslam/examplePointCloud.ply");
+        auto digitalModelPath = AIAC::Config::Get<string>(AIAC::Config::SEC_RENDERER, AIAC::Config::DIGITAL_MODEL_PATH, "assets/tslam/example3dModel.ply");
 
         PointCloudMap = Mesh(pointCloudMapPath);
         DigitalModel = Mesh(digitalModelPath);
 
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>("Renderer", "MeshPaths", {});
+        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>(AIAC::Config::SEC_RENDERER, AIAC::Config::MESH_PATHS, {});
         for(auto path : meshPaths) {
             Meshes.emplace_back(path);
         }
