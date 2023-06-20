@@ -6,9 +6,23 @@
 #include "utils/Ini.h"
 
 namespace AIAC{
-
 class Config
 {
+public:
+    inline static const std::string SEC_AIAC = "AIAC";
+    inline static const std::string CAM_ID = "CamID";
+    inline static const std::string CAM_PARAMS_FILE = "CamParamsFile";
+
+    inline static const std::string SEC_TSLAM = "TSlam";
+    inline static const std::string MAP_FILE = "MapFile";
+    inline static const std::string VocFile = "VocFile";
+
+    inline static const std::string SEC_RENDERER = "Renderer";
+    inline static const std::string PCD_MAP_PATH = "PointCloudMapPath";
+    inline static const std::string DIGITAL_MODEL_PATH = "DigitalModelPath";
+    inline static const std::string MESH_PATHS = "MeshPaths";
+
+
 public:
     Config(std::string filename, bool updateFile=true):
         m_Filename(filename),
@@ -64,6 +78,7 @@ public:
     inline static void InsertEntry(const std::string& section, const std::string& name, const T& v)
     {
         AIAC_ASSERT(s_Instance != NULL, "Config not initialized!");
+        AIAC_INFO("Insert config value: [{}] {} = {}", section, name, v);
         s_Instance->m_IniReader.InsertEntry(section, name, v);
         if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
     };
@@ -72,6 +87,7 @@ public:
     inline static void InsertEntry(const std::string& section, const std::string& name, const std::vector<T>& vs)
     {
         AIAC_ASSERT(s_Instance != NULL, "Config not initialized!");
+        AIAC_INFO("Insert config value: [{}] {} = {}...", section, name, vs[0]);
         s_Instance->m_IniReader.InsertEntry(section, name, vs);
         if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
     };
@@ -80,6 +96,7 @@ public:
     inline static void UpdateEntry(const std::string& section, const std::string& name, const T& v)
     {
         AIAC_ASSERT(s_Instance != NULL, "Config not initialized!");
+        AIAC_INFO("Update config value: [{}] {} = {}", section, name, v);
         s_Instance->m_IniReader.UpdateEntry(section, name, v);
         if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
     }
@@ -89,6 +106,7 @@ public:
                      const std::vector<T>& vs)
     {
         AIAC_ASSERT(s_Instance, "Config not initialized!");
+        AIAC_INFO("Update config value: [{}] {} = {}...", section, name, vs[0]);
         s_Instance->m_IniReader.UpdateEntry(section, name, vs);
         if(s_Instance->m_UpdateFile) s_Instance->WriteToFile();
     };
@@ -102,7 +120,7 @@ public:
 private:
     inih::INIReader m_IniReader;
     std::string m_Filename;
-    bool m_UpdateFile;
+    bool m_UpdateFile = true;
 
     static Config* s_Instance;
 };

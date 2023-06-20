@@ -10,7 +10,7 @@
 
 #include "AIAC/UI/ClrPalette.h"
 #include "AIAC/UI/CustomLogos.h"
-
+#include "LayerCameraCalib.h"
 
 
 namespace AIAC
@@ -65,14 +65,18 @@ namespace AIAC
         ImGui::NewFrame();
     }
 
-    void LayerUI::OnUIRender()
-    {
+    void LayerUI::OnUIRender() {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
-        if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()){
+        if (AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             ShowMappingPopup();
-            if(m_IsSavingMap){
+            if (m_IsSavingMap) {
                 ShowSaveMapFileDialog();
+            }
+        } else if (AIAC_APP.GetLayer<LayerCameraCalib>()->IsCalibrating()){
+            ShowCamCalibPopup();
+            if (m_IsChoosingCamCalibFileSavePath){
+                ShowSaveCamCalibFileDialog();
             }
         } else {
             ShowMenuBar();
@@ -209,21 +213,56 @@ namespace AIAC
 
     void LayerUI::SetPaneUICamera()
     {
-        ImGui::Text("This layer is responsible for the physical camera.");
-        AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
-        ImGui::Text("Camera is %s", camera.IsOpened() ? "open" : "closed");
-        ImGui::Text("Camera resolution: %d x %d", camera.GetWidth(), camera.GetHeight());
+        string currentItem = AIAC_APP.GetLayer<LayerCamera>()->GetCurrentDevice();
+        static const char* previewValue = currentItem.c_str();
+        if(ImGui::BeginCombo("is Opened", previewValue)){
+            for (auto& devicePath : AIAC_APP.GetLayer<LayerCamera>()->AvailableDevices) {
+                bool is_selected = (currentItem == devicePath);
+                if (ImGui::Selectable(devicePath.c_str(), is_selected)){
+                    AIAC_APP.GetLayer<LayerCamera>()->SetCurrentDevice(devicePath);
+                }
+                if (is_selected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
+        }
 
-        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
-        AIAC::ImTexture frameImTexture = frame.GetImTexture();
-        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
+        AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
+        ImGui::Text("Resolution: (%d x %d) > (%d x %d)", camera.GetRawWidth(), camera.GetRawHeight(), camera.GetWidth(), camera.GetHeight());
+
+        ImGui::BeginChild("camera_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+            if(ImGui::Button("Start Calibration")){
+                AIAC_APP.GetRenderer()->StartCamCalib();
+                AIAC_APP.GetLayer<LayerCameraCalib>()->StartCalibration();
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Open Calib File")) {
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
+            }
+            if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+
+            ImGui::PopStyleColor();
+        ImGui::EndChild();
+
+//        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
+//        AIAC::ImTexture frameImTexture = frame.GetImTexture(ImVec2(800, 480));
+//        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
     }
 
     void LayerUI::SetPaneUISlam()
     {
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 56), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
         if (ImGui::Button("Open SLAM map"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
@@ -232,9 +271,10 @@ namespace AIAC
             if (ImGuiFileDialog::Instance()->IsOk())
             {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+                //                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
                 // action
-                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName);
+                //                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
+                AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
             }
             ImGuiFileDialog::Instance()->Close();
         }
@@ -251,19 +291,20 @@ namespace AIAC
             }
             ImGuiFileDialog::Instance()->Close();
         }
-        ImGui::SameLine();
-        if (ImGui::Button("Open camera calib"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
+//        ImGui::SameLine();
+//        if (ImGui::Button("Open camera calib"))
+//            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
+//
+//        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
+//        {
+//            if (ImGuiFileDialog::Instance()->IsOk())
+//            {
+//            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+//            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+//            }
+//            ImGuiFileDialog::Instance()->Close();
+//        }
 
         ImGui::EndChild();
 
@@ -277,11 +318,11 @@ namespace AIAC
             if(ImGui::Button("Combine Map")){
                 m_IsCombiningMap = true;
             }
-        ImGui::PopStyleColor();
+            ImGui::PopStyleColor();
         ImGui::EndChild();
 
+        ImGui::Checkbox("Process Frames", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToProcess);
         ImGui::Checkbox("Enhance Photo", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToEnhance);
-
 
         ImGui::Text("Tracked: %s", AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked() ? "Yes" : "No");
 
@@ -293,6 +334,20 @@ namespace AIAC
     {
         ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+        if(ImGui::Button("Load Digital Model")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+        }
+        if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                // TODO: Add ply to renderer
+//                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+
     }
 
     void LayerUI::ShowMappingPopup()
@@ -302,6 +357,7 @@ namespace AIAC
         ImGui::Begin("Mapping", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
             CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetMappingView(), m_MappingViewImTexture);
+            // TODO: use config to store the size, and set glViewPort before rendering
             ImGui::ImageButton(m_MappingViewImTexture.ID, ImVec2(600, 442), ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
 
             ImGui::SameLine();
@@ -322,7 +378,7 @@ namespace AIAC
                         m_IsSavingMap = true;
                     }
                     ImGui::SameLine();
-                    if(ImGui::Button("Cancel")){
+                    if(ImGui::Button("Exit")){
                         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
                         AIAC_APP.GetRenderer()->StopMapping();
                         m_IsSavingMap = false;
@@ -339,6 +395,92 @@ namespace AIAC
             }
         ImGui::End();
     }
+
+    void LayerUI::ShowCamCalibPopup()
+    {
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y));
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        ImGui::Begin("Camera Calibration", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
+
+        CvtGlTextureObj2ImTexture(AIAC_APP.GetRenderer()->GetCamCalibView(), m_CamCalibViewImTexture);
+        ImGui::ImageButton(m_CamCalibViewImTexture.ID, ImVec2(600, 442), ImVec2(0, 1), ImVec2(1, 0), 0, ImColor(255, 255, 255, 128));
+
+        ImGui::SameLine();
+        ImGui::BeginChild("cam_calib_info_child", ImVec2(0, 0), false); {
+            ImVec2 sideBarViewportSize = ImGui::GetContentRegionAvail();
+            ImGui::BeginChild("calib_param", ImVec2(sideBarViewportSize.x, 132), true);
+            {
+                ImGui::Text("Board Size:");
+
+                ImGui::Text("Width");
+                ImGui::SameLine();
+                ImGui::InputInt("Board Width",
+                                &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().boardSize.width);
+
+                ImGui::Text("Height");
+                ImGui::SameLine();
+                ImGui::InputInt("Board Height",
+                                &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().boardSize.height);
+
+                ImGui::Text("Square Size");
+                ImGui::SameLine();
+                ImGui::InputFloat(" Square Size",
+                                  &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().squareSize);
+
+                ImGui::Checkbox("Use Fisheye",
+                                &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().useFisheye);
+
+            } ImGui::EndChild();
+            ImGui::BeginChild("capture_setting", ImVec2(sideBarViewportSize.x, 108), true);
+            {
+                ImGui::Checkbox("Auto Capture", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->AutoCapture);
+
+                ImGui::Text("Delay");
+                ImGui::SameLine();
+                ImGui::InputInt("Delay", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->Delay);
+
+                ImGui::Text("Num of Frames");
+                ImGui::SameLine();
+                ImGui::InputInt("Num Of Frame", &AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->NumOfFrame);
+
+                stringstream ss;
+                if (AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->IsCapturing()) {
+                    ss << "Capturing: "
+                        << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->GetCameraCalibrator().GetImageAmount() << "/"
+                        << AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->NumOfFrame;
+                } else {
+                    ss << "Click Start to Capture";
+                }
+                ImGui::Text("%s", ss.str().c_str());
+
+            }ImGui::EndChild();
+            sideBarViewportSize = ImGui::GetContentRegionAvail();
+            ImGui::BeginChild("menu", sideBarViewportSize, true);
+            {
+                // Save Path
+                if(ImGui::Button(">")){
+                    m_IsChoosingCamCalibFileSavePath = true;
+                }
+                ImGui::SameLine();
+                char tmpSavePath[PATH_BUF_SIZE];
+                strcpy(tmpSavePath, AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->SaveFilename.c_str());
+                ImGui::InputText("Save Path", tmpSavePath, PATH_BUF_SIZE);
+                AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->SaveFilename = tmpSavePath;
+
+                if(ImGui::Button("Start")){
+                    AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->StartCapturing();
+                }
+                ImGui::SameLine();
+                if(ImGui::Button("Exit")){
+                    AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->StopCalibration();
+                    AIAC_APP.GetRenderer()->StopCamCalib();
+                }
+            } ImGui::EndChild();
+        } ImGui::EndChild();
+
+        ImGui::End();
+    }
+
     void LayerUI::ShowCombineMapPopup()
     {
 //        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.3, ImGui::GetIO().DisplaySize.y * 0.3));
@@ -388,6 +530,25 @@ namespace AIAC
             }
 
         ImGui::End();
+    }
+
+    void LayerUI::ShowSaveCamCalibFileDialog()
+    {
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+        ImGuiFileDialog::Instance()->OpenDialog("ChooseSaveCalibFilePath", "Choose calib file path", ".yml", ".");
+        if (ImGuiFileDialog::Instance()->Display("ChooseSaveCalibFilePath"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+
+                AIAC_INFO("Saving calib file to {0}", filePathName.c_str());
+                AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->SetSaveFilename(filePathName);
+            }
+            ImGuiFileDialog::Instance()->Close();
+            m_IsChoosingCamCalibFileSavePath = false;
+        }
     }
     void LayerUI::ShowSaveMapFileDialog()
     {

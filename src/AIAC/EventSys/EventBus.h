@@ -26,7 +26,7 @@ namespace AIAC
             });
             m_EventQueue.appendListener(EventType::CameraCalibrationLoaded, [](const EventPointer& event) {
                 auto& cameraEvent = static_cast<CameraCalibrationLoadedEvent&>(*event);
-                cameraEvent.OnCameraCalibrationLoaded();
+                cameraEvent.OnCameraCalibrationFileLoaded();
             });
             m_EventQueue.appendListener(EventType::AppClose, [](const EventPointer& event) {
                 auto& appEvent = static_cast<AppCloseEvent&>(*event);

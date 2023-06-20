@@ -12,7 +12,7 @@ namespace AIAC
             : Event(EventType::CameraCalibrationLoaded, EventCategory::EventCategoryCamera), m_FilePath(filePath)
         {}
         
-        void OnCameraCalibrationLoaded();
+        void OnCameraCalibrationFileLoaded();
     
     private:
         std::string m_FilePath;
