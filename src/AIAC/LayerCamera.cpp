@@ -3,6 +3,7 @@
 #include "AIAC/LayerCamera.h"
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
+#include "AIAC/Config.h"
 #include "utils/glob.h"
 
 namespace AIAC
@@ -20,8 +21,7 @@ namespace AIAC
             if (AvailableDevices.empty()) {
                 AIAC_ERROR("No camera device found");
             } else {
-                AIAC_INFO("Found {} camera devices", AvailableDevices.size());
-                // open 0 for default
+                m_CurrentDeviceIndex = AIAC::Config::Get<int>("AIAC", "CamID", 0);
                 MainCamera.Open(m_CurrentDeviceIndex);
             }
         }
@@ -43,6 +43,7 @@ namespace AIAC
             m_CurrentDeviceIndex = std::distance(AvailableDevices.begin(), it);
             try {
                 MainCamera.Open(m_CurrentDeviceIndex);
+                AIAC::Config::UpdateEntry("AIAC", "CamID", m_CurrentDeviceIndex);
             } catch (const std::runtime_error& e) {
                 m_CurrentDeviceIndex = prevDeviceIdx;
                 MainCamera.Open(m_CurrentDeviceIndex);

@@ -13,21 +13,20 @@
 
 namespace AIAC
 {
-    const std::string TSLAM_CONF_SEC = "TSlam"; 
-
     void LayerSlam::OnAttach()
     {
         // load camera calibration file (mainly for distortion matrix)
-        Slam.setCamParams(AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
+        auto calibFilePath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "assets/tslam/calibration_webcam.yml");
+        Slam.setCamParams(calibFilePath);
         Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
         Slam.systemParams.enableLoopClosure = false;
 
         // load map, the camera matrix will be replaced by the one in the map
-        auto pathToMapFile = AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map");
+        auto pathToMapFile = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, "assets/tslam/example.map");
         AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
 
         // load vocabulary
-        Slam.setVocabulary(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
+        Slam.setVocabulary(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, "assets/tslam/orb.fbow"));
         Slam.setInstancing(true);
     }
 
