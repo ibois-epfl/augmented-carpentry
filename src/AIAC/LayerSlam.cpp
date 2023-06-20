@@ -13,26 +13,36 @@
 
 namespace AIAC
 {
-    const std::string TSLAM_CONF_SEC = "TSlam"; 
-
     void LayerSlam::OnAttach()
     {
-        Slam.setMap(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "MapFile", "assets/tslam/example.map"), true);
-        Slam.setVocabulary(AIAC::Config::Get<std::string>(TSLAM_CONF_SEC, "VocFile", "assets/tslam/orb.fbow"));
-        Slam.setCamParams(AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml"));
+        // load camera calibration file (mainly for distortion matrix)
+        auto calibFilePath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "assets/tslam/calibration_webcam.yml");
+        Slam.setCamParams(calibFilePath);
+        Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
+        Slam.systemParams.enableLoopClosure = false;
+
+        // load map, the camera matrix will be replaced by the one in the map
+        auto pathToMapFile = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, "assets/tslam/example.map");
+        AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+
+        // load vocabulary
+        Slam.setVocabulary(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, "assets/tslam/orb.fbow"));
         Slam.setInstancing(true);
     }
 
     void LayerSlam::OnFrameStart()
     {
-        cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        if(!ToProcess){
+            return;
+        }
 
-//        if(undistort){
-//            cv::remap(in_image,auxImage,undistMap[0],undistMap[1],cv::INTER_CUBIC);
-//            in_image=auxImage;
-//            image_params.Distorsion.setTo(cv::Scalar::all(0));
-//        }
+        cv::Mat currentFrame;
+        cv::Mat resizedFrame;
+
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        auto targetSize = Slam.imageParams.CamSize;
+        cv::resize(currentFrame, resizedFrame, targetSize);
+        currentFrame = resizedFrame;
 
         if(ToEnhance){
             //Get Intensity image
@@ -57,7 +67,6 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
-
         if(m_IsTracked) { m_LastTrackedCamPose = m_CamPose; }
     }
 
@@ -110,6 +119,7 @@ namespace AIAC
 
     void LayerSlam::StartMapping()
     {
+        ToProcess = true;
         m_IsMapping = true;
         Slam.clearMap();
         Slam.setInstancing(false);

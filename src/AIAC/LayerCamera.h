@@ -15,7 +15,16 @@ namespace AIAC
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
+        inline std::string GetCurrentDevice() const { return AvailableDevices[m_CurrentDeviceIndex]; }
+        inline int GetCurrentDeviceIndex() const { return m_CurrentDeviceIndex; }
+        void SetCurrentDevice(std::string path);
+        void SetCurrentDeviceIndex(int index);
+
     public:
+        std::vector<std::string> AvailableDevices;
         AIAC::Camera MainCamera;
+
+    private:
+        int m_CurrentDeviceIndex = 0;
     };
 }

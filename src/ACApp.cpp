@@ -1,5 +1,6 @@
 #include "aiacpch.h"
 #include "AIAC.h"
+#include "AIAC/LayerCameraCalib.h"
 
 int main(int argc, char* argv[]) {
 #ifdef __linux__
@@ -23,6 +24,7 @@ int main(int argc, char* argv[]) {
     acApp_ptr->GetGORegistry()->Init();
 
     acApp_ptr->PushLayer<AIAC::LayerCamera>();
+    acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
     acApp_ptr->PushLayer<AIAC::LayerSlam>();
     acApp_ptr->PushLayer<AIAC::LayerModel>();
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();

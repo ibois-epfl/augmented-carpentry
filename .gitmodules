@@ -22,7 +22,7 @@
 	url = git@github.com:ibois-epfl/glm.git
 [submodule "deps/glew"]
 	path = deps/glew
-	url = git@github.com:ibois-epfl/glewAC.git
+	url = git@github.com:ibois-epfl/glew.git
 [submodule "deps/eventpp"]
 	branch = master
 	path = deps/eventpp
