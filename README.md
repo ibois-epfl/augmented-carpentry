@@ -101,6 +101,7 @@ git pull --recurse-submodules
 If it is the first time you are installing AC, set all the dependecies options in the `CMakeLists.txt` file to **ON**.
 
 ```bash
+    ./cmake/install_TSlam.sh (Although CMakeList.txt run this when INSTALL_TSLAM option is on, you might need to install TSlam with this command manually as its need sudo priviledge)
     ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
     ./build.sh
 ```
