@@ -20,6 +20,14 @@ namespace AIAC
         void SetCurrentDevice(std::string path);
         void SetCurrentDeviceIndex(int index);
 
+        /**
+         * @brief Update the list of available devices
+         *
+         * @return true if the list contains >= 1 device
+         * @return false if the list has no devices
+         */
+        bool UpdateAvailableDevices();
+
     public:
         std::vector<std::string> AvailableDevices;
         AIAC::Camera MainCamera;

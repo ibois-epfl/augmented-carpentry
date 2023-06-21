@@ -1,4 +1,5 @@
 #include "aiacpch.h"
+#include "AIAC/Config.h"
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/Application.h"
 
@@ -8,6 +9,9 @@ namespace AIAC
     void SLAMMapLoadedEvent::OnSLAMMapLoaded()
     {
         AIAC_INFO("SLAM map file changed to: {}", m_FilePath);
+        // update config
+        AIAC::Config::UpdateEntry(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, m_FilePath);
+
         AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(m_FilePath, true);
 
         // extract the camera calibration file path from the SLAM map and update for camera and SLAM
@@ -35,6 +39,10 @@ namespace AIAC
     void SLAMVocabularyLoadedEvent::OnSLAMVocabularyLoaded()
     {
         AIAC_INFO("SLAM vocabulary file changed to: {}", m_FilePath);
+
+        // update config
+        AIAC::Config::UpdateEntry(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, m_FilePath);
+
         AIAC_APP.GetLayer<LayerSlam>()->Slam.setVocabulary(m_FilePath);
     }
 }

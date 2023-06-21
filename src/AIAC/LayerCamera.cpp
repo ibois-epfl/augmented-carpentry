@@ -12,17 +12,11 @@ namespace AIAC
     {
         try
         {
-            glob::glob glob("/dev/video*");
-            while(glob){
-                AvailableDevices.push_back(glob.current_match());
-                glob.next();
-            }
-            sort(AvailableDevices.begin(), AvailableDevices.end());
-            if (AvailableDevices.empty()) {
-                AIAC_ERROR("No camera device found");
-            } else {
+            if(UpdateAvailableDevices()){
                 m_CurrentDeviceIndex = AIAC::Config::Get<int>("AIAC", "CamID", 0);
-                MainCamera.Open(m_CurrentDeviceIndex);
+                SetCurrentDeviceIndex(m_CurrentDeviceIndex);
+            } else {
+                throw std::runtime_error("No camera found");
             }
         }
         catch(const std::runtime_error& e)
@@ -55,11 +49,33 @@ namespace AIAC
     }
 
     void LayerCamera::SetCurrentDeviceIndex(int index) {
-        if (index >= 0 && index < AvailableDevices.size()) {
-            m_CurrentDeviceIndex = index;
-            MainCamera.Open(m_CurrentDeviceIndex);
-        } else {
-            AIAC_ERROR("Device index {} out of range", index);
+        try {
+            if (index >= 0 && index < AvailableDevices.size()) {
+                MainCamera.Open(index);
+                m_CurrentDeviceIndex = index;
+            } else {
+                AIAC_ERROR("Camera device index {} out of range (0~{})", index, AvailableDevices.size() - 1);
+                MainCamera.Open(0);
+                m_CurrentDeviceIndex = 0;
+            }
+            AIAC::Config::UpdateEntry("AIAC", "CamID", m_CurrentDeviceIndex);
+        } catch (const std::runtime_error &e) {
+            AIAC_ERROR(e.what());
         }
+    }
+
+    bool LayerCamera::UpdateAvailableDevices(){
+        AvailableDevices.clear();
+        glob::glob glob("/dev/video*");
+        while(glob){
+            AvailableDevices.push_back(glob.current_match());
+            glob.next();
+        }
+        if(AvailableDevices.empty()){
+            AIAC_ERROR("No camera device found");
+            return false;
+        }
+        sort(AvailableDevices.begin(), AvailableDevices.end());
+        return true;
     }
 }

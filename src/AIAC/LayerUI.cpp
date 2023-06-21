@@ -215,7 +215,7 @@ namespace AIAC
     {
         string currentItem = AIAC_APP.GetLayer<LayerCamera>()->GetCurrentDevice();
         static const char* previewValue = currentItem.c_str();
-        if(ImGui::BeginCombo("is Opened", previewValue)){
+        if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
             for (auto& devicePath : AIAC_APP.GetLayer<LayerCamera>()->AvailableDevices) {
                 bool is_selected = (currentItem == devicePath);
                 if (ImGui::Selectable(devicePath.c_str(), is_selected)){
@@ -225,6 +225,10 @@ namespace AIAC
                     ImGui::SetItemDefaultFocus();
             }
             ImGui::EndCombo();
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("Refresh")){
+            AIAC_APP.GetLayer<LayerCamera>()->UpdateAvailableDevices();
         }
 
         AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;

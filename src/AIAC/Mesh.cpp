@@ -20,7 +20,7 @@ namespace AIAC
 
 
 
-        // Fill vertices positions
+        // Fill vertices positions & compute Bounding Box
         Vertices.reserve(mesh->mNumVertices);
         for(unsigned int i=0; i<mesh->mNumVertices; i++){
             aiVector3D pos = mesh->mVertices[i];

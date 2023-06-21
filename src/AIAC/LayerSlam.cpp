@@ -67,7 +67,13 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
-        if(m_IsTracked) { m_LastTrackedCamPose = m_CamPose; }
+        if(m_IsTracked) {
+            auto poseDifference = cv::norm(m_CamPose - m_LastTrackedCamPose);
+            if (poseDifference < 1.0) {
+                m_LastTrackedCamPose = m_CamPose * 0.2 + m_LastTrackedCamPose * 0.8;
+            }
+            m_LastTrackedCamPose = m_CamPose;
+        }
     }
 
     glm::mat4 LayerSlam::GetCamPoseGlm()
