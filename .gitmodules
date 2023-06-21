@@ -30,3 +30,6 @@
 [submodule "deps/freetype"]
 	path = deps/freetype
 	url = https://gitlab.freedesktop.org/freetype/freetype
+[submodule "deps/TTool"]
+	path = deps/TTool
+	url = git@github.com:ibois-epfl/TTool.git
