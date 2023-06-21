@@ -54,6 +54,7 @@ option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
 option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
 option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
+option(INSTALL_TTOOL "Install TTool in case it has been updated" OFF)
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
@@ -139,11 +140,26 @@ if(TSlam_FOUND)
     message(STATUS "TSlam libraries: ${TSlam_LIBS}")
 endif()
 
+# TTool
+if(UNIX AND INSTALL_TTOOL)
+    message(WARNING "Re/Compiling TTool...${INSTALL_TTOOL}")
+    execute_process(COMMAND ./cmake/install_TTool.sh
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
+find_package(TTool REQUIRED)
+if(TTool_FOUND)
+    message(STATUS "TTool version: ${TTool_VERSION}")
+    message(STATUS "TTool include dir: ${TTool_INCLUDE_DIRS}")
+    message(STATUS "TTool libraries dir: ${TTool_LIB_DIR}")
+    message(STATUS "TTool libraries: ${TTool_LIBS}")
+endif()
+
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
+    PUBLIC ${TTool_INCLUDE_DIRS}
     PUBLIC ${ASSIMP_INCLUDE_DIRS}
     )
 
@@ -151,6 +167,7 @@ target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
     ${TSlam_LIBS}
+    ${TTool_LIBS}
     ${CMAKE_DL_LIBS}
     glfw
     assimp
