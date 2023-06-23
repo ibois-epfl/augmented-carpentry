@@ -23,7 +23,9 @@ namespace AIAC
         Slam.systemParams.aruco_minerrratio_valid = 15;
         Slam.systemParams.KPNonMaximaSuppresion=true;
         Slam.systemParams.markersOptWeight=1.0; // maximum importance of markers in the final error. Value in range [0,1]. The rest if assigned to points
-        Slam.systemParams.minMarkersForMaxWeight=2;
+        Slam.systemParams.minMarkersForMaxWeight=3;
+        Slam.systemParams.detectKeyPoints=false;
+
 
         // load map, the camera matrix will be replaced by the one in the map
         auto pathToMapFile = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, "assets/tslam/example.map");
