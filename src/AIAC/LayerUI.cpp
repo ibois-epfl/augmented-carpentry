@@ -347,6 +347,8 @@ namespace AIAC
             {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
                 // TODO: Add ply to renderer
+                AIAC_INFO("Loading Digital Model: {}", filePathName);
+                AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
 //                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
             }
             ImGuiFileDialog::Instance()->Close();

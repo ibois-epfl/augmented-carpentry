@@ -14,13 +14,13 @@ namespace AIAC
 
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
     {
-        std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
-        for(const auto& mapPoint: map->map_points){
-            if(mapPoint.isValid()){
-                mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
-            }
-        }
-        glDrawPoints3d(mapPoints, OGL_YELLOW, pointSize);
+//        std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
+//        for(const auto& mapPoint: map->map_points){
+//            if(mapPoint.isValid()){
+//                mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
+//            }
+//        }
+//        glDrawPoints3d(mapPoints, OGL_YELLOW, pointSize);
 
         std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
         std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
