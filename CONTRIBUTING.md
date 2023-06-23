@@ -106,35 +106,45 @@ inih::Ini config("config.ini", true);
 ```
 
 #### Usage
+In order to get rid of plain text, where an typo can cause unexpected error, we strongly suggest you to declare a static const string variable in `config.h` and call it in your code. For each data entry, "section" and "name" are combined as the primary key. Here's an example:
+
+In `Config.h`, declare the variable for key:
 ```cpp
-AIAC::Config::Get<int>("section", "key1", 10);
+inline static const std::string SEC_TEST = "SectionTest";
+inline static const std::string VALUE_NAME_1 = "ValueName1";
+inline static const std::string VALUE_NAME_2 = "ValueName2";
+```
+Usage:
+```cpp
+// Get<type>(section, key, default value if not exist)
+AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::VALUE_NAME_1, 10);
 
 // InsertEntry(section, key, value)
-AIAC::Config::InsertEntry("section_test", "key1", -1);
+AIAC::Config::InsertEntry(AIAC::Config::SEC_AIAC, AIAC::Config::VALUE_NAME_2, -1);
 
 // Insert a vector
 vector<int> primeVector = {2, 3, 5, 7, 11};
-AIAC::Config::InsertEntry("section_test_vector", "prime_number", primeVector);
+AIAC::Config::InsertEntry("SectionTestVector", "PrimeNumber", primeVector);
 
 
 // Get<T>(section, key, default_value)
 // The entry will be created if not exist.
-cout << AIAC::Config::Get<int>("section_test", "key1", -1) << endl;
-cout << AIAC::Config::Get<string>("section_test", "key2", "I'm a string!") << endl;
+cout << AIAC::Config::Get<int>("SectionTest", "ValueName1", -1) << endl;
+cout << AIAC::Config::Get<string>("SectionTest", "ValueName2", "I'm a string!") << endl;
 
 // With vector, use GetVector() instead of Get(),
-for(auto n: AIAC::Config::GetVector<int>("section_test_vector", "prime_number", primeVector)){
+for(auto n: AIAC::Config::GetVector<int>("SectionTestVector", "PrimeNumber", primeVector)){
     cout << n << " ";
 }
 cout << endl;
 
 // Update an Entry
-AIAC::Config::UpdateEntry("section_test", "key1", 999);
-cout << AIAC::Config::Get("section_test", "key1", -1) << endl;
+AIAC::Config::UpdateEntry("SectionTest", "key1", 999);
+cout << AIAC::Config::Get("SectionTest", "key1", -1) << endl;
 
 // For update an vector entry, call the same function as normal
 primeVector.push_back(13);
-AIAC::Config::UpdateEntry("section_test_vector", "prime_number", primeVector);
+AIAC::Config::UpdateEntry("SectionTestVector", "PrimeNumber", primeVector);
 
 // Write the ini to the original file
 AIAC::Config::WriteToFile();
@@ -151,12 +161,12 @@ I'm a string!
 ```
 with two identical `.ini` file contains:
 ```
-[section_test]
+[SectionTest]
 key1 = 999
 key2 = I'm a string!
 
-[section_test_vector]
-prime_number = 2 3 5 7 11 13
+[SectionTestVector]
+PrimeNumber = 2 3 5 7 11 13
 ```
 ### Pre-Compiled headers
 AC uses a precompile header `aiacpch.h` to the project to shorten compilation time for headers that you rarely modify such as stdb library, opencv etc.. Add to `aiacpch.h` every big header you do not use often.
