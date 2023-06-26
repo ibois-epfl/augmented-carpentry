@@ -27,14 +27,15 @@ file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the corr
 
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ACApp.cpp
-    ${AIAC_SRC}
-        src/AIAC/Render/Viewport.cpp src/AIAC/Render/Viewport.h src/AIAC/LayerCameraCalib.cpp src/AIAC/LayerCameraCalib.h src/utils/glob.cpp src/utils/glob.h)
+    # ${AIAC_SRC}
+    #     src/AIAC/Render/Viewport.cpp src/AIAC/Render/Viewport.h src/AIAC/LayerCameraCalib.cpp src/AIAC/LayerCameraCalib.h src/utils/glob.cpp src/utils/glob.h
+        )
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-target_include_directories(${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
-    )
+# target_include_directories(${PROJECT_NAME}
+#     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
+#     )
 
 #------------------------------------------------------------------------------------------------------------
 # Pre compiled headers
@@ -146,20 +147,19 @@ if(UNIX AND INSTALL_TTOOL)
     execute_process(COMMAND ./cmake/install_TTool.sh
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
-find_package(TTool REQUIRED)
-if(TTool_FOUND)
-    message(STATUS "TTool version: ${TTool_VERSION}")
-    message(STATUS "TTool include dir: ${TTool_INCLUDE_DIRS}")
-    message(STATUS "TTool libraries dir: ${TTool_LIB_DIR}")
-    message(STATUS "TTool libraries: ${TTool_LIBS}")
+find_package(ttool REQUIRED)
+if(ttool_FOUND)
+    message(STATUS "TTool version: ${ttool_VERSION}")
+    message(STATUS "TTool include dir: ${ttool_INCLUDE_DIRS}")
+    message(STATUS "TTool libraries dir: ${ttool_LIBRARY_DIRS}")
+    message(STATUS "TTool libraries: ${ttool_LIBRARIES}")
 endif()
-
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
-    PUBLIC ${TTool_INCLUDE_DIRS}
+    PUBLIC ${ttool_INCLUDE_DIRS}
     PUBLIC ${ASSIMP_INCLUDE_DIRS}
     )
 
@@ -167,7 +167,7 @@ target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
     ${TSlam_LIBS}
-    ${TTool_LIBS}
+    ${ttool_LIBRARIES}
     ${CMAKE_DL_LIBS}
     glfw
     assimp
