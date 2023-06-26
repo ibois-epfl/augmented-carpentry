@@ -1,9 +1,9 @@
-// #include "aiacpch.h"
-// #include "AIAC.h"
-// #include "AIAC/LayerCameraCalib.h"
+#include "aiacpch.h"
+#include "AIAC.h"
+#include "AIAC/LayerCameraCalib.h"
 
 #include <QApplication>
-// #include <QThread>
+#include <QThread>
 
 #include "ttool.hh"
 
@@ -20,18 +20,18 @@ int main(int argc, char* argv[]) {
         "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/calibration_orange_B_1280_720_r.yml"
         );
     std::cout << "END Main\n";
+    AIAC::Log::Init();
+
+    AIAC::Config config("config.ini", true);
+
+    AIAC::ApplicationSpecification appSpec;
+    appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
+    appSpec.WinWidth = 800;
+    appSpec.WinHeight = 480;
+    appSpec.IsResizable = false;
+    appSpec.VSync = true;
+    appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     return 0;
-    // AIAC::Log::Init();
-
-    // AIAC::Config config("config.ini", true);
-
-    // AIAC::ApplicationSpecification appSpec;
-    // appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
-    // appSpec.WinWidth = 800;
-    // appSpec.WinHeight = 480;
-    // appSpec.IsResizable = false;
-    // appSpec.VSync = true;
-    // appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 
     // std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
 
