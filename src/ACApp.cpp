@@ -6,20 +6,24 @@
 #include <QThread>
 
 #include "ttool.hh"
+#include "view.hh"
 
 int main(int argc, char* argv[]) {
 #ifdef __linux__
 
     // int argc = 1;
     // char* argv[] = { "augmented_carpentry" };
-    std::cout << "BEGIN Main\n";
-    QApplication app(argc, argv);
+    // std::cout << "BEGIN Main\n";
+    // QApplication app(argc, argv);
 	
-    std::shared_ptr<ttool::TTool> ttool = std::make_shared<ttool::TTool>(
-        "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/config.yml",
-        "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/calibration_orange_B_1280_720_r.yml"
-        );
-    std::cout << "END Main\n";
+    // std::shared_ptr<ttool::TTool> ttool = std::make_shared<ttool::TTool>(
+    //     "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/config.yml",
+    //     "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/calibration_orange_B_1280_720_r.yml"
+    //     );
+    // std::cout << "END Main\n";
+    // View* view = View::Instance();
+    // view->doneCurrent();
+
     AIAC::Log::Init();
 
     AIAC::Config config("config.ini", true);
@@ -33,28 +37,27 @@ int main(int argc, char* argv[]) {
     appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 
     std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
-    return 0;
 
-    // std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
+    acApp_ptr->GetWindow()->Init();
 
-    // acApp_ptr->GetWindow()->Init();
+    acApp_ptr->GetGORegistry()->Init();
 
-    // acApp_ptr->GetGORegistry()->Init();
+    acApp_ptr->PushLayer<AIAC::LayerCamera>();
+    acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
+    acApp_ptr->PushLayer<AIAC::LayerSlam>();
+    acApp_ptr->PushLayer<AIAC::LayerModel>();
+    acApp_ptr->PushLayer<AIAC::LayerToolhead>();
+    acApp_ptr->PushLayer<AIAC::LayerInstructor>();
+    acApp_ptr->PushLayer<AIAC::LayerFeedback>();
+    acApp_ptr->GetWindow()->OnBeforeRender();
+    acApp_ptr->PushLayer<AIAC::LayerUI>();
 
-    // acApp_ptr->PushLayer<AIAC::LayerCamera>();
-    // acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
-    // acApp_ptr->PushLayer<AIAC::LayerSlam>();
-    // acApp_ptr->PushLayer<AIAC::LayerModel>();
-    // // acApp_ptr->PushLayer<AIAC::LayerToolhead>();
-    // acApp_ptr->PushLayer<AIAC::LayerInstructor>();
-    // acApp_ptr->PushLayer<AIAC::LayerFeedback>();
-    // acApp_ptr->PushLayer<AIAC::LayerUI>();
+    acApp_ptr->GetRenderer()->Init();
 
-    // acApp_ptr->GetRenderer()->Init();
+    acApp_ptr->GetEventBus()->Init();
 
-    // acApp_ptr->GetEventBus()->Init();
-
-    // acApp_ptr->Run();
+    acApp_ptr->GetWindow()->OnAfterRender();
+    acApp_ptr->Run();
 
     return 0;
 #else

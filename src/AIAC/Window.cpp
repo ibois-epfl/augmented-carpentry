@@ -93,6 +93,8 @@ namespace AIAC
 
 //        glfwSetMouseButtonCallback(m_GLFWWindow, m_MouseButtonCallback);
 //        glfwSetCursorPosCallback(m_GLFWWindow, m_MouseMoveCallback);
+
+        OnAfterRender();
     }
 
     void Window::Shutdown()
@@ -103,6 +105,18 @@ namespace AIAC
         {
             glfwTerminate();
         }
+    }
+
+    void Window::OnBeforeRender()
+    {
+        glfwMakeContextCurrent(m_GLFWWindow);
+        AIAC_INFO("Window make context current\n");
+    }
+
+    void Window::OnAfterRender()
+    {
+        glfwMakeContextCurrent(NULL);
+        AIAC_INFO("Window make context null\n");
     }
 
     bool Window::IsOpen()
