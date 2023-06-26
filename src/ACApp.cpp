@@ -31,6 +31,8 @@ int main(int argc, char* argv[]) {
     appSpec.IsResizable = false;
     appSpec.VSync = true;
     appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+
+    std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
     return 0;
 
     // std::unique_ptr<AIAC::Application> acApp_ptr = std::unique_ptr<AIAC::Application>(new AIAC::Application(appSpec));
