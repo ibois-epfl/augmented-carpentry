@@ -6,6 +6,7 @@ import datetime as dt
 
 import log
 import acim
+import hole
 
 
 def main():
@@ -102,22 +103,33 @@ def main():
                     is_hole = True
                     continue
 
-            b_guid = sc.doc.Objects.AddBrep(b)  # TODO: DEBUG
+            # b_guid = sc.doc.Objects.AddBrep(b)  # TODO: DEBUG
 
             if is_hole:
-                rs.ObjectColor(b_guid, (0,255,0))
+                # rs.ObjectColor(b_guid, (0,255,0))  # TODO: DEBUG
                 holes_b.append(b)
             elif is_cut:
-                rs.ObjectColor(b_guid, (255,0,0))  # TODO: DEBUG
+                # rs.ObjectColor(b_guid, (255,0,0))  # TODO: DEBUG
                 cuts_b.append(b)
-            sc.doc.Views.Redraw()
+            sc.doc.Views.Redraw()  # TODO: DEBUG
 
             is_hole = False
             is_cut = False
 
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        # DETECT EXPOSED to NOT-EXPOSED
-    
+        # PARSE HOLES
+        for hole_b in holes_b:
+            log.info("Processing hole: " + str(hole_b))
+
+            # b_guid = sc.doc.Objects.AddBrep(hole_b)  # TODO: DEBUG
+            # rs.ObjectColor(b_guid, (255,0,0))  # TODO: DEBUG
+
+            hole.get_data_from_brep(hole_b)
+            break  # TODO: DEBUG
+
+        sc.doc.Views.Redraw()  # TODO: DEBUG
+
+
     ACIM.dump_data()
 
 
