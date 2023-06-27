@@ -18,6 +18,7 @@ namespace AIAC
 
     void LayerUI::OnAttach()
     {
+        AIAC_APP.GetWindow()->MakeCurrent();  //TODO: add
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -56,16 +57,22 @@ namespace AIAC
         //TODO: add vertical menu bar
 
         m_IsOpen = new bool(true);
+
+        // AIAC_APP.GetWindow()->ReleaseCurrent();  //TODO: add
     }
 
     void LayerUI::OnFrameStart()
     {
+        AIAC_APP.GetWindow()->MakeCurrent();  //TODO: add
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        // AIAC_APP.GetWindow()->ReleaseCurrent();  //TODO: add
     }
 
-    void LayerUI::OnUIRender() {
+    void LayerUI::OnUIRender()
+    {
+        AIAC_APP.GetWindow()->MakeCurrent();  //TODO: add
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
         if (AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
@@ -94,10 +101,12 @@ namespace AIAC
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        // AIAC_APP.GetWindow()->ReleaseCurrent();  //TODO: add
     }
 
     void LayerUI::OnDetach()
     {
+        AIAC_APP.GetWindow()->MakeCurrent();  //TODO: add
         ImGui::EndMainMenuBar();
 
         ImGui_ImplOpenGL3_Shutdown();

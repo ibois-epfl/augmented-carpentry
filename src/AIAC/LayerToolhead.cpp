@@ -1,5 +1,6 @@
 #include "aiacpch.h"
 
+#include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
 
 #include <QApplication>
@@ -12,6 +13,7 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
+        AIAC_APP.GetWindow()->ReleaseCurrent();
         std::cout << "BEGIN Main\n";
         int argc = 1;
         char* argv[] = { "augmented_carpentry" };
@@ -22,15 +24,13 @@ namespace AIAC
             "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/calibration_orange_B_1280_720_r.yml"
             );
         std::cout << "END Main\n";
-        ttool->doneCurrent();
+        AIAC_APP.GetWindow()->MakeCurrent();
     }
 
     void LayerToolhead::OnFrameStart()
     {
-        // ttool->makeCurrent();
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
 
-        // std::cout << "TTool: using context from ttool\n";
-
-        // ttool->doneCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
     }
 }
