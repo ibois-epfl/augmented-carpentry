@@ -33,8 +33,8 @@ namespace AIAC
         void OnUpdate();
         void OnBufferSwap();
         void Shutdown();
-        void OnBeforeRender();
-        void OnAfterRender();
+        void MakeCurrent();
+        void ReleaseCurrent();
 
         bool IsOpen();
 

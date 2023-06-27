@@ -10,20 +10,6 @@
 
 int main(int argc, char* argv[]) {
 #ifdef __linux__
-
-    // int argc = 1;
-    // char* argv[] = { "augmented_carpentry" };
-    // std::cout << "BEGIN Main\n";
-    // QApplication app(argc, argv);
-	
-    // std::shared_ptr<ttool::TTool> ttool = std::make_shared<ttool::TTool>(
-    //     "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/config.yml",
-    //     "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/calibration_orange_B_1280_720_r.yml"
-    //     );
-    // std::cout << "END Main\n";
-    // View* view = View::Instance();
-    // view->doneCurrent();
-
     AIAC::Log::Init();
 
     AIAC::Config config("config.ini", true);
@@ -49,14 +35,14 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();
     acApp_ptr->PushLayer<AIAC::LayerInstructor>();
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();
-    acApp_ptr->GetWindow()->OnBeforeRender();
+    acApp_ptr->GetWindow()->MakeCurrent();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->GetRenderer()->Init();
 
     acApp_ptr->GetEventBus()->Init();
 
-    acApp_ptr->GetWindow()->OnAfterRender();
+    acApp_ptr->GetWindow()->ReleaseCurrent();
     acApp_ptr->Run();
 
     return 0;
