@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<acim version="0.1.0">
+    <timber id="0301a3b9-35fc-4fc7-aba9-1c07c5b03014">
+        <executed>False</executed>
+        <bbox>
+            <corner id="0">0.476036944284 -0.0650357975891 -0.129637139768</corner>
+            <corner id="1">0.925369476168 -0.0650357975891 -0.129637139768</corner>
+            <corner id="2">0.925369476168 0.0650159497795 -0.129637139768</corner>
+            <corner id="3">0.476036944284 0.0650159497795 -0.129637139768</corner>
+            <corner id="4">0.476036944284 -0.0650357975891 -4.17443857259e-16</corner>
+            <corner id="5">0.925369476168 -0.0650357975891 -4.17443857259e-16</corner>
+            <corner id="6">0.925369476168 0.0650159497795 -4.17443857259e-16</corner>
+            <corner id="7">0.476036944284 0.0650159497795 -4.17443857259e-16</corner>
+            </bbox>
+        <hole id="1">
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.754204759432 0.0650154048283 -0.0422357867914</coordinates>
+                </start>
+            <end>
+                <accessible>True</accessible>
+                <coordinates>0.754204759432 -0.0650154048283 -0.0422357867914</coordinates>
+                </end>
+            <radius>0.025</radius>
+            </hole>
+        </timber>
+    </acim>

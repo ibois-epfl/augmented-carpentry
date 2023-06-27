@@ -124,8 +124,8 @@ def main():
             # b_guid = sc.doc.Objects.AddBrep(hole_b)  # TODO: DEBUG
             # rs.ObjectColor(b_guid, (255,0,0))  # TODO: DEBUG
 
-            hole.get_data_from_brep(hole_b)
-            break  # TODO: DEBUG
+            hole.get_data_from_brep(ACIM, str(p_GUID), hole_b, bbox_b)
+            # break  # TODO: DEBUG
 
         sc.doc.Views.Redraw()  # TODO: DEBUG
 
