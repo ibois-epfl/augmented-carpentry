@@ -54,7 +54,8 @@ class ACIM:
             corner_et.text = val_x + " " + val_y + " " + val_z
     
     # TODO: add the connettivity of start/end or faces? points with other holes (?)
-    def add_hole(self, guid,
+    def add_hole(self, 
+                 guid,
                  start_pt,
                  end_pt,
                  is_start_accessible,
@@ -69,6 +70,11 @@ class ACIM:
             :param is_end_accessible: is the ending point accessible from outside
             :param radius: the radius of the hole
         """
+
+        # print all keys in a dictionnary
+        for key in self._timber_ets.keys():
+            print(key)
+
         hole_et = ET.SubElement(self._timber_ets[guid], "hole")
         hole_et.set("id", str(len(self._timber_ets[guid].findall("hole"))))
 
