@@ -1,17 +1,13 @@
 #pragma once
 
 #include "AIAC/Layer.h"
+#include "AIAC/GOSys/GOPrimitive.h"
+#include "ACInfoModel.h"
+#include "ScannedModel.h"
 
 
 namespace AIAC
 {
-    //TODO: create model loader class to import .ply but also custom .aiac/.xml
-    struct Model
-    {
-        std::string FilePath;
-    };
-
-
     class LayerModel : public AIAC::Layer
     {
     public:
@@ -23,6 +19,7 @@ namespace AIAC
 
     private:
         // ModelLoader m_ModelLoader;
-        Model m_CurrentModel;
+        ACInfoModel m_ACInfoModel;
+        ScannedModel m_ScannedModel;
     };
 }
