@@ -29,8 +29,8 @@ namespace AIAC
 
     void LayerToolhead::OnFrameStart()
     {
-        // AIAC_APP.GetWindow()->ReleaseCurrent();
+        AIAC_APP.GetWindow()->ReleaseCurrent();
 
-        // AIAC_APP.GetWindow()->MakeCurrent();
+        AIAC_APP.GetWindow()->MakeCurrent();
     }
 }
