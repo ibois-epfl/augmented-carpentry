@@ -201,8 +201,8 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOMesh;
     }
 
-    GOMesh::GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
-        : m_Vertices(vertices), m_Indices(indices)
+    GOMesh::GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices, std::vector<glm::vec3> normals, std::vector<glm::vec4> colors)
+        : m_Vertices(vertices), m_Indices(indices), m_Normals(normals), m_Colors(colors)
     {
         m_Type = GOTypeFlags::_GOMesh;
     }
@@ -218,6 +218,55 @@ namespace AIAC
     uint32_t GOMesh::Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
     {
         auto ptrGO = std::make_shared<GOMesh>(GOMesh(vertices, indices));
+        uint32_t idGO = ptrGO->GetId();
+        AIAC_GOREG->Register(idGO, ptrGO);
+        return idGO;
+    }
+
+    uint32_t GOMesh::LoadPly(std::string path){
+        Assimp::Importer importer;
+
+        const aiScene* scene = importer.ReadFile(path, aiProcess_JoinIdenticalVertices);
+        if( !scene) {
+            fprintf( stderr, importer.GetErrorString());
+            getchar();
+            return false;
+        }
+
+        const aiMesh* mesh = scene->mMeshes[0]; // TODO: here we use only the 1st mesh, make more?
+
+        auto ptrGO = std::make_shared<GOMesh>(GOMesh());
+
+        ptrGO->m_Vertices.reserve(mesh->mNumVertices);
+        for(unsigned int i=0; i<mesh->mNumVertices; i++){
+            aiVector3D pos = mesh->mVertices[i];
+            ptrGO->m_Vertices.emplace_back(pos.x, pos.y, pos.z);
+        }
+
+        ptrGO->m_Indices.reserve(mesh->mNumFaces * 3);
+        for(unsigned int i=0; i<mesh->mNumFaces; i++){
+            aiFace face = mesh->mFaces[i];
+            ptrGO->m_Indices.push_back(face.mIndices[0]);
+            ptrGO->m_Indices.push_back(face.mIndices[1]);
+            ptrGO->m_Indices.push_back(face.mIndices[2]);
+        }
+
+//        if(mesh->mNormals != nullptr){
+//            ptrGO->m_Normals.reserve(mesh->mNumVertices);
+//            for(unsigned int i=0; i<mesh->mNumVertices; i++){
+//                aiVector3D norm = mesh->mNormals[i];
+//                ptrGO->m_Normals.emplace_back(norm.x, norm.y, norm.z);
+//            }
+//        }
+//
+//        if(mesh->mColors != nullptr){
+//            ptrGO->m_Colors.reserve(mesh->mNumVertices);
+//            for(unsigned int i=0; i<mesh->mNumVertices; i++){
+//                aiColor4D color = mesh->mColors[0][i];
+//                ptrGO->m_Colors.emplace_back(color.r, color.g, color.b, color.a);
+//            }
+//        }
+
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
