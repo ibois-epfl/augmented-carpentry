@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get install qtbase5-dev libqt5opengl5-dev libopenni2-dev
+sudo apt-get install qtbase5-dev libqt5opengl5-dev libopenni2-dev libgoogle-glog-dev qtwayland5
 
 cd ./deps/TTool
 
