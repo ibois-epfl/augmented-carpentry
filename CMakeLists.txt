@@ -6,7 +6,7 @@ enable_testing()
 
 set(CMAKE_CXX_STANDARD 17)
 
-#TODO: check for Opencv 4.5.5 that cannot be installed or detected
+#TODO: check for Opencv 4.5.4 that cannot be installed or detected
 
 
 # Get hpp/cpp of AIAC module
@@ -52,7 +52,7 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE src/aiacpch.h)
 # -------------------- COMPILE OPTIONS -----------------------------
 option(INSTALL_GLFW33 "Install glfw3 with dpkg OFF" OFF)
 option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
-option(INSTALL_OPENCV455 "Install Opencv4.5.5 OFF" OFF)
+option(INSTALL_OPENCV455 "Install Opencv4.5.4 OFF" OFF)
 option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
 option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
 option(INSTALL_TTOOL "Install TTool in case it has been updated" OFF)
@@ -95,8 +95,8 @@ set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
 execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
-message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
+# string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
+# message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
 message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
@@ -112,7 +112,7 @@ if (UNIX AND INSTALL_OPENCV455)
     message(WARNING "Install OpenCV...")
     execute_process(COMMAND ./cmake/install_opencv_4_5_5.sh)
 endif()
-find_package(OpenCV 4.5.5 REQUIRED)   # FIXME: 4.5.5 not found (?)
+find_package(OpenCV 4.5.4 REQUIRED)   # FIXME: 4.5.4 not found (?)
 if(OpenCV_FOUND)
     message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
     message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
@@ -147,19 +147,19 @@ if(UNIX AND INSTALL_TTOOL)
     execute_process(COMMAND ./cmake/install_TTool.sh
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
-find_package(ttool REQUIRED)
-if(ttool_FOUND)
-    message(STATUS "TTool version: ${ttool_VERSION}")
-    message(STATUS "TTool include dir: ${ttool_INCLUDE_DIRS}")
-    message(STATUS "TTool libraries dir: ${ttool_LIBRARY_DIRS}")
-    message(STATUS "TTool libraries: ${ttool_LIBRARIES}")
+find_package(TTool REQUIRED)
+if(TTool_FOUND)
+    message(STATUS "TTool version: ${TTool_VERSION}")
+    message(STATUS "TTool include dir: ${TTool_INCLUDE_DIRS}")
+    message(STATUS "TTool libraries dir: ${TTool_LIBRARY_DIRS}")
+    message(STATUS "TTool libraries: ${TTool_LIBRARIES}")
 endif()
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${TSlam_INCLUDE_DIRS}
-    PUBLIC ${ttool_INCLUDE_DIRS}
+    PUBLIC ${TTool_INCLUDE_DIRS}
     PUBLIC ${ASSIMP_INCLUDE_DIRS}
     )
 
@@ -167,7 +167,7 @@ target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${OpenCV_LIBS}
     ${TSlam_LIBS}
-    ${ttool_LIBRARIES}
+    ${TTool_LIBRARIES}
     ${CMAKE_DL_LIBS}
     glfw
     assimp
