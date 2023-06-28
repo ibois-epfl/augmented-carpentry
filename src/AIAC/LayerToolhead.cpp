@@ -2,6 +2,7 @@
 
 #include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
+#include "AIAC/Config.h"
 
 #include <QApplication>
 #include <QThread>
@@ -20,9 +21,10 @@ namespace AIAC
         QApplication app(argc, argv);
         
         ttool = std::make_shared<ttool::TTool>(
-            "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/config.yml",
-            "/home/tpp/IBOIS/augmented-carpentry/deps/TTool/assets/calibration_orange_B_1280_720_r.yml"
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, ":("),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, ":(")
             );
+        ttool->ReleaseCurrent();
         std::cout << "END Main\n";
         AIAC_APP.GetWindow()->MakeCurrent();
     }
