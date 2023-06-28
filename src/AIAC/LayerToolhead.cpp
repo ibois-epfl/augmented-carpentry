@@ -14,7 +14,7 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
-        AIAC_APP.GetWindow()->ReleaseCurrent();
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
         std::cout << "BEGIN Main\n";
         int argc = 1;
         char* argv[] = { "augmented_carpentry" };
@@ -26,7 +26,7 @@ namespace AIAC
             );
         ttool->ReleaseCurrent();
         std::cout << "END Main\n";
-        AIAC_APP.GetWindow()->MakeCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
     }
 
     void LayerToolhead::OnFrameStart()
