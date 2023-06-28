@@ -56,8 +56,6 @@ namespace AIAC
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameStart();                
-            // m_Window->ReleaseCurrent();
-            // m_Window->MakeCurrent();
 
             m_Window->OnUpdate();
 
@@ -65,21 +63,15 @@ namespace AIAC
 
             GetLayer<AIAC::LayerUI>()->OnUIRender();
 
-            // m_Window->ReleaseCurrent();
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameEnd();
 
-            // m_Window->MakeCurrent();  //TODO: add
             m_Window->OnBufferSwap();
-            // m_Window->ReleaseCurrent();  //TODO: add
 
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameFall();
-
-            // TODO: add an event call to release the context of window
-            // m_Window->OnContextRelease();
 
         }
     }

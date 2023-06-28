@@ -110,13 +110,11 @@ namespace AIAC
     void Window::MakeCurrent()
     {
         glfwMakeContextCurrent(m_GLFWWindow);
-        // AIAC_INFO("Window make context current\n");
     }
 
     void Window::ReleaseCurrent()
     {
         glfwMakeContextCurrent(NULL);
-        // AIAC_INFO("Window make context null\n");
     }
 
     bool Window::IsOpen()
