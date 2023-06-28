@@ -111,7 +111,7 @@ class ACIM:
 
     def peek_current_hole_id(self, guid):
         """ Get the last hole id of a timber """
-        return len(self._timber_ets[guid].findall("hole"))
+        return (len(self._timber_ets[guid].findall("hole"))+1)
 
     def _prettify(self, elem, level=0):
         """ Pretty print XML tree with blocks and indents """

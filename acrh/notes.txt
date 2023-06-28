@@ -49,7 +49,8 @@ AC C++ APP:
         <end>0.5 0.5 1.5</end>
         <radius>0.1</radius>
     </hole>
-    <cuts>
+    <cuts id="1">
+        <state>Current OR Done OR NotDone</state>
         <face id="1">
             <exposed>True</exposed>
             <lines>1 2 3 4</lines>
