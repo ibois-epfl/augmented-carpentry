@@ -31,7 +31,7 @@ AC C++ APP:
 
 <acim>
   <timber id="GUID value">
-    <executed>True</executed>
+    <state>Current OR Done OR NotDone</state>
     <bbox>
       <corner>0 0 0</corner>
       <corner>1 0 0</corner>
@@ -42,7 +42,9 @@ AC C++ APP:
       <corner>1 1 1</corner>
       <corner>0 1 1</corner>
     </bbox>
-    <hole>
+    <hole id="1">
+        <state>Current OR Done OR NotDone</state>
+        <neighbors>2 3 4</neighbors>
         <start>0.5 0.5 0.5</start>
         <end>0.5 0.5 1.5</end>
         <radius>0.1</radius>
