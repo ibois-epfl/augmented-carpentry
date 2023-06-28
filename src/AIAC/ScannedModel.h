@@ -24,9 +24,15 @@ public:
      */
     void BuildBoundingBox();
 
+    /**
+     * @brief Update Boundary Box GOLine
+     */
+    void UpdateBboxGOLine();
+
 private:
     uint32_t m_MeshID;
     std::vector<glm::vec3> m_Bbox;
+    std::vector<uint32_t> m_BboxGOLineIDs;
 };
 
 }

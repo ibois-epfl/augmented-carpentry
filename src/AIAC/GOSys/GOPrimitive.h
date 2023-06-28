@@ -82,7 +82,7 @@ namespace AIAC
 
     class GOPoint : public GOPrimitive
     {
-    private:
+    public:
         GOPoint(float x, float y, float z, float weight = GOWeight::Default);
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
 

@@ -9,12 +9,12 @@ namespace AIAC
 {
     void ScannedModel::Load(std::string path) {
         m_MeshID = GOMesh::LoadPly(path);
+        GOMesh::Get(m_MeshID)->SetVisibility(false);
         BuildBoundingBox();
+        UpdateBboxGOLine();
     }
 
     void ScannedModel::BuildBoundingBox() {
-        vector<glm::vec3> sortedVertices(8);
-
         struct Neighbor{
             Neighbor(){};
             Neighbor(float dist, glm::vec3 vec, glm::vec3 pt): dist(dist), vec(vec), pt(pt) {};
@@ -38,8 +38,6 @@ namespace AIAC
         sort(neighbors.begin(), neighbors.end(), [](Neighbor& a, Neighbor& b) {
             return a.dist < b.dist;
         });
-
-        sortedVertices[0] = basePt;
 
         // filter out duplicate vertices based on point difference
         if (neighbors.size() > 8) {
@@ -88,6 +86,28 @@ namespace AIAC
             neighbors[7].pt,
             neighbors[3].pt
         };
+    }
+
+    void ScannedModel::UpdateBboxGOLine() {
+        // update the GOLine references
+        for(auto& id : m_BboxGOLineIDs)
+            GOLine::Remove(id);
+
+        // bottom
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[2], m_Bbox[3]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[3], m_Bbox[0]));
+        // top
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[4], m_Bbox[5]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[5], m_Bbox[6]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[6], m_Bbox[7]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[7], m_Bbox[4]));
+        // side
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6]));
+        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7]));
     }
 } // namespace AIAC
 
