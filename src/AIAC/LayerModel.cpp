@@ -15,8 +15,8 @@ namespace AIAC
     
     void LayerModel::OnAttach()
     {
-        m_ACInfoModel.Load("/home/ibois/Downloads/20230627_121210.acim");
-        m_ScannedModel.Load("/home/ibois/Downloads/01/01_tslam_map_files/01/01_model.ply");
+        m_ACInfoModel.Load("assets/ACModel/test.acim");
+        m_ScannedModel.Load("assets/ACModel/01_scanned_model.ply");
 
         vector<glm::vec3> cadBox = {
                 {0.0,0.0,7.0},
@@ -42,7 +42,7 @@ namespace AIAC
 
         auto transMat = GetRigidTransformationMatrix(cadBox, fabBox);
         cout << glm::to_string(transMat) << endl;
-        //        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
+//        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
 //        uint32_t idPt1 = GOPoint::Add(1, 1, 1, 5.0f);
 //        uint32_t idPt2 = GOPoint::Add(20, 50, 20, 5.0f);
 //        uint32_t idPt3 = GOPoint::Add(30, 30, 30, 5.0f);
@@ -66,6 +66,7 @@ namespace AIAC
 //        uint32_t triangle3 = GOTriangle::Add(*pt3, *pt1, *pt2);
 //        uint32_t mesh1 = GOMesh::Add(std::vector<glm::vec3>{*pt1, *pt2, *pt3}, std::vector<uint32_t>{0,1,2});
 //        uint32_t text1 = GOText::Add("Hello World1", *pt1, 1.0f);
+//        GOText::Remove(text1);
 //        uint32_t text2 = GOText::Add("Hello World2", *pt2, 1.0f);
 //        uint32_t text3 = GOText::Add("Hello World3", *pt3, 1.0f);
 //        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
