@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='utf-8'?>
+<acim version="0.1.0">
+    <timber id="314291a7-dad7-400e-a60b-670e927a2677">
+        <executed>NotDone</executed>
+        <bbox>
+            <corner id="0">0.281114390808 -0.0650357975891 -0.129654325813</corner>
+            <corner id="1">0.925369476168 -0.0650357975891 -0.129654325813</corner>
+            <corner id="2">0.925369476168 0.0650159497795 -0.129654325813</corner>
+            <corner id="3">0.281114390808 0.0650159497795 -0.129654325813</corner>
+            <corner id="4">0.281114390808 -0.0650357975891 1.71858549797e-05</corner>
+            <corner id="5">0.925369476168 -0.0650357975891 1.71858549797e-05</corner>
+            <corner id="6">0.925369476168 0.0650159497795 1.71858549797e-05</corner>
+            <corner id="7">0.281114390808 0.0650159497795 1.71858549797e-05</corner>
+            </bbox>
+        <hole id="1">
+            <state>NotDone</state>
+            <neighbours>-1</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.754204759432 -0.0650154048283 -0.0422357867914</coordinates>
+                </start>
+            <end>
+                <accessible>True</accessible>
+                <coordinates>0.754204759432 0.0650154048283 -0.0422357867914</coordinates>
+                </end>
+            <radius>0.025</radius>
+            </hole>
+        <hole id="2">
+            <state>NotDone</state>
+            <neighbours>2 3</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.618677279339 -0.0650154048283 -0.0660054628675</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.558196271891 0.0506912459716 -0.0854305520331</coordinates>
+                </end>
+            <radius>0.013</radius>
+            </hole>
+        <hole id="3">
+            <state>NotDone</state>
+            <neighbours>3 2</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.550708892795 0.0650154048283 -0.087835323592</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.558196271891 0.0506912459716 -0.0854305520331</coordinates>
+                </end>
+            <radius>0.027</radius>
+            </hole>
+        <hole id="4">
+            <state>NotDone</state>
+            <neighbours>-1</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.730784387202 0.0298139715162 -0.129637139768</coordinates>
+                </start>
+            <end>
+                <accessible>True</accessible>
+                <coordinates>0.62184783536 -0.0214772112911 -1.62053577989e-16</coordinates>
+                </end>
+            <radius>0.02</radius>
+            </hole>
+        <hole id="5">
+            <state>NotDone</state>
+            <neighbours>5 6</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.854453473924 -0.0650154048283 -0.0737785507686</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.850410241767 -0.0490314229201 -0.0741823905089</coordinates>
+                </end>
+            <radius>0.041</radius>
+            </hole>
+        <hole id="6">
+            <state>NotDone</state>
+            <neighbours>6 5</neighbours>
+            <start>
+                <accessible>False</accessible>
+                <coordinates>0.828606620157 0.0371641453346 -0.0763601454698</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.850410241767 -0.0490314229201 -0.0741823905089</coordinates>
+                </end>
+            <radius>0.017</radius>
+            </hole>
+        <hole id="7">
+            <state>NotDone</state>
+            <neighbours>7 5</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.821561497819 0.0650154048283 -0.0770638152728</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.828606620157 0.0371641453346 -0.0763601454698</coordinates>
+                </end>
+            <radius>0.041</radius>
+            </hole>
+        <hole id="8">
+            <state>NotDone</state>
+            <neighbours>8 9</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.389249552114 -0.00639194889788 -8.99603788592e-17</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.392791791963 -0.00925481561323 -0.0384429137136</coordinates>
+                </end>
+            <radius>0.035</radius>
+            </hole>
+        <hole id="9">
+            <state>NotDone</state>
+            <neighbours>9 8</neighbours>
+            <start>
+                <accessible>False</accessible>
+                <coordinates>0.395488470914 -0.011434293215 -0.0677091973778</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.392791791963 -0.00925481561323 -0.0384429137136</coordinates>
+                </end>
+            <radius>0.028</radius>
+            </hole>
+        <hole id="10">
+            <state>NotDone</state>
+            <neighbours>10 8</neighbours>
+            <start>
+                <accessible>False</accessible>
+                <coordinates>0.397101316796 -0.0127378082191 -0.0852129514162</coordinates>
+                </start>
+            <end>
+                <accessible>False</accessible>
+                <coordinates>0.395488470914 -0.011434293215 -0.0677091973778</coordinates>
+                </end>
+            <radius>0.028</radius>
+            </hole>
+        <hole id="11">
+            <state>NotDone</state>
+            <neighbours>-1</neighbours>
+            <start>
+                <accessible>True</accessible>
+                <coordinates>0.485706455324 -0.00897625919748 1.31992615089e-17</coordinates>
+                </start>
+            <end>
+                <accessible>True</accessible>
+                <coordinates>0.512751912337 0.0174999845061 -0.129637139768</coordinates>
+                </end>
+            <radius>0.019</radius>
+            </hole>
+        </timber>
+    </acim>

@@ -164,6 +164,8 @@ def get_data_from_brep(ACIM, p_GUID, cylinder_b, bbox_b):
             sc.doc.Objects.AddLine(ln)  # TODO: debug
             hole_axis_ln.append(ln)
         
+        # >>>>>>>>>>>>>>>>>>>>>>>
+        # detect NEIGHBOURS
         #FIXME: add neighbour list
         # build neighbor list
         neighbor_lst = []
@@ -183,7 +185,7 @@ def get_data_from_brep(ACIM, p_GUID, cylinder_b, bbox_b):
         # predict next hole's ids
         next_hole_ids = []
         current_hole_id = ACIM.peek_current_hole_id(p_GUID)
-        next_hole_ids.append(current_hole_id)
+        # next_hole_ids.append(current_hole_id)
         for i in range(1, len(neighbor_lst)+1):
             current_hole_id += 1
             next_hole_ids.append(current_hole_id)
