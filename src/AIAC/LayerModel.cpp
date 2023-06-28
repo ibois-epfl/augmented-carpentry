@@ -76,4 +76,7 @@ namespace AIAC
 
 
     }
+
+    void LayerModel::AlignModels() {
+    }
 }

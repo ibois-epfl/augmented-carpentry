@@ -50,6 +50,8 @@ private:
     bool m_Executed = false; // TODO: states instead of executed?
     std::map<std::string, Drill> m_Drills;
     std::map<std::string, Cut> m_Cuts;
+
+    friend class ACInfoModel;
 };
 
 class ACInfoModel
@@ -64,8 +66,29 @@ public:
      */
     void Load(std::string path);
 
+    /**
+     * @brief Get all TimberInfo IDs
+     */
+    std::vector<std::string> GetTimberIDs() const;
+
+    /**
+     * @brief Get the TimberInfo object
+     */
+    TimberInfo GetTimberInfo(std::string timberID);
+
+    /**
+     * @brief Get the active TimberInfo object
+     */
+    TimberInfo GetActiveTimberInfo() { return GetTimberInfo(m_CurrentActiveTimberID); }
+
+    /**
+     * @brief Set the active TimberInfo object
+     */
+    void SetActiveTimberInfo(std::string timberID) { m_CurrentActiveTimberID = timberID; }
+
 private:
     std::map<std::string, TimberInfo> m_TimberInfo;
+    std::string m_CurrentActiveTimberID;
 };
 
 }
