@@ -15,14 +15,14 @@ namespace AIAC{
     TextRenderer* TextRenderer::s_instance = nullptr;
     bool TextRenderer::s_Initialized;
     GLuint TextRenderer::s_ShaderProgram;
-    GLuint TextRenderer::s_VAO, TextRenderer::s_VBO;
+    GLuint TextRenderer::s_VBO;
     std::map<char, Character> TextRenderer::Characters;
     glm::mat4 TextRenderer::s_Projection = glm::mat4(1.0f);
 
     void TextRenderer::Init() {
         s_instance = new TextRenderer();
 
-        glGenVertexArrays(1, &s_VAO);
+        // glGenVertexArrays(1, &s_VAO);
 
         // Load FreeType
         // --------
@@ -155,7 +155,7 @@ namespace AIAC{
 
         glActiveTexture(GL_TEXTURE0);
 
-        glBindVertexArray(s_VAO);
+        // glBindVertexArray(s_VAO);
         glBindBuffer(GL_ARRAY_BUFFER, s_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, nullptr, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
