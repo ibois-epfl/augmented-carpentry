@@ -102,6 +102,7 @@ If it is the first time you are installing AC, set all the dependecies options i
 
 ```bash
     ./cmake/install_TSlam.sh (Although CMakeList.txt run this when INSTALL_TSLAM option is on, you might need to install TSlam with this command manually as its need sudo priviledge)
+    ./cmake/install_TTool.sh
     ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
     ./build.sh
 ```
@@ -112,3 +113,38 @@ To run the code:
 
 ## How to contribute
 Please have a look at the `contributing.md" file. There you will find all the set of rules and the main softwarer documentation to contribute.
+
+## 🚧🚧🚧 Memory Leak Issue 🚧🚧🚧
+We notice the memory leak caused by TTool integration.
+### Cause
+- TTool uses Qt5's View to render the track the toolheads.
+- AC uses glfw to show window UI.
+- Thus, context switching between TTool and AC is required in order for OpenGL to render to the correct buffers.
+#### Context Switching
+- In order to do the context switching between AC and TTool, we introduced `TTool::MakeCurrent()` and `TTool::ReleaseCurrent()` on TTool.
+- We also introduct `Window::MakeCurrent()` and `Window::ReleaseCurrent()` on Window.
+- Now, one context needs to be released, before the other can make current.
+#### Issues/Behaviours
+- We found that the MakeCurrent and ReleaseCurrent cannot be called carelessly.
+- In the `Application::Run()`, this make and release will be called repeatedly, which leads to additional memory increase on the program which will not decrease.
+#### Replication
+- Run this program on this commit, and monitor the memory increase.
+- To replicate the worse memory leak rate that we discovered, please change from this commit 
+```cpp
+// Application.cpp
+
+void Application::Run()
+{
+    // ... code before ...
+        m_Window->MakeCurrent(); // ADD THIS LINE
+
+        GetLayer<AIAC::LayerUI>()->OnUIRender();
+
+        m_Window->ReleaseCurrent(); // ADD THIS LINE
+    // ... code after ...
+    }
+}
+```
+#### Mitigation
+- We put the context switching only on the TTool `OnAttach` and `OnFrameStart`.
+- In this current commit, we found the most bearable memory increase rate, that will allow the program to run for some hours on 10GB memory device.
