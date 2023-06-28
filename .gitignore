@@ -42,7 +42,7 @@ assets/tslam/*.map
 *.out
 *.app
 
-**/cmake-build-debug
+**/cmake-build-*
 **/CMakeCache.txt
 **/cmake_install.cmake
 **/install_manifest.txt
