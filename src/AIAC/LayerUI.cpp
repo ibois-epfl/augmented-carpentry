@@ -72,7 +72,7 @@ namespace AIAC
 
     void LayerUI::OnUIRender()
     {
-        AIAC_APP.GetWindow()->MakeCurrent();  //TODO: add
+        // AIAC_APP.GetWindow()->MakeCurrent();  //TODO: add
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
         if (AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
@@ -101,7 +101,7 @@ namespace AIAC
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        AIAC_APP.GetWindow()->ReleaseCurrent();
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
     }
 
     void LayerUI::OnDetach()

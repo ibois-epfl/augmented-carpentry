@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 
     acApp_ptr->GetEventBus()->Init();
 
-    acApp_ptr->GetWindow()->ReleaseCurrent();
+    // acApp_ptr->GetWindow()->ReleaseCurrent();
     acApp_ptr->Run();
 
     return 0;
