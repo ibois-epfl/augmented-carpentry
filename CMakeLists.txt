@@ -93,10 +93,10 @@ set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
 execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
-message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
-message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
-message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
+#string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
+#message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
+#message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
+#message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
 #GLFW
 if(UNIX AND INSTALL_GLFW33)
