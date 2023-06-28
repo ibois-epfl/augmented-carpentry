@@ -30,3 +30,6 @@
 [submodule "deps/freetype"]
 	path = deps/freetype
 	url = https://gitlab.freedesktop.org/freetype/freetype
+[submodule "pugixml"]
+	path = deps/pugixml
+	url = git@github.com:zeux/pugixml.git
