@@ -64,7 +64,7 @@ namespace AIAC
     private:
         static bool s_Initialized;
         static GLuint s_ShaderProgram;
-        static GLuint s_VAO, s_VBO;
+        static GLuint s_VBO;
         static TextRenderer* s_instance;
         static glm::mat4 s_Projection;
     };

@@ -27,6 +27,9 @@ namespace AIAC
 
         m_BasicShaderProgram = LoadShaders(vertexFilePath, fragmentFilePath);
 
+        glGenVertexArrays(1, &m_VAO);
+        glBindVertexArray(m_VAO);
+
         // Get a handle for our "MVP" uniform
         m_MatrixId = glGetUniformLocation(m_BasicShaderProgram, "MVP");
 
@@ -187,9 +190,6 @@ namespace AIAC
         if(ShowDigitalModel){
             DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
             DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-        }
-        for (auto& mesh : Meshes) {
-            mesh.DrawEdges(m_DefaultEdgeColor);
         }
 
         DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));

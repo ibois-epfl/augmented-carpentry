@@ -68,6 +68,7 @@ namespace AIAC
 
         GLuint m_BasicShaderProgram;
         GLuint m_MatrixId;
+        GLuint m_VAO;
 
         glm::mat4 m_ProjMatrix;
 

@@ -82,7 +82,7 @@ namespace AIAC
 
     class GOPoint : public GOPrimitive
     {
-    private:
+    public:
         GOPoint(float x, float y, float z, float weight = GOWeight::Default);
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
 
@@ -292,7 +292,9 @@ namespace AIAC
     {
     private:
         GOMesh();
-        GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
+        GOMesh(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices,
+               std::vector<glm::vec3> normals = std::vector<glm::vec3>(),
+               std::vector<glm::vec4> colors = std::vector<glm::vec4>());
 
     public:
         /**
@@ -308,6 +310,12 @@ namespace AIAC
          * @return uint32_t Id of the mesh.
          */
         static uint32_t Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
+
+        /**
+         * @brief Load .ply and add the corresponding GOMesh to the scene.
+         * @return uint32_t Id of the mesh.
+         */
+        static uint32_t LoadPly(std::string);
 
         virtual ~GOMesh() = default;
 
