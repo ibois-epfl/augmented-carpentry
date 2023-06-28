@@ -26,7 +26,7 @@ def main():
     for p_GUID in pieces:
         log.info("Processing piece: " + str(p_GUID))
         ACIM.add_timber(str(p_GUID))
-        ACIM.add_is_executed(str(p_GUID), False)
+        ACIM.add_timber_state(str(p_GUID), 0)
         brep = rs.coercebrep(p_GUID)
         
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

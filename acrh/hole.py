@@ -12,7 +12,6 @@ import acim
 #     face_brep = face.DuplicateFace(False)
 #     if face_brep.IsSurface:
 #         #get the radius of the cylinder
-        
 
 
 def _get_single_face_brep_center(brep):
@@ -142,21 +141,12 @@ def get_data_from_brep(ACIM, p_GUID, cylinder_b, bbox_b):
             for j in range(i+1, centers_len):
                 pt1 = acim_centers.keys()[i]
                 pt2 = acim_centers.keys()[j]
-                # ln = rg.Line(pt1, pt2)
-                # ln_guid = sc.doc.Objects.AddLine(ln)  # TODO: DEBUG
-                # # assign random color
-                # color = (random.randint(0,255),
-                #          random.randint(0,255),
-                #          random.randint(0,255))  # TODO: debug
-                # rs.ObjectColor(ln_guid, color)  # TODO: debug
                 dist = pt1.DistanceTo(pt2)
                 # if dist is the biggest in dists
                 dists.append(dist)
                 if dist >= max(dists) or len(dists) == 0:
                     extreme_pts = [i, j]
 
-        # # sc.doc.Objects.AddPoint(extreme_pts[0])  # TODO: DEBUG
-        # # sc.doc.Objects.AddPoint(extreme_pts[1])  # TODO: DEBUG
         extreme_pts = [acim_centers.keys()[extreme_pts[0]],
                        acim_centers.keys()[extreme_pts[1]]]
         longest_ln = rg.Line(extreme_pts[0], extreme_pts[1])
@@ -173,18 +163,101 @@ def get_data_from_brep(ACIM, p_GUID, cylinder_b, bbox_b):
             ln = rg.Line(pt1, pt2)
             sc.doc.Objects.AddLine(ln)  # TODO: debug
             hole_axis_ln.append(ln)
+        
+        #FIXME: add neighbour list
+        # build neighbor list
+        neighbor_lst = []
+        for i in range(0, len(hole_axis_ln)):
+            for j in range(0, len(hole_axis_ln)):
+                if i == j:
+                    continue
+                if hole_axis_ln[i].DistanceTo(hole_axis_ln[j].From, False) < 0.01:
+                    neighbor_lst.append([i, j])
+                    break
+                if hole_axis_ln[i].DistanceTo(hole_axis_ln[j].To, False) < 0.01:
+                    neighbor_lst.append([i, j])
+                    break
+            
+        log.info("neighbor for current hole set: " + str(neighbor_lst))
+
+        # predict next hole's ids
+        next_hole_ids = []
+        current_hole_id = ACIM.peek_current_hole_id(p_GUID)
+        next_hole_ids.append(current_hole_id)
+        for i in range(1, len(neighbor_lst)+1):
+            current_hole_id += 1
+            next_hole_ids.append(current_hole_id)
+
+        neighbor_acim_str = []
+        for i in range(0, len(neighbor_lst)):
+            # hole_neighbours = []
+            temp_str = ""
+            for j in range(0, len(neighbor_lst[i])):
+                temp_str += str(next_hole_ids[neighbor_lst[i][j]]) + " "
+            # get rid of the last space
+            temp_str = temp_str[:-1]
+            neighbor_acim_str.append(temp_str)
+        log.info("neighbor acim str: " + str(neighbor_acim_str))
 
         # >>>>>>>>>>>>>>>>>>>>>>>
-        # for axis_ln in hole_axis_ln:
-        #     # get the radius
-        #     radius = 0
-        #     for face in cylinder_faces_b:
-        #         if face.Faces[0].IsPlanar():
-        #             face_curves = face.DuplicateEdgeCurves(True)
-        #             if face_curves.__len__() > 0:
-        #                 # get the smallest curve
 
-        #             face_crv = face_curves[0]
+        for i, axis_ln in enumerate(hole_axis_ln):
+            # 1. detect which point is start and end
+            start_pt = rg.Point3d(0,0,0)
+            end_pt = rg.Point3d(0,0,0)
+            is_start_pt_accessible = False
+            is_end_pt_accessible = False
+            pt_1 = axis_ln.PointAt(0)
+            pt_2 = axis_ln.PointAt(1)
+            if acim_centers[pt_1]:
+                start_pt = pt_1
+                end_pt = pt_2
+                is_start_pt_accessible = acim_centers[pt_1]
+                is_end_pt_accessible = acim_centers[pt_2]
+            else:
+                start_pt = pt_2
+                end_pt = pt_1
+                is_start_pt_accessible = acim_centers[pt_2]
+                is_end_pt_accessible = acim_centers[pt_1]
+            
+            # 2. get the radius
+            radius = 0
+            for face in cylinder_faces_b:
+                if face.Faces[0].IsPlanar():
+                    face_curves = face.DuplicateEdgeCurves(True)
+                    if face_curves.__len__() > 1:
+                        smallest_crv = face_curves[0]
+                        for face_crv in face_curves:
+                            if face_crv.GetLength() < smallest_crv.GetLength():
+                                smallest_crv = face_crv
+                        face_crv = smallest_crv
+                    else:
+                        face_crv = face_curves[0]
+                    sc.doc.Objects.AddCurve(face_crv)  #TODO: debug
+
+                    face_center = _get_single_face_brep_center(face)
+                    face_center_GUID = sc.doc.Objects.AddPoint(face_center)  # TODO: DEBUG
+
+                    # get the radius
+                    if face_center == start_pt:
+                        ellipse_pt = face_crv.PointAtStart
+                        radius = axis_ln.DistanceTo(ellipse_pt, False)
+                        radius = round(radius, 3)
+                        log.info("radius: " + str(radius))
+                        break
+            
+            # 3. replace the neighbours with the indexes
+
+
+            # 4. store in acim
+            ACIM.add_hole(p_GUID,
+                        start_pt,
+                        end_pt,
+                        is_start_pt_accessible,
+                        is_end_pt_accessible,
+                        radius,
+                        neighbours=neighbor_acim_str[i])
+
 
 
 

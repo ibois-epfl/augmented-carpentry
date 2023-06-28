@@ -4,6 +4,12 @@ import xml.etree.ElementTree as ET
 import log
 from config import __ACIM_VERSION__
 
+__ACIM_STATE__ = {
+                  0: "NotDone",
+                  1: "Done",
+                  2: "Executed"
+            }
+
 class ACIM:
     def __init__(self, out_dir):
         self._out_path_xml = out_dir + ".xml"
@@ -13,6 +19,8 @@ class ACIM:
         self._tree = None
         
         self._timber_ets = {}
+
+        
 
 
     def dump_data(self):
@@ -30,10 +38,10 @@ class ACIM:
         timber_et.set("id", guid)
         self._timber_ets[guid] = timber_et
 
-    def add_is_executed(self, guid, is_executed):
+    def add_timber_state(self, guid, state_value):
         """ Add the execution state of the object, by default False """
         executed_et = ET.SubElement(self._timber_ets[guid], "executed")
-        executed_et.text = str(is_executed)
+        executed_et.text = str(__ACIM_STATE__[state_value])
 
     def add_bbox(self, guid, corners):
         """
@@ -53,14 +61,16 @@ class ACIM:
             val_z = str(corner.Z)
             corner_et.text = val_x + " " + val_y + " " + val_z
     
-    # TODO: add the connettivity of start/end or faces? points with other holes (?)
     def add_hole(self, 
                  guid,
                  start_pt,
                  end_pt,
                  is_start_accessible,
                  is_end_accessible,
-                 radius):
+                 radius,
+                 neighbours=-1,
+                 state=__ACIM_STATE__[0]
+                 ):
         """
             Add a hole to a timber
             :param guid: the guid of the timber
@@ -78,6 +88,12 @@ class ACIM:
         hole_et = ET.SubElement(self._timber_ets[guid], "hole")
         hole_et.set("id", str(len(self._timber_ets[guid].findall("hole"))))
 
+        state_et = ET.SubElement(hole_et, "state")
+        state_et.text = state
+
+        neighbours_et = ET.SubElement(hole_et, "neighbours")
+        neighbours_et.text = str(neighbours)
+
         start_et = ET.SubElement(hole_et, "start")
         accessible_start_et = ET.SubElement(start_et, "accessible")
         accessible_start_et.text = str(is_start_accessible)
@@ -92,6 +108,10 @@ class ACIM:
 
         radius_et = ET.SubElement(hole_et, "radius")
         radius_et.text = str(radius)
+
+    def peek_current_hole_id(self, guid):
+        """ Get the last hole id of a timber """
+        return len(self._timber_ets[guid].findall("hole"))
 
     def _prettify(self, elem, level=0):
         """ Pretty print XML tree with blocks and indents """
