@@ -129,7 +129,7 @@ We notice the memory leak caused by TTool integration.
 - In the `Application::Run()`, this make and release will be called repeatedly, which leads to additional memory increase on the program which will not decrease.
 #### Replication
 - Run this program on this commit, and monitor the memory increase.
-- To replicate the worse memory leak rate that we discovered, please change from this commit 
+- To replicate the worse memory leak rate that we discovered, please change from this commit (d876108cd9cff82dd72c2a1d8be1306c7db3b19a)
 ```cpp
 // Application.cpp
 
@@ -147,4 +147,4 @@ void Application::Run()
 ```
 #### Mitigation
 - We put the context switching only on the TTool `OnAttach` and `OnFrameStart`.
-- In this current commit, we found the most bearable memory increase rate, that will allow the program to run for some hours on 10GB memory device.
+- In this current commit (d876108cd9cff82dd72c2a1d8be1306c7db3b19a), we found the most bearable memory increase rate, that will allow the program to run for some hours on 10GB memory device.
