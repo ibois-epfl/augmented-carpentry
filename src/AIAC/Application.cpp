@@ -56,8 +56,8 @@ namespace AIAC
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameStart();                
-            m_Window->ReleaseCurrent();
-            m_Window->MakeCurrent();
+            // m_Window->ReleaseCurrent();
+            // m_Window->MakeCurrent();
 
             m_Window->OnUpdate();
 

@@ -18,7 +18,7 @@ namespace AIAC
 
     void LayerUI::OnAttach()
     {
-        AIAC_APP.GetWindow()->MakeCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -58,16 +58,16 @@ namespace AIAC
 
         m_IsOpen = new bool(true);
 
-        AIAC_APP.GetWindow()->ReleaseCurrent();
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
     }
 
     void LayerUI::OnFrameStart()
     {
-        AIAC_APP.GetWindow()->MakeCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        AIAC_APP.GetWindow()->ReleaseCurrent();
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
     }
 
     void LayerUI::OnUIRender()
@@ -106,7 +106,7 @@ namespace AIAC
 
     void LayerUI::OnDetach()
     {
-        AIAC_APP.GetWindow()->MakeCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
         ImGui::EndMainMenuBar();
 
         ImGui_ImplOpenGL3_Shutdown();
