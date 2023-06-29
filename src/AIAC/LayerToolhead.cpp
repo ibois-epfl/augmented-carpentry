@@ -14,7 +14,7 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
-        std::cout << "BEGIN Main\n";
+        // Adding dummy arguments to make QApplication
         int argc = 1;
         char* argv[] = { "augmented_carpentry" };
         QApplication app(argc, argv);
@@ -24,7 +24,6 @@ namespace AIAC
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, ":(")
             );
         ttool->ReleaseCurrent();
-        std::cout << "END Main\n";
     }
 
     void LayerToolhead::OnFrameStart()
