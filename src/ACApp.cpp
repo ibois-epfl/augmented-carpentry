@@ -2,9 +2,14 @@
 #include "AIAC.h"
 #include "AIAC/LayerCameraCalib.h"
 
+#include <QApplication>
+#include <QThread>
+
+#include "ttool.hh"
+#include "view.hh"
+
 int main(int argc, char* argv[]) {
 #ifdef __linux__
-
     AIAC::Log::Init();
 
     AIAC::Config config("config.ini", true);
@@ -27,7 +32,9 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
     acApp_ptr->PushLayer<AIAC::LayerSlam>();
     acApp_ptr->PushLayer<AIAC::LayerModel>();
+    acApp_ptr->GetWindow()->ReleaseCurrent();
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();
+    acApp_ptr->GetWindow()->MakeCurrent();
     acApp_ptr->PushLayer<AIAC::LayerInstructor>();
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
