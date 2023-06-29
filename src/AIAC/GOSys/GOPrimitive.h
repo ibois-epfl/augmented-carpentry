@@ -39,9 +39,10 @@ namespace AIAC
     {
     public:
         explicit GOPrimitive(bool isVisible = true,
-                             glm::vec4 color = glm::vec4(0, 0, 0, 0.5));
+                             glm::vec4 color = glm::vec4(0, 0, 0, 1.0));
         virtual ~GOPrimitive() = default;
         static void Remove(const uint32_t& id);
+        static void Remove(const std::shared_ptr<GOPrimitive>& ptrGO);
 
         uint32_t GenerateId();
         inline const uint32_t GetId() const { return m_Id; }
@@ -51,12 +52,14 @@ namespace AIAC
         inline bool GetState() { return m_State; }
         inline GOTypeFlags GetType() { return m_Type; }
 
-        inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }
-        inline void SetColor(glm::vec4 color) { m_Color = color; }
-        inline void SetState(bool state) { m_State = state; }
+        inline int SetVisibility(bool isVisible) { m_IsVisible = isVisible; return m_Id; }
+        inline int SetColor(glm::vec4 color) { m_Color = color; return m_Id; }
+        inline int SetState(bool state) { m_State = state; return m_Id; }
 
         inline float GetWeight() const { return m_Weight; }
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline int SetWeight(float weight) { m_Weight = weight; return m_Id;}
+
+        virtual void Transform(const glm::mat4x4& transformMat) {};
 
     protected:
         uint32_t m_Id;
@@ -84,8 +87,8 @@ namespace AIAC
          * @param weight Weight of the point.
          * @return uint32_t Id of the point.
          */
-        static uint32_t Add(float x, float y, float z, float weight = GOWeight::Default);
-        static uint32_t Add(glm::vec3 position, float weight = GOWeight::Default);
+        static std::shared_ptr<GOPoint> Add(float x, float y, float z, float weight = GOWeight::Default);
+        static std::shared_ptr<GOPoint> Add(glm::vec3 position, float weight = GOWeight::Default);
 
         virtual ~GOPoint() = default;
 
@@ -101,13 +104,24 @@ namespace AIAC
         inline void SetY(float y) { m_Position.y = y; }
         inline void SetZ(float z) { m_Position.z = z; }
 
-        inline void setWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; }
+
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            m_Position = transformMat * glm::vec4(m_Position, 1.0f);
+        }
 
         operator glm::vec3() const { return m_Position; }
 
     private:
         glm::vec3 m_Position;
 
+    friend class GOPrimitive;
+    friend class GOLine;
+    friend class GOCircle;
+    friend class GOCylinder;
+    friend class GOPolyline;
+    friend class GOTriangle;
+    friend class GOMesh;
     friend class GOText;
     };
 
@@ -126,7 +140,7 @@ namespace AIAC
          * @param weight Weight of the line.
          * @return uint32_t Id of the line.
          */
-        static uint32_t Add(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
+        static std::shared_ptr<GOLine> Add(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
 
         virtual ~GOLine() = default;
 
@@ -135,10 +149,20 @@ namespace AIAC
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
+        inline void SetPStart(GOPoint pStart) { m_PStart = pStart; }
+        inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
+        inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; }
+
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            m_PStart.Transform(transformMat);
+            m_PEnd.Transform(transformMat);
+        }
 
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;
+
+    friend class GOPoint;
     };
 
 
@@ -155,7 +179,7 @@ namespace AIAC
          * @param radius Radius of the circle.
          * @return uint32_t Id of the circle.
          */
-        static uint32_t Add(GOPoint center, float radius);
+        static std::shared_ptr<GOCircle> Add(GOPoint center, float radius);
 
         virtual ~GOCircle() = default;
 
@@ -167,11 +191,18 @@ namespace AIAC
         inline float GetRadius() const { return m_Radius; }
         inline glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            m_Center.Transform(transformMat);
+            m_Normal = glm::normalize(glm::vec3(transformMat * glm::vec4(m_Normal, 0.0f)));
+        }
+
     private:
         GOPoint m_Center;
         glm::vec3 m_Normal = glm::vec3(0, 0, 1);
         glm::vec4 m_EdgeColor = glm::vec4(1, 0, 0, 1);
         float m_Radius;
+
+    friend class GOPoint;
     };
 
 
@@ -189,7 +220,7 @@ namespace AIAC
          * @param radius Radius of the cylinder.
          * @return uint32_t Id of the cylinder.
          */
-        static uint32_t Add(GOPoint p1, GOPoint p2, float radius);
+        static std::shared_ptr<GOCylinder> Add(GOPoint p1, GOPoint p2, float radius);
 
         virtual ~GOCylinder() = default;
 
@@ -201,11 +232,18 @@ namespace AIAC
         float GetRadius() const { return m_Radius; }
         glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            m_PStart.Transform(transformMat);
+            m_PEnd.Transform(transformMat);
+        }
+
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;
         float m_Radius;
         glm::vec4 m_EdgeColor = glm::vec4(0, 1, 1, 1);
+
+    friend class GOPoint;
     };
 
 
@@ -221,7 +259,7 @@ namespace AIAC
          * @param points Points of the polyline.
          * @return uint32_t Id of the polyline.
          */
-        static uint32_t Add(std::vector<GOPoint> points);
+        static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points);
 
         virtual ~GOPolyline() = default;
 
@@ -232,12 +270,20 @@ namespace AIAC
 
         inline bool IsClosed() const { return m_IsClosed; }
 
-        inline void setWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; }
+
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            for (auto& point : m_Points) {
+                point.Transform(transformMat);
+            }
+        }
 
     private:
         std::vector<GOPoint> m_Points;
         bool m_IsClosed = true;
         float m_Weight = GOWeight::Default;
+
+    friend class GOPoint;
     };
 
 
@@ -255,7 +301,7 @@ namespace AIAC
          * @param p3 Third point of the triangle.
          * @return uint32_t Id of the triangle.
          */
-        static uint32_t Add(GOPoint p1, GOPoint p2, GOPoint p3);
+        static std::shared_ptr<GOTriangle> Add(GOPoint p1, GOPoint p2, GOPoint p3);
 
         virtual ~GOTriangle() = default;
 
@@ -266,13 +312,21 @@ namespace AIAC
             return std::vector<glm::vec3>{m_P1.GetPosition(), m_P2.GetPosition(), m_P3.GetPosition()};
         }
 
-        inline void setWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; }
+
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            m_P1.Transform(transformMat);
+            m_P2.Transform(transformMat);
+            m_P3.Transform(transformMat);
+        }
 
     private:
         GOPoint m_P1;
         GOPoint m_P2;
         GOPoint m_P3;
         float m_Weight = GOWeight::Default;
+    
+    friend class GOPoint;
     };
 
 
@@ -288,7 +342,7 @@ namespace AIAC
         /**
          * @brief Add empty GOMesh to the scene.
          */
-        static uint32_t Add();
+        static std::shared_ptr<GOMesh> Add();
 
         /**
          * @brief Add GOMesh to the scene.
@@ -297,7 +351,7 @@ namespace AIAC
          * @param indices Indices of the mesh.
          * @return uint32_t Id of the mesh.
          */
-        static uint32_t Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
+        static std::shared_ptr<GOMesh> Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices);
 
         /**
          * @brief Load .ply and add the corresponding GOMesh to the scene.
@@ -318,13 +372,26 @@ namespace AIAC
         void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; }
         void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
         void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; }
-        // FIXME: Override the SetColor function for Mesh
+        // FIXME: /* override */ the SetColor function for Mesh
+
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ {
+            // vertices
+            for (auto& vertex : m_Vertices) {
+                vertex = glm::vec3(transformMat * glm::vec4(vertex, 1.0f));
+            }
+            // normals
+            for (auto& normal : m_Normals) {
+                normal = glm::normalize(glm::vec3(transformMat * glm::vec4(normal, 0.0f)));
+            }
+        }
 
     private:
         std::vector<glm::vec3> m_Vertices;
         std::vector<uint32_t> m_Indices;
         std::vector<glm::vec3> m_Normals;
         std::vector<glm::vec4> m_Colors;
+    
+    friend class GOPoint;
     };
 
 
@@ -342,8 +409,8 @@ namespace AIAC
          * @param size Size of the text.
          * @return uint32_t Id of the text.
          */
-        static uint32_t Add(std::string text, GOPoint anchor, double size);
-        static uint32_t Add(std::string text, glm::vec3 anchor, double size);
+        static std::shared_ptr<GOText> Add(std::string text, GOPoint anchor, double size);
+        // static std::shared_ptr<GOText> Add(std::string text, glm::vec3 anchor, double size);
 
         virtual ~GOText() = default;
 
@@ -354,10 +421,13 @@ namespace AIAC
         inline const GOPoint GetAnchor() const { return m_Anchor; }
         inline const double GetTextSize() const { return m_Size; }
 
+        inline void Transform(const glm::mat4x4& transformMat) /* override */ { m_Anchor.Transform(transformMat); }
+
     private:
         GOPoint m_Anchor;
         std::string m_Text;
         double m_Size;
 
+    friend class GOPoint;
     };
 }

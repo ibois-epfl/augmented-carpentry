@@ -1,5 +1,6 @@
 #include "aiacpch.h"
 
+#include "AIAC/Application.h"
 #include "ACInfoModel.h"
 
 using namespace std;
@@ -56,7 +57,23 @@ namespace AIAC
                 //     AIAC_INFO("Neighbor: {0}", n);
                 // }
 
+                // build primitive
+                auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 3.0f);
+                holeAxis->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.7f));
+                auto holeCylinder = GOCylinder::Add(holeInfo.m_Start, holeInfo.m_End, holeInfo.m_Radius);
+                holeCylinder->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.2f));
+                auto startPoint = GOPoint::Add(holeInfo.m_Start, 2.0f);
+                auto endPoint = GOPoint::Add(holeInfo.m_End, 2.0f);
+                auto radiusText = std::to_string(holeInfo.m_Radius);
+                radiusText = radiusText.substr(0, radiusText.find(".") + 3);
+                auto label = GOText::Add(radiusText, holeInfo.m_Start, 1.0f);
+                holeInfo.m_GOPrimitives.push_back(holeAxis);
+                holeInfo.m_GOPrimitives.push_back(startPoint);
+                holeInfo.m_GOPrimitives.push_back(endPoint);
+                holeInfo.m_GOPrimitives.push_back(label);
+
                 m_TimberInfo[timberInfo.m_ID].m_Holes[holeInfo.m_ID] = holeInfo;
+                break;
             }
         }
         m_CurrentActiveTimberID = m_TimberInfo.begin()->first;
@@ -77,35 +94,31 @@ namespace AIAC
 
     void ACInfoModel::UpdateBboxGOLine() {
         auto bbox = GetActiveTimberInfo().m_Bbox;
-
+        
         // print the axis of the bounding box
         // for(auto& p : bbox){
         //     AIAC_INFO("Bbox: {0}, {1}, {2}", p.x, p.y, p.z);
         // }
 
         // update the GOLine references
-        for(auto& id : m_BboxGOLineIDs)
-            GOLine::Remove(id);
+        for(auto& line : m_BboxGOLines)
+            GOLine::Remove(line);
 
         // bottom
-        // cout << "bbox[0]: " << bbox[0].x << ", " << bbox[0].y << ", " << bbox[0].z << endl;
-        // cout << "bbox[1]: " << bbox[1].x << ", " << bbox[1].y << ", " << bbox[1].z << endl;
-        // cout << "bbox[2]: " << bbox[2].x << ", " << bbox[2].y << ", " << bbox[2].z << endl;
-        // cout << "bbox[3]: " << bbox[3].x << ", " << bbox[3].y << ", " << bbox[3].z << endl;
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f)); // O
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f)); // X
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f)); // O
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f)); // X
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f)); // O
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f)); // X
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f)); // O
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f)); // X
         // top
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[4], bbox[5], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[5], bbox[6], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[6], bbox[7], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[7], bbox[4], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[7], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[4], 2.0f));
         // side
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[0], bbox[4], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[1], bbox[5], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[2], bbox[6], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(bbox[3], bbox[7], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[4], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[6], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[7], 2.0f));
 
         // change color of the bounding box
         // for(int i = 0; i < 4; i++)
@@ -125,6 +138,13 @@ namespace AIAC
         bbox = m_TimberInfo[m_CurrentActiveTimberID].m_Bbox;
         UpdateBboxGOLine();
 
+        // holes
+        for(auto& kv : m_TimberInfo[m_CurrentActiveTimberID].m_Holes){
+            auto holeInfo = kv.second;
+            for(auto& objs : holeInfo.m_GOPrimitives){
+                objs->Transform(transformMat);
+            }
+        }
     }
 
     float ACInfoModel::GetLength(){
