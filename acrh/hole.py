@@ -8,6 +8,40 @@ import log
 import acim
 import visual_debug as vd
 
+def _detect_pt_in_dict(pt, pt_dict):
+    is_unique = True
+    for pt_dict in pt_dict.keys():
+        X_a = round(pt.X, 3)
+        Y_a = round(pt.Y, 3)
+        Z_a = round(pt.Z, 3)
+
+        X_b = round(pt_dict.X, 3)
+        Y_b = round(pt_dict.Y, 3)
+        Z_b = round(pt_dict.Z, 3)
+
+        if X_a == X_b and Y_a == Y_b and Z_a == Z_b:
+            is_unique = False
+            break
+    return is_unique
+
+def _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt):
+    for face in cylinder_faces_b:
+        if not face.Faces[0].IsPlanar():
+            face_curves = face.DuplicateEdgeCurves(True)
+            face_crv = face_curves[0]
+            pt_base = face_crv.PointAtStart
+            axis_ln = rg.Line(start_pt, end_pt)
+            radius = axis_ln.DistanceTo(pt_base, False)
+            radius = round(radius, 3)
+            log.info("radius: " + str(radius))
+    return round(radius, 3)
+
+def _get_crv_center(crv):
+    bbox = crv.GetBoundingBox(True)
+    bbox_b = bbox.ToBrep()
+    center_point = bbox_b.GetBoundingBox(True).Center
+    return center_point
+
 def _get_single_face_brep_center(brep):
     bbox = brep.GetBoundingBox(True)
     bbox_b = bbox.ToBrep()
@@ -39,44 +73,35 @@ def parse_data_from_brep(ACIM,
         :param cylinder_b: the brep defining the hole
         :param bbox_b: the brep of the bounding box
     """
+    log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     bbox_faces_b = _explode_brep(bbox_b)
     cylinder_faces_b = _explode_brep(cylinder_b)
     log.info("cylinder_faces_b: " + str(len(cylinder_faces_b)))
-
-
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    # get the centers of the cylinder's bases
+    # get the centers of the cylinder's bases and if they are exposed
     acim_centers = {}
-
-    # for face in cylinder_faces_b:
-    #     vd.addBrep(face)
-
-    # FIXME: change here, work only with the curved surface (it is sure it is alwyas there?)
+    acim_hash = []
     for face in cylinder_faces_b:
-        # discard the round surfaces
-        if not face.Faces[0].IsPlanar():
+        if face.Faces[0].IsPlanar():
             continue
-
-        face_center = _get_single_face_brep_center(face)
-        log.info("face_center: " + str(face_center))
-
-        # if the center is inside the bbox, continue
-        is_on_face = False
-        if bbox_b.IsPointInside(face_center, sc.doc.ModelAbsoluteTolerance, True):
-            acim_centers[face_center] = is_on_face
-            continue
-
-        point_surf_dist = rs.IsPointOnSurface(face, face_center)
-        log.info("point_surf_dist: " + str(point_surf_dist))
-
-        # PROP: get if the point is on the bbox surface
-        if point_surf_dist:
-            is_on_face = True
-            # vd.addBrep(face, (255,0,255))
-
-        acim_centers[face_center] = is_on_face
+        face_curves = face.DuplicateEdgeCurves(True)
+        for face_crv in face_curves:
+            face_crv_center = _get_crv_center(face_crv)
+            is_on_face = False
+            if bbox_b.IsPointInside(face_crv_center, sc.doc.ModelAbsoluteTolerance, True):
+                if _detect_pt_in_dict(face_crv_center, acim_centers):
+                    acim_centers[face_crv_center] = is_on_face
+                    vd.addPt(face_crv_center, (0,255,0))
+                    continue
+            if rs.IsPointOnSurface(face, face_crv_center):
+                is_on_face = True
+            if _detect_pt_in_dict(face_crv_center, acim_centers):
+                acim_centers[face_crv_center] = is_on_face
+                vd.addPt(face_crv_center, (255,0,0))
+    log.info("length of acim_centers: " + str(len(acim_centers)))
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    # parse simple holes or sub-holes
     centers_len = len(acim_centers)
     if centers_len == 0:
         log.error("No center found for the hole. Exiting...")
@@ -86,8 +111,6 @@ def parse_data_from_brep(ACIM,
         return
     if centers_len == 2:
         log.info("Simple 2-points hole detected")
-
-        # detect which point is start and end
         start_pt = rg.Point3d(0,0,0)
         end_pt = rg.Point3d(0,0,0)
         is_start_pt_accessible = False
@@ -103,26 +126,16 @@ def parse_data_from_brep(ACIM,
             is_start_pt_accessible = acim_centers.values()[1]
             is_end_pt_accessible = acim_centers.values()[0]
 
-        # get the radius
-        radius = 0
-        for face in cylinder_faces_b:
-            if face.Faces[0].IsPlanar():
-                face_curves = face.DuplicateEdgeCurves(True)
-                face_crv = face_curves[0]
-                # vd.addCurve(face_crv)
-                pt_base = face_crv.PointAtStart
-                axis_ln = rg.Line(start_pt, end_pt)
-                vd.addLine(axis_ln)
-                radius = axis_ln.DistanceTo(pt_base, False)
-                radius = round(radius, 3)
-                log.info("radius: " + str(radius))
-                break
-
-        vd.addPt(start_pt)
-        vd.addPt(end_pt)
+        radius = _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt)
+        log.info("radius: " + str(radius))
+        vd.addLine(rg.Line(start_pt, end_pt))
         vd.addDotPt(ptA=start_pt, ptB=end_pt, clr=(0,255,0), txt=str(ACIM.peek_current_hole_id(p_GUID)))
+        for face in cylinder_faces_b:
+            if not face.Faces[0].IsPlanar():
+                face_curves = face.DuplicateEdgeCurves(True)
+                vd.addCurve(face_curves[0], (255,0,255))
+                vd.addCurve(face_curves[1], (255,0,255))
 
-        # store in acim
         ACIM.add_hole(p_GUID,
                     start_pt,
                     end_pt,
@@ -133,7 +146,7 @@ def parse_data_from_brep(ACIM,
         log.info("Complex hole detected")
         holes = []
         
-        # get the two farthest points by comparing the distance between each other
+        # get longest line
         dists = []
         extreme_pts = []
         for i in range(0, centers_len):
@@ -141,7 +154,6 @@ def parse_data_from_brep(ACIM,
                 pt1 = acim_centers.keys()[i]
                 pt2 = acim_centers.keys()[j]
                 dist = pt1.DistanceTo(pt2)
-                # if dist is the biggest in dists
                 dists.append(dist)
                 if dist >= max(dists) or len(dists) == 0:
                     extreme_pts = [i, j]
@@ -160,11 +172,10 @@ def parse_data_from_brep(ACIM,
             pt1 = centers_lst_reorder[i]
             pt2 = centers_lst_reorder[i+1]
             ln = rg.Line(pt1, pt2)
-            sc.doc.Objects.AddLine(ln)  # TODO: debug
+            # vd.addLine(ln)
             hole_axis_ln.append(ln)
         
-        # >>>>>>>>>>>>>>>>>>>>>>>
-        # detect NEIGHBOURS
+        # detect neighbours
         neighbor_lst = []
         for i in range(0, len(hole_axis_ln)):
             for j in range(0, len(hole_axis_ln)):
@@ -183,8 +194,6 @@ def parse_data_from_brep(ACIM,
             next_hole_ids.append(current_hole_id)
             current_hole_id += 1
         log.info("next hole ids: " + str(next_hole_ids))
-        for ln in hole_axis_ln:
-            vd.addDotLn(ln=ln, clr=(30,255,230), txt=str(ACIM.peek_current_hole_id(p_GUID)))
         neighbor_acim_str = []
         for i in range(0, len(neighbor_lst)):
             temp_str = ""
@@ -194,10 +203,10 @@ def parse_data_from_brep(ACIM,
             neighbor_acim_str.append(temp_str)
         log.info("neighbor acim str: " + str(neighbor_acim_str))
 
-        # >>>>>>>>>>>>>>>>>>>>>>>
-        # detect start/end, radius and dump to acim
         for i, axis_ln in enumerate(hole_axis_ln):
-            # 1. detect which point is start and end
+            vd.addLine(axis_ln)
+            vd.addDotLn(ln=axis_ln, clr=(30,255,230), txt=str(ACIM.peek_current_hole_id(p_GUID)))
+
             start_pt = rg.Point3d(0,0,0)
             end_pt = rg.Point3d(0,0,0)
             is_start_pt_accessible = False
@@ -215,31 +224,40 @@ def parse_data_from_brep(ACIM,
                 is_start_pt_accessible = acim_centers[pt_2]
                 is_end_pt_accessible = acim_centers[pt_1]
             
-            # 2. get the radius
-            radius = 0
             for face in cylinder_faces_b:
-                if face.Faces[0].IsPlanar():
+                if not face.Faces[0].IsPlanar():
+                    radius = 0
                     face_curves = face.DuplicateEdgeCurves(True)
-                    if face_curves.__len__() > 1:
-                        smallest_crv = face_curves[0]
-                        for face_crv in face_curves:
-                            if face_crv.GetLength() < smallest_crv.GetLength():
-                                smallest_crv = face_crv
-                        face_crv = smallest_crv
-                    else:
-                        face_crv = face_curves[0]
-                    # vd.addCurve(face_crv)
-                    face_center = _get_single_face_brep_center(face)
-                    vd.addPt(face_center)
+                    face_center_A = _get_crv_center(face_curves[0])
+                    face_center_B = _get_crv_center(face_curves[1])
 
-                    if face_center == start_pt:
-                        ellipse_pt = face_crv.PointAtStart
-                        radius = axis_ln.DistanceTo(ellipse_pt, False)
-                        radius = round(radius, 3)
-                        log.info("radius: " + str(radius))
-                        break
-            
-            # 3. store in acim
+                    vd.addCurve(face_curves[0], (255,0,255))
+                    vd.addCurve(face_curves[1], (255,0,255))
+
+                    f_0X = round(face_center_A.X, 3)
+                    f_0Y = round(face_center_A.Y, 3)
+                    f_0Z = round(face_center_A.Z, 3)
+
+                    f_1X = round(face_center_B.X, 3)
+                    f_1Y = round(face_center_B.Y, 3)
+                    f_1Z = round(face_center_B.Z, 3)
+
+                    sX = round(start_pt.X, 3)
+                    sY = round(start_pt.Y, 3)
+                    sZ = round(start_pt.Z, 3)
+
+                    eX = round(end_pt.X, 3)
+                    eY = round(end_pt.Y, 3)
+                    eZ = round(end_pt.Z, 3)
+
+                    if (f_0X == sX and f_0Y == sY and f_0Z == sZ) or (f_0X == eX and f_0Y == eY and f_0Z == eZ):  # = start
+                        if (f_1X == sX and f_1Y == sY and f_1Z == sZ) or (f_1X == eX and f_1Y == eY and f_1Z == eZ):  # = end
+                            ellipse_pt = face_curves[0].PointAtStart
+                            radius = axis_ln.DistanceTo(ellipse_pt, False)
+                            radius = round(radius, 3)
+                            log.info("radius: " + str(radius))
+                            break
+
             ACIM.add_hole(p_GUID,
                         start_pt,
                         end_pt,
