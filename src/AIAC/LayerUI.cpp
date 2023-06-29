@@ -65,7 +65,8 @@ namespace AIAC
         ImGui::NewFrame();
     }
 
-    void LayerUI::OnUIRender() {
+    void LayerUI::OnUIRender()
+    {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
         if (AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
@@ -90,7 +91,6 @@ namespace AIAC
                 }
             }
         }
-
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

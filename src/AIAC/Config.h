@@ -17,6 +17,9 @@ public:
     inline static const std::string MAP_FILE = "MapFile";
     inline static const std::string VocFile = "VocFile";
 
+    inline static const std::string SEC_TTOOL = "TTool";
+    inline static const std::string CONFIG_FILE = "ConfigFile";
+
     inline static const std::string SEC_RENDERER = "Renderer";
     inline static const std::string PCD_MAP_PATH = "PointCloudMapPath";
     inline static const std::string DIGITAL_MODEL_PATH = "DigitalModelPath";

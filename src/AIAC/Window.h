@@ -33,6 +33,8 @@ namespace AIAC
         void OnUpdate();
         void OnBufferSwap();
         void Shutdown();
+        void MakeCurrent();
+        void ReleaseCurrent();
 
         bool IsOpen();
 
