@@ -87,7 +87,7 @@ They are made to be print as stickers. The code to generate them can be found ![
 ## Build
 Cloning the repo with submodules
 ```bash
-git clone --recursive git@github.com:ibois-epfl/TSlam.git
+git clone --recursive git@github.com:ibois-epfl/augmented-carpentry.git
 ```
 or
 ```bash
