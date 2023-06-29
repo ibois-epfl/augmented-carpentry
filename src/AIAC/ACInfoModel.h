@@ -83,12 +83,34 @@ public:
 
     /**
      * @brief Set the active TimberInfo object
+     * @param timberID ID of the TimberInfo object
      */
-    void SetActiveTimberInfo(std::string timberID) { m_CurrentActiveTimberID = timberID; }
+    void SetActiveTimberInfo(std::string timberID) { m_CurrentActiveTimberID = timberID; UpdateBboxGOLine(); }
+
+    /**
+     * @brief Update the bounding box of the timber (use the current Active TimberInfo)
+     */
+    void UpdateBboxGOLine();
+
+    /**
+     * @brief transform all the GOPrimitive belonging to the ACInfoModel
+     * @param transformMat transformation matrix
+     */
+    void TransformGOPrimitives(glm::mat4x4 transformMat);
+
+    /**
+     * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
+     * @return The length of the scanned model. (in TSLAM unit)
+     */
+    float GetLength();
 
 private:
+    float m_Scale = 50.0f;
+
     std::map<std::string, TimberInfo> m_TimberInfo;
     std::string m_CurrentActiveTimberID;
+
+    std::vector<uint32_t> m_BboxGOLineIDs;
 };
 
 }
