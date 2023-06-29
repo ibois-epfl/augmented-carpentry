@@ -19,6 +19,9 @@ namespace AIAC
 
         std::vector<std::string> GetACInfoTimberIDs() const { return m_ACInfoModel.GetTimberIDs(); };
         void SetActiveACInfoTimber(const std::string& id) { m_ACInfoModel.SetActiveTimberInfo(id); };
+        /**
+         * @brief transform the ACInfoModel to the ScannedModel
+         */
         void AlignModels();
 
     private:

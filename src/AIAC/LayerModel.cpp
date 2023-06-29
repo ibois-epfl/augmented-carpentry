@@ -17,41 +17,41 @@ namespace AIAC
     {
         m_ACInfoModel.Load("assets/ACModel/test.acim");
         m_ScannedModel.Load("assets/ACModel/01_scanned_model.ply");
-
-        vector<glm::vec3> cadBox = {
-                {0.0,0.0,7.0},
-                {7.0,0.0,7.0},
-                {7.0,0.0,0.0},
-                {0.0,0.0,0.0},
-                {0.0,48.0,7.0},
-                {7.0,48.0,7.0},
-                {7.0,48.0,0.0},
-                {0.0,48.0,0.0}
-        };
-
-        vector<glm::vec3> fabBox = {
-                {42.5765991211,-16.7697906494,36.6605987549},
-                {43.1363983154,-11.2471008301,32.6360015869},
-                {45.5475006104,-15.2264785767,27.5181999207},
-                {44.9822006226,-20.7733116150,31.5688991547},
-                {-50.3394012451,-29.9007606506,2.74846005440},
-                {-49.7759017944,-24.3774700165,-1.27487003803},
-                {-47.3773002625,-28.3247394562,-6.35024976730},
-                {-47.9462013245,-33.8720016479,-2.30100011826}
-        };
-
-        auto transMat = GetRigidTransformationMatrix(cadBox, fabBox);
-        cout << glm::to_string(transMat) << endl;
-//        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
-//        uint32_t idPt1 = GOPoint::Add(1, 1, 1, 5.0f);
-//        uint32_t idPt2 = GOPoint::Add(20, 50, 20, 5.0f);
-//        uint32_t idPt3 = GOPoint::Add(30, 30, 30, 5.0f);
-//        auto pt1 = GOPoint::Get(idPt1);
-//        auto pt2 = GOPoint::Get(idPt2);
-//        auto pt3 = GOPoint::Get(idPt3);
+        AlignModels();
+//        vector<glm::vec3> cadBox = {
+//                {0.0,0.0,7.0},
+//                {7.0,0.0,7.0},
+//                {7.0,0.0,0.0},
+//                {0.0,0.0,0.0},
+//                {0.0,48.0,7.0},
+//                {7.0,48.0,7.0},
+//                {7.0,48.0,0.0},
+//                {0.0,48.0,0.0}
+//        };
 //
-//        uint32_t line = GOLine::Add(*pt1, *pt2, 3.0f);
-//        uint32_t line2 = GOLine::Add(*pt1, *pt3, 3.0f);
+//        vector<glm::vec3> fabBox = {
+//                {42.5765991211,-16.7697906494,36.6605987549},
+//                {43.1363983154,-11.2471008301,32.6360015869},
+//                {45.5475006104,-15.2264785767,27.5181999207},
+//                {44.9822006226,-20.7733116150,31.5688991547},
+//                {-50.3394012451,-29.9007606506,2.74846005440},
+//                {-49.7759017944,-24.3774700165,-1.27487003803},
+//                {-47.3773002625,-28.3247394562,-6.35024976730},
+//                {-47.9462013245,-33.8720016479,-2.30100011826}
+//        };
+//
+//        auto transMat = GetRigidTransformationMatrix(cadBox, fabBox);
+//        cout << glm::to_string(transMat) << endl;
+//        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
+    //    uint32_t idPt1 = GOPoint::Add(1, 1, 1, 5.0f);
+    //    uint32_t idPt2 = GOPoint::Add(20, 50, 20, 5.0f);
+    //    uint32_t idPt3 = GOPoint::Add(30, 30, 30, 5.0f);
+    //    auto pt1 = GOPoint::Get(idPt1);
+    //    auto pt2 = GOPoint::Get(idPt2);
+    //    auto pt3 = GOPoint::Get(idPt3);
+
+    //    uint32_t line = GOLine::Add(*pt1, *pt2, 3.0f);
+    //    uint32_t line2 = GOLine::Add(*pt1, *pt3, 3.0f);
 //        uint32_t circle1 = GOCircle::Add(*pt1, 30.5f);
 //        uint32_t circle2 = GOCircle::Add(*pt2, 0.5f);
 //        uint32_t circle3 = GOCircle::Add(*pt3, 0.5f);
@@ -79,5 +79,26 @@ namespace AIAC
     }
 
     void LayerModel::AlignModels() {
+        auto acInfoModelBbox = m_ACInfoModel.GetActiveTimberInfo().GetBoundingBox();
+        auto scannedModelBbox = m_ScannedModel.GetBoundingBox();
+
+        float infoModelLength = m_ACInfoModel.GetLength();
+        float scannedModelLength = m_ScannedModel.GetLength();
+
+        cout << "infoModelLength: " << infoModelLength << endl;
+        cout << "scannedModelLength: " << scannedModelLength << endl;
+
+        // crop the scanned model to the similar length as the info model
+        // reserve 2 cm on each side = 4 cm = 0.04 m = 2 TSLAM unit (by * 50)
+        auto usedPortion = (infoModelLength + 2) / scannedModelLength;
+        auto subBbox = m_ScannedModel.GetBoundingBox();
+        subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
+        subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
+        subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
+        subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
+
+        auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
+        m_ACInfoModel.TransformGOPrimitives(transMat);
+
     }
 }
