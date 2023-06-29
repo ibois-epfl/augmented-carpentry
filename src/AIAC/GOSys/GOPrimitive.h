@@ -35,20 +35,10 @@ namespace AIAC
         static constexpr float Thick              = 1.0f;
     };
 
-    enum GOCategory
-    {
-        GOCategoryNone                            = BIT(0),
-        GOCategoryHole                            = BIT(1),
-        GOCategoryCut                             = BIT(2),
-        GOCategoryVolume                          = BIT(3)
-    };
-
-
     class GOPrimitive
     {
     public:
-        explicit GOPrimitive(GOCategory category = GOCategoryNone,
-                             bool isVisible = true,
+        explicit GOPrimitive(bool isVisible = true,
                              glm::vec4 color = glm::vec4(0, 0, 0, 0.5));
         virtual ~GOPrimitive() = default;
         static void Remove(const uint32_t& id);
@@ -56,7 +46,6 @@ namespace AIAC
         uint32_t GenerateId();
         inline const uint32_t GetId() const { return m_Id; }
 
-        inline GOCategory GetCategory() const { return m_Category; }
         inline bool IsVisible() const { return m_IsVisible; }
         inline glm::vec4 GetColor() const { return m_Color; }
         inline bool GetState() { return m_State; }
@@ -71,7 +60,6 @@ namespace AIAC
 
     protected:
         uint32_t m_Id;
-        GOCategory m_Category;
         bool m_IsVisible;
         glm::vec4 m_Color;
         bool m_State;

@@ -7,8 +7,8 @@
 
 namespace AIAC
 {
-    GOPrimitive::GOPrimitive(GOCategory category, bool isVisible, glm::vec4 color)
-        : m_Category(category), m_IsVisible(isVisible), m_Color(color), m_State(false), m_Type(GOTypeFlags::_GOPrimitive)
+    GOPrimitive::GOPrimitive(bool isVisible, glm::vec4 color)
+        : m_IsVisible(isVisible), m_Color(color), m_State(false)
     {
         m_Id = GenerateId();
     }
