@@ -25,7 +25,7 @@ public:
         bool m_EndAccessible;
         double m_Radius;
         std::set<std::string> m_Neighbors;
-        std::vector<GOPrimitive> m_ObjsToRender;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
     };
     struct Face{
         std::string m_ID;
@@ -34,7 +34,7 @@ public:
         glm::vec3 m_Center;
         std::set<std::string> m_Lines;
         std::set<std::string> m_Neighbors;
-        std::vector<GOPrimitive> m_ObjsToRender;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
     };
     struct Line{
         std::string m_ID;
@@ -42,7 +42,7 @@ public:
         glm::vec3 m_Start;
         glm::vec3 m_End;
         std::set<std::string> m_Neighbors;
-        std::vector<GOPrimitive> m_ObjsToRender;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitiveIDs;
     };
     struct Cut{
         ACIMState m_State;
@@ -154,7 +154,7 @@ private:
     std::map<std::string, TimberInfo> m_TimberInfo;
     std::string m_CurrentActiveTimberID;
 
-    std::vector<uint32_t> m_BboxGOLineIDs;
+    std::vector<std::shared_ptr<GOLine>> m_BboxGOLines;
 };
 
 }

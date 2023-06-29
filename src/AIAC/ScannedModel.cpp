@@ -89,23 +89,23 @@ namespace AIAC
         //     GOLine::Remove(id);
 
         // bottom
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[2], m_Bbox[3], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[3], m_Bbox[0], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[3], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[0], 2.0f));
         // top
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[4], m_Bbox[5], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[5], m_Bbox[6], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[6], m_Bbox[7], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[7], m_Bbox[4], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[6], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[7], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[4], 2.0f));
         // side
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
-        m_BboxGOLineIDs.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
     }
 
-    float ScannedModel::GetLength(){    
+    float ScannedModel::GetLength(){
         float dist = 0.0f;
         dist += glm::distance(m_Bbox[0], m_Bbox[1]);
         dist += glm::distance(m_Bbox[2], m_Bbox[3]);
