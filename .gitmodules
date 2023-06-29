@@ -30,6 +30,9 @@
 [submodule "deps/freetype"]
 	path = deps/freetype
 	url = https://gitlab.freedesktop.org/freetype/freetype
+[submodule "deps/TTool"]
+	path = deps/TTool
+	url = git@github.com:ibois-epfl/TTool.git
 [submodule "pugixml"]
 	path = deps/pugixml
 	url = git@github.com:zeux/pugixml.git
