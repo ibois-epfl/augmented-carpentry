@@ -17,17 +17,47 @@ namespace AIAC
         for(auto timber = doc.child("acim").child("timber"); timber; timber = timber.next_sibling("timber")){
             TimberInfo timberInfo;
             timberInfo.m_ID = timber.attribute("id").as_string();
+            timberInfo.m_State = StringToState(timber.child("state").child_value());
             AIAC_INFO("Timber: {0}", timberInfo.m_ID);
             
             // Bounding Box
             auto bboxNode = timber.child("bbox");
             for(auto corner = bboxNode.child("corner"); corner; corner = corner.next_sibling("corner")){
-                glm::vec3 p;
-                auto ss = stringstream(corner.child_value());
-                ss >> p.x >> p.y >> p.z;
-                timberInfo.m_Bbox.push_back(p * m_Scale);
+                auto c = StringToVec3(corner.child_value());
+                timberInfo.m_Bbox.push_back(c * m_Scale);
             }
             m_TimberInfo[timberInfo.m_ID] = timberInfo;
+
+            // Holes
+            for(auto hole = timber.child("hole"); hole; hole=hole.next_sibling("hole")){
+                TimberInfo::Hole holeInfo;
+                holeInfo.m_ID = hole.attribute("id").as_string();
+                holeInfo.m_State = StringToState(hole.child("state").child_value());
+                holeInfo.m_Neighbors = StringToSet(hole.child("neighbours").child_value());
+                if(holeInfo.m_Neighbors.size() == 1 && *holeInfo.m_Neighbors.begin() == "-1"){
+                    AIAC_INFO("Hole: {0} has no neighbors", holeInfo.m_ID);
+                    holeInfo.m_Neighbors.clear();
+                }
+                holeInfo.m_Start = StringToVec3(hole.child("start").child("coordinates").child_value()) * m_Scale;
+                holeInfo.m_StartAccessible = StringToBool(hole.child("start").child("accessible").child_value());
+                holeInfo.m_End = StringToVec3(hole.child("end").child("coordinates").child_value()) * m_Scale;
+                holeInfo.m_EndAccessible = StringToBool(hole.child("end").child("accessible").child_value());
+                holeInfo.m_Radius = std::stof(hole.child("radius").child_value());
+
+                // print out the hole info
+                // AIAC_INFO("Hole: {0}", holeInfo.m_ID);
+                // AIAC_INFO("State: {0}", int(holeInfo.m_State));
+                // AIAC_INFO("Radius: {0}", holeInfo.m_Radius);
+                // AIAC_INFO("Start: {0}, {1}, {2}", holeInfo.m_Start.x, holeInfo.m_Start.y, holeInfo.m_Start.z);
+                // AIAC_INFO("End: {0}, {1}, {2}", holeInfo.m_End.x, holeInfo.m_End.y, holeInfo.m_End.z);
+                // AIAC_INFO("Start Accessible: {0}", holeInfo.m_StartAccessible);
+                // AIAC_INFO("End Accessible: {0}", holeInfo.m_EndAccessible);
+                // for(auto& n : holeInfo.m_Neighbors){
+                //     AIAC_INFO("Neighbor: {0}", n);
+                // }
+
+                m_TimberInfo[timberInfo.m_ID].m_Holes[holeInfo.m_ID] = holeInfo;
+            }
         }
         m_CurrentActiveTimberID = m_TimberInfo.begin()->first;
         UpdateBboxGOLine();
@@ -108,6 +138,67 @@ namespace AIAC
         dist /= 4.0f;
 
         return dist;
+    }
+
+    ACIMState ACInfoModel::StringToState(std::string state){
+        std::string notDoneStr = "NotDone";
+        std::string doneStr = "Done";
+        std::string currentStr = "Current";
+        if(!state.compare(0, notDoneStr.length(), notDoneStr)){
+            return ACIMState::NOT_DONE;
+        }
+        else if(!state.compare(0, doneStr.length(), doneStr)){
+            return ACIMState::DONE;
+        }
+        else if(!state.compare(0, currentStr.length(), currentStr)){
+            return ACIMState::CURRENT;
+        }
+        else {
+            AIAC_ERROR("Invalid state string: {0}", state);
+            return ACIMState::NOT_DONE;
+        }
+    }
+
+    glm::vec3 ACInfoModel::StringToVec3(std::string str){
+        glm::vec3 vec;
+        auto ss = stringstream(str);
+        ss >> vec.x >> vec.y >> vec.z;
+        return vec;
+    }
+
+    std::vector<std::string> ACInfoModel::StringToTokens(std::string str){
+        std::vector<std::string> tokens;
+        std::string token;
+        std::istringstream tokenStream(str);
+        while (std::getline(tokenStream, token, ' ')){
+            tokens.push_back(token);
+        }
+        return tokens;
+    }
+
+    std::set<std::string> ACInfoModel::StringToSet(std::string str){
+        std::set<std::string> set;
+        std::string token;
+        std::istringstream tokenStream(str);
+        while (std::getline(tokenStream, token, ' ')){
+            set.insert(token);
+        }
+        return set;
+    }
+
+    bool ACInfoModel::StringToBool(std::string str){
+        std::string trueStr = "True";
+        std::string falseStr = "False";
+        if(!str.compare(0, trueStr.length(), trueStr)){
+            return true;
+        }
+        else if(!str.compare(0, falseStr.length(), falseStr)){
+            return false;
+        }
+        else {
+            AIAC_ERROR("Invalid bool string: {0}", str);
+            return false;
+        }
     }
 
 } // namespace AIAC
