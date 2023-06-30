@@ -4,6 +4,8 @@
 #include "AIAC/Layer.h"
 #include "ttool.hh"
 
+#include "AIAC/ACInfoToolhead.h"
+
 namespace AIAC
 {
     class LayerToolhead : public AIAC::Layer
@@ -17,11 +19,11 @@ namespace AIAC
 
         bool NeedsContextReleased() const { return true; }
 
-    protected:
+    private:
         void UpdateToolheadState();
         void TrackFrame();
 
-    protected:
+    private:
         std::shared_ptr<ttool::TTool> TTool;
         uint trackCounter = 0;
         uint TRACK_EVERY = 600;
@@ -29,5 +31,11 @@ namespace AIAC
 
         ttool::EventType ttoolState = ttool::EventType::Tracking;
         cv::Matx44f m_Pose;
+
+    private:
+        /// @brief Map of toolhead name to toolhead model of all possible toolheads loaded
+        std::map<std::string, std::shared_ptr<ACInfoToolhead>> m_ACInfoToolheadMap;
+
+
     };
 }

@@ -58,7 +58,7 @@ option(INSTALL_TTOOL "Install TTool in case it has been updated" OFF)
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
-option(SILENT_LOGGING "Do not log messages in the terminal of on." ON)
+option(SILENT_LOGGING "Do not log messages in the terminal if on." ON)
 # -------------------- TEST OPTIONS --------------------------------
 option(TEST_GRAPHICS "Test graphics by launching opengl with glfw window." ON)
 
