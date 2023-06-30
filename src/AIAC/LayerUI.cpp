@@ -44,7 +44,7 @@ namespace AIAC
 
         // Load images from memory
         m_LogoBlack = AIAC::Image(AIAC_LOGO_BLACK);
-        m_LogoLightGray = AIAC::Image(AIAC_LOGO_LIGHT_GRAY);
+        m_LogoLightClr = AIAC::Image(AIAC_LOGO_COLOR);
 
         // Set panes UI for layers
         //                 Label       Collapse             PaneContent
@@ -130,7 +130,7 @@ namespace AIAC
     void LayerUI::ShowMainUI()
     {
         ImGui::Begin("augmented_carpentry", m_IsOpen);
-        ImGui::Image(m_LogoLightGray.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::Image(m_LogoLightClr.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
         

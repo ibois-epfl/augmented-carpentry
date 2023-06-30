@@ -29,32 +29,11 @@ namespace AIAC
         
         // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
         TTool->ManipulateModel('e');
-    }
 
-    void LayerToolhead::OnFrameStart()
-    {
-        UpdateToolheadState();
-        if (!(ttoolState == ttool::EventType::Tracking))
-            return;
 
-        AIAC_APP.GetWindow()->ReleaseCurrent();
-        TTool->MakeCurrent();
-        
-        cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
-        TTool->RunOnAFrame(currentFrame);
-        m_Pose = TTool->GetPose();
-        std::stringstream ss;
-        ss << "Pose: " << m_Pose;
-        AIAC_INFO(ss.str());
 
-        TTool->ReleaseCurrent();
-        AIAC_APP.GetWindow()->MakeCurrent();
-    }
-
-    void LayerToolhead::TrackFrame()
-    {
-
+        std::string test = "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/metadata.acit";
+        std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(test);
     }
 
     /**
@@ -85,5 +64,31 @@ namespace AIAC
                 trackCounter = 0;
             }
         }
+    }
+
+    void LayerToolhead::OnFrameStart()
+    {
+        // UpdateToolheadState();
+        // if (!(ttoolState == ttool::EventType::Tracking))
+        //     return;
+
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
+        // TTool->MakeCurrent();
+        
+        // cv::Mat currentFrame;
+        // AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        // // TTool->RunOnAFrame(currentFrame);
+        // m_Pose = TTool->GetPose();
+        // std::stringstream ss;
+        // ss << "Pose: " << m_Pose;
+        // AIAC_INFO(ss.str());
+
+        // TTool->ReleaseCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
+    }
+
+    void LayerToolhead::TrackFrame()
+    {
+
     }
 }
