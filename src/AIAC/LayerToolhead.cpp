@@ -16,11 +16,6 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
-        // Adding dummy arguments to make QApplication
-        int argc = 1;
-        char* argv[] = { "augmented_carpentry" };
-        QApplication app(argc, argv);
-        
         TTool = std::make_shared<ttool::TTool>(
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")

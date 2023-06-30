@@ -109,11 +109,13 @@ namespace AIAC
 
     void Window::MakeCurrent()
     {
+        return;
         glfwMakeContextCurrent(m_GLFWWindow);
     }
 
     void Window::ReleaseCurrent()
     {
+        return;
         glfwMakeContextCurrent(NULL);
     }
 
