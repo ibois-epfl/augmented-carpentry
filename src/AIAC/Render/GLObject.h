@@ -1,0 +1,125 @@
+
+#pragma once
+
+#include <vector>
+#include "AIAC/GlHeader.h"
+#include "glm/glm.hpp"
+
+namespace AIAC {
+    enum class GLObjectType {
+        POINTS,
+        LINES,
+        TRIANGLES
+    };
+
+    class GLObject {
+    public:
+        GLObjectType type;
+        GLuint vertexBuf;
+        GLuint colorBuf;
+        GLsizei size; // how many objects to Draw (for glDrawArrays)
+
+        GLObject() = default;
+        ~GLObject() {};
+
+        // copy constructor
+        GLObject(const GLObject &other) {
+            type = other.type;
+            vertexBuf = other.vertexBuf;
+            colorBuf = other.colorBuf;
+            size = other.size;
+        }
+
+        GLObject& operator=(const GLObject &other) {
+            type = other.type;
+            vertexBuf = other.vertexBuf;
+            colorBuf = other.colorBuf;
+            size = other.size;
+            return *this;
+        }
+
+        virtual void Draw() = 0;
+
+    protected:
+        void BindVBOs();
+        void BufferData(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors);
+    };
+
+    // ----------------- //
+    //   GLPointObject   //
+    // ----------------- //
+    class GLPointObject : public GLObject {
+    public:
+        GLPointObject() { type = GLObjectType::POINTS; }
+
+        GLPointObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize = 1.0f);
+        
+        // copy constructor
+        GLPointObject(const GLPointObject &other) : GLObject(other) {
+            pointSize = other.pointSize;
+        }
+
+        GLPointObject& operator=(const GLPointObject &other) {
+            GLObject::operator=(other);
+            pointSize = other.pointSize;
+            return *this;
+        }
+
+        virtual void Draw();
+
+    public:
+        GLfloat pointSize;
+    };
+
+    // ----------------- //
+    //   GLLineObject   //
+    // ----------------- //
+    class GLLineObject : public GLObject {
+    public:
+        GLLineObject() { type = GLObjectType::LINES; }
+
+        GLLineObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat lineWidth = 1.0f);
+        
+        // copy constructor
+        GLLineObject(const GLLineObject &other) : GLObject(other) {
+            lineWidth = other.lineWidth;
+        }
+
+        GLLineObject& operator=(const GLLineObject &other) {
+            GLObject::operator=(other);
+            lineWidth = other.lineWidth;
+            return *this;
+        }
+
+        virtual void Draw();
+
+    public:
+        GLfloat lineWidth;
+    };
+
+    // -------------------- //
+    //   GLTriangleObject   //
+    // -------------------- //
+    class GLTriangleObject : public GLObject {
+    public:
+        GLTriangleObject() { type = GLObjectType::TRIANGLES; }
+
+        GLTriangleObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices);
+        
+        // copy constructor
+        GLTriangleObject(const GLTriangleObject &other) : GLObject(other) {
+            indexBuf = other.indexBuf;
+        }
+
+        GLTriangleObject& operator=(const GLTriangleObject &other) {
+            GLObject::operator=(other);
+            indexBuf = other.indexBuf;
+            return *this;
+        }
+
+        virtual void Draw();
+
+    public:
+        GLuint indexBuf;
+    };
+}
