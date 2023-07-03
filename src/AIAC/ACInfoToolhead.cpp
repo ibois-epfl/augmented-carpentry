@@ -5,14 +5,6 @@
 
 namespace AIAC
 {
-    glm::vec3 ToolHeadData::ParseString2GlmVector(std::string str)
-    {
-        glm::vec3 vec;
-        auto ss = std::stringstream(str);
-        ss >> vec.x >> vec.y >> vec.z;
-        return vec;
-    }
-    
     void ToolHeadData::LoadACIT(std::string acitPath)
     {
         AIAC_INFO("Loading ACIT from {0}", acitPath);
@@ -27,7 +19,8 @@ namespace AIAC
         if (type == "drillbit")
         {
             m_Type = ACToolHeadType::DRILLBIT;
-            m_DrillBitD.Name = toolhead.attribute("name").as_string();
+            m_Name = toolhead.attribute("name").as_string();
+
             m_DrillBitD.Toolbase = ParseString2GlmVector(toolhead.child("toolbase").child_value());
             m_DrillBitD.Tooltip = ParseString2GlmVector(toolhead.child("tooltip").child_value());
             m_DrillBitD.Eattip = ParseString2GlmVector(toolhead.child("eattip").child_value());
@@ -37,8 +30,9 @@ namespace AIAC
         else if (type == "circularsaw")
         {
             m_Type = ACToolHeadType::CIRCULARSAW;
-            m_CircularSawD.Name = toolhead.attribute("name").as_string();
+            m_Name = toolhead.attribute("name").as_string();
             m_CircularSawD.Center = ParseString2GlmVector(toolhead.child("center").child_value());
+
             m_CircularSawD.NormalStart = ParseString2GlmVector(toolhead.child("normalstart").child_value());
             m_CircularSawD.NormalEnd = ParseString2GlmVector(toolhead.child("normalend").child_value());
             m_CircularSawD.Radius = toolhead.child("radius").text().as_float();
@@ -46,8 +40,9 @@ namespace AIAC
         else if (type == "chainsaw")
         {
             m_Type = ACToolHeadType::CHAINSAW;
-            m_ChainSawD.Name = toolhead.attribute("name").as_string();
+            m_Name = toolhead.attribute("name").as_string();
             m_ChainSawD.Chainbase = ParseString2GlmVector(toolhead.child("chainbase").child_value());
+
             m_ChainSawD.Chainmid = ParseString2GlmVector(toolhead.child("chainmid").child_value());
             m_ChainSawD.Chainend = ParseString2GlmVector(toolhead.child("chainend").child_value());
             m_ChainSawD.NormalStart = ParseString2GlmVector(toolhead.child("normalstart").child_value());
@@ -57,7 +52,8 @@ namespace AIAC
         else if (type == "sabersaw")
         {
             m_Type = ACToolHeadType::SABERSAW;
-            m_SaberSawD.Name = toolhead.attribute("name").as_string();
+            m_Name = toolhead.attribute("name").as_string();
+            
             m_SaberSawD.Toolbase = ParseString2GlmVector(toolhead.child("toolbase").child_value());
             m_SaberSawD.Tooltip = ParseString2GlmVector(toolhead.child("tooltip").child_value());
             m_SaberSawD.NormalStart = ParseString2GlmVector(toolhead.child("normalstart").child_value());
@@ -68,9 +64,20 @@ namespace AIAC
         return;
     }
 
-    ACInfoToolhead::ACInfoToolhead(std::string acitPath)
+    glm::vec3 ToolHeadData::ParseString2GlmVector(std::string str)
+    {
+        glm::vec3 vec;
+        auto ss = std::stringstream(str);
+        ss >> vec.x >> vec.y >> vec.z;
+        return vec;
+    }
+
+
+    ACInfoToolhead::ACInfoToolhead(std::string acitPath, std::string objPath)
+        : m_ACITPath(acitPath), m_OBJPath(objPath) 
     {
         this->m_Data.LoadACIT(acitPath);
-        this-m_State = ACToolHeadState::IDLE;
+
+        // TODO: add primitives, widgets and meshGO
     }
 }

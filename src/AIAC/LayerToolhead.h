@@ -4,7 +4,7 @@
 #include "AIAC/Layer.h"
 #include "ttool.hh"
 
-#include "AIAC/ACInfoToolhead.h"
+#include "AIAC/ACInfoToolheadManager.h"
 
 namespace AIAC
 {
@@ -32,10 +32,7 @@ namespace AIAC
         ttool::EventType ttoolState = ttool::EventType::Tracking;
         cv::Matx44f m_Pose;
 
-    private:
-        /// @brief Map of toolhead name to toolhead model of all possible toolheads loaded
-        std::map<std::string, std::shared_ptr<ACInfoToolhead>> m_ACInfoToolheadMap;
-
-
+    public:
+        std::shared_ptr<AIAC::ACInfoToolheadManager> ACInfoToolheadManager;
     };
 }

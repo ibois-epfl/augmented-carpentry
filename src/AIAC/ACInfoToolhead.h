@@ -1,15 +1,7 @@
 #pragma once
 
 #include "AIAC/GOSys/GO.h"
-
-#include <glm/glm.hpp>
-/*
-    the class hold the toolhead, it should:
-    - (A) hold the geometric information of the toolhead with GoTypes
-    - (A2) have the mesh of the toolhead for representation
-    - (B) have state, type, property members and util functions linked to it
-    - a transform/rotate/translate function to apply to all the GoTypes
-*/
+#include "AIAC/GOSys/GOPrimitive.h"
 
 #include <glm/glm.hpp>
 
@@ -75,7 +67,6 @@ namespace AIAC
     */
     struct ChainSawData
     {
-        std::string Name;
         glm::vec3 Chainbase;
         glm::vec3 Chainmid;
         glm::vec3 Chainend;
@@ -119,12 +110,16 @@ namespace AIAC
             */
             glm::vec3 ParseString2GlmVector(std::string str);
 
-        public: __always_inline
+        private: __always_inline
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Type; }
+            /// @brief Retrieve the name of the toolhead
+            inline std::string GetName() const { return m_Name; }
+            
+            // FIXME: casting not working?
             /// @brief Retrive the correct data type according to the type of tool of ToolHeadData
             template<typename T>
-            T GetData() const
+            inline T GetData() const
             {
                 switch (m_Type)
                 {
@@ -146,8 +141,11 @@ namespace AIAC
             }
 
         private:
-            /// @brief Name of the toolhead
+            /// @brief Type of the toolhead
             ACToolHeadType m_Type;
+            /// @brief Type of the toolhead
+            std::string m_Name;
+
             /// @brief struct contains info from .acit data for drillbit
             DrillBitData m_DrillBitD;
             /// @brief struct contains info from .acit data for circularsaw
@@ -163,33 +161,44 @@ namespace AIAC
     /// @section ACIT Model ////////////////////////////////////////////////////////////////////////////
     class ACInfoToolhead
     {
-        enum class ToolHeadState
-        {
-            IDLE,
-            ACTIVE
-        };
-
         public:
-            ACInfoToolhead(std::string acitPath);
+            ACInfoToolhead(std::string acitPath, std::string meshObjPath);
 
             void Init();
 
         public: __always_inline
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Data.GetType(); }
+            /// @brief Get the name of the toolhead
+            std::string GetName() const { return m_Data.GetName(); }
+
+        public:
+            /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
+            void createGOsInfo();
+            /// @brief 
+            void loadGOsWidget();
+
+        public:
+            // TODO: @Hong-Bin to be implemented in the GO system
+            /// @brief transform all the geometries, widgets and mesh contained in the ACInfoToolhead object
+            void Transform(glm::mat4 transform);
 
         private:
+            /// @brief the path to the acit file
+            std::string m_ACITPath;
+            /// @brief the path to the mesh file as obj
+            std::string m_OBJPath;
+
             /// @brief the data loaded from the .acit
             ToolHeadData m_Data;
-            /// @brief the state of the toolhead
-            ToolHeadState m_State;
 
+        private:
             /// @brief the geometries that defines the hole and used in the feedback layer
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfo;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPsrimitivesInfo;
             /// @brief the geometries the create the widget UI of the toolhead
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
+            // TODO: a@Hong-Bin to be implemented a GOMesh constructor able to get a path to obj and create GOfile
             /// @brief the mesh used to input and check the 6dof pose of the toolhead by the user
             GOMesh m_GOMesh;
-
     };
 }
