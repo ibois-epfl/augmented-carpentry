@@ -46,6 +46,16 @@ namespace AIAC
         AIAC_INFO(ss.str());
     }
 
+    /**
+     * @brief Reload the camera calibration file
+    */
+    void LayerToolhead::ReloadCameraCalibration()
+    {
+        TTool->DestrolView();
+        OnAttach();
+        ttoolState = ttool::EventType::PoseInput;
+    }
+
     void LayerToolhead::OnPoseManipulation()
     {
         char key = cv::waitKey(1);

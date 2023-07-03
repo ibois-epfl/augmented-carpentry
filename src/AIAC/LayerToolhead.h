@@ -15,7 +15,7 @@ namespace AIAC
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
-        bool NeedsContextReleased() const { return true; }
+        void ReloadCameraCalibration();
 
     protected:
         void UpdateToolheadState();
