@@ -48,6 +48,25 @@ namespace AIAC
         InitCamCalibView();
 
         m_MappingView.SetSize(600, 442);
+
+        std::vector<glm::vec3> vertices = {
+            glm::vec3(0.0f, 0.0f, 10.0f),
+            glm::vec3(0.0f, 10.0f, 0.0f),
+            glm::vec3(10.0f, 0.0f, 0.0f),
+        };
+        std::vector<glm::vec4> colors = {
+            glm::vec4(1.0f, 0.0f, 0.0f, 1.0f),
+            glm::vec4(0.0f, 1.0f, 0.0f, 1.0f),
+            glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
+        };
+        std::vector<uint32_t> indices = {
+            0, 1, 2,
+        };
+
+        m_TestGLObject = std::make_shared<GLTriangleObject>(vertices, colors, indices);
+        // glBindVertexArray(m_VAO);
+        // m_TestGLObject = glCreatePoints(vertices, colors, 3);
+        // cout << "m_TestGLObject: " << m_TestGLObject.vertexBuf << endl;
     }
 
     void Renderer::InitProjMatrix(){
@@ -192,30 +211,48 @@ namespace AIAC
         glUseProgram(m_BasicShaderProgram);
 
         m_GlobalView.Activate();
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
 
         // visualize map
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        if(ShowPointCloudMap){
-            PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-        }
+        // glDrawObject(m_TestGLObject);
+        m_TestGLObject->Draw();
+
+        // std::vector<glm::vec3> vertices = {
+        //     glm::vec3(0.0f, 0.0f, 10.0f),
+        //     glm::vec3(0.0f, 10.0f, 0.0f),
+        //     glm::vec3(10.0f, 0.0f, 0.0f),
+        // };
+        // std::vector<glm::vec4> colors = {
+        //     glm::vec4(1.0f, 1.0f, 0.0f, 1.0f),
+        //     glm::vec4(0.0f, 1.0f, 1.0f, 1.0f),
+        //     glm::vec4(1.0f, 0.0f, 1.0f, 1.0f),
+        // };
+        // glBindVertexArray(m_VAO);
+        // m_TestGLObject = glCreatePoints(vertices, colors, 3);
+
+        // if(ShowPointCloudMap){
+        //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+        // }
         if(ShowDigitalModel){
-            DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-            DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+            // DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+            // DigitalModel.DrawFaces(m_DigitalModelFaceColor);
         }
 
-        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
 
         // visualize camera
-        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
-        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-        glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+        // auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+        // glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+        // // glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         // Draw All objects
-        DrawAllGOs(finalPoseMatrix);
+        // DrawAllGOs(finalPoseMatrix);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
