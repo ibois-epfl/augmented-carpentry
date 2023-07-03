@@ -6,9 +6,6 @@
 #include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
 
-#include <QApplication>
-#include <QThread>
-
 #include "ttool.hh"
 
 
