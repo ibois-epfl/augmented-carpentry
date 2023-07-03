@@ -20,10 +20,10 @@ namespace AIAC
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
             );
-        TTool->ReleaseCurrent();
         
         // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
         TTool->ManipulateModel('e');
+        TTool->ManipulateModel('q');
     }
 
     void LayerToolhead::OnFrameStart()
@@ -32,9 +32,6 @@ namespace AIAC
         if (!(ttoolState == ttool::EventType::Tracking))
             return;
 
-        AIAC_APP.GetWindow()->ReleaseCurrent();
-        TTool->MakeCurrent();
-        
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
         TTool->RunOnAFrame(currentFrame);
@@ -42,9 +39,6 @@ namespace AIAC
         std::stringstream ss;
         ss << "Pose: " << m_Pose;
         AIAC_INFO(ss.str());
-
-        TTool->ReleaseCurrent();
-        AIAC_APP.GetWindow()->MakeCurrent();
     }
 
     void LayerToolhead::TrackFrame()
