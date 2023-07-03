@@ -103,24 +103,18 @@ namespace AIAC
             break;
         }
         return;
+    }
 
-        // if (ttoolState == ttool::EventType::Tracking)
-        // {
-        //     trackCounter++;
-        //     if (trackCounter >= TRACK_FOR)
-        //     {
-        //         ttoolState = ttool::EventType::None;
-        //         trackCounter = 0;
-        //     }
-        // }
-        // else if (ttoolState == ttool::EventType::None)
-        // {
-        //     trackCounter++;
-        //     if (trackCounter >= TRACK_EVERY)
-        //     {
-        //         ttoolState = ttool::EventType::Tracking;
-        //         trackCounter = 0;
-        //     }
-        // }
+    glm::mat4 LayerToolhead::GetWorldPose()
+    {
+        glm::mat4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
+        cv::Matx44f toolheadPose = TTool->GetPose();
+        glm::mat4 toolheadPoseGlm = glm::make_mat4(toolheadPose.val);
+
+        cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
+        glm::mat4 toolheadNormalizationGlm = glm::make_mat4(toolheadNormalization.val);
+
+        glm::mat4 worldPose = cameraPose * (toolheadNormalizationGlm * toolheadPoseGlm);
+        return worldPose;
     }
 }
