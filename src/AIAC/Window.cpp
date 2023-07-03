@@ -107,18 +107,6 @@ namespace AIAC
         }
     }
 
-    void Window::MakeCurrent()
-    {
-        return;
-        glfwMakeContextCurrent(m_GLFWWindow);
-    }
-
-    void Window::ReleaseCurrent()
-    {
-        return;
-        glfwMakeContextCurrent(NULL);
-    }
-
     bool Window::IsOpen()
     {
         return !(glfwWindowShouldClose(m_GLFWWindow));
