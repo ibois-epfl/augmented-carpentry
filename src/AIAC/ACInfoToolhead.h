@@ -91,6 +91,7 @@ namespace AIAC
         glm::vec3 NormalStart;
         glm::vec3 NormalEnd;
     };
+    
     /// @brief Class holding and parse the information from the .acit file of the toolhead
     class ToolHeadData
     {
@@ -174,9 +175,12 @@ namespace AIAC
 
         public:
             /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
-            void createGOsInfo();
-            /// @brief 
-            void loadGOsWidget();
+            void CreateGOsInfo();
+            /// @brief From the parsed acit geometries, add widgets made by GOs (e.g. text, arrows, etc)
+            void CreateGOsWidget();
+            // // TODO: maybe this is not needed
+            // /// @brief From the parsed acit geometries, create the mesh of the toolhead
+            // void createGOMesh();
 
         public:
             // TODO: @Hong-Bin to be implemented in the GO system
@@ -197,8 +201,8 @@ namespace AIAC
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPsrimitivesInfo;
             /// @brief the geometries the create the widget UI of the toolhead
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
-            // TODO: a@Hong-Bin to be implemented a GOMesh constructor able to get a path to obj and create GOfile
-            /// @brief the mesh used to input and check the 6dof pose of the toolhead by the user
-            GOMesh m_GOMesh;
+            // // TODO: @Hong-Bin to be implemented a GOMesh constructor able to get a path to obj and create GOfile
+            // /// @brief the mesh used to input and check the 6dof pose of the toolhead by the user
+            // GOMesh m_GOMesh;
     };
 }
