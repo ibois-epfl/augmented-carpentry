@@ -28,10 +28,6 @@ namespace AIAC
         void OnPoseManipulation();
 
     protected:
-        uint trackCounter = 0;
-        uint TRACK_EVERY = 600;
-        uint TRACK_FOR = 64;
-
         ttool::EventType ttoolState = ttool::EventType::None;
         cv::Matx44f m_Pose;
     };
