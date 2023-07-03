@@ -16,19 +16,19 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
-        // Adding dummy arguments to make QApplication
-        int argc = 1;
-        char* argv[] = { "augmented_carpentry" };
-        QApplication app(argc, argv);
+    //     // Adding dummy arguments to make QApplication
+    //     int argc = 1;
+    //     char* argv[] = { "augmented_carpentry" };
+    //     QApplication app(argc, argv);
         
-        TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
-            );
-        TTool->ReleaseCurrent();
+    //     TTool = std::make_shared<ttool::TTool>(
+    //         AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+    //         AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
+    //         );
+    //     // TTool->ReleaseCurrent();
         
-        // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
-        TTool->ManipulateModel('e');
+    //     // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
+    //     TTool->ManipulateModel('e');
 
 
         // load the ACIT models from the dataset
@@ -48,24 +48,24 @@ namespace AIAC
      */
     void LayerToolhead::UpdateToolheadState()
     {
-        if (ttoolState == ttool::EventType::Tracking)
-        {
-            trackCounter++;
-            if (trackCounter >= TRACK_FOR)
-            {
-                ttoolState = ttool::EventType::None;
-                trackCounter = 0;
-            }
-        }
-        else if (ttoolState == ttool::EventType::None)
-        {
-            trackCounter++;
-            if (trackCounter >= TRACK_EVERY)
-            {
-                ttoolState = ttool::EventType::Tracking;
-                trackCounter = 0;
-            }
-        }
+        // if (ttoolState == ttool::EventType::Tracking)
+        // {
+        //     trackCounter++;
+        //     if (trackCounter >= TRACK_FOR)
+        //     {
+        //         ttoolState = ttool::EventType::None;
+        //         trackCounter = 0;
+        //     }
+        // }
+        // else if (ttoolState == ttool::EventType::None)
+        // {
+        //     trackCounter++;
+        //     if (trackCounter >= TRACK_EVERY)
+        //     {
+        //         ttoolState = ttool::EventType::Tracking;
+        //         trackCounter = 0;
+        //     }
+        // }
     }
 
     void LayerToolhead::OnFrameStart()

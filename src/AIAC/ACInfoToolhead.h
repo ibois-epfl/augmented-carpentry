@@ -91,7 +91,7 @@ namespace AIAC
         glm::vec3 NormalStart;
         glm::vec3 NormalEnd;
     };
-    
+
     /// @brief Class holding and parse the information from the .acit file of the toolhead
     class ToolHeadData
     {
@@ -172,15 +172,25 @@ namespace AIAC
             ACToolHeadType GetType() const { return m_Data.GetType(); }
             /// @brief Get the name of the toolhead
             std::string GetName() const { return m_Data.GetName(); }
+            /// @brief Retrieve scaling factor
+            inline float GetScaleF() const { return m_ScaleF; }
 
         public:
             /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
-            void CreateGOsInfo();
+            void AddGOsInfo(ToolHeadData& data);
+            void AddGOsInfoDrillBit(ToolHeadData& data);
+            void AddGOsInfoCircularSaw(ToolHeadData& data);
+            void AddGOsInfoChainSaw(ToolHeadData& data);
+            void AddGOsInfoSaberSaw(ToolHeadData& data);
             /// @brief From the parsed acit geometries, add widgets made by GOs (e.g. text, arrows, etc)
-            void CreateGOsWidget();
+            void AddGOsWidget();
+            void AddGOsWidgetDrillBit();
+            void AddGOsWidgetCircularSaw();
+            void AddGOsWidgetChainSaw();
+            void AddGOsWidgetSaberSaw();
             // // TODO: maybe this is not needed
             // /// @brief From the parsed acit geometries, create the mesh of the toolhead
-            // void createGOMesh();
+            // void AddGODisplayMesh();
 
         public:
             // TODO: @Hong-Bin to be implemented in the GO system
@@ -188,6 +198,9 @@ namespace AIAC
             void Transform(glm::mat4 transform);
 
         private:
+            /// @brief Scaling factor from meters to AC scale
+            float m_ScaleF = 50.0f;
+            
             /// @brief the path to the acit file
             std::string m_ACITPath;
             /// @brief the path to the mesh file as obj
@@ -198,11 +211,11 @@ namespace AIAC
 
         private:
             /// @brief the geometries that defines the hole and used in the feedback layer
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPsrimitivesInfo;
+            std::vector<uint32_t> m_GOPrimitivesInfo;
             /// @brief the geometries the create the widget UI of the toolhead
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
+            std::vector<uint32_t> m_GOPrimitivesWidget;
             // // TODO: @Hong-Bin to be implemented a GOMesh constructor able to get a path to obj and create GOfile
-            // /// @brief the mesh used to input and check the 6dof pose of the toolhead by the user
-            // GOMesh m_GOMesh;
+            // /// @brief the mesh id used to input and check the 6dof pose of the toolhead by the user
+            // uint32_t m_GODisplayMesh;
     };
 }

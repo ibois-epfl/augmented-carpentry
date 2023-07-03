@@ -78,23 +78,154 @@ namespace AIAC
     {
         this->m_Data.LoadACIT(acitPath);
 
-        this->CreateGOsInfo();
-        this->CreateGOsWidget();
+        this->AddGOsInfo(this->m_Data);
+        this->AddGOsWidget();
     }
 
-    ACInfoToolhead::CreateGOsInfo()
+    void ACInfoToolhead::AddGOsInfo(ToolHeadData& data)
     {
-        ToolHeadData& data = this->m_Data;
-        if (data.m_Type == ACToolHeadType::DRILLBIT)
+        switch (data.m_Type)
         {
-            uint32_t idPtToolbase = GOPoint::Add(data.m_DrillBitD.Toolbase.x, 
-                                                 data.m_DrillBitD.Toolbase.y,
-                                                 data.m_DrillBitD.Toolbase.z);
+            case ACToolHeadType::DRILLBIT:
+                this->AddGOsInfoDrillBit(data);
+                break;
 
+            case ACToolHeadType::CIRCULARSAW:
+                // uint32_t idPtCenter = GOPoint::Add(data.m_CircularSawD.Center.x,
+                //                                    data.m_CircularSawD.Center.y,
+                //                                    data.m_CircularSawD.Center.z);
+                // uint32_t idPtNormalEnd = GOPoint::Add(data.m_CircularSawD.NormalEnd.x,
+                //                                       data.m_CircularSawD.NormalEnd.y,
+                //                                       data.m_CircularSawD.NormalEnd.z);
+                // auto PtCenter = GOPoint::Get(idPtCenter);
+                // auto PtNormalEnd = GOPoint::Get(idPtNormalEnd);
+                // // TODO: create GOcircle with radius, center and vector constructor
+                break;
+            
+            case ACToolHeadType::CHAINSAW:
+                // uint32_t idPtChainbase = GOPoint::Add(data.m_ChainSawD.Chainbase.x,
+                //                                       data.m_ChainSawD.Chainbase.y,
+                //                                       data.m_ChainSawD.Chainbase.z);
+                // uint32_t idPtChainmid = GOPoint::Add(data.m_ChainSawD.Chainmid.x,
+                //                                      data.m_ChainSawD.Chainmid.y,
+                //                                      data.m_ChainSawD.Chainmid.z);
+                // uint32_t idPtChainend = GOPoint::Add(data.m_ChainSawD.Chainend.x,
+                //                                      data.m_ChainSawD.Chainend.y,
+                //                                      data.m_ChainSawD.Chainend.z);
+                // uint32_t idPtNormalStart = GOPoint::Add(data.m_ChainSawD.NormalStart.x,
+                //                                         data.m_ChainSawD.NormalStart.y,
+                //                                         data.m_ChainSawD.NormalStart.z);
+                // uint32_t idPtNormalEnd = GOPoint::Add(data.m_ChainSawD.NormalEnd.x,
+                //                                       data.m_ChainSawD.NormalEnd.y,
+                //                                       data.m_ChainSawD.NormalEnd.z);
+                // std::vector<GOPoint> polyPts = { GOPoint::Get(idPtChainbase),
+                //                                  GOPoint::Get(idPtChainmid),
+                //                                  GOPoint::Get(idPtChainend) };
+                // uint32_t idPolyChain = GOPolygon::Add(polyPts);
+                break;
+
+            case ACToolHeadType::SABERSAW:
+                // uint32_t idPtToolbase = GOPoint::Add(data.m_SaberSawD.Toolbase.x,
+                //                                       data.m_SaberSawD.Toolbase.y,
+                //                                       data.m_SaberSawD.Toolbase.z);
+                // uint32_t idPtTooltip = GOPoint::Add(data.m_SaberSawD.Tooltip.x,
+                //                                       data.m_SaberSawD.Tooltip.y,
+                //                                       data.m_SaberSawD.Tooltip.z);
+                // uint32_t idPtNormalStart = GOPoint::Add(data.m_SaberSawD.NormalStart.x,
+                //                                           data.m_SaberSawD.NormalStart.y,
+                //                                           data.m_SaberSawD.NormalStart.z);
+                // uint32_t idPtNormalEnd = GOPoint::Add(data.m_SaberSawD.NormalEnd.x,
+                //                                         data.m_SaberSawD.NormalEnd.y,
+                //                                         data.m_SaberSawD.NormalEnd.z);
+                // auto PtToolbase = GOPoint::Get(idPtToolbase);
+                // auto PtTooltip = GOPoint::Get(idPtTooltip);
+                // uint32_t idLineAxis = GOLine::Add(PtToolbase*, PtTooltip*);
+                break;
+
+            default:
+                AIAC_ERROR("Toolhead type not supported");
+                break;
+        }
+        
+        return; 
     }
 
-    ACInfoToolhead::CreateGOsWidget()
+    void ACInfoToolhead::AddGOsInfoDrillBit(ToolHeadData& data)
     {
+        // uint32_t idPtToolbase = GOPoint::Add(data.m_DrillBitD.Toolbase.x * this->GetScaleF(), //FIXME: get scale right
+        //                                     data.m_DrillBitD.Toolbase.y * this->GetScaleF(),
+        //                                     data.m_DrillBitD.Toolbase.z * this->GetScaleF(),
+        //                                     5.0f);
+        // auto PtToolbase = GOPoint::Get(idPtToolbase);
+        // PtToolbase->SetVisibility(false);
 
+
+        // uint32_t idPtTooltip = GOPoint::Add(data.m_DrillBitD.Tooltip.x * this->GetScaleF(), 
+        //                                     data.m_DrillBitD.Tooltip.y * this->GetScaleF(),
+        //                                     data.m_DrillBitD.Tooltip.z * this->GetScaleF(),
+        //                                     5.0f);
+        // auto PtTooltip = GOPoint::Get(idPtTooltip);
+        // PtTooltip->SetVisibility(false);
+
+        AIAC_INFO("---------------------------");
+        AIAC_INFO(data.m_DrillBitD.Eattip.z);
+        AIAC_INFO("---------------------------");
+
+        uint32_t idPtEattip = GOPoint::Add((data.m_DrillBitD.Eattip.x * this->GetScaleF()),
+                                           (data.m_DrillBitD.Eattip.y * this->GetScaleF()),
+                                           (data.m_DrillBitD.Eattip.z * this->GetScaleF()),
+                                           5.0f);
+        auto PtEattip = GOPoint::Get(idPtEattip);
+
+        AIAC_INFO("---------------------------");
+        AIAC_INFO(PtEattip->Z());
+        AIAC_INFO("---------------------------");
+        // // PtEattip->SetVisibility(false);
+
+        // uint32_t idPtChucktip = GOPoint::Add(data.m_DrillBitD.Chucktip.x * this->GetScaleF(),
+        //                                     data.m_DrillBitD.Chucktip.y * this->GetScaleF(),
+        //                                     data.m_DrillBitD.Chucktip.z * this->GetScaleF(),
+        //                                     5.0f);
+        // auto PtChucktip = GOPoint::Get(idPtChucktip);
+        // // PtChucktip->SetVisibility(false);
+
+
+
+
+        // uint32_t idLineAxis = GOLine::Add(*PtToolbase, GOPoint(70.f,70.f,70.f));
+        // auto LineAxis = GOLine::Get(idLineAxis);
+        // LineAxis->SetVisibility(false);
+
+        //toDO: test
+        // uint32_t idPt1 = GOPoint::Add(1, 1, 1, 5.0f);
+        uint32_t idPt2 = GOPoint::Add(20, 50, 20, 5.0f);
+        // uint32_t idPt3 = GOPoint::Add(30, 30, 30, 5.0f);
+        // auto pt1 = GOPoint::Get(idPt1);
+        // auto pt2 = GOPoint::Get(idPt2);
+        // auto pt3 = GOPoint::Get(idPt3);
+        // uint32_t line = GOLine::Add(*pt1, *pt2, 3.0f);
+        // uint32_t line2 = GOLine::Add(*pt1, *pt3, 3.0f);
+
+        // TODO: test
+        // uint32_t test = GOLine::Add(GOPoint(3,3,3), GOPoint(30,30,30));
+
+        // this->m_GOPrimitivesInfo.push_back(idPtToolbase);
+        // this->m_GOPrimitivesInfo.push_back(idPtTooltip);
+        // this->m_GOPrimitivesInfo.push_back(idPtEattip);
+        // this->m_GOPrimitivesInfo.push_back(idPtChucktip);
+        // this->m_GOPrimitivesInfo.push_back(idLineAxis);
     }
+    void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data) {}  // TODO: implement
+    void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data) {}  // TODO: implement
+    void ACInfoToolhead::AddGOsInfoSaberSaw(ToolHeadData& data) {}  // TODO: implement
+
+    void ACInfoToolhead::AddGOsWidget() {}  // TODO: implement
+    void ACInfoToolhead::AddGOsWidgetDrillBit() {}  // TODO: implement
+    void ACInfoToolhead::AddGOsWidgetCircularSaw() {}  // TODO: implement
+    void ACInfoToolhead::AddGOsWidgetChainSaw() {}  // TODO: implement
+    void ACInfoToolhead::AddGOsWidgetSaberSaw() {}  // TODO: implement
+
+
+
+
 }
