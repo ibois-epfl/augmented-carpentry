@@ -49,10 +49,21 @@ namespace AIAC
     /**
      * @brief Reload the camera calibration file
     */
-    void LayerToolhead::ReloadCameraCalibration()
+    void LayerToolhead::ReloadCameraFromFile()
     {
         TTool->DestrolView();
         OnAttach();
+        ttoolState = ttool::EventType::PoseInput;
+    }
+
+    void LayerToolhead::ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize)
+    {
+        TTool->DestrolView();
+        TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+            cameraMatrix,
+            cameraSize
+            );
         ttoolState = ttool::EventType::PoseInput;
     }
 
