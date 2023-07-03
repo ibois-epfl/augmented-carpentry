@@ -93,8 +93,6 @@ namespace AIAC
 
 //        glfwSetMouseButtonCallback(m_GLFWWindow, m_MouseButtonCallback);
 //        glfwSetCursorPosCallback(m_GLFWWindow, m_MouseMoveCallback);
-
-        ReleaseCurrent();
     }
 
     void Window::Shutdown()
