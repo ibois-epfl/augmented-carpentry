@@ -1,6 +1,5 @@
 #pragma once
 
-// #include <TTool/ttool.hh>
 #include "AIAC/Layer.h"
 #include "ttool.hh"
 
@@ -17,6 +16,8 @@ namespace AIAC
 
         void ReloadCameraFromFile();
         void ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize);
+
+        glm::mat4 GetWorldPose();
 
     public:
         std::shared_ptr<ttool::TTool> TTool;
