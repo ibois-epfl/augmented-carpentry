@@ -31,9 +31,11 @@ namespace AIAC
         TTool->ManipulateModel('e');
 
 
+        // load the ACIT models from the dataset
+        this->ACInfoToolheadManager->LoadToolheadModels();
 
-        std::string test = "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/metadata.acit";
-        std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(test);
+        // std::string test = "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/metadata.acit";
+        // std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(test);
     }
 
     /**
