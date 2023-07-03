@@ -53,7 +53,6 @@ namespace AIAC
     {
         TTool->DestrolView();
         OnAttach();
-        ttoolState = ttool::EventType::PoseInput;
     }
 
     void LayerToolhead::ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize)
@@ -64,7 +63,6 @@ namespace AIAC
             cameraMatrix,
             cameraSize
             );
-        ttoolState = ttool::EventType::PoseInput;
     }
 
     void LayerToolhead::OnPoseManipulation()
@@ -81,7 +79,8 @@ namespace AIAC
         }
         cv::destroyAllWindows();
         AIAC_INFO("Pose manipulation done");
-        ttoolState = ttool::EventType::Tracking;
+        ttoolState = ttool::EventType::None;
+        ToolheadStateUI = -1;
     }
 
     /**
@@ -94,23 +93,37 @@ namespace AIAC
      */
     void LayerToolhead::UpdateToolheadState()
     {
-        if (ttoolState == ttool::EventType::Tracking)
+        switch (ToolheadStateUI)
         {
-            trackCounter++;
-            if (trackCounter >= TRACK_FOR)
-            {
-                ttoolState = ttool::EventType::None;
-                trackCounter = 0;
-            }
+        case 0:
+            ttoolState = ttool::EventType::Tracking;
+            break;
+        case 1:
+            ttoolState = ttool::EventType::PoseInput;
+            break;
+        default:
+            ttoolState = ttool::EventType::None;
+            break;
         }
-        else if (ttoolState == ttool::EventType::None)
-        {
-            trackCounter++;
-            if (trackCounter >= TRACK_EVERY)
-            {
-                ttoolState = ttool::EventType::Tracking;
-                trackCounter = 0;
-            }
-        }
+        return;
+
+        // if (ttoolState == ttool::EventType::Tracking)
+        // {
+        //     trackCounter++;
+        //     if (trackCounter >= TRACK_FOR)
+        //     {
+        //         ttoolState = ttool::EventType::None;
+        //         trackCounter = 0;
+        //     }
+        // }
+        // else if (ttoolState == ttool::EventType::None)
+        // {
+        //     trackCounter++;
+        //     if (trackCounter >= TRACK_EVERY)
+        //     {
+        //         ttoolState = ttool::EventType::Tracking;
+        //         trackCounter = 0;
+        //     }
+        // }
     }
 }
