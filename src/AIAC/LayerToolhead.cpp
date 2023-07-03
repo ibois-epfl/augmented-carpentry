@@ -29,6 +29,11 @@ namespace AIAC
     void LayerToolhead::OnFrameStart()
     {
         UpdateToolheadState();
+        if (ttoolState == ttool::EventType::PoseInput)
+        {
+            OnPoseManipulation();
+        }
+
         if (!(ttoolState == ttool::EventType::Tracking))
             return;
 
@@ -41,9 +46,21 @@ namespace AIAC
         AIAC_INFO(ss.str());
     }
 
-    void LayerToolhead::TrackFrame()
+    void LayerToolhead::OnPoseManipulation()
     {
-
+        char key = cv::waitKey(1);
+        while (key != 'q')
+        {
+            cv::Mat currentFrame;
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+            TTool->ShowSilhouette(currentFrame, -1);
+            TTool->ManipulateModel(key);
+            key = cv::waitKey(1);
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetNextFrame();
+        }
+        cv::destroyAllWindows();
+        AIAC_INFO("Pose manipulation done");
+        ttoolState = ttool::EventType::Tracking;
     }
 
     /**
