@@ -16,9 +16,12 @@ namespace AIAC
     void LayerModel::OnAttach()
     {
         m_ACInfoModel.Load("assets/ACModel/test.acim");
-        m_ScannedModel.Load("assets/ACModel/01_scanned_model.ply");
+        m_ScannedModel.Load("assets/ACModel/28_model.ply");
         AlignModels();
+
+        
     }
+    
     void LayerModel::OnFrameStart()
     {
 
@@ -32,8 +35,8 @@ namespace AIAC
         float infoModelLength = m_ACInfoModel.GetLength();
         float scannedModelLength = m_ScannedModel.GetLength();
 
-        cout << "infoModelLength: " << infoModelLength << endl;
-        cout << "scannedModelLength: " << scannedModelLength << endl;
+        AIAC_INFO("AC Info Model Length: {0} (m)", infoModelLength * 0.02);
+        AIAC_INFO("Scanned Model Length: {0} (m)", scannedModelLength * 0.02);
 
         // crop the scanned model to the similar length as the info model
         // reserve 2 cm on each side = 4 cm = 0.04 m = 2 TSLAM unit (by * 50)
