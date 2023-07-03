@@ -102,9 +102,23 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOCircle;
     }
 
+    GOCircle::GOCircle(GOPoint center, glm::vec3 normal, float radius)
+        : m_Center(center), m_Normal(normal), m_Radius(radius)
+    {
+        m_Type = GOTypeFlags::_GOCircle;
+    }
+
     uint32_t GOCircle::Add(GOPoint center, float radius)
     {
         auto ptrGO = std::make_shared<GOCircle>(GOCircle(center, radius));
+        uint32_t idGO = ptrGO->GetId();
+        AIAC_GOREG->Register(idGO, ptrGO);
+        return idGO;
+    }
+
+    uint32_t GOCircle::Add(GOPoint center, glm::vec3 normal, float radius)
+    {
+        auto ptrGO = std::make_shared<GOCircle>(GOCircle(center, normal, radius));
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;

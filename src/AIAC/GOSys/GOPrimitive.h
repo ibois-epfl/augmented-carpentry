@@ -32,7 +32,7 @@ namespace AIAC
     {
         static constexpr float Default            = 1.0f;
         static constexpr float Thin               = 0.1f;
-        static constexpr float Thick              = 1.0f;
+        static constexpr float Thick              = 5.0f;
     };
 
     enum GOCategory
@@ -62,14 +62,17 @@ namespace AIAC
         inline bool GetState() { return m_State; }
         inline GOTypeFlags GetType() { return m_Type; }
 
+        inline void SetName(std::string name) { m_Name = std::move(name); }
         inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }
         inline void SetColor(glm::vec4 color) { m_Color = color; }
         inline void SetState(bool state) { m_State = state; }
 
+        inline std::string GetName() const { return m_Name; }
         inline float GetWeight() const { return m_Weight; }
         inline void SetWeight(float weight) { m_Weight = weight; }
 
     protected:
+        std::string m_Name;
         uint32_t m_Id;
         GOCategory m_Category;
         bool m_IsVisible;
@@ -82,7 +85,7 @@ namespace AIAC
 
     class GOPoint : public GOPrimitive
     {
-    public:
+    public:  // FIXME: this should be private @hb, used in ScannedModel.h?
         GOPoint(float x, float y, float z, float weight = GOWeight::Default);
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
 
@@ -158,6 +161,7 @@ namespace AIAC
     {
     private:
         GOCircle(GOPoint center, float radius);
+        GOCircle(GOPoint center, glm::vec3 normal, float radius);
 
     public:
         /**
@@ -168,6 +172,7 @@ namespace AIAC
          * @return uint32_t Id of the circle.
          */
         static uint32_t Add(GOPoint center, float radius);
+        static uint32_t Add(GOPoint center, glm::vec3 normal, float radius);
 
         virtual ~GOCircle() = default;
 
