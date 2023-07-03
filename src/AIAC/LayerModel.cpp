@@ -71,6 +71,7 @@ namespace AIAC
 //        uint32_t text3 = GOText::Add("Hello World3", *pt3, 1.0f);
 //        // >>>>>>>>>>>>>> TEST for the Render parsing >>>>>>>>>>>>>>
 
+        AlignModels();
     }
     void LayerModel::OnFrameStart()
     {
@@ -79,5 +80,26 @@ namespace AIAC
     }
 
     void LayerModel::AlignModels() {
+        auto acInfoModelBbox = m_ACInfoModel.GetActiveTimberInfo().GetBoundingBox();
+        auto scannedModelBbox = m_ScannedModel.GetBoundingBox();
+
+        float infoModelLength = m_ACInfoModel.GetLength();
+        float scannedModelLength = m_ScannedModel.GetLength();
+
+        cout << "infoModelLength: " << infoModelLength << endl;
+        cout << "scannedModelLength: " << scannedModelLength << endl;
+
+        // crop the scanned model to the similar length as the info model
+        // reserve 2 cm on each side = 4 cm = 0.04 m = 2 TSLAM unit (by * 50)
+        auto usedPortion = (infoModelLength + 2) / scannedModelLength;
+        auto subBbox = m_ScannedModel.GetBoundingBox();
+        subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
+        subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
+        subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
+        subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
+
+        auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
+        m_ACInfoModel.TransformGOPrimitives(transMat);
+
     }
 }
