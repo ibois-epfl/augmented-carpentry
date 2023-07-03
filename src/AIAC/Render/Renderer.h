@@ -10,6 +10,8 @@
 
 #include "AIAC/Render/Viewport.h"
 
+#include "AIAC/Render/GLObject.h"
+
 namespace AIAC
 {
     class Renderer
@@ -67,6 +69,8 @@ namespace AIAC
 
 
     private:
+        std::shared_ptr<GLObject> m_TestGLObject;
+
         float m_CamW, m_CamH;
 
         GLuint m_BasicShaderProgram;
