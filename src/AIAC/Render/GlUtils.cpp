@@ -146,55 +146,55 @@ namespace AIAC {
     }
 
     void glDrawPoints3d(const std::vector<glm::vec3> &vertices, const glm::vec4 &color, GLfloat pointSize) {
-        // std::vector<glm::vec4> colors(vertices.size(), color);
-        // glDrawPoints3d(vertices, std::move(colors), pointSize);
+        std::vector<glm::vec4> colors(vertices.size(), color);
+        glDrawPoints3d(vertices, std::move(colors), pointSize);
     }
 
     void glDrawLines3d(const std::vector<glm::vec3> &edges, const std::vector<glm::vec4> &colors) {
-        // GLuint vbo;
-        // glGenBuffers(1, &vbo);
+        GLuint vbo;
+        glGenBuffers(1, &vbo);
     
-        // // show current vao
-        // // GLint vao;
-        // // glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
-        // // cout << "vbo: " << vbo << " vao: " << vao << endl;
-        // glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        // glBufferData(GL_ARRAY_BUFFER, edges.size() * sizeof(glm::vec3), &edges[0], GL_STATIC_DRAW);
-        // glEnableVertexAttribArray(0);
-        // glVertexAttribPointer(
-        //         0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-        //         3,                  // size
-        //         GL_FLOAT,           // type
-        //         GL_FALSE,           // normalized?
-        //         0,                  // stride
-        //         (void *) nullptr     // array buffer offset
-        // );
+        // show current vao
+        // GLint vao;
+        // glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
+        // cout << "vbo: " << vbo << " vao: " << vao << endl;
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, edges.size() * sizeof(glm::vec3), &edges[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(
+                0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+                3,                  // size
+                GL_FLOAT,           // type
+                GL_FALSE,           // normalized?
+                0,                  // stride
+                (void *) nullptr     // array buffer offset
+        );
 
-        // GLuint colorBuffer;
-        // glGenBuffers(1, &colorBuffer);
-        // glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        // glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
-        // glEnableVertexAttribArray(1);
-        // glVertexAttribPointer(
-        //         1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.
-        //         4,                  // size
-        //         GL_FLOAT,           // type
-        //         GL_FALSE,           // normalized?
-        //         0,                  // stride
-        //         (void *) nullptr     // array buffer offset
-        // );
+        GLuint colorBuffer;
+        glGenBuffers(1, &colorBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(
+                1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.
+                4,                  // size
+                GL_FLOAT,           // type
+                GL_FALSE,           // normalized?
+                0,                  // stride
+                (void *) nullptr     // array buffer offset
+        );
 
-        // glDrawArrays(GL_LINES, 0, (GLsizei) edges.size() / 2);
+        glDrawArrays(GL_LINES, 0, (GLsizei) edges.size() / 2);
 
-        // // glDisableVertexAttribArray(0);
-        // // glDisableVertexAttribArray(1);
-        // // glDeleteBuffers(1, &vbo);
-        // // glDeleteBuffers(1, &colorBuffer);
+        // glDisableVertexAttribArray(0);
+        // glDisableVertexAttribArray(1);
+        // glDeleteBuffers(1, &vbo);
+        // glDeleteBuffers(1, &colorBuffer);
     }
 
     void glDrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color) {
-        // std::vector<glm::vec4> colors(edges.size(), color);
-        // glDrawLines3d(edges, colors);
+        std::vector<glm::vec4> colors(edges.size(), color);
+        glDrawLines3d(edges, colors);
     }
 
     void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const std::vector<glm::vec4> &colors){
@@ -245,7 +245,7 @@ namespace AIAC {
 
     }
     void glDrawTriangles3d(const std::vector<glm::vec3> &vertices, const std::vector<uint32_t> &indices, const glm::vec4 &color){
-        // std::vector<glm::vec4> colors(vertices.size(), color);
-        // glDrawTriangles3d(vertices, indices, colors);
+        std::vector<glm::vec4> colors(vertices.size(), color);
+        glDrawTriangles3d(vertices, indices, colors);
     }
 }

@@ -80,7 +80,7 @@ namespace AIAC
     }
 
     // -------------------- //
-    //   GLMeshObject   //
+    //     GLMeshObject     //
     // -------------------- //
     GLMeshObject::GLMeshObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices) {
         this->type = GLObjectType::TRIANGLES;

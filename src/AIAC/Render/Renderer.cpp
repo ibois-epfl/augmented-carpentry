@@ -250,7 +250,7 @@ namespace AIAC
         // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         // Draw All objects
-        DrawAllGOs(finalPoseMatrix);
+        // DrawAllGOs(finalPoseMatrix);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
