@@ -19,7 +19,7 @@ namespace AIAC
 
     protected:
         void UpdateToolheadState();
-        void TrackFrame();
+        void OnPoseManipulation();
 
     protected:
         std::shared_ptr<ttool::TTool> TTool;
@@ -27,7 +27,7 @@ namespace AIAC
         uint TRACK_EVERY = 600;
         uint TRACK_FOR = 64;
 
-        ttool::EventType ttoolState = ttool::EventType::Tracking;
+        ttool::EventType ttoolState = ttool::EventType::PoseInput;
         cv::Matx44f m_Pose;
     };
 }
