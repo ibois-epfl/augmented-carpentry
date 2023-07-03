@@ -38,9 +38,9 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
         TTool->RunOnAFrame(currentFrame);
         m_Pose = TTool->GetPose();
-        std::stringstream ss;
-        ss << "Pose: " << m_Pose;
-        AIAC_INFO(ss.str());
+        // std::stringstream ss;
+        // ss << "Pose: " << m_Pose;
+        // AIAC_INFO(ss.str());
     }
 
     /**
