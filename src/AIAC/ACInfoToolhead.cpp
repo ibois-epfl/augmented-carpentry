@@ -53,7 +53,7 @@ namespace AIAC
         {
             m_Type = ACToolHeadType::SABERSAW;
             m_Name = toolhead.attribute("name").as_string();
-            
+
             m_SaberSawD.Toolbase = ParseString2GlmVector(toolhead.child("toolbase").child_value());
             m_SaberSawD.Tooltip = ParseString2GlmVector(toolhead.child("tooltip").child_value());
             m_SaberSawD.NormalStart = ParseString2GlmVector(toolhead.child("normalstart").child_value());
@@ -78,6 +78,23 @@ namespace AIAC
     {
         this->m_Data.LoadACIT(acitPath);
 
-        // TODO: add primitives, widgets and meshGO
+        this->CreateGOsInfo();
+        this->CreateGOsWidget();
+    }
+
+    ACInfoToolhead::CreateGOsInfo()
+    {
+        ToolHeadData& data = this->m_Data;
+        if (data.m_Type == ACToolHeadType::DRILLBIT)
+        {
+            uint32_t idPtToolbase = GOPoint::Add(data.m_DrillBitD.Toolbase.x, 
+                                                 data.m_DrillBitD.Toolbase.y,
+                                                 data.m_DrillBitD.Toolbase.z);
+
+    }
+
+    ACInfoToolhead::CreateGOsWidget()
+    {
+
     }
 }
