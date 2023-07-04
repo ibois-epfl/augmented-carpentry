@@ -247,6 +247,8 @@ namespace AIAC
             m_PEnd.Transform(transformMat);
         }
 
+        void InitGLObject();
+
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;

@@ -49,9 +49,17 @@ namespace AIAC
 
         m_MappingView.SetSize(600, 442);
 
-        GOPoint::Add(0, 0, 0, 15.0f);
-        GOLine::Add(glm::vec3(0,0,0), glm::vec3(0,0,10), 10.0f);
+        auto pt = GOPoint::Add(0, 0, 0, 5.0f);
+        pt->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
+        // GOLine::Add(glm::vec3(0,0,0), glm::vec3(0,0,10), 10.0f);
+        
+        cout << "--------------------" << endl;
+        auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 10.0f);
+        myCylinder->SetColor(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+        cout << "--------------------" << endl;
+        // auto circle = GOCircle::Add(glm::vec3(0, 5, 0), 10.0f);
+        // circle->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
         // std::vector<glm::vec3> vertices = {
         //     glm::vec3(0.0f, 0.0f, 10.0f),
