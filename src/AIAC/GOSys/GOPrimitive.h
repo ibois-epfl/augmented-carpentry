@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include "AIAC/Render/GLObject.h"
 #include "AIAC/Base.h"
 #include "glm/glm.hpp"
 
@@ -64,6 +65,9 @@ namespace AIAC
         virtual void Transform(const glm::mat4x4& transformMat) {};
         
         virtual void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) { AIAC_ERROR("Not Implemented"); };
+        inline void Draw() { for(auto glObject : m_GLObjects) glObject->Draw(); }
+
+        virtual void InitGLObject() {}
 
     protected:
         std::string m_Name;
@@ -73,6 +77,7 @@ namespace AIAC
         bool m_State;
         GOTypeFlags m_Type;
         float m_Weight = GOWeight::Default;
+        std::vector<std::shared_ptr<GLObject> > m_GLObjects;
     };
 
 
@@ -124,6 +129,7 @@ namespace AIAC
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+        void InitGLObject();
 
         operator glm::vec3() const { return m_Position; }
 
@@ -182,6 +188,7 @@ namespace AIAC
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+        void InitGLObject();
 
     private:
         GOPoint m_PStart;
