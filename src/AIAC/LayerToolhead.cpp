@@ -26,6 +26,8 @@ namespace AIAC
         TTool->ManipulateModel('q');
 
         this->ACInfoToolheadManager->LoadToolheadModels();
+        this->ACInfoToolheadManager->SetActiveToolhead("twist_drill_bit_32_165");
+        // this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
     }
 
     void LayerToolhead::OnFrameStart()
@@ -45,7 +47,8 @@ namespace AIAC
         }
 
         // === BEGIN TEST GO Rendering ===
-        // glm::mat4x4 toWorld = GetWorldPose();
+        glm::mat4x4 toWorld = GetWorldPose();
+        this->ACInfoToolheadManager->GetActiveToolhead()->Transform(toWorld);
 
         // Testing why the translation seems to not be working.
         // for (auto& point : m_Points)
@@ -64,10 +67,19 @@ namespace AIAC
         // for (auto point : m_Points)
         // {
         //     std::stringstream ss;
-        //     ss << "Point_before: " << point[0] << ", " << point[1] << ", " << point[2] << " ";
-        //     point = toWorld * glm::vec4(point, 1.0f);
-        //     ss << "Point_after: " << point[0] << ", " << point[1] << ", " << point[2];
+        //     ss << "\n" << "==============================\n";
+        //     ss << "To world: \n" << toWorld[0][0] << ", " << toWorld[0][1] << ", " << toWorld[0][2] << ", " << toWorld[0][3] << "\n"
+        //                         << toWorld[1][0] << ", " << toWorld[1][1] << ", " << toWorld[1][2] << ", " << toWorld[1][3] << "\n"
+        //                         << toWorld[2][0] << ", " << toWorld[2][1] << ", " << toWorld[2][2] << ", " << toWorld[2][3] << "\n"
+        //                         << toWorld[3][0] << ", " << toWorld[3][1] << ", " << toWorld[3][2] << ", " << toWorld[3][3] << "\n";
+        //     ss << "Point_before: " << point[0] << ", " << point[1] << ", " << point[2] << "\n";
+        //     glm::vec4 point_4d = glm::vec4(point, 1.0f);
+        //     ss << "Point_4d: " << point_4d[0] << ", " << point_4d[1] << ", " << point_4d[2] << ", " << point_4d[3] << "\n";
+        //     glm::vec4 point_2 =  toWorld * glm::vec4(point, 1.0f);
+        //     ss << "Point_after: " << point_2[0] << ", " << point_2[1] << ", " << point_2[2] <<  ", " << point_2[3] << "\n";
+        //     ss << "\n" << "==============================\n";
         //     AIAC_INFO(ss.str());
+        //     point = glm::vec3(point_2);
         //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
         // }
         // === END TEST GO Rendering ===
@@ -115,6 +127,7 @@ namespace AIAC
 
         // load the ACIT models from the dataset
         this->ACInfoToolheadManager->LoadToolheadModels();
+
     }
 
     /**
@@ -148,12 +161,16 @@ namespace AIAC
 
         cv::Matx44f projectionMatrix = TTool->GetProjectionMatrix();
         cv::Matx44f toolheadPose = TTool->GetPose();
+        // toolheadPose += cv::Matx44f(0 ,0 ,0 ,0
+        //                             ,0 ,0 ,0 ,0
+        //                             ,0 ,0 ,0 ,10
+        //                             ,0 ,0 ,0 ,0);
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
-        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((projectionMatrix * toolheadNormalization * toolheadPose).val);
+        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((projectionMatrix * toolheadPose * toolheadNormalization).val);
 
-        std::stringstream ss;
-        ss << "Pose Matrix: " << toolheadNormalization * toolheadPose;
-        AIAC_INFO(ss.str());
+        // std::stringstream ss;
+        // ss << "Pose Matrix: " << toolheadPose;
+        // AIAC_INFO(ss.str());
 
         glm::mat4x4 worldPose = cameraPose * glm::transpose(toolheadPoseGlm);
         return worldPose;

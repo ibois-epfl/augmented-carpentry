@@ -383,7 +383,6 @@ namespace AIAC
             toolheadNames.emplace_back(toolhead);
         for (int i = 0; i < toolheadNames.size(); i++)
         {
-            ImGui::SetNextWindowSize(ImVec2(200, 50));
             auto toolNameButton = ImGui::Button(toolheadNames[i].c_str());
             if (toolNameButton)
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->SetActiveToolhead(toolheadNames[i]);
