@@ -51,6 +51,7 @@ namespace AIAC
         StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
+        StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
 
         // TODO: add config for file dialog widget
         //TODO: add vertical menu bar
@@ -354,6 +355,26 @@ namespace AIAC
             ImGuiFileDialog::Instance()->Close();
         }
 
+    }
+
+    void LayerUI::SetPaneUIToolhead()
+    {
+        
+        ImGui::PushID(0);
+        ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
+        ImGui::PopID();
+        ImGui::SameLine();
+
+        ImGui::PushID(1);
+        ImGui::RadioButton("Track", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 0);
+        ImGui::PopID();
+        ImGui::SameLine();
+        
+        ImGui::PushID(2);
+        ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
+        ImGui::PopID();
+        // ImGui::Checkbox("Tracking", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToTrack);
+        // ImGui::Checkbox("Tracking", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToTrack);
     }
 
     void LayerUI::ShowMappingPopup()

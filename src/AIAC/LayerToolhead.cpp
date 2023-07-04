@@ -6,46 +6,113 @@
 #include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
 
-#include <QApplication>
-#include <QThread>
-
-#include "ttool.hh"
-
-
 namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
-    //     // Adding dummy arguments to make QApplication
-    //     int argc = 1;
-    //     char* argv[] = { "augmented_carpentry" };
-    //     QApplication app(argc, argv);
-        
-    //     TTool = std::make_shared<ttool::TTool>(
-    //         AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
-    //         AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
-    //         );
-    //     // TTool->ReleaseCurrent();
-        
-    //     // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
-    //     TTool->ManipulateModel('e');
+        // for(auto& goObj : m_GOObjects)
+        //     GOPrimitive::Remove(goObj);
 
+        // for (auto& point : m_Points)
+        //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
+
+        TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
+            );
+        
+        // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
+        TTool->ManipulateModel('e');
+        TTool->ManipulateModel('q');
+    }
+
+    void LayerToolhead::OnFrameStart()
+    {
+        UpdateToolheadState();
+        if (m_TtoolState == ttool::EventType::PoseInput)
+        {
+            OnPoseManipulation();
+        }
+
+        if (m_TtoolState == ttool::EventType::Tracking)
+        {
+            cv::Mat currentFrame;
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+            TTool->RunOnAFrame(currentFrame);
+            m_Pose = TTool->GetPose();
+        }
+
+        // === BEGIN TEST GO Rendering ===
+        // glm::mat4x4 toWorld = GetWorldPose();
+
+        // Testing why the translation seems to not be working.
+        // for (auto& point : m_Points)
+        // {
+        //     cv::Matx44f translate = cv::Matx44f(1, 0, 0, 0,
+        //                                         0, 1, 0, 0,
+        //                                         0, 0, 1, 0.01,
+        //                                         0, 0, 0, 1);
+        //     glm::mat4x4 translateX = glm::make_mat4x4(translate.val);
+        //     point = glm::vec4(point, 1.0f) * translateX;
+        // }
+
+        // for(auto& goObj : m_GOObjects)
+        //     GOPrimitive::Remove(goObj);
+
+        // for (auto point : m_Points)
+        // {
+        //     std::stringstream ss;
+        //     ss << "Point_before: " << point[0] << ", " << point[1] << ", " << point[2] << " ";
+        //     point = toWorld * glm::vec4(point, 1.0f);
+        //     ss << "Point_after: " << point[0] << ", " << point[1] << ", " << point[2];
+        //     AIAC_INFO(ss.str());
+        //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
+        // }
+        // === END TEST GO Rendering ===
+
+        // std::stringstream ss;
+        // ss << "Pose: " << m_Pose;
+        // AIAC_INFO(ss.str());
+    }
+
+    /**
+     * @brief Reload the camera calibration file
+    */
+    void LayerToolhead::ReloadCameraFromFile()
+    {
+        TTool->DestrolView();
+        OnAttach();
+    }
+
+    void LayerToolhead::ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize)
+    {
+        TTool->DestrolView();
+        TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+            cameraMatrix,
+            cameraSize
+            );
+    }
+
+    void LayerToolhead::OnPoseManipulation()
+    {
+        char key = cv::waitKey(1);
+        while (key != 'q')
+        {
+            cv::Mat currentFrame;
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+            TTool->ShowSilhouette(currentFrame, -1);
+            TTool->ManipulateModel(key);
+            key = cv::waitKey(1);
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetNextFrame();
+        }
+        cv::destroyAllWindows();
+        AIAC_INFO("Pose manipulation done");
+        m_TtoolState = ttool::EventType::None;
+        ToolheadStateUI = -1;
 
         // load the ACIT models from the dataset
         this->ACInfoToolheadManager->LoadToolheadModels();
-
-        this->ACInfoToolheadManager->SetActiveToolhead("auger_drill_bit_20_235");
-        std::string name = this->ACInfoToolheadManager->GetActiveToolhead()->ToString();
-        AIAC_INFO("ooooooooooooooooooooooo");
-        AIAC_INFO(name);
-
-        this->ACInfoToolheadManager->SetActiveToolhead("chain_saw_blade_f_250");
-        name = this->ACInfoToolheadManager->GetActiveToolhead()->ToString();
-        AIAC_INFO("ooooooooooooooooooooooo");
-        AIAC_INFO(name);
-
-        // std::string test = "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/metadata.acit";
-        // std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(test);
     }
 
     /**
@@ -58,49 +125,35 @@ namespace AIAC
      */
     void LayerToolhead::UpdateToolheadState()
     {
-        // if (ttoolState == ttool::EventType::Tracking)
-        // {
-        //     trackCounter++;
-        //     if (trackCounter >= TRACK_FOR)
-        //     {
-        //         ttoolState = ttool::EventType::None;
-        //         trackCounter = 0;
-        //     }
-        // }
-        // else if (ttoolState == ttool::EventType::None)
-        // {
-        //     trackCounter++;
-        //     if (trackCounter >= TRACK_EVERY)
-        //     {
-        //         ttoolState = ttool::EventType::Tracking;
-        //         trackCounter = 0;
-        //     }
-        // }
+        switch (ToolheadStateUI)
+        {
+        case 0:
+            m_TtoolState = ttool::EventType::Tracking;
+            break;
+        case 1:
+            m_TtoolState = ttool::EventType::PoseInput;
+            break;
+        default:
+            m_TtoolState = ttool::EventType::None;
+            break;
+        }
+        return;
     }
 
-    void LayerToolhead::OnFrameStart()
+    glm::mat4x4 LayerToolhead::GetWorldPose()
     {
-        // UpdateToolheadState();
-        // if (!(ttoolState == ttool::EventType::Tracking))
-        //     return;
+        glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
 
-        // AIAC_APP.GetWindow()->ReleaseCurrent();
-        // TTool->MakeCurrent();
-        
-        // cv::Mat currentFrame;
-        // AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
-        // // TTool->RunOnAFrame(currentFrame);
-        // m_Pose = TTool->GetPose();
-        // std::stringstream ss;
-        // ss << "Pose: " << m_Pose;
-        // AIAC_INFO(ss.str());
 
-        // TTool->ReleaseCurrent();
-        // AIAC_APP.GetWindow()->MakeCurrent();
-    }
+        cv::Matx44f toolheadPose = TTool->GetPose();
+        cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
+        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
 
-    void LayerToolhead::TrackFrame()
-    {
+        std::stringstream ss;
+        ss << "Pose Matrix: " << toolheadNormalization * toolheadPose;
+        AIAC_INFO(ss.str());
 
+        glm::mat4x4 worldPose = cameraPose * (toolheadPoseGlm);
+        return worldPose;
     }
 }
