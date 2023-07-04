@@ -30,7 +30,7 @@ namespace AIAC
 
     struct GOWeight
     {
-        static constexpr float Default            = 1.0f;
+        static constexpr float Default            = 1.1f;
         static constexpr float Thin               = 0.1f;
         static constexpr float Thick              = 5.0f;
     };
@@ -196,6 +196,11 @@ namespace AIAC
         inline float GetRadius() const { return m_Radius; }
         inline glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
+        inline void SetNormal(glm::vec3 normal) { m_Normal = normal; }
+        inline void SetCenter(GOPoint center) { m_Center = center; }
+        inline void SetRadius(float radius) { m_Radius = radius; }
+        inline void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; }
+
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Center.Transform(transformMat);
             m_Normal = glm::normalize(glm::vec3(transformMat * glm::vec4(m_Normal, 0.0f)));
@@ -251,7 +256,7 @@ namespace AIAC
     friend class GOPoint;
     };
 
-
+    // FIXME: the polyline  is not renderered
     class GOPolyline : public GOPrimitive
     {
     private:

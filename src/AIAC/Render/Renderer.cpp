@@ -254,6 +254,8 @@ namespace AIAC
             for (auto& mesh : Meshes) {
                 mesh.DrawEdges(m_DefaultEdgeColor);
             }
+            // Draw All objects
+            DrawAllGOs(finalPoseMatrix);
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
     }

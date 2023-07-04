@@ -110,6 +110,9 @@ namespace AIAC
         AIAC_INFO("Pose manipulation done");
         m_TtoolState = ttool::EventType::None;
         ToolheadStateUI = -1;
+
+        // load the ACIT models from the dataset
+        this->ACInfoToolheadManager->LoadToolheadModels();
     }
 
     /**

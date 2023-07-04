@@ -25,14 +25,26 @@ public:
     void BuildBoundingBox();
 
     /**
+     * @brief Get the bounding box of the ply model.
+     * @return The bounding box of the ply model.
+     */
+    std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
+
+    /**
      * @brief Update Boundary Box GOLine
      */
     void UpdateBboxGOLine();
 
+    /**
+     * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
+     * @return The length of the scanned model. (in TSLAM unit)
+     */
+    float GetLength();
+
 private:
     uint32_t m_MeshID;
     std::vector<glm::vec3> m_Bbox;
-    std::vector<std::shared_ptr<GOPrimitive>> m_BboxGOLineIDs;
+    std::vector<std::shared_ptr<GOLine> > m_BboxGOLines;
 };
 
 }

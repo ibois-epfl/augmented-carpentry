@@ -6,13 +6,17 @@
 
 #include "ttool.hh"
 
+#include "AIAC/ACInfoToolheadManager.h"
+
 namespace AIAC
 {
     class LayerToolhead : public AIAC::Layer
     {
     public:
-        LayerToolhead() = default;
-        virtual ~LayerToolhead() = default;
+        LayerToolhead()
+        {
+            this->ACInfoToolheadManager = std::make_shared<AIAC::ACInfoToolheadManager>();
+        };
 
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
@@ -26,14 +30,17 @@ namespace AIAC
         std::shared_ptr<ttool::TTool> TTool;
         int ToolheadStateUI = -1;
 
-    protected:
+    private:
         void UpdateToolheadState();
         void OnPoseManipulation();
 
-    protected:
+    private:
         ttool::EventType m_TtoolState = ttool::EventType::None;
         cv::Matx44f m_Pose;
         std::vector<std::shared_ptr<GOPrimitive>> m_GOObjects;
         std::vector<glm::vec3> m_Points = { glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
+
+    public:
+        std::shared_ptr<AIAC::ACInfoToolheadManager> ACInfoToolheadManager;
     };
 }

@@ -67,7 +67,7 @@ namespace AIAC {
         int m_testSlider = 0;
 
         AIAC::Image m_LogoBlack;
-        AIAC::Image m_LogoLightGray;
+        AIAC::Image m_LogoLightClr;
 
         AIAC::ImTexture m_SceneViewportImTexture;
         AIAC::ImTexture m_MappingViewImTexture;
