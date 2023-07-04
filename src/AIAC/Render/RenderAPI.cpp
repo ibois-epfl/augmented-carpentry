@@ -71,13 +71,13 @@ namespace AIAC
         switch (goPrimitive->GetType()){
             case _GOPoint:
             case _GOLine:
+            case _GOCylinder:
+            case _GOCircle:
                 // DrawPoint(*std::dynamic_pointer_cast<GOPoint>(goPrimitive)); break;
                 goPrimitive->Draw(); break;
                 // DrawLine(*std::dynamic_pointer_cast<GOLine>(goPrimitive)); break;
-            case _GOCircle:
-                DrawCircle(*std::dynamic_pointer_cast<GOCircle>(goPrimitive)); break;
-            case _GOCylinder:
-                DrawCylinder(*std::dynamic_pointer_cast<GOCylinder>(goPrimitive)); break;
+                // DrawCircle(*std::dynamic_pointer_cast<GOCircle>(goPrimitive)); break;
+                // DrawCylinder(*std::dynamic_pointer_cast<GOCylinder>(goPrimitive)); break;
             case _GOPolyline:
                 DrawPolyline(*std::dynamic_pointer_cast<GOPolyline>(goPrimitive)); break;
             case _GOTriangle:
