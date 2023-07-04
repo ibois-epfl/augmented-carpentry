@@ -102,7 +102,7 @@ If it is the first time you are installing AC, set all the dependecies options i
     ./cmake/install_TSlam.sh (Although CMakeList.txt run this when INSTALL_TSLAM option is on, you might need to install TSlam with this command manually as its need sudo priviledge)
     ./cmake/install_TTool.sh
     ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
-    ./build.sh
+    ./build.sh  # or cmake --build . --target AC
 ```
 To run the code:
 ```bash
