@@ -7,6 +7,8 @@
 
 namespace AIAC
 {
+    static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 20.0f;
+
     GOPrimitive::GOPrimitive(bool isVisible, glm::vec4 color)
         : m_IsVisible(isVisible), m_Color(color), m_State(false)
     {
@@ -50,6 +52,7 @@ namespace AIAC
     std::shared_ptr<GOPoint> GOPoint::Add(float x, float y, float z, float weight)
     {
         auto ptrGO = std::make_shared<GOPoint>(GOPoint(x, y, z, weight));
+        ptrGO->InitGLObject();
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;
     }
@@ -57,8 +60,18 @@ namespace AIAC
     std::shared_ptr<GOPoint> GOPoint::Add(glm::vec3 position, float weight)
     {
         auto ptrGO = std::make_shared<GOPoint>(GOPoint(position, weight));
+        ptrGO->InitGLObject();
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;
+    }
+
+    void GOPoint::InitGLObject()
+    {
+        std::vector<glm::vec3> vertices;
+        std::vector<glm::vec4> colors;
+        vertices.push_back(m_Position);
+        colors.push_back(m_Color);
+        m_GLObjects.push_back(std::make_shared<GLPointObject>(vertices, colors, m_Weight));
     }
 
     std::shared_ptr<GOPoint> GOPoint::Get(const uint32_t& id)
@@ -82,8 +95,26 @@ namespace AIAC
     std::shared_ptr<GOLine> GOLine::Add(GOPoint p1, GOPoint p2, float weight)
     {
         auto ptrGO = std::make_shared<GOLine>(GOLine(p1, p2, weight));
+        ptrGO->InitGLObject();
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;
+    }
+
+    void GOLine::InitGLObject()
+    {
+        if (m_Weight <= 1.0f) {
+            std::vector<glm::vec3> vertices;
+            std::vector<glm::vec4> colors;
+            vertices.push_back(m_PStart.GetPosition());
+            vertices.push_back(m_PEnd.GetPosition());
+            colors.push_back(m_Color);
+            colors.push_back(m_Color);
+            m_GLObjects.push_back(std::make_shared<GLLineObject>(vertices, colors, m_Weight));
+        } else {
+            float radius = m_Weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+            m_GLObjects = CreateCylinder(m_PStart.GetPosition(), m_PEnd.GetPosition(), radius,
+                                         m_Color, m_Color);
+        }
     }
 
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
