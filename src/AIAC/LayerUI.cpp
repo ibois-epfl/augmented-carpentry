@@ -311,8 +311,6 @@ namespace AIAC
 //            ImGuiFileDialog::Instance()->Close();
 //        }
 
-        ImGui::EndChild();
-
         ImGui::Text("Mapping Functions:");
         ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
             if(ImGui::Button("Start Mapping")){
@@ -333,6 +331,8 @@ namespace AIAC
 
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
+        ImGui::EndChild();
+
     }
 
     void LayerUI::SetPaneUIRender()
@@ -374,19 +374,21 @@ namespace AIAC
         ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
         ImGui::PopID();
 
-        // // add a new section down the button
-        // if (ImGui::Button("Open Vocab"))
-        //     ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
 
-        // if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
-        // {
-        //     if (ImGuiFileDialog::Instance()->IsOk())
-        //     {
-        //     std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-        //     AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
-        //     }
-        //     ImGuiFileDialog::Instance()->Close();
-        // }
+        std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolheadName();
+        ImGui::Text("Toolhead active: %s", toolheadName.c_str());
+        ImGui::BeginChild("toolhead_selection", ImVec2(0, 70), true, ImGuiWindowFlags_HorizontalScrollbar);
+        std::vector<std::string> toolheadNames;
+        for (auto& toolhead : AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetToolheadNames())
+            toolheadNames.emplace_back(toolhead);
+        for (int i = 0; i < toolheadNames.size(); i++)
+        {
+            ImGui::SetNextWindowSize(ImVec2(200, 50));
+            auto toolNameButton = ImGui::Button(toolheadNames[i].c_str());
+            if (toolNameButton)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->SetActiveToolhead(toolheadNames[i]);
+        }
+        ImGui::EndChild();
     }
 
     void LayerUI::ShowMappingPopup()
