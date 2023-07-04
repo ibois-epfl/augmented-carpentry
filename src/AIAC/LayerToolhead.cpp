@@ -24,6 +24,8 @@ namespace AIAC
         // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
         TTool->ManipulateModel('e');
         TTool->ManipulateModel('q');
+
+        this->ACInfoToolheadManager->LoadToolheadModels();
     }
 
     void LayerToolhead::OnFrameStart()
