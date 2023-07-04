@@ -23,6 +23,10 @@ namespace AIAC
             AIAC_INFO("Loading toolhead model: {}", acInfoToolhead->GetName());
             this->m_ACInfoToolheadMap.insert(std::make_pair(acInfoToolhead->GetName(), acInfoToolhead));
         }
+        if (this->m_ACInfoToolheadMap.empty())
+            AIAC_ERROR("No toolhead models loaded!");
+            
+        this->m_ActiveACInfoToolhead = this->m_ACInfoToolheadMap.begin()->second;
     }
 
     void ACInfoToolheadManager::SetActiveToolhead(const std::string& toolheadName)
