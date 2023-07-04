@@ -99,7 +99,7 @@ namespace AIAC
     void LayerToolhead::OnPoseManipulation()
     {
         char key = cv::waitKey(1);
-        while (key != 'q')
+        while (key != 'x')
         {
             cv::Mat currentFrame;
             AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
@@ -146,16 +146,16 @@ namespace AIAC
     {
         glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
 
-
+        cv::Matx44f projectionMatrix = TTool->GetProjectionMatrix();
         cv::Matx44f toolheadPose = TTool->GetPose();
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
-        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
+        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((projectionMatrix * toolheadNormalization * toolheadPose).val);
 
         std::stringstream ss;
         ss << "Pose Matrix: " << toolheadNormalization * toolheadPose;
         AIAC_INFO(ss.str());
 
-        glm::mat4x4 worldPose = cameraPose * (toolheadPoseGlm);
+        glm::mat4x4 worldPose = cameraPose * glm::transpose(toolheadPoseGlm);
         return worldPose;
     }
 }
