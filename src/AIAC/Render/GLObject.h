@@ -122,4 +122,19 @@ namespace AIAC {
     public:
         GLuint indexBuf;
     };
+
+    // --------------------- //
+    //   Auxilary function   //
+    // --------------------- //
+    /**
+     * @brief Combine 3 points into a glm::vec3 and transform it based on the given transformation matrix.
+     * @param transformMat A 4x4 transformation matrix.
+     * @param x X coordinate.
+     * @param y Y coordinate.
+     * @param z Z coordinate.
+     */
+    glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z);
+
+    std::vector<std::shared_ptr<GLObject> > CreateCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum=-1);
+
 }

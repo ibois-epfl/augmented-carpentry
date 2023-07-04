@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include "AIAC/Render/GLObject.h"
 #include "AIAC/Base.h"
 #include "glm/glm.hpp"
 
@@ -59,7 +60,11 @@ namespace AIAC
         inline float GetWeight() const { return m_Weight; }
         inline int SetWeight(float weight) { m_Weight = weight; return m_Id;}
 
-        virtual void Transform(const glm::mat4x4& transformMat) {};
+        inline void Draw() { for(auto glObject : m_GLObjects) glObject->Draw(); }
+
+        virtual void Transform(const glm::mat4x4& transformMat) {}
+        
+        virtual void InitGLObject() {}
 
     protected:
         uint32_t m_Id;
@@ -68,6 +73,7 @@ namespace AIAC
         bool m_State;
         GOTypeFlags m_Type;
         float m_Weight = GOWeight::Default;
+        std::vector<std::shared_ptr<GLObject> > m_GLObjects;
     };
 
 
@@ -109,6 +115,8 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Position = transformMat * glm::vec4(m_Position, 1.0f);
         }
+
+        void InitGLObject();
 
         operator glm::vec3() const { return m_Position; }
 
@@ -157,6 +165,8 @@ namespace AIAC
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
         }
+
+        void InitGLObject();
 
     private:
         GOPoint m_PStart;
