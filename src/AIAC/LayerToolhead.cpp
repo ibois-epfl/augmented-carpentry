@@ -6,13 +6,16 @@
 #include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
 
-#include "ttool.hh"
-
-
 namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
+        // for(auto& goObj : m_GOObjects)
+        //     GOPrimitive::Remove(goObj);
+
+        // for (auto& point : m_Points)
+        //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
+
         TTool = std::make_shared<ttool::TTool>(
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
@@ -26,18 +29,47 @@ namespace AIAC
     void LayerToolhead::OnFrameStart()
     {
         UpdateToolheadState();
-        if (ttoolState == ttool::EventType::PoseInput)
+        if (m_TtoolState == ttool::EventType::PoseInput)
         {
             OnPoseManipulation();
         }
 
-        if (!(ttoolState == ttool::EventType::Tracking))
-            return;
+        if (m_TtoolState == ttool::EventType::Tracking)
+        {
+            cv::Mat currentFrame;
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+            TTool->RunOnAFrame(currentFrame);
+            m_Pose = TTool->GetPose();
+        }
 
-        cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
-        TTool->RunOnAFrame(currentFrame);
-        m_Pose = TTool->GetPose();
+        // === BEGIN TEST GO Rendering ===
+        // glm::mat4x4 toWorld = GetWorldPose();
+
+        // Testing why the translation seems to not be working.
+        // for (auto& point : m_Points)
+        // {
+        //     cv::Matx44f translate = cv::Matx44f(1, 0, 0, 0,
+        //                                         0, 1, 0, 0,
+        //                                         0, 0, 1, 0.01,
+        //                                         0, 0, 0, 1);
+        //     glm::mat4x4 translateX = glm::make_mat4x4(translate.val);
+        //     point = glm::vec4(point, 1.0f) * translateX;
+        // }
+
+        // for(auto& goObj : m_GOObjects)
+        //     GOPrimitive::Remove(goObj);
+
+        // for (auto point : m_Points)
+        // {
+        //     std::stringstream ss;
+        //     ss << "Point_before: " << point[0] << ", " << point[1] << ", " << point[2] << " ";
+        //     point = toWorld * glm::vec4(point, 1.0f);
+        //     ss << "Point_after: " << point[0] << ", " << point[1] << ", " << point[2];
+        //     AIAC_INFO(ss.str());
+        //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
+        // }
+        // === END TEST GO Rendering ===
+
         // std::stringstream ss;
         // ss << "Pose: " << m_Pose;
         // AIAC_INFO(ss.str());
@@ -76,7 +108,7 @@ namespace AIAC
         }
         cv::destroyAllWindows();
         AIAC_INFO("Pose manipulation done");
-        ttoolState = ttool::EventType::None;
+        m_TtoolState = ttool::EventType::None;
         ToolheadStateUI = -1;
     }
 
@@ -93,28 +125,32 @@ namespace AIAC
         switch (ToolheadStateUI)
         {
         case 0:
-            ttoolState = ttool::EventType::Tracking;
+            m_TtoolState = ttool::EventType::Tracking;
             break;
         case 1:
-            ttoolState = ttool::EventType::PoseInput;
+            m_TtoolState = ttool::EventType::PoseInput;
             break;
         default:
-            ttoolState = ttool::EventType::None;
+            m_TtoolState = ttool::EventType::None;
             break;
         }
         return;
     }
 
-    glm::mat4 LayerToolhead::GetWorldPose()
+    glm::mat4x4 LayerToolhead::GetWorldPose()
     {
-        glm::mat4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
+        glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
+
+
         cv::Matx44f toolheadPose = TTool->GetPose();
-        glm::mat4 toolheadPoseGlm = glm::make_mat4(toolheadPose.val);
-
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
-        glm::mat4 toolheadNormalizationGlm = glm::make_mat4(toolheadNormalization.val);
+        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
 
-        glm::mat4 worldPose = cameraPose * (toolheadNormalizationGlm * toolheadPoseGlm);
+        std::stringstream ss;
+        ss << "Pose Matrix: " << toolheadNormalization * toolheadPose;
+        AIAC_INFO(ss.str());
+
+        glm::mat4x4 worldPose = cameraPose * (toolheadPoseGlm);
         return worldPose;
     }
 }
