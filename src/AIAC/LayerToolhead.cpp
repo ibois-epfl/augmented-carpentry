@@ -34,6 +34,16 @@ namespace AIAC
         // load the ACIT models from the dataset
         this->ACInfoToolheadManager->LoadToolheadModels();
 
+        this->ACInfoToolheadManager->SetActiveToolhead("auger_drill_bit_20_235");
+        std::string name = this->ACInfoToolheadManager->GetActiveToolhead()->ToString();
+        AIAC_INFO("ooooooooooooooooooooooo");
+        AIAC_INFO(name);
+
+        this->ACInfoToolheadManager->SetActiveToolhead("chain_saw_blade_f_250");
+        name = this->ACInfoToolheadManager->GetActiveToolhead()->ToString();
+        AIAC_INFO("ooooooooooooooooooooooo");
+        AIAC_INFO(name);
+
         // std::string test = "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/metadata.acit";
         // std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(test);
     }

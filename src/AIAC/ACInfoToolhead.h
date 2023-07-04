@@ -112,15 +112,15 @@ namespace AIAC
             glm::vec3 ParseString2GlmVector(std::string str);
 
         private: __always_inline
+            /// @brief Retrieve scaling factor
+            float GetScaleF() const { return m_ScaleF; }
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Type; }
             /// @brief Retrieve the name of the toolhead
-            inline std::string GetName() const { return m_Name; }
-            
-            // FIXME: casting not working?
+            std::string GetName() const { return m_Name; }
             /// @brief Retrive the correct data type according to the type of tool of ToolHeadData
             template<typename T>
-            inline T GetData() const
+            T GetData() const
             {
                 switch (m_Type)
                 {
@@ -142,6 +142,9 @@ namespace AIAC
             }
 
         private:
+            /// @brief Scaling factor from meters to AC scale
+            float m_ScaleF = 50.0f;
+
             /// @brief Type of the toolhead
             ACToolHeadType m_Type;
             /// @brief Type of the toolhead
@@ -159,21 +162,17 @@ namespace AIAC
             friend class ACInfoToolhead;
     };
 
-    /// @section ACIT Model ////////////////////////////////////////////////////////////////////////////
+    /// @brief the class holding the information of the toolhead (GOs, metadata, etc)
     class ACInfoToolhead
     {
         public:
             ACInfoToolhead(std::string acitPath, std::string meshObjPath);
-
-            void Init();
 
         public: __always_inline
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Data.GetType(); }
             /// @brief Get the name of the toolhead
             std::string GetName() const { return m_Data.GetName(); }
-            /// @brief Retrieve scaling factor
-            inline float GetScaleF() const { return m_ScaleF; }
 
         public:
             /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
@@ -193,29 +192,32 @@ namespace AIAC
             // void AddGODisplayMesh();
 
         public:
+            /// @brief to set the visibility of all the GOobjects
+            void SetVisibility(bool visible);
+
+        public:
             // TODO: @Hong-Bin to be implemented in the GO system
             /// @brief transform all the geometries, widgets and mesh contained in the ACInfoToolhead object
             void Transform(glm::mat4 transform);
 
+        public: __always_inline
+            std::string ToString() const { return m_Data.GetName(); }
+
         private:
-            /// @brief Scaling factor from meters to AC scale
-            float m_ScaleF = 50.0f;
-            
             /// @brief the path to the acit file
             std::string m_ACITPath;
             /// @brief the path to the mesh file as obj
             std::string m_OBJPath;
-
             /// @brief the data loaded from the .acit
             ToolHeadData m_Data;
 
         private:
             /// @brief the geometries that defines the hole and used in the feedback layer
-            std::vector<uint32_t> m_GOPrimitivesInfo;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfo;
             /// @brief the geometries the create the widget UI of the toolhead
-            std::vector<uint32_t> m_GOPrimitivesWidget;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
             // // TODO: @Hong-Bin to be implemented a GOMesh constructor able to get a path to obj and create GOfile
             // /// @brief the mesh id used to input and check the 6dof pose of the toolhead by the user
-            // uint32_t m_GODisplayMesh;
+            // std::shared_ptr<GOMesh> m_GODisplayMesh;
     };
 }
