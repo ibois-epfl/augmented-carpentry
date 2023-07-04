@@ -86,19 +86,160 @@ namespace AIAC
         this->type = GLObjectType::TRIANGLES;
         this->size = indices.size();
 
-        GLObject::BufferData(vertices, colors);
-
         glGenBuffers(1, &this->indexBuf);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuf);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices) * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
+        GLObject::BufferData(vertices, colors);
     }
 
     void GLTriangleObject::Draw()
     {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuf);
+        
         BindVBOs();
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuf);
         glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
     }
+
+    // ---------------------- //
+    //   Auxilary functions   //
+    // ---------------------- //
+    struct CylinderPole {
+        GLfloat x, z;
+    };
+
+    int GetSectorNum(float radius)
+    {
+        if(radius <= 3){
+            return 8;
+        }
+        if(radius <= 12){
+            return 12;
+        }
+        if(radius <= 24){
+            return 24;
+        }
+        return 36;
+    }
+
+    glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
+    {
+        glm::vec4 point(x, y, z, 1);
+        point = transformMat * point;
+        return {point.x, point.y, point.z};
+    }
+
+    std::vector< std::shared_ptr<GLObject> > CreateCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
+        if(sectorNum == -1){
+            sectorNum = GetSectorNum(radius);
+        }
+        std::vector<CylinderPole> cylinderPoles; // vector of structs
+
+        glm::vec3 x1 = baseCenter, x2 = topCenter;
+        glm::vec3 norm = glm::normalize(x2 - x1);
+        GLfloat h = glm::length(x2 - x1);
+
+        glm::vec3 newX = glm::cross(norm, glm::vec3(0, 1, 0));
+        glm::vec3 newZ = glm::cross(newX, norm);
+
+        glm::mat4 transformMat;
+
+        transformMat[0] = glm::vec4(newX, 0);
+        transformMat[1] = glm::vec4(norm, 0);
+        transformMat[2] = glm::vec4(newZ, 0);
+        transformMat[3] = glm::vec4(x1, 1);
+
+        for (int i = 0; i < sectorNum; ++i){
+            GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
+            CylinderPole cp{
+                    .x = static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
+                    .z = static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
+            };
+            cylinderPoles.push_back(cp);
+        }
+
+        vector<uint32_t> flattenedIndices;
+        vector<glm::vec3> indices;
+        vector<glm::vec3> vertices;
+        vector<glm::vec3> capContourTop, capContourBase;
+
+        vertices.emplace_back(x1); // 0
+        vertices.emplace_back(x2); // 1
+
+        vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z)); // 2
+        vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z)); // 3
+
+        capContourBase.push_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
+        capContourTop.push_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
+
+        int baseCenterIdx = 0;
+        int topCenterIdx = 1;
+        int prevBaseVertexIdx = 2;
+        int prevTopVertexIdx = 3;
+        int curBaseVertexIdx = 4;
+        int curTopVertexIdx = 5;
+
+        for(int i = 1; i < sectorNum; i++){
+            capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+            capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+            capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+            capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+
+            vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+            vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+
+            indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
+            indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
+            indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
+            indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
+
+            prevBaseVertexIdx = curBaseVertexIdx;
+            prevTopVertexIdx = curTopVertexIdx;
+            curBaseVertexIdx += 2;
+            curTopVertexIdx += 2;
+        }
+
+        // Last one
+        curBaseVertexIdx = 2;
+        curTopVertexIdx = 3;
+        indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
+        indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
+        indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
+        indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
+
+        capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
+        capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
+
+        for(auto vid: indices){
+            flattenedIndices.push_back((uint)vid.x);
+            flattenedIndices.push_back((uint)vid.y);
+            flattenedIndices.push_back((uint)vid.z);
+        }
+
+        vector<glm::vec4> cylinderColorVec(vertices.size(), color);
+        vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
+
+        // auto cylinder = std::make_shared<GOTriangleObject>(vertices, color, flattenedIndices);
+        // auto capContourBase = std::make_shared<GOLineObject>(capContourBase, edgeColor);
+        // auto capContourTop = std::make_shared<GOLineObject>(capContourTop, edgeColor);
+
+        std::vector<std::shared_ptr<GLObject> > glObjs;
+
+        // print all vertices & indices
+        // for (int i = 0; i < vertices.size(); i++){
+        //     std::cout << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << std::endl;
+        // }
+        // for (int i = 0; i < flattenedIndices.size(); i++){
+        //     std::cout << flattenedIndices[i] << std::endl;
+        // }
+
+
+        glObjs.push_back(std::make_shared<GLTriangleObject>(vertices, cylinderColorVec, flattenedIndices));
+        // glObjs.push_back(std::make_shared<GLLineObject>(capContourBase, edgeColorVec, 1.0f));
+        // glObjs.push_back(std::make_shared<GLLineObject>(capContourTop, edgeColorVec, 1.0f));
+
+        return glObjs;
+    }
+
 
 
 } // namespace AIAC
