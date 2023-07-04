@@ -11,8 +11,10 @@ namespace AIAC
     class LayerToolhead : public AIAC::Layer
     {
     public:
-        LayerToolhead() = default;
-        virtual ~LayerToolhead() = default;
+        LayerToolhead()
+        {
+            this->ACInfoToolheadManager = std::make_shared<AIAC::ACInfoToolheadManager>();
+        };
 
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
