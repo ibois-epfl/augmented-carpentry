@@ -401,7 +401,6 @@ The GOSystem is composed of two components:
 - `GORegistry.h/cpp` (an API which interacts with the map. Note that it has to recive only smart pointers to avoid [object slicing](https://stackoverflow.com/questions/274626/what-is-object-slicing) since we pass heirs of `GOPrimitive`.)
 
 
-
 ### Renderer API
 The renderer API is separated into two parts:
 1. `GlUtils.h`: Provides a convenient interface to interact with OpenGL, can draw 3 types of object: `Point`, `Line`, and `Triangle`

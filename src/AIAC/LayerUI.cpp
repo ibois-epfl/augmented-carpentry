@@ -373,8 +373,20 @@ namespace AIAC
         ImGui::PushID(2);
         ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
         ImGui::PopID();
-        // ImGui::Checkbox("Tracking", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToTrack);
-        // ImGui::Checkbox("Tracking", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToTrack);
+
+        // // add a new section down the button
+        // if (ImGui::Button("Open Vocab"))
+        //     ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
+
+        // if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
+        // {
+        //     if (ImGuiFileDialog::Instance()->IsOk())
+        //     {
+        //     std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+        //     AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
+        //     }
+        //     ImGuiFileDialog::Instance()->Close();
+        // }
     }
 
     void LayerUI::ShowMappingPopup()
