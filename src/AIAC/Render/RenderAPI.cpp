@@ -10,7 +10,7 @@
 
 namespace AIAC
 {
-    const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
+    static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 32.0f;
 
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
     {
@@ -56,12 +56,12 @@ namespace AIAC
         DrawGOs(gos);
     }
 
-    glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
-    {
-        glm::vec4 point(x, y, z, 1);
-        point = transformMat * point;
-        return {point.x, point.y, point.z};
-    }
+    // glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
+    // {
+    //     glm::vec4 point(x, y, z, 1);
+    //     point = transformMat * point;
+    //     return {point.x, point.y, point.z};
+    // }
 
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive)
     {
@@ -70,9 +70,10 @@ namespace AIAC
         }
         switch (goPrimitive->GetType()){
             case _GOPoint:
-                DrawPoint(*std::dynamic_pointer_cast<GOPoint>(goPrimitive)); break;
             case _GOLine:
-                DrawLine(*std::dynamic_pointer_cast<GOLine>(goPrimitive)); break;
+                // DrawPoint(*std::dynamic_pointer_cast<GOPoint>(goPrimitive)); break;
+                goPrimitive->Draw(); break;
+                // DrawLine(*std::dynamic_pointer_cast<GOLine>(goPrimitive)); break;
             case _GOCircle:
                 DrawCircle(*std::dynamic_pointer_cast<GOCircle>(goPrimitive)); break;
             case _GOCylinder:
@@ -83,8 +84,8 @@ namespace AIAC
                 DrawTriangle(*std::dynamic_pointer_cast<GOTriangle>(goPrimitive)); break;
             case _GOMesh:
                 DrawMesh(*std::dynamic_pointer_cast<GOMesh>(goPrimitive)); break;
-            case _GOText:
-                DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
+            // case _GOText:
+            //     DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
 
             default:
                 break;
