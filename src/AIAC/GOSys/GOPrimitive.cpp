@@ -7,12 +7,11 @@
 
 namespace AIAC
 {
-    GOPrimitive::GOPrimitive(GOCategory category, bool isVisible, glm::vec4 color)
-        : m_Category(category), m_IsVisible(isVisible), m_Color(color), m_State(false), m_Type(GOTypeFlags::_GOPrimitive)
+    GOPrimitive::GOPrimitive(bool isVisible, glm::vec4 color)
+        : m_IsVisible(isVisible), m_Color(color), m_State(false)
     {
         m_Id = GenerateId();
     }
-
 
     uint32_t GOPrimitive::GenerateId()
     {
@@ -26,6 +25,11 @@ namespace AIAC
     void GOPrimitive::Remove(const uint32_t& id)
     {
         AIAC_GOREG->Unregister(id);
+    }
+
+    void GOPrimitive::Remove(const std::shared_ptr<GOPrimitive>& ptrGO)
+    {
+        AIAC_GOREG->Unregister(ptrGO->GetId());
     }
 
 
@@ -43,20 +47,18 @@ namespace AIAC
         m_Weight = weight;
     }
 
-    uint32_t GOPoint::Add(float x, float y, float z, float weight)
+    std::shared_ptr<GOPoint> GOPoint::Add(float x, float y, float z, float weight)
     {
         auto ptrGO = std::make_shared<GOPoint>(GOPoint(x, y, z, weight));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
-    uint32_t GOPoint::Add(glm::vec3 position, float weight)
+    std::shared_ptr<GOPoint> GOPoint::Add(glm::vec3 position, float weight)
     {
         auto ptrGO = std::make_shared<GOPoint>(GOPoint(position, weight));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOPoint> GOPoint::Get(const uint32_t& id)
@@ -77,12 +79,11 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOLine;
     }
 
-    uint32_t GOLine::Add(GOPoint p1, GOPoint p2, float weight)
+    std::shared_ptr<GOLine> GOLine::Add(GOPoint p1, GOPoint p2, float weight)
     {
         auto ptrGO = std::make_shared<GOLine>(GOLine(p1, p2, weight));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
@@ -102,12 +103,24 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOCircle;
     }
 
-    uint32_t GOCircle::Add(GOPoint center, float radius)
+    GOCircle::GOCircle(GOPoint center, glm::vec3 normal, float radius)
+        : m_Center(center), m_Normal(normal), m_Radius(radius)
+    {
+        m_Type = GOTypeFlags::_GOCircle;
+    }
+
+    std::shared_ptr<GOCircle> GOCircle::Add(GOPoint center, float radius)
     {
         auto ptrGO = std::make_shared<GOCircle>(GOCircle(center, radius));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
+    }
+
+    std::shared_ptr<GOCircle> GOCircle::Add(GOPoint center, glm::vec3 normal, float radius)
+    {
+        auto ptrGO = std::make_shared<GOCircle>(GOCircle(center, normal, radius));
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOCircle> GOCircle::Get(const uint32_t& id)
@@ -127,12 +140,11 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOCylinder;
     }
 
-    uint32_t GOCylinder::Add(GOPoint p1, GOPoint p2, float radius)
+    std::shared_ptr<GOCylinder> GOCylinder::Add(GOPoint p1, GOPoint p2, float radius)
     {
         auto ptrGO = std::make_shared<GOCylinder>(GOCylinder(p1, p2, radius));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOCylinder> GOCylinder::Get(const uint32_t& id)
@@ -152,12 +164,11 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOPolyline;
     }
 
-    uint32_t GOPolyline::Add(std::vector<GOPoint> points)
+    std::shared_ptr<GOPolyline> GOPolyline::Add(std::vector<GOPoint> points)
     {
         auto ptrGO = std::make_shared<GOPolyline>(GOPolyline(points));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOPolyline> GOPolyline::Get(const uint32_t& id)
@@ -177,12 +188,11 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOTriangle;
     }
 
-    uint32_t GOTriangle::Add(GOPoint p1, GOPoint p2, GOPoint p3)
+    std::shared_ptr<GOTriangle> GOTriangle::Add(GOPoint p1, GOPoint p2, GOPoint p3)
     {
         auto ptrGO = std::make_shared<GOTriangle>(GOTriangle(p1, p2, p3));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOTriangle> GOTriangle::Get(const uint32_t& id)
@@ -207,20 +217,18 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOMesh;
     }
 
-    uint32_t GOMesh::Add()
+    std::shared_ptr<GOMesh> GOMesh::Add()
     {
         auto ptrGO = std::make_shared<GOMesh>(GOMesh());
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
-    uint32_t GOMesh::Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
+    std::shared_ptr<GOMesh> GOMesh::Add(std::vector<glm::vec3> vertices, std::vector<uint32_t> indices)
     {
         auto ptrGO = std::make_shared<GOMesh>(GOMesh(vertices, indices));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     uint32_t GOMesh::LoadPly(std::string path){
@@ -290,21 +298,20 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOText;
     }
 
-    uint32_t GOText::Add(std::string text, GOPoint anchor, double size)
+    std::shared_ptr<GOText> GOText::Add(std::string text, GOPoint anchor, double size)
     {
         auto ptrGO = std::make_shared<GOText>(GOText(text, anchor, size));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
-    uint32_t GOText::Add(std::string text, glm::vec3 anchor, double size)
-    {
-        auto ptrGO = std::make_shared<GOText>(GOText(text, anchor, size));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
-    }
+    // std::shared_ptr<GOText> GOText::Add(std::string text, glm::vec3 anchor, double size)
+    // {
+    //     auto ptrGO = std::make_shared<GOText>(GOText(text, anchor, size));
+    //     uint32_t idGO = ptrGO->GetId();
+    //     AIAC_GOREG->Register(idGO, ptrGO);
+    //     return idGO;
+    // }
 
     std::shared_ptr<GOText> GOText::Get(const uint32_t& id)
     {

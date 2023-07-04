@@ -1,12 +1,13 @@
-//
-// Created by tpp on 15.08.22.
-//
-
 #ifndef AC_UTILS_H
 
 #include <opencv2/opencv.hpp>
 #include <string>
+#include <iostream>
+#include <filesystem>
+
 #include <sys/stat.h>
+
+#include "AIAC/Log.h"
 
 #include "glm/glm.hpp"
 
@@ -41,6 +42,50 @@ inline void CvtCvMat2GlmMat(const cv::Mat &cvMat, glm::mat3 &glmMat)
             glmMat[j][i] = cvMat.at<float>(i, j);
         }
     }
+}
+
+inline std::vector<std::string> GetFolderPaths(const std::string& dirPath)
+{
+    // check the dirPath is a directory and it exists
+    if (!std::filesystem::is_directory(dirPath) || !std::filesystem::exists(dirPath))
+    {
+        AIAC_ERROR("Error: {0} is not a directory or it does not exist!", dirPath);
+        return std::vector<std::string>();
+    }
+
+    std::vector<std::string> folderPaths;
+
+    for (const auto & entry : std::filesystem::directory_iterator(dirPath))
+    {
+        if (entry.is_directory())
+        {
+            folderPaths.push_back(entry.path());
+        }
+    }
+
+    return folderPaths;
+}
+
+inline std::vector<std::string> GetFilePaths(const std::string& dirPath, const std::string& extension)
+{
+    // check the dirPath is a directory and it exists
+    if (!std::filesystem::is_directory(dirPath) || !std::filesystem::exists(dirPath))
+    {
+        AIAC_ERROR("Error: {0} is not a directory or it does not exist!", dirPath);
+        return std::vector<std::string>();
+    }
+
+    std::vector<std::string> filePaths;
+
+    for (const auto & entry : std::filesystem::directory_iterator(dirPath))
+    {
+        if (entry.is_regular_file() && entry.path().extension() == extension)
+        {
+            filePaths.push_back(entry.path());
+        }
+    }
+
+    return filePaths;
 }
 
 #define AC_UTILS_H
