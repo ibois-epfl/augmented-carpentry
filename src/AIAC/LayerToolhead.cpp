@@ -16,45 +16,36 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
-        // Adding dummy arguments to make QApplication
-        int argc = 1;
-        char* argv[] = { "augmented_carpentry" };
-        QApplication app(argc, argv);
+    //     // Adding dummy arguments to make QApplication
+    //     int argc = 1;
+    //     char* argv[] = { "augmented_carpentry" };
+    //     QApplication app(argc, argv);
         
-        TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
-            );
-        TTool->ReleaseCurrent();
+    //     TTool = std::make_shared<ttool::TTool>(
+    //         AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+    //         AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
+    //         );
+    //     // TTool->ReleaseCurrent();
         
-        // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
-        TTool->ManipulateModel('e');
-    }
+    //     // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
+    //     TTool->ManipulateModel('e');
 
-    void LayerToolhead::OnFrameStart()
-    {
-        UpdateToolheadState();
-        if (!(ttoolState == ttool::EventType::Tracking))
-            return;
 
-        AIAC_APP.GetWindow()->ReleaseCurrent();
-        TTool->MakeCurrent();
-        
-        cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
-        TTool->RunOnAFrame(currentFrame);
-        m_Pose = TTool->GetPose();
-        std::stringstream ss;
-        ss << "Pose: " << m_Pose;
-        AIAC_INFO(ss.str());
+        // load the ACIT models from the dataset
+        this->ACInfoToolheadManager->LoadToolheadModels();
 
-        TTool->ReleaseCurrent();
-        AIAC_APP.GetWindow()->MakeCurrent();
-    }
+        this->ACInfoToolheadManager->SetActiveToolhead("auger_drill_bit_20_235");
+        std::string name = this->ACInfoToolheadManager->GetActiveToolhead()->ToString();
+        AIAC_INFO("ooooooooooooooooooooooo");
+        AIAC_INFO(name);
 
-    void LayerToolhead::TrackFrame()
-    {
+        this->ACInfoToolheadManager->SetActiveToolhead("chain_saw_blade_f_250");
+        name = this->ACInfoToolheadManager->GetActiveToolhead()->ToString();
+        AIAC_INFO("ooooooooooooooooooooooo");
+        AIAC_INFO(name);
 
+        // std::string test = "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/metadata.acit";
+        // std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(test);
     }
 
     /**
@@ -67,23 +58,49 @@ namespace AIAC
      */
     void LayerToolhead::UpdateToolheadState()
     {
-        if (ttoolState == ttool::EventType::Tracking)
-        {
-            trackCounter++;
-            if (trackCounter >= TRACK_FOR)
-            {
-                ttoolState = ttool::EventType::None;
-                trackCounter = 0;
-            }
-        }
-        else if (ttoolState == ttool::EventType::None)
-        {
-            trackCounter++;
-            if (trackCounter >= TRACK_EVERY)
-            {
-                ttoolState = ttool::EventType::Tracking;
-                trackCounter = 0;
-            }
-        }
+        // if (ttoolState == ttool::EventType::Tracking)
+        // {
+        //     trackCounter++;
+        //     if (trackCounter >= TRACK_FOR)
+        //     {
+        //         ttoolState = ttool::EventType::None;
+        //         trackCounter = 0;
+        //     }
+        // }
+        // else if (ttoolState == ttool::EventType::None)
+        // {
+        //     trackCounter++;
+        //     if (trackCounter >= TRACK_EVERY)
+        //     {
+        //         ttoolState = ttool::EventType::Tracking;
+        //         trackCounter = 0;
+        //     }
+        // }
+    }
+
+    void LayerToolhead::OnFrameStart()
+    {
+        // UpdateToolheadState();
+        // if (!(ttoolState == ttool::EventType::Tracking))
+        //     return;
+
+        // AIAC_APP.GetWindow()->ReleaseCurrent();
+        // TTool->MakeCurrent();
+        
+        // cv::Mat currentFrame;
+        // AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        // // TTool->RunOnAFrame(currentFrame);
+        // m_Pose = TTool->GetPose();
+        // std::stringstream ss;
+        // ss << "Pose: " << m_Pose;
+        // AIAC_INFO(ss.str());
+
+        // TTool->ReleaseCurrent();
+        // AIAC_APP.GetWindow()->MakeCurrent();
+    }
+
+    void LayerToolhead::TrackFrame()
+    {
+
     }
 }

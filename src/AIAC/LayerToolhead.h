@@ -4,24 +4,28 @@
 #include "AIAC/Layer.h"
 #include "ttool.hh"
 
+#include "AIAC/ACInfoToolheadManager.h"
+
 namespace AIAC
 {
     class LayerToolhead : public AIAC::Layer
     {
     public:
-        LayerToolhead() = default;
-        virtual ~LayerToolhead() = default;
+        LayerToolhead()
+        {
+            this->ACInfoToolheadManager = std::make_shared<AIAC::ACInfoToolheadManager>();
+        };
 
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
         bool NeedsContextReleased() const { return true; }
 
-    protected:
+    private:
         void UpdateToolheadState();
         void TrackFrame();
 
-    protected:
+    private:
         std::shared_ptr<ttool::TTool> TTool;
         uint trackCounter = 0;
         uint TRACK_EVERY = 600;
@@ -29,5 +33,8 @@ namespace AIAC
 
         ttool::EventType ttoolState = ttool::EventType::Tracking;
         cv::Matx44f m_Pose;
+
+    public:
+        std::shared_ptr<AIAC::ACInfoToolheadManager> ACInfoToolheadManager;
     };
 }

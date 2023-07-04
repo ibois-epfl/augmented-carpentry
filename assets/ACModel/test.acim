@@ -27,7 +27,7 @@
             </hole>
         <hole id="2">
             <state>NotDone</state>
-            <neighbours>1 2</neighbours>
+            <neighbours>2 3</neighbours>
             <start>
                 <accessible>True</accessible>
                 <coordinates>0.618677279339 -0.0650154048283 -0.0660054628675</coordinates>
@@ -40,7 +40,7 @@
             </hole>
         <hole id="3">
             <state>NotDone</state>
-            <neighbours>2 1</neighbours>
+            <neighbours>3 2</neighbours>
             <start>
                 <accessible>True</accessible>
                 <coordinates>0.550708892795 0.0650154048283 -0.087835323592</coordinates>
@@ -66,7 +66,7 @@
             </hole>
         <hole id="5">
             <state>NotDone</state>
-            <neighbours>4 5</neighbours>
+            <neighbours>5 6</neighbours>
             <start>
                 <accessible>True</accessible>
                 <coordinates>0.854453473924 -0.0650154048283 -0.0737785507686</coordinates>
@@ -79,7 +79,7 @@
             </hole>
         <hole id="6">
             <state>NotDone</state>
-            <neighbours>5 4</neighbours>
+            <neighbours>6 5</neighbours>
             <start>
                 <accessible>False</accessible>
                 <coordinates>0.828606620157 0.0371641453346 -0.0763601454698</coordinates>
@@ -92,7 +92,7 @@
             </hole>
         <hole id="7">
             <state>NotDone</state>
-            <neighbours>6 4</neighbours>
+            <neighbours>7 5</neighbours>
             <start>
                 <accessible>True</accessible>
                 <coordinates>0.821561497819 0.0650154048283 -0.0770638152728</coordinates>
@@ -105,7 +105,7 @@
             </hole>
         <hole id="8">
             <state>NotDone</state>
-            <neighbours>7 8</neighbours>
+            <neighbours>8 9</neighbours>
             <start>
                 <accessible>True</accessible>
                 <coordinates>0.389249552114 -0.00639194889788 -8.99603788592e-17</coordinates>
@@ -118,7 +118,7 @@
             </hole>
         <hole id="9">
             <state>NotDone</state>
-            <neighbours>8 7</neighbours>
+            <neighbours>9 8</neighbours>
             <start>
                 <accessible>False</accessible>
                 <coordinates>0.395488470914 -0.011434293215 -0.0677091973778</coordinates>
@@ -131,7 +131,7 @@
             </hole>
         <hole id="10">
             <state>NotDone</state>
-            <neighbours>9 7</neighbours>
+            <neighbours>10 8</neighbours>
             <start>
                 <accessible>False</accessible>
                 <coordinates>0.397101316796 -0.0127378082191 -0.0852129514162</coordinates>
