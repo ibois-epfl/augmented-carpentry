@@ -306,6 +306,7 @@ namespace AIAC
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+        void InitGLObject();
 
     private:
         GOPoint m_PStart;

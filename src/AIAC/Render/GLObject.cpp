@@ -225,12 +225,13 @@ namespace AIAC
         std::vector<std::shared_ptr<GLObject> > glObjs;
 
         // print all vertices & indices
-        // for (int i = 0; i < vertices.size(); i++){
-        //     std::cout << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << std::endl;
-        // }
-        // for (int i = 0; i < flattenedIndices.size(); i++){
-        //     std::cout << flattenedIndices[i] << std::endl;
-        // }
+        for (int i = 0; i < vertices.size(); i++){
+            std::cout << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << std::endl;
+        }
+        for (int i = 0; i < flattenedIndices.size(); i++){
+            std::cout << flattenedIndices[i] << " ";
+            if (i % 3 == 2) std::cout << std::endl;
+        }
 
 
         glObjs.push_back(std::make_shared<GLTriangleObject>(vertices, cylinderColorVec, flattenedIndices));
@@ -240,6 +241,66 @@ namespace AIAC
         return glObjs;
     }
 
+    std::vector< std::shared_ptr<GLObject> > CreateCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum){
+        if(sectorNum == -1){
+            sectorNum = GetSectorNum(radius);
+        }
+
+        std::vector<glm::vec3> vertices; // vertices.reserve(sectorNum);
+        std::vector<glm::vec3> edges; // edges.reserve(2 * sectorNum);
+        std::vector<uint32_t> indices; // indices.reserve(3 * sectorNum);
+        vertices.emplace_back(center);
+
+        glm::vec3 newX = glm::cross(normal, glm::vec3(0, 1, 0));
+        glm::vec3 newZ = glm::cross(newX, normal);
+
+        glm::mat4 transformMat;
+
+        transformMat[0] = glm::vec4(newX, 0);
+        transformMat[1] = glm::vec4(normal, 0);
+        transformMat[2] = glm::vec4(newZ, 0);
+        transformMat[3] = glm::vec4(center, 1);
+
+        for (int i = 0; i < sectorNum; ++i){
+            GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
+            glm::vec3 vertex = transformMat * glm::vec4(
+                    static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
+                    0,
+                    static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
+                    1
+            );
+            vertices.emplace_back(vertex);
+        }
+
+        for (int i = 1; i < sectorNum; ++i){
+            indices.emplace_back(0);
+            indices.emplace_back(i);
+            indices.emplace_back(i + 1);
+        }
+        indices.emplace_back(0);
+        indices.emplace_back(sectorNum);
+        indices.emplace_back(1);
+
+
+        for (int i = 1; i < sectorNum; ++i){
+            edges.emplace_back(vertices[i]);
+            edges.emplace_back(vertices[i + 1]);
+        }
+        edges.emplace_back(vertices[sectorNum]);
+        edges.emplace_back(vertices[1]);
+
+        vector<glm::vec4> faceColorVec(vertices.size(), color);
+        vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
+
+        // auto faceObj = std::make_shared<GLTriangleObject>(vertices, faceColorVec, indices);
+        auto edgeObj = std::make_shared<GLLineObject>(edges, edgeColorVec, edgeWeight);
+
+        std::vector< std::shared_ptr<GLObject>> glObjs;
+        // glObjs.push_back(faceObj);
+        glObjs.push_back(edgeObj);
+                
+        return glObjs;
+    }
 
 
 } // namespace AIAC
