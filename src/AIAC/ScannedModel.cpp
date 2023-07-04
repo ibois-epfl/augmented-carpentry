@@ -88,6 +88,8 @@ namespace AIAC
         // for(auto& id : m_BboxGOLineIDs)
         //     GOLine::Remove(id);
 
+        AIAC_INFO("-------- Scanned bbox ---------");
+        
         // bottom
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2], 2.0f));
@@ -103,6 +105,8 @@ namespace AIAC
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
+
+        AIAC_INFO("-------- Scanned bbox DONE ---------");
     }
 
     float ScannedModel::GetLength(){
