@@ -78,9 +78,17 @@ namespace AIAC
         this->m_Data.LoadACIT(acitPath);
 
         this->AddGOsInfo(this->m_Data);
-        this->AddGOsWidget();
+        this->m_GOPrimitivesInfoOriginal.clear();
+        for (auto& go : this->m_GOPrimitivesInfo) 
+        {
+            this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOPoint>(*go)); 
+        }
 
-        this->SetVisibility(false);
+        this->AddGOsWidget();
+        this->m_GOPrimitivesWidgetOriginal = this->m_GOPrimitivesWidget;
+        // FIXME: do the same as above for copying folders
+
+        this->SetVisibility(true);  // TODO: set back to false
     }
 
     void ACInfoToolhead::AddGOsInfo(ToolHeadData& data)
@@ -124,14 +132,14 @@ namespace AIAC
                                        data.m_DrillBitD.Chucktip.y,
                                        data.m_DrillBitD.Chucktip.z,
                                        GOWeight::Thick);
-        auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
-        lineAxis->SetVisibility(false);
+        // auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
+        // lineAxis->SetVisibility(false);
 
         this->m_GOPrimitivesInfo.push_back(ptToolbase);
         this->m_GOPrimitivesInfo.push_back(ptTooltip);
         this->m_GOPrimitivesInfo.push_back(ptEattip);
         this->m_GOPrimitivesInfo.push_back(ptChucktip);
-        this->m_GOPrimitivesInfo.push_back(lineAxis);
+        // this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {
@@ -143,12 +151,12 @@ namespace AIAC
                                         data.m_CircularSawD.NormalEnd.y,
                                         data.m_CircularSawD.NormalEnd.z,
                                         GOWeight::Thick);
-        glm::vec3 norm = glm::normalize(ptNormalEnd->GetPosition() - ptCenter->GetPosition());
-        auto circle = GOCircle::Add(*ptCenter, norm, data.m_CircularSawD.Radius);
+        // glm::vec3 norm = glm::normalize(ptNormalEnd->GetPosition() - ptCenter->GetPosition());
+        // auto circle = GOCircle::Add(*ptCenter, norm, data.m_CircularSawD.Radius);
 
         this->m_GOPrimitivesInfo.push_back(ptCenter);
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
-        this->m_GOPrimitivesInfo.push_back(circle);
+        // this->m_GOPrimitivesInfo.push_back(circle);
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
@@ -172,16 +180,16 @@ namespace AIAC
                                         data.m_ChainSawD.NormalEnd.y,
                                         data.m_ChainSawD.NormalEnd.z,
                                         GOWeight::Thick);
-        auto lnBaseMid = GOLine::Add(*ptChainbase, *ptChainmid);
-        auto lnMidEnd = GOLine::Add(*ptChainmid, *ptChainend);
+        // auto lnBaseMid = GOLine::Add(*ptChainbase, *ptChainmid);
+        // auto lnMidEnd = GOLine::Add(*ptChainmid, *ptChainend);
 
         this->m_GOPrimitivesInfo.push_back(ptChainbase);
         this->m_GOPrimitivesInfo.push_back(ptChainmid);
         this->m_GOPrimitivesInfo.push_back(ptChainend);
         this->m_GOPrimitivesInfo.push_back(ptNormalStart);
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
-        this->m_GOPrimitivesInfo.push_back(lnBaseMid);
-        this->m_GOPrimitivesInfo.push_back(lnMidEnd);
+        // this->m_GOPrimitivesInfo.push_back(lnBaseMid);
+        // this->m_GOPrimitivesInfo.push_back(lnMidEnd);
     }
     void ACInfoToolhead::AddGOsInfoSaberSaw(ToolHeadData& data)
     {
@@ -201,14 +209,14 @@ namespace AIAC
                                         data.m_SaberSawD.NormalEnd.y,
                                         data.m_SaberSawD.NormalEnd.z,
                                         GOWeight::Thick);
-        auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
-        lineAxis->SetWeight(GOWeight::Thick);
+        // auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
+        // lineAxis->SetWeight(GOWeight::Thick);
 
         this->m_GOPrimitivesInfo.push_back(ptToolbase);
         this->m_GOPrimitivesInfo.push_back(ptTooltip);
         this->m_GOPrimitivesInfo.push_back(ptNormalStart);
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
-        this->m_GOPrimitivesInfo.push_back(lineAxis);
+        // this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
 
     void ACInfoToolhead::AddGOsWidget() {}  // TODO: implement
@@ -219,10 +227,37 @@ namespace AIAC
 
     void ACInfoToolhead::SetVisibility(bool visible)
     {
+        AIAC_INFO("SetVisibility: {} {}", visible, m_GOPrimitivesInfo.size());
+
         for (auto& go : m_GOPrimitivesInfo)  // FIXME: this should be a seperate function
             go->SetVisibility(visible);
         for (auto& go : m_GOPrimitivesWidget)
             go->SetVisibility(visible);
     }
 
+    void ACInfoToolhead::Transform(glm::mat4 transform)
+    {
+        // TODO: use original to update current GOs (info + widgets)
+        // TODO: add in-place transform + npormal transform in go primitive
+        for (uint i = 0; i < m_GOPrimitivesInfo.size(); i++)
+        {
+            // std::shared_ptr<GOPoint> go = std::make_shared<GOPoint>(*(m_GOPrimitivesInfoOriginal[i]));
+            glm::vec3 position = m_GOPrimitivesInfoOriginal[i]->GetPosition();
+            std::stringstream ss;
+            ss << "position: " << position.x << " " << position.y << " " << position.z;
+            ss << "\n";
+            glm::vec4 position4 = glm::vec4(position, 1.0f);
+            glm::vec4 position4_transformed = transform * position4;
+            ss << "position_transformed: " << position4_transformed.x << " " << position4_transformed.y << " " << position4_transformed.z;
+            AIAC_INFO(ss.str());
+            m_GOPrimitivesInfo[i]->SetPosition(position4_transformed);
+        }
+
+        // for (uint i = 0; i < m_GOPrimitivesWidget.size(); i++)
+        // {
+        //     std::shared_ptr<GOPrimitive> go = std::make_shared<GOPrimitive>(*(m_GOPrimitivesWidgetOriginal[i]));
+        //     go->Transform(transform);
+        //     m_GOPrimitivesWidget[i]->SetValueFrom(go);
+        // }
+    }
 }
