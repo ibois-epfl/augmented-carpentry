@@ -136,5 +136,5 @@ namespace AIAC {
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z);
 
     std::vector<std::shared_ptr<GLObject> > CreateCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum=-1);
-
+    std::vector< std::shared_ptr<GLObject> > CreateCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum = -1);
 }

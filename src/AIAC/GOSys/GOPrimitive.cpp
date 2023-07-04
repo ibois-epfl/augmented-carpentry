@@ -162,8 +162,14 @@ namespace AIAC
     std::shared_ptr<GOCylinder> GOCylinder::Add(GOPoint p1, GOPoint p2, float radius)
     {
         auto ptrGO = std::make_shared<GOCylinder>(GOCylinder(p1, p2, radius));
+        ptrGO->InitGLObject();
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;
+    }
+
+    void GOCylinder::InitGLObject(){
+        m_GLObjects = CreateCylinder(m_PStart.GetPosition(), m_PEnd.GetPosition(), m_Radius,
+                                     m_Color, m_Color);
     }
 
     std::shared_ptr<GOCylinder> GOCylinder::Get(const uint32_t& id)
