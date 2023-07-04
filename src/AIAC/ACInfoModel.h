@@ -8,47 +8,57 @@
 #include "pugixml.hpp"
 
 namespace AIAC{
+enum class ACIMState{
+    NOT_DONE,
+    CURRENT,
+    DONE,
+};
+
 class TimberInfo{
 public:
-    struct Drill{
-        std::string id;
-        glm::vec3 start;
-        glm::vec3 end;
-        double radius;
-        std::vector<GOPrimitive> objsToRender;
+    struct Hole{
+        ACIMState m_State;
+        std::string m_ID;
+        glm::vec3 m_Start;
+        bool m_StartAccessible;
+        glm::vec3 m_End;
+        bool m_EndAccessible;
+        double m_Radius;
+        std::set<std::string> m_Neighbors;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
     };
     struct Face{
-        std::string id;
-        bool exposed;
-        glm::vec3 normal;
-        glm::vec3 center;
-        std::set<std::string> lines;
-        std::set<std::string> neighbors;
-        std::vector<GOPrimitive> objsToRender;
+        std::string m_ID;
+        bool m_Accessible;
+        glm::vec3 m_Normal;
+        glm::vec3 m_Center;
+        std::set<std::string> m_Lines;
+        std::set<std::string> m_Neighbors;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
     };
     struct Line{
-        std::string id;
-        bool exposed;
-        glm::vec3 start;
-        glm::vec3 end;
-        std::set<std::string> neighbors;
-        std::vector<GOPrimitive> objsToRender;
+        std::string m_ID;
+        bool m_Accessible;
+        glm::vec3 m_Start;
+        glm::vec3 m_End;
+        std::set<std::string> m_Neighbors;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitiveIDs;
     };
     struct Cut{
-        std::string id;
-        std::map<std::string, Face> faces;
-        std::map<std::string, Line> lines;
+        ACIMState m_State;
+        std::string m_ID;
+        std::map<std::string, Face> m_Faces;
+        std::map<std::string, Line> m_Lines;
     };
 
     std::string GetID() const { return m_ID; }
     std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
-    bool IsExecuted() const { return m_Executed; }
 
 private:
     std::string m_ID;
     std::vector<glm::vec3> m_Bbox;
-    bool m_Executed = false; // TODO: states instead of executed?
-    std::map<std::string, Drill> m_Drills;
+    ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
+    std::map<std::string, Hole> m_Holes;
     std::map<std::string, Cut> m_Cuts;
 
     friend class ACInfoModel;
@@ -83,12 +93,68 @@ public:
 
     /**
      * @brief Set the active TimberInfo object
+     * @param timberID m_ID of the TimberInfo object
      */
-    void SetActiveTimberInfo(std::string timberID) { m_CurrentActiveTimberID = timberID; }
+    void SetActiveTimberInfo(std::string timberID) { m_CurrentActiveTimberID = timberID; UpdateBboxGOLine(); }
+
+    /**
+     * @brief Update the bounding box of the timber (use the current Active TimberInfo)
+     */
+    void UpdateBboxGOLine();
+
+    /**
+     * @brief transform all the GOPrimitive belonging to the ACInfoModel
+     * @param transformMat transformation matrix
+     */
+    void TransformGOPrimitives(glm::mat4x4 transformMat);
+
+    /**
+     * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
+     * @return The length of the scanned model. (in TSLAM unit)
+     */
+    float GetLength();
+
+    /**
+     * @brief Convert string m_State to ACIMState
+     * @param m_State ACIMState
+     */
+    static ACIMState StringToState(std::string m_State);
+
+    /**
+     * @brief Convert a string separated by space to glm::vec3
+     * @param str string separated by space
+     * @return glm::vec3
+     */
+    static glm::vec3 StringToVec3(std::string str);
+
+    /**
+     * @brief Convert a string separated by space to a list of string
+     * @param str string separated by space
+     * @return a std::vector<std::string>
+     */
+    static std::vector<std::string> StringToTokens(std::string str);
+
+    /**
+     * @brief Convert a string separated by space to a set of tokens
+     * @param str string separated by space
+     * @return a std::set<std::string>
+     */
+    static std::set<std::string> StringToSet(std::string str);
+
+    /**
+     * @brief Convert a string to bool
+     * @param str string
+     * @return bool
+     */
+    static bool StringToBool(std::string str);
 
 private:
+    float m_Scale = 50.0f;
+
     std::map<std::string, TimberInfo> m_TimberInfo;
     std::string m_CurrentActiveTimberID;
+
+    std::vector<std::shared_ptr<GOLine>> m_BboxGOLines;
 };
 
 }

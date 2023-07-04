@@ -13,7 +13,6 @@ namespace AIAC
         m_Id = GenerateId();
     }
 
-
     uint32_t GOPrimitive::GenerateId()
     {
         uint32_t id = std::hash<std::string>{}(std::to_string(std::rand()));
@@ -120,8 +119,7 @@ namespace AIAC
     std::shared_ptr<GOCircle> GOCircle::Add(GOPoint center, glm::vec3 normal, float radius)
     {
         auto ptrGO = std::make_shared<GOCircle>(GOCircle(center, normal, radius));
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
+        AIAC_GOREG->Register(ptrGO);
         return ptrGO;
     }
 
