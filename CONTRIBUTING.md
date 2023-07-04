@@ -385,11 +385,12 @@ To add, remove or get Geometric Objects (GO) from any layer:
 ```c++
 #include "AIAC/GOSys/GO.h"
 
-uint32_t idPt1 = GOPoint::Add(1, 1, 1);             // create a point
-auto pt1 = GOPoint::Get(idPt1);                     // get the point
-float x = pt1->X();                                 // access GO properties
-auto pts = GOPoint::GetAll();                       // access all GO of one type
-GOPoint::Remove(idPt1);                             // remove the point from registry
+std::shared_ptr<GOPoint> pt1 = GOPoint::Add(1, 1, 1);             // create a point
+
+std::shared_ptr<GOPoint> pt1copy = GOPoint::Get(pt1.GetId());     // get the point elsewhere
+float x = pt1copy->X();                                 // access GO properties
+auto pts = GOPoint::GetAll();                           // access all GO of one type
+GOPoint::Remove(pt1copy.GetId());                                 // remove the point from registry
 ```
 Note the the Constructor for each GO is private, the only way to instance it is to use the `Add()` static function. The reason why we decided to adopt this "registry" pattern is because all GO object need to be created as a smart pointer to be copied into a GOregistry. We must be sure that every GOObject is subscribed to the GORegistry. A normal c++ constructor cannot create the smart pointer of the create object, hence the Add() function does this for us.  All the next layers will retrive those smart pointers from the GOregistry and eventually modify them. And finally the render will go through the GOregistry and "bake" (render) all the GO geometries.
 
