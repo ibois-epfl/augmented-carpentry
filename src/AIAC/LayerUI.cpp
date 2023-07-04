@@ -359,20 +359,23 @@ namespace AIAC
 
     void LayerUI::SetPaneUIToolhead()
     {
-        
+        ImGui::Text("TTool control");
+        ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::PushID(0);
         ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
         ImGui::PopID();
         ImGui::SameLine();
-
         ImGui::PushID(1);
         ImGui::RadioButton("Track", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 0);
         ImGui::PopID();
         ImGui::SameLine();
-        
         ImGui::PushID(2);
         ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
         ImGui::PopID();
+
+
+
+        ImGui::EndChild();
 
 
         std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolheadName();
