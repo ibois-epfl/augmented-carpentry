@@ -32,9 +32,7 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
     acApp_ptr->PushLayer<AIAC::LayerSlam>();
     acApp_ptr->PushLayer<AIAC::LayerModel>();
-    acApp_ptr->GetWindow()->ReleaseCurrent();
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();
-    acApp_ptr->GetWindow()->MakeCurrent();
     acApp_ptr->PushLayer<AIAC::LayerInstructor>();
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
