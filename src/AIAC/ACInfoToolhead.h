@@ -14,7 +14,21 @@ namespace AIAC
         DRILLBIT,
         CIRCULARSAW,
         SABERSAW,
-        CHAINSAW
+        CHAINSAW,
+        AXIS
+    };
+
+    struct AxisData
+    {
+        std::string Name;
+        glm::vec3 Origin;
+        glm::vec3 XAxis;
+        glm::vec3 YAxis;
+        glm::vec3 YPoint1;
+        glm::vec3 ZAxis;
+        glm::vec3 ZPoint1;
+        glm::vec3 ZPoint2;
+        float Radius;
     };
 
     /// @brief All the possible states of the toolheads in AC
@@ -136,6 +150,9 @@ namespace AIAC
                     case ACToolHeadType::SABERSAW:
                         return m_SaberSawD;
                         break;
+                    case ACToolHeadType::AXIS:
+                        return m_AxisD;
+                        break;
                     default:
                         break;
                 }
@@ -158,6 +175,7 @@ namespace AIAC
             ChainSawData m_ChainSawD;
             /// @brief struct contains info from .acit data for sabersaw
             SaberSawData m_SaberSawD;
+            AxisData m_AxisD;
 
             friend class ACInfoToolhead;
     };
@@ -181,6 +199,7 @@ namespace AIAC
             void AddGOsInfoCircularSaw(ToolHeadData& data);
             void AddGOsInfoChainSaw(ToolHeadData& data);
             void AddGOsInfoSaberSaw(ToolHeadData& data);
+            void AddGOsInfoAxis(ToolHeadData& data);
             /// @brief From the parsed acit geometries, add widgets made by GOs (e.g. text, arrows, etc)
             void AddGOsWidget();
             void AddGOsWidgetDrillBit();

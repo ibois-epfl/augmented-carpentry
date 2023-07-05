@@ -59,6 +59,20 @@ namespace AIAC
             m_SaberSawD.NormalStart = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_SaberSawD.NormalEnd = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
         }
+        else if (type == "axis")
+        {
+            m_Type = ACToolHeadType::AXIS;
+            m_Name = toolhead.attribute("name").as_string();
+
+            m_AxisD.Origin = ParseString2GlmVector(toolhead.child("origin").child_value()) * this->GetScaleF();
+            m_AxisD.XAxis = ParseString2GlmVector(toolhead.child("xaxis").child_value()) * this->GetScaleF();
+            m_AxisD.YAxis = ParseString2GlmVector(toolhead.child("yaxis").child_value()) * this->GetScaleF();
+            m_AxisD.YPoint1 = ParseString2GlmVector(toolhead.child("ypoint1").child_value()) * this->GetScaleF();
+            m_AxisD.ZAxis = ParseString2GlmVector(toolhead.child("zaxis").child_value()) * this->GetScaleF();
+            m_AxisD.ZPoint1 = ParseString2GlmVector(toolhead.child("zpoint1").child_value()) * this->GetScaleF();
+            m_AxisD.ZPoint2 = ParseString2GlmVector(toolhead.child("zpoint2").child_value()) * this->GetScaleF();
+
+        }
         else { AIAC_ERROR("Toolhead type {0} not supported", type); }
 
         return;
@@ -106,6 +120,9 @@ namespace AIAC
                 break;
             case ACToolHeadType::SABERSAW:
                 this->AddGOsInfoSaberSaw(data);
+                break;
+            case ACToolHeadType::AXIS:
+                this->AddGOsInfoAxis(data);
                 break;
             default:
                 AIAC_ERROR("Toolhead type not supported");
@@ -217,6 +234,48 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(ptNormalStart);
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
         // this->m_GOPrimitivesInfo.push_back(lineAxis);
+    }
+    void ACInfoToolhead::AddGOsInfoAxis(ToolHeadData& data)
+    {
+        auto ptOrigin = GOPoint::Add(data.m_AxisD.Origin.x,
+                                     data.m_AxisD.Origin.y,
+                                     data.m_AxisD.Origin.z,
+                                     GOWeight::Thick);
+
+        auto ptX = GOPoint::Add(data.m_AxisD.XAxis.x,
+                                data.m_AxisD.XAxis.y,
+                                data.m_AxisD.XAxis.z,
+                                GOWeight::Thick);
+        auto ptY = GOPoint::Add(data.m_AxisD.YAxis.x,
+                                data.m_AxisD.YAxis.y,
+                                data.m_AxisD.YAxis.z,
+                                GOWeight::Thick);
+        auto ptY1 = GOPoint::Add(data.m_AxisD.YPoint1.x,
+                                 data.m_AxisD.YPoint1.y,
+                                 data.m_AxisD.YPoint1.z,
+                                 GOWeight::Thick);
+        auto ptZ = GOPoint::Add(data.m_AxisD.ZAxis.x,
+                                data.m_AxisD.ZAxis.y,
+                                data.m_AxisD.ZAxis.z,
+                                GOWeight::Thick);
+        auto ptZ1 = GOPoint::Add(data.m_AxisD.ZPoint1.x,
+                                 data.m_AxisD.ZPoint1.y,
+                                 data.m_AxisD.ZPoint1.z,
+                                 GOWeight::Thick);
+        auto ptZ2 = GOPoint::Add(data.m_AxisD.ZPoint2.x,
+                                 data.m_AxisD.ZPoint2.y,
+                                 data.m_AxisD.ZPoint2.z,
+                                 GOWeight::Thick);
+
+        this->m_GOPrimitivesInfo.push_back(ptOrigin);
+        this->m_GOPrimitivesInfo.push_back(ptX);
+        this->m_GOPrimitivesInfo.push_back(ptY);
+        this->m_GOPrimitivesInfo.push_back(ptY1);
+        this->m_GOPrimitivesInfo.push_back(ptZ);
+        this->m_GOPrimitivesInfo.push_back(ptZ1);
+        this->m_GOPrimitivesInfo.push_back(ptZ2);
+
+        
     }
 
     void ACInfoToolhead::AddGOsWidget() {}  // TODO: implement
