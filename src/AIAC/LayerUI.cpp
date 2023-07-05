@@ -359,7 +359,7 @@ namespace AIAC
 
     void LayerUI::SetPaneUIToolhead()
     {
-        ImGui::Text("TTool control");
+        ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::PushID(0);
         ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
@@ -372,9 +372,38 @@ namespace AIAC
         ImGui::PushID(2);
         ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
         ImGui::PopID();
+        ImGui::EndChild();
 
-
-
+        // TODO: to be finished and integrate eventbus?
+        ImGui::Text("Toolhead pose inputs:");
+        ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+        // translation
+        if (ImGui::Button("tFORWARD"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('e');
+        ImGui::SameLine();
+        if (ImGui::Button("tBACKWARD"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('q');
+        if (ImGui::Button("tLEFT"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('a');
+        if (ImGui::Button("tRIGHT"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('d');
+        if (ImGui::Button("tUP"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('w');
+        if (ImGui::Button("tDOWN"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('s');
+        // rotation
+        if (ImGui::Button("rLEFT"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('j');
+        if (ImGui::Button("rRIGHT"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('l');
+        if (ImGui::Button("rUP"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('i');
+        if (ImGui::Button("rDOWN"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('k');
+        if (ImGui::Button("rFORWARD"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('u');
+        if (ImGui::Button("rBACKWARD"))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('o');
         ImGui::EndChild();
 
 

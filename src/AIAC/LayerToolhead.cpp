@@ -17,13 +17,14 @@ namespace AIAC
         //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
 
         TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Oh la la la, tu dois metre un fichier de parametre de camera")
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
         
         // TODO: ObjectTracker needs modelID2Pose to be set, but it is not done during the initialization of object tracker
-        TTool->ManipulateModel('e');
-        TTool->ManipulateModel('q');
+        // FIXME: if needed, to be move to constructor
+        // TTool->ManipulateModel('e');
+        // TTool->ManipulateModel('q');
 
         this->ACInfoToolheadManager->LoadToolheadModels();
     }
@@ -33,7 +34,14 @@ namespace AIAC
         UpdateToolheadState();
         if (m_TtoolState == ttool::EventType::PoseInput)
         {
-            OnPoseManipulation();
+            cv::Mat currentFrame;
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+            // FIXME: (?) if it is not called x2 it does not work on setting pose (?)
+            // create empty cv::mat
+
+            TTool->DrawSilhouette(currentFrame);
+            TTool->DrawSilhouette(currentFrame);
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().ReplaceCvMat(currentFrame);
         }
 
         if (m_TtoolState == ttool::EventType::Tracking)
@@ -41,40 +49,10 @@ namespace AIAC
             cv::Mat currentFrame;
             AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
             TTool->RunOnAFrame(currentFrame);
+            TTool->DrawSilhouette(currentFrame);
+            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().ReplaceCvMat(currentFrame);
             m_Pose = TTool->GetPose();
         }
-
-        // === BEGIN TEST GO Rendering ===
-        // glm::mat4x4 toWorld = GetWorldPose();
-
-        // Testing why the translation seems to not be working.
-        // for (auto& point : m_Points)
-        // {
-        //     cv::Matx44f translate = cv::Matx44f(1, 0, 0, 0,
-        //                                         0, 1, 0, 0,
-        //                                         0, 0, 1, 0.01,
-        //                                         0, 0, 0, 1);
-        //     glm::mat4x4 translateX = glm::make_mat4x4(translate.val);
-        //     point = glm::vec4(point, 1.0f) * translateX;
-        // }
-
-        // for(auto& goObj : m_GOObjects)
-        //     GOPrimitive::Remove(goObj);
-
-        // for (auto point : m_Points)
-        // {
-        //     std::stringstream ss;
-        //     ss << "Point_before: " << point[0] << ", " << point[1] << ", " << point[2] << " ";
-        //     point = toWorld * glm::vec4(point, 1.0f);
-        //     ss << "Point_after: " << point[0] << ", " << point[1] << ", " << point[2];
-        //     AIAC_INFO(ss.str());
-        //     m_GOObjects.push_back(GOPoint::Add(point, 10.5f));
-        // }
-        // === END TEST GO Rendering ===
-
-        // std::stringstream ss;
-        // ss << "Pose: " << m_Pose;
-        // AIAC_INFO(ss.str());
     }
 
     /**
@@ -98,23 +76,27 @@ namespace AIAC
 
     void LayerToolhead::OnPoseManipulation()
     {
-        char key = cv::waitKey(1);
-        while (key != 'x')
+        // char key = cv::waitKey(1);
+        int cnt = 1;
+        while (cnt--)
         {
             cv::Mat currentFrame;
             AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
-            TTool->ShowSilhouette(currentFrame, -1);
-            TTool->ManipulateModel(key);
-            key = cv::waitKey(1);
-            AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetNextFrame();
+            TTool->DrawSilhouette(currentFrame);
+            // cv::cvtColor(currentFrame, currentFrame, cv::COLOR_BGR2RGB);
+            // cv::imshow("TTool Debugging Window", currentFrame);
+            // TTool->ManipulateModel(key);  // <<<<<<<<<
+            // key = cv::waitKey(1);
+            // AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetNextFrame();
+
         }
-        cv::destroyAllWindows();
+        // cv::destroyAllWindows();
         AIAC_INFO("Pose manipulation done");
-        m_TtoolState = ttool::EventType::None;
-        ToolheadStateUI = -1;
+        // m_TtoolState = ttool::EventType::None;
+        // ToolheadStateUI = -1;
 
         // load the ACIT models from the dataset
-        this->ACInfoToolheadManager->LoadToolheadModels();
+        // this->ACInfoToolheadManager->LoadToolheadModels();
     }
 
     /**
