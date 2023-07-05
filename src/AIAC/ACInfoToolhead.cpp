@@ -80,7 +80,7 @@ namespace AIAC
         this->AddGOsInfo(this->m_Data);
         this->AddGOsWidget();
 
-        this->SetVisibility(false);
+        this->SetVisibility(true);  // TODO: set to false
     }
 
     void ACInfoToolhead::AddGOsInfo(ToolHeadData& data)
