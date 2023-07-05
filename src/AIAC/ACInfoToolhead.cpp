@@ -72,15 +72,15 @@ namespace AIAC
         return vec;
     }
 
-    ACInfoToolhead::ACInfoToolhead(std::string acitPath, std::string objPath)
-        : m_ACITPath(acitPath), m_OBJPath(objPath) 
+    ACInfoToolhead::ACInfoToolhead(std::string acitPath, std::string objPath, int id)
+        : m_ACITPath(acitPath), m_OBJPath(objPath), m_ID(id)
     {
         this->m_Data.LoadACIT(acitPath);
 
         this->AddGOsInfo(this->m_Data);
         this->AddGOsWidget();
 
-        this->SetVisibility(true);  // TODO: set to false
+        this->SetVisibility(false);
     }
 
     void ACInfoToolhead::AddGOsInfo(ToolHeadData& data)
