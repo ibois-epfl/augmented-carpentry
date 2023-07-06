@@ -14,12 +14,24 @@ namespace AIAC
                                                                 AIAC::Config::DATASET_DIR);
         std::vector<std::string> toolheadPaths = GetFolderPaths(datasetDir);
 
-        for (auto& toolheadPath : toolheadPaths)
+
+
+        std::string configPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
+                                                                AIAC::Config::CONFIG_FILE);
+        // parse the config file to get the list of acit toolheads from entry "modelFiles"
+
+
+        std::vector<std::string> toolheadACITPaths = ParseConfigFile(configPath, "acitFiles");
+        std::vector<std::string> toolheadOBJPaths = ParseConfigFile(configPath, "modelFiles");
+
+
+
+        // for (auto& toolheadPath : toolheadPaths)
+        for (int i = 0; i < toolheadOBJPaths.size(); i++)
         {
-            std::string acitPath = GetFilePaths(toolheadPath, ".acit")[0];
-            std::string objPath = GetFilePaths(toolheadPath, ".obj")[0];
-            std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(acitPath,
-                                                                                              objPath);
+            std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(toolheadACITPaths[i],
+                                                                                              toolheadOBJPaths[i],
+                                                                                              (i+1));
             AIAC_INFO("Loading toolhead model: {}", acInfoToolhead->GetName());
             this->m_ACInfoToolheadMap.insert(std::make_pair(acInfoToolhead->GetName(), acInfoToolhead));
         }

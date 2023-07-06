@@ -72,8 +72,8 @@ namespace AIAC
         return vec;
     }
 
-    ACInfoToolhead::ACInfoToolhead(std::string acitPath, std::string objPath)
-        : m_ACITPath(acitPath), m_OBJPath(objPath) 
+    ACInfoToolhead::ACInfoToolhead(std::string acitPath, std::string objPath, int id)
+        : m_ACITPath(acitPath), m_OBJPath(objPath), m_ID(id)
     {
         this->m_Data.LoadACIT(acitPath);
 
