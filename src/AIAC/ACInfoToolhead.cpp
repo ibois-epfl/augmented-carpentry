@@ -1,5 +1,6 @@
 #include "ACInfoToolhead.h"
 #include "AIAC/Log.h"
+#include "GeometryUtils.h"
 
 #include "pugixml.hpp"
 
@@ -128,6 +129,7 @@ namespace AIAC
                 AIAC_ERROR("Toolhead type not supported");
                 break;
         }
+        TransformSync();
         return;
     }
 
@@ -302,13 +304,13 @@ namespace AIAC
         {
             // std::shared_ptr<GOPoint> go = std::make_shared<GOPoint>(*(m_GOPrimitivesInfoOriginal[i]));
             glm::vec3 position = m_GOPrimitivesInfoOriginal[i]->GetPosition();
-            std::stringstream ss;
-            ss << "position: " << position.x << " " << position.y << " " << position.z;
-            ss << "\n";
+            // std::stringstream ss;
+            // ss << "position: " << position.x << " " << position.y << " " << position.z;
+            // ss << "\n";
             glm::vec4 position4 = glm::vec4(position, 1.0f);
             glm::vec4 position4_transformed = transform * position4;
-            ss << "position_transformed: " << position4_transformed.x << " " << position4_transformed.y << " " << position4_transformed.z;
-            AIAC_INFO(ss.str());
+            // ss << "position_transformed: " << position4_transformed.x << " " << position4_transformed.y << " " << position4_transformed.z;
+            // AIAC_INFO(ss.str());
             m_GOPrimitivesInfo[i]->SetPosition(position4_transformed);
         }
 
@@ -318,5 +320,60 @@ namespace AIAC
         //     go->Transform(transform);
         //     m_GOPrimitivesWidget[i]->SetValueFrom(go);
         // }
+    }
+
+    void ACInfoToolhead::TransformSync()
+    {
+        // Derive the bounding boxes of the info
+        // Now at the development, we know that m_GOPrimitivesInfo are all GOPoints
+        // In the future, all lines and others are derived from GOPoints, so this should check the type of GOPrimitives        glm::vec3 lbn = glm::vec3(FLT_MAX, FLT_MAX, FLT_MAX);
+        glm::vec3 lbn = glm::vec3(FLT_MAX, FLT_MAX, FLT_MAX);
+        glm::vec3 rtf = glm::vec3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+        for (auto& go : m_GOPrimitivesInfo)
+        {
+            glm::vec3 position = go->GetPosition();
+            lbn.x = std::min(lbn.x, position.x);
+            lbn.y = std::min(lbn.y, position.y);
+            lbn.z = std::min(lbn.z, position.z);
+            rtf.x = std::max(rtf.x, position.x);
+            rtf.y = std::max(rtf.y, position.y);
+            rtf.z = std::max(rtf.z, position.z);
+        }
+        AIAC_INFO("LBN: {} {} {}", lbn[0], lbn[1], lbn[2]);
+        AIAC_INFO("RTF: {} {} {}", rtf[0], rtf[1], rtf[2]);
+
+        glm::vec3 center = (lbn + rtf) / 2.0f;
+        AIAC_INFO("Center: {} {} {}", center[0], center[1], center[2]);
+        
+        AIAC_INFO("Rotating the GO");
+
+        glm::mat4x4 transformToCenter, transformBackFromCenter;
+        transformToCenter = GetTranslationMatrix(-center);
+        transformBackFromCenter = GetTranslationMatrix(center);
+
+        std::stringstream ss;
+        ss << "\n";
+        ss << "Translate: \n";
+        ss << transformToCenter[0][0] << " " << transformToCenter[0][1] << " " << transformToCenter[0][2] << " " << transformToCenter[0][3] << "\n";
+        ss << transformToCenter[1][0] << " " << transformToCenter[1][1] << " " << transformToCenter[1][2] << " " << transformToCenter[1][3] << "\n";
+        ss << transformToCenter[2][0] << " " << transformToCenter[2][1] << " " << transformToCenter[2][2] << " " << transformToCenter[2][3] << "\n";
+        ss << transformToCenter[3][0] << " " << transformToCenter[3][1] << " " << transformToCenter[3][2] << " " << transformToCenter[3][3] << "\n";
+
+        glm::mat4x4 rotation = glm::mat4x4(GetRotationMatrix(glm::vec3(1, 0, 0), 90.0f * M_PI / 180.0f));
+        ss << "Rotation: \n";
+        ss << rotation[0][0] << " " << rotation[0][1] << " " << rotation[0][2] << " " << rotation[0][3] << "\n";
+        ss << rotation[1][0] << " " << rotation[1][1] << " " << rotation[1][2] << " " << rotation[1][3] << "\n";
+        ss << rotation[2][0] << " " << rotation[2][1] << " " << rotation[2][2] << " " << rotation[2][3] << "\n";
+        ss << rotation[3][0] << " " << rotation[3][1] << " " << rotation[3][2] << " " << rotation[3][3] << "\n";
+        AIAC_INFO(ss.str());
+
+        for (auto& go : m_GOPrimitivesInfo)
+        {
+            glm::vec3 position = go->GetPosition();
+            glm::vec3 positionTransformed = transformBackFromCenter * rotation * transformToCenter * glm::vec4(position, 1.0f);
+            go->SetPosition(positionTransformed);
+            AIAC_INFO("Transformed Rotation: {} {} {}", positionTransformed[0], positionTransformed[1], positionTransformed[2]);
+        }
     }
 }

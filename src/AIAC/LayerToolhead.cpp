@@ -27,8 +27,8 @@ namespace AIAC
         TTool->ManipulateModel('q');
 
         this->ACInfoToolheadManager->LoadToolheadModels();
-        // this->ACInfoToolheadManager->SetActiveToolhead("axes");
-        this->ACInfoToolheadManager->SetActiveToolhead("twist_drill_bit_32_165");
+        this->ACInfoToolheadManager->SetActiveToolhead("axes");
+        // this->ACInfoToolheadManager->SetActiveToolhead("twist_drill_bit_32_165");
         // this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
     }
 
@@ -175,9 +175,12 @@ namespace AIAC
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
         glm::vec3 rotationAxis = glm::vec3(1, 0, 0);
         // glm::vec3 globalRotationAxis = ???
+        
         glm::mat3x3 rotationMatrix = GetRotationMatrix(rotationAxis, -90.0f * M_PI / 180.0f);
         glm::highp_mat4x4 rotationMatrix4 = glm::highp_mat4x4(rotationMatrix);
+        
         glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4(toolheadPose.val) * glm::make_mat4x4(toolheadNormalization.val);
+
 
         // std::stringstream ss;
         // ss << "Pose Matrix: " << toolheadPose;
