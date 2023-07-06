@@ -20,7 +20,6 @@ namespace AIAC
         this->ACInfoToolheadManager->LoadToolheadModels();
     }
 
-    // TODO: add the color input to DrawSilhouette()
     void LayerToolhead::OnFrameStart()
     {
         UpdateToolheadStateUI();
@@ -62,7 +61,10 @@ namespace AIAC
     void LayerToolhead::ReloadCameraFromFile()
     {
         TTool->DestrolView();
-        OnAttach();
+        TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
+            );
     }
 
     void LayerToolhead::ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize)
@@ -109,7 +111,7 @@ namespace AIAC
         return;
     }
 
-    //FIXME: solve flickering when changing
+    //FIXME: @hong-bin render: solve flickering when changing
     void LayerToolhead::SetCurrentObject(std::string name)
     {
         this->ACInfoToolheadManager->SetActiveToolhead(name);
