@@ -158,6 +158,7 @@ namespace AIAC
     {
         // During mapping, an overlay panel is opened, so we only render things on it
         // and stop updating the main scene.
+        // TODO: mapping has some problem when calib file is switched (with slam map)
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderGlobalView();
             RenderMappingView();
@@ -170,8 +171,11 @@ namespace AIAC
         }
 
         // Default, render the main scene
-        RenderGlobalView();
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
+        
         RenderMainView();
+        RenderGlobalView();
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -201,6 +205,8 @@ namespace AIAC
 
     void Renderer::RenderGlobalView() {
         glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
+
         m_GlobalView.Activate();
 
         // visualize map
@@ -228,7 +234,6 @@ namespace AIAC
         DrawAllGOs(finalPoseMatrix);
 
         // Bind back to the main framebuffer
-        glUseProgram(m_BasicShaderProgram);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
@@ -258,6 +263,8 @@ namespace AIAC
     }
 
     void Renderer::RenderMainView() {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        
         RenderCameraFrame(AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
 
         // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM

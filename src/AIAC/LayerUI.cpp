@@ -12,6 +12,8 @@
 #include "AIAC/UI/CustomLogos.h"
 #include "LayerCameraCalib.h"
 
+#include "ttool.hh"
+
 
 namespace AIAC
 {
@@ -235,7 +237,7 @@ namespace AIAC
         AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
         ImGui::Text("Resolution: (%d x %d) > (%d x %d)", camera.GetRawWidth(), camera.GetRawHeight(), camera.GetWidth(), camera.GetHeight());
 
-        ImGui::BeginChild("camera_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("camera_function_child", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
             if(ImGui::Button("Start Calibration")){
                 AIAC_APP.GetRenderer()->StartCamCalib();
@@ -257,17 +259,13 @@ namespace AIAC
 
             ImGui::PopStyleColor();
         ImGui::EndChild();
-
-//        Image frame = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame();
-//        AIAC::ImTexture frameImTexture = frame.GetImTexture(ImVec2(800, 480));
-//        ImGui::Image(frameImTexture.ID, ImVec2(frame.GetImTexture().Size.x * 0.5f, frame.GetImTexture().Size.y * 0.5f));
     }
 
     void LayerUI::SetPaneUISlam()
     {
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 260), true, ImGuiWindowFlags_HorizontalScrollbar);
         if (ImGui::Button("Open SLAM map"))
             ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
@@ -296,20 +294,6 @@ namespace AIAC
             }
             ImGuiFileDialog::Instance()->Close();
         }
-
-//        ImGui::SameLine();
-//        if (ImGui::Button("Open camera calib"))
-//            ImGuiFileDialog::Instance()->OpenDialog("ChooseCameraCalib", "Open calib", ".yml", ".");
-//
-//        if (ImGuiFileDialog::Instance()->Display("ChooseCameraCalib"))
-//        {
-//            if (ImGuiFileDialog::Instance()->IsOk())
-//            {
-//            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-//            AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
-//            }
-//            ImGuiFileDialog::Instance()->Close();
-//        }
 
         ImGui::Text("Mapping Functions:");
         ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
@@ -354,26 +338,75 @@ namespace AIAC
             }
             ImGuiFileDialog::Instance()->Close();
         }
-
     }
 
     void LayerUI::SetPaneUIToolhead()
     {
-        
-        ImGui::PushID(0);
+        if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
+
+        ImGui::Text("TTool control:");
+        ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
-        ImGui::PopID();
         ImGui::SameLine();
-
-        ImGui::PushID(1);
         ImGui::RadioButton("Track", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 0);
-        ImGui::PopID();
         ImGui::SameLine();
-        
-        ImGui::PushID(2);
         ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
-        ImGui::PopID();
+        ImGui::EndChild();
 
+        if (AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI != -1)
+        {
+            ImGui::Text("Toolhead pose inputs:");
+            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
+            ImGui::PushStyleVar(ImGuiStyleVar_GrabMinSize, 100);
+            ImGui::PushStyleVar(ImGuiStyleVar_GrabRounding, 5);
+            ImGui::PushItemWidth(-30);
+            float sliderF = 0.f;
+            ImGui::SliderFloat("Teq", &sliderF, -1.0f, 1.0f, "<backward T forward>", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderF != 0.f)
+                if (sliderF > 0.f)
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('e');
+                else
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('q');
+            sliderF = 0.f;
+            ImGui::SliderFloat("Tda", &sliderF, -1.0f, 1.0f, "<left T right>", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderF != 0.f)
+                if (sliderF > 0.f)
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('d');
+                else
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('a');
+            sliderF = 0.f;
+            ImGui::SliderFloat("Tws", &sliderF, -1.0f, 1.0f, "<down T up>", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderF != 0.f)
+                if (sliderF > 0.f)
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('w');
+                else
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('s');
+            sliderF = 0.f;
+            ImGui::SliderFloat("Rjl", &sliderF, -1.0f, 1.0f, "<left R right>", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderF != 0.f)
+                if (sliderF > 0.f)
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('j');
+                else
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('l');
+            sliderF = 0.f;
+            ImGui::SliderFloat("Rik", &sliderF, -1.0f, 1.0f, "<down R up>", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderF != 0.f)
+                if (sliderF > 0.f)
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('i');
+                else
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('k');
+            sliderF = 0.f;
+            ImGui::SliderFloat("Ruo", &sliderF, -1.0f, 1.0f, "<backward R forward>", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderF != 0.f)
+                if (sliderF > 0.f)
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('u');
+                else
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('o');
+            ImGui::PopStyleVar(3);
+            ImGui::PopItemWidth();
+            ImGui::EndChild();
+        }
 
         std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolheadName();
         ImGui::Text("Toolhead active: %s", toolheadName.c_str());
@@ -385,7 +418,9 @@ namespace AIAC
         {
             auto toolNameButton = ImGui::Button(toolheadNames[i].c_str());
             if (toolNameButton)
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->SetActiveToolhead(toolheadNames[i]);
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SetCurrentObject(toolheadNames[i]);
+            }
         }
         ImGui::EndChild();
     }

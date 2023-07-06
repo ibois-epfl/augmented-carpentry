@@ -32,7 +32,7 @@ namespace AIAC
     };
 
     /// @brief All the possible states of the toolheads in AC
-    /*
+    /**
         @brief Struct holding the data of the drillbit toolhead from .acit
 
         @param Name: name of the toolhead
@@ -51,7 +51,7 @@ namespace AIAC
         glm::vec3 Chucktip;
         float Radius;
     };
-    /*
+    /**
         @brief Structs holding the data of the drillbit toolhead from .acit
 
         @param Name: name of the toolhead
@@ -68,7 +68,7 @@ namespace AIAC
         glm::vec3 NormalEnd;
         float Radius;
     };
-    /*
+    /**
         @brief Structs holding the data of the chainsaw toolhead from .acit
 
         @param Name: name of the toolhead
@@ -88,7 +88,7 @@ namespace AIAC
         glm::vec3 NormalEnd;
         float Width;
     };
-    /*
+    /**
         @brief Struct holding the data of the drillbit toolhead from .acit
 
         @param Name: name of the toolhead
@@ -113,12 +113,12 @@ namespace AIAC
             ToolHeadData() = default;
             ~ToolHeadData() = default;
         private:
-            /*
+            /**
                 @brief Load the .acit file and parse the data into the correct struct member values
                 @param path: path to the .acit file
             */
             void LoadACIT(std::string path);
-            /*
+            /**
                 @brief Parse a string into a glm::vec3
                 @param str: string to parse
                 @return glm::vec3: the parsed vector
@@ -184,13 +184,15 @@ namespace AIAC
     class ACInfoToolhead
     {
         public:
-            ACInfoToolhead(std::string acitPath, std::string meshObjPath);
+            ACInfoToolhead(std::string acitPath, std::string meshObjPath, int id);
 
         public: __always_inline
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Data.GetType(); }
             /// @brief Get the name of the toolhead
             std::string GetName() const { return m_Data.GetName(); }
+            /// @brief Get the id of the toolhead
+            inline int GetId() const { return m_ID; }
 
         public:
             /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
@@ -234,6 +236,8 @@ namespace AIAC
             std::string m_OBJPath;
             /// @brief the data loaded from the .acit
             ToolHeadData m_Data;
+            /// @brief the id of the object given by its path index position in the config file
+            int m_ID;
 
         private:
             /// @brief the geometries that defines the hole and used in the feedback layer
