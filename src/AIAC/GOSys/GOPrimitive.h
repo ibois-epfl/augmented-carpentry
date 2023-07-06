@@ -117,9 +117,10 @@ namespace AIAC
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
             auto ptrPoint = std::dynamic_pointer_cast<GOPoint>(ptrGO);
-            if (ptrPoint)
+            if (ptrPoint != nullptr)
             {
                 SetPosition(ptrPoint->GetPosition());
+                return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
@@ -174,9 +175,10 @@ namespace AIAC
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
             auto ptrLine = std::dynamic_pointer_cast<GOLine>(ptrGO);
-            if (ptrLine)
+            if (ptrLine != nullptr)
             {
                 SetPts(ptrLine->GetPStart(), ptrLine->GetPEnd());
+                return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
@@ -234,7 +236,9 @@ namespace AIAC
                 SetNormal(ptrCircle->GetNormal());
                 SetRadius(ptrCircle->GetRadius());
                 SetEdgeColor(ptrCircle->GetEdgeColor());
+                return;
             }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
 
     private:
@@ -291,7 +295,9 @@ namespace AIAC
                 SetPEnd(ptrCylinder->GetPEnd());
                 SetRadius(ptrCylinder->GetRadius());
                 SetEdgeColor(ptrCylinder->GetEdgeColor());
+                return;
             }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
 
     private:
