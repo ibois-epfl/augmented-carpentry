@@ -20,9 +20,6 @@ class ACIM:
         
         self._timber_ets = {}
 
-        
-
-
     def dump_data(self):
         self._prettify(self._root)
 
@@ -91,7 +88,7 @@ class ACIM:
         state_et = ET.SubElement(hole_et, "state")
         state_et.text = state
 
-        neighbours_et = ET.SubElement(hole_et, "neighbours")
+        neighbours_et = ET.SubElement(hole_et, "neighbors")
         neighbours_et.text = str(neighbours)
 
         start_et = ET.SubElement(hole_et, "start")
