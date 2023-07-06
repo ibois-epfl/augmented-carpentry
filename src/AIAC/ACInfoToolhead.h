@@ -218,6 +218,11 @@ namespace AIAC
             // TODO: @Hong-Bin to be implemented in the GO system
             /// @brief transform all the geometries, widgets and mesh contained in the ACInfoToolhead object
             void Transform(glm::mat4 transform);
+        
+        public:
+            /// @brief rotate around local x axis of the toolhead 90 degrees to match the AC coordinate system with the TTool coordinate system
+            /// Should only be called once at loading time
+            void TransformSync();
 
         public: __always_inline
             std::string ToString() const { return m_Data.GetName(); }
