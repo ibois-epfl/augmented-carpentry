@@ -367,6 +367,38 @@ namespace AIAC
                     m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
                     break;
                 }
+                case _GOPolyline:
+                {
+                    std::shared_ptr<GOPolyline> go = std::dynamic_pointer_cast<GOPolyline>(m_GOPrimitivesInfoOriginal[i]);
+                    std::shared_ptr<GOPolyline> goCopied = std::make_shared<GOPolyline>(*go);
+                    goCopied->Transform(transform);
+                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
+                    break;
+                }
+                case _GOTriangle:
+                {
+                    std::shared_ptr<GOTriangle> go = std::dynamic_pointer_cast<GOTriangle>(m_GOPrimitivesInfoOriginal[i]);
+                    std::shared_ptr<GOTriangle> goCopied = std::make_shared<GOTriangle>(*go);
+                    goCopied->Transform(transform);
+                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
+                    break;
+                }
+                case _GOMesh:
+                {
+                    std::shared_ptr<GOMesh> go = std::dynamic_pointer_cast<GOMesh>(m_GOPrimitivesInfoOriginal[i]);
+                    std::shared_ptr<GOMesh> goCopied = std::make_shared<GOMesh>(*go);
+                    goCopied->Transform(transform);
+                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
+                    break;
+                }
+                case _GOText:
+                {
+                    std::shared_ptr<GOText> go = std::dynamic_pointer_cast<GOText>(m_GOPrimitivesInfoOriginal[i]);
+                    std::shared_ptr<GOText> goCopied = std::make_shared<GOText>(*go);
+                    goCopied->Transform(transform);
+                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
+                    break;
+                }
                 default:
                     break;
             }
