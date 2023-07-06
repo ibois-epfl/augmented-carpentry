@@ -33,18 +33,24 @@ namespace AIAC
                                                                                               toolheadOBJPaths[i],
                                                                                               (i+1));
             AIAC_INFO("Loading toolhead model: {}", acInfoToolhead->GetName());
+            acInfoToolhead->SetVisibility(false);
             this->m_ACInfoToolheadMap.insert(std::make_pair(acInfoToolhead->GetName(), acInfoToolhead));
         }
         if (this->m_ACInfoToolheadMap.empty())
             AIAC_ERROR("No toolhead models loaded!");
             
         this->m_ActiveACInfoToolhead = this->m_ACInfoToolheadMap.begin()->second;
+        this->m_ActiveACInfoToolhead->SetVisibility(true);
     }
 
     void ACInfoToolheadManager::SetActiveToolhead(const std::string& toolheadName)
     {
+        this->m_ActiveACInfoToolhead->SetVisibility(false);
         if (this->m_ACInfoToolheadMap.find(toolheadName) != this->m_ACInfoToolheadMap.end())
+        {
             this->m_ActiveACInfoToolhead = this->m_ACInfoToolheadMap[toolheadName];
+            this->m_ActiveACInfoToolhead->SetVisibility(true);
+        }
         else
             AIAC_ERROR("Toolhead model {} not found!", toolheadName);
     }

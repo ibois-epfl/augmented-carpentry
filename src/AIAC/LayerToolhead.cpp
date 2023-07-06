@@ -5,6 +5,7 @@
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
+#include "GeometryUtils.h"
 
 namespace AIAC
 {
@@ -18,6 +19,8 @@ namespace AIAC
         
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
+        this->ACInfoToolheadManager->SetActiveToolhead("twist_drill_bit_32_165");
+        // this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
     }
 
     void LayerToolhead::OnFrameStart()
@@ -46,6 +49,9 @@ namespace AIAC
             }
             m_Pose = TTool->GetPose();
         }
+
+        glm::mat4x4 toWorld = GetWorldPose();
+        this->ACInfoToolheadManager->GetActiveToolhead()->Transform(toWorld);
 
         if (m_TtoolState == ttool::EventType::None)
         {
@@ -77,6 +83,11 @@ namespace AIAC
             );
     }
 
+    /**
+     * @brief Get the world pose of the toolhead
+     * 
+     * @return The transformation matrix that transforms from the toolhead frame to the world frame
+    */
     glm::mat4x4 LayerToolhead::GetWorldPose()
     {
         glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
@@ -84,10 +95,6 @@ namespace AIAC
         cv::Matx44f toolheadPose = TTool->GetPose();
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
         glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
-
-        std::stringstream ss;
-        ss << "Pose Matrix: " << toolheadNormalization * toolheadPose;
-        AIAC_INFO(ss.str());
 
         glm::mat4x4 worldPose = cameraPose * glm::transpose(toolheadPoseGlm);
         return worldPose;
@@ -121,7 +128,6 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
         TTool->DrawSilhouette(currentFrame);
         TTool->DrawSilhouette(currentFrame);
-
         this->TTool->SetObjectID(id);
     }
 }

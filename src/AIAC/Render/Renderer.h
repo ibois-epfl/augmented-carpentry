@@ -42,6 +42,8 @@ namespace AIAC
         GLuint GetCamCalibView() const { return m_CamCalibView.GetTexture(); };
         void SetCamCalibViewSize(float w, float h);
 
+        glm::mat4 GetProjectionMatrix() { return m_GlobalCamMatrix; };
+
     public:
         AIAC::Mesh PointCloudMap;
         AIAC::Mesh DigitalModel;
@@ -62,6 +64,7 @@ namespace AIAC
         void RenderCamCalibView();
 
         void RenderCameraFrame(int w, int h, bool useRawFrame = false);
+
 
     private:
         float m_CamW, m_CamH;
