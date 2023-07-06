@@ -182,6 +182,8 @@ namespace AIAC
     }
 
     void Renderer::RenderGlobalView() {
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
         m_GlobalView.Activate();
 
         // visualize map
