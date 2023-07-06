@@ -237,9 +237,9 @@ namespace AIAC
 
         private:
             /// @brief the geometries that defines the hole and used in the feedback layer
-            std::vector<std::shared_ptr<GOPoint>> m_GOPrimitivesInfo;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfo;
             /// @brief the original geometries of GOinfos at loading time
-            std::vector<std::shared_ptr<GOPoint>> m_GOPrimitivesInfoOriginal;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfoOriginal;
             /// @brief the geometries the create the widget UI of the toolhead
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
             /// @brief the original geometries of GOWidgets at loading time
