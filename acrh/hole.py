@@ -7,6 +7,7 @@ import random
 import log
 import acim
 import visual_debug as vd
+import util
 
 def _detect_pt_in_dict(pt, pt_dict):
     is_unique = True
@@ -48,20 +49,6 @@ def _get_single_face_brep_center(brep):
     center_point = bbox_b.GetBoundingBox(True).Center
     return center_point
 
-def _explode_brep(brep):
-    exploded_objects = []
-    if brep.IsSolid:
-        for face in brep.Faces:
-            face_brep = face.DuplicateFace(False)
-            if face_brep:
-                exploded_objects.append(face_brep)
-    else:
-        for face in brep.Faces:
-            face_brep = face.DuplicateFace(False)
-            if face_brep:
-                exploded_objects.append(face_brep)
-    return exploded_objects
-
 def parse_data_from_brep(ACIM,
                          p_GUID,
                          cylinder_b,
@@ -74,9 +61,9 @@ def parse_data_from_brep(ACIM,
         :param bbox_b: the brep of the bounding box
     """
     log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-    bbox_faces_b = _explode_brep(bbox_b)
-    cylinder_faces_b = _explode_brep(cylinder_b)
-    log.info("cylinder_faces_b: " + str(len(cylinder_faces_b)))
+    bbox_faces_b = util.explode_brep(bbox_b)
+    cylinder_faces_b = util.explode_brep(cylinder_b)
+    log.info("cylinder faces: " + str(len(cylinder_faces_b)))
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     # get the centers of the cylinder's bases and if they are exposed
     acim_centers = {}
@@ -197,7 +184,7 @@ def parse_data_from_brep(ACIM,
         neighbor_acim_str = []
         for i in range(0, len(neighbor_lst)):
             temp_str = ""
-            for j in range(0, len(neighbor_lst[i])):
+            for j in range(1, len(neighbor_lst[i])):
                 temp_str += str(next_hole_ids[neighbor_lst[i][j]]) + " "
             temp_str = temp_str[:-1]
             neighbor_acim_str.append(temp_str)

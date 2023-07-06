@@ -7,6 +7,7 @@ import datetime as dt
 import log
 import acim
 import hole
+import cut
 
 import visual_debug as vd
 
@@ -60,6 +61,7 @@ def distinguish_holes_cuts(breps):
     cuts_b = []
 
     for b in breps:
+        vd.addBrep(b, clr=(255, 255, 0))
         is_cut = True
         for f in b.Faces:
             f_brep = f.ToBrep()
@@ -69,7 +71,7 @@ def distinguish_holes_cuts(breps):
                 continue
         if is_hole:
             holes_b.append(b)
-        elif is_cut:
+        elif is_cut: 
             cuts_b.append(b)
 
         is_hole = False
@@ -118,11 +120,18 @@ def main():
         # FIXME: it is not working for holes on cut for now
         # get holes and cuts breps
         holes_b, cuts_b = distinguish_holes_cuts(brep_result)
+        log.info("Found " + str(len(holes_b)) + " holes and " + str(len(cuts_b)) + " cuts.")
 
         # analyse and loading holes and cuts into .acim
-        for hole_b in holes_b:
-            log.info("Processing hole: " + str(hole_b))
-            hole.parse_data_from_brep(ACIM, str(p_GUID), hole_b, bbox_b)
+        if holes_b.__len__() != 0:
+            for hole_b in holes_b:
+                log.info("Processing hole: " + str(hole_b))
+                hole.parse_data_from_brep(ACIM, str(p_GUID), hole_b, bbox_b)
+
+        if cuts_b.__len__() != 0:
+            for cut_b in cuts_b:
+                log.info("Processing cut: " + str(cut_b))
+                cut.parse_data_from_brep(ACIM, str(p_GUID), cut_b, bbox_b)
 
         sc.doc.Views.Redraw()
     ACIM.dump_data()
