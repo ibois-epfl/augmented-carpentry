@@ -32,8 +32,8 @@ namespace AIAC
             // FIXME: (?) if it is not called x2 it does not work on setting pose (?)
             if (IsShowSilouhette)
             {
-                TTool->DrawSilhouette(currentFrame);
-                TTool->DrawSilhouette(currentFrame);
+                TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
+                TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
             }
         }
 
