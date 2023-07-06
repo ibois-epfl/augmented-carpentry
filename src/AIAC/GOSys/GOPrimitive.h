@@ -62,6 +62,8 @@ namespace AIAC
         inline int SetWeight(float weight) { m_Weight = weight; return m_Id;}
 
         virtual void Transform(const glm::mat4x4& transformMat) {};
+        
+        virtual void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) { AIAC_ERROR("Not Implemented"); };
 
     protected:
         std::string m_Name;
@@ -113,6 +115,16 @@ namespace AIAC
             m_Position = transformMat * glm::vec4(m_Position, 1.0f);
         }
 
+        inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
+            auto ptrPoint = std::dynamic_pointer_cast<GOPoint>(ptrGO);
+            if (ptrPoint != nullptr)
+            {
+                SetPosition(ptrPoint->GetPosition());
+                return;
+            }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
+        }
+
         operator glm::vec3() const { return m_Position; }
 
     private:
@@ -161,6 +173,16 @@ namespace AIAC
             m_PEnd.Transform(transformMat);
         }
 
+        inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
+            auto ptrLine = std::dynamic_pointer_cast<GOLine>(ptrGO);
+            if (ptrLine != nullptr)
+            {
+                SetPts(ptrLine->GetPStart(), ptrLine->GetPEnd());
+                return;
+            }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
+        }
+
     private:
         GOPoint m_PStart;
         GOPoint m_PEnd;
@@ -206,6 +228,19 @@ namespace AIAC
             m_Normal = glm::normalize(glm::vec3(transformMat * glm::vec4(m_Normal, 0.0f)));
         }
 
+        inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
+            auto ptrCircle = std::dynamic_pointer_cast<GOCircle>(ptrGO);
+            if (ptrCircle)
+            {
+                SetCenter(ptrCircle->GetCenter());
+                SetNormal(ptrCircle->GetNormal());
+                SetRadius(ptrCircle->GetRadius());
+                SetEdgeColor(ptrCircle->GetEdgeColor());
+                return;
+            }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
+        }
+
     private:
         GOPoint m_Center;
         glm::vec3 m_Normal = glm::vec3(0, 0, 1);
@@ -242,9 +277,27 @@ namespace AIAC
         float GetRadius() const { return m_Radius; }
         glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
+        void SetPStart(GOPoint pStart) { m_PStart = pStart; }
+        void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
+        void SetRadius(float radius) { m_Radius = radius; }
+        void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; }
+
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
+        }
+
+        inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
+            auto ptrCylinder = std::dynamic_pointer_cast<GOCylinder>(ptrGO);
+            if (ptrCylinder)
+            {
+                SetPStart(ptrCylinder->GetPStart());
+                SetPEnd(ptrCylinder->GetPEnd());
+                SetRadius(ptrCylinder->GetRadius());
+                SetEdgeColor(ptrCylinder->GetEdgeColor());
+                return;
+            }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
 
     private:
@@ -288,6 +341,13 @@ namespace AIAC
             }
         }
 
+        GOPrimitive operator* (const glm::mat4x4& transformMat)
+        {
+            GOPolyline polyline = *this;
+            polyline.Transform(transformMat);
+            return polyline;
+        }
+
     private:
         std::vector<GOPoint> m_Points;
         bool m_IsClosed = true;
@@ -328,6 +388,13 @@ namespace AIAC
             m_P1.Transform(transformMat);
             m_P2.Transform(transformMat);
             m_P3.Transform(transformMat);
+        }
+
+        GOPrimitive operator* (const glm::mat4x4& transformMat)
+        {
+            GOTriangle triangle = *this;
+            triangle.Transform(transformMat);
+            return triangle;
         }
 
     private:
@@ -395,6 +462,13 @@ namespace AIAC
             }
         }
 
+        GOPrimitive operator* (const glm::mat4x4& transformMat)
+        {
+            GOMesh mesh = *this;
+            mesh.Transform(transformMat);
+            return mesh;
+        }
+
     private:
         std::vector<glm::vec3> m_Vertices;
         std::vector<uint32_t> m_Indices;
@@ -432,6 +506,13 @@ namespace AIAC
         inline const double GetTextSize() const { return m_Size; }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ { m_Anchor.Transform(transformMat); }
+
+        GOPrimitive operator* (const glm::mat4x4& transformMat)
+        {
+            GOText text = *this;
+            text.Transform(transformMat);
+            return text;
+        }
 
     private:
         GOPoint m_Anchor;

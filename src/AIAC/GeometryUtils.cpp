@@ -34,6 +34,16 @@ namespace AIAC{
         return mat;
     }
 
+    glm::mat4x4 GetTranslationMatrix(glm::vec3 translationVector)
+    {
+        return glm::mat4x4(
+            1, 0, 0, translationVector.x,
+            0, 1, 0, translationVector.y,
+            0, 0, 1, translationVector.z,
+            0, 0, 0, 1
+        );
+    }
+
     glm::mat4x4 GetRigidTransformationMatrix(std::vector<glm::vec3> srcPts, std::vector<glm::vec3> dstPts) {
         glm::mat4x4 rigidTransformMatrix = glm::mat4x4(1.0f);
 
