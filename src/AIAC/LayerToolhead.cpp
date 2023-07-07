@@ -93,6 +93,11 @@ namespace AIAC
         glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
 
         cv::Matx44f toolheadPose = TTool->GetPose();
+        // scale the translation by 20.0f
+        toolheadPose(0, 3) *= 20.0f;
+        toolheadPose(1, 3) *= 20.0f;
+        toolheadPose(2, 3) *= 20.0f;
+
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
         glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
 
