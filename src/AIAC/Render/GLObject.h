@@ -98,20 +98,20 @@ namespace AIAC {
     };
 
     // -------------------- //
-    //   GLTriangleObject   //
+    //   GLMeshObject   //
     // -------------------- //
-    class GLTriangleObject : public GLObject {
+    class GLMeshObject : public GLObject {
     public:
-        GLTriangleObject() { type = GLObjectType::TRIANGLES; }
+        GLMeshObject() { type = GLObjectType::TRIANGLES; }
 
-        GLTriangleObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices);
+        GLMeshObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices);
         
         // copy constructor
-        GLTriangleObject(const GLTriangleObject &other) : GLObject(other) {
+        GLMeshObject(const GLMeshObject &other) : GLObject(other) {
             indexBuf = other.indexBuf;
         }
 
-        GLTriangleObject& operator=(const GLTriangleObject &other) {
+        GLMeshObject& operator=(const GLMeshObject &other) {
             GLObject::operator=(other);
             indexBuf = other.indexBuf;
             return *this;
