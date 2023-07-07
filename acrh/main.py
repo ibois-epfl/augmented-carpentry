@@ -61,7 +61,6 @@ def distinguish_holes_cuts(breps):
     cuts_b = []
 
     for b in breps:
-        vd.addBrep(b, clr=(255, 255, 0))
         is_cut = True
         for f in b.Faces:
             f_brep = f.ToBrep()
@@ -96,6 +95,7 @@ def main():
     if not pieces:
         log.error("No pieces selected. Exiting...")
         return
+    log.info("Selected " + str(len(pieces)) + " pieces.")
 
     for p_GUID in pieces:
         log.info("Processing piece: " + str(p_GUID))
@@ -125,13 +125,19 @@ def main():
         # analyse and loading holes and cuts into .acim
         if holes_b.__len__() != 0:
             for hole_b in holes_b:
+                vd.addBrep(hole_b, clr=(255, 255, 0, 30))
                 log.info("Processing hole: " + str(hole_b))
                 hole.parse_data_from_brep(ACIM, str(p_GUID), hole_b, bbox_b)
 
         if cuts_b.__len__() != 0:
+            cut_counter = 1
             for cut_b in cuts_b:
+                vd.addBrep(cut_b, clr=(255, 0, 255, 30))
                 log.info("Processing cut: " + str(cut_b))
                 cut.parse_data_from_brep(ACIM, str(p_GUID), cut_b, bbox_b)
+
+                vd.addSingleDot(cut_b.GetBoundingBox(True).Center, str(cut_counter), (0,0,255))
+                cut_counter += 1
 
         sc.doc.Views.Redraw()
     ACIM.dump_data()
