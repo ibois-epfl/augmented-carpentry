@@ -8,6 +8,7 @@ import log
 import acim
 import hole
 import cut
+import util
 
 import visual_debug as vd
 
@@ -57,24 +58,92 @@ def distinguish_holes_cuts(breps):
     """
     is_hole = False
     is_cut = False
+    is_mix = False
     holes_b = []
     cuts_b = []
+    mix_b = []
 
+    # parse holes, cuts and mix
     for b in breps:
         is_cut = True
         for f in b.Faces:
             f_brep = f.ToBrep()
             f = f_brep.Faces[0]
             if not f.IsPlanar():
+                is_cut = False
                 is_hole = True
-                continue
+                b_faces = util.explode_brep(b)
+                for b_face in b_faces:
+                    if b_face.Faces[0].IsPlanar():
+                        b_face_edges = b_face.Edges
+                        for b_face_edge in b_face_edges:
+                            if not b_face_edge.IsClosed:
+                                is_mix = True
+                                is_hole = False
+                                break
+                        if is_mix:
+                            break
+                break
+
         if is_hole:
             holes_b.append(b)
         elif is_cut: 
             cuts_b.append(b)
+        elif is_mix:
+            mix_b.append(b)
 
         is_hole = False
         is_cut = False
+        is_mix = False
+    
+    # deal with mix
+    candidate_cuts = []
+    candidate_holes = []
+    for b in mix_b:
+        # -- algorithm draft --
+        # (1) explode
+        # (2) seperate in tow list flat surfaces (cuts + cylinder's bases) and non flat surfaces (cylinders)
+        # (3) cap each object in both lists
+        # (4) boolunion every object in both lists
+        # (5) check if closed, if it is 
+        # ----------------------
+        # (1) explode
+        faces_b = util.explode_brep(b)
+
+        # (2) seperate in tow list flat surfaces (cuts + cylinder's bases) and non flat surfaces (cylinders)
+        flat_faces_b = []
+        non_flat_faces_b = []
+        for f_b in faces_b:
+            if f_b.Faces[0].IsPlanar():
+                flat_faces_b.append(f_b)
+            else:
+                non_flat_faces_b.append(f_b)
+
+        # (*) cap the cylinders
+        non_flat_faces_b = [f_b.CapPlanarHoles(sc.doc.ModelAbsoluteTolerance) for f_b in non_flat_faces_b]
+        
+        # (4) boolunion every object in both lists
+        flat_faces_b = rc.Geometry.Brep.CreateBooleanUnion(flat_faces_b, sc.doc.ModelAbsoluteTolerance)
+        non_flat_faces_b = rc.Geometry.Brep.CreateBooleanUnion(non_flat_faces_b, sc.doc.ModelAbsoluteTolerance)
+
+        # (3) cap candidate cuts
+        flat_faces_b = [f_b.CapPlanarHoles(sc.doc.ModelAbsoluteTolerance) for f_b in flat_faces_b]
+        # non_flat_faces_b = [f_b.CapPlanarHoles(sc.doc.ModelAbsoluteTolerance) for f_b in non_flat_faces_b]
+
+        # (*) merge all coplanar faces in breps cut candidates
+        for f_b in flat_faces_b:
+            if f_b is not None:
+                f_b.MergeCoplanarFaces(sc.doc.ModelAbsoluteTolerance)
+
+        # (5) check if closed, if it is add to cuts, if not add to holes
+        for f_b in flat_faces_b:
+            if f_b is not None:
+                if f_b.IsSolid:
+                    cuts_b.append(f_b)
+        for f_b in non_flat_faces_b:
+            if f_b is not None:
+                if f_b.IsSolid:
+                    holes_b.append(f_b)
 
     return holes_b, cuts_b
 
@@ -117,10 +186,11 @@ def main():
             log.error("No breps found after boolean difference. Exiting...")
             return
 
-        # FIXME: it is not working for holes on cut for now
         # get holes and cuts breps
         holes_b, cuts_b = distinguish_holes_cuts(brep_result)
-        log.info("Found " + str(len(holes_b)) + " holes and " + str(len(cuts_b)) + " cuts.")
+        log.info("Found:\n" \
+            + "\t --holes: " +  str(len(holes_b)) + "\n" \
+            + "\t --cuts: " + str(len(cuts_b)) + "\n")
 
         # analyse and loading holes and cuts into .acim
         if holes_b.__len__() != 0:
