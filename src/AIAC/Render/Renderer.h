@@ -42,8 +42,6 @@ namespace AIAC
         GLuint GetCamCalibView() const { return m_CamCalibView.GetTexture(); };
         void SetCamCalibViewSize(float w, float h);
 
-        glm::mat4 GetProjectionMatrix() { return m_GlobalCamMatrix; };
-
     public:
         AIAC::Mesh PointCloudMap;
         AIAC::Mesh DigitalModel;
