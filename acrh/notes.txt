@@ -51,19 +51,26 @@ AC C++ APP:
     </hole>
     <cuts id="1">
         <state>Current OR Done OR NotDone</state>
-        <face id="1">
-            <exposed>True</exposed>
-            <lines>1 2 3 4</lines>
-            <normal>0 0 1</normal>
-            <center>0.5 0.5 0.5</center>
-            <neighbors>2 3 4</neighbors>
-        </face>
-        <line id="1">
-            <exposed>True</exposed>
-            <neighbors>2 3 4</neighbors>
-            <start>0 0 0</start>
-            <end>1 0 0</end>
-        </line>
+        <faces>
+          <face id="1">
+              <exposed>True</exposd>
+              <exposed>false</exposed>
+              <edges>1 2 3 4</lines>
+          </face>
+          <face id="2">
+              ...
+          </face>
+        </faces>
+        <edges>
+          <edge id="1">
+              <start>0 0 0</start>
+              <end>1 0 0</end>
+              <exposed>True</exposed>
+          </edge>
+          <edge id="2">
+              ...
+          </line>
+        </edges>
     </cuts>
   </timber>
   <timber id="GUID value">

@@ -106,6 +106,45 @@ class ACIM:
         radius_et = ET.SubElement(hole_et, "radius")
         radius_et.text = str(radius)
 
+    def add_cut(self,
+                guid,
+                edges,
+                faces,
+                state=__ACIM_STATE__[0]
+    ):
+        """
+            Add a cut to a timber
+            :param guid: the guid of the timber
+            :param edges: (List[dict]) the edges of the faces
+            :param faces: (List[dict]) the faces of the cut
+            :param state: the state of the cut, by default NotDone
+        """
+        cut_et = ET.SubElement(self._timber_ets[guid], "cut")
+        cut_et.set("id", str(len(self._timber_ets[guid].findall("cut"))))
+
+        state_et = ET.SubElement(cut_et, "state")
+        state_et.text = state
+
+        faces_et = ET.SubElement(cut_et, "faces")
+        for f in faces:
+            face_et = ET.SubElement(faces_et, "face")
+            face_et.set("id", str(f["face_id"]))
+            face_state_et = ET.SubElement(face_et, "state")
+            face_state_et.text = state
+            face_exposed_et = ET.SubElement(face_et, "exposed")
+            face_exposed_et.text = str(f["exposed"])
+            face_edges_et = ET.SubElement(face_et, "edges")
+            face_edges_et.text = str(f["edges"])
+
+        edges_et = ET.SubElement(cut_et, "edges")
+        for e in edges:
+            edges_et = ET.SubElement(edges_et, "edge")
+            edges_et.set("id", str(e["line_id"]))
+            edge_start_et = ET.SubElement(edges_et, "start")
+            edge_start_et.text = str(e["start"])
+            edge_end_et = ET.SubElement(edges_et, "end")
+            edge_end_et.text = str(e["end"])
+
     def peek_current_hole_id(self, guid):
         """ Get the last hole id of a timber """
         return (len(self._timber_ets[guid].findall("hole"))+1)

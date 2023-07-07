@@ -20,6 +20,12 @@ def addPt(pt, clr=(0,0,0)):
         guid = sc.doc.Objects.AddPoint(pt)
         rs.ObjectColor(guid, clr)
 
+def addPtName(pt, name, clr=(0,0,0)):
+    if __IS_VDEBUG__:
+        guid = sc.doc.Objects.AddPoint(pt)
+        rs.ObjectColor(guid, clr)
+        rs.ObjectName(guid, name)
+
 def addBrep(brep, clr=(0,0,0)):
     if __IS_VDEBUG__:
         guid = sc.doc.Objects.AddBrep(brep)
@@ -34,6 +40,12 @@ def addLine(line, clr=(0,0,0)):
     if __IS_VDEBUG__:
         guid = sc.doc.Objects.AddLine(line)
         rs.ObjectColor(guid, clr)
+
+def addSingleDot(pt, txt, clr=(0,0,0)):
+    if __IS_VDEBUG__:
+        text = str(txt)
+        text_GUID = sc.doc.Objects.AddTextDot(text, pt)
+        rs.ObjectColor(text_GUID, clr)
 
 def addDotPt(ptA, ptB, txt, clr=(0,0,0)):
     if __IS_VDEBUG__:

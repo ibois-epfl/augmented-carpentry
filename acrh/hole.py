@@ -9,21 +9,6 @@ import acim
 import visual_debug as vd
 import util
 
-def _detect_pt_in_dict(pt, pt_dict):
-    is_unique = True
-    for pt_dict in pt_dict.keys():
-        X_a = round(pt.X, 3)
-        Y_a = round(pt.Y, 3)
-        Z_a = round(pt.Z, 3)
-
-        X_b = round(pt_dict.X, 3)
-        Y_b = round(pt_dict.Y, 3)
-        Z_b = round(pt_dict.Z, 3)
-
-        if X_a == X_b and Y_a == Y_b and Z_a == Z_b:
-            is_unique = False
-            break
-    return is_unique
 
 def _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt):
     for face in cylinder_faces_b:
@@ -36,12 +21,6 @@ def _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt):
             radius = round(radius, 3)
             log.info("radius: " + str(radius))
     return round(radius, 3)
-
-def _get_crv_center(crv):
-    bbox = crv.GetBoundingBox(True)
-    bbox_b = bbox.ToBrep()
-    center_point = bbox_b.GetBoundingBox(True).Center
-    return center_point
 
 def _get_single_face_brep_center(brep):
     bbox = brep.GetBoundingBox(True)
@@ -67,22 +46,21 @@ def parse_data_from_brep(ACIM,
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     # get the centers of the cylinder's bases and if they are exposed
     acim_centers = {}
-    acim_hash = []
     for face in cylinder_faces_b:
         if face.Faces[0].IsPlanar():
             continue
         face_curves = face.DuplicateEdgeCurves(True)
         for face_crv in face_curves:
-            face_crv_center = _get_crv_center(face_crv)
+            face_crv_center = util.get_crv_circle_center(face_crv)
             is_on_face = False
             if bbox_b.IsPointInside(face_crv_center, sc.doc.ModelAbsoluteTolerance, True):
-                if _detect_pt_in_dict(face_crv_center, acim_centers):
+                if util.is_pt_unique_in_dict(face_crv_center, acim_centers):
                     acim_centers[face_crv_center] = is_on_face
                     vd.addPt(face_crv_center, (0,255,0))
                     continue
             if rs.IsPointOnSurface(face, face_crv_center):
                 is_on_face = True
-            if _detect_pt_in_dict(face_crv_center, acim_centers):
+            if util.is_pt_unique_in_dict(face_crv_center, acim_centers):
                 acim_centers[face_crv_center] = is_on_face
                 vd.addPt(face_crv_center, (255,0,0))
     log.info("length of acim_centers: " + str(len(acim_centers)))
@@ -115,8 +93,9 @@ def parse_data_from_brep(ACIM,
 
         radius = _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt)
         log.info("radius: " + str(radius))
-        vd.addLine(rg.Line(start_pt, end_pt))
+        vd.addLine(rg.Line(start_pt, end_pt), (255,165,0))
         vd.addDotPt(ptA=start_pt, ptB=end_pt, clr=(0,255,0), txt=str(ACIM.peek_current_hole_id(p_GUID)))
+        
         for face in cylinder_faces_b:
             if not face.Faces[0].IsPlanar():
                 face_curves = face.DuplicateEdgeCurves(True)
@@ -159,7 +138,6 @@ def parse_data_from_brep(ACIM,
             pt1 = centers_lst_reorder[i]
             pt2 = centers_lst_reorder[i+1]
             ln = rg.Line(pt1, pt2)
-            # vd.addLine(ln)
             hole_axis_ln.append(ln)
         
         # detect neighbours
@@ -191,7 +169,7 @@ def parse_data_from_brep(ACIM,
         log.info("neighbor acim str: " + str(neighbor_acim_str))
 
         for i, axis_ln in enumerate(hole_axis_ln):
-            vd.addLine(axis_ln)
+            vd.addLine(axis_ln, (255,165,0))
             vd.addDotLn(ln=axis_ln, clr=(30,255,230), txt=str(ACIM.peek_current_hole_id(p_GUID)))
 
             start_pt = rg.Point3d(0,0,0)
@@ -215,8 +193,8 @@ def parse_data_from_brep(ACIM,
                 if not face.Faces[0].IsPlanar():
                     radius = 0
                     face_curves = face.DuplicateEdgeCurves(True)
-                    face_center_A = _get_crv_center(face_curves[0])
-                    face_center_B = _get_crv_center(face_curves[1])
+                    face_center_A = util.get_crv_circle_center(face_curves[0])
+                    face_center_B = util.get_crv_circle_center(face_curves[1])
 
                     vd.addCurve(face_curves[0], (255,0,255))
                     vd.addCurve(face_curves[1], (255,0,255))
