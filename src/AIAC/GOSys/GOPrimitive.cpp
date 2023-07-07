@@ -102,19 +102,21 @@ namespace AIAC
 
     void GOLine::InitGLObject()
     {
-        if (m_Weight <= 1.0f) {
-            std::vector<glm::vec3> vertices;
-            std::vector<glm::vec4> colors;
-            vertices.push_back(m_PStart.GetPosition());
-            vertices.push_back(m_PEnd.GetPosition());
-            colors.push_back(m_Color);
-            colors.push_back(m_Color);
-            m_GLObjects.push_back(std::make_shared<GLLineObject>(vertices, colors, m_Weight));
-        } else {
-            float radius = m_Weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-            m_GLObjects = CreateCylinder(m_PStart.GetPosition(), m_PEnd.GetPosition(), radius,
-                                         m_Color, m_Color);
-        }
+        std::vector<glm::vec3> vertices;
+        vertices.push_back(m_PStart.GetPosition());
+        vertices.push_back(m_PEnd.GetPosition());
+        m_GLObjects = CreatePolyline(vertices, false, m_Color, m_Weight);
+
+        // if (m_Weight <= 1.0f) {
+        //     std::vector<glm::vec4> colors;
+        //     colors.push_back(m_Color);
+        //     colors.push_back(m_Color);
+        //     m_GLObjects.push_back(std::make_shared<GLLineObject>(vertices, colors, m_Weight));
+        // } else {
+        //     float radius = m_Weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+        //     m_GLObjects = CreateCylinder(m_PStart.GetPosition(), m_PEnd.GetPosition(), radius,
+        //                                  m_Color, m_Color);
+        // }
     }
 
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
@@ -208,6 +210,10 @@ namespace AIAC
         return ptrGO;
     }
 
+    void GOPolyline::InitGLObject() {
+        m_GLObjects = CreatePolyline(m_Points, m_IsClosed, m_Color, m_Weight);
+    }
+
     std::shared_ptr<GOPolyline> GOPolyline::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOPolyline>(id);
@@ -218,11 +224,26 @@ namespace AIAC
         return AIAC_GOREG->GetAllGOs<GOPolyline>();
     }
 
-
     GOTriangle::GOTriangle(GOPoint p1, GOPoint p2, GOPoint p3)
         : m_P1(p1), m_P2(p2), m_P3(p3)
     {
         m_Type = GOTypeFlags::_GOTriangle;
+    }
+
+    void GOTriangle::InitGLObject() {
+        std::vector<uint32_t> indices;
+        std::vector<glm::vec3> vertices;
+        std::vector<glm::vec4> colors;
+        indices.push_back(0);
+        indices.push_back(1);
+        indices.push_back(2);
+        vertices.push_back(m_P1.GetPosition());
+        vertices.push_back(m_P2.GetPosition());
+        vertices.push_back(m_P3.GetPosition());
+        colors.push_back(m_Color);
+        colors.push_back(m_Color);
+        colors.push_back(m_Color);
+        m_GLObjects.push_back(std::make_shared<GLMeshObject>(vertices, colors, indices));
     }
 
     std::shared_ptr<GOTriangle> GOTriangle::Add(GOPoint p1, GOPoint p2, GOPoint p3)
@@ -252,6 +273,10 @@ namespace AIAC
         : m_Vertices(vertices), m_Indices(indices), m_Normals(normals), m_Colors(colors)
     {
         m_Type = GOTypeFlags::_GOMesh;
+    }
+
+    GOMesh::InitGLObject(){
+        m_GLObjects = GLMeshObject(m_Vertices, m_Indices, m_Normals, m_Colors);
     }
 
     std::shared_ptr<GOMesh> GOMesh::Add()

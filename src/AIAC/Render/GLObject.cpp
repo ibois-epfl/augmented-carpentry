@@ -80,9 +80,9 @@ namespace AIAC
     }
 
     // -------------------- //
-    //   GLTriangleObject   //
+    //   GLMeshObject   //
     // -------------------- //
-    GLTriangleObject::GLTriangleObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices) {
+    GLMeshObject::GLMeshObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices) {
         this->type = GLObjectType::TRIANGLES;
         this->size = indices.size();
 
@@ -92,7 +92,7 @@ namespace AIAC
         GLObject::BufferData(vertices, colors);
     }
 
-    void GLTriangleObject::Draw()
+    void GLMeshObject::Draw()
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuf);
         
@@ -234,7 +234,7 @@ namespace AIAC
         }
 
 
-        glObjs.push_back(std::make_shared<GLTriangleObject>(vertices, cylinderColorVec, flattenedIndices));
+        glObjs.push_back(std::make_shared<GLMeshObject>(vertices, cylinderColorVec, flattenedIndices));
         // glObjs.push_back(std::make_shared<GLLineObject>(capContourBase, edgeColorVec, 1.0f));
         // glObjs.push_back(std::make_shared<GLLineObject>(capContourTop, edgeColorVec, 1.0f));
 
@@ -292,7 +292,7 @@ namespace AIAC
         vector<glm::vec4> faceColorVec(vertices.size(), color);
         vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
 
-        // auto faceObj = std::make_shared<GLTriangleObject>(vertices, faceColorVec, indices);
+        // auto faceObj = std::make_shared<GLMeshObject>(vertices, faceColorVec, indices);
         auto edgeObj = std::make_shared<GLLineObject>(edges, edgeColorVec, edgeWeight);
 
         std::vector< std::shared_ptr<GLObject>> glObjs;
@@ -302,5 +302,31 @@ namespace AIAC
         return glObjs;
     }
 
+    std::vector< std::shared_ptr<GLObject> > CreatePolyline(vector<glm::vec3> vertices, bool isClosed, glm::vec4 color, float lineWidth){
+        // TODO: dealing with lineWidth > 1.0
+        if(lineWidth <= 1.0){
+            vector<glm::vec3> vertices; vertices.reserve(vertices.size() * 2);
+            vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+            for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
+                vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+                vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+            }
+            vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
+
+            if(goPolyline.IsClosed()){
+                vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
+                vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+            }
+            vector<glm::vec4> colors(vertices.size(), color);
+
+            return std::make_shared<GLLineObject>(vertices, colors, lineWidth);
+        } else {
+            auto glObjs = std::vector< std::shared_ptr<GLObject> >();
+            for(int i = 1; i < goPolyline.GetPoints().size(); i++){
+                auto line = CreateLine(goPolyline.GetPoints()[i - 1].GetPosition(), goPolyline.GetPoints()[i].GetPosition(), color, lineWidth);
+                glObjs.insert(glObjs.end(), line.begin(), line.end());
+            }
+        }
+    }
 
 } // namespace AIAC
