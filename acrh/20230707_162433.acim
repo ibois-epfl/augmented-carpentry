@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<acim version="0.1.0">
+    <timber id="0027c48a-1c67-424b-b9d3-5c77cbcb4a8d">
+        <executed>NotDone</executed>
+        <bbox>
+            <corner id="0">-0.462400086708 -0.084769768863 -0.174935665706</corner>
+            <corner id="1">0.199219902317 -0.084769768863 -0.174935665706</corner>
+            <corner id="2">0.199219902317 0.084769768863 -0.174935665706</corner>
+            <corner id="3">-0.462400086708 0.084769768863 -0.174935665706</corner>
+            <corner id="4">-0.462400086708 -0.084769768863 0.0</corner>
+            <corner id="5">0.199219902317 -0.084769768863 0.0</corner>
+            <corner id="6">0.199219902317 0.084769768863 0.0</corner>
+            <corner id="7">-0.462400086708 0.084769768863 0.0</corner>
+            </bbox>
+        </timber>
+    </acim>
