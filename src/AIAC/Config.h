@@ -19,6 +19,7 @@ public:
 
     inline static const std::string SEC_TTOOL = "TTool";
     inline static const std::string CONFIG_FILE = "ConfigFile";
+    inline static const std::string DATASET_DIR = "DatasetDir";
 
     inline static const std::string SEC_RENDERER = "Renderer";
     inline static const std::string PCD_MAP_PATH = "PointCloudMapPath";

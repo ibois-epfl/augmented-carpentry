@@ -63,6 +63,7 @@ namespace AIAC
 
         void RenderCameraFrame(int w, int h, bool useRawFrame = false);
 
+
     private:
         float m_CamW, m_CamH;
 
