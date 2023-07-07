@@ -290,6 +290,8 @@ namespace AIAC
             }
         }
 
+        void InitGLObject();
+
     private:
         std::vector<GOPoint> m_Points;
         bool m_IsClosed = true;
