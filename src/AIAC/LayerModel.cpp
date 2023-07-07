@@ -16,7 +16,7 @@ namespace AIAC
     void LayerModel::OnAttach()
     {
         m_ACInfoModel.Load("assets/ACModel/test.acim");
-        m_ScannedModel.Load("assets/ACModel/28_model.ply");
+        m_ScannedModel.Load("assets/ACModel/01_scanned_model.ply");
         AlignModels();
 
         
