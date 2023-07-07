@@ -19,8 +19,6 @@ namespace AIAC
         
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
-        this->ACInfoToolheadManager->SetActiveToolhead("twist_drill_bit_32_165");
-        // this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
     }
 
     void LayerToolhead::OnFrameStart()
@@ -99,7 +97,11 @@ namespace AIAC
         toolheadPose(2, 3) *= 20.0f;
 
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
-        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
+        toolheadNormalization(0, 3) *= 20.0f;
+        toolheadNormalization(1, 3) *= 20.0f;
+        toolheadNormalization(2, 3) *= 20.0f;
+
+        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadPose * toolheadNormalization).val);
 
         glm::mat4x4 worldPose = cameraPose * glm::transpose(toolheadPoseGlm);
         return worldPose;
