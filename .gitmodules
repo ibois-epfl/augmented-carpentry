@@ -31,6 +31,7 @@
 	path = deps/freetype
 	url = https://gitlab.freedesktop.org/freetype/freetype
 [submodule "deps/TTool"]
+	branch = main
 	path = deps/TTool
 	url = git@github.com:ibois-epfl/TTool.git
 [submodule "pugixml"]

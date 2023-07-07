@@ -55,7 +55,7 @@ namespace AIAC
                 layer->OnFrameAwake();
 
             for (auto& layer : m_LayerStack)
-                layer->OnFrameStart();                
+                layer->OnFrameStart(); 
 
             m_Window->OnUpdate();
 

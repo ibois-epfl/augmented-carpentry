@@ -54,6 +54,8 @@ namespace AIAC
 
         inline void DeleteGlTexture() { glDeleteTextures(1, &m_GlTextureObj); m_GlTextureObj = 0;}
 
+        inline void ReplaceCvMat(cv::Mat cvMat) { m_CvMat = cvMat; }
+
         Image& operator=(cv::Mat cvImg){ UpdateData(std::move(cvImg)); return *this; }
 
     private:

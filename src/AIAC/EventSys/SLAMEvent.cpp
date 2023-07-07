@@ -27,6 +27,9 @@ namespace AIAC
         AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.height = paramHeight;
         AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.width = paramWidth;
 
+        // update the camera parameters for TTool
+        AIAC_APP.GetLayer<LayerToolhead>()->ReloadCameraFromMatrix(cameraMatrix, cv::Size(paramWidth, paramHeight));
+
         // update projection matrix
         AIAC_APP.GetRenderer()->InitProjMatrix();
 

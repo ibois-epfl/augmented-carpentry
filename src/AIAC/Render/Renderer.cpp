@@ -111,11 +111,33 @@ namespace AIAC
                 float(m_GlobalView.GetW()) / float(m_GlobalView.GetH()), 0.1f, 100.0f
         );
 
+        std::stringstream ss;
+        ss << "Global View: ";
+        cv::Mat globalProjMatrix;
+        CvtGlmMat2CvMat(m_GlobalProjMatrix, globalProjMatrix);
+        ss << globalProjMatrix;
+        AIAC_INFO(ss.str());
+        
+
         m_GlobalCamMatrix = glm::lookAt(
                 glm::vec3(20, 20, 20),   // the position of your camera, in world space
                 DigitalModel.GetBboxCenter(),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
+
+        auto testLookAt4TTool = glm::lookAt(
+                glm::vec3(0, 0, 0),   // the position of your camera, in world space
+                glm::vec3(0, 0, 1),   // where you want to look at, in world space
+                glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
+        );
+
+        std::stringstream ss2;
+        ss2 << "Look At: ";
+        cv::Mat testLookAt4TToolCvMat;
+        CvtGlmMat2CvMat(testLookAt4TTool, testLookAt4TToolCvMat);
+        ss2 << testLookAt4TToolCvMat;
+        AIAC_INFO(ss2.str());
+
     }
 
     void Renderer::ReloadMeshes()
@@ -136,6 +158,7 @@ namespace AIAC
     {
         // During mapping, an overlay panel is opened, so we only render things on it
         // and stop updating the main scene.
+        // TODO: mapping has some problem when calib file is switched (with slam map)
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderGlobalView();
             RenderMappingView();
@@ -148,8 +171,11 @@ namespace AIAC
         }
 
         // Default, render the main scene
-        RenderGlobalView();
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
+        
         RenderMainView();
+        RenderGlobalView();
     }
 
     void Renderer::SetGlobalViewSize(float w, float h) {
@@ -178,6 +204,9 @@ namespace AIAC
     }
 
     void Renderer::RenderGlobalView() {
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
+
         m_GlobalView.Activate();
 
         // visualize map
@@ -205,11 +234,11 @@ namespace AIAC
         DrawAllGOs(finalPoseMatrix);
 
         // Bind back to the main framebuffer
-        glUseProgram(m_BasicShaderProgram);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
     void Renderer::RenderMappingView() {
+        glBindVertexArray(m_VAO);
         m_MappingView.Activate();
 
         RenderCameraFrame(600, 442);
@@ -234,6 +263,8 @@ namespace AIAC
     }
 
     void Renderer::RenderMainView() {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        
         RenderCameraFrame(AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
 
         // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
@@ -254,6 +285,8 @@ namespace AIAC
             for (auto& mesh : Meshes) {
                 mesh.DrawEdges(m_DefaultEdgeColor);
             }
+            // Draw All objects
+            DrawAllGOs(finalPoseMatrix);
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
     }

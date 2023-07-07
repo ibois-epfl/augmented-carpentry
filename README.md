@@ -8,6 +8,7 @@
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## TODOList
+> - [ ] the change of the calibration file brakes the tslam (but not the ttool it seems)
 > - [ ] when we create the output yaml map we should not the calibration file and/or the camera model since this files is calibration-dependent
 > - [ ] create find package for TSlam instead install it locally
 > - [ ] for the reporitories we roked in IBOIS for the gitsubmodules, be sure that nobody can do modifications
@@ -87,7 +88,7 @@ They are made to be print as stickers. The code to generate them can be found ![
 ## Build
 Cloning the repo with submodules
 ```bash
-git clone --recursive git@github.com:ibois-epfl/TSlam.git
+git clone --recursive git@github.com:ibois-epfl/augmented-carpentry.git
 ```
 or
 ```bash
@@ -102,7 +103,7 @@ If it is the first time you are installing AC, set all the dependecies options i
     ./cmake/install_TSlam.sh (Although CMakeList.txt run this when INSTALL_TSLAM option is on, you might need to install TSlam with this command manually as its need sudo priviledge)
     ./cmake/install_TTool.sh
     ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
-    ./build.sh
+    ./build.sh  # or cmake --build . --target AC
 ```
 To run the code:
 ```bash
