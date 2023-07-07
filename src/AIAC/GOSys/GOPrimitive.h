@@ -367,6 +367,7 @@ namespace AIAC
             polyline.Transform(transformMat);
             return polyline;
         }
+        void InitGLObject();
 
     private:
         std::vector<GOPoint> m_Points;
