@@ -129,12 +129,7 @@ namespace AIAC
         // if(radius <= 24){
         //     return 24;
         // }
-
-        if (radius <= 3){
-            return 3;
-        } else {
-            return 8;
-        }
+        return 8;
     }
 
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
@@ -170,7 +165,6 @@ namespace AIAC
                     .x = static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
                     .z = static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
             };
-            cout << i << ": " << cp.x << " " << cp.z << endl;
             cylinderPoles.push_back(cp);
         }
 

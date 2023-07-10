@@ -134,6 +134,7 @@ namespace AIAC
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Position = transformMat * glm::vec4(m_Position, 1.0f);
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -192,6 +193,7 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -247,6 +249,7 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Center.Transform(transformMat);
             m_Normal = glm::normalize(glm::vec3(transformMat * glm::vec4(m_Normal, 0.0f)));
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -307,6 +310,7 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -363,6 +367,7 @@ namespace AIAC
             for (auto& point : m_Points) {
                 point.Transform(transformMat);
             }
+            InitGLObject();
         }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
@@ -412,6 +417,7 @@ namespace AIAC
             m_P1.Transform(transformMat);
             m_P2.Transform(transformMat);
             m_P3.Transform(transformMat);
+            InitGLObject();
         }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
@@ -459,7 +465,7 @@ namespace AIAC
          * @brief Load .ply and add the corresponding GOMesh to the scene.
          * @return uint32_t Id of the mesh.
          */
-        static uint32_t LoadPly(std::string);
+        static std::shared_ptr<GOMesh> LoadPly(std::string);
 
         virtual ~GOMesh() = default;
 
@@ -470,10 +476,11 @@ namespace AIAC
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
         const std::vector<glm::vec3> GetNormals() const { return m_Normals; }
         const std::vector<glm::vec4> GetColors() const { return m_Colors; }
-        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; }
-        void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; }
+        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; InitGLObject(); }
+        void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; InitGLObject(); }
         void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
-        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; }
+        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; InitGLObject(); }
+        void SetColor(glm::vec4 color) { m_Colors = std::vector<glm::vec4>(m_Vertices.size(), color); InitGLObject(); }
         // FIXME: override the SetColor function for Mesh
         
         void InitGLObject();
@@ -488,6 +495,7 @@ namespace AIAC
             for (auto& normal : m_Normals) {
                 normal = glm::normalize(glm::vec3(transformMat * glm::vec4(normal, 0.0f)));
             }
+            InitGLObject();
         }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
