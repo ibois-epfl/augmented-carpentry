@@ -249,7 +249,10 @@ namespace AIAC
     void Renderer::RenderMainView() {
         glBindVertexArray(m_VAO);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         RenderCameraFrame(AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
 
         // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
