@@ -42,7 +42,7 @@ public:
     float GetLength();
 
 private:
-    uint32_t m_MeshID;
+    std::shared_ptr<GOMesh> m_Mesh;
     std::vector<glm::vec3> m_Bbox;
     std::vector<std::shared_ptr<GOLine> > m_BboxGOLines;
 };
