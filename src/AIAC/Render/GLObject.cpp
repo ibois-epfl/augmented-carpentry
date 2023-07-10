@@ -2,6 +2,7 @@
 using namespace std;
 namespace AIAC
 {
+    static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 20.0f;
     // GLObject
     void GLObject::BindVBOs(){
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuf);
@@ -35,6 +36,11 @@ namespace AIAC
         glGenBuffers(1, &this->colorBuf);
         glBindBuffer(GL_ARRAY_BUFFER, this->colorBuf);
         glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+    }
+
+    void GLObject::DeleteVBOs() {
+        // glDeleteBuffers(1, &vertexBuf);
+        // glDeleteBuffers(1, &colorBuf);
     }
 
     // ----------------- //
@@ -85,6 +91,10 @@ namespace AIAC
     GLMeshObject::GLMeshObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, const std::vector<uint32_t> &indices) {
         this->type = GLObjectType::TRIANGLES;
         this->size = indices.size();
+        
+        this->m_Indices = indices;
+        this->m_Vertices = vertices;
+        this->m_Colors = colors;
 
         glGenBuffers(1, &this->indexBuf);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuf);
@@ -97,7 +107,7 @@ namespace AIAC
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuf);
         
         BindVBOs();
-        glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, this->m_Indices.size(), GL_UNSIGNED_INT, nullptr);
     }
 
     // ---------------------- //
@@ -109,16 +119,22 @@ namespace AIAC
 
     int GetSectorNum(float radius)
     {
-        if(radius <= 3){
+        // TODO: there is a bug if sector number > 8, now we just set it to 8
+        // if(radius <= 3){
+        //     return 8;
+        // }
+        // if(radius <= 12){
+        //     return 16;
+        // }
+        // if(radius <= 24){
+        //     return 24;
+        // }
+
+        if (radius <= 3){
+            return 3;
+        } else {
             return 8;
         }
-        if(radius <= 12){
-            return 12;
-        }
-        if(radius <= 24){
-            return 24;
-        }
-        return 36;
     }
 
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
@@ -129,9 +145,9 @@ namespace AIAC
     }
 
     std::vector< std::shared_ptr<GLObject> > CreateCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
-        if(sectorNum == -1){
-            sectorNum = GetSectorNum(radius);
-        }
+        // if(sectorNum == -1){
+        sectorNum = GetSectorNum(radius);
+        // }
         std::vector<CylinderPole> cylinderPoles; // vector of structs
 
         glm::vec3 x1 = baseCenter, x2 = topCenter;
@@ -154,6 +170,7 @@ namespace AIAC
                     .x = static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
                     .z = static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
             };
+            cout << i << ": " << cp.x << " " << cp.z << endl;
             cylinderPoles.push_back(cp);
         }
 
@@ -209,10 +226,20 @@ namespace AIAC
         capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
         capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
 
+
+        int counter = 0;
         for(auto vid: indices){
             flattenedIndices.push_back((uint)vid.x);
             flattenedIndices.push_back((uint)vid.y);
             flattenedIndices.push_back((uint)vid.z);
+            // if(vertices[0][0] == 50){
+            //     cout << "mmmmmmmmmm"<< counter <<  vertices[vid.x][0] << " " << vertices[vid.y][0] << " " << vertices[vid.z][0] << endl;
+            //     counter++;
+            //     if (counter == 42){
+            //         cout << "CCCCCCCCCCCCCCAP" << endl;
+            //         break;
+            //     }
+            // }
         }
 
         vector<glm::vec4> cylinderColorVec(vertices.size(), color);
@@ -222,17 +249,23 @@ namespace AIAC
         // auto capContourBase = std::make_shared<GOLineObject>(capContourBase, edgeColor);
         // auto capContourTop = std::make_shared<GOLineObject>(capContourTop, edgeColor);
 
-        std::vector<std::shared_ptr<GLObject> > glObjs;
+        std::vector<std::shared_ptr<GLObject>> glObjs;
 
         // print all vertices & indices
-        for (int i = 0; i < vertices.size(); i++){
-            std::cout << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << std::endl;
-        }
-        for (int i = 0; i < flattenedIndices.size(); i++){
-            std::cout << flattenedIndices[i] << " ";
-            if (i % 3 == 2) std::cout << std::endl;
-        }
+        // if(vertices[0][0] == 50){
+        //     for (int i = 0; i < vertices.size(); i++){
+        //     std::cout << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << std::endl;
+        //     }
+        //     for (int i = 0; i < flattenedIndices.size(); i++){
+        //         std::cout << flattenedIndices[i] << " ";
+        //         if (i % 3 == 2) std::cout << std::endl;
+        //     }
+        // }
+        
 
+        // cout << "vertices size: " << vertices.size() << endl;
+        // cout << "cylinderColorVec size: " << cylinderColorVec.size() << endl;
+        // cout << "indices size: " << flattenedIndices.size() << endl;
 
         glObjs.push_back(std::make_shared<GLMeshObject>(vertices, cylinderColorVec, flattenedIndices));
         // glObjs.push_back(std::make_shared<GLLineObject>(capContourBase, edgeColorVec, 1.0f));
@@ -304,29 +337,29 @@ namespace AIAC
 
     std::vector< std::shared_ptr<GLObject> > CreatePolyline(vector<glm::vec3> vertices, bool isClosed, glm::vec4 color, float lineWidth){
         // TODO: dealing with lineWidth > 1.0
-        if(lineWidth <= 1.0){
-            vector<glm::vec3> vertices; vertices.reserve(vertices.size() * 2);
-            vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
-            for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
-                vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
-                vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+        auto glObjs = std::vector< std::shared_ptr<GLObject> >();
+        if(lineWidth <= 1.0f){
+            vector<glm::vec3> lineObjVertices; lineObjVertices.reserve(vertices.size() * 2);
+            lineObjVertices.emplace_back(vertices[0]);
+            for (int i = 1; i < vertices.size() - 1; i++) {
+                lineObjVertices.emplace_back(vertices[i]);
+                lineObjVertices.emplace_back(vertices[i]);
             }
-            vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
-
-            if(goPolyline.IsClosed()){
-                vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
-                vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+            lineObjVertices.emplace_back(vertices[vertices.size() - 1]);
+            if(isClosed){
+                lineObjVertices.emplace_back(vertices[vertices.size() - 1]);
+                lineObjVertices.emplace_back(vertices[0]);
             }
-            vector<glm::vec4> colors(vertices.size(), color);
-
-            return std::make_shared<GLLineObject>(vertices, colors, lineWidth);
+            vector<glm::vec4> colors(lineObjVertices.size(), color);
+            glObjs.emplace_back(std::make_shared<GLLineObject>(lineObjVertices, colors, lineWidth));
         } else {
-            auto glObjs = std::vector< std::shared_ptr<GLObject> >();
-            for(int i = 1; i < goPolyline.GetPoints().size(); i++){
-                auto line = CreateLine(goPolyline.GetPoints()[i - 1].GetPosition(), goPolyline.GetPoints()[i].GetPosition(), color, lineWidth);
-                glObjs.insert(glObjs.end(), line.begin(), line.end());
+            for(int i = 1; i < vertices.size(); i++){
+                auto radius = WEIGHT_TO_CYLINDER_RADIUS_RATE * lineWidth;
+                auto cylinderLine = CreateCylinder(vertices[i - 1], vertices[i], radius, color, color);
+                glObjs.insert(glObjs.end(), cylinderLine.begin(), cylinderLine.end());
             }
         }
+        return glObjs;
     }
 
 } // namespace AIAC
