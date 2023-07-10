@@ -36,9 +36,13 @@ namespace AIAC
         AIAC_INFO("AC Info Model Length: {0} (m)", infoModelLength * 0.02);
         AIAC_INFO("Scanned Model Length: {0} (m)", scannedModelLength * 0.02);
 
+        // TODO: change this one to be moved with UI
+        
         // crop the scanned model to the similar length as the info model
         // reserve 2 cm on each side = 4 cm = 0.04 m = 2 TSLAM unit (by * 50)
-        auto usedPortion = (infoModelLength + 2) / scannedModelLength;
+        // auto usedPortion = (infoModelLength + 2) / scannedModelLength;
+        
+        auto usedPortion = 1.0f;
         auto subBbox = m_ScannedModel.GetBoundingBox();
         subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
         subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
