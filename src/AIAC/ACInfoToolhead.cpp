@@ -60,20 +60,6 @@ namespace AIAC
             m_SaberSawD.NormalStart = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_SaberSawD.NormalEnd = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
         }
-        else if (type == "axis")
-        {
-            m_Type = ACToolHeadType::AXIS;
-            m_Name = toolhead.attribute("name").as_string();
-
-            m_AxisD.Origin = ParseString2GlmVector(toolhead.child("origin").child_value()) * this->GetScaleF();
-            m_AxisD.XAxis = ParseString2GlmVector(toolhead.child("xaxis").child_value()) * this->GetScaleF();
-            m_AxisD.YAxis = ParseString2GlmVector(toolhead.child("yaxis").child_value()) * this->GetScaleF();
-            m_AxisD.YPoint1 = ParseString2GlmVector(toolhead.child("ypoint1").child_value()) * this->GetScaleF();
-            m_AxisD.ZAxis = ParseString2GlmVector(toolhead.child("zaxis").child_value()) * this->GetScaleF();
-            m_AxisD.ZPoint1 = ParseString2GlmVector(toolhead.child("zpoint1").child_value()) * this->GetScaleF();
-            m_AxisD.ZPoint2 = ParseString2GlmVector(toolhead.child("zpoint2").child_value()) * this->GetScaleF();
-
-        }
         else { AIAC_ERROR("Toolhead type {0} not supported", type); }
 
         return;
@@ -91,50 +77,16 @@ namespace AIAC
         : m_ACITPath(acitPath), m_OBJPath(objPath), m_ID(id)
     {
         this->m_Data.LoadACIT(acitPath);
-
         this->AddGOsInfo(this->m_Data);
+        this->AddGOsWidget(this->m_Data);
         this->m_GOPrimitivesInfoOriginal.clear();
-        for (const auto& go : this->m_GOPrimitivesInfo) 
-        {
-            // We need to make a copy of the correct shared pointer type
-            // Otherwisem, dynamic cast will fail
-            switch (go->GetType())
-            {
-            case _GOPoint:
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOPoint>(*std::dynamic_pointer_cast<GOPoint>(go))); 
-                break;
-            case _GOLine:
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOLine>(*std::dynamic_pointer_cast<GOLine>(go))); 
-                break;
-            case _GOCircle:
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOCircle>(*std::dynamic_pointer_cast<GOCircle>(go))); 
-                break;
-            case _GOCylinder:
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOCylinder>(*std::dynamic_pointer_cast<GOCylinder>(go))); 
-                break;
-            case _GOPolyline:
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOPolyline>(*std::dynamic_pointer_cast<GOPolyline>(go))); 
-                break;
-            case _GOTriangle:
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOTriangle>(*std::dynamic_pointer_cast<GOTriangle>(go))); 
-                break;
-            case _GOMesh:
-                // TODO: do we need this case?
-                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOMesh>(*std::dynamic_pointer_cast<GOMesh>(go))); 
-                break;
-            case _GOText:
-                // TODO: do we need this case?
-                break;
-            default:
-                break;
-            }
-        }
+        this->m_GOPrimitivesWidgetOriginal.clear();
+        this->CopyGOsInfoOriginal();
+        this->CopyGOsWidgetOriginal();
 
-        this->AddGOsWidget();
-        this->m_GOPrimitivesWidgetOriginal = this->m_GOPrimitivesWidget;
-        // FIXME: do the same as above for copying folders
+        this->TransformSync();
 
-        this->SetVisibility(true);  // TODO: set back to false
+        this->SetVisibility(true);
     }
 
     void ACInfoToolhead::AddGOsInfo(ToolHeadData& data)
@@ -153,14 +105,10 @@ namespace AIAC
             case ACToolHeadType::SABERSAW:
                 this->AddGOsInfoSaberSaw(data);
                 break;
-            case ACToolHeadType::AXIS:
-                this->AddGOsInfoAxis(data);
-                break;
             default:
                 AIAC_ERROR("Toolhead type not supported");
                 break;
         }
-        TransformSync();
         return;
     }
 
@@ -182,14 +130,11 @@ namespace AIAC
                                        data.m_DrillBitD.Chucktip.y,
                                        data.m_DrillBitD.Chucktip.z,
                                        GOWeight::Thick);
-        auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
-        // lineAxis->SetVisibility(false);
 
         this->m_GOPrimitivesInfo.push_back(ptToolbase);
         this->m_GOPrimitivesInfo.push_back(ptTooltip);
         this->m_GOPrimitivesInfo.push_back(ptEattip);
         this->m_GOPrimitivesInfo.push_back(ptChucktip);
-        this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {
@@ -268,148 +213,153 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
         this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
-    void ACInfoToolhead::AddGOsInfoAxis(ToolHeadData& data)
+
+    void ACInfoToolhead::AddGOsWidget(ToolHeadData& data)
     {
-        auto ptOrigin = GOPoint::Add(data.m_AxisD.Origin.x,
-                                     data.m_AxisD.Origin.y,
-                                     data.m_AxisD.Origin.z,
-                                     GOWeight::Thick);
+        switch (data.m_Type)
+        {
+            case ACToolHeadType::DRILLBIT:
+                this->AddGOsWidgetDrillBit(data);
+                break;
+            case ACToolHeadType::CIRCULARSAW:
+                this->AddGOsWidgetCircularSaw(data);
+                break;
+            case ACToolHeadType::CHAINSAW:
+                this->AddGOsWidgetChainSaw(data);
+                break;
+            case ACToolHeadType::SABERSAW:
+                this->AddGOsWidgetSaberSaw(data);
+                break;
+            default:
+                AIAC_ERROR("Toolhead type not supported");
+                break;
+        }
+        // TransformSync();
+        return;
 
-        auto ptX = GOPoint::Add(data.m_AxisD.XAxis.x,
-                                data.m_AxisD.XAxis.y,
-                                data.m_AxisD.XAxis.z,
-                                GOWeight::Thick);
-        auto ptY = GOPoint::Add(data.m_AxisD.YAxis.x,
-                                data.m_AxisD.YAxis.y,
-                                data.m_AxisD.YAxis.z,
-                                GOWeight::Thick);
-        auto ptY1 = GOPoint::Add(data.m_AxisD.YPoint1.x,
-                                 data.m_AxisD.YPoint1.y,
-                                 data.m_AxisD.YPoint1.z,
-                                 GOWeight::Thick);
-        auto ptZ = GOPoint::Add(data.m_AxisD.ZAxis.x,
-                                data.m_AxisD.ZAxis.y,
-                                data.m_AxisD.ZAxis.z,
-                                GOWeight::Thick);
-        auto ptZ1 = GOPoint::Add(data.m_AxisD.ZPoint1.x,
-                                 data.m_AxisD.ZPoint1.y,
-                                 data.m_AxisD.ZPoint1.z,
-                                 GOWeight::Thick);
-        auto ptZ2 = GOPoint::Add(data.m_AxisD.ZPoint2.x,
-                                 data.m_AxisD.ZPoint2.y,
-                                 data.m_AxisD.ZPoint2.z,
-                                 GOWeight::Thick);
-
-        this->m_GOPrimitivesInfo.push_back(ptOrigin);
-        this->m_GOPrimitivesInfo.push_back(ptX);
-        this->m_GOPrimitivesInfo.push_back(ptY);
-        this->m_GOPrimitivesInfo.push_back(ptY1);
-        this->m_GOPrimitivesInfo.push_back(ptZ);
-        this->m_GOPrimitivesInfo.push_back(ptZ1);
-        this->m_GOPrimitivesInfo.push_back(ptZ2);
-
-        
     }
-
-    void ACInfoToolhead::AddGOsWidget() {}  // TODO: implement
-    void ACInfoToolhead::AddGOsWidgetDrillBit() {}  // TODO: implement
-    void ACInfoToolhead::AddGOsWidgetCircularSaw() {}  // TODO: implement
-    void ACInfoToolhead::AddGOsWidgetChainSaw() {}  // TODO: implement
-    void ACInfoToolhead::AddGOsWidgetSaberSaw() {}  // TODO: implement
-
-    void ACInfoToolhead::SetVisibility(bool visible)
+    void ACInfoToolhead::AddGOsWidgetDrillBit(ToolHeadData& data)
     {
-        AIAC_INFO("SetVisibility: {} {}", visible, m_GOPrimitivesInfo.size());
+        auto ptToolbaseW = GOPoint::Add(data.m_DrillBitD.Toolbase.x,
+                                        data.m_DrillBitD.Toolbase.y,
+                                        data.m_DrillBitD.Toolbase.z,
+                                        GOWeight::ExtraThick);
+        ptToolbaseW->SetColor(GOColor::GREEN);
+        auto ptTooltipW = GOPoint::Add(data.m_DrillBitD.Tooltip.x, 
+                                       data.m_DrillBitD.Tooltip.y,
+                                       data.m_DrillBitD.Tooltip.z,
+                                       GOWeight::ExtraThick);
+        ptToolbaseW->SetColor(GOColor::RED);
+        auto lnAxisW = GOLine::Add(*ptToolbaseW, *ptTooltipW);
+        lnAxisW->SetColor(GOColor::MAGENTA);
 
-        for (auto& go : m_GOPrimitivesInfo)  // FIXME: this should be a seperate function
-            go->SetVisibility(visible);
+        // std::string strToolbaseW = "Tb";
+        // std::string strTooltipW = "Tp";
+        // auto textToolbaseW = GOText::Add(strToolbaseW, *ptToolbaseW, 0.5f);
+        // auto textTooltipW = GOText::Add(strTooltipW, *ptTooltipW, 0.5f);
+
+        this->m_GOPrimitivesWidget.push_back(lnAxisW);
+        this->m_GOPrimitivesWidget.push_back(ptToolbaseW);
+        this->m_GOPrimitivesWidget.push_back(ptTooltipW);
+        // this->m_GOPrimitivesWidget.push_back(textToolbaseW);
+        // this->m_GOPrimitivesWidget.push_back(textTooltipW);
+    }
+    void ACInfoToolhead::AddGOsWidgetCircularSaw(ToolHeadData& data)
+    {
+
+    }
+    void ACInfoToolhead::AddGOsWidgetChainSaw(ToolHeadData& data) {}
+    void ACInfoToolhead::AddGOsWidgetSaberSaw(ToolHeadData& data) {}
+
+    void ACInfoToolhead::SetVisibility(bool visibleWidget, bool visibleInfo)
+    {
+        for (auto& go : m_GOPrimitivesInfo)
+            go->SetVisibility(visibleInfo);
         for (auto& go : m_GOPrimitivesWidget)
-            go->SetVisibility(visible);
+            go->SetVisibility(visibleWidget);
     }
 
     void ACInfoToolhead::Transform(glm::mat4 transform)
     {
-        // TODO: use original to update current GOs (info + widgets)
-        // TODO: add in-place transform + npormal transform in go primitive
-        for (uint i = 0; i < m_GOPrimitivesInfo.size(); i++)
-        {
-            switch (m_GOPrimitivesInfo[i]->GetType())
-            {
-                case _GOPoint:
-                {
-                    std::shared_ptr<GOPoint> go = std::dynamic_pointer_cast<GOPoint>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOPoint> goCopied = std::make_shared<GOPoint>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOLine:
-                {
-                    std::shared_ptr<GOLine> go = std::dynamic_pointer_cast<GOLine>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOLine> goCopied = std::make_shared<GOLine>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOCircle:
-                {
-                    std::shared_ptr<GOCircle> go = std::dynamic_pointer_cast<GOCircle>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOCircle> goCopied = std::make_shared<GOCircle>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOCylinder:
-                {
-                    std::shared_ptr<GOCylinder> go = std::dynamic_pointer_cast<GOCylinder>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOCylinder> goCopied = std::make_shared<GOCylinder>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOPolyline:
-                {
-                    std::shared_ptr<GOPolyline> go = std::dynamic_pointer_cast<GOPolyline>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOPolyline> goCopied = std::make_shared<GOPolyline>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOTriangle:
-                {
-                    std::shared_ptr<GOTriangle> go = std::dynamic_pointer_cast<GOTriangle>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOTriangle> goCopied = std::make_shared<GOTriangle>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOMesh:
-                {
-                    std::shared_ptr<GOMesh> go = std::dynamic_pointer_cast<GOMesh>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOMesh> goCopied = std::make_shared<GOMesh>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                case _GOText:
-                {
-                    std::shared_ptr<GOText> go = std::dynamic_pointer_cast<GOText>(m_GOPrimitivesInfoOriginal[i]);
-                    std::shared_ptr<GOText> goCopied = std::make_shared<GOText>(*go);
-                    goCopied->Transform(transform);
-                    m_GOPrimitivesInfo[i]->SetValueFrom(goCopied);
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
+        for (uint i = 0; i < this->m_GOPrimitivesInfo.size(); i++)
+            this->TransformGO(this->m_GOPrimitivesInfo[i], this->m_GOPrimitivesInfoOriginal[i], transform);
 
-        // for (uint i = 0; i < m_GOPrimitivesWidget.size(); i++)
-        // {
-        //     std::shared_ptr<GOPrimitive> go = std::make_shared<GOPrimitive>(*(m_GOPrimitivesWidgetOriginal[i]));
-        //     go->Transform(transform);
-        //     m_GOPrimitivesWidget[i]->SetValueFrom(go);
-        // }
+        for (uint i = 0; i < this->m_GOPrimitivesWidget.size(); i++)
+            this->TransformGO(this->m_GOPrimitivesWidget[i], this->m_GOPrimitivesWidgetOriginal[i], transform);
+    }
+    void ACInfoToolhead::TransformGO(std::shared_ptr<GOPrimitive> goPtr,
+                                     std::shared_ptr<GOPrimitive> goOriginalPtr,
+                                     glm::mat4 transform)
+    {
+        switch (goPtr->GetType())
+        {
+            case _GOPoint:
+            {
+                std::shared_ptr<GOPoint> go = std::dynamic_pointer_cast<GOPoint>(goOriginalPtr);
+                std::shared_ptr<GOPoint> goCopied = std::make_shared<GOPoint>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOLine:
+            {
+                std::shared_ptr<GOLine> go = std::dynamic_pointer_cast<GOLine>(goOriginalPtr);
+                std::shared_ptr<GOLine> goCopied = std::make_shared<GOLine>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOCircle:
+            {
+                std::shared_ptr<GOCircle> go = std::dynamic_pointer_cast<GOCircle>(goOriginalPtr);
+                std::shared_ptr<GOCircle> goCopied = std::make_shared<GOCircle>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOCylinder:
+            {
+                std::shared_ptr<GOCylinder> go = std::dynamic_pointer_cast<GOCylinder>(goOriginalPtr);
+                std::shared_ptr<GOCylinder> goCopied = std::make_shared<GOCylinder>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOPolyline:
+            {
+                std::shared_ptr<GOPolyline> go = std::dynamic_pointer_cast<GOPolyline>(goOriginalPtr);
+                std::shared_ptr<GOPolyline> goCopied = std::make_shared<GOPolyline>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOTriangle:
+            {
+                std::shared_ptr<GOTriangle> go = std::dynamic_pointer_cast<GOTriangle>(goOriginalPtr);
+                std::shared_ptr<GOTriangle> goCopied = std::make_shared<GOTriangle>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOMesh:
+            {
+                std::shared_ptr<GOMesh> go = std::dynamic_pointer_cast<GOMesh>(goOriginalPtr);
+                std::shared_ptr<GOMesh> goCopied = std::make_shared<GOMesh>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            case _GOText:
+            {
+                std::shared_ptr<GOText> go = std::dynamic_pointer_cast<GOText>(goOriginalPtr);
+                std::shared_ptr<GOText> goCopied = std::make_shared<GOText>(*go);
+                goCopied->Transform(transform);
+                goPtr->SetValueFrom(goCopied);
+                break;
+            }
+            default:
+                break;
+        }
     }
 
     void ACInfoToolhead::TransformSync()
@@ -420,7 +370,7 @@ namespace AIAC
 
         // Getting the bounding box of the info
         // Here, we filter in only the points
-        for (auto& go : m_GOPrimitivesInfo)
+        for (auto& go : this->m_GOPrimitivesInfo)
         {
             if (go->GetType() != _GOPoint)
                 continue;
@@ -442,9 +392,84 @@ namespace AIAC
 
         glm::mat4x4 rotation = glm::mat4x4(GetRotationMatrix(glm::vec3(1, 0, 0), 90.0f * M_PI / 180.0f));
 
-        for (auto& go : m_GOPrimitivesInfo)
+        for (auto& go : this->m_GOPrimitivesInfoOriginal)
         {
             go->Transform(transformBackFromCenter * rotation * transformToCenter);
+        }
+        for (auto& go : this->m_GOPrimitivesWidgetOriginal)
+        {
+            go->Transform(transformBackFromCenter * rotation * transformToCenter);
+        }
+    }
+
+    void ACInfoToolhead::CopyGOsInfoOriginal()
+    {
+        for (const auto& go : this->m_GOPrimitivesInfo) 
+        {
+            switch (go->GetType())
+            {
+            case _GOPoint:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOPoint>(*std::dynamic_pointer_cast<GOPoint>(go))); 
+                break;
+            case _GOLine:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOLine>(*std::dynamic_pointer_cast<GOLine>(go))); 
+                break;
+            case _GOCircle:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOCircle>(*std::dynamic_pointer_cast<GOCircle>(go))); 
+                break;
+            case _GOCylinder:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOCylinder>(*std::dynamic_pointer_cast<GOCylinder>(go))); 
+                break;
+            case _GOPolyline:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOPolyline>(*std::dynamic_pointer_cast<GOPolyline>(go))); 
+                break;
+            case _GOTriangle:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOTriangle>(*std::dynamic_pointer_cast<GOTriangle>(go))); 
+                break;
+            case _GOMesh:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOMesh>(*std::dynamic_pointer_cast<GOMesh>(go))); 
+                break;
+            case _GOText:
+                this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOText>(*std::dynamic_pointer_cast<GOText>(go)));
+                break;
+            default:
+                break;
+            }
+        }
+    }
+    void ACInfoToolhead::CopyGOsWidgetOriginal()
+    {
+        for (const auto& go : this->m_GOPrimitivesWidget) 
+        {
+            switch (go->GetType())
+            {
+            case _GOPoint:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOPoint>(*std::dynamic_pointer_cast<GOPoint>(go))); 
+                break;
+            case _GOLine:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOLine>(*std::dynamic_pointer_cast<GOLine>(go))); 
+                break;
+            case _GOCircle:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOCircle>(*std::dynamic_pointer_cast<GOCircle>(go))); 
+                break;
+            case _GOCylinder:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOCylinder>(*std::dynamic_pointer_cast<GOCylinder>(go))); 
+                break;
+            case _GOPolyline:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOPolyline>(*std::dynamic_pointer_cast<GOPolyline>(go))); 
+                break;
+            case _GOTriangle:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOTriangle>(*std::dynamic_pointer_cast<GOTriangle>(go))); 
+                break;
+            case _GOMesh:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOMesh>(*std::dynamic_pointer_cast<GOMesh>(go))); 
+                break;
+            case _GOText:
+                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOText>(*std::dynamic_pointer_cast<GOText>(go)));
+                break;
+            default:
+                break;
+            }
         }
     }
 }
