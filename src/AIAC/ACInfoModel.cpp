@@ -73,7 +73,6 @@ namespace AIAC
                 holeInfo.m_GOPrimitives.push_back(label);
 
                 m_TimberInfo[timberInfo.m_ID].m_Holes[holeInfo.m_ID] = holeInfo;
-                break;
             }
         }
         m_CurrentActiveTimberID = m_TimberInfo.begin()->first;
