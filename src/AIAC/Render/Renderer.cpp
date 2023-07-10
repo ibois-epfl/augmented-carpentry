@@ -111,14 +111,6 @@ namespace AIAC
                 float(m_GlobalView.GetW()) / float(m_GlobalView.GetH()), 0.1f, 100.0f
         );
 
-        std::stringstream ss;
-        ss << "Global View: ";
-        cv::Mat globalProjMatrix;
-        CvtGlmMat2CvMat(m_GlobalProjMatrix, globalProjMatrix);
-        ss << globalProjMatrix;
-        AIAC_INFO(ss.str());
-        
-
         m_GlobalCamMatrix = glm::lookAt(
                 glm::vec3(20, 20, 20),   // the position of your camera, in world space
                 DigitalModel.GetBboxCenter(),   // where you want to look at, in world space
@@ -130,14 +122,6 @@ namespace AIAC
                 glm::vec3(0, 0, 1),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
-
-        std::stringstream ss2;
-        ss2 << "Look At: ";
-        cv::Mat testLookAt4TToolCvMat;
-        CvtGlmMat2CvMat(testLookAt4TTool, testLookAt4TToolCvMat);
-        ss2 << testLookAt4TToolCvMat;
-        AIAC_INFO(ss2.str());
-
     }
 
     void Renderer::ReloadMeshes()
@@ -263,6 +247,7 @@ namespace AIAC
     }
 
     void Renderer::RenderMainView() {
+        glBindVertexArray(m_VAO);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         
         RenderCameraFrame(AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
