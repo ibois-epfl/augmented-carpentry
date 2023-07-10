@@ -29,11 +29,13 @@ namespace AIAC
     // TODO: delete GL Objects
     void GOPrimitive::Remove(const uint32_t& id)
     {
+        AIAC_GOREG->GetGO<GOPrimitive>(id)->ClearGLObject();
         AIAC_GOREG->Unregister(id);
     }
 
     void GOPrimitive::Remove(const std::shared_ptr<GOPrimitive>& ptrGO)
     {
+        ptrGO->ClearGLObject();
         AIAC_GOREG->Unregister(ptrGO->GetId());
     }
 
@@ -116,24 +118,7 @@ namespace AIAC
         std::vector<glm::vec3> vertices;
         vertices.push_back(m_PStart.GetPosition());
         vertices.push_back(m_PEnd.GetPosition());
-        cout << "GOLine::InitGLObject()" << endl;
-        cout << "m_Weight: " << m_Weight << endl;
-        cout << "m_Color: " << glm::to_string(m_Color) << endl;
-        for(auto& v : vertices)
-            cout << glm::to_string(v) << endl;
-        cout << "--------------------------" << endl;
         m_GLObjects = CreatePolyline(vertices, false, m_Color, m_Weight);
-
-        // if (m_Weight <= 1.0f) {
-        //     std::vector<glm::vec4> colors;
-        //     colors.push_back(m_Color);
-        //     colors.push_back(m_Color);
-        //     m_GLObjects.push_back(std::make_shared<GLLineObject>(vertices, colors, m_Weight));
-        // } else {
-        //     float radius = m_Weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-        //     m_GLObjects = CreateCylinder(m_PStart.GetPosition(), m_PEnd.GetPosition(), radius,
-        //                                  m_Color, m_Color);
-        // }
     }
 
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
@@ -343,14 +328,14 @@ namespace AIAC
         return ptrGO;
     }
 
-    uint32_t GOMesh::LoadPly(std::string path){
+    std::shared_ptr<GOMesh> GOMesh::LoadPly(std::string path){
         Assimp::Importer importer;
 
         const aiScene* scene = importer.ReadFile(path, aiProcess_JoinIdenticalVertices);
-        if( !scene) {
+        if(!scene) {
             fprintf( stderr, importer.GetErrorString());
             getchar();
-            return false;
+            return nullptr;
         }
 
         const aiMesh* mesh = scene->mMeshes[0]; // TODO: here we use only the 1st mesh, make more?
@@ -393,9 +378,8 @@ namespace AIAC
 //            }
 //        }
 
-        uint32_t idGO = ptrGO->GetId();
-        AIAC_GOREG->Register(idGO, ptrGO);
-        return idGO;
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOMesh> GOMesh::Get(const uint32_t& id)
