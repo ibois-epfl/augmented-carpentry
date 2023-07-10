@@ -49,15 +49,23 @@ namespace AIAC
 
         m_MappingView.SetSize(600, 442);
 
-        auto pt = GOPoint::Add(0, 0, 0, 5.0f);
-        pt->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+        // auto pt = GOPoint::Add(0, 0, 0, 5.0f);
+        // pt->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
         // GOLine::Add(glm::vec3(0,0,0), glm::vec3(0,0,10), 10.0f);
         
-        cout << "--------------------" << endl;
-        auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 10.0f);
-        myCylinder->SetColor(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
-        cout << "--------------------" << endl;
+        // cout << "--------------------" << endl;
+        auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 32.0f);
+        myCylinder->SetColor(glm::vec4(0.5f, 0.5f, 0.0f, 0.2f));
+        // cout << "--------------------" << endl;
+
+        // vector<glm::vec3> pts;
+        // pts.push_back(glm::vec3(4,0,0));
+        // pts.push_back(glm::vec3(99,5,10));
+        // pts.push_back(glm::vec3(9,10,10));
+        // auto myPolyline = GOPolyline::Add(pts);
+        // myPolyline->SetColor(glm::vec4(0.5f, 0.2f, 0.0f, 1.0f));
+
         // auto circle = GOCircle::Add(glm::vec3(0, 5, 0), 10.0f);
         // circle->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
@@ -205,6 +213,9 @@ namespace AIAC
         glBindVertexArray(m_VAO);
         glUseProgram(m_BasicShaderProgram);
         
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
         RenderMainView();
         RenderGlobalView();
     }
@@ -320,10 +331,7 @@ namespace AIAC
             for (auto& mesh : Meshes) {
                 mesh.DrawEdges(m_DefaultEdgeColor);
             }
-<<<<<<< HEAD
             // Draw All objects
-=======
->>>>>>> 9dc4fce5e25ec20c19ba25351757d0d6138133cf
             DrawAllGOs(finalPoseMatrix);
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }

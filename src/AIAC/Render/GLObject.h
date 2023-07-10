@@ -40,6 +40,11 @@ namespace AIAC {
 
         virtual void Draw() = 0;
 
+        // must be called if data is already buffered
+        // I didn't do this inside deconstructor because there might be multiple <GLObject> instances holding the same VBOs
+        // For example, when operator= or copy operator is called, it shouldn't do this delete
+        void DeleteVBOs();
+
     protected:
         void BindVBOs();
         void BufferData(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors);
@@ -109,11 +114,17 @@ namespace AIAC {
         // copy constructor
         GLMeshObject(const GLMeshObject &other) : GLObject(other) {
             indexBuf = other.indexBuf;
+            m_Vertices = other.m_Vertices;
+            m_Colors = other.m_Colors;
+            m_Indices = other.m_Indices;
         }
 
         GLMeshObject& operator=(const GLMeshObject &other) {
             GLObject::operator=(other);
             indexBuf = other.indexBuf;
+            m_Vertices = other.m_Vertices;
+            m_Colors = other.m_Colors;
+            m_Indices = other.m_Indices;
             return *this;
         }
 
@@ -121,6 +132,9 @@ namespace AIAC {
 
     public:
         GLuint indexBuf;
+        std::vector<glm::vec3> m_Vertices;
+        std::vector<glm::vec4> m_Colors;
+        std::vector<uint32_t> m_Indices;
     };
 
     // --------------------- //
@@ -135,6 +149,7 @@ namespace AIAC {
      */
     glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z);
 
-    std::vector<std::shared_ptr<GLObject> > CreateCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum=-1);
+    std::vector< std::shared_ptr<GLObject> > CreateCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum=-1);
     std::vector< std::shared_ptr<GLObject> > CreateCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum = -1);
+    std::vector< std::shared_ptr<GLObject> > CreatePolyline(std::vector<glm::vec3> vertices, bool isClosed, glm::vec4 color, float lineWidth);
 }
