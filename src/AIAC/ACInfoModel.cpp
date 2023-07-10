@@ -45,19 +45,7 @@ namespace AIAC
                 holeInfo.m_EndAccessible = StringToBool(hole.child("end").child("accessible").child_value());
                 holeInfo.m_Radius = std::stof(hole.child("radius").child_value()) * m_Scale;
 
-                // print out the hole info
-                // AIAC_INFO("Hole: {0}", holeInfo.m_ID);
-                // AIAC_INFO("State: {0}", int(holeInfo.m_State));
-                // AIAC_INFO("Radius: {0}", holeInfo.m_Radius);
-                // AIAC_INFO("Start: {0}, {1}, {2}", holeInfo.m_Start.x, holeInfo.m_Start.y, holeInfo.m_Start.z);
-                // AIAC_INFO("End: {0}, {1}, {2}", holeInfo.m_End.x, holeInfo.m_End.y, holeInfo.m_End.z);
-                // AIAC_INFO("Start Accessible: {0}", holeInfo.m_StartAccessible);
-                // AIAC_INFO("End Accessible: {0}", holeInfo.m_EndAccessible);
-                // for(auto& n : holeInfo.m_Neighbors){
-                //     AIAC_INFO("Neighbor: {0}", n);
-                // }
-
-                // build primitive
+                // build GOPrimitive
                 auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 1.0f);
                 holeAxis->SetColor(glm::vec4(0.15f, 0.6f, 0.7f, 1.0f));
                 auto holeCylinder = GOCylinder::Add(holeInfo.m_Start, holeInfo.m_End, holeInfo.m_Radius);
@@ -100,10 +88,10 @@ namespace AIAC
             GOLine::Remove(line);
 
         // bottom
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f)); // O
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f)); // X
-        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f)); // O
-        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f)); // X
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f));
         // top
         m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 2.0f));

@@ -73,6 +73,17 @@ namespace AIAC
             swap(neighbors[5], neighbors[6]);
         }
 
+        // re-order the vertices, making it a counter-clockwise order start from the longer edge
+        // first bottom, then top
+        //
+        //   (7)------------------------(6)
+        //   / |                       / |  
+        // (4)-----------------------(5) |
+        //  |  |                      |  |
+        //  | (3)---------------------|-(2)
+        //  |/                        |/
+        // (0)-----------------------(1)
+        //
         m_Bbox = {
             neighbors[0].pt,
             neighbors[4].pt,
