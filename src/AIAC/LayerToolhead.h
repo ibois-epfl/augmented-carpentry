@@ -35,6 +35,10 @@ namespace AIAC
         /// @brief Update the ttool state from the UI
         void UpdateToolheadStateUI();
 
+        /// @brief Save the current pose of the ttool to the config file and to the ttool model manager (as a fallback pose for the ttool)
+        // It will reset LayerToolhead state to None (i.e. stop tracking and pose input)
+        void SavePose();
+
     public: ///< Getters and setters
         /**
          * @brief Get the Ttool State object of the ttool event type
@@ -48,6 +52,10 @@ namespace AIAC
          * @param name 
          */
         void SetCurrentObject(std::string name);
+    
+    private:
+        /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
+        void syncTToolAndACInfoToolhead();
     
     public: ///< Public members
         /// The ttool object
