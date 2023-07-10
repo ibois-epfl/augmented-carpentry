@@ -138,11 +138,11 @@ class ACIM:
 
         edges_et = ET.SubElement(cut_et, "edges")
         for e in edges:
-            edges_et = ET.SubElement(edges_et, "edge")
-            edges_et.set("id", str(e["line_id"]))
-            edge_start_et = ET.SubElement(edges_et, "start")
+            edge_et = ET.SubElement(edges_et, "edge")
+            edge_et.set("id", str(e["line_id"]))
+            edge_start_et = ET.SubElement(edge_et, "start")
             edge_start_et.text = str(e["start"])
-            edge_end_et = ET.SubElement(edges_et, "end")
+            edge_end_et = ET.SubElement(edge_et, "end")
             edge_end_et.text = str(e["end"])
 
     def peek_current_hole_id(self, guid):
