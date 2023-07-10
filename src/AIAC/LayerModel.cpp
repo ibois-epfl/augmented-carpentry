@@ -18,8 +18,6 @@ namespace AIAC
         m_ACInfoModel.Load("assets/ACModel/test.acim");
         m_ScannedModel.Load("assets/ACModel/01_scanned_model.ply");
         AlignModels();
-
-        
     }
     
     void LayerModel::OnFrameStart()

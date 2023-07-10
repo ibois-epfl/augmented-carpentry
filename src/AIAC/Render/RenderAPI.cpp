@@ -49,11 +49,25 @@ namespace AIAC
 
     void DrawAllGOs(glm::mat4 projection)
     {
-        TextRenderer::SetProjection(projection);
-
         std::vector<std::shared_ptr<GOPrimitive>> gos;
         AIAC_GOREG->GetAllGOs(gos);
-        DrawGOs(gos);
+        
+        std::vector<std::shared_ptr<GOPrimitive>> goTexts;
+        for(auto& go: gos){
+            if(!go->IsVisible()){
+                continue;
+            }   
+            if(go->GetType() == _GOText){
+                goTexts.emplace_back(go);
+            } else{
+                DrawGO(go);
+            }
+        }
+
+        TextRenderer::SetProjection(projection);
+        for(auto& goText: goTexts){
+            DrawGO(goText);
+        }
     }
 
     // glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
@@ -85,20 +99,32 @@ namespace AIAC
                 // DrawTriangle(*std::dynamic_pointer_cast<GOTriangle>(goPrimitive)); break;
                 // DrawMesh(*std::dynamic_pointer_cast<GOMesh>(goPrimitive)); break;
             case _GOText:
+                DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
                 break;
-                // DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
 
             default:
                 break;
         }
     }
 
-    void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive)
-    {
-        for(auto& go: goPrimitive){
-            DrawGO(go);
-        }
-    }
+    // void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive)
+    // {
+    //     std::vector<shared_ptr<GOText>> goTexts;
+    //     for(auto& go: goPrimitive){
+    //         if(!go->IsVisible()){
+    //             continue;
+    //         }
+            
+    //         if(go->GetType() == _GOText){
+    //             goTexts.emplace_back(std::dynamic_pointer_cast<GOText>(go));
+    //         } else{
+    //             DrawGO(go);
+    //         }
+    //     }
+    //     for(auto& goText: goTexts){
+    //         DrawGO(goText);
+    //     }
+    // }
 
     void DrawPoint(const GOPoint& goPoint)
     {

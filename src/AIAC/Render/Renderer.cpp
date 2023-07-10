@@ -55,8 +55,8 @@ namespace AIAC
         // GOLine::Add(glm::vec3(0,0,0), glm::vec3(0,0,10), 10.0f);
         
         // cout << "--------------------" << endl;
-        auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 32.0f);
-        myCylinder->SetColor(glm::vec4(0.5f, 0.5f, 0.0f, 0.2f));
+        // auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 32.0f);
+        // myCylinder->SetColor(glm::vec4(0.5f, 0.5f, 0.0f, 0.2f));
         // cout << "--------------------" << endl;
 
         // vector<glm::vec3> pts;
