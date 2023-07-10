@@ -10,23 +10,11 @@ namespace AIAC
         if (!this->m_ACInfoToolheadMap.empty())
             this->m_ACInfoToolheadMap.clear();
 
-        std::string datasetDir = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
-                                                                AIAC::Config::DATASET_DIR);
-        std::vector<std::string> toolheadPaths = GetFolderPaths(datasetDir);
-
-
-
         std::string configPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
                                                                 AIAC::Config::CONFIG_FILE);
-        // parse the config file to get the list of acit toolheads from entry "modelFiles"
-
-
         std::vector<std::string> toolheadACITPaths = ParseConfigFile(configPath, "acitFiles");
         std::vector<std::string> toolheadOBJPaths = ParseConfigFile(configPath, "modelFiles");
-
-
-
-        // for (auto& toolheadPath : toolheadPaths)
+        
         for (int i = 0; i < toolheadOBJPaths.size(); i++)
         {
             std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(toolheadACITPaths[i],
