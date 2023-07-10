@@ -259,22 +259,6 @@ namespace AIAC
             ptrGO->m_Indices.push_back(face.mIndices[2]);
         }
 
-//        if(mesh->mNormals != nullptr){
-//            ptrGO->m_Normals.reserve(mesh->mNumVertices);
-//            for(unsigned int i=0; i<mesh->mNumVertices; i++){
-//                aiVector3D norm = mesh->mNormals[i];
-//                ptrGO->m_Normals.emplace_back(norm.x, norm.y, norm.z);
-//            }
-//        }
-//
-//        if(mesh->mColors != nullptr){
-//            ptrGO->m_Colors.reserve(mesh->mNumVertices);
-//            for(unsigned int i=0; i<mesh->mNumVertices; i++){
-//                aiColor4D color = mesh->mColors[0][i];
-//                ptrGO->m_Colors.emplace_back(color.r, color.g, color.b, color.a);
-//            }
-//        }
-
         uint32_t idGO = ptrGO->GetId();
         AIAC_GOREG->Register(idGO, ptrGO);
         return idGO;
@@ -304,14 +288,6 @@ namespace AIAC
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;
     }
-
-    // std::shared_ptr<GOText> GOText::Add(std::string text, glm::vec3 anchor, double size)
-    // {
-    //     auto ptrGO = std::make_shared<GOText>(GOText(text, anchor, size));
-    //     uint32_t idGO = ptrGO->GetId();
-    //     AIAC_GOREG->Register(idGO, ptrGO);
-    //     return idGO;
-    // }
 
     std::shared_ptr<GOText> GOText::Get(const uint32_t& id)
     {

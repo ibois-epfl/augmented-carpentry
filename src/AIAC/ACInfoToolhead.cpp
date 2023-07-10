@@ -146,12 +146,9 @@ namespace AIAC
                                         data.m_CircularSawD.NormalEnd.y,
                                         data.m_CircularSawD.NormalEnd.z,
                                         GOWeight::Thick);
-        glm::vec3 norm = glm::normalize(ptNormalEnd->GetPosition() - ptCenter->GetPosition());
-        auto circle = GOCircle::Add(*ptCenter, norm, data.m_CircularSawD.Radius);
 
         this->m_GOPrimitivesInfo.push_back(ptCenter);
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
-        this->m_GOPrimitivesInfo.push_back(circle);
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
@@ -214,6 +211,7 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
 
+    // FIXME: get rid of widgets all together <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     void ACInfoToolhead::AddGOsWidget(ToolHeadData& data)
     {
         switch (data.m_Type)
@@ -253,19 +251,30 @@ namespace AIAC
         auto lnAxisW = GOLine::Add(*ptToolbaseW, *ptTooltipW);
         lnAxisW->SetColor(GOColor::MAGENTA);
 
-        // std::string strToolbaseW = "Tb";
-        // std::string strTooltipW = "Tp";
-        // auto textToolbaseW = GOText::Add(strToolbaseW, *ptToolbaseW, 0.5f);
-        // auto textTooltipW = GOText::Add(strTooltipW, *ptTooltipW, 0.5f);
-
         this->m_GOPrimitivesWidget.push_back(lnAxisW);
         this->m_GOPrimitivesWidget.push_back(ptToolbaseW);
         this->m_GOPrimitivesWidget.push_back(ptTooltipW);
-        // this->m_GOPrimitivesWidget.push_back(textToolbaseW);
-        // this->m_GOPrimitivesWidget.push_back(textTooltipW);
     }
     void ACInfoToolhead::AddGOsWidgetCircularSaw(ToolHeadData& data)
     {
+        auto ptCenterW = GOPoint::Add(data.m_CircularSawD.Center.x,
+                                      data.m_CircularSawD.Center.y,
+                                      data.m_CircularSawD.Center.z,
+                                      GOWeight::Thick);
+        ptCenterW->SetColor(GOColor::GREEN);
+        auto ptNormalEndW = GOPoint::Add(data.m_CircularSawD.NormalEnd.x,
+                                         data.m_CircularSawD.NormalEnd.y,
+                                         data.m_CircularSawD.NormalEnd.z,
+                                         GOWeight::Thick);
+
+        glm::vec3 norm = glm::normalize(ptNormalEndW->GetPosition() - ptCenterW->GetPosition());
+        glm::vec3 endAxis = ptCenterW->GetPosition() + norm * 1.5f;
+        auto lnNormalW = GOLine::Add(*ptCenterW, GOPoint(endAxis));
+        lnNormalW->SetColor(GOColor::MAGENTA);
+
+        GOPoint::Remove(ptNormalEndW->GetId());
+        this->m_GOPrimitivesWidget.push_back(ptCenterW);
+        this->m_GOPrimitivesWidget.push_back(lnNormalW);
 
     }
     void ACInfoToolhead::AddGOsWidgetChainSaw(ToolHeadData& data) {}

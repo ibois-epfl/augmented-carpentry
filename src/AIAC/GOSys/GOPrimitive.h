@@ -20,6 +20,23 @@ namespace AIAC
         static constexpr glm::vec4 GRAY = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
     };
 
+    struct GOWeight
+    {
+        static constexpr float Default            = 1.01f;
+        static constexpr float Bold               = 2.5f;
+        static constexpr float Thick              = 5.0f;
+        static constexpr float ExtraThick         = 10.0f;
+        static constexpr float MaxThick           = 20.0f;
+    };
+
+    struct GOTextSize
+    {
+        static constexpr double Default            = 1.0;
+        static constexpr double Small              = 2.5;
+        static constexpr double Medium             = 5.0;
+        static constexpr double Big                = 10.0;
+    };
+
     enum GOTypeFlags
     {
         _GOPrimitive = 0,
@@ -31,14 +48,6 @@ namespace AIAC
         _GOTriangle,
         _GOMesh,
         _GOText,
-    };
-
-    struct GOWeight
-    {
-        static constexpr float Default            = 1.05f;
-        static constexpr float Bold               = 2.5f;
-        static constexpr float Thick              = 5.0f;
-        static constexpr float ExtraThick         = 10.0f;
     };
 
     class GOPrimitive
@@ -68,7 +77,7 @@ namespace AIAC
         inline int SetWeight(float weight) { m_Weight = weight; return m_Id;}
 
         virtual void Transform(const glm::mat4x4& transformMat) {};
-        
+
         virtual void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) { AIAC_ERROR("Not Implemented"); };
 
     protected:
@@ -146,7 +155,6 @@ namespace AIAC
     friend class GOText;
     };
 
-
     class GOLine : public GOPrimitive
     {
     private:
@@ -195,7 +203,6 @@ namespace AIAC
 
     friend class GOPoint;
     };
-
 
     class GOCircle : public GOPrimitive
     {
@@ -255,7 +262,6 @@ namespace AIAC
 
     friend class GOPoint;
     };
-
 
     class GOCylinder : public GOPrimitive
     {
@@ -362,7 +368,6 @@ namespace AIAC
     friend class GOPoint;
     };
 
-
     class GOTriangle : public GOPrimitive
     {
     private:
@@ -411,7 +416,6 @@ namespace AIAC
     
     friend class GOPoint;
     };
-
 
     class GOMesh : public GOPrimitive
     {
@@ -484,7 +488,6 @@ namespace AIAC
     friend class GOPoint;
     };
 
-
     class GOText : public GOPrimitive
     {
     private:
@@ -499,9 +502,7 @@ namespace AIAC
          * @param size Size of the text.
          * @return uint32_t Id of the text.
          */
-        static std::shared_ptr<GOText> Add(std::string text, GOPoint anchor, double size);
-        // static std::shared_ptr<GOText> Add(std::string text, glm::vec3 anchor, double size);
-
+        static std::shared_ptr<GOText> Add(std::string text, GOPoint anchor, double size = GOTextSize::Default);
         virtual ~GOText() = default;
 
         static std::shared_ptr<GOText> Get(const uint32_t& id);
@@ -511,7 +512,23 @@ namespace AIAC
         inline const GOPoint GetAnchor() const { return m_Anchor; }
         inline const double GetTextSize() const { return m_Size; }
 
+        inline void SetText(const std::string text) { m_Text = text; }
+        inline void SetAnchor(const GOPoint anchor) { m_Anchor = anchor; }
+        inline void SetTextSize(const double size) { m_Size = size; }
+
         inline void Transform(const glm::mat4x4& transformMat) /* override */ { m_Anchor.Transform(transformMat); }
+        
+        inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
+            auto ptrPoint = std::dynamic_pointer_cast<GOText>(ptrGO);
+            if (ptrPoint != nullptr)
+            {
+                SetText(ptrPoint->GetText());
+                SetAnchor(ptrPoint->GetAnchor());
+                SetTextSize(ptrPoint->GetTextSize());
+                return;
+            }
+            AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
+        }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
         {
