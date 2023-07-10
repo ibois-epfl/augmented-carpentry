@@ -143,6 +143,15 @@ namespace AIAC
         this->TTool->SetObjectID(id);
     }
 
+    void LayerToolhead::SavePose()
+    {
+        this->TTool->ManipulateModel('y');
+
+        m_TtoolState = ttool::EventType::None;
+        this->ToolheadStateUI = -1;
+
+    }
+
     void LayerToolhead::syncTToolAndACInfoToolhead()
     {
         int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
