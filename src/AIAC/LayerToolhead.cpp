@@ -19,6 +19,8 @@ namespace AIAC
         
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
+
+        syncTToolAndACInfoToolhead();
     }
 
     void LayerToolhead::OnFrameStart()
@@ -69,6 +71,7 @@ namespace AIAC
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
+        syncTToolAndACInfoToolhead();
     }
 
     void LayerToolhead::ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize)
@@ -79,6 +82,7 @@ namespace AIAC
             cameraMatrix,
             cameraSize
             );
+        syncTToolAndACInfoToolhead();
     }
 
     /**
@@ -135,6 +139,13 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
         TTool->DrawSilhouette(currentFrame);
         TTool->DrawSilhouette(currentFrame);
+
+        this->TTool->SetObjectID(id);
+    }
+
+    void LayerToolhead::syncTToolAndACInfoToolhead()
+    {
+        int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
         this->TTool->SetObjectID(id);
     }
 }

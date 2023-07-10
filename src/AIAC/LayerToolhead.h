@@ -49,6 +49,9 @@ namespace AIAC
          */
         void SetCurrentObject(std::string name);
     
+    private:
+        void syncTToolAndACInfoToolhead();
+    
     public: ///< Public members
         /// The ttool object
         std::shared_ptr<ttool::TTool> TTool;
