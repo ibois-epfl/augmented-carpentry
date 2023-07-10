@@ -344,6 +344,10 @@ namespace AIAC
     {
         if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
 
+        if(ImGui::Button("Save Pose")) {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SavePose();
+        }
+
         ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
