@@ -8,8 +8,10 @@ using namespace std;
 namespace AIAC
 {
     void ScannedModel::Load(std::string path) {
-        m_MeshID = GOMesh::LoadPly(path);
-        GOMesh::Get(m_MeshID)->SetVisibility(false);
+        m_Mesh = GOMesh::LoadPly(path);
+        // m_Mesh->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
+        m_Mesh->SetVisibility(false);
+
         BuildBoundingBox();
         UpdateBboxGOLine();
     }
@@ -23,7 +25,7 @@ namespace AIAC
             glm::vec3 pt;
         };
 
-        auto vertices = GOMesh::Get(m_MeshID)->GetVertices();
+        auto vertices = m_Mesh->GetVertices();
         auto basePt = vertices[0];
         vector<Neighbor> neighbors;
 
@@ -85,10 +87,8 @@ namespace AIAC
 
     void ScannedModel::UpdateBboxGOLine() {
         // update the GOLine references
-        // for(auto& id : m_BboxGOLineIDs)
-        //     GOLine::Remove(id);
-
-        AIAC_INFO("-------- Scanned bbox ---------");
+        for(auto& line : m_BboxGOLines)
+            GOLine::Remove(line);
         
         // bottom
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
@@ -105,8 +105,6 @@ namespace AIAC
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
-
-        AIAC_INFO("-------- Scanned bbox DONE ---------");
     }
 
     float ScannedModel::GetLength(){
