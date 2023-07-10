@@ -52,6 +52,10 @@ namespace AIAC
          * @param name 
          */
         void SetCurrentObject(std::string name);
+
+        cv::Matx44f GetPose() const { return m_Pose; }
+
+        std::string GetTrackingStatus() const { return TTool ? TTool->GetTrackingStatus() : "TTool not initialized"; }
     
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
