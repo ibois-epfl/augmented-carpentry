@@ -66,7 +66,7 @@ namespace AIAC
                 auto endPoint = GOPoint::Add(holeInfo.m_End, 2.0f);
                 auto radiusText = std::to_string(holeInfo.m_Radius);
                 radiusText = radiusText.substr(0, radiusText.find(".") + 3);
-                auto label = GOText::Add(radiusText, holeInfo.m_Start, 1.0f);
+                auto label = GOText::Add(radiusText, holeInfo.m_Start, 2.0f);
                 holeInfo.m_GOPrimitives.push_back(holeAxis);
                 holeInfo.m_GOPrimitives.push_back(startPoint);
                 holeInfo.m_GOPrimitives.push_back(endPoint);
@@ -122,18 +122,18 @@ namespace AIAC
 
         // change color of the bounding box
         // for(int i = 0; i < 4; i++)
-        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(0.0f, 1.0f, 0.0f, 0.3f));
+        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(0.0f, 2.0f, 0.0f, 0.3f));
         // for(int i = 4; i < 8; i++)
-        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(0.0f, 1.0f, 1.0f, 0.3f));
+        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(0.0f, 2.0f, 2.0f, 0.3f));
         // for(int i = 8; i < 12; i++)
-        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(1.0f, 0.0f, 1.0f, 0.3f));
+        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(2.0f, 0.0f, 2.0f, 0.3f));
     }
 
     void ACInfoModel::TransformGOPrimitives(glm::mat4x4 transformMat) {
         // bounding box
         auto bbox = m_TimberInfo[m_CurrentActiveTimberID].m_Bbox;
         for(int i = 0 ; i < bbox.size() ; i++){
-            m_TimberInfo[m_CurrentActiveTimberID].m_Bbox[i] = glm::vec3(transformMat * glm::vec4(bbox[i], 1.0f));
+            m_TimberInfo[m_CurrentActiveTimberID].m_Bbox[i] = glm::vec3(transformMat * glm::vec4(bbox[i], 2.0f));
         }
         bbox = m_TimberInfo[m_CurrentActiveTimberID].m_Bbox;
         UpdateBboxGOLine();

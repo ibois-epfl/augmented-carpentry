@@ -55,7 +55,7 @@ namespace AIAC
 
         inline void SetName(std::string name) { m_Name = std::move(name); }
         inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }
-        inline void SetColor(glm::vec4 color) { m_Color = color; }
+        inline void SetColor(glm::vec4 color) { m_Color = color; InitGLObject();}
         inline void SetState(bool state) { m_State = state; }
 
         inline std::string GetName() const { return m_Name; }
@@ -67,6 +67,7 @@ namespace AIAC
         virtual void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) { AIAC_ERROR("Not Implemented"); };
         inline void Draw() { for(auto glObject : m_GLObjects) glObject->Draw(); }
 
+        void ClearGLObject();
         virtual void InitGLObject() {}
 
     protected:
@@ -248,6 +249,8 @@ namespace AIAC
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
 
+        void InitGLObject();
+
     private:
         GOPoint m_Center;
         glm::vec3 m_Normal = glm::vec3(0, 0, 1);
@@ -331,6 +334,7 @@ namespace AIAC
          * @return uint32_t Id of the polyline.
          */
         static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points);
+        static std::shared_ptr<GOPolyline> Add(std::vector<glm::vec3> points);
 
         virtual ~GOPolyline() = default;
 
@@ -406,6 +410,8 @@ namespace AIAC
             return triangle;
         }
 
+        void InitGLObject();
+
     private:
         GOPoint m_P1;
         GOPoint m_P2;
@@ -458,7 +464,10 @@ namespace AIAC
         void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; }
         void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
         void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; }
-        // FIXME: /* override */ the SetColor function for Mesh
+        // FIXME: override the SetColor function for Mesh
+        
+        void InitGLObject();
+        
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             // vertices
@@ -477,6 +486,7 @@ namespace AIAC
             mesh.Transform(transformMat);
             return mesh;
         }
+
 
     private:
         std::vector<glm::vec3> m_Vertices;

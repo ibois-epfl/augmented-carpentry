@@ -9,7 +9,7 @@ namespace AIAC
 {
     void ScannedModel::Load(std::string path) {
         m_MeshID = GOMesh::LoadPly(path);
-        GOMesh::Get(m_MeshID)->SetVisibility(false);
+        // GOMesh::Get(m_MeshID)->SetVisibility(false);
         BuildBoundingBox();
         UpdateBboxGOLine();
     }
