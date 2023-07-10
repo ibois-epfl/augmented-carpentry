@@ -7,13 +7,18 @@
 
 namespace AIAC
 {
-    // TODO: implement flag system if needed
-    // enum GOStateFlags
-    // {
-    //     GOFlagNone = 0,
-    //     GOFlagSelected,
-    //     GOFlagVisible,
-    // };
+    struct GOColor
+    {
+        static constexpr glm::vec4 RED = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+        static constexpr glm::vec4 GREEN = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+        static constexpr glm::vec4 BLUE = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+        static constexpr glm::vec4 YELLOW = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
+        static constexpr glm::vec4 MAGENTA = glm::vec4(1.0f, 0.0f, 1.0f, 1.0f);
+        static constexpr glm::vec4 CYAN = glm::vec4(0.0f, 1.0f, 1.0f, 1.0f);
+        static constexpr glm::vec4 WHITE = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+        static constexpr glm::vec4 BLACK = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        static constexpr glm::vec4 GRAY = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
+    };
 
     enum GOTypeFlags
     {
@@ -30,9 +35,10 @@ namespace AIAC
 
     struct GOWeight
     {
-        static constexpr float Default            = 1.1f;
-        static constexpr float Thin               = 0.1f;
+        static constexpr float Default            = 1.05f;
+        static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
+        static constexpr float ExtraThick         = 10.0f;
     };
 
     class GOPrimitive
@@ -45,12 +51,12 @@ namespace AIAC
         static void Remove(const std::shared_ptr<GOPrimitive>& ptrGO);
 
         uint32_t GenerateId();
-        inline const uint32_t GetId() const { return m_Id; }
 
         inline bool IsVisible() const { return m_IsVisible; }
         inline glm::vec4 GetColor() const { return m_Color; }
         inline bool GetState() { return m_State; }
         inline GOTypeFlags GetType() { return m_Type; }
+        inline uint32_t GetId() { return m_Id; }
 
         inline void SetName(std::string name) { m_Name = std::move(name); }
         inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }

@@ -350,7 +350,7 @@ namespace AIAC
         if (AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI != -1)
         {
             ImGui::Text("Toolhead pose inputs:");
-            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 350), true, ImGuiWindowFlags_HorizontalScrollbar);
             
             if(ImGui::Button("save pose", ImVec2(-1, 40)))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
