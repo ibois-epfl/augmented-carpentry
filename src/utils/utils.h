@@ -90,21 +90,6 @@ inline std::vector<std::string> GetFilePaths(const std::string& dirPath, const s
 
 inline std::vector<std::string> ParseConfigFile(const std::string& configPath, std::string entryName)
 {
-    // parse a yml file to get a list of path as such
-    /*
-        modelFiles:
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/twist_drill_bit_32_165/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/brad_point_drill_bit_20_150/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/self_feeding_bit_40_90/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/spade_drill_bit_25_150/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/saber_saw_blade_makita_t/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/auger_drill_bit_20_235/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/self_feeding_bit_50_90/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/chain_saw_blade_f_250/model.obj"
-   - "/home/as/augmented-carpentry/deps/TTool/assets/toolheads/circular_saw_blade_makita_190/model.obj"
-
-    */
-
     cv::FileStorage fs(configPath, cv::FileStorage::READ);
 
     if (!fs.isOpened())
