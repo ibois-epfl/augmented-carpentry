@@ -143,7 +143,7 @@ namespace AIAC
 
         private:
             /// @brief Scaling factor from meters to AC scale
-            float m_ScaleF = 20.0f;
+            float m_ScaleF = 50.0f;
 
             /// @brief Type of the toolhead
             ACToolHeadType m_Type;
