@@ -277,8 +277,6 @@ namespace AIAC
             DrawAllGOs(finalPoseMatrix);
             DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
-        // FIXME: for debug, get rid next line
-        DrawAllGOs(finalPoseMatrix);
     }
 
     void Renderer::RenderCameraFrame(int w, int h, bool useRawFrame) {
