@@ -10,7 +10,7 @@
 
 namespace AIAC
 {
-    const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 16.0f;
+    static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 32.0f;
 
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
     {
@@ -49,54 +49,49 @@ namespace AIAC
 
     void DrawAllGOs(glm::mat4 projection)
     {
-        TextRenderer::SetProjection(projection);
-
         std::vector<std::shared_ptr<GOPrimitive>> gos;
         AIAC_GOREG->GetAllGOs(gos);
-        DrawGOs(gos);
-    }
+        
+        std::vector<std::shared_ptr<GOPrimitive>> goTexts;
+        for(auto& go: gos){
+            if(!go->IsVisible()){
+                continue;
+            }   
+            if(go->GetType() == _GOText){
+                goTexts.emplace_back(go);
+            } else{
+                DrawGO(go);
+            }
+        }
 
-    glm::vec3 GetTransformed(glm::mat4 transformMat, float x, float y, float z)
-    {
-        glm::vec4 point(x, y, z, 1);
-        point = transformMat * point;
-        return {point.x, point.y, point.z};
+        TextRenderer::SetProjection(projection);
+        for(auto& goText: goTexts){
+            DrawGO(goText);
+        }
     }
 
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive)
     {
-        if(!goPrimitive->IsVisible()){
-            return;
-        }
         switch (goPrimitive->GetType()){
             case _GOPoint:
-                DrawPoint(*std::dynamic_pointer_cast<GOPoint>(goPrimitive)); break;
             case _GOLine:
-                DrawLine(*std::dynamic_pointer_cast<GOLine>(goPrimitive)); break;
-            case _GOCircle:
-                DrawCircle(*std::dynamic_pointer_cast<GOCircle>(goPrimitive)); break;
             case _GOCylinder:
-                DrawCylinder(*std::dynamic_pointer_cast<GOCylinder>(goPrimitive)); break;
+            case _GOCircle:
             case _GOPolyline:
-                DrawPolyline(*std::dynamic_pointer_cast<GOPolyline>(goPrimitive)); break;
             case _GOTriangle:
-                DrawTriangle(*std::dynamic_pointer_cast<GOTriangle>(goPrimitive)); break;
             case _GOMesh:
-                DrawMesh(*std::dynamic_pointer_cast<GOMesh>(goPrimitive)); break;
+                goPrimitive->Draw(); break;
             case _GOText:
+                DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
                 break;
-                // DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
 
             default:
                 break;
         }
     }
 
-    void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive)
-    {
-        for(auto& go: goPrimitive){
-            DrawGO(go);
-        }
+    int getSectorNum(float radius){
+        return 8;
     }
 
     void DrawPoint(const GOPoint& goPoint)
@@ -117,20 +112,6 @@ namespace AIAC
             }
             DrawPoint(*goPoint);
         }
-    }
-
-    int getSectorNum(float radius)
-    {
-        if(radius <= 3){
-            return 8;
-        }
-        if(radius <= 12){
-            return 12;
-        }
-        if(radius <= 24){
-            return 24;
-        }
-        return 36;
     }
 
     void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color)

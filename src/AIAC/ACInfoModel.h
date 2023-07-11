@@ -56,6 +56,17 @@ public:
 
 private:
     std::string m_ID;
+
+    // The bounding box has this structure
+    //
+    //   (7)------------------------(6)
+    //   / |                       / |  
+    // (4)-----------------------(5) |
+    //  |  |                      |  |
+    //  | (3)---------------------|-(2)
+    //  |/                        |/
+    // (0)-----------------------(1)
+    //
     std::vector<glm::vec3> m_Bbox;
     ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
     std::map<std::string, Hole> m_Holes;

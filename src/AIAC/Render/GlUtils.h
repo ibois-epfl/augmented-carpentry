@@ -16,6 +16,7 @@ namespace AIAC {
     const static glm::vec4 OGL_CYAN    = glm::vec4(0, 1, 1, 1);
     const static glm::vec4 OGL_WHITE   = glm::vec4(1, 1, 1, 1);
 
+    
     /**
      * @brief Draw multiple points
      * @param vertices A vector of 3d points, indicate the position of the vertices.

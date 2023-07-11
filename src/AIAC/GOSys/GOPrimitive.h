@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include "AIAC/Render/GLObject.h"
 #include "AIAC/Base.h"
 #include "glm/glm.hpp"
 
@@ -69,7 +70,7 @@ namespace AIAC
 
         inline void SetName(std::string name) { m_Name = std::move(name); }
         inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }
-        inline void SetColor(glm::vec4 color) { m_Color = color; }
+        inline void SetColor(glm::vec4 color) { m_Color = color; InitGLObject();}
         inline void SetState(bool state) { m_State = state; }
 
         inline std::string GetName() const { return m_Name; }
@@ -79,6 +80,10 @@ namespace AIAC
         virtual void Transform(const glm::mat4x4& transformMat) {};
 
         virtual void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) { AIAC_ERROR("Not Implemented"); };
+        inline void Draw() { for(auto glObject : m_GLObjects) glObject->Draw(); }
+
+        void ClearGLObject();
+        virtual void InitGLObject() {}
 
     protected:
         std::string m_Name;
@@ -88,6 +93,7 @@ namespace AIAC
         bool m_State;
         GOTypeFlags m_Type;
         float m_Weight = GOWeight::Default;
+        std::vector<std::shared_ptr<GLObject> > m_GLObjects;
     };
 
 
@@ -128,6 +134,7 @@ namespace AIAC
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Position = transformMat * glm::vec4(m_Position, 1.0f);
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -135,10 +142,12 @@ namespace AIAC
             if (ptrPoint != nullptr)
             {
                 SetPosition(ptrPoint->GetPosition());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+        void InitGLObject();
 
         operator glm::vec3() const { return m_Position; }
 
@@ -185,6 +194,7 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -192,10 +202,12 @@ namespace AIAC
             if (ptrLine != nullptr)
             {
                 SetPts(ptrLine->GetPStart(), ptrLine->GetPEnd());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+        void InitGLObject();
 
     private:
         GOPoint m_PStart;
@@ -239,6 +251,7 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Center.Transform(transformMat);
             m_Normal = glm::normalize(glm::vec3(transformMat * glm::vec4(m_Normal, 0.0f)));
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -249,10 +262,13 @@ namespace AIAC
                 SetNormal(ptrCircle->GetNormal());
                 SetRadius(ptrCircle->GetRadius());
                 SetEdgeColor(ptrCircle->GetEdgeColor());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+
+        void InitGLObject();
 
     private:
         GOPoint m_Center;
@@ -297,6 +313,7 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
+            InitGLObject();
         }
 
         inline void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) /* override */ {
@@ -307,10 +324,12 @@ namespace AIAC
                 SetPEnd(ptrCylinder->GetPEnd());
                 SetRadius(ptrCylinder->GetRadius());
                 SetEdgeColor(ptrCylinder->GetEdgeColor());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
         }
+        void InitGLObject();
 
     private:
         GOPoint m_PStart;
@@ -335,6 +354,7 @@ namespace AIAC
          * @return uint32_t Id of the polyline.
          */
         static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points);
+        static std::shared_ptr<GOPolyline> Add(std::vector<glm::vec3> points);
 
         virtual ~GOPolyline() = default;
 
@@ -351,6 +371,7 @@ namespace AIAC
             for (auto& point : m_Points) {
                 point.Transform(transformMat);
             }
+            InitGLObject();
         }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
@@ -359,6 +380,7 @@ namespace AIAC
             polyline.Transform(transformMat);
             return polyline;
         }
+        void InitGLObject();
 
     private:
         std::vector<GOPoint> m_Points;
@@ -399,6 +421,7 @@ namespace AIAC
             m_P1.Transform(transformMat);
             m_P2.Transform(transformMat);
             m_P3.Transform(transformMat);
+            InitGLObject();
         }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
@@ -407,6 +430,8 @@ namespace AIAC
             triangle.Transform(transformMat);
             return triangle;
         }
+
+        void InitGLObject();
 
     private:
         GOPoint m_P1;
@@ -444,7 +469,7 @@ namespace AIAC
          * @brief Load .ply and add the corresponding GOMesh to the scene.
          * @return uint32_t Id of the mesh.
          */
-        static uint32_t LoadPly(std::string);
+        static std::shared_ptr<GOMesh> LoadPly(std::string);
 
         virtual ~GOMesh() = default;
 
@@ -455,11 +480,15 @@ namespace AIAC
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
         const std::vector<glm::vec3> GetNormals() const { return m_Normals; }
         const std::vector<glm::vec4> GetColors() const { return m_Colors; }
-        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; }
-        void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; }
+        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; InitGLObject(); }
+        void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; InitGLObject(); }
         void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
-        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; }
-        // FIXME: /* override */ the SetColor function for Mesh
+        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; InitGLObject(); }
+        void SetColor(glm::vec4 color) { m_Colors = std::vector<glm::vec4>(m_Vertices.size(), color); InitGLObject(); }
+        // FIXME: override the SetColor function for Mesh
+        
+        void InitGLObject();
+        
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             // vertices
@@ -470,6 +499,7 @@ namespace AIAC
             for (auto& normal : m_Normals) {
                 normal = glm::normalize(glm::vec3(transformMat * glm::vec4(normal, 0.0f)));
             }
+            InitGLObject();
         }
 
         GOPrimitive operator* (const glm::mat4x4& transformMat)
@@ -478,6 +508,7 @@ namespace AIAC
             mesh.Transform(transformMat);
             return mesh;
         }
+
 
     private:
         std::vector<glm::vec3> m_Vertices;
@@ -525,6 +556,7 @@ namespace AIAC
                 SetText(ptrPoint->GetText());
                 SetAnchor(ptrPoint->GetAnchor());
                 SetTextSize(ptrPoint->GetTextSize());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
