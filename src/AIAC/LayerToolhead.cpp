@@ -32,7 +32,7 @@ namespace AIAC
 
         if (m_TtoolState == ttool::EventType::PoseInput)
         {
-            // FIXME: (?) if it is not called x2 it does not work on setting pose (?)
+            // (?) if it is not called x2 it does not work on setting pose (?)
             if (IsShowSilouhette)
             {
                 TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
@@ -95,15 +95,14 @@ namespace AIAC
         glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
 
         cv::Matx44f toolheadPose = TTool->GetPose();
-        // scale the translation by 20.0f
-        toolheadPose(0, 3) *= 20.0f;
-        toolheadPose(1, 3) *= 20.0f;
-        toolheadPose(2, 3) *= 20.0f;
+        toolheadPose(0, 3) *= this->m_ACScaleFactor;
+        toolheadPose(1, 3) *= this->m_ACScaleFactor;
+        toolheadPose(2, 3) *= this->m_ACScaleFactor;
 
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
-        toolheadNormalization(0, 3) *= 20.0f;
-        toolheadNormalization(1, 3) *= 20.0f;
-        toolheadNormalization(2, 3) *= 20.0f;
+        toolheadNormalization(0, 3) *= this->m_ACScaleFactor;
+        toolheadNormalization(1, 3) *= this->m_ACScaleFactor;
+        toolheadNormalization(2, 3) *= this->m_ACScaleFactor;
 
         glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadPose * toolheadNormalization).val);
 
@@ -128,10 +127,10 @@ namespace AIAC
         return;
     }
 
-    //FIXME: @hong-bin render: solve flickering when changing
     void LayerToolhead::SetCurrentObject(std::string name)
     {
         this->ACInfoToolheadManager->SetActiveToolhead(name);
+        this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(this->IsShowToolheadGOInfo);
 
         int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
 

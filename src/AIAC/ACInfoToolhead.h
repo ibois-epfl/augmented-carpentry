@@ -183,21 +183,10 @@ namespace AIAC
             void AddGOsInfoCircularSaw(ToolHeadData& data);
             void AddGOsInfoChainSaw(ToolHeadData& data);
             void AddGOsInfoSaberSaw(ToolHeadData& data);
-            /// @brief From the parsed acit geometries, add widgets made by GOs (e.g. text, arrows, etc)
-            void AddGOsWidget(ToolHeadData& data);
-            void AddGOsWidgetDrillBit(ToolHeadData& data);
-            void AddGOsWidgetCircularSaw(ToolHeadData& data);
-            void AddGOsWidgetChainSaw(ToolHeadData& data);
-            void AddGOsWidgetSaberSaw(ToolHeadData& data);
 
         public:
-            /**
-             * @brief Set the visibility of the geometries and widgets of the toolhead
-             * 
-             * @param visibleWidget: visibility of the widgets
-             * @param visibleInfo: visibility of the geometries
-             */
-            void SetVisibility(bool visibleWidget, bool visibleInfo = false);
+            /// @brief Set the visibility of the geometries and widgets of the toolhead
+            void SetVisibility(bool visible);
 
         public:
             /// @brief transform all the geometries, widgets and mesh contained in the ACInfoToolhead object
@@ -212,8 +201,6 @@ namespace AIAC
 
             /// @brief copy the original transform of the GO infos
             void CopyGOsInfoOriginal();
-            /// @brief copy the original transform of the GO widgets
-            void CopyGOsWidgetOriginal();
 
         public: __always_inline
             std::string ToString() const { return m_Data.GetName(); }
@@ -233,9 +220,5 @@ namespace AIAC
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfo;
             /// @brief the original geometries of GOinfos at loading time
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfoOriginal;
-            /// @brief the geometries the create the widget UI of the toolhead
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
-            /// @brief the original geometries of GOWidgets at loading time
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidgetOriginal;
     };
 }
