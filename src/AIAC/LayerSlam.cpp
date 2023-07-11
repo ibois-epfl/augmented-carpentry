@@ -136,4 +136,30 @@ namespace AIAC
         Slam.clearMap();
         Slam.setInstancing(false);
     }
+
+    void LayerSlam::UpdateMap(std::string path){
+        Slam.setMap(path, true);
+
+        // reset GLObjects
+        for(auto &go: m_SlamMapGOs){
+            GOPrimitive::Remove(go);
+        }
+        m_SlamMapGOs.clear();
+
+        // add new GLObjects
+        // std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
+        // std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
+        for(const auto& mapMarker: Slam.getMap()->map_markers){
+            auto points = mapMarker.second.get3DPoints();
+            std::vector<glm::vec3> markerEdges;
+            for(int i = 0 ; i < 4; i++){
+                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
+            }
+            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
+            
+            auto tag = GOPolyline::Add(markerEdges);
+            tag->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+            m_SlamMapGOs.push_back(tag);
+        }
+    }
 }
