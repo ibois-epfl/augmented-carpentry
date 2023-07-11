@@ -194,12 +194,6 @@ namespace AIAC
         }
 
         // Default, render the main scene
-        glBindVertexArray(m_VAO);
-        glUseProgram(m_BasicShaderProgram);
-        
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        
         RenderMainView();
         RenderGlobalView();
     }
@@ -230,12 +224,11 @@ namespace AIAC
     }
 
     void Renderer::RenderGlobalView() {
+        
         glBindVertexArray(m_VAO);
         glUseProgram(m_BasicShaderProgram);
 
         m_GlobalView.Activate();
-        glBindVertexArray(m_VAO);
-        glUseProgram(m_BasicShaderProgram);
 
         glDisable(GL_DEPTH_TEST);
 
@@ -251,7 +244,7 @@ namespace AIAC
             // DigitalModel.DrawFaces(m_DigitalModelFaceColor);
         // }
 
-        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
 
         // visualize camera
         // auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
@@ -293,8 +286,12 @@ namespace AIAC
     }
 
     void Renderer::RenderMainView() {
-        glBindVertexArray(m_VAO);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
+        
+        glDisable(GL_DEPTH_TEST);        
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

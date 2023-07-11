@@ -142,6 +142,7 @@ namespace AIAC
             if (ptrPoint != nullptr)
             {
                 SetPosition(ptrPoint->GetPosition());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
@@ -201,6 +202,7 @@ namespace AIAC
             if (ptrLine != nullptr)
             {
                 SetPts(ptrLine->GetPStart(), ptrLine->GetPEnd());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
@@ -260,6 +262,7 @@ namespace AIAC
                 SetNormal(ptrCircle->GetNormal());
                 SetRadius(ptrCircle->GetRadius());
                 SetEdgeColor(ptrCircle->GetEdgeColor());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
@@ -321,6 +324,7 @@ namespace AIAC
                 SetPEnd(ptrCylinder->GetPEnd());
                 SetRadius(ptrCylinder->GetRadius());
                 SetEdgeColor(ptrCylinder->GetEdgeColor());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
@@ -552,6 +556,7 @@ namespace AIAC
                 SetText(ptrPoint->GetText());
                 SetAnchor(ptrPoint->GetAnchor());
                 SetTextSize(ptrPoint->GetTextSize());
+                InitGLObject();
                 return;
             }
             AIAC_ERROR("Cannot set value from different type of primitive; The type is {}", ptrGO->GetType());
