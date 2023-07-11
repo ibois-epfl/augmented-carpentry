@@ -63,6 +63,39 @@ namespace AIAC
 
                 m_TimberInfo.m_Holes[holeInfo.m_ID] = holeInfo;
             }
+
+            // cuts
+            for(auto cut = timber.child("cut"); cut; cut=cut.next_sibling("cut")){
+                TimberInfo::Cut cutInfo;
+                cutInfo.m_ID = cut.attribute("id").as_string();
+                cutInfo.m_State = StringToState(cut.child("state").child_value());
+
+                auto faces = cut.child("faces");
+                for(auto face = faces.child("face"); face; face=face.next_sibling("face")){
+                    TimberInfo::Cut::Face faceInfo;
+                    faceInfo.m_ID = face.attribute("id").as_string();
+                    faceInfo.m_State = StringToState(face.child("state").child_value());
+                    faceInfo.m_Edges = StringToSet(face.child("edges").child_value());
+                    cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
+                }
+
+                auto edges = cut.child("edges");
+                for(auto edge = edges.child("edge"); edge; edge=edge.next_sibling("edge")){
+                    TimberInfo::Cut::Edge edgeInfo;
+                    edgeInfo.m_ID = edge.attribute("id").as_string();
+                    edgeInfo.m_Start = StringToVec3(edge.child("start").child_value()) * m_Scale;
+                    edgeInfo.m_End = StringToVec3(edge.child("end").child_value()) * m_Scale;
+
+                    // build GOPrimitive
+                    auto edgeGO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 1.0f);
+                    edgeGO->SetColor(glm::vec4(0.15f, 0.6f, 0.7f, 1.0f));
+                    edgeInfo.m_GOPrimitives.push_back(edgeGO);
+
+                    cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
+                }
+
+                m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
+            }
         }
         UpdateBboxGOLine();
     }
