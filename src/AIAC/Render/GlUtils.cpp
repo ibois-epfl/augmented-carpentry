@@ -56,11 +56,11 @@ namespace AIAC {
 
     //     glGenBuffers(1, &glObject.vertexBuf);
     //     glBindBuffer(GL_ARRAY_BUFFER, glObject.vertexBuf);
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+    //     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(glm::vec3), &vertices[0], GL_DYNAMIC_DRAW);
 
     //     glGenBuffers(1, &glObject.colorBuf);
     //     glBindBuffer(GL_ARRAY_BUFFER, glObject.colorBuf);
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+    //     glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
 
     //     return glObject;
     // }
@@ -74,11 +74,11 @@ namespace AIAC {
 
     //     glGenBuffers(1, &glObject.vertexBuf);
     //     glBindBuffer(GL_ARRAY_BUFFER, glObject.vertexBuf);
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(endPts) * sizeof(glm::vec3), &endPts[0], GL_STATIC_DRAW);
+    //     glBufferData(GL_ARRAY_BUFFER, sizeof(endPts) * sizeof(glm::vec3), &endPts[0], GL_DYNAMIC_DRAW);
 
     //     glGenBuffers(1, &glObject.colorBuf);
     //     glBindBuffer(GL_ARRAY_BUFFER, glObject.colorBuf);
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+    //     glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
 
     //     return glObject;
     // }
@@ -92,11 +92,11 @@ namespace AIAC {
 
     //     glGenBuffers(1, &glObject.vertexBuf);
     //     glBindBuffer(GL_ARRAY_BUFFER, glObject.vertexBuf);
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+    //     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(glm::vec3), &vertices[0], GL_DYNAMIC_DRAW);
 
     //     glGenBuffers(1, &glObject.colorBuf);
     //     glBindBuffer(GL_ARRAY_BUFFER, glObject.colorBuf);
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+    //     glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
 
     //     return glObject;
     // }
@@ -107,7 +107,7 @@ namespace AIAC {
         // GLuint vbo;
         // glGenBuffers(1, &vbo);
         // glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        // glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+        // glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_DYNAMIC_DRAW);
         // glEnableVertexAttribArray(0);
         // glVertexAttribPointer(
         //         0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -121,7 +121,7 @@ namespace AIAC {
         // GLuint colorBuffer;
         // glGenBuffers(1, &colorBuffer);
         // glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        // glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        // glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
         // glEnableVertexAttribArray(1);
         // glVertexAttribPointer(
         //         1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.
@@ -159,7 +159,7 @@ namespace AIAC {
         // glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
         // cout << "vbo: " << vbo << " vao: " << vao << endl;
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, edges.size() * sizeof(glm::vec3), &edges[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, edges.size() * sizeof(glm::vec3), &edges[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(
                 0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -173,7 +173,7 @@ namespace AIAC {
         GLuint colorBuffer;
         glGenBuffers(1, &colorBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(
                 1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.
@@ -201,7 +201,7 @@ namespace AIAC {
         GLuint elementBuffer;
         glGenBuffers(1, &elementBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_DYNAMIC_DRAW);
 
         // Index buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer);
@@ -210,7 +210,7 @@ namespace AIAC {
         GLuint vbo;
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(
                 0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -224,7 +224,7 @@ namespace AIAC {
         GLuint colorBuffer;
         glGenBuffers(1, &colorBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(
                 1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.

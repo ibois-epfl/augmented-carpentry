@@ -29,21 +29,15 @@ namespace AIAC
 
     /**
      * @brief Draw all the GOs present in the GORegistry.
-     * 
      * @param projection OpenGL projection matrix.
      */
     void DrawAllGOs(glm::mat4 projection = glm::mat4(1.0f));
 
     /**
-     * @brief Draw a GOPrimitive.
+     * @brief Draw a GOPrimitive. (This function neglects the "isVisible" attribute of the object and will draw it anyway)
      * @param goPrimitive Object to draw.
      */
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
-    /**
-     * @brief Draw multiple GOPrimitive.
-     * @param goPrimitive A vector of GOPrimitive to draw.
-     */
-    void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
 
     /**
      * @brief Draw a GOPoint
