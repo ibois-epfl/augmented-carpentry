@@ -78,14 +78,9 @@ namespace AIAC
     {
         this->m_Data.LoadACIT(acitPath);
         this->AddGOsInfo(this->m_Data);
-        this->AddGOsWidget(this->m_Data);
         this->m_GOPrimitivesInfoOriginal.clear();
-        this->m_GOPrimitivesWidgetOriginal.clear();
         this->CopyGOsInfoOriginal();
-        this->CopyGOsWidgetOriginal();
-
         this->TransformSync();
-
         this->SetVisibility(true);
     }
 
@@ -118,23 +113,31 @@ namespace AIAC
                                        data.m_DrillBitD.Toolbase.y,
                                        data.m_DrillBitD.Toolbase.z,
                                        GOWeight::Thick);
+        ptToolbase->SetColor(GOColor::RED);
         auto ptTooltip = GOPoint::Add(data.m_DrillBitD.Tooltip.x, 
                                       data.m_DrillBitD.Tooltip.y,
                                       data.m_DrillBitD.Tooltip.z,
                                       GOWeight::Thick);
+        ptTooltip->SetColor(GOColor::GREEN);
         auto ptEattip = GOPoint::Add(data.m_DrillBitD.Eattip.x,
                                      data.m_DrillBitD.Eattip.y,
                                      data.m_DrillBitD.Eattip.z,
                                      GOWeight::Thick);
+        ptEattip->SetColor(GOColor::BLUE);
         auto ptChucktip = GOPoint::Add(data.m_DrillBitD.Chucktip.x,
                                        data.m_DrillBitD.Chucktip.y,
                                        data.m_DrillBitD.Chucktip.z,
                                        GOWeight::Thick);
+        ptChucktip->SetColor(GOColor::YELLOW);
+
+        auto lnAxis = GOLine::Add(*ptToolbase, *ptTooltip);
+        lnAxis->SetColor(GOColor::MAGENTA);
 
         this->m_GOPrimitivesInfo.push_back(ptToolbase);
         this->m_GOPrimitivesInfo.push_back(ptTooltip);
         this->m_GOPrimitivesInfo.push_back(ptEattip);
         this->m_GOPrimitivesInfo.push_back(ptChucktip);
+        this->m_GOPrimitivesInfo.push_back(lnAxis);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {
@@ -142,13 +145,18 @@ namespace AIAC
                                      data.m_CircularSawD.Center.y,
                                      data.m_CircularSawD.Center.z,
                                      GOWeight::Thick);
+        ptCenter->SetColor(GOColor::RED);
         auto ptNormalEnd = GOPoint::Add(data.m_CircularSawD.NormalEnd.x,
                                         data.m_CircularSawD.NormalEnd.y,
                                         data.m_CircularSawD.NormalEnd.z,
                                         GOWeight::Thick);
+        ptNormalEnd->SetColor(GOColor::GREEN);
+        auto lnNormal = GOLine::Add(*ptCenter, *ptNormalEnd);
+        lnNormal->SetColor(GOColor::MAGENTA);
 
         this->m_GOPrimitivesInfo.push_back(ptCenter);
         this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
+        this->m_GOPrimitivesInfo.push_back(lnNormal);
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
@@ -156,24 +164,31 @@ namespace AIAC
                                         data.m_ChainSawD.Chainbase.y,
                                         data.m_ChainSawD.Chainbase.z,
                                         GOWeight::Thick);
+        ptChainbase->SetColor(GOColor::RED);
         auto ptChainmid = GOPoint::Add(data.m_ChainSawD.Chainmid.x,
                                        data.m_ChainSawD.Chainmid.y,
                                        data.m_ChainSawD.Chainmid.z,
                                        GOWeight::Thick);
+        ptChainmid->SetColor(GOColor::GREEN);
         auto ptChainend = GOPoint::Add(data.m_ChainSawD.Chainend.x,
                                        data.m_ChainSawD.Chainend.y,
                                        data.m_ChainSawD.Chainend.z,
                                        GOWeight::Thick);
+        ptChainend->SetColor(GOColor::BLUE);
         auto ptNormalStart = GOPoint::Add(data.m_ChainSawD.NormalStart.x,
                                           data.m_ChainSawD.NormalStart.y,
                                           data.m_ChainSawD.NormalStart.z,
                                           GOWeight::Thick);
+        ptNormalStart->SetColor(GOColor::YELLOW);
         auto ptNormalEnd = GOPoint::Add(data.m_ChainSawD.NormalEnd.x,
                                         data.m_ChainSawD.NormalEnd.y,
                                         data.m_ChainSawD.NormalEnd.z,
                                         GOWeight::Thick);
+        ptNormalEnd->SetColor(GOColor::CYAN);
         auto lnBaseMid = GOLine::Add(*ptChainbase, *ptChainmid);
+        lnBaseMid->SetColor(GOColor::MAGENTA);
         auto lnMidEnd = GOLine::Add(*ptChainmid, *ptChainend);
+        lnMidEnd->SetColor(GOColor::MAGENTA);
 
         this->m_GOPrimitivesInfo.push_back(ptChainbase);
         this->m_GOPrimitivesInfo.push_back(ptChainmid);
@@ -189,20 +204,24 @@ namespace AIAC
                                        data.m_SaberSawD.Toolbase.y,
                                        data.m_SaberSawD.Toolbase.z,
                                        GOWeight::Thick);
+        ptToolbase->SetColor(GOColor::RED);
         auto ptTooltip = GOPoint::Add(data.m_SaberSawD.Tooltip.x,
                                       data.m_SaberSawD.Tooltip.y,
                                       data.m_SaberSawD.Tooltip.z,
                                       GOWeight::Thick);
+        ptTooltip->SetColor(GOColor::GREEN);
         auto ptNormalStart = GOPoint::Add(data.m_SaberSawD.NormalStart.x,
                                           data.m_SaberSawD.NormalStart.y,
                                           data.m_SaberSawD.NormalStart.z,
                                           GOWeight::Thick);
+        ptNormalStart->SetColor(GOColor::BLUE);
         auto ptNormalEnd = GOPoint::Add(data.m_SaberSawD.NormalEnd.x,
                                         data.m_SaberSawD.NormalEnd.y,
                                         data.m_SaberSawD.NormalEnd.z,
                                         GOWeight::Thick);
+        ptNormalEnd->SetColor(GOColor::YELLOW);
         auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
-        lineAxis->SetWeight(GOWeight::Thick);
+        lineAxis->SetColor(GOColor::MAGENTA);
 
         this->m_GOPrimitivesInfo.push_back(ptToolbase);
         this->m_GOPrimitivesInfo.push_back(ptTooltip);
@@ -211,90 +230,16 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
 
-    // FIXME: get rid of widgets all together <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    void ACInfoToolhead::AddGOsWidget(ToolHeadData& data)
-    {
-        switch (data.m_Type)
-        {
-            case ACToolHeadType::DRILLBIT:
-                this->AddGOsWidgetDrillBit(data);
-                break;
-            case ACToolHeadType::CIRCULARSAW:
-                this->AddGOsWidgetCircularSaw(data);
-                break;
-            case ACToolHeadType::CHAINSAW:
-                this->AddGOsWidgetChainSaw(data);
-                break;
-            case ACToolHeadType::SABERSAW:
-                this->AddGOsWidgetSaberSaw(data);
-                break;
-            default:
-                AIAC_ERROR("Toolhead type not supported");
-                break;
-        }
-        // TransformSync();
-        return;
-
-    }
-    void ACInfoToolhead::AddGOsWidgetDrillBit(ToolHeadData& data)
-    {
-        auto ptToolbaseW = GOPoint::Add(data.m_DrillBitD.Toolbase.x,
-                                        data.m_DrillBitD.Toolbase.y,
-                                        data.m_DrillBitD.Toolbase.z,
-                                        GOWeight::ExtraThick);
-        ptToolbaseW->SetColor(GOColor::GREEN);
-        auto ptTooltipW = GOPoint::Add(data.m_DrillBitD.Tooltip.x, 
-                                       data.m_DrillBitD.Tooltip.y,
-                                       data.m_DrillBitD.Tooltip.z,
-                                       GOWeight::ExtraThick);
-        ptToolbaseW->SetColor(GOColor::RED);
-        auto lnAxisW = GOLine::Add(*ptToolbaseW, *ptTooltipW);
-        lnAxisW->SetColor(GOColor::MAGENTA);
-
-        this->m_GOPrimitivesWidget.push_back(lnAxisW);
-        this->m_GOPrimitivesWidget.push_back(ptToolbaseW);
-        this->m_GOPrimitivesWidget.push_back(ptTooltipW);
-    }
-    void ACInfoToolhead::AddGOsWidgetCircularSaw(ToolHeadData& data)
-    {
-        auto ptCenterW = GOPoint::Add(data.m_CircularSawD.Center.x,
-                                      data.m_CircularSawD.Center.y,
-                                      data.m_CircularSawD.Center.z,
-                                      GOWeight::Thick);
-        ptCenterW->SetColor(GOColor::GREEN);
-        auto ptNormalEndW = GOPoint::Add(data.m_CircularSawD.NormalEnd.x,
-                                         data.m_CircularSawD.NormalEnd.y,
-                                         data.m_CircularSawD.NormalEnd.z,
-                                         GOWeight::Thick);
-
-        glm::vec3 norm = glm::normalize(ptNormalEndW->GetPosition() - ptCenterW->GetPosition());
-        glm::vec3 endAxis = ptCenterW->GetPosition() + norm * 1.5f;
-        auto lnNormalW = GOLine::Add(*ptCenterW, GOPoint(endAxis));
-        lnNormalW->SetColor(GOColor::MAGENTA);
-
-        GOPoint::Remove(ptNormalEndW->GetId());
-        this->m_GOPrimitivesWidget.push_back(ptCenterW);
-        this->m_GOPrimitivesWidget.push_back(lnNormalW);
-
-    }
-    void ACInfoToolhead::AddGOsWidgetChainSaw(ToolHeadData& data) {}
-    void ACInfoToolhead::AddGOsWidgetSaberSaw(ToolHeadData& data) {}
-
-    void ACInfoToolhead::SetVisibility(bool visibleWidget, bool visibleInfo)
+    void ACInfoToolhead::SetVisibility(bool visible)
     {
         for (auto& go : m_GOPrimitivesInfo)
-            go->SetVisibility(visibleInfo);
-        for (auto& go : m_GOPrimitivesWidget)
-            go->SetVisibility(visibleWidget);
+            go->SetVisibility(visible);
     }
 
     void ACInfoToolhead::Transform(glm::mat4 transform)
     {
         for (uint i = 0; i < this->m_GOPrimitivesInfo.size(); i++)
             this->TransformGO(this->m_GOPrimitivesInfo[i], this->m_GOPrimitivesInfoOriginal[i], transform);
-
-        for (uint i = 0; i < this->m_GOPrimitivesWidget.size(); i++)
-            this->TransformGO(this->m_GOPrimitivesWidget[i], this->m_GOPrimitivesWidgetOriginal[i], transform);
     }
     void ACInfoToolhead::TransformGO(std::shared_ptr<GOPrimitive> goPtr,
                                      std::shared_ptr<GOPrimitive> goOriginalPtr,
@@ -379,7 +324,7 @@ namespace AIAC
 
         // Getting the bounding box of the info
         // Here, we filter in only the points
-        for (auto& go : this->m_GOPrimitivesInfo)
+        for (auto& go : this->m_GOPrimitivesInfoOriginal)
         {
             if (go->GetType() != _GOPoint)
                 continue;
@@ -402,13 +347,7 @@ namespace AIAC
         glm::mat4x4 rotation = glm::mat4x4(GetRotationMatrix(glm::vec3(1, 0, 0), 90.0f * M_PI / 180.0f));
 
         for (auto& go : this->m_GOPrimitivesInfoOriginal)
-        {
             go->Transform(transformBackFromCenter * rotation * transformToCenter);
-        }
-        for (auto& go : this->m_GOPrimitivesWidgetOriginal)
-        {
-            go->Transform(transformBackFromCenter * rotation * transformToCenter);
-        }
     }
 
     void ACInfoToolhead::CopyGOsInfoOriginal()
@@ -440,41 +379,6 @@ namespace AIAC
                 break;
             case _GOText:
                 this->m_GOPrimitivesInfoOriginal.push_back(std::make_shared<GOText>(*std::dynamic_pointer_cast<GOText>(go)));
-                break;
-            default:
-                break;
-            }
-        }
-    }
-    void ACInfoToolhead::CopyGOsWidgetOriginal()
-    {
-        for (const auto& go : this->m_GOPrimitivesWidget) 
-        {
-            switch (go->GetType())
-            {
-            case _GOPoint:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOPoint>(*std::dynamic_pointer_cast<GOPoint>(go))); 
-                break;
-            case _GOLine:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOLine>(*std::dynamic_pointer_cast<GOLine>(go))); 
-                break;
-            case _GOCircle:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOCircle>(*std::dynamic_pointer_cast<GOCircle>(go))); 
-                break;
-            case _GOCylinder:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOCylinder>(*std::dynamic_pointer_cast<GOCylinder>(go))); 
-                break;
-            case _GOPolyline:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOPolyline>(*std::dynamic_pointer_cast<GOPolyline>(go))); 
-                break;
-            case _GOTriangle:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOTriangle>(*std::dynamic_pointer_cast<GOTriangle>(go))); 
-                break;
-            case _GOMesh:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOMesh>(*std::dynamic_pointer_cast<GOMesh>(go))); 
-                break;
-            case _GOText:
-                this->m_GOPrimitivesWidgetOriginal.push_back(std::make_shared<GOText>(*std::dynamic_pointer_cast<GOText>(go)));
                 break;
             default:
                 break;

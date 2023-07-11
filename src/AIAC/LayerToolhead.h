@@ -14,8 +14,10 @@ namespace AIAC
     {
     public:
         LayerToolhead()
-            :IsShowSilouhette(true),
-            ToolheadStateUI(-1),
+            : IsShowSilouhette(true),
+              ToolheadStateUI(-1),
+              IsShowToolheadGOInfo(true),
+              m_ACScaleFactor(50.0f),
             m_TtoolState(ttool::EventType::None)
         {
             this->ACInfoToolheadManager = std::make_shared<AIAC::ACInfoToolheadManager>();
@@ -29,8 +31,6 @@ namespace AIAC
         /// @brief Destroy the  ttool view and recreate a new ttool object with given camera params
         void ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize);
 
-        /// @brief Get the current pose of the ttool
-        glm::mat4x4 GetWorldPose();
 
         /// @brief Update the ttool state from the UI
         void UpdateToolheadStateUI();
@@ -39,22 +39,17 @@ namespace AIAC
         // It will reset LayerToolhead state to None (i.e. stop tracking and pose input)
         void SavePose();
 
+        /// @brief Get the current pose of the ttool
+        glm::mat4x4 GetWorldPose();
+
     public: ///< Getters and setters
-        /**
-         * @brief Get the Ttool State object of the ttool event type
-         * 
-         * @return ttool::EventType None, poseinput or tracking
-         */
+        /// @brief Get the Ttool State object of the ttool event type
         inline ttool::EventType GetTtoolState() const { return this->m_TtoolState; }
-        /**
-         * @brief Set the current active object for both the ttool and acit menager
-         * 
-         * @param name 
-         */
+        /// @brief Set the current active object for both the ttool and acit menager
         void SetCurrentObject(std::string name);
-
+        /// @brief Get the current pose of the ttool
         cv::Matx44f GetPose() const { return m_Pose; }
-
+        /// @brief Get the current tracking status of the ttool
         std::string GetTrackingStatus() const { return TTool ? TTool->GetTrackingStatus() : "TTool not initialized"; }
     
     private:
@@ -68,12 +63,16 @@ namespace AIAC
         int ToolheadStateUI;
         /// Show the silouhette of the ttool
         bool IsShowSilouhette;
+        /// Show the GOInfo toolhead's elements
+        bool IsShowToolheadGOInfo;
 
     private: ///< Private members
         /// The current state of the ttool (None, PoseInput, Tracking)
         ttool::EventType m_TtoolState;
         /// The current pose of the ttool
         cv::Matx44f m_Pose;
+        /// The scaling factor for ttoolhead data to AC space
+        float m_ACScaleFactor;
 
     public:
         /// The manager holding the toolheads and setting the active one
