@@ -27,28 +27,29 @@ public:
         std::set<std::string> m_Neighbors;
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
     };
-    struct Face{
-        std::string m_ID;
-        bool m_Accessible;
-        glm::vec3 m_Normal;
-        glm::vec3 m_Center;
-        std::set<std::string> m_Lines;
-        std::set<std::string> m_Neighbors;
-        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
-    };
-    struct Line{
-        std::string m_ID;
-        bool m_Accessible;
-        glm::vec3 m_Start;
-        glm::vec3 m_End;
-        std::set<std::string> m_Neighbors;
-        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitiveIDs;
-    };
     struct Cut{
+        struct Face{
+            ACIMState m_State;
+            std::string m_ID;
+            bool m_Accessible;
+            glm::vec3 m_Normal;
+            glm::vec3 m_Center;
+            std::set<std::string> m_Edges;
+            std::set<std::string> m_Neighbors;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+        };
+        struct Edge{
+            std::string m_ID;
+            bool m_Accessible;
+            glm::vec3 m_Start;
+            glm::vec3 m_End;
+            std::set<std::string> m_Neighbors;
+            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+        };
         ACIMState m_State;
         std::string m_ID;
         std::map<std::string, Face> m_Faces;
-        std::map<std::string, Line> m_Lines;
+        std::map<std::string, Edge> m_Edges;
     };
 
     std::string GetID() const { return m_ID; }
