@@ -39,8 +39,8 @@ namespace AIAC
     }
 
     void GLObject::DeleteVBOs() {
-        // glDeleteBuffers(1, &vertexBuf);
-        // glDeleteBuffers(1, &colorBuf);
+        glDeleteBuffers(1, &vertexBuf);
+        glDeleteBuffers(1, &colorBuf);
     }
 
     // ----------------- //
@@ -149,8 +149,8 @@ namespace AIAC
         glm::vec3 norm = glm::normalize(x2 - x1);
         GLfloat h = glm::length(x2 - x1);
 
-        glm::vec3 newX = glm::cross(norm, glm::vec3(0, 1, 0));
-        glm::vec3 newZ = glm::cross(newX, norm);
+        glm::vec3 newX = glm::normalize(glm::cross(norm, glm::vec3(0, 1, 0)));
+        glm::vec3 newZ = glm::normalize(glm::cross(newX, norm));
 
         glm::mat4 transformMat;
 
@@ -226,44 +226,16 @@ namespace AIAC
             flattenedIndices.push_back((uint)vid.x);
             flattenedIndices.push_back((uint)vid.y);
             flattenedIndices.push_back((uint)vid.z);
-            // if(vertices[0][0] == 50){
-            //     cout << "mmmmmmmmmm"<< counter <<  vertices[vid.x][0] << " " << vertices[vid.y][0] << " " << vertices[vid.z][0] << endl;
-            //     counter++;
-            //     if (counter == 42){
-            //         cout << "CCCCCCCCCCCCCCAP" << endl;
-            //         break;
-            //     }
-            // }
         }
 
         vector<glm::vec4> cylinderColorVec(vertices.size(), color);
         vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
 
-        // auto cylinder = std::make_shared<GOTriangleObject>(vertices, color, flattenedIndices);
-        // auto capContourBase = std::make_shared<GOLineObject>(capContourBase, edgeColor);
-        // auto capContourTop = std::make_shared<GOLineObject>(capContourTop, edgeColor);
-
         std::vector<std::shared_ptr<GLObject>> glObjs;
 
-        // print all vertices & indices
-        // if(vertices[0][0] == 50){
-        //     for (int i = 0; i < vertices.size(); i++){
-        //     std::cout << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << std::endl;
-        //     }
-        //     for (int i = 0; i < flattenedIndices.size(); i++){
-        //         std::cout << flattenedIndices[i] << " ";
-        //         if (i % 3 == 2) std::cout << std::endl;
-        //     }
-        // }
-        
-
-        // cout << "vertices size: " << vertices.size() << endl;
-        // cout << "cylinderColorVec size: " << cylinderColorVec.size() << endl;
-        // cout << "indices size: " << flattenedIndices.size() << endl;
-
         glObjs.push_back(std::make_shared<GLMeshObject>(vertices, cylinderColorVec, flattenedIndices));
-        // glObjs.push_back(std::make_shared<GLLineObject>(capContourBase, edgeColorVec, 1.0f));
-        // glObjs.push_back(std::make_shared<GLLineObject>(capContourTop, edgeColorVec, 1.0f));
+        glObjs.push_back(std::make_shared<GLLineObject>(capContourBase, edgeColorVec, 1.0f));
+        glObjs.push_back(std::make_shared<GLLineObject>(capContourTop, edgeColorVec, 1.0f));
 
         return glObjs;
     }
@@ -278,8 +250,9 @@ namespace AIAC
         std::vector<uint32_t> indices; // indices.reserve(3 * sectorNum);
         vertices.emplace_back(center);
 
-        glm::vec3 newX = glm::cross(normal, glm::vec3(0, 1, 0));
-        glm::vec3 newZ = glm::cross(newX, normal);
+        // Rodrigues' rotation formula ?
+        glm::vec3 newX = glm::normalize(glm::cross(normal, glm::vec3(0, 1, 0)));
+        glm::vec3 newZ = glm::normalize(glm::cross(newX, normal));
 
         glm::mat4 transformMat;
 
@@ -323,7 +296,7 @@ namespace AIAC
         auto edgeObj = std::make_shared<GLLineObject>(edges, edgeColorVec, edgeWeight);
 
         std::vector< std::shared_ptr<GLObject>> glObjs;
-        // glObjs.push_back(faceObj);
+        
         glObjs.push_back(edgeObj);
                 
         return glObjs;

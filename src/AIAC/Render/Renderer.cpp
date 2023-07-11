@@ -246,19 +246,19 @@ namespace AIAC
         // if(ShowPointCloudMap){
         //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
         // }
-        if(ShowDigitalModel){
+        // if(ShowDigitalModel){
             // DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
             // DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-        }
+        // }
 
         // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
 
         // visualize camera
-        // auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
-        // glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
-        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-        // // glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
-        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+        glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         // Draw All objects
         DrawAllGOs(finalPoseMatrix);

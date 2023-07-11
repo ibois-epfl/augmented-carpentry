@@ -79,9 +79,6 @@ namespace AIAC
 
     void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive)
     {
-        if(!goPrimitive->IsVisible()){
-            return;
-        }
         switch (goPrimitive->GetType()){
             case _GOPoint:
             case _GOLine:
@@ -91,13 +88,6 @@ namespace AIAC
             case _GOTriangle:
             case _GOMesh:
                 goPrimitive->Draw(); break;
-                // DrawPoint(*std::dynamic_pointer_cast<GOPoint>(goPrimitive)); break;
-                // DrawLine(*std::dynamic_pointer_cast<GOLine>(goPrimitive)); break;
-                // DrawCircle(*std::dynamic_pointer_cast<GOCircle>(goPrimitive)); break;
-                // DrawCylinder(*std::dynamic_pointer_cast<GOCylinder>(goPrimitive)); break;
-                // DrawPolyline(*std::dynamic_pointer_cast<GOPolyline>(goPrimitive)); break;
-                // DrawTriangle(*std::dynamic_pointer_cast<GOTriangle>(goPrimitive)); break;
-                // DrawMesh(*std::dynamic_pointer_cast<GOMesh>(goPrimitive)); break;
             case _GOText:
                 DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
                 break;
@@ -106,25 +96,6 @@ namespace AIAC
                 break;
         }
     }
-
-    // void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive)
-    // {
-    //     std::vector<shared_ptr<GOText>> goTexts;
-    //     for(auto& go: goPrimitive){
-    //         if(!go->IsVisible()){
-    //             continue;
-    //         }
-            
-    //         if(go->GetType() == _GOText){
-    //             goTexts.emplace_back(std::dynamic_pointer_cast<GOText>(go));
-    //         } else{
-    //             DrawGO(go);
-    //         }
-    //     }
-    //     for(auto& goText: goTexts){
-    //         DrawGO(goText);
-    //     }
-    // }
 
     void DrawPoint(const GOPoint& goPoint)
     {
