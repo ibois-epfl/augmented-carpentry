@@ -27,7 +27,7 @@ namespace AIAC
                 auto c = StringToVec3(corner.child_value());
                 timberInfo.m_Bbox.push_back(c * m_Scale);
             }
-            m_TimberInfo[timberInfo.m_ID] = timberInfo;
+            m_TimberInfo = timberInfo;
 
             // Holes
             for(auto hole = timber.child("hole"); hole; hole=hole.next_sibling("hole")){
@@ -61,27 +61,18 @@ namespace AIAC
                 holeInfo.m_GOPrimitives.push_back(endPoint);
                 holeInfo.m_GOPrimitives.push_back(label);
 
-                m_TimberInfo[timberInfo.m_ID].m_Holes[holeInfo.m_ID] = holeInfo;
+                m_TimberInfo.m_Holes[holeInfo.m_ID] = holeInfo;
             }
         }
-        m_CurrentActiveTimberID = m_TimberInfo.begin()->first;
         UpdateBboxGOLine();
     }
 
-    std::vector<std::string> ACInfoModel::GetTimberIDs() const {
-        std::vector<std::string> ids;
-        for (auto& kv : m_TimberInfo) {
-            ids.push_back(kv.first);
-        }
-        return ids;
-    }
-
-    TimberInfo ACInfoModel::GetTimberInfo(std::string id) {
-        return m_TimberInfo[id];
+    TimberInfo ACInfoModel::GetTimberInfo() {
+        return m_TimberInfo;
     }
 
     void ACInfoModel::UpdateBboxGOLine() {
-        auto bbox = GetActiveTimberInfo().m_Bbox;
+        auto bbox = m_TimberInfo.m_Bbox;
 
         // update the GOLine references
         for(auto& line : m_BboxGOLines)
@@ -110,15 +101,15 @@ namespace AIAC
 
     void ACInfoModel::TransformGOPrimitives(glm::mat4x4 transformMat) {
         // bounding box
-        auto bbox = m_TimberInfo[m_CurrentActiveTimberID].m_Bbox;
+        auto bbox = m_TimberInfo.m_Bbox;
         for(int i = 0 ; i < bbox.size() ; i++){
-            m_TimberInfo[m_CurrentActiveTimberID].m_Bbox[i] = glm::vec3(transformMat * glm::vec4(bbox[i], 1.0f));
+            m_TimberInfo.m_Bbox[i] = glm::vec3(transformMat * glm::vec4(bbox[i], 1.0f));
         }
-        bbox = m_TimberInfo[m_CurrentActiveTimberID].m_Bbox;
+        bbox = m_TimberInfo.m_Bbox;
         UpdateBboxGOLine();
 
         // holes
-        for(auto& kv : m_TimberInfo[m_CurrentActiveTimberID].m_Holes){
+        for(auto& kv : m_TimberInfo.m_Holes){
             auto holeInfo = kv.second;
             for(auto& objs : holeInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
@@ -127,7 +118,7 @@ namespace AIAC
     }
 
     float ACInfoModel::GetLength(){
-        auto bbox = m_TimberInfo[m_CurrentActiveTimberID].m_Bbox;
+        auto bbox = m_TimberInfo.m_Bbox;
         
         float dist = 0.0f;
         dist += glm::distance(bbox[0], bbox[1]);
