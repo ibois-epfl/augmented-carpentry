@@ -88,25 +88,9 @@ public:
     void Load(std::string path);
 
     /**
-     * @brief Get all TimberInfo IDs
-     */
-    std::vector<std::string> GetTimberIDs() const;
-
-    /**
      * @brief Get the TimberInfo object
      */
-    TimberInfo GetTimberInfo(std::string timberID);
-
-    /**
-     * @brief Get the active TimberInfo object
-     */
-    TimberInfo GetActiveTimberInfo() { return GetTimberInfo(m_CurrentActiveTimberID); }
-
-    /**
-     * @brief Set the active TimberInfo object
-     * @param timberID m_ID of the TimberInfo object
-     */
-    void SetActiveTimberInfo(std::string timberID) { m_CurrentActiveTimberID = timberID; UpdateBboxGOLine(); }
+    TimberInfo GetTimberInfo();
 
     /**
      * @brief Update the bounding box of the timber (use the current Active TimberInfo)
@@ -162,8 +146,7 @@ public:
 private:
     float m_Scale = 50.0f;
 
-    std::map<std::string, TimberInfo> m_TimberInfo;
-    std::string m_CurrentActiveTimberID;
+    TimberInfo m_TimberInfo;
 
     std::vector<std::shared_ptr<GOLine>> m_BboxGOLines;
 };

@@ -27,7 +27,7 @@ namespace AIAC
     }
 
     void LayerModel::AlignModels() {
-        auto acInfoModelBbox = m_ACInfoModel.GetActiveTimberInfo().GetBoundingBox();
+        auto acInfoModelBbox = m_ACInfoModel.GetTimberInfo().GetBoundingBox();
         auto scannedModelBbox = m_ScannedModel.GetBoundingBox();
 
         float infoModelLength = m_ACInfoModel.GetLength();
