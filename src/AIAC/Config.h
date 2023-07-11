@@ -12,6 +12,8 @@ public:
     inline static const std::string SEC_AIAC = "AIAC";
     inline static const std::string CAM_ID = "CamID";
     inline static const std::string CAM_PARAMS_FILE = "CamParamsFile";
+    inline static const std::string AC_INFO_MODEL = "ACInfoModel";
+    inline static const std::string SCANNED_MODEL = "ScannedModel";
 
     inline static const std::string SEC_TSLAM = "TSlam";
     inline static const std::string MAP_FILE = "MapFile";

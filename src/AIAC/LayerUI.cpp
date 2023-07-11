@@ -52,6 +52,7 @@ namespace AIAC
         StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
+        StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
 
         m_IsOpen = new bool(true);
@@ -314,23 +315,60 @@ namespace AIAC
 
     void LayerUI::SetPaneUIRender()
     {
-        ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
-        ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
-        if(ImGui::Button("Load Digital Model")){
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+        // ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
+//         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+//         if(ImGui::Button("Load Digital Model")){
+//             ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+//         }
+//         if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+//         {
+//             if (ImGuiFileDialog::Instance()->IsOk())
+//             {
+//                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+//                 // TODO: Add ply to renderer
+//                 AIAC_INFO("Loading Digital Model: {}", filePathName);
+//                 AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
+// //                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+//             }
+//             ImGuiFileDialog::Instance()->Close();
+//         }
+    }
+
+    void LayerUI::SetPaneUIACIM()
+    {
+        // ACIM Loader
+        if(ImGui::Button("Load ACIM")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseACIM", "Open ACIM file", ".acim", ".");
         }
-        if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+        if (ImGuiFileDialog::Instance()->Display("ChooseACIM"))
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                // TODO: Add ply to renderer
-                AIAC_INFO("Loading Digital Model: {}", filePathName);
-                AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
-//                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(filePathName);
             }
             ImGuiFileDialog::Instance()->Close();
         }
+
+        // Scanned Model Loader
+        if(ImGui::Button("Load Scanned Model")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseScannedModel", "Open Scanned Model", ".ply", ".");
+        }
+        if (ImGuiFileDialog::Instance()->Display("ChooseScannedModel"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(filePathName);
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+
+        // Re-position the ACIM model
+        float sliderVal = 0.f;
+        ImGui::SliderFloat("Model Offset", &sliderVal, -1.0f, 1.0f, "Left / Right", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
+            sliderVal = 0.f;
     }
 
     void LayerUI::SetPaneUIToolhead()
