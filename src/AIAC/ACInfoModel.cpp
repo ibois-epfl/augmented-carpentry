@@ -43,37 +43,25 @@ namespace AIAC
                 holeInfo.m_StartAccessible = StringToBool(hole.child("start").child("accessible").child_value());
                 holeInfo.m_End = StringToVec3(hole.child("end").child("coordinates").child_value()) * m_Scale;
                 holeInfo.m_EndAccessible = StringToBool(hole.child("end").child("accessible").child_value());
-                holeInfo.m_Radius = std::stof(hole.child("radius").child_value());
+                holeInfo.m_Radius = std::stof(hole.child("radius").child_value()) * m_Scale;
 
-                // print out the hole info
-                // AIAC_INFO("Hole: {0}", holeInfo.m_ID);
-                // AIAC_INFO("State: {0}", int(holeInfo.m_State));
-                // AIAC_INFO("Radius: {0}", holeInfo.m_Radius);
-                // AIAC_INFO("Start: {0}, {1}, {2}", holeInfo.m_Start.x, holeInfo.m_Start.y, holeInfo.m_Start.z);
-                // AIAC_INFO("End: {0}, {1}, {2}", holeInfo.m_End.x, holeInfo.m_End.y, holeInfo.m_End.z);
-                // AIAC_INFO("Start Accessible: {0}", holeInfo.m_StartAccessible);
-                // AIAC_INFO("End Accessible: {0}", holeInfo.m_EndAccessible);
-                // for(auto& n : holeInfo.m_Neighbors){
-                //     AIAC_INFO("Neighbor: {0}", n);
-                // }
-
-                // build primitive
-                auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 3.0f);
-                holeAxis->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.7f));
+                // build GOPrimitive
+                auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 1.0f);
+                holeAxis->SetColor(glm::vec4(0.15f, 0.6f, 0.7f, 1.0f));
                 auto holeCylinder = GOCylinder::Add(holeInfo.m_Start, holeInfo.m_End, holeInfo.m_Radius);
-                holeCylinder->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.2f));
+                holeCylinder->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.5f));
                 auto startPoint = GOPoint::Add(holeInfo.m_Start, 2.0f);
                 auto endPoint = GOPoint::Add(holeInfo.m_End, 2.0f);
                 auto radiusText = std::to_string(holeInfo.m_Radius);
                 radiusText = radiusText.substr(0, radiusText.find(".") + 3);
                 auto label = GOText::Add(radiusText, holeInfo.m_Start, 1.0f);
                 holeInfo.m_GOPrimitives.push_back(holeAxis);
+                holeInfo.m_GOPrimitives.push_back(holeCylinder);
                 holeInfo.m_GOPrimitives.push_back(startPoint);
                 holeInfo.m_GOPrimitives.push_back(endPoint);
                 holeInfo.m_GOPrimitives.push_back(label);
 
                 m_TimberInfo[timberInfo.m_ID].m_Holes[holeInfo.m_ID] = holeInfo;
-                break;
             }
         }
         m_CurrentActiveTimberID = m_TimberInfo.begin()->first;
@@ -94,21 +82,16 @@ namespace AIAC
 
     void ACInfoModel::UpdateBboxGOLine() {
         auto bbox = GetActiveTimberInfo().m_Bbox;
-        
-        // print the axis of the bounding box
-        // for(auto& p : bbox){
-        //     AIAC_INFO("Bbox: {0}, {1}, {2}", p.x, p.y, p.z);
-        // }
 
         // update the GOLine references
         for(auto& line : m_BboxGOLines)
             GOLine::Remove(line);
 
         // bottom
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f)); // O
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f)); // X
-        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f)); // O
-        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f)); // X
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f));
         // top
         m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 2.0f));
@@ -121,12 +104,8 @@ namespace AIAC
         m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[7], 2.0f));
 
         // change color of the bounding box
-        // for(int i = 0; i < 4; i++)
-        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(0.0f, 1.0f, 0.0f, 0.3f));
-        // for(int i = 4; i < 8; i++)
-        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(0.0f, 1.0f, 1.0f, 0.3f));
-        // for(int i = 8; i < 12; i++)
-        //     GOLine::Get(m_BboxGOLineIDs[i])->SetColor(glm::vec4(1.0f, 0.0f, 1.0f, 0.3f));
+        for(auto line : m_BboxGOLines)
+            line->SetColor(glm::vec4(0.3f, 0.7f, 0.1f, 0.3f));
     }
 
     void ACInfoModel::TransformGOPrimitives(glm::mat4x4 transformMat) {
