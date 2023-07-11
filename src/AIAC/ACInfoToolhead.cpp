@@ -80,7 +80,7 @@ namespace AIAC
         this->AddGOsInfo(this->m_Data);
         this->m_GOPrimitivesInfoOriginal.clear();
         this->CopyGOsInfoOriginal();
-        this->TransformSync();
+        // this->TransformSync();
         this->SetVisibility(true);
     }
 
