@@ -36,8 +36,10 @@ namespace AIAC
         void UpdateToolheadStateUI();
 
         /// @brief Save the current pose of the ttool to the config file and to the ttool model manager (as a fallback pose for the ttool)
-        // It will reset LayerToolhead state to None (i.e. stop tracking and pose input)
+        /// It will reset LayerToolhead state to None (i.e. stop tracking and pose input)
         void SavePose();
+        /// @brief Set the pose from the value in the config
+        void ResetPoseFromConfig();
 
         /// @brief Get the current pose of the ttool
         glm::mat4x4 GetWorldPose();

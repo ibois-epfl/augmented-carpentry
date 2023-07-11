@@ -151,6 +151,11 @@ namespace AIAC
 
     }
 
+    void LayerToolhead::ResetPoseFromConfig()
+    {
+        this->TTool->GetModelManager()->ResetObjectToInitialPose();
+    }
+
     void LayerToolhead::syncTToolAndACInfoToolhead()
     {
         int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
