@@ -82,7 +82,7 @@ namespace AIAC
             case _GOMesh:
                 goPrimitive->Draw(); break;
             case _GOText:
-                // DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
+                DrawText(*std::dynamic_pointer_cast<GOText>(goPrimitive)); break;
                 break;
 
             default:
