@@ -38,6 +38,20 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        // Update the Tag visibility setting
+        if(ToShowTag != m_IsShowingTag){
+            if(ToShowTag){
+                for(auto &go : m_SlamMapGOs){
+                    go->SetVisibility(true);
+                }
+            } else {
+                for(auto &go : m_SlamMapGOs){
+                    go->SetVisibility(false);
+                }
+            }
+            m_IsShowingTag = ToShowTag;
+        }
+
         if(!ToProcess){
             return;
         }
@@ -156,7 +170,8 @@ namespace AIAC
                 markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
             }
             auto tag = GOPolyline::Add(markerEdges, true, 1.0f);
-            tag->SetColor(glm::vec4(.5f, .5f, .5f, .5f));
+            tag->SetColor(glm::vec4(1.0f, .0f, .0f, 1.0f));
+            tag->SetVisibility(false);
             m_SlamMapGOs.push_back(tag);
         }
     }
