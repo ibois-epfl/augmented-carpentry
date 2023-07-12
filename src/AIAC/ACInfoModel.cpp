@@ -9,6 +9,8 @@ using namespace std;
 namespace AIAC
 {
     void ACInfoModel::Load(std::string path) {
+        Clear();
+        
         pugi::xml_document doc;
         pugi::xml_parse_result result = doc.load_file(path.c_str());
         if (!result){
@@ -100,6 +102,30 @@ namespace AIAC
         UpdateBboxGOLine();
     }
 
+    void ACInfoModel::Clear() {
+        for(auto& line : m_BboxGOLines)
+            GOLine::Remove(line);
+        m_BboxGOLines.clear();
+
+        for(auto& hole : m_TimberInfo.m_Holes){
+            for(auto& primitive : hole.second.m_GOPrimitives)
+                GOPrimitive::Remove(primitive);
+        }
+        m_TimberInfo.m_Holes.clear();
+
+        for(auto& cut : m_TimberInfo.m_Cuts){
+            for(auto& face : cut.second.m_Faces){
+                for(auto& primitive : face.second.m_GOPrimitives)
+                    GOPrimitive::Remove(primitive);
+            }
+            for(auto& edge : cut.second.m_Edges){
+                for(auto& primitive : edge.second.m_GOPrimitives)
+                    GOPrimitive::Remove(primitive);
+            }
+        }
+        m_TimberInfo.m_Cuts.clear();
+    }
+
     TimberInfo ACInfoModel::GetTimberInfo() {
         return m_TimberInfo;
     }
@@ -148,6 +174,26 @@ namespace AIAC
                 objs->Transform(transformMat);
             }
         }
+
+        // cuts
+        for(auto& kv : m_TimberInfo.m_Cuts){
+            auto cutInfo = kv.second;
+            // Face has no GOPrimitives now
+            for(auto& kv : cutInfo.m_Faces){
+                auto faceInfo = kv.second;
+                for(auto& objs : faceInfo.m_GOPrimitives){
+                    objs->Transform(transformMat);
+                }
+            }
+            // Edge
+            for(auto& kv : cutInfo.m_Edges){
+                auto edgeInfo = kv.second;
+                for(auto& objs : edgeInfo.m_GOPrimitives){
+                    objs->Transform(transformMat);
+                }
+            }
+        }
+
     }
 
     float ACInfoModel::GetLength(){

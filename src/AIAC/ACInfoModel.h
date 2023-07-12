@@ -89,6 +89,11 @@ public:
     void Load(std::string path);
 
     /**
+     * @brief Clear the loaded data.
+     */
+    void Clear();
+
+    /**
      * @brief Get the TimberInfo object
      */
     TimberInfo GetTimberInfo();

@@ -351,6 +351,7 @@ namespace AIAC
         }
 
         // Scanned Model Loader
+        ImGui::SameLine();
         if(ImGui::Button("Load Scanned Model")){
             ImGuiFileDialog::Instance()->OpenDialog("ChooseScannedModel", "Open Scanned Model", ".ply", ".");
         }
@@ -366,9 +367,12 @@ namespace AIAC
 
         // Re-position the ACIM model
         float sliderVal = 0.f;
-        ImGui::SliderFloat("Model Offset", &sliderVal, -1.0f, 1.0f, "Left / Right", ImGuiSliderFlags_AlwaysClamp);
+        ImGui::SliderFloat("##Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
             if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
             sliderVal = 0.f;
+        if(ImGui::Button("Reset Model Offset")){
+            AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
+        }
     }
 
     void LayerUI::SetPaneUIToolhead()
