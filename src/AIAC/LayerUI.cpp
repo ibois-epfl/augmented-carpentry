@@ -215,11 +215,11 @@ namespace AIAC
         static const char* previewValue = currentItem.c_str();
         if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
             for (auto& devicePath : AIAC_APP.GetLayer<LayerCamera>()->AvailableDevices) {
-                bool is_selected = (currentItem == devicePath);
-                if (ImGui::Selectable(devicePath.c_str(), is_selected)){
+                bool isSelected = (currentItem == devicePath);
+                if (ImGui::Selectable(devicePath.c_str(), isSelected)){
                     AIAC_APP.GetLayer<LayerCamera>()->SetCurrentDevice(devicePath);
                 }
-                if (is_selected)
+                if (isSelected)
                     ImGui::SetItemDefaultFocus();
             }
             ImGui::EndCombo();
@@ -367,31 +367,52 @@ namespace AIAC
         }
 
         // Re-position the ACIM model
-        float sliderVal = 0.f;
-        ImGui::SliderFloat("##Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
-            sliderVal = 0.f;
-        ImGui::SameLine();
-        if(ImGui::Button("Reset Model Offset")){
-            AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
-        }
-        
-        if(ImGui::Button("Rotate +")){
-            AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(1);
-        }
-        ImGui::SameLine();
-        if(ImGui::Button("Rotate -")){
-            AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(-1);
-        }
-        ImGui::SameLine();
-        if(ImGui::Button("Reset Rotation")){
-            AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignRotation();
-        }
-        ImGui::SameLine();
-        if(ImGui::Button("Flip")){
-            AIAC_APP.GetLayer<AIAC::LayerModel>()->FlipAlign();
-        }
-        
+        ImGui::Text("Adjust model alignment:");
+        ImGui::BeginChild("Adjust model alignment", ImVec2(0, 60), true, ImGuiWindowFlags_HorizontalScrollbar);
+            float sliderVal = 0.f;
+            ImGui::SliderFloat("##Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
+                if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
+                sliderVal = 0.f;
+            ImGui::SameLine();
+            if(ImGui::Button("Reset Offset")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
+            }
+            
+            if(ImGui::Button("Rotate +")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Rotate -")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(-1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Reset Rotation")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignRotation();
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Flip")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->FlipAlign();
+            }
+        ImGui::EndChild();
+
+        ImGui::Text("Components Control:");
+        ImGui::BeginChild("Components Control Panel", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::Text("Current Component:");
+            string currentCompoID = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
+            static const char* previewValue = currentCompoID.c_str();
+            if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
+                for (auto& componentID : AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetAllComponentsIDs()) {
+                    bool isSelected = (currentCompoID == componentID);
+                    if (ImGui::Selectable(componentID.c_str(), isSelected)){
+                        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
+                    }
+                    if (isSelected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
+        ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIToolhead()

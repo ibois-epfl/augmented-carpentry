@@ -333,8 +333,7 @@ namespace AIAC
 
         const aiScene* scene = importer.ReadFile(path, aiProcess_JoinIdenticalVertices);
         if(!scene) {
-            fprintf( stderr, importer.GetErrorString());
-            getchar();
+            AIAC_ERROR(importer.GetErrorString());
             return nullptr;
         }
 

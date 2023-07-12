@@ -8,52 +8,105 @@
 #include "pugixml.hpp"
 
 namespace AIAC{
+
 enum class ACIMState{
     NOT_DONE,
     CURRENT,
     DONE,
 };
 
+static std::map<ACIMState, glm::vec4> HOLE_AXIS_COLOR = {
+    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 1.0f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
+};
+
+static std::map<ACIMState, glm::vec4> HOLE_CYLINDER_COLOR = {
+    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 0.2f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
+};
+
+static std::map<ACIMState, glm::vec4> CUT_FACE_COLOR = {
+    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 0.2f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
+};
+
+static std::map<ACIMState, glm::vec4> CUT_EDGE_COLOR = {
+    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 1.0f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
+};
+
+
 class TimberInfo{
 public:
-    struct Hole{
+    class Component {
+    public:
+        Component()=default;
+        void SetAsCurrent();
+        void SetAsDone();
+        void SetAsNotDone();
+
+    protected:
         ACIMState m_State;
+        pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
+        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+    };
+
+    class Hole: public Component{
         glm::vec3 m_Start;
         bool m_StartAccessible;
         glm::vec3 m_End;
         bool m_EndAccessible;
         double m_Radius;
         std::set<std::string> m_Neighbors;
-        std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+
+        // GOPrimitives
+        std::shared_ptr<GOLine> m_AxisGO;
+        std::shared_ptr<GOCylinder> m_CylinderGO;
+        std::shared_ptr<GOPoint> m_StartPointGO;
+        std::shared_ptr<GOPoint> m_EndPointGO;
+        std::shared_ptr<GOText> m_RadiusLabelGO;
+        std::shared_ptr<GOText> m_IDLabelGO;
+
+        friend class ACInfoModel;
     };
-    struct Cut{
-        struct Face{
-            ACIMState m_State;
-            std::string m_ID;
+
+    class Cut: public Component{
+        class Face: public Component{
             bool m_Accessible;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+
+            friend class ACInfoModel;
         };
-        struct Edge{
-            std::string m_ID;
+        class Edge: public Component{
             bool m_Accessible;
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+
+            friend class ACInfoModel;
         };
-        ACIMState m_State;
-        std::string m_ID;
+        void SetAsCurrent();
+        void SetAsDone();
+        void SetAsNotDone();
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
+
+        friend class ACInfoModel;
     };
 
-    std::string GetID() const { return m_ID; }
-    std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
+    inline std::string GetID() const { return m_ID; }
+    std::vector<std::string> GetAllComponentsIDs() const;
+    std::string GetCurrentComponentID() { return m_CurrentComponentID; }
+    void SetCurrentComponentTo(std::string id);
+    inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
 
 private:
     std::string m_ID;
@@ -72,6 +125,8 @@ private:
     ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
     std::map<std::string, Hole> m_Holes;
     std::map<std::string, Cut> m_Cuts;
+    std::map<std::string, Component*> m_Components;
+    std::string m_CurrentComponentID = "";
 
     friend class ACInfoModel;
 };
@@ -96,7 +151,7 @@ public:
     /**
      * @brief Get the TimberInfo object
      */
-    TimberInfo GetTimberInfo();
+    inline TimberInfo& GetTimberInfo() { return m_TimberInfo; }
 
     /**
      * @brief Update the bounding box of the timber (use the current Active TimberInfo)
@@ -151,6 +206,8 @@ public:
 
 private:
     float m_Scale = 50.0f;
+    std::string m_FilePath;
+    pugi::xml_document m_ACIMDoc;
 
     TimberInfo m_TimberInfo;
 
