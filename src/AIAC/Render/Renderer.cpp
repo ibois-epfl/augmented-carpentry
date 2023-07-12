@@ -48,6 +48,45 @@ namespace AIAC
         InitCamCalibView();
 
         m_MappingView.SetSize(600, 442);
+
+        // auto pt = GOPoint::Add(0, 0, 0, 5.0f);
+        // pt->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+
+        // GOLine::Add(glm::vec3(0,0,0), glm::vec3(0,0,10), 10.0f);
+        
+        // cout << "--------------------" << endl;
+        // auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 32.0f);
+        // myCylinder->SetColor(glm::vec4(0.5f, 0.5f, 0.0f, 0.2f));
+        // cout << "--------------------" << endl;
+
+        // vector<glm::vec3> pts;
+        // pts.push_back(glm::vec3(4,0,0));
+        // pts.push_back(glm::vec3(99,5,10));
+        // pts.push_back(glm::vec3(9,10,10));
+        // auto myPolyline = GOPolyline::Add(pts);
+        // myPolyline->SetColor(glm::vec4(0.5f, 0.2f, 0.0f, 1.0f));
+
+        // auto circle = GOCircle::Add(glm::vec3(0, 5, 0), 10.0f);
+        // circle->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+
+        // std::vector<glm::vec3> vertices = {
+        //     glm::vec3(0.0f, 0.0f, 10.0f),
+        //     glm::vec3(0.0f, 0.0f, 0.0f),
+        //     glm::vec3(0.0f, 10.0f, 0.0f),
+        //     glm::vec3(10.0f, 0.0f, 0.0f),
+        // };
+        // std::vector<glm::vec4> colors = {
+        //     glm::vec4(1.0f, 0.0f, 0.0f, 1.0f),
+        //     glm::vec4(0.0f, 1.0f, 1.0f, 1.0f),
+        //     glm::vec4(0.0f, 1.0f, 0.0f, 1.0f),
+        //     glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
+        // };
+
+        // m_TestGLObject = std::make_shared<GLPointObject>(vertices, colors, 3.0f);
+        // glBindVertexArray(m_VAO);
+        // m_TestGLObject = glCreatePoints(vertices, colors, 3);
+        // cout << "m_TestGLObject: " << m_TestGLObject.vertexBuf << endl;
+
     }
 
     void Renderer::InitProjMatrix(){
@@ -108,16 +147,8 @@ namespace AIAC
 
         m_GlobalProjMatrix = glm::perspective(
                 glm::radians(35.0f),
-                float(m_GlobalView.GetW()) / float(m_GlobalView.GetH()), 0.1f, 100.0f
+                float(m_GlobalView.GetW()) / float(m_GlobalView.GetH()), 0.01f, 100.0f
         );
-
-        std::stringstream ss;
-        ss << "Global View: ";
-        cv::Mat globalProjMatrix;
-        CvtGlmMat2CvMat(m_GlobalProjMatrix, globalProjMatrix);
-        ss << globalProjMatrix;
-        AIAC_INFO(ss.str());
-        
 
         m_GlobalCamMatrix = glm::lookAt(
                 glm::vec3(20, 20, 20),   // the position of your camera, in world space
@@ -130,14 +161,6 @@ namespace AIAC
                 glm::vec3(0, 0, 1),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
-
-        std::stringstream ss2;
-        ss2 << "Look At: ";
-        cv::Mat testLookAt4TToolCvMat;
-        CvtGlmMat2CvMat(testLookAt4TTool, testLookAt4TToolCvMat);
-        ss2 << testLookAt4TToolCvMat;
-        AIAC_INFO(ss2.str());
-
     }
 
     void Renderer::ReloadMeshes()
@@ -171,9 +194,6 @@ namespace AIAC
         }
 
         // Default, render the main scene
-        glBindVertexArray(m_VAO);
-        glUseProgram(m_BasicShaderProgram);
-        
         RenderMainView();
         RenderGlobalView();
     }
@@ -204,31 +224,34 @@ namespace AIAC
     }
 
     void Renderer::RenderGlobalView() {
+        
         glBindVertexArray(m_VAO);
         glUseProgram(m_BasicShaderProgram);
 
         m_GlobalView.Activate();
 
+        glDisable(GL_DEPTH_TEST);
+
         // visualize map
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        if(ShowPointCloudMap){
-            PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-        }
-        if(ShowDigitalModel){
-            DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-            DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-        }
+        // if(ShowPointCloudMap){
+        //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+        // }
+        // if(ShowDigitalModel){
+            // DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+            // DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+        // }
 
-        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
 
         // visualize camera
-        auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
-        glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-        glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
-        glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+        // auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
+        // glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
+        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
+        // // glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
+        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         // Draw All objects
         DrawAllGOs(finalPoseMatrix);
@@ -247,7 +270,7 @@ namespace AIAC
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -265,6 +288,14 @@ namespace AIAC
     void Renderer::RenderMainView() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         
+        glBindVertexArray(m_VAO);
+        glUseProgram(m_BasicShaderProgram);
+        
+        glDisable(GL_DEPTH_TEST);        
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         RenderCameraFrame(AIAC_APP.GetWindow()->GetDisplayW(), AIAC_APP.GetWindow()->GetDisplayH());
 
         // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
@@ -287,7 +318,7 @@ namespace AIAC
             }
             // Draw All objects
             DrawAllGOs(finalPoseMatrix);
-            DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+            // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
         }
     }
 

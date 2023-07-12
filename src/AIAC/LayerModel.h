@@ -17,8 +17,6 @@ namespace AIAC
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
-        std::vector<std::string> GetACInfoTimberIDs() const { return m_ACInfoModel.GetTimberIDs(); };
-        void SetActiveACInfoTimber(const std::string& id) { m_ACInfoModel.SetActiveTimberInfo(id); };
         /**
          * @brief transform the ACInfoModel to the ScannedModel
          */

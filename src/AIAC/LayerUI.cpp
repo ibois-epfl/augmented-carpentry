@@ -43,7 +43,6 @@ namespace AIAC
 
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 14.0f);  // default
 
-
         // Load images from memory
         m_LogoBlack = AIAC::Image(AIAC_LOGO_BLACK);
         m_LogoLightClr = AIAC::Image(AIAC_LOGO_COLOR);
@@ -54,9 +53,6 @@ namespace AIAC
         StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
-
-        // TODO: add config for file dialog widget
-        //TODO: add vertical menu bar
 
         m_IsOpen = new bool(true);
     }
@@ -110,8 +106,6 @@ namespace AIAC
 
     void LayerUI::ShowMenuBar()
     {
-        // set menu bar as transparent
-
         if (ImGui::BeginMainMenuBar())
         {
             ImGui::Image(m_LogoBlack.GetImTexture().ID, ImVec2(18, 18), ImVec2(0, 1), ImVec2(1, 0));
@@ -316,7 +310,6 @@ namespace AIAC
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
         ImGui::EndChild();
-
     }
 
     void LayerUI::SetPaneUIRender()
@@ -343,6 +336,8 @@ namespace AIAC
     void LayerUI::SetPaneUIToolhead()
     {
         if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
+        if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
 
         ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
@@ -353,10 +348,21 @@ namespace AIAC
         ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
         ImGui::EndChild();
 
+        std::stringstream toolheadPose; toolheadPose << AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetPose();
+        ImGui::Text("Estimated Toolhead Pose: \n%s", toolheadPose.str().c_str());
+        ImGui::Text("Tracking Status: %s", AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI == 0 ? AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetTrackingStatus().c_str() : "Not Tracking");
+
         if (AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI != -1)
         {
             ImGui::Text("Toolhead pose inputs:");
-            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 350), true, ImGuiWindowFlags_HorizontalScrollbar);
+            
+            if(ImGui::Button("save pose", ImVec2(-1, 40)))
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
+
+            if(ImGui::Button("reset pose", ImVec2(-1, 40)))
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetPoseFromConfig();
+            
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
             ImGui::PushStyleVar(ImGuiStyleVar_GrabMinSize, 100);
             ImGui::PushStyleVar(ImGuiStyleVar_GrabRounding, 5);

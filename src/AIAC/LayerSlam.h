@@ -29,10 +29,13 @@ namespace AIAC
 
         void GetCamPoseInObjCoord(cv::Mat &rotationMatrix, cv::Mat &tvec);
 
+        void UpdateMap();
+
     public:
         tslam::TSlam Slam;
         bool ToEnhance = true;
         bool ToProcess = true;
+        // std::vector<shared_ptr<GOPrimitive>> SlamMapGOs;
 
     private:
         cv::Mat m_CamPose = cv::Mat();
