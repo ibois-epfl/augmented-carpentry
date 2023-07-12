@@ -8,16 +8,42 @@ using namespace std;
 //FIXME:: do we still need this class?
 namespace AIAC
 {
+    void TimberInfo::Component::SetAsCurrent() {
+        m_State = ACIMState::CURRENT;
+        for(auto& go : m_GOPrimitives){
+            go->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
+        }
+    }
+
+    std::vector<std::string> TimberInfo::GetAllComponentsIDs() const {
+        // This is only for C++20, but we're using C++17, I leave it here for future reference
+        // #include <ranges>
+        // auto kv = std::views::keys(m_Components);
+        // std::vector<std::string> keys{ kv.begin(), kv.end() };
+        // return keys;
+        std::vector<std::string> keys;
+        for (const auto& [key, _] : m_Components) {
+            keys.push_back(key);
+        }
+        return keys;
+    }
+
+    void TimberInfo::SetCurrentComponentTo(std::string id) {
+        m_CurrentComponentID = id;
+        m_Components[id]->SetAsCurrent();
+    }
+
     void ACInfoModel::Load(std::string path) {
+        m_FilePath = path;
+        
         Clear();
         
-        pugi::xml_document doc;
-        pugi::xml_parse_result result = doc.load_file(path.c_str());
+        pugi::xml_parse_result result = m_ACIMDoc.load_file(path.c_str());
         if (!result){
             AIAC_ERROR("Could not load ACInfoModel from file: {0}", path);
             return;
         }
-        for(auto timber = doc.child("acim").child("timber"); timber; timber = timber.next_sibling("timber")){
+        for(auto timber = m_ACIMDoc.child("acim").child("timber"); timber; timber = timber.next_sibling("timber")){
             TimberInfo timberInfo;
             timberInfo.m_ID = timber.attribute("id").as_string();
             timberInfo.m_State = StringToState(timber.child("state").child_value());
@@ -48,22 +74,36 @@ namespace AIAC
                 holeInfo.m_Radius = std::stof(hole.child("radius").child_value()) * m_Scale;
 
                 // build GOPrimitive
-                auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 2.0f);
-                holeAxis->SetColor(glm::vec4(0.1f, 0.9f, 0.9f, 1.0f));
-                auto holeCylinder = GOCylinder::Add(holeInfo.m_Start, holeInfo.m_End, holeInfo.m_Radius);
-                holeCylinder->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.2f));
-                auto startPoint = GOPoint::Add(holeInfo.m_Start, 2.0f);
-                auto endPoint = GOPoint::Add(holeInfo.m_End, 2.0f);
+                holeInfo.m_AxisGO = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 2.0f);
+                holeInfo.m_AxisGO->SetColor(HOLE_AXIS_COLOR[holeInfo.m_State]);
+                holeInfo.m_CylinderGO = GOCylinder::Add(holeInfo.m_Start, holeInfo.m_End, holeInfo.m_Radius);
+                holeInfo.m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[holeInfo.m_State]);
+                holeInfo.m_StartPointGO = GOPoint::Add(holeInfo.m_Start, 2.0f);
+                holeInfo.m_EndPointGO = GOPoint::Add(holeInfo.m_End, 2.0f);
+                auto centerPoint = (holeInfo.m_Start + holeInfo.m_End) * 0.5f;
+                holeInfo.m_IDLabelGO = GOText::Add(holeInfo.m_ID, centerPoint, 1.0f);
                 auto radiusText = std::to_string(holeInfo.m_Radius);
                 radiusText = radiusText.substr(0, radiusText.find(".") + 3);
-                auto label = GOText::Add(radiusText, holeInfo.m_Start, 1.0f);
-                holeInfo.m_GOPrimitives.push_back(holeAxis);
-                holeInfo.m_GOPrimitives.push_back(holeCylinder);
-                holeInfo.m_GOPrimitives.push_back(startPoint);
-                holeInfo.m_GOPrimitives.push_back(endPoint);
-                holeInfo.m_GOPrimitives.push_back(label);
+                holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, 0.5f);
+                if(holeInfo.m_State != ACIMState::CURRENT) holeInfo.m_RadiusLabelGO->SetVisibility(false);
+
+                holeInfo.m_GOPrimitives.push_back(holeInfo.m_AxisGO);
+                holeInfo.m_GOPrimitives.push_back(holeInfo.m_CylinderGO);
+                holeInfo.m_GOPrimitives.push_back(holeInfo.m_StartPointGO);
+                holeInfo.m_GOPrimitives.push_back(holeInfo.m_EndPointGO);
+                holeInfo.m_GOPrimitives.push_back(holeInfo.m_IDLabelGO);
+                holeInfo.m_GOPrimitives.push_back(holeInfo.m_RadiusLabelGO);
 
                 m_TimberInfo.m_Holes[holeInfo.m_ID] = holeInfo;
+                auto uniqueID = "Hole #"+holeInfo.m_ID;
+                m_TimberInfo.m_Components[uniqueID] = &m_TimberInfo.m_Holes[holeInfo.m_ID];
+                if(holeInfo.m_State == ACIMState::CURRENT) {
+                    if(m_TimberInfo.m_CurrentComponentID == ""){
+                        m_TimberInfo.m_CurrentComponentID = uniqueID;
+                    } else {
+                        AIAC_WARN("Multiple current components in ACIM file");
+                    }
+                }
             }
 
             // cuts
@@ -90,7 +130,7 @@ namespace AIAC
 
                     // build GOPrimitive
                     auto edgeGO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
-                    edgeGO->SetColor(glm::vec4(0.1f, 0.9f, 0.5f, 1.0f));
+                    edgeGO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
                     edgeInfo.m_GOPrimitives.push_back(edgeGO);
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
@@ -124,10 +164,7 @@ namespace AIAC
             }
         }
         m_TimberInfo.m_Cuts.clear();
-    }
-
-    TimberInfo ACInfoModel::GetTimberInfo() {
-        return m_TimberInfo;
+        m_TimberInfo.m_Components.clear();
     }
 
     void ACInfoModel::UpdateBboxGOLine() {
@@ -269,6 +306,8 @@ namespace AIAC
             return false;
         }
     }
+
+
 
 } // namespace AIAC
 

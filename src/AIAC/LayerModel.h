@@ -33,6 +33,8 @@ namespace AIAC
          */
         void LoadScannedModel(std::string path);
 
+        inline ACInfoModel& GetACInfoModel() { return m_ACInfoModel; }
+        inline ScannedModel& GetScannedModel() { return m_ScannedModel; }
         /**
          * @brief Change the align offset. The value is in TSLAM unit.
          */
