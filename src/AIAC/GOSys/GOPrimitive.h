@@ -75,7 +75,7 @@ namespace AIAC
 
         inline std::string GetName() const { return m_Name; }
         inline float GetWeight() const { return m_Weight; }
-        inline int SetWeight(float weight) { m_Weight = weight; return m_Id;}
+        inline int SetWeight(float weight) { m_Weight = weight; InitGLObject(); return m_Id;}
 
         virtual void Transform(const glm::mat4x4& transformMat) {};
 

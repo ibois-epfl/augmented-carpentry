@@ -34,6 +34,7 @@ namespace AIAC
 
     public:
         tslam::TSlam Slam;
+        bool ToShowTag = false;
         bool ToEnhance = true;
         bool ToProcess = true;
 
@@ -42,6 +43,7 @@ namespace AIAC
         cv::Mat m_LastTrackedCamPose = cv::Mat::eye(4, 4, CV_32FC1);
         bool m_IsTracked = false;
         bool m_IsMapping = false;
+        bool m_IsShowingTag = false;
         std::vector<std::shared_ptr<GOPrimitive>> m_SlamMapGOs;
     };
 }
