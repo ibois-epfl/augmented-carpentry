@@ -48,10 +48,10 @@ namespace AIAC
                 holeInfo.m_Radius = std::stof(hole.child("radius").child_value()) * m_Scale;
 
                 // build GOPrimitive
-                auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 1.0f);
-                holeAxis->SetColor(glm::vec4(0.15f, 0.6f, 0.7f, 1.0f));
+                auto holeAxis = GOLine::Add(holeInfo.m_Start, holeInfo.m_End, 2.0f);
+                holeAxis->SetColor(glm::vec4(0.1f, 0.9f, 0.9f, 1.0f));
                 auto holeCylinder = GOCylinder::Add(holeInfo.m_Start, holeInfo.m_End, holeInfo.m_Radius);
-                holeCylinder->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.5f));
+                holeCylinder->SetColor(glm::vec4(0.27f, 0.75f, 0.86f, 0.2f));
                 auto startPoint = GOPoint::Add(holeInfo.m_Start, 2.0f);
                 auto endPoint = GOPoint::Add(holeInfo.m_End, 2.0f);
                 auto radiusText = std::to_string(holeInfo.m_Radius);
@@ -89,8 +89,8 @@ namespace AIAC
                     edgeInfo.m_End = StringToVec3(edge.child("end").child_value()) * m_Scale;
 
                     // build GOPrimitive
-                    auto edgeGO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 1.0f);
-                    edgeGO->SetColor(glm::vec4(0.15f, 0.6f, 0.7f, 1.0f));
+                    auto edgeGO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
+                    edgeGO->SetColor(glm::vec4(0.1f, 0.9f, 0.5f, 1.0f));
                     edgeInfo.m_GOPrimitives.push_back(edgeGO);
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
