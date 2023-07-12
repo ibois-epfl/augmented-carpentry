@@ -20,6 +20,9 @@ namespace AIAC
         auto scannedModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::SCANNED_MODEL, "assets/ACModel/28_scanned_model.ply");
         m_ACInfoModel.Load(acInfoModelPath);
         m_ScannedModel.Load(scannedModelPath);
+        m_AlignOffset = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_OFFSET, 0.0f);
+        m_AlignRotation = AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_ROTATION, 0);
+        m_AlignFlip = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_FLIP, false);
         AlignModels();
     }
     
@@ -60,6 +63,29 @@ namespace AIAC
             subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
             subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
             subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
+        }
+
+        // rotate the subBox
+        // TODO: This is definately not the most efficient way to do this
+        for(int i = 0 ; i < m_AlignRotation; i++){
+            auto tmp = subBbox[0];
+            subBbox[0] = subBbox[4];
+            subBbox[4] = subBbox[7];
+            subBbox[7] = subBbox[3];
+            subBbox[3] = tmp;
+
+            tmp = subBbox[1];
+            subBbox[1] = subBbox[5];
+            subBbox[5] = subBbox[6];
+            subBbox[6] = subBbox[2];
+            subBbox[2] = tmp;
+        }
+        // flip the subBox
+        if(m_AlignFlip){
+            std::swap(subBbox[0], subBbox[5]);
+            std::swap(subBbox[1], subBbox[4]);
+            std::swap(subBbox[2], subBbox[7]);
+            std::swap(subBbox[3], subBbox[6]);
         }
 
         auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);

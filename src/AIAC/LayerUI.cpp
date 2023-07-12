@@ -371,9 +371,27 @@ namespace AIAC
         ImGui::SliderFloat("##Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
             if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
             sliderVal = 0.f;
+        ImGui::SameLine();
         if(ImGui::Button("Reset Model Offset")){
             AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
         }
+        
+        if(ImGui::Button("Rotate +")){
+            AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(1);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("Rotate -")){
+            AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(-1);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("Reset Rotation")){
+            AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignRotation();
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("Flip")){
+            AIAC_APP.GetLayer<AIAC::LayerModel>()->FlipAlign();
+        }
+        
     }
 
     void LayerUI::SetPaneUIToolhead()
