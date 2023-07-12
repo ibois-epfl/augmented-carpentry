@@ -1,7 +1,10 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get install qtbase5-dev libqt5opengl5-dev libopenni2-dev libgoogle-glog-dev qtwayland5
+sudo apt-get -y install libopencv-dev
+sudo apt-get -y install libassimp-dev
+sudo apt-get -y install libgoogle-glog-dev
+sudo apt-get -y install freeglut3-dev libglew-dev libglfw3 libglfw3-dev
 
 cd ./deps/TTool
 
