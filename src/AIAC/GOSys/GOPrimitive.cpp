@@ -206,21 +206,21 @@ namespace AIAC
     }
 
 
-    GOPolyline::GOPolyline(std::vector<GOPoint> points)
-        : m_Points(points)
+    GOPolyline::GOPolyline(std::vector<GOPoint> points, bool isClosed, float weight)
+        : m_Points(points), m_IsClosed(isClosed), m_Weight(weight)
     {
         m_Type = GOTypeFlags::_GOPolyline;
     }
 
-    std::shared_ptr<GOPolyline> GOPolyline::Add(std::vector<GOPoint> points)
+    std::shared_ptr<GOPolyline> GOPolyline::Add(std::vector<GOPoint> points, bool isClosed, float weight)
     {
-        auto ptrGO = std::make_shared<GOPolyline>(GOPolyline(points));
+        auto ptrGO = std::make_shared<GOPolyline>(GOPolyline(points, isClosed, weight));
         ptrGO->InitGLObject();
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;
     }
 
-    std::shared_ptr<GOPolyline> GOPolyline::Add(std::vector<glm::vec3> points)
+    std::shared_ptr<GOPolyline> GOPolyline::Add(std::vector<glm::vec3> points, bool isClosed, float weight)
     {
         // convert glm::vec3 to GOPoint
         std::vector<GOPoint> pts;
@@ -228,7 +228,7 @@ namespace AIAC
             pts.push_back(GOPoint(p));
         }
 
-        auto ptrGO = std::make_shared<GOPolyline>(GOPolyline(pts));
+        auto ptrGO = std::make_shared<GOPolyline>(GOPolyline(pts, isClosed, weight));
         ptrGO->InitGLObject();
         AIAC_GOREG->Register(ptrGO);
         return ptrGO;

@@ -344,7 +344,7 @@ namespace AIAC
     class GOPolyline : public GOPrimitive
     {
     private:
-        GOPolyline(std::vector<GOPoint> points);
+        GOPolyline(std::vector<GOPoint> points, bool isClosed = false, float weight = GOWeight::Default);
 
     public:
         /**
@@ -353,8 +353,8 @@ namespace AIAC
          * @param points Points of the polyline.
          * @return uint32_t Id of the polyline.
          */
-        static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points);
-        static std::shared_ptr<GOPolyline> Add(std::vector<glm::vec3> points);
+        static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points, bool isClosed = false, float weight = GOWeight::Default);
+        static std::shared_ptr<GOPolyline> Add(std::vector<glm::vec3> points, bool isClosed = false, float weight = GOWeight::Default);
 
         virtual ~GOPolyline() = default;
 
@@ -384,7 +384,7 @@ namespace AIAC
 
     private:
         std::vector<GOPoint> m_Points;
-        bool m_IsClosed = true;
+        bool m_IsClosed = false;
         float m_Weight = GOWeight::Default;
 
     friend class GOPoint;

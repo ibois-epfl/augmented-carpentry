@@ -155,10 +155,8 @@ namespace AIAC
             for(int i = 0 ; i < 4; i++){
                 markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
             }
-            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
-            
-            auto tag = GOPolyline::Add(markerEdges);
-            tag->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+            auto tag = GOPolyline::Add(markerEdges, true, 1.0f);
+            tag->SetColor(glm::vec4(.5f, .5f, .5f, .5f));
             m_SlamMapGOs.push_back(tag);
         }
     }

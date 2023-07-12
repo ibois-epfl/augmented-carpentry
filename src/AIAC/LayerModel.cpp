@@ -46,29 +46,20 @@ namespace AIAC
 
         float infoModelLength = m_ACInfoModel.GetLength();
         float scannedModelLength = m_ScannedModel.GetLength();
-
-        AIAC_INFO("AC Info Model Length: {0} (m)", infoModelLength * 0.02);
-        AIAC_INFO("Scanned Model Length: {0} (m)", scannedModelLength * 0.02);
-
-        // TODO: change this one to be moved with UI
         
-        // crop the scanned model to the similar length as the info model
-        // reserve 2 cm on each side = 4 cm = 0.04 m = 2 TSLAM unit (by * 50)
-        // auto usedPortion = (infoModelLength + 2) / scannedModelLength;
-
         auto subBbox = m_ScannedModel.GetBoundingBox();
         if(m_AlignOffset > 0){
             auto usedPortion = (scannedModelLength - m_AlignOffset) / scannedModelLength;;
-            subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
-            subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
-            subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
-            subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
-        } else {
-            auto usedPortion = (scannedModelLength + m_AlignOffset) / scannedModelLength;;
             subBbox[0] = (subBbox[0] - subBbox[1]) * usedPortion + subBbox[1];
             subBbox[3] = (subBbox[3] - subBbox[2]) * usedPortion + subBbox[2];
             subBbox[4] = (subBbox[4] - subBbox[5]) * usedPortion + subBbox[5];
             subBbox[7] = (subBbox[7] - subBbox[6]) * usedPortion + subBbox[6];
+        } else {
+            auto usedPortion = (scannedModelLength + m_AlignOffset) / scannedModelLength;;
+            subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
+            subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
+            subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
+            subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
         }
 
         auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
