@@ -19,8 +19,8 @@ namespace AIAC
         
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
-        this->ACInfoToolheadManager->SetActiveToolhead("twist_drill_bit_32_165");
-        // this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
+
+        syncTToolAndACInfoToolhead();
     }
 
     void LayerToolhead::OnFrameStart()
@@ -32,7 +32,7 @@ namespace AIAC
 
         if (m_TtoolState == ttool::EventType::PoseInput)
         {
-            // FIXME: (?) if it is not called x2 it does not work on setting pose (?)
+            // (?) if it is not called x2 it does not work on setting pose (?)
             if (IsShowSilouhette)
             {
                 TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
@@ -71,6 +71,7 @@ namespace AIAC
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
+        syncTToolAndACInfoToolhead();
     }
 
     void LayerToolhead::ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize)
@@ -81,6 +82,7 @@ namespace AIAC
             cameraMatrix,
             cameraSize
             );
+        syncTToolAndACInfoToolhead();
     }
 
     /**
@@ -93,13 +95,16 @@ namespace AIAC
         glm::mat4x4 cameraPose = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm();
 
         cv::Matx44f toolheadPose = TTool->GetPose();
-        // scale the translation by 20.0f
-        toolheadPose(0, 3) *= 20.0f;
-        toolheadPose(1, 3) *= 20.0f;
-        toolheadPose(2, 3) *= 20.0f;
+        toolheadPose(0, 3) *= this->m_ACScaleFactor;
+        toolheadPose(1, 3) *= this->m_ACScaleFactor;
+        toolheadPose(2, 3) *= this->m_ACScaleFactor;
 
         cv::Matx44f toolheadNormalization = TTool->GetModelManager()->GetObject()->getNormalization();
-        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadNormalization * toolheadPose).val);
+        toolheadNormalization(0, 3) *= this->m_ACScaleFactor;
+        toolheadNormalization(1, 3) *= this->m_ACScaleFactor;
+        toolheadNormalization(2, 3) *= this->m_ACScaleFactor;
+
+        glm::mat4x4 toolheadPoseGlm = glm::make_mat4x4((toolheadPose * toolheadNormalization).val);
 
         glm::mat4x4 worldPose = cameraPose * glm::transpose(toolheadPoseGlm);
         return worldPose;
@@ -122,10 +127,10 @@ namespace AIAC
         return;
     }
 
-    //FIXME: @hong-bin render: solve flickering when changing
     void LayerToolhead::SetCurrentObject(std::string name)
     {
         this->ACInfoToolheadManager->SetActiveToolhead(name);
+        this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(this->IsShowToolheadGOInfo);
 
         int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
 
@@ -133,6 +138,27 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
         TTool->DrawSilhouette(currentFrame);
         TTool->DrawSilhouette(currentFrame);
+
+        this->TTool->SetObjectID(id);
+    }
+
+    void LayerToolhead::SavePose()
+    {
+        this->TTool->ManipulateModel('y');
+
+        m_TtoolState = ttool::EventType::None;
+        this->ToolheadStateUI = -1;
+
+    }
+
+    void LayerToolhead::ResetPoseFromConfig()
+    {
+        this->TTool->GetModelManager()->ResetObjectToInitialPose();
+    }
+
+    void LayerToolhead::syncTToolAndACInfoToolhead()
+    {
+        int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
         this->TTool->SetObjectID(id);
     }
 }

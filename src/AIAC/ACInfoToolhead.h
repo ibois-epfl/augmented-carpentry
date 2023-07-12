@@ -14,21 +14,7 @@ namespace AIAC
         DRILLBIT,
         CIRCULARSAW,
         SABERSAW,
-        CHAINSAW,
-        AXIS
-    };
-
-    struct AxisData
-    {
-        std::string Name;
-        glm::vec3 Origin;
-        glm::vec3 XAxis;
-        glm::vec3 YAxis;
-        glm::vec3 YPoint1;
-        glm::vec3 ZAxis;
-        glm::vec3 ZPoint1;
-        glm::vec3 ZPoint2;
-        float Radius;
+        CHAINSAW
     };
 
     /// @brief All the possible states of the toolheads in AC
@@ -150,9 +136,6 @@ namespace AIAC
                     case ACToolHeadType::SABERSAW:
                         return m_SaberSawD;
                         break;
-                    case ACToolHeadType::AXIS:
-                        return m_AxisD;
-                        break;
                     default:
                         break;
                 }
@@ -160,7 +143,7 @@ namespace AIAC
 
         private:
             /// @brief Scaling factor from meters to AC scale
-            float m_ScaleF = 20.0f;
+            float m_ScaleF = 50.0f;
 
             /// @brief Type of the toolhead
             ACToolHeadType m_Type;
@@ -175,7 +158,6 @@ namespace AIAC
             ChainSawData m_ChainSawD;
             /// @brief struct contains info from .acit data for sabersaw
             SaberSawData m_SaberSawD;
-            AxisData m_AxisD;
 
             friend class ACInfoToolhead;
     };
@@ -201,30 +183,24 @@ namespace AIAC
             void AddGOsInfoCircularSaw(ToolHeadData& data);
             void AddGOsInfoChainSaw(ToolHeadData& data);
             void AddGOsInfoSaberSaw(ToolHeadData& data);
-            void AddGOsInfoAxis(ToolHeadData& data);
-            /// @brief From the parsed acit geometries, add widgets made by GOs (e.g. text, arrows, etc)
-            void AddGOsWidget();
-            void AddGOsWidgetDrillBit();
-            void AddGOsWidgetCircularSaw();
-            void AddGOsWidgetChainSaw();
-            void AddGOsWidgetSaberSaw();
-            // // TODO: maybe this is not needed
-            // /// @brief From the parsed acit geometries, create the mesh of the toolhead
-            // void AddGODisplayMesh();
 
         public:
-            /// @brief to set the visibility of all the GOobjects
+            /// @brief Set the visibility of the geometries and widgets of the toolhead
             void SetVisibility(bool visible);
 
         public:
-            // TODO: @Hong-Bin to be implemented in the GO system
             /// @brief transform all the geometries, widgets and mesh contained in the ACInfoToolhead object
             void Transform(glm::mat4 transform);
-        
-        public:
+            /// @brief transform a specific geometry
+            void TransformGO(std::shared_ptr<GOPrimitive> goPtr,
+                             std::shared_ptr<GOPrimitive> goOriginalPtr,
+                             glm::mat4 transform);
             /// @brief rotate around local x axis of the toolhead 90 degrees to match the AC coordinate system with the TTool coordinate system
             /// Should only be called once at loading time
             void TransformSync();
+
+            /// @brief copy the original transform of the GO infos
+            void CopyGOsInfoOriginal();
 
         public: __always_inline
             std::string ToString() const { return m_Data.GetName(); }
@@ -244,13 +220,5 @@ namespace AIAC
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfo;
             /// @brief the original geometries of GOinfos at loading time
             std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesInfoOriginal;
-            /// @brief the geometries the create the widget UI of the toolhead
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidget;
-            /// @brief the original geometries of GOWidgets at loading time
-            std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitivesWidgetOriginal;
-            
-            // // TODO: @Hong-Bin to be implemented a GOMesh constructor able to get a path to obj and create GOfile
-            // /// @brief the mesh id used to input and check the 6dof pose of the toolhead by the user
-            // std::shared_ptr<GOMesh> m_GODisplayMesh;
     };
 }
