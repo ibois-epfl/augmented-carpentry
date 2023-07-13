@@ -46,8 +46,11 @@ public:
     public:
         Component()=default;
         virtual void SetAsCurrent();
-        // void SetAsDone();
-        // void SetAsNotDone();
+        virtual void SetAsDone();
+        virtual void SetAsNotDone();
+
+    public:
+        bool IsMarkedDone; // This one is for UI
 
     protected:
         ACIMState m_State;
@@ -62,6 +65,8 @@ public:
     class Hole: public Component{
     public:
         virtual void SetAsCurrent();
+        virtual void SetAsDone();
+        virtual void SetAsNotDone();
 
     private:
         glm::vec3 m_Start;
@@ -117,6 +122,8 @@ public:
 
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
+    inline Component* GetComponent(std::string id) { return m_Components[id]; }
+    inline Component* GetCurrentComponent() { return m_Components[m_CurrentComponentID]; }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }

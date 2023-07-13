@@ -411,7 +411,7 @@ namespace AIAC
                 }
                 ImGui::EndCombo();
             }
-            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
+            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
         ImGui::EndChild();
     }
 
