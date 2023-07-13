@@ -2,9 +2,6 @@
 #include "AIAC.h"
 #include "AIAC/LayerCameraCalib.h"
 
-#include <QApplication>
-#include <QThread>
-
 #include "ttool.hh"
 #include "view.hh"
 

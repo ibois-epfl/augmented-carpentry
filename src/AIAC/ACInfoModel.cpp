@@ -9,44 +9,72 @@ using namespace std;
 namespace AIAC
 {
     void TimberInfo::Component::SetAsCurrent() {
-        AIAC_WARN("Component::SetAsCurrent is called");
+        m_State = ACIMState::CURRENT;
     }
 
     void TimberInfo::Component::SetAsDone() {
-        AIAC_WARN("Component::SetAsDone is called");
+        AIAC_INFO("timberInfo::Component::SetAsDone()");
+
+        m_State = ACIMState::DONE;
+        m_ACIMDocNode.child("state").last_child().set_value("Done");
+        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
     void TimberInfo::Component::SetAsNotDone() {
-        AIAC_WARN("Component::SetAsNotDone is called");
+        m_State = ACIMState::NOT_DONE;
+        m_ACIMDocNode.child("state").last_child().set_value("NotDone");
+        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
     void TimberInfo::Hole::SetAsCurrent() {
+        TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to Hole #" + m_ID);
-        m_State = ACIMState::CURRENT;
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::CURRENT]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::CURRENT]);
         m_RadiusLabelGO->SetVisibility(true);
     }
 
     void TimberInfo::Hole::SetAsDone() {
-        AIAC_INFO("Set Hole #" + m_ID + " as Done");
-        m_State = ACIMState::DONE;
+        TimberInfo::Component::SetAsDone();
+        AIAC_INFO("Set " + m_ID + " as Done");
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::DONE]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::DONE]);
         m_RadiusLabelGO->SetVisibility(false);
     }
 
     void TimberInfo::Hole::SetAsNotDone() {
-        AIAC_INFO("Set Hole #" + m_ID + " as Not Done");
-        m_State = ACIMState::NOT_DONE;
+        TimberInfo::Component::SetAsNotDone();
+        AIAC_INFO("Set " + m_ID + " as Not Done");
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::NOT_DONE]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::NOT_DONE]);
         m_RadiusLabelGO->SetVisibility(false);
     }
 
+    // Cut
     void TimberInfo::Cut::SetAsCurrent() {
-        AIAC_INFO("Cut::SetAsCurrent");
+        AIAC_INFO("Set Current Component to " + m_ID);
+        m_State = ACIMState::CURRENT;
+        for (const auto& [_, edge] : m_Edges) {
+            edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+        }
     }
+
+    void TimberInfo::Cut::SetAsDone() {
+        AIAC_INFO("Set " + m_ID + " as Done");
+        m_State = ACIMState::DONE;
+        for (const auto& [_, edge] : m_Edges) {
+            edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::DONE]);
+        }
+    }
+
+    void TimberInfo::Cut::SetAsNotDone() {
+        AIAC_INFO("Set " + m_ID + " as Not Done");
+        m_State = ACIMState::NOT_DONE;
+        for (const auto& [_, edge] : m_Edges) {
+            edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+        }
+    }
+
 
     void TimberInfo::Cut::Face::SetAsCurrent() {
         AIAC_INFO("Face::SetAsCurrent");
@@ -97,6 +125,7 @@ namespace AIAC
             TimberInfo timberInfo;
             timberInfo.m_ID = timber.attribute("id").as_string();
             timberInfo.m_State = StringToState(timber.child("state").child_value());
+            timberInfo.m_CurrentComponentID = timber.child("current").child_value();
             AIAC_INFO("Timber: {0}", timberInfo.m_ID);
             
             // Bounding Box
@@ -110,6 +139,7 @@ namespace AIAC
             // Holes
             for(auto hole = timber.child("hole"); hole; hole=hole.next_sibling("hole")){
                 TimberInfo::Hole holeInfo;
+                holeInfo.m_ACIMDocNode = hole;
                 holeInfo.m_ID = hole.attribute("id").as_string();
                 holeInfo.m_State = StringToState(hole.child("state").child_value());
                 holeInfo.IsMarkedDone = holeInfo.m_State == ACIMState::DONE;
@@ -147,22 +177,16 @@ namespace AIAC
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_RadiusLabelGO);
 
                 m_TimberInfo.m_Holes[holeInfo.m_ID] = holeInfo;
-                auto uniqueID = "Hole #"+holeInfo.m_ID;
-                m_TimberInfo.m_Components[uniqueID] = &m_TimberInfo.m_Holes[holeInfo.m_ID];
-                if(holeInfo.m_State == ACIMState::CURRENT) {
-                    if(m_TimberInfo.m_CurrentComponentID == ""){
-                        m_TimberInfo.m_CurrentComponentID = uniqueID;
-                    } else {
-                        AIAC_WARN("Multiple current components in ACIM file");
-                    }
-                }
+                m_TimberInfo.m_Components[holeInfo.m_ID] = &m_TimberInfo.m_Holes[holeInfo.m_ID];
             }
 
             // cuts
             for(auto cut = timber.child("cut"); cut; cut=cut.next_sibling("cut")){
                 TimberInfo::Cut cutInfo;
+                cutInfo.m_ACIMDocNode = cut;
                 cutInfo.m_ID = cut.attribute("id").as_string();
                 cutInfo.m_State = StringToState(cut.child("state").child_value());
+                cutInfo.IsMarkedDone = cutInfo.m_State == ACIMState::DONE;
 
                 auto faces = cut.child("faces");
                 for(auto face = faces.child("face"); face; face=face.next_sibling("face")){
@@ -181,17 +205,28 @@ namespace AIAC
                     edgeInfo.m_End = StringToVec3(edge.child("end").child_value()) * m_Scale;
 
                     // build GOPrimitive
-                    auto edgeGO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
-                    edgeGO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
-                    edgeInfo.m_GOPrimitives.push_back(edgeGO);
+                    edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
+                    edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
+                    edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
-
-                m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
+                m_TimberInfo.m_Components[cutInfo.m_ID] = &m_TimberInfo.m_Cuts[cutInfo.m_ID];
+            }
+            if(m_TimberInfo.m_CurrentComponentID.length() == 0){
+                m_TimberInfo.m_CurrentComponentID = m_TimberInfo.m_Components.begin()->first;
             }
         }
         UpdateBboxGOLine();
+    }
+
+    void ACInfoModel::Save() {
+        auto timber = m_ACIMDoc.child("acim").child("timber");
+        for(auto hole = timber.child("hole"); hole; hole=hole.next_sibling("hole")){
+            cout << hole.child("state").child_value() << endl;
+        }
+
+        m_ACIMDoc.save_file(m_FilePath.c_str());        
     }
 
     void ACInfoModel::Clear() {
@@ -227,15 +262,41 @@ namespace AIAC
             GOLine::Remove(line);
 
         // bottom
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[0], 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f));
+        // auto vec = glm::normalize(bbox[1] - bbox[0]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[0] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[1] - vec, 2.0f));
+        // vec = glm::normalize(bbox[2] - bbox[1]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[1] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[2] - vec, 2.0f));
+        // vec = glm::normalize(bbox[3] - bbox[2]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[2] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[3] - vec, 2.0f));
+        // vec = glm::normalize(bbox[0] - bbox[3]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[3] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[0] - vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[1], 1.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 1.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 1.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 1.0f));
+
         // top
-        m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[7], 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[4], 2.0f));
+        // vec = glm::normalize(bbox[5] - bbox[4]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[4] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[5] - vec, 2.0f));
+        // vec = glm::normalize(bbox[6] - bbox[5]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[5] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[6] - vec, 2.0f));
+        // vec = glm::normalize(bbox[7] - bbox[6]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[6] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[7] - vec, 2.0f));
+        // vec = glm::normalize(bbox[4] - bbox[7]);
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[7] + vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[4] - vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 1.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 1.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[7], 1.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[4], 1.0f));
+        
         // side
         m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[4], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[5], 2.0f));
@@ -244,7 +305,8 @@ namespace AIAC
 
         // change color of the bounding box
         for(auto line : m_BboxGOLines)
-            line->SetColor(glm::vec4(0.3f, 0.7f, 0.1f, 0.3f));
+            line->SetColor(glm::vec4(0.7f, 0.7f, 0.5f, 0.5f));
+            
     }
 
     void ACInfoModel::TransformGOPrimitives(glm::mat4x4 transformMat) {
