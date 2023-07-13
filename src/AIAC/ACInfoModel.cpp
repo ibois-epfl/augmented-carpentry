@@ -9,18 +9,39 @@ using namespace std;
 namespace AIAC
 {
     void TimberInfo::Component::SetAsCurrent() {
-        AIAC_INFO("Component::SetAsCurrent");
-        // m_State = ACIMState::CURRENT;
-        // for(auto& go : m_GOPrimitives){
-        //     go->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
-        // }
+        AIAC_WARN("Component::SetAsCurrent is called");
+    }
+
+    void TimberInfo::Component::SetAsDone() {
+        AIAC_WARN("Component::SetAsDone is called");
+    }
+
+    void TimberInfo::Component::SetAsNotDone() {
+        AIAC_WARN("Component::SetAsNotDone is called");
     }
 
     void TimberInfo::Hole::SetAsCurrent() {
         AIAC_INFO("Set Current Component to Hole #" + m_ID);
+        m_State = ACIMState::CURRENT;
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::CURRENT]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::CURRENT]);
         m_RadiusLabelGO->SetVisibility(true);
+    }
+
+    void TimberInfo::Hole::SetAsDone() {
+        AIAC_INFO("Set Hole #" + m_ID + " as Done");
+        m_State = ACIMState::DONE;
+        m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::DONE]);
+        m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::DONE]);
+        m_RadiusLabelGO->SetVisibility(false);
+    }
+
+    void TimberInfo::Hole::SetAsNotDone() {
+        AIAC_INFO("Set Hole #" + m_ID + " as Not Done");
+        m_State = ACIMState::NOT_DONE;
+        m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::NOT_DONE]);
+        m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::NOT_DONE]);
+        m_RadiusLabelGO->SetVisibility(false);
     }
 
     void TimberInfo::Cut::SetAsCurrent() {
@@ -51,12 +72,11 @@ namespace AIAC
     }
 
     void TimberInfo::SetCurrentComponentTo(std::string id) {
-        // TODO: set back the current
         if(m_CurrentComponentID != ""){
-            if(m_Components[m_CurrentComponentID]->m_State == ACIMState::DONE){
-                // m_Components[m_CurrentComponentID]->SetAs;
+            if(GetCurrentComponent()->IsMarkedDone){
+                GetCurrentComponent()->SetAsDone();
             } else { // Not Done
-                // m_Components[m_CurrentComponentID]->SetAs;
+                GetCurrentComponent()->SetAsNotDone();
             }
         }
         m_CurrentComponentID = id;
@@ -92,6 +112,7 @@ namespace AIAC
                 TimberInfo::Hole holeInfo;
                 holeInfo.m_ID = hole.attribute("id").as_string();
                 holeInfo.m_State = StringToState(hole.child("state").child_value());
+                holeInfo.IsMarkedDone = holeInfo.m_State == ACIMState::DONE;
                 holeInfo.m_Neighbors = StringToSet(hole.child("neighbours").child_value());
                 if(holeInfo.m_Neighbors.size() == 1 && *holeInfo.m_Neighbors.begin() == "-1"){
                     AIAC_INFO("Hole: {0} has no neighbors", holeInfo.m_ID);
@@ -115,6 +136,7 @@ namespace AIAC
                 auto radiusText = std::to_string(holeInfo.m_Radius);
                 radiusText = radiusText.substr(0, radiusText.find(".") + 3);
                 holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, 0.5f);
+                
                 if(holeInfo.m_State != ACIMState::CURRENT) holeInfo.m_RadiusLabelGO->SetVisibility(false);
 
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_AxisGO);
