@@ -90,6 +90,8 @@ public:
     class Cut: public Component{
     public:
         virtual void SetAsCurrent();
+        virtual void SetAsDone();
+        virtual void SetAsNotDone();
 
         class Face: public Component{
             virtual void SetAsCurrent();
@@ -100,6 +102,8 @@ public:
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
 
+            friend class Cut;
+            friend class TimberInfo;
             friend class ACInfoModel;
         };
         class Edge: public Component{
@@ -109,7 +113,10 @@ public:
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
+            std::shared_ptr<GOLine> m_GO;
 
+            friend class Cut;
+            friend class TimberInfo;
             friend class ACInfoModel;
         };
     
@@ -158,10 +165,15 @@ public:
     ~ACInfoModel(){};
 
     /**
-     * @brief Load a .ply model from a file.
+     * @brief Load a .acim model from a file.
      * @param path Path to the model file.
      */
     void Load(std::string path);
+
+    /**
+     * @brief Save the current state to the loaded .acim file.
+     */
+    void Save();
 
     /**
      * @brief Clear the loaded data.
