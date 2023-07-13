@@ -45,18 +45,25 @@ public:
     class Component {
     public:
         Component()=default;
-        void SetAsCurrent();
-        void SetAsDone();
-        void SetAsNotDone();
+        virtual void SetAsCurrent();
+        // void SetAsDone();
+        // void SetAsNotDone();
 
     protected:
         ACIMState m_State;
         pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
+
+    friend class ACInfoModel;
+    friend class TimberInfo;
     };
 
     class Hole: public Component{
+    public:
+        virtual void SetAsCurrent();
+
+    private:
         glm::vec3 m_Start;
         bool m_StartAccessible;
         glm::vec3 m_End;
@@ -76,7 +83,12 @@ public:
     };
 
     class Cut: public Component{
+    public:
+        virtual void SetAsCurrent();
+
         class Face: public Component{
+            virtual void SetAsCurrent();
+
             bool m_Accessible;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
@@ -86,6 +98,8 @@ public:
             friend class ACInfoModel;
         };
         class Edge: public Component{
+            virtual void SetAsCurrent();
+
             bool m_Accessible;
             glm::vec3 m_Start;
             glm::vec3 m_End;
@@ -93,9 +107,8 @@ public:
 
             friend class ACInfoModel;
         };
-        void SetAsCurrent();
-        void SetAsDone();
-        void SetAsNotDone();
+    
+    private:
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
 

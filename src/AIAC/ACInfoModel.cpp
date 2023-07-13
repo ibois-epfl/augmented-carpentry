@@ -9,11 +9,33 @@ using namespace std;
 namespace AIAC
 {
     void TimberInfo::Component::SetAsCurrent() {
-        m_State = ACIMState::CURRENT;
-        for(auto& go : m_GOPrimitives){
-            go->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
-        }
+        AIAC_INFO("Component::SetAsCurrent");
+        // m_State = ACIMState::CURRENT;
+        // for(auto& go : m_GOPrimitives){
+        //     go->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
+        // }
     }
+
+    void TimberInfo::Hole::SetAsCurrent() {
+        AIAC_INFO("Set Current Component to Hole #" + m_ID);
+        m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::CURRENT]);
+        m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::CURRENT]);
+        m_RadiusLabelGO->SetVisibility(true);
+    }
+
+    void TimberInfo::Cut::SetAsCurrent() {
+        AIAC_INFO("Cut::SetAsCurrent");
+    }
+
+    void TimberInfo::Cut::Face::SetAsCurrent() {
+        AIAC_INFO("Face::SetAsCurrent");
+    }
+
+    void TimberInfo::Cut::Edge::SetAsCurrent() {
+        AIAC_INFO("Edge::SetAsCurrent");
+    }
+
+
 
     std::vector<std::string> TimberInfo::GetAllComponentsIDs() const {
         // This is only for C++20, but we're using C++17, I leave it here for future reference
@@ -29,6 +51,14 @@ namespace AIAC
     }
 
     void TimberInfo::SetCurrentComponentTo(std::string id) {
+        // TODO: set back the current
+        if(m_CurrentComponentID != ""){
+            if(m_Components[m_CurrentComponentID]->m_State == ACIMState::DONE){
+                // m_Components[m_CurrentComponentID]->SetAs;
+            } else { // Not Done
+                // m_Components[m_CurrentComponentID]->SetAs;
+            }
+        }
         m_CurrentComponentID = id;
         m_Components[id]->SetAsCurrent();
     }
