@@ -306,19 +306,19 @@ namespace AIAC
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glm::vec4 edgeColor;
         if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
-            if(ShowPointCloudMap){
-                PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-            }
-            if(ShowDigitalModel){
-                DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-                DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-            }
-            for (auto& mesh : Meshes) {
-                mesh.DrawEdges(m_DefaultEdgeColor);
-            }
+            // if(ShowPointCloudMap){
+            //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+            // }
+            // if(ShowDigitalModel){
+            //     DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+            //     DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+            // }
+            // for (auto& mesh : Meshes) {
+            //     mesh.DrawEdges(m_DefaultEdgeColor);
+            // }
             // Draw All objects
-            DrawAllGOs(finalPoseMatrix);
             // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+            DrawAllGOs(finalPoseMatrix);
         }
     }
 

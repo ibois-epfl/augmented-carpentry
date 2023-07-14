@@ -52,6 +52,7 @@ namespace AIAC
         StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
+        StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
 
         m_IsOpen = new bool(true);
@@ -214,11 +215,11 @@ namespace AIAC
         static const char* previewValue = currentItem.c_str();
         if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
             for (auto& devicePath : AIAC_APP.GetLayer<LayerCamera>()->AvailableDevices) {
-                bool is_selected = (currentItem == devicePath);
-                if (ImGui::Selectable(devicePath.c_str(), is_selected)){
+                bool isSelected = (currentItem == devicePath);
+                if (ImGui::Selectable(devicePath.c_str(), isSelected)){
                     AIAC_APP.GetLayer<LayerCamera>()->SetCurrentDevice(devicePath);
                 }
-                if (is_selected)
+                if (isSelected)
                     ImGui::SetItemDefaultFocus();
             }
             ImGui::EndCombo();
@@ -302,6 +303,7 @@ namespace AIAC
             ImGui::PopStyleColor();
         ImGui::EndChild();
 
+        ImGui::Checkbox("Show Tag", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToShowTag);
         ImGui::Checkbox("Process Frames", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToProcess);
         ImGui::Checkbox("Enhance Photo", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToEnhance);
 
@@ -314,23 +316,103 @@ namespace AIAC
 
     void LayerUI::SetPaneUIRender()
     {
-        ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
-        ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
-        if(ImGui::Button("Load Digital Model")){
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+        // ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
+//         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+//         if(ImGui::Button("Load Digital Model")){
+//             ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+//         }
+//         if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+//         {
+//             if (ImGuiFileDialog::Instance()->IsOk())
+//             {
+//                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+//                 // TODO: Add ply to renderer
+//                 AIAC_INFO("Loading Digital Model: {}", filePathName);
+//                 AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
+// //                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+//             }
+//             ImGuiFileDialog::Instance()->Close();
+//         }
+    }
+
+    void LayerUI::SetPaneUIACIM()
+    {
+        // ACIM Loader
+        if(ImGui::Button("Load ACIM")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseACIM", "Open ACIM file", ".acim", ".");
         }
-        if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+        if (ImGuiFileDialog::Instance()->Display("ChooseACIM"))
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                // TODO: Add ply to renderer
-                AIAC_INFO("Loading Digital Model: {}", filePathName);
-                AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
-//                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(filePathName);
             }
             ImGuiFileDialog::Instance()->Close();
         }
+
+        // Scanned Model Loader
+        ImGui::SameLine();
+        if(ImGui::Button("Load Scanned Model")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseScannedModel", "Open Scanned Model", ".ply", ".");
+        }
+        if (ImGuiFileDialog::Instance()->Display("ChooseScannedModel"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(filePathName);
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+
+        // Re-position the ACIM model
+        ImGui::Text("Adjust model alignment:");
+        ImGui::BeginChild("Adjust model alignment", ImVec2(0, 60), true, ImGuiWindowFlags_HorizontalScrollbar);
+            float sliderVal = 0.f;
+            ImGui::SliderFloat("##Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
+                if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
+                sliderVal = 0.f;
+            ImGui::SameLine();
+            if(ImGui::Button("Reset Offset")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
+            }
+            
+            if(ImGui::Button("Rotate +")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Rotate -")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(-1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Reset Rotation")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignRotation();
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Flip")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->FlipAlign();
+            }
+        ImGui::EndChild();
+
+        ImGui::Text("Components Control:");
+        ImGui::BeginChild("Components Control Panel", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::Text("Current Component:");
+            string currentCompoID = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
+            static const char* previewValue = currentCompoID.c_str();
+            if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
+                for (auto& componentID : AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetAllComponentsIDs()) {
+                    bool isSelected = (currentCompoID == componentID);
+                    if (ImGui::Selectable(componentID.c_str(), isSelected)){
+                        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
+                    }
+                    if (isSelected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+        ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIToolhead()
