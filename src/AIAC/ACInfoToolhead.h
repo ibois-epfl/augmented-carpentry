@@ -166,6 +166,7 @@ namespace AIAC
     class ACInfoToolhead
     {
         public:
+            ACInfoToolhead() = default;
             ACInfoToolhead(std::string acitPath, std::string meshObjPath, int id);
 
         public:
