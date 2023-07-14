@@ -71,3 +71,32 @@ def detect_idx_pt_in_list(pt, list):
         if X_a == X_b and Y_a == Y_b and Z_a == Z_b:
             return idx
     return idx
+
+def sort_vertices_clockwise(brep_face):
+    """ Order the corners on the normal of the brep face surface """
+    sorted_vertices = []
+
+    # edges = brep_face.DuplicateEdgeCurves()
+
+    # edges_sorted = []
+    # for idx, edge in enumerate(edges):
+    #     if idx == 0:
+    #         edges_sorted.append(edge)
+    #     else:
+    #         for edge_sorted in edges_sorted:
+    #             if edge_sorted.PointAtStart == edge.PointAtStart:
+    #                 edges_sorted.insert(0, edge)
+    #             elif edge_sorted.PointAtEnd == edge.PointAtStart:
+    #                 edges_sorted.append(edge)
+    #             elif edge_sorted.PointAtStart == edge.PointAtEnd:
+    #                 edges_sorted.insert(0, edge)
+    #             elif edge_sorted.PointAtEnd == edge.PointAtEnd:
+    #                 edges_sorted.append(edge)
+
+    # log.info(f"edges_sorted: {edges_sorted.__len__()}")
+
+    # for edge in edges_sorted:
+    #     sorted_vertices.append(edge.PointAtStart)
+
+
+    return sorted_vertices
