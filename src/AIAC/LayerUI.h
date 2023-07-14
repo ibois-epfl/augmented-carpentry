@@ -59,6 +59,7 @@ namespace AIAC {
         void SetPaneUISlam();
         void SetPaneUIRender();
         void SetPaneUIToolhead();
+        void SetPaneUIACIM();
 
     private:
         void SetGlobalViewUI(ImVec2 viewportSize);

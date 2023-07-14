@@ -12,7 +12,7 @@ namespace AIAC
         // update config
         AIAC::Config::UpdateEntry(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, m_FilePath);
 
-        AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(m_FilePath, true);
+        AIAC_APP.GetLayer<LayerSlam>()->UpdateMap(m_FilePath);
 
         // extract the camera calibration file path from the SLAM map and update for camera and SLAM
         auto paramHeight = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.height;
