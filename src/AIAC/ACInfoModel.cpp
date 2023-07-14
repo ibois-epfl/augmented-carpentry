@@ -192,17 +192,29 @@ namespace AIAC
                 cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, 0.75f);
                 cutInfo.m_GOPrimitives.push_back(cutInfo.m_IDLabelGO);
 
+                auto nonExposedEdges = std::set<std::string>();
+
                 auto faces = cut.child("faces");
                 for(auto face = faces.child("face"); face; face=face.next_sibling("face")){
                     TimberInfo::Cut::Face faceInfo;
                     faceInfo.m_ID = face.attribute("id").as_string();
+                    faceInfo.m_Exposed = StringToBool(face.child("exposed").child_value());
                     faceInfo.m_State = StringToState(face.child("state").child_value());
                     faceInfo.m_Edges = StringToSet(face.child("edges").child_value());
+                    if(!faceInfo.m_Exposed){
+                        nonExposedEdges.insert(faceInfo.m_Edges.begin(), faceInfo.m_Edges.end());
+                    }
                     cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
                 }
 
                 auto edges = cut.child("edges");
                 for(auto edge = edges.child("edge"); edge; edge=edge.next_sibling("edge")){
+                    auto id = edge.attribute("id").as_string();
+                    // only work with non-exposed edges
+                    if(nonExposedEdges.find(id) == nonExposedEdges.end()){
+                        continue;
+                    }
+
                     TimberInfo::Cut::Edge edgeInfo;
                     edgeInfo.m_ID = edge.attribute("id").as_string();
                     edgeInfo.m_Start = StringToVec3(edge.child("start").child_value()) * m_Scale;
@@ -212,6 +224,7 @@ namespace AIAC
                     edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
                     edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
                     edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
+
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
@@ -411,8 +424,11 @@ namespace AIAC
     }
 
     bool ACInfoModel::StringToBool(std::string str){
-        std::string trueStr = "True";
-        std::string falseStr = "False";
+        // convert str to lowercase
+        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+
+        std::string trueStr = "true";
+        std::string falseStr = "false";
         if(!str.compare(0, trueStr.length(), trueStr)){
             return true;
         }
