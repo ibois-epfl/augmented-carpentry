@@ -7,7 +7,7 @@
 
 namespace AIAC
 {
-    /// @section ACIT info ////////////////////////////////////////////////////////////////////////////
+    /// @section Structs holding the data of the toolheads from .acit and the corresponding GOs
     /// @brief All the possible types of the toolheads in AC
     enum class ACToolHeadType
     {
@@ -17,82 +17,122 @@ namespace AIAC
         CHAINSAW
     };
 
-    /// @brief All the possible states of the toolheads in AC
-    /**
-        @brief Struct holding the data of the drillbit toolhead from .acit
-
-        @param Name: name of the toolhead
-        @param Toolbase: position of the base of the toolhead
-        @param Tooltip: position of the tip of the toolhead
-        @param Eattip: position of the tip of the toolhead eating the material
-        @param Chucktip: position of the end of the drill chuck
-        @param Radius: radius of the drillbit
-    */
     struct DrillBitData
     {
-        std::string Name;
-        glm::vec3 Toolbase;
-        glm::vec3 Tooltip;
-        glm::vec3 Eattip;
-        glm::vec3 Chucktip;
-        float Radius;
-    };
-    /**
-        @brief Structs holding the data of the drillbit toolhead from .acit
+        /// @brief name of the toolhead
+        std::string NameACIT;
+        /// @brief radius of the drillbit
+        float RadiusACIT;
 
-        @param Name: name of the toolhead
-        @param Center: the center of the circle defining the circular blade
-        @param NormalStart: start of the normal of the blade plane
-        @param NormalEnd: end of the normal of the blade plane
-        @param Radius: radius of the circular blade
-    */
+        /// @brief original position of the base of the toolhead
+        glm::vec3 ToolbaseACIT;
+        /// @brief original position of the tip of the toolhead
+        glm::vec3 TooltipACIT;
+        /// @brief original position of the tip of the toolhead eating the material
+        glm::vec3 EattipACIT;
+        /// @brief original position of the end of the drill chuck
+        glm::vec3 ChucktipACIT;
+        /// @brief GOPoints equivalent
+        std::shared_ptr<GOPoint> ToolbaseGO;
+        std::shared_ptr<GOPoint> TooltipGO;
+        std::shared_ptr<GOPoint> EattipGO;
+        std::shared_ptr<GOPoint> ChucktipGO;
+    
+        DrillBitData()
+        {
+            ToolbaseGO = std::make_shared<GOPoint>();
+            TooltipGO = std::make_shared<GOPoint>();
+            EattipGO = std::make_shared<GOPoint>();
+            ChucktipGO = std::make_shared<GOPoint>();
+        }
+    };
     struct CircularSawData
     {
-        std::string Name;
-        glm::vec3 Center;
-        glm::vec3 NormalStart;
-        glm::vec3 NormalEnd;
-        float Radius;
-    };
-    /**
-        @brief Structs holding the data of the chainsaw toolhead from .acit
+        /// @brief name of the toolhead
+        std::string NameACIT;
+        /// @brief radius of the circular blade
+        float RadiusACIT;
 
-        @param Name: name of the toolhead
-        @param Chainbase: point start of the basetool
-        @param Chainmid: point in the middle of the chain
-        @param Chainend: point end of the chain before the round tip
-        @param NormalStart: start of the normal of the blade plane
-        @param NormalEnd: end of the normal of the blade plane
-        @param Width: width of the chain
-    */
+        /// @brief center of the circle defining the circular blade
+        glm::vec3 CenterACIT;
+        /// @brief start of the normal of the blade plane
+        glm::vec3 NormalStartACIT;
+        /// @brief end of the normal of the blade plane
+        glm::vec3 NormalEndACIT;
+        /// @brief GOPoints equivalent
+        std::shared_ptr<GOPoint> CenterGO;
+        std::shared_ptr<GOPoint> NormalStartGO;
+        std::shared_ptr<GOPoint> NormalEndGO;
+
+        CircularSawData()
+        {
+            CenterGO = std::make_shared<GOPoint>();
+            NormalStartGO = std::make_shared<GOPoint>();
+            NormalEndGO = std::make_shared<GOPoint>();
+        }
+    };
     struct ChainSawData
     {
-        glm::vec3 Chainbase;
-        glm::vec3 Chainmid;
-        glm::vec3 Chainend;
-        glm::vec3 NormalStart;
-        glm::vec3 NormalEnd;
-        float Width;
-    };
-    /**
-        @brief Struct holding the data of the drillbit toolhead from .acit
+        /// @brief name of the toolhead
+        std::string NameACIT;
+        /// @brief width of the chain
+        float WidthACIT;
 
-        @param Name: name of the toolhead
-        @param Toolbase: position of the base of the toolhead
-        @param Tooltip: position of the tip of the toolhead
-        @param NormalStart: start of the normal of the blade plane
-        @param NormalEnd: end of the normal of the blade plane
-    */
+        /// @brief point start of the basetool
+        glm::vec3 ChainbaseACIT;
+        /// @brief point in the middle of the chain
+        glm::vec3 ChainmidACIT;
+        /// @brief point end of the chain before the round tip
+        glm::vec3 ChainendACIT;
+        /// @brief start of the normal of the plateau plane
+        glm::vec3 NormalStartACIT;
+        /// @brief end of the normal of the plateau plane
+        glm::vec3 NormalEndACIT;
+        /// @brief GOPoints equivalent
+        std::shared_ptr<GOPoint> ChainbaseGO;
+        std::shared_ptr<GOPoint> ChainmidGO;
+        std::shared_ptr<GOPoint> ChainendGO;
+        std::shared_ptr<GOPoint> NormalStartGO;
+        std::shared_ptr<GOPoint> NormalEndGO;
+
+        ChainSawData()
+        {
+            ChainbaseGO = std::make_shared<GOPoint>();
+            ChainmidGO = std::make_shared<GOPoint>();
+            ChainendGO = std::make_shared<GOPoint>();
+            NormalStartGO = std::make_shared<GOPoint>();
+            NormalEndGO = std::make_shared<GOPoint>();
+        }
+    };
     struct SaberSawData
     {
-        std::string Name;
-        glm::vec3 Toolbase;
-        glm::vec3 Tooltip;
-        glm::vec3 NormalStart;
-        glm::vec3 NormalEnd;
+        /// @brief name of the toolhead
+        std::string NameACIT;
+
+        /// @brief position of the base of the toolhead
+        glm::vec3 ToolbaseACIT;
+        /// @brief position of the tip of the toolhead
+        glm::vec3 TooltipACIT;
+        /// @brief start of the normal of the blade plane
+        glm::vec3 NormalStartACIT;
+        /// @brief end of the normal of the blade plane
+        glm::vec3 NormalEndACIT;
+        /// @brief GOPoints equivalent
+        std::shared_ptr<GOPoint> ToolbaseGO;
+        std::shared_ptr<GOPoint> TooltipGO;
+        std::shared_ptr<GOPoint> NormalStartGO;
+        std::shared_ptr<GOPoint> NormalEndGO;
+
+        SaberSawData()
+        {
+            ToolbaseGO = std::make_shared<GOPoint>();
+            TooltipGO = std::make_shared<GOPoint>();
+            NormalStartGO = std::make_shared<GOPoint>();
+            NormalEndGO = std::make_shared<GOPoint>();
+        }
     };
 
-    /// @brief Class holding and parse the information from the .acit file of the toolhead
+    /// @brief Class holding and parse and create data from the .acit file of the toolhead
     class ToolHeadData
     {
         public:
@@ -112,34 +152,30 @@ namespace AIAC
             glm::vec3 ParseString2GlmVector(std::string str);
 
         private: __always_inline
-            /// @brief Retrieve scaling factor
-            float GetScaleF() const { return m_ScaleF; }
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Type; }
             /// @brief Retrieve the name of the toolhead
             std::string GetName() const { return m_Name; }
-            /// @brief Retrive the correct data type according to the type of tool of ToolHeadData
-            template<typename T>
-            T GetData() const
-            {
-                switch (m_Type)
-                {
-                    case ACToolHeadType::DRILLBIT:
-                        return m_DrillBitD;
-                        break;
-                    case ACToolHeadType::CIRCULARSAW:
-                        return m_CircularSawD;
-                        break;
-                    case ACToolHeadType::CHAINSAW:
-                        return m_ChainSawD;
-                        break;
-                    case ACToolHeadType::SABERSAW:
-                        return m_SaberSawD;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            // /// @brief Retrive the correct data type according to the type of tool of ToolHeadData
+            // template<typename T>
+            // auto GetData() const
+            // {
+            //     // if constexpr (std::is_same_v<T, DrillBitData>)
+            //     //     return m_DrillBitD;
+            //     // else if constexpr (std::is_same_v<T, CircularSawData>)
+            //     //     return m_CircularSawD;
+            //     // else if constexpr (std::is_same_v<T, ChainSawData>)
+            //     //     return m_ChainSawD;
+            //     // else if constexpr (std::is_same_v<T, SaberSawData>)
+            //     //     return m_SaberSawD;
+            // }
+
+            /// @brief Retrieve scaling factor
+            float GetScaleF() const { return m_ScaleF; }
+
+        public: __always_inline ///< utils
+            /// @brief convert to a string
+            std::string ToString() const { return m_Name;}
 
         private:
             /// @brief Scaling factor from meters to AC scale
@@ -169,14 +205,18 @@ namespace AIAC
             ACInfoToolhead() = default;
             ACInfoToolhead(std::string acitPath, std::string meshObjPath, int id);
 
-        public:
+        public: __always_inline
             /// @brief Retrieve the type of the toolhead
-            inline ACToolHeadType GetType() const { return m_Data.GetType(); }
+            ACToolHeadType GetType() const { return m_Data.GetType(); }
             /// @brief Get the name of the toolhead
-            inline std::string GetName() const { return m_Data.GetName(); }
+            std::string GetName() const { return m_Data.GetName(); }
             /// @brief Get the id of the toolhead
-            inline int GetId() const { return m_ID; }
+            int GetId() const { return m_ID; }
 
+            // /// @brief Get the data of the toolhead
+            // template<typename T>
+            // auto GetData() const { return m_Data.GetData<T>(); }
+            
         public:
             /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
             void AddGOsInfo(ToolHeadData& data);

@@ -23,6 +23,12 @@ namespace AIAC
             // translationFeedback
             // rotationFeedback
 
+            // template <typename T>
+            // inline std::shared_ptr<T> GetActiveToolheadData()
+            // {
+            //     return this->m_CurrentToolhead->GetData<T>();
+            // }
+
         private:
             std::shared_ptr<ACInfoToolhead> m_CurrentToolhead;
             // obj current m_CurrentModelComponent;
