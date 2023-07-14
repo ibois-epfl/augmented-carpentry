@@ -185,6 +185,7 @@ namespace AIAC
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             RenderGlobalView();
             RenderMappingView();
+            cout << "Render Mapping View" << endl;
             return;
         }
 
@@ -264,7 +265,7 @@ namespace AIAC
         glBindVertexArray(m_VAO);
         m_MappingView.Activate();
 
-        RenderCameraFrame(600, 442);
+        RenderCameraFrame(600, 442, Renderer::CameraFrameType::SLAM_PROCESSED);
 
         // visualize map
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
@@ -279,7 +280,7 @@ namespace AIAC
     void Renderer::RenderCamCalibView() {
         m_CamCalibView.Activate();
 
-        RenderCameraFrame(600, 442, true);
+        RenderCameraFrame(600, 442, Renderer::CameraFrameType::RAW);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -322,7 +323,7 @@ namespace AIAC
         }
     }
 
-    void Renderer::RenderCameraFrame(int w, int h, bool useRawFrame) {
+    void Renderer::RenderCameraFrame(int w, int h, Renderer::CameraFrameType frameType) {
         if ( w <= 0 || h <= 0 ){
             stringstream ss;
             ss << "Renderer::RenderCameraFrame: invalid size: (" << w << "," << h << ")";
@@ -331,14 +332,17 @@ namespace AIAC
 
         GLuint frameGlTextureObj;
         cv::Size frameSize;
-        if(useRawFrame){
+        if(frameType == Renderer::CameraFrameType::RAW) {
             frameGlTextureObj = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetGlTextureObj();
             frameSize.height = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawHeight();
             frameSize.width = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawWidth();
-        } else {
+        } else if (frameType == Renderer::CameraFrameType::UNDISTORTED) {
             frameGlTextureObj = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj();
             frameSize.height = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetHeight();
             frameSize.width = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetWidth();
+        } else if (frameType == Renderer::CameraFrameType::SLAM_PROCESSED) {
+            frameGlTextureObj = AIAC_APP.GetLayer<LayerSlam>()->GetProcessedFrame().GetGlTextureObj();
+            frameSize =  AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize;
         }
 
         GLuint readFboIdFrame = 0;

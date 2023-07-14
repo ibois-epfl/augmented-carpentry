@@ -38,6 +38,14 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        if(m_ToStartMapping){
+            Slam.clearMap();
+            Slam.setInstancing(false);
+            ToProcess = true;
+            m_IsMapping = true;
+            m_ToStartMapping = false;
+        }
+        
         // Update the Tag visibility setting
         if(ToShowTag != m_IsShowingTag){
             if(ToShowTag){
@@ -87,6 +95,7 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+        m_ProcessedFrame = currentFrame.clone();
         if(m_IsTracked) {
             auto poseDifference = cv::norm(m_CamPose - m_LastTrackedCamPose);
             if (poseDifference < 1.0) {
@@ -145,10 +154,12 @@ namespace AIAC
 
     void LayerSlam::StartMapping()
     {
-        ToProcess = true;
-        m_IsMapping = true;
-        Slam.clearMap();
-        Slam.setInstancing(false);
+        m_ToStartMapping = true;
+        // ToProcess = false;
+        // Slam.clearMap();
+        // Slam.setInstancing(false);
+        // ToProcess = true;
+        // m_IsMapping = true;
     }
 
     void LayerSlam::UpdateMap(std::string path){

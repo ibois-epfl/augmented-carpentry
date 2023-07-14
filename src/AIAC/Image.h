@@ -42,7 +42,7 @@ namespace AIAC
         inline std::string_view GetPath() const { return m_Path; }
         inline int GetWidth() const { return m_CvMat.rows ; }
         inline int GetHeight() const { return m_CvMat.cols; }
-        inline const cv::Mat GetCvMat() const { return m_CvMat; }
+        inline const cv::Mat GetCvMat() const { cv::cvtColor(m_CvMat, m_CvMat, cv::COLOR_RGB2BGR); return m_CvMat; }
 
         // Image Getter of different types and corresponding helpers
         ImTexture GetImTexture(ImVec2 size = ImVec2(0, 0));
