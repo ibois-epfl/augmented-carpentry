@@ -123,6 +123,8 @@ public:
     private:
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
+        glm::vec3 m_Center;
+        std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
     };
@@ -130,7 +132,11 @@ public:
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
     inline Component* GetComponent(std::string id) { return m_Components[id]; }
-    inline Component* GetCurrentComponent() { return m_Components[m_CurrentComponentID]; }
+    inline Component* GetCurrentComponent() { 
+        if(m_Components.find(m_CurrentComponentID) == m_Components.end())
+            return nullptr;
+        return m_Components[m_CurrentComponentID];
+    }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
