@@ -1,8 +1,8 @@
 #pragma once
 
 #include "AIAC/Layer.h"
-
-
+#include "AIAC/ACInfoToolheadManager.h"
+#include "AIAC/ACInfoToolhead.h"
 
 namespace AIAC
 {
@@ -16,9 +16,16 @@ namespace AIAC
             virtual void OnFrameStart() override;
 
         // private:
-            // translation
-            // rotation
 
+            // -> current toolheaed
+            // -> current model component to fabricate
+
+            // translationFeedback
+            // rotationFeedback
+
+        private:
+            std::shared_ptr<ACInfoToolhead> m_CurrentToolhead;
+            // obj current m_CurrentModelComponent;
 
     };
 }
