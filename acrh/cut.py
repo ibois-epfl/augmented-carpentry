@@ -88,22 +88,11 @@ def parse_data_from_brep(ACIM,
         polyline_vertices = []
 
         # corners
-        corners = []
-        face_b_f = face.Faces[0]
-        vertices = face.Vertices
-        # print("ooooooooooooooooooooo")
-        # print(face_b_f.AdjacentEdges())
-        for idx, v in enumerate(vertices):
-            # vd.addSingleDot(v.Location, str(idx), (255,0,0))
-            corners.append(v)
-        #reorder the points clockwise
-        # normal = face_b_f.NormalAt(0,0)
-        
-        corners = util.sort_vertices_clockwise(face)
-        
-        random_clr = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
-        for idx, c in enumerate(corners):
-            vd.addSingleDot(c, str(idx), random_clr)
+        corners = util.compute_ordered_vertices(face)
+        corners_str = []
+        for corner in corners:
+            corners_str.append(str(corner.X) + " " + str(corner.Y) + " " + str(corner.Z))
+        acim_face_dict["corners"] = corners_str
 
         # edges indices
         for i, face_edge in enumerate(face_edges):

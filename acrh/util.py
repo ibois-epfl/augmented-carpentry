@@ -72,31 +72,38 @@ def detect_idx_pt_in_list(pt, list):
             return idx
     return idx
 
-def sort_vertices_clockwise(brep_face):
-    """ Order the corners on the normal of the brep face surface """
+def compute_ordered_vertices(brep_face):
+    """ Retrieve the ordered vertices of a brep face """
     sorted_vertices = []
 
-    # edges = brep_face.DuplicateEdgeCurves()
+    edges = brep_face.DuplicateEdgeCurves()
+    edges = list(set(edges))
 
-    # edges_sorted = []
-    # for idx, edge in enumerate(edges):
-    #     if idx == 0:
-    #         edges_sorted.append(edge)
-    #     else:
-    #         for edge_sorted in edges_sorted:
-    #             if edge_sorted.PointAtStart == edge.PointAtStart:
-    #                 edges_sorted.insert(0, edge)
-    #             elif edge_sorted.PointAtEnd == edge.PointAtStart:
-    #                 edges_sorted.append(edge)
-    #             elif edge_sorted.PointAtStart == edge.PointAtEnd:
-    #                 edges_sorted.insert(0, edge)
-    #             elif edge_sorted.PointAtEnd == edge.PointAtEnd:
-    #                 edges_sorted.append(edge)
-
-    # log.info(f"edges_sorted: {edges_sorted.__len__()}")
-
-    # for edge in edges_sorted:
-    #     sorted_vertices.append(edge.PointAtStart)
-
+    edges_sorted = []
+    while len(edges) > 0:
+        if len(edges_sorted) == 0:
+            edges_sorted.append(edges[0])
+            edges.pop(0)
+        else:
+            for edge in edges:
+                if edges_sorted[-1].PointAtStart == edge.PointAtStart:
+                    edges_sorted.append(edge)
+                    edges.pop(edges.index(edge))
+                    break
+                elif edges_sorted[-1].PointAtStart == edge.PointAtEnd:
+                    edges_sorted.append(edge)
+                    edges.pop(edges.index(edge))
+                    break
+                elif edges_sorted[-1].PointAtEnd == edge.PointAtStart:
+                    edges_sorted.append(edge)
+                    edges.pop(edges.index(edge))
+                    break
+                elif edges_sorted[-1].PointAtEnd == edge.PointAtEnd:
+                    edges_sorted.append(edge)
+                    edges.pop(edges.index(edge))
+                    break
+    
+    for edge in edges_sorted:
+        sorted_vertices.append(edge.PointAtStart)
 
     return sorted_vertices

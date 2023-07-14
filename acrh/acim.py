@@ -147,6 +147,11 @@ class ACIM:
             face_exposed_et.text = str(f["exposed"])
             face_edges_et = ET.SubElement(face_et, "edges")
             face_edges_et.text = str(f["edges"])
+            face_corners_et = ET.SubElement(face_et, "corners")
+            for idx, c in enumerate(f["corners"]):
+                corner_et = ET.SubElement(face_corners_et, "corner")
+                corner_et.set("id", str(idx))
+                corner_et.text = str(c)
 
         edges_et = ET.SubElement(cut_et, "edges")
         for e in edges:
