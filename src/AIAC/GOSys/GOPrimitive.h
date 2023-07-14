@@ -99,7 +99,8 @@ namespace AIAC
 
     class GOPoint : public GOPrimitive
     {
-    public:  // FIXME: this should be private @hb, used in ScannedModel.h?
+    public:
+        GOPoint() = default;
         GOPoint(float x, float y, float z, float weight = GOWeight::Default);
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
 

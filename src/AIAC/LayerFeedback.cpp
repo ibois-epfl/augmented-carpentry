@@ -17,5 +17,9 @@ namespace AIAC
     }
     void LayerFeedback::OnFrameStart()
     {
+        // auto toolheadData = this->m_CurrentToolhead->GetData<DrillBitData>();
+        // float toolheadRadius = toolheadData.RadiusACIT;
+        // std::string toolheadRadiusString = std::to_string(toolheadRadius);
+        // AIAC_INFO("Toolhead data: {0}", toolheadRadiusString);
     }
 }
