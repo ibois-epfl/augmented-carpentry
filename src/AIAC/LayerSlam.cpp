@@ -38,6 +38,20 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        // Update the Tag visibility setting
+        if(ToShowTag != m_IsShowingTag){
+            if(ToShowTag){
+                for(auto &go : m_SlamMapGOs){
+                    go->SetVisibility(true);
+                }
+            } else {
+                for(auto &go : m_SlamMapGOs){
+                    go->SetVisibility(false);
+                }
+            }
+            m_IsShowingTag = ToShowTag;
+        }
+
         if(!ToProcess){
             return;
         }
@@ -135,5 +149,30 @@ namespace AIAC
         m_IsMapping = true;
         Slam.clearMap();
         Slam.setInstancing(false);
+    }
+
+    void LayerSlam::UpdateMap(std::string path){
+        Slam.setMap(path, true);
+
+        // reset GLObjects
+        for(auto &go: m_SlamMapGOs){
+            GOPrimitive::Remove(go);
+        }
+        m_SlamMapGOs.clear();
+
+        // add new GLObjects
+        // std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
+        // std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
+        for(const auto& mapMarker: Slam.getMap()->map_markers){
+            auto points = mapMarker.second.get3DPoints();
+            std::vector<glm::vec3> markerEdges;
+            for(int i = 0 ; i < 4; i++){
+                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
+            }
+            auto tag = GOPolyline::Add(markerEdges, true, 1.0f);
+            tag->SetColor(glm::vec4(1.0f, .0f, .0f, 1.0f));
+            tag->SetVisibility(false);
+            m_SlamMapGOs.push_back(tag);
+        }
     }
 }

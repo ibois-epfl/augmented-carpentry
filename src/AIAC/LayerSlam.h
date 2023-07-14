@@ -3,6 +3,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "GOSys/GOPrimitive.h"
 #include "tslam.h"
 #include "AIAC/Layer.h"
 
@@ -29,18 +30,20 @@ namespace AIAC
 
         void GetCamPoseInObjCoord(cv::Mat &rotationMatrix, cv::Mat &tvec);
 
-        void UpdateMap();
+        void UpdateMap(std::string path);
 
     public:
         tslam::TSlam Slam;
+        bool ToShowTag = false;
         bool ToEnhance = true;
         bool ToProcess = true;
-        // std::vector<shared_ptr<GOPrimitive>> SlamMapGOs;
 
     private:
         cv::Mat m_CamPose = cv::Mat();
         cv::Mat m_LastTrackedCamPose = cv::Mat::eye(4, 4, CV_32FC1);
         bool m_IsTracked = false;
         bool m_IsMapping = false;
+        bool m_IsShowingTag = false;
+        std::vector<std::shared_ptr<GOPrimitive>> m_SlamMapGOs;
     };
 }
