@@ -174,6 +174,11 @@ public:
      * @brief Save the current state to the loaded .acim file.
      */
     void Save();
+    
+    /**
+     * @brief Get the pugi::xml_document object
+     */
+    inline pugi::xml_document& GetDoc() { return m_ACIMDoc; }
 
     /**
      * @brief Clear the loaded data.

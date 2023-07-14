@@ -5,11 +5,12 @@
 
 using namespace std;
 
-//FIXME:: do we still need this class?
 namespace AIAC
 {
     void TimberInfo::Component::SetAsCurrent() {
         m_State = ACIMState::CURRENT;
+        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetDoc().child("acim").child("timber").child("current").last_child().set_value(m_ID.c_str());
+        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
     void TimberInfo::Component::SetAsDone() {
@@ -162,12 +163,11 @@ namespace AIAC
                 holeInfo.m_StartPointGO = GOPoint::Add(holeInfo.m_Start, 2.0f);
                 holeInfo.m_EndPointGO = GOPoint::Add(holeInfo.m_End, 2.0f);
                 auto centerPoint = (holeInfo.m_Start + holeInfo.m_End) * 0.5f;
-                holeInfo.m_IDLabelGO = GOText::Add(holeInfo.m_ID, centerPoint, 1.0f);
+                holeInfo.m_IDLabelGO = GOText::Add(holeInfo.m_ID, centerPoint, 0.75f);
                 auto radiusText = std::to_string(holeInfo.m_Radius);
                 radiusText = radiusText.substr(0, radiusText.find(".") + 3);
-                holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, 0.5f);
-                
-                if(holeInfo.m_State != ACIMState::CURRENT) holeInfo.m_RadiusLabelGO->SetVisibility(false);
+                holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, 0.75f);
+                holeInfo.m_RadiusLabelGO->SetVisibility(false);
 
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_AxisGO);
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_CylinderGO);
@@ -211,21 +211,18 @@ namespace AIAC
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
+                m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
                 m_TimberInfo.m_Components[cutInfo.m_ID] = &m_TimberInfo.m_Cuts[cutInfo.m_ID];
             }
             if(m_TimberInfo.m_CurrentComponentID.length() == 0){
                 m_TimberInfo.m_CurrentComponentID = m_TimberInfo.m_Components.begin()->first;
             }
+            m_TimberInfo.GetCurrentComponent()->SetAsCurrent();
         }
         UpdateBboxGOLine();
     }
 
     void ACInfoModel::Save() {
-        auto timber = m_ACIMDoc.child("acim").child("timber");
-        for(auto hole = timber.child("hole"); hole; hole=hole.next_sibling("hole")){
-            cout << hole.child("state").child_value() << endl;
-        }
-
         m_ACIMDoc.save_file(m_FilePath.c_str());        
     }
 
@@ -329,6 +326,9 @@ namespace AIAC
         // cuts
         for(auto& kv : m_TimberInfo.m_Cuts){
             auto cutInfo = kv.second;
+            for(auto& objs : cutInfo.m_GOPrimitives){
+                objs->Transform(transformMat);
+            }
             // Face has no GOPrimitives now
             for(auto& kv : cutInfo.m_Faces){
                 auto faceInfo = kv.second;
