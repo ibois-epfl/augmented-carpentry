@@ -318,7 +318,7 @@ namespace AIAC
             // }
             // Draw All objects
             // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
-            // DrawAllGOs(finalPoseMatrix);
+            DrawAllGOs(finalPoseMatrix);
         }
     }
 
