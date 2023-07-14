@@ -17,25 +17,25 @@ enum class ACIMState{
 
 static std::map<ACIMState, glm::vec4> HOLE_AXIS_COLOR = {
     {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 1.0f)},
-    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 1.0f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
 };
 
 static std::map<ACIMState, glm::vec4> HOLE_CYLINDER_COLOR = {
     {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 0.2f)},
-    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 0.2f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
 };
 
 static std::map<ACIMState, glm::vec4> CUT_FACE_COLOR = {
     {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
-    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 0.2f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
 };
 
 static std::map<ACIMState, glm::vec4> CUT_EDGE_COLOR = {
     {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
-    {ACIMState::CURRENT, glm::vec4(0.5f, 0.1f, 0.9f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 1.0f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
 };
 
@@ -96,7 +96,7 @@ public:
         class Face: public Component{
             virtual void SetAsCurrent();
 
-            bool m_Accessible;
+            bool m_Exposed;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
             std::set<std::string> m_Edges;
@@ -109,7 +109,6 @@ public:
         class Edge: public Component{
             virtual void SetAsCurrent();
 
-            bool m_Accessible;
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
