@@ -168,11 +168,11 @@ namespace AIAC
         public:
             ACInfoToolhead(std::string acitPath, std::string meshObjPath, int id);
 
-        public: __always_inline
+        public:
             /// @brief Retrieve the type of the toolhead
-            ACToolHeadType GetType() const { return m_Data.GetType(); }
+            inline ACToolHeadType GetType() const { return m_Data.GetType(); }
             /// @brief Get the name of the toolhead
-            std::string GetName() const { return m_Data.GetName(); }
+            inline std::string GetName() const { return m_Data.GetName(); }
             /// @brief Get the id of the toolhead
             inline int GetId() const { return m_ID; }
 

@@ -28,7 +28,6 @@
 #include "AIAC/LayerCamera.h"
 #include "AIAC/LayerModel.h"
 #include "AIAC/LayerToolhead.h"
-#include "AIAC/LayerInstructor.h"
 #include "AIAC/LayerFeedback.h"
 
 #include "AIAC/Render/Renderer.h"
