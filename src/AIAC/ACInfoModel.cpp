@@ -7,6 +7,7 @@ using namespace std;
 
 namespace AIAC
 {
+    // Base Component
     void TimberInfo::Component::SetAsCurrent() {
         m_State = ACIMState::CURRENT;
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetDoc().child("acim").child("timber").child("current").last_child().set_value(m_ID.c_str());
@@ -27,6 +28,7 @@ namespace AIAC
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
+    // Hole 
     void TimberInfo::Hole::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to Hole #" + m_ID);
@@ -53,29 +55,28 @@ namespace AIAC
 
     // Cut
     void TimberInfo::Cut::SetAsCurrent() {
+        TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to " + m_ID);
-        m_State = ACIMState::CURRENT;
         for (const auto& [_, edge] : m_Edges) {
             edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
         }
     }
 
     void TimberInfo::Cut::SetAsDone() {
+        TimberInfo::Component::SetAsDone();
         AIAC_INFO("Set " + m_ID + " as Done");
-        m_State = ACIMState::DONE;
         for (const auto& [_, edge] : m_Edges) {
             edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::DONE]);
         }
     }
 
     void TimberInfo::Cut::SetAsNotDone() {
+        TimberInfo::Component::SetAsNotDone();
         AIAC_INFO("Set " + m_ID + " as Not Done");
-        m_State = ACIMState::NOT_DONE;
         for (const auto& [_, edge] : m_Edges) {
             edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
         }
     }
-
 
     void TimberInfo::Cut::Face::SetAsCurrent() {
         AIAC_INFO("Face::SetAsCurrent");
@@ -101,7 +102,7 @@ namespace AIAC
     }
 
     void TimberInfo::SetCurrentComponentTo(std::string id) {
-        if(m_CurrentComponentID != ""){
+        if(GetCurrentComponent() != nullptr){
             if(GetCurrentComponent()->IsMarkedDone){
                 GetCurrentComponent()->SetAsDone();
             } else { // Not Done
@@ -187,6 +188,9 @@ namespace AIAC
                 cutInfo.m_ID = cut.attribute("id").as_string();
                 cutInfo.m_State = StringToState(cut.child("state").child_value());
                 cutInfo.IsMarkedDone = cutInfo.m_State == ACIMState::DONE;
+                cutInfo.m_Center = StringToVec3(cut.child("center").child_value()) * m_Scale;
+                cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, 0.75f);
+                cutInfo.m_GOPrimitives.push_back(cutInfo.m_IDLabelGO);
 
                 auto faces = cut.child("faces");
                 for(auto face = faces.child("face"); face; face=face.next_sibling("face")){
@@ -214,7 +218,7 @@ namespace AIAC
                 m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
                 m_TimberInfo.m_Components[cutInfo.m_ID] = &m_TimberInfo.m_Cuts[cutInfo.m_ID];
             }
-            if(m_TimberInfo.m_CurrentComponentID.length() == 0){
+            if(m_TimberInfo.GetCurrentComponent() == nullptr){
                 m_TimberInfo.m_CurrentComponentID = m_TimberInfo.m_Components.begin()->first;
             }
             m_TimberInfo.GetCurrentComponent()->SetAsCurrent();
