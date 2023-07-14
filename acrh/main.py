@@ -118,7 +118,7 @@ def distinguish_holes_cuts(breps):
                 flat_faces_b.append(f_b)
             else:
                 non_flat_faces_b.append(f_b)
-
+  
         # (*) cap the cylinders
         non_flat_faces_b = [f_b.CapPlanarHoles(sc.doc.ModelAbsoluteTolerance) for f_b in non_flat_faces_b]
         
@@ -153,7 +153,6 @@ def main():
     print(vd.__IS_VDEBUG__)
 
     log.info(".acim exporter started")
-
     rh_doc_path = rs.DocumentPath()
     timestamp = dt.datetime.now().strftime("%Y%m%d_%H%M%S")
     acim_path = rh_doc_path + timestamp

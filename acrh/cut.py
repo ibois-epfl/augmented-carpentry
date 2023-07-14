@@ -8,6 +8,8 @@ import util
 import acim
 import visual_debug as vd
 
+import random
+
 # TODO: to implement
 def parse_data_from_brep(ACIM,
                          p_GUID,
@@ -29,15 +31,21 @@ def parse_data_from_brep(ACIM,
     acim_faces = []
     acim_edges = []
     # template dicts for faces and lines
-    acim_face_dict = {"face_id" : "1",             # the id of the face
-                      "exposed" : "True",          # if the face is exposed
-                      "edges" : "1 2 3",           # the ids of the lines
+    acim_face_dict = {"face_id" : "1",                        # the id of the face
+                      "exposed" : "True",                     # if the face is exposed
+                      "edges" : "1 2 3",                      # the ids of the lines
+                      "corners" : ["0 0 0", "1 1 1", "2 2 2"] # the coordinates of the corners
                       }
-    acim_edge_dict = {"line_id" : "1",             # the id of the line
-                      "start" : "0 0 0",           # the start point of the line
-                      "end" : "1 1 1",              # the end point of the line
-                      "exposed" : "true",          # if the line is exposed
+    acim_edge_dict = {"line_id" : "1",                        # the id of the line
+                      "start" : "0 0 0",                      # the start point of the line
+                      "end" : "1 1 1",                        # the end point of the line
+                      "exposed" : "true",                     # if the line is exposed
                       }
+
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    log.info("Detecting cut centroid..")
+    cut_centroid = cut_b.GetBoundingBox(True).Center
+    cut_centroid_str = str(cut_centroid.X) + " " + str(cut_centroid.Y) + " " + str(cut_centroid.Z)
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     log.info("Parsing lines..")
@@ -79,6 +87,24 @@ def parse_data_from_brep(ACIM,
         is_on_face = False
         polyline_vertices = []
 
+        # corners
+        corners = []
+        face_b_f = face.Faces[0]
+        vertices = face.Vertices
+        # print("ooooooooooooooooooooo")
+        # print(face_b_f.AdjacentEdges())
+        for idx, v in enumerate(vertices):
+            # vd.addSingleDot(v.Location, str(idx), (255,0,0))
+            corners.append(v)
+        #reorder the points clockwise
+        # normal = face_b_f.NormalAt(0,0)
+        
+        corners = util.sort_vertices_clockwise(face)
+        
+        random_clr = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        for idx, c in enumerate(corners):
+            vd.addSingleDot(c, str(idx), random_clr)
+
         # edges indices
         for i, face_edge in enumerate(face_edges):
             face_edge_center = face_edge.PointAtNormalizedLength(0.5)
@@ -107,6 +133,7 @@ def parse_data_from_brep(ACIM,
     log.info("Dumping cut in acim..")
     ACIM.add_cut(
         p_GUID,
+        cut_centroid_str,
         acim_edges,
         acim_faces
     )
