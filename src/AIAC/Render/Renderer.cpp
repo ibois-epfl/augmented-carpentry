@@ -183,9 +183,8 @@ namespace AIAC
         // and stop updating the main scene.
         // TODO: mapping has some problem when calib file is switched (with slam map)
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
-            RenderGlobalView();
+            // RenderGlobalView();
             RenderMappingView();
-            cout << "Render Mapping View" << endl;
             return;
         }
 
@@ -263,15 +262,18 @@ namespace AIAC
 
     void Renderer::RenderMappingView() {
         glBindVertexArray(m_VAO);
-        m_MappingView.Activate();
+        glUseProgram(m_BasicShaderProgram);
 
-        RenderCameraFrame(600, 442, Renderer::CameraFrameType::SLAM_PROCESSED);
-
-        // visualize map
+        // Draw the small panel 3D view
+        m_GlobalView.Activate();
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+
+        // Draw the camera view
+        m_MappingView.Activate();
+        RenderCameraFrame(600, 442, Renderer::CameraFrameType::SLAM_PROCESSED);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
