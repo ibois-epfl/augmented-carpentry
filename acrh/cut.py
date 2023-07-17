@@ -85,7 +85,6 @@ def parse_data_from_brep(ACIM,
 
         face_edges = face.Edges
         is_on_face = False
-        polyline_vertices = []
 
         # corners
         corners = util.compute_ordered_vertices(face)
@@ -101,12 +100,16 @@ def parse_data_from_brep(ACIM,
             if idx != -1:
                 edges_candidate_ids.append(TEMP_line_ids[idx])
             vertex = face_edge.PointAtStart
-            polyline_vertices.append(vertex)
         acim_face_dict["edges"] = " ".join(str(x) for x in edges_candidate_ids)
 
         # face exposed value
-        polyline = rg.Polyline(polyline_vertices)
+        polyline_corners = corners
+        polyline_corners.append(corners[0])
+        polyline = rg.Polyline(corners)
+        # vd.addPolyline(polyline, (0,0,0))
         face_center = polyline.CenterPoint()
+        # log.info("Face center: " + str(face_center))
+        # vd.addBrep(bbox_b, (0,0,0))
         if bbox_b.IsPointInside(face_center, sc.doc.ModelAbsoluteTolerance, True):
             is_on_face = False
             clr_face = (0,255,0)
