@@ -22,8 +22,8 @@ namespace AIAC
 //        }
 //        glDrawPoints3d(mapPoints, OGL_YELLOW, pointSize);
 
-        std::vector<glm::vec3> markerEdges; // markerEdges.reserve(map->map_markers.size() * 4 * 2);
-        std::vector<glm::vec4> markerEdgeColors; // markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
+        std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
+        std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
         for(const auto& mapMarker: map->map_markers){
             auto points = mapMarker.second.get3DPoints();
             markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
