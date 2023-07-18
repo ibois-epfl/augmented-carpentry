@@ -114,10 +114,11 @@ namespace AIAC
         vec = glm::normalize(m_Bbox[0] - m_Bbox[3]);
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[3] + vec, 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[0] - vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[3], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[0], 2.0f));
+
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[3], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[0], 2.0f));
 
         // top
         vec = glm::normalize(m_Bbox[5] - m_Bbox[4]);
@@ -132,10 +133,11 @@ namespace AIAC
         vec = glm::normalize(m_Bbox[4] - m_Bbox[7]);
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[7] + vec, 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[4] - vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[5], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[6], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[7], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[4], 2.0f));
+
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[6], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[7], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[4], 2.0f));
 
         // side
         vec = glm::normalize(m_Bbox[4] - m_Bbox[0]);
@@ -150,10 +152,11 @@ namespace AIAC
         vec = glm::normalize(m_Bbox[7] - m_Bbox[3]);
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[3] + vec, 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[7] - vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
+
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
     }
 
     float ScannedModel::GetLength(){

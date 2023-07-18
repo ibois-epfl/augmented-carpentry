@@ -99,6 +99,23 @@ namespace AIAC {
             char *FilePathTarget;
         } m_CombMapParams;
 
+        struct MappingParams{
+            bool ToOptimizeMap = true;
+            bool ToSaveMap = true;
+            char MapSavingPath[PATH_BUF_SIZE] = "/tmp/test.map";
+        } m_MappingParams;
+        
+        struct ReconstructParams {
+            float RadiusSearch = 2.0f;
+            double CreaseAngleThreshold = 5.0f;
+            int MinClusterSize = 1;
+            double AABBScaleFactor = 1.1f;
+            double MaxPolyDist = 1.0f;
+            double MaxPlnDist = 1.0f;
+            double MaxPlnAngle = 5.0f;
+            double Eps = 1e-5f;
+        } m_ReconstructParams;
+
         // Cam Calib
         bool m_IsChoosingCamCalibFileSavePath = false;
     };

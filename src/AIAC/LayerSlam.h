@@ -23,7 +23,7 @@ namespace AIAC
         inline const bool IsTracked() { return m_IsTracked; }
         inline const bool IsMapping() const { return m_IsMapping; }
         void StartMapping();
-        void StopMapping() { m_IsMapping = false; }
+        void StopMapping();
 
         inline const cv::Mat GetCamPoseCv() { return m_CamPose; }
         glm::mat4 GetCamPoseGlm();
@@ -33,6 +33,7 @@ namespace AIAC
         void GetCamPoseInObjCoord(cv::Mat &rotationMatrix, cv::Mat &tvec);
 
         void UpdateMap(std::string path);
+        void InitSlamMapGOs();
 
     public:
         tslam::TSlam Slam;
