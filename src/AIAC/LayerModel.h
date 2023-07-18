@@ -54,6 +54,16 @@ namespace AIAC
         };
 
         /**
+         * @brief Set the offset make it align to one end.
+         */
+        inline void ForceAlignToEnd(bool leftOrRight) {
+            m_AlignOffset = (m_ACInfoModel.GetLength() - m_ScannedModel.GetLength());
+            if (leftOrRight) m_AlignOffset = -m_AlignOffset;
+            AlignModels();
+            Config::UpdateEntry(Config::SEC_AIAC, Config::ALIGN_OFFSET, m_AlignOffset);
+        }
+
+        /**
          * @brief Change the align rotation. The value is in degree.
          * @param diff +1 or -1 to rotate 90 degree (counter-)clock wise.
          */
