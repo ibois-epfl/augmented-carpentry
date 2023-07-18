@@ -45,11 +45,15 @@ namespace AIAC {
         void ShowMenuBar();
         void ShowMainUI();
         void ShowSceneViewport();
+        void ShowFileSelectDialog(char* title, char* fileExt, char *path, bool &controlFlag);
 
         void ShowCombineMapPopup();
         void ShowMappingPopup();
         void ShowSaveMapFileDialog();
         void ShowMapFileDialog(char *path);
+
+        void ShowReconstruct3DPopup();
+        void ShowReconExportFilePathDialog();
 
         void ShowCamCalibPopup();
         void ShowSaveCamCalibFileDialog();
@@ -90,6 +94,7 @@ namespace AIAC {
 
         bool m_IsSavingMap = false;
         bool m_IsCombiningMap = false;
+        bool m_IsReconstructing3D = false;
 
         struct CombineMapParams{
             char MapPathA[PATH_BUF_SIZE] = {0},
@@ -106,6 +111,10 @@ namespace AIAC {
         } m_MappingParams;
         
         struct ReconstructParams {
+            char TagMapPath[PATH_BUF_SIZE] = {0};
+            char ExportPath[PATH_BUF_SIZE] = {0};
+            bool IsSelectingTagMapPath = false;
+            bool IsSelectingExportPath = false;
             float RadiusSearch = 2.0f;
             double CreaseAngleThreshold = 5.0f;
             int MinClusterSize = 1;
