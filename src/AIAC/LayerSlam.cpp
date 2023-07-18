@@ -39,6 +39,7 @@ namespace AIAC
     void LayerSlam::OnFrameStart()
     {
         if(m_ToStartMapping){
+            Slam.systemParams.detectKeyPoints=true;
             Slam.clearMap();
             Slam.setInstancing(false);
             ToProcess = true;
@@ -152,19 +153,23 @@ namespace AIAC
         return glmMat;
     }
 
-    void LayerSlam::StartMapping()
-    {
+    void LayerSlam::StartMapping() {
         m_ToStartMapping = true;
-        // ToProcess = false;
-        // Slam.clearMap();
-        // Slam.setInstancing(false);
-        // ToProcess = true;
-        // m_IsMapping = true;
+        // The rest of the process is done in OnFrameStart()
+    }
+
+    void LayerSlam::StopMapping() {
+        Slam.systemParams.detectKeyPoints=false;
+        Slam.setInstancing(true);
+        m_IsMapping = false;
     }
 
     void LayerSlam::UpdateMap(std::string path){
         Slam.setMap(path, true);
+        InitSlamMapGOs();
+    }
 
+    void LayerSlam::InitSlamMapGOs(){
         // reset GLObjects
         for(auto &go: m_SlamMapGOs){
             GOPrimitive::Remove(go);

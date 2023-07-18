@@ -48,4 +48,60 @@ namespace AIAC
 
         AIAC_APP.GetLayer<LayerSlam>()->Slam.setVocabulary(m_FilePath);
     }
+
+    void SLAMStartMappingEvent::OnSLAMStartMapping()
+    {
+        AIAC_INFO("Start mapping");
+        AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
+        AIAC_APP.GetRenderer()->StartMapping();
+    }
+
+    void SLAMStopMappingEvent::OnSLAMStopMapping()
+    {
+        AIAC_INFO("Stop mapping");
+        AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
+        AIAC_APP.GetRenderer()->StopMapping();
+
+        // Optimize Map
+        if(m_ToOptimize && m_ToSave) {
+            AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->optimize();
+        }
+        
+        // Save the map & reconstruct 3D
+        if(m_ToSave) {
+            auto basePath = m_SavePath.substr(0, m_SavePath.find_last_of("."));
+            auto ymlTagMapPath = basePath + ".yml";
+            auto recPlyPath = basePath + ".ply";
+
+            AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToFile(m_SavePath);
+            if(AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->map_markers.size() == 0){
+                AIAC_WARN("No tag in the map, skip rest of the process");
+                return;
+            }
+            AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToMarkerMap(ymlTagMapPath);
+            
+            // Reload Tag to GL for rendering
+            AIAC_APP.GetLayer<AIAC::LayerSlam>()->InitSlamMapGOs();
+
+            // Reconstruct 3D
+            bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
+                ymlTagMapPath,
+                recPlyPath,
+                m_RadiusSearch,
+                m_CreaseAngleThreshold,
+                m_MinClusterSize,
+                m_AABBScaleFactor,
+                m_MaxPolyTagDist,
+                m_MaxPlnDist2Merge,
+                m_MaxPlnAngle2Merge,
+                m_EPS
+            );
+
+            // Load reconstructed 3D model
+            if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(recPlyPath);
+            else AIAC_WARN("Reconstruction failed, skip loading the model");
+        }
+        
+
+    }
 }
