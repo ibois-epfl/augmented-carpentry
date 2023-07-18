@@ -101,7 +101,5 @@ namespace AIAC
             if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(recPlyPath);
             else AIAC_WARN("Reconstruction failed, skip loading the model");
         }
-        
-
     }
 }

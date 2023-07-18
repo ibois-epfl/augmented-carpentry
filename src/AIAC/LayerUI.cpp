@@ -90,6 +90,19 @@ namespace AIAC
                     ShowMapFileDialog(m_CombMapParams.FilePathTarget);
                 }
             }
+
+            if(m_IsReconstructing3D){
+                ShowReconstruct3DPopup();
+                if (m_ReconstructParams.IsSelectingTagMapPath) {
+                    ShowFileSelectDialog("Select map path", ".yml",
+                                         m_ReconstructParams.TagMapPath,
+                                         m_ReconstructParams.IsSelectingTagMapPath);
+                } else if(m_ReconstructParams.IsSelectingExportPath){
+                    ShowFileSelectDialog("Select export path", ".ply",
+                                         m_ReconstructParams.ExportPath,
+                                         m_ReconstructParams.IsSelectingExportPath);
+                }
+            }
         }
 
         ImGui::Render();
@@ -260,46 +273,48 @@ namespace AIAC
     {
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 260), true, ImGuiWindowFlags_HorizontalScrollbar);
-        if (ImGui::Button("Open SLAM map"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+            if (ImGui::Button("Open SLAM map"))
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
+            if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
             {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    //                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+                    // action
+                    //                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Open Vocab"))
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
+
+            if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                //                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-                // action
-                //                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
-                AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
+                AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
+                }
+                ImGuiFileDialog::Instance()->Close();
             }
-            ImGuiFileDialog::Instance()->Close();
-        }
-        ImGui::SameLine();
-        if (ImGui::Button("Open Vocab"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
-
-        if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
-
+        ImGui::EndChild();
         ImGui::Text("Mapping Functions:");
         ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
             if(ImGui::Button("Start Mapping")){
                 AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStartMappingEvent>());
-                // AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
-                // AIAC_APP.GetRenderer()->StartMapping();
             }
             ImGui::SameLine();
             if(ImGui::Button("Combine Map")){
                 m_IsCombiningMap = true;
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Reconstruct 3D")){
+                m_IsReconstructing3D = true;
             }
             ImGui::PopStyleColor();
         ImGui::EndChild();
@@ -312,7 +327,6 @@ namespace AIAC
 
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
-        ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIRender()
@@ -556,17 +570,6 @@ namespace AIAC
                     
                     ImGui::Text("--------------------");
                     ImGui::Text("Reconstruct Params:");
-                        // struct ReconstructParams {
-                        //     float RadiusSearch = 2.0f;
-                        //     double CreaseAngleThreshold = 5.0f;
-                        //     int MinClusterSize = 1;
-                        //     double MaxPlnDist = 1.0f;
-                        //     double MaxPlnAngle = 5.0f;
-                        //     double AABBScaleFactor = 1.1f;
-                        //     double MaxPolyDist = 1.0f;
-                        //     double Eps = 1e-5f;
-                        // } m_ReconstructParams;
-                
                     float sliderValFloat = 0.f;
                     int sliderValInt = 0;
 
@@ -785,6 +788,115 @@ namespace AIAC
         ImGui::End();
     }
 
+    void LayerUI::ShowReconstruct3DPopup()
+    {
+        ImGui::Begin("Reconstruct 3D", nullptr);
+            ImGui::Text("Select Path:");
+            if(ImGui::Button("Import .yml", ImVec2(84, 0))){
+                m_ReconstructParams.IsSelectingTagMapPath = true;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("## Export Path", m_ReconstructParams.TagMapPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+            if(ImGui::Button("Export .ply", ImVec2(84, 0))){
+                m_ReconstructParams.IsSelectingExportPath = true;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("## Export Path", m_ReconstructParams.ExportPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+            
+
+            ImGui::PushItemWidth(-54);
+
+            ImGui::Text("Reconstruct Params:");
+            float sliderValFloat = 0.f;
+            int sliderValInt = 0;
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Radius Search", &sliderValFloat, -0.3f, 0.3f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.RadiusSearch += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.RadiusSearch);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -0.3f, 0.3f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.CreaseAngleThreshold += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.CreaseAngleThreshold);
+
+            sliderValInt = 0;
+            ImGui::SliderInt("## Min Cluster Size", &sliderValInt, -3, 3, "Min Cluster Size", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValInt != 0) m_ReconstructParams.MinClusterSize += sliderValInt;
+            ImGui::SameLine();
+            ImGui::Text("%d", m_ReconstructParams.MinClusterSize);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -0.3f, 0.3f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnDist += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.MaxPlnDist);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -0.3f, 0.3f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnAngle += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.MaxPlnAngle);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -0.3f, 0.3f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.AABBScaleFactor += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.AABBScaleFactor);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -0.3f, 0.3f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.MaxPolyDist += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.MaxPolyDist);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Eps", &sliderValFloat, -0.3f, 0.3f, "Eps", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::PopItemWidth();
+            if (sliderValFloat > 0.f) m_ReconstructParams.Eps *= 2;
+            else if (sliderValFloat < 0.f) m_ReconstructParams.Eps /= 2;
+            ImGui::SameLine();
+            ImGui::Text("%.1e", m_ReconstructParams.Eps);
+
+
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            ImGui::SameLine(ImGui::GetWindowWidth() - 180);
+            if(ImGui::Button("Cancel", ImVec2(80, 0))){ m_IsReconstructing3D = false; }
+            ImGui::SameLine();
+            if(ImGui::Button("Confirm", ImVec2(80, 0))){
+                if(strlen(m_ReconstructParams.TagMapPath) == 0 || strlen(m_ReconstructParams.TagMapPath) == 0){
+                    AIAC_ERROR("Path not selected.");
+                } else {
+                    // Reconstruct 3D
+                    bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
+                        m_ReconstructParams.TagMapPath,
+                        m_ReconstructParams.ExportPath,
+                        m_ReconstructParams.RadiusSearch,
+                        m_ReconstructParams.CreaseAngleThreshold,
+                        m_ReconstructParams.MinClusterSize,
+                        m_ReconstructParams.AABBScaleFactor,
+                        m_ReconstructParams.MaxPolyDist,
+                        m_ReconstructParams.MaxPlnDist,
+                        m_ReconstructParams.MaxPlnAngle,
+                        m_ReconstructParams.Eps
+                    );
+
+                    // Load reconstructed 3D model
+                    if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_ReconstructParams.ExportPath);
+                    else AIAC_WARN("Reconstruction failed, skip loading the model");
+                    
+                    memset(m_ReconstructParams.TagMapPath, 0, PATH_BUF_SIZE);
+                    memset(m_ReconstructParams.ExportPath, 0, PATH_BUF_SIZE);
+                    m_IsReconstructing3D = false;
+                }
+            }
+
+        ImGui::End();
+    }
+
     void LayerUI::ShowSaveCamCalibFileDialog()
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
@@ -826,6 +938,27 @@ namespace AIAC
             m_IsSavingMap = false;
         }
     }
+    void LayerUI::ShowFileSelectDialog(char* title, char* fileExt, char *path, bool &controlFlag)
+    {
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+        ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, ".");
+        if (ImGuiFileDialog::Instance()->Display("SelectFileDialog"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                // std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+
+                AIAC_INFO("Select: {0}", filePathName.c_str());
+                memset(path, 0, PATH_BUF_SIZE);
+                memcpy(path, filePathName.c_str(), filePathName.length());
+            }
+            ImGuiFileDialog::Instance()->Close();
+            controlFlag = false;
+        }
+    }
+    
+    // TODO: Replace this with ShowFileSelectDialog
     void LayerUI::ShowMapFileDialog(char *path)
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
@@ -845,6 +978,23 @@ namespace AIAC
             m_CombMapParams.IsSelectingFile = false;
         }
     }
+    // void LayerUI::ShowReconExportFilePathDialog(){
+    //     auto path = m_ReconstructParams.ExportPath;
+    //     ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+    //     ImGuiFileDialog::Instance()->OpenDialog("Choose Export Path", "Choose export ply path", ".ply", ".");
+    //     if (ImGuiFileDialog::Instance()->Display("Choose Export Path"))
+    //     {
+    //         if (ImGuiFileDialog::Instance()->IsOk())
+    //         {
+    //             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+    //             std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
 
-
+    //             AIAC_INFO("Select: {0}", filePathName.c_str());
+    //             memset(path, 0, PATH_BUF_SIZE);
+    //             memcpy(path, filePathName.c_str(), filePathName.length());
+    //         }
+    //         ImGuiFileDialog::Instance()->Close();
+    //         m_ReconstructParams.IsSelectingExportPath = false;
+    //     }
+    // }
 }
