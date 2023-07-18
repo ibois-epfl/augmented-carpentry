@@ -383,14 +383,22 @@ namespace AIAC
 
         // Re-position the ACIM model
         ImGui::Text("Adjust model alignment:");
-        ImGui::BeginChild("Adjust model alignment", ImVec2(0, 60), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("Adjust model alignment", ImVec2(0, 84), true, ImGuiWindowFlags_HorizontalScrollbar);
             float sliderVal = 0.f;
             ImGui::SliderFloat("## Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
                 if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
                 sliderVal = 0.f;
-            ImGui::SameLine();
-            if(ImGui::Button("Reset Offset")){
+            
+            if(ImGui::Button("Align Center")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Align End 1")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ForceAlignToEnd(1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Align End 2")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ForceAlignToEnd(0);
             }
             
             if(ImGui::Button("Rotate +")){
