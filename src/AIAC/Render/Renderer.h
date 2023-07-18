@@ -33,7 +33,7 @@ namespace AIAC
         void UpdateGlobalViewCameraScale(double diff);
 
         // Mapping View
-        void StartMapping() { Meshes.clear(); ShowDigitalModel = false; ShowPointCloudMap = false; }
+        void StartMapping() { ShowDigitalModel = false; ShowPointCloudMap = false; }
         void StopMapping() { ReloadMeshes(); ShowDigitalModel = true; ShowPointCloudMap = true; }
         GLuint GetMappingView() const { return m_MappingView.GetTexture(); };
         void SetMappingViewSize(float w, float h);
@@ -43,6 +43,14 @@ namespace AIAC
         void StopCamCalib() { ReloadMeshes(); ShowDigitalModel = true; ShowPointCloudMap = true; }
         GLuint GetCamCalibView() const { return m_CamCalibView.GetTexture(); };
         void SetCamCalibViewSize(float w, float h);
+
+        // Camera Frame rendering type
+        enum class CameraFrameType
+        {
+            RAW,
+            UNDISTORTED,
+            SLAM_PROCESSED
+        };
 
     public:
         AIAC::Mesh PointCloudMap;
@@ -63,7 +71,7 @@ namespace AIAC
         void RenderMappingView();
         void RenderCamCalibView();
 
-        void RenderCameraFrame(int w, int h, bool useRawFrame = false);
+        void RenderCameraFrame(int w, int h, CameraFrameType frameType=CameraFrameType::UNDISTORTED);
 
 
     private:
