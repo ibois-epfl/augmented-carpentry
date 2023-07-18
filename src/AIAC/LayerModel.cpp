@@ -66,7 +66,6 @@ namespace AIAC
         }
 
         // rotate the subBox
-        // TODO: This is definately not the most efficient way to do this
         for(int i = 0 ; i < m_AlignRotation; i++){
             auto tmp = subBbox[0];
             subBbox[0] = subBbox[4];
