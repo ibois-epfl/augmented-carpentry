@@ -5,6 +5,7 @@
 #include "AIAC/Image.h"
 #include "AIAC/Log.h"
 
+#include "tslam.h"
 #include "GlHeader.h"
 #include "AIAC/UI/ImGuiFileDialog.h"
 
@@ -45,7 +46,7 @@ namespace AIAC {
         void ShowMenuBar();
         void ShowMainUI();
         void ShowSceneViewport();
-        void ShowFileSelectDialog(char* title, char* fileExt, char *path, bool &controlFlag);
+        void ShowFileSelectDialog(const char* title, const char* fileExt, char *path, bool &controlFlag);
 
         void ShowCombineMapPopup();
         void ShowMappingPopup();

@@ -869,7 +869,7 @@ namespace AIAC
             if(ImGui::Button("Confirm", ImVec2(80, 0))){
                 if(strlen(m_ReconstructParams.TagMapPath) == 0 || strlen(m_ReconstructParams.TagMapPath) == 0){
                     AIAC_ERROR("Path not selected.");
-                } else {
+                } else {                    
                     // Reconstruct 3D
                     bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
                         m_ReconstructParams.TagMapPath,
@@ -938,7 +938,7 @@ namespace AIAC
             m_IsSavingMap = false;
         }
     }
-    void LayerUI::ShowFileSelectDialog(char* title, char* fileExt, char *path, bool &controlFlag)
+    void LayerUI::ShowFileSelectDialog(const char* title, const char* fileExt, char *path, bool &controlFlag)
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
         ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, ".");
