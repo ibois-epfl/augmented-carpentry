@@ -6,7 +6,7 @@ namespace AIAC {
         // GLuint vbo;
         // glGenBuffers(1, &vbo);
         // glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        // glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+        // glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_DYNAMIC_DRAW);
         // glEnableVertexAttribArray(0);
         // glVertexAttribPointer(
         //         0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -20,7 +20,7 @@ namespace AIAC {
         // GLuint colorBuffer;
         // glGenBuffers(1, &colorBuffer);
         // glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        // glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        // glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
         // glEnableVertexAttribArray(1);
         // glVertexAttribPointer(
         //         1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.
@@ -58,7 +58,7 @@ namespace AIAC {
         // glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
         // cout << "vbo: " << vbo << " vao: " << vao << endl;
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, edges.size() * sizeof(glm::vec3), &edges[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, edges.size() * sizeof(glm::vec3), &edges[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(
                 0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -72,7 +72,7 @@ namespace AIAC {
         GLuint colorBuffer;
         glGenBuffers(1, &colorBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(
                 1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.
@@ -83,12 +83,12 @@ namespace AIAC {
                 (void *) nullptr     // array buffer offset
         );
 
-        glDrawArrays(GL_LINES, 0, (GLsizei) edges.size() / 2);
+        glDrawArrays(GL_LINES, 0, (GLsizei) edges.size());
 
-        // glDisableVertexAttribArray(0);
-        // glDisableVertexAttribArray(1);
-        // glDeleteBuffers(1, &vbo);
-        // glDeleteBuffers(1, &colorBuffer);
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDeleteBuffers(1, &vbo);
+        glDeleteBuffers(1, &colorBuffer);
     }
 
     void glDrawLines3d(const std::vector<glm::vec3> &edges, const glm::vec4 &color) {
@@ -100,7 +100,7 @@ namespace AIAC {
         GLuint elementBuffer;
         glGenBuffers(1, &elementBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_DYNAMIC_DRAW);
 
         // Index buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer);
@@ -109,7 +109,7 @@ namespace AIAC {
         GLuint vbo;
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(
                 0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -123,7 +123,7 @@ namespace AIAC {
         GLuint colorBuffer;
         glGenBuffers(1, &colorBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec4), &colors[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(
                 1,                  // attribute 1. No particular reason for 0, but must match the layout in the shader.

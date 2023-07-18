@@ -38,6 +38,15 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        if(m_ToStartMapping){
+            Slam.systemParams.detectKeyPoints=true;
+            Slam.clearMap();
+            Slam.setInstancing(false);
+            ToProcess = true;
+            m_IsMapping = true;
+            m_ToStartMapping = false;
+        }
+        
         // Update the Tag visibility setting
         if(ToShowTag != m_IsShowingTag){
             if(ToShowTag){
@@ -87,6 +96,7 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+        m_ProcessedFrame = currentFrame.clone();
         if(m_IsTracked) {
             auto poseDifference = cv::norm(m_CamPose - m_LastTrackedCamPose);
             if (poseDifference < 1.0) {
@@ -143,17 +153,23 @@ namespace AIAC
         return glmMat;
     }
 
-    void LayerSlam::StartMapping()
-    {
-        ToProcess = true;
-        m_IsMapping = true;
-        Slam.clearMap();
-        Slam.setInstancing(false);
+    void LayerSlam::StartMapping() {
+        m_ToStartMapping = true;
+        // The rest of the process is done in OnFrameStart()
+    }
+
+    void LayerSlam::StopMapping() {
+        Slam.systemParams.detectKeyPoints=false;
+        Slam.setInstancing(true);
+        m_IsMapping = false;
     }
 
     void LayerSlam::UpdateMap(std::string path){
         Slam.setMap(path, true);
+        InitSlamMapGOs();
+    }
 
+    void LayerSlam::InitSlamMapGOs(){
         // reset GLObjects
         for(auto &go: m_SlamMapGOs){
             GOPrimitive::Remove(go);
