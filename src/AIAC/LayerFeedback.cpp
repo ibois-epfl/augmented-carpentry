@@ -7,6 +7,12 @@ namespace AIAC
 {
     LayerFeedback::LayerFeedback() {}
 
-    void LayerFeedback::OnAttach() {}
-    void LayerFeedback::OnFrameStart() {}
+    void LayerFeedback::OnAttach()
+    {
+
+    }
+    void LayerFeedback::OnFrameStart()
+    {
+        
+    }
 }

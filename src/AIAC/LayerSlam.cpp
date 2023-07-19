@@ -26,10 +26,15 @@ namespace AIAC
         Slam.systemParams.minMarkersForMaxWeight=3;
         Slam.systemParams.detectKeyPoints=false;
 
-
         // load map, the camera matrix will be replaced by the one in the map
         auto pathToMapFile = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, "assets/tslam/example.map");
-        AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+        if(std::filesystem::exists(pathToMapFile)){
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+        } else {
+            AIAC_WARN("SLAM map file doesn't exist: \"{}\". Init empty map.", pathToMapFile);
+            Slam.clearMap();
+        }
+        
 
         // load vocabulary
         Slam.setVocabulary(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, "assets/tslam/orb.fbow"));
@@ -38,6 +43,29 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        if(m_ToStartMapping){
+            Slam.systemParams.detectKeyPoints=true;
+            Slam.clearMap();
+            Slam.setInstancing(false);
+            ToProcess = true;
+            m_IsMapping = true;
+            m_ToStartMapping = false;
+        }
+        
+        // Update the Tag visibility setting
+        if(ToShowTag != m_IsShowingTag){
+            if(ToShowTag){
+                for(auto &go : m_SlamMapGOs){
+                    go->SetVisibility(true);
+                }
+            } else {
+                for(auto &go : m_SlamMapGOs){
+                    go->SetVisibility(false);
+                }
+            }
+            m_IsShowingTag = ToShowTag;
+        }
+
         if(!ToProcess){
             return;
         }
@@ -73,6 +101,7 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+        m_ProcessedFrame = currentFrame.clone();
         if(m_IsTracked) {
             auto poseDifference = cv::norm(m_CamPose - m_LastTrackedCamPose);
             if (poseDifference < 1.0) {
@@ -129,11 +158,42 @@ namespace AIAC
         return glmMat;
     }
 
-    void LayerSlam::StartMapping()
-    {
-        ToProcess = true;
-        m_IsMapping = true;
-        Slam.clearMap();
-        Slam.setInstancing(false);
+    void LayerSlam::StartMapping() {
+        m_ToStartMapping = true;
+        // The rest of the process is done in OnFrameStart()
+    }
+
+    void LayerSlam::StopMapping() {
+        Slam.systemParams.detectKeyPoints=false;
+        Slam.setInstancing(true);
+        m_IsMapping = false;
+    }
+
+    void LayerSlam::UpdateMap(std::string path){
+        Slam.setMap(path, true);
+        InitSlamMapGOs();
+    }
+
+    void LayerSlam::InitSlamMapGOs(){
+        // reset GLObjects
+        for(auto &go: m_SlamMapGOs){
+            GOPrimitive::Remove(go);
+        }
+        m_SlamMapGOs.clear();
+
+        // add new GLObjects
+        // std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
+        // std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
+        for(const auto& mapMarker: Slam.getMap()->map_markers){
+            auto points = mapMarker.second.get3DPoints();
+            std::vector<glm::vec3> markerEdges;
+            for(int i = 0 ; i < 4; i++){
+                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
+            }
+            auto tag = GOPolyline::Add(markerEdges, true, 1.0f);
+            tag->SetColor(glm::vec4(1.0f, .0f, .0f, 1.0f));
+            tag->SetVisibility(false);
+            m_SlamMapGOs.push_back(tag);
+        }
     }
 }

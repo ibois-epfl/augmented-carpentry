@@ -5,6 +5,7 @@
 #include "AIAC/Image.h"
 #include "AIAC/Log.h"
 
+#include "tslam.h"
 #include "GlHeader.h"
 #include "AIAC/UI/ImGuiFileDialog.h"
 
@@ -45,11 +46,15 @@ namespace AIAC {
         void ShowMenuBar();
         void ShowMainUI();
         void ShowSceneViewport();
+        void ShowFileSelectDialog(const char* title, const char* fileExt, char *path, bool &controlFlag);
 
         void ShowCombineMapPopup();
         void ShowMappingPopup();
         void ShowSaveMapFileDialog();
         void ShowMapFileDialog(char *path);
+
+        void ShowReconstruct3DPopup();
+        void ShowReconExportFilePathDialog();
 
         void ShowCamCalibPopup();
         void ShowSaveCamCalibFileDialog();
@@ -59,6 +64,7 @@ namespace AIAC {
         void SetPaneUISlam();
         void SetPaneUIRender();
         void SetPaneUIToolhead();
+        void SetPaneUIACIM();
 
     private:
         void SetGlobalViewUI(ImVec2 viewportSize);
@@ -89,6 +95,7 @@ namespace AIAC {
 
         bool m_IsSavingMap = false;
         bool m_IsCombiningMap = false;
+        bool m_IsReconstructing3D = false;
 
         struct CombineMapParams{
             char MapPathA[PATH_BUF_SIZE] = {0},
@@ -97,6 +104,27 @@ namespace AIAC {
             bool IsSelectingFile = false;
             char *FilePathTarget;
         } m_CombMapParams;
+
+        struct MappingParams{
+            bool ToOptimizeMap = true;
+            bool ToSaveMap = true;
+            char MapSavingPath[PATH_BUF_SIZE] = "/tmp/test.map";
+        } m_MappingParams;
+        
+        struct ReconstructParams {
+            char TagMapPath[PATH_BUF_SIZE] = {0};
+            char ExportPath[PATH_BUF_SIZE] = {0};
+            bool IsSelectingTagMapPath = false;
+            bool IsSelectingExportPath = false;
+            float RadiusSearch = 2.0f;
+            double CreaseAngleThreshold = 5.0f;
+            int MinClusterSize = 1;
+            double AABBScaleFactor = 1.1f;
+            double MaxPolyDist = 1.0f;
+            double MaxPlnDist = 1.0f;
+            double MaxPlnAngle = 5.0f;
+            double Eps = 1e-5f;
+        } m_ReconstructParams;
 
         // Cam Calib
         bool m_IsChoosingCamCalibFileSavePath = false;

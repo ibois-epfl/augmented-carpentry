@@ -41,7 +41,6 @@ namespace AIAC
             markerEdgeColors.emplace_back(OGL_BLUE);
             markerEdgeColors.emplace_back(OGL_BLUE);
             markerEdgeColors.emplace_back(OGL_BLUE);
-
         }
 
         glDrawLines3d(markerEdges, markerEdgeColors);

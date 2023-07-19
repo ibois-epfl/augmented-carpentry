@@ -52,6 +52,7 @@ namespace AIAC
         StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
         StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
+        StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
 
         m_IsOpen = new bool(true);
@@ -87,6 +88,19 @@ namespace AIAC
                 ShowCombineMapPopup();
                 if(m_CombMapParams.IsSelectingFile){
                     ShowMapFileDialog(m_CombMapParams.FilePathTarget);
+                }
+            }
+
+            if(m_IsReconstructing3D){
+                ShowReconstruct3DPopup();
+                if (m_ReconstructParams.IsSelectingTagMapPath) {
+                    ShowFileSelectDialog("Select map path", ".yml",
+                                         m_ReconstructParams.TagMapPath,
+                                         m_ReconstructParams.IsSelectingTagMapPath);
+                } else if(m_ReconstructParams.IsSelectingExportPath){
+                    ShowFileSelectDialog("Select export path", ".ply",
+                                         m_ReconstructParams.ExportPath,
+                                         m_ReconstructParams.IsSelectingExportPath);
                 }
             }
         }
@@ -214,11 +228,11 @@ namespace AIAC
         static const char* previewValue = currentItem.c_str();
         if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
             for (auto& devicePath : AIAC_APP.GetLayer<LayerCamera>()->AvailableDevices) {
-                bool is_selected = (currentItem == devicePath);
-                if (ImGui::Selectable(devicePath.c_str(), is_selected)){
+                bool isSelected = (currentItem == devicePath);
+                if (ImGui::Selectable(devicePath.c_str(), isSelected)){
                     AIAC_APP.GetLayer<LayerCamera>()->SetCurrentDevice(devicePath);
                 }
-                if (is_selected)
+                if (isSelected)
                     ImGui::SetItemDefaultFocus();
             }
             ImGui::EndCombo();
@@ -259,49 +273,53 @@ namespace AIAC
     {
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 260), true, ImGuiWindowFlags_HorizontalScrollbar);
-        if (ImGui::Button("Open SLAM map"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
+            if (ImGui::Button("Open SLAM map"))
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
 
-        if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
+            if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
             {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    //                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+                    // action
+                    //                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Open Vocab"))
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
+
+            if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                //                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-                // action
-                //                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
-                AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
+                AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
+                }
+                ImGuiFileDialog::Instance()->Close();
             }
-            ImGuiFileDialog::Instance()->Close();
-        }
-        ImGui::SameLine();
-        if (ImGui::Button("Open Vocab"))
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
-
-        if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMVocabularyLoadedEvent>(filePathName));
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
-
+        ImGui::EndChild();
         ImGui::Text("Mapping Functions:");
         ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
             if(ImGui::Button("Start Mapping")){
-                AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
-                AIAC_APP.GetRenderer()->StartMapping();
+                AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStartMappingEvent>());
             }
             ImGui::SameLine();
             if(ImGui::Button("Combine Map")){
                 m_IsCombiningMap = true;
             }
+            ImGui::SameLine();
+            if(ImGui::Button("Reconstruct 3D")){
+                m_IsReconstructing3D = true;
+            }
             ImGui::PopStyleColor();
         ImGui::EndChild();
 
+        ImGui::Checkbox("Show Tag", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToShowTag);
         ImGui::Checkbox("Process Frames", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToProcess);
         ImGui::Checkbox("Enhance Photo", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToEnhance);
 
@@ -309,28 +327,115 @@ namespace AIAC
 
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
-        ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIRender()
     {
-        ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
-        ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
-        if(ImGui::Button("Load Digital Model")){
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+        // ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
+//         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
+//         if(ImGui::Button("Load Digital Model")){
+//             ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
+//         }
+//         if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+//         {
+//             if (ImGuiFileDialog::Instance()->IsOk())
+//             {
+//                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+//                 // TODO: Add ply to renderer
+//                 AIAC_INFO("Loading Digital Model: {}", filePathName);
+//                 AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
+// //                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+//             }
+//             ImGuiFileDialog::Instance()->Close();
+//         }
+    }
+
+    void LayerUI::SetPaneUIACIM()
+    {
+        // ACIM Loader
+        if(ImGui::Button("Load ACIM")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseACIM", "Open ACIM file", ".acim", ".");
         }
-        if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
+        if (ImGuiFileDialog::Instance()->Display("ChooseACIM"))
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                // TODO: Add ply to renderer
-                AIAC_INFO("Loading Digital Model: {}", filePathName);
-                AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
-//                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(filePathName);
             }
             ImGuiFileDialog::Instance()->Close();
         }
+
+        // Scanned Model Loader
+        ImGui::SameLine();
+        if(ImGui::Button("Load Scanned Model")){
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseScannedModel", "Open Scanned Model", ".ply", ".");
+        }
+        if (ImGuiFileDialog::Instance()->Display("ChooseScannedModel"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(filePathName);
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+
+        // Re-position the ACIM model
+        ImGui::Text("Adjust model alignment:");
+        ImGui::BeginChild("Adjust model alignment", ImVec2(0, 84), true, ImGuiWindowFlags_HorizontalScrollbar);
+            float sliderVal = 0.f;
+            ImGui::SliderFloat("## Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
+                if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
+                sliderVal = 0.f;
+            
+            if(ImGui::Button("Align Center")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Align End 1")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ForceAlignToEnd(1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Align End 2")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ForceAlignToEnd(0);
+            }
+            
+            if(ImGui::Button("Rotate +")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Rotate -")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(-1);
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Reset Rotation")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignRotation();
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Flip")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->FlipAlign();
+            }
+        ImGui::EndChild();
+
+        ImGui::Text("Components Control:");
+        ImGui::BeginChild("Components Control Panel", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::Text("Current Component:");
+            string currentCompoID = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
+            static const char* previewValue = currentCompoID.c_str();
+            if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
+                for (auto& componentID : AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetAllComponentsIDs()) {
+                    bool isSelected = (currentCompoID == componentID);
+                    if (ImGui::Selectable(componentID.c_str(), isSelected)){
+                        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
+                    }
+                    if (isSelected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+        ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIToolhead()
@@ -443,6 +548,7 @@ namespace AIAC
 
             ImGui::SameLine();
             ImGui::BeginChild("mapping_info_child", ImVec2(0, 0), false);
+                // First part - global view
                 ImVec2 sideBarViewportSize = ImGui::GetContentRegionAvail();
                 ImGui::BeginChild("global_view", ImVec2(sideBarViewportSize.x, sideBarViewportSize.x * 3 / 4 + 20), true);
                     ImVec2 viewportSize = ImGui::GetContentRegionAvail();
@@ -451,20 +557,97 @@ namespace AIAC
                     SetGlobalViewUI(viewportSize);
                 ImGui::EndChild();
 
+                // Second part - mapping info
+                // sideBarViewportSize = ImGui::GetContentRegionAvail();
+                // ImGui::BeginChild("mapping_info", ImVec2(sideBarViewportSize.x, 0), true);
+                //     ImGui::Text("Map Points: %u", AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->map_points.size());
+                //     ImGui::Text("Map Markers: %lu", AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->map_markers.size());
+                // ImGui::EndChild();
+
+                // Third part - mapping menu for adjusting params
                 sideBarViewportSize = ImGui::GetContentRegionAvail();
-                ImGui::BeginChild("mapping_menu", sideBarViewportSize, true);
-                    ImGui::Text("Map Points: %u", AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->map_points.size());
-                    ImGui::Text("Map Markers: %lu", AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->map_markers.size());
-                    if(ImGui::Button("Save")){
+                ImGui::BeginChild("mapping_menu", ImVec2(sideBarViewportSize.x, sideBarViewportSize.y - 48), true);
+                    ImGui::Text("Save Path:");
+                    ImGui::InputText("## Map Saving Path", m_MappingParams.MapSavingPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+                    ImGui::SameLine();
+                    if(ImGui::Button(".", ImVec2(0, 0))){
                         m_IsSavingMap = true;
                     }
+                    ImGui::Checkbox("Optimize Map", &m_MappingParams.ToOptimizeMap);
+                    ImGui::Checkbox("Save Map", &m_MappingParams.ToSaveMap);
+                    
+                    ImGui::Text("--------------------");
+                    ImGui::Text("Reconstruct Params:");
+                    float sliderValFloat = 0.f;
+                    int sliderValInt = 0;
+
+                    sliderValFloat = 0.f;
+                    ImGui::SliderFloat("## Radius Search", &sliderValFloat, -0.3f, 0.3f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValFloat != 0.f) m_ReconstructParams.RadiusSearch += sliderValFloat;
                     ImGui::SameLine();
-                    if(ImGui::Button("Exit")){
-                        AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
-                        AIAC_APP.GetRenderer()->StopMapping();
-                        m_IsSavingMap = false;
-                    }
+                    ImGui::Text("%.1f", m_ReconstructParams.RadiusSearch);
+
+                    sliderValFloat = 0.f;
+                    ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -0.3f, 0.3f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValFloat != 0.f) m_ReconstructParams.CreaseAngleThreshold += sliderValFloat;
+                    ImGui::SameLine();
+                    ImGui::Text("%.1f", m_ReconstructParams.CreaseAngleThreshold);
+
+                    sliderValInt = 0;
+                    ImGui::SliderInt("## Min Cluster Size", &sliderValInt, -3, 3, "Min Cluster Size", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValInt != 0) m_ReconstructParams.MinClusterSize += sliderValInt;
+                    ImGui::SameLine();
+                    ImGui::Text("%d", m_ReconstructParams.MinClusterSize);
+
+                    sliderValFloat = 0.f;
+                    ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -0.3f, 0.3f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnDist += sliderValFloat;
+                    ImGui::SameLine();
+                    ImGui::Text("%.1f", m_ReconstructParams.MaxPlnDist);
+
+                    sliderValFloat = 0.f;
+                    ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -0.3f, 0.3f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnAngle += sliderValFloat;
+                    ImGui::SameLine();
+                    ImGui::Text("%.1f", m_ReconstructParams.MaxPlnAngle);
+
+                    sliderValFloat = 0.f;
+                    ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -0.3f, 0.3f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValFloat != 0.f) m_ReconstructParams.AABBScaleFactor += sliderValFloat;
+                    ImGui::SameLine();
+                    ImGui::Text("%.1f", m_ReconstructParams.AABBScaleFactor);
+
+                    sliderValFloat = 0.f;
+                    ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -0.3f, 0.3f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
+                    if (sliderValFloat != 0.f) m_ReconstructParams.MaxPolyDist += sliderValFloat;
+                    ImGui::SameLine();
+                    ImGui::Text("%.1f", m_ReconstructParams.MaxPolyDist);
+
+                    sliderValFloat = 0.f;
+                    ImGui::PushItemWidth(-54);
+                    ImGui::SliderFloat("## Eps", &sliderValFloat, -0.3f, 0.3f, "Eps", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::PopItemWidth();
+                    if (sliderValFloat > 0.f) m_ReconstructParams.Eps *= 2;
+                    else if (sliderValFloat < 0.f) m_ReconstructParams.Eps /= 2;
+                    ImGui::SameLine();
+                    ImGui::Text("%.1e", m_ReconstructParams.Eps);
+
                 ImGui::EndChild();
+                if(ImGui::Button("Done & Exit", ImVec2(ImGui::GetContentRegionAvail().x, 40))){
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStopMappingEvent>(
+                        m_MappingParams.ToSaveMap,
+                        m_MappingParams.MapSavingPath,
+                        m_MappingParams.ToOptimizeMap,
+                        m_ReconstructParams.RadiusSearch,
+                        m_ReconstructParams.CreaseAngleThreshold,
+                        m_ReconstructParams.MinClusterSize,
+                        m_ReconstructParams.AABBScaleFactor,
+                        m_ReconstructParams.MaxPolyDist,
+                        m_ReconstructParams.MaxPlnDist,
+                        m_ReconstructParams.MaxPlnAngle,
+                        m_ReconstructParams.Eps
+                    ));
+                }
             ImGui::EndChild();
 
             if (ImGui::BeginPopupContextWindow())
@@ -613,6 +796,115 @@ namespace AIAC
         ImGui::End();
     }
 
+    void LayerUI::ShowReconstruct3DPopup()
+    {
+        ImGui::Begin("Reconstruct 3D", nullptr);
+            ImGui::Text("Select Path:");
+            if(ImGui::Button("Import .yml", ImVec2(84, 0))){
+                m_ReconstructParams.IsSelectingTagMapPath = true;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("## Export Path", m_ReconstructParams.TagMapPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+            if(ImGui::Button("Export .ply", ImVec2(84, 0))){
+                m_ReconstructParams.IsSelectingExportPath = true;
+            }
+            ImGui::SameLine();
+            ImGui::InputText("## Export Path", m_ReconstructParams.ExportPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+            
+
+            ImGui::PushItemWidth(-54);
+
+            ImGui::Text("Reconstruct Params:");
+            float sliderValFloat = 0.f;
+            int sliderValInt = 0;
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Radius Search", &sliderValFloat, -0.3f, 0.3f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.RadiusSearch += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.RadiusSearch);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -0.3f, 0.3f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.CreaseAngleThreshold += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.CreaseAngleThreshold);
+
+            sliderValInt = 0;
+            ImGui::SliderInt("## Min Cluster Size", &sliderValInt, -3, 3, "Min Cluster Size", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValInt != 0) m_ReconstructParams.MinClusterSize += sliderValInt;
+            ImGui::SameLine();
+            ImGui::Text("%d", m_ReconstructParams.MinClusterSize);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -0.3f, 0.3f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnDist += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.MaxPlnDist);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -0.3f, 0.3f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnAngle += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.MaxPlnAngle);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -0.3f, 0.3f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.AABBScaleFactor += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.AABBScaleFactor);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -0.3f, 0.3f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderValFloat != 0.f) m_ReconstructParams.MaxPolyDist += sliderValFloat;
+            ImGui::SameLine();
+            ImGui::Text("%.1f", m_ReconstructParams.MaxPolyDist);
+
+            sliderValFloat = 0.f;
+            ImGui::SliderFloat("## Eps", &sliderValFloat, -0.3f, 0.3f, "Eps", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::PopItemWidth();
+            if (sliderValFloat > 0.f) m_ReconstructParams.Eps *= 2;
+            else if (sliderValFloat < 0.f) m_ReconstructParams.Eps /= 2;
+            ImGui::SameLine();
+            ImGui::Text("%.1e", m_ReconstructParams.Eps);
+
+
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            ImGui::SameLine(ImGui::GetWindowWidth() - 180);
+            if(ImGui::Button("Cancel", ImVec2(80, 0))){ m_IsReconstructing3D = false; }
+            ImGui::SameLine();
+            if(ImGui::Button("Confirm", ImVec2(80, 0))){
+                if(strlen(m_ReconstructParams.TagMapPath) == 0 || strlen(m_ReconstructParams.TagMapPath) == 0){
+                    AIAC_ERROR("Path not selected.");
+                } else {                    
+                    // Reconstruct 3D
+                    bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
+                        m_ReconstructParams.TagMapPath,
+                        m_ReconstructParams.ExportPath,
+                        m_ReconstructParams.RadiusSearch,
+                        m_ReconstructParams.CreaseAngleThreshold,
+                        m_ReconstructParams.MinClusterSize,
+                        m_ReconstructParams.AABBScaleFactor,
+                        m_ReconstructParams.MaxPolyDist,
+                        m_ReconstructParams.MaxPlnDist,
+                        m_ReconstructParams.MaxPlnAngle,
+                        m_ReconstructParams.Eps
+                    );
+
+                    // Load reconstructed 3D model
+                    if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_ReconstructParams.ExportPath);
+                    else AIAC_WARN("Reconstruction failed, skip loading the model");
+                    
+                    memset(m_ReconstructParams.TagMapPath, 0, PATH_BUF_SIZE);
+                    memset(m_ReconstructParams.ExportPath, 0, PATH_BUF_SIZE);
+                    m_IsReconstructing3D = false;
+                }
+            }
+
+        ImGui::End();
+    }
+
     void LayerUI::ShowSaveCamCalibFileDialog()
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
@@ -639,17 +931,42 @@ namespace AIAC
         {
             if (ImGuiFileDialog::Instance()->IsOk())
             {
-                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+                ImGuiFileDialog::Instance()->GetFilePathName().copy(m_MappingParams.MapSavingPath, PATH_BUF_SIZE);
+                // std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                // std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
 
-                AIAC_INFO("Saving map to {0}", filePathName.c_str());
-                AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToFile(filePathName);
+                // AIAC_INFO("Saving map to {0}", filePathName.c_str());
+                // AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->optimize();
+                // AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToFile(filePathName);
 
             }
             ImGuiFileDialog::Instance()->Close();
+            // AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
+            // AIAC_APP.GetRenderer()->StopMapping();
             m_IsSavingMap = false;
         }
     }
+    void LayerUI::ShowFileSelectDialog(const char* title, const char* fileExt, char *path, bool &controlFlag)
+    {
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+        ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, ".");
+        if (ImGuiFileDialog::Instance()->Display("SelectFileDialog"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                // std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+
+                AIAC_INFO("Select: {0}", filePathName.c_str());
+                memset(path, 0, PATH_BUF_SIZE);
+                memcpy(path, filePathName.c_str(), filePathName.length());
+            }
+            ImGuiFileDialog::Instance()->Close();
+            controlFlag = false;
+        }
+    }
+    
+    // TODO: Replace this with ShowFileSelectDialog
     void LayerUI::ShowMapFileDialog(char *path)
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
@@ -669,6 +986,23 @@ namespace AIAC
             m_CombMapParams.IsSelectingFile = false;
         }
     }
+    // void LayerUI::ShowReconExportFilePathDialog(){
+    //     auto path = m_ReconstructParams.ExportPath;
+    //     ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+    //     ImGuiFileDialog::Instance()->OpenDialog("Choose Export Path", "Choose export ply path", ".ply", ".");
+    //     if (ImGuiFileDialog::Instance()->Display("Choose Export Path"))
+    //     {
+    //         if (ImGuiFileDialog::Instance()->IsOk())
+    //         {
+    //             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+    //             std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
 
-
+    //             AIAC_INFO("Select: {0}", filePathName.c_str());
+    //             memset(path, 0, PATH_BUF_SIZE);
+    //             memcpy(path, filePathName.c_str(), filePathName.length());
+    //         }
+    //         ImGuiFileDialog::Instance()->Close();
+    //         m_ReconstructParams.IsSelectingExportPath = false;
+    //     }
+    // }
 }

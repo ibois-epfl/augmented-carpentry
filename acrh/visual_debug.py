@@ -36,6 +36,11 @@ def addCurve(curve, clr=(0,0,0)):
         guid = sc.doc.Objects.AddCurve(curve)
         rs.ObjectColor(guid, clr)
 
+def addPolyline(polyline, clr=(0,0,0)):
+    if __IS_VDEBUG__:
+        guid = sc.doc.Objects.AddPolyline(polyline)
+        rs.ObjectColor(guid, clr)
+
 def addLine(line, clr=(0,0,0)):
     if __IS_VDEBUG__:
         guid = sc.doc.Objects.AddLine(line)

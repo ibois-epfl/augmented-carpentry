@@ -7,7 +7,6 @@ from config import __ACIM_VERSION__
 __ACIM_STATE__ = {
                   0: "NotDone",
                   1: "Done",
-                  2: "Executed"
             }
 
 class ACIM:
@@ -34,6 +33,10 @@ class ACIM:
         timber_et = ET.SubElement(self._root, "timber")
         timber_et.set("id", guid)
         self._timber_ets[guid] = timber_et
+        timber_executed_et = ET.SubElement(timber_et, "executed")
+        timber_executed_et.text = str(__ACIM_STATE__[0])
+        timber_current_et = ET.SubElement(timber_et, "current")
+        timber_current_et.text = "__NOT_SET__"
 
     def add_timber_state(self, guid, state_value):
         """ Add the execution state of the object, by default False """
@@ -62,8 +65,8 @@ class ACIM:
                  guid,
                  start_pt,
                  end_pt,
-                 is_start_accessible,
-                 is_end_accessible,
+                 is_start_exposed,
+                 is_end_exposed,
                  radius,
                  neighbours=-1,
                  state=__ACIM_STATE__[0]
@@ -73,8 +76,8 @@ class ACIM:
             :param guid: the guid of the timber
             :param start_pt: the starting point of the hole
             :param end_pt: the ending point of the hole
-            :param is_start_accessible: is the starting point accessible from outside,
-            :param is_end_accessible: is the ending point accessible from outside
+            :param is_start_exposed: is the starting point accessible from outside,
+            :param is_end_exposed: is the ending point accessible from outside
             :param radius: the radius of the hole
         """
 
@@ -83,7 +86,9 @@ class ACIM:
             print(key)
 
         hole_et = ET.SubElement(self._timber_ets[guid], "hole")
-        hole_et.set("id", str(len(self._timber_ets[guid].findall("hole"))))
+        hole_id_nbr = str(len(self._timber_ets[guid].findall("hole")))
+        hole_id = "Hole#" + hole_id_nbr
+        hole_et.set("id", hole_id)
 
         state_et = ET.SubElement(hole_et, "state")
         state_et.text = state
@@ -92,14 +97,14 @@ class ACIM:
         neighbours_et.text = str(neighbours)
 
         start_et = ET.SubElement(hole_et, "start")
-        accessible_start_et = ET.SubElement(start_et, "accessible")
-        accessible_start_et.text = str(is_start_accessible)
+        exposed_start_et = ET.SubElement(start_et, "exposed")
+        exposed_start_et.text = str(is_start_exposed)
         coordinates_start_et = ET.SubElement(start_et, "coordinates")
         coordinates_start_et.text = str(start_pt.X) + " " + str(start_pt.Y) + " " + str(start_pt.Z)
 
         end_et = ET.SubElement(hole_et, "end")
-        accessible_end_et = ET.SubElement(end_et, "accessible")
-        accessible_end_et.text = str(is_end_accessible)
+        exposed_end_et = ET.SubElement(end_et, "exposed")
+        exposed_end_et.text = str(is_end_exposed)
         coordinates_end_et = ET.SubElement(end_et, "coordinates")
         coordinates_end_et.text = str(end_pt.X) + " " + str(end_pt.Y) + " " + str(end_pt.Z)
 
@@ -108,6 +113,7 @@ class ACIM:
 
     def add_cut(self,
                 guid,
+                center,
                 edges,
                 faces,
                 state=__ACIM_STATE__[0]
@@ -115,15 +121,21 @@ class ACIM:
         """
             Add a cut to a timber
             :param guid: the guid of the timber
+            :param center: (String) the centroid point of the polysurface cut
             :param edges: (List[dict]) the edges of the faces
             :param faces: (List[dict]) the faces of the cut
             :param state: the state of the cut, by default NotDone
         """
         cut_et = ET.SubElement(self._timber_ets[guid], "cut")
-        cut_et.set("id", str(len(self._timber_ets[guid].findall("cut"))))
+        cut_id_nbr = str(len(self._timber_ets[guid].findall("cut")))
+        cut_id = "Cut#" + cut_id_nbr
+        cut_et.set("id", cut_id)
 
         state_et = ET.SubElement(cut_et, "state")
         state_et.text = state
+
+        center_et = ET.SubElement(cut_et, "center")
+        center_et.text = center
 
         faces_et = ET.SubElement(cut_et, "faces")
         for f in faces:
@@ -135,6 +147,11 @@ class ACIM:
             face_exposed_et.text = str(f["exposed"])
             face_edges_et = ET.SubElement(face_et, "edges")
             face_edges_et.text = str(f["edges"])
+            face_corners_et = ET.SubElement(face_et, "corners")
+            for idx, c in enumerate(f["corners"]):
+                corner_et = ET.SubElement(face_corners_et, "corner")
+                corner_et.set("id", str(idx))
+                corner_et.text = str(c)
 
         edges_et = ET.SubElement(cut_et, "edges")
         for e in edges:

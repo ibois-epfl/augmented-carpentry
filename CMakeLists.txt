@@ -126,6 +126,8 @@ find_package(assimp 5.0.0 REQUIRED)
 message(STATUS "Assimp include dir: ${ASSIMP_INCLUDE_DIRS}")
 message(STATUS "Assimp lib dir: ${ASSIMP_LIBRARIES}")
 
+find_package(TBB REQUIRED)
+
 # TSlam
 if(UNIX AND INSTALL_TSLAM)
     message(WARNING "Re/Compiling TSlam...")
@@ -171,6 +173,7 @@ target_link_libraries(${PROJECT_NAME}
     glfw
     assimp
     GLU
+    TBB::tbb
     )
 
 #------------------------------------------------------------------------------------------------------------

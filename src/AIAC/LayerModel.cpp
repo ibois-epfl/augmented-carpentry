@@ -1,5 +1,6 @@
 #include "aiacpch.h"
 
+#include "Config.h"
 #include "AIAC/LayerModel.h"
 #include "AIAC/GOSys/GO.h"
 #include "AIAC/Application.h"
@@ -15,15 +16,31 @@ namespace AIAC
     
     void LayerModel::OnAttach()
     {
-        m_ACInfoModel.Load("assets/ACModel/test.acim");
-        m_ScannedModel.Load("assets/ACModel/28_scanned_model.ply");
+        auto acInfoModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
+        auto scannedModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::SCANNED_MODEL, "assets/ACModel/28_scanned_model.ply");
+        m_ACInfoModel.Load(acInfoModelPath);
+        m_ScannedModel.Load(scannedModelPath);
+        m_AlignOffset = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_OFFSET, 0.0f);
+        m_AlignRotation = AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_ROTATION, 0);
+        m_AlignFlip = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_FLIP, false);
         AlignModels();
     }
     
     void LayerModel::OnFrameStart()
     {
 
+    }
 
+    void LayerModel::LoadACInfoModel(std::string path)
+    {
+        m_ACInfoModel.Load(path);
+        AlignModels();
+    }
+
+    void LayerModel::LoadScannedModel(std::string path)
+    {
+        m_ScannedModel.Load(path);
+        AlignModels();
     }
 
     void LayerModel::AlignModels() {
@@ -32,25 +49,45 @@ namespace AIAC
 
         float infoModelLength = m_ACInfoModel.GetLength();
         float scannedModelLength = m_ScannedModel.GetLength();
-
-        AIAC_INFO("AC Info Model Length: {0} (m)", infoModelLength * 0.02);
-        AIAC_INFO("Scanned Model Length: {0} (m)", scannedModelLength * 0.02);
-
-        // TODO: change this one to be moved with UI
         
-        // crop the scanned model to the similar length as the info model
-        // reserve 2 cm on each side = 4 cm = 0.04 m = 2 TSLAM unit (by * 50)
-        // auto usedPortion = (infoModelLength + 2) / scannedModelLength;
-
-        auto usedPortion = 1.0f;
         auto subBbox = m_ScannedModel.GetBoundingBox();
-        subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
-        subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
-        subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
-        subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
+        if(m_AlignOffset > 0){
+            auto usedPortion = (scannedModelLength - m_AlignOffset) / scannedModelLength;;
+            subBbox[0] = (subBbox[0] - subBbox[1]) * usedPortion + subBbox[1];
+            subBbox[3] = (subBbox[3] - subBbox[2]) * usedPortion + subBbox[2];
+            subBbox[4] = (subBbox[4] - subBbox[5]) * usedPortion + subBbox[5];
+            subBbox[7] = (subBbox[7] - subBbox[6]) * usedPortion + subBbox[6];
+        } else {
+            auto usedPortion = (scannedModelLength + m_AlignOffset) / scannedModelLength;;
+            subBbox[1] = (subBbox[1] - subBbox[0]) * usedPortion + subBbox[0];
+            subBbox[2] = (subBbox[2] - subBbox[3]) * usedPortion + subBbox[3];
+            subBbox[5] = (subBbox[5] - subBbox[4]) * usedPortion + subBbox[4];
+            subBbox[6] = (subBbox[6] - subBbox[7]) * usedPortion + subBbox[7];
+        }
+
+        // rotate the subBox
+        for(int i = 0 ; i < m_AlignRotation; i++){
+            auto tmp = subBbox[0];
+            subBbox[0] = subBbox[4];
+            subBbox[4] = subBbox[7];
+            subBbox[7] = subBbox[3];
+            subBbox[3] = tmp;
+
+            tmp = subBbox[1];
+            subBbox[1] = subBbox[5];
+            subBbox[5] = subBbox[6];
+            subBbox[6] = subBbox[2];
+            subBbox[2] = tmp;
+        }
+        // flip the subBox
+        if(m_AlignFlip){
+            std::swap(subBbox[0], subBbox[5]);
+            std::swap(subBbox[1], subBbox[4]);
+            std::swap(subBbox[2], subBbox[7]);
+            std::swap(subBbox[3], subBbox[6]);
+        }
 
         auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
         m_ACInfoModel.TransformGOPrimitives(transMat);
-
     }
 }
