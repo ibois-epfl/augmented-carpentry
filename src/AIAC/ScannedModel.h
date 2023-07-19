@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <glm/glm.hpp>
+#include <glm/gtx/string_cast.hpp>
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "pugixml.hpp"
 

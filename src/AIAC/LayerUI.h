@@ -116,13 +116,13 @@ namespace AIAC {
             char ExportPath[PATH_BUF_SIZE] = {0};
             bool IsSelectingTagMapPath = false;
             bool IsSelectingExportPath = false;
-            float RadiusSearch = 2.0f;
-            double CreaseAngleThreshold = 5.0f;
+            float RadiusSearch = 15.0f;
+            double CreaseAngleThreshold = 50.0f;
             int MinClusterSize = 1;
-            double AABBScaleFactor = 1.1f;
-            double MaxPolyDist = 1.0f;
-            double MaxPlnDist = 1.0f;
-            double MaxPlnAngle = 5.0f;
+            double AABBScaleFactor = 6.0f;
+            double MaxPolyDist = 20.0f;
+            double MaxPlnDist = 4.0f;
+            double MaxPlnAngle = 45.0f;
             double Eps = 1e-5f;
         } m_ReconstructParams;
 

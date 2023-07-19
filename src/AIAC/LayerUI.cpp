@@ -896,8 +896,8 @@ namespace AIAC
                     if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_ReconstructParams.ExportPath);
                     else AIAC_WARN("Reconstruction failed, skip loading the model");
                     
-                    memset(m_ReconstructParams.TagMapPath, 0, PATH_BUF_SIZE);
-                    memset(m_ReconstructParams.ExportPath, 0, PATH_BUF_SIZE);
+                    // memset(m_ReconstructParams.TagMapPath, 0, PATH_BUF_SIZE);
+                    // memset(m_ReconstructParams.ExportPath, 0, PATH_BUF_SIZE);
                     m_IsReconstructing3D = false;
                 }
             }
