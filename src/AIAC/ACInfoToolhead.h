@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #include "AIAC/GOSys/GO.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 
@@ -154,21 +156,36 @@ namespace AIAC
         private: __always_inline
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Type; }
+            /// @brief Retrieve the type of the toolhead as a string
+            std::string GetTypeString() const
+            {
+                if (this->GetType() == ACToolHeadType::DRILLBIT)
+                    return "DRILLBIT";
+                else if (this->GetType() == ACToolHeadType::CIRCULARSAW)
+                    return "CIRCULARSAW";
+                else if (this->GetType() == ACToolHeadType::CHAINSAW)
+                    return "CHAINSAW";
+                else if (this->GetType() == ACToolHeadType::SABERSAW)
+                    return "SABERSAW";
+            }
             /// @brief Retrieve the name of the toolhead
             std::string GetName() const { return m_Name; }
-            // /// @brief Retrive the correct data type according to the type of tool of ToolHeadData
-            // template<typename T>
-            // auto GetData() const
-            // {
-            //     // if constexpr (std::is_same_v<T, DrillBitData>)
-            //     //     return m_DrillBitD;
-            //     // else if constexpr (std::is_same_v<T, CircularSawData>)
-            //     //     return m_CircularSawD;
-            //     // else if constexpr (std::is_same_v<T, ChainSawData>)
-            //     //     return m_ChainSawD;
-            //     // else if constexpr (std::is_same_v<T, SaberSawData>)
-            //     //     return m_SaberSawD;
-            // }
+            
+            // FIXME: need refactor/clever way to get this data
+            // write a function that returns DrillBitData, CircularSawData, etc based on the m_Type value
+            template <typename T>
+            T GetData() const
+            {
+                if constexpr (std::is_same_v<T, DrillBitData>)
+                    return m_DrillBitD;
+                else if constexpr (std::is_same_v<T, CircularSawData>)
+                    return m_CircularSawD;
+                else if constexpr (std::is_same_v<T, ChainSawData>)
+                    return m_ChainSawD;
+                else if constexpr (std::is_same_v<T, SaberSawData>)
+                    return m_SaberSawD;
+            }
+
 
             /// @brief Retrieve scaling factor
             float GetScaleF() const { return m_ScaleF; }
@@ -208,14 +225,26 @@ namespace AIAC
         public: __always_inline
             /// @brief Retrieve the type of the toolhead
             ACToolHeadType GetType() const { return m_Data.GetType(); }
+            /// @brief Retrieve the type of the toolhead as a string
+            std::string GetTypeString() const { return m_Data.GetTypeString();}
             /// @brief Get the name of the toolhead
             std::string GetName() const { return m_Data.GetName(); }
             /// @brief Get the id of the toolhead
             int GetId() const { return m_ID; }
 
-            // /// @brief Get the data of the toolhead
-            // template<typename T>
-            // auto GetData() const { return m_Data.GetData<T>(); }
+            /// @brief access the data of the toolheads
+            template <typename T>
+            T GetData() const
+            {
+                if constexpr (std::is_same_v<T, DrillBitData>)
+                    return m_Data.GetData<DrillBitData>();
+                else if constexpr (std::is_same_v<T, CircularSawData>)
+                    return m_Data.GetData<CircularSawData>();
+                else if constexpr (std::is_same_v<T, ChainSawData>)
+                    return m_Data.GetData<ChainSawData>();
+                else if constexpr (std::is_same_v<T, SaberSawData>)
+                    return m_Data.GetData<SaberSawData>();
+            }
             
         public:
             /// @brief From the parse data acit, create the corresponding geometries (e.g. GOPoint for tooltip, toolbase, etc)
@@ -244,6 +273,7 @@ namespace AIAC
             void CopyGOsInfoOriginal();
 
         public: __always_inline
+            /// @brief convert to a string byy getting the name
             std::string ToString() const { return m_Data.GetName(); }
 
         private:
