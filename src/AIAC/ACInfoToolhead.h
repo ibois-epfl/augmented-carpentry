@@ -170,9 +170,9 @@ namespace AIAC
             }
             /// @brief Retrieve the name of the toolhead
             std::string GetName() const { return m_Name; }
-            
-            // FIXME: need refactor/clever way to get this data
-            // write a function that returns DrillBitData, CircularSawData, etc based on the m_Type value
+            /// @brief  Retrieve the data of the toolhead+
+            /// @tparam T the type of the data to retrieve (DrillBitData, CircularSawData, ChainSawData, SaberSawData)
+            /// @return the data of the toolhead struct
             template <typename T>
             T GetData() const
             {
@@ -185,7 +185,6 @@ namespace AIAC
                 else if constexpr (std::is_same_v<T, SaberSawData>)
                     return m_SaberSawD;
             }
-
 
             /// @brief Retrieve scaling factor
             float GetScaleF() const { return m_ScaleF; }

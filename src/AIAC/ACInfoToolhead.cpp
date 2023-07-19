@@ -108,143 +108,124 @@ namespace AIAC
 
     void ACInfoToolhead::AddGOsInfoDrillBit(ToolHeadData& data)
     {
-        auto ptToolbase = GOPoint::Add(data.m_DrillBitD.ToolbaseACIT.x,
+        data.m_DrillBitD.ToolbaseGO = GOPoint::Add(data.m_DrillBitD.ToolbaseACIT.x,
                                        data.m_DrillBitD.ToolbaseACIT.y,
                                        data.m_DrillBitD.ToolbaseACIT.z,
                                        GOWeight::Thick);
-        ptToolbase->SetColor(GOColor::RED);
-        auto ptTooltip = GOPoint::Add(data.m_DrillBitD.TooltipACIT.x, 
+        data.m_DrillBitD.ToolbaseGO->SetColor(GOColor::RED);
+        data.m_DrillBitD.TooltipGO = GOPoint::Add(data.m_DrillBitD.TooltipACIT.x, 
                                       data.m_DrillBitD.TooltipACIT.y,
                                       data.m_DrillBitD.TooltipACIT.z,
                                       GOWeight::Thick);
-        ptTooltip->SetColor(GOColor::GREEN);
-        auto ptEattip = GOPoint::Add(data.m_DrillBitD.EattipACIT.x,
+        data.m_DrillBitD.TooltipGO->SetColor(GOColor::GREEN);
+        data.m_DrillBitD.EattipGO = GOPoint::Add(data.m_DrillBitD.EattipACIT.x,
                                      data.m_DrillBitD.EattipACIT.y,
                                      data.m_DrillBitD.EattipACIT.z,
                                      GOWeight::Thick);
-        ptEattip->SetColor(GOColor::BLUE);
-        auto ptChucktip = GOPoint::Add(data.m_DrillBitD.ChucktipACIT.x,
+        data.m_DrillBitD.EattipGO->SetColor(GOColor::BLUE);
+        data.m_DrillBitD.ChucktipGO = GOPoint::Add(data.m_DrillBitD.ChucktipACIT.x,
                                        data.m_DrillBitD.ChucktipACIT.y,
                                        data.m_DrillBitD.ChucktipACIT.z,
                                        GOWeight::Thick);
-        ptChucktip->SetColor(GOColor::YELLOW);
+        data.m_DrillBitD.ChucktipGO->SetColor(GOColor::YELLOW);
 
-        auto lnAxis = GOLine::Add(*ptToolbase, *ptTooltip);
+        auto lnAxis = GOLine::Add(*data.m_DrillBitD.ToolbaseGO, *data.m_DrillBitD.TooltipGO);
         lnAxis->SetColor(GOColor::MAGENTA);
 
-        *data.m_DrillBitD.ToolbaseGO = *ptToolbase;
-        *data.m_DrillBitD.TooltipGO = *ptTooltip;
-        *data.m_DrillBitD.EattipGO = *ptEattip;
-        *data.m_DrillBitD.ChucktipGO = *ptChucktip;
-
-        this->m_GOPrimitivesInfo.push_back(ptToolbase);
-        this->m_GOPrimitivesInfo.push_back(ptTooltip);
-        this->m_GOPrimitivesInfo.push_back(ptEattip);
-        this->m_GOPrimitivesInfo.push_back(ptChucktip);
+        this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ToolbaseGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.TooltipGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.EattipGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ChucktipGO);
         this->m_GOPrimitivesInfo.push_back(lnAxis);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {
-        auto ptCenter = GOPoint::Add(data.m_CircularSawD.CenterACIT.x,
-                                     data.m_CircularSawD.CenterACIT.y,
-                                     data.m_CircularSawD.CenterACIT.z,
-                                     GOWeight::Thick);
-        ptCenter->SetColor(GOColor::RED);
-        auto ptNormalEnd = GOPoint::Add(data.m_CircularSawD.NormalEndACIT.x,
+        data.m_CircularSawD.CenterGO = GOPoint::Add(data.m_CircularSawD.CenterACIT.x,
+                                         data.m_CircularSawD.CenterACIT.y,
+                                         data.m_CircularSawD.CenterACIT.z,
+                                         GOWeight::Thick);
+        data.m_CircularSawD.CenterGO->SetColor(GOColor::RED);
+        data.m_CircularSawD.NormalEndGO = GOPoint::Add(data.m_CircularSawD.NormalEndACIT.x,
                                         data.m_CircularSawD.NormalEndACIT.y,
                                         data.m_CircularSawD.NormalEndACIT.z,
                                         GOWeight::Thick);
-        ptNormalEnd->SetColor(GOColor::GREEN);
-        auto lnNormal = GOLine::Add(*ptCenter, *ptNormalEnd);
+        data.m_CircularSawD.NormalEndGO->SetColor(GOColor::GREEN);
+        auto lnNormal = GOLine::Add(*data.m_CircularSawD.CenterGO, *data.m_CircularSawD.NormalEndGO);
         lnNormal->SetColor(GOColor::MAGENTA);
 
-        *data.m_CircularSawD.CenterGO = *ptCenter;
-        *data.m_CircularSawD.NormalEndGO = *ptNormalEnd;
-
-        this->m_GOPrimitivesInfo.push_back(ptCenter);
-        this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
+        this->m_GOPrimitivesInfo.push_back(data.m_CircularSawD.CenterGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_CircularSawD.NormalEndGO);
         this->m_GOPrimitivesInfo.push_back(lnNormal);
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
-        auto ptChainbase = GOPoint::Add(data.m_ChainSawD.ChainbaseACIT.x,
+        data.m_ChainSawD.ChainbaseGO = GOPoint::Add(data.m_ChainSawD.ChainbaseACIT.x,
                                         data.m_ChainSawD.ChainbaseACIT.y,
                                         data.m_ChainSawD.ChainbaseACIT.z,
                                         GOWeight::Thick);
-        ptChainbase->SetColor(GOColor::RED);
-        auto ptChainmid = GOPoint::Add(data.m_ChainSawD.ChainmidACIT.x,
+        data.m_ChainSawD.ChainbaseGO->SetColor(GOColor::RED);
+        data.m_ChainSawD.ChainmidGO = GOPoint::Add(data.m_ChainSawD.ChainmidACIT.x,
                                        data.m_ChainSawD.ChainmidACIT.y,
                                        data.m_ChainSawD.ChainmidACIT.z,
                                        GOWeight::Thick);
-        ptChainmid->SetColor(GOColor::GREEN);
-        auto ptChainend = GOPoint::Add(data.m_ChainSawD.ChainendACIT.x,
+        data.m_ChainSawD.ChainmidGO->SetColor(GOColor::GREEN);
+        data.m_ChainSawD.ChainendGO = GOPoint::Add(data.m_ChainSawD.ChainendACIT.x,
                                        data.m_ChainSawD.ChainendACIT.y,
                                        data.m_ChainSawD.ChainendACIT.z,
                                        GOWeight::Thick);
-        ptChainend->SetColor(GOColor::BLUE);
-        auto ptNormalStart = GOPoint::Add(data.m_ChainSawD.NormalStartACIT.x,
+        data.m_ChainSawD.ChainendGO->SetColor(GOColor::BLUE);
+        data.m_ChainSawD.NormalStartGO = GOPoint::Add(data.m_ChainSawD.NormalStartACIT.x,
                                           data.m_ChainSawD.NormalStartACIT.y,
                                           data.m_ChainSawD.NormalStartACIT.z,
                                           GOWeight::Thick);
-        ptNormalStart->SetColor(GOColor::YELLOW);
-        auto ptNormalEnd = GOPoint::Add(data.m_ChainSawD.NormalEndACIT.x,
+        data.m_ChainSawD.NormalStartGO->SetColor(GOColor::YELLOW);
+        data.m_ChainSawD.NormalEndGO = GOPoint::Add(data.m_ChainSawD.NormalEndACIT.x,
                                         data.m_ChainSawD.NormalEndACIT.y,
                                         data.m_ChainSawD.NormalEndACIT.z,
                                         GOWeight::Thick);
-        ptNormalEnd->SetColor(GOColor::CYAN);
-        auto lnBaseMid = GOLine::Add(*ptChainbase, *ptChainmid);
+        data.m_ChainSawD.NormalEndGO->SetColor(GOColor::CYAN);
+        auto lnBaseMid = GOLine::Add(*data.m_ChainSawD.ChainbaseGO, *data.m_ChainSawD.ChainmidGO);
         lnBaseMid->SetColor(GOColor::MAGENTA);
-        auto lnMidEnd = GOLine::Add(*ptChainmid, *ptChainend);
+        auto lnMidEnd = GOLine::Add(*data.m_ChainSawD.ChainmidGO, *data.m_ChainSawD.ChainendGO);
         lnMidEnd->SetColor(GOColor::MAGENTA);
 
-        *data.m_ChainSawD.ChainbaseGO = *ptChainbase;
-        *data.m_ChainSawD.ChainmidGO = *ptChainmid;
-        *data.m_ChainSawD.ChainendGO = *ptChainend;
-        *data.m_ChainSawD.NormalStartGO = *ptNormalStart;
-        *data.m_ChainSawD.NormalEndGO = *ptNormalEnd;
-
-        this->m_GOPrimitivesInfo.push_back(ptChainbase);
-        this->m_GOPrimitivesInfo.push_back(ptChainmid);
-        this->m_GOPrimitivesInfo.push_back(ptChainend);
-        this->m_GOPrimitivesInfo.push_back(ptNormalStart);
-        this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainbaseGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainmidGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainendGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.NormalStartGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.NormalEndGO);
         this->m_GOPrimitivesInfo.push_back(lnBaseMid);
         this->m_GOPrimitivesInfo.push_back(lnMidEnd);
     }
     void ACInfoToolhead::AddGOsInfoSaberSaw(ToolHeadData& data)
     {
-        auto ptToolbase = GOPoint::Add(data.m_SaberSawD.ToolbaseACIT.x,
+        data.m_SaberSawD.ToolbaseGO = GOPoint::Add(data.m_SaberSawD.ToolbaseACIT.x,
                                        data.m_SaberSawD.ToolbaseACIT.y,
                                        data.m_SaberSawD.ToolbaseACIT.z,
                                        GOWeight::Thick);
-        ptToolbase->SetColor(GOColor::RED);
-        auto ptTooltip = GOPoint::Add(data.m_SaberSawD.TooltipACIT.x,
+        data.m_SaberSawD.ToolbaseGO->SetColor(GOColor::RED);
+        data.m_SaberSawD.TooltipGO = GOPoint::Add(data.m_SaberSawD.TooltipACIT.x,
                                       data.m_SaberSawD.TooltipACIT.y,
                                       data.m_SaberSawD.TooltipACIT.z,
                                       GOWeight::Thick);
-        ptTooltip->SetColor(GOColor::GREEN);
-        auto ptNormalStart = GOPoint::Add(data.m_SaberSawD.NormalStartACIT.x,
+        data.m_SaberSawD.TooltipGO->SetColor(GOColor::GREEN);
+        data.m_SaberSawD.NormalStartGO = GOPoint::Add(data.m_SaberSawD.NormalStartACIT.x,
                                           data.m_SaberSawD.NormalStartACIT.y,
                                           data.m_SaberSawD.NormalStartACIT.z,
                                           GOWeight::Thick);
-        ptNormalStart->SetColor(GOColor::BLUE);
-        auto ptNormalEnd = GOPoint::Add(data.m_SaberSawD.NormalEndACIT.x,
+        data.m_SaberSawD.NormalStartGO->SetColor(GOColor::BLUE);
+        data.m_SaberSawD.NormalEndGO = GOPoint::Add(data.m_SaberSawD.NormalEndACIT.x,
                                         data.m_SaberSawD.NormalEndACIT.y,
                                         data.m_SaberSawD.NormalEndACIT.z,
                                         GOWeight::Thick);
-        ptNormalEnd->SetColor(GOColor::YELLOW);
-        auto lineAxis = GOLine::Add(*ptToolbase, *ptTooltip);
+        data.m_SaberSawD.NormalEndGO->SetColor(GOColor::YELLOW);
+        auto lineAxis = GOLine::Add(*data.m_SaberSawD.ToolbaseGO, *data.m_SaberSawD.TooltipGO);
         lineAxis->SetColor(GOColor::MAGENTA);
 
-        *data.m_SaberSawD.ToolbaseGO = *ptToolbase;
-        *data.m_SaberSawD.TooltipGO = *ptTooltip;
-        *data.m_SaberSawD.NormalStartGO = *ptNormalStart;
-        *data.m_SaberSawD.NormalEndGO = *ptNormalEnd;
-
-        this->m_GOPrimitivesInfo.push_back(ptToolbase);
-        this->m_GOPrimitivesInfo.push_back(ptTooltip);
-        this->m_GOPrimitivesInfo.push_back(ptNormalStart);
-        this->m_GOPrimitivesInfo.push_back(ptNormalEnd);
+        this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.ToolbaseGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.TooltipGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.NormalStartGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.NormalEndGO);
         this->m_GOPrimitivesInfo.push_back(lineAxis);
     }
 

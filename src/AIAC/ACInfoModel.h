@@ -74,6 +74,9 @@ public:
         virtual void SetAsDone();
         virtual void SetAsNotDone();
 
+    public:  __always_inline
+        std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
+
     private:
         glm::vec3 m_Start;
         bool m_StartAccessible;
