@@ -68,7 +68,7 @@ public:
 
     class Hole: public Component{
     public:
-        Hole() : Component("Hole") {}
+        Hole() : Component("HOLE") {}
     public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
@@ -95,7 +95,7 @@ public:
 
     class Cut: public Component{
     public:
-        Cut() : Component("Cut") {}
+        Cut() : Component("CUT") {}
 
         virtual void SetAsCurrent();
         virtual void SetAsDone();
@@ -103,7 +103,7 @@ public:
 
         class Face: public Component{
         public:
-            Face() : Component("Face") {}
+            Face() : Component("FACE") {}
 
         private:
             virtual void SetAsCurrent();
@@ -120,7 +120,7 @@ public:
         };
         class Edge: public Component{
         public:
-            Edge() : Component("Edge") {}
+            Edge() : Component("EDGE") {}
 
         private:
             virtual void SetAsCurrent();
