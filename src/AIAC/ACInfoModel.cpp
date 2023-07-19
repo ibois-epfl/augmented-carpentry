@@ -57,6 +57,9 @@ namespace AIAC
     void TimberInfo::Cut::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to " + m_ID);
+        for (const auto& [_, face] : m_Faces) {
+            face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+        }
         for (const auto& [_, edge] : m_Edges) {
             edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
         }
@@ -65,6 +68,9 @@ namespace AIAC
     void TimberInfo::Cut::SetAsDone() {
         TimberInfo::Component::SetAsDone();
         AIAC_INFO("Set " + m_ID + " as Done");
+        for (const auto& [_, face] : m_Faces) {
+            face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::DONE]);
+        }
         for (const auto& [_, edge] : m_Edges) {
             edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::DONE]);
         }
@@ -73,6 +79,9 @@ namespace AIAC
     void TimberInfo::Cut::SetAsNotDone() {
         TimberInfo::Component::SetAsNotDone();
         AIAC_INFO("Set " + m_ID + " as Not Done");
+        for (const auto& [_, face] : m_Faces) {
+            face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+        }
         for (const auto& [_, edge] : m_Edges) {
             edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
         }
@@ -113,7 +122,7 @@ namespace AIAC
         m_Components[id]->SetAsCurrent();
     }
 
-    void ACInfoModel::Load(std::string path) {
+    bool ACInfoModel::Load(std::string path) {
         m_FilePath = path;
         
         Clear();
@@ -121,7 +130,7 @@ namespace AIAC
         pugi::xml_parse_result result = m_ACIMDoc.load_file(path.c_str());
         if (!result){
             AIAC_ERROR("Could not load ACInfoModel from file: {0}", path);
-            return;
+            return false;
         }
         for(auto timber = m_ACIMDoc.child("acim").child("timber"); timber; timber = timber.next_sibling("timber")){
             TimberInfo timberInfo;
@@ -151,9 +160,9 @@ namespace AIAC
                     holeInfo.m_Neighbors.clear();
                 }
                 holeInfo.m_Start = StringToVec3(hole.child("start").child("coordinates").child_value()) * m_Scale;
-                holeInfo.m_StartAccessible = StringToBool(hole.child("start").child("accessible").child_value());
+                holeInfo.m_StartExposed = StringToBool(hole.child("start").child("exposed").child_value());
                 holeInfo.m_End = StringToVec3(hole.child("end").child("coordinates").child_value()) * m_Scale;
-                holeInfo.m_EndAccessible = StringToBool(hole.child("end").child("accessible").child_value());
+                holeInfo.m_EndExposed = StringToBool(hole.child("end").child("exposed").child_value());
                 holeInfo.m_Radius = std::stof(hole.child("radius").child_value()) * m_Scale;
 
                 // build GOPrimitive
@@ -204,6 +213,31 @@ namespace AIAC
                     if(!faceInfo.m_Exposed){
                         nonExposedEdges.insert(faceInfo.m_Edges.begin(), faceInfo.m_Edges.end());
                     }
+                    auto corners = face.child("corners");
+                    for(auto corner = corners.child("corner"); corner; corner=corner.next_sibling("corner")){
+                        faceInfo.m_Corners.push_back(StringToVec3(corner.child_value()) * m_Scale);
+                    }
+                    // build face GO
+                    if(faceInfo.m_Corners.size()<3){
+                        AIAC_ERROR("Face: {0} has less than 3 corners", faceInfo.m_ID);
+                        continue;
+                    }
+
+                    std::vector<uint32_t> indices;
+                    auto baseCornerIdx = 0;
+                    for(int i = 2; i < faceInfo.m_Corners.size(); i++){
+                        indices.push_back(baseCornerIdx);
+                        indices.push_back(i-1);
+                        indices.push_back(i);
+                    }
+                    faceInfo.m_GO = GOMesh::Add(faceInfo.m_Corners, indices);
+                    faceInfo.m_GO->SetColor(CUT_FACE_COLOR[cutInfo.m_State]);
+                    // We only show non-exposed faces
+                    if(faceInfo.m_Exposed){
+                        faceInfo.m_GO->SetVisibility(false);
+                    }
+                    faceInfo.m_GOPrimitives.push_back(faceInfo.m_GO);
+
                     cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
                 }
 
@@ -237,6 +271,7 @@ namespace AIAC
             m_TimberInfo.GetCurrentComponent()->SetAsCurrent();
         }
         UpdateBboxGOLine();
+        return true;
     }
 
     void ACInfoModel::Save() {
@@ -276,40 +311,40 @@ namespace AIAC
             GOLine::Remove(line);
 
         // bottom
-        // auto vec = glm::normalize(bbox[1] - bbox[0]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[0] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[1] - vec, 2.0f));
-        // vec = glm::normalize(bbox[2] - bbox[1]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[1] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[2] - vec, 2.0f));
-        // vec = glm::normalize(bbox[3] - bbox[2]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[2] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[3] - vec, 2.0f));
-        // vec = glm::normalize(bbox[0] - bbox[3]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[3] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[0] - vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[1], 1.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 1.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 1.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 1.0f));
+        auto vec = glm::normalize(bbox[1] - bbox[0]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[0] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[1] - vec, 2.0f));
+        vec = glm::normalize(bbox[2] - bbox[1]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[1] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[2] - vec, 2.0f));
+        vec = glm::normalize(bbox[3] - bbox[2]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[2] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[3] - vec, 2.0f));
+        vec = glm::normalize(bbox[0] - bbox[3]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[3] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[0] - vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[1], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[1], bbox[2], 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[3], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[0], 2.0f));
 
         // top
-        // vec = glm::normalize(bbox[5] - bbox[4]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[4] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[5] - vec, 2.0f));
-        // vec = glm::normalize(bbox[6] - bbox[5]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[5] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[6] - vec, 2.0f));
-        // vec = glm::normalize(bbox[7] - bbox[6]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[6] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[7] - vec, 2.0f));
-        // vec = glm::normalize(bbox[4] - bbox[7]);
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[7] + vec, 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[4] - vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 1.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 1.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[7], 1.0f));
-        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[4], 1.0f));
+        vec = glm::normalize(bbox[5] - bbox[4]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[4] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[5] - vec, 2.0f));
+        vec = glm::normalize(bbox[6] - bbox[5]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[5] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[6] - vec, 2.0f));
+        vec = glm::normalize(bbox[7] - bbox[6]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[6] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[7] - vec, 2.0f));
+        vec = glm::normalize(bbox[4] - bbox[7]);
+        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[7] + vec, 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[4] - vec, 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[4], bbox[5], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[5], bbox[6], 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(bbox[6], bbox[7], 2.0f));
+        m_BboxGOLines.push_back(GOLine::Add(bbox[7], bbox[4], 2.0f));
         
         // side
         m_BboxGOLines.push_back(GOLine::Add(bbox[0], bbox[4], 2.0f));
