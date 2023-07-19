@@ -8,15 +8,19 @@ namespace AIAC
 {
     void SLAMMapLoadedEvent::OnSLAMMapLoaded()
     {
-        AIAC_INFO("SLAM map file changed to: {}", m_FilePath);
+        AIAC_INFO("SLAM map file changed to: \"{}\"", m_FilePath);
         // update config
         AIAC::Config::UpdateEntry(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, m_FilePath);
 
+        if(!std::filesystem::exists(m_FilePath)){
+            AIAC_WARN("SLAM map file not found: \"{}\"", m_FilePath);
+            return;
+        }
         AIAC_APP.GetLayer<LayerSlam>()->UpdateMap(m_FilePath);
 
         // extract the camera calibration file path from the SLAM map and update for camera and SLAM
-        auto paramHeight = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.height;
-        auto paramWidth = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.width;
+        auto paramHeight  = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.height;
+        auto paramWidth   = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.width;
         auto cameraMatrix = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CameraMatrix;
 
         // update the camera parameters for camera

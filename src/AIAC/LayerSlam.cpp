@@ -26,10 +26,15 @@ namespace AIAC
         Slam.systemParams.minMarkersForMaxWeight=3;
         Slam.systemParams.detectKeyPoints=false;
 
-
         // load map, the camera matrix will be replaced by the one in the map
         auto pathToMapFile = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, "assets/tslam/example.map");
-        AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+        if(std::filesystem::exists(pathToMapFile)){
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+        } else {
+            AIAC_WARN("SLAM map file doesn't exist: \"{}\". Init empty map.", pathToMapFile);
+            Slam.clearMap();
+        }
+        
 
         // load vocabulary
         Slam.setVocabulary(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, "assets/tslam/orb.fbow"));

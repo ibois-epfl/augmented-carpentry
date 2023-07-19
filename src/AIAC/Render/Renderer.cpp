@@ -37,7 +37,7 @@ namespace AIAC
         InitProjMatrix();
 
         // Load meshes
-        ReloadMeshes();
+        // ReloadMeshes();
 
         // Initialize the static interface of TextRenderer
         TextRenderer::Init();
@@ -95,6 +95,11 @@ namespace AIAC
         cv::Mat cameraMatrix = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetCameraMatrix();
         float camW = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetWidth();
         float camH = AIAC_APP.GetLayer<LayerCamera>()->MainCamera.GetHeight();
+
+        cout << "camW: " << camW << endl;
+        cout << "camH: " << camH << endl;
+        cout << "cameraMatrix: " << cameraMatrix << endl;
+
         float x0 = 0, y0 = 0,zF = 100.0f, zN =0.01f;
         float fovX = cameraMatrix.at<float>(0,0);
         float fovY = cameraMatrix.at<float>(1,1);
@@ -304,6 +309,8 @@ namespace AIAC
         // finalPoseMatrix is the perspective projected pose of the current camera detected by SLAM
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
+
+        cout << glm::to_string(finalPoseMatrix) << endl;
 
         // Draw the essential objects: map, point cloud map and digital model !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
