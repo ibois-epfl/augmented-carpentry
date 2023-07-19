@@ -152,6 +152,11 @@ namespace AIAC
 
         operator glm::vec3() const { return m_Position; }
 
+    public:
+        inline float DistanceTo(const GOPoint& point) const {
+            return glm::distance(m_Position, point.m_Position);
+        }
+
     private:
         glm::vec3 m_Position;
 
