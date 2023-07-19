@@ -26,10 +26,15 @@ namespace AIAC
         Slam.systemParams.minMarkersForMaxWeight=3;
         Slam.systemParams.detectKeyPoints=false;
 
-
         // load map, the camera matrix will be replaced by the one in the map
         auto pathToMapFile = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, "assets/tslam/example.map");
-        AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+        if(std::filesystem::exists(pathToMapFile)){
+            AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(pathToMapFile));
+        } else {
+            AIAC_WARN("SLAM map file doesn't exist: \"{}\". Init empty map.", pathToMapFile);
+            Slam.clearMap();
+        }
+        
 
         // load vocabulary
         Slam.setVocabulary(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, "assets/tslam/orb.fbow"));
@@ -38,6 +43,15 @@ namespace AIAC
 
     void LayerSlam::OnFrameStart()
     {
+        if(m_ToStartMapping){
+            Slam.systemParams.detectKeyPoints=true;
+            Slam.clearMap();
+            Slam.setInstancing(false);
+            ToProcess = true;
+            m_IsMapping = true;
+            m_ToStartMapping = false;
+        }
+        
         // Update the Tag visibility setting
         if(ToShowTag != m_IsShowingTag){
             if(ToShowTag){
@@ -87,6 +101,7 @@ namespace AIAC
         }
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
+        m_ProcessedFrame = currentFrame.clone();
         if(m_IsTracked) {
             auto poseDifference = cv::norm(m_CamPose - m_LastTrackedCamPose);
             if (poseDifference < 1.0) {
@@ -143,17 +158,23 @@ namespace AIAC
         return glmMat;
     }
 
-    void LayerSlam::StartMapping()
-    {
-        ToProcess = true;
-        m_IsMapping = true;
-        Slam.clearMap();
-        Slam.setInstancing(false);
+    void LayerSlam::StartMapping() {
+        m_ToStartMapping = true;
+        // The rest of the process is done in OnFrameStart()
+    }
+
+    void LayerSlam::StopMapping() {
+        Slam.systemParams.detectKeyPoints=false;
+        Slam.setInstancing(true);
+        m_IsMapping = false;
     }
 
     void LayerSlam::UpdateMap(std::string path){
         Slam.setMap(path, true);
+        InitSlamMapGOs();
+    }
 
+    void LayerSlam::InitSlamMapGOs(){
         // reset GLObjects
         for(auto &go: m_SlamMapGOs){
             GOPrimitive::Remove(go);

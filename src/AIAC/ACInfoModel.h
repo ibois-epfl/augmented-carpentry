@@ -17,25 +17,25 @@ enum class ACIMState{
 
 static std::map<ACIMState, glm::vec4> HOLE_AXIS_COLOR = {
     {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 1.0f)},
-    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
 };
 
 static std::map<ACIMState, glm::vec4> HOLE_CYLINDER_COLOR = {
     {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 0.2f)},
-    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
 };
 
 static std::map<ACIMState, glm::vec4> CUT_FACE_COLOR = {
-    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
-    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 0.2f)},
+    {ACIMState::NOT_DONE, glm::vec4(0.9f, 0.6f, 0.2f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
 };
 
 static std::map<ACIMState, glm::vec4> CUT_EDGE_COLOR = {
-    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
-    {ACIMState::CURRENT, glm::vec4(0.6f, 0.3f, 0.9f, 1.0f)},
+    {ACIMState::NOT_DONE, glm::vec4(0.9f, 0.6f, 0.2f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
 };
 
@@ -79,9 +79,9 @@ public:
 
     private:
         glm::vec3 m_Start;
-        bool m_StartAccessible;
+        bool m_StartExposed;
         glm::vec3 m_End;
-        bool m_EndAccessible;
+        bool m_EndExposed;
         double m_Radius;
         std::set<std::string> m_Neighbors;
 
@@ -116,6 +116,8 @@ public:
             glm::vec3 m_Center;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
+            std::vector<glm::vec3> m_Corners;
+            std::shared_ptr<GOMesh> m_GO;
 
             friend class Cut;
             friend class TimberInfo;
@@ -191,8 +193,9 @@ public:
     /**
      * @brief Load a .acim model from a file.
      * @param path Path to the model file.
+     * @return true if the file is loaded successfully, false otherwise.
      */
-    void Load(std::string path);
+    bool Load(std::string path);
 
     /**
      * @brief Save the current state to the loaded .acim file.

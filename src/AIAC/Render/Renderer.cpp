@@ -37,7 +37,7 @@ namespace AIAC
         InitProjMatrix();
 
         // Load meshes
-        ReloadMeshes();
+        // ReloadMeshes();
 
         // Initialize the static interface of TextRenderer
         TextRenderer::Init();
@@ -183,7 +183,7 @@ namespace AIAC
         // and stop updating the main scene.
         // TODO: mapping has some problem when calib file is switched (with slam map)
         if(AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
-            RenderGlobalView();
+            // RenderGlobalView();
             RenderMappingView();
             return;
         }
@@ -262,15 +262,18 @@ namespace AIAC
 
     void Renderer::RenderMappingView() {
         glBindVertexArray(m_VAO);
-        m_MappingView.Activate();
+        glUseProgram(m_BasicShaderProgram);
 
-        RenderCameraFrame(600, 442);
-
-        // visualize map
+        // Draw the small panel 3D view
+        m_GlobalView.Activate();
         glm::mat4 finalPoseMatrix = m_ProjMatrix * AIAC_APP.GetLayer<LayerSlam>()->GetCamPoseGlm();
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+        DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1), 1.5);
+
+        // Draw the camera view
+        m_MappingView.Activate();
+        RenderCameraFrame(600, 442, Renderer::CameraFrameType::SLAM_PROCESSED);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -279,7 +282,7 @@ namespace AIAC
     void Renderer::RenderCamCalibView() {
         m_CamCalibView.Activate();
 
-        RenderCameraFrame(600, 442, true);
+        RenderCameraFrame(600, 442, Renderer::CameraFrameType::RAW);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -322,7 +325,7 @@ namespace AIAC
         }
     }
 
-    void Renderer::RenderCameraFrame(int w, int h, bool useRawFrame) {
+    void Renderer::RenderCameraFrame(int w, int h, Renderer::CameraFrameType frameType) {
         if ( w <= 0 || h <= 0 ){
             stringstream ss;
             ss << "Renderer::RenderCameraFrame: invalid size: (" << w << "," << h << ")";
@@ -331,14 +334,17 @@ namespace AIAC
 
         GLuint frameGlTextureObj;
         cv::Size frameSize;
-        if(useRawFrame){
+        if(frameType == Renderer::CameraFrameType::RAW) {
             frameGlTextureObj = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawCurrentFrame().GetGlTextureObj();
             frameSize.height = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawHeight();
             frameSize.width = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetRawWidth();
-        } else {
+        } else if (frameType == Renderer::CameraFrameType::UNDISTORTED) {
             frameGlTextureObj = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetGlTextureObj();
             frameSize.height = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetHeight();
             frameSize.width = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetWidth();
+        } else if (frameType == Renderer::CameraFrameType::SLAM_PROCESSED) {
+            frameGlTextureObj = AIAC_APP.GetLayer<LayerSlam>()->GetProcessedFrame().GetGlTextureObj();
+            frameSize =  AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize;
         }
 
         GLuint readFboIdFrame = 0;
