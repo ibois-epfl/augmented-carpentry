@@ -7,13 +7,16 @@ using namespace std;
 
 namespace AIAC
 {
-    void ScannedModel::Load(std::string path) {
+    bool ScannedModel::Load(std::string path) {
         m_Mesh = GOMesh::LoadPly(path);
-        // m_Mesh->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
+        if(m_Mesh == nullptr) return false;
+        
         m_Mesh->SetVisibility(false);
 
         BuildBoundingBox();
         UpdateBboxGOLine();
+
+        return true;
     }
 
     void ScannedModel::BuildBoundingBox() {
