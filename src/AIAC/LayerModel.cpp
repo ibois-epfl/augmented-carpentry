@@ -26,10 +26,7 @@ namespace AIAC
         AlignModels();
     }
     
-    void LayerModel::OnFrameStart()
-    {
-
-    }
+    void LayerModel::OnFrameStart() {}
 
     void LayerModel::LoadACInfoModel(std::string path)
     {
