@@ -44,7 +44,7 @@ class TimberInfo{
 public:
     class Component {
     public:
-        Component()=default;
+        Component(std::string type) : m_Type(type) {}
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
@@ -52,8 +52,12 @@ public:
     public:
         bool IsMarkedDone; // This one is for UI
 
+    public:  __always_inline
+        std::string GetTypeString() const { return m_Type; }
+
     protected:
         ACIMState m_State;
+        std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
@@ -63,6 +67,8 @@ public:
     };
 
     class Hole: public Component{
+    public:
+        Hole() : Component("Hole") {}
     public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
@@ -89,11 +95,17 @@ public:
 
     class Cut: public Component{
     public:
+        Cut() : Component("Cut") {}
+
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
 
         class Face: public Component{
+        public:
+            Face() : Component("Face") {}
+
+        private:
             virtual void SetAsCurrent();
 
             bool m_Exposed;
@@ -107,6 +119,10 @@ public:
             friend class ACInfoModel;
         };
         class Edge: public Component{
+        public:
+            Edge() : Component("Edge") {}
+
+        private:
             virtual void SetAsCurrent();
 
             glm::vec3 m_Start;
@@ -157,7 +173,7 @@ private:
     ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
     std::map<std::string, Hole> m_Holes;
     std::map<std::string, Cut> m_Cuts;
-    std::map<std::string, Component*> m_Components;
+    std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
 
     friend class ACInfoModel;
