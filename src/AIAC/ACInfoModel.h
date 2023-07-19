@@ -174,8 +174,9 @@ public:
     /**
      * @brief Load a .acim model from a file.
      * @param path Path to the model file.
+     * @return true if the file is loaded successfully, false otherwise.
      */
-    void Load(std::string path);
+    bool Load(std::string path);
 
     /**
      * @brief Save the current state to the loaded .acim file.

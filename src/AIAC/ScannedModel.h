@@ -17,8 +17,9 @@ public:
     /**
      * @brief Load a .ply model from a file.
      * @param path Path to the model file.
+     * @return True if the model is loaded successfully, false otherwise.
      */
-    void Load(std::string path);
+    bool Load(std::string path);
 
     /**
      * @brief Build the bounding box based on the ply model.
