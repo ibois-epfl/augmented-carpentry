@@ -8,8 +8,10 @@ namespace AIAC
     {
         public:
             ACInfoToolheadManager()
-                : m_ActiveACInfoToolhead(nullptr)
-            {};
+                // : m_ActiveACInfoToolhead(nullptr)
+            {
+                m_ActiveACInfoToolhead = std::make_shared<ACInfoToolhead>(); 
+            };
 
         public:
             /// @brief Load each toolhead model acit/obj from the dataset dir

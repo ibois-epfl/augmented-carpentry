@@ -26,8 +26,8 @@ namespace AIAC
         }
         if (this->m_ACInfoToolheadMap.empty())
             AIAC_ERROR("No toolhead models loaded!");
-            
-        this->m_ActiveACInfoToolhead = this->m_ACInfoToolheadMap.begin()->second;
+        
+        this->SetActiveToolhead(this->m_ACInfoToolheadMap.begin()->first);
         this->m_ActiveACInfoToolhead->SetVisibility(true);
     }
 
@@ -36,7 +36,7 @@ namespace AIAC
         this->m_ActiveACInfoToolhead->SetVisibility(false);
         if (this->m_ACInfoToolheadMap.find(toolheadName) != this->m_ACInfoToolheadMap.end())
         {
-            this->m_ActiveACInfoToolhead = this->m_ACInfoToolheadMap[toolheadName];
+            *this->m_ActiveACInfoToolhead = *this->m_ACInfoToolheadMap[toolheadName];
             this->m_ActiveACInfoToolhead->SetVisibility(true);
         }
         else

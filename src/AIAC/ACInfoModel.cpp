@@ -7,7 +7,7 @@ using namespace std;
 
 namespace AIAC
 {
-    // Base Component
+    ///< Base Component
     void TimberInfo::Component::SetAsCurrent() {
         m_State = ACIMState::CURRENT;
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetDoc().child("acim").child("timber").child("current").last_child().set_value(m_ID.c_str());
@@ -28,7 +28,7 @@ namespace AIAC
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
-    // Hole 
+    ///< Hole 
     void TimberInfo::Hole::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to Hole #" + m_ID);
@@ -53,7 +53,7 @@ namespace AIAC
         m_RadiusLabelGO->SetVisibility(false);
     }
 
-    // Cut
+    ///< Cut
     void TimberInfo::Cut::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to " + m_ID);
