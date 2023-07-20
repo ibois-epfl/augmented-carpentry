@@ -3,6 +3,7 @@ import Rhino as rc
 import scriptcontext as sc
 import Rhino.Geometry as rg
 import datetime as dt
+import math
 
 import log
 import acim
@@ -11,6 +12,21 @@ import cut
 import util
 
 import visual_debug as vd
+
+def get_lowest_brep_vertex(brep):
+    """ Get the the vertex with the lowest y,x and z values """
+    biggest_vertices = brep.Vertices
+    lowest_x = 0
+    lowest_y = 0
+    lowest_z = 0
+    for vertex in biggest_vertices:
+        if vertex.Location.X < lowest_x:
+            lowest_x = vertex.Location.X
+        if vertex.Location.Y < lowest_y:
+            lowest_y = vertex.Location.Y
+        if vertex.Location.Z < lowest_z:
+            lowest_z = vertex.Location.Z
+    return rc.Geometry.Point3d(lowest_x, lowest_y, lowest_z)
 
 def pln_2_pln_world_transform(brep):
     """ Transform a brep to the world plane """
@@ -24,14 +40,10 @@ def pln_2_pln_world_transform(brep):
         if edge.GetLength() > longest_edge_length:
             longest_edge_length = edge.GetLength()
             longest_edge = edge
-    
-    # get face of the longest edge
+
+    # find biggest face
     face_indices = longest_edge.AdjacentFaces()
     faces = [brep.Faces[face_index] for face_index in face_indices]
-
-    log.info("Found " + str(len(faces)) + " faces for longest edge.")
-
-    # get the biggest face
     biggest_face = None
     biggest_face_area = 0
     for face in faces:
@@ -44,12 +56,38 @@ def pln_2_pln_world_transform(brep):
         log.error("Could not find plane for longest edge. Exiting...")
         return
     plane_src = biggest_face.TryGetPlane()[1]
-    log.info("Found plane for longest edge: " + str(plane_src))
     plane_tgt = rc.Geometry.Plane.WorldXY
+    log.info("Found plane for longest edge: " + str(plane_src))
 
     # plane to plane transformation
     plane_to_world = rc.Geometry.Transform.PlaneToPlane(plane_src, plane_tgt)
     brep.Transform(plane_to_world)
+
+    # adjust to x,y,z positive
+    lowest_vertex = get_lowest_brep_vertex(brep)
+    lowest_vertex_transform = rc.Geometry.Transform.Translation(rg.Vector3d(-lowest_vertex))
+    brep.Transform(lowest_vertex_transform)
+
+    bbox = brep.GetBoundingBox(True)
+    bbox_corners = bbox.GetCorners()
+    y_val_sum = 0
+    x_val_sum = 0
+    for corner in bbox_corners:
+        y_val_sum += corner.Y
+        x_val_sum += corner.X
+
+    if x_val_sum > y_val_sum:
+        log.info("Bounding box is alligned to x axis. No rotation needed.")
+    else:
+        log.info("Bounding box is not alligned to y axis. A 90 deg rotation is needed.")
+        rot_90_z = rc.Geometry.Transform.Rotation(math.radians(90), rg.Vector3d.ZAxis, rg.Point3d.Origin)
+        brep.Transform(rot_90_z)
+        lowest_vertex = get_lowest_brep_vertex(brep)
+
+        lowest_vertex_transform = rc.Geometry.Transform.Translation(rg.Vector3d(-lowest_vertex))
+        brep.Transform(lowest_vertex_transform)
+
+    vd.addBrep(brep, clr=(255, 0, 0, 30))
 
 def distinguish_holes_cuts(breps):
     """ 
