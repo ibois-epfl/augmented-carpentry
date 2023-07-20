@@ -290,6 +290,8 @@ namespace AIAC
         m_TimberInfo.m_Holes.clear();
 
         for(auto& cut : m_TimberInfo.m_Cuts){
+            for(auto& primitive : cut.second.m_GOPrimitives)
+                GOPrimitive::Remove(primitive);
             for(auto& face : cut.second.m_Faces){
                 for(auto& primitive : face.second.m_GOPrimitives)
                     GOPrimitive::Remove(primitive);
