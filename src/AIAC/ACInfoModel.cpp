@@ -7,7 +7,7 @@ using namespace std;
 
 namespace AIAC
 {
-    // Base Component
+    ///< Base Component
     void TimberInfo::Component::SetAsCurrent() {
         m_State = ACIMState::CURRENT;
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetDoc().child("acim").child("timber").child("current").last_child().set_value(m_ID.c_str());
@@ -28,7 +28,7 @@ namespace AIAC
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
-    // Hole 
+    ///< Hole 
     void TimberInfo::Hole::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to Hole #" + m_ID);
@@ -53,7 +53,7 @@ namespace AIAC
         m_RadiusLabelGO->SetVisibility(false);
     }
 
-    // Cut
+    ///< Cut
     void TimberInfo::Cut::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to " + m_ID);
@@ -122,7 +122,7 @@ namespace AIAC
         m_Components[id]->SetAsCurrent();
     }
 
-    void ACInfoModel::Load(std::string path) {
+    bool ACInfoModel::Load(std::string path) {
         m_FilePath = path;
         
         Clear();
@@ -130,7 +130,7 @@ namespace AIAC
         pugi::xml_parse_result result = m_ACIMDoc.load_file(path.c_str());
         if (!result){
             AIAC_ERROR("Could not load ACInfoModel from file: {0}", path);
-            return;
+            return false;
         }
         for(auto timber = m_ACIMDoc.child("acim").child("timber"); timber; timber = timber.next_sibling("timber")){
             TimberInfo timberInfo;
@@ -271,6 +271,7 @@ namespace AIAC
             m_TimberInfo.GetCurrentComponent()->SetAsCurrent();
         }
         UpdateBboxGOLine();
+        return true;
     }
 
     void ACInfoModel::Save() {

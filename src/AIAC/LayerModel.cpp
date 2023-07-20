@@ -26,21 +26,24 @@ namespace AIAC
         AlignModels();
     }
     
-    void LayerModel::OnFrameStart()
-    {
-
-    }
+    void LayerModel::OnFrameStart() {}
 
     void LayerModel::LoadACInfoModel(std::string path)
     {
-        m_ACInfoModel.Load(path);
-        AlignModels();
+        bool succeed = m_ACInfoModel.Load(path);
+        if(succeed){
+            AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: AC_INFO_MODEL, path);
+            AlignModels();
+        }
     }
 
     void LayerModel::LoadScannedModel(std::string path)
     {
-        m_ScannedModel.Load(path);
-        AlignModels();
+        bool succeed = m_ScannedModel.Load(path);
+        if(succeed) {
+            AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: SCANNED_MODEL, path);
+            AlignModels();
+        }
     }
 
     void LayerModel::AlignModels() {

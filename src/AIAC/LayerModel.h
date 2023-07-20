@@ -33,8 +33,20 @@ namespace AIAC
          */
         void LoadScannedModel(std::string path);
 
+        /**
+         * @brief Return the ACInfoModel.
+         */
         inline ACInfoModel& GetACInfoModel() { return m_ACInfoModel; }
+        /**
+         * @brief Get the Scanned Model object
+         */
         inline ScannedModel& GetScannedModel() { return m_ScannedModel; }
+        // /**
+        //  * @brief Return the active selected component (hole or cut)
+        //  * 
+        //  */
+        // inline std::shared_ptr<AIAC::GOPrimitive> GetActiveComponent() { return m_ACInfoModel.GetActiveComponent(); }
+
         /**
          * @brief Change the align offset. The value is in TSLAM unit.
          */
