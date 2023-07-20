@@ -18,6 +18,7 @@ public:
     inline static const std::string ALIGN_OFFSET = "AlignOffset";
     inline static const std::string ALIGN_ROTATION = "AlignRotation";
     inline static const std::string ALIGN_FLIP = "AlignFlip";
+    inline static const std::string SCALE_FACTOR = "ScaleFactor";
 
     inline static const std::string SEC_TSLAM = "TSlam";
     inline static const std::string MAP_FILE = "MapFile";

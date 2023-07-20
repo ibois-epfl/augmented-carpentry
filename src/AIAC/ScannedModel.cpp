@@ -7,13 +7,16 @@ using namespace std;
 
 namespace AIAC
 {
-    void ScannedModel::Load(std::string path) {
+    bool ScannedModel::Load(std::string path) {
         m_Mesh = GOMesh::LoadPly(path);
-        // m_Mesh->SetColor(glm::vec4(0.9f, 0.7f, 0.1f, 0.2f));
+        if(m_Mesh == nullptr) return false;
+        
         m_Mesh->SetVisibility(false);
 
         BuildBoundingBox();
         UpdateBboxGOLine();
+
+        return true;
     }
 
     void ScannedModel::BuildBoundingBox() {
@@ -29,7 +32,6 @@ namespace AIAC
         auto basePt = vertices[0];
         vector<Neighbor> neighbors;
 
-        // print all vertices
         for (auto& v : vertices) {
             auto vec = v - basePt;
             auto dist = glm::length(vec);
@@ -44,7 +46,7 @@ namespace AIAC
         // filter out duplicate vertices based on point difference
         if (neighbors.size() > 8) {
             for (int i = 0; i < neighbors.size() - 1; i++) {
-                if (glm::length(neighbors[i].pt - neighbors[i + 1].pt) < 0.01) {
+                if (glm::length(neighbors[i].pt - neighbors[i + 1].pt) < 0.05) {
                     neighbors.erase(neighbors.begin() + i);
                     i--;
                 }
@@ -94,6 +96,40 @@ namespace AIAC
             neighbors[7].pt,
             neighbors[3].pt
         };
+
+        // print the bounding box
+        // cout << "Bbox: " << endl;
+        // for(auto& pt : m_Bbox){
+        //     cout << pt.x << " " << pt.y << " " << pt.z << endl;
+        // }
+
+        // testing the rotation is correct
+        float minTotalDist = 1e9;
+        int rotIndex = -1;
+        for(int i = 0 ; i < 4 ; i++){
+            float dist = 0;
+            for(int j = 0 ; j < 8 ; j+=2){
+                dist += glm::length(m_Bbox[j] - m_Bbox[j + 1]);
+            }
+            if(dist < minTotalDist){
+                minTotalDist = dist;
+                rotIndex = i;
+            }
+            // perform rotation
+            auto tmp = m_Bbox[0];
+            m_Bbox[0] = m_Bbox[3];
+            m_Bbox[3] = m_Bbox[7];
+            m_Bbox[7] = m_Bbox[4];
+            m_Bbox[4] = tmp;
+        }
+        // rotate to the correct order
+        for(int i = 0 ; i < rotIndex ; i++){
+            auto tmp = m_Bbox[0];
+            m_Bbox[0] = m_Bbox[3];
+            m_Bbox[3] = m_Bbox[7];
+            m_Bbox[7] = m_Bbox[4];
+            m_Bbox[4] = tmp;
+        }
     }
 
     void ScannedModel::UpdateBboxGOLine() {
@@ -153,10 +189,17 @@ namespace AIAC
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[3] + vec, 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[7] - vec, 2.0f));
 
-    //     m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
-    //     m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
-    //     m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
-    //     m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
+        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
+
+        // visualize the bounding box corner
+        // for(int i = 0; i < 8; i++){
+        //     auto pt = m_Bbox[i];
+        //     auto go = GOText::Add(std::to_string(i), pt, 1.0f);
+        //     go->SetColor(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+        // }
     }
 
     float ScannedModel::GetLength(){
