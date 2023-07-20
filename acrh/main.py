@@ -13,6 +13,21 @@ import util
 
 import visual_debug as vd
 
+def get_lowest_brep_vertex(brep):
+    """ Get the the vertex with the lowest y,x and z values """
+    biggest_vertices = brep.Vertices
+    lowest_x = 0
+    lowest_y = 0
+    lowest_z = 0
+    for vertex in biggest_vertices:
+        if vertex.Location.X < lowest_x:
+            lowest_x = vertex.Location.X
+        if vertex.Location.Y < lowest_y:
+            lowest_y = vertex.Location.Y
+        if vertex.Location.Z < lowest_z:
+            lowest_z = vertex.Location.Z
+    return rc.Geometry.Point3d(lowest_x, lowest_y, lowest_z)
+
 def pln_2_pln_world_transform(brep):
     """ Transform a brep to the world plane """
     log.info("Computing Oriented Bounding Boxes...")
@@ -36,8 +51,6 @@ def pln_2_pln_world_transform(brep):
             biggest_face_area = rg.AreaMassProperties.Compute(face).Area
             biggest_face = face
     
-    
-    
     # get the plane of the biggest face
     if biggest_face.TryGetPlane()[0] is False:
         log.error("Could not find plane for longest edge. Exiting...")
@@ -46,82 +59,33 @@ def pln_2_pln_world_transform(brep):
     plane_tgt = rc.Geometry.Plane.WorldXY
     log.info("Found plane for longest edge: " + str(plane_src))
 
-
-
-
-
     # plane to plane transformation
     plane_to_world = rc.Geometry.Transform.PlaneToPlane(plane_src, plane_tgt)
     brep.Transform(plane_to_world)
 
-
-
-    #>>>> [0] get thte lowest vertex 1
-    # get the vertex with the lowest x, y and z values
-    biggest_vertices = brep.Vertices
-    lowest_x = 0
-    lowest_y = 0
-    lowest_z = 0
-    for vertex in biggest_vertices:
-        if vertex.Location.X < lowest_x:
-            lowest_x = vertex.Location.X
-        if vertex.Location.Y < lowest_y:
-            lowest_y = vertex.Location.Y
-        if vertex.Location.Z < lowest_z:
-            lowest_z = vertex.Location.Z
-    lowest_vertex = rc.Geometry.Point3d(lowest_x, lowest_y, lowest_z)
-    # vd.addPt(lowest_vertex, clr=(0, 255, 0))
-
-    # transalte to origin
+    # adjust to x,y,z positive
+    lowest_vertex = get_lowest_brep_vertex(brep)
     lowest_vertex_transform = rc.Geometry.Transform.Translation(rg.Vector3d(-lowest_vertex))
     brep.Transform(lowest_vertex_transform)
 
-
-
-
-
-    #>>>> [2] detect if a 90 deg rotation is needed
-    # get the vertex with the lowest x, y and z values
     bbox = brep.GetBoundingBox(True)
-    # detect if the  bounding box is alligned to y or x axis
     bbox_corners = bbox.GetCorners()
     y_val_sum = 0
     x_val_sum = 0
     for corner in bbox_corners:
         y_val_sum += corner.Y
         x_val_sum += corner.X
-    # y_val_avg = y_val_sum / 8
-    # x_val_avg = x_val_sum / 8
 
-    # if the average y value is equal to the average x value, the bounding box is alligned to y or x axis
     if x_val_sum > y_val_sum:
         log.info("Bounding box is alligned to x axis. No rotation needed.")
     else:
         log.info("Bounding box is not alligned to y axis. A 90 deg rotation is needed.")
-        # rotate 90 deg around z axis
         rot_90_z = rc.Geometry.Transform.Rotation(math.radians(90), rg.Vector3d.ZAxis, rg.Point3d.Origin)
         brep.Transform(rot_90_z)
-        # >>>> [*] get thte lowest vertex 1
-        # get the vertex with the lowest x, y and z values
-        biggest_vertices = brep.Vertices
-        lowest_x = 0
-        lowest_y = 0
-        lowest_z = 0
-        for vertex in biggest_vertices:
-            if vertex.Location.X < lowest_x:
-                lowest_x = vertex.Location.X
-            if vertex.Location.Y < lowest_y:
-                lowest_y = vertex.Location.Y
-            if vertex.Location.Z < lowest_z:
-                lowest_z = vertex.Location.Z
-        lowest_vertex = rc.Geometry.Point3d(lowest_x, lowest_y, lowest_z)
-        # vd.addPt(lowest_vertex, clr=(0, 255, 0))
+        lowest_vertex = get_lowest_brep_vertex(brep)
 
-        # transalte to origin
         lowest_vertex_transform = rc.Geometry.Transform.Translation(rg.Vector3d(-lowest_vertex))
         brep.Transform(lowest_vertex_transform)
-
-    
 
     vd.addBrep(brep, clr=(255, 0, 0, 30))
 
