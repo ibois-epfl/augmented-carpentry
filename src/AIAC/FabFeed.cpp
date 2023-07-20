@@ -42,6 +42,7 @@ namespace AIAC
         // auto test = AC_FF_HOLE->GetStartPointGO();
         float distStartToolTip = AC_FF_TOOL->GetData<DrillBitData>().TooltipGO->DistanceTo(*hole->GetStartPointGO());
         // float distScaled = distStartToolTip * (AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR));
+        // float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR);
         float distScaled = distStartToolTip * 50;
 
         AIAC_INFO("distances: {0}", distScaled);
