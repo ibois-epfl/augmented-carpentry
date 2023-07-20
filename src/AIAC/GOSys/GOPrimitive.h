@@ -196,6 +196,7 @@ namespace AIAC
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; }
         inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; }
+        inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);

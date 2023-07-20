@@ -2,6 +2,7 @@
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
 #include "AIAC/GOSys/GOPrimitive.h"
+#include "AIAC/Config.h"
 
 namespace AIAC
 {
@@ -33,22 +34,39 @@ namespace AIAC
 
     bool FabFeed::ComputeHoleFeed()
     {
+        /*
+         *    x Tb
+         *     \
+         *      \
+         *       \
+         *        \
+         *         \
+         *          x Tt
+         *          ..
+         *          .  .v2
+         *          .    .
+         *          .     x Hs
+         *       v1 .    /
+         *          .   /
+         *          .  /
+         *          . /
+         *          ./
+         *          x He
+         * 
+         */
         auto hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
-        // auto testHole = hole->GetStartPointGO();
+        
+        this->m_HoleLine2Start->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,
+                                     *hole->GetStartPointGO());
+        this->m_HoleLine2Start->InitGLObject();
+
+        this->m_HoleLine2End->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,
+                                     *hole->GetEndPointGO());
+        this->m_HoleLine2End->InitGLObject();
 
 
-        // auto comp = AC_FABFEED_COMP;
-        // implicit cast Component to Hole
-        // auto test = AC_FF_HOLE->GetStartPointGO();
-        float distStartToolTip = AC_FF_TOOL->GetData<DrillBitData>().TooltipGO->DistanceTo(*hole->GetStartPointGO());
-        // float distScaled = distStartToolTip * (AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR));
-        // float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR);
-        float distScaled = distStartToolTip * 50;
 
-        AIAC_INFO("distances: {0}", distScaled);
-
-        // auto hole = std::dynamic_pointer_cast<TimberInfo::Hole>(AC_FABFEED_COMP);
-        // AC_FABFEED_HOLE->GetStartPointGO();
+        
 
         return true;
     }
