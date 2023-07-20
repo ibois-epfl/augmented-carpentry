@@ -101,6 +101,10 @@ namespace AIAC
                     ShowFileSelectDialog("Select export path", ".ply",
                                          m_ReconstructParams.ExportPath,
                                          m_ReconstructParams.IsSelectingExportPath);
+                } else if(m_ReconstructParams.IsSelectingParamPath){
+                    ShowFileSelectDialog("Select camera calibration path", ".yml",
+                                         m_ReconstructParams.ParamPath,
+                                         m_ReconstructParams.IsSelectingParamPath);
                 }
             }
         }
@@ -814,7 +818,11 @@ namespace AIAC
 
             ImGui::PushItemWidth(-54);
 
-            ImGui::Text("Reconstruct Params:");
+            ImGui::Text("Reconstruct Params");
+            ImGui::SameLine();
+            if(ImGui::Button("Load Param File", ImVec2(84, 0))){
+                m_ReconstructParams.IsSelectingParamPath = true;
+            }
             float sliderValFloat = 0.f;
             int sliderValInt = 0;
 

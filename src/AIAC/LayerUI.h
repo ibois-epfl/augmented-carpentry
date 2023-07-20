@@ -114,8 +114,10 @@ namespace AIAC {
         struct ReconstructParams {
             char TagMapPath[PATH_BUF_SIZE] = {0};
             char ExportPath[PATH_BUF_SIZE] = {0};
+            char ParamPath[PATH_BUF_SIZE] = {0};
             bool IsSelectingTagMapPath = false;
             bool IsSelectingExportPath = false;
+            bool IsSelectingParamPath = false;
             float RadiusSearch = 2.0f;
             double CreaseAngleThreshold = 5.0f;
             int MinClusterSize = 1;
