@@ -1,8 +1,10 @@
 #pragma once
 
 #include "AIAC/Layer.h"
-
-
+#include "AIAC/ACInfoToolheadManager.h"
+#include "AIAC/ACInfoToolhead.h"
+#include "AIAC/ACInfoModel.h"
+#include "FabFeed.h"
 
 namespace AIAC
 {
@@ -15,9 +17,13 @@ namespace AIAC
             virtual void OnAttach() override;
             virtual void OnFrameStart() override;
 
-        // private:
-            // translation
-            // rotation
+
+        private:  ///< IN
+            // FabFeed m_FabFeed;
+            FabFeed m_FabFeed;
+            // ACInfoModel& m_CurrentModel; I need the current component / not model
+
+        // private:  ///< OUT
 
 
     };

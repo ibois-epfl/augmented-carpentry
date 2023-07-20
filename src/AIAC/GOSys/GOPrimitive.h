@@ -99,7 +99,8 @@ namespace AIAC
 
     class GOPoint : public GOPrimitive
     {
-    public:  // FIXME: this should be private @hb, used in ScannedModel.h?
+    public:
+        GOPoint() = default;
         GOPoint(float x, float y, float z, float weight = GOWeight::Default);
         GOPoint(glm::vec3 position, float weight = GOWeight::Default);
 
@@ -150,6 +151,11 @@ namespace AIAC
         void InitGLObject();
 
         operator glm::vec3() const { return m_Position; }
+
+    public:
+        inline float DistanceTo(const GOPoint& point) const {
+            return glm::distance(m_Position, point.m_Position);
+        }
 
     private:
         glm::vec3 m_Position;
