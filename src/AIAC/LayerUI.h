@@ -4,6 +4,7 @@
 
 #include "AIAC/Image.h"
 #include "AIAC/Log.h"
+#include "Config.h"
 
 #include "tslam.h"
 #include "GlHeader.h"
@@ -46,7 +47,8 @@ namespace AIAC {
         void ShowMenuBar();
         void ShowMainUI();
         void ShowSceneViewport();
-        void ShowFileSelectDialog(const char* title, const char* fileExt, char *path, bool &controlFlag);
+        void ShowFileSelectDialog();
+        void OpenFileSelectDialog(const char* title, const char* fileExt, char *path, std::function<void()> callback=[]{});
 
         void ShowCombineMapPopup();
         void ShowMappingPopup();
@@ -58,6 +60,7 @@ namespace AIAC {
 
         void ShowCamCalibPopup();
         void ShowSaveCamCalibFileDialog();
+        void LoadReconstructParams();
 
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         void SetPaneUICamera();
@@ -92,8 +95,13 @@ namespace AIAC {
         bool *m_IsOpen = nullptr;
 
         std::vector<std::shared_ptr<PaneUI>> m_PaneUIStack;
+        
+        // UI File Selection
+        std::string m_FileSelectDefaultPath = ".";
+        char m_TmpPathBuf[PATH_BUF_SIZE] = {0};
+        char *m_FileSelectionTargetBuf = nullptr;
+        std::function<void()> m_FileSelectionCallback = []{};
 
-        bool m_IsSavingMap = false;
         bool m_IsCombiningMap = false;
         bool m_IsReconstructing3D = false;
 
@@ -101,7 +109,6 @@ namespace AIAC {
             char MapPathA[PATH_BUF_SIZE] = {0},
                  MapPathB[PATH_BUF_SIZE] = {0},
                  OutputPath[PATH_BUF_SIZE] = {0};
-            bool IsSelectingFile = false;
             char *FilePathTarget;
         } m_CombMapParams;
 
@@ -114,10 +121,6 @@ namespace AIAC {
         struct ReconstructParams {
             char TagMapPath[PATH_BUF_SIZE] = {0};
             char ExportPath[PATH_BUF_SIZE] = {0};
-            char ParamPath[PATH_BUF_SIZE] = {0};
-            bool IsSelectingTagMapPath = false;
-            bool IsSelectingExportPath = false;
-            bool IsSelectingParamPath = false;
             float RadiusSearch = 2.0f;
             double CreaseAngleThreshold = 5.0f;
             int MinClusterSize = 1;
@@ -127,6 +130,7 @@ namespace AIAC {
             double MaxPlnAngle = 5.0f;
             double Eps = 1e-5f;
         } m_ReconstructParams;
+        void LoadReconstructParamsFromFile(const char *filePath);
 
         // Cam Calib
         bool m_IsChoosingCamCalibFileSavePath = false;

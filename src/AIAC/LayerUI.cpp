@@ -71,9 +71,6 @@ namespace AIAC
 
         if (AIAC_APP.GetLayer<LayerSlam>()->IsMapping()) {
             ShowMappingPopup();
-            if (m_IsSavingMap) {
-                ShowSaveMapFileDialog();
-            }
         } else if (AIAC_APP.GetLayer<LayerCameraCalib>()->IsCalibrating()){
             ShowCamCalibPopup();
             if (m_IsChoosingCamCalibFileSavePath){
@@ -86,28 +83,13 @@ namespace AIAC
 
             if(m_IsCombiningMap){
                 ShowCombineMapPopup();
-                if(m_CombMapParams.IsSelectingFile){
-                    ShowMapFileDialog(m_CombMapParams.FilePathTarget);
-                }
             }
 
             if(m_IsReconstructing3D){
                 ShowReconstruct3DPopup();
-                if (m_ReconstructParams.IsSelectingTagMapPath) {
-                    ShowFileSelectDialog("Select map path", ".yml",
-                                         m_ReconstructParams.TagMapPath,
-                                         m_ReconstructParams.IsSelectingTagMapPath);
-                } else if(m_ReconstructParams.IsSelectingExportPath){
-                    ShowFileSelectDialog("Select export path", ".ply",
-                                         m_ReconstructParams.ExportPath,
-                                         m_ReconstructParams.IsSelectingExportPath);
-                } else if(m_ReconstructParams.IsSelectingParamPath){
-                    ShowFileSelectDialog("Select camera calibration path", ".yml",
-                                         m_ReconstructParams.ParamPath,
-                                         m_ReconstructParams.IsSelectingParamPath);
-                }
             }
         }
+        ShowFileSelectDialog();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -358,33 +340,18 @@ namespace AIAC
     {
         // ACIM Loader
         if(ImGui::Button("Load ACIM")){
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseACIM", "Open ACIM file", ".acim", ".");
+            OpenFileSelectDialog("Open ACIM file", ".acim", m_TmpPathBuf, [&]{
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
+            });
         }
-        if (ImGuiFileDialog::Instance()->Display("ChooseACIM"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(filePathName);
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
-
         // Scanned Model Loader
         ImGui::SameLine();
         if(ImGui::Button("Load Scanned Model")){
-            ImGuiFileDialog::Instance()->OpenDialog("ChooseScannedModel", "Open Scanned Model", ".ply", ".");
+            OpenFileSelectDialog("Open Scanned Model", ".ply", m_TmpPathBuf, [&]{
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_TmpPathBuf);
+            });
         }
-        if (ImGuiFileDialog::Instance()->Display("ChooseScannedModel"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(filePathName);
-            }
-            ImGuiFileDialog::Instance()->Close();
-        }
-
+        
         // Re-position the ACIM model
         ImGui::Text("Adjust model alignment:");
         ImGui::BeginChild("Adjust model alignment", ImVec2(0, 84), true, ImGuiWindowFlags_HorizontalScrollbar);
@@ -575,7 +542,8 @@ namespace AIAC
                     ImGui::InputText("## Map Saving Path", m_MappingParams.MapSavingPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
                     ImGui::SameLine();
                     if(ImGui::Button(".", ImVec2(0, 0))){
-                        m_IsSavingMap = true;
+                        // m_IsSavingMap = true;
+                        OpenFileSelectDialog("Choose Save Map Path", ".map", m_MappingParams.MapSavingPath);
                     }
                     ImGui::Checkbox("Optimize Map", &m_MappingParams.ToOptimizeMap);
                     ImGui::Checkbox("Save Map", &m_MappingParams.ToSaveMap);
@@ -758,22 +726,19 @@ namespace AIAC
 
             ImGui::Text("Select File:");
             if(ImGui::Button("Map 1", ImVec2(60, 0))){
-                m_CombMapParams.IsSelectingFile = true;
-                m_CombMapParams.FilePathTarget = m_CombMapParams.MapPathA;
+                OpenFileSelectDialog("Select input map 1 path", ".map", m_CombMapParams.MapPathA);
             }
             ImGui::SameLine();
             ImGui::InputText("In Map 1", m_CombMapParams.MapPathA, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
 
             if(ImGui::Button("Map 2", ImVec2(60, 0))){
-                m_CombMapParams.IsSelectingFile = true;
-                m_CombMapParams.FilePathTarget = m_CombMapParams.MapPathB;
+                OpenFileSelectDialog("Select input map 2 path", ".map", m_CombMapParams.MapPathB);
             }
             ImGui::SameLine();
             ImGui::InputText("In Map 2", m_CombMapParams.MapPathB, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
 
             if(ImGui::Button("Output", ImVec2(60, 0))){
-                m_CombMapParams.IsSelectingFile = true;
-                m_CombMapParams.FilePathTarget = m_CombMapParams.OutputPath;
+                OpenFileSelectDialog("Select export map path", ".map", m_CombMapParams.OutputPath);
             }
             ImGui::SameLine();
             ImGui::InputText("In Output Path", m_CombMapParams.OutputPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
@@ -805,23 +770,24 @@ namespace AIAC
         ImGui::Begin("Reconstruct 3D", nullptr);
             ImGui::Text("Select Path:");
             if(ImGui::Button("Import .yml", ImVec2(84, 0))){
-                m_ReconstructParams.IsSelectingTagMapPath = true;
+                OpenFileSelectDialog("Select map path", ".yml", m_ReconstructParams.TagMapPath);
             }
             ImGui::SameLine();
             ImGui::InputText("## Export Path", m_ReconstructParams.TagMapPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
             if(ImGui::Button("Export .ply", ImVec2(84, 0))){
-                m_ReconstructParams.IsSelectingExportPath = true;
+                OpenFileSelectDialog("Select export .ply path", ".ply", m_ReconstructParams.ExportPath);
             }
             ImGui::SameLine();
             ImGui::InputText("## Export Path", m_ReconstructParams.ExportPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
-            
 
             ImGui::PushItemWidth(-54);
 
             ImGui::Text("Reconstruct Params");
             ImGui::SameLine();
-            if(ImGui::Button("Load Param File", ImVec2(84, 0))){
-                m_ReconstructParams.IsSelectingParamPath = true;
+            if(ImGui::Button("Load Param", ImVec2(84, 0))){
+                OpenFileSelectDialog("Load Reconstruction Parameter", ".ini", m_TmpPathBuf, [&]{
+                    LoadReconstructParamsFromFile(m_TmpPathBuf);
+                });
             }
             float sliderValFloat = 0.f;
             int sliderValInt = 0;
@@ -929,6 +895,20 @@ namespace AIAC
         ImGui::End();
     }
 
+    // FIXME: This should not be here, the LayerUI should only handle visualization, not logic
+    void LayerUI::LoadReconstructParamsFromFile(const char *filePath){
+        inih::INIReader reader(filePath);
+        auto section = "Reconstruction Parameters";
+        m_ReconstructParams.RadiusSearch = reader.Get<float>(section, "RadiusSearch");
+        m_ReconstructParams.CreaseAngleThreshold = reader.Get<float>(section, "CreaseAngleThreshold");
+        m_ReconstructParams.MinClusterSize = reader.Get<int>(section, "MinClusterSize");
+        m_ReconstructParams.AABBScaleFactor = reader.Get<float>(section, "AABBScaleFactor");
+        m_ReconstructParams.MaxPolyDist = reader.Get<float>(section, "MaxPolyDist");
+        m_ReconstructParams.MaxPlnDist = reader.Get<float>(section, "MaxPlnDist");
+        m_ReconstructParams.MaxPlnAngle = reader.Get<float>(section, "MaxPlnAngle");
+        m_ReconstructParams.Eps = reader.Get<float>(section, "Eps");
+    }
+
     void LayerUI::ShowSaveCamCalibFileDialog()
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
@@ -947,86 +927,29 @@ namespace AIAC
             m_IsChoosingCamCalibFileSavePath = false;
         }
     }
-    void LayerUI::ShowSaveMapFileDialog()
-    {
+
+    void LayerUI::OpenFileSelectDialog(const char* title, const char* fileExt, char *path, std::function<void()> callback) {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
-        ImGuiFileDialog::Instance()->OpenDialog("ChooseSaveMapPath", "Choose Save Map Path", ".map", ".");
-        if (ImGuiFileDialog::Instance()->Display("ChooseSaveMapPath"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-                ImGuiFileDialog::Instance()->GetFilePathName().copy(m_MappingParams.MapSavingPath, PATH_BUF_SIZE);
-                // std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                // std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-
-                // AIAC_INFO("Saving map to {0}", filePathName.c_str());
-                // AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->optimize();
-                // AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToFile(filePathName);
-
-            }
-            ImGuiFileDialog::Instance()->Close();
-            // AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
-            // AIAC_APP.GetRenderer()->StopMapping();
-            m_IsSavingMap = false;
-        }
+        ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, m_FileSelectDefaultPath);
+        m_FileSelectionTargetBuf = path;
+        m_FileSelectionCallback = callback;
     }
-    void LayerUI::ShowFileSelectDialog(const char* title, const char* fileExt, char *path, bool &controlFlag)
-    {
-        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
-        ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, ".");
-        if (ImGuiFileDialog::Instance()->Display("SelectFileDialog"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
+
+    void LayerUI::ShowFileSelectDialog(){
+        if (ImGuiFileDialog::Instance()->Display("SelectFileDialog")) {
+            if (ImGuiFileDialog::Instance()->IsOk()) {
                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                // std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-
                 AIAC_INFO("Select: {0}", filePathName.c_str());
-                memset(path, 0, PATH_BUF_SIZE);
-                memcpy(path, filePathName.c_str(), filePathName.length());
+                memset(m_FileSelectionTargetBuf, 0, PATH_BUF_SIZE);
+                memcpy(m_FileSelectionTargetBuf, filePathName.c_str(), filePathName.length());
+
+                if(m_FileSelectionCallback) m_FileSelectionCallback();
             }
             ImGuiFileDialog::Instance()->Close();
-            controlFlag = false;
         }
+        m_FileSelectDefaultPath = ImGuiFileDialog::Instance()->GetCurrentPath();
+        if (m_FileSelectDefaultPath[m_FileSelectDefaultPath.length()-1] != '/') {
+            m_FileSelectDefaultPath += "/";
+        };
     }
-    
-    // TODO: Replace this with ShowFileSelectDialog
-    void LayerUI::ShowMapFileDialog(char *path)
-    {
-        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
-        ImGuiFileDialog::Instance()->OpenDialog("ChooseMapPath", "Choose Map Path", ".map", ".");
-        if (ImGuiFileDialog::Instance()->Display("ChooseMapPath"))
-        {
-            if (ImGuiFileDialog::Instance()->IsOk())
-            {
-                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-
-                AIAC_INFO("Select: {0}", filePathName.c_str());
-                memset(path, 0, PATH_BUF_SIZE);
-                memcpy(path, filePathName.c_str(), filePathName.length());
-            }
-            ImGuiFileDialog::Instance()->Close();
-            m_CombMapParams.IsSelectingFile = false;
-        }
-    }
-    // void LayerUI::ShowReconExportFilePathDialog(){
-    //     auto path = m_ReconstructParams.ExportPath;
-    //     ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
-    //     ImGuiFileDialog::Instance()->OpenDialog("Choose Export Path", "Choose export ply path", ".ply", ".");
-    //     if (ImGuiFileDialog::Instance()->Display("Choose Export Path"))
-    //     {
-    //         if (ImGuiFileDialog::Instance()->IsOk())
-    //         {
-    //             std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-    //             std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-
-    //             AIAC_INFO("Select: {0}", filePathName.c_str());
-    //             memset(path, 0, PATH_BUF_SIZE);
-    //             memcpy(path, filePathName.c_str(), filePathName.length());
-    //         }
-    //         ImGuiFileDialog::Instance()->Close();
-    //         m_ReconstructParams.IsSelectingExportPath = false;
-    //     }
-    // }
 }
