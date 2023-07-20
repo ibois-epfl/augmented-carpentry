@@ -76,6 +76,7 @@ public:
 
     public:  __always_inline
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
+        std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
 
     private:
         glm::vec3 m_Start;

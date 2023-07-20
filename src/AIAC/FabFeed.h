@@ -3,6 +3,7 @@
 #include "AIAC/ACInfoToolheadManager.h"
 #include "AIAC/ACInfoToolhead.h"
 #include "AIAC/ACInfoModel.h"
+#include "AIAC/GOSys/GOPrimitive.h"
 
 ///< timber components
 #define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
@@ -21,7 +22,16 @@ namespace AIAC
         public:
             FabFeed()
             {
-                
+                auto pt1 = GOPoint::Add(0.f, 0.f, 0.f);
+                auto pt2 = GOPoint::Add(5.f, 5.f, 5.f);
+                m_HoleLine2Start = GOLine::Add(*pt1, *pt2);
+                m_HoleLine2Start->SetColor(GOColor::CYAN);
+
+                m_HoleLine2End = GOLine::Add(*pt1, *pt2);
+                m_HoleLine2End->SetColor(GOColor::RED);
+                // GOPoint::Remove(pt1->GetId());
+                // GOPoint::Remove(pt1->GetId());
+
             };
 
         public:
@@ -38,6 +48,9 @@ namespace AIAC
             bool ComputeCutCircularSawFeed();
 
         private:
+            std::shared_ptr<GOLine> m_HoleLine2Start;
+            std::shared_ptr<GOLine> m_HoleLine2End;
+
 
 
         // private:
