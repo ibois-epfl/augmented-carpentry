@@ -2,7 +2,7 @@
 #include "AIAC/Config.h"
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/Application.h"
-
+#include <filesystem>
 
 namespace AIAC
 {
@@ -62,6 +62,13 @@ namespace AIAC
 
     void SLAMStopMappingEvent::OnSLAMStopMapping()
     {
+        // create folder
+        auto path = m_SavePath.substr(0, m_SavePath.find_last_of("/"));
+        auto folderCreatedSucceed = std::filesystem::create_directories(path);
+        if(folderCreatedSucceed){
+            AIAC_INFO("Create folder: {}", path);
+        }
+
         AIAC_INFO("Stop mapping");
         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
         AIAC_APP.GetRenderer()->StopMapping();

@@ -582,13 +582,13 @@ namespace AIAC
                     int sliderValInt = 0;
 
                     sliderValFloat = 0.f;
-                    ImGui::SliderFloat("## Radius Search", &sliderValFloat, -0.3f, 0.3f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## Radius Search", &sliderValFloat, -1.0f, 1.0f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
                     if (sliderValFloat != 0.f) m_ReconstructParams.RadiusSearch += sliderValFloat;
                     ImGui::SameLine();
                     ImGui::Text("%.1f", m_ReconstructParams.RadiusSearch);
 
                     sliderValFloat = 0.f;
-                    ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -0.3f, 0.3f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -1.0f, 1.0f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
                     if (sliderValFloat != 0.f) m_ReconstructParams.CreaseAngleThreshold += sliderValFloat;
                     ImGui::SameLine();
                     ImGui::Text("%.1f", m_ReconstructParams.CreaseAngleThreshold);
@@ -600,32 +600,32 @@ namespace AIAC
                     ImGui::Text("%d", m_ReconstructParams.MinClusterSize);
 
                     sliderValFloat = 0.f;
-                    ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -0.3f, 0.3f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -1.0f, 1.0f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
                     if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnDist += sliderValFloat;
                     ImGui::SameLine();
                     ImGui::Text("%.1f", m_ReconstructParams.MaxPlnDist);
 
                     sliderValFloat = 0.f;
-                    ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -0.3f, 0.3f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -1.0f, 1.0f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
                     if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnAngle += sliderValFloat;
                     ImGui::SameLine();
                     ImGui::Text("%.1f", m_ReconstructParams.MaxPlnAngle);
 
                     sliderValFloat = 0.f;
-                    ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -0.3f, 0.3f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -1.0f, 1.0f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
                     if (sliderValFloat != 0.f) m_ReconstructParams.AABBScaleFactor += sliderValFloat;
                     ImGui::SameLine();
                     ImGui::Text("%.1f", m_ReconstructParams.AABBScaleFactor);
 
                     sliderValFloat = 0.f;
-                    ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -0.3f, 0.3f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -1.0f, 1.0f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
                     if (sliderValFloat != 0.f) m_ReconstructParams.MaxPolyDist += sliderValFloat;
                     ImGui::SameLine();
                     ImGui::Text("%.1f", m_ReconstructParams.MaxPolyDist);
 
                     sliderValFloat = 0.f;
                     ImGui::PushItemWidth(-54);
-                    ImGui::SliderFloat("## Eps", &sliderValFloat, -0.3f, 0.3f, "Eps", ImGuiSliderFlags_AlwaysClamp);
+                    ImGui::SliderFloat("## Eps", &sliderValFloat, -1.0f, 1.0f, "Eps", ImGuiSliderFlags_AlwaysClamp);
                     ImGui::PopItemWidth();
                     if (sliderValFloat > 0.f) m_ReconstructParams.Eps *= 2;
                     else if (sliderValFloat < 0.f) m_ReconstructParams.Eps /= 2;
@@ -819,49 +819,65 @@ namespace AIAC
             int sliderValInt = 0;
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## Radius Search", &sliderValFloat, -0.3f, 0.3f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text(" (2.0)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## Radius Search", &sliderValFloat, -1.0f, 1.0f, "Radius Search", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValFloat != 0.f) m_ReconstructParams.RadiusSearch += sliderValFloat;
             ImGui::SameLine();
             ImGui::Text("%.1f", m_ReconstructParams.RadiusSearch);
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -0.3f, 0.3f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text(" (5.0)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## Crease Angle Threshold", &sliderValFloat, -1.0f, 1.0f, "Crease Angle Threshold", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValFloat != 0.f) m_ReconstructParams.CreaseAngleThreshold += sliderValFloat;
             ImGui::SameLine();
             ImGui::Text("%.1f", m_ReconstructParams.CreaseAngleThreshold);
 
             sliderValInt = 0;
+            ImGui::Text("  (1) ");
+            ImGui::SameLine();
             ImGui::SliderInt("## Min Cluster Size", &sliderValInt, -3, 3, "Min Cluster Size", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValInt != 0) m_ReconstructParams.MinClusterSize += sliderValInt;
             ImGui::SameLine();
             ImGui::Text("%d", m_ReconstructParams.MinClusterSize);
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -0.3f, 0.3f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text(" (1.0)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## Max Pln Dist", &sliderValFloat, -1.0f, 1.0f, "Max Pln Dist", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnDist += sliderValFloat;
             ImGui::SameLine();
             ImGui::Text("%.1f", m_ReconstructParams.MaxPlnDist);
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -0.3f, 0.3f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text(" (5.0)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## Max Pln Angle", &sliderValFloat, -1.0f, 1.0f, "Max Pln Angle", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValFloat != 0.f) m_ReconstructParams.MaxPlnAngle += sliderValFloat;
             ImGui::SameLine();
             ImGui::Text("%.1f", m_ReconstructParams.MaxPlnAngle);
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -0.3f, 0.3f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text(" (1.1)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## AABB Scale Factor", &sliderValFloat, -1.0f, 1.0f, "AABB Scale Factor", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValFloat != 0.f) m_ReconstructParams.AABBScaleFactor += sliderValFloat;
             ImGui::SameLine();
             ImGui::Text("%.1f", m_ReconstructParams.AABBScaleFactor);
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -0.3f, 0.3f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text(" (1.0)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## Max Poly Dist", &sliderValFloat, -1.0f, 1.0f, "Max Poly Dist", ImGuiSliderFlags_AlwaysClamp);
             if (sliderValFloat != 0.f) m_ReconstructParams.MaxPolyDist += sliderValFloat;
             ImGui::SameLine();
             ImGui::Text("%.1f", m_ReconstructParams.MaxPolyDist);
 
             sliderValFloat = 0.f;
-            ImGui::SliderFloat("## Eps", &sliderValFloat, -0.3f, 0.3f, "Eps", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::Text("(1e-5)");
+            ImGui::SameLine();
+            ImGui::SliderFloat("## Eps", &sliderValFloat, -1.0f, 1.0f, "Eps", ImGuiSliderFlags_AlwaysClamp);
             ImGui::PopItemWidth();
             if (sliderValFloat > 0.f) m_ReconstructParams.Eps *= 2;
             else if (sliderValFloat < 0.f) m_ReconstructParams.Eps /= 2;
