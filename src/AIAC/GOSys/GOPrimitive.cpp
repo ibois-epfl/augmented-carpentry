@@ -112,15 +112,6 @@ namespace AIAC
         return ptrGO;
     }
 
-    void GOLine::InitGLObject()
-    {
-        ClearGLObject();
-        std::vector<glm::vec3> vertices;
-        vertices.push_back(m_PStart.GetPosition());
-        vertices.push_back(m_PEnd.GetPosition());
-        m_GLObjects = CreatePolyline(vertices, false, m_Color, m_Weight);
-    }
-
     std::shared_ptr<GOLine> GOLine::Get(const uint32_t& id)
     {
         return AIAC_GOREG->GetGO<GOLine>(id);
@@ -129,6 +120,23 @@ namespace AIAC
     std::vector<std::shared_ptr<GOLine>> GOLine::GetAll()
     {
         return AIAC_GOREG->GetAllGOs<GOLine>();
+    }
+
+    float GOLine::ComputeAngle(std::shared_ptr<GOLine> ptrGO2)
+    {
+        glm::vec3 v1 = this->m_PEnd.GetPosition() - this->m_PStart.GetPosition();
+        glm::vec3 v2 = ptrGO2->m_PEnd.GetPosition() - ptrGO2->m_PStart.GetPosition();
+        auto angle = glm::acos(glm::dot(v1, v2) / (glm::length(v1) * glm::length(v2)));
+        return angle * 180.0f / glm::pi<float>();
+    }
+
+    void GOLine::InitGLObject()
+    {
+        ClearGLObject();
+        std::vector<glm::vec3> vertices;
+        vertices.push_back(m_PStart.GetPosition());
+        vertices.push_back(m_PEnd.GetPosition());
+        m_GLObjects = CreatePolyline(vertices, false, m_Color, m_Weight);
     }
 
 

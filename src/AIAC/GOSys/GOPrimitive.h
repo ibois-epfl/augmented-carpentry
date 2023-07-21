@@ -198,6 +198,14 @@ namespace AIAC
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; }
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
 
+        /**
+         * @brief Compute the angle between the current line object and another one
+         * 
+         * @param ptrGO2 the second line
+         * @return float the angle in degrees
+         */
+        float ComputeAngle(std::shared_ptr<GOLine> ptrGO2);
+
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);

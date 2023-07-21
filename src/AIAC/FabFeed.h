@@ -4,6 +4,7 @@
 #include "AIAC/ACInfoToolhead.h"
 #include "AIAC/ACInfoModel.h"
 #include "AIAC/GOSys/GOPrimitive.h"
+#include "AIAC/Config.h"
 
 ///< timber components
 #define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
@@ -22,16 +23,21 @@ namespace AIAC
         public:
             FabFeed()
             {
+                this->m_ScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
+
                 auto pt1 = GOPoint::Add(0.f, 0.f, 0.f);
                 auto pt2 = GOPoint::Add(5.f, 5.f, 5.f);
+                pt1->SetVisibility(false);
+                pt2->SetVisibility(false);
                 m_HoleLine2Start = GOLine::Add(*pt1, *pt2);
                 m_HoleLine2Start->SetColor(GOColor::CYAN);
 
                 m_HoleLine2End = GOLine::Add(*pt1, *pt2);
                 m_HoleLine2End->SetColor(GOColor::RED);
-                // GOPoint::Remove(pt1->GetId());
-                // GOPoint::Remove(pt1->GetId());
 
+                // FIXME: why remove is not working anymorer?
+                // GOPoint::Remove(pt1->GetId());
+                // GOPoint::Remove(pt1->GetId());
             };
 
         public:
@@ -48,7 +54,11 @@ namespace AIAC
             bool ComputeCutCircularSawFeed();
 
         private:
+            /// Scale factor
+            float m_ScaleFactor = m_ScaleFactor;
+            /// the line from the drillbit tip to the start of the hole (aka start distance)
             std::shared_ptr<GOLine> m_HoleLine2Start;
+            /// the line from the drillbit tip to the end of the hole (aka depth)
             std::shared_ptr<GOLine> m_HoleLine2End;
 
 

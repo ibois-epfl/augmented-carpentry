@@ -1,8 +1,7 @@
 #include "FabFeed.h"
-#include "AIAC/Log.h"
 #include "AIAC/Application.h"
 #include "AIAC/GOSys/GOPrimitive.h"
-#include "AIAC/Config.h"
+#include "AIAC/Log.h"
 
 namespace AIAC
 {
@@ -35,10 +34,15 @@ namespace AIAC
     bool FabFeed::ComputeHoleFeed()
     {
         /*
+         Feeds (in chronological order):
+         - (i) position
+         - (ii) angle
+         - (iii) depth
+
          *    x Tb
          *     \
          *      \
-         *       \
+         *       \ v3
          *        \
          *         \
          *          x Tt
@@ -48,25 +52,33 @@ namespace AIAC
          *          .     x Hs
          *       v1 .    /
          *          .   /
-         *          .  /
+         *          .  / v4
          *          . /
          *          ./
          *          x He
-         * 
+         
          */
         auto hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
-        
-        this->m_HoleLine2Start->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,
-                                     *hole->GetStartPointGO());
+
+        this->m_HoleLine2Start->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,  // start
+                                       *hole->GetStartPointGO());                       // end
         this->m_HoleLine2Start->InitGLObject();
 
-        this->m_HoleLine2End->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,
-                                     *hole->GetEndPointGO());
+        this->m_HoleLine2End->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,    // start
+                                     *hole->GetEndPointGO());                           // end
         this->m_HoleLine2End->InitGLObject();
 
+        // (i) start distance
+        float dist = this->m_HoleLine2Start->GetLength();
+        float distScaled = dist * this->m_ScaleFactor;
+        AIAC_INFO(">> start distance: " + std::to_string(distScaled));
+
+        // (ii) angle
+        float angle = this->m_HoleLine2Start->ComputeAngle(this->m_HoleLine2End);
+        AIAC_INFO(">> >> angle: " + std::to_string(angle));
 
 
-        
+
 
         return true;
     }
