@@ -1,11 +1,8 @@
 #include "CameraCalibrator.h"
 
 namespace AIAC {
-    using namespace std;
-    using namespace cv;
-
 //! [board_corners]
-    void CameraCalibrator::CalcBoardCornerPositions(vector<Point3f> &corners) const {
+    void CameraCalibrator::CalcBoardCornerPositions(std::vector<cv::Point3f> &corners) const {
         corners.clear();
 
         switch (calibrationPattern) {
@@ -13,13 +10,13 @@ namespace AIAC {
             case CameraCalibrator::CIRCLES_GRID:
                 for (int i = 0; i < boardSize.height; ++i)
                     for (int j = 0; j < boardSize.width; ++j)
-                        corners.push_back(Point3f(j * squareSize, i * squareSize, 0));
+                        corners.push_back(cv::Point3f(j * squareSize, i * squareSize, 0));
                 break;
 
             case CameraCalibrator::ASYMMETRIC_CIRCLES_GRID:
                 for (int i = 0; i < boardSize.height; i++)
                     for (int j = 0; j < boardSize.width; j++)
-                        corners.push_back(Point3f((2 * j + i % 2) * squareSize, i * squareSize, 0));
+                        corners.push_back(cv::Point3f((2 * j + i % 2) * squareSize, i * squareSize, 0));
                 break;
             default:
                 break;
@@ -37,17 +34,17 @@ namespace AIAC {
         }
 
         //! [fixed_aspect]
-        cameraMatrix = Mat::eye(3, 3, CV_32F);
-        if (!useFisheye && calibFlag & CALIB_FIX_ASPECT_RATIO)
+        cameraMatrix = cv::Mat::eye(3, 3, CV_32F);
+        if (!useFisheye && calibFlag & cv::CALIB_FIX_ASPECT_RATIO)
             cameraMatrix.at<double>(0, 0) = aspectRatio;
         //! [fixed_aspect]
         if (useFisheye) {
-            distCoeffs = Mat::zeros(4, 1, CV_32F);
+            distCoeffs = cv::Mat::zeros(4, 1, CV_32F);
         } else {
-            distCoeffs = Mat::zeros(8, 1, CV_32F);
+            distCoeffs = cv::Mat::zeros(8, 1, CV_32F);
         }
 
-        vector<vector<Point3f> > objectPoints(1);
+        std::vector<std::vector<cv::Point3f> > objectPoints(1);
         CalcBoardCornerPositions(objectPoints[0]);
         objectPoints[0][boardSize.width - 1].x = objectPoints[0][0].x + gridWidth;
         auto newObjPoints = objectPoints[0];
@@ -58,7 +55,7 @@ namespace AIAC {
         double rms;
 
         if (useFisheye) {
-            fisheye::calibrate(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs,
+            cv::fisheye::calibrate(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs,
                                rvecs, tvecs, calibFlag);
         } else {
             int iFixedPoint = -1;
@@ -66,7 +63,7 @@ namespace AIAC {
                 iFixedPoint = boardSize.width - 1;
             calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
                               cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
-                              calibFlag | CALIB_USE_LU);
+                              calibFlag | cv::CALIB_USE_LU);
         }
 
     }
@@ -167,7 +164,7 @@ namespace AIAC {
     }
 
     void CameraCalibrator::Save(const std::string &filename) {
-        cv::FileStorage fs(filename, FileStorage::WRITE);
+        cv::FileStorage fs(filename, cv::FileStorage::WRITE);
         fs << "image_width" << imageSize.width;
         fs << "image_height" << imageSize.height;
         cameraMatrix.convertTo(cameraMatrix, CV_32F);

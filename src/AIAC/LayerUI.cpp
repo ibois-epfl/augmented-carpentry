@@ -448,6 +448,12 @@ namespace AIAC
         if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
 
+        ImGui::Text("Toolhead Classifier:");
+        ImGui::BeginChild("toolhead_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
+        if(ImGui::Button("Detect Toolhead", ImVec2(-1, 40)))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->DetectToolhead();
+        ImGui::EndChild();
+
         ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);

@@ -5,6 +5,10 @@ include(CTest)
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+if (MSVC)
+    add_compile_options(/permissive-) 
+endif()
 
 #TODO: check for Opencv 4.5.4 that cannot be installed or detected
 
@@ -24,6 +28,7 @@ file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the corr
     "src/utils/*"
     "src/AIAC.h"
     )
+
 
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ACApp.cpp
@@ -156,6 +161,9 @@ if(TTool_FOUND)
     message(STATUS "TTool libraries: ${TTool_LIBRARIES}")
 endif()
 
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/deps/TTool/deps/libtorch")
+find_package(Torch REQUIRED)
+
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${OPENGL_INCLUDE_DIRS}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
@@ -174,6 +182,7 @@ target_link_libraries(${PROJECT_NAME}
     assimp
     GLU
     TBB::tbb
+    ${TORCH_LIBRARIES}
     )
 
 #------------------------------------------------------------------------------------------------------------
@@ -181,34 +190,34 @@ target_link_libraries(${PROJECT_NAME}
 #------------------------------------------------------------------------------------------------------------
 
 # Download and update submodules with latest remote version
-find_package(Git QUIET)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if(GIT_SUBMODULE)
-        message(STATUS "Submodule update with latest commit")
+# find_package(Git QUIET)
+# if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+#     option(GIT_SUBMODULE "Check submodules during build" ON)
+#     if(GIT_SUBMODULE)
+#         message(STATUS "Submodule update with latest commit")
 
-        execute_process(
-            COMMAND ${GIT_EXECUTABLE} --version
-            OUTPUT_VARIABLE GIT_VERSION_STRING
-        )
-        string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
-        set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
-        set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
-        set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
+#         execute_process(
+#             COMMAND ${GIT_EXECUTABLE} --version
+#             OUTPUT_VARIABLE GIT_VERSION_STRING
+#         )
+#         string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
+#         set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
+#         set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
+#         set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
 
-        if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
-            message(FATAL_ERROR "Git version 1.8 or greater is required.")
-        endif()
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif()
-    endif()
-endif()
+#         if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
+#             message(FATAL_ERROR "Git version 1.8 or greater is required.")
+#         endif()
+#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
+#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
+#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
+#         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+#             message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+#         endif()
+#     endif()
+# endif()
 
 
 #------------------------------------------------------------------------------------------------------------

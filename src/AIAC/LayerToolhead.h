@@ -31,6 +31,7 @@ namespace AIAC
         /// @brief Destroy the  ttool view and recreate a new ttool object with given camera params
         void ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize);
 
+        void DetectToolhead();
 
         /// @brief Update the ttool state from the UI
         void UpdateToolheadStateUI();

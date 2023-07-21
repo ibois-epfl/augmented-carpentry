@@ -1,5 +1,7 @@
 #pragma once
 
+#include <torch/script.h>
+
 #include "AIAC/GlHeader.h"
 
 #include "AIAC/Config.h"

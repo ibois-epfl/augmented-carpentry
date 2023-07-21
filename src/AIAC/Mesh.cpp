@@ -2,8 +2,6 @@
 
 #include "Mesh.h"
 
-using namespace std;
-
 //FIXME:: do we still need this class?
 namespace AIAC
 {

@@ -3,8 +3,6 @@
 #include "GeometryUtils.h"
 #include "ScannedModel.h"
 
-using namespace std;
-
 namespace AIAC
 {
     bool ScannedModel::Load(std::string path) {
@@ -30,7 +28,7 @@ namespace AIAC
 
         auto vertices = m_Mesh->GetVertices();
         auto basePt = vertices[0];
-        vector<Neighbor> neighbors;
+        std::vector<Neighbor> neighbors;
 
         for (auto& v : vertices) {
             auto vec = v - basePt;
@@ -39,7 +37,7 @@ namespace AIAC
         }
 
         // sort by distance
-        sort(neighbors.begin(), neighbors.end(), [](Neighbor& a, Neighbor& b) {
+        std::sort(neighbors.begin(), neighbors.end(), [](Neighbor& a, Neighbor& b) {
             return a.dist < b.dist;
         });
 
@@ -61,7 +59,7 @@ namespace AIAC
         // if it's in the correct order, test1 should be ~0,
         // therefore, when test1 > test2, it means that the order is wrong
         if (test1 > test2) {
-            swap(neighbors[1], neighbors[2]);
+            std::swap(neighbors[1], neighbors[2]);
         }
 
         basePt = neighbors[4].pt;
@@ -72,7 +70,7 @@ namespace AIAC
         // if it's in the correct order, test1 should be ~0,
         // therefore, when test1 > test2, it means that the order is wrong
         if (test1 > test2) {
-            swap(neighbors[5], neighbors[6]);
+            std::swap(neighbors[5], neighbors[6]);
         }
 
         // re-order the vertices, making it a counter-clockwise order start from the longer edge
