@@ -65,6 +65,20 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().ReplaceCvMat(currentFrame);
     }
 
+    void LayerToolhead::DetectToolhead()
+    {
+        cv::Mat currentFrame;
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+
+        std::string toolhead = TTool->Classify(currentFrame);
+
+        this->ACInfoToolheadManager->SetActiveToolhead(toolhead);
+        this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(this->IsShowToolheadGOInfo);
+
+        int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
+        this->TTool->SetObjectID(id);
+    }
+
     void LayerToolhead::ReloadCameraFromFile()
     {
         TTool->DestrolView();
