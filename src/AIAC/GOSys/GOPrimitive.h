@@ -78,6 +78,7 @@ namespace AIAC
         inline int SetWeight(float weight) { m_Weight = weight; InitGLObject(); return m_Id;}
 
         virtual void Transform(const glm::mat4x4& transformMat) {};
+        virtual void Translate(const glm::vec3& translation) {};
 
         virtual void SetValueFrom(const std::shared_ptr<GOPrimitive>& ptrGO) { AIAC_ERROR("Not Implemented"); };
         inline void Draw() { for(auto glObject : m_GLObjects) glObject->Draw(); }
@@ -193,10 +194,19 @@ namespace AIAC
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
+        
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; }
         inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
+        inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); }
+        inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); }
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; }
+        
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
+        inline void ExtendFromStart(float length) { m_PStart.SetPosition(m_PStart.GetPosition() - glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
+        inline void ExtendFromEnd(float length) { m_PEnd.SetPosition(m_PEnd.GetPosition() + glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
+
+        inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
+        inline glm::vec3 GetNormalValues() const { return glm::normalize(glm::cross(m_PEnd.GetPosition() - m_PStart.GetPosition(), glm::vec3(0, 0, 1))); }
 
         /**
          * @brief Compute the angle between the current line object and another one
@@ -209,6 +219,12 @@ namespace AIAC
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);
+            InitGLObject();
+        }
+
+        inline void Translate(const glm::vec3& translation) /* override */ {
+            m_PStart.SetPosition(m_PStart.GetPosition() + translation);
+            m_PEnd.SetPosition(m_PEnd.GetPosition() + translation);
             InitGLObject();
         }
 
