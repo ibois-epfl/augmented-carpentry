@@ -2,11 +2,16 @@
 #include "AIAC/Application.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Log.h"
+#include "utils/utils.h"
 
 namespace AIAC
 {
     bool FabFeed::Compute()
     {
+        if(m_CurrentFeedbackVisualizer != nullptr){
+            m_CurrentFeedbackVisualizer->Deactivate();
+        }
+
         if (AC_FF_TOOL->GetTypeString() == "DRILLBIT")
             if (AC_FF_COMP->GetTypeString() == "HOLE")
                 return ComputeHoleFeed();
@@ -23,8 +28,11 @@ namespace AIAC
             else
                 return false;
         else if (AC_FF_TOOL->GetTypeString() == "CHAINSAW")
-            if (AC_FF_COMP->GetTypeString() == "CUT")
+            if (AC_FF_COMP->GetTypeString() == "CUT") {
+                m_CutChainSawFeedVisualizer.Activate();
+                m_CurrentFeedbackVisualizer = &m_CutChainSawFeedVisualizer;
                 return ComputeCutChainSawFeed();
+            }
             else
                 return false;
         else
@@ -61,12 +69,10 @@ namespace AIAC
         auto hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
 
         this->m_HoleLine2Start->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,  // start
-                                       *hole->GetStartPointGO());                       // end
-        this->m_HoleLine2Start->InitGLObject();
+                                       *hole->GetStartPointGO());
 
         this->m_HoleLine2End->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,    // start
                                      *hole->GetEndPointGO());                           // end
-        this->m_HoleLine2End->InitGLObject();
 
         // (i) start distance
         float dist = this->m_HoleLine2Start->GetLength();
@@ -92,10 +98,67 @@ namespace AIAC
     bool FabFeed::ComputeCutChainSawFeed()
     {
         AIAC_INFO("ComputeCutChainSawFeed>>>>");
+
+        // calculate tool normal
+        auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().StartGO->GetPosition();
+        auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().EndGO->GetPosition();
+        auto toolMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
+        auto toolNormalVec = glm::cross((toolStartPt - toolMidPt), (toolEndPt - toolMidPt));
+
+        std::string nearestParallelFaceID;
+        float nearestParallelFaceDist = 1e9f;
+        vector<std::string> parallelFaceIDs;
+        vector<std::string> perpendicularFaceIDs;
+
         TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
-        // calculate normal
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
-            AC_FF_TOOL->GetData<ChainSawData>().StartACIT
+            cout << faceID << endl;
+            cout << glm::to_string(faceInfo.GetNormal()) << endl;
+            cout << glm::to_string(faceInfo.GetCenter()) << endl;
+            
+            if (faceInfo.IsExposed()) continue;
+            auto faceNormal = faceInfo.GetNormal();
+            auto theta = glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec)));
+            AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
+
+            // for parallel faces, find the nearest one
+            if(theta < glm::radians(45.0f) || theta > glm::radians(-45.0f)){
+                parallelFaceIDs.push_back(faceID);
+                auto distStart = glm::distance(faceInfo.GetCenter(), toolStartPt);
+                auto distEnd = glm::distance(faceInfo.GetCenter(), toolEndPt);
+                auto distMid = glm::distance(faceInfo.GetCenter(), toolMidPt);
+                auto totalDist = distStart + distEnd + distMid;
+
+                
+                AIAC_INFO(">> " + faceID + ": totalDist: " + std::to_string(totalDist));
+
+                // update nearest parallel face
+                if(nearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist){
+                    nearestParallelFaceID = faceID;
+                    nearestParallelFaceDist = totalDist;
+                }
+            } else {
+                perpendicularFaceIDs.push_back(faceID);
+            }
+            //
+        }
+
+        // Update the visualizer for the closest parallel face
+        if(!nearestParallelFaceID.empty()){
+            AIAC_INFO(">> nearestParallelFaceID: " + nearestParallelFaceID);
+            // find the projection point of the three points on the face
+            auto faceInfo = cut->GetFace(nearestParallelFaceID);
+            auto faceNormal = faceInfo.GetNormal();
+            auto faceCenter = faceInfo.GetCenter();
+
+            auto projStart = GetProjectionPointOnPlane(faceNormal, faceCenter, toolStartPt);
+            auto projEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolEndPt);
+            auto projMid = GetProjectionPointOnPlane(faceNormal, faceCenter, toolMidPt);
+
+            // update the visualizer
+            this->m_CutChainSawFeedVisualizer.LineStart->SetPts(projStart, projStart);
+            this->m_CutChainSawFeedVisualizer.LineEnd->SetPts(projEnd, projEnd);
+            this->m_CutChainSawFeedVisualizer.LineMid->SetPts(projMid, projMid);
         }
 
         return true;
