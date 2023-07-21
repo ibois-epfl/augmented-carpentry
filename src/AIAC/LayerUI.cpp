@@ -773,7 +773,7 @@ namespace AIAC
                 OpenFileSelectDialog("Select map path", ".yml", m_ReconstructParams.TagMapPath);
             }
             ImGui::SameLine();
-            ImGui::InputText("## Export Path", m_ReconstructParams.TagMapPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
+            ImGui::InputText("## Tag Map Path", m_ReconstructParams.TagMapPath, PATH_BUF_SIZE, ImGuiInputTextFlags_AutoSelectAll);
             if(ImGui::Button("Export .ply", ImVec2(84, 0))){
                 OpenFileSelectDialog("Select export .ply path", ".ply", m_ReconstructParams.ExportPath);
             }
@@ -784,7 +784,7 @@ namespace AIAC
 
             ImGui::Text("Reconstruct Params");
             ImGui::SameLine();
-            if(ImGui::Button("Load Param", ImVec2(84, 0))){
+            if(ImGui::Button("Load from file", ImVec2(106, 0))){
                 OpenFileSelectDialog("Load Reconstruction Parameter", ".ini", m_TmpPathBuf, [&]{
                     LoadReconstructParamsFromFile(m_TmpPathBuf);
                 });
@@ -865,7 +865,7 @@ namespace AIAC
             if(ImGui::Button("Cancel", ImVec2(80, 0))){ m_IsReconstructing3D = false; }
             ImGui::SameLine();
             if(ImGui::Button("Confirm", ImVec2(80, 0))){
-                if(strlen(m_ReconstructParams.TagMapPath) == 0 || strlen(m_ReconstructParams.TagMapPath) == 0){
+                if(strlen(m_ReconstructParams.TagMapPath) == 0 || strlen(m_ReconstructParams.ExportPath) == 0){
                     AIAC_ERROR("Path not selected.");
                 } else {                    
                     // Reconstruct 3D
