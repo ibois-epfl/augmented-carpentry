@@ -1,902 +1,902 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0"?>
 <acim version="0.1.0">
-    <timber id="24c4fb33-67fa-4c27-b42c-c0dc7ca5cd91">
-        <executed>NotDone</executed>
-        <current>__NOT_SET__</current>
-        <executed>NotDone</executed>
-        <bbox>
-            <corner id="0">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
-            <corner id="1">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
-            <corner id="2">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
-            <corner id="3">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
-            <corner id="4">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
-            <corner id="5">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
-            <corner id="6">1.85073895234 0.129643784514 0.130034050856</corner>
-            <corner id="7">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
-            </bbox>
-        <hole id="Hole#1">
-            <state>NotDone</state>
-            <neighbors>-1</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>0.171164716736 0.0874013529763 0.130030809657</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>0.171164716736 0.0874013529763 6.34902733979e-16</coordinates>
-                </end>
-            <radius>0.025</radius>
-            </hole>
-        <hole id="Hole#2">
-            <state>NotDone</state>
-            <neighbors>-1</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>0.815633178699 0.129637139768 0.0479175711147</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>0.76526171789 0.0326758083005 0.130030809657</coordinates>
-                </end>
-            <radius>0.018</radius>
-            </hole>
-        <hole id="Hole#3">
-            <state>NotDone</state>
-            <neighbors>4</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>1.26549922563 0.105362930915 0.0489589816389</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>1.26714600769 0.129637139768 0.0643466036399</coordinates>
-                </end>
-            <radius>0.029</radius>
-            </hole>
-        <hole id="Hole#4">
-            <state>NotDone</state>
-            <neighbors>3</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>1.26398468266 0.0830379779115 0.0348070090622</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>1.26549922563 0.105362930915 0.0489589816389</coordinates>
-                </end>
-            <radius>0.015</radius>
-            </hole>
-        <hole id="Hole#5">
-            <state>NotDone</state>
-            <neighbors>-1</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>1.38456200479 0.129637139768 0.0643466036399</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>1.34625688456 0.105275417713 0.0489035062958</coordinates>
-                </end>
-            <radius>0.015</radius>
-            </hole>
-        <hole id="Hole#6">
-            <state>NotDone</state>
-            <neighbors>7</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>1.70321155690 0.0851270568901 0.0159007973871</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>1.70479729814 0.0851863660335 5.93474228436e-16</coordinates>
-                </end>
-            <radius>0.022</radius>
-            </hole>
-        <hole id="Hole#7">
-            <state>NotDone</state>
-            <neighbors>6</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>1.69312604933 0.0847498435101 0.117031806619</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>1.70321155690 0.0851270568901 0.0159007973871</coordinates>
-                </end>
-            <radius>0.012</radius>
-            </hole>
-        <hole id="Hole#8">
-            <state>NotDone</state>
-            <neighbors>6</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>1.69182969577 0.084701357908 0.130030809657</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>1.69312604933 0.0847498435101 0.117031806619</coordinates>
-                </end>
-            <radius>0.022</radius>
-            </hole>
-        <hole id="Hole#9">
-            <state>NotDone</state>
-            <neighbors>10</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>0.367173204277 0.0442065877345 0.1157066508</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>0.314864109457 0.0610070491341 0.0156337448858</coordinates>
-                </end>
-            <radius>0.013</radius>
-            </hole>
-        <hole id="Hole#10">
-            <state>NotDone</state>
-            <neighbors>9</neighbors>
-            <start>
-                <exposed>False</exposed>
-                <coordinates>0.374660583373 0.0418018161756 0.130030809657</coordinates>
-                </start>
-            <end>
-                <exposed>False</exposed>
-                <coordinates>0.367173204277 0.0442065877345 0.1157066508</coordinates>
-                </end>
-            <radius>0.027</radius>
-            </hole>
-        <cut id="Cut#1">
-            <state>NotDone</state>
-            <center>0.543917917169 0.064821892257 0.10202644336</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 1 9 10</edges>
-                    <corners>
-                        <corner id="0">0.583187494871 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="1">0.436928047461 4.4408920985e-16 0.130030809657</corner>
-                        <corner id="2">0.436928047461 6.66133814775e-16 0.0740188358647</corner>
-                        <corner id="3">0.583187494871 6.66133814775e-16 0.0740188358647</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 2 5 7</edges>
-                    <corners>
-                        <corner id="0">0.650907786877 0.129637139768 0.0740188358647</corner>
-                        <corner id="1">0.583187494871 6.66133814775e-16 0.0740188358647</corner>
-                        <corner id="2">0.583187494871 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="3">0.650907786877 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>1 3 6 8</edges>
-                    <corners>
-                        <corner id="0">0.436928047461 4.4408920985e-16 0.130030809657</corner>
-                        <corner id="1">0.436928047461 6.66133814775e-16 0.0740188358647</corner>
-                        <corner id="2">0.504648339467 0.129637139768 0.0740188358647</corner>
-                        <corner id="3">0.504648339467 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>4 7 8 9</edges>
-                    <corners>
-                        <corner id="0">0.504648339467 0.129637139768 0.0740188358647</corner>
-                        <corner id="1">0.650907786877 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">0.583187494871 6.66133814775e-16 0.0740188358647</corner>
-                        <corner id="3">0.436928047461 6.66133814775e-16 0.0740188358647</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>2 3 4 11</edges>
-                    <corners>
-                        <corner id="0">0.650907786877 0.129643784514 0.130034050856</corner>
-                        <corner id="1">0.650907786877 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">0.504648339467 0.129637139768 0.0740188358647</corner>
-                        <corner id="3">0.504648339467 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="5">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>5 6 10 11</edges>
-                    <corners>
-                        <corner id="0">0.583187494871 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="1">0.650907786877 0.129643784514 0.130034050856</corner>
-                        <corner id="2">0.504648339467 0.129643784514 0.130034050856</corner>
-                        <corner id="3">0.436928047461 4.4408920985e-16 0.130030809657</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>0.583187494871 -1.33226762955e-15 0.130034050856</start>
-                    <end>0.583187494871 6.66133814775e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="1">
-                    <start>0.436928047461 6.66133814775e-16 0.0740188358647</start>
-                    <end>0.436928047461 4.4408920985e-16 0.130030809657</end>
-                    </edge>
-                <edge id="2">
-                    <start>0.650907786877 0.129637139768 0.0740188358647</start>
-                    <end>0.650907786877 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="3">
-                    <start>0.504648339467 0.129643784514 0.130034050856</start>
-                    <end>0.504648339467 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="4">
-                    <start>0.650907786877 0.129637139768 0.0740188358647</start>
-                    <end>0.504648339467 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="5">
-                    <start>0.650907786877 0.129643784514 0.130034050856</start>
-                    <end>0.583187494871 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="6">
-                    <start>0.436928047461 4.4408920985e-16 0.130030809657</start>
-                    <end>0.504648339467 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="7">
-                    <start>0.583187494871 6.66133814775e-16 0.0740188358647</start>
-                    <end>0.650907786877 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="8">
-                    <start>0.504648339467 0.129637139768 0.0740188358647</start>
-                    <end>0.436928047461 6.66133814775e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="9">
-                    <start>0.436928047461 6.66133814775e-16 0.0740188358647</start>
-                    <end>0.583187494871 6.66133814775e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="10">
-                    <start>0.436928047461 4.4408920985e-16 0.130030809657</start>
-                    <end>0.583187494871 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="11">
-                    <start>0.650907786877 0.129643784514 0.130034050856</start>
-                    <end>0.504648339467 0.129643784514 0.130034050856</end>
-                    </edge>
-                </edges>
-            </cut>
-        <cut id="Cut#2">
-            <state>NotDone</state>
-            <center>1.81189785841 0.064821892257 0.0650166214453</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 1 3 4</edges>
-                    <corners>
-                        <corner id="0">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
-                        <corner id="1">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="2">1.85073895234 0.129643784514 0.130034050856</corner>
-                        <corner id="3">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>2 4 6</edges>
-                    <corners>
-                        <corner id="0">1.77305676448 0.129637139768 0.130030809657</corner>
-                        <corner id="1">1.85073895234 0.129643784514 0.130034050856</corner>
-                        <corner id="2">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 5 6 7</edges>
-                    <corners>
-                        <corner id="0">1.77305676448 0.129637139768 0.130030809657</corner>
-                        <corner id="1">1.77305676448 -1.33226762955e-15 0.130030809657</corner>
-                        <corner id="2">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
-                        <corner id="3">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>3 5 8</edges>
-                    <corners>
-                        <corner id="0">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="1">1.77305676448 -1.33226762955e-15 0.130030809657</corner>
-                        <corner id="2">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>1 2 7 8</edges>
-                    <corners>
-                        <corner id="0">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="1">1.85073895234 0.129643784514 0.130034050856</corner>
-                        <corner id="2">1.77305676448 0.129637139768 0.130030809657</corner>
-                        <corner id="3">1.77305676448 -1.33226762955e-15 0.130030809657</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>1.85073895234 -1.33226762955e-15 -8.07965638975e-07</start>
-                    <end>1.85073895234 0.129643784514 -8.07965638975e-07</end>
-                    </edge>
-                <edge id="1">
-                    <start>1.85073895234 -1.33226762955e-15 0.130034050856</start>
-                    <end>1.85073895234 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="2">
-                    <start>1.85073895234 0.129643784514 0.130034050856</start>
-                    <end>1.77305676448 0.129637139768 0.130030809657</end>
-                    </edge>
-                <edge id="3">
-                    <start>1.85073895234 -1.33226762955e-15 -8.07965638975e-07</start>
-                    <end>1.85073895234 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="4">
-                    <start>1.85073895234 0.129643784514 -8.07965638975e-07</start>
-                    <end>1.85073895234 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="5">
-                    <start>1.85073895234 -1.33226762955e-15 -8.07965638975e-07</start>
-                    <end>1.77305676448 -1.33226762955e-15 0.130030809657</end>
-                    </edge>
-                <edge id="6">
-                    <start>1.85073895234 0.129643784514 -8.07965638975e-07</start>
-                    <end>1.77305676448 0.129637139768 0.130030809657</end>
-                    </edge>
-                <edge id="7">
-                    <start>1.77305676448 -1.33226762955e-15 0.130030809657</start>
-                    <end>1.77305676448 0.129637139768 0.130030809657</end>
-                    </edge>
-                <edge id="8">
-                    <start>1.77305676448 -1.33226762955e-15 0.130030809657</start>
-                    <end>1.85073895234 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                </edges>
-            </cut>
-        <cut id="Cut#3">
-            <state>NotDone</state>
-            <center>0.0259421883235 0.064821892257 0.0650166214453</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 2 3 4</edges>
-                    <corners>
-                        <corner id="0">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="1">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
-                        <corner id="2">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="3">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 5 6 7</edges>
-                    <corners>
-                        <corner id="0">0.0518843766469 6.66133814775e-16 0.130030809657</corner>
-                        <corner id="1">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
-                        <corner id="2">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="3">0.0518843766469 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>1 3 5</edges>
-                    <corners>
-                        <corner id="0">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="1">0.0518843766469 6.66133814775e-16 0.130030809657</corner>
-                        <corner id="2">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>4 6 8</edges>
-                    <corners>
-                        <corner id="0">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
-                        <corner id="1">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="2">0.0518843766469 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>1 2 7 8</edges>
-                    <corners>
-                        <corner id="0">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="1">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
-                        <corner id="2">0.0518843766469 0.129643784514 0.130034050856</corner>
-                        <corner id="3">0.0518843766469 6.66133814775e-16 0.130030809657</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>-4.4408920985e-16 0.129643784514 -8.07965638975e-07</start>
-                    <end>-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</end>
-                    </edge>
-                <edge id="1">
-                    <start>-4.4408920985e-16 -1.33226762955e-15 0.130034050856</start>
-                    <end>0.0518843766469 6.66133814775e-16 0.130030809657</end>
-                    </edge>
-                <edge id="2">
-                    <start>-4.4408920985e-16 0.129643784514 0.130034050856</start>
-                    <end>-4.4408920985e-16 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="3">
-                    <start>-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</start>
-                    <end>-4.4408920985e-16 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="4">
-                    <start>-4.4408920985e-16 0.129643784514 -8.07965638975e-07</start>
-                    <end>-4.4408920985e-16 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="5">
-                    <start>-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</start>
-                    <end>0.0518843766469 6.66133814775e-16 0.130030809657</end>
-                    </edge>
-                <edge id="6">
-                    <start>-4.4408920985e-16 0.129643784514 -8.07965638975e-07</start>
-                    <end>0.0518843766469 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="7">
-                    <start>0.0518843766469 0.129643784514 0.130034050856</start>
-                    <end>0.0518843766469 6.66133814775e-16 0.130030809657</end>
-                    </edge>
-                <edge id="8">
-                    <start>0.0518843766469 0.129643784514 0.130034050856</start>
-                    <end>-4.4408920985e-16 0.129643784514 0.130034050856</end>
-                    </edge>
-                </edges>
-            </cut>
-        <cut id="Cut#4">
-            <state>NotDone</state>
-            <center>0.925369476168 0.064821892257 0.10202644336</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 2 5 7</edges>
-                    <corners>
-                        <corner id="0">1.05233500500 0.129643784514 0.130034050856</corner>
-                        <corner id="1">1.05233500500 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">0.958460717866 -2.22044604925e-16 0.0740188358647</corner>
-                        <corner id="3">0.958460717866 -8.881784197e-16 0.130030809657</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>1 3 6 8</edges>
-                    <corners>
-                        <corner id="0">0.89227823447 0.129637139768 0.0740188358647</corner>
-                        <corner id="1">0.89227823447 0.129643784514 0.130034050856</corner>
-                        <corner id="2">0.79840394734 0.0 0.130030809657</corner>
-                        <corner id="3">0.79840394734 -4.4408920985e-16 0.0740188358647</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>4 7 8 9</edges>
-                    <corners>
-                        <corner id="0">0.958460717866 -2.22044604925e-16 0.0740188358647</corner>
-                        <corner id="1">1.05233500500 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">0.89227823447 0.129637139768 0.0740188358647</corner>
-                        <corner id="3">0.79840394734 -4.4408920985e-16 0.0740188358647</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 1 9 10</edges>
-                    <corners>
-                        <corner id="0">0.79840394734 0.0 0.130030809657</corner>
-                        <corner id="1">0.79840394734 -4.4408920985e-16 0.0740188358647</corner>
-                        <corner id="2">0.958460717866 -2.22044604925e-16 0.0740188358647</corner>
-                        <corner id="3">0.958460717866 -8.881784197e-16 0.130030809657</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>2 3 4 11</edges>
-                    <corners>
-                        <corner id="0">0.89227823447 0.129637139768 0.0740188358647</corner>
-                        <corner id="1">1.05233500500 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">1.05233500500 0.129643784514 0.130034050856</corner>
-                        <corner id="3">0.89227823447 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="5">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>5 6 10 11</edges>
-                    <corners>
-                        <corner id="0">0.89227823447 0.129643784514 0.130034050856</corner>
-                        <corner id="1">0.79840394734 0.0 0.130030809657</corner>
-                        <corner id="2">0.958460717866 -8.881784197e-16 0.130030809657</corner>
-                        <corner id="3">1.05233500500 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>0.958460717866 -8.881784197e-16 0.130030809657</start>
-                    <end>0.958460717866 -2.22044604925e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="1">
-                    <start>0.79840394734 -4.4408920985e-16 0.0740188358647</start>
-                    <end>0.79840394734 0.0 0.130030809657</end>
-                    </edge>
-                <edge id="2">
-                    <start>1.05233500500 0.129637139768 0.0740188358647</start>
-                    <end>1.05233500500 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="3">
-                    <start>0.89227823447 0.129643784514 0.130034050856</start>
-                    <end>0.89227823447 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="4">
-                    <start>1.05233500500 0.129637139768 0.0740188358647</start>
-                    <end>0.89227823447 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="5">
-                    <start>1.05233500500 0.129643784514 0.130034050856</start>
-                    <end>0.958460717866 -8.881784197e-16 0.130030809657</end>
-                    </edge>
-                <edge id="6">
-                    <start>0.79840394734 0.0 0.130030809657</start>
-                    <end>0.89227823447 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="7">
-                    <start>0.958460717866 -2.22044604925e-16 0.0740188358647</start>
-                    <end>1.05233500500 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="8">
-                    <start>0.89227823447 0.129637139768 0.0740188358647</start>
-                    <end>0.79840394734 -4.4408920985e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="9">
-                    <start>0.79840394734 -4.4408920985e-16 0.0740188358647</start>
-                    <end>0.958460717866 -2.22044604925e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="10">
-                    <start>0.79840394734 0.0 0.130030809657</start>
-                    <end>0.958460717866 -8.881784197e-16 0.130030809657</end>
-                    </edge>
-                <edge id="11">
-                    <start>1.05233500500 0.129643784514 0.130034050856</start>
-                    <end>0.89227823447 0.129643784514 0.130034050856</end>
-                    </edge>
-                </edges>
-            </cut>
-        <cut id="Cut#5">
-            <state>NotDone</state>
-            <center>1.46435550332 0.064821892257 0.10202644336</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 2 5 7</edges>
-                    <corners>
-                        <corner id="0">1.59132103215 0.129643784514 0.130034050856</corner>
-                        <corner id="1">1.59132103215 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">1.49744674502 4.4408920985e-16 0.0740188358647</corner>
-                        <corner id="3">1.49744674502 -1.33226762955e-15 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>1 3 6 8</edges>
-                    <corners>
-                        <corner id="0">1.33738997449 0.0 0.130030809657</corner>
-                        <corner id="1">1.33738997449 1.33226762955e-15 0.0740188358647</corner>
-                        <corner id="2">1.43126426162 0.129637139768 0.0740188358647</corner>
-                        <corner id="3">1.43126426162 0.129643784514 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>4 7 8 9</edges>
-                    <corners>
-                        <corner id="0">1.59132103215 0.129637139768 0.0740188358647</corner>
-                        <corner id="1">1.43126426162 0.129637139768 0.0740188358647</corner>
-                        <corner id="2">1.33738997449 1.33226762955e-15 0.0740188358647</corner>
-                        <corner id="3">1.49744674502 4.4408920985e-16 0.0740188358647</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 1 9 10</edges>
-                    <corners>
-                        <corner id="0">1.33738997449 0.0 0.130030809657</corner>
-                        <corner id="1">1.33738997449 1.33226762955e-15 0.0740188358647</corner>
-                        <corner id="2">1.49744674502 4.4408920985e-16 0.0740188358647</corner>
-                        <corner id="3">1.49744674502 -1.33226762955e-15 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>2 3 4 11</edges>
-                    <corners>
-                        <corner id="0">1.59132103215 0.129643784514 0.130034050856</corner>
-                        <corner id="1">1.43126426162 0.129643784514 0.130034050856</corner>
-                        <corner id="2">1.43126426162 0.129637139768 0.0740188358647</corner>
-                        <corner id="3">1.59132103215 0.129637139768 0.0740188358647</corner>
-                        </corners>
-                    </face>
-                <face id="5">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>5 6 10 11</edges>
-                    <corners>
-                        <corner id="0">1.43126426162 0.129643784514 0.130034050856</corner>
-                        <corner id="1">1.59132103215 0.129643784514 0.130034050856</corner>
-                        <corner id="2">1.49744674502 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="3">1.33738997449 0.0 0.130030809657</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>1.49744674502 -1.33226762955e-15 0.130034050856</start>
-                    <end>1.49744674502 4.4408920985e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="1">
-                    <start>1.33738997449 1.33226762955e-15 0.0740188358647</start>
-                    <end>1.33738997449 0.0 0.130030809657</end>
-                    </edge>
-                <edge id="2">
-                    <start>1.59132103215 0.129637139768 0.0740188358647</start>
-                    <end>1.59132103215 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="3">
-                    <start>1.43126426162 0.129643784514 0.130034050856</start>
-                    <end>1.43126426162 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="4">
-                    <start>1.59132103215 0.129637139768 0.0740188358647</start>
-                    <end>1.43126426162 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="5">
-                    <start>1.59132103215 0.129643784514 0.130034050856</start>
-                    <end>1.49744674502 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="6">
-                    <start>1.33738997449 0.0 0.130030809657</start>
-                    <end>1.43126426162 0.129643784514 0.130034050856</end>
-                    </edge>
-                <edge id="7">
-                    <start>1.49744674502 4.4408920985e-16 0.0740188358647</start>
-                    <end>1.59132103215 0.129637139768 0.0740188358647</end>
-                    </edge>
-                <edge id="8">
-                    <start>1.43126426162 0.129637139768 0.0740188358647</start>
-                    <end>1.33738997449 1.33226762955e-15 0.0740188358647</end>
-                    </edge>
-                <edge id="9">
-                    <start>1.33738997449 1.33226762955e-15 0.0740188358647</start>
-                    <end>1.49744674502 4.4408920985e-16 0.0740188358647</end>
-                    </edge>
-                <edge id="10">
-                    <start>1.33738997449 0.0 0.130030809657</start>
-                    <end>1.49744674502 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="11">
-                    <start>1.59132103215 0.129643784514 0.130034050856</start>
-                    <end>1.43126426162 0.129643784514 0.130034050856</end>
-                    </edge>
-                </edges>
-            </cut>
-        <cut id="Cut#6">
-            <state>NotDone</state>
-            <center>1.20111537885 0.0419819727062 0.103419710115</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>2 5 6 7</edges>
-                    <corners>
-                        <corner id="0">1.18238646044 0.0 0.0768053693732</corner>
-                        <corner id="1">1.10752774864 0.0839639454125 0.130030809657</corner>
-                        <corner id="2">1.21984429725 0.0839639454125 0.130030809657</corner>
-                        <corner id="3">1.29470300905 -6.66133814775e-16 0.0768053693732</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 3 5</edges>
-                    <corners>
-                        <corner id="0">1.10752774864 0.0839639454125 0.130030809657</corner>
-                        <corner id="1">1.18238646044 0.0 0.0768053693732</corner>
-                        <corner id="2">1.16092808489 -1.33226762955e-15 0.130034050856</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>1 4 6</edges>
-                    <corners>
-                        <corner id="0">1.21984429725 0.0839639454125 0.130030809657</corner>
-                        <corner id="1">1.27324463350 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="2">1.29470300905 -6.66133814775e-16 0.0768053693732</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 1 7 8</edges>
-                    <corners>
-                        <corner id="0">1.29470300905 -6.66133814775e-16 0.0768053693732</corner>
-                        <corner id="1">1.27324463350 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="2">1.16092808489 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="3">1.18238646044 0.0 0.0768053693732</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>2 3 4 8</edges>
-                    <corners>
-                        <corner id="0">1.21984429725 0.0839639454125 0.130030809657</corner>
-                        <corner id="1">1.10752774864 0.0839639454125 0.130030809657</corner>
-                        <corner id="2">1.16092808489 -1.33226762955e-15 0.130034050856</corner>
-                        <corner id="3">1.27324463350 -1.33226762955e-15 0.130034050856</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>1.16092808489 -1.33226762955e-15 0.130034050856</start>
-                    <end>1.18238646044 0.0 0.0768053693732</end>
-                    </edge>
-                <edge id="1">
-                    <start>1.27324463350 -1.33226762955e-15 0.130034050856</start>
-                    <end>1.29470300905 -6.66133814775e-16 0.0768053693732</end>
-                    </edge>
-                <edge id="2">
-                    <start>1.10752774864 0.0839639454125 0.130030809657</start>
-                    <end>1.21984429725 0.0839639454125 0.130030809657</end>
-                    </edge>
-                <edge id="3">
-                    <start>1.10752774864 0.0839639454125 0.130030809657</start>
-                    <end>1.16092808489 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="4">
-                    <start>1.21984429725 0.0839639454125 0.130030809657</start>
-                    <end>1.27324463350 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                <edge id="5">
-                    <start>1.18238646044 0.0 0.0768053693732</start>
-                    <end>1.10752774864 0.0839639454125 0.130030809657</end>
-                    </edge>
-                <edge id="6">
-                    <start>1.29470300905 -6.66133814775e-16 0.0768053693732</start>
-                    <end>1.21984429725 0.0839639454125 0.130030809657</end>
-                    </edge>
-                <edge id="7">
-                    <start>1.29470300905 -6.66133814775e-16 0.0768053693732</start>
-                    <end>1.18238646044 0.0 0.0768053693732</end>
-                    </edge>
-                <edge id="8">
-                    <start>1.16092808489 -1.33226762955e-15 0.130034050856</start>
-                    <end>1.27324463350 -1.33226762955e-15 0.130034050856</end>
-                    </edge>
-                </edges>
-            </cut>
-        <cut id="Cut#7">
-            <state>NotDone</state>
-            <center>0.315121394369 0.0886809287967 0.0481862202016</center>
-            <faces>
-                <face id="0">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>0 1 2 3</edges>
-                    <corners>
-                        <corner id="0">0.250537842931 0.129637139768 0.0963732483688</corner>
-                        <corner id="1">0.379704945806 0.129637139768 0.0963732483688</corner>
-                        <corner id="2">0.379704945806 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="3">0.250537842931 0.129643784514 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="1">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>1 5 7</edges>
-                    <corners>
-                        <corner id="0">0.379704945806 0.129637139768 0.0963732483688</corner>
-                        <corner id="1">0.379704945806 0.0477180730794 0.0</corner>
-                        <corner id="2">0.379704945806 0.129643784514 -8.07965638975e-07</corner>
-                        </corners>
-                    </face>
-                <face id="2">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>2 6 8</edges>
-                    <corners>
-                        <corner id="0">0.250537842931 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="1">0.250537842931 0.129637139768 0.0963732483688</corner>
-                        <corner id="2">0.250537842931 0.0477180730794 0.0</corner>
-                        </corners>
-                    </face>
-                <face id="3">
-                    <state>NotDone</state>
-                    <exposed>True</exposed>
-                    <edges>3 4 7 8</edges>
-                    <corners>
-                        <corner id="0">0.379704945806 0.0477180730794 0.0</corner>
-                        <corner id="1">0.379704945806 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="2">0.250537842931 0.129643784514 -8.07965638975e-07</corner>
-                        <corner id="3">0.250537842931 0.0477180730794 0.0</corner>
-                        </corners>
-                    </face>
-                <face id="4">
-                    <state>NotDone</state>
-                    <exposed>False</exposed>
-                    <edges>0 4 5 6</edges>
-                    <corners>
-                        <corner id="0">0.250537842931 0.0477180730794 0.0</corner>
-                        <corner id="1">0.250537842931 0.129637139768 0.0963732483688</corner>
-                        <corner id="2">0.379704945806 0.129637139768 0.0963732483688</corner>
-                        <corner id="3">0.379704945806 0.0477180730794 0.0</corner>
-                        </corners>
-                    </face>
-                </faces>
-            <edges>
-                <edge id="0">
-                    <start>0.250537842931 0.129637139768 0.0963732483688</start>
-                    <end>0.379704945806 0.129637139768 0.0963732483688</end>
-                    </edge>
-                <edge id="1">
-                    <start>0.379704945806 0.129643784514 -8.07965638975e-07</start>
-                    <end>0.379704945806 0.129637139768 0.0963732483688</end>
-                    </edge>
-                <edge id="2">
-                    <start>0.250537842931 0.129637139768 0.0963732483688</start>
-                    <end>0.250537842931 0.129643784514 -8.07965638975e-07</end>
-                    </edge>
-                <edge id="3">
-                    <start>0.379704945806 0.129643784514 -8.07965638975e-07</start>
-                    <end>0.250537842931 0.129643784514 -8.07965638975e-07</end>
-                    </edge>
-                <edge id="4">
-                    <start>0.379704945806 0.0477180730794 0.0</start>
-                    <end>0.250537842931 0.0477180730794 0.0</end>
-                    </edge>
-                <edge id="5">
-                    <start>0.379704945806 0.129637139768 0.0963732483688</start>
-                    <end>0.379704945806 0.0477180730794 0.0</end>
-                    </edge>
-                <edge id="6">
-                    <start>0.250537842931 0.0477180730794 0.0</start>
-                    <end>0.250537842931 0.129637139768 0.0963732483688</end>
-                    </edge>
-                <edge id="7">
-                    <start>0.379704945806 0.129643784514 -8.07965638975e-07</start>
-                    <end>0.379704945806 0.0477180730794 0.0</end>
-                    </edge>
-                <edge id="8">
-                    <start>0.250537842931 0.0477180730794 0.0</start>
-                    <end>0.250537842931 0.129643784514 -8.07965638975e-07</end>
-                    </edge>
-                </edges>
-            </cut>
-        </timber>
-    </acim>
+	<timber id="24c4fb33-67fa-4c27-b42c-c0dc7ca5cd91">
+		<executed>NotDone</executed>
+		<current>Cut#1</current>
+		<executed>NotDone</executed>
+		<bbox>
+			<corner id="0">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
+			<corner id="1">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
+			<corner id="2">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
+			<corner id="3">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
+			<corner id="4">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
+			<corner id="5">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
+			<corner id="6">1.85073895234 0.129643784514 0.130034050856</corner>
+			<corner id="7">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
+		</bbox>
+		<hole id="Hole#1">
+			<state>NotDone</state>
+			<neighbors>-1</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>0.171164716736 0.0874013529763 0.130030809657</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>0.171164716736 0.0874013529763 6.34902733979e-16</coordinates>
+			</end>
+			<radius>0.025</radius>
+		</hole>
+		<hole id="Hole#2">
+			<state>NotDone</state>
+			<neighbors>-1</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>0.815633178699 0.129637139768 0.0479175711147</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>0.76526171789 0.0326758083005 0.130030809657</coordinates>
+			</end>
+			<radius>0.018</radius>
+		</hole>
+		<hole id="Hole#3">
+			<state>NotDone</state>
+			<neighbors>4</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>1.26549922563 0.105362930915 0.0489589816389</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>1.26714600769 0.129637139768 0.0643466036399</coordinates>
+			</end>
+			<radius>0.029</radius>
+		</hole>
+		<hole id="Hole#4">
+			<state>NotDone</state>
+			<neighbors>3</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>1.26398468266 0.0830379779115 0.0348070090622</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>1.26549922563 0.105362930915 0.0489589816389</coordinates>
+			</end>
+			<radius>0.015</radius>
+		</hole>
+		<hole id="Hole#5">
+			<state>NotDone</state>
+			<neighbors>-1</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>1.38456200479 0.129637139768 0.0643466036399</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>1.34625688456 0.105275417713 0.0489035062958</coordinates>
+			</end>
+			<radius>0.015</radius>
+		</hole>
+		<hole id="Hole#6">
+			<state>NotDone</state>
+			<neighbors>7</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>1.70321155690 0.0851270568901 0.0159007973871</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>1.70479729814 0.0851863660335 5.93474228436e-16</coordinates>
+			</end>
+			<radius>0.022</radius>
+		</hole>
+		<hole id="Hole#7">
+			<state>NotDone</state>
+			<neighbors>6</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>1.69312604933 0.0847498435101 0.117031806619</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>1.70321155690 0.0851270568901 0.0159007973871</coordinates>
+			</end>
+			<radius>0.012</radius>
+		</hole>
+		<hole id="Hole#8">
+			<state>NotDone</state>
+			<neighbors>6</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>1.69182969577 0.084701357908 0.130030809657</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>1.69312604933 0.0847498435101 0.117031806619</coordinates>
+			</end>
+			<radius>0.022</radius>
+		</hole>
+		<hole id="Hole#9">
+			<state>NotDone</state>
+			<neighbors>10</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>0.367173204277 0.0442065877345 0.1157066508</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>0.314864109457 0.0610070491341 0.0156337448858</coordinates>
+			</end>
+			<radius>0.013</radius>
+		</hole>
+		<hole id="Hole#10">
+			<state>NotDone</state>
+			<neighbors>9</neighbors>
+			<start>
+				<exposed>False</exposed>
+				<coordinates>0.374660583373 0.0418018161756 0.130030809657</coordinates>
+			</start>
+			<end>
+				<exposed>False</exposed>
+				<coordinates>0.367173204277 0.0442065877345 0.1157066508</coordinates>
+			</end>
+			<radius>0.027</radius>
+		</hole>
+		<cut id="Cut#1">
+			<state>NotDone</state>
+			<center>0.543917917169 0.064821892257 0.10202644336</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 1 9 10</edges>
+					<corners>
+						<corner id="0">0.583187494871 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="1">0.436928047461 4.4408920985e-16 0.130030809657</corner>
+						<corner id="2">0.436928047461 6.66133814775e-16 0.0740188358647</corner>
+						<corner id="3">0.583187494871 6.66133814775e-16 0.0740188358647</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 2 5 7</edges>
+					<corners>
+						<corner id="0">0.650907786877 0.129637139768 0.0740188358647</corner>
+						<corner id="1">0.583187494871 6.66133814775e-16 0.0740188358647</corner>
+						<corner id="2">0.583187494871 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="3">0.650907786877 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>1 3 6 8</edges>
+					<corners>
+						<corner id="0">0.436928047461 4.4408920985e-16 0.130030809657</corner>
+						<corner id="1">0.436928047461 6.66133814775e-16 0.0740188358647</corner>
+						<corner id="2">0.504648339467 0.129637139768 0.0740188358647</corner>
+						<corner id="3">0.504648339467 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>4 7 8 9</edges>
+					<corners>
+						<corner id="0">0.504648339467 0.129637139768 0.0740188358647</corner>
+						<corner id="1">0.650907786877 0.129637139768 0.0740188358647</corner>
+						<corner id="2">0.583187494871 6.66133814775e-16 0.0740188358647</corner>
+						<corner id="3">0.436928047461 6.66133814775e-16 0.0740188358647</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>2 3 4 11</edges>
+					<corners>
+						<corner id="0">0.650907786877 0.129643784514 0.130034050856</corner>
+						<corner id="1">0.650907786877 0.129637139768 0.0740188358647</corner>
+						<corner id="2">0.504648339467 0.129637139768 0.0740188358647</corner>
+						<corner id="3">0.504648339467 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="5">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>5 6 10 11</edges>
+					<corners>
+						<corner id="0">0.583187494871 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="1">0.650907786877 0.129643784514 0.130034050856</corner>
+						<corner id="2">0.504648339467 0.129643784514 0.130034050856</corner>
+						<corner id="3">0.436928047461 4.4408920985e-16 0.130030809657</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>0.583187494871 -1.33226762955e-15 0.130034050856</start>
+					<end>0.583187494871 6.66133814775e-16 0.0740188358647</end>
+				</edge>
+				<edge id="1">
+					<start>0.436928047461 6.66133814775e-16 0.0740188358647</start>
+					<end>0.436928047461 4.4408920985e-16 0.130030809657</end>
+				</edge>
+				<edge id="2">
+					<start>0.650907786877 0.129637139768 0.0740188358647</start>
+					<end>0.650907786877 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="3">
+					<start>0.504648339467 0.129643784514 0.130034050856</start>
+					<end>0.504648339467 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="4">
+					<start>0.650907786877 0.129637139768 0.0740188358647</start>
+					<end>0.504648339467 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="5">
+					<start>0.650907786877 0.129643784514 0.130034050856</start>
+					<end>0.583187494871 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="6">
+					<start>0.436928047461 4.4408920985e-16 0.130030809657</start>
+					<end>0.504648339467 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="7">
+					<start>0.583187494871 6.66133814775e-16 0.0740188358647</start>
+					<end>0.650907786877 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="8">
+					<start>0.504648339467 0.129637139768 0.0740188358647</start>
+					<end>0.436928047461 6.66133814775e-16 0.0740188358647</end>
+				</edge>
+				<edge id="9">
+					<start>0.436928047461 6.66133814775e-16 0.0740188358647</start>
+					<end>0.583187494871 6.66133814775e-16 0.0740188358647</end>
+				</edge>
+				<edge id="10">
+					<start>0.436928047461 4.4408920985e-16 0.130030809657</start>
+					<end>0.583187494871 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="11">
+					<start>0.650907786877 0.129643784514 0.130034050856</start>
+					<end>0.504648339467 0.129643784514 0.130034050856</end>
+				</edge>
+			</edges>
+		</cut>
+		<cut id="Cut#2">
+			<state>NotDone</state>
+			<center>1.81189785841 0.064821892257 0.0650166214453</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 1 3 4</edges>
+					<corners>
+						<corner id="0">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
+						<corner id="1">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="2">1.85073895234 0.129643784514 0.130034050856</corner>
+						<corner id="3">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>2 4 6</edges>
+					<corners>
+						<corner id="0">1.77305676448 0.129637139768 0.130030809657</corner>
+						<corner id="1">1.85073895234 0.129643784514 0.130034050856</corner>
+						<corner id="2">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 5 6 7</edges>
+					<corners>
+						<corner id="0">1.77305676448 0.129637139768 0.130030809657</corner>
+						<corner id="1">1.77305676448 -1.33226762955e-15 0.130030809657</corner>
+						<corner id="2">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
+						<corner id="3">1.85073895234 0.129643784514 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>3 5 8</edges>
+					<corners>
+						<corner id="0">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="1">1.77305676448 -1.33226762955e-15 0.130030809657</corner>
+						<corner id="2">1.85073895234 -1.33226762955e-15 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>1 2 7 8</edges>
+					<corners>
+						<corner id="0">1.85073895234 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="1">1.85073895234 0.129643784514 0.130034050856</corner>
+						<corner id="2">1.77305676448 0.129637139768 0.130030809657</corner>
+						<corner id="3">1.77305676448 -1.33226762955e-15 0.130030809657</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>1.85073895234 -1.33226762955e-15 -8.07965638975e-07</start>
+					<end>1.85073895234 0.129643784514 -8.07965638975e-07</end>
+				</edge>
+				<edge id="1">
+					<start>1.85073895234 -1.33226762955e-15 0.130034050856</start>
+					<end>1.85073895234 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="2">
+					<start>1.85073895234 0.129643784514 0.130034050856</start>
+					<end>1.77305676448 0.129637139768 0.130030809657</end>
+				</edge>
+				<edge id="3">
+					<start>1.85073895234 -1.33226762955e-15 -8.07965638975e-07</start>
+					<end>1.85073895234 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="4">
+					<start>1.85073895234 0.129643784514 -8.07965638975e-07</start>
+					<end>1.85073895234 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="5">
+					<start>1.85073895234 -1.33226762955e-15 -8.07965638975e-07</start>
+					<end>1.77305676448 -1.33226762955e-15 0.130030809657</end>
+				</edge>
+				<edge id="6">
+					<start>1.85073895234 0.129643784514 -8.07965638975e-07</start>
+					<end>1.77305676448 0.129637139768 0.130030809657</end>
+				</edge>
+				<edge id="7">
+					<start>1.77305676448 -1.33226762955e-15 0.130030809657</start>
+					<end>1.77305676448 0.129637139768 0.130030809657</end>
+				</edge>
+				<edge id="8">
+					<start>1.77305676448 -1.33226762955e-15 0.130030809657</start>
+					<end>1.85073895234 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+			</edges>
+		</cut>
+		<cut id="Cut#3">
+			<state>NotDone</state>
+			<center>0.0259421883235 0.064821892257 0.0650166214453</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 2 3 4</edges>
+					<corners>
+						<corner id="0">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="1">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
+						<corner id="2">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="3">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 5 6 7</edges>
+					<corners>
+						<corner id="0">0.0518843766469 6.66133814775e-16 0.130030809657</corner>
+						<corner id="1">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
+						<corner id="2">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="3">0.0518843766469 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>1 3 5</edges>
+					<corners>
+						<corner id="0">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="1">0.0518843766469 6.66133814775e-16 0.130030809657</corner>
+						<corner id="2">-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>4 6 8</edges>
+					<corners>
+						<corner id="0">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
+						<corner id="1">-4.4408920985e-16 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="2">0.0518843766469 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>1 2 7 8</edges>
+					<corners>
+						<corner id="0">-4.4408920985e-16 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="1">-4.4408920985e-16 0.129643784514 0.130034050856</corner>
+						<corner id="2">0.0518843766469 0.129643784514 0.130034050856</corner>
+						<corner id="3">0.0518843766469 6.66133814775e-16 0.130030809657</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>-4.4408920985e-16 0.129643784514 -8.07965638975e-07</start>
+					<end>-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</end>
+				</edge>
+				<edge id="1">
+					<start>-4.4408920985e-16 -1.33226762955e-15 0.130034050856</start>
+					<end>0.0518843766469 6.66133814775e-16 0.130030809657</end>
+				</edge>
+				<edge id="2">
+					<start>-4.4408920985e-16 0.129643784514 0.130034050856</start>
+					<end>-4.4408920985e-16 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="3">
+					<start>-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</start>
+					<end>-4.4408920985e-16 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="4">
+					<start>-4.4408920985e-16 0.129643784514 -8.07965638975e-07</start>
+					<end>-4.4408920985e-16 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="5">
+					<start>-4.4408920985e-16 -1.33226762955e-15 -8.07965638975e-07</start>
+					<end>0.0518843766469 6.66133814775e-16 0.130030809657</end>
+				</edge>
+				<edge id="6">
+					<start>-4.4408920985e-16 0.129643784514 -8.07965638975e-07</start>
+					<end>0.0518843766469 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="7">
+					<start>0.0518843766469 0.129643784514 0.130034050856</start>
+					<end>0.0518843766469 6.66133814775e-16 0.130030809657</end>
+				</edge>
+				<edge id="8">
+					<start>0.0518843766469 0.129643784514 0.130034050856</start>
+					<end>-4.4408920985e-16 0.129643784514 0.130034050856</end>
+				</edge>
+			</edges>
+		</cut>
+		<cut id="Cut#4">
+			<state>NotDone</state>
+			<center>0.925369476168 0.064821892257 0.10202644336</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 2 5 7</edges>
+					<corners>
+						<corner id="0">1.05233500500 0.129643784514 0.130034050856</corner>
+						<corner id="1">1.05233500500 0.129637139768 0.0740188358647</corner>
+						<corner id="2">0.958460717866 -2.22044604925e-16 0.0740188358647</corner>
+						<corner id="3">0.958460717866 -8.881784197e-16 0.130030809657</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>1 3 6 8</edges>
+					<corners>
+						<corner id="0">0.89227823447 0.129637139768 0.0740188358647</corner>
+						<corner id="1">0.89227823447 0.129643784514 0.130034050856</corner>
+						<corner id="2">0.79840394734 0.0 0.130030809657</corner>
+						<corner id="3">0.79840394734 -4.4408920985e-16 0.0740188358647</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>4 7 8 9</edges>
+					<corners>
+						<corner id="0">0.958460717866 -2.22044604925e-16 0.0740188358647</corner>
+						<corner id="1">1.05233500500 0.129637139768 0.0740188358647</corner>
+						<corner id="2">0.89227823447 0.129637139768 0.0740188358647</corner>
+						<corner id="3">0.79840394734 -4.4408920985e-16 0.0740188358647</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 1 9 10</edges>
+					<corners>
+						<corner id="0">0.79840394734 0.0 0.130030809657</corner>
+						<corner id="1">0.79840394734 -4.4408920985e-16 0.0740188358647</corner>
+						<corner id="2">0.958460717866 -2.22044604925e-16 0.0740188358647</corner>
+						<corner id="3">0.958460717866 -8.881784197e-16 0.130030809657</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>2 3 4 11</edges>
+					<corners>
+						<corner id="0">0.89227823447 0.129637139768 0.0740188358647</corner>
+						<corner id="1">1.05233500500 0.129637139768 0.0740188358647</corner>
+						<corner id="2">1.05233500500 0.129643784514 0.130034050856</corner>
+						<corner id="3">0.89227823447 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="5">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>5 6 10 11</edges>
+					<corners>
+						<corner id="0">0.89227823447 0.129643784514 0.130034050856</corner>
+						<corner id="1">0.79840394734 0.0 0.130030809657</corner>
+						<corner id="2">0.958460717866 -8.881784197e-16 0.130030809657</corner>
+						<corner id="3">1.05233500500 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>0.958460717866 -8.881784197e-16 0.130030809657</start>
+					<end>0.958460717866 -2.22044604925e-16 0.0740188358647</end>
+				</edge>
+				<edge id="1">
+					<start>0.79840394734 -4.4408920985e-16 0.0740188358647</start>
+					<end>0.79840394734 0.0 0.130030809657</end>
+				</edge>
+				<edge id="2">
+					<start>1.05233500500 0.129637139768 0.0740188358647</start>
+					<end>1.05233500500 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="3">
+					<start>0.89227823447 0.129643784514 0.130034050856</start>
+					<end>0.89227823447 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="4">
+					<start>1.05233500500 0.129637139768 0.0740188358647</start>
+					<end>0.89227823447 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="5">
+					<start>1.05233500500 0.129643784514 0.130034050856</start>
+					<end>0.958460717866 -8.881784197e-16 0.130030809657</end>
+				</edge>
+				<edge id="6">
+					<start>0.79840394734 0.0 0.130030809657</start>
+					<end>0.89227823447 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="7">
+					<start>0.958460717866 -2.22044604925e-16 0.0740188358647</start>
+					<end>1.05233500500 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="8">
+					<start>0.89227823447 0.129637139768 0.0740188358647</start>
+					<end>0.79840394734 -4.4408920985e-16 0.0740188358647</end>
+				</edge>
+				<edge id="9">
+					<start>0.79840394734 -4.4408920985e-16 0.0740188358647</start>
+					<end>0.958460717866 -2.22044604925e-16 0.0740188358647</end>
+				</edge>
+				<edge id="10">
+					<start>0.79840394734 0.0 0.130030809657</start>
+					<end>0.958460717866 -8.881784197e-16 0.130030809657</end>
+				</edge>
+				<edge id="11">
+					<start>1.05233500500 0.129643784514 0.130034050856</start>
+					<end>0.89227823447 0.129643784514 0.130034050856</end>
+				</edge>
+			</edges>
+		</cut>
+		<cut id="Cut#5">
+			<state>NotDone</state>
+			<center>1.46435550332 0.064821892257 0.10202644336</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 2 5 7</edges>
+					<corners>
+						<corner id="0">1.59132103215 0.129643784514 0.130034050856</corner>
+						<corner id="1">1.59132103215 0.129637139768 0.0740188358647</corner>
+						<corner id="2">1.49744674502 4.4408920985e-16 0.0740188358647</corner>
+						<corner id="3">1.49744674502 -1.33226762955e-15 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>1 3 6 8</edges>
+					<corners>
+						<corner id="0">1.33738997449 0.0 0.130030809657</corner>
+						<corner id="1">1.33738997449 1.33226762955e-15 0.0740188358647</corner>
+						<corner id="2">1.43126426162 0.129637139768 0.0740188358647</corner>
+						<corner id="3">1.43126426162 0.129643784514 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>4 7 8 9</edges>
+					<corners>
+						<corner id="0">1.59132103215 0.129637139768 0.0740188358647</corner>
+						<corner id="1">1.43126426162 0.129637139768 0.0740188358647</corner>
+						<corner id="2">1.33738997449 1.33226762955e-15 0.0740188358647</corner>
+						<corner id="3">1.49744674502 4.4408920985e-16 0.0740188358647</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 1 9 10</edges>
+					<corners>
+						<corner id="0">1.33738997449 0.0 0.130030809657</corner>
+						<corner id="1">1.33738997449 1.33226762955e-15 0.0740188358647</corner>
+						<corner id="2">1.49744674502 4.4408920985e-16 0.0740188358647</corner>
+						<corner id="3">1.49744674502 -1.33226762955e-15 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>2 3 4 11</edges>
+					<corners>
+						<corner id="0">1.59132103215 0.129643784514 0.130034050856</corner>
+						<corner id="1">1.43126426162 0.129643784514 0.130034050856</corner>
+						<corner id="2">1.43126426162 0.129637139768 0.0740188358647</corner>
+						<corner id="3">1.59132103215 0.129637139768 0.0740188358647</corner>
+					</corners>
+				</face>
+				<face id="5">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>5 6 10 11</edges>
+					<corners>
+						<corner id="0">1.43126426162 0.129643784514 0.130034050856</corner>
+						<corner id="1">1.59132103215 0.129643784514 0.130034050856</corner>
+						<corner id="2">1.49744674502 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="3">1.33738997449 0.0 0.130030809657</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>1.49744674502 -1.33226762955e-15 0.130034050856</start>
+					<end>1.49744674502 4.4408920985e-16 0.0740188358647</end>
+				</edge>
+				<edge id="1">
+					<start>1.33738997449 1.33226762955e-15 0.0740188358647</start>
+					<end>1.33738997449 0.0 0.130030809657</end>
+				</edge>
+				<edge id="2">
+					<start>1.59132103215 0.129637139768 0.0740188358647</start>
+					<end>1.59132103215 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="3">
+					<start>1.43126426162 0.129643784514 0.130034050856</start>
+					<end>1.43126426162 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="4">
+					<start>1.59132103215 0.129637139768 0.0740188358647</start>
+					<end>1.43126426162 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="5">
+					<start>1.59132103215 0.129643784514 0.130034050856</start>
+					<end>1.49744674502 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="6">
+					<start>1.33738997449 0.0 0.130030809657</start>
+					<end>1.43126426162 0.129643784514 0.130034050856</end>
+				</edge>
+				<edge id="7">
+					<start>1.49744674502 4.4408920985e-16 0.0740188358647</start>
+					<end>1.59132103215 0.129637139768 0.0740188358647</end>
+				</edge>
+				<edge id="8">
+					<start>1.43126426162 0.129637139768 0.0740188358647</start>
+					<end>1.33738997449 1.33226762955e-15 0.0740188358647</end>
+				</edge>
+				<edge id="9">
+					<start>1.33738997449 1.33226762955e-15 0.0740188358647</start>
+					<end>1.49744674502 4.4408920985e-16 0.0740188358647</end>
+				</edge>
+				<edge id="10">
+					<start>1.33738997449 0.0 0.130030809657</start>
+					<end>1.49744674502 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="11">
+					<start>1.59132103215 0.129643784514 0.130034050856</start>
+					<end>1.43126426162 0.129643784514 0.130034050856</end>
+				</edge>
+			</edges>
+		</cut>
+		<cut id="Cut#6">
+			<state>NotDone</state>
+			<center>1.20111537885 0.0419819727062 0.103419710115</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>2 5 6 7</edges>
+					<corners>
+						<corner id="0">1.18238646044 0.0 0.0768053693732</corner>
+						<corner id="1">1.10752774864 0.0839639454125 0.130030809657</corner>
+						<corner id="2">1.21984429725 0.0839639454125 0.130030809657</corner>
+						<corner id="3">1.29470300905 -6.66133814775e-16 0.0768053693732</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 3 5</edges>
+					<corners>
+						<corner id="0">1.10752774864 0.0839639454125 0.130030809657</corner>
+						<corner id="1">1.18238646044 0.0 0.0768053693732</corner>
+						<corner id="2">1.16092808489 -1.33226762955e-15 0.130034050856</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>1 4 6</edges>
+					<corners>
+						<corner id="0">1.21984429725 0.0839639454125 0.130030809657</corner>
+						<corner id="1">1.27324463350 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="2">1.29470300905 -6.66133814775e-16 0.0768053693732</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 1 7 8</edges>
+					<corners>
+						<corner id="0">1.29470300905 -6.66133814775e-16 0.0768053693732</corner>
+						<corner id="1">1.27324463350 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="2">1.16092808489 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="3">1.18238646044 0.0 0.0768053693732</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>2 3 4 8</edges>
+					<corners>
+						<corner id="0">1.21984429725 0.0839639454125 0.130030809657</corner>
+						<corner id="1">1.10752774864 0.0839639454125 0.130030809657</corner>
+						<corner id="2">1.16092808489 -1.33226762955e-15 0.130034050856</corner>
+						<corner id="3">1.27324463350 -1.33226762955e-15 0.130034050856</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>1.16092808489 -1.33226762955e-15 0.130034050856</start>
+					<end>1.18238646044 0.0 0.0768053693732</end>
+				</edge>
+				<edge id="1">
+					<start>1.27324463350 -1.33226762955e-15 0.130034050856</start>
+					<end>1.29470300905 -6.66133814775e-16 0.0768053693732</end>
+				</edge>
+				<edge id="2">
+					<start>1.10752774864 0.0839639454125 0.130030809657</start>
+					<end>1.21984429725 0.0839639454125 0.130030809657</end>
+				</edge>
+				<edge id="3">
+					<start>1.10752774864 0.0839639454125 0.130030809657</start>
+					<end>1.16092808489 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="4">
+					<start>1.21984429725 0.0839639454125 0.130030809657</start>
+					<end>1.27324463350 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+				<edge id="5">
+					<start>1.18238646044 0.0 0.0768053693732</start>
+					<end>1.10752774864 0.0839639454125 0.130030809657</end>
+				</edge>
+				<edge id="6">
+					<start>1.29470300905 -6.66133814775e-16 0.0768053693732</start>
+					<end>1.21984429725 0.0839639454125 0.130030809657</end>
+				</edge>
+				<edge id="7">
+					<start>1.29470300905 -6.66133814775e-16 0.0768053693732</start>
+					<end>1.18238646044 0.0 0.0768053693732</end>
+				</edge>
+				<edge id="8">
+					<start>1.16092808489 -1.33226762955e-15 0.130034050856</start>
+					<end>1.27324463350 -1.33226762955e-15 0.130034050856</end>
+				</edge>
+			</edges>
+		</cut>
+		<cut id="Cut#7">
+			<state>NotDone</state>
+			<center>0.315121394369 0.0886809287967 0.0481862202016</center>
+			<faces>
+				<face id="0">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>0 1 2 3</edges>
+					<corners>
+						<corner id="0">0.250537842931 0.129637139768 0.0963732483688</corner>
+						<corner id="1">0.379704945806 0.129637139768 0.0963732483688</corner>
+						<corner id="2">0.379704945806 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="3">0.250537842931 0.129643784514 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="1">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>1 5 7</edges>
+					<corners>
+						<corner id="0">0.379704945806 0.129637139768 0.0963732483688</corner>
+						<corner id="1">0.379704945806 0.0477180730794 0.0</corner>
+						<corner id="2">0.379704945806 0.129643784514 -8.07965638975e-07</corner>
+					</corners>
+				</face>
+				<face id="2">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>2 6 8</edges>
+					<corners>
+						<corner id="0">0.250537842931 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="1">0.250537842931 0.129637139768 0.0963732483688</corner>
+						<corner id="2">0.250537842931 0.0477180730794 0.0</corner>
+					</corners>
+				</face>
+				<face id="3">
+					<state>NotDone</state>
+					<exposed>True</exposed>
+					<edges>3 4 7 8</edges>
+					<corners>
+						<corner id="0">0.379704945806 0.0477180730794 0.0</corner>
+						<corner id="1">0.379704945806 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="2">0.250537842931 0.129643784514 -8.07965638975e-07</corner>
+						<corner id="3">0.250537842931 0.0477180730794 0.0</corner>
+					</corners>
+				</face>
+				<face id="4">
+					<state>NotDone</state>
+					<exposed>False</exposed>
+					<edges>0 4 5 6</edges>
+					<corners>
+						<corner id="0">0.250537842931 0.0477180730794 0.0</corner>
+						<corner id="1">0.250537842931 0.129637139768 0.0963732483688</corner>
+						<corner id="2">0.379704945806 0.129637139768 0.0963732483688</corner>
+						<corner id="3">0.379704945806 0.0477180730794 0.0</corner>
+					</corners>
+				</face>
+			</faces>
+			<edges>
+				<edge id="0">
+					<start>0.250537842931 0.129637139768 0.0963732483688</start>
+					<end>0.379704945806 0.129637139768 0.0963732483688</end>
+				</edge>
+				<edge id="1">
+					<start>0.379704945806 0.129643784514 -8.07965638975e-07</start>
+					<end>0.379704945806 0.129637139768 0.0963732483688</end>
+				</edge>
+				<edge id="2">
+					<start>0.250537842931 0.129637139768 0.0963732483688</start>
+					<end>0.250537842931 0.129643784514 -8.07965638975e-07</end>
+				</edge>
+				<edge id="3">
+					<start>0.379704945806 0.129643784514 -8.07965638975e-07</start>
+					<end>0.250537842931 0.129643784514 -8.07965638975e-07</end>
+				</edge>
+				<edge id="4">
+					<start>0.379704945806 0.0477180730794 0.0</start>
+					<end>0.250537842931 0.0477180730794 0.0</end>
+				</edge>
+				<edge id="5">
+					<start>0.379704945806 0.129637139768 0.0963732483688</start>
+					<end>0.379704945806 0.0477180730794 0.0</end>
+				</edge>
+				<edge id="6">
+					<start>0.250537842931 0.0477180730794 0.0</start>
+					<end>0.250537842931 0.129637139768 0.0963732483688</end>
+				</edge>
+				<edge id="7">
+					<start>0.379704945806 0.129643784514 -8.07965638975e-07</start>
+					<end>0.379704945806 0.0477180730794 0.0</end>
+				</edge>
+				<edge id="8">
+					<start>0.250537842931 0.0477180730794 0.0</start>
+					<end>0.250537842931 0.129643784514 -8.07965638975e-07</end>
+				</edge>
+			</edges>
+		</cut>
+	</timber>
+</acim>
