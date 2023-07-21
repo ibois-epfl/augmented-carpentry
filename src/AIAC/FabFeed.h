@@ -29,11 +29,15 @@ namespace AIAC
                 auto pt2 = GOPoint::Add(5.f, 5.f, 5.f);
                 pt1->SetVisibility(false);
                 pt2->SetVisibility(false);
-                m_HoleLine2Start = GOLine::Add(*pt1, *pt2);
-                m_HoleLine2Start->SetColor(GOColor::CYAN);
-
-                m_HoleLine2End = GOLine::Add(*pt1, *pt2);
-                m_HoleLine2End->SetColor(GOColor::RED);
+                this->m_HoleLine2ToolStart = GOLine::Add(*pt1, *pt2);
+                this->m_HoleLine2ToolStart->SetColor(GOColor::CYAN);
+                this->m_HoleLine2ToolEnd = GOLine::Add(*pt1, *pt2);
+                this->m_HoleLine2ToolEnd->SetColor(GOColor::RED);
+                this->m_DrillBitLineAxis = GOLine::Add(*pt1, *pt2);
+                this->m_HoleLineAxis = GOLine::Add(*pt1, *pt2);
+                this->m_HoleLineAxis->SetColor(GOColor::GREEN);
+                this->m_GUILineOrientation = GOLine::Add(*pt1, *pt2);
+                this->m_GUILineOrientation->SetColor(GOColor::YELLOW);
 
                 // FIXME: why remove is not working anymorer?
                 // GOPoint::Remove(pt1->GetId());
@@ -57,9 +61,15 @@ namespace AIAC
             /// Scale factor
             float m_ScaleFactor = m_ScaleFactor;
             /// the line from the drillbit tip to the start of the hole (aka start distance)
-            std::shared_ptr<GOLine> m_HoleLine2Start;
+            std::shared_ptr<GOLine> m_HoleLine2ToolStart;
             /// the line from the drillbit tip to the end of the hole (aka depth)
-            std::shared_ptr<GOLine> m_HoleLine2End;
+            std::shared_ptr<GOLine> m_HoleLine2ToolEnd;
+            /// the line axis for the drillbit
+            std::shared_ptr<GOLine> m_DrillBitLineAxis;
+            /// the line axis for the hole
+            std::shared_ptr<GOLine> m_HoleLineAxis;
+            /// GUI indicator for orientation
+            std::shared_ptr<GOLine> m_GUILineOrientation;
 
 
 
