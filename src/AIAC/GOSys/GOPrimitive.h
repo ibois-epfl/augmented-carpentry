@@ -123,15 +123,15 @@ namespace AIAC
         static std::vector<std::shared_ptr<GOPoint>> GetAll();
 
         inline glm::vec3 GetPosition() const { return m_Position; }
-        inline void SetPosition(glm::vec3 position) { m_Position = position; }
+        inline void SetPosition(glm::vec3 position) { m_Position = position; InitGLObject(); }
         inline float X() const { return m_Position.x; }
         inline float Y() const { return m_Position.y; }
         inline float Z() const { return m_Position.z; }
-        inline void SetX(float x) { m_Position.x = x; }
-        inline void SetY(float y) { m_Position.y = y; }
-        inline void SetZ(float z) { m_Position.z = z; }
+        inline void SetX(float x) { m_Position.x = x; InitGLObject(); }
+        inline void SetY(float y) { m_Position.y = y; InitGLObject(); }
+        inline void SetZ(float z) { m_Position.z = z; InitGLObject(); }
 
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Position = transformMat * glm::vec4(m_Position, 1.0f);
@@ -193,10 +193,12 @@ namespace AIAC
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
-        inline void SetPStart(GOPoint pStart) { m_PStart = pStart; }
-        inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
-        inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; }
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
+
+        inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
+        inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
+        inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
+
 
         /**
          * @brief Compute the angle between the current line object and another one
@@ -258,10 +260,10 @@ namespace AIAC
         inline float GetRadius() const { return m_Radius; }
         inline glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
-        inline void SetNormal(glm::vec3 normal) { m_Normal = normal; }
-        inline void SetCenter(GOPoint center) { m_Center = center; }
-        inline void SetRadius(float radius) { m_Radius = radius; }
-        inline void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; }
+        inline void SetNormal(glm::vec3 normal) { m_Normal = normal; InitGLObject(); }
+        inline void SetCenter(GOPoint center) { m_Center = center; InitGLObject(); }
+        inline void SetRadius(float radius) { m_Radius = radius; InitGLObject(); }
+        inline void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Center.Transform(transformMat);
@@ -320,10 +322,10 @@ namespace AIAC
         float GetRadius() const { return m_Radius; }
         glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
-        void SetPStart(GOPoint pStart) { m_PStart = pStart; }
-        void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
-        void SetRadius(float radius) { m_Radius = radius; }
-        void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; }
+        void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
+        void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
+        void SetRadius(float radius) { m_Radius = radius; InitGLObject(); }
+        void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
@@ -380,7 +382,7 @@ namespace AIAC
 
         inline bool IsClosed() const { return m_IsClosed; }
 
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             for (auto& point : m_Points) {
@@ -430,7 +432,7 @@ namespace AIAC
             return std::vector<glm::vec3>{m_P1.GetPosition(), m_P2.GetPosition(), m_P3.GetPosition()};
         }
 
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_P1.Transform(transformMat);
@@ -497,7 +499,7 @@ namespace AIAC
         const std::vector<glm::vec4> GetColors() const { return m_Colors; }
         void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; InitGLObject(); }
         void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; InitGLObject(); }
-        void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
+        void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; InitGLObject(); }
         void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; InitGLObject(); }
         void SetColor(glm::vec4 color) { m_Colors = std::vector<glm::vec4>(m_Vertices.size(), color); InitGLObject(); }
         // FIXME: override the SetColor function for Mesh
@@ -558,9 +560,9 @@ namespace AIAC
         inline const GOPoint GetAnchor() const { return m_Anchor; }
         inline const double GetTextSize() const { return m_Size; }
 
-        inline void SetText(const std::string text) { m_Text = text; }
-        inline void SetAnchor(const GOPoint anchor) { m_Anchor = anchor; }
-        inline void SetTextSize(const double size) { m_Size = size; }
+        inline void SetText(const std::string text) { m_Text = text; InitGLObject(); }
+        inline void SetAnchor(const GOPoint anchor) { m_Anchor = anchor; InitGLObject(); }
+        inline void SetTextSize(const double size) { m_Size = size; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ { m_Anchor.Transform(transformMat); }
         
