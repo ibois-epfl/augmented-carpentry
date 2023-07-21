@@ -27,6 +27,7 @@ namespace AIAC
         static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
         static constexpr float ExtraThick         = 10.0f;
+        static constexpr float BoldThick          = 15.0f;
         static constexpr float MaxThick           = 20.0f;
     };
 
