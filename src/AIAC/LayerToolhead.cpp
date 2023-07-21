@@ -13,10 +13,11 @@ namespace AIAC
     {
         // init ttool
         TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
-        
+
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
 
@@ -68,6 +69,7 @@ namespace AIAC
     {
         TTool->DestrolView();
         TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
@@ -78,7 +80,8 @@ namespace AIAC
     {
         TTool->DestrolView();
         TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             cameraMatrix,
             cameraSize
             );
