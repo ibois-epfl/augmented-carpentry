@@ -108,6 +108,12 @@ public:
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
+            bool IsExposed() const { return m_Exposed; }
+            glm::vec3 GetNormal() const { return m_Normal; }
+            glm::vec3 GetCenter() const { return m_Center; }
+            std::set<std::string> GetEdges() const { return m_Edges; }
+            std::set<std::string> GetNeighbors() const { return m_Neighbors; }
+            std::vector<glm::vec3> GetCorners() const { return m_Corners; }
 
         private:
             virtual void SetAsCurrent();
@@ -141,6 +147,7 @@ public:
             friend class ACInfoModel;
         };
 
+        inline Face& GetFace(std::string id) { return m_Faces[id]; }
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline glm::vec3 GetCenter() const { return m_Center; }

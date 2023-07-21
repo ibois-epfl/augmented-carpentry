@@ -210,18 +210,25 @@ namespace AIAC
                     faceInfo.m_Exposed = StringToBool(face.child("exposed").child_value());
                     faceInfo.m_State = StringToState(face.child("state").child_value());
                     faceInfo.m_Edges = StringToSet(face.child("edges").child_value());
+                    faceInfo.m_Center = glm::vec3(0.0f);
                     if(!faceInfo.m_Exposed){
                         nonExposedEdges.insert(faceInfo.m_Edges.begin(), faceInfo.m_Edges.end());
                     }
                     auto corners = face.child("corners");
                     for(auto corner = corners.child("corner"); corner; corner=corner.next_sibling("corner")){
                         faceInfo.m_Corners.push_back(StringToVec3(corner.child_value()) * m_Scale);
+                        faceInfo.m_Center += faceInfo.m_Corners.back();
                     }
+                    faceInfo.m_Center /= faceInfo.m_Corners.size();
+
                     // build face GO
                     if(faceInfo.m_Corners.size()<3){
                         AIAC_ERROR("Face: {0} has less than 3 corners", faceInfo.m_ID);
                         continue;
                     }
+
+                    // build normal
+                    faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0], faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
 
                     std::vector<uint32_t> indices;
                     auto baseCornerIdx = 0;
@@ -239,6 +246,12 @@ namespace AIAC
                     faceInfo.m_GOPrimitives.push_back(faceInfo.m_GO);
 
                     cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
+                }
+
+                for(auto const& [faceID, faceInfo]: cutInfo.m_Faces){
+                    cout << faceID << faceInfo.m_Exposed << endl;
+                    cout << glm::to_string(faceInfo.GetNormal()) << endl;
+                    cout << glm::to_string(faceInfo.GetCenter()) << endl;
                 }
 
                 auto edges = cut.child("edges");
