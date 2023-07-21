@@ -18,9 +18,45 @@
 
 namespace AIAC
 {
+    class FeedbackVisualizer {
+    public:
+        FeedbackVisualizer() = default;
+        ~FeedbackVisualizer() = default;
+
+        inline virtual void Activate() {
+            for (auto &p : AllPrimitives) {
+                p->SetVisibility(true);
+            }
+        }
+
+        inline virtual void Deactivate() {
+            for (auto &p : AllPrimitives) {
+                p->SetVisibility(false);
+            }
+        }
+
+        std::vector<std::shared_ptr<GOPrimitive>> AllPrimitives;
+    };
+
+    class CutChainSawFeedVisualizer : public FeedbackVisualizer {
+    public:
+        CutChainSawFeedVisualizer(){
+            LineStart = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+            LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+            LineMid = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+            AllPrimitives.push_back(LineStart);
+            AllPrimitives.push_back(LineEnd);
+            AllPrimitives.push_back(LineMid);
+            Deactivate();
+        }
+        std::shared_ptr<GOLine> LineStart;
+        std::shared_ptr<GOLine> LineEnd;
+        std::shared_ptr<GOLine> LineMid;
+    };
+
     class FabFeed
     {
-        public:
+    public:
             FabFeed()
             {
                 this->m_ScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
@@ -60,6 +96,9 @@ namespace AIAC
             std::shared_ptr<GOLine> m_HoleLine2Start;
             /// the line from the drillbit tip to the end of the hole (aka depth)
             std::shared_ptr<GOLine> m_HoleLine2End;
+
+            FeedbackVisualizer* m_CurrentFeedbackVisualizer = nullptr;
+            CutChainSawFeedVisualizer m_CutChainSawFeedVisualizer;
 
 
 
