@@ -29,6 +29,10 @@ namespace AIAC
                 auto pt2 = GOPoint::Add(5.f, 5.f, 5.f);
                 pt1->SetVisibility(false);
                 pt2->SetVisibility(false);
+                
+                this->m_InfoText = GOText::Add("///", *pt1);
+                this->m_InfoText->SetColor(GOColor::WHITE);
+
                 this->m_HoleLine2ToolStart = GOLine::Add(*pt1, *pt2);
                 this->m_HoleLine2ToolStart->SetColor(GOColor::CYAN);
                 this->m_HoleLine2ToolEnd = GOLine::Add(*pt1, *pt2);
@@ -37,11 +41,13 @@ namespace AIAC
                 this->m_HoleLineAxis = GOLine::Add(*pt1, *pt2);
                 this->m_HoleLineAxis->SetColor(GOColor::GREEN);
                 this->m_GUILineOrientation = GOLine::Add(*pt1, *pt2);
-                this->m_GUILineOrientation->SetColor(GOColor::YELLOW);
-
-                // FIXME: why remove is not working anymorer?
-                // GOPoint::Remove(pt1->GetId());
-                // GOPoint::Remove(pt1->GetId());
+                this->m_GUILineOrientation->SetColor(GOColor::WHITE);
+                
+                this->m_HoleLine2ToolStart->SetVisibility(true);
+                this->m_HoleLine2ToolEnd->SetVisibility(false);
+                this->m_GUILineOrientation->SetVisibility(true);
+                this->m_DrillBitLineAxis->SetVisibility(false);
+                this->m_HoleLineAxis->SetVisibility(false);
             };
 
         public:
@@ -70,7 +76,8 @@ namespace AIAC
             std::shared_ptr<GOLine> m_HoleLineAxis;
             /// GUI indicator for orientation
             std::shared_ptr<GOLine> m_GUILineOrientation;
-
+            /// All text objects
+            std::shared_ptr<GOText> m_InfoText;
 
 
         // private:
