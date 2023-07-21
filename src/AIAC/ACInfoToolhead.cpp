@@ -43,9 +43,9 @@ namespace AIAC
             m_Type = ACToolHeadType::CHAINSAW;
             m_Name = toolhead.attribute("name").as_string();
 
-            m_ChainSawD.ChainbaseACIT = ParseString2GlmVector(toolhead.child("chainbase").child_value()) * this->GetScaleF();
-            m_ChainSawD.ChainmidACIT = ParseString2GlmVector(toolhead.child("chainmid").child_value()) * this->GetScaleF();
-            m_ChainSawD.ChainendACIT = ParseString2GlmVector(toolhead.child("chainend").child_value()) * this->GetScaleF();
+            m_ChainSawD.ChainBaseACIT = ParseString2GlmVector(toolhead.child("ChainBase").child_value()) * this->GetScaleF();
+            m_ChainSawD.ChainMidACIT = ParseString2GlmVector(toolhead.child("ChainMid").child_value()) * this->GetScaleF();
+            m_ChainSawD.ChainEndACIT = ParseString2GlmVector(toolhead.child("ChainEnd").child_value()) * this->GetScaleF();
             m_ChainSawD.StartACIT = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_ChainSawD.EndACIT = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
             m_ChainSawD.WidthACIT = toolhead.child("width").text().as_float() * this->GetScaleF();
@@ -159,21 +159,21 @@ namespace AIAC
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
-        data.m_ChainSawD.ChainbaseGO = GOPoint::Add(data.m_ChainSawD.ChainbaseACIT.x,
-                                        data.m_ChainSawD.ChainbaseACIT.y,
-                                        data.m_ChainSawD.ChainbaseACIT.z,
+        data.m_ChainSawD.ChainBaseGO = GOPoint::Add(data.m_ChainSawD.ChainBaseACIT.x,
+                                        data.m_ChainSawD.ChainBaseACIT.y,
+                                        data.m_ChainSawD.ChainBaseACIT.z,
                                         GOWeight::Thick);
-        data.m_ChainSawD.ChainbaseGO->SetColor(GOColor::RED);
-        data.m_ChainSawD.ChainmidGO = GOPoint::Add(data.m_ChainSawD.ChainmidACIT.x,
-                                       data.m_ChainSawD.ChainmidACIT.y,
-                                       data.m_ChainSawD.ChainmidACIT.z,
+        data.m_ChainSawD.ChainBaseGO->SetColor(GOColor::RED);
+        data.m_ChainSawD.ChainMidGO = GOPoint::Add(data.m_ChainSawD.ChainMidACIT.x,
+                                                   data.m_ChainSawD.ChainMidACIT.y,
+                                                   data.m_ChainSawD.ChainMidACIT.z,
+                                                   GOWeight::Thick);
+        data.m_ChainSawD.ChainMidGO->SetColor(GOColor::GREEN);
+        data.m_ChainSawD.ChainEndGO = GOPoint::Add(data.m_ChainSawD.ChainEndACIT.x,
+                                       data.m_ChainSawD.ChainEndACIT.y,
+                                       data.m_ChainSawD.ChainEndACIT.z,
                                        GOWeight::Thick);
-        data.m_ChainSawD.ChainmidGO->SetColor(GOColor::GREEN);
-        data.m_ChainSawD.ChainendGO = GOPoint::Add(data.m_ChainSawD.ChainendACIT.x,
-                                       data.m_ChainSawD.ChainendACIT.y,
-                                       data.m_ChainSawD.ChainendACIT.z,
-                                       GOWeight::Thick);
-        data.m_ChainSawD.ChainendGO->SetColor(GOColor::BLUE);
+        data.m_ChainSawD.ChainEndGO->SetColor(GOColor::BLUE);
         data.m_ChainSawD.StartGO = GOPoint::Add(data.m_ChainSawD.StartACIT.x,
                                                 data.m_ChainSawD.StartACIT.y,
                                                 data.m_ChainSawD.StartACIT.z,
@@ -184,14 +184,14 @@ namespace AIAC
                                               data.m_ChainSawD.EndACIT.z,
                                               GOWeight::Thick);
         data.m_ChainSawD.EndGO->SetColor(GOColor::CYAN);
-        auto lnBaseMid = GOLine::Add(*data.m_ChainSawD.ChainbaseGO, *data.m_ChainSawD.ChainmidGO);
+        auto lnBaseMid = GOLine::Add(*data.m_ChainSawD.ChainBaseGO, *data.m_ChainSawD.ChainMidGO);
         lnBaseMid->SetColor(GOColor::MAGENTA);
-        auto lnMidEnd = GOLine::Add(*data.m_ChainSawD.ChainmidGO, *data.m_ChainSawD.ChainendGO);
+        auto lnMidEnd = GOLine::Add(*data.m_ChainSawD.ChainMidGO, *data.m_ChainSawD.ChainEndGO);
         lnMidEnd->SetColor(GOColor::MAGENTA);
 
-        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainbaseGO);
-        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainmidGO);
-        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainendGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainBaseGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainMidGO);
+        this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.ChainEndGO);
         this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.StartGO);
         this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.EndGO);
         this->m_GOPrimitivesInfo.push_back(lnBaseMid);
