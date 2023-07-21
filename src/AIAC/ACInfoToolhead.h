@@ -81,27 +81,27 @@ namespace AIAC
         float WidthACIT;
 
         /// @brief point start of the basetool
-        glm::vec3 ChainbaseACIT;
+        glm::vec3 ChainBaseACIT;
         /// @brief point in the middle of the chain
-        glm::vec3 ChainmidACIT;
+        glm::vec3 ChainMidACIT;
         /// @brief point end of the chain before the round tip
-        glm::vec3 ChainendACIT;
+        glm::vec3 ChainEndACIT;
         /// @brief start of the normal of the plateau plane
         glm::vec3 StartACIT;
         /// @brief end of the normal of the plateau plane
         glm::vec3 EndACIT;
         /// @brief GOPoints equivalent
-        std::shared_ptr<GOPoint> ChainbaseGO;
-        std::shared_ptr<GOPoint> ChainmidGO;
-        std::shared_ptr<GOPoint> ChainendGO;
+        std::shared_ptr<GOPoint> ChainBaseGO;
+        std::shared_ptr<GOPoint> ChainMidGO;
+        std::shared_ptr<GOPoint> ChainEndGO;
         std::shared_ptr<GOPoint> StartGO;
         std::shared_ptr<GOPoint> EndGO;
 
         ChainSawData()
         {
-            ChainbaseGO = std::make_shared<GOPoint>();
-            ChainmidGO = std::make_shared<GOPoint>();
-            ChainendGO = std::make_shared<GOPoint>();
+            ChainBaseGO = std::make_shared<GOPoint>();
+            ChainMidGO = std::make_shared<GOPoint>();
+            ChainEndGO = std::make_shared<GOPoint>();
             StartGO = std::make_shared<GOPoint>();
             EndGO = std::make_shared<GOPoint>();
         }
