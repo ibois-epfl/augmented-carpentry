@@ -43,7 +43,7 @@ namespace AIAC
                 this->m_GUILineOrientation = GOLine::Add(*pt1, *pt2);
                 this->m_GUILineOrientation->SetColor(GOColor::WHITE);
                 
-                this->m_HoleLine2ToolStart->SetVisibility(true);
+                this->m_HoleLine2ToolStart->SetVisibility(false);
                 this->m_HoleLine2ToolEnd->SetVisibility(false);
                 this->m_GUILineOrientation->SetVisibility(true);
                 this->m_DrillBitLineAxis->SetVisibility(false);

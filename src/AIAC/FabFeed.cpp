@@ -133,7 +133,7 @@ namespace AIAC
         
         if (160.f < angle && angle < 200.f)  // TODO: set tolerance var member, 20deg for now
         {
-            AIAC_INFO(">> >> >> drillbit is inside");
+            // AIAC_INFO(">> >> >> drillbit is inside");
             distScaledMMStr = "00";
         }
         if (angleOrient < 0.5f)  // TODO: set tolerance var member
