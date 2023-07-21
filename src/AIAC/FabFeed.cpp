@@ -69,6 +69,16 @@ namespace AIAC
         this->m_HoleLineAxis->SetPts(*hole->GetStartPointGO(),                              // start
                                      *hole->GetEndPointGO());                               // end
         
+        // start orientation guidance
+        glm::vec3 toolTipVec = this->m_DrillBitLineAxis->GetPEnd().GetPosition();
+        glm::vec3 midPtToolAxisVec = this->m_HoleLine2ToolStart->GetMidPointValues();
+        glm::vec3 midPtToolAxisVecHalf1 = glm::vec3((toolTipVec.x + midPtToolAxisVec.x) / 2.f,
+                                            (toolTipVec.y + midPtToolAxisVec.y) / 2.f,
+                                            (toolTipVec.z + midPtToolAxisVec.z) / 2.f);
+        glm::vec3 holeStartVec = this->m_HoleLineAxis->GetPStart().GetPosition();
+        this->m_GUIPointsTranslation[0]->SetPosition(toolTipVec);
+        this->m_GUIPointsTranslation[1]->SetPosition(midPtToolAxisVecHalf1);
+        this->m_GUIPointsTranslation[2]->SetPosition(midPtToolAxisVec);
 
         // angle orientation guidance
         glm::vec3 midPtToolAxis = this->m_DrillBitLineAxis->GetMidPointValues();
@@ -94,6 +104,8 @@ namespace AIAC
         this->m_DrillBitLineAxis->InitGLObject();
         this->m_HoleLineAxis->InitGLObject();
         this->m_GUILineOrientation->InitGLObject();
+        for (auto& pt : this->m_GUIPointsTranslation)
+            pt->InitGLObject();
 
         // (i) start distance
         float dist = this->m_HoleLine2ToolStart->GetLength();
@@ -135,6 +147,14 @@ namespace AIAC
         {
             // AIAC_INFO(">> >> >> drillbit is inside");
             distScaledMMStr = "00";
+            for (auto& pt : this->m_GUIPointsTranslation)
+                pt->SetVisibility(false);
+        }
+        else
+        {
+            // AIAC_INFO(">> >> >> drillbit is outside");
+            for (auto& pt : this->m_GUIPointsTranslation)
+                pt->SetVisibility(true);
         }
         if (angleOrient < 0.5f)  // TODO: set tolerance var member
             this->m_GUILineOrientation->SetVisibility(false);
