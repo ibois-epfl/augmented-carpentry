@@ -92,6 +92,12 @@ namespace AIAC
     bool FabFeed::ComputeCutChainSawFeed()
     {
         AIAC_INFO("ComputeCutChainSawFeed>>>>");
+        TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
+        // calculate normal
+        for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
+            AC_FF_TOOL->GetData<ChainSawData>().StartACIT
+        }
+
         return true;
     }
 

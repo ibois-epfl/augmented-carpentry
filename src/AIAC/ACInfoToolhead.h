@@ -58,19 +58,19 @@ namespace AIAC
         /// @brief center of the circle defining the circular blade
         glm::vec3 CenterACIT;
         /// @brief start of the normal of the blade plane
-        glm::vec3 NormalStartACIT;
+        glm::vec3 StartACIT;
         /// @brief end of the normal of the blade plane
-        glm::vec3 NormalEndACIT;
+        glm::vec3 EndACIT;
         /// @brief GOPoints equivalent
         std::shared_ptr<GOPoint> CenterGO;
-        std::shared_ptr<GOPoint> NormalStartGO;
-        std::shared_ptr<GOPoint> NormalEndGO;
+        std::shared_ptr<GOPoint> StartGO;
+        std::shared_ptr<GOPoint> EndGO;
 
         CircularSawData()
         {
             CenterGO = std::make_shared<GOPoint>();
-            NormalStartGO = std::make_shared<GOPoint>();
-            NormalEndGO = std::make_shared<GOPoint>();
+            StartGO = std::make_shared<GOPoint>();
+            EndGO = std::make_shared<GOPoint>();
         }
     };
     struct ChainSawData
@@ -87,23 +87,23 @@ namespace AIAC
         /// @brief point end of the chain before the round tip
         glm::vec3 ChainendACIT;
         /// @brief start of the normal of the plateau plane
-        glm::vec3 NormalStartACIT;
+        glm::vec3 StartACIT;
         /// @brief end of the normal of the plateau plane
-        glm::vec3 NormalEndACIT;
+        glm::vec3 EndACIT;
         /// @brief GOPoints equivalent
         std::shared_ptr<GOPoint> ChainbaseGO;
         std::shared_ptr<GOPoint> ChainmidGO;
         std::shared_ptr<GOPoint> ChainendGO;
-        std::shared_ptr<GOPoint> NormalStartGO;
-        std::shared_ptr<GOPoint> NormalEndGO;
+        std::shared_ptr<GOPoint> StartGO;
+        std::shared_ptr<GOPoint> EndGO;
 
         ChainSawData()
         {
             ChainbaseGO = std::make_shared<GOPoint>();
             ChainmidGO = std::make_shared<GOPoint>();
             ChainendGO = std::make_shared<GOPoint>();
-            NormalStartGO = std::make_shared<GOPoint>();
-            NormalEndGO = std::make_shared<GOPoint>();
+            StartGO = std::make_shared<GOPoint>();
+            EndGO = std::make_shared<GOPoint>();
         }
     };
     struct SaberSawData
@@ -116,21 +116,21 @@ namespace AIAC
         /// @brief position of the tip of the toolhead
         glm::vec3 TooltipACIT;
         /// @brief start of the normal of the blade plane
-        glm::vec3 NormalStartACIT;
+        glm::vec3 StartACIT;
         /// @brief end of the normal of the blade plane
-        glm::vec3 NormalEndACIT;
+        glm::vec3 EndACIT;
         /// @brief GOPoints equivalent
         std::shared_ptr<GOPoint> ToolbaseGO;
         std::shared_ptr<GOPoint> TooltipGO;
-        std::shared_ptr<GOPoint> NormalStartGO;
-        std::shared_ptr<GOPoint> NormalEndGO;
+        std::shared_ptr<GOPoint> StartGO;
+        std::shared_ptr<GOPoint> EndGO;
 
         SaberSawData()
         {
             ToolbaseGO = std::make_shared<GOPoint>();
             TooltipGO = std::make_shared<GOPoint>();
-            NormalStartGO = std::make_shared<GOPoint>();
-            NormalEndGO = std::make_shared<GOPoint>();
+            StartGO = std::make_shared<GOPoint>();
+            EndGO = std::make_shared<GOPoint>();
         }
     };
 

@@ -140,6 +140,10 @@ public:
             friend class TimberInfo;
             friend class ACInfoModel;
         };
+
+        inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
+        inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
+        inline glm::vec3 GetCenter() const { return m_Center; }
     
     private:
         std::map<std::string, Face> m_Faces;
