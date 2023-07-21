@@ -67,7 +67,7 @@
 			<radius>0.028</radius>
 		</hole>
 		<hole id="Hole#5">
-			<state>NotDone</state>
+			<state>Done</state>
 			<neighbors>4</neighbors>
 			<start>
 				<exposed>False</exposed>

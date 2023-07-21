@@ -70,7 +70,7 @@ namespace AIAC
                                      *hole->GetEndPointGO());                               // end
         
 
-        // translate DrillBitAxis to the end of the hole
+        // angle orientation guidance
         glm::vec3 midPtToolAxis = this->m_DrillBitLineAxis->GetMidPointValues();
         glm::vec3 translVec = glm::vec3(this->m_HoleLineAxis->GetPEnd().X() - this->m_DrillBitLineAxis->GetPEnd().X(),
                                        this->m_HoleLineAxis->GetPEnd().Y() - this->m_DrillBitLineAxis->GetPEnd().Y(),
@@ -89,28 +89,6 @@ namespace AIAC
         this->m_GUILineOrientation->Translate(vectGUITrans);
 
 
-
-        // -------
-        // glm::vec3 midPt = this->m_DrillBitLineAxis->GetMidPointValues();
-        // this->m_GUILineOrientation->SetPStartValues(midPt.x, midPt.y, midPt.z);
-        
-        // // get the line normal
-        // glm::vec3 lineNormal = this->m_DrillBitLineAxis->GetNormalValues();
-        // float xMidNormal = midPt.x + lineNormal.x;
-        // float yMidNormal = midPt.y + lineNormal.y;
-        // float zMidNormal = midPt.z + lineNormal.z;
-
-        // this->m_GUILineOrientation->SetPEndValues(midPt.x + lineNormal.x,
-        //                                           midPt.y + lineNormal.y,
-        //                                           midPt.z + lineNormal.z);
-        // -------
-
-
-
-
-
-
-
         this->m_HoleLine2ToolStart->InitGLObject();
         this->m_HoleLine2ToolEnd->InitGLObject();
         this->m_DrillBitLineAxis->InitGLObject();
@@ -120,30 +98,55 @@ namespace AIAC
         // (i) start distance
         float dist = this->m_HoleLine2ToolStart->GetLength();
         float distScaled = dist / this->m_ScaleFactor;
-        AIAC_INFO(">> start distance: " + std::to_string(distScaled));
+        int distScaledMM = std::round(distScaled * 1000.f);
+        if (distScaledMM > 99) distScaledMM = 99;
+        // make the text always 2 digits like 01, 02, 03, ...
+        std::string distScaledMMStr = std::to_string(distScaledMM);
+        if (distScaledMMStr.size() == 1) distScaledMMStr = "0" + distScaledMMStr;
+        // AIAC_INFO(">> start distance: " + std::to_string(distScaledMMStr));
 
         // (ii) detect if inside
         float angle = this->m_HoleLine2ToolStart->ComputeAngle(this->m_HoleLine2ToolEnd);
-        AIAC_INFO(">> >> angle tooltips/holeEnds: " + std::to_string(angle));
+        // AIAC_INFO(">> >> angle tooltips/holeEnds: " + std::to_string(angle));
 
         // (iii) angle
         float angleOrient = this->m_DrillBitLineAxis->ComputeAngle(this->m_HoleLineAxis);
-        AIAC_INFO(">> >> angle drillbit/holeAxis: " + std::to_string(angleOrient));
+        int angleOrientRounded = angleOrient;
+        if (angleOrientRounded > 99) angleOrientRounded = 99;
+        std::string angleOrientRoundedStr = std::to_string(angleOrientRounded);
+        if (angleOrientRoundedStr.size() == 1) angleOrientRoundedStr = "0" + angleOrientRoundedStr;
+        // AIAC_INFO(">> >> angle drillbit/holeAxis: " + std::to_string(angleOrientRoundedStr));
 
         // (iv) depth
-        float depth = this->m_HoleLine2ToolEnd->GetLength();
-        float depthScaled = depth / this->m_ScaleFactor;
-        AIAC_INFO(">> depth: " + std::to_string(depthScaled));
+        float depthLeft = this->m_HoleLineAxis->GetPEnd().DistanceTo(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);
+        float depthLeftScaled = depthLeft / this->m_ScaleFactor;
+        int depthLeftScaledMM = std::round(depthLeftScaled * 1000.f);
+        std::string depthLeftScaledMMStr = std::to_string(depthLeftScaledMM);
+        // AIAC_INFO(">> depthLeft: " + std::to_string(depthLeftScaledMMStr));
 
 
 
-        // >>>>>>>>>>>>>>>>>
-        if (distScaled < 0.005f)  // TODO: set tolerance var member, 5mm for now
-            AIAC_INFO(">> >> >> drillbit is well positioned");  // TODO: set tolerance var member
-        else if (170.f < angle && angle < 190.f)
-            AIAC_INFO(">> >> >> drillbit is inside and correct oriented");
+
+        // // >>>>>>>>>>>>>>>>>
+        // if (distScaled < 0.005f)  // TODO: set tolerance var member, 5mm for now
+        //     AIAC_INFO(">> >> >> drillbit is well positioned");  // TODO: set tolerance var member
+        
+        if (160.f < angle && angle < 200.f)  // TODO: set tolerance var member, 20deg for now
+        {
+            AIAC_INFO(">> >> >> drillbit is inside");
+            distScaledMMStr = "00";
+        }
+        if (angleOrient < 0.5f)  // TODO: set tolerance var member
+            this->m_GUILineOrientation->SetVisibility(false);
+        else
+            this->m_GUILineOrientation->SetVisibility(true);
 
 
+
+        // -- text
+        std::string test = " s:" + distScaledMMStr + "/a:" + angleOrientRoundedStr + "/e:" + depthLeftScaledMMStr;
+        this->m_InfoText->SetText(test);
+        this->m_InfoText->SetAnchor(midPtToolAxis);
 
 
         return true;

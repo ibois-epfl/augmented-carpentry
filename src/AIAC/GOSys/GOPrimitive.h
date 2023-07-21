@@ -194,7 +194,7 @@ namespace AIAC
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
-        
+
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; }
         inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
         inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); }
@@ -576,6 +576,7 @@ namespace AIAC
 
         inline void SetText(const std::string text) { m_Text = text; }
         inline void SetAnchor(const GOPoint anchor) { m_Anchor = anchor; }
+        inline void SetAnchor(const glm::vec3 anchor) { m_Anchor.SetPosition(anchor); }
         inline void SetTextSize(const double size) { m_Size = size; }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ { m_Anchor.Transform(transformMat); }
