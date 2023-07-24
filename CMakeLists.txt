@@ -85,6 +85,40 @@ if(SILENT_LOGGING)
     target_compile_definitions(${PROJECT_NAME} PRIVATE SILENT_LOGGING=true)
 endif()
 
+#------------------------------------------------------------------------------------------------------------
+# Check and update git submodules
+#------------------------------------------------------------------------------------------------------------
+
+# Download and update submodules with latest remote version
+find_package(Git QUIET)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if(GIT_SUBMODULE)
+        message(STATUS "Submodule update with latest commit")
+
+        execute_process(
+            COMMAND ${GIT_EXECUTABLE} --version
+            OUTPUT_VARIABLE GIT_VERSION_STRING
+        )
+        string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
+        set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
+        set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
+        set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
+
+        if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
+            message(FATAL_ERROR "Git version 1.8 or greater is required.")
+        endif()
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+            message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+        endif()
+    endif()
+endif()
+
 
 #------------------------------------------------------------------------------------------------------------
 # GLOBAL 3rd libs (NOT compatible with add_subdirectory())
@@ -153,6 +187,16 @@ if(UNIX AND INSTALL_TTOOL)
     execute_process(COMMAND ./cmake/install_TTool.sh
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
+# FIXME: run the download 
+# specify binary dir for TTool
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/deps/TTool/deps/libtorch")
+    set(EXTRACT_LIBTORCH_CMD "${PROJECT_SOURCE_DIR}/deps/TTool/util/extract_libtorch.sh")
+    execute_process(
+        COMMAND chmod +x ${EXTRACT_LIBTORCH_CMD}
+        COMMAND ${EXTRACT_LIBTORCH_CMD} ${PROJECT_SOURCE_DIR}/deps/TTool
+    )
+endif()
+
 find_package(TTool REQUIRED)
 if(TTool_FOUND)
     message(STATUS "TTool version: ${TTool_VERSION}")
@@ -161,7 +205,8 @@ if(TTool_FOUND)
     message(STATUS "TTool libraries: ${TTool_LIBRARIES}")
 endif()
 
-set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/deps/TTool/deps/libtorch")
+# Pytorch
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/deps/TTool/deps/libtorch")
 find_package(Torch REQUIRED)
 
 target_include_directories(${PROJECT_NAME}
@@ -182,43 +227,7 @@ target_link_libraries(${PROJECT_NAME}
     assimp
     GLU
     TBB::tbb
-    ${TORCH_LIBRARIES}
     )
-
-#------------------------------------------------------------------------------------------------------------
-# Check and update git submodules
-#------------------------------------------------------------------------------------------------------------
-
-# Download and update submodules with latest remote version
-# find_package(Git QUIET)
-# if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-#     option(GIT_SUBMODULE "Check submodules during build" ON)
-#     if(GIT_SUBMODULE)
-#         message(STATUS "Submodule update with latest commit")
-
-#         execute_process(
-#             COMMAND ${GIT_EXECUTABLE} --version
-#             OUTPUT_VARIABLE GIT_VERSION_STRING
-#         )
-#         string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
-#         set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
-#         set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
-#         set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
-
-#         if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
-#             message(FATAL_ERROR "Git version 1.8 or greater is required.")
-#         endif()
-#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
-#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
-#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-#                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
-#         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-#             message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-#         endif()
-#     endif()
-# endif()
-
 
 #------------------------------------------------------------------------------------------------------------
 # LOCAL 3rd libs (compatible with add_subdirectory())
