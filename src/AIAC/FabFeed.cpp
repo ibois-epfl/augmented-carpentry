@@ -100,11 +100,13 @@ namespace AIAC
         // calculate tool normal
         auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().StartGO->GetPosition();
         auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().EndGO->GetPosition();
-        auto toolMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
-        auto toolNormalVec = glm::cross((toolStartPt - toolMidPt), (toolEndPt - toolMidPt));
+        auto toolChainBasePt = AC_FF_TOOL->GetData<ChainSawData>().ChainBaseGO->GetPosition();
+        auto toolChainMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
+        auto toolChainEndPt = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
+        auto toolNormalVec = glm::cross((toolStartPt - toolChainMidPt), (toolEndPt - toolChainMidPt));
 
-        std::string nearestParallelFaceID;
         float nearestParallelFaceDist = 1e9f;
+        std::string nearestParallelFaceID;
         vector<std::string> parallelFaceIDs;
         vector<std::string> perpendicularFaceIDs;
 
@@ -112,16 +114,15 @@ namespace AIAC
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
-            auto theta = glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec)));
+            auto theta = abs(glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec))));
             // AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
 
             // for parallel faces, find the nearest one
-            if(theta < glm::radians(45.0f) || theta > glm::radians(-45.0f)){
+            if(theta < glm::radians(45.0f)){
                 parallelFaceIDs.push_back(faceID);
-                auto distStart = glm::distance(faceInfo.GetCenter(), toolStartPt);
-                auto distEnd = glm::distance(faceInfo.GetCenter(), toolEndPt);
-                auto distMid = glm::distance(faceInfo.GetCenter(), toolMidPt);
-                auto totalDist = distStart + distEnd + distMid;
+                auto distChainBase = glm::distance(faceInfo.GetCenter(), toolChainBasePt);
+                auto distChainEnd = glm::distance(faceInfo.GetCenter(), toolChainEndPt);
+                auto totalDist = distChainBase + distChainEnd;
                 
                 // update nearest parallel face
                 if(nearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist){
@@ -131,28 +132,54 @@ namespace AIAC
             } else {
                 perpendicularFaceIDs.push_back(faceID);
             }
-            //
         }
 
         // Update the visualizer for the closest parallel face
         if(!nearestParallelFaceID.empty()){
+            // Highlight the face
+
+
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
-
-            auto projStart = GetProjectionPointOnPlane(faceNormal, faceCenter, toolStartPt);
-            auto projEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolEndPt);
-            auto projMid = GetProjectionPointOnPlane(faceNormal, faceCenter, toolMidPt);
-
-            auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().StartGO->GetPosition();
-            auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().EndGO->GetPosition();
-            auto toolMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
             
+            // auto projStart = GetProjectionPointOnPlane(faceNormal, faceCenter, toolStartPt);
+            auto projEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolEndPt);
+            auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainBasePt);
+            // auto projChainMid = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainMidPt);
+            auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
+
             // update the visualizer
-            this->m_CutChainSawFeedVisualizer.LineStart->SetPts(toolStartPt, projStart);
+            // this->m_CutChainSawFeedVisualizer.LineStart->SetPts(toolStartPt, projStart);
             this->m_CutChainSawFeedVisualizer.LineEnd->SetPts(toolEndPt, projEnd);
-            this->m_CutChainSawFeedVisualizer.LineMid->SetPts(toolMidPt, projMid);
+            this->m_CutChainSawFeedVisualizer.LineChainBase->SetPts(toolChainBasePt, projChainBase);
+            // this->m_CutChainSawFeedVisualizer.LineChainMid->SetPts(toolChainMidPt, projChainMid);
+            this->m_CutChainSawFeedVisualizer.LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
+            
+            // this->m_CutChainSawFeedVisualizer.GuideTxtStart->SetAnchor(toolStartPt);
+            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetAnchor(toolEndPt);
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetAnchor(toolChainBasePt);
+            // this->m_CutChainSawFeedVisualizer.GuideTxtChainMid->SetAnchor(toolChainMidPt);
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetAnchor(toolChainEndPt);
+
+            // auto startDist = std::to_string(glm::distance(toolStartPt, projStart));
+            auto endDist = glm::distance(toolEndPt, projEnd);
+            auto chainBaseDist = glm::distance(toolChainBasePt, projChainBase);
+            // auto chainMidDist = std::to_string(glm::distance(toolChainMidPt, projChainMid));
+            auto chainEndDist = glm::distance(toolChainEndPt, projChainEnd);
+
+            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetText("End: " + std::to_string(endDist));
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetText("Chain Base: " + std::to_string(chainBaseDist));
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetText("Chain End: " + std::to_string(chainEndDist));
+
+            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+
+            this->m_CutChainSawFeedVisualizer.LineEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.LineChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.LineChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
         }
 
         return true;
