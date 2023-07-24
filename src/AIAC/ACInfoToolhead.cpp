@@ -43,9 +43,9 @@ namespace AIAC
             m_Type = ACToolHeadType::CHAINSAW;
             m_Name = toolhead.attribute("name").as_string();
 
-            m_ChainSawD.ChainBaseACIT = ParseString2GlmVector(toolhead.child("ChainBase").child_value()) * this->GetScaleF();
-            m_ChainSawD.ChainMidACIT = ParseString2GlmVector(toolhead.child("ChainMid").child_value()) * this->GetScaleF();
-            m_ChainSawD.ChainEndACIT = ParseString2GlmVector(toolhead.child("ChainEnd").child_value()) * this->GetScaleF();
+            m_ChainSawD.ChainBaseACIT = ParseString2GlmVector(toolhead.child("chainbase").child_value()) * this->GetScaleF();
+            m_ChainSawD.ChainMidACIT = ParseString2GlmVector(toolhead.child("chainmid").child_value()) * this->GetScaleF();
+            m_ChainSawD.ChainEndACIT = ParseString2GlmVector(toolhead.child("chainend").child_value()) * this->GetScaleF();
             m_ChainSawD.StartACIT = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_ChainSawD.EndACIT = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
             m_ChainSawD.WidthACIT = toolhead.child("width").text().as_float() * this->GetScaleF();
