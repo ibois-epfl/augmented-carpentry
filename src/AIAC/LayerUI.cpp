@@ -449,9 +449,12 @@ namespace AIAC
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
 
         ImGui::Text("Toolhead Classifier:");
+        ImGui::BeginChild("toolhead_classifier", ImVec2(0, 150), true, ImGuiWindowFlags_HorizontalScrollbar);
         if(ImGui::Button("Detect Toolhead", ImVec2(-1, 40)))
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->DetectToolhead();
-        ImGui::Text("Classifier Log: \n%s", AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierLog());
+        std::string classifierLog = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierLog();
+        ImGui::Text("Classifier Log: \n%s", classifierLog.c_str());
+        ImGui::EndChild();
 
         ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
