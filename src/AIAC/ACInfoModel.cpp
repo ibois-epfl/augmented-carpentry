@@ -228,7 +228,8 @@ namespace AIAC
                     }
 
                     // build normal
-                    faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0], faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
+                    faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0],
+                                                                     faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
 
                     std::vector<uint32_t> indices;
                     auto baseCornerIdx = 0;
@@ -271,7 +272,6 @@ namespace AIAC
                     edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
                     edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
                     edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
-
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
@@ -373,7 +373,9 @@ namespace AIAC
             
     }
 
-    void ACInfoModel::TransformGOPrimitives(glm::mat4x4 transformMat) {
+    void ACInfoModel::Transform(glm::mat4x4 transformMat) {
+        auto rotationMat = glm::mat3x3(transformMat);
+
         // bounding box
         auto bbox = m_TimberInfo.m_Bbox;
         for(int i = 0 ; i < bbox.size() ; i++){
@@ -396,11 +398,17 @@ namespace AIAC
             for(auto& objs : cutInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
-            // Face has no GOPrimitives now
+            // Face
             for(auto& kv : cutInfo.m_Faces){
                 auto faceInfo = kv.second;
                 for(auto& objs : faceInfo.m_GOPrimitives){
                     objs->Transform(transformMat);
+                }
+                // Normal, Center, and Corners are glm::vec3
+                faceInfo.m_Normal = glm::normalize(rotationMat * faceInfo.m_Normal);
+                faceInfo.m_Center = glm::vec3(transformMat * glm::vec4(faceInfo.m_Center, 1.0f));
+                for(auto& corner : faceInfo.m_Corners){
+                    corner = glm::vec3(transformMat * glm::vec4(corner, 1.0f));
                 }
             }
             // Edge
