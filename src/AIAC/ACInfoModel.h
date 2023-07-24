@@ -111,9 +111,9 @@ public:
             bool IsExposed() const { return m_Exposed; }
             glm::vec3 GetNormal() const { return m_Normal; }
             glm::vec3 GetCenter() const { return m_Center; }
+            std::vector<glm::vec3> GetCorners() const { return m_Corners; }
             std::set<std::string> GetEdges() const { return m_Edges; }
             std::set<std::string> GetNeighbors() const { return m_Neighbors; }
-            std::vector<glm::vec3> GetCorners() const { return m_Corners; }
 
         private:
             virtual void SetAsCurrent();
@@ -121,9 +121,9 @@ public:
             bool m_Exposed;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
+            std::vector<glm::vec3> m_Corners;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
-            std::vector<glm::vec3> m_Corners;
             std::shared_ptr<GOMesh> m_GO;
 
             friend class Cut;
@@ -238,7 +238,7 @@ public:
      * @brief transform all the GOPrimitive belonging to the ACInfoModel
      * @param transformMat transformation matrix
      */
-    void TransformGOPrimitives(glm::mat4x4 transformMat);
+    void Transform(glm::mat4x4 transformMat);
 
     /**
      * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
