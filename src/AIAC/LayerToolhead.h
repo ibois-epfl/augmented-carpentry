@@ -54,6 +54,8 @@ namespace AIAC
         cv::Matx44f GetPose() const { return m_Pose; }
         /// @brief Get the current tracking status of the ttool
         std::string GetTrackingStatus() const { return TTool ? TTool->GetTrackingStatus() : "TTool not initialized"; }
+        /// @brief Get the current classifier log of the ttool
+        std::string GetClassifierLog() const { return TTool ? TTool->GetClassifierLog() : "TTool not initialized"; }
     
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
