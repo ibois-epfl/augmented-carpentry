@@ -43,6 +43,7 @@ namespace AIAC
         inline int GetWidth() const { return m_CvMat.rows ; }
         inline int GetHeight() const { return m_CvMat.cols; }
         inline const cv::Mat GetCvMat() const { cv::cvtColor(m_CvMat, m_CvMat, cv::COLOR_RGB2BGR); return m_CvMat; }
+        inline const cv::Mat GetPureCvMat() const { cv::cvtColor(m_PureCvMat, m_PureCvMat, cv::COLOR_RGB2BGR); return m_PureCvMat; }
 
         // Image Getter of different types and corresponding helpers
         ImTexture GetImTexture(ImVec2 size = ImVec2(0, 0));
@@ -62,6 +63,7 @@ namespace AIAC
         const char* m_Path;
         
         cv::Mat m_CvMat = cv::Mat();
+        cv::Mat m_PureCvMat = cv::Mat(); // only updated by UpdateData(), used by Toolhead Classifier (TTool)
         GLuint m_GlTextureObj = 0;
         ImTexture m_ImTexture = { 0, ImVec2(0, 0) };
 
