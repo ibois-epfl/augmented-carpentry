@@ -95,6 +95,45 @@ namespace AIAC
         AIAC_INFO("Edge::SetAsCurrent");
     }
 
+    void TimberInfo::Cut::HighlightFace(std::string faceID) {
+        if(faceID == m_HighlightedFaceID) return;
+
+        // faceID is empty -> Reset everything to CURRENT
+        if(faceID.empty()){
+            for(auto& [_, face] : m_Faces){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+            }
+            for(auto& [_, edge] : m_Edges){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+            }
+            m_HighlightedFaceID = "";
+            return;
+        }
+        
+        if(m_HighlightedFaceID.empty()){
+            // init : set all to NOT_DONE
+            for(auto& [_, face] : m_Faces){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+            }
+            for(auto& [_, edge] : m_Edges){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+            }
+        } else {
+            // reset the previous Highlighted face
+            m_Faces[m_HighlightedFaceID].m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+            for(auto& edgeID : m_Faces[m_HighlightedFaceID].m_Edges){
+                m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+            }
+        }
+
+        // set the new Highlighted face
+        m_HighlightedFaceID = faceID;
+        m_Faces[m_HighlightedFaceID].m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+        for(auto& edgeID : m_Faces[m_HighlightedFaceID].m_Edges){
+            m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+        }
+    }
+
 
 
     std::vector<std::string> TimberInfo::GetAllComponentsIDs() const {

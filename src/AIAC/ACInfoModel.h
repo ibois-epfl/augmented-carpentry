@@ -151,8 +151,10 @@ public:
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline glm::vec3 GetCenter() const { return m_Center; }
+        void HighlightFace(std::string id);
     
     private:
+        std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
         glm::vec3 m_Center;
