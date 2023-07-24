@@ -115,10 +115,10 @@ namespace AIAC
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
             auto theta = abs(glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec))));
-            // AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
+            AIAC_INFO(">> theta: " + std::to_string(theta) + "(60 = " + std::to_string(glm::radians(60.0f)) + ")");
 
             // for parallel faces, find the nearest one
-            if(theta < glm::radians(45.0f)){
+            if(theta < glm::radians(60.0f)){
                 parallelFaceIDs.push_back(faceID);
                 auto distChainBase = glm::distance(faceInfo.GetCenter(), toolChainBasePt);
                 auto distChainEnd = glm::distance(faceInfo.GetCenter(), toolChainEndPt);
@@ -134,44 +134,43 @@ namespace AIAC
             }
         }
 
+        // Highlight the face
+        cut->HighlightFace(nearestParallelFaceID);
+
         // Update the visualizer for the closest parallel face
         if(!nearestParallelFaceID.empty()){
-            // Highlight the face
-
-
+            m_CutChainSawFeedVisualizer.Activate();
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
             
-            // auto projStart = GetProjectionPointOnPlane(faceNormal, faceCenter, toolStartPt);
             auto projEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolEndPt);
             auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainBasePt);
-            // auto projChainMid = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainMidPt);
             auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
 
             // update the visualizer
-            // this->m_CutChainSawFeedVisualizer.LineStart->SetPts(toolStartPt, projStart);
             this->m_CutChainSawFeedVisualizer.LineEnd->SetPts(toolEndPt, projEnd);
             this->m_CutChainSawFeedVisualizer.LineChainBase->SetPts(toolChainBasePt, projChainBase);
-            // this->m_CutChainSawFeedVisualizer.LineChainMid->SetPts(toolChainMidPt, projChainMid);
             this->m_CutChainSawFeedVisualizer.LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
             
-            // this->m_CutChainSawFeedVisualizer.GuideTxtStart->SetAnchor(toolStartPt);
             this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetAnchor(toolEndPt);
             this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetAnchor(toolChainBasePt);
-            // this->m_CutChainSawFeedVisualizer.GuideTxtChainMid->SetAnchor(toolChainMidPt);
             this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetAnchor(toolChainEndPt);
 
-            // auto startDist = std::to_string(glm::distance(toolStartPt, projStart));
-            auto endDist = glm::distance(toolEndPt, projEnd);
-            auto chainBaseDist = glm::distance(toolChainBasePt, projChainBase);
-            // auto chainMidDist = std::to_string(glm::distance(toolChainMidPt, projChainMid));
-            auto chainEndDist = glm::distance(toolChainEndPt, projChainEnd);
+            double endDist = glm::distance(toolEndPt, projEnd);
+            double chainBaseDist = glm::distance(toolChainBasePt, projChainBase);
+            double chainEndDist = glm::distance(toolChainEndPt, projChainEnd);
 
-            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetText("End: " + std::to_string(endDist));
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetText("Chain Base: " + std::to_string(chainBaseDist));
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetText("Chain End: " + std::to_string(chainEndDist));
+            auto toString = [](double &val) -> std::string {
+                const int precisionVal = 2;
+                std::string valStr = std::to_string(val);
+                return valStr.substr(0, valStr.find(".") + precisionVal + 1);
+            };
+
+            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetText("End: " + toString(endDist));
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetText("Base: " + toString(chainBaseDist));
+            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetText("Tip: " + toString(chainEndDist));
 
             this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
             this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
@@ -180,6 +179,8 @@ namespace AIAC
             this->m_CutChainSawFeedVisualizer.LineEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
             this->m_CutChainSawFeedVisualizer.LineChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
             this->m_CutChainSawFeedVisualizer.LineChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+        } else {
+            m_CutChainSawFeedVisualizer.Deactivate();
         }
 
         return true;
