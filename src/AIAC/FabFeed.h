@@ -44,6 +44,9 @@ namespace AIAC
             LineStart = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
             LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
             LineMid = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+            LineStart->SetColor(GOColor::RED);
+            LineEnd->SetColor(GOColor::RED);
+            LineMid->SetColor(GOColor::RED);
             AllPrimitives.push_back(LineStart);
             AllPrimitives.push_back(LineEnd);
             AllPrimitives.push_back(LineMid);

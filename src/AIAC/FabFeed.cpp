@@ -97,8 +97,6 @@ namespace AIAC
 
     bool FabFeed::ComputeCutChainSawFeed()
     {
-        AIAC_INFO("ComputeCutChainSawFeed>>>>");
-
         // calculate tool normal
         auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().StartGO->GetPosition();
         auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().EndGO->GetPosition();
@@ -112,14 +110,10 @@ namespace AIAC
 
         TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
-            cout << faceID << endl;
-            cout << glm::to_string(faceInfo.GetNormal()) << endl;
-            cout << glm::to_string(faceInfo.GetCenter()) << endl;
-            
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
             auto theta = glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec)));
-            AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
+            // AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
 
             // for parallel faces, find the nearest one
             if(theta < glm::radians(45.0f) || theta > glm::radians(-45.0f)){
@@ -128,10 +122,7 @@ namespace AIAC
                 auto distEnd = glm::distance(faceInfo.GetCenter(), toolEndPt);
                 auto distMid = glm::distance(faceInfo.GetCenter(), toolMidPt);
                 auto totalDist = distStart + distEnd + distMid;
-
                 
-                AIAC_INFO(">> " + faceID + ": totalDist: " + std::to_string(totalDist));
-
                 // update nearest parallel face
                 if(nearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist){
                     nearestParallelFaceID = faceID;
@@ -145,7 +136,6 @@ namespace AIAC
 
         // Update the visualizer for the closest parallel face
         if(!nearestParallelFaceID.empty()){
-            AIAC_INFO(">> nearestParallelFaceID: " + nearestParallelFaceID);
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
@@ -155,10 +145,14 @@ namespace AIAC
             auto projEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolEndPt);
             auto projMid = GetProjectionPointOnPlane(faceNormal, faceCenter, toolMidPt);
 
+            auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().StartGO->GetPosition();
+            auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().EndGO->GetPosition();
+            auto toolMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
+            
             // update the visualizer
-            this->m_CutChainSawFeedVisualizer.LineStart->SetPts(projStart, projStart);
-            this->m_CutChainSawFeedVisualizer.LineEnd->SetPts(projEnd, projEnd);
-            this->m_CutChainSawFeedVisualizer.LineMid->SetPts(projMid, projMid);
+            this->m_CutChainSawFeedVisualizer.LineStart->SetPts(toolStartPt, projStart);
+            this->m_CutChainSawFeedVisualizer.LineEnd->SetPts(toolEndPt, projEnd);
+            this->m_CutChainSawFeedVisualizer.LineMid->SetPts(toolMidPt, projMid);
         }
 
         return true;

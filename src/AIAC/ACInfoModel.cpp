@@ -386,7 +386,7 @@ namespace AIAC
 
         // holes
         for(auto& kv : m_TimberInfo.m_Holes){
-            auto holeInfo = kv.second;
+            auto& holeInfo = kv.second;
             for(auto& objs : holeInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
@@ -394,13 +394,13 @@ namespace AIAC
 
         // cuts
         for(auto& kv : m_TimberInfo.m_Cuts){
-            auto cutInfo = kv.second;
+            auto& cutInfo = kv.second;
             for(auto& objs : cutInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
             // Face
             for(auto& kv : cutInfo.m_Faces){
-                auto faceInfo = kv.second;
+                auto& faceInfo = kv.second;
                 for(auto& objs : faceInfo.m_GOPrimitives){
                     objs->Transform(transformMat);
                 }
