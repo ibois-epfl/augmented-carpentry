@@ -121,6 +121,16 @@ namespace AIAC
     }
 
     bool ACInfoModel::Load(std::string path) {
+        // check if file is good
+        if(path.empty()){
+            AIAC_ERROR("ACInfoModel::Load() path is empty");
+            return false;
+        }
+        if(!std::filesystem::exists(path)){
+            AIAC_ERROR("ACInfoModel::Load() file does not exist");
+            return false;
+        }
+
         m_FilePath = path;
         
         Clear();
