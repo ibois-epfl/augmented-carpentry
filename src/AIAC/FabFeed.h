@@ -23,75 +23,64 @@ namespace AIAC
         FeedbackVisualizer() = default;
         ~FeedbackVisualizer() = default;
 
-        inline virtual void Activate() {
-            for (auto &p : AllPrimitives) {
+        inline void Activate() {
+            for (auto &p : m_AllPrimitives) {
                 p->SetVisibility(true);
             }
         }
 
-        inline virtual void Deactivate() {
-            for (auto &p : AllPrimitives) {
+        inline void Deactivate() {
+            for (auto &p : m_AllPrimitives) {
                 p->SetVisibility(false);
             }
         }
 
-        std::vector<std::shared_ptr<GOPrimitive>> AllPrimitives;
+    protected:
+        std::vector<std::shared_ptr<GOPrimitive>> m_AllPrimitives;
+
+    friend class FabFeed;
+    };
+
+    class CutChainSawAngleFeedVisualizer : public FeedbackVisualizer {
+    public:
+        CutChainSawAngleFeedVisualizer();
+
+    private:
+        std::shared_ptr<GOLine> m_LineEnd;
+        std::shared_ptr<GOLine> m_LineChainBase;
+        std::shared_ptr<GOLine> m_LineChainEnd;
+
+    friend class FabFeed;
+    };
+
+    class CutChainSawDepthFeedVisualizer : public FeedbackVisualizer {
+    public:
+        CutChainSawDepthFeedVisualizer();
+
+    private:
+        std::shared_ptr<GOLine> m_LineIntersect;
+        std::shared_ptr<GOLine> m_LineDepthFront;
+        std::shared_ptr<GOLine> m_LineDepthBack;
+
+    friend class FabFeed;
     };
 
     class CutChainSawFeedVisualizer : public FeedbackVisualizer {
     public:
-        CutChainSawFeedVisualizer(){
-            // Line
-            // LineStart = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-            LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-            LineChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-            // LineChainMid = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-            LineChainEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        CutChainSawFeedVisualizer();
 
-            // LineStart->SetColor(GOColor::WHITE);
-            LineEnd->SetColor(GOColor::WHITE);
-            LineChainBase->SetColor(GOColor::WHITE);
-            // LineChainMid->SetColor(GOColor::WHITE);
-            LineChainEnd->SetColor(GOColor::WHITE);
+        CutChainSawAngleFeedVisualizer& GetAngleFeedVisualizer() { return m_AngleFeedVisualizer; }
+        CutChainSawDepthFeedVisualizer& GetDepthFeedVisualizer() { return m_DepthFeedVisualizer; }
 
-            // AllPrimitives.push_back(LineStart);
-            AllPrimitives.push_back(LineEnd);
-            AllPrimitives.push_back(LineChainBase);
-            // AllPrimitives.push_back(LineChainMid);
-            AllPrimitives.push_back(LineChainEnd);
+    private:
+        CutChainSawAngleFeedVisualizer m_AngleFeedVisualizer;
+        CutChainSawDepthFeedVisualizer m_DepthFeedVisualizer;
 
-            // Text
-            // GuideTxtStart = GOText::Add("Start", GOPoint(0.f, 0.f, 0.f));
-            GuideTxtEnd = GOText::Add("End", GOPoint(0.f, 0.f, 0.f));
-            GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
-            // GuideTxtChainMid = GOText::Add("ChainMid", GOPoint(0.f, 0.f, 0.f));
-            GuideTxtChainEnd = GOText::Add("ChainEnd", GOPoint(0.f, 0.f, 0.f));
+        std::shared_ptr<GOText> m_GuideTxtEnd;
+        std::shared_ptr<GOText> m_GuideTxtChainBase;
+        std::shared_ptr<GOText> m_GuideTxtChainEnd;
 
-            // GuideTxtStart->SetColor(GOColor::WHITE);
-            GuideTxtEnd->SetColor(GOColor::WHITE);
-            GuideTxtChainBase->SetColor(GOColor::WHITE);
-            // GuideTxtChainMid->SetColor(GOColor::WHITE);
-            GuideTxtChainEnd->SetColor(GOColor::WHITE);
-
-            // AllPrimitives.push_back(GuideTxtStart);
-            AllPrimitives.push_back(GuideTxtEnd);
-            AllPrimitives.push_back(GuideTxtChainBase);
-            // AllPrimitives.push_back(GuideTxtChainMid);
-            AllPrimitives.push_back(GuideTxtChainEnd);
-            
-            Deactivate();
-        }
-        // std::shared_ptr<GOLine> LineStart;
-        std::shared_ptr<GOLine> LineEnd;
-        std::shared_ptr<GOLine> LineChainBase;
-        // std::shared_ptr<GOLine> LineChainMid;
-        std::shared_ptr<GOLine> LineChainEnd;
-
-        // std::shared_ptr<GOText> GuideTxtStart;
-        std::shared_ptr<GOText> GuideTxtEnd;
-        std::shared_ptr<GOText> GuideTxtChainBase;
-        // std::shared_ptr<GOText> GuideTxtChainMid;
-        std::shared_ptr<GOText> GuideTxtChainEnd;
+    friend class FabFeed;
     };
 
     class FabFeed

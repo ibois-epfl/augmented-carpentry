@@ -107,6 +107,8 @@ namespace AIAC
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
+        float nearestPerpendicularFaceDist = 1e9f;
+        std::string nearestPerpendicularFaceID;
         vector<std::string> parallelFaceIDs;
         vector<std::string> perpendicularFaceIDs;
 
@@ -115,15 +117,15 @@ namespace AIAC
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
             auto theta = abs(glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec))));
-            AIAC_INFO(">> theta: " + std::to_string(theta) + "(60 = " + std::to_string(glm::radians(60.0f)) + ")");
+            AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
+
+            auto distChainBase = glm::distance(faceInfo.GetCenter(), toolChainBasePt);
+            auto distChainEnd = glm::distance(faceInfo.GetCenter(), toolChainEndPt);
+            auto totalDist = distChainBase + distChainEnd;
 
             // for parallel faces, find the nearest one
-            if(theta < glm::radians(60.0f)){
-                parallelFaceIDs.push_back(faceID);
-                auto distChainBase = glm::distance(faceInfo.GetCenter(), toolChainBasePt);
-                auto distChainEnd = glm::distance(faceInfo.GetCenter(), toolChainEndPt);
-                auto totalDist = distChainBase + distChainEnd;
-                
+            if(theta < glm::radians(45.0f)){
+                parallelFaceIDs.push_back(faceID);    
                 // update nearest parallel face
                 if(nearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist){
                     nearestParallelFaceID = faceID;
@@ -131,6 +133,11 @@ namespace AIAC
                 }
             } else {
                 perpendicularFaceIDs.push_back(faceID);
+                // update nearest perpendicular face
+                if(nearestPerpendicularFaceID.empty() || totalDist < nearestPerpendicularFaceDist){
+                    nearestPerpendicularFaceID = faceID;
+                    nearestPerpendicularFaceDist = totalDist;
+                }
             }
         }
 
@@ -138,8 +145,11 @@ namespace AIAC
         cut->HighlightFace(nearestParallelFaceID);
 
         // Update the visualizer for the closest parallel face
+        bool toShowText = false;
+        auto& angleVisualizer = this->m_CutChainSawFeedVisualizer.GetAngleFeedVisualizer();
         if(!nearestParallelFaceID.empty()){
-            m_CutChainSawFeedVisualizer.Activate();
+            toShowText = true;
+            angleVisualizer.Activate();
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
@@ -150,13 +160,13 @@ namespace AIAC
             auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
 
             // update the visualizer
-            this->m_CutChainSawFeedVisualizer.LineEnd->SetPts(toolEndPt, projEnd);
-            this->m_CutChainSawFeedVisualizer.LineChainBase->SetPts(toolChainBasePt, projChainBase);
-            this->m_CutChainSawFeedVisualizer.LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
+            angleVisualizer.m_LineEnd->SetPts(toolEndPt, projEnd);
+            angleVisualizer.m_LineChainBase->SetPts(toolChainBasePt, projChainBase);
+            angleVisualizer.m_LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
             
-            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetAnchor(toolEndPt);
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetAnchor(toolChainBasePt);
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetAnchor(toolChainEndPt);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetAnchor(toolEndPt);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetAnchor(toolChainEndPt);
 
             double endDist = glm::distance(toolEndPt, projEnd);
             double chainBaseDist = glm::distance(toolChainBasePt, projChainBase);
@@ -168,22 +178,81 @@ namespace AIAC
                 return valStr.substr(0, valStr.find(".") + precisionVal + 1);
             };
 
-            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetText("End: " + toString(endDist));
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetText("Base: " + toString(chainBaseDist));
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetText("Tip: " + toString(chainEndDist));
+            angleVisualizer.m_LineChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
+            angleVisualizer.m_LineEnd->SetColor(endDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
+            angleVisualizer.m_LineChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
 
-            this->m_CutChainSawFeedVisualizer.GuideTxtEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.GuideTxtChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetText("End: " + toString(endDist));
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetText("Base: " + toString(chainBaseDist));
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetText("Tip: " + toString(chainEndDist));
 
-            this->m_CutChainSawFeedVisualizer.LineEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.LineChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.LineChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
         } else {
-            m_CutChainSawFeedVisualizer.Deactivate();
+            angleVisualizer.Deactivate();
         }
 
+        // Perpendicular face
+        if(!nearestPerpendicularFaceID.empty()){
+            toShowText = true;
+        }
+
+        if(toShowText) m_CutChainSawFeedVisualizer.Activate();
+        else m_CutChainSawFeedVisualizer.Deactivate();
+
         return true;
+    }
+
+    CutChainSawAngleFeedVisualizer::CutChainSawAngleFeedVisualizer(){
+        // Line            
+        m_LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineChainEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+
+        m_LineEnd->SetColor(GOColor::WHITE);
+        m_LineChainBase->SetColor(GOColor::WHITE);
+        m_LineChainEnd->SetColor(GOColor::WHITE);
+
+        m_AllPrimitives.push_back(m_LineEnd);
+        m_AllPrimitives.push_back(m_LineChainBase);
+        m_AllPrimitives.push_back(m_LineChainEnd);
+
+        Deactivate();
+    }
+
+    CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer(){
+        // Line
+        m_LineIntersect = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDepthFront = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDepthBack = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+
+        m_LineIntersect->SetColor(GOColor::WHITE);
+        m_LineDepthFront->SetColor(GOColor::WHITE);
+        m_LineDepthBack->SetColor(GOColor::WHITE);
+
+        m_AllPrimitives.push_back(m_LineIntersect);
+        m_AllPrimitives.push_back(m_LineDepthFront);
+        m_AllPrimitives.push_back(m_LineDepthBack);
+
+        Deactivate();
+    }
+
+    CutChainSawFeedVisualizer::CutChainSawFeedVisualizer(){
+        // Text
+        m_GuideTxtEnd = GOText::Add("End", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtChainEnd = GOText::Add("ChainEnd", GOPoint(0.f, 0.f, 0.f));
+
+        m_GuideTxtEnd->SetColor(GOColor::WHITE);
+        m_GuideTxtChainBase->SetColor(GOColor::WHITE);
+        m_GuideTxtChainEnd->SetColor(GOColor::WHITE);
+
+        m_AllPrimitives.push_back(m_GuideTxtEnd);
+        m_AllPrimitives.push_back(m_GuideTxtChainBase);
+        m_AllPrimitives.push_back(m_GuideTxtChainEnd);
+
+        Deactivate();
     }
 
     bool FabFeed::ComputeCutCircularSawFeed()
