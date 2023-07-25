@@ -12,7 +12,7 @@ namespace AIAC{
 enum class ACIMState{
     NOT_DONE,
     CURRENT,
-    DONE,
+    DONE
 };
 
 static std::map<ACIMState, glm::vec4> HOLE_AXIS_COLOR = {
@@ -108,6 +108,12 @@ public:
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
+            bool IsExposed() const { return m_Exposed; }
+            glm::vec3 GetNormal() const { return m_Normal; }
+            glm::vec3 GetCenter() const { return m_Center; }
+            std::vector<glm::vec3> GetCorners() const { return m_Corners; }
+            std::set<std::string> GetEdges() const { return m_Edges; }
+            std::set<std::string> GetNeighbors() const { return m_Neighbors; }
 
         private:
             virtual void SetAsCurrent();
@@ -115,9 +121,9 @@ public:
             bool m_Exposed;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
+            std::vector<glm::vec3> m_Corners;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
-            std::vector<glm::vec3> m_Corners;
             std::shared_ptr<GOMesh> m_GO;
 
             friend class Cut;
@@ -140,8 +146,15 @@ public:
             friend class TimberInfo;
             friend class ACInfoModel;
         };
+
+        inline Face& GetFace(std::string id) { return m_Faces[id]; }
+        inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
+        inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
+        inline glm::vec3 GetCenter() const { return m_Center; }
+        void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
     
     private:
+        std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
         glm::vec3 m_Center;
@@ -227,7 +240,7 @@ public:
      * @brief transform all the GOPrimitive belonging to the ACInfoModel
      * @param transformMat transformation matrix
      */
-    void TransformGOPrimitives(glm::mat4x4 transformMat);
+    void Transform(glm::mat4x4 transformMat);
 
     /**
      * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.

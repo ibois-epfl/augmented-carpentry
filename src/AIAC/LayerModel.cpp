@@ -95,6 +95,6 @@ namespace AIAC
         }
 
         auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
-        m_ACInfoModel.TransformGOPrimitives(transMat);
+        m_ACInfoModel.Transform(transMat);
     }
 }

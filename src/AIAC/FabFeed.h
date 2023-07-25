@@ -18,9 +18,74 @@
 
 namespace AIAC
 {
+    class FeedbackVisualizer {
+    public:
+        FeedbackVisualizer() = default;
+        ~FeedbackVisualizer() = default;
+
+        inline void Activate() {
+            for (auto &p : m_AllPrimitives) {
+                p->SetVisibility(true);
+            }
+        }
+
+        inline void Deactivate() {
+            for (auto &p : m_AllPrimitives) {
+                p->SetVisibility(false);
+            }
+        }
+
+    protected:
+        std::vector<std::shared_ptr<GOPrimitive>> m_AllPrimitives;
+
+    friend class FabFeed;
+    };
+
+    class CutChainSawAngleFeedVisualizer : public FeedbackVisualizer {
+    public:
+        CutChainSawAngleFeedVisualizer();
+
+    private:
+        std::shared_ptr<GOLine> m_LineEnd;
+        std::shared_ptr<GOLine> m_LineChainBase;
+        std::shared_ptr<GOLine> m_LineChainEnd;
+
+    friend class FabFeed;
+    };
+
+    class CutChainSawDepthFeedVisualizer : public FeedbackVisualizer {
+    public:
+        CutChainSawDepthFeedVisualizer();
+
+    private:
+        std::shared_ptr<GOLine> m_LineIntersect;
+        std::shared_ptr<GOLine> m_LineDepthChainBase;
+        std::shared_ptr<GOLine> m_LineDepthChainEnd;
+
+    friend class FabFeed;
+    };
+
+    class CutChainSawFeedVisualizer : public FeedbackVisualizer {
+    public:
+        CutChainSawFeedVisualizer();
+
+        CutChainSawAngleFeedVisualizer& GetAngleFeedVisualizer() { return m_AngleFeedVisualizer; }
+        CutChainSawDepthFeedVisualizer& GetDepthFeedVisualizer() { return m_DepthFeedVisualizer; }
+
+    private:
+        CutChainSawAngleFeedVisualizer m_AngleFeedVisualizer;
+        CutChainSawDepthFeedVisualizer m_DepthFeedVisualizer;
+
+        std::shared_ptr<GOText> m_GuideTxtEnd;
+        std::shared_ptr<GOText> m_GuideTxtChainBase;
+        std::shared_ptr<GOText> m_GuideTxtChainEnd;
+
+    friend class FabFeed;
+    };
+
     class FabFeed
     {
-        public:
+    public:
             FabFeed()
             {
                 this->m_ScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
