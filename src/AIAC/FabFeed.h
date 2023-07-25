@@ -59,8 +59,8 @@ namespace AIAC
 
     private:
         std::shared_ptr<GOLine> m_LineIntersect;
-        std::shared_ptr<GOLine> m_LineDepthFront;
-        std::shared_ptr<GOLine> m_LineDepthBack;
+        std::shared_ptr<GOLine> m_LineDepthChainBase;
+        std::shared_ptr<GOLine> m_LineDepthChainEnd;
 
     friend class FabFeed;
     };

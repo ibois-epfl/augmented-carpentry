@@ -198,13 +198,30 @@ namespace AIAC
 
             // update the visualizer
             depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
-            depthVisualizer.m_LineDepthFront->SetPts(projChainBase, toolChainBasePt);
-            depthVisualizer.m_LineDepthBack->SetPts(projChainEnd, toolChainEndPt);
+            depthVisualizer.m_LineDepthChainBase->SetPts(projChainBase, toolChainBasePt);
+            depthVisualizer.m_LineDepthChainEnd->SetPts(projChainEnd, toolChainEndPt);
 
             perpendicularChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
             perpendicularChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
 
             // get the direction of cutting
+            // FIXIT: This we don't need to calculate toolUpVec everytime
+            auto toolUpVec = glm::normalize(toolEndPt - toolChainBasePt);
+            auto chainBaseVec = glm::normalize(toolChainBasePt - projChainBase);
+            auto chainEndVec = glm::normalize(toolChainEndPt - projChainEnd);
+
+            if(glm::dot(toolUpVec, chainBaseVec) < 0){
+                depthVisualizer.m_LineDepthChainBase->SetColor(GOColor::RED);
+                perpendicularChainBaseDist = -perpendicularChainBaseDist;
+            } else {
+                depthVisualizer.m_LineDepthChainBase->SetColor(GOColor::YELLOW);
+            }
+            if(glm::dot(toolUpVec, chainEndVec) < 0){
+                perpendicularChainEndDist = -perpendicularChainEndDist;
+                depthVisualizer.m_LineDepthChainEnd->SetColor(GOColor::RED);
+            } else {
+                depthVisualizer.m_LineDepthChainEnd->SetColor(GOColor::YELLOW);
+            }
 
         } else {
             depthVisualizer.Deactivate();
@@ -217,7 +234,9 @@ namespace AIAC
                 // const int precisionVal = 2;
                 // std::string valStr = std::to_string(val);
                 // return valStr.substr(0, valStr.find(".") + precisionVal + 1);
-                auto retVal = to_string(int(val * 2));
+
+                // TODO: / 50 * 1000 => mm, change this to a variable
+                auto retVal = to_string(int(val * 20));
                 if(retVal.length() == 1){
                     return "0" + retVal;
                 }
@@ -236,9 +255,31 @@ namespace AIAC
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetAnchor(toolChainEndPt);
 
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(parallelEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            auto endColor = GOColor::WHITE;
+            auto chainBaseColor = GOColor::WHITE;
+            auto chainEndColor = GOColor::WHITE;
+
+            if(parallelEndDist != 0 && parallelEndDist < 0.5f){
+                endColor = GOColor::GREEN;
+            }
+            if(parallelChainBaseDist != 0 && parallelChainBaseDist < 0.5f){
+                chainBaseColor = GOColor::GREEN;
+            }
+            if(parallelChainEndDist != 0 && parallelChainEndDist < 0.5f){
+                chainEndColor = GOColor::GREEN;
+            }
+            if(perpendicularChainBaseDist != 0 && perpendicularChainBaseDist < 0){
+                chainBaseColor = GOColor::RED;
+            }
+            if(perpendicularChainEndDist != 0 && perpendicularChainEndDist < 0){
+                chainEndColor = GOColor::RED;
+            }
+
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(endColor);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(chainBaseColor);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(chainEndColor);
+//            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+//            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
 
         }
         else m_CutChainSawFeedVisualizer.Deactivate();
@@ -266,16 +307,16 @@ namespace AIAC
     CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer(){
         // Line
         m_LineIntersect = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LineDepthFront = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LineDepthBack = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDepthChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDepthChainEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineIntersect->SetColor(GOColor::MAGENTA);
-        m_LineDepthFront->SetColor(GOColor::CYAN);
-        m_LineDepthBack->SetColor(GOColor::CYAN);
+        m_LineIntersect->SetColor(GOColor::CYAN);
+        m_LineDepthChainBase->SetColor(GOColor::YELLOW);
+        m_LineDepthChainEnd->SetColor(GOColor::YELLOW);
 
         m_AllPrimitives.push_back(m_LineIntersect);
-        m_AllPrimitives.push_back(m_LineDepthFront);
-        m_AllPrimitives.push_back(m_LineDepthBack);
+        m_AllPrimitives.push_back(m_LineDepthChainBase);
+        m_AllPrimitives.push_back(m_LineDepthChainEnd);
 
         Deactivate();
     }
