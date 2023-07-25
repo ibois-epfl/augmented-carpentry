@@ -71,6 +71,7 @@ namespace AIAC
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetPureCvMat().copyTo(currentFrame);
 
         std::string toolhead = TTool->Classify(currentFrame);
+        cv::imwrite(toolhead + ".png", currentFrame);
 
         this->ACInfoToolheadManager->SetActiveToolhead(toolhead);
         this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(this->IsShowToolheadGOInfo);
