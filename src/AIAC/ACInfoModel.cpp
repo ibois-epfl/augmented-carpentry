@@ -3,8 +3,6 @@
 #include "AIAC/Application.h"
 #include "ACInfoModel.h"
 
-using namespace std;
-
 namespace AIAC
 {
     ///< Base Component

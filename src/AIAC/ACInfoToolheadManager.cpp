@@ -12,13 +12,15 @@ namespace AIAC
 
         std::string configPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
                                                                 AIAC::Config::CONFIG_FILE);
+        std::string ttoolRootPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
+                                                                   AIAC::Config::TTOOL_ROOT_PATH);
         std::vector<std::string> toolheadACITPaths = ParseConfigFile(configPath, "acitFiles");
         std::vector<std::string> toolheadOBJPaths = ParseConfigFile(configPath, "modelFiles");
         
         for (int i = 0; i < toolheadOBJPaths.size(); i++)
         {
-            std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(toolheadACITPaths[i],
-                                                                                              toolheadOBJPaths[i],
+            std::shared_ptr<ACInfoToolhead> acInfoToolhead = std::make_shared<ACInfoToolhead>(ttoolRootPath + "/" + toolheadACITPaths[i],
+                                                                                              ttoolRootPath + "/" + toolheadOBJPaths[i],
                                                                                               (i+1));
             AIAC_INFO("Loading toolhead model: {}", acInfoToolhead->GetName());
             acInfoToolhead->SetVisibility(false);

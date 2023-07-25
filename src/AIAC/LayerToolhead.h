@@ -31,6 +31,7 @@ namespace AIAC
         /// @brief Destroy the  ttool view and recreate a new ttool object with given camera params
         void ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize);
 
+        void DetectToolhead();
 
         /// @brief Update the ttool state from the UI
         void UpdateToolheadStateUI();
@@ -53,6 +54,8 @@ namespace AIAC
         cv::Matx44f GetPose() const { return m_Pose; }
         /// @brief Get the current tracking status of the ttool
         std::string GetTrackingStatus() const { return TTool ? TTool->GetTrackingStatus() : "TTool not initialized"; }
+        /// @brief Get the current classifier log of the ttool
+        std::string GetClassifierLog() const { return TTool ? TTool->GetClassifierLog() : "TTool not initialized"; }
     
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
