@@ -43,7 +43,7 @@ namespace AIAC
         inline int GetWidth() const { return m_CvMat.rows ; }
         inline int GetHeight() const { return m_CvMat.cols; }
         inline const cv::Mat GetCvMat() const { cv::cvtColor(m_CvMat, m_CvMat, cv::COLOR_RGB2BGR); return m_CvMat; }
-        inline const cv::Mat GetPureCvMat() const { cv::cvtColor(m_PureCvMat, m_PureCvMat, cv::COLOR_RGB2BGR); return m_PureCvMat; }
+        inline const cv::Mat GetPureCvMat() const { return m_PureCvMat; } // BGR
 
         // Image Getter of different types and corresponding helpers
         ImTexture GetImTexture(ImVec2 size = ImVec2(0, 0));
