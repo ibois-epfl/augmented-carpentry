@@ -103,7 +103,7 @@ namespace AIAC
         auto toolChainBasePt = AC_FF_TOOL->GetData<ChainSawData>().ChainBaseGO->GetPosition();
         auto toolChainMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
         auto toolChainEndPt = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
-        auto toolNormalVec = glm::cross((toolStartPt - toolChainMidPt), (toolEndPt - toolChainMidPt));
+        auto toolNormalVec = glm::normalize(glm::cross((toolChainEndPt - toolChainMidPt), (toolChainBasePt - toolChainMidPt)));
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
@@ -116,15 +116,16 @@ namespace AIAC
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
-            auto theta = abs(glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec))));
-            AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
+            auto theta = glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec)));
+            // AIAC_INFO(">> theta: " + std::to_string(theta) + "(45 = " + std::to_string(glm::radians(45.0f)) + ")");
 
             auto distChainBase = glm::distance(faceInfo.GetCenter(), toolChainBasePt);
             auto distChainEnd = glm::distance(faceInfo.GetCenter(), toolChainEndPt);
             auto totalDist = distChainBase + distChainEnd;
 
             // for parallel faces, find the nearest one
-            if(theta < glm::radians(45.0f)){
+            auto threshold = 0.7853f; // 45 degrees
+            if(theta < threshold || (3.14159 - theta) < threshold) {
                 parallelFaceIDs.push_back(faceID);    
                 // update nearest parallel face
                 if(nearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist){
@@ -154,9 +155,15 @@ namespace AIAC
         double perpendicularChainBaseDist = 0.0f;
         double perpendicularChainEndDist = 0.0f;
 
+        angleVisualizer.Activate();
+        // normal vector
+        auto toolNormal = glm::normalize(glm::cross((toolChainEndPt - toolChainMidPt), (toolChainBasePt - toolChainMidPt)));
+        auto toolCenter = (toolStartPt + toolEndPt + toolChainBasePt + toolChainEndPt) / 4.0f;
+        angleVisualizer.m_LineSawNormal->SetPts(toolCenter, toolCenter + toolNormal * 10.0f);
+
         if(!nearestParallelFaceID.empty()){
             hasParallelFace = true;
-            angleVisualizer.Activate();
+            // angleVisualizer.Activate();
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
@@ -171,6 +178,11 @@ namespace AIAC
             angleVisualizer.m_LineChainBase->SetPts(toolChainBasePt, projChainBase);
             angleVisualizer.m_LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
 
+            // // normal vector
+            // auto toolNormal = glm::normalize(glm::cross((toolStartPt - toolChainMidPt), (toolEndPt - toolChainMidPt)));
+            // auto toolCenter = (toolStartPt + toolEndPt + toolChainBasePt + toolChainEndPt) / 4.0f;
+            // angleVisualizer.m_LineSawNormal->SetPts(toolCenter, toolCenter + toolNormal * 10.0f);
+
             parallelEndDist = glm::distance(toolEndPt, projEnd);
             parallelChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
             parallelChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
@@ -179,7 +191,7 @@ namespace AIAC
             angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
             angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
         } else {
-            angleVisualizer.Deactivate();
+            // angleVisualizer.Deactivate();
         }
 
         // Perpendicular face
@@ -292,14 +304,20 @@ namespace AIAC
         m_LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        
+        m_LineSawNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), 5.0f);
 
         m_LineEnd->SetColor(GOColor::WHITE);
         m_LineChainBase->SetColor(GOColor::WHITE);
         m_LineChainEnd->SetColor(GOColor::WHITE);
+    
+        m_LineSawNormal->SetColor(GOColor::RED);
 
         m_AllPrimitives.push_back(m_LineEnd);
         m_AllPrimitives.push_back(m_LineChainBase);
         m_AllPrimitives.push_back(m_LineChainEnd);
+
+        m_AllPrimitives.push_back(m_LineSawNormal);
 
         Deactivate();
     }
