@@ -20,6 +20,7 @@ namespace AIAC
     void Image::UpdateData(cv::Mat cvImg)
     {
         cvImg.copyTo(m_CvMat);
+        cvImg.copyTo(m_PureCvMat);
 
         switch (cvImg.channels())
         {

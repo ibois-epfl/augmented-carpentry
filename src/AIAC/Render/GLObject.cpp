@@ -1,5 +1,5 @@
 #include "GLObject.h"
-using namespace std;
+
 namespace AIAC
 {
     static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 20.0f;
@@ -168,10 +168,10 @@ namespace AIAC
             cylinderPoles.push_back(cp);
         }
 
-        vector<uint32_t> flattenedIndices;
-        vector<glm::vec3> indices;
-        vector<glm::vec3> vertices;
-        vector<glm::vec3> capContourTop, capContourBase;
+        std::vector<uint32_t> flattenedIndices;
+        std::vector<glm::vec3> indices;
+        std::vector<glm::vec3> vertices;
+        std::vector<glm::vec3> capContourTop, capContourBase;
 
         vertices.emplace_back(x1); // 0
         vertices.emplace_back(x2); // 1
@@ -228,8 +228,8 @@ namespace AIAC
             flattenedIndices.push_back((uint)vid.z);
         }
 
-        vector<glm::vec4> cylinderColorVec(vertices.size(), color);
-        vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
+        std::vector<glm::vec4> cylinderColorVec(vertices.size(), color);
+        std::vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
 
         std::vector<std::shared_ptr<GLObject>> glObjs;
 
@@ -289,8 +289,8 @@ namespace AIAC
         edges.emplace_back(vertices[sectorNum]);
         edges.emplace_back(vertices[1]);
 
-        vector<glm::vec4> faceColorVec(vertices.size(), color);
-        vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
+        std::vector<glm::vec4> faceColorVec(vertices.size(), color);
+        std::vector<glm::vec4> edgeColorVec(vertices.size(), edgeColor);
 
         // auto faceObj = std::make_shared<GLMeshObject>(vertices, faceColorVec, indices);
         auto edgeObj = std::make_shared<GLLineObject>(edges, edgeColorVec, edgeWeight);
@@ -302,11 +302,11 @@ namespace AIAC
         return glObjs;
     }
 
-    std::vector< std::shared_ptr<GLObject> > CreatePolyline(vector<glm::vec3> vertices, bool isClosed, glm::vec4 color, float lineWidth){
+    std::vector< std::shared_ptr<GLObject> > CreatePolyline(std::vector<glm::vec3> vertices, bool isClosed, glm::vec4 color, float lineWidth){
         // TODO: dealing with lineWidth > 1.0
         auto glObjs = std::vector< std::shared_ptr<GLObject> >();
         if(lineWidth <= 1.0f){
-            vector<glm::vec3> lineObjVertices; lineObjVertices.reserve(vertices.size() * 2);
+            std::vector<glm::vec3> lineObjVertices; lineObjVertices.reserve(vertices.size() * 2);
             lineObjVertices.emplace_back(vertices[0]);
             for (int i = 1; i < vertices.size() - 1; i++) {
                 lineObjVertices.emplace_back(vertices[i]);
@@ -317,7 +317,7 @@ namespace AIAC
                 lineObjVertices.emplace_back(vertices[vertices.size() - 1]);
                 lineObjVertices.emplace_back(vertices[0]);
             }
-            vector<glm::vec4> colors(lineObjVertices.size(), color);
+            std::vector<glm::vec4> colors(lineObjVertices.size(), color);
             glObjs.emplace_back(std::make_shared<GLLineObject>(lineObjVertices, colors, lineWidth));
         } else {
             for(int i = 1; i < vertices.size(); i++){
