@@ -145,10 +145,17 @@ namespace AIAC
         cut->HighlightFace(nearestParallelFaceID);
 
         // Update the visualizer for the closest parallel face
-        bool toShowText = false;
+        bool hasParallelFace = false, hasPerpendicularFace = false;
         auto& angleVisualizer = this->m_CutChainSawFeedVisualizer.GetAngleFeedVisualizer();
+
+        double parallelEndDist = 0.0f;
+        double parallelChainBaseDist = 0.0f;
+        double parallelChainEndDist = 0.0f;
+        double perpendicularChainBaseDist = 0.0f;
+        double perpendicularChainEndDist = 0.0f;
+
         if(!nearestParallelFaceID.empty()){
-            toShowText = true;
+            hasParallelFace = true;
             angleVisualizer.Activate();
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
@@ -163,42 +170,77 @@ namespace AIAC
             angleVisualizer.m_LineEnd->SetPts(toolEndPt, projEnd);
             angleVisualizer.m_LineChainBase->SetPts(toolChainBasePt, projChainBase);
             angleVisualizer.m_LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
-            
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetAnchor(toolEndPt);
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetAnchor(toolChainEndPt);
 
-            double endDist = glm::distance(toolEndPt, projEnd);
-            double chainBaseDist = glm::distance(toolChainBasePt, projChainBase);
-            double chainEndDist = glm::distance(toolChainEndPt, projChainEnd);
+            parallelEndDist = glm::distance(toolEndPt, projEnd);
+            parallelChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
+            parallelChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
 
-            auto toString = [](double &val) -> std::string {
-                const int precisionVal = 2;
-                std::string valStr = std::to_string(val);
-                return valStr.substr(0, valStr.find(".") + precisionVal + 1);
-            };
-
-            angleVisualizer.m_LineChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
-            angleVisualizer.m_LineEnd->SetColor(endDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
-            angleVisualizer.m_LineChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
-
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetText("End: " + toString(endDist));
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetText("Base: " + toString(chainBaseDist));
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetText("Tip: " + toString(chainEndDist));
-
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(endDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(chainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(chainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            angleVisualizer.m_LineEnd->SetColor(parallelEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
+            angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
+            angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
         } else {
             angleVisualizer.Deactivate();
         }
 
         // Perpendicular face
+        auto& depthVisualizer = this->m_CutChainSawFeedVisualizer.GetDepthFeedVisualizer();
         if(!nearestPerpendicularFaceID.empty()){
-            toShowText = true;
+            hasPerpendicularFace = true;
+            depthVisualizer.Activate();
+
+            // find the projection point of the 2 points on the face
+            auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
+            auto faceNormal = faceInfo.GetNormal();
+            auto faceCenter = faceInfo.GetCenter();
+
+            auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainBasePt);
+            auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
+
+            // update the visualizer
+            depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
+            depthVisualizer.m_LineDepthFront->SetPts(projChainBase, toolChainBasePt);
+            depthVisualizer.m_LineDepthBack->SetPts(projChainEnd, toolChainEndPt);
+
+            perpendicularChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
+            perpendicularChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
+
+            // get the direction of cutting
+
+        } else {
+            depthVisualizer.Deactivate();
         }
 
-        if(toShowText) m_CutChainSawFeedVisualizer.Activate();
+        if(hasParallelFace || hasPerpendicularFace) {
+            m_CutChainSawFeedVisualizer.Activate();
+
+            auto toString = [](double &val) -> std::string {
+                // const int precisionVal = 2;
+                // std::string valStr = std::to_string(val);
+                // return valStr.substr(0, valStr.find(".") + precisionVal + 1);
+                auto retVal = to_string(int(val * 2));
+                if(retVal.length() == 1){
+                    return "0" + retVal;
+                }
+                return retVal;
+            };
+
+            auto strEnd = "End: " + toString(parallelEndDist);
+            auto strChainBase = "Base: " + toString(parallelChainBaseDist) + "/" + toString(perpendicularChainBaseDist);
+            auto strChainEnd = "Tip: " + toString(parallelChainEndDist) + "/" + toString(perpendicularChainEndDist);
+
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetText(strEnd);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetText(strChainBase);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetText(strChainEnd);
+
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetAnchor(toolEndPt);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetAnchor(toolChainEndPt);
+
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(parallelEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
+
+        }
         else m_CutChainSawFeedVisualizer.Deactivate();
 
         return true;
@@ -227,9 +269,9 @@ namespace AIAC
         m_LineDepthFront = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDepthBack = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineIntersect->SetColor(GOColor::WHITE);
-        m_LineDepthFront->SetColor(GOColor::WHITE);
-        m_LineDepthBack->SetColor(GOColor::WHITE);
+        m_LineIntersect->SetColor(GOColor::MAGENTA);
+        m_LineDepthFront->SetColor(GOColor::CYAN);
+        m_LineDepthBack->SetColor(GOColor::CYAN);
 
         m_AllPrimitives.push_back(m_LineIntersect);
         m_AllPrimitives.push_back(m_LineDepthFront);
