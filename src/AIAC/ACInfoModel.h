@@ -12,7 +12,7 @@ namespace AIAC{
 enum class ACIMState{
     NOT_DONE,
     CURRENT,
-    DONE,
+    DONE
 };
 
 static std::map<ACIMState, glm::vec4> HOLE_AXIS_COLOR = {
@@ -151,7 +151,7 @@ public:
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline glm::vec3 GetCenter() const { return m_Center; }
-        void HighlightFace(const std::string& faceId);
+        void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
     
     private:
         std::string m_HighlightedFaceID;
