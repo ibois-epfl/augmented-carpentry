@@ -156,10 +156,6 @@ namespace AIAC
         double perpendicularChainEndDist = 0.0f;
 
         angleVisualizer.Activate();
-        // normal vector
-        auto toolNormal = glm::normalize(glm::cross((toolChainEndPt - toolChainMidPt), (toolChainBasePt - toolChainMidPt)));
-        auto toolCenter = (toolStartPt + toolEndPt + toolChainBasePt + toolChainEndPt) / 4.0f;
-        angleVisualizer.m_LineSawNormal->SetPts(toolCenter, toolCenter + toolNormal * 10.0f);
 
         if(!nearestParallelFaceID.empty()){
             hasParallelFace = true;
@@ -177,11 +173,6 @@ namespace AIAC
             angleVisualizer.m_LineEnd->SetPts(toolEndPt, projEnd);
             angleVisualizer.m_LineChainBase->SetPts(toolChainBasePt, projChainBase);
             angleVisualizer.m_LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
-
-            // // normal vector
-            // auto toolNormal = glm::normalize(glm::cross((toolStartPt - toolChainMidPt), (toolEndPt - toolChainMidPt)));
-            // auto toolCenter = (toolStartPt + toolEndPt + toolChainBasePt + toolChainEndPt) / 4.0f;
-            // angleVisualizer.m_LineSawNormal->SetPts(toolCenter, toolCenter + toolNormal * 10.0f);
 
             parallelEndDist = glm::distance(toolEndPt, projEnd);
             parallelChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
@@ -248,7 +239,9 @@ namespace AIAC
                 // return valStr.substr(0, valStr.find(".") + precisionVal + 1);
 
                 // TODO: / 50 * 1000 => mm, change this to a variable
-                auto retVal = to_string(int(val * 20));
+                int valInt = (int)(val / 50 * 1000);
+                if(valInt > 99) valInt = 99;
+                auto retVal = to_string(valInt);
                 if(retVal.length() == 1){
                     return "0" + retVal;
                 }
@@ -304,20 +297,14 @@ namespace AIAC
         m_LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        
-        m_LineSawNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), 5.0f);
 
         m_LineEnd->SetColor(GOColor::WHITE);
         m_LineChainBase->SetColor(GOColor::WHITE);
         m_LineChainEnd->SetColor(GOColor::WHITE);
-    
-        m_LineSawNormal->SetColor(GOColor::RED);
 
         m_AllPrimitives.push_back(m_LineEnd);
         m_AllPrimitives.push_back(m_LineChainBase);
         m_AllPrimitives.push_back(m_LineChainEnd);
-
-        m_AllPrimitives.push_back(m_LineSawNormal);
 
         Deactivate();
     }

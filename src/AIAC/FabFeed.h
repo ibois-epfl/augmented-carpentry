@@ -46,7 +46,6 @@ namespace AIAC
         CutChainSawAngleFeedVisualizer();
 
     private:
-        std::shared_ptr<GOLine> m_LineSawNormal;
         std::shared_ptr<GOLine> m_LineEnd;
         std::shared_ptr<GOLine> m_LineChainBase;
         std::shared_ptr<GOLine> m_LineChainEnd;
