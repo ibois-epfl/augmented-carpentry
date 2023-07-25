@@ -18,8 +18,12 @@ namespace AIAC
     {
         auto acInfoModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
         auto scannedModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::SCANNED_MODEL, "assets/ACModel/28_scanned_model.ply");
-        m_ACInfoModel.Load(acInfoModelPath);
-        m_ScannedModel.Load(scannedModelPath);
+        bool acimLoaded = m_ACInfoModel.Load(acInfoModelPath);
+        bool scannedModelLoded = m_ScannedModel.Load(scannedModelPath);
+        if(!acimLoaded || !scannedModelLoded){
+            AIAC_ERROR("LayerModel::OnAttach() failed to load models");
+            return;
+        }
         m_AlignOffset = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_OFFSET, 0.0f);
         m_AlignRotation = AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_ROTATION, 0);
         m_AlignFlip = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_FLIP, false);
