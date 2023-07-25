@@ -95,7 +95,7 @@ namespace AIAC
         AIAC_INFO("Edge::SetAsCurrent");
     }
 
-    void TimberInfo::Cut::HighlightFace(std::string faceID) {
+    void TimberInfo::Cut::HighlightFace(const std::string& faceID) {
         if(faceID == m_HighlightedFaceID) return;
 
         // faceID is empty -> Reset everything to CURRENT
