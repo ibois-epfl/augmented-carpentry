@@ -93,6 +93,45 @@ namespace AIAC
         AIAC_INFO("Edge::SetAsCurrent");
     }
 
+    void TimberInfo::Cut::HighlightFace(const std::string& faceID, glm::vec4 color) {
+        if(faceID == m_HighlightedFaceID) return;
+
+        // faceID is empty -> Reset everything to CURRENT
+        if(faceID.empty()){
+            for(auto& [_, face] : m_Faces){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+            }
+            for(auto& [_, edge] : m_Edges){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+            }
+            m_HighlightedFaceID = "";
+            return;
+        }
+        
+        if(m_HighlightedFaceID.empty()){
+            // init : set all to NOT_DONE
+            for(auto& [_, face] : m_Faces){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+            }
+            for(auto& [_, edge] : m_Edges){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+            }
+        } else {
+            // reset the previous Highlighted face
+            m_Faces[m_HighlightedFaceID].m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+            for(auto& edgeID : m_Faces[m_HighlightedFaceID].m_Edges){
+                m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+            }
+        }
+
+        // set the new Highlighted face
+        m_HighlightedFaceID = faceID;
+        m_Faces[m_HighlightedFaceID].m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+        for(auto& edgeID : m_Faces[m_HighlightedFaceID].m_Edges){
+            m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+        }
+    }
+
 
 
     std::vector<std::string> TimberInfo::GetAllComponentsIDs() const {
@@ -218,18 +257,26 @@ namespace AIAC
                     faceInfo.m_Exposed = StringToBool(face.child("exposed").child_value());
                     faceInfo.m_State = StringToState(face.child("state").child_value());
                     faceInfo.m_Edges = StringToSet(face.child("edges").child_value());
+                    faceInfo.m_Center = glm::vec3(0.0f);
                     if(!faceInfo.m_Exposed){
                         nonExposedEdges.insert(faceInfo.m_Edges.begin(), faceInfo.m_Edges.end());
                     }
                     auto corners = face.child("corners");
                     for(auto corner = corners.child("corner"); corner; corner=corner.next_sibling("corner")){
                         faceInfo.m_Corners.push_back(StringToVec3(corner.child_value()) * m_Scale);
+                        faceInfo.m_Center += faceInfo.m_Corners.back();
                     }
+                    faceInfo.m_Center /= faceInfo.m_Corners.size();
+
                     // build face GO
                     if(faceInfo.m_Corners.size()<3){
                         AIAC_ERROR("Face: {0} has less than 3 corners", faceInfo.m_ID);
                         continue;
                     }
+
+                    // build normal
+                    faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0],
+                                                                     faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
 
                     std::vector<uint32_t> indices;
                     auto baseCornerIdx = 0;
@@ -249,6 +296,12 @@ namespace AIAC
                     cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
                 }
 
+                for(auto const& [faceID, faceInfo]: cutInfo.m_Faces){
+                    cout << faceID << faceInfo.m_Exposed << endl;
+                    cout << glm::to_string(faceInfo.GetNormal()) << endl;
+                    cout << glm::to_string(faceInfo.GetCenter()) << endl;
+                }
+
                 auto edges = cut.child("edges");
                 for(auto edge = edges.child("edge"); edge; edge=edge.next_sibling("edge")){
                     auto id = edge.attribute("id").as_string();
@@ -266,7 +319,6 @@ namespace AIAC
                     edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
                     edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
                     edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
-
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
@@ -368,7 +420,9 @@ namespace AIAC
             
     }
 
-    void ACInfoModel::TransformGOPrimitives(glm::mat4x4 transformMat) {
+    void ACInfoModel::Transform(glm::mat4x4 transformMat) {
+        auto rotationMat = glm::mat3x3(transformMat);
+
         // bounding box
         auto bbox = m_TimberInfo.m_Bbox;
         for(int i = 0 ; i < bbox.size() ; i++){
@@ -379,7 +433,7 @@ namespace AIAC
 
         // holes
         for(auto& kv : m_TimberInfo.m_Holes){
-            auto holeInfo = kv.second;
+            auto& holeInfo = kv.second;
             for(auto& objs : holeInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
@@ -387,15 +441,21 @@ namespace AIAC
 
         // cuts
         for(auto& kv : m_TimberInfo.m_Cuts){
-            auto cutInfo = kv.second;
+            auto& cutInfo = kv.second;
             for(auto& objs : cutInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
-            // Face has no GOPrimitives now
+            // Face
             for(auto& kv : cutInfo.m_Faces){
-                auto faceInfo = kv.second;
+                auto& faceInfo = kv.second;
                 for(auto& objs : faceInfo.m_GOPrimitives){
                     objs->Transform(transformMat);
+                }
+                // Normal, Center, and Corners are glm::vec3
+                faceInfo.m_Normal = glm::normalize(rotationMat * faceInfo.m_Normal);
+                faceInfo.m_Center = glm::vec3(transformMat * glm::vec4(faceInfo.m_Center, 1.0f));
+                for(auto& corner : faceInfo.m_Corners){
+                    corner = glm::vec3(transformMat * glm::vec4(corner, 1.0f));
                 }
             }
             // Edge
