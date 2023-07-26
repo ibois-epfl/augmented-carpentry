@@ -78,6 +78,11 @@ inline bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1
  */
 inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, glm::vec3 pt2, glm::vec3 &pt)
 {
+    std::cout << "intersect pt of 2 lines: " << endl;
+    std::cout << "pt1: " << pt1.x << " " << pt1.y << " " << pt1.z << std::endl;
+    std::cout << "dir1: " << dir1.x << " " << dir1.y << " " << dir1.z << std::endl;
+    std::cout << "pt2: " << pt2.x << " " << pt2.y << " " << pt2.z << std::endl;
+    std::cout << "dir2: " << dir2.x << " " << dir2.y << " " << dir2.z << std::endl;
     auto dir3 = glm::cross(dir1, dir2);
     auto dir3Len = glm::length(dir3);
     if (dir3Len < 1e-4f)
@@ -97,6 +102,7 @@ inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 d
     auto t1 = glm::dot(dir3Norm, glm::cross(pt2 - pt1, dir2Norm)) / det;
     auto t2 = glm::dot(dir3Norm, glm::cross(pt2 - pt1, dir1Norm)) / det;
     pt = pt1 + t1 * dir1;
+    std::cout << "pt: " << pt.x << " " << pt.y << " " << pt.z << std::endl;
     return true;
 }
 
@@ -114,19 +120,46 @@ inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 lineP
     return false;
 }
 
-// https://stackoverflow.com/questions/6408670/line-of-intersection-between-two-planes
 inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
-                               glm::vec3 p2Norm, glm::vec3 pt2,
-                               glm::vec3 &lineVec, glm::vec3 &linePt){
-    auto p3Norm = glm::cross(p1Norm, p2Norm);
-    auto vecLen = glm::length(p3Norm);
-    auto det = vecLen * vecLen;
-    if(det < 1e-4f){
-        return false;
+                                      glm::vec3 p2Norm, glm::vec3 pt2,
+                                      glm::vec3 &lineVec, glm::vec3 &linePt){
+
+    // // https://math.stackexchange.com/questions/475953/how-to-calculate-the-intersection-of-two-planes
+    lineVec = glm::cross(p1Norm, p2Norm);
+    auto line1Dir = glm::cross(p1Norm, lineVec);
+    auto line2Dir = glm::cross(p2Norm, lineVec);
+    if(GetIntersectPointOf2Lines(line1Dir, pt1, line2Dir, pt2, linePt)){
+        return true;
     }
-    lineVec = p3Norm;
-    linePt = (glm::cross(p3Norm, p2Norm) * pt1 + glm::cross(p1Norm, p3Norm) * pt2) / det;
-    return true;
+    return false;
+    
+    // ChatGPT version
+    // auto dir = glm::cross(p1Norm, p2Norm);
+    // auto dirLen = glm::length(dir);
+    // if(dirLen < 1e-4f){
+    //     return false;
+    // }
+    // auto dirNorm = dir / dirLen;
+    // auto det = glm::dot(dirNorm, glm::cross(p1Norm, p2Norm));
+    // if(det < 1e-4f){
+    //     return false;
+    // }
+    // auto t1 = glm::dot(dirNorm, glm::cross(pt2 - pt1, p2Norm)) / det;
+    // auto t2 = glm::dot(dirNorm, glm::cross(pt2 - pt1, p1Norm)) / det;
+    // lineVec = dirNorm;
+    // linePt = pt1 + t1 * p1Norm;
+    // return true;
+
+    // https://stackoverflow.com/questions/6408670/line-of-intersection-between-two-planes
+    // auto p3Norm = glm::cross(p1Norm, p2Norm);
+    // auto vecLen = glm::length(p3Norm);
+    // auto det = vecLen * vecLen;
+    // if(det < 1e-4f){
+    //     return false;
+    // }
+    // lineVec = p3Norm;
+    // linePt = (glm::cross(p3Norm, p2Norm) * pt1 + glm::cross(p1Norm, p3Norm) * pt2) / det;
+    // return true;
 }
 
 // #endif //GEOMETRY_UTILS_H
