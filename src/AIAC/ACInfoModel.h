@@ -39,6 +39,46 @@ static std::map<ACIMState, glm::vec4> CUT_EDGE_COLOR = {
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
 };
 
+/**
+ * @brief Convert string m_State to ACIMState
+ * @param m_State ACIMState
+ */
+static ACIMState StringToState(std::string m_State);
+
+/**
+ * @brief Convert a string separated by space to glm::vec3
+ * @param str string separated by space
+ * @return glm::vec3
+ */
+static glm::vec3 StringToVec3(std::string str);
+
+/**
+ * @brief Convert a string separated by space to a list of string
+ * @param str string separated by space
+ * @return a std::vector<std::string>
+ */
+static std::vector<std::string> StringToTokens(std::string str);
+
+/**
+ * @brief Convert a string separated by space to a set of tokens
+ * @param str string separated by space
+ * @return a std::set<std::string>
+ */
+static std::set<std::string> StringToSet(std::string str);
+
+/**
+ * @brief Convert a string to bool
+ * @param str string
+ * @return bool
+ */
+static bool StringToBool(std::string str);
+
+/**
+ * @brief Convert a vec3 to String
+ * @param vec3 vec3
+ * @return string
+ */
+static std::string Vec3ToString(glm::vec3 vec3);
 
 class TimberInfo{
 public:
@@ -56,6 +96,7 @@ public:
         std::string GetTypeString() const { return m_Type; }
 
     protected:
+        float m_Scale = 50.0f; // When converting to real world unit, divide by this number
         ACIMState m_State;
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
@@ -73,12 +114,15 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        void SwapStartEnd();
 
     public:  __always_inline
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
         std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
 
     private:
+        // These values uses original coordinate in xml file
+        // i.e. not transformation (rotation / translation) is applied
         glm::vec3 m_Start;
         bool m_StartExposed;
         glm::vec3 m_End;
@@ -247,40 +291,6 @@ public:
      * @return The length of the scanned model. (in TSLAM unit)
      */
     float GetLength();
-
-    /**
-     * @brief Convert string m_State to ACIMState
-     * @param m_State ACIMState
-     */
-    static ACIMState StringToState(std::string m_State);
-
-    /**
-     * @brief Convert a string separated by space to glm::vec3
-     * @param str string separated by space
-     * @return glm::vec3
-     */
-    static glm::vec3 StringToVec3(std::string str);
-
-    /**
-     * @brief Convert a string separated by space to a list of string
-     * @param str string separated by space
-     * @return a std::vector<std::string>
-     */
-    static std::vector<std::string> StringToTokens(std::string str);
-
-    /**
-     * @brief Convert a string separated by space to a set of tokens
-     * @param str string separated by space
-     * @return a std::set<std::string>
-     */
-    static std::set<std::string> StringToSet(std::string str);
-
-    /**
-     * @brief Convert a string to bool
-     * @param str string
-     * @return bool
-     */
-    static bool StringToBool(std::string str);
 
 private:
     float m_Scale = 50.0f;

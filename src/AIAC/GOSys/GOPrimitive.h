@@ -195,12 +195,6 @@ namespace AIAC
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
-
-        // inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
-        // inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
-        // inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); InitGLObject(); }
-        // inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); InitGLObject(); }
-        // inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
         
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
         inline void ExtendFromStart(float length) { m_PStart.SetPosition(m_PStart.GetPosition() - glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
@@ -211,6 +205,8 @@ namespace AIAC
 
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
         inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
+        // inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); InitGLObject(); }
+        // inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); InitGLObject(); }
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
 
 
