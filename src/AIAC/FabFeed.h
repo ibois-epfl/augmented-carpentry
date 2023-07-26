@@ -158,6 +158,9 @@ namespace AIAC
             /// All text objects
             std::shared_ptr<GOText> m_InfoText;
 
+            FeedbackVisualizer* m_CurrentFeedbackVisualizer = nullptr;
+            // For Cuts
+            CutChainSawFeedVisualizer m_CutChainSawFeedVisualizer;
 
         // private:
         //     std::shared_ptr<ACInfoToolhead> m_CurrentToolhead;

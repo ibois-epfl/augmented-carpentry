@@ -291,6 +291,7 @@ namespace AIAC
             auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
 
             // update the visualizer
+            // FIXME: Change to intersection of two planes
             depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
             depthVisualizer.m_LineDepthChainBase->SetPts(projChainBase, toolChainBasePt);
             depthVisualizer.m_LineDepthChainEnd->SetPts(projChainEnd, toolChainEndPt);
@@ -374,8 +375,6 @@ namespace AIAC
             this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(endColor);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(chainBaseColor);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(chainEndColor);
-//            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
-//            this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN: GOColor::WHITE);
 
         }
         else m_CutChainSawFeedVisualizer.Deactivate();
