@@ -106,7 +106,7 @@ namespace AIAC
                                            midPtToolAxis.z - this->m_DrillBitLineAxis->GetPStart().Z());
         this->m_GUILineOrientation->Translate(vectGUITrans);
 
-
+        // FIXME: normally you shouldn't call this by yourself
         this->m_HoleLine2ToolStart->InitGLObject();
         this->m_HoleLine2ToolEnd->InitGLObject();
         this->m_DrillBitLineAxis->InitGLObject();

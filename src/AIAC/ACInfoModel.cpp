@@ -51,6 +51,32 @@ namespace AIAC
         m_RadiusLabelGO->SetVisibility(false);
     }
 
+    void TimberInfo::Hole::SwapStartEnd() {
+        // holeInfo.m_Start = StringToVec3(hole.child("start").child("coordinates").child_value()) * m_Scale;
+        // holeInfo.m_StartExposed = StringToBool(hole.child("start").child("exposed").child_value());
+        // holeInfo.m_End = StringToVec3(hole.child("end").child("coordinates").child_value()) * m_Scale;
+        // holeInfo.m_EndExposed = StringToBool(hole.child("end").child("exposed").child_value());
+        
+        // Update .acim doc
+        std::swap(m_Start, m_End);
+        std::swap(m_StartExposed, m_EndExposed);
+
+        m_ACIMDocNode.child("start").child("coordinates").last_child().set_value(Vec3ToString(m_Start / m_Scale).c_str());
+        m_ACIMDocNode.child("start").child("exposed").last_child().set_value(m_StartExposed ? "True" : "False");
+        m_ACIMDocNode.child("end").child("coordinates").last_child().set_value(Vec3ToString(m_End / m_Scale).c_str());
+        m_ACIMDocNode.child("end").child("exposed").last_child().set_value(m_EndExposed ? "True" : "False");
+
+        // Update system
+        auto curStart = m_StartPointGO->GetPosition();
+        auto curEnd = m_EndPointGO->GetPosition();
+
+        m_StartPointGO->SetPosition(curEnd);
+        m_EndPointGO->SetPosition(curStart);
+        m_AxisGO->SetPts(curEnd, curStart);
+
+        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
+    }
+
     ///< Cut
     void TimberInfo::Cut::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
@@ -482,7 +508,7 @@ namespace AIAC
         return dist;
     }
 
-    ACIMState ACInfoModel::StringToState(std::string state){
+    ACIMState StringToState(std::string state){
         std::string notDoneStr = "NotDone";
         std::string doneStr = "Done";
         std::string currentStr = "Current";
@@ -501,14 +527,14 @@ namespace AIAC
         }
     }
 
-    glm::vec3 ACInfoModel::StringToVec3(std::string str){
+    glm::vec3 StringToVec3(std::string str){
         glm::vec3 vec;
         auto ss = stringstream(str);
         ss >> vec.x >> vec.y >> vec.z;
         return vec;
     }
 
-    std::vector<std::string> ACInfoModel::StringToTokens(std::string str){
+    std::vector<std::string> StringToTokens(std::string str){
         std::vector<std::string> tokens;
         std::string token;
         std::istringstream tokenStream(str);
@@ -518,7 +544,7 @@ namespace AIAC
         return tokens;
     }
 
-    std::set<std::string> ACInfoModel::StringToSet(std::string str){
+    std::set<std::string> StringToSet(std::string str){
         std::set<std::string> set;
         std::string token;
         std::istringstream tokenStream(str);
@@ -528,7 +554,7 @@ namespace AIAC
         return set;
     }
 
-    bool ACInfoModel::StringToBool(std::string str){
+    bool StringToBool(std::string str){
         // convert str to lowercase
         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
 
@@ -546,6 +572,11 @@ namespace AIAC
         }
     }
 
+    std::string Vec3ToString(glm::vec3 vec){
+        std::stringstream ss;
+        ss << vec.x << " " << vec.y << " " << vec.z;
+        return ss.str();
+    }
 
 
 } // namespace AIAC

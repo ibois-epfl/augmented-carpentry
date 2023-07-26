@@ -359,6 +359,8 @@ namespace AIAC
             ImGui::SliderFloat("## Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
                 if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
                 sliderVal = 0.f;
+            ImGui::SameLine();
+            ImGui::Text(std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
             
             if(ImGui::Button("Align Center")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
@@ -406,6 +408,13 @@ namespace AIAC
                 ImGui::EndCombo();
             }
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+            auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
+            if (auto hole = dynamic_cast<TimberInfo::Hole*>(currentComp)){
+                ImGui::SameLine();
+                if(ImGui::Button("Swap Hole S/E")){
+                    hole->SwapStartEnd();
+                }
+            }
         ImGui::EndChild();
     }
 
