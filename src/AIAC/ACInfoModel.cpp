@@ -451,6 +451,7 @@ namespace AIAC
                 for(auto& objs : faceInfo.m_GOPrimitives){
                     objs->Transform(transformMat);
                 }
+                // FIXME: Add GOVec so we can use GO to manage everything.
                 // Normal, Center, and Corners are glm::vec3
                 faceInfo.m_Normal = glm::normalize(rotationMat * faceInfo.m_Normal);
                 faceInfo.m_Center = glm::vec3(transformMat * glm::vec4(faceInfo.m_Center, 1.0f));
