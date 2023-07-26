@@ -5,10 +5,12 @@ include(CTest)
 enable_testing()
 
 set(BUILD_SHARED_LIBS ON)
+
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 #set(CMAKE_CXX_STANDARD 17)
 #TODO: check for Opencv 4.5.4 that cannot be installed or detected
-file(GLOB_RECURSE AIAC_SRC "src/*.cpp")
 
+file(GLOB_RECURSE AIAC_SRC "src/*.cpp")
 
 add_executable(${PROJECT_NAME}
     ${AIAC_SRC})
@@ -76,21 +78,29 @@ find_package(OpenGL REQUIRED)
 #                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 # string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
 # message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
-message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
-message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
+#message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
+#message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
 set(BUILD_V4_API ON)
+set(TSLAM_QUIET ON)
 add_subdirectory(deps/TSlam)
+set(TTOOL_BUILD_TTOOL_EXE OFF)
 add_subdirectory(deps/TTool)
 
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenCV 4.5.4 REQUIRED)   # FIXME: 4.5.4 not found (?)
 find_package(assimp 5.0.0 REQUIRED)
+find_package(GLEW REQUIRED)
 
-add_subdirectory(deps/imgui)
-add_subdirectory(deps/spdlog)
-add_subdirectory(deps/pugixml)
-add_subdirectory(deps/freetype)
+add_external_package(imgui)
+add_external_package(spdlog)
+add_external_package(pugixml)
+add_external_package(Freetype)
+add_external_package(eventpp)
+#add_subdirectory(deps/imgui)
+#add_subdirectory(deps/spdlog)
+#add_subdirectory(deps/pugixml)
+#add_subdirectory(deps/freetype)
 
 
 # Pytorch
@@ -112,8 +122,10 @@ target_link_libraries(${PROJECT_NAME}
     imgui::imgui
     spdlog::spdlog
     pugixml::pugixml
-    freetype
+    Freetype::Freetype
     glfw
+    GLEW::GLEW
+    eventpp::eventpp
     )
 
 #------------------------------------------------------------------------------------------------------------

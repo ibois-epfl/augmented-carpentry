@@ -23,10 +23,6 @@
 [submodule "deps/glew"]
 	path = deps/glew
 	url = git@github.com:ibois-epfl/glew.git
-[submodule "deps/eventpp"]
-	branch = master
-	path = deps/eventpp
-	url = git@github.com:ibois-epfl/eventpp.git
 [submodule "deps/freetype"]
 	path = deps/freetype
 	url = https://gitlab.freedesktop.org/freetype/freetype
