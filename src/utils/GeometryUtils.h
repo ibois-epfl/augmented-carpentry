@@ -1,3 +1,7 @@
+#pragma once
+// #ifndef GEOMETRY_UTILS_H
+// #define GEOMETRY_UTILS_H
+
 #include "glm/glm.hpp"
 
 inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 planePoint, glm::vec3 point)
@@ -7,7 +11,7 @@ inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 plan
     return point - d * planeNormal;
 }
 
-glm::vec3 GetNearestPtOnLine(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 pt)
+inline glm::vec3 GetNearestPtOnLine(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 pt)
 {
     auto dir = glm::normalize(lineVec);
     auto pt2LinePt = pt - linePt;
@@ -31,7 +35,7 @@ inline void ExtendLineSeg(glm::vec3 &pt1, glm::vec3 &pt2, float extendLen)
     pt2 += dir * extendLen;
 }
 
-bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1, glm::vec3 &pt2)
+inline bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1, glm::vec3 &pt2)
 {
     if(pts.size() < 2){
         return false;
@@ -72,7 +76,7 @@ bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1, glm::
  * @param pt
  * @return true if intersect, false if not
  */
-bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, glm::vec3 pt2, glm::vec3 &pt)
+inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, glm::vec3 pt2, glm::vec3 &pt)
 {
     auto dir3 = glm::cross(dir1, dir2);
     auto dir3Len = glm::length(dir3);
@@ -96,7 +100,7 @@ bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, gl
     return true;
 }
 
-bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 linePt,
+inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 linePt,
                                           glm::vec3 lineSegPt1, glm::vec3 lineSegPt2, glm::vec3& ptInLineSeg)
 {
     glm::vec3 intersectPt;
@@ -111,7 +115,7 @@ bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 linePt,
 }
 
 // https://stackoverflow.com/questions/6408670/line-of-intersection-between-two-planes
-bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
+inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
                                glm::vec3 p2Norm, glm::vec3 pt2,
                                glm::vec3 &lineVec, glm::vec3 &linePt){
     auto p3Norm = glm::cross(p1Norm, p2Norm);
@@ -124,3 +128,5 @@ bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
     linePt = (glm::cross(p3Norm, p2Norm) * pt1 + glm::cross(p1Norm, p3Norm) * pt2) / det;
     return true;
 }
+
+// #endif //GEOMETRY_UTILS_H

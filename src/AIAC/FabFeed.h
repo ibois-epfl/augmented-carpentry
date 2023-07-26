@@ -5,7 +5,6 @@
 #include "AIAC/ACInfoModel.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Config.h"
-#include "utils/GeometryUtils.h"
 
 ///< timber components
 #define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
@@ -80,6 +79,8 @@ namespace AIAC
         std::shared_ptr<GOText> m_GuideTxtEnd;
         std::shared_ptr<GOText> m_GuideTxtChainBase;
         std::shared_ptr<GOText> m_GuideTxtChainEnd;
+
+        std::shared_ptr<GOLine> m_LineChainNormal;
 
     friend class FabFeed;
     };

@@ -3,6 +3,7 @@
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Log.h"
 #include "utils/utils.h"
+#include "utils/GeometryUtils.h"
 
 namespace AIAC
 {
@@ -281,6 +282,8 @@ namespace AIAC
             hasPerpendicularFace = true;
             depthVisualizer.Activate();
 
+            AIAC_INFO("--- perpendicular face start ---");
+            
             // find the projection point of the 2 points on the face
             auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
             auto faceNormal = faceInfo.GetNormal();
@@ -295,6 +298,12 @@ namespace AIAC
                 // Technically this should not happen
                 // TODO: Error handling?
             }
+            AIAC_INFO(">> faceNormal: " + glm::to_string(faceNormal));
+            AIAC_INFO(">> faceCenter: " + glm::to_string(faceCenter));
+            AIAC_INFO(">> toolNormalVec: " + glm::to_string(toolNormalVec));
+            AIAC_INFO(">> toolChainBasePt: " + glm::to_string(toolChainBasePt));
+            AIAC_INFO(">> intersectLineVec: " + glm::to_string(intersectLineVec));
+            AIAC_INFO(">> intersectLinePt: " + glm::to_string(intersectLinePt));
 
             // Get the intersection point of the intersect line and the face's edges
             std::vector<glm::vec3> intersectPts;
@@ -350,6 +359,8 @@ namespace AIAC
 
         if(hasParallelFace || hasPerpendicularFace) {
             m_CutChainSawFeedVisualizer.Activate();
+
+            m_CutChainSawFeedVisualizer.m_LineChainNormal->SetPts(toolChainEndPt, toolChainEndPt + toolNormalVec * 5.0f);
 
             auto toString = [](double &val) -> std::string {
                 // const int precisionVal = 2;
@@ -455,6 +466,10 @@ namespace AIAC
         m_AllPrimitives.push_back(m_GuideTxtEnd);
         m_AllPrimitives.push_back(m_GuideTxtChainBase);
         m_AllPrimitives.push_back(m_GuideTxtChainEnd);
+
+        m_LineChainNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineChainNormal->SetColor(GOColor::BLUE);
+        m_AllPrimitives.push_back(m_LineChainNormal);
 
         Deactivate();
     }
