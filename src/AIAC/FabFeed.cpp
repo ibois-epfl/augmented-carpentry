@@ -246,16 +246,15 @@ namespace AIAC
         double perpendicularChainBaseDist = 0.0f;
         double perpendicularChainEndDist = 0.0f;
 
-        angleVisualizer.Activate();
-
         if(!nearestParallelFaceID.empty()){
             hasParallelFace = true;
-            // angleVisualizer.Activate();
+            angleVisualizer.Activate();
+
             // find the projection point of the three points on the face
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
-            
+
             auto projEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolEndPt);
             auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainBasePt);
             auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
@@ -287,8 +286,35 @@ namespace AIAC
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
 
-            auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainBasePt);
-            auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
+            // Get the intersection line of the tool plane and the face plane
+            glm::vec3 intersectLineVec, intersectLinePt;
+            if(!GetIntersectLineOf2Planes(faceNormal, faceCenter,
+                                          toolNormalVec, toolChainBasePt,
+                                          intersectLineVec, intersectLinePt)){
+                AIAC_ERROR("Failed to get the intersect line of two planes");
+                // Technically this should not happen
+                // TODO: Error handling?
+            }
+
+            // Get the intersection point of the intersect line and the face's edges
+            std::vector<glm::vec3> intersectPts;
+            for(auto const& edgeID: faceInfo.GetEdges()){
+                auto edge = cut->GetEdge(edgeID);
+                auto edgePt1 = edge.GetStartPt().GetPosition();
+                auto edgePt2 = edge.GetEndPt().GetPosition();
+                ExtendLineSeg(edgePt1, edgePt2, 5.0f);
+
+                glm::vec3 intersectPt;
+                if(GetIntersectPointOfLineAndLineSeg(intersectLinePt, intersectLineVec, edgePt1, edgePt2, intersectPt)) {
+                    intersectPts.push_back(intersectPt);
+                }
+            }
+
+            glm::vec3 projLineSegPt1, projLineSegPt2;
+            bool projLineSegFound = FormLongestLineSeg(intersectPts, projLineSegPt1, projLineSegPt2);
+
+            auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, toolChainBasePt);
+            auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, toolChainEndPt);
 
             // update the visualizer
             // FIXME: Change to intersection of two planes

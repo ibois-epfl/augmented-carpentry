@@ -5,6 +5,7 @@
 #include "AIAC/ACInfoModel.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Config.h"
+#include "utils/GeometryUtils.h"
 
 ///< timber components
 #define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()

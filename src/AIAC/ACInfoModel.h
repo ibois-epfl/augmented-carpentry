@@ -132,11 +132,14 @@ public:
         };
         class Edge: public Component{
         public:
+            GOPoint GetStartPt() { return m_GO->GetPStart(); }
+            GOPoint GetEndPt() { return m_GO->GetPEnd(); }
             Edge() : Component("EDGE") {}
 
         private:
             virtual void SetAsCurrent();
 
+            // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
@@ -148,6 +151,7 @@ public:
         };
 
         inline Face& GetFace(std::string id) { return m_Faces[id]; }
+        inline Edge& GetEdge(std::string id) { return m_Edges[id]; }
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline glm::vec3 GetCenter() const { return m_Center; }
