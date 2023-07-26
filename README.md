@@ -8,6 +8,7 @@
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
 ## ORD Proposal Gantt
+
 ```mermaid
 gantt
     dateFormat  YYYY-MM-DD
@@ -21,7 +22,7 @@ gantt
     Optimization + Refactoring                                :ref, after cmkprj, 8w
     Packaging + containerization                              :packcont, after ref, 6w
     deliverable 1                                             :milestone, del1, 2024-01-01, 0d
-    deliverable 2                                             :milestone, del2, 2024-02-31, 0d
+    deliverable 2                                             :milestone, del2, 2024-02-20, 0d
 
     section WP2
     Documentation + Guidelines                                :docu, 2024-01-20, 6w
