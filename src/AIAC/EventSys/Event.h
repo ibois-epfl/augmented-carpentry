@@ -1,9 +1,9 @@
 #pragma once
 
 #include "AIAC/Base.h"
-#include "eventpp/include/eventpp/eventqueue.h"
-#include "eventpp/include/eventpp/eventdispatcher.h"
-#include "eventpp/include/eventpp/eventpolicies.h"
+#include "eventpp/eventqueue.h"
+#include "eventpp/eventdispatcher.h"
+#include "eventpp/eventpolicies.h"
 
 
 namespace AIAC
