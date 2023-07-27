@@ -78,11 +78,11 @@ inline bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1
  */
 inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, glm::vec3 pt2, glm::vec3 &pt)
 {
-    std::cout << "intersect pt of 2 lines: " << endl;
-    std::cout << "pt1: " << pt1.x << " " << pt1.y << " " << pt1.z << std::endl;
-    std::cout << "dir1: " << dir1.x << " " << dir1.y << " " << dir1.z << std::endl;
-    std::cout << "pt2: " << pt2.x << " " << pt2.y << " " << pt2.z << std::endl;
-    std::cout << "dir2: " << dir2.x << " " << dir2.y << " " << dir2.z << std::endl;
+    // std::cout << "--- intersect pt of 2 lines: ---" << endl;
+    // std::cout << "pt1: " << pt1.x << " " << pt1.y << " " << pt1.z << std::endl;
+    // std::cout << "dir1: " << dir1.x << " " << dir1.y << " " << dir1.z << std::endl;
+    // std::cout << "pt2: " << pt2.x << " " << pt2.y << " " << pt2.z << std::endl;
+    // std::cout << "dir2: " << dir2.x << " " << dir2.y << " " << dir2.z << std::endl;
     auto dir3 = glm::cross(dir1, dir2);
     auto dir3Len = glm::length(dir3);
     if (dir3Len < 1e-4f)
@@ -102,7 +102,8 @@ inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 d
     auto t1 = glm::dot(dir3Norm, glm::cross(pt2 - pt1, dir2Norm)) / det;
     auto t2 = glm::dot(dir3Norm, glm::cross(pt2 - pt1, dir1Norm)) / det;
     pt = pt1 + t1 * dir1;
-    std::cout << "pt: " << pt.x << " " << pt.y << " " << pt.z << std::endl;
+    // std::cout << "pt: " << pt.x << " " << pt.y << " " << pt.z << std::endl;
+    // std::cout << "-----------------------------" << endl;
     return true;
 }
 
