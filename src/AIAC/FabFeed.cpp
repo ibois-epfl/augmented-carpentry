@@ -190,8 +190,8 @@ namespace AIAC
     bool FabFeed::ComputeCutChainSawFeed()
     {
         // calculate tool normal
-        auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().StartGO->GetPosition();
-        auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().EndGO->GetPosition();
+        auto toolStartPt = AC_FF_TOOL->GetData<ChainSawData>().NormStartGO->GetPosition();
+        auto toolEndPt = AC_FF_TOOL->GetData<ChainSawData>().NormEndGO->GetPosition();
         auto toolChainBasePt = AC_FF_TOOL->GetData<ChainSawData>().ChainBaseGO->GetPosition();
         auto toolChainMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
         auto toolChainEndPt = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
@@ -351,17 +351,6 @@ namespace AIAC
             auto pt2OnEndMid = GetNearestPtOnLine(toolChainEndPt - toolChainMidPt, toolChainEndPt, perpIntersectLineSegPt2);
             auto pt2OnMidBase = GetNearestPtOnLine(toolChainMidPt - toolChainBasePt, toolChainMidPt, perpIntersectLineSegPt2);
 
-            // bool isBetweenEndMid, isBetweenMidBase;
-            // isBetweenEndMid = CheckIfPointInsideLineSeg(pt1OnEndMid, toolChainEndPt, toolChainMidPt);
-            // isBetweenMidBase = CheckIfPointInsideLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt);
-            // if(isBetweenEndMid) pt1ProjPt = pt1OnEndMid;
-            // else if(isBetweenMidBase) pt1ProjPt = pt1OnMidBase;
-            // else pt1ProjPt = pt1OnEndMid; // the only possibility of not being between is that the point is a further than the end point
-            // isBetweenEndMid = CheckIfPointInsideLineSeg(pt2OnEndMid, toolChainEndPt, toolChainMidPt);
-            // isBetweenMidBase = CheckIfPointInsideLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt);
-            // if(isBetweenEndMid) pt2ProjPt = pt2OnEndMid;
-            // else if(isBetweenMidBase) pt2ProjPt = pt2OnMidBase;
-            // else pt2ProjPt = pt2OnEndMid;
             pt1ProjPt = CheckIfPointInsideLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt) ? pt1OnMidBase : pt1OnEndMid;
             pt2ProjPt = CheckIfPointInsideLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt) ? pt2OnMidBase : pt2OnEndMid;
 

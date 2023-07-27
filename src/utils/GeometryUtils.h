@@ -124,7 +124,6 @@ inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 lineP
 inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
                                       glm::vec3 p2Norm, glm::vec3 pt2,
                                       glm::vec3 &lineVec, glm::vec3 &linePt){
-
     // // https://math.stackexchange.com/questions/475953/how-to-calculate-the-intersection-of-two-planes
     lineVec = glm::cross(p1Norm, p2Norm);
     auto line1Dir = glm::cross(p1Norm, lineVec);
@@ -133,34 +132,6 @@ inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
         return true;
     }
     return false;
-    
-    // ChatGPT version
-    // auto dir = glm::cross(p1Norm, p2Norm);
-    // auto dirLen = glm::length(dir);
-    // if(dirLen < 1e-4f){
-    //     return false;
-    // }
-    // auto dirNorm = dir / dirLen;
-    // auto det = glm::dot(dirNorm, glm::cross(p1Norm, p2Norm));
-    // if(det < 1e-4f){
-    //     return false;
-    // }
-    // auto t1 = glm::dot(dirNorm, glm::cross(pt2 - pt1, p2Norm)) / det;
-    // auto t2 = glm::dot(dirNorm, glm::cross(pt2 - pt1, p1Norm)) / det;
-    // lineVec = dirNorm;
-    // linePt = pt1 + t1 * p1Norm;
-    // return true;
-
-    // https://stackoverflow.com/questions/6408670/line-of-intersection-between-two-planes
-    // auto p3Norm = glm::cross(p1Norm, p2Norm);
-    // auto vecLen = glm::length(p3Norm);
-    // auto det = vecLen * vecLen;
-    // if(det < 1e-4f){
-    //     return false;
-    // }
-    // lineVec = p3Norm;
-    // linePt = (glm::cross(p3Norm, p2Norm) * pt1 + glm::cross(p1Norm, p3Norm) * pt2) / det;
-    // return true;
 }
 
 // #endif //GEOMETRY_UTILS_H
