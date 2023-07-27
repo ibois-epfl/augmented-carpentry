@@ -59,8 +59,8 @@ namespace AIAC
 
     private:
         std::shared_ptr<GOLine> m_LineIntersect;
-        std::shared_ptr<GOLine> m_LineDepthChainBase;
-        std::shared_ptr<GOLine> m_LineDepthChainEnd;
+        // std::shared_ptr<GOLine> m_LineDepthChainBase;
+        // std::shared_ptr<GOLine> m_LineDepthChainEnd;
         std::shared_ptr<GOLine> m_LineDepthFaceEdge1;
         std::shared_ptr<GOLine> m_LineDepthFaceEdge2;
 
