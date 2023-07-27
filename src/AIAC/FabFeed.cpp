@@ -246,6 +246,9 @@ namespace AIAC
         double parallelChainEndDist = 0.0f;
         double perpendicularChainBaseDist = 0.0f;
         double perpendicularChainEndDist = 0.0f;
+        double perpendicularFaceEdge1Dist = 0.0f;
+        double perpendicularFaceEdge2Dist = 0.0f;
+        glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
         if(!nearestParallelFaceID.empty()){
             hasParallelFace = true;
@@ -298,12 +301,6 @@ namespace AIAC
                 // Technically this should not happen
                 // TODO: Error handling?
             }
-            AIAC_INFO(">> faceNormal: " + glm::to_string(faceNormal));
-            AIAC_INFO(">> faceCenter: " + glm::to_string(faceCenter));
-            AIAC_INFO(">> toolNormalVec: " + glm::to_string(toolNormalVec));
-            AIAC_INFO(">> toolChainBasePt: " + glm::to_string(toolChainBasePt));
-            AIAC_INFO(">> intersectLineVec: " + glm::to_string(intersectLineVec));
-            AIAC_INFO(">> intersectLinePt: " + glm::to_string(intersectLinePt));
 
             // Get the intersection point of the intersect line and the face's edges
             std::vector<glm::vec3> intersectPts;
@@ -311,22 +308,34 @@ namespace AIAC
                 auto edge = cut->GetEdge(edgeID);
                 auto edgePt1 = edge.GetStartPt().GetPosition();
                 auto edgePt2 = edge.GetEndPt().GetPosition();
+                
+                cout << "edgePt1: " << glm::to_string(edgePt1) << endl;
+                cout << "edgePt2: " << glm::to_string(edgePt2) << endl;
+
                 ExtendLineSeg(edgePt1, edgePt2, 5.0f);
+                
+                cout << "extended edgePt1: " << glm::to_string(edgePt1) << endl;
+                cout << "extended edgePt2: " << glm::to_string(edgePt2) << endl;
 
                 glm::vec3 intersectPt;
-                if(GetIntersectPointOfLineAndLineSeg(intersectLinePt, intersectLineVec, edgePt1, edgePt2, intersectPt)) {
+                if(GetIntersectPointOfLineAndLineSeg(intersectLineVec, intersectLinePt, edgePt1, edgePt2, intersectPt)) {
                     intersectPts.push_back(intersectPt);
                 }
             }
-
-            glm::vec3 projLineSegPt1, projLineSegPt2;
-            bool projLineSegFound = FormLongestLineSeg(intersectPts, projLineSegPt1, projLineSegPt2);
-
+            
+            cout << "intersectPts: " << endl;
+            for(auto const& pt: intersectPts){
+                cout << glm::to_string(pt) << endl;
+            }
+            cout << "-----------------" << endl;
+            FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+            
+            // update the visualizer
+            // FIXME: Change to intersection of two planes
+            // Lines based on tool
             auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, toolChainBasePt);
             auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, toolChainEndPt);
 
-            // update the visualizer
-            // FIXME: Change to intersection of two planes
             depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
             depthVisualizer.m_LineDepthChainBase->SetPts(projChainBase, toolChainBasePt);
             depthVisualizer.m_LineDepthChainEnd->SetPts(projChainEnd, toolChainEndPt);
@@ -334,11 +343,40 @@ namespace AIAC
             perpendicularChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
             perpendicularChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
 
-            // get the direction of cutting
-            // FIXIT: This we don't need to calculate toolUpVec everytime
+            // Lines based on face edge
+            // for face edge dist, we need to find the projection point of the two points on the saw first
+            glm::vec3 pt1ProjPt, pt2ProjPt;
+            auto pt1OnEndMid = GetNearestPtOnLine(toolChainEndPt - toolChainMidPt, toolChainEndPt, perpIntersectLineSegPt1);
+            auto pt1OnMidBase = GetNearestPtOnLine(toolChainMidPt - toolChainBasePt, toolChainMidPt, perpIntersectLineSegPt1);
+            auto pt2OnEndMid = GetNearestPtOnLine(toolChainEndPt - toolChainMidPt, toolChainEndPt, perpIntersectLineSegPt2);
+            auto pt2OnMidBase = GetNearestPtOnLine(toolChainMidPt - toolChainBasePt, toolChainMidPt, perpIntersectLineSegPt2);
+
+            // bool isBetweenEndMid, isBetweenMidBase;
+            // isBetweenEndMid = CheckIfPointInsideLineSeg(pt1OnEndMid, toolChainEndPt, toolChainMidPt);
+            // isBetweenMidBase = CheckIfPointInsideLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt);
+            // if(isBetweenEndMid) pt1ProjPt = pt1OnEndMid;
+            // else if(isBetweenMidBase) pt1ProjPt = pt1OnMidBase;
+            // else pt1ProjPt = pt1OnEndMid; // the only possibility of not being between is that the point is a further than the end point
+            // isBetweenEndMid = CheckIfPointInsideLineSeg(pt2OnEndMid, toolChainEndPt, toolChainMidPt);
+            // isBetweenMidBase = CheckIfPointInsideLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt);
+            // if(isBetweenEndMid) pt2ProjPt = pt2OnEndMid;
+            // else if(isBetweenMidBase) pt2ProjPt = pt2OnMidBase;
+            // else pt2ProjPt = pt2OnEndMid;
+            pt1ProjPt = CheckIfPointInsideLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt) ? pt1OnMidBase : pt1OnEndMid;
+            pt2ProjPt = CheckIfPointInsideLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt) ? pt2OnMidBase : pt2OnEndMid;
+
+            depthVisualizer.m_LineDepthFaceEdge1->SetPts(perpIntersectLineSegPt1, pt1ProjPt);
+            depthVisualizer.m_LineDepthFaceEdge2->SetPts(perpIntersectLineSegPt2, pt2ProjPt);
+
+            perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
+            perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
+
+            // get the direction of tool
             auto toolUpVec = glm::normalize(toolEndPt - toolChainBasePt);
             auto chainBaseVec = glm::normalize(toolChainBasePt - projChainBase);
             auto chainEndVec = glm::normalize(toolChainEndPt - projChainEnd);
+            auto faceEdge1Vec = glm::normalize(pt1ProjPt - perpIntersectLineSegPt1);
+            auto faceEdge2Vec = glm::normalize(pt2ProjPt - perpIntersectLineSegPt2);
 
             if(glm::dot(toolUpVec, chainBaseVec) < 0){
                 depthVisualizer.m_LineDepthChainBase->SetColor(GOColor::RED);
@@ -351,6 +389,19 @@ namespace AIAC
                 depthVisualizer.m_LineDepthChainEnd->SetColor(GOColor::RED);
             } else {
                 depthVisualizer.m_LineDepthChainEnd->SetColor(GOColor::YELLOW);
+            }
+
+            if(glm::dot(toolUpVec, faceEdge1Vec) < 0){
+                depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::RED);
+                perpendicularFaceEdge1Dist = -perpendicularFaceEdge1Dist;
+            } else {
+                depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
+            }
+            if(glm::dot(toolUpVec, faceEdge2Vec) < 0){
+                depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::RED);
+                perpendicularFaceEdge2Dist = -perpendicularFaceEdge2Dist;
+            } else {
+                depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
             }
 
         } else {
@@ -377,21 +428,30 @@ namespace AIAC
                 return retVal;
             };
 
-            auto strEnd = "End: " + toString(parallelEndDist);
-            auto strChainBase = "Base: " + toString(parallelChainBaseDist) + "/" + toString(perpendicularChainBaseDist);
-            auto strChainEnd = "Tip: " + toString(parallelChainEndDist) + "/" + toString(perpendicularChainEndDist);
+            auto strEnd = toString(parallelEndDist);
+            auto strChainBase = toString(parallelChainBaseDist);
+            auto strChainEnd = toString(parallelChainEndDist);
 
             this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetText(strEnd);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetText(strChainBase);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetText(strChainEnd);
 
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtFaceEdgeDepth1->SetText(to_string(perpendicularFaceEdge1Dist));
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtFaceEdgeDepth2->SetText(to_string(perpendicularFaceEdge2Dist));
+
             this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetAnchor(toolEndPt);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetAnchor(toolChainEndPt);
 
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtFaceEdgeDepth1->SetAnchor(perpIntersectLineSegPt1);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtFaceEdgeDepth2->SetAnchor(perpIntersectLineSegPt2);
+
             auto endColor = GOColor::WHITE;
             auto chainBaseColor = GOColor::WHITE;
             auto chainEndColor = GOColor::WHITE;
+            
+            auto faceEdgeTxt1Color = GOColor::WHITE;
+            auto faceEdgeTxt2Color = GOColor::WHITE;
 
             if(parallelEndDist != 0 && parallelEndDist < 0.5f){
                 endColor = GOColor::GREEN;
@@ -402,16 +462,24 @@ namespace AIAC
             if(parallelChainEndDist != 0 && parallelChainEndDist < 0.5f){
                 chainEndColor = GOColor::GREEN;
             }
-            if(perpendicularChainBaseDist != 0 && perpendicularChainBaseDist < 0){
-                chainBaseColor = GOColor::RED;
+
+            if(perpendicularFaceEdge1Dist > 0 && perpendicularFaceEdge1Dist < 0.5f){
+                faceEdgeTxt1Color = GOColor::GREEN;
+            } else if (perpendicularFaceEdge1Dist < 0){
+                faceEdgeTxt1Color = GOColor::RED;
             }
-            if(perpendicularChainEndDist != 0 && perpendicularChainEndDist < 0){
-                chainEndColor = GOColor::RED;
+            if(perpendicularFaceEdge2Dist > 0 && perpendicularFaceEdge2Dist < 0.5f){
+                faceEdgeTxt2Color = GOColor::GREEN;
+            } else if (perpendicularFaceEdge2Dist < 0){
+                faceEdgeTxt2Color = GOColor::RED;
             }
 
             this->m_CutChainSawFeedVisualizer.m_GuideTxtEnd->SetColor(endColor);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainBase->SetColor(chainBaseColor);
             this->m_CutChainSawFeedVisualizer.m_GuideTxtChainEnd->SetColor(chainEndColor);
+
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtFaceEdgeDepth1->SetColor(faceEdgeTxt1Color);
+            this->m_CutChainSawFeedVisualizer.m_GuideTxtFaceEdgeDepth2->SetColor(faceEdgeTxt2Color);
 
         }
         else m_CutChainSawFeedVisualizer.Deactivate();
@@ -442,13 +510,20 @@ namespace AIAC
         m_LineDepthChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDepthChainEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
+        m_LineDepthFaceEdge1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDepthFaceEdge2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+
         m_LineIntersect->SetColor(GOColor::CYAN);
         m_LineDepthChainBase->SetColor(GOColor::YELLOW);
         m_LineDepthChainEnd->SetColor(GOColor::YELLOW);
+        m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
+        m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
 
         m_AllPrimitives.push_back(m_LineIntersect);
         m_AllPrimitives.push_back(m_LineDepthChainBase);
         m_AllPrimitives.push_back(m_LineDepthChainEnd);
+        m_AllPrimitives.push_back(m_LineDepthFaceEdge1);
+        m_AllPrimitives.push_back(m_LineDepthFaceEdge2);
 
         Deactivate();
     }
@@ -459,13 +534,22 @@ namespace AIAC
         m_GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
         m_GuideTxtChainEnd = GOText::Add("ChainEnd", GOPoint(0.f, 0.f, 0.f));
 
+        m_GuideTxtFaceEdgeDepth1 = GOText::Add("FaceEdgeDepth1", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtFaceEdgeDepth2 = GOText::Add("FaceEdgeDepth2", GOPoint(0.f, 0.f, 0.f));
+
         m_GuideTxtEnd->SetColor(GOColor::WHITE);
         m_GuideTxtChainBase->SetColor(GOColor::WHITE);
         m_GuideTxtChainEnd->SetColor(GOColor::WHITE);
 
+        m_GuideTxtFaceEdgeDepth1->SetColor(GOColor::WHITE);
+        m_GuideTxtFaceEdgeDepth2->SetColor(GOColor::WHITE);
+
         m_AllPrimitives.push_back(m_GuideTxtEnd);
         m_AllPrimitives.push_back(m_GuideTxtChainBase);
         m_AllPrimitives.push_back(m_GuideTxtChainEnd);
+
+        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth1);
+        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth2);
 
         m_LineChainNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainNormal->SetColor(GOColor::BLUE);
