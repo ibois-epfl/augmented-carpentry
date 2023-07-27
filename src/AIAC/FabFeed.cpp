@@ -284,8 +284,6 @@ namespace AIAC
             hasPerpendicularFace = true;
             depthVisualizer.Activate();
 
-            AIAC_INFO("--- perpendicular face start ---");
-            
             // find the projection point of the 2 points on the face
             auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
             auto faceNormal = faceInfo.GetNormal();
@@ -314,9 +312,6 @@ namespace AIAC
                 }
             }
             
-            for(auto const& pt: intersectPts){
-                cout << glm::to_string(pt) << endl;
-            }
             FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
             
             // update the visualizer
