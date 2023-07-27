@@ -48,6 +48,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
 
     public:
         bool IsMarkedDone; // This one is for UI
@@ -73,6 +74,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
 
     public:  __always_inline
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
@@ -104,7 +106,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
-
+        virtual void SetVisibility(bool visible);
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
@@ -116,8 +118,6 @@ public:
             std::set<std::string> GetNeighbors() const { return m_Neighbors; }
 
         private:
-            virtual void SetAsCurrent();
-
             bool m_Exposed;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
@@ -137,8 +137,6 @@ public:
             Edge() : Component("EDGE") {}
 
         private:
-            virtual void SetAsCurrent();
-
             // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
@@ -177,7 +175,14 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
+    
+    void HideAllComponentsExceptCurrent();
+    void ShowAllComponents();
+
+public:
+    bool IsShowingAllComponents = false;
 
 private:
     std::string m_ID;
@@ -198,6 +203,7 @@ private:
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
+    
 
     friend class ACInfoModel;
 };

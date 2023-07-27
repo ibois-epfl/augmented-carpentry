@@ -26,6 +26,12 @@ namespace AIAC
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
     }
 
+    void TimberInfo::Component::SetVisibility(bool visible) {
+        for (auto& go : m_GOPrimitives) {
+            go->SetVisibility(visible);
+        }
+    }
+
     ///< Hole 
     void TimberInfo::Hole::SetAsCurrent() {
         TimberInfo::Component::SetAsCurrent();
@@ -49,6 +55,10 @@ namespace AIAC
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::NOT_DONE]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::NOT_DONE]);
         m_RadiusLabelGO->SetVisibility(false);
+    }
+
+    void TimberInfo::Hole::SetVisibility(bool visible) {
+        TimberInfo::Component::SetVisibility(visible);
     }
 
     ///< Cut
@@ -85,12 +95,14 @@ namespace AIAC
         }
     }
 
-    void TimberInfo::Cut::Face::SetAsCurrent() {
-        AIAC_INFO("Face::SetAsCurrent");
-    }
-
-    void TimberInfo::Cut::Edge::SetAsCurrent() {
-        AIAC_INFO("Edge::SetAsCurrent");
+    void TimberInfo::Cut::SetVisibility(bool visible) {
+        TimberInfo::Component::SetVisibility(visible);
+        for (const auto& [_, face] : m_Faces) {
+            face.m_GO->SetVisibility(visible);
+        }
+        for (const auto& [_, edge] : m_Edges) {
+            edge.m_GO->SetVisibility(visible);
+        }
     }
 
     void TimberInfo::Cut::HighlightFace(const std::string& faceID, glm::vec4 color) {
@@ -157,6 +169,25 @@ namespace AIAC
         }
         m_CurrentComponentID = id;
         m_Components[id]->SetAsCurrent();
+
+        ShowAllComponents();
+        HideAllComponentsExceptCurrent();
+    }
+
+    void TimberInfo::HideAllComponentsExceptCurrent() {
+        for (const auto& [_, component] : m_Components) {
+            if(component->m_ID != m_CurrentComponentID){
+                component->SetVisibility(false);
+            }
+        }
+    }
+
+    void TimberInfo::ShowAllComponents() {
+        for (const auto& [_, component] : m_Components) {
+            for(auto& go: component->m_GOPrimitives){
+                component->SetVisibility(true);
+            }
+        }
     }
 
     bool ACInfoModel::Load(std::string path) {
@@ -274,6 +305,11 @@ namespace AIAC
                         continue;
                     }
 
+                    // skip exposed faces
+                    if(faceInfo.m_Exposed){
+                        continue;
+                    }
+
                     // build normal
                     faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0],
                                                                      faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
@@ -296,11 +332,11 @@ namespace AIAC
                     cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
                 }
 
-                for(auto const& [faceID, faceInfo]: cutInfo.m_Faces){
-                    cout << faceID << faceInfo.m_Exposed << endl;
-                    cout << glm::to_string(faceInfo.GetNormal()) << endl;
-                    cout << glm::to_string(faceInfo.GetCenter()) << endl;
-                }
+                // for(auto const& [faceID, faceInfo]: cutInfo.m_Faces){
+                //     cout << faceID << faceInfo.m_Exposed << endl;
+                //     cout << glm::to_string(faceInfo.GetNormal()) << endl;
+                //     cout << glm::to_string(faceInfo.GetCenter()) << endl;
+                // }
 
                 auto edges = cut.child("edges");
                 for(auto edge = edges.child("edge"); edge; edge=edge.next_sibling("edge")){
@@ -330,7 +366,10 @@ namespace AIAC
             }
             m_TimberInfo.GetCurrentComponent()->SetAsCurrent();
         }
+        
         UpdateBboxGOLine();
+        m_TimberInfo.HideAllComponentsExceptCurrent();
+
         return true;
     }
 

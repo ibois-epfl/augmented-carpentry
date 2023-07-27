@@ -406,6 +406,14 @@ namespace AIAC
                 ImGui::EndCombo();
             }
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+            ImGui::SameLine();
+            if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
+                if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
+                } else {
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
+                }
+            }
         ImGui::EndChild();
     }
 
