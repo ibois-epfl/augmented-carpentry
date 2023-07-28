@@ -85,7 +85,7 @@ namespace AIAC
         std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth1;
         std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth2;
 
-        std::shared_ptr<GOLine> m_LineChainNormal;
+        // std::shared_ptr<GOLine> m_LineChainNormal;
 
     friend class FabFeed;
     };

@@ -251,10 +251,10 @@ namespace AIAC
                 holeInfo.m_StartPointGO = GOPoint::Add(holeInfo.m_Start, 2.0f);
                 holeInfo.m_EndPointGO = GOPoint::Add(holeInfo.m_End, 2.0f);
                 auto centerPoint = (holeInfo.m_Start + holeInfo.m_End) * 0.5f;
-                holeInfo.m_IDLabelGO = GOText::Add(holeInfo.m_ID, centerPoint, 0.75f);
+                holeInfo.m_IDLabelGO = GOText::Add(holeInfo.m_ID, centerPoint, m_LabelSize);
                 auto radiusText = std::to_string(holeInfo.m_Radius);
                 radiusText = radiusText.substr(0, radiusText.find(".") + 3);
-                holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, 0.75f);
+                holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, m_LabelSize);
                 holeInfo.m_RadiusLabelGO->SetVisibility(false);
 
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_AxisGO);
@@ -276,7 +276,7 @@ namespace AIAC
                 cutInfo.m_State = StringToState(cut.child("state").child_value());
                 cutInfo.IsMarkedDone = cutInfo.m_State == ACIMState::DONE;
                 cutInfo.m_Center = StringToVec3(cut.child("center").child_value()) * m_Scale;
-                cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, 0.75f);
+                cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, m_labelSize);
                 cutInfo.m_GOPrimitives.push_back(cutInfo.m_IDLabelGO);
 
                 auto nonExposedEdges = std::set<std::string>();
@@ -352,7 +352,7 @@ namespace AIAC
                     edgeInfo.m_End = StringToVec3(edge.child("end").child_value()) * m_Scale;
 
                     // build GOPrimitive
-                    edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, 2.0f);
+                    edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, m_EdgeWeight);
                     edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
                     edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
 
@@ -520,6 +520,12 @@ namespace AIAC
         dist /= 4.0f;
 
         return dist;
+    }
+
+    void ACInfoModel::SetBboxVisibility(bool visible){
+        for(auto line : m_BboxGOLines){
+            line->SetVisibility(visible);
+        }
     }
 
     ACIMState ACInfoModel::StringToState(std::string state){
