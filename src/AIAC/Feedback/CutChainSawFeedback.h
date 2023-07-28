@@ -61,7 +61,8 @@ namespace AIAC {
 
     class CutChainSawFeedback : public FabFeedback {
     public:
-        FabFeedback() = default;
+        CutChainSawFeedback() = default;
+
         virtual void Update();
         virtual void Activate();
         virtual void Deactivate();
