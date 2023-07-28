@@ -384,7 +384,7 @@ namespace AIAC
         if(hasParallelFace || hasPerpendicularFace) {
             m_CutChainSawFeedVisualizer.Activate();
 
-            m_CutChainSawFeedVisualizer.m_LineChainNormal->SetPts(toolChainEndPt, toolChainEndPt + toolNormalVec * 5.0f);
+            // m_CutChainSawFeedVisualizer.m_LineChainNormal->SetPts(toolChainEndPt, toolChainEndPt + toolNormalVec * 5.0f);
 
             auto toString = [](double &val) -> std::string {
                 // const int precisionVal = 2;
@@ -524,9 +524,9 @@ namespace AIAC
         m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth1);
         m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth2);
 
-        m_LineChainNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LineChainNormal->SetColor(GOColor::BLUE);
-        m_AllPrimitives.push_back(m_LineChainNormal);
+        // m_LineChainNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        // m_LineChainNormal->SetColor(GOColor::BLUE);
+        // m_AllPrimitives.push_back(m_LineChainNormal);
 
         Deactivate();
     }

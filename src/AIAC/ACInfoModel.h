@@ -259,6 +259,11 @@ public:
     float GetLength();
 
     /**
+     * Set the visibility of bbox to true or false
+     */
+    void SetBboxVisibility(bool visible);
+
+    /**
      * @brief Convert string m_State to ACIMState
      * @param m_State ACIMState
      */
@@ -293,6 +298,9 @@ public:
     static bool StringToBool(std::string str);
 
 private:
+    float m_EdgeWeight = 1.0f;
+    float m_LabelSize = 0.75f;
+
     float m_Scale = 50.0f;
     std::string m_FilePath;
     pugi::xml_document m_ACIMDoc;

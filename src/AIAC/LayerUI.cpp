@@ -410,8 +410,10 @@ namespace AIAC
             if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
                 } else {
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(true);
                 }
             }
         ImGui::EndChild();
