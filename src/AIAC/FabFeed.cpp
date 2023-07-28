@@ -427,22 +427,22 @@ namespace AIAC
             auto faceEdgeTxt2Color = GOColor::WHITE;
 
             if(parallelEndDist != 0 && parallelEndDist < 0.5f){
-                endColor = GOColor::GREEN;
+                endColor = GOColor::ORANGE;
             }
             if(parallelChainBaseDist != 0 && parallelChainBaseDist < 0.5f){
-                chainBaseColor = GOColor::GREEN;
+                chainBaseColor = GOColor::ORANGE;
             }
             if(parallelChainEndDist != 0 && parallelChainEndDist < 0.5f){
-                chainEndColor = GOColor::GREEN;
+                chainEndColor = GOColor::ORANGE;
             }
 
             if(perpendicularFaceEdge1Dist > 0 && perpendicularFaceEdge1Dist < 0.5f){
-                faceEdgeTxt1Color = GOColor::GREEN;
+                faceEdgeTxt1Color = GOColor::ORANGE;
             } else if (perpendicularFaceEdge1Dist < 0){
                 faceEdgeTxt1Color = GOColor::RED;
             }
             if(perpendicularFaceEdge2Dist > 0 && perpendicularFaceEdge2Dist < 0.5f){
-                faceEdgeTxt2Color = GOColor::GREEN;
+                faceEdgeTxt2Color = GOColor::ORANGE;
             } else if (perpendicularFaceEdge2Dist < 0){
                 faceEdgeTxt2Color = GOColor::RED;
             }
