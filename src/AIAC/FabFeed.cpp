@@ -271,9 +271,9 @@ namespace AIAC
             parallelChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
             parallelChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
 
-            angleVisualizer.m_LineEnd->SetColor(parallelEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
-            angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
-            angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
+            angleVisualizer.m_LineEnd->SetColor(parallelEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
+            angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
+            angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
         } else {
             // angleVisualizer.Deactivate();
         }
@@ -305,7 +305,7 @@ namespace AIAC
                 auto edge = cut->GetEdge(edgeID);
                 auto edgePt1 = edge.GetStartPt().GetPosition();
                 auto edgePt2 = edge.GetEndPt().GetPosition();
-                ExtendLineSeg(edgePt1, edgePt2, 5.0f);
+                ExtendLineSeg(edgePt1, edgePt2, 1.0f);
                 glm::vec3 intersectPt;
                 if(GetIntersectPointOfLineAndLineSeg(intersectLineVec, intersectLinePt, edgePt1, edgePt2, intersectPt)) {
                     intersectPts.push_back(intersectPt);
@@ -427,17 +427,17 @@ namespace AIAC
             auto faceEdgeTxt2Color = GOColor::WHITE;
 
             if(parallelEndDist != 0 && parallelEndDist < 0.5f){
-                endColor = GOColor::ORANGE;
+                endColor = GOColor::YELLOW;
             }
             if(parallelChainBaseDist != 0 && parallelChainBaseDist < 0.5f){
-                chainBaseColor = GOColor::ORANGE;
+                chainBaseColor = GOColor::YELLOW;
             }
             if(parallelChainEndDist != 0 && parallelChainEndDist < 0.5f){
-                chainEndColor = GOColor::ORANGE;
+                chainEndColor = GOColor::YELLOW;
             }
 
             if(perpendicularFaceEdge1Dist > 0 && perpendicularFaceEdge1Dist < 0.5f){
-                faceEdgeTxt1Color = GOColor::ORANGE;
+                faceEdgeTxt1Color = GOColor::YELLOW;
             } else if (perpendicularFaceEdge1Dist < 0){
                 faceEdgeTxt1Color = GOColor::RED;
             }

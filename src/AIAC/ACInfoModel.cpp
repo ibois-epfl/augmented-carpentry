@@ -276,7 +276,7 @@ namespace AIAC
                 cutInfo.m_State = StringToState(cut.child("state").child_value());
                 cutInfo.IsMarkedDone = cutInfo.m_State == ACIMState::DONE;
                 cutInfo.m_Center = StringToVec3(cut.child("center").child_value()) * m_Scale;
-                cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, m_labelSize);
+                cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, m_LabelSize);
                 cutInfo.m_GOPrimitives.push_back(cutInfo.m_IDLabelGO);
 
                 auto nonExposedEdges = std::set<std::string>();
@@ -456,7 +456,8 @@ namespace AIAC
         // change color of the bounding box
         for(auto line : m_BboxGOLines)
             line->SetColor(glm::vec4(0.7f, 0.7f, 0.5f, 0.5f));
-            
+
+        SetBboxVisibility(false);
     }
 
     void ACInfoModel::Transform(glm::mat4x4 transformMat) {

@@ -9,8 +9,6 @@
 
 namespace AIAC
 {
-    static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 20.0f;
-
     GOPrimitive::GOPrimitive(bool isVisible, glm::vec4 color)
         : m_IsVisible(isVisible), m_Color(color), m_State(false)
     {

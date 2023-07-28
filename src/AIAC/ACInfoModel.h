@@ -298,7 +298,7 @@ public:
     static bool StringToBool(std::string str);
 
 private:
-    float m_EdgeWeight = 1.0f;
+    float m_EdgeWeight = 1.1f;
     float m_LabelSize = 0.75f;
 
     float m_Scale = 50.0f;
