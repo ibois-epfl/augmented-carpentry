@@ -8,8 +8,6 @@
 #define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
 #define AC_FF_TOOL AIAC_APP.GetLayer<LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()
 
-#include "AIAC.h"
-
 namespace AIAC {
     class FabFeedback {
     public:

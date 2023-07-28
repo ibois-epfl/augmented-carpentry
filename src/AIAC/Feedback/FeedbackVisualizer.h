@@ -29,8 +29,6 @@ namespace AIAC{
 
     protected:
         std::vector<std::shared_ptr<GOPrimitive>> m_AllPrimitives;
-
-        friend class FabFeed;
     };
 }
 

@@ -19,8 +19,6 @@
 
 namespace AIAC
 {
-
-
     class FabFeed
     {
     public:
