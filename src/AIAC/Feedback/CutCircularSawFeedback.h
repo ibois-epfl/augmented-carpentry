@@ -33,17 +33,24 @@ namespace AIAC{
         void Deactivate() override;
         
     private:
+        // data
+        TimberInfo::Cut* m_Cut;
         float m_Radius;
         glm::vec3 m_Center;
-        glm::vec3 m_Normal;
         glm::vec3 m_NormalStart;
         glm::vec3 m_NormalEnd;
+
+        // derived
+        glm::vec3 m_Normal;
+        glm::vec3 m_DownVec;
+        glm::vec3 m_BottomPoint;
 
         std:;string m_NearestParallelFaceID;
         std::string m_NearestPerpendicularFaceID;
 
         void updatePosition();
         void updateRefFaces();
+        void updateDownVecAndBottomPoint();
 
         CutCircularSawFeedbackVisualizer m_Visualizer;
     };

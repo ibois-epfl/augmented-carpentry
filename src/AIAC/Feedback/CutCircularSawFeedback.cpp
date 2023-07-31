@@ -27,6 +27,7 @@ namespace AIAC {
     }
 
     void CutCircularSawFeedback::Update() {
+        m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         updatePosition();
         updateRefFaces();
     }
@@ -45,8 +46,7 @@ namespace AIAC {
 
         std::vector<std::pair<std::string, float>> perpenFaces;
 
-        TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
-        for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
+        for(auto const& [faceID, faceInfo]: m_Cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
             auto theta = glm::acos(
@@ -86,5 +86,17 @@ namespace AIAC {
             m_NearestParallelFaceID = nearestParallelFaceID;
             m_NearestPerpendicularFaceID = perpenFaces[0].first;
         }
+    }
+
+    void CutCircularSawFeedback::updateDownVecAndBottomPoint() {
+        glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, m_Cut->GetNormal()));
+        glm::vec3 _ptPlaceHolder;
+        GetIntersectLineOf2Planes(
+            m_Normal, m_Center,
+            perpFaceOfBladeVec, m_Center,
+            m_DownVec, _ptPlaceHolder
+        );
+
+        // TODO: get the bottom point and update
     }
 }
