@@ -2,8 +2,9 @@
 // Created by ibois on 7/28/23.
 //
 
+#include "AIAC/Application.h"
 #include "CutChainSawFeedback.h"
-#include "FabFeedback.h"
+#include "utils/GeometryUtils.h"
 
 namespace AIAC {
     CutChainSawAngleFeedVisualizer::CutChainSawAngleFeedVisualizer(){
@@ -80,8 +81,8 @@ namespace AIAC {
         std::string nearestParallelFaceID;
         float nearestPerpendicularFaceDist = 1e9f;
         std::string nearestPerpendicularFaceID;
-        vector<std::string> parallelFaceIDs;
-        vector<std::string> perpendicularFaceIDs;
+        std::vector<std::string> parallelFaceIDs;
+        std::vector<std::string> perpendicularFaceIDs;
 
         TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
@@ -247,7 +248,7 @@ namespace AIAC {
                 // TODO: / 50 * 1000 => mm, change this to a variable
                 int valInt = (int)(val / 50 * 1000);
                 if(valInt > 99) valInt = 99;
-                auto retVal = to_string(valInt);
+                auto retVal = std::to_string(valInt);
                 if(retVal.length() == 1){
                     return "0" + retVal;
                 }

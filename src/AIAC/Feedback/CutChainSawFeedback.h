@@ -2,14 +2,10 @@
 // Created by ibois on 7/28/23.
 //
 
-#ifndef AC_CUTCHAINSAWFEEDBACK_H
-#define AC_CUTCHAINSAWFEEDBACK_H
+#pragma once
 
-#include "AIAC/GOSys/GOPrimitive.h"
-#include "AIAC/ACInfoModel.h"
-#include "FeedbackVisualizer.h"
-#include "FabFeedback.h"
-#include "utils/GeometryUtils.h"
+#include "AIAC/Feedback/FeedbackVisualizer.h"
+#include "AIAC/Feedback/FabFeedback.h"
 
 #include <vector>
 
@@ -70,5 +66,3 @@ namespace AIAC {
         CutChainSawFeedVisualizer m_Visualizer;
     };
 }
-
-#endif //AC_CUTCHAINSAWFEEDBACK_H

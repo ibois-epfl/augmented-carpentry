@@ -4,7 +4,7 @@
 #include "AIAC/ACInfoToolheadManager.h"
 #include "AIAC/ACInfoToolhead.h"
 #include "AIAC/ACInfoModel.h"
-#include "FabFeed.h"
+#include "AIAC/Feedback/CutChainSawFeedback.h"
 
 namespace AIAC
 {
@@ -20,8 +20,8 @@ namespace AIAC
 
         private:  ///< IN
             // FabFeed m_FabFeed;
-            FabFeed m_FabFeed;
             // ACInfoModel& m_CurrentModel; I need the current component / not model
+            CutChainSawFeedback m_CutChainSawFeedback;
 
         // private:  ///< OUT
 
