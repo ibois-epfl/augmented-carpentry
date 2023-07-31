@@ -2,6 +2,7 @@
 // Created by ibois on 7/28/23.
 //
 
+#include "AIAC/Application.h"
 #include "CutCircularSawFeedback.h"
 
 namespace AIAC {
@@ -25,5 +26,65 @@ namespace AIAC {
         
     }
 
+    void CutCircularSawFeedback::Update() {
+        updatePosition();
+        updateRefFaces();
+    }
 
+    void CutCircularSawFeedback::updatePosition() {
+        m_Radius = AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
+        m_Center = AC_FF_TOOL->GetData<CircularSawData>().CenterACIT;
+        m_NormalStart = AC_FF_TOOL->GetData<CircularSawData>().NormStartGO->GetPosition();
+        m_NormalEnd = AC_FF_TOOL->GetData<CircularSawData>().NormEndGO->GetPosition();
+        m_Normal = glm::normalize(m_NormalEnd - m_NormalStart);
+    }
+
+    void CutCircularSawFeedback::updateRefFaces() {
+        float nearestParallelFaceDist = 0.f;
+        std::string nearestParallelFaceID;
+
+        std::vector<std::pair<std::string, float>> perpenFaces;
+
+        TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
+        for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
+            if (faceInfo.IsExposed()) continue;
+            auto faceNormal = faceInfo.GetNormal();
+            auto theta = glm::acos(
+                            glm::dot(faceNormal, m_Normal) / 
+                            (glm::length(faceNormal) * glm::length(m_Normal))
+                        );
+
+            auto dist = glm::distance(faceInfo.GetCenter(), m_Center);
+
+            // for parallel faces, find the nearest one
+            auto threshold = 0.7853f; // 45 degrees
+            if(theta < threshold || (3.14159 - theta) < threshold) {
+                // update nearest parallel face
+                if(nearestParallelFaceID.empty() || dist < nearestParallelFaceDist){
+                    nearestParallelFaceID = faceID;
+                    nearestParallelFaceDist = dist;
+                }
+            } else {
+                perpenFaces.push_back(std::make_pair(faceID, dist));
+            }
+        }
+
+        // sort perpendicular faces by distance
+        std::sort(perpenFaces.begin(), perpenFaces.end(), [](auto const& a, auto const& b){
+            return a.second < b.second;
+        });
+
+        // update class members
+        if(nearestParallelFaceID.empty()){
+            if(perpenFaces.size() < 2) {
+                // TODO: catch error
+                return;
+            }
+            m_NearestParallelFaceID = perpenFaces[0].first;
+            m_NearestPerpendicularFaceID = perpenFaces[1].first;
+        } else {
+            m_NearestParallelFaceID = nearestParallelFaceID;
+            m_NearestPerpendicularFaceID = perpenFaces[0].first;
+        }
+    }
 }

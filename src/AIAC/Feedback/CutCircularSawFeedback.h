@@ -31,8 +31,20 @@ namespace AIAC{
         void Update() override;
         void Activate() override;
         void Deactivate() override;
-
+        
     private:
+        float m_Radius;
+        glm::vec3 m_Center;
+        glm::vec3 m_Normal;
+        glm::vec3 m_NormalStart;
+        glm::vec3 m_NormalEnd;
+
+        std:;string m_NearestParallelFaceID;
+        std::string m_NearestPerpendicularFaceID;
+
+        void updatePosition();
+        void updateRefFaces();
+
         CutCircularSawFeedbackVisualizer m_Visualizer;
     };
 }
