@@ -1,15 +1,10 @@
 #include "FabFeed.h"
-#include "AIAC/Application.h"
-#include "AIAC/GOSys/GOPrimitive.h"
-#include "AIAC/Log.h"
-#include "utils/utils.h"
-#include "utils/GeometryUtils.h"
 
 namespace AIAC
 {
     bool FabFeed::Compute()
     {
-        m_CurrentFabFeedback.Deactivate();
+//        m_CurrentFabFeedback.Deactivate();
 
         if (AC_FF_TOOL->GetTypeString() == "DRILLBIT")
             if (AC_FF_COMP->GetTypeString() == "HOLE")
@@ -28,8 +23,8 @@ namespace AIAC
                 return false;
         else if (AC_FF_TOOL->GetTypeString() == "CHAINSAW")
             if (AC_FF_COMP->GetTypeString() == "CUT") {
-                m_CurrentFabFeedback = m_CutChainSawFeedback;
-                m_CurrentFabFeedback.Activate();
+//                m_CurrentFabFeedback = m_CutChainSawFeedback;
+//                m_CurrentFabFeedback.Activate();
                 return true;
             }
             else

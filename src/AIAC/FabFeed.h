@@ -1,10 +1,16 @@
 #pragma once
 
+#include "AIAC/Application.h"
 #include "AIAC/ACInfoToolheadManager.h"
 #include "AIAC/ACInfoToolhead.h"
 #include "AIAC/ACInfoModel.h"
 #include "AIAC/GOSys/GOPrimitive.h"
+#include "AIAC/Log.h"
 #include "AIAC/Config.h"
+
+#include "utils/utils.h"
+#include "utils/GeometryUtils.h"
+
 #include "AIAC/Feedback/CutChainSawFeedback.h"
 
 ///< timber components
@@ -94,9 +100,9 @@ namespace AIAC
             /// All text objects
             std::shared_ptr<GOText> m_InfoText;
 
-            CutChainSawFeedback m_CutChainSawFeedback;
+//            CutChainSawFeedback m_CutChainSawFeedback;
 
-            FabFeedback& m_CurrentFabFeedback = m_CutChainSawFeedback;
+//            FabFeedback& m_CurrentFabFeedback = m_CutChainSawFeedback;
 
         // private:
         //     std::shared_ptr<ACInfoToolhead> m_CurrentToolhead;
