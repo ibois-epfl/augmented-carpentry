@@ -20,7 +20,7 @@ namespace AIAC{
         std::shared_ptr<GOPoint> m_BottomPoint;
         std::shared_ptr<GOLine> m_LineToBottomPt;
         std::shared_ptr<GOLine> m_ProjLineOnFace;
-        std::shared_ptr<GOLine> m_LineSide2;
+        std::shared_ptr<GOLine> m_ProjLineOfBlade;
 
         std::shared_ptr<GOText> m_TxtBottomDist;
 
@@ -54,7 +54,7 @@ namespace AIAC{
 
         void updatePosition();
         void updateRefFaces();
-        void updateDownVecAndBottomPoint();
+        void updateFeedback();
 
         CutCircularSawFeedbackVisualizer m_Visualizer;
     };

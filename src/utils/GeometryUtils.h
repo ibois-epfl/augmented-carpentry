@@ -6,6 +6,7 @@
 
 inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 planePoint, glm::vec3 point)
 {
+    planeNormal = glm::normalize(planeNormal);
     glm::vec3 v = point - planePoint;
     float d = glm::dot(planeNormal, v);
     return point - d * planeNormal;
@@ -19,15 +20,46 @@ inline glm::vec3 GetNearestPtOnLine(glm::vec3 lineVec, glm::vec3 linePt, glm::ve
     return linePt + projLen * dir;
 }
 
-// Function related to line seg
-inline bool CheckIfPointInsideLineSeg(glm::vec3 pt, glm::vec3 pt1, glm::vec3 pt2)
+inline bool GetIntersectPointOfLineAndPlane(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 &intersectPt)
 {
-    auto dir1 = glm::normalize(pt - pt1);
-    auto dir2 = glm::normalize(pt - pt2);
-    auto dir3 = glm::normalize(pt2 - pt1);
+    lineVec = glm::normalize(lineVec);
+    planeNormal = glm::normalize(planeNormal);
+
+    if(glm::dot(lineVec, planeNormal) == 0) return false;
+
+    auto d = glm::dot(planeNormal, planePt - linePt);
+    auto t = d / glm::dot(planeNormal, lineVec);
+    intersectPt = linePt + t * lineVec;
+    return true;
+}
+
+// ---------------------------- //
+// Function related to line seg //
+// ---------------------------- //
+
+/**
+ * @brief Check if a point is between a line segment, no matter if the point is on the line segment or not
+ * 
+ * @param pt Point to check
+ * @param lineSegPt1 Start of the line segment
+ * @param lineSegPt2 End of the line segment
+ * @return true if the point is between the line segment
+ */
+inline bool IsPointBetweenLineSeg(glm::vec3 pt, glm::vec3 lineSegPt1, glm::vec3 lineSegPt2)
+{
+    auto dir1 = glm::normalize(pt - lineSegPt1);
+    auto dir2 = glm::normalize(pt - lineSegPt2);
+    auto dir3 = glm::normalize(lineSegPt2 - lineSegPt1);
     return glm::dot(dir1, dir3) > 0 && glm::dot(dir2, dir3) < 0;
 }
 
+/**
+ * @brief Make a line segment longer by a certain length
+ * 
+ * @param pt1 Start of the line segment
+ * @param pt2 End of the line segment
+ * @param extendLen Length to extend
+ */
 inline void ExtendLineSeg(glm::vec3 &pt1, glm::vec3 &pt2, float extendLen)
 {
     auto dir = glm::normalize(pt2 - pt1);
@@ -83,6 +115,8 @@ inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 d
     // std::cout << "dir1: " << dir1.x << " " << dir1.y << " " << dir1.z << std::endl;
     // std::cout << "pt2: " << pt2.x << " " << pt2.y << " " << pt2.z << std::endl;
     // std::cout << "dir2: " << dir2.x << " " << dir2.y << " " << dir2.z << std::endl;
+    dir1 = glm::normalize(dir1);
+    dir2 = glm::normalize(dir2);
     auto dir3 = glm::cross(dir1, dir2);
     auto dir3Len = glm::length(dir3);
     if (dir3Len < 1e-4f)
@@ -110,10 +144,11 @@ inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 d
 inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 linePt,
                                           glm::vec3 lineSegPt1, glm::vec3 lineSegPt2, glm::vec3& ptInLineSeg)
 {
+    lineVec = glm::normalize(lineVec);
     glm::vec3 intersectPt;
-    auto lineSegVec = lineSegPt2 - lineSegPt1;
+    auto lineSegVec = glm::normalize(lineSegPt2 - lineSegPt1);
     if(GetIntersectPointOf2Lines(lineVec, linePt, lineSegVec, lineSegPt1, intersectPt)){
-        if(CheckIfPointInsideLineSeg(intersectPt, lineSegPt1, lineSegPt2)){
+        if(IsPointBetweenLineSeg(intersectPt, lineSegPt1, lineSegPt2)){
             ptInLineSeg = intersectPt;
             return true;
         }
@@ -124,7 +159,10 @@ inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 lineP
 inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
                                       glm::vec3 p2Norm, glm::vec3 pt2,
                                       glm::vec3 &lineVec, glm::vec3 &linePt){
-    // // https://math.stackexchange.com/questions/475953/how-to-calculate-the-intersection-of-two-planes
+    // https://math.stackexchange.com/questions/475953/how-to-calculate-the-intersection-of-two-planes
+    p1Norm = glm::normalize(p1Norm);
+    p2Norm = glm::normalize(p2Norm);
+
     lineVec = glm::normalize(glm::cross(p1Norm, p2Norm));
     auto line1Dir = glm::cross(p1Norm, lineVec);
     auto line2Dir = glm::cross(p2Norm, lineVec);
