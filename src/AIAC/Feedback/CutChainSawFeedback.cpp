@@ -243,17 +243,6 @@ namespace AIAC {
         if(hasParallelFace || hasPerpendicularFace) {
             m_Visualizer.Activate();
 
-            // auto toString = [](double &val) -> std::string {
-            //     // TODO: / 50 * 1000 => mm, change this to a variable
-            //     int valInt = (int)(val / 50 * 1000);
-            //     if(valInt > 99) valInt = 99;
-            //     auto retVal = std::to_string(valInt);
-            //     if(retVal.length() == 1){
-            //         return "0" + retVal;
-            //     }
-            //     return retVal;
-            // };
-
             auto strEnd = FeedbackVisualizer::toString(parallelEndDist);
             auto strChainBase = FeedbackVisualizer::toString(parallelChainBaseDist);
             auto strChainEnd = FeedbackVisualizer::toString(parallelChainEndDist);
