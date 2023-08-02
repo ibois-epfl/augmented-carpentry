@@ -4,33 +4,40 @@
 
 #include "glm/glm.hpp"
 
-inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 planePoint, glm::vec3 point)
+// --------------------------------- //
+// Function related to point & plane //
+// --------------------------------- //
+
+/**
+ * @brief Get the projection point of a point on a plane
+ * 
+ * @param planeNormal Normal of the plane
+ * @param planePt A point on the plane
+ * @param point The point to project
+ * @return glm::vec3 The projection point
+ */
+inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 pt)
 {
     planeNormal = glm::normalize(planeNormal);
-    glm::vec3 v = point - planePoint;
+    glm::vec3 v = pt - planePt;
     float d = glm::dot(planeNormal, v);
-    return point - d * planeNormal;
+    return pt - d * planeNormal;
 }
 
+/**
+ * @brief Get the Nearest Pt On Line object
+ * 
+ * @param lineVec 
+ * @param linePt 
+ * @param pt 
+ * @return glm::vec3 
+ */
 inline glm::vec3 GetNearestPtOnLine(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 pt)
 {
     auto dir = glm::normalize(lineVec);
     auto pt2LinePt = pt - linePt;
     auto projLen = glm::dot(pt2LinePt, dir);
     return linePt + projLen * dir;
-}
-
-inline bool GetIntersectPointOfLineAndPlane(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 &intersectPt)
-{
-    lineVec = glm::normalize(lineVec);
-    planeNormal = glm::normalize(planeNormal);
-
-    if(glm::dot(lineVec, planeNormal) == 0) return false;
-
-    auto d = glm::dot(planeNormal, planePt - linePt);
-    auto t = d / glm::dot(planeNormal, lineVec);
-    intersectPt = linePt + t * lineVec;
-    return true;
 }
 
 // ---------------------------- //
@@ -67,6 +74,14 @@ inline void ExtendLineSeg(glm::vec3 &pt1, glm::vec3 &pt2, float extendLen)
     pt2 += dir * extendLen;
 }
 
+/**
+ * @brief From a list of points, find 2 point that forms the longest line segment
+ * 
+ * @param pts Candidate points
+ * @param pt1 Start of the line segment
+ * @param pt2 End of the line segment
+ * @return true if the line segment is formed successfully
+ */
 inline bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1, glm::vec3 &pt2)
 {
     if(pts.size() < 2){
@@ -98,7 +113,33 @@ inline bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1
     return true;
 }
 
-// Different intersection methods
+// ------------------------------ //
+// Different intersection methods //
+// ------------------------------ //
+
+/**
+ * @brief Get the Intersect Point Of Line And Plane object
+ * 
+ * @param lineVec 
+ * @param linePt 
+ * @param planeNormal 
+ * @param planePt 
+ * @param intersectPt 
+ * @return true if intersect, false if not
+ */
+inline bool GetIntersectPointOfLineAndPlane(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 &intersectPt)
+{
+    lineVec = glm::normalize(lineVec);
+    planeNormal = glm::normalize(planeNormal);
+
+    if(glm::dot(lineVec, planeNormal) == 0) return false;
+
+    auto d = glm::dot(planeNormal, planePt - linePt);
+    auto t = d / glm::dot(planeNormal, lineVec);
+    intersectPt = linePt + t * lineVec;
+    return true;
+}
+
 /**
  * @brief Get the Intersect Point Of 2 Lines
  * @param dir1
@@ -110,11 +151,6 @@ inline bool FormLongestLineSeg(const std::vector<glm::vec3> &pts, glm::vec3 &pt1
  */
 inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, glm::vec3 pt2, glm::vec3 &pt)
 {
-    // std::cout << "--- intersect pt of 2 lines: ---" << endl;
-    // std::cout << "pt1: " << pt1.x << " " << pt1.y << " " << pt1.z << std::endl;
-    // std::cout << "dir1: " << dir1.x << " " << dir1.y << " " << dir1.z << std::endl;
-    // std::cout << "pt2: " << pt2.x << " " << pt2.y << " " << pt2.z << std::endl;
-    // std::cout << "dir2: " << dir2.x << " " << dir2.y << " " << dir2.z << std::endl;
     dir1 = glm::normalize(dir1);
     dir2 = glm::normalize(dir2);
     auto dir3 = glm::cross(dir1, dir2);
@@ -136,13 +172,22 @@ inline bool GetIntersectPointOf2Lines(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 d
     auto t1 = glm::dot(dir3Norm, glm::cross(pt2 - pt1, dir2Norm)) / det;
     auto t2 = glm::dot(dir3Norm, glm::cross(pt2 - pt1, dir1Norm)) / det;
     pt = pt1 + t1 * dir1;
-    // std::cout << "pt: " << pt.x << " " << pt.y << " " << pt.z << std::endl;
-    // std::cout << "-----------------------------" << endl;
     return true;
 }
 
+/**
+ * @brief Get the Intersect Point Of Line And Line Seg object
+ * 
+ * @param lineVec 
+ * @param linePt 
+ * @param lineSegPt1 
+ * @param lineSegPt2 
+ * @param ptInLineSeg 
+ * @return true if intersect, false if not
+ */
 inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 linePt,
-                                          glm::vec3 lineSegPt1, glm::vec3 lineSegPt2, glm::vec3& ptInLineSeg)
+                                              glm::vec3 lineSegPt1, glm::vec3 lineSegPt2,
+                                              glm::vec3& ptInLineSeg)
 {
     lineVec = glm::normalize(lineVec);
     glm::vec3 intersectPt;
@@ -156,6 +201,17 @@ inline bool GetIntersectPointOfLineAndLineSeg(glm::vec3 lineVec, glm::vec3 lineP
     return false;
 }
 
+/**
+ * @brief Get the Intersect Line Of 2 Planes
+ * 
+ * @param p1Norm 
+ * @param pt1 
+ * @param p2Norm 
+ * @param pt2 
+ * @param lineVec 
+ * @param linePt 
+ * @return true if intersect, false if not
+ */
 inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
                                       glm::vec3 p2Norm, glm::vec3 pt2,
                                       glm::vec3 &lineVec, glm::vec3 &linePt){
