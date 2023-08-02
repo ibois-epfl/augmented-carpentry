@@ -30,7 +30,6 @@ namespace AIAC
             AIAC_ERROR("No toolhead models loaded!");
         
         this->SetActiveToolhead(this->m_ACInfoToolheadMap.begin()->first);
-        this->m_ActiveACInfoToolhead->SetVisibility(true);
     }
 
     void ACInfoToolheadManager::SetActiveToolhead(const std::string& toolheadName)
@@ -39,7 +38,6 @@ namespace AIAC
         if (this->m_ACInfoToolheadMap.find(toolheadName) != this->m_ACInfoToolheadMap.end())
         {
             *this->m_ActiveACInfoToolhead = *this->m_ACInfoToolheadMap[toolheadName];
-            this->m_ActiveACInfoToolhead->SetVisibility(true);
         }
         else
             AIAC_ERROR("Toolhead model {} not found!", toolheadName);

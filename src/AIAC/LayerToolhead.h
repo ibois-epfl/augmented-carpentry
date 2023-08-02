@@ -16,7 +16,7 @@ namespace AIAC
         LayerToolhead()
             : IsShowSilouhette(true),
               ToolheadStateUI(-1),
-              IsShowToolheadGOInfo(true),
+              IsShowToolheadGOInfo(false),
               m_ACScaleFactor(50.0f),
             m_TtoolState(ttool::EventType::None)
         {
