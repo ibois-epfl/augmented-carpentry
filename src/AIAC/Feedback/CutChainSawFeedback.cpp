@@ -318,6 +318,8 @@ namespace AIAC {
 
     void CutChainSawFeedback::Deactivate(){
         m_Visualizer.Deactivate();
+        m_Visualizer.m_AngleFeedVisualizer.Deactivate();
+        m_Visualizer.m_DepthFeedVisualizer.Deactivate();
     }
 }
 

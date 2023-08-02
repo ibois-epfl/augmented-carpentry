@@ -36,8 +36,8 @@ namespace AIAC {
     }
 
     void CutCircularSawFeedback::Activate() {
-        m_Visualizer.Activate();
         Update();
+        m_Visualizer.Activate();
     }
 
     void CutCircularSawFeedback::Deactivate() {
