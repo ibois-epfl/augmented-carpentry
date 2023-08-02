@@ -7,35 +7,47 @@
 
 namespace AIAC {
     CutCircularSawFeedbackVisualizer::CutCircularSawFeedbackVisualizer() {
-        m_LineBottom = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LineSide1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
+        m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineSide2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
-        m_LineBottom->SetColor(GOColor::CYAN);
-        m_LineSide1->SetColor(GOColor::YELLOW);
-        m_LineSide2->SetColor(GOColor::YELLOW);
+        m_BottomPoint->SetColor(GOColor::YELLOW);
+        m_LineToBottomPt->SetColor(GOColor::YELLOW);
+        m_ProjLineOnFace->SetColor(GOColor::CYAN);
+        m_LineSide2->SetColor(GOColor::BLUE);
+        m_TxtBottomDist->SetColor(GOColor::WHITE);
 
-        m_AllPrimitives.push_back(m_LineBottom);
-        m_AllPrimitives.push_back(m_LineSide1);
+        m_AllPrimitives.push_back(m_BottomPoint);
+        m_AllPrimitives.push_back(m_LineToBottomPt);
+        m_AllPrimitives.push_back(m_ProjLineOnFace);
         m_AllPrimitives.push_back(m_LineSide2);
+        m_AllPrimitives.push_back(m_TxtBottomDist);
 
         Deactivate();
-    }
-
-    CutCircularSawFeedback::CutCircularSawFeedback() {
-        
     }
 
     void CutCircularSawFeedback::Update() {
         m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         updatePosition();
         updateRefFaces();
+        updateDownVecAndBottomPoint();
+    }
+
+    void CutCircularSawFeedback::Activate() {
+        m_Visualizer.Activate();
+        Update();
+    }
+
+    void CutCircularSawFeedback::Deactivate() {
+        m_Visualizer.Deactivate();
     }
 
     void CutCircularSawFeedback::updatePosition() {
         m_Radius = AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
-        m_Center = AC_FF_TOOL->GetData<CircularSawData>().CenterACIT;
-        m_NormalStart = AC_FF_TOOL->GetData<CircularSawData>().NormStartGO->GetPosition();
+        m_Center = AC_FF_TOOL->GetData<CircularSawData>().CenterGO->GetPosition();
+        m_NormalStart = m_Center; // AC_FF_TOOL->GetData<CircularSawData>().NormStartGO->GetPosition(); // this value is not initialized
         m_NormalEnd = AC_FF_TOOL->GetData<CircularSawData>().NormEndGO->GetPosition();
         m_Normal = glm::normalize(m_NormalEnd - m_NormalStart);
     }
@@ -89,14 +101,32 @@ namespace AIAC {
     }
 
     void CutCircularSawFeedback::updateDownVecAndBottomPoint() {
-        glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, m_Cut->GetNormal()));
+        auto prepPlnCenter = m_Cut->GetFace(m_NearestPerpendicularFaceID).GetCenter();
+        auto perpPlnNormal = m_Cut->GetFace(m_NearestPerpendicularFaceID).GetNormal();
+        glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
         glm::vec3 _ptPlaceHolder;
         GetIntersectLineOf2Planes(
             m_Normal, m_Center,
             perpFaceOfBladeVec, m_Center,
             m_DownVec, _ptPlaceHolder
         );
+        // get the bottom point and update
+        m_BottomPoint = m_Center + m_DownVec * m_Radius;
+        m_Visualizer.m_BottomPoint->SetPosition(m_BottomPoint);
+        m_Visualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
 
-        // TODO: get the bottom point and update
+        // side point of the blade
+        auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
+        auto projSidePt1 = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, sidePt1);
+        auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
+        auto projSidePt2 = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, sidePt2);
+        m_Visualizer.m_ProjLineOnFace->SetPts(projSidePt1, projSidePt2);
+
+        // distance to the bottom face
+        auto projBtmPt = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, m_BottomPoint);
+        auto dist = glm::distance(projBtmPt, m_BottomPoint);
+        m_Visualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
+        m_Visualizer.m_TxtBottomDist->SetText(FeedbackVisualizer::toString(dist));
+
     }
 }

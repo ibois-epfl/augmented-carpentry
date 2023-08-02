@@ -125,7 +125,7 @@ inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
                                       glm::vec3 p2Norm, glm::vec3 pt2,
                                       glm::vec3 &lineVec, glm::vec3 &linePt){
     // // https://math.stackexchange.com/questions/475953/how-to-calculate-the-intersection-of-two-planes
-    lineVec = glm::cross(p1Norm, p2Norm);
+    lineVec = glm::normalize(glm::cross(p1Norm, p2Norm));
     auto line1Dir = glm::cross(p1Norm, lineVec);
     auto line2Dir = glm::cross(p2Norm, lineVec);
     if(GetIntersectPointOf2Lines(line1Dir, pt1, line2Dir, pt2, linePt)){
