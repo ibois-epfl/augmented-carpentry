@@ -17,16 +17,20 @@ namespace AIAC{
         CutCircularSawFeedbackVisualizer();
 
     private:
-        std::shared_ptr<GOLine> m_LineBottom;
-        std::shared_ptr<GOLine> m_LineSide1;
+        std::shared_ptr<GOPoint> m_BottomPoint;
+        std::shared_ptr<GOLine> m_LineToBottomPt;
+        std::shared_ptr<GOLine> m_ProjLineOnFace;
         std::shared_ptr<GOLine> m_LineSide2;
+
+        std::shared_ptr<GOText> m_TxtBottomDist;
 
     friend class CutCircularSawFeedback;
     };
 
     class CutCircularSawFeedback : public FabFeedback {
     public:
-        CutCircularSawFeedback();
+        CutCircularSawFeedback() = default;
+        ~CutCircularSawFeedback() = default;
 
         void Update() override;
         void Activate() override;
@@ -45,7 +49,7 @@ namespace AIAC{
         glm::vec3 m_DownVec;
         glm::vec3 m_BottomPoint;
 
-        std:;string m_NearestParallelFaceID;
+        std::string m_NearestParallelFaceID;
         std::string m_NearestPerpendicularFaceID;
 
         void updatePosition();

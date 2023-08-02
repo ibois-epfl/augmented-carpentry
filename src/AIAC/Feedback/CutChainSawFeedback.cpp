@@ -244,27 +244,27 @@ namespace AIAC {
         if(hasParallelFace || hasPerpendicularFace) {
             m_Visualizer.Activate();
 
-            auto toString = [](double &val) -> std::string {
-                // TODO: / 50 * 1000 => mm, change this to a variable
-                int valInt = (int)(val / 50 * 1000);
-                if(valInt > 99) valInt = 99;
-                auto retVal = std::to_string(valInt);
-                if(retVal.length() == 1){
-                    return "0" + retVal;
-                }
-                return retVal;
-            };
+            // auto toString = [](double &val) -> std::string {
+            //     // TODO: / 50 * 1000 => mm, change this to a variable
+            //     int valInt = (int)(val / 50 * 1000);
+            //     if(valInt > 99) valInt = 99;
+            //     auto retVal = std::to_string(valInt);
+            //     if(retVal.length() == 1){
+            //         return "0" + retVal;
+            //     }
+            //     return retVal;
+            // };
 
-            auto strEnd = toString(parallelEndDist);
-            auto strChainBase = toString(parallelChainBaseDist);
-            auto strChainEnd = toString(parallelChainEndDist);
+            auto strEnd = FeedbackVisualizer::toString(parallelEndDist);
+            auto strChainBase = FeedbackVisualizer::toString(parallelChainBaseDist);
+            auto strChainEnd = FeedbackVisualizer::toString(parallelChainEndDist);
 
             this->m_Visualizer.m_GuideTxtEnd->SetText(strEnd);
             this->m_Visualizer.m_GuideTxtChainBase->SetText(strChainBase);
             this->m_Visualizer.m_GuideTxtChainEnd->SetText(strChainEnd);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetText(toString(perpendicularFaceEdge1Dist));
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText(toString(perpendicularFaceEdge2Dist));
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetText(FeedbackVisualizer::toString(perpendicularFaceEdge1Dist));
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText(FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
 
             this->m_Visualizer.m_GuideTxtEnd->SetAnchor(toolNormStartPt);
             this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);

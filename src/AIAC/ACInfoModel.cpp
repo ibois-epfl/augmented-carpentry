@@ -312,7 +312,7 @@ namespace AIAC
 
                     // build normal
                     faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0],
-                                                                     faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
+                                                                  faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
 
                     std::vector<uint32_t> indices;
                     auto baseCornerIdx = 0;
@@ -493,11 +493,12 @@ namespace AIAC
                 }
                 // FIXME: Add GOVec so we can use GO to manage everything.
                 // Normal, Center, and Corners are glm::vec3
-                faceInfo.m_Normal = glm::normalize(rotationMat * faceInfo.m_Normal);
-                faceInfo.m_Center = glm::vec3(transformMat * glm::vec4(faceInfo.m_Center, 1.0f));
                 for(auto& corner : faceInfo.m_Corners){
                     corner = glm::vec3(transformMat * glm::vec4(corner, 1.0f));
                 }
+                faceInfo.m_Center = glm::vec3(transformMat * glm::vec4(faceInfo.m_Center, 1.0f));
+                faceInfo.m_Normal = glm::normalize(glm::cross(faceInfo.m_Corners[1] - faceInfo.m_Corners[0],
+                                                              faceInfo.m_Corners[2] - faceInfo.m_Corners[0]));
             }
             // Edge
             for(auto& kv : cutInfo.m_Edges){
