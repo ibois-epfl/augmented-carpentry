@@ -10,19 +10,19 @@ namespace AIAC {
         m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
         m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LineSide2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
         m_BottomPoint->SetColor(GOColor::YELLOW);
         m_LineToBottomPt->SetColor(GOColor::YELLOW);
         m_ProjLineOnFace->SetColor(GOColor::CYAN);
-        m_LineSide2->SetColor(GOColor::BLUE);
+        m_ProjLineOfBlade->SetColor(GOColor::CYAN);
         m_TxtBottomDist->SetColor(GOColor::WHITE);
 
         m_AllPrimitives.push_back(m_BottomPoint);
         m_AllPrimitives.push_back(m_LineToBottomPt);
         m_AllPrimitives.push_back(m_ProjLineOnFace);
-        m_AllPrimitives.push_back(m_LineSide2);
+        m_AllPrimitives.push_back(m_ProjLineOfBlade);
         m_AllPrimitives.push_back(m_TxtBottomDist);
 
         Deactivate();
@@ -32,7 +32,7 @@ namespace AIAC {
         m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         updatePosition();
         updateRefFaces();
-        updateDownVecAndBottomPoint();
+        updateFeedback();
     }
 
     void CutCircularSawFeedback::Activate() {
@@ -100,9 +100,10 @@ namespace AIAC {
         }
     }
 
-    void CutCircularSawFeedback::updateDownVecAndBottomPoint() {
-        auto prepPlnCenter = m_Cut->GetFace(m_NearestPerpendicularFaceID).GetCenter();
-        auto perpPlnNormal = m_Cut->GetFace(m_NearestPerpendicularFaceID).GetNormal();
+    void CutCircularSawFeedback::updateFeedback() {
+        auto prepFaceInfo = m_Cut->GetFace(m_NearestPerpendicularFaceID);
+        auto prepPlnCenter = prepFaceInfo.GetCenter();
+        auto perpPlnNormal = prepFaceInfo.GetNormal();
         glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
         glm::vec3 _ptPlaceHolder;
         GetIntersectLineOf2Planes(
@@ -110,6 +111,7 @@ namespace AIAC {
             perpFaceOfBladeVec, m_Center,
             m_DownVec, _ptPlaceHolder
         );
+
         // get the bottom point and update
         m_BottomPoint = m_Center + m_DownVec * m_Radius;
         m_Visualizer.m_BottomPoint->SetPosition(m_BottomPoint);
@@ -117,16 +119,41 @@ namespace AIAC {
 
         // side point of the blade
         auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
-        auto projSidePt1 = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, sidePt1);
         auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
-        auto projSidePt2 = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, sidePt2);
-        m_Visualizer.m_ProjLineOnFace->SetPts(projSidePt1, projSidePt2);
+        glm::vec3 projSidePt1, projSidePt2;
+        GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
+        GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
+        m_Visualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
 
         // distance to the bottom face
         auto projBtmPt = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, m_BottomPoint);
         auto dist = glm::distance(projBtmPt, m_BottomPoint);
+
+        if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt)){
+            m_Visualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
+        } else {
+            dist = -dist;
+            m_Visualizer.m_TxtBottomDist->SetColor(GOColor::RED);
+        }
+
         m_Visualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
         m_Visualizer.m_TxtBottomDist->SetText(FeedbackVisualizer::toString(dist));
 
+        // Projection line on face
+        // Find all intersection points on the edges of the perpendicular face, and form the longest segment
+        std::vector<glm::vec3> intersectPts;
+        glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2;
+        for(auto const& edgeID: prepFaceInfo.GetEdges()){
+            auto edge = m_Cut->GetEdge(edgeID);
+            auto edgePt1 = edge.GetStartPt().GetPosition();
+            auto edgePt2 = edge.GetEndPt().GetPosition();
+            ExtendLineSeg(edgePt1, edgePt2, 1.0f);
+            glm::vec3 intersectPt;
+            if(GetIntersectPointOfLineAndLineSeg((projSidePt2 - projSidePt1), projSidePt1, edgePt1, edgePt2, intersectPt)) {
+                intersectPts.push_back(intersectPt);
+            }
+        }
+        FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+        m_Visualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1, perpIntersectLineSegPt2);
     }
 }

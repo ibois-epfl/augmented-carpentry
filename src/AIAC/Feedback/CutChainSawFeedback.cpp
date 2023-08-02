@@ -189,7 +189,6 @@ namespace AIAC {
                     intersectPts.push_back(intersectPt);
                 }
             }
-
             FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
 
             // update the m_Visualizer
@@ -208,8 +207,8 @@ namespace AIAC {
             auto pt2OnEndMid = GetNearestPtOnLine(toolChainEndPt - toolChainMidPt, toolChainEndPt, perpIntersectLineSegPt2);
             auto pt2OnMidBase = GetNearestPtOnLine(toolChainMidPt - toolChainBasePt, toolChainMidPt, perpIntersectLineSegPt2);
 
-            pt1ProjPt = CheckIfPointInsideLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt) ? pt1OnMidBase : pt1OnEndMid;
-            pt2ProjPt = CheckIfPointInsideLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt) ? pt2OnMidBase : pt2OnEndMid;
+            pt1ProjPt = IsPointBetweenLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt) ? pt1OnMidBase : pt1OnEndMid;
+            pt2ProjPt = IsPointBetweenLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt) ? pt2OnMidBase : pt2OnEndMid;
 
             depthVisualizer.m_LineDepthFaceEdge1->SetPts(perpIntersectLineSegPt1, pt1ProjPt);
             depthVisualizer.m_LineDepthFaceEdge2->SetPts(perpIntersectLineSegPt2, pt2ProjPt);
