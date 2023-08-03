@@ -4,6 +4,40 @@
 
 #include "glm/glm.hpp"
 
+// --------------------------- //
+// Function related to vectors //
+// --------------------------- //
+
+/**
+ * @brief Get the angle between 2 vectors
+ * 
+ * @param v1 
+ * @param v2 
+ * @return float 
+ */
+inline float GetAngleBetweenVectors(glm::vec3 v1, glm::vec3 v2, bool useDegree = false){
+    v1 = glm::normalize(v1);
+    v2 = glm::normalize(v2);
+    auto rad = glm::acos(glm::dot(v1, v2));
+    if(useDegree){
+        return glm::degrees(rad);
+    }
+    return rad;
+}
+
+/**
+ * @brief Check if 2 vectors are in the same direction (angle < 180 degree)
+ * 
+ * @param v1 
+ * @param v2 
+ * @return true if in the same direction
+ */
+inline bool IsSameDirection(glm::vec3 v1, glm::vec3 v2){
+    v1 = glm::normalize(v1);
+    v2 = glm::normalize(v2);
+    return glm::dot(v1, v2) > 0;
+}
+
 // --------------------------------- //
 // Function related to point & plane //
 // --------------------------------- //
