@@ -221,6 +221,7 @@ public:
     void SetCurrentComponentTo(std::string id);
 
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
+    inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
@@ -242,6 +243,11 @@ private:
     // (0)-----------------------(1)
     //
     std::vector<glm::vec3> m_Bbox;
+    std::vector<std::pair<int, int> > m_BboxEdgesIndices = {
+        {0, 1}, {1, 2}, {2, 3}, {3, 0}, // bottom
+        {4, 5}, {5, 6}, {6, 7}, {7, 4}, // top
+        {0, 4}, {1, 5}, {2, 6}, {3, 7}  // vertical
+    };
     ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
     std::map<std::string, Hole> m_Holes;
     std::map<std::string, Cut> m_Cuts;

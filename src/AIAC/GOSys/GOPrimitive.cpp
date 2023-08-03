@@ -211,11 +211,22 @@ namespace AIAC
         return AIAC_GOREG->GetAllGOs<GOCylinder>();
     }
 
-
+    GOPolyline::GOPolyline()
+    {
+        m_Type = GOTypeFlags::_GOPolyline;
+    }
+    
     GOPolyline::GOPolyline(std::vector<GOPoint> points, bool isClosed, float weight)
         : m_Points(points), m_IsClosed(isClosed), m_Weight(weight)
     {
         m_Type = GOTypeFlags::_GOPolyline;
+    }
+
+    std::shared_ptr<GOPolyline> GOPolyline::Add()
+    {
+        auto ptrGO = std::make_shared<GOPolyline>(GOPolyline());
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOPolyline> GOPolyline::Add(std::vector<GOPoint> points, bool isClosed, float weight)
@@ -316,6 +327,13 @@ namespace AIAC
 
     void GOMesh::InitGLObject(){
         ClearGLObject();
+        if(m_Vertices.size() == 0){
+            return;
+        }
+        if(m_Indices.size() == 0){
+            return;
+        }
+        cout << "GOMesh::InitGLObject" << endl;
         m_GLObjects.push_back(std::make_shared<GLMeshObject>(m_Vertices, m_Colors, m_Indices));
     }
 
