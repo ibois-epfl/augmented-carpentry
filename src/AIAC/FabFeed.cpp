@@ -79,6 +79,8 @@ namespace AIAC
         
         // start orientation guidance
         glm::vec3 toolTipVec = this->m_DrillBitLineAxis->GetPEnd().GetPosition();
+        // print the vector
+        // AIAC_INFO(">> toolTipVec: " + std::to_string(toolTipVec.x) + ", " + std::to_string(toolTipVec.y) + ", " + std::to_string(toolTipVec.z));
         glm::vec3 midPtToolAxisVec = this->m_HoleLine2ToolStart->GetMidPointValues();
         glm::vec3 midPtToolAxisVecHalf1 = glm::vec3((toolTipVec.x + midPtToolAxisVec.x) / 2.f,
                                             (toolTipVec.y + midPtToolAxisVec.y) / 2.f,
@@ -87,12 +89,13 @@ namespace AIAC
         this->m_GUIPointsTranslation[0]->SetPosition(toolTipVec);
         this->m_GUIPointsTranslation[1]->SetPosition(midPtToolAxisVecHalf1);
         this->m_GUIPointsTranslation[2]->SetPosition(midPtToolAxisVec);
+        this->m_GUIPointsTranslation[3]->SetPosition(holeStartVec);
 
         // angle orientation guidance
         glm::vec3 midPtToolAxis = this->m_DrillBitLineAxis->GetMidPointValues();
         glm::vec3 translVec = glm::vec3(this->m_HoleLineAxis->GetPEnd().X() - this->m_DrillBitLineAxis->GetPEnd().X(),
-                                       this->m_HoleLineAxis->GetPEnd().Y() - this->m_DrillBitLineAxis->GetPEnd().Y(),
-                                       this->m_HoleLineAxis->GetPEnd().Z() - this->m_DrillBitLineAxis->GetPEnd().Z());
+                                        this->m_HoleLineAxis->GetPEnd().Y() - this->m_DrillBitLineAxis->GetPEnd().Y(),
+                                        this->m_HoleLineAxis->GetPEnd().Z() - this->m_DrillBitLineAxis->GetPEnd().Z());
         this->m_DrillBitLineAxis->Translate(translVec);
         float lengthHole = this->m_HoleLineAxis->GetLength();
         float lengthDrillBit = this->m_DrillBitLineAxis->GetLength();
@@ -139,11 +142,18 @@ namespace AIAC
 
         // (iv) depth
         float depthLeft = this->m_HoleLineAxis->GetPEnd().DistanceTo(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);
-        float depthLeftScaled = depthLeft / this->m_ScaleFactor;
-        int depthLeftScaledMM = std::round(depthLeftScaled * 1000.f);
-        std::string depthLeftScaledMMStr = std::to_string(depthLeftScaledMM);
-        // AIAC_INFO(">> depthLeft: " + std::to_string(depthLeftScaledMMStr));
-
+        float holeLength = this->m_HoleLineAxis->GetLength();
+        // float depthDrilled = depthDrilled - holeLength;
+        // get the rest between the hole length and the depth drilled
+        float depthDrilled = holeLength - depthLeft;
+        std::cout << "depthLeft: " << depthLeft << std::endl;
+        std::cout << "holeLength: " << holeLength << std::endl;
+        std::cout << "depthDrilled: " << depthDrilled << std::endl;
+        
+        float depthDrilledScaled = depthDrilled / this->m_ScaleFactor;
+        int depthDrilledScaledMM = std::round(depthDrilledScaled * 1000.f);
+        std::string depthDrilledScaledMMStr = std::to_string(depthDrilledScaledMM);
+        // AIAC_INFO(">> depthDrilled: " + std::to_string(depthDrilledScaledMMStr));
 
 
 
@@ -155,14 +165,39 @@ namespace AIAC
         {
             // AIAC_INFO(">> >> >> drillbit is inside");
             distScaledMMStr = "00";
-            for (auto& pt : this->m_GUIPointsTranslation)
-                pt->SetVisibility(false);
+            // for (auto& pt : this->m_GUIPointsTranslation)
+            //     pt->SetVisibility(false);
+            // this->m_HoleLine2ToolStart->SetColor(GOColor::GREEN);
+
+            if (depthDrilled < 0.f)
+            {
+                // AIAC_INFO(">> >> >> drillbit is inside and too deep");
+                // depthDrilledScaledMMStr = "00";
+                this->m_HoleLine2ToolEnd->SetColor(GOColor::RED);
+            }
+            else
+            {
+                // AIAC_INFO(">> >> >> drillbit is inside and not too deep");
+                this->m_HoleLine2ToolEnd->SetColor(GOColor::GREEN);
+            }
         }
         else
         {
             // AIAC_INFO(">> >> >> drillbit is outside");
-            for (auto& pt : this->m_GUIPointsTranslation)
-                pt->SetVisibility(true);
+            // for (auto& pt : this->m_GUIPointsTranslation)
+            //     pt->SetVisibility(true);
+            if (depthDrilled > 0.f)
+            {
+                // AIAC_INFO(">> >> >> drillbit is outside and well positioned");
+                this->m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
+            }
+            else
+            {
+                // AIAC_INFO(">> >> >> drillbit is outside and not well positioned");
+                this->m_HoleLine2ToolStart->SetColor(GOColor::RED);
+            }
+            // this->m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
+
         }
         if (angleOrient < 0.5f)  // TODO: set tolerance var member
             this->m_GUILineOrientation->SetVisibility(false);
@@ -172,7 +207,7 @@ namespace AIAC
 
 
         // -- text
-        std::string test = " s:" + distScaledMMStr + "/a:" + angleOrientRoundedStr + "/e:" + depthLeftScaledMMStr;
+        std::string test = " s:" + distScaledMMStr + "/a:" + angleOrientRoundedStr + "/e:" + depthDrilledScaledMMStr;
         this->m_InfoText->SetText(test);
         this->m_InfoText->SetAnchor(midPtToolAxis);
 
