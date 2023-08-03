@@ -305,6 +305,10 @@ namespace AIAC
     std::vector< std::shared_ptr<GLObject> > CreatePolyline(std::vector<glm::vec3> vertices, bool isClosed, glm::vec4 color, float lineWidth){
         // TODO: dealing with lineWidth > 1.0
         auto glObjs = std::vector< std::shared_ptr<GLObject> >();
+        if(vertices.size() < 2){
+            return glObjs;
+        }
+
         if(lineWidth <= 1.0f){
             std::vector<glm::vec3> lineObjVertices; lineObjVertices.reserve(vertices.size() * 2);
             lineObjVertices.emplace_back(vertices[0]);
@@ -320,9 +324,13 @@ namespace AIAC
             std::vector<glm::vec4> colors(lineObjVertices.size(), color);
             glObjs.emplace_back(std::make_shared<GLLineObject>(lineObjVertices, colors, lineWidth));
         } else {
+            auto radius = WEIGHT_TO_CYLINDER_RADIUS_RATE * lineWidth;
             for(int i = 1; i < vertices.size(); i++){
-                auto radius = WEIGHT_TO_CYLINDER_RADIUS_RATE * lineWidth;
                 auto cylinderLine = CreateCylinder(vertices[i - 1], vertices[i], radius, color, color);
+                glObjs.insert(glObjs.end(), cylinderLine.begin(), cylinderLine.end());
+            }
+            if(isClosed){
+                auto cylinderLine = CreateCylinder(vertices[vertices.size() - 1], vertices[0], radius, color, color);
                 glObjs.insert(glObjs.end(), cylinderLine.begin(), cylinderLine.end());
             }
         }

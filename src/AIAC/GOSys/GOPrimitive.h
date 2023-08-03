@@ -402,8 +402,16 @@ namespace AIAC
         static std::vector<std::shared_ptr<GOPolyline>> GetAll();
 
         inline const std::vector<GOPoint> &GetPoints() const { return m_Points; }
+        inline void SetPoints(std::vector<glm::vec3> points) {
+            m_Points.clear();
+            for (auto& point : points) {
+                m_Points.push_back(GOPoint(point));
+            }
+            InitGLObject();
+        }
         inline void SetPoints(std::vector<GOPoint> points) { m_Points = points; InitGLObject(); }
-
+        
+        inline void SetClosed(bool isClosed) { m_IsClosed = isClosed; InitGLObject(); }
         inline bool IsClosed() const { return m_IsClosed; }
 
         inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
@@ -425,7 +433,7 @@ namespace AIAC
 
     private:
         std::vector<GOPoint> m_Points;
-        bool m_IsClosed = false;
+        bool m_IsClosed = true;
         float m_Weight = GOWeight::Default;
 
     friend class GOPoint;

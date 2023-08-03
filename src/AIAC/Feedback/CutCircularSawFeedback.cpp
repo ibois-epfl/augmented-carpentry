@@ -188,18 +188,8 @@ namespace AIAC {
      * @brief When there is no perpendicular face, just show the intersection face of the saw and the timber
      */
     void CutCircularSawFeedback::updateSingleFaceFeedback(){
-        AIAC_INFO("CutCircularSawFeedback::updateSingleFaceFeedback");
         std::vector<glm::vec3> bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
         std::vector<std::pair<int, int>> bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
-        
-        // print all bbox
-        for(auto const& pt: bbox){
-            AIAC_INFO("bbox pt: {}", glm::to_string(pt));
-        }
-        for(auto const& [ep1, ep2]: bboxIndices){
-            AIAC_INFO("bbox edge: {} -> {}", ep1, ep2);
-        }
-
         m_SingleFaceVisualizer.Update(bbox, bboxIndices, m_Normal, m_Center);
     }
 }
