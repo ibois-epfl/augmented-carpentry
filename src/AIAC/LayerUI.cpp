@@ -410,8 +410,8 @@ namespace AIAC
             auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
             if (auto hole = dynamic_cast<TimberInfo::Hole*>(currentComp)){
                 if(ImGui::Button("Swap S/E")) hole->SwapStartEnd();
+                ImGui::SameLine();
             }
-            ImGui::SameLine();
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
             ImGui::SameLine();
             if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
