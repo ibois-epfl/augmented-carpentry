@@ -534,7 +534,6 @@ namespace AIAC
             InitGLObject();
         }
         void SetVertices(std::vector<glm::vec3> vertices) {
-            std::cout << m_IsUsingUniformColor << " " << m_Vertices.size() << " " << vertices.size() << std::endl;
             if(m_IsUsingUniformColor && m_Vertices.size() != vertices.size()){
                 SetColor(m_UniformColor);
             }
