@@ -333,7 +333,6 @@ namespace AIAC
         if(m_Indices.size() == 0){
             return;
         }
-        cout << "GOMesh::InitGLObject" << endl;
         m_GLObjects.push_back(std::make_shared<GLMeshObject>(m_Vertices, m_Colors, m_Indices));
     }
 

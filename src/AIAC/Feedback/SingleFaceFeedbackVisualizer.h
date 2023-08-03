@@ -27,11 +27,8 @@ namespace AIAC{
          * @return std::vector<glm::vec3> the intersection point of the bbox and the face
          */
         std::vector<glm::vec3> Update(const std::vector<glm::vec3>& bbox, const std::vector<std::pair<int, int>>& bboxIndices, glm::vec3 faceNorm, glm::vec3 facePt){
-            std::cout << "SingleFaceFBV::Update()" << std::endl;
             std::vector<glm::vec3> intersectPts;
             for(auto [i, j] : bboxIndices){
-                std::cout << i << " " << j << std::endl;
-                std::cout << glm::to_string(bbox[i]) << " " << glm::to_string(bbox[j]) << std::endl;
                 glm::vec3 intersectPt;
                 if(GetIntersectPointOfLineSegAndPlane(bbox[i], bbox[j], faceNorm, facePt, intersectPt)){
                     intersectPts.push_back(intersectPt);
@@ -39,8 +36,7 @@ namespace AIAC{
             }
             // The size of intersect Pts should always be 4
             // assert(intersectPts.size() == 4);
-            cout << intersectPts.size() << endl;
-
+            
             // Update the intersect polyline
             m_IntersectFace->SetVertices(intersectPts);
 
