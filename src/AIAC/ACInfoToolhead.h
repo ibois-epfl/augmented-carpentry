@@ -167,6 +167,8 @@ namespace AIAC
                     return "CHAINSAW";
                 else if (this->GetType() == ACToolHeadType::SABERSAW)
                     return "SABERSAW";
+                else
+                    throw std::out_of_range("Tool head type unknown");
             }
             /// @brief Retrieve the name of the toolhead
             std::string GetName() const { return m_Name; }
