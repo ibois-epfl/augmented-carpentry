@@ -7,6 +7,8 @@ enable_testing()
 set(BUILD_SHARED_LIBS ON)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+include(external_tools)
+
 #set(CMAKE_CXX_STANDARD 17)
 #TODO: check for Opencv 4.5.4 that cannot be installed or detected
 
@@ -82,13 +84,19 @@ find_package(OpenGL REQUIRED)
 #message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
 set(BUILD_V4_API ON)
-set(TSLAM_QUIET ON)
-add_subdirectory(deps/TSlam)
-set(TTOOL_BUILD_TTOOL_EXE OFF)
-add_subdirectory(deps/TTool)
+add_external_package(TSlam)
+add_external_package(TTool)
 
 find_package(glfw3 3.3 REQUIRED)
-find_package(OpenCV 4.5.4 REQUIRED)   # FIXME: 4.5.4 not found (?)
+find_package(OpenCV 4.5.4 REQUIRED
+    COMPONENTS
+      core
+      imgproc
+      calib3d
+      videoio
+      highgui
+      imgcodecs
+)
 find_package(assimp 5.0.0 REQUIRED)
 find_package(GLEW REQUIRED)
 
@@ -97,15 +105,7 @@ add_external_package(spdlog)
 add_external_package(pugixml)
 add_external_package(Freetype)
 add_external_package(eventpp)
-#add_subdirectory(deps/imgui)
-#add_subdirectory(deps/spdlog)
-#add_subdirectory(deps/pugixml)
-#add_subdirectory(deps/freetype)
 
-
-# Pytorch
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/deps/TTool/deps/libtorch")
-find_package(Torch REQUIRED)
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC
@@ -129,43 +129,8 @@ target_link_libraries(${PROJECT_NAME}
     )
 
 #------------------------------------------------------------------------------------------------------------
-# Check and update git submodules
-#------------------------------------------------------------------------------------------------------------
-
-# Download and update submodules with latest remote version
-# find_package(Git QUIET)
-# if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-#     option(GIT_SUBMODULE "Check submodules during build" ON)
-#     if(GIT_SUBMODULE)
-#         message(STATUS "Submodule update with latest commit")
-
-#         execute_process(
-#             COMMAND ${GIT_EXECUTABLE} --version
-#             OUTPUT_VARIABLE GIT_VERSION_STRING
-#         )
-#         string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
-#         set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
-#         set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
-#         set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
-
-#         if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
-#             message(FATAL_ERROR "Git version 1.8 or greater is required.")
-#         endif()
-#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync
-#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-#         execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote
-#                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-#                         RESULT_VARIABLE GIT_SUBMOD_RESULT)
-#         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-#             message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-#         endif()
-#     endif()
-# endif()
-
-#------------------------------------------------------------------------------------------------------------
 # CTest (unit tests)
 #------------------------------------------------------------------------------------------------------------
-
 # Testing adds
 if (TEST_PLATFORM)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/platform)

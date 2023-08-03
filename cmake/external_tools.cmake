@@ -25,9 +25,12 @@ function(download_external_project project_name)
   endif()
 
   if(_dep_args_BACKEND)
-    set(_ep_backend ${_dep_args_BACKEND}_REPOSITORY ${_dep_args_URL})
+    set(_ep_backend "${_dep_args_BACKEND}_REPOSITORY \"${_dep_args_URL}\"")
   else()
-    set(_ep_backend URL ${_dep_args_URL} DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+    set(_ep_backend "URL \"${_dep_args_URL}\"")
+    if(CMAKE_VERSION VERSION_GREATER 3.23)
+      list(APPEND _ep_backend "DOWNLOAD_EXTRACT_TIMESTAMP TRUE")
+    endif()
   endif()
 
   if(_dep_args_TAG)
@@ -41,7 +44,7 @@ function(download_external_project project_name)
 
   if (_dep_args_PATCH)
     find_program(PATCH_EXECUTABLE patch REQUIRED)
-    set(_patch_cmd PATCH_COMMAND ${PATCH_EXECUTABLE} -p1 < "${PROJECT_SOURCE_DIR}/${_dep_args_THIRD_PARTY_DIR}/${_dep_args_PATCH}")
+    set(_patch_cmd "PATCH_COMMAND ${PATCH_EXECUTABLE} -p1 < \"${PROJECT_SOURCE_DIR}/${_dep_args_THIRD_PARTY_DIR}/${_dep_args_PATCH}\"")
   endif()
 
   set(_src_dir ${PROJECT_SOURCE_DIR}/${_dep_args_THIRD_PARTY_DIR}/${project_name})
@@ -57,7 +60,9 @@ function(download_external_project project_name)
   file(APPEND ${_cmake_lists} "ExternalProject_Add(${project_name}\n")
   file(APPEND ${_cmake_lists} "    SOURCE_DIR ${_src_dir}\n")
   file(APPEND ${_cmake_lists} "    BINARY_DIR ${_working_dir}\n")
-  file(APPEND ${_cmake_lists} "    ${_ep_backend}\n")
+  foreach(line ${_ep_backend})
+    file(APPEND ${_cmake_lists} "    ${line}\n")
+  endforeach()
   file(APPEND ${_cmake_lists} "    ${_ep_tag}\n")
   file(APPEND ${_cmake_lists} "    CONFIGURE_COMMAND \"\"\n")
   file(APPEND ${_cmake_lists} "    BUILD_COMMAND     \"\"\n")
@@ -74,11 +79,12 @@ function(download_external_project project_name)
     ERROR_FILE ${_working_dir}/download-error.log)
 
   if(_result)
-    message(FATAL_ERROR "Something went wrong (${_result}) during the download"
+    message(SEND_ERROR "Something went wrong (${_result}) during the download"
       " process of ${project_name} check the file"
       " ${_working_dir}/download-error.log for more details:")
-    file(STRINGS "${_working_dir}/download-error.log" ERROR_MSG)
-    message("${ERROR_MSG}")
+    file(STRINGS "${_working_dir}/download-error.log" _error_strings)
+    string(REPLACE ";" "\n" _error_msg "${_error_strings}")
+    message(FATAL_ERROR "${_error_msg}")
   endif()
 
   execute_process(COMMAND "${CMAKE_COMMAND}" --build .
@@ -88,9 +94,12 @@ function(download_external_project project_name)
     ERROR_FILE ${_working_dir}/build-error.log)
 
   if(_result)
-    message(FATAL_ERROR "Something went wrong (${_result}) during the download"
+    message("Something went wrong (${_result}) during the download"
       " process of ${project_name} check the file"
       " ${_working_dir}/build-error.log for more details")
+    file(STRINGS "${_working_dir}/build-error.log" _error_strings)
+    string(REPLACE ";" "\n" _error_msg "${_error_strings}")
+    message(FATAL_ERROR "${_error_msg}")
   endif()
 
   file(WRITE ${_src_dir}/.DOWNLOAD_SUCCESS "")
@@ -109,7 +118,6 @@ endfunction()
 # ------------------------------------------------------------------------------
 function(add_external_package package)
   include(CMakeParseArguments)
-
 
   set(_aep_flags
     IGNORE_SYSTEM
@@ -147,6 +155,7 @@ function(add_external_package package)
   if(NOT _aep_args_IGNORE_SYSTEM)
     find_package(${package} ${_${package}_version} ${_required} ${_aep_UNPARSED_ARGUMENTS} QUIET)
     if(${package}_FOUND AND NOT ${package}_FOUND_EXTERNAL)
+      message(STATUS "Found system ${package}")
       string(TOUPPER ${package} u_package)
       mark_as_advanced_prefix(${package})
       mark_as_advanced_prefix(${u_package})
@@ -155,6 +164,7 @@ function(add_external_package package)
   endif()
 
   if(EXISTS ${_cmake_includes}/${package}.cmake)
+    message(STATUS "Using own ${package}")
     include(${_cmake_includes}/${package}.cmake)
   endif()
   string(TOUPPER ${package} u_package)
@@ -176,5 +186,40 @@ function(quote_arguments var)
     set(${var} "${${var}}, ${_quoted}" PARENT_SCOPE)
   else()
     set(${var} "${_quoted}" PARENT_SCOPE)
+  endif()
+endfunction()
+
+# Download and update submodules with latest remote version
+function(download_submodule_project project_name)
+  find_package(Git QUIET)
+  if(NOT GIT_FOUND OR NOT EXISTS "${PROJECT_SOURCE_DIR}/.git")
+  endif()
+  message(STATUS "Submodule update with latest commit")
+
+  execute_process(
+    COMMAND ${GIT_EXECUTABLE} --version
+    OUTPUT_VARIABLE GIT_VERSION_STRING
+  )
+  string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" GIT_VERSION_STRING ${GIT_VERSION_STRING})
+  set(GIT_VERSION_MAJOR ${CMAKE_MATCH_1})
+  set(GIT_VERSION_MINOR ${CMAKE_MATCH_2})
+  set(GIT_VERSION_PATCH ${CMAKE_MATCH_3})
+
+  if(NOT (GIT_VERSION_MAJOR GREATER 1 OR (GIT_VERSION_MAJOR EQUAL 1 AND GIT_VERSION_MINOR GREATER 8)))
+    message(FATAL_ERROR "Git version 1.8 or greater is required.")
+  endif()
+
+  if(NOT EXISTS ${PROJECT_SOURCE_DIR}/deps/${project_name}/.git)
+    execute_process(COMMAND ${GIT_EXECUTABLE} submodule init -- deps/${project_name}
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+  endif()
+
+  execute_process(COMMAND ${GIT_EXECUTABLE} submodule sync -- deps/${project_name}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+  execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote -- deps/${project_name}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    RESULT_VARIABLE GIT_SUBMOD_RESULT)
+  if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+    message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
   endif()
 endfunction()
