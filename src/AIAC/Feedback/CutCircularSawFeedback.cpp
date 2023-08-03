@@ -87,6 +87,7 @@ namespace AIAC {
         });
 
         // update class members
+        // if the saw is place on the side for adjusting the height, there should be no parallel face
         if(nearestParallelFaceID.empty()){
             if(perpenFaces.size() < 2) {
                 // TODO: catch error
@@ -96,7 +97,9 @@ namespace AIAC {
             m_NearestPerpendicularFaceID = perpenFaces[1].first;
         } else {
             m_NearestParallelFaceID = nearestParallelFaceID;
-            m_NearestPerpendicularFaceID = perpenFaces[0].first;
+            if(!perpenFaces.empty()){
+                m_NearestPerpendicularFaceID = perpenFaces[0].first;
+            }
         }
     }
 
