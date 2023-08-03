@@ -99,6 +99,8 @@ namespace AIAC {
             m_NearestParallelFaceID = nearestParallelFaceID;
             if(!perpenFaces.empty()){
                 m_NearestPerpendicularFaceID = perpenFaces[0].first;
+            } else {
+                m_NearestPerpendicularFaceID.clear();
             }
         }
     }
@@ -114,6 +116,11 @@ namespace AIAC {
             perpFaceOfBladeVec, m_Center,
             m_DownVec, _ptPlaceHolder
         );
+
+        if(glm::distance(m_Center + m_DownVec * m_Radius, prepFaceInfo.GetCenter()) >
+           glm::distance(m_Center - m_DownVec * m_Radius, prepFaceInfo.GetCenter())){
+            m_DownVec = -m_DownVec;
+        }
 
         // get the bottom point and update
         m_BottomPoint = m_Center + m_DownVec * m_Radius;
