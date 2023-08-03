@@ -407,12 +407,20 @@ namespace AIAC
                 }
                 ImGui::EndCombo();
             }
-            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
             auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
             if (auto hole = dynamic_cast<TimberInfo::Hole*>(currentComp)){
+                if(ImGui::Button("Swap S/E")) hole->SwapStartEnd();
                 ImGui::SameLine();
-                if(ImGui::Button("Swap Hole S/E")){
-                    hole->SwapStartEnd();
+            }
+            if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+            ImGui::SameLine();
+            if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
+                if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(true);
+                } else {
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
                 }
             }
         ImGui::EndChild();

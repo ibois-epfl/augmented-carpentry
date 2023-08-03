@@ -88,6 +88,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
 
     public:
         bool IsMarkedDone; // This one is for UI
@@ -114,6 +115,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
         void SwapStartEnd();
 
     public:  __always_inline
@@ -148,7 +150,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
-
+        virtual void SetVisibility(bool visible);
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
@@ -160,8 +162,6 @@ public:
             std::set<std::string> GetNeighbors() const { return m_Neighbors; }
 
         private:
-            virtual void SetAsCurrent();
-
             bool m_Exposed;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
@@ -176,11 +176,12 @@ public:
         };
         class Edge: public Component{
         public:
+            GOPoint GetStartPt() { return m_GO->GetPStart(); }
+            GOPoint GetEndPt() { return m_GO->GetPEnd(); }
             Edge() : Component("EDGE") {}
 
         private:
-            virtual void SetAsCurrent();
-
+            // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
@@ -192,6 +193,7 @@ public:
         };
 
         inline Face& GetFace(std::string id) { return m_Faces[id]; }
+        inline Edge& GetEdge(std::string id) { return m_Edges[id]; }
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline glm::vec3 GetCenter() const { return m_Center; }
@@ -217,7 +219,14 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
+    
+    void HideAllComponentsExceptCurrent();
+    void ShowAllComponents();
+
+public:
+    bool IsShowingAllComponents = false;
 
 private:
     std::string m_ID;
@@ -238,6 +247,7 @@ private:
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
+    
 
     friend class ACInfoModel;
 };
@@ -292,7 +302,15 @@ public:
      */
     float GetLength();
 
+    /**
+     * Set the visibility of bbox to true or false
+     */
+    void SetBboxVisibility(bool visible);
+
 private:
+    float m_EdgeWeight = 1.1f;
+    float m_LabelSize = 0.75f;
+
     float m_Scale = 50.0f;
     std::string m_FilePath;
     pugi::xml_document m_ACIMDoc;

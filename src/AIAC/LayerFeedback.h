@@ -4,27 +4,26 @@
 #include "AIAC/ACInfoToolheadManager.h"
 #include "AIAC/ACInfoToolhead.h"
 #include "AIAC/ACInfoModel.h"
-#include "FabFeed.h"
+#include "AIAC/Feedback/CutChainSawFeedback.h"
+#include "AIAC/Feedback/CutCircularSawFeedback.h"
+#include "AIAC/Feedback/HoleFeedback.h"
 
 namespace AIAC
 {
     class LayerFeedback : public AIAC::Layer
     {
-        public:
-            LayerFeedback();
-            virtual ~LayerFeedback() = default;
+    public:
+        LayerFeedback();
+        virtual ~LayerFeedback() = default;
 
-            virtual void OnAttach() override;
-            virtual void OnFrameStart() override;
+        virtual void OnAttach() override;
+        virtual void OnFrameStart() override;
 
+    private:
+        HoleFeedback m_HoleFeedback;
+        CutChainSawFeedback m_CutChainSawFeedback;
+        CutCircularSawFeedback m_CutCircularSawFeedback;
 
-        private:  ///< IN
-            // FabFeed m_FabFeed;
-            FabFeed m_FabFeed;
-            // ACInfoModel& m_CurrentModel; I need the current component / not model
-
-        // private:  ///< OUT
-
-
+        FabFeedback* m_CurrentFabFeedbackPtr = nullptr;
     };
 }
