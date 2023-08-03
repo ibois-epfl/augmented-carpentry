@@ -87,12 +87,8 @@ namespace AIAC
 
                 auto pt1 = GOPoint::Add(0.f, 0.f, 0.f);
                 auto pt2 = GOPoint::Add(5.f, 5.f, 5.f);
-                auto pt3 = GOPoint::Add(5.f, 5.f, 5.f);
-                auto pt4 = GOPoint::Add(5.f, 5.f, 5.f);
                 pt1->SetVisibility(false);
                 pt2->SetVisibility(false);
-                pt3->SetVisibility(false);
-                pt4->SetVisibility(false);
                 
                 this->m_InfoText = GOText::Add("///", *pt1);
                 this->m_InfoText->SetColor(GOColor::WHITE);
@@ -104,25 +100,14 @@ namespace AIAC
                 this->m_DrillBitLineAxis = GOLine::Add(*pt1, *pt2);
                 this->m_HoleLineAxis = GOLine::Add(*pt1, *pt2);
                 this->m_HoleLineAxis->SetColor(GOColor::GREEN);
-                this->m_GUIPointsTranslation.push_back(pt1);  // tooltip
-                this->m_GUIPointsTranslation.push_back(pt2);  // midHalf1
-                this->m_GUIPointsTranslation.push_back(pt3);  // midHalf
-                this->m_GUIPointsTranslation.push_back(pt4);  // holeStart
-                for (auto& pt : this->m_GUIPointsTranslation)
-                    pt->SetColor(GOColor::WHITE);
                 this->m_GUILineOrientation = GOLine::Add(*pt1, *pt2);
                 this->m_GUILineOrientation->SetColor(GOColor::WHITE);
-
-                for (auto& pt : this->m_GUIPointsTranslation)
-                    pt->SetWeight(GOWeight::BoldThick);
                 
                 this->m_HoleLine2ToolStart->SetVisibility(true);  // << position guidance
                 this->m_HoleLine2ToolEnd->SetVisibility(false);
                 this->m_GUILineOrientation->SetVisibility(true);
                 this->m_DrillBitLineAxis->SetVisibility(false);
                 this->m_HoleLineAxis->SetVisibility(false);
-                for (auto& pt : this->m_GUIPointsTranslation)
-                    pt->SetVisibility(true);
             };
 
         public:
@@ -149,8 +134,6 @@ namespace AIAC
             std::shared_ptr<GOLine> m_DrillBitLineAxis;
             /// the line axis for the hole
             std::shared_ptr<GOLine> m_HoleLineAxis;
-            /// GUI indicator for translation (dots)
-            std::vector<std::shared_ptr<GOPoint>> m_GUIPointsTranslation;
             /// GUI indicator for orientation
             std::shared_ptr<GOLine> m_GUILineOrientation;
             /// All text objects
