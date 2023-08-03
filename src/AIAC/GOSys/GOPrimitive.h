@@ -1,6 +1,7 @@
 #pragma once
 
 #include <utility>
+#include <iostream>
 
 #include "AIAC/Render/GLObject.h"
 #include "AIAC/Base.h"
@@ -381,6 +382,7 @@ namespace AIAC
     class GOPolyline : public GOPrimitive
     {
     private:
+        GOPolyline();
         GOPolyline(std::vector<GOPoint> points, bool isClosed = false, float weight = GOWeight::Default);
 
     public:
@@ -390,6 +392,7 @@ namespace AIAC
          * @param points Points of the polyline.
          * @return uint32_t Id of the polyline.
          */
+        static std::shared_ptr<GOPolyline> Add();
         static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points, bool isClosed = false, float weight = GOWeight::Default);
         static std::shared_ptr<GOPolyline> Add(std::vector<glm::vec3> points, bool isClosed = false, float weight = GOWeight::Default);
 
@@ -399,6 +402,7 @@ namespace AIAC
         static std::vector<std::shared_ptr<GOPolyline>> GetAll();
 
         inline const std::vector<GOPoint> &GetPoints() const { return m_Points; }
+        inline void SetPoints(std::vector<GOPoint> points) { m_Points = points; InitGLObject(); }
 
         inline bool IsClosed() const { return m_IsClosed; }
 
@@ -517,12 +521,32 @@ namespace AIAC
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
         const std::vector<glm::vec3> GetNormals() const { return m_Normals; }
         const std::vector<glm::vec4> GetColors() const { return m_Colors; }
-        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; InitGLObject(); }
+        
+        void SetColors(std::vector<glm::vec4> colors) {
+            m_IsUsingUniformColor = false;
+            m_Colors = colors;
+            InitGLObject();
+        }
+        void SetColor(glm::vec4 color) {
+            m_IsUsingUniformColor = true;
+            m_UniformColor = color;
+            m_Colors = std::vector<glm::vec4>(m_Vertices.size(), m_UniformColor);
+            InitGLObject();
+        }
+        void SetVertices(std::vector<glm::vec3> vertices) {
+            std::cout << m_IsUsingUniformColor << " " << m_Vertices.size() << " " << vertices.size() << std::endl;
+            if(m_IsUsingUniformColor && m_Vertices.size() != vertices.size()){
+                SetColor(m_UniformColor);
+            }
+            m_Vertices = vertices;
+            if(m_IsUsingUniformColor){
+                SetColor(m_UniformColor);
+            }
+            InitGLObject();
+        }
         void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; InitGLObject(); }
         void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; InitGLObject(); }
-        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; InitGLObject(); }
-        void SetColor(glm::vec4 color) { m_Colors = std::vector<glm::vec4>(m_Vertices.size(), color); InitGLObject(); }
-        // FIXME: override the SetColor function for Mesh
+        
         
         void InitGLObject();
         
@@ -552,6 +576,9 @@ namespace AIAC
         std::vector<uint32_t> m_Indices;
         std::vector<glm::vec3> m_Normals;
         std::vector<glm::vec4> m_Colors;
+        glm::vec4 m_UniformColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+        bool m_IsUsingUniformColor = true;
     
     friend class GOPoint;
     };

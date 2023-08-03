@@ -37,11 +37,11 @@ namespace AIAC {
 
     void CutCircularSawFeedback::Activate() {
         Update();
-        m_Visualizer.Activate();
     }
 
     void CutCircularSawFeedback::Deactivate() {
-        m_Visualizer.Deactivate();
+        m_SingleFaceVisualizer.Deactivate();
+        m_GeneralVisualizer.Deactivate();
     }
 
     void CutCircularSawFeedback::updatePosition() {
@@ -106,6 +106,23 @@ namespace AIAC {
     }
 
     void CutCircularSawFeedback::updateFeedback() {
+        if(!m_NearestPerpendicularFaceID.empty()){
+            m_GeneralVisualizer.Activate();
+            updateGeneralFeedback();
+        } else {
+            m_SingleFaceVisualizer.Activate();
+            updateSingleFaceFeedback();
+        }
+    }
+
+    /**
+     * @brief The "General" situation means that we have a perpendicular face that served as 
+     * the "bottom" face, where the bottom of the saw blade should be placed on. Therefore, the
+     * m_DownVec, which indicate the direction from the center to the bottom of the saw blade,
+     * is calculated based on the perpendicular face.
+     * 
+     */
+    void CutCircularSawFeedback::updateGeneralFeedback(){
         auto prepFaceInfo = m_Cut->GetFace(m_NearestPerpendicularFaceID);
         auto prepPlnCenter = prepFaceInfo.GetCenter();
         auto perpPlnNormal = prepFaceInfo.GetNormal();
@@ -124,8 +141,8 @@ namespace AIAC {
 
         // get the bottom point and update
         m_BottomPoint = m_Center + m_DownVec * m_Radius;
-        m_Visualizer.m_BottomPoint->SetPosition(m_BottomPoint);
-        m_Visualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
+        m_GeneralVisualizer.m_BottomPoint->SetPosition(m_BottomPoint);
+        m_GeneralVisualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
 
         // side point of the blade
         auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
@@ -133,21 +150,21 @@ namespace AIAC {
         glm::vec3 projSidePt1, projSidePt2;
         GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
         GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
-        m_Visualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
+        m_GeneralVisualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
 
         // distance to the bottom face
         auto projBtmPt = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, m_BottomPoint);
         auto dist = glm::distance(projBtmPt, m_BottomPoint);
 
         if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt)){
-            m_Visualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
         } else {
             dist = -dist;
-            m_Visualizer.m_TxtBottomDist->SetColor(GOColor::RED);
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
         }
 
-        m_Visualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
-        m_Visualizer.m_TxtBottomDist->SetText(FeedbackVisualizer::toString(dist));
+        m_GeneralVisualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
+        m_GeneralVisualizer.m_TxtBottomDist->SetText(FeedbackVisualizer::toString(dist));
 
         // Projection line on face
         // Find all intersection points on the edges of the perpendicular face, and form the longest segment
@@ -164,6 +181,25 @@ namespace AIAC {
             }
         }
         FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
-        m_Visualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+        m_GeneralVisualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+    }
+
+    /**
+     * @brief When there is no perpendicular face, just show the intersection face of the saw and the timber
+     */
+    void CutCircularSawFeedback::updateSingleFaceFeedback(){
+        AIAC_INFO("CutCircularSawFeedback::updateSingleFaceFeedback");
+        std::vector<glm::vec3> bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
+        std::vector<std::pair<int, int>> bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
+        
+        // print all bbox
+        for(auto const& pt: bbox){
+            AIAC_INFO("bbox pt: {}", glm::to_string(pt));
+        }
+        for(auto const& [ep1, ep2]: bboxIndices){
+            AIAC_INFO("bbox edge: {} -> {}", ep1, ep2);
+        }
+
+        m_SingleFaceVisualizer.Update(bbox, bboxIndices, m_Normal, m_Center);
     }
 }

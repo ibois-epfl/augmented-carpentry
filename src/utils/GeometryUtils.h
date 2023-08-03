@@ -175,6 +175,28 @@ inline bool GetIntersectPointOfLineAndPlane(glm::vec3 lineVec, glm::vec3 linePt,
 }
 
 /**
+ * @brief Get the Intersect Point Of Line Seg And Plane object
+ * 
+ * @param lineSegPt1 
+ * @param lineSegPt2 
+ * @param planeNormal 
+ * @param planePt 
+ * @param intersectPt 
+ * @return true 
+ * @return false 
+ */
+inline bool GetIntersectPointOfLineSegAndPlane(glm::vec3 lineSegPt1, glm::vec3 lineSegPt2, glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 &intersectPt)
+{
+    auto lineVec = lineSegPt2 - lineSegPt1;
+    if(GetIntersectPointOfLineAndPlane(lineVec, lineSegPt1, planeNormal, planePt, intersectPt)){
+        if(IsPointBetweenLineSeg(intersectPt, lineSegPt1, lineSegPt2)){
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * @brief Get the Intersect Point Of 2 Lines
  * @param dir1
  * @param pt1

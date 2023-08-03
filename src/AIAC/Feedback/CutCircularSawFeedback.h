@@ -8,6 +8,7 @@
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/ACInfoModel.h"
 #include "FeedbackVisualizer.h"
+#include "SingleFaceFeedbackVisualizer.h"
 #include "FabFeedback.h"
 #include "utils/GeometryUtils.h"
 
@@ -23,6 +24,13 @@ namespace AIAC{
         std::shared_ptr<GOLine> m_ProjLineOfBlade;
 
         std::shared_ptr<GOText> m_TxtBottomDist;
+
+    friend class CutCircularSawFeedback;
+    };
+
+    class CutCircularSawSingleFaceFBV : public SingleFaceFeedbackVisualizer {
+    public:
+        CutCircularSawSingleFaceFBV() = default;
 
     friend class CutCircularSawFeedback;
     };
@@ -55,8 +63,11 @@ namespace AIAC{
         void updatePosition();
         void updateRefFaces();
         void updateFeedback();
+        void updateGeneralFeedback();
+        void updateSingleFaceFeedback();
 
-        CutCircularSawFeedbackVisualizer m_Visualizer;
+        CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
+        CutCircularSawSingleFaceFBV m_SingleFaceVisualizer;
     };
 }
 
