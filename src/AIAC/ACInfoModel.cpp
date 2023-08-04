@@ -234,6 +234,7 @@ namespace AIAC
                 component->SetVisibility(false);
             }
         }
+        IsShowingAllComponents = false;
     }
 
     void TimberInfo::ShowAllComponents() {
