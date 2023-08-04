@@ -188,8 +188,6 @@ namespace AIAC {
      * When there is no perpendicular face, it will be very useful.
      */
     void CutCircularSawFeedback::updateCutPlaneFeedback(){
-        std::vector<glm::vec3> bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
-        std::vector<std::pair<int, int>> bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
-        m_CutPlaneVisualizer.Update(bbox, bboxIndices, m_Normal, m_Center);
+        m_CutPlaneVisualizer.Update(m_Normal, m_Center);
     }
 }
