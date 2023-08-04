@@ -180,9 +180,11 @@ namespace AIAC
     class GOLine : public GOPrimitive
     {
     private:
+        GOLine();
         GOLine(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
 
     public:
+        static std::shared_ptr<GOLine> Add();
         /**
          * @brief Add GOLine to the scene.
          *
@@ -593,6 +595,7 @@ namespace AIAC
     class GOText : public GOPrimitive
     {
     private:
+        GOText();
         GOText(std::string text, GOPoint anchor, double size);
 
     public:
@@ -604,6 +607,7 @@ namespace AIAC
          * @param size Size of the text.
          * @return uint32_t Id of the text.
          */
+        static std::shared_ptr<GOText> Add();
         static std::shared_ptr<GOText> Add(std::string text, GOPoint anchor, double size = GOTextSize::Default);
         virtual ~GOText() = default;
 

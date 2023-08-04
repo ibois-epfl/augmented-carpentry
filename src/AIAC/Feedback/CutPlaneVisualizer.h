@@ -9,6 +9,17 @@ namespace AIAC{
     public:
         CutPlaneVisualizer();
         
+        class DistanceVisualizer : public FeedbackVisualizer {
+        public:
+            DistanceVisualizer();
+
+        private:
+            std::vector<std::shared_ptr<GOLine>> m_Lines;
+            std::vector<std::shared_ptr<GOText>> m_Texts;
+        
+        friend class CutPlaneVisualizer;
+        };
+
         /**
          * @brief Update the intersection polyline and face, and return the intersection point
          * 
@@ -22,6 +33,7 @@ namespace AIAC{
     protected:
         std::shared_ptr<GOPolyline> m_IntersectPolyline;
         std::shared_ptr<GOMesh> m_IntersectFace;
+        DistanceVisualizer m_DistanceVisualizer;
     };
 }
 
