@@ -124,40 +124,18 @@ namespace AIAC {
         // computed feedbacks
         if (160.f < angle && angle < 200.f)  // TODO: set tolerance var member, 20deg for now
         {
-            // AIAC_INFO(">> >> >> drillbit is inside");
             distScaledMMStr = "00";
-            // for (auto& pt : this->m_Visualizer.m_GUIPointsTranslation)
-            //     pt->SetVisibility(false);
-            // this->m_Visualizer.m_HoleLine2ToolStart->SetColor(GOColor::GREEN);
-
             if (depthDrilled < 0.f)
-            {
-                // AIAC_INFO(">> >> >> drillbit is inside and too deep");
-                // depthDrilledScaledMMStr = "00";
                 this->m_Visualizer.m_HoleLine2ToolEnd->SetColor(GOColor::RED);
-            }
             else
-            {
-                // AIAC_INFO(">> >> >> drillbit is inside and not too deep");
                 this->m_Visualizer.m_HoleLine2ToolEnd->SetColor(GOColor::GREEN);
-            }
         }
         else
         {
-            // AIAC_INFO(">> >> >> drillbit is outside");
-            // for (auto& pt : this->m_Visualizer.m_GUIPointsTranslation)
-            //     pt->SetVisibility(true);
             if (depthDrilled > 0.f)
-            {
-                // AIAC_INFO(">> >> >> drillbit is outside and well positioned");
                 this->m_Visualizer.m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
-            }
             else
-            {
-                // AIAC_INFO(">> >> >> drillbit is outside and not well positioned");
                 this->m_Visualizer.m_HoleLine2ToolStart->SetColor(GOColor::RED);
-            }
-            // this->m_Visualizer.m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
 
         }
         if (angleOrient < 0.5f)  // TODO: set tolerance var member

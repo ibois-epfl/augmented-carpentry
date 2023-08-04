@@ -16,13 +16,13 @@ namespace AIAC{
         /// the line from the drillbit tip to the start of the hole (aka start distance)
         std::shared_ptr<GOLine> m_HoleLine2ToolStart;
         /// the line from the drillbit tip to the end of the hole (aka depth)
-        std::shared_ptr<GOLine> m_HoleLine2ToolEnd;
+        std::shared_ptr<GOLine> m_HoleLine2ToolEnd;  // <<< position
         /// the line axis for the drillbit
         std::shared_ptr<GOLine> m_DrillBitLineAxis;
         /// the line axis for the hole
         std::shared_ptr<GOLine> m_HoleLineAxis;
         /// GUI indicator for orientation
-        std::shared_ptr<GOLine> m_GUILineOrientation;
+        std::shared_ptr<GOLine> m_GUILineOrientation;  // <<< orientation
         /// All text objects
         std::shared_ptr<GOText> m_InfoText;
 
@@ -40,7 +40,7 @@ namespace AIAC{
 
     private:
         // TODO: here we need to differentiate between the different types of visualization
-        // e.g.: the position visualization and rotation visualization
+        // e.g.: the position visualization and rotation visualizations need to be different
         HoleFeedbackVisualizer m_Visualizer;
     };
 }
