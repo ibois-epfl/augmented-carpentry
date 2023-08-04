@@ -408,10 +408,12 @@ The GOSystem is composed of two components:
 
 ### Renderer API
 The renderer API is separated into two parts:
-1. `GlUtils.h`: Provides a convenient interface to interact with OpenGL, can draw 3 types of object: `Point`, `Line`, and `Triangle`
-2. `RenderAPI.h`: A high level API for drawing `GO` and other shapes, including `Slam Map`, `Circle`, `Cylinder`, `Mesh`, and `Text`.
+1. `GlUtils.h`: Provides a direct interface to draw the 3 basic material of OpenGL, i.e. `Point`, `Line`, and `Triangle (mesh)`. By calling the function, it creates an object, render it and delete instantly. **These functions should only be used when GO system doesn't fit the scenrio.**
+2. `RenderAPI.h`: To render the already exist GO Primitives. When a GO is initialized or update, it creates an OpenGL object and stores in the memory. The functions in this file takes the GO object as the parameter and renders the corresponding OpenGL objects.
 
 #### GlUtils.h
+`GlUtils.h` contains the function to draw the 3 basic material of OpenGL, i.e. point, line, and triangle (mesh). By calling the function, it creates an OpenGL object, render it, and delete instantly. **Since calling these functions continuesly add/delete OpenGL objects, which is not efficient, they should only be used when GO system doesn't fit the scenrio.** (e.g. drawing SLAM tags while mapping, since it changes every frame)
+
 ##### Point
 ```c++
 void glDrawPoints3d(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize);
@@ -487,16 +489,6 @@ An implicit type casting is implemented, simply call the `DrawGO` function in th
 void DrawGO(const shared_ptr<GOPrimitive>& goPrimitive);
 void DrawGOs(const std::vector<shared_ptr<GOPrimitive>>& goPrimitive);
 ```
-Otherwise, if you know the type you want to draw, you can also use the specific function:
-```c++
-// All function follows this structure:
-void DrawType(const GOType& goType);
-void DrawTypes(const std::vector<std::shared_ptr<GOType>>& goTypes);
-
-// For example, GOLine can be drawn with
-void DrawLine(const GOLine& goLine);
-void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines);
-```
 
 
 #### TextRenderer.h
@@ -539,7 +531,8 @@ void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, floa
 
 `other shapes`
 
-##### Line
+<!-- These APIs are abandoned -->
+<!-- ##### Line
 Draw a line base on two glm::vec3.
 ```c++
 void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight = GOWeight::Default, const glm::vec4 &color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
@@ -580,7 +573,8 @@ void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLflo
 * `radius` Radius of the cylinder; For drawing line, radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE.
 * `color` Color of the cylinder.
 * `edgeColor` The color of the edges of the caps.
-* `sectorNum` Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value.
+* `sectorNum` Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value. -->
+
 
 
 ### CTesting

@@ -1,5 +1,3 @@
-// TODO: cache base cylinder and sphere meshes
-
 #include "RenderAPI.h"
 #include "TextRenderer.h"
 #include "AIAC/Log.h"
@@ -10,40 +8,6 @@
 
 namespace AIAC
 {
-    void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
-    {
-//        std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
-//        for(const auto& mapPoint: map->map_points){
-//            if(mapPoint.isValid()){
-//                mapPoints.emplace_back(mapPoint.getCoordinates().x, mapPoint.getCoordinates().y, mapPoint.getCoordinates().z);
-//            }
-//        }
-//        glDrawPoints3d(mapPoints, OGL_YELLOW, pointSize);
-
-        std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
-        std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
-        for(const auto& mapMarker: map->map_markers){
-            auto points = mapMarker.second.get3DPoints();
-            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
-            for(int i = 1 ; i < 4; i++){
-                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
-                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
-            }
-            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
-
-            markerEdgeColors.emplace_back(OGL_RED);
-            markerEdgeColors.emplace_back(OGL_RED);
-            markerEdgeColors.emplace_back(OGL_RED);
-            markerEdgeColors.emplace_back(OGL_RED);
-            markerEdgeColors.emplace_back(OGL_BLUE);
-            markerEdgeColors.emplace_back(OGL_BLUE);
-            markerEdgeColors.emplace_back(OGL_BLUE);
-            markerEdgeColors.emplace_back(OGL_BLUE);
-        }
-
-        glDrawLines3d(markerEdges, markerEdgeColors);
-    }
-
     void DrawAllGOs(glm::mat4 projection)
     {
         std::vector<std::shared_ptr<GOPrimitive>> gos;
@@ -87,30 +51,65 @@ namespace AIAC
         }
     }
 
+    void DrawText(const GOText& goText, const glm::mat4& projection) {
+        if(projection != glm::mat4(1.0f)){
+            TextRenderer::SetProjection(projection);
+        }
+        TextRenderer::RenderTextIn3DSpace(
+                goText.GetText(),
+                goText.GetAnchor(),
+                goText.GetColor(),
+                goText.GetTextSize());
+
+    }
+
+    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts, const glm::mat4& projection) {
+        if(projection != glm::mat4(1.0f)){
+            TextRenderer::SetProjection(projection);
+        }
+        for (auto &goText: goTexts) {
+            if(!goText->IsVisible()){
+                continue;
+            }
+            DrawText(*goText, projection);
+        }
+    }
+
+    void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
+    {
+        std::vector<glm::vec3> markerEdges; markerEdges.reserve(map->map_markers.size() * 4 * 2);
+        std::vector<glm::vec4> markerEdgeColors; markerEdgeColors.reserve(map->map_markers.size() * 4 * 2);
+        for(const auto& mapMarker: map->map_markers){
+            auto points = mapMarker.second.get3DPoints();
+            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
+            for(int i = 1 ; i < 4; i++){
+                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
+                markerEdges.emplace_back(points[i].x, points[i].y, points[i].z);
+            }
+            markerEdges.emplace_back(points[0].x, points[0].y, points[0].z);
+
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_RED);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+            markerEdgeColors.emplace_back(OGL_BLUE);
+        }
+        glDrawLines3d(markerEdges, markerEdgeColors);
+    }
+
     // int getSectorNum(float radius){
     //     return 8;
     // }
 
-    
-    // void DrawPoint(const GOPoint& goPoint)
-    // {
-    //     if(!goPoint.IsVisible()){
-    //         return;
-    //     }
-    //     vector<glm::vec3> point(1, goPoint.GetPosition());
-    //     glDrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
-    // }
-
-    // void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints)
-    // {
-    //     // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
-    //     for(const auto& goPoint: goPoints){
-    //         if(!goPoint->IsVisible()){
-    //             return;
-    //         }
-    //         DrawPoint(*goPoint);
-    //     }
-    // }
+    /**
+     * The following functions are deprecated since the create/delete
+     * OpenGL objects every time they are called, which is not prefered
+     * way to do it. However, I keep them here for future reference in case
+     * we need it in the future.
+     */
 
     // void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color)
     // {
@@ -141,49 +140,6 @@ namespace AIAC
     //     float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
     //     DrawCylinder(vertices[0], vertices[1], radius,
     //                  color, glm::vec4(0,0,0,0), getSectorNum(radius));
-    // }
-
-    // void DrawLine(const GOLine& goLine)
-    // {
-    //     if(!goLine.IsVisible()){
-    //         return;
-    //     }
-
-    //     if(goLine.GetWeight() <= 1.0f){
-    //         vector<glm::vec3> vertices; vertices.reserve(2);
-    //         vertices[0] = goLine.GetPStart().GetPosition();
-    //         vertices[1] = goLine.GetPEnd().GetPosition();
-    //         glDrawLines3d(vertices, goLine.GetColor());
-    //     } else {
-    //         float radius = goLine.GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-    //         DrawCylinder(goLine.GetPStart().GetPosition(), goLine.GetPEnd().GetPosition(),
-    //                      radius, goLine.GetColor(), glm::vec4(0, 0, 0, 0),
-    //                      getSectorNum(radius));
-    //     }
-    // }
-
-    // void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines)
-    // {
-    //     vector<glm::vec3> vertices; vertices.reserve(goLines.size() * 2);
-    //     vector<glm::vec4> colors; colors.reserve(goLines.size());
-    //     for (const auto &goLine: goLines) {
-    //         if(!goLine->IsVisible()){
-    //             continue;
-    //         }
-    //         // if weight is 1.0f, put into the vector and draw altogether at once; else, draw as cylinder immediately
-    //         if(goLine->GetWeight() <= 1.0f){
-    //             vertices.emplace_back(goLine->GetPStart().GetPosition());
-    //             vertices.emplace_back(goLine->GetPEnd().GetPosition());
-    //             colors.emplace_back(goLine->GetColor());
-    //             colors.emplace_back(goLine->GetColor());
-    //         } else {
-    //             float radius = goLine->GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-    //             DrawCylinder(goLine->GetPStart().GetPosition(), goLine->GetPEnd().GetPosition(),
-    //                          radius, goLine->GetColor(), glm::vec4(0, 0, 0, 0),
-    //                          getSectorNum(radius));
-    //         }
-    //     }
-    //     glDrawLines3d(vertices, colors);
     // }
 
     // void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum)
@@ -235,27 +191,8 @@ namespace AIAC
     //     DrawLines(edges, edgeWeight, edgeColor);
     // }
 
-    // void DrawCircle(const GOCircle& goCircle)
-    // {
-    //     if(!goCircle.IsVisible()){
-    //         return;
-    //     }
-    //     DrawCircle(goCircle.GetCenter().GetPosition(), goCircle.GetNormal(), goCircle.GetRadius(),
-    //                goCircle.GetColor(), goCircle.GetEdgeColor(), goCircle.GetWeight(), getSectorNum(goCircle.GetRadius()));
-    // }
-
-    // void DrawCircles(const std::vector<std::shared_ptr<GOCircle>>& goCircles)
-    // {
-    //     for (const auto &goCircle: goCircles) {
-    //         if(!goCircle->IsVisible()){
-    //             continue;
-    //         }
-    //         DrawCircle(*goCircle);
-    //     }
-    // }
 
     // void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
-
     //     std::vector<CylinderPole> cylinderPoles; // vector of structs
 
     //     glm::vec3 x1 = baseCenter, x2 = topCenter;
@@ -343,117 +280,4 @@ namespace AIAC
     //     glDrawLines3d(capContourBase, edgeColor);
     //     glDrawLines3d(capContourTop, edgeColor);
     // }
-
-    // void DrawCylinder(const GOCylinder& goCylinder)
-    // {
-    //     if(!goCylinder.IsVisible()){
-    //         return;
-    //     }
-    //     DrawCylinder(goCylinder.GetPStart().GetPosition(), goCylinder.GetPEnd().GetPosition(),
-    //                  goCylinder.GetRadius(), goCylinder.GetColor(), goCylinder.GetEdgeColor());
-    // }
-
-    // void DrawCylinders(const std::vector<std::shared_ptr<GOCylinder>>& goCylinders)
-    // {
-    //     for (const auto &goCylinder: goCylinders) {
-    //         if(!goCylinder->IsVisible()){
-    //             continue;
-    //         }
-    //         DrawCylinder(*goCylinder);
-    //     }
-    // }
-
-    // void DrawPolyline(const GOPolyline& goPolyline)
-    // {
-    //     if(!goPolyline.IsVisible()){
-    //         return;
-    //     }
-    //     vector<glm::vec3> vertices; vertices.reserve(goPolyline.GetPoints().size() * 2);
-    //     vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
-    //     for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
-    //         vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
-    //         vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
-    //     }
-    //     vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
-
-    //     if(goPolyline.IsClosed()){
-    //         vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
-    //         vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
-    //     }
-
-    //     DrawLines(vertices, goPolyline.GetWeight(), goPolyline.GetColor());
-    // }
-
-    // void DrawPolylines(const std::vector<std::shared_ptr<GOPolyline>>& goPolylines)
-    // {
-    //     for(const auto& goPolyline: goPolylines){
-    //         if(!goPolyline->IsVisible()){
-    //             continue;
-    //         }
-    //         DrawPolyline(*goPolyline);
-    //     }
-    // }
-
-    // void DrawTriangle(const GOTriangle& goTriangle)
-    // {
-    //     if(!goTriangle.IsVisible()){
-    //         return;
-    //     }
-    //     vector<glm::vec3> vertices = goTriangle.GetVertices();
-    //     vector<uint32_t> indices{0, 1, 2};
-    //     glDrawTriangles3d(vertices, indices, goTriangle.GetColor());
-    // }
-
-    // void DrawTriangles(const std::vector<std::shared_ptr<GOTriangle>>& goTriangles)
-    // {
-    //     for (const auto &goTriangle: goTriangles) {
-    //         if(!goTriangle->IsVisible()){
-    //             continue;
-    //         }
-    //         DrawTriangle(*goTriangle);
-    //     }
-    // }
-
-    // void DrawMesh(const GOMesh& goMesh)
-    // {
-    //     if(!goMesh.IsVisible()){
-    //         return;
-    //     }
-    //     glDrawTriangles3d(goMesh.GetVertices(), goMesh.GetIndices(), goMesh.GetColor());
-    // }
-
-    // void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes)
-    // {
-    //     for (auto &goMesh: goMeshes) {
-    //         if(!goMesh->IsVisible()){
-    //             continue;
-    //         }
-    //         DrawMesh(*goMesh);
-    //     }
-    // }
-
-
-    void DrawText(const GOText& goText, const glm::mat4& projection) {
-        if(projection != glm::mat4(1.0f)){
-            TextRenderer::SetProjection(projection);
-        }
-        TextRenderer::RenderTextIn3DSpace(
-                goText.GetText(),
-                goText.GetAnchor(),
-                goText.GetColor(),
-                goText.GetTextSize());
-
-    }
-
-    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts, const glm::mat4& projection) {
-        if(projection != glm::mat4(1.0f)){
-            TextRenderer::SetProjection(projection);
-        }
-        for (auto &goText: goTexts) {
-            if(!goText->IsVisible()){
-                continue;
-            }
-            DrawText(*goText, projection);
-        }
-    }
 }
