@@ -17,10 +17,6 @@
 
 #include "AIAC/GOSys/GO.h"
 
-
-
-
-
 namespace AIAC
 {
     struct ApplicationSpecification

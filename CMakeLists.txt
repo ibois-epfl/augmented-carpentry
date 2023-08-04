@@ -15,6 +15,8 @@ endif()
 
 # Get hpp/cpp of AIAC module
 file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the correct way. Or try oarget include directories only.
+    "src/AIAC/Feedback/*.h"
+    "src/AIAC/Feedback/*.cpp"    
     "src/AIAC/*.h"
     "src/AIAC/*.cpp"
     "src/AIAC/UI/*.h"
@@ -33,8 +35,8 @@ file(GLOB AIAC_SRC  # FIXME: try to not include headers, this should be the corr
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ACApp.cpp
     ${AIAC_SRC}
-        src/AIAC/Render/Viewport.cpp src/AIAC/Render/Viewport.h src/AIAC/LayerCameraCalib.cpp src/AIAC/LayerCameraCalib.h src/utils/glob.cpp src/utils/glob.h src/AIAC/GeometryUtils.cpp)
-
+)
+    
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 target_include_directories(${PROJECT_NAME}

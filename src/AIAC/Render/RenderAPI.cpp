@@ -10,8 +10,6 @@
 
 namespace AIAC
 {
-    static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0 / 32.0f;
-
     void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, float pointSize)
     {
 //        std::vector<glm::vec3> mapPoints; mapPoints.reserve(map->map_points.size());
@@ -89,349 +87,350 @@ namespace AIAC
         }
     }
 
-    int getSectorNum(float radius){
-        return 8;
-    }
+    // int getSectorNum(float radius){
+    //     return 8;
+    // }
 
-    void DrawPoint(const GOPoint& goPoint)
-    {
-        if(!goPoint.IsVisible()){
-            return;
-        }
-        vector<glm::vec3> point(1, goPoint.GetPosition());
-        glDrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
-    }
+    
+    // void DrawPoint(const GOPoint& goPoint)
+    // {
+    //     if(!goPoint.IsVisible()){
+    //         return;
+    //     }
+    //     vector<glm::vec3> point(1, goPoint.GetPosition());
+    //     glDrawPoints3d(point, goPoint.GetColor(), goPoint.GetWeight());
+    // }
 
-    void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints)
-    {
-        // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
-        for(const auto& goPoint: goPoints){
-            if(!goPoint->IsVisible()){
-                return;
-            }
-            DrawPoint(*goPoint);
-        }
-    }
+    // void DrawPoints(const std::vector<std::shared_ptr<GOPoint>>& goPoints)
+    // {
+    //     // TODO: Try to use cache to avoid re-construction of the vector (if slow, probably no needed)
+    //     for(const auto& goPoint: goPoints){
+    //         if(!goPoint->IsVisible()){
+    //             return;
+    //         }
+    //         DrawPoint(*goPoint);
+    //     }
+    // }
 
-    void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color)
-    {
-        if(weight <= 0){
-            return;
-        }
-        if(weight == 1.0f){
-            vector<glm::vec3> line;
-            line.emplace_back(p1);
-            line.emplace_back(p2);
-            glDrawLines3d(line, color);
-            return;
-        }
-        float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-        DrawCylinder(p1, p2, radius,
-                     color, glm::vec4(0,0,0,0), getSectorNum(radius));
-    }
+    // void DrawLine(const glm::vec3 &p1, const glm::vec3 &p2, float weight, const glm::vec4 &color)
+    // {
+    //     if(weight <= 0){
+    //         return;
+    //     }
+    //     if(weight == 1.0f){
+    //         vector<glm::vec3> line;
+    //         line.emplace_back(p1);
+    //         line.emplace_back(p2);
+    //         glDrawLines3d(line, color);
+    //         return;
+    //     }
+    //     float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+    //     DrawCylinder(p1, p2, radius,
+    //                  color, glm::vec4(0,0,0,0), getSectorNum(radius));
+    // }
 
-    void DrawLines(const vector<glm::vec3> &vertices, float weight, const glm::vec4 &color)
-    {
-        if(weight <= 0){
-            return;
-        }
-        if(weight == 1.0f){
-            glDrawLines3d(vertices, color);
-            return;
-        }
-        float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-        DrawCylinder(vertices[0], vertices[1], radius,
-                     color, glm::vec4(0,0,0,0), getSectorNum(radius));
-    }
+    // void DrawLines(const vector<glm::vec3> &vertices, float weight, const glm::vec4 &color)
+    // {
+    //     if(weight <= 0){
+    //         return;
+    //     }
+    //     if(weight == 1.0f){
+    //         glDrawLines3d(vertices, color);
+    //         return;
+    //     }
+    //     float radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+    //     DrawCylinder(vertices[0], vertices[1], radius,
+    //                  color, glm::vec4(0,0,0,0), getSectorNum(radius));
+    // }
 
-    void DrawLine(const GOLine& goLine)
-    {
-        if(!goLine.IsVisible()){
-            return;
-        }
+    // void DrawLine(const GOLine& goLine)
+    // {
+    //     if(!goLine.IsVisible()){
+    //         return;
+    //     }
 
-        if(goLine.GetWeight() <= 1.0f){
-            vector<glm::vec3> vertices; vertices.reserve(2);
-            vertices[0] = goLine.GetPStart().GetPosition();
-            vertices[1] = goLine.GetPEnd().GetPosition();
-            glDrawLines3d(vertices, goLine.GetColor());
-        } else {
-            float radius = goLine.GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-            DrawCylinder(goLine.GetPStart().GetPosition(), goLine.GetPEnd().GetPosition(),
-                         radius, goLine.GetColor(), glm::vec4(0, 0, 0, 0),
-                         getSectorNum(radius));
-        }
-    }
+    //     if(goLine.GetWeight() <= 1.0f){
+    //         vector<glm::vec3> vertices; vertices.reserve(2);
+    //         vertices[0] = goLine.GetPStart().GetPosition();
+    //         vertices[1] = goLine.GetPEnd().GetPosition();
+    //         glDrawLines3d(vertices, goLine.GetColor());
+    //     } else {
+    //         float radius = goLine.GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+    //         DrawCylinder(goLine.GetPStart().GetPosition(), goLine.GetPEnd().GetPosition(),
+    //                      radius, goLine.GetColor(), glm::vec4(0, 0, 0, 0),
+    //                      getSectorNum(radius));
+    //     }
+    // }
 
-    void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines)
-    {
-        vector<glm::vec3> vertices; vertices.reserve(goLines.size() * 2);
-        vector<glm::vec4> colors; colors.reserve(goLines.size());
-        for (const auto &goLine: goLines) {
-            if(!goLine->IsVisible()){
-                continue;
-            }
-            // if weight is 1.0f, put into the vector and draw altogether at once; else, draw as cylinder immediately
-            if(goLine->GetWeight() <= 1.0f){
-                vertices.emplace_back(goLine->GetPStart().GetPosition());
-                vertices.emplace_back(goLine->GetPEnd().GetPosition());
-                colors.emplace_back(goLine->GetColor());
-                colors.emplace_back(goLine->GetColor());
-            } else {
-                float radius = goLine->GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
-                DrawCylinder(goLine->GetPStart().GetPosition(), goLine->GetPEnd().GetPosition(),
-                             radius, goLine->GetColor(), glm::vec4(0, 0, 0, 0),
-                             getSectorNum(radius));
-            }
-        }
-        glDrawLines3d(vertices, colors);
-    }
+    // void DrawLines(const std::vector<std::shared_ptr<GOLine>>& goLines)
+    // {
+    //     vector<glm::vec3> vertices; vertices.reserve(goLines.size() * 2);
+    //     vector<glm::vec4> colors; colors.reserve(goLines.size());
+    //     for (const auto &goLine: goLines) {
+    //         if(!goLine->IsVisible()){
+    //             continue;
+    //         }
+    //         // if weight is 1.0f, put into the vector and draw altogether at once; else, draw as cylinder immediately
+    //         if(goLine->GetWeight() <= 1.0f){
+    //             vertices.emplace_back(goLine->GetPStart().GetPosition());
+    //             vertices.emplace_back(goLine->GetPEnd().GetPosition());
+    //             colors.emplace_back(goLine->GetColor());
+    //             colors.emplace_back(goLine->GetColor());
+    //         } else {
+    //             float radius = goLine->GetWeight() * WEIGHT_TO_CYLINDER_RADIUS_RATE;
+    //             DrawCylinder(goLine->GetPStart().GetPosition(), goLine->GetPEnd().GetPosition(),
+    //                          radius, goLine->GetColor(), glm::vec4(0, 0, 0, 0),
+    //                          getSectorNum(radius));
+    //         }
+    //     }
+    //     glDrawLines3d(vertices, colors);
+    // }
 
-    void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum)
-    {
-        std::vector<glm::vec3> vertices; vertices.reserve(sectorNum + 1);
-        std::vector<glm::vec3> edges; edges.reserve(2 * sectorNum);
-        std::vector<uint32_t> indices; indices.reserve(3 * sectorNum);
-        vertices.emplace_back(center);
+    // void DrawCircle(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum)
+    // {
+    //     std::vector<glm::vec3> vertices; vertices.reserve(sectorNum + 1);
+    //     std::vector<glm::vec3> edges; edges.reserve(2 * sectorNum);
+    //     std::vector<uint32_t> indices; indices.reserve(3 * sectorNum);
+    //     vertices.emplace_back(center);
 
-        glm::vec3 newX = glm::cross(normal, glm::vec3(0, 1, 0));
-        glm::vec3 newZ = glm::cross(newX, normal);
+    //     glm::vec3 newX = glm::cross(normal, glm::vec3(0, 1, 0));
+    //     glm::vec3 newZ = glm::cross(newX, normal);
 
-        glm::mat4 transformMat;
+    //     glm::mat4 transformMat;
 
-        transformMat[0] = glm::vec4(newX, 0);
-        transformMat[1] = glm::vec4(normal, 0);
-        transformMat[2] = glm::vec4(newZ, 0);
-        transformMat[3] = glm::vec4(center, 1);
+    //     transformMat[0] = glm::vec4(newX, 0);
+    //     transformMat[1] = glm::vec4(normal, 0);
+    //     transformMat[2] = glm::vec4(newZ, 0);
+    //     transformMat[3] = glm::vec4(center, 1);
 
-        for (int i = 0; i < sectorNum; ++i){
-            GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
-            glm::vec3 vertex = transformMat * glm::vec4(
-                    static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
-                    0,
-                    static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
-                    1
-            );
-            vertices.emplace_back(vertex);
-        }
+    //     for (int i = 0; i < sectorNum; ++i){
+    //         GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
+    //         glm::vec3 vertex = transformMat * glm::vec4(
+    //                 static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
+    //                 0,
+    //                 static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
+    //                 1
+    //         );
+    //         vertices.emplace_back(vertex);
+    //     }
 
-        for (int i = 1; i < sectorNum; ++i){
-            indices.emplace_back(0);
-            indices.emplace_back(i);
-            indices.emplace_back(i + 1);
-        }
-        indices.emplace_back(0);
-        indices.emplace_back(sectorNum);
-        indices.emplace_back(1);
+    //     for (int i = 1; i < sectorNum; ++i){
+    //         indices.emplace_back(0);
+    //         indices.emplace_back(i);
+    //         indices.emplace_back(i + 1);
+    //     }
+    //     indices.emplace_back(0);
+    //     indices.emplace_back(sectorNum);
+    //     indices.emplace_back(1);
 
-        glDrawTriangles3d(vertices, indices, color);
+    //     glDrawTriangles3d(vertices, indices, color);
 
-        for (int i = 1; i < sectorNum; ++i){
-            edges.emplace_back(vertices[i]);
-            edges.emplace_back(vertices[i + 1]);
-        }
-        edges.emplace_back(vertices[sectorNum]);
-        edges.emplace_back(vertices[1]);
+    //     for (int i = 1; i < sectorNum; ++i){
+    //         edges.emplace_back(vertices[i]);
+    //         edges.emplace_back(vertices[i + 1]);
+    //     }
+    //     edges.emplace_back(vertices[sectorNum]);
+    //     edges.emplace_back(vertices[1]);
 
-        DrawLines(edges, edgeWeight, edgeColor);
-    }
+    //     DrawLines(edges, edgeWeight, edgeColor);
+    // }
 
-    void DrawCircle(const GOCircle& goCircle)
-    {
-        if(!goCircle.IsVisible()){
-            return;
-        }
-        DrawCircle(goCircle.GetCenter().GetPosition(), goCircle.GetNormal(), goCircle.GetRadius(),
-                   goCircle.GetColor(), goCircle.GetEdgeColor(), goCircle.GetWeight(), getSectorNum(goCircle.GetRadius()));
-    }
+    // void DrawCircle(const GOCircle& goCircle)
+    // {
+    //     if(!goCircle.IsVisible()){
+    //         return;
+    //     }
+    //     DrawCircle(goCircle.GetCenter().GetPosition(), goCircle.GetNormal(), goCircle.GetRadius(),
+    //                goCircle.GetColor(), goCircle.GetEdgeColor(), goCircle.GetWeight(), getSectorNum(goCircle.GetRadius()));
+    // }
 
-    void DrawCircles(const std::vector<std::shared_ptr<GOCircle>>& goCircles)
-    {
-        for (const auto &goCircle: goCircles) {
-            if(!goCircle->IsVisible()){
-                continue;
-            }
-            DrawCircle(*goCircle);
-        }
-    }
+    // void DrawCircles(const std::vector<std::shared_ptr<GOCircle>>& goCircles)
+    // {
+    //     for (const auto &goCircle: goCircles) {
+    //         if(!goCircle->IsVisible()){
+    //             continue;
+    //         }
+    //         DrawCircle(*goCircle);
+    //     }
+    // }
 
-    void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
+    // void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum){
 
-        std::vector<CylinderPole> cylinderPoles; // vector of structs
+    //     std::vector<CylinderPole> cylinderPoles; // vector of structs
 
-        glm::vec3 x1 = baseCenter, x2 = topCenter;
-        glm::vec3 norm = glm::normalize(x2 - x1);
-        GLfloat h = glm::length(x2 - x1);
+    //     glm::vec3 x1 = baseCenter, x2 = topCenter;
+    //     glm::vec3 norm = glm::normalize(x2 - x1);
+    //     GLfloat h = glm::length(x2 - x1);
 
-        glm::vec3 newX = glm::cross(norm, glm::vec3(0, 1, 0));
-        glm::vec3 newZ = glm::cross(newX, norm);
+    //     glm::vec3 newX = glm::cross(norm, glm::vec3(0, 1, 0));
+    //     glm::vec3 newZ = glm::cross(newX, norm);
 
-        glm::mat4 transformMat;
+    //     glm::mat4 transformMat;
 
-        transformMat[0] = glm::vec4(newX, 0);
-        transformMat[1] = glm::vec4(norm, 0);
-        transformMat[2] = glm::vec4(newZ, 0);
-        transformMat[3] = glm::vec4(x1, 1);
+    //     transformMat[0] = glm::vec4(newX, 0);
+    //     transformMat[1] = glm::vec4(norm, 0);
+    //     transformMat[2] = glm::vec4(newZ, 0);
+    //     transformMat[3] = glm::vec4(x1, 1);
 
-        for (int i = 0; i < sectorNum; ++i){
-            GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
-            CylinderPole cp{
-                    .x = static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
-                    .z = static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
-            };
-            cylinderPoles.push_back(cp);
-        }
+    //     for (int i = 0; i < sectorNum; ++i){
+    //         GLfloat u = (GLfloat)i / (GLfloat)sectorNum;
+    //         CylinderPole cp{
+    //                 .x = static_cast<GLfloat>(radius * cos(2 * M_PI * u)),
+    //                 .z = static_cast<GLfloat>(radius * sin(2 * M_PI * u)),
+    //         };
+    //         cylinderPoles.push_back(cp);
+    //     }
 
-        vector<uint32_t> flattenedIndices;
-        vector<glm::vec3> indices;
-        vector<glm::vec3> vertices;
-        vector<glm::vec3> capContourTop, capContourBase;
+    //     vector<uint32_t> flattenedIndices;
+    //     vector<glm::vec3> indices;
+    //     vector<glm::vec3> vertices;
+    //     vector<glm::vec3> capContourTop, capContourBase;
 
-        vertices.emplace_back(x1); // 0
-        vertices.emplace_back(x2); // 1
+    //     vertices.emplace_back(x1); // 0
+    //     vertices.emplace_back(x2); // 1
 
-        vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z)); // 2
-        vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z)); // 3
+    //     vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z)); // 2
+    //     vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z)); // 3
 
-        capContourBase.push_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
-        capContourTop.push_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
+    //     capContourBase.push_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
+    //     capContourTop.push_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
 
-        int baseCenterIdx = 0;
-        int topCenterIdx = 1;
-        int prevBaseVertexIdx = 2;
-        int prevTopVertexIdx = 3;
-        int curBaseVertexIdx = 4;
-        int curTopVertexIdx = 5;
+    //     int baseCenterIdx = 0;
+    //     int topCenterIdx = 1;
+    //     int prevBaseVertexIdx = 2;
+    //     int prevTopVertexIdx = 3;
+    //     int curBaseVertexIdx = 4;
+    //     int curTopVertexIdx = 5;
 
-        for(int i = 1; i < sectorNum; i++){
-            capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
-            capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
-            capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
-            capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+    //     for(int i = 1; i < sectorNum; i++){
+    //         capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+    //         capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+    //         capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+    //         capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
 
-            vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
-            vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
+    //         vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, 0, cylinderPoles[i].z));
+    //         vertices.emplace_back(GetTransformed(transformMat, cylinderPoles[i].x, h, cylinderPoles[i].z));
 
-            indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
-            indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
-            indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
-            indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
+    //         indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
+    //         indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
+    //         indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
+    //         indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
 
-            prevBaseVertexIdx = curBaseVertexIdx;
-            prevTopVertexIdx = curTopVertexIdx;
-            curBaseVertexIdx += 2;
-            curTopVertexIdx += 2;
-        }
+    //         prevBaseVertexIdx = curBaseVertexIdx;
+    //         prevTopVertexIdx = curTopVertexIdx;
+    //         curBaseVertexIdx += 2;
+    //         curTopVertexIdx += 2;
+    //     }
 
-        // Last one
-        curBaseVertexIdx = 2;
-        curTopVertexIdx = 3;
-        indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
-        indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
-        indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
-        indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
+    //     // Last one
+    //     curBaseVertexIdx = 2;
+    //     curTopVertexIdx = 3;
+    //     indices.emplace_back(curBaseVertexIdx ,baseCenterIdx   , prevBaseVertexIdx);
+    //     indices.emplace_back(prevTopVertexIdx ,topCenterIdx    , curTopVertexIdx  );
+    //     indices.emplace_back(curBaseVertexIdx ,curTopVertexIdx , prevTopVertexIdx );
+    //     indices.emplace_back(prevBaseVertexIdx,curBaseVertexIdx, prevTopVertexIdx );
 
-        capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
-        capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
+    //     capContourBase.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, 0, cylinderPoles[0].z));
+    //     capContourTop.emplace_back(GetTransformed(transformMat, cylinderPoles[0].x, h, cylinderPoles[0].z));
 
-        for(auto vid: indices){
-            flattenedIndices.push_back((uint)vid.x);
-            flattenedIndices.push_back((uint)vid.y);
-            flattenedIndices.push_back((uint)vid.z);
-        }
+    //     for(auto vid: indices){
+    //         flattenedIndices.push_back((uint)vid.x);
+    //         flattenedIndices.push_back((uint)vid.y);
+    //         flattenedIndices.push_back((uint)vid.z);
+    //     }
 
-        glDrawTriangles3d(vertices, flattenedIndices, color);
-        glDrawLines3d(capContourBase, edgeColor);
-        glDrawLines3d(capContourTop, edgeColor);
-    }
+    //     glDrawTriangles3d(vertices, flattenedIndices, color);
+    //     glDrawLines3d(capContourBase, edgeColor);
+    //     glDrawLines3d(capContourTop, edgeColor);
+    // }
 
-    void DrawCylinder(const GOCylinder& goCylinder)
-    {
-        if(!goCylinder.IsVisible()){
-            return;
-        }
-        DrawCylinder(goCylinder.GetPStart().GetPosition(), goCylinder.GetPEnd().GetPosition(),
-                     goCylinder.GetRadius(), goCylinder.GetColor(), goCylinder.GetEdgeColor());
-    }
+    // void DrawCylinder(const GOCylinder& goCylinder)
+    // {
+    //     if(!goCylinder.IsVisible()){
+    //         return;
+    //     }
+    //     DrawCylinder(goCylinder.GetPStart().GetPosition(), goCylinder.GetPEnd().GetPosition(),
+    //                  goCylinder.GetRadius(), goCylinder.GetColor(), goCylinder.GetEdgeColor());
+    // }
 
-    void DrawCylinders(const std::vector<std::shared_ptr<GOCylinder>>& goCylinders)
-    {
-        for (const auto &goCylinder: goCylinders) {
-            if(!goCylinder->IsVisible()){
-                continue;
-            }
-            DrawCylinder(*goCylinder);
-        }
-    }
+    // void DrawCylinders(const std::vector<std::shared_ptr<GOCylinder>>& goCylinders)
+    // {
+    //     for (const auto &goCylinder: goCylinders) {
+    //         if(!goCylinder->IsVisible()){
+    //             continue;
+    //         }
+    //         DrawCylinder(*goCylinder);
+    //     }
+    // }
 
-    void DrawPolyline(const GOPolyline& goPolyline)
-    {
-        if(!goPolyline.IsVisible()){
-            return;
-        }
-        vector<glm::vec3> vertices; vertices.reserve(goPolyline.GetPoints().size() * 2);
-        vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
-        for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
-            vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
-            vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
-        }
-        vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
+    // void DrawPolyline(const GOPolyline& goPolyline)
+    // {
+    //     if(!goPolyline.IsVisible()){
+    //         return;
+    //     }
+    //     vector<glm::vec3> vertices; vertices.reserve(goPolyline.GetPoints().size() * 2);
+    //     vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+    //     for (int i = 1; i < goPolyline.GetPoints().size() - 1; i++) {
+    //         vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+    //         vertices.emplace_back(goPolyline.GetPoints()[i].GetPosition());
+    //     }
+    //     vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
 
-        if(goPolyline.IsClosed()){
-            vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
-            vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
-        }
+    //     if(goPolyline.IsClosed()){
+    //         vertices.emplace_back(goPolyline.GetPoints()[goPolyline.GetPoints().size() - 1].GetPosition());
+    //         vertices.emplace_back(goPolyline.GetPoints()[0].GetPosition());
+    //     }
 
-        DrawLines(vertices, goPolyline.GetWeight(), goPolyline.GetColor());
-    }
+    //     DrawLines(vertices, goPolyline.GetWeight(), goPolyline.GetColor());
+    // }
 
-    void DrawPolylines(const std::vector<std::shared_ptr<GOPolyline>>& goPolylines)
-    {
-        for(const auto& goPolyline: goPolylines){
-            if(!goPolyline->IsVisible()){
-                continue;
-            }
-            DrawPolyline(*goPolyline);
-        }
-    }
+    // void DrawPolylines(const std::vector<std::shared_ptr<GOPolyline>>& goPolylines)
+    // {
+    //     for(const auto& goPolyline: goPolylines){
+    //         if(!goPolyline->IsVisible()){
+    //             continue;
+    //         }
+    //         DrawPolyline(*goPolyline);
+    //     }
+    // }
 
-    void DrawTriangle(const GOTriangle& goTriangle)
-    {
-        if(!goTriangle.IsVisible()){
-            return;
-        }
-        vector<glm::vec3> vertices = goTriangle.GetVertices();
-        vector<uint32_t> indices{0, 1, 2};
-        glDrawTriangles3d(vertices, indices, goTriangle.GetColor());
-    }
+    // void DrawTriangle(const GOTriangle& goTriangle)
+    // {
+    //     if(!goTriangle.IsVisible()){
+    //         return;
+    //     }
+    //     vector<glm::vec3> vertices = goTriangle.GetVertices();
+    //     vector<uint32_t> indices{0, 1, 2};
+    //     glDrawTriangles3d(vertices, indices, goTriangle.GetColor());
+    // }
 
-    void DrawTriangles(const std::vector<std::shared_ptr<GOTriangle>>& goTriangles)
-    {
-        for (const auto &goTriangle: goTriangles) {
-            if(!goTriangle->IsVisible()){
-                continue;
-            }
-            DrawTriangle(*goTriangle);
-        }
-    }
+    // void DrawTriangles(const std::vector<std::shared_ptr<GOTriangle>>& goTriangles)
+    // {
+    //     for (const auto &goTriangle: goTriangles) {
+    //         if(!goTriangle->IsVisible()){
+    //             continue;
+    //         }
+    //         DrawTriangle(*goTriangle);
+    //     }
+    // }
 
-    void DrawMesh(const GOMesh& goMesh)
-    {
-        if(!goMesh.IsVisible()){
-            return;
-        }
-        glDrawTriangles3d(goMesh.GetVertices(), goMesh.GetIndices(), goMesh.GetColor());
-    }
+    // void DrawMesh(const GOMesh& goMesh)
+    // {
+    //     if(!goMesh.IsVisible()){
+    //         return;
+    //     }
+    //     glDrawTriangles3d(goMesh.GetVertices(), goMesh.GetIndices(), goMesh.GetColor());
+    // }
 
-    void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes)
-    {
-        for (auto &goMesh: goMeshes) {
-            if(!goMesh->IsVisible()){
-                continue;
-            }
-            DrawMesh(*goMesh);
-        }
-    }
+    // void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes)
+    // {
+    //     for (auto &goMesh: goMeshes) {
+    //         if(!goMesh->IsVisible()){
+    //             continue;
+    //         }
+    //         DrawMesh(*goMesh);
+    //     }
+    // }
 
 
     void DrawText(const GOText& goText, const glm::mat4& projection) {
