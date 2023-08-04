@@ -68,14 +68,22 @@ namespace AIAC {
         Deactivate();
     }
 
+    void CutChainSawFeedback::updateCutPlane (){
+        std::vector<glm::vec3> bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
+        std::vector<std::pair<int, int>> bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
+        m_CutPlaneVisualizer.Update(bbox, bboxIndices, m_NormalVec, m_NormStart);
+    }
+
     void CutChainSawFeedback::Update(){
         // calculate tool normal
-        auto toolNormStartPt = AC_FF_TOOL->GetData<ChainSawData>().NormStartGO->GetPosition();
-        auto toolNormEndPt = AC_FF_TOOL->GetData<ChainSawData>().NormEndGO->GetPosition();
-        auto toolChainBasePt = AC_FF_TOOL->GetData<ChainSawData>().ChainBaseGO->GetPosition();
-        auto toolChainMidPt = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
-        auto toolChainEndPt = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
-        auto toolNormalVec = glm::normalize(toolNormEndPt - toolNormStartPt);
+        m_NormStart = AC_FF_TOOL->GetData<ChainSawData>().NormStartGO->GetPosition();
+        m_NormEnd = AC_FF_TOOL->GetData<ChainSawData>().NormEndGO->GetPosition();
+        m_ChainBase = AC_FF_TOOL->GetData<ChainSawData>().ChainBaseGO->GetPosition();
+        m_ChainMid = AC_FF_TOOL->GetData<ChainSawData>().ChainMidGO->GetPosition();
+        m_ChainEnd = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
+        m_NormalVec = glm::normalize(m_NormEnd - m_NormStart);
+
+        updateCutPlane();
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
@@ -88,10 +96,10 @@ namespace AIAC {
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
-            auto theta = glm::acos(glm::dot(faceNormal, toolNormalVec)/(glm::length(faceNormal)*glm::length(toolNormalVec)));
+            auto theta = glm::acos(glm::dot(faceNormal, m_NormalVec)/(glm::length(faceNormal)*glm::length(m_NormalVec)));
 
-            auto distChainBase = glm::distance(faceInfo.GetCenter(), toolChainBasePt);
-            auto distChainEnd = glm::distance(faceInfo.GetCenter(), toolChainEndPt);
+            auto distChainBase = glm::distance(faceInfo.GetCenter(), m_ChainBase);
+            auto distChainEnd = glm::distance(faceInfo.GetCenter(), m_ChainEnd);
             auto totalDist = distChainBase + distChainEnd;
 
             // for parallel faces, find the nearest one
@@ -136,18 +144,18 @@ namespace AIAC {
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
 
-            auto projNormStart = GetProjectionPointOnPlane(faceNormal, faceCenter, toolNormStartPt);
-            auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainBasePt);
-            auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, toolChainEndPt);
+            auto projNormStart = GetProjectionPointOnPlane(faceNormal, faceCenter, m_NormStart);
+            auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, m_ChainBase);
+            auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, m_ChainEnd);
 
             // update the m_Visualizer
-            angleVisualizer.m_LineEnd->SetPts(toolNormStartPt, projNormStart);
-            angleVisualizer.m_LineChainBase->SetPts(toolChainBasePt, projChainBase);
-            angleVisualizer.m_LineChainEnd->SetPts(toolChainEndPt, projChainEnd);
+            angleVisualizer.m_LineEnd->SetPts(m_NormStart, projNormStart);
+            angleVisualizer.m_LineChainBase->SetPts(m_ChainBase, projChainBase);
+            angleVisualizer.m_LineChainEnd->SetPts(m_ChainEnd, projChainEnd);
 
-            parallelEndDist = glm::distance(toolNormStartPt, projNormStart);
-            parallelChainBaseDist = glm::distance(toolChainBasePt, projChainBase);
-            parallelChainEndDist = glm::distance(toolChainEndPt, projChainEnd);
+            parallelEndDist = glm::distance(m_NormStart, projNormStart);
+            parallelChainBaseDist = glm::distance(m_ChainBase, projChainBase);
+            parallelChainEndDist = glm::distance(m_ChainEnd, projChainEnd);
 
             angleVisualizer.m_LineEnd->SetColor(parallelEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
             angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
@@ -170,7 +178,7 @@ namespace AIAC {
             // Get the intersection line of the tool plane and the face plane
             glm::vec3 intersectLineVec, intersectLinePt;
             if(!GetIntersectLineOf2Planes(faceNormal, faceCenter,
-                                          toolNormalVec, toolChainBasePt,
+                                          m_NormalVec, m_ChainBase,
                                           intersectLineVec, intersectLinePt)){
                 AIAC_ERROR("Failed to get the intersect line of two planes");
                 // Technically this should not happen
@@ -194,21 +202,21 @@ namespace AIAC {
             // update the m_Visualizer
             // FIXME: Change to intersection of two planes
             // Lines based on tool
-            auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, toolChainBasePt);
-            auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, toolChainEndPt);
+            auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainBase);
+            auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainEnd);
 
             depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
 
             // Lines based on face edge
             // for face edge dist, we need to find the projection point of the two points on the saw first
             glm::vec3 pt1ProjPt, pt2ProjPt;
-            auto pt1OnEndMid = GetNearestPtOnLine(toolChainEndPt - toolChainMidPt, toolChainEndPt, perpIntersectLineSegPt1);
-            auto pt1OnMidBase = GetNearestPtOnLine(toolChainMidPt - toolChainBasePt, toolChainMidPt, perpIntersectLineSegPt1);
-            auto pt2OnEndMid = GetNearestPtOnLine(toolChainEndPt - toolChainMidPt, toolChainEndPt, perpIntersectLineSegPt2);
-            auto pt2OnMidBase = GetNearestPtOnLine(toolChainMidPt - toolChainBasePt, toolChainMidPt, perpIntersectLineSegPt2);
+            auto pt1OnEndMid = GetNearestPtOnLine(m_ChainEnd - m_ChainMid, m_ChainEnd, perpIntersectLineSegPt1);
+            auto pt1OnMidBase = GetNearestPtOnLine(m_ChainMid - m_ChainBase, m_ChainMid, perpIntersectLineSegPt1);
+            auto pt2OnEndMid = GetNearestPtOnLine(m_ChainEnd - m_ChainMid, m_ChainEnd, perpIntersectLineSegPt2);
+            auto pt2OnMidBase = GetNearestPtOnLine(m_ChainMid - m_ChainBase, m_ChainMid, perpIntersectLineSegPt2);
 
-            pt1ProjPt = IsPointBetweenLineSeg(pt1OnMidBase, toolChainMidPt, toolChainBasePt) ? pt1OnMidBase : pt1OnEndMid;
-            pt2ProjPt = IsPointBetweenLineSeg(pt2OnMidBase, toolChainMidPt, toolChainBasePt) ? pt2OnMidBase : pt2OnEndMid;
+            pt1ProjPt = IsPointBetweenLineSeg(pt1OnMidBase, m_ChainMid, m_ChainBase) ? pt1OnMidBase : pt1OnEndMid;
+            pt2ProjPt = IsPointBetweenLineSeg(pt2OnMidBase, m_ChainMid, m_ChainBase) ? pt2OnMidBase : pt2OnEndMid;
 
             depthVisualizer.m_LineDepthFaceEdge1->SetPts(perpIntersectLineSegPt1, pt1ProjPt);
             depthVisualizer.m_LineDepthFaceEdge2->SetPts(perpIntersectLineSegPt2, pt2ProjPt);
@@ -217,9 +225,9 @@ namespace AIAC {
             perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
 
             // get the direction of tool
-            auto toolUpVec = glm::normalize(toolNormStartPt - toolChainBasePt);
-            auto chainBaseVec = glm::normalize(toolChainBasePt - projChainBase);
-            auto chainEndVec = glm::normalize(toolChainEndPt - projChainEnd);
+            auto toolUpVec = glm::normalize(m_NormStart - m_ChainBase);
+            auto chainBaseVec = glm::normalize(m_ChainBase - projChainBase);
+            auto chainEndVec = glm::normalize(m_ChainEnd - projChainEnd);
             auto faceEdge1Vec = glm::normalize(pt1ProjPt - perpIntersectLineSegPt1);
             auto faceEdge2Vec = glm::normalize(pt2ProjPt - perpIntersectLineSegPt2);
 
@@ -254,9 +262,9 @@ namespace AIAC {
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetText(FeedbackVisualizer::toString(perpendicularFaceEdge1Dist));
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText(FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
 
-            this->m_Visualizer.m_GuideTxtEnd->SetAnchor(toolNormStartPt);
-            this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(toolChainBasePt);
-            this->m_Visualizer.m_GuideTxtChainEnd->SetAnchor(toolChainEndPt);
+            this->m_Visualizer.m_GuideTxtEnd->SetAnchor(m_NormStart);
+            this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(m_ChainBase);
+            this->m_Visualizer.m_GuideTxtChainEnd->SetAnchor(m_ChainEnd);
 
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetAnchor(perpIntersectLineSegPt1);
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetAnchor(perpIntersectLineSegPt2);

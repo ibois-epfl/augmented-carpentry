@@ -60,7 +60,7 @@ namespace AIAC{
         std::string m_NearestParallelFaceID;
         std::string m_NearestPerpendicularFaceID;
 
-        void updatePosition();
+        void updateToolPosition();
         void updateRefFaces();
         void updateFeedback();
         void updateGeneralFeedback();
