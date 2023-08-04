@@ -92,10 +92,14 @@ namespace AIAC
         TimberInfo::Component::SetAsCurrent();
         AIAC_INFO("Set Current Component to " + m_ID);
         for (const auto& [_, face] : m_Faces) {
-            face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+            if(face.m_GO != nullptr){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+            }
         }
         for (const auto& [_, edge] : m_Edges) {
-            edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+            if(edge.m_GO != nullptr){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+            }
         }
     }
 
@@ -103,10 +107,14 @@ namespace AIAC
         TimberInfo::Component::SetAsDone();
         AIAC_INFO("Set " + m_ID + " as Done");
         for (const auto& [_, face] : m_Faces) {
-            face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::DONE]);
+            if(face.m_GO != nullptr){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::DONE]);
+            }
         }
         for (const auto& [_, edge] : m_Edges) {
-            edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::DONE]);
+            if(edge.m_GO != nullptr){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::DONE]);
+            }
         }
     }
 
@@ -114,20 +122,28 @@ namespace AIAC
         TimberInfo::Component::SetAsNotDone();
         AIAC_INFO("Set " + m_ID + " as Not Done");
         for (const auto& [_, face] : m_Faces) {
-            face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+            if(face.m_GO != nullptr){
+                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+            }
         }
         for (const auto& [_, edge] : m_Edges) {
-            edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+            if(edge.m_GO != nullptr){
+                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+            }
         }
     }
 
     void TimberInfo::Cut::SetVisibility(bool visible) {
         TimberInfo::Component::SetVisibility(visible);
         for (const auto& [_, face] : m_Faces) {
-            face.m_GO->SetVisibility(visible);
+            if(face.m_GO != nullptr){
+                face.m_GO->SetVisibility(visible);
+            }
         }
         for (const auto& [_, edge] : m_Edges) {
-            edge.m_GO->SetVisibility(visible);
+            if(edge.m_GO != nullptr){
+                edge.m_GO->SetVisibility(visible);
+            }
         }
     }
 
@@ -137,10 +153,14 @@ namespace AIAC
         // faceID is empty -> Reset everything to CURRENT
         if(faceID.empty()){
             for(auto& [_, face] : m_Faces){
-                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+                if(face.m_GO != nullptr){
+                    face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
+                }
             }
             for(auto& [_, edge] : m_Edges){
-                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+                if(edge.m_GO != nullptr){
+                    edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+                }
             }
             m_HighlightedFaceID = "";
             return;
@@ -149,16 +169,22 @@ namespace AIAC
         if(m_HighlightedFaceID.empty()){
             // init : set all to NOT_DONE
             for(auto& [_, face] : m_Faces){
-                face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+                if(face.m_GO != nullptr){
+                    face.m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
+                }
             }
             for(auto& [_, edge] : m_Edges){
-                edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+                if(edge.m_GO != nullptr){
+                    edge.m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+                }
             }
         } else {
             // reset the previous Highlighted face
             m_Faces[m_HighlightedFaceID].m_GO->SetColor(CUT_FACE_COLOR[ACIMState::NOT_DONE]);
             for(auto& edgeID : m_Faces[m_HighlightedFaceID].m_Edges){
-                m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+                if(m_Edges[edgeID].m_GO != nullptr){
+                    m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::NOT_DONE]);
+                }
             }
         }
 
@@ -166,7 +192,9 @@ namespace AIAC
         m_HighlightedFaceID = faceID;
         m_Faces[m_HighlightedFaceID].m_GO->SetColor(CUT_FACE_COLOR[ACIMState::CURRENT]);
         for(auto& edgeID : m_Faces[m_HighlightedFaceID].m_Edges){
-            m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+            if(m_Edges[edgeID].m_GO != nullptr){
+                m_Edges[edgeID].m_GO->SetColor(CUT_EDGE_COLOR[ACIMState::CURRENT]);
+            }
         }
     }
 
@@ -305,8 +333,6 @@ namespace AIAC
                 cutInfo.m_IDLabelGO = GOText::Add(cutInfo.m_ID, cutInfo.m_Center, m_LabelSize);
                 cutInfo.m_GOPrimitives.push_back(cutInfo.m_IDLabelGO);
 
-                auto nonExposedEdges = std::set<std::string>();
-
                 auto faces = cut.child("faces");
                 for(auto face = faces.child("face"); face; face=face.next_sibling("face")){
                     TimberInfo::Cut::Face faceInfo;
@@ -316,7 +342,7 @@ namespace AIAC
                     faceInfo.m_Edges = StringToSet(face.child("edges").child_value());
                     faceInfo.m_Center = glm::vec3(0.0f);
                     if(!faceInfo.m_Exposed){
-                        nonExposedEdges.insert(faceInfo.m_Edges.begin(), faceInfo.m_Edges.end());
+                        cutInfo.m_NonExposedEdgeIDs.insert(faceInfo.m_Edges.begin(), faceInfo.m_Edges.end());
                     }
                     auto corners = face.child("corners");
                     for(auto corner = corners.child("corner"); corner; corner=corner.next_sibling("corner")){
@@ -356,6 +382,9 @@ namespace AIAC
                     faceInfo.m_GOPrimitives.push_back(faceInfo.m_GO);
 
                     cutInfo.m_Faces[faceInfo.m_ID] = faceInfo;
+                    if(!faceInfo.m_Exposed){
+                        cutInfo.m_NonExposedFaceIDs.insert(faceInfo.m_ID);
+                    }
                 }
 
                 // for(auto const& [faceID, faceInfo]: cutInfo.m_Faces){
@@ -367,20 +396,18 @@ namespace AIAC
                 auto edges = cut.child("edges");
                 for(auto edge = edges.child("edge"); edge; edge=edge.next_sibling("edge")){
                     auto id = edge.attribute("id").as_string();
-                    // only work with non-exposed edges
-                    if(nonExposedEdges.find(id) == nonExposedEdges.end()){
-                        continue;
-                    }
 
                     TimberInfo::Cut::Edge edgeInfo;
                     edgeInfo.m_ID = edge.attribute("id").as_string();
                     edgeInfo.m_Start = StringToVec3(edge.child("start").child_value()) * m_Scale;
                     edgeInfo.m_End = StringToVec3(edge.child("end").child_value()) * m_Scale;
 
-                    // build GOPrimitive
-                    edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, m_EdgeWeight);
-                    edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
-                    edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
+                    // build GOPrimitive, only on non-exposed edges
+                    if(cutInfo.m_NonExposedEdgeIDs.find(id) != cutInfo.m_NonExposedEdgeIDs.end()){
+                        edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, m_EdgeWeight);
+                        edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
+                        edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
+                    }
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
