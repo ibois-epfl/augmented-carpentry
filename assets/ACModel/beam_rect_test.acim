@@ -19,11 +19,11 @@
 			<neighbors>-1</neighbors>
 			<start>
 				<exposed>False</exposed>
-				<coordinates>0.121027265062 0.278 0.0744407911465</coordinates>
+				<coordinates>0.121027 0.278 0.0744408</coordinates>
 			</start>
 			<end>
 				<exposed>False</exposed>
-				<coordinates>0.121027265062 2.5735186034e-16 0.0744407911465</coordinates>
+				<coordinates>0.121027 2.57352e-16 0.0744408</coordinates>
 			</end>
 			<radius>0.015</radius>
 		</hole>
