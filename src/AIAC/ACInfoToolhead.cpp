@@ -129,10 +129,15 @@ namespace AIAC
                                        GOWeight::Thick);
         data.m_DrillBitD.ChucktipGO->SetColor(GOColor::YELLOW);
 
+        auto lnAxis = GOLine::Add(*data.m_DrillBitD.ToolbaseGO, *data.m_DrillBitD.TooltipGO);
+        lnAxis->SetColor(GOColor::MAGENTA);
+        lnAxis->SetVisibility(false);
+
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ToolbaseGO);
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.TooltipGO);
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.EattipGO);
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ChucktipGO);
+        this->m_GOPrimitivesInfo.push_back(lnAxis);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {

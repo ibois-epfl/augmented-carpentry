@@ -20,6 +20,8 @@ namespace AIAC
 
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
+        if (this->IsShowToolheadGOInfo)
+            this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
 
         syncTToolAndACInfoToolhead();
     }
