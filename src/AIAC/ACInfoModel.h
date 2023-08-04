@@ -196,6 +196,8 @@ public:
         inline Edge& GetEdge(std::string id) { return m_Edges[id]; }
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
+        inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
+        inline std::set<std::string>& GetAllNonExposedEdgeIDs() { return m_NonExposedEdgeIDs; }
         inline glm::vec3 GetCenter() const { return m_Center; }
         void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
     
@@ -203,6 +205,8 @@ public:
         std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
+        std::set<std::string> m_NonExposedFaceIDs;
+        std::set<std::string> m_NonExposedEdgeIDs;
         glm::vec3 m_Center;
         std::shared_ptr<GOText> m_IDLabelGO;
 
