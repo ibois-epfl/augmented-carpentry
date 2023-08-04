@@ -303,10 +303,12 @@ namespace AIAC {
     void CutChainSawFeedback::Activate(){
         Update();
         m_Visualizer.Activate();
+        m_CutPlaneVisualizer.Activate();
     }
 
     void CutChainSawFeedback::Deactivate(){
         m_Visualizer.Deactivate();
+        m_CutPlaneVisualizer.Deactivate();
         m_Visualizer.m_AngleFeedVisualizer.Deactivate();
         m_Visualizer.m_DepthFeedVisualizer.Deactivate();
     }

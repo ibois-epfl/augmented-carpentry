@@ -8,7 +8,7 @@
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/ACInfoModel.h"
 #include "FeedbackVisualizer.h"
-#include "SingleFaceFeedbackVisualizer.h"
+#include "CutPlaneVisualizer.h"
 #include "FabFeedback.h"
 #include "utils/GeometryUtils.h"
 
@@ -28,9 +28,9 @@ namespace AIAC{
     friend class CutCircularSawFeedback;
     };
 
-    class CutCircularSawSingleFaceFBV : public SingleFaceFeedbackVisualizer {
+    class CircularSawCutPlaneVisualizer : public CutPlaneVisualizer {
     public:
-        CutCircularSawSingleFaceFBV() = default;
+        CircularSawCutPlaneVisualizer() = default;
 
     friend class CutCircularSawFeedback;
     };
@@ -64,10 +64,10 @@ namespace AIAC{
         void updateRefFaces();
         void updateFeedback();
         void updateGeneralFeedback();
-        void updateSingleFaceFeedback();
+        void updateCutPlaneFeedback();
 
         CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
-        CutCircularSawSingleFaceFBV m_SingleFaceVisualizer;
+        CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
     };
 }
 
