@@ -40,7 +40,7 @@ namespace AIAC {
     }
 
     void CutCircularSawFeedback::Deactivate() {
-        m_SingleFaceVisualizer.Deactivate();
+        m_CutPlaneVisualizer.Deactivate();
         m_GeneralVisualizer.Deactivate();
     }
 
@@ -109,10 +109,9 @@ namespace AIAC {
         if(!m_NearestPerpendicularFaceID.empty()){
             m_GeneralVisualizer.Activate();
             updateGeneralFeedback();
-        } else {
-            m_SingleFaceVisualizer.Activate();
-            updateSingleFaceFeedback();
         }
+        m_CutPlaneVisualizer.Activate();
+        updateCutPlaneFeedback();
     }
 
     /**
@@ -185,11 +184,12 @@ namespace AIAC {
     }
 
     /**
-     * @brief When there is no perpendicular face, just show the intersection face of the saw and the timber
+     * @brief Show the intersection plane of the tool and virtual model.
+     * When there is no perpendicular face, it will be very useful.
      */
-    void CutCircularSawFeedback::updateSingleFaceFeedback(){
+    void CutCircularSawFeedback::updateCutPlaneFeedback(){
         std::vector<glm::vec3> bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
         std::vector<std::pair<int, int>> bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
-        m_SingleFaceVisualizer.Update(bbox, bboxIndices, m_Normal, m_Center);
+        m_CutPlaneVisualizer.Update(bbox, bboxIndices, m_Normal, m_Center);
     }
 }

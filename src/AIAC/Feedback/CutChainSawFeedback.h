@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "AIAC/Feedback/CutPlaneVisualizer.h"
 #include "AIAC/Feedback/FeedbackVisualizer.h"
 #include "AIAC/Feedback/FabFeedback.h"
 
@@ -34,6 +35,13 @@ namespace AIAC {
     friend class CutChainSawFeedback;
     };
 
+    class ChainSawCutPlaneVisualizer: public CutPlaneVisualizer {
+    public:
+        ChainSawCutPlaneVisualizer() = default;
+
+    friend class CutChainSawFeedback;
+    };
+
     class CutChainSawFeedVisualizer : public FeedbackVisualizer {
     public:
         CutChainSawFeedVisualizer();
@@ -59,10 +67,15 @@ namespace AIAC {
     public:
         CutChainSawFeedback() = default;
 
-        virtual void Update();
-        virtual void Activate();
-        virtual void Deactivate();
+        void Update() override;
+        void Activate() override;
+        void Deactivate() override;
+    
+    private:
+        void updateCutPlane();
+
     private:
         CutChainSawFeedVisualizer m_Visualizer;
+        ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;
     };
 }

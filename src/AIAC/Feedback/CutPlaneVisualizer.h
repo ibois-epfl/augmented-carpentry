@@ -1,13 +1,13 @@
-#ifndef SINGLEFACEFEEDBACKVISUALIZER_H
-#define SINGLEFACEFEEDBACKVISUALIZER_H
+#ifndef CUTPLANEVISUALIZER_H
+#define CUTPLANEVISUALIZER_H
 
 #include "FeedbackVisualizer.h"
 #include "utils/GeometryUtils.h"
 
 namespace AIAC{
-    class SingleFaceFeedbackVisualizer : public FeedbackVisualizer {
+    class CutPlaneVisualizer : public FeedbackVisualizer {
     public:
-        SingleFaceFeedbackVisualizer() {
+        CutPlaneVisualizer() {
             m_IntersectFace = GOMesh::Add();
             m_IntersectFace->SetIndices({0, 1, 2, 1, 2, 3});
             m_IntersectFace->SetColor(glm::vec4(1.0f, 0.3f, 0.3f, 0.5f));
@@ -19,6 +19,8 @@ namespace AIAC{
 
             m_AllPrimitives.push_back(m_IntersectFace);
             m_AllPrimitives.push_back(m_IntersectPolyline);
+
+            Deactivate();
         }
 
         /**
@@ -37,8 +39,11 @@ namespace AIAC{
                     intersectPts.push_back(intersectPt);
                 }
             }
-            // The size of intersect Pts should always be 4
-            // assert(intersectPts.size() == 4);
+            // The size of intersect Pts should always be 4, otherwise don't show the intersect face
+            if(intersectPts.size() != 4){
+                Deactivate();
+                return std::vector<glm::vec3>();
+            }
 
             // Update the intersect face
             m_IntersectFace->SetVertices(intersectPts);
@@ -70,4 +75,4 @@ namespace AIAC{
     };
 }
 
-#endif // SINGLEFACEFEEDBACKVISUALIZER_H
+#endif // CUTPLANEVISUALIZER_H
