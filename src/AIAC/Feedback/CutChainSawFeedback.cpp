@@ -69,9 +69,7 @@ namespace AIAC {
     }
 
     void CutChainSawFeedback::updateCutPlane (){
-        std::vector<glm::vec3> bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
-        std::vector<std::pair<int, int>> bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
-        m_CutPlaneVisualizer.Update(bbox, bboxIndices, m_NormalVec, m_NormStart);
+        m_CutPlaneVisualizer.Update(m_NormalVec, m_NormStart);
     }
 
     void CutChainSawFeedback::Update(){
