@@ -41,6 +41,10 @@ namespace AIAC
                 TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
                 TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
             }
+            if (IsShowShaded)
+            {
+                TTool->DrawShaded(currentFrame);
+            }
         }
 
         if (m_TtoolState == ttool::EventType::Tracking)
@@ -49,6 +53,10 @@ namespace AIAC
             if (IsShowSilouhette)
             {
                 TTool->DrawSilhouette(currentFrame);
+            }
+            if (IsShowShaded)
+            {
+                TTool->DrawShaded(currentFrame);
             }
             m_Pose = TTool->GetPose();
         }
@@ -61,6 +69,10 @@ namespace AIAC
             if (IsShowSilouhette)
             {
                 TTool->DrawSilhouette(currentFrame, glm::vec3(0.0f, 128.0f, 255.0f));
+            }
+            if (IsShowShaded)
+            {
+                TTool->DrawShaded(currentFrame);
             }
         }
 

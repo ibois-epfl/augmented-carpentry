@@ -68,6 +68,8 @@ namespace AIAC
         int ToolheadStateUI;
         /// Show the silouhette of the ttool
         bool IsShowSilouhette;
+        /// Show the silouhette of the ttool
+        bool IsShowShaded;
         /// Show the GOInfo toolhead's elements
         bool IsShowToolheadGOInfo;
 
