@@ -21,8 +21,6 @@ namespace AIAC{
         std::shared_ptr<GOLine> m_DrillBitLineAxis;
         /// the line axis for the hole
         std::shared_ptr<GOLine> m_HoleLineAxis;
-        /// GUI indicator for translation (dots)
-        std::vector<std::shared_ptr<GOPoint>> m_GUIPointsTranslation;
         /// GUI indicator for orientation
         std::shared_ptr<GOLine> m_GUILineOrientation;
         /// All text objects
@@ -41,6 +39,8 @@ namespace AIAC{
         void Deactivate() override;
 
     private:
+        // TODO: here we need to differentiate between the different types of visualization
+        // e.g.: the position visualization and rotation visualization
         HoleFeedbackVisualizer m_Visualizer;
     };
 }
