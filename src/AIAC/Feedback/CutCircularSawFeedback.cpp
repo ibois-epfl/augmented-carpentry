@@ -30,7 +30,7 @@ namespace AIAC {
 
     void CutCircularSawFeedback::Update() {
         m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
-        updatePosition();
+        updateToolPosition();
         updateRefFaces();
         updateFeedback();
     }
@@ -44,7 +44,7 @@ namespace AIAC {
         m_GeneralVisualizer.Deactivate();
     }
 
-    void CutCircularSawFeedback::updatePosition() {
+    void CutCircularSawFeedback::updateToolPosition() {
         m_Radius = AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
         m_Center = AC_FF_TOOL->GetData<CircularSawData>().CenterGO->GetPosition();
         m_NormalStart = m_Center; // AC_FF_TOOL->GetData<CircularSawData>().NormStartGO->GetPosition(); // this value is not initialized

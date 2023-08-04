@@ -74,6 +74,14 @@ namespace AIAC {
     private:
         void updateCutPlane();
 
+        glm::vec3 m_NormStart;
+        glm::vec3 m_NormEnd;
+        glm::vec3 m_NormalVec;
+        glm::vec3 m_ChainBase;
+        glm::vec3 m_ChainMid;
+        glm::vec3 m_ChainEnd;
+
+
     private:
         CutChainSawFeedVisualizer m_Visualizer;
         ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;
