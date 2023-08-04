@@ -27,6 +27,11 @@ namespace AIAC{
             }
         }
 
+        /**
+         * @brief Convert a double value to the real world scale in mm and return a string with 2 digits.
+         * If the value in mm is > 99, return "99"
+         * 
+        */
         static std::string toString(double val) {
             // TODO: / 50 * 1000 => convert to right scale in mm, change this to a variable based on config
             int valInt = (int)(val / 50 * 1000);

@@ -12,8 +12,8 @@ CutPlaneVisualizer::DistanceVisualizer::DistanceVisualizer(){
         m_Lines.push_back(line);
         m_AllPrimitives.push_back(line);
 
-        auto text = GOText::Add();
-        text->SetColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        auto text = GOText::Add("Dist", GOPoint(0.0f, 0.0f, 0.0f));
+        text->SetColor(GOColor::WHITE);
         text->SetWeight(GOWeight::BoldThick);
         m_Texts.push_back(text);
         m_AllPrimitives.push_back(text);
@@ -106,6 +106,11 @@ std::vector<glm::vec3> CutPlaneVisualizer:: Update(glm::vec3 faceNorm, glm::vec3
             line->SetPts(pt, minDistPt);
             text->SetAnchor(pt);
             text->SetText(FeedbackVisualizer::toString(minDist));
+            if(minDist < 0.5f){
+                text->SetColor(GOColor::YELLOW);
+            } else {
+                text->SetColor(GOColor::WHITE);
+            }
         }
 
     } else {
