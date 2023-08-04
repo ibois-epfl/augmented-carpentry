@@ -16,12 +16,12 @@ inline bool IsFileExist (const std::string& name) {
     return (stat (name.c_str(), &buffer) == 0);
 }
 
-inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 planePoint, glm::vec3 point)
-{
-    glm::vec3 v = point - planePoint;
-    float d = glm::dot(planeNormal, v);
-    return point - d * planeNormal;
-}
+// inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 planePoint, glm::vec3 point)
+// {
+//     glm::vec3 v = point - planePoint;
+//     float d = glm::dot(planeNormal, v);
+//     return point - d * planeNormal;
+// }
 
 inline void CvtGlmMat2CvMat(const glm::mat4 &glmMat, cv::Mat &cvMat)
 {

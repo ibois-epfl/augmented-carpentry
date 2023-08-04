@@ -9,11 +9,16 @@ git commit -m "ADD:<description>"         <--- for adding new elements
 git commit -m "FIX:<description>"         <--- for fixing (errors, typos)
 git commit -m "FLASH:<description>"       <--- quick checkpoint before refactoring
 git commit -m "MILESTONE:<description>"   <--- for capping moment in development
+git commit -m "CAP:<description>"         <--- for for less important milestones
 git commit -m "UPDATE:<description>"      <--- for moddification to the same file
 git commit -m "MISC:<description>"        <--- for any other reasons to be described
 git commit -m "WIP:<description>"         <--- for not finished work
 git commit -m "REFACTOR:<description>"    <--- for refactored code
 git commit -m "MERGE:<description>"       <--- for merging operations
+```
+You can merge few tags e.g.:
+```
+git commit -m "WIP-CAP:<description>      <--- for cap moment in not finished work 
 ```
 
 ### Naming & synthax convention
