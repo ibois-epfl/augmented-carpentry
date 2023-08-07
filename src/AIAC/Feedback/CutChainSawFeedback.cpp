@@ -69,7 +69,7 @@ namespace AIAC {
     }
 
     void CutChainSawFeedback::updateCutPlane (){
-        m_CutPlaneVisualizer.Update(m_NormalVec, m_NormStart);
+        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_NormalVec, m_NormStart);
     }
 
     void CutChainSawFeedback::Update(){
@@ -81,8 +81,9 @@ namespace AIAC {
         m_ChainEnd = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
         m_NormalVec = glm::normalize(m_NormEnd - m_NormStart);
 
-        updateCutPlane();
+        if(m_ToShowCutPlane) updateCutPlane();
 
+        TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
         float nearestPerpendicularFaceDist = 1e9f;
@@ -90,7 +91,6 @@ namespace AIAC {
         std::vector<std::string> parallelFaceIDs;
         std::vector<std::string> perpendicularFaceIDs;
 
-        TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
             auto faceNormal = faceInfo.GetNormal();
@@ -133,7 +133,7 @@ namespace AIAC {
         double perpendicularFaceEdge2Dist = 0.0f;
         glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
-        if(!nearestParallelFaceID.empty()){
+        if(!nearestParallelFaceID.empty() && cut){
             hasParallelFace = true;
             angleVisualizer.Activate();
 
@@ -309,7 +309,7 @@ namespace AIAC {
     void CutChainSawFeedback::Activate(){
         Update();
         m_Visualizer.Activate();
-        m_CutPlaneVisualizer.Activate();
+        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Activate();
     }
 
     void CutChainSawFeedback::Deactivate(){

@@ -19,6 +19,14 @@ namespace AIAC
         virtual void OnAttach() override;
         virtual void OnFrameStart() override;
 
+    public:
+        bool ToShowCutPlane = true;
+        void EnableCutPlane(bool enable) {
+            ToShowCutPlane = enable;
+            m_CutChainSawFeedback.EnableCutPlane(enable);
+            m_CutCircularSawFeedback.EnableCutPlane(enable);
+        };
+
     private:
         HoleFeedback m_HoleFeedback;
         CutChainSawFeedback m_CutChainSawFeedback;
