@@ -532,6 +532,7 @@ void DrawSlamMap(const shared_ptr<tslam::Map> &map, const glm::vec4 &color, floa
 `other shapes`
 
 <!-- These APIs are abandoned -->
+<!-- These APIs are deprecated; the code is comment out in the original file. -->
 <!-- ##### Line
 Draw a line base on two glm::vec3.
 ```c++
@@ -574,8 +575,6 @@ void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLflo
 * `color` Color of the cylinder.
 * `edgeColor` The color of the edges of the caps.
 * `sectorNum` Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value. -->
-
-
 
 ### CTesting
 When necessary, c++ testing is done by using CTest. Important/critical features (e.g., correcting functioning of graphics with OpenGL and Glfw) needs testing to be written (this is usefull for e.g., GitHub Actions). Such tests can be extracted from the main source code and integrated in a seperate section: cmake testing.

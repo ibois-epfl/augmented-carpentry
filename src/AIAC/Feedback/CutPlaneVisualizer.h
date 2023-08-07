@@ -8,6 +8,8 @@ namespace AIAC{
     class CutPlaneVisualizer : public FeedbackVisualizer {
     public:
         CutPlaneVisualizer();
+        void Activate() override;
+        void Deactivate() override;
         
         class DistanceVisualizer : public FeedbackVisualizer {
         public:

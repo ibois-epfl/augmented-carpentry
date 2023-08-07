@@ -11,6 +11,8 @@ namespace AIAC{
     class HoleFeedbackVisualizer : public FeedbackVisualizer {
     public:
         HoleFeedbackVisualizer();
+        void Activate() override;
+        void Deactivate() override;
 
     private:
         /// the line from the drillbit tip to the start of the hole (aka start distance)
