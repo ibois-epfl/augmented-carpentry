@@ -38,6 +38,16 @@ CutPlaneVisualizer::CutPlaneVisualizer(){
     Deactivate();
 }
 
+CutPlaneVisualizer::CutPlaneVisualizer::Activate(){
+    FeedbackVisualizer::Activate();
+    m_DistanceVisualizer.Activate();
+}
+
+CutPlaneVisualizer::CutPlaneVisualizer::Deactivate(){
+    FeedbackVisualizer::Deactivate();
+    m_DistanceVisualizer.Deactivate();
+}
+
 std::vector<glm::vec3> CutPlaneVisualizer:: Update(glm::vec3 faceNorm, glm::vec3 facePt){
     auto bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
     auto bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();

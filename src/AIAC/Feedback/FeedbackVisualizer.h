@@ -15,13 +15,13 @@ namespace AIAC{
         FeedbackVisualizer() = default;
         ~FeedbackVisualizer() = default;
 
-        inline void Activate() {
+        inline virtual void Activate() {
             for (auto &p : m_AllPrimitives) {
                 p->SetVisibility(true);
             }
         }
 
-        inline void Deactivate() {
+        inline virtual void Deactivate() {
             for (auto &p : m_AllPrimitives) {
                 p->SetVisibility(false);
             }
