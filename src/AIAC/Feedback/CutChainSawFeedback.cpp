@@ -133,7 +133,8 @@ namespace AIAC {
         double perpendicularFaceEdge2Dist = 0.0f;
         glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
-        if(!nearestParallelFaceID.empty() && cut){
+        // update angle visualizer
+        if(!nearestParallelFaceID.empty() && !cut->IsSingleFace()){
             hasParallelFace = true;
             angleVisualizer.Activate();
 
