@@ -536,7 +536,13 @@ namespace AIAC
 
     void LayerUI::SetPaneUIFeedback()
     {
-        if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->IsShowCutPlane));
+        if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
+            if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
+                AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
+            } else {
+                AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
+            }
+        };
     }
 
     void LayerUI::ShowMappingPopup()

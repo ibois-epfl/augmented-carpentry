@@ -110,8 +110,10 @@ namespace AIAC {
             m_GeneralVisualizer.Activate();
             updateGeneralFeedback();
         }
-        m_CutPlaneVisualizer.Activate();
-        updateCutPlaneFeedback();
+        if(m_ToShowCutPlane) {
+            m_CutPlaneVisualizer.Activate();
+            updateCutPlaneFeedback();
+        }
     }
 
     /**
@@ -188,6 +190,6 @@ namespace AIAC {
      * When there is no perpendicular face, it will be very useful.
      */
     void CutCircularSawFeedback::updateCutPlaneFeedback(){
-        m_CutPlaneVisualizer.Update(m_Normal, m_Center);
+        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_Normal, m_Center);
     }
 }
