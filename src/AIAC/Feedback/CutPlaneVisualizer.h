@@ -11,8 +11,6 @@ namespace AIAC{
         void Activate() override;
         void Deactivate() override;
         
-<<<<<<< Updated upstream
-=======
         // Distance visualizer: 4 line and 4 text
         class DistanceVisualizer : public FeedbackVisualizer {
         public:
@@ -27,7 +25,6 @@ namespace AIAC{
         friend class CutPlaneVisualizer;
         };
 
->>>>>>> Stashed changes
         /**
          * @brief Update the intersection polyline and face, and return the intersection point
          * 
@@ -41,6 +38,7 @@ namespace AIAC{
     protected:
         std::shared_ptr<GOPolyline> m_IntersectPolyline;
         std::shared_ptr<GOMesh> m_IntersectFace;
+        DistanceVisualizer m_DistanceVisualizer;
     };
 }
 

@@ -4,6 +4,24 @@
 
 namespace AIAC{
 
+CutPlaneVisualizer::DistanceVisualizer::DistanceVisualizer(){
+    for(int i = 0 ; i < 4 ; i++){
+        auto line = GOLine::Add();
+        line->SetColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        line->SetWeight(2.0f);
+        m_Lines.push_back(line);
+        m_AllPrimitives.push_back(line);
+
+        auto text = GOText::Add("Dist", GOPoint(0.0f, 0.0f, 0.0f));
+        text->SetColor(GOColor::WHITE);
+        text->SetWeight(GOWeight::BoldThick);
+        m_Texts.push_back(text);
+        m_AllPrimitives.push_back(text);
+    }
+
+    Deactivate();
+}
+
 CutPlaneVisualizer::CutPlaneVisualizer(){
     m_IntersectFace = GOMesh::Add();
     m_IntersectFace->SetIndices({0, 1, 2, 1, 2, 3});
@@ -71,8 +89,43 @@ std::vector<glm::vec3> CutPlaneVisualizer:: Update(glm::vec3 faceNorm, glm::vec3
 
     // Update distance indicator
     TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
-    if(cut->GetAllFaces().size() == 1)
+    if(cut->GetAllNonExposedFaceIDs().size() == 1){
+        m_DistanceVisualizer.Activate();
+        auto nonExposedFaceID = *(cut->GetAllNonExposedFaceIDs().begin());
+        auto nonExposedFace = cut->GetFace(nonExposedFaceID);
 
+        auto faceCorners = nonExposedFace.GetCorners();
+        for(int i = 0 ; i<4 ; i++){
+            auto line = m_DistanceVisualizer.m_Lines[i];
+            auto text = m_DistanceVisualizer.m_Texts[i];
+
+            auto pt = intersectPts[i];
+            
+            // find the minimal distance between pt and the face corners
+            float minDist = std::numeric_limits<float>::max();
+            glm::vec3 minDistPt;
+            for(auto corner : faceCorners){
+                auto dist = glm::distance(pt, corner);
+                if(dist < minDist){
+                    minDist = dist;
+                    minDistPt = corner;
+                }
+            }
+            
+            // update the line & text
+            line->SetPts(pt, minDistPt);
+            text->SetAnchor(pt);
+            text->SetText(FeedbackVisualizer::toString(minDist));
+            if(minDist < 0.5f){
+                text->SetColor(GOColor::YELLOW);
+            } else {
+                text->SetColor(GOColor::WHITE);
+            }
+        }
+
+    } else {
+        m_DistanceVisualizer.Deactivate();
+    }
 
     return intersectPts;
 }

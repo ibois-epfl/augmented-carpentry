@@ -94,12 +94,23 @@ namespace AIAC
         return AIAC_GOREG->GetAllGOs<GOPoint>();
     }
 
+    GOLine::GOLine()
+    {
+        m_Type = GOTypeFlags::_GOLine;
+    }
 
     GOLine::GOLine(GOPoint p1, GOPoint p2, float weight)
         : m_PStart(p1), m_PEnd(p2)
     {
         m_Weight = weight;
         m_Type = GOTypeFlags::_GOLine;
+    }
+    
+     std::shared_ptr<GOLine> GOLine::Add()
+    {
+        auto ptrGO = std::make_shared<GOLine>(GOLine());
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOLine> GOLine::Add(GOPoint p1, GOPoint p2, float weight)
@@ -414,12 +425,24 @@ namespace AIAC
         return AIAC_GOREG->GetAllGOs<GOMesh>();
     }
 
+    GOText::GOText()
+    {
+        m_Anchor.SetVisibility(false);
+        m_Type = GOTypeFlags::_GOText;
+    }
 
     GOText::GOText(std::string text, GOPoint anchor, double size)
         : m_Text(text), m_Anchor(anchor), m_Size(size)
     {
         m_Anchor.SetVisibility(false);
         m_Type = GOTypeFlags::_GOText;
+    }
+
+    std::shared_ptr<GOText> GOText::Add()
+    {
+        auto ptrGO = std::make_shared<GOText>(GOText());
+        AIAC_GOREG->Register(ptrGO);
+        return ptrGO;
     }
 
     std::shared_ptr<GOText> GOText::Add(std::string text, GOPoint anchor, double size)
