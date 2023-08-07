@@ -70,6 +70,9 @@ namespace AIAC {
         void Update() override;
         void Activate() override;
         void Deactivate() override;
+
+        // FIXME: maybe we can have a "CutFeedback" class for such fuctions
+        void EnableCutPlane(bool enable) { m_ToShowCutPlane = enable; }
     
     private:
         void updateCutPlane();
@@ -80,6 +83,8 @@ namespace AIAC {
         glm::vec3 m_ChainBase;
         glm::vec3 m_ChainMid;
         glm::vec3 m_ChainEnd;
+
+        bool m_ToShowCutPlane = true;
 
 
     private:

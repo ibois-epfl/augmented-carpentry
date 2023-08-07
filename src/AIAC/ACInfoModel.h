@@ -151,6 +151,8 @@ public:
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+
+        // Sub-class Face
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
@@ -174,6 +176,8 @@ public:
             friend class TimberInfo;
             friend class ACInfoModel;
         };
+
+        // Sub-class Edge
         class Edge: public Component{
         public:
             GOPoint GetStartPt() { return m_GO->GetPStart(); }
@@ -192,6 +196,7 @@ public:
             friend class ACInfoModel;
         };
 
+        inline bool IsSingleFace() const { return m_NonExposedFaceIDs.size() == 1; }
         inline Face& GetFace(std::string id) { return m_Faces[id]; }
         inline Edge& GetEdge(std::string id) { return m_Edges[id]; }
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }

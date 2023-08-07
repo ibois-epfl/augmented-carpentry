@@ -54,6 +54,7 @@ namespace AIAC
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
         StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
+        StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
 
         m_IsOpen = new bool(true);
     }
@@ -531,6 +532,11 @@ namespace AIAC
             }
         }
         ImGui::EndChild();
+    }
+
+    void LayerUI::SetPaneUIFeedback()
+    {
+        if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->IsShowCutPlane));
     }
 
     void LayerUI::ShowMappingPopup()
