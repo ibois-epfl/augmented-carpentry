@@ -35,10 +35,7 @@ namespace AIAC
 
         // init the projection matrix based on the camera parameters
         InitProjMatrix();
-
-        // Load meshes
-        // ReloadMeshes();
-
+        
         // Initialize the static interface of TextRenderer
         TextRenderer::Init();
 
@@ -161,20 +158,6 @@ namespace AIAC
                 glm::vec3(0, 0, 1),   // where you want to look at, in world space
                 glm::vec3(0, 1, 0)        // probably glm::vec3(0,1,0), but (0,-1,0) would make you looking upside-down, which can be great too
         );
-    }
-
-    void Renderer::ReloadMeshes()
-    {
-        auto pointCloudMapPath = AIAC::Config::Get<string>(AIAC::Config::SEC_RENDERER, AIAC::Config::PCD_MAP_PATH, "assets/tslam/examplePointCloud.ply");
-        auto digitalModelPath = AIAC::Config::Get<string>(AIAC::Config::SEC_RENDERER, AIAC::Config::DIGITAL_MODEL_PATH, "assets/tslam/example3dModel.ply");
-
-        PointCloudMap = Mesh(pointCloudMapPath);
-        DigitalModel = Mesh(digitalModelPath);
-
-        std::vector<std::string> meshPaths = AIAC::Config::GetVector<string>(AIAC::Config::SEC_RENDERER, AIAC::Config::MESH_PATHS, {});
-        for(auto path : meshPaths) {
-            Meshes.emplace_back(path);
-        }
     }
 
     void Renderer::OnRender()
