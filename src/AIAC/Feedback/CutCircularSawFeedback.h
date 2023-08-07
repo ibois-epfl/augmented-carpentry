@@ -43,6 +43,8 @@ namespace AIAC{
         void Update() override;
         void Activate() override;
         void Deactivate() override;
+
+        inline void EnableCutPlane(bool enable) { m_ToShowCutPlane = enable; };
         
     private:
         // data
@@ -59,6 +61,9 @@ namespace AIAC{
 
         std::string m_NearestParallelFaceID;
         std::string m_NearestPerpendicularFaceID;
+
+        // config
+        bool m_ToShowCutPlane = true;
 
         void updateToolPosition();
         void updateRefFaces();
