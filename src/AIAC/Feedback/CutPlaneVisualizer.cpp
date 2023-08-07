@@ -38,12 +38,12 @@ CutPlaneVisualizer::CutPlaneVisualizer(){
     Deactivate();
 }
 
-CutPlaneVisualizer::CutPlaneVisualizer::Activate(){
+void CutPlaneVisualizer::CutPlaneVisualizer::Activate(){
     FeedbackVisualizer::Activate();
     m_DistanceVisualizer.Activate();
 }
 
-CutPlaneVisualizer::CutPlaneVisualizer::Deactivate(){
+void CutPlaneVisualizer::CutPlaneVisualizer::Deactivate(){
     FeedbackVisualizer::Deactivate();
     m_DistanceVisualizer.Deactivate();
 }

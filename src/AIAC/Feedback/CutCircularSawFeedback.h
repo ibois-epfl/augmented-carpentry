@@ -16,8 +16,6 @@ namespace AIAC{
     class CutCircularSawFeedbackVisualizer : public FeedbackVisualizer {
     public:
         CutCircularSawFeedbackVisualizer();
-        void Activate() override;
-        void Deactivate() override;
 
     private:
         std::shared_ptr<GOPoint> m_BottomPoint;

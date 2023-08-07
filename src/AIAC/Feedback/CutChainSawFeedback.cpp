@@ -81,9 +81,13 @@ namespace AIAC {
         m_ChainEnd = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
         m_NormalVec = glm::normalize(m_NormEnd - m_NormStart);
 
-        if(m_ToShowCutPlane) updateCutPlane();
-
         TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
+
+        if(m_ToShowCutPlane) updateCutPlane();
+        
+        // if it's a single face, only show the red cutting plane
+        if(cut->IsSingleFace()) return;
+
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
         float nearestPerpendicularFaceDist = 1e9f;
@@ -134,7 +138,7 @@ namespace AIAC {
         glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
         // update angle visualizer
-        if(!nearestParallelFaceID.empty() && !cut->IsSingleFace()){
+        if(!nearestParallelFaceID.empty()){
             hasParallelFace = true;
             angleVisualizer.Activate();
 
