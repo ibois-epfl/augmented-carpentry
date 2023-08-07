@@ -14,6 +14,8 @@ namespace AIAC {
     class CutChainSawAngleFeedVisualizer : public FeedbackVisualizer {
     public:
         CutChainSawAngleFeedVisualizer();
+        void Activate() override;
+        void Deactivate() override;
 
     private:
         std::shared_ptr<GOLine> m_LineEnd;
@@ -26,6 +28,8 @@ namespace AIAC {
     class CutChainSawDepthFeedVisualizer : public FeedbackVisualizer {
     public:
         CutChainSawDepthFeedVisualizer();
+        void Activate() override;
+        void Deactivate() override;
 
     private:
         std::shared_ptr<GOLine> m_LineIntersect;
@@ -45,7 +49,9 @@ namespace AIAC {
     class CutChainSawFeedVisualizer : public FeedbackVisualizer {
     public:
         CutChainSawFeedVisualizer();
-
+        void Activate() override;
+        void Deactivate() override;
+        
         CutChainSawAngleFeedVisualizer& GetAngleFeedVisualizer() { return m_AngleFeedVisualizer; }
         CutChainSawDepthFeedVisualizer& GetDepthFeedVisualizer() { return m_DepthFeedVisualizer; }
 
