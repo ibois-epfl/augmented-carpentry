@@ -160,7 +160,7 @@ namespace AIAC {
             angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
             angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
         } else {
-             angleVisualizer.Deactivate();
+            angleVisualizer.Deactivate();
         }
 
         // Perpendicular face

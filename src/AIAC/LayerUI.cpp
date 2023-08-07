@@ -14,6 +14,7 @@
 
 #include "ttool.hh"
 
+#include "utils/utils.h"
 
 namespace AIAC
 {
@@ -293,6 +294,11 @@ namespace AIAC
         ImGui::Text("Mapping Functions:");
         ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
             if(ImGui::Button("Start Mapping")){
+                std::string defaultPath = "";
+                defaultPath += "./scanned_map/map-";
+                defaultPath += GetCurrentDateTime();
+                defaultPath += ".map";
+                strncpy(m_MappingParams.MapSavingPath, defaultPath.c_str(), defaultPath.size());
                 AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStartMappingEvent>());
             }
             ImGui::SameLine();
