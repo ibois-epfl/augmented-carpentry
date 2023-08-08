@@ -16,7 +16,7 @@ namespace AIAC
         LayerToolhead()
             : IsShowSilouhette(true),
               ToolheadStateUI(-1),
-              IsShowToolheadGOInfo(true),
+              IsShowToolheadGOInfo(false),
               m_ACScaleFactor(50.0f),
             m_TtoolState(ttool::EventType::None)
         {
@@ -31,6 +31,7 @@ namespace AIAC
         /// @brief Destroy the  ttool view and recreate a new ttool object with given camera params
         void ReloadCameraFromMatrix(cv::Mat cameraMatrix, cv::Size cameraSize);
 
+        void DetectToolhead();
 
         /// @brief Update the ttool state from the UI
         void UpdateToolheadStateUI();
@@ -38,7 +39,9 @@ namespace AIAC
         /// @brief Save the current pose of the ttool to the config file and to the ttool model manager (as a fallback pose for the ttool)
         /// It will reset LayerToolhead state to None (i.e. stop tracking and pose input)
         void SavePose();
-        /// @brief Set the pose from the value in the config
+        /// @brief Reset the pose of the ttool to the last saved pose
+        void ResetToLastSavedPose();
+        /// @brief Set the pose from the value in the config initially read
         void ResetPoseFromConfig();
 
         /// @brief Get the current pose of the ttool
@@ -53,6 +56,8 @@ namespace AIAC
         cv::Matx44f GetPose() const { return m_Pose; }
         /// @brief Get the current tracking status of the ttool
         std::string GetTrackingStatus() const { return TTool ? TTool->GetTrackingStatus() : "TTool not initialized"; }
+        /// @brief Get the current classifier log of the ttool
+        std::string GetClassifierLog() const { return TTool ? TTool->GetClassifierLog() : "TTool not initialized"; }
     
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
@@ -65,8 +70,12 @@ namespace AIAC
         int ToolheadStateUI;
         /// Show the silouhette of the ttool
         bool IsShowSilouhette;
+        /// Show the silouhette of the ttool
+        bool IsShowShaded;
         /// Show the GOInfo toolhead's elements
         bool IsShowToolheadGOInfo;
+        /// Save pose log
+        bool IsSavePoseLog = false;
 
     private: ///< Private members
         /// The current state of the ttool (None, PoseInput, Tracking)

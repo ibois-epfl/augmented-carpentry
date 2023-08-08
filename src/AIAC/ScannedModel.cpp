@@ -3,11 +3,20 @@
 #include "GeometryUtils.h"
 #include "ScannedModel.h"
 
-using namespace std;
-
 namespace AIAC
 {
     bool ScannedModel::Load(std::string path) {
+        // check if file is good
+        if(path.empty()){
+            AIAC_ERROR("ACInfoModel::Load() path is empty");
+            return false;
+        }
+        
+        if(!std::filesystem::exists(path)){
+            AIAC_ERROR("ACInfoModel::Load() file does not exist");
+            return false;
+        }
+
         m_Mesh = GOMesh::LoadPly(path);
         if(m_Mesh == nullptr) return false;
         
@@ -30,7 +39,7 @@ namespace AIAC
 
         auto vertices = m_Mesh->GetVertices();
         auto basePt = vertices[0];
-        vector<Neighbor> neighbors;
+        std::vector<Neighbor> neighbors;
 
         for (auto& v : vertices) {
             auto vec = v - basePt;
@@ -39,7 +48,7 @@ namespace AIAC
         }
 
         // sort by distance
-        sort(neighbors.begin(), neighbors.end(), [](Neighbor& a, Neighbor& b) {
+        std::sort(neighbors.begin(), neighbors.end(), [](Neighbor& a, Neighbor& b) {
             return a.dist < b.dist;
         });
 
@@ -61,7 +70,7 @@ namespace AIAC
         // if it's in the correct order, test1 should be ~0,
         // therefore, when test1 > test2, it means that the order is wrong
         if (test1 > test2) {
-            swap(neighbors[1], neighbors[2]);
+            std::swap(neighbors[1], neighbors[2]);
         }
 
         basePt = neighbors[4].pt;
@@ -72,7 +81,7 @@ namespace AIAC
         // if it's in the correct order, test1 should be ~0,
         // therefore, when test1 > test2, it means that the order is wrong
         if (test1 > test2) {
-            swap(neighbors[5], neighbors[6]);
+            std::swap(neighbors[5], neighbors[6]);
         }
 
         // re-order the vertices, making it a counter-clockwise order start from the longer edge
@@ -96,12 +105,6 @@ namespace AIAC
             neighbors[7].pt,
             neighbors[3].pt
         };
-
-        // print the bounding box
-        // cout << "Bbox: " << endl;
-        // for(auto& pt : m_Bbox){
-        //     cout << pt.x << " " << pt.y << " " << pt.z << endl;
-        // }
 
         // testing the rotation is correct
         float minTotalDist = 1e9;
@@ -137,69 +140,12 @@ namespace AIAC
         for(auto& line : m_BboxGOLines)
             GOLine::Remove(line);
         
-        // bottom
-        auto vec = glm::normalize(m_Bbox[1] - m_Bbox[0]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[0] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[1] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[2] - m_Bbox[1]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[1] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[2] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[3] - m_Bbox[2]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[2] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[3] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[0] - m_Bbox[3]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[3] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[0] - vec, 2.0f));
-
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[1], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[2], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[3], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[0], 2.0f));
-
-        // top
-        vec = glm::normalize(m_Bbox[5] - m_Bbox[4]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[4] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[5] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[6] - m_Bbox[5]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[5] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[6] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[7] - m_Bbox[6]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[6] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[7] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[4] - m_Bbox[7]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[7] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[4] - vec, 2.0f));
-
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[5], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[6], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[7], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[4], 2.0f));
-
-        // side
-        vec = glm::normalize(m_Bbox[4] - m_Bbox[0]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[0] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[4], m_Bbox[4] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[5] - m_Bbox[1]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[1] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[5], m_Bbox[5] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[6] - m_Bbox[2]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[2] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[6], m_Bbox[6] - vec, 2.0f));
-        vec = glm::normalize(m_Bbox[7] - m_Bbox[3]);
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[3] + vec, 2.0f));
-        m_BboxGOLines.push_back(GOLine::Add(m_Bbox[7], m_Bbox[7] - vec, 2.0f));
-
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[0], m_Bbox[4], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[1], m_Bbox[5], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[2], m_Bbox[6], 2.0f));
-        // m_BboxGOLines.push_back(GOLine::Add(m_Bbox[3], m_Bbox[7], 2.0f));
-
-        // visualize the bounding box corner
-        // for(int i = 0; i < 8; i++){
-        //     auto pt = m_Bbox[i];
-        //     auto go = GOText::Add(std::to_string(i), pt, 1.0f);
-        //     go->SetColor(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-        // }
+        for(auto& edge : m_BboxEdgesIndices){
+            auto i = edge.first, k = edge.second;
+            auto vec = glm::normalize(m_Bbox[k] - m_Bbox[i]);
+            m_BboxGOLines.push_back(GOLine::Add(m_Bbox[i], m_Bbox[i] + vec, 2.0f));
+            m_BboxGOLines.push_back(GOLine::Add(m_Bbox[k], m_Bbox[k] - vec, 2.0f));
+        }
     }
 
     float ScannedModel::GetLength(){

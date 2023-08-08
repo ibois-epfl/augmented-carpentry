@@ -7,6 +7,40 @@
 
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
+## ORD Proposal Gantt
+
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       NC package planning
+    axisFormat %Y-%m
+
+    Start                                                     :milestone, crit, strt, 2023-09-01, 0d
+
+    section WP1
+    CMake project + CI/CD                                     :cmkprj, 2023-09-01, 10w
+    Optimization + Refactoring                                :ref, after cmkprj, 8w
+    Packaging + containerization                              :packcont, after ref, 6w
+    deliverable 1                                             :milestone, del1, 2024-01-01, 0d
+    deliverable 2                                             :milestone, del2, 2024-02-20, 0d
+
+    section WP2
+    Documentation + Guidelines                                :docu, 2024-01-20, 6w
+    Wiki                                                      :wiki, after docu, 4w
+    deliverable 3                                             :milestone, del3, 2024-04-01, 0d
+    deliverable 4                                             :milestone, del4, 2024-04-01, 0d
+    Governance System                                         :gov, 2024-06-01, 6w
+    deliverable 5                                             :milestone, del5, 2024-07-20, 0d
+
+    section WP3
+    Packaging component 1                                     :pack1, after strt, 8w
+    deliverable 6                                             :milestone, del6, 2023-10-30, 0d
+    Packaging component 2                                     :pack1, after del6, 8w
+    deliverable 7                                             :milestone, del7, 2023-12-30, 0d
+
+    End                                                       :milestone, crit, ender, 2024-07-31, 0d
+```
+
 ## TODOList
 > - [ ] the change of the calibration file brakes the tslam (but not the ttool it seems)
 > - [ ] when we create the output yaml map we should not the calibration file and/or the camera model since this files is calibration-dependent

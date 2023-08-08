@@ -13,12 +13,15 @@ namespace AIAC
     {
         // init ttool
         TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
-        
+
         // load the datasets acits
         this->ACInfoToolheadManager->LoadToolheadModels();
+        if (this->IsShowToolheadGOInfo)
+            this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(true);
 
         syncTToolAndACInfoToolhead();
     }
@@ -29,6 +32,9 @@ namespace AIAC
 
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        
+        cv::Mat currentFramePure;
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFramePure);
 
         if (m_TtoolState == ttool::EventType::PoseInput)
         {
@@ -38,6 +44,10 @@ namespace AIAC
                 TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
                 TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
             }
+            if (IsShowShaded)
+            {
+                TTool->DrawShaded(currentFrame);
+            }
         }
 
         if (m_TtoolState == ttool::EventType::Tracking)
@@ -46,6 +56,10 @@ namespace AIAC
             if (IsShowSilouhette)
             {
                 TTool->DrawSilhouette(currentFrame);
+            }
+            if (IsShowShaded)
+            {
+                TTool->DrawShaded(currentFrame);
             }
             m_Pose = TTool->GetPose();
         }
@@ -59,15 +73,37 @@ namespace AIAC
             {
                 TTool->DrawSilhouette(currentFrame, glm::vec3(0.0f, 128.0f, 255.0f));
             }
+            if (IsShowShaded)
+            {
+                TTool->DrawShaded(currentFrame);
+            }
         }
 
+        if (IsSavePoseLog) { TTool->WritePoseToFile(currentFramePure); }
+        else { TTool->ResetPoseWriter(); }
+
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().ReplaceCvMat(currentFrame);
+    }
+
+    void LayerToolhead::DetectToolhead()
+    {
+        cv::Mat currentFrame;
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetPureCvMat().copyTo(currentFrame);
+
+        std::string toolhead = TTool->Classify(currentFrame);
+
+        this->ACInfoToolheadManager->SetActiveToolhead(toolhead);
+        this->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(this->IsShowToolheadGOInfo);
+
+        int id = this->ACInfoToolheadManager->GetActiveToolhead()->GetId();
+        this->TTool->SetObjectID(id);
     }
 
     void LayerToolhead::ReloadCameraFromFile()
     {
         TTool->DestrolView();
         TTool = std::make_shared<ttool::TTool>(
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
             );
@@ -78,7 +114,8 @@ namespace AIAC
     {
         TTool->DestrolView();
         TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Aie Aie aie, y a rien de configurer"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
             cameraMatrix,
             cameraSize
             );
@@ -151,9 +188,14 @@ namespace AIAC
 
     }
 
+    void LayerToolhead::ResetToLastSavedPose()
+    {
+        this->TTool->GetModelManager()->ResetObjectToLastSavePose();
+    }
+
     void LayerToolhead::ResetPoseFromConfig()
     {
-        this->TTool->GetModelManager()->ResetObjectToInitialPose();
+        this->TTool->GetModelManager()->ResetObjectToConfigInitialPose();
     }
 
     void LayerToolhead::syncTToolAndACInfoToolhead()

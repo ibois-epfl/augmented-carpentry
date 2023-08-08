@@ -12,7 +12,7 @@ namespace AIAC{
 enum class ACIMState{
     NOT_DONE,
     CURRENT,
-    DONE,
+    DONE
 };
 
 static std::map<ACIMState, glm::vec4> HOLE_AXIS_COLOR = {
@@ -39,6 +39,46 @@ static std::map<ACIMState, glm::vec4> CUT_EDGE_COLOR = {
     {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
 };
 
+/**
+ * @brief Convert string m_State to ACIMState
+ * @param m_State ACIMState
+ */
+static ACIMState StringToState(std::string m_State);
+
+/**
+ * @brief Convert a string separated by space to glm::vec3
+ * @param str string separated by space
+ * @return glm::vec3
+ */
+static glm::vec3 StringToVec3(std::string str);
+
+/**
+ * @brief Convert a string separated by space to a list of string
+ * @param str string separated by space
+ * @return a std::vector<std::string>
+ */
+static std::vector<std::string> StringToTokens(std::string str);
+
+/**
+ * @brief Convert a string separated by space to a set of tokens
+ * @param str string separated by space
+ * @return a std::set<std::string>
+ */
+static std::set<std::string> StringToSet(std::string str);
+
+/**
+ * @brief Convert a string to bool
+ * @param str string
+ * @return bool
+ */
+static bool StringToBool(std::string str);
+
+/**
+ * @brief Convert a vec3 to String
+ * @param vec3 vec3
+ * @return string
+ */
+static std::string Vec3ToString(glm::vec3 vec3);
 
 class TimberInfo{
 public:
@@ -48,6 +88,7 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
 
     public:
         bool IsMarkedDone; // This one is for UI
@@ -56,6 +97,7 @@ public:
         std::string GetTypeString() const { return m_Type; }
 
     protected:
+        float m_Scale = 50.0f; // When converting to real world unit, divide by this number
         ACIMState m_State;
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
@@ -73,12 +115,16 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
+        void SwapStartEnd();
 
     public:  __always_inline
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
         std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
 
     private:
+        // These values uses original coordinate in xml file
+        // i.e. not transformation (rotation / translation) is applied
         glm::vec3 m_Start;
         bool m_StartExposed;
         glm::vec3 m_End;
@@ -104,33 +150,42 @@ public:
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
+        virtual void SetVisibility(bool visible);
 
+        // Sub-class Face
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
+            bool IsExposed() const { return m_Exposed; }
+            glm::vec3 GetNormal() const { return m_Normal; }
+            glm::vec3 GetCenter() const { return m_Center; }
+            std::vector<glm::vec3> GetCorners() const { return m_Corners; }
+            std::set<std::string> GetEdges() const { return m_Edges; }
+            std::set<std::string> GetNeighbors() const { return m_Neighbors; }
 
         private:
-            virtual void SetAsCurrent();
-
             bool m_Exposed;
             glm::vec3 m_Normal;
             glm::vec3 m_Center;
+            std::vector<glm::vec3> m_Corners;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
-            std::vector<glm::vec3> m_Corners;
             std::shared_ptr<GOMesh> m_GO;
 
             friend class Cut;
             friend class TimberInfo;
             friend class ACInfoModel;
         };
+
+        // Sub-class Edge
         class Edge: public Component{
         public:
+            GOPoint GetStartPt() { return m_GO->GetPStart(); }
+            GOPoint GetEndPt() { return m_GO->GetPEnd(); }
             Edge() : Component("EDGE") {}
 
         private:
-            virtual void SetAsCurrent();
-
+            // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
@@ -140,10 +195,23 @@ public:
             friend class TimberInfo;
             friend class ACInfoModel;
         };
+
+        inline bool IsSingleFace() const { return m_NonExposedFaceIDs.size() == 1; }
+        inline Face& GetFace(std::string id) { return m_Faces[id]; }
+        inline Edge& GetEdge(std::string id) { return m_Edges[id]; }
+        inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
+        inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
+        inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
+        inline std::set<std::string>& GetAllNonExposedEdgeIDs() { return m_NonExposedEdgeIDs; }
+        inline glm::vec3 GetCenter() const { return m_Center; }
+        void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
     
     private:
+        std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
+        std::set<std::string> m_NonExposedFaceIDs;
+        std::set<std::string> m_NonExposedEdgeIDs;
         glm::vec3 m_Center;
         std::shared_ptr<GOText> m_IDLabelGO;
 
@@ -160,7 +228,15 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
+    inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
+    
+    void HideAllComponentsExceptCurrent();
+    void ShowAllComponents();
+
+public:
+    bool IsShowingAllComponents = false;
 
 private:
     std::string m_ID;
@@ -176,11 +252,17 @@ private:
     // (0)-----------------------(1)
     //
     std::vector<glm::vec3> m_Bbox;
+    std::vector<std::pair<int, int> > m_BboxEdgesIndices = {
+        {0, 1}, {1, 2}, {2, 3}, {3, 0}, // bottom
+        {4, 5}, {5, 6}, {6, 7}, {7, 4}, // top
+        {0, 4}, {1, 5}, {2, 6}, {3, 7}  // vertical
+    };
     ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
     std::map<std::string, Hole> m_Holes;
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
+    
 
     friend class ACInfoModel;
 };
@@ -227,7 +309,7 @@ public:
      * @brief transform all the GOPrimitive belonging to the ACInfoModel
      * @param transformMat transformation matrix
      */
-    void TransformGOPrimitives(glm::mat4x4 transformMat);
+    void Transform(glm::mat4x4 transformMat);
 
     /**
      * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
@@ -236,40 +318,14 @@ public:
     float GetLength();
 
     /**
-     * @brief Convert string m_State to ACIMState
-     * @param m_State ACIMState
+     * Set the visibility of bbox to true or false
      */
-    static ACIMState StringToState(std::string m_State);
-
-    /**
-     * @brief Convert a string separated by space to glm::vec3
-     * @param str string separated by space
-     * @return glm::vec3
-     */
-    static glm::vec3 StringToVec3(std::string str);
-
-    /**
-     * @brief Convert a string separated by space to a list of string
-     * @param str string separated by space
-     * @return a std::vector<std::string>
-     */
-    static std::vector<std::string> StringToTokens(std::string str);
-
-    /**
-     * @brief Convert a string separated by space to a set of tokens
-     * @param str string separated by space
-     * @return a std::set<std::string>
-     */
-    static std::set<std::string> StringToSet(std::string str);
-
-    /**
-     * @brief Convert a string to bool
-     * @param str string
-     * @return bool
-     */
-    static bool StringToBool(std::string str);
+    void SetBboxVisibility(bool visible);
 
 private:
+    float m_EdgeWeight = 1.1f;
+    float m_LabelSize = 0.75f;
+
     float m_Scale = 50.0f;
     std::string m_FilePath;
     pugi::xml_document m_ACIMDoc;

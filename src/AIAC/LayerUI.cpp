@@ -14,6 +14,7 @@
 
 #include "ttool.hh"
 
+#include "utils/utils.h"
 
 namespace AIAC
 {
@@ -54,6 +55,7 @@ namespace AIAC
         StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
         StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
+        StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
 
         m_IsOpen = new bool(true);
     }
@@ -292,6 +294,11 @@ namespace AIAC
         ImGui::Text("Mapping Functions:");
         ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
             if(ImGui::Button("Start Mapping")){
+                std::string defaultPath = "";
+                defaultPath += "./scanned_map/map-";
+                defaultPath += GetCurrentDateTime();
+                defaultPath += ".map";
+                strncpy(m_MappingParams.MapSavingPath, defaultPath.c_str(), defaultPath.size());
                 AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStartMappingEvent>());
             }
             ImGui::SameLine();
@@ -359,6 +366,8 @@ namespace AIAC
             ImGui::SliderFloat("## Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
                 if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
                 sliderVal = 0.f;
+            ImGui::SameLine();
+            ImGui::Text(std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
             
             if(ImGui::Button("Align Center")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
@@ -405,15 +414,56 @@ namespace AIAC
                 }
                 ImGui::EndCombo();
             }
+            auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
+            if (auto hole = dynamic_cast<TimberInfo::Hole*>(currentComp)){
+                if(ImGui::Button("Swap S/E")) hole->SwapStartEnd();
+                ImGui::SameLine();
+            }
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+            ImGui::SameLine();
+            if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
+                if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(true);
+                } else {
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
+                }
+            }
         ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIToolhead()
     {
         if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
+        if(ImGui::Checkbox("Draw Shaded", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowShaded));
         if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
+
+        ImGui::Text("Toolhead Classifier:");
+        ImGui::BeginChild("toolhead_classifier", ImVec2(0, 150), true, ImGuiWindowFlags_HorizontalScrollbar);
+        if(ImGui::Button("Detect Toolhead", ImVec2(-1, 40)))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->DetectToolhead();
+        std::string classifierLog = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierLog();
+        ImGui::Text("Classifier Log: \n%s", classifierLog.c_str());
+        ImGui::EndChild();
+
+        std::string poseLogButtonText = "Log TTool Pose";
+        bool deferPoseLogUI = false;
+        if(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog)
+        {
+            deferPoseLogUI = true;
+            poseLogButtonText = "Stop Log TTool Pose";
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, AIAC_UI_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, AIAC_UI_GREEN);
+        }
+        if (ImGui::Button(poseLogButtonText.c_str(), ImVec2(-1, 40)))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog = !AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog;
+        if (deferPoseLogUI)
+        {
+            ImGui::PopStyleColor(3);
+        }
 
         ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
@@ -436,7 +486,10 @@ namespace AIAC
             if(ImGui::Button("save pose", ImVec2(-1, 40)))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
 
-            if(ImGui::Button("reset pose", ImVec2(-1, 40)))
+            if(ImGui::Button("reset to last saved pose", ImVec2(-1, 40)))
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetToLastSavedPose();
+
+            if(ImGui::Button("reset to original config pose", ImVec2(-1, 40)))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetPoseFromConfig();
             
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
@@ -505,6 +558,17 @@ namespace AIAC
             }
         }
         ImGui::EndChild();
+    }
+
+    void LayerUI::SetPaneUIFeedback()
+    {
+        if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
+            if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
+                AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
+            } else {
+                AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
+            }
+        };
     }
 
     void LayerUI::ShowMappingPopup()
