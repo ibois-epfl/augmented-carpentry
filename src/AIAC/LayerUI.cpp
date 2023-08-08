@@ -486,7 +486,10 @@ namespace AIAC
             if(ImGui::Button("save pose", ImVec2(-1, 40)))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
 
-            if(ImGui::Button("reset pose", ImVec2(-1, 40)))
+            if(ImGui::Button("reset to last saved pose", ImVec2(-1, 40)))
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetToLastSavedPose();
+
+            if(ImGui::Button("reset to original config pose", ImVec2(-1, 40)))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetPoseFromConfig();
             
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
