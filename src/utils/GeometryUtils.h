@@ -58,6 +58,7 @@ inline glm::vec3 GetProjectionPointOnPlane(glm::vec3 planeNormal, glm::vec3 plan
     return pt - d * planeNormal;
 }
 
+// FIXME: This one may have a bug
 /**
  * @brief Get the Nearest Pt On Line object
  * 

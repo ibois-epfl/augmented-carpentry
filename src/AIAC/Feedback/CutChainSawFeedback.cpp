@@ -82,11 +82,18 @@ namespace AIAC {
         m_NormalVec = glm::normalize(m_NormEnd - m_NormStart);
 
         TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
+        auto& angleVisualizer = this->m_Visualizer.GetAngleFeedVisualizer();
+        auto& depthVisualizer = this->m_Visualizer.GetDepthFeedVisualizer();
 
         if(m_ToShowCutPlane) updateCutPlane();
         
         // if it's a single face, only show the red cutting plane
-        if(cut->IsSingleFace()) return;
+        if(cut->IsSingleFace()) {
+            m_Visualizer.Deactivate();
+            angleVisualizer.Deactivate();
+            depthVisualizer.Deactivate();
+            return;
+        }
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
@@ -128,7 +135,6 @@ namespace AIAC {
 
         // Update the m_Visualizer for the closest parallel face
         bool hasParallelFace = false, hasPerpendicularFace = false;
-        auto& angleVisualizer = this->m_Visualizer.GetAngleFeedVisualizer();
 
         double parallelEndDist = 0.0f;
         double parallelChainBaseDist = 0.0f;
@@ -168,10 +174,8 @@ namespace AIAC {
         }
 
         // Perpendicular face
-        auto& depthVisualizer = this->m_Visualizer.GetDepthFeedVisualizer();
         if(!nearestPerpendicularFaceID.empty()){
             hasPerpendicularFace = true;
-            depthVisualizer.Activate();
 
             // find the projection point of the 2 points on the face
             auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
@@ -218,35 +222,51 @@ namespace AIAC {
             auto pt2OnEndMid = GetNearestPtOnLine(m_ChainEnd - m_ChainMid, m_ChainEnd, perpIntersectLineSegPt2);
             auto pt2OnMidBase = GetNearestPtOnLine(m_ChainMid - m_ChainBase, m_ChainMid, perpIntersectLineSegPt2);
 
-            pt1ProjPt = IsPointBetweenLineSeg(pt1OnMidBase, m_ChainMid, m_ChainBase) ? pt1OnMidBase : pt1OnEndMid;
-            pt2ProjPt = IsPointBetweenLineSeg(pt2OnMidBase, m_ChainMid, m_ChainBase) ? pt2OnMidBase : pt2OnEndMid;
-
-            depthVisualizer.m_LineDepthFaceEdge1->SetPts(perpIntersectLineSegPt1, pt1ProjPt);
-            depthVisualizer.m_LineDepthFaceEdge2->SetPts(perpIntersectLineSegPt2, pt2ProjPt);
-
-            perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
-            perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
-
-            // get the direction of tool
-            auto toolUpVec = glm::normalize(m_NormStart - m_ChainBase);
-            auto chainBaseVec = glm::normalize(m_ChainBase - projChainBase);
-            auto chainEndVec = glm::normalize(m_ChainEnd - projChainEnd);
-            auto faceEdge1Vec = glm::normalize(pt1ProjPt - perpIntersectLineSegPt1);
-            auto faceEdge2Vec = glm::normalize(pt2ProjPt - perpIntersectLineSegPt2);
-
-            if(glm::dot(toolUpVec, faceEdge1Vec) < 0){
-                depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::RED);
-                perpendicularFaceEdge1Dist = -perpendicularFaceEdge1Dist;
-            } else {
-                depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
+            bool pt1Found = false, pt2Found = false;
+            if(IsPointBetweenLineSeg(pt1OnMidBase, m_ChainMid, m_ChainBase)){
+                pt1ProjPt = pt1OnMidBase;
+                pt1Found = true;
+            } else if(IsPointBetweenLineSeg(pt1OnEndMid, m_ChainEnd, m_ChainMid)){
+                pt1ProjPt = pt1OnEndMid;
+                pt1Found = true;
             }
-            if(glm::dot(toolUpVec, faceEdge2Vec) < 0){
-                depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::RED);
-                perpendicularFaceEdge2Dist = -perpendicularFaceEdge2Dist;
-            } else {
-                depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
+            if(IsPointBetweenLineSeg(pt2OnMidBase, m_ChainMid, m_ChainBase)){
+                pt2ProjPt = pt2OnMidBase;
+                pt2Found = true;
+            } else if(IsPointBetweenLineSeg(pt2OnEndMid, m_ChainEnd, m_ChainMid)){
+                pt2ProjPt = pt2OnEndMid;
+                pt2Found = true;
             }
+            if(pt1Found && pt2Found){
+                depthVisualizer.m_LineDepthFaceEdge1->SetPts(perpIntersectLineSegPt1, pt1ProjPt);
+                depthVisualizer.m_LineDepthFaceEdge2->SetPts(perpIntersectLineSegPt2, pt2ProjPt);
 
+                perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
+                perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
+
+                // get the direction of tool
+                auto toolUpVec = glm::normalize(m_NormStart - m_ChainBase);
+                auto chainBaseVec = glm::normalize(m_ChainBase - projChainBase);
+                auto chainEndVec = glm::normalize(m_ChainEnd - projChainEnd);
+                auto faceEdge1Vec = glm::normalize(pt1ProjPt - perpIntersectLineSegPt1);
+                auto faceEdge2Vec = glm::normalize(pt2ProjPt - perpIntersectLineSegPt2);
+
+                if(glm::dot(toolUpVec, faceEdge1Vec) < 0){
+                    depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::RED);
+                    perpendicularFaceEdge1Dist = -perpendicularFaceEdge1Dist;
+                } else {
+                    depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
+                }
+                if(glm::dot(toolUpVec, faceEdge2Vec) < 0){
+                    depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::RED);
+                    perpendicularFaceEdge2Dist = -perpendicularFaceEdge2Dist;
+                } else {
+                    depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
+                }
+                depthVisualizer.Activate();
+            } else {
+                depthVisualizer.Deactivate();    
+            }
         } else {
             depthVisualizer.Deactivate();
         }
@@ -313,7 +333,7 @@ namespace AIAC {
 
     void CutChainSawFeedback::Activate(){
         Update();
-        m_Visualizer.Activate();
+        // m_Visualizer.Activate();
         if(m_ToShowCutPlane) m_CutPlaneVisualizer.Activate();
     }
 
