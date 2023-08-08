@@ -27,6 +27,10 @@ namespace AIAC {
         this->m_DrillBitLineAxis->SetVisibility(false);
         this->m_HoleLineAxis->SetVisibility(false);
 
+        this->m_AllPrimitives.push_back(this->m_InfoText);
+        this->m_AllPrimitives.push_back(this->m_HoleLine2ToolStart);
+        this->m_AllPrimitives.push_back(this->m_GUILineOrientation);
+
         Deactivate();
     }
 
