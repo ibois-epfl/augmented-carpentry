@@ -72,6 +72,8 @@ namespace AIAC
         bool IsShowShaded;
         /// Show the GOInfo toolhead's elements
         bool IsShowToolheadGOInfo;
+        /// Save pose log
+        bool IsSavePoseLog = false;
 
     private: ///< Private members
         /// The current state of the ttool (None, PoseInput, Tracking)
