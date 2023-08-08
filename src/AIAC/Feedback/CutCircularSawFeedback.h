@@ -44,7 +44,11 @@ namespace AIAC{
         void Activate() override;
         void Deactivate() override;
 
-        inline void EnableCutPlane(bool enable) { m_ToShowCutPlane = enable; };
+        inline void EnableCutPlane(bool enable) {
+            m_ToShowCutPlane = enable;
+            if(enable) m_CutPlaneVisualizer.Activate();
+            else m_CutPlaneVisualizer.Deactivate();
+        };
         
     private:
         // data
