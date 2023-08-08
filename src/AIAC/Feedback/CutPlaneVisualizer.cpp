@@ -9,14 +9,14 @@ CutPlaneVisualizer::DistanceVisualizer::DistanceVisualizer(){
         auto line = GOLine::Add();
         line->SetColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
         line->SetWeight(2.0f);
-        m_Lines.push_back(line);
-        m_AllPrimitives.push_back(line);
+        m_AllPrimitives.emplace_back(line);
+        m_Lines.emplace_back(line);
 
-        auto text = GOText::Add("Dist", GOPoint(0.0f, 0.0f, 0.0f));
+        auto text = GOText::Add("", GOPoint(0.0f, 0.0f, 0.0f));
         text->SetColor(GOColor::WHITE);
         text->SetWeight(GOWeight::BoldThick);
-        m_Texts.push_back(text);
-        m_AllPrimitives.push_back(text);
+        m_AllPrimitives.emplace_back(text);
+        m_Texts.emplace_back(text);
     }
 
     Deactivate();
@@ -48,7 +48,7 @@ void CutPlaneVisualizer::CutPlaneVisualizer::Deactivate(){
     m_DistanceVisualizer.Deactivate();
 }
 
-std::vector<glm::vec3> CutPlaneVisualizer:: Update(glm::vec3 faceNorm, glm::vec3 facePt){
+std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 facePt){
     auto bbox = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBoundingBox();
     auto bboxIndices = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetBboxEdgesIndices();
 
@@ -111,7 +111,7 @@ std::vector<glm::vec3> CutPlaneVisualizer:: Update(glm::vec3 faceNorm, glm::vec3
                     minDistPt = corner;
                 }
             }
-            
+
             // update the line & text
             line->SetPts(pt, minDistPt);
             text->SetAnchor(pt);
@@ -122,7 +122,6 @@ std::vector<glm::vec3> CutPlaneVisualizer:: Update(glm::vec3 faceNorm, glm::vec3
                 text->SetColor(GOColor::WHITE);
             }
         }
-
     } else {
         m_DistanceVisualizer.Deactivate();
     }

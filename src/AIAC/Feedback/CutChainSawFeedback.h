@@ -72,7 +72,11 @@ namespace AIAC {
         void Deactivate() override;
 
         // FIXME: maybe we can have a "CutFeedback" class for such fuctions
-        inline void EnableCutPlane(bool enable) { m_ToShowCutPlane = enable; }
+        inline void EnableCutPlane(bool enable) { 
+            m_ToShowCutPlane = enable;
+            if(enable) m_CutPlaneVisualizer.Activate();
+            else m_CutPlaneVisualizer.Deactivate();
+        }
     
     private:
         void updateCutPlane();
