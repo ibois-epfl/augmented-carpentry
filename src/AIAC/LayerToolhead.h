@@ -39,7 +39,9 @@ namespace AIAC
         /// @brief Save the current pose of the ttool to the config file and to the ttool model manager (as a fallback pose for the ttool)
         /// It will reset LayerToolhead state to None (i.e. stop tracking and pose input)
         void SavePose();
-        /// @brief Set the pose from the value in the config
+        /// @brief Reset the pose of the ttool to the last saved pose
+        void ResetToLastSavedPose();
+        /// @brief Set the pose from the value in the config initially read
         void ResetPoseFromConfig();
 
         /// @brief Get the current pose of the ttool

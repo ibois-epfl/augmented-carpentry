@@ -188,9 +188,14 @@ namespace AIAC
 
     }
 
+    void LayerToolhead::ResetToLastSavedPose()
+    {
+        this->TTool->GetModelManager()->ResetObjectToLastSavePose();
+    }
+
     void LayerToolhead::ResetPoseFromConfig()
     {
-        this->TTool->GetModelManager()->ResetObjectToInitialPose();
+        this->TTool->GetModelManager()->ResetObjectToConfigInitialPose();
     }
 
     void LayerToolhead::syncTToolAndACInfoToolhead()
