@@ -1,6 +1,7 @@
 #pragma once
 
 #include <utility>
+#include <iostream>
 
 #include "AIAC/Render/GLObject.h"
 #include "AIAC/Base.h"
@@ -19,6 +20,10 @@ namespace AIAC
         static constexpr glm::vec4 WHITE = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
         static constexpr glm::vec4 BLACK = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
         static constexpr glm::vec4 GRAY = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
+        static constexpr glm::vec4 ORANGE = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
+        static constexpr glm::vec4 PURPLE = glm::vec4(0.5f, 0.0f, 0.5f, 1.0f);
+        static constexpr glm::vec4 PINK = glm::vec4(1.0f, 0.0f, 0.5f, 1.0f);
+        static constexpr glm::vec4 BROWN = glm::vec4(0.5f, 0.25f, 0.0f, 1.0f);
     };
 
     struct GOWeight
@@ -125,15 +130,15 @@ namespace AIAC
         static std::vector<std::shared_ptr<GOPoint>> GetAll();
 
         inline glm::vec3 GetPosition() const { return m_Position; }
-        inline void SetPosition(glm::vec3 position) { m_Position = position; }
+        inline void SetPosition(glm::vec3 position) { m_Position = position; InitGLObject(); }
         inline float X() const { return m_Position.x; }
         inline float Y() const { return m_Position.y; }
         inline float Z() const { return m_Position.z; }
-        inline void SetX(float x) { m_Position.x = x; }
-        inline void SetY(float y) { m_Position.y = y; }
-        inline void SetZ(float z) { m_Position.z = z; }
+        inline void SetX(float x) { m_Position.x = x; InitGLObject(); }
+        inline void SetY(float y) { m_Position.y = y; InitGLObject(); }
+        inline void SetZ(float z) { m_Position.z = z; InitGLObject(); }
 
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Position = transformMat * glm::vec4(m_Position, 1.0f);
@@ -175,9 +180,11 @@ namespace AIAC
     class GOLine : public GOPrimitive
     {
     private:
+        GOLine();
         GOLine(GOPoint p1, GOPoint p2, float weight = GOWeight::Default);
 
     public:
+        static std::shared_ptr<GOLine> Add();
         /**
          * @brief Add GOLine to the scene.
          *
@@ -195,12 +202,6 @@ namespace AIAC
 
         inline GOPoint GetPStart() const { return m_PStart; }
         inline GOPoint GetPEnd() const { return m_PEnd; }
-
-        inline void SetPStart(GOPoint pStart) { m_PStart = pStart; }
-        inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
-        inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); }
-        inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); }
-        inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; }
         
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
         inline void ExtendFromStart(float length) { m_PStart.SetPosition(m_PStart.GetPosition() - glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
@@ -208,6 +209,13 @@ namespace AIAC
 
         inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
         inline glm::vec3 GetNormalValues() const { return glm::normalize(glm::cross(m_PEnd.GetPosition() - m_PStart.GetPosition(), glm::vec3(0, 0, 1))); }
+
+        inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
+        inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
+        // inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); InitGLObject(); }
+        // inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); InitGLObject(); }
+        inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
+
 
         /**
          * @brief Compute the angle between the current line object and another one
@@ -275,10 +283,10 @@ namespace AIAC
         inline float GetRadius() const { return m_Radius; }
         inline glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
-        inline void SetNormal(glm::vec3 normal) { m_Normal = normal; }
-        inline void SetCenter(GOPoint center) { m_Center = center; }
-        inline void SetRadius(float radius) { m_Radius = radius; }
-        inline void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; }
+        inline void SetNormal(glm::vec3 normal) { m_Normal = normal; InitGLObject(); }
+        inline void SetCenter(GOPoint center) { m_Center = center; InitGLObject(); }
+        inline void SetRadius(float radius) { m_Radius = radius; InitGLObject(); }
+        inline void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_Center.Transform(transformMat);
@@ -337,10 +345,10 @@ namespace AIAC
         float GetRadius() const { return m_Radius; }
         glm::vec4 GetEdgeColor() const { return m_EdgeColor; }
 
-        void SetPStart(GOPoint pStart) { m_PStart = pStart; }
-        void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; }
-        void SetRadius(float radius) { m_Radius = radius; }
-        void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; }
+        void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
+        void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
+        void SetRadius(float radius) { m_Radius = radius; InitGLObject(); }
+        void SetEdgeColor(glm::vec4 edgeColor) { m_EdgeColor = edgeColor; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
@@ -376,6 +384,7 @@ namespace AIAC
     class GOPolyline : public GOPrimitive
     {
     private:
+        GOPolyline();
         GOPolyline(std::vector<GOPoint> points, bool isClosed = false, float weight = GOWeight::Default);
 
     public:
@@ -385,6 +394,7 @@ namespace AIAC
          * @param points Points of the polyline.
          * @return uint32_t Id of the polyline.
          */
+        static std::shared_ptr<GOPolyline> Add();
         static std::shared_ptr<GOPolyline> Add(std::vector<GOPoint> points, bool isClosed = false, float weight = GOWeight::Default);
         static std::shared_ptr<GOPolyline> Add(std::vector<glm::vec3> points, bool isClosed = false, float weight = GOWeight::Default);
 
@@ -394,10 +404,19 @@ namespace AIAC
         static std::vector<std::shared_ptr<GOPolyline>> GetAll();
 
         inline const std::vector<GOPoint> &GetPoints() const { return m_Points; }
-
+        inline void SetPoints(std::vector<glm::vec3> points) {
+            m_Points.clear();
+            for (auto& point : points) {
+                m_Points.push_back(GOPoint(point));
+            }
+            InitGLObject();
+        }
+        inline void SetPoints(std::vector<GOPoint> points) { m_Points = points; InitGLObject(); }
+        
+        inline void SetClosed(bool isClosed) { m_IsClosed = isClosed; InitGLObject(); }
         inline bool IsClosed() const { return m_IsClosed; }
 
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             for (auto& point : m_Points) {
@@ -416,7 +435,7 @@ namespace AIAC
 
     private:
         std::vector<GOPoint> m_Points;
-        bool m_IsClosed = false;
+        bool m_IsClosed = true;
         float m_Weight = GOWeight::Default;
 
     friend class GOPoint;
@@ -447,7 +466,7 @@ namespace AIAC
             return std::vector<glm::vec3>{m_P1.GetPosition(), m_P2.GetPosition(), m_P3.GetPosition()};
         }
 
-        inline void SetWeight(float weight) { m_Weight = weight; }
+        inline void SetWeight(float weight) { m_Weight = weight; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_P1.Transform(transformMat);
@@ -512,12 +531,31 @@ namespace AIAC
         const std::vector<uint32_t> GetIndices() const { return m_Indices; }
         const std::vector<glm::vec3> GetNormals() const { return m_Normals; }
         const std::vector<glm::vec4> GetColors() const { return m_Colors; }
-        void SetVertices(std::vector<glm::vec3> vertices) { m_Vertices = vertices; InitGLObject(); }
+        
+        void SetColors(std::vector<glm::vec4> colors) {
+            m_IsUsingUniformColor = false;
+            m_Colors = colors;
+            InitGLObject();
+        }
+        void SetColor(glm::vec4 color) {
+            m_IsUsingUniformColor = true;
+            m_UniformColor = color;
+            m_Colors = std::vector<glm::vec4>(m_Vertices.size(), m_UniformColor);
+            InitGLObject();
+        }
+        void SetVertices(std::vector<glm::vec3> vertices) {
+            if(m_IsUsingUniformColor && m_Vertices.size() != vertices.size()){
+                SetColor(m_UniformColor);
+            }
+            m_Vertices = vertices;
+            if(m_IsUsingUniformColor){
+                SetColor(m_UniformColor);
+            }
+            InitGLObject();
+        }
         void SetIndices(std::vector<uint32_t> indices) { m_Indices = indices; InitGLObject(); }
-        void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; }
-        void SetColors(std::vector<glm::vec4> colors) { m_Colors = colors; InitGLObject(); }
-        void SetColor(glm::vec4 color) { m_Colors = std::vector<glm::vec4>(m_Vertices.size(), color); InitGLObject(); }
-        // FIXME: override the SetColor function for Mesh
+        void SetNormals(std::vector<glm::vec3> normals) { m_Normals = normals; InitGLObject(); }
+        
         
         void InitGLObject();
         
@@ -547,6 +585,9 @@ namespace AIAC
         std::vector<uint32_t> m_Indices;
         std::vector<glm::vec3> m_Normals;
         std::vector<glm::vec4> m_Colors;
+        glm::vec4 m_UniformColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+        bool m_IsUsingUniformColor = true;
     
     friend class GOPoint;
     };
@@ -554,6 +595,7 @@ namespace AIAC
     class GOText : public GOPrimitive
     {
     private:
+        GOText();
         GOText(std::string text, GOPoint anchor, double size);
 
     public:
@@ -565,6 +607,7 @@ namespace AIAC
          * @param size Size of the text.
          * @return uint32_t Id of the text.
          */
+        static std::shared_ptr<GOText> Add();
         static std::shared_ptr<GOText> Add(std::string text, GOPoint anchor, double size = GOTextSize::Default);
         virtual ~GOText() = default;
 
@@ -575,10 +618,10 @@ namespace AIAC
         inline const GOPoint GetAnchor() const { return m_Anchor; }
         inline const double GetTextSize() const { return m_Size; }
 
-        inline void SetText(const std::string text) { m_Text = text; }
-        inline void SetAnchor(const GOPoint anchor) { m_Anchor = anchor; }
-        inline void SetAnchor(const glm::vec3 anchor) { m_Anchor.SetPosition(anchor); }
-        inline void SetTextSize(const double size) { m_Size = size; }
+        inline void SetText(const std::string text) { m_Text = text; InitGLObject(); }
+        inline void SetAnchor(const GOPoint anchor) { m_Anchor = anchor; InitGLObject(); }
+        inline void SetAnchor(const glm::vec3 anchor) { m_Anchor.SetPosition(anchor); InitGLObject(); }
+        inline void SetTextSize(const double size) { m_Size = size; InitGLObject(); }
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ { m_Anchor.Transform(transformMat); }
         

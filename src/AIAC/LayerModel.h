@@ -41,11 +41,10 @@ namespace AIAC
          * @brief Get the Scanned Model object
          */
         inline ScannedModel& GetScannedModel() { return m_ScannedModel; }
-        // /**
-        //  * @brief Return the active selected component (hole or cut)
-        //  * 
-        //  */
-        // inline std::shared_ptr<AIAC::GOPrimitive> GetActiveComponent() { return m_ACInfoModel.GetActiveComponent(); }
+        /**
+         * @brief Get the Align Offset object
+         */
+        inline float GetAlignOffset() { return m_AlignOffset; }
 
         /**
          * @brief Change the align offset. The value is in TSLAM unit.

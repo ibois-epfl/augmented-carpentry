@@ -4,16 +4,34 @@
 #include <string>
 #include <iostream>
 #include <filesystem>
-
 #include <sys/stat.h>
-
+#include <time.h>
+#include <sstream>
 #include "AIAC/Log.h"
-
 #include "glm/glm.hpp"
 
 inline bool IsFileExist (const std::string& name) {
     struct stat buffer;
     return (stat (name.c_str(), &buffer) == 0);
+}
+
+
+/**
+ * @brief Get current date/time, format is YYYY-MM-DD.HH:mm
+*/
+inline const std::string GetCurrentDateTime() {
+    std::time_t t = std::time(0);   // get time now
+    std::tm* now = std::localtime(&t);
+    
+    std::ostringstream ss;
+    ss << (now->tm_year + 1900) << '-' 
+       << (now->tm_mon + 1) << '-'
+       <<  now->tm_mday << '-'
+       <<  now->tm_hour << '-'
+       <<  now->tm_min << '-'
+       <<  now->tm_sec;
+    
+    return ss.str();
 }
 
 inline void CvtGlmMat2CvMat(const glm::mat4 &glmMat, cv::Mat &cvMat)
