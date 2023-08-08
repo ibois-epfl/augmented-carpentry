@@ -448,6 +448,23 @@ namespace AIAC
         ImGui::Text("Classifier Log: \n%s", classifierLog.c_str());
         ImGui::EndChild();
 
+        std::string poseLogButtonText = "Log TTool Pose";
+        bool deferPoseLogUI = false;
+        if(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog)
+        {
+            deferPoseLogUI = true;
+            poseLogButtonText = "Stop Log TTool Pose";
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, AIAC_UI_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, AIAC_UI_GREEN);
+        }
+        if (ImGui::Button(poseLogButtonText.c_str(), ImVec2(-1, 40)))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog = !AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog;
+        if (deferPoseLogUI)
+        {
+            ImGui::PopStyleColor(3);
+        }
+
         ImGui::Text("TTool control:");
         ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
         ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);

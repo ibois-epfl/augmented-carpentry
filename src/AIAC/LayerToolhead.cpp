@@ -32,6 +32,9 @@ namespace AIAC
 
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFrame);
+        
+        cv::Mat currentFramePure;
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFramePure);
 
         if (m_TtoolState == ttool::EventType::PoseInput)
         {
@@ -75,6 +78,9 @@ namespace AIAC
                 TTool->DrawShaded(currentFrame);
             }
         }
+
+        if (IsSavePoseLog) { TTool->WritePoseToFile(currentFramePure); }
+        else { TTool->ResetPoseWriter(); }
 
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().ReplaceCvMat(currentFrame);
     }
