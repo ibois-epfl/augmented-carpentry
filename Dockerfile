@@ -37,17 +37,17 @@ RUN find . -name "CMakeCache.txt" -type f -delete
 
 # Install TTool
 WORKDIR /deps/TTool
-# RUN cmake -S . -B build
-# RUN cmake --build build --target TTool
-# WORKDIR /deps/TTool/build
-# RUN make install
+RUN cmake -S . -B build
+RUN cmake --build build --target TTool
+WORKDIR /deps/TTool/build
+RUN make install
 
 # Install TSlam
 WORKDIR /deps/TSlam
-# RUN cmake -S . -B build
-# RUN cmake --build build
-# WORKDIR /deps/TSlam/build
-# RUN make install
+RUN cmake -S . -B build
+RUN cmake --build build
+WORKDIR /deps/TSlam/build
+RUN make install
 
 WORKDIR /
 
