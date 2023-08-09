@@ -58,6 +58,7 @@ namespace AIAC
         std::string GetTrackingStatus() const { return TTool ? TTool->GetTrackingStatus() : "TTool not initialized"; }
         /// @brief Get the current classifier log of the ttool
         std::string GetClassifierLog() const { return TTool ? TTool->GetClassifierLog() : "TTool not initialized"; }
+        std::vector<std::string> GetClassifierToolheadList() const {return m_ClassifierToolList; }
     
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
@@ -71,7 +72,7 @@ namespace AIAC
         /// Show the silouhette of the ttool
         bool IsShowSilouhette;
         /// Show the silouhette of the ttool
-        bool IsShowShaded;
+        bool IsShowShaded = false;
         /// Show the GOInfo toolhead's elements
         bool IsShowToolheadGOInfo;
         /// Save pose log
@@ -84,6 +85,7 @@ namespace AIAC
         cv::Matx44f m_Pose;
         /// The scaling factor for ttoolhead data to AC space
         float m_ACScaleFactor;
+        std::vector<std::string> m_ClassifierToolList = {};
 
     public:
         /// The manager holding the toolheads and setting the active one

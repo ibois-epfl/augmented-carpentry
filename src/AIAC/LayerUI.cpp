@@ -441,10 +441,23 @@ namespace AIAC
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
 
         ImGui::Text("Toolhead Classifier:");
-        ImGui::BeginChild("toolhead_classifier", ImVec2(0, 150), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("toolhead_classifier", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
         if(ImGui::Button("Detect Toolhead", ImVec2(-1, 40)))
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->DetectToolhead();
         std::string classifierLog = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierLog();
+        ImGui::BeginChild("toolhead_selection_ml", ImVec2(0, 150), true, ImGuiWindowFlags_HorizontalScrollbar);
+        std::vector<std::string> toolheadNamesML;
+        for (auto& toolhead : AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierToolheadList())
+            toolheadNamesML.emplace_back(toolhead);
+        for (int i = 0; i < toolheadNamesML.size(); i++)
+        {
+            auto toolNameButton = ImGui::Button(toolheadNamesML[i].c_str());
+            if (toolNameButton)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SetCurrentObject(toolheadNamesML[i]);
+            }
+        }
+        ImGui::EndChild();
         ImGui::Text("Classifier Log: \n%s", classifierLog.c_str());
         ImGui::EndChild();
 
