@@ -5,6 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive # ignore user input required
 RUN apt-get -y update && apt-get install -y
 RUN apt-get -y install g++ cmake git
 RUN apt-get install -y apt-utils
+RUN apt-get -y update
 
 # install tslam deps
 RUN apt-get -y install libopencv-dev
