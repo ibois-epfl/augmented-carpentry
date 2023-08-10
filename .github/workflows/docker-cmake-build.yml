@@ -17,15 +17,6 @@ jobs:
       with:
         lfs: true
     - run:  git lfs pull
-    # this allows to run the submodule checkouts from the docker commands by using a PAT (Personal Access Token)
-    # for each collaborator a CI_PAT is needed
-    - name: Checkout submodules using a PAT
-      run: |
-        git config --file .gitmodules --get-regexp url | while read url; do
-          git config --file=.gitmodules $(echo "$url" | sed -E "s/git@github.com:|https:\/\/github.com\//https:\/\/${{ secrets.CI_PAT }}:${{ secrets.CI_PAT }}@github.com\//")
-        done
-        git submodule sync
-        git submodule update --init --recursive
 
     - name: Build the Docker image
       run: docker build -t ac .
