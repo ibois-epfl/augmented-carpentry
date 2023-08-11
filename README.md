@@ -110,7 +110,7 @@ monitor_name = WaveShare WS170120
 monitor_link_t = HDMI
 monitor_resolution = 800x480
 ```
-For wayland display server
+For wayland display server. WARNING: Wayland display and touchscreen are not compatible yet as the touchscreen register for the main display and not the small display.
 ```c++
 [MonitorSpecs]
 LinkMode = XWAYLAND1
