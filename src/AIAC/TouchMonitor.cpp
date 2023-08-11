@@ -110,7 +110,8 @@ namespace AIAC
     bool TouchMonitor::SiftMonitorsByResolution(std::string res, std::vector<GLFWmonitor*>& monitors)
     {
         bool isResolutionPresent = false;
-        for (int i = 0; i < monitors.size(); i++)
+        int count = monitors.size();
+        for (int i = 0; i < count; i++)
         {
             const GLFWvidmode* mode = glfwGetVideoMode(monitors[i]);
             if (!(mode->width == std::stoi(res.substr(0, res.find('x'))) && mode->height == std::stoi(res.substr(res.find('x') + 1))))
