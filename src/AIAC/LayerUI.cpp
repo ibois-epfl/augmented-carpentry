@@ -510,47 +510,65 @@ namespace AIAC
             ImGui::PushStyleVar(ImGuiStyleVar_GrabRounding, 5);
             ImGui::PushItemWidth(-30);
             float sliderF = 0.f;
-            ImGui::SliderFloat("Teq", &sliderF, -1.0f, 1.0f, "<backward T forward>", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat("Teq", &sliderF, -0.01f, 0.01f, "<backward T forward>", ImGuiSliderFlags_AlwaysClamp);
             if (sliderF != 0.f)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
                 if (sliderF > 0.f)
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('e');
                 else
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('q');
+            }
             sliderF = 0.f;
-            ImGui::SliderFloat("Tda", &sliderF, -1.0f, 1.0f, "<left T right>", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat("Tda", &sliderF, -0.01f, 0.01f, "<left T right>", ImGuiSliderFlags_AlwaysClamp);
             if (sliderF != 0.f)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
                 if (sliderF > 0.f)
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('d');
                 else
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('a');
+            }
             sliderF = 0.f;
-            ImGui::SliderFloat("Tws", &sliderF, -1.0f, 1.0f, "<down T up>", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat("Tws", &sliderF, -0.01f, 0.01f, "<down T up>", ImGuiSliderFlags_AlwaysClamp);
             if (sliderF != 0.f)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
                 if (sliderF > 0.f)
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('w');
                 else
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('s');
+            }
             sliderF = 0.f;
-            ImGui::SliderFloat("Rjl", &sliderF, -1.0f, 1.0f, "<left R right>", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat("Rjl", &sliderF, -3.0f, 3.0f, "<left R right>", ImGuiSliderFlags_AlwaysClamp);
             if (sliderF != 0.f)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
                 if (sliderF > 0.f)
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('j');
                 else
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('l');
+            }
             sliderF = 0.f;
-            ImGui::SliderFloat("Rik", &sliderF, -1.0f, 1.0f, "<down R up>", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat("Rik", &sliderF, -3.0f, 3.0f, "<down R up>", ImGuiSliderFlags_AlwaysClamp);
             if (sliderF != 0.f)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
                 if (sliderF > 0.f)
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('i');
                 else
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('k');
+            }
             sliderF = 0.f;
-            ImGui::SliderFloat("Ruo", &sliderF, -1.0f, 1.0f, "<backward R forward>", ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat("Ruo", &sliderF, -3.0f, 3.0f, "<backward R forward>", ImGuiSliderFlags_AlwaysClamp);
             if (sliderF != 0.f)
+            {
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
                 if (sliderF > 0.f)
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('u');
                 else
                     AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('o');
+            }
             ImGui::PopStyleVar(3);
             ImGui::PopItemWidth();
             ImGui::EndChild();
