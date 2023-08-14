@@ -7,12 +7,10 @@
 
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
-## ORD Proposal Gantt
-
 ```mermaid
 gantt
     dateFormat  YYYY-MM-DD
-    title       NC package planning
+    title       ORD Proposal Gantt
     axisFormat %Y-%m
 
     Start                                                     :milestone, crit, strt, 2023-09-01, 0d
@@ -40,6 +38,57 @@ gantt
 
     End                                                       :milestone, crit, ender, 2024-07-31, 0d
 ```
+
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Guli AC dev
+    axisFormat %Y-%m
+
+    Start                                                     :milestone, crit, strt, 2023-08-02, 0d
+
+    section WP1 - TTool
+    Eval protocol design                                      :cmkprj, 2023-08-14, 1w
+    State-of-art interface eval                               :ref, 2023-08-14, 4d
+    Eval protocol                                             :milestone, milttol, 2023-08-23, 0d
+
+    ML classifier dev                                         :mlclass, after milttol, 3.5w
+    ML finished                                               :milestone, mlclasmil, after mlclass, 0d
+
+    (optional) UI design proposal                             :uidesign, after mlclass, 0d
+    Eval campaign                                             :eval, after uidesign, 2w
+    TTool packaging                                           :packcont, after eval, 4d
+
+    Ttool package deliverable                                 :milestone, del1, 2023-10-30, 0d
+
+
+    Andrea off                                                :crit, 2023-08-24, 2023-09-17
+
+    End                                                       :milestone, crit, ender, 2024-01-31, 0d
+```
+
+# Guli AC dev
+- **Eval protocol design** : 
+- [ ] test
+
+- **State-of-art interface eval**:
+- [ ] test
+
+- **ML classifier dev**:
+- [ ] test robustness to different backgrounds (workshop, building site, etc.)
+- [ ] major ML dev improvements (etc)
+- [ ] automatize the addition of new tool heads (how to make it open source)
+
+- **(optional) UI design proposal**:
+- [ ] optional for now but we might do it if we have time
+
+- **Eval campaign**:
+- [ ] execute tests with population
+- [ ] collect data, analyze and visualize it
+
+- **TTool packaging**:
+- [ ] create a package for TTool
+- [ ] unify as much as possible all components of TTool (we add a new tool, what happens?)
 
 ## TODOList
 > - [ ] the change of the calibration file brakes the tslam (but not the ttool it seems)
