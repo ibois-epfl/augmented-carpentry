@@ -78,7 +78,7 @@ namespace AIAC
 
         int count;
         GLFWmonitor** monitors = glfwGetMonitors(&count);
-        if(count<=1) { AIAC_CRITICAL("No external monitors found."); exit(EXIT_FAILURE); }
+        if(count<=0) { AIAC_CRITICAL("No monitors found."); exit(EXIT_FAILURE); }
         glfwSetMonitorCallback(GLFWMonitorCallback);
 
         if(m_IsPrintMonitorsInfo) PrintInfoMonitors(count, monitors);
@@ -96,10 +96,14 @@ namespace AIAC
     bool TouchMonitor::SiftMonitorsByMode(std::string videoMode, int count, GLFWmonitor**& monitors)
     {
         bool isVideoModPresent = false;
+
         for (int i = 0; i < count; i++)
-        {
+        {  
+            AIAC_INFO("Monitor {0} name: {1} looking for {2}", i, glfwGetMonitorName(monitors[i]), videoMode.c_str());
             if (strstr(glfwGetMonitorName(monitors[i]), videoMode.c_str()) != NULL)
             {
+                AIAC_INFO("Monitor {0} name: {1} found", i, glfwGetMonitorName(monitors[i]));
+
                 isVideoModPresent = true;
                 m_SiftedMonitors.push_back(monitors[i]);
             }
@@ -113,7 +117,9 @@ namespace AIAC
         int count = monitors.size();
         for (int i = 0; i < count; i++)
         {
+            AIAC_INFO("Monitor {0} name: {1} looking for {2}", i, glfwGetMonitorName(monitors[i]), res.c_str());
             const GLFWvidmode* mode = glfwGetVideoMode(monitors[i]);
+            AIAC_INFO("Mode width: {0} height: {1}. Looking for {2} x {3}", mode->width, mode->height, std::stoi(res.substr(0, res.find('x'))), std::stoi(res.substr(res.find('x') + 1)));
             if (!(mode->width == std::stoi(res.substr(0, res.find('x'))) && mode->height == std::stoi(res.substr(res.find('x') + 1))))
             {
                 monitors.erase(monitors.begin() + i);
