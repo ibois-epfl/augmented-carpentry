@@ -10,42 +10,108 @@
 namespace AIAC
 {
     /**
-        @brief The visualizer for the HoleFeedback class
+        @brief The general visualizer for the info displayed as text
     */
-    class HoleFeedbackVisualizer : public FeedbackVisualizer {
+    class HoleFeedbackText : public FeedbackVisualizer
+    {
     public:
-        HoleFeedbackVisualizer();
+        HoleFeedbackText();
 
     private:
-        /// the line from the drillbit tip to the start of the hole (aka start distance)
-        std::shared_ptr<GOLine> m_HoleLine2ToolStart;
-        /// the line from the drillbit tip to the end of the hole (aka depth)
-        std::shared_ptr<GOLine> m_HoleLine2ToolEnd;  // <<< position
-        /// the line axis for the drillbit
-        std::shared_ptr<GOLine> m_DrillBitLineAxis;
-        /// the line axis for the hole
-        std::shared_ptr<GOLine> m_HoleLineAxis;
-        /// GUI indicator for orientation
-        std::shared_ptr<GOLine> m_GUILineOrientation;  // <<< orientation
-        /// All text objects
+        // @brief text visualized for numeric values of start, orientation and depth
         std::shared_ptr<GOText> m_InfoText;
 
     friend class HoleFeedback;
     };
 
-    class HoleFeedback : public FabFeedback {
+    /**
+        @brief The UI widget for providing feedback on position
+    */
+    class HoleFeedbackPosition : public FeedbackVisualizer
+    {
     public:
-        HoleFeedback() = default;
+        HoleFeedbackPosition();
+
+    private:
+        /// @brief the line from the drillbit tip to the end of the hole
+        std::shared_ptr<GOLine> m_HoleLine2ToolEnd;
+        /// @brief the line from the drillbit tip to the start of the hole (aka start distance)
+        std::shared_ptr<GOLine> m_HoleLine2ToolStart;
+
+    friend class HoleFeedback;
+    };
+
+    /**
+        @brief The UI widget for providing feedback on rotation
+    */
+    class HoleFeedbackRotation : public FeedbackVisualizer
+    {
+    public:
+        HoleFeedbackRotation();
+
+    private:
+        /// @brief UI indicator for orientation
+        std::shared_ptr<GOLine> m_GUILineOrientation;
+
+    friend class HoleFeedback;
+    };
+
+    /**
+        @brief The UI widget for providing feedback on orientation
+                Feeds (in chronological order):
+                - (i) position
+                - (ii) angle
+                - (iii) depth
+
+                *    x Tb
+                *     \
+                *      \
+                *       \ v3
+                *        \
+                *         \
+                *          x Tt
+                *          ..
+                *          .  .v2
+                *          .    .
+                *          .     x Hs
+                *       v1 .    /
+                *          .   /
+                *          .  / v4
+                *          . /
+                *          ./
+                *          x He
+
+    */
+    class HoleFeedback : public FabFeedback 
+    {
+    public:
+        HoleFeedback();
         ~HoleFeedback() = default;
 
         void Update() override;
         void Activate() override;
         void Deactivate() override;
 
-    private:
-        // TODO: here we need to differentiate between the different types of visualization
-        // e.g.: the position visualization and rotation visualizations need to be different
-        HoleFeedbackVisualizer m_Visualizer;
+    private:  ///< general data for all feedbacks but not visualized
+        /// @brief the line axis for the drillbit
+        std::shared_ptr<GOLine> m_DrillBitLineAxis;
+        /// @brief the line axis for the hole
+        std::shared_ptr<GOLine> m_HoleLineAxis;
+
+    private:  ///< for UI widgets
+        /// @brief the text visualized for numeric values of start, orientation and depth
+        HoleFeedbackText m_VisText;
+        /// @brief The ui widget for position guidance
+        HoleFeedbackPosition m_VisPosition;
+        /// @brief The ui widget to guide for the orientation
+        HoleFeedbackRotation m_VisRotation;
+
+    private:  ///< tolerances for angle and position feedbacks
+        /// @brief the tolerance to detect if the tooltip is inside or outside the  hole
+        float m_InsideOutDetection = 20.f;
+        /// @brief acceptable tolerance for the correct rotation detection
+        float m_OrientationTolerance = 0.5f;
+
     };
 }
 
