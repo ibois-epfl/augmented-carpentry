@@ -7,7 +7,11 @@
 #include "FabFeedback.h"
 #include "utils/GeometryUtils.h"
 
-namespace AIAC{
+namespace AIAC
+{
+    /**
+        @brief The visualizer for the HoleFeedback class
+    */
     class HoleFeedbackVisualizer : public FeedbackVisualizer {
     public:
         HoleFeedbackVisualizer();

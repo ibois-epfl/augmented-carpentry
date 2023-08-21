@@ -9,6 +9,7 @@ namespace AIAC {
         pt2->SetVisibility(false);
         
         this->m_InfoText = GOText::Add("///", *pt1);
+        this->m_InfoText->SetTextSize(GOTextSize::Small);
         this->m_InfoText->SetColor(GOColor::WHITE);
 
         this->m_HoleLine2ToolStart = GOLine::Add(*pt1, *pt2);
@@ -117,7 +118,7 @@ namespace AIAC {
         if (angleOrientRoundedStr.size() == 1) angleOrientRoundedStr = "0" + angleOrientRoundedStr;
 
         // (iv) depth
-        float depthLeft = this->m_Visualizer.m_HoleLineAxis->GetPEnd().DistanceTo(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);
+        float depthLeft = this->m_Visualizer.m_HoleLineAxis->GetPStart().DistanceTo(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);
         float holeLength = this->m_Visualizer.m_HoleLineAxis->GetLength();
         float depthDrilled = holeLength - depthLeft;
         float depthDrilledScaled = depthDrilled / scaleF;
@@ -129,6 +130,7 @@ namespace AIAC {
         if (160.f < angle && angle < 200.f)  // TODO: set tolerance var member, 20deg for now
         {
             distScaledMMStr = "00";
+            this->m_Visualizer.m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
             if (depthDrilled < 0.f)
                 this->m_Visualizer.m_HoleLine2ToolEnd->SetColor(GOColor::RED);
             else

@@ -39,7 +39,7 @@ namespace AIAC
     struct GOTextSize
     {
         static constexpr double Default            = 1.0;
-        static constexpr double Small              = 2.5;
+        static constexpr double Small              = 0.5;
         static constexpr double Medium             = 5.0;
         static constexpr double Big                = 10.0;
     };
