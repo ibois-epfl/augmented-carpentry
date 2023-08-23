@@ -185,7 +185,7 @@ git clone --recursive git@github.com:ibois-epfl/augmented-carpentry.git
 ```
 or
 ```bash
-git clone git@github.com:ibois-epfl/TSlam.git
+git clone git@github.com:ibois-epfl/augmented-carpentry.git
 git submodule sync
 git pull --recurse-submodules
 ```
