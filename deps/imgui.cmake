@@ -1,5 +1,5 @@
 download_external_project(imgui
-    URL "https://github.com/ibois-epfl/imgui.git"
+    URL "https://github.com/ibois-epfl/imgui2.git"
     TAG "release_1_88"
     BACKEND GIT)
 download_external_project(stb
