@@ -207,6 +207,32 @@ namespace AIAC
     };
 }
 ```
+Next, you need to add it to the stack call in the main file [CApp](https://github.com/ibois-epfl/augmented-carpentry/blob/main/src/ACApp.cpp) where it fits most:
+
+```cpp
+...
+acApp_ptr->GetWindow()->Init();
+
+acApp_ptr->GetGORegistry()->Init();
+
+acApp_ptr->PushLayer<AIAC::LayerCamera>();
+acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
+acApp_ptr->PushLayer<AIAC::LayerSlam>();
+acApp_ptr->PushLayer<AIAC::NewLayer1>(); <---------- e.g.: your new layer 1
+acApp_ptr->PushLayer<AIAC::LayerModel>();
+acApp_ptr->PushLayer<AIAC::LayerToolhead>();
+acApp_ptr->PushLayer<AIAC::LayerFeedback>();
+acApp_ptr->PushLayer<AIAC::LayerUI>();
+acApp_ptr->PushLayer<AIAC::NewLayer2>(); <---------- e.g.: your new layer 2
+
+acApp_ptr->GetRenderer()->Init();
+
+acApp_ptr->GetEventBus()->Init();
+
+acApp_ptr->Run();
+
+```
+
 
 ### Getting the main app
 There is one only app and it can be accessed from layers with:
