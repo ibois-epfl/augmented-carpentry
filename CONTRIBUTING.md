@@ -218,12 +218,12 @@ acApp_ptr->GetGORegistry()->Init();
 acApp_ptr->PushLayer<AIAC::LayerCamera>();
 acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();
 acApp_ptr->PushLayer<AIAC::LayerSlam>();
-acApp_ptr->PushLayer<AIAC::NewLayer1>(); <---------- e.g.: your new layer 1
+acApp_ptr->PushLayer<AIAC::NewLayer1>();  // <---------- e.g.: your new layer 1
 acApp_ptr->PushLayer<AIAC::LayerModel>();
 acApp_ptr->PushLayer<AIAC::LayerToolhead>();
 acApp_ptr->PushLayer<AIAC::LayerFeedback>();
 acApp_ptr->PushLayer<AIAC::LayerUI>();
-acApp_ptr->PushLayer<AIAC::NewLayer2>(); <---------- e.g.: your new layer 2
+acApp_ptr->PushLayer<AIAC::NewLayer2>();  // <---------- e.g.: your new layer 2
 
 acApp_ptr->GetRenderer()->Init();
 
