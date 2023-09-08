@@ -8,7 +8,7 @@ set(BUILD_SHARED_LIBS ON)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(external_tools)
-
+message("CMAKE PREFIX PATH" ${CMAKE_PREFIX_PATH})
 #set(CMAKE_CXX_STANDARD 17)
 #TODO: check for Opencv 4.5.4 that cannot be installed or detected
 
@@ -85,7 +85,7 @@ find_package(OpenGL REQUIRED)
 
 set(BUILD_V4_API ON)
 add_external_package(TSlam)
-add_external_package(TTool)
+add_external_package(TTool IGNORE_SYSTEM)
 
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenCV 4.5.4 REQUIRED
@@ -99,6 +99,7 @@ find_package(OpenCV 4.5.4 REQUIRED
 )
 find_package(assimp 5.0.0 REQUIRED)
 find_package(GLEW REQUIRED)
+
 
 add_external_package(imgui)
 add_external_package(spdlog)
