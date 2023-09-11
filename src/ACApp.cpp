@@ -28,6 +28,8 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerModel>();
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();
+    // place the videorecorder here
+    acApp_ptr->PushLayer<AIAC::LayerUtils()>;
     acApp_ptr->PushLayer<AIAC::LayerUI>();
 
     acApp_ptr->GetRenderer()->Init();
