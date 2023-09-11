@@ -32,6 +32,7 @@ jobs:
         with:
           lfs: true
           submodules: true
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Configure
         run: cmake -B build .
       - uses: actions/upload-artifact@v3
