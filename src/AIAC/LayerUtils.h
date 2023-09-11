@@ -7,13 +7,13 @@
 #include "AIAC/Layer.h"
 #include "utils/VideoRecorder.h"
 
+// management
 namespace AIAC
 {
     class LayerUtils: public AIAC::Layer{
+    public:
 
-
-
-
+        virtual void OnFrameStart() override;
     };
 
 }
