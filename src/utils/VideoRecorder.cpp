@@ -4,4 +4,3 @@
 
 #include "VideoRecorder.h"
 
-AIAC::Utils::VideoRecorder
