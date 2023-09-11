@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive # ignore user input required
 # install required dependencies
 # # install required dependencies
 RUN apt-get -qq update && apt-get -qq -y install \
-    g++ cmake git \
+    g++ cmake git git-lfs \
     && rm -rf /var/lib/apt/lists/*
 
 # install tslam deps
