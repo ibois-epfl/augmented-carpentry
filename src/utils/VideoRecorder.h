@@ -1,20 +1,28 @@
 //
 // Created by zholmaga on 11.09.23.
 //
+#pragma once
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+#include <vector>
+#include <string>
 
-#ifndef AUGMENTED_CARPENTRY_VIDEO_RECORDER_H
-#define AUGMENTED_CARPENTRY_VIDEO_RECORDER_H
+namespace AIAC::Utils {
 
-namespace AIAC{
-    namespace Utils{
-        class VideoRecorder{
+    class VideoRecorder {
+    public:
+        VideoRecorder();
+        ~VideoRecorder();
 
+        void StartRecording();
+        void StopRecording();
+        void CaptureFrame();
+        void ExportVideo();
 
-
-        };
+    private:
+        bool m_IsRecording;
+        std::vector<std::string> m_SavedFrames;
     };
-}
 
-
-
-#endif //AUGMENTED_CARPENTRY_VIDEO_RECORDER_H
+} // namespace AIAC::Utils
