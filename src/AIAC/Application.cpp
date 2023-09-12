@@ -96,4 +96,14 @@ namespace AIAC
         exit(EXIT_SUCCESS);
     }
 
+    // Function to capture the frame and return pixel data
+    std::vector<GLubyte> CaptureFramePixels(const ApplicationSpecification& appSpec) {
+        // Assuming your window is m_Window and framebuffer size is known (640x480 in this case)
+        std::vector<GLubyte> pixels(appSpec.WinWidth * appSpec.WinHeight * 4); // Assuming RGBA
+
+        glReadPixels(0, 0, appSpec.WinWidth, appSpec.WinHeight, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+
+        return pixels;
+    }
+
 }

@@ -3,17 +3,31 @@
 //
 
 #pragma once
+#pragma once
 
 #include "AIAC/Layer.h"
-#include "utils/VideoRecorder.h"
+#include "Utils/VideoRecorder.h"
+#include "Utils/HoleToolheadExporter.h"
 
-// management
-namespace AIAC
-{
-    class LayerUtils: public AIAC::Layer{
+namespace AIAC {
+
+    class LayerUtils : public Layer {
     public:
+        LayerUtils();
+        ~LayerUtils();
 
-        virtual void OnFrameStart() override;
+        virtual void OnAttach() override;
+        virtual void OnDetach() override;
+        virtual void OnUpdate() override;
+        virtual void OnImGuiRender() override;
+
+        void StartRecording();
+        void StopRecording();
+
+    private:
+        Utils::VideoRecorder m_VideoRecorder;
+        Utils::HoleToolheadExporter m_HoleToolheadExporter;
     };
 
 }
+
