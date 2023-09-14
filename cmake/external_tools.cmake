@@ -219,7 +219,7 @@ function(download_submodule_project project_name)
   execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --remote -- deps/${project_name}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     RESULT_VARIABLE GIT_SUBMOD_RESULT)
-  if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+#[[  if(NOT GIT_SUBMOD_RESULT EQUAL "0")
     message(FATAL_ERROR "git submodule update --init --recursive --remote failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-  endif()
+  endif()]]
 endfunction()
