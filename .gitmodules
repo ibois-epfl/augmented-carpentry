@@ -3,10 +3,10 @@
 	path = deps/rgb-camera-calibration
 	url = git@github.com:ibois-epfl/rgb-camera-calibration.git
 [submodule "deps/TSlam"]
-	branch = main
+	branch = tslam_after_cmake_merge_guli
 	path = deps/TSlam
 	url = git@github.com:ibois-epfl/TSlam.git
 [submodule "deps/TTool"]
-	branch = main
+	branch = ttool_after_cmake_merge_guli
 	path = deps/TTool
 	url = git@github.com:ibois-epfl/TTool.git
