@@ -1,6 +1,6 @@
 download_external_project(imgui
     URL "https://github.com/ibois-epfl/imgui2.git"
-    TAG "features/cmake_modif_for_ac_integration"
+    TAG "features/cmake_modif_for_ac_intergration_guli"
     BACKEND GIT)
 download_external_project(stb
     URL "https://github.com/ibois-epfl/stb.git"
