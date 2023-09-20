@@ -8,7 +8,6 @@ set(BUILD_SHARED_LIBS ON)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(external_tools)
-message("CMAKE PREFIX PATH" ${CMAKE_PREFIX_PATH})
 #set(CMAKE_CXX_STANDARD 17)
 #TODO: check for Opencv 4.5.4 that cannot be installed or detected
 
