@@ -14,8 +14,10 @@
 namespace AIAC {
 
     void LayerUtils::OnFrameEnd() {
-        boost::uuids::uuid myUuid = boost::uuids::random_generator()();
-        int width = AIAC_APP.GetWindow()->GetDisplayW();
+        std::cout << "LayerUtils::OnFrameEnd()" << std::endl;
+
+
+        /*int width = AIAC_APP.GetWindow()->GetDisplayW();
         int height = AIAC_APP.GetWindow()->GetDisplayH();
         std::cout << "Before Frame buffer: width: " << width << " height: " << height << std::endl;
         // create a vector to hold the data
@@ -28,10 +30,11 @@ namespace AIAC {
         // write pixels to image using opencv
         cv::Mat image(height, width, CV_8UC4, pixels.data());
         cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
-/*        cv::imwrite("output.jpg", image);
-        std::cout << "Frame saved" << std::endl;*/
+*//*        cv::imwrite("output.jpg", image);
+        std::cout << "Frame saved" << std::endl;*//*
+        boost::uuids::uuid myUuid = boost::uuids::random_generator()();
         cv::imwrite("images/" + boost::uuids::to_string(myUuid) + ".jpg", image);
-        std::cout << "Frame saved" << std::endl;
+        std::cout << "Frame saved" << std::endl;*/
 
     }
 
