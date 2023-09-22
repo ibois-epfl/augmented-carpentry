@@ -10,6 +10,16 @@
 
 namespace AIAC::Utils {
 
+    class VideoRecorder {
+    public:
+        VideoRecorder();
+        ~VideoRecorder();
+
+        void CaptureFrames();
+        void SaveFrames(int height, int width, std::vector<unsigned char> pixels);
+        void MakeVideoFromFrames();
+
+    };
 
 
 }
