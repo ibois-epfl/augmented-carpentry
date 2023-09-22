@@ -10,19 +10,6 @@
 
 namespace AIAC::Utils {
 
-    class VideoRecorder {
-    public:
-        VideoRecorder();
-        ~VideoRecorder();
 
-        void StartRecording();
-        void StopRecording();
-        void CaptureFrame();
-        void ExportVideo();
 
-    private:
-        bool m_IsRecording;
-        std::vector<std::string> m_SavedFrames;
-    };
-
-} // namespace AIAC::Utils
+}
