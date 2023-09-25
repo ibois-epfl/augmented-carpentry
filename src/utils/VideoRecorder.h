@@ -15,6 +15,11 @@ namespace AIAC::Utils {
         VideoRecorder();
         ~VideoRecorder();
 
+
+        inline void StartRecording(){isRecording = true;};
+        inline void StopRecording(){isRecording = false;};
+        inline bool IsRecording() const {return isRecording;};
+
         void CaptureFrames();
         void SaveFrames(int height, int width, std::vector<unsigned char> pixels);
         void MakeVideoFromFrames();
@@ -23,6 +28,7 @@ namespace AIAC::Utils {
         std::string imageFolderPath = "./videorecorder";  // Path to the image folder
         std::string framesFolderPath = imageFolderPath + "/frames";  // Path to the frames folder
         std::string videoFolderPath = imageFolderPath + "/videos";  // Path to the video folder
+        bool isRecording;
     };
 
 

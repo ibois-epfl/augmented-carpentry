@@ -74,6 +74,13 @@ namespace AIAC::Utils {
 
     void VideoRecorder::MakeVideoFromFrames() {
         std::cout << "VideoRecorder::MakeVideoFromFrames" << std::endl;
+        // count how many frames are in the /frames folder
+
+        // sort the names of the folder
+
+        // create a video from the frames
+
+        // save the video in the /video folder
 
     }
 
