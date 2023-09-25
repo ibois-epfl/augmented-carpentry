@@ -6,13 +6,12 @@
 #pragma once
 
 #include "AIAC/Layer.h"
-#include "../utils/VideoRecorder.h"
+#include "utils/VideoRecorder.h"
 
 namespace AIAC {
 
     class LayerUtils : public AIAC::Layer {
     public:
-
 
         virtual void OnFrameEnd() override;
 
