@@ -19,6 +19,10 @@ namespace AIAC::Utils {
         void SaveFrames(int height, int width, std::vector<unsigned char> pixels);
         void MakeVideoFromFrames();
 
+    private:
+        std::string imageFolderPath = "./videorecorder";  // Path to the image folder
+        std::string framesFolderPath = imageFolderPath + "/frames";  // Path to the frames folder
+        std::string videoFolderPath = imageFolderPath + "/videos";  // Path to the video folder
     };
 
 

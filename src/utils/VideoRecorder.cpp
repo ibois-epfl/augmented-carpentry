@@ -14,7 +14,6 @@ namespace AIAC::Utils {
 
     VideoRecorder::VideoRecorder() {
         // check /image folder if it doesn't exist create it
-        std::string imageFolderPath = "./videorecorder";  // Path to the image folder
         if (!std::filesystem::exists(imageFolderPath)) {
             std::filesystem::create_directory(imageFolderPath);
             AIAC_INFO("Created {0} folder", imageFolderPath);
@@ -22,7 +21,6 @@ namespace AIAC::Utils {
         AIAC_INFO("{0} folder exists!", imageFolderPath);
 
         // create the /frames folder in image folder if image folder exists
-        std::string framesFolderPath = imageFolderPath + "/frames";  // Path to the frames folder
         if (std::filesystem::exists(imageFolderPath) && !std::filesystem::exists(framesFolderPath)) {
             std::filesystem::create_directory(framesFolderPath);
             AIAC_INFO("Created {0} folder", framesFolderPath);
@@ -30,7 +28,6 @@ namespace AIAC::Utils {
         AIAC_INFO("{0} folder exists!", framesFolderPath);
 
         // create the /video folder in image folder if image folder exists
-        std::string videoFolderPath = imageFolderPath + "/videos";  // Path to the video folder
         if (std::filesystem::exists(imageFolderPath) && !std::filesystem::exists(videoFolderPath)) {
             std::filesystem::create_directory(videoFolderPath);
             AIAC_INFO("Created {0} folder", videoFolderPath);
@@ -39,6 +36,10 @@ namespace AIAC::Utils {
 
     VideoRecorder::~VideoRecorder() {
         std::cout << "VideoRecorder destructor" << std::endl;
+        if (std::filesystem::exists(framesFolderPath)) {
+            std::filesystem::remove_all(framesFolderPath);
+            std::cout << "Deleted /image/frames folder and its contents" << std::endl;
+        }
 
     }
 
@@ -63,12 +64,17 @@ namespace AIAC::Utils {
         cv::Mat image(height, width, CV_8UC4, pixels.data());
         cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
 
-        boost::uuids::uuid myUuid = boost::uuids::random_generator()();
-        cv::imwrite("images/" + boost::uuids::to_string(myUuid) + ".jpg", image);
+        auto now = std::chrono::system_clock::now();
+        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+
+        std::stringstream filename;
+        filename << std::setfill('0') << std::setw(13) << timestamp << ".jpg";
+        cv::imwrite(framesFolderPath + "/" + filename.str(), image);
     }
 
     void VideoRecorder::MakeVideoFromFrames() {
         std::cout << "VideoRecorder::MakeVideoFromFrames" << std::endl;
+
     }
 
 }
