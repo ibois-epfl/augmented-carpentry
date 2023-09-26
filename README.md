@@ -48,19 +48,20 @@ gantt
     Start                                                     :milestone, crit, strt, 2023-08-02, 0d
 
     section WP1 - TTool
-    Eval protocol design                                      :cmkprj, 2023-08-14, 6.2w
-    State-of-art interface eval                               :ref, 2023-08-14, 5w
-    Eval protocol                                             :milestone, milttol, 2023-08-23, 0d
+    Eval protocol design                                      :done, cmkprj, 2023-08-14, 6.2w
+    State-of-art interface eval                               :done, ref, 2023-08-14, 5w
+    Eval protocol                                             :done, milestone, milttol, 2023-09-26, 0d
     
-    TTool packaging                                           :packcont, 2023-09-01, 2.5w
+    TTool packaging                                           :done, packcont, 2023-09-01, 2.5w
 
 
     (optional) UI design proposal                             :uidesign, after packcont, 0d
     Eval campaign                                             :active, eval, after uidesign, 4w
-    ML classifier dev                                         :mlclass, after eval, 4d
+    ML classifier dev                                         :mlclass, after eval, 15d
     ML finished                                               :milestone, mlclasmil, after mlclass, 0d
     Ttool package deliverable                                 :milestone, del1, 2023-10-30, 0d
-
+    
+    AC dev                                                    :acdev, after mlclasmil, 12w
 
     Andrea off                                                :crit, 2023-08-24, 2023-09-17
 
