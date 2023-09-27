@@ -62,6 +62,8 @@ namespace AIAC::Utils {
     void VideoRecorder::SaveFrames(int height, int width, std::vector<unsigned char> pixels) {
         std::cout << "VideoRecorder::SaveFrames" << std::endl;
         cv::Mat image(height, width, CV_8UC4, pixels.data());
+        // flip to match the opengl coordinate system
+        cv::flip(image, image, 0);
         cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
 
         auto now = std::chrono::system_clock::now();
@@ -75,12 +77,48 @@ namespace AIAC::Utils {
     void VideoRecorder::MakeVideoFromFrames() {
         std::cout << "VideoRecorder::MakeVideoFromFrames" << std::endl;
         // count how many frames are in the /frames folder
+        int frameCount = 0;
+        const std::string framesFolder = framesFolderPath;
+        for (const auto& entry : std::filesystem::directory_iterator(framesFolder)) {
+            frameCount++;
+        }
+
+        if (frameCount == 0) {
+            std::cout << "No frames found in the /frames folder." << std::endl;
+            return;
+        }
 
         // sort the names of the folder
+        std::vector<std::string> framePaths;
+        for (const auto& entry : std::filesystem::directory_iterator(framesFolder)) {
+            framePaths.push_back(entry.path().string());
+        }
 
+        std::sort(framePaths.begin(), framePaths.end());
+        std::cout << "SORTED:" << framePaths << std::endl;
         // create a video from the frames
+        const std::string imageListFile = "image_list.txt";
+        std::ofstream imageList(imageListFile);
+        for (const std::string& framePath : framePaths) {
+            imageList << "file '" << framePath << "'\n";
+        }
+        imageList.close();
 
         // save the video in the /video folder
+        const std::string videoPath = videoFolderPath + "/output_video.mp4";
+        std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath;
+
+        std::cout << "ffmpegCommand: " << ffmpegCommand << std::endl;
+        int result = std::system(ffmpegCommand.c_str());
+
+        if (result == 0) {
+            std::cout << "Video saved to: " << videoPath << std::endl;
+        } else {
+            std::cerr << "Error creating video." << std::endl;
+        }
+
+        // Clean up temporary files
+        std::remove(imageListFile.c_str());
 
     }
 
