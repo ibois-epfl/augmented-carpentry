@@ -56,6 +56,8 @@ namespace AIAC
         StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
         StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
+        StackPane(PaneUI("Utils",        true,      AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+
 
         m_IsOpen = new bool(true);
     }
@@ -431,6 +433,14 @@ namespace AIAC
                 }
             }
         ImGui::EndChild();
+    }
+
+    void LayerUI::SetPaneUIUtils(){
+        ImGui::Text("Video Recorder Controls: ");
+        ImGui::Button("Start Recording");
+        ImGui::SameLine();
+        ImGui::Button("Stop Recording");
+
     }
 
     void LayerUI::SetPaneUIToolhead()
