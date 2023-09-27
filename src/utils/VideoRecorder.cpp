@@ -104,8 +104,14 @@ namespace AIAC::Utils {
         }
         imageList.close();
 
+        //video name
+        auto now = std::chrono::system_clock::now();
+        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+
+        std::stringstream videoname;
+        videoname << std::setfill('0') << std::setw(13) << timestamp << ".mp4";
         // save the video in the /video folder
-        const std::string videoPath = videoFolderPath + "/output_video.mp4";
+        const std::string videoPath = videoFolderPath + "/" + videoname.str();
         std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath;
 
         std::cout << "ffmpegCommand: " << ffmpegCommand << std::endl;
