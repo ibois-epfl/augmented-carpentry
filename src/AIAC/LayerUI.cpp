@@ -15,6 +15,7 @@
 #include "ttool.hh"
 
 #include "utils/utils.h"
+#include "LayerUtils.h"
 
 namespace AIAC
 {
@@ -437,10 +438,13 @@ namespace AIAC
 
     void LayerUI::SetPaneUIUtils(){
         ImGui::Text("Video Recorder Controls: ");
-        ImGui::Button("Start Recording");
+        if(ImGui::Button("Start Recording")){
+            AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+        };
         ImGui::SameLine();
-        ImGui::Button("Stop Recording");
-
+        if(ImGui::Button("Stop Recording")){
+            AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+        };
     }
 
     void LayerUI::SetPaneUIToolhead()
