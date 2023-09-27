@@ -15,12 +15,22 @@
 namespace AIAC {
 
     void LayerUtils::OnFrameEnd() {
-        std::cout << "LayerUtils::OnFrameEnd()" << std::endl;
-        Utils::VideoRecorder recorder;
-        recorder.CaptureFrames();
-        recorder.MakeVideoFromFrames();
+        if(m_Recording){
+            videoRecorder->CaptureFrames();
+        }
 
     }
+
+    void LayerUtils::StartRecording(){
+        m_Recording = true;
+        videoRecorder = std::make_unique<AIAC::Utils::VideoRecorder>();
+    };
+
+    void LayerUtils::StopRecording(){
+        m_Recording = false;
+        videoRecorder->MakeVideoFromFrames();
+        videoRecorder.reset();
+    };
 
 }
 
