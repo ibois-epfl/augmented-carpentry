@@ -18,6 +18,8 @@ namespace AIAC::Utils {
         void CaptureFrames();
         void SaveFrames(int height, int width, std::vector<unsigned char> pixels);
         void MakeVideoFromFrames();
+        void CreateFolders();
+        void DeleteFrameFolder();
 
     private:
         std::string imageFolderPath = "./videorecorder";  // Path to the image folder
