@@ -22,9 +22,9 @@ namespace AIAC::Utils {
         void DeleteFrameFolder();
 
     private:
-        std::string imageFolderPath = "./videorecorder";  // Path to the image folder
-        std::string framesFolderPath = imageFolderPath + "/frames";  // Path to the frames folder
-        std::string videoFolderPath = imageFolderPath + "/videos";  // Path to the video folder
+        std::string m_ImageFolderPath = "/videorecorder";  // Path to the image folder
+        std::string m_FramesFolderPath = m_ImageFolderPath + "/frames";  // Path to the frames folder
+        std::string m_VideoFolderPath = m_ImageFolderPath + "/videos";  // Path to the video folder
     };
 
 
