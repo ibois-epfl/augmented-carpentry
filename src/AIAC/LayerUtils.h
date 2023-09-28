@@ -14,8 +14,12 @@ namespace AIAC {
     public:
 
         virtual void OnFrameEnd() override;
+        /**
+         * @brief
+         */
         void StartRecording();
         void StopRecording();
+
     private:
         bool m_Recording;
         std::unique_ptr<AIAC::Utils::VideoRecorder> videoRecorder;
