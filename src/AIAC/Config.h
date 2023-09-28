@@ -34,6 +34,8 @@ public:
     inline static const std::string DIGITAL_MODEL_PATH = "DigitalModelPath";
     inline static const std::string MESH_PATHS = "MeshPaths";
 
+    inline static const std::string SEC_UTILS = "Utils";
+    inline static const std::string RECORDER_DEFAULT_PATH = "RecorderDefaultPath";
 
 public:
     Config(std::string filename, bool updateFile=true):
