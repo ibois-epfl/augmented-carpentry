@@ -50,8 +50,6 @@ namespace AIAC::Utils {
         // create a vector to hold the data
         std::vector<unsigned char> pixels(width * height * 4);  // 4 for RGBA
 
-        // read pixels from the framebuffer
-        glReadBuffer(GL_BACK);
         glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
 
         // write pixels to image using opencv
