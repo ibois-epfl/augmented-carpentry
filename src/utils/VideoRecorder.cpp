@@ -50,6 +50,7 @@ namespace AIAC::Utils {
         // create a vector to hold the data
         std::vector<unsigned char> pixels(width * height * 4);  // 4 for RGBA
 
+        // opengl 0,0 -- lower left corner
         glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
 
         // write pixels to image using opencv
@@ -60,7 +61,7 @@ namespace AIAC::Utils {
     void VideoRecorder::SaveFrames(int height, int width, std::vector<unsigned char> pixels) {
         std::cout << "VideoRecorder::SaveFrames" << std::endl;
         cv::Mat image(height, width, CV_8UC4, pixels.data());
-        // flip to match the opengl coordinate system
+        // opencv 0,0 -- upper left corner
         cv::flip(image, image, 0);
         cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
 
@@ -74,17 +75,7 @@ namespace AIAC::Utils {
 
     void VideoRecorder::MakeVideoFromFrames() {
         std::cout << "VideoRecorder::MakeVideoFromFrames" << std::endl;
-        // count how many frames are in the /frames folder
-        int frameCount = 0;
         const std::string framesFolder = framesFolderPath;
-        for (const auto& entry : std::filesystem::directory_iterator(framesFolder)) {
-            frameCount++;
-        }
-
-        if (frameCount == 0) {
-            std::cout << "No frames found in the /frames folder." << std::endl;
-            return;
-        }
 
         // sort the names of the folder
         std::vector<std::string> framePaths;
@@ -94,7 +85,7 @@ namespace AIAC::Utils {
 
         std::sort(framePaths.begin(), framePaths.end());
         std::cout << "SORTED:" << framePaths << std::endl;
-        // create a video from the frames
+        // writing to a file? ram?io?
         const std::string imageListFile = "image_list.txt";
         std::ofstream imageList(imageListFile);
         for (const std::string& framePath : framePaths) {
