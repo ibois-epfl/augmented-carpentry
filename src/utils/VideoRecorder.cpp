@@ -97,30 +97,49 @@ namespace AIAC::Utils {
     }
 
     void VideoRecorder::CreateFolders(){
+        // temp/recorder/
         // check /image folder if it doesn't exist create it
-        if (!std::filesystem::exists(imageFolderPath)) {
-            std::filesystem::create_directory(imageFolderPath);
-            AIAC_INFO("Created {0} folder", imageFolderPath);
+
+        std::string defaultPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS,
+                                                                AIAC::Config::RECORDER_DEFAULT_PATH);
+
+        std::string UIPath = "";
+
+
+        // Determine the actual path to use.
+        std::string actualPath = !UIPath.empty() && std::filesystem::exists(UIPath) ? UIPath : defaultPath;
+
+
+        // create default folder /temp if doesnt exist
+        if (!std::filesystem::exists(actualPath)) {
+            std::filesystem::create_directory(actualPath);
+            AIAC_INFO("Created {0} folder", actualPath);
         }
-        AIAC_INFO("{0} folder exists!", imageFolderPath);
+
+
+        if (!std::filesystem::exists(actualPath)) {
+            std::filesystem::create_directory(actualPath + m_ImageFolderPath);
+            AIAC_INFO("Created {0} folder", actualPath + m_ImageFolderPath);
+        }
+        AIAC_INFO("{0} folder exists!", actualPath + m_ImageFolderPath);
 
         // create the /frames folder in image folder if image folder exists
-        if (std::filesystem::exists(imageFolderPath) && !std::filesystem::exists(framesFolderPath)) {
-            std::filesystem::create_directory(framesFolderPath);
-            AIAC_INFO("Created {0} folder", framesFolderPath);
+        if (std::filesystem::exists(actualPath + m_ImageFolderPath) && !std::filesystem::exists(actualPath + m_FramesFolderPath)) {
+            std::filesystem::create_directory(actualPath + m_FramesFolderPath);
+            AIAC_INFO("Created {0} folder", actualPath + m_FramesFolderPath);
         }
-        AIAC_INFO("{0} folder exists!", framesFolderPath);
+        AIAC_INFO("{0} folder exists!", actualPath + m_FramesFolderPath);
 
         // create the /video folder in image folder if image folder exists
-        if (std::filesystem::exists(imageFolderPath) && !std::filesystem::exists(videoFolderPath)) {
-            std::filesystem::create_directory(videoFolderPath);
-            AIAC_INFO("Created {0} folder", videoFolderPath);
+        if (std::filesystem::exists(actualPath + m_ImageFolderPath) && !std::filesystem::exists(actualPath + m_VideoFolderPath)) {
+            std::filesystem::create_directory(actualPath + m_VideoFolderPath);
+            AIAC_INFO("Created {0} folder", actualPath + m_VideoFolderPath);
         }
     }
 
     void VideoRecorder::DeleteFrameFolder(){
-        if (std::filesystem::exists(framesFolderPath)) {
-            std::filesystem::remove_all(framesFolderPath);
+        if (std::filesystem::exists(actualPath + m_FramesFolderPath)) {
+            std::filesystem::remove_all(actualPath + m_FramesFolderPath);
             std::cout << "Deleted /image/frames folder and its contents" << std::endl;
         }
     }
