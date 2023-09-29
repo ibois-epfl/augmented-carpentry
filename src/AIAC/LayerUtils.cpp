@@ -3,8 +3,8 @@
 //
 
 #include "LayerUtils.h"
-#include <boost/uuid/uuid_io.hpp>
 #include "utils/VideoRecorder.h"
+
 namespace AIAC {
     void LayerUtils::OnFrameEnd() {
         if(this->m_Recording){
@@ -13,16 +13,16 @@ namespace AIAC {
     }
 
     void LayerUtils::StartRecording(){
-        std::cout << "LayerUtils::StartRecording" << std::endl;
+        AIAC_INFO("LayerUtils::StartRecording");
         this->m_Recording = true;
         this->videoRecorder = std::make_unique<AIAC::Utils::VideoRecorder>();
     };
 
     void LayerUtils::StopRecording(){
-        std::cout << "LayerUtils::StopRecording" << std::endl;
+        AIAC_INFO("LayerUtils::StopRecording");
         this->m_Recording = false;
         this->videoRecorder->MakeVideoFromFrames();
-        this -> videoRecorder.reset();
+        this->videoRecorder.reset();
     };
 
 }
