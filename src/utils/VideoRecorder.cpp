@@ -84,7 +84,7 @@ namespace AIAC::Utils {
 
         // run the ffmpeg command to create the video and save it in the /video folder
         const std::string videoPath = m_VideoFolderPath + "/" + videoname.str();
-        std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath;
+        std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath + " 2>/dev/null";
 
         // check if the video was created successfully
         int result = std::system(ffmpegCommand.c_str());
@@ -102,27 +102,30 @@ namespace AIAC::Utils {
         // check /image folder if it doesn't exist create it
         if (!std::filesystem::exists(this->m_ImageFolderPath)) {
             std::filesystem::create_directory(this->m_ImageFolderPath);
+        } else {
+            AIAC_INFO("{0} folder exists!", this->m_ImageFolderPath);
         }
-        AIAC_INFO("{0} folder exists!", this->m_ImageFolderPath);
 
         // create the /frames folder in image folder if image folder exists
         if (std::filesystem::exists(this->m_ImageFolderPath) && !std::filesystem::exists(this->m_FramesFolderPath)) {
             std::filesystem::create_directory(this->m_FramesFolderPath);
+        } else {
+            AIAC_INFO("{0} folder exists!", this->m_FramesFolderPath);
         }
-        AIAC_INFO("{0} folder exists!", this->m_FramesFolderPath);
 
         // create the /video folder in image folder if image folder exists
         if (std::filesystem::exists(this->m_ImageFolderPath) && !std::filesystem::exists(this->m_VideoFolderPath)) {
             std::filesystem::create_directory(this->m_VideoFolderPath);
-        }
+        } else {
         AIAC_INFO("{0} folder exists!", this->m_VideoFolderPath);
+        }
     }
 
     void VideoRecorder::DeleteFrameFolder(){
         // delete the /frames folder
         if (std::filesystem::exists(this->m_FramesFolderPath)) {
             std::filesystem::remove_all(this->m_FramesFolderPath);
-        }
-        AIAC_ERROR("Could not delete {0} folder", this->m_FramesFolderPath);
+        } else {
+        AIAC_ERROR("Could not delete {0} folder", this->m_FramesFolderPath);}
     }
 }
