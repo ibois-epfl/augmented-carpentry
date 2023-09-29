@@ -3,7 +3,6 @@
 //
 
 #pragma once
-#pragma once
 
 #include "AIAC/Layer.h"
 #include "utils/VideoRecorder.h"
@@ -12,16 +11,16 @@ namespace AIAC {
 
     class LayerUtils : public AIAC::Layer {
     public:
-
         virtual void OnFrameEnd() override;
-        /**
-         * @brief
-         */
+        /// @brief Start recording the video of a window
         void StartRecording();
+        /// @brief Stop recording the video of a window
         void StopRecording();
 
     private:
+        /// @brief Flag to check if the video is being recorded
         bool m_Recording;
+        /// @brief Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> videoRecorder;
     };
 
