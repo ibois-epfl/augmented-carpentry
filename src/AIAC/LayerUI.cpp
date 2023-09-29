@@ -437,13 +437,34 @@ namespace AIAC
     }
 
     void LayerUI::SetPaneUIUtils(){
-        ImGui::Text("Video Recorder Controls: ");
-        if(ImGui::Button("Start Recording")){
-            AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
-        };
+        static bool isOperationInProgress = false;
+
+        // Recording Status
+        ImGui::Text("Recording is in Progress: ");
         ImGui::SameLine();
-        if(ImGui::Button("Stop Recording")){
-            AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+        if(isOperationInProgress){
+            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Yes");
+        } else {
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "No");
+        }
+
+        // Recording Control Buttons
+        ImGui::Text("Video Recorder Controls: ");
+
+        if(ImGui::Button("Start Recording") && !isOperationInProgress){
+            isOperationInProgress = true;
+            std::cout << "isOperationInProgress is TRUE" << std::endl;
+            AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+        }
+
+        ImGui::SameLine();
+        if(ImGui::Button("Stop Recording")  && isOperationInProgress){
+            isOperationInProgress = false;
+            std::cout << "isOperationInProgress is FALSE" << std::endl;
+
+            std::thread([=] {
+                AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+            }).detach(); // Create a detached thread to run the operation
         };
     }
 
