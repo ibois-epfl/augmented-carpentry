@@ -5,26 +5,22 @@
 #include "VideoRecorder.h"
 #include "../AIAC/Application.h"
 #include <opencv2/opencv.hpp>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <filesystem>
 
 namespace AIAC::Utils {
 
     VideoRecorder::VideoRecorder() {
-        std::cout << "VideoRecorder constructor" << std::endl;
         // create folders
         CreateFolders();
     }
 
     VideoRecorder::~VideoRecorder() {
-        std::cout << "VideoRecorder destructor" << std::endl;
         // delete folders
         DeleteFrameFolder();
     }
 
     void VideoRecorder::CaptureFrames() {
-        //std::cout << "VideoRecorder::CaptureFrames" << std::endl;
+        // get the height and width of the window
         int width = AIAC_APP.GetWindow()->GetDisplayW();
         int height = AIAC_APP.GetWindow()->GetDisplayH();
         // create a vector to hold the data
@@ -34,38 +30,43 @@ namespace AIAC::Utils {
         glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
 
         // write pixels to image using opencv
-        SaveFrames(height, width, pixels);
-
+        if(std::filesystem::exists(m_FramesFolderPath)) {
+            SaveFrames(height, width, pixels);
+        } else {
+            AIAC_ERROR("Error: {0} does not exist!", m_FramesFolderPath);
+    }
     }
 
     void VideoRecorder::SaveFrames(int height, int width, std::vector<unsigned char> pixels) {
-        //std::cout << "VideoRecorder::SaveFrames" << std::endl;
+        // create mat object to hold the data
         cv::Mat image(height, width, CV_8UC4, pixels.data());
         // opencv 0,0 -- upper left corner
         cv::flip(image, image, 0);
         cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
 
+        // get the timestamp to name the image
         auto now = std::chrono::system_clock::now();
         auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
 
+        // format the filename
         std::stringstream filename;
         filename << std::setfill('0') << std::setw(13) << timestamp << ".jpg";
-        cv::imwrite(framesFolderPath + "/" + filename.str(), image);
+
+        // save the image in the /frames folder
+        cv::imwrite(m_FramesFolderPath + "/" + filename.str(), image);
     }
 
     void VideoRecorder::MakeVideoFromFrames() {
-        //std::cout << "VideoRecorder::MakeVideoFromFrames" << std::endl;
-        const std::string framesFolder = framesFolderPath;
+        const std::string framesFolder = m_FramesFolderPath;
 
         // sort the names of the folder
         std::vector<std::string> framePaths;
         for (const auto& entry : std::filesystem::directory_iterator(framesFolder)) {
             framePaths.push_back(entry.path().string());
         }
-
         std::sort(framePaths.begin(), framePaths.end());
-        std::cout << "SORTED:" << framePaths << std::endl;
-        // writing to a file? ram?io?
+
+        // create a file to hold the names of the images
         const std::string imageListFile = "image_list.txt";
         std::ofstream imageList(imageListFile);
         for (const std::string& framePath : framePaths) {
@@ -73,23 +74,24 @@ namespace AIAC::Utils {
         }
         imageList.close();
 
-        //video name
+        // get the timestamp to name the video
         auto now = std::chrono::system_clock::now();
         auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
 
+        // format the video filename
         std::stringstream videoname;
         videoname << std::setfill('0') << std::setw(13) << timestamp << ".mp4";
-        // save the video in the /video folder
-        const std::string videoPath = videoFolderPath + "/" + videoname.str();
+
+        // run the ffmpeg command to create the video and save it in the /video folder
+        const std::string videoPath = m_VideoFolderPath + "/" + videoname.str();
         std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath;
 
-        std::cout << "ffmpegCommand: " << ffmpegCommand << std::endl;
+        // check if the video was created successfully
         int result = std::system(ffmpegCommand.c_str());
-
         if (result == 0) {
-            std::cout << "Video saved to: " << videoPath << std::endl;
+            AIAC_INFO("Video saved to: {0}", videoPath);
         } else {
-            std::cerr << "Error creating video." << std::endl;
+            AIAC_ERROR("Error creating video.");
         }
 
         // Clean up temporary files
@@ -97,50 +99,30 @@ namespace AIAC::Utils {
     }
 
     void VideoRecorder::CreateFolders(){
-        // temp/recorder/
         // check /image folder if it doesn't exist create it
-
-        std::string defaultPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS,
-                                                                AIAC::Config::RECORDER_DEFAULT_PATH);
-
-        std::string UIPath = "";
-
-
-        // Determine the actual path to use.
-        std::string actualPath = !UIPath.empty() && std::filesystem::exists(UIPath) ? UIPath : defaultPath;
-
-
-        // create default folder /temp if doesnt exist
-        if (!std::filesystem::exists(actualPath)) {
-            std::filesystem::create_directory(actualPath);
-            AIAC_INFO("Created {0} folder", actualPath);
+        if (!std::filesystem::exists(m_ImageFolderPath)) {
+            std::filesystem::create_directory(m_ImageFolderPath);
         }
-
-
-        if (!std::filesystem::exists(actualPath)) {
-            std::filesystem::create_directory(actualPath + m_ImageFolderPath);
-            AIAC_INFO("Created {0} folder", actualPath + m_ImageFolderPath);
-        }
-        AIAC_INFO("{0} folder exists!", actualPath + m_ImageFolderPath);
+        AIAC_INFO("{0} folder exists!", m_ImageFolderPath);
 
         // create the /frames folder in image folder if image folder exists
-        if (std::filesystem::exists(actualPath + m_ImageFolderPath) && !std::filesystem::exists(actualPath + m_FramesFolderPath)) {
-            std::filesystem::create_directory(actualPath + m_FramesFolderPath);
-            AIAC_INFO("Created {0} folder", actualPath + m_FramesFolderPath);
+        if (std::filesystem::exists(m_ImageFolderPath) && !std::filesystem::exists(m_FramesFolderPath)) {
+            std::filesystem::create_directory(m_FramesFolderPath);
         }
-        AIAC_INFO("{0} folder exists!", actualPath + m_FramesFolderPath);
+        AIAC_INFO("{0} folder exists!", m_FramesFolderPath);
 
         // create the /video folder in image folder if image folder exists
-        if (std::filesystem::exists(actualPath + m_ImageFolderPath) && !std::filesystem::exists(actualPath + m_VideoFolderPath)) {
-            std::filesystem::create_directory(actualPath + m_VideoFolderPath);
-            AIAC_INFO("Created {0} folder", actualPath + m_VideoFolderPath);
+        if (std::filesystem::exists(m_ImageFolderPath) && !std::filesystem::exists(m_VideoFolderPath)) {
+            std::filesystem::create_directory(m_VideoFolderPath);
         }
+        AIAC_INFO("{0} folder exists!", m_VideoFolderPath);
     }
 
     void VideoRecorder::DeleteFrameFolder(){
-        if (std::filesystem::exists(actualPath + m_FramesFolderPath)) {
-            std::filesystem::remove_all(actualPath + m_FramesFolderPath);
-            std::cout << "Deleted /image/frames folder and its contents" << std::endl;
+        // delete the /frames folder
+        if (std::filesystem::exists(m_FramesFolderPath)) {
+            std::filesystem::remove_all(m_FramesFolderPath);
         }
+        AIAC_ERROR("Could not delete {0} folder", m_FramesFolderPath);
     }
 }
