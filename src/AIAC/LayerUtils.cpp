@@ -7,7 +7,6 @@
 #include "utils/VideoRecorder.h"
 namespace AIAC {
     void LayerUtils::OnFrameEnd() {
-        std::cout << "LayerUtils::OnFrameEnd" << std::endl;
         if(this->m_Recording){
             this->videoRecorder->CaptureFrames();
         }
@@ -23,6 +22,7 @@ namespace AIAC {
         std::cout << "LayerUtils::StopRecording" << std::endl;
         this->m_Recording = false;
         this->videoRecorder->MakeVideoFromFrames();
+        this -> videoRecorder.reset();
     };
 
 }
