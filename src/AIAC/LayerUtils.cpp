@@ -32,5 +32,12 @@ namespace AIAC {
         this->videoRecorder.reset();
     };
 
+    void LayerUtils::SetSaveFolderPath(std::string path){
+        AIAC_INFO("LayerUtils::SetSaveFolderPath");
+        // set the save folder path for the video recorder
+        m_SaveFolderPath = path;
+        std::cout << "path: " << m_SaveFolderPath << std::endl;
+    };
+
 }
 
