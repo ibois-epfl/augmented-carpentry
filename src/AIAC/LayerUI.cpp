@@ -443,9 +443,9 @@ namespace AIAC
         ImGui::Text("Recording is in Progress: ");
         ImGui::SameLine();
         if(isOperationInProgress){
-            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Yes");
+            ImGui::TextColored(AIAC_UI_GREEN, "Yes");
         } else {
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "No");
+            ImGui::TextColored(AIAC_UI_RED, "No");
         }
 
         // Recording Control Buttons
@@ -453,14 +453,12 @@ namespace AIAC
 
         if(ImGui::Button("Start Recording") && !isOperationInProgress){
             isOperationInProgress = true;
-            std::cout << "isOperationInProgress is TRUE" << std::endl;
             AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
         }
 
         ImGui::SameLine();
         if(ImGui::Button("Stop Recording")  && isOperationInProgress){
             isOperationInProgress = false;
-            std::cout << "isOperationInProgress is FALSE" << std::endl;
 
             std::thread([=] {
                 AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
