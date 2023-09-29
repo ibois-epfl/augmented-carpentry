@@ -61,6 +61,7 @@ namespace AIAC {
         void ShowCamCalibPopup();
         void ShowSaveCamCalibFileDialog();
         void LoadReconstructParams();
+        void ShowSaveVideoRecorderFileDialog();
 
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         void SetPaneUICamera();
@@ -103,6 +104,7 @@ namespace AIAC {
         char m_TmpPathBuf[PATH_BUF_SIZE] = {0};
         char *m_FileSelectionTargetBuf = nullptr;
         std::function<void()> m_FileSelectionCallback = []{};
+        std::string m_VideoRecorderPathName;
 
         bool m_IsCombiningMap = false;
         bool m_IsReconstructing3D = false;

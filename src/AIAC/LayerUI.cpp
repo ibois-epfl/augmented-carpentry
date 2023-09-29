@@ -436,7 +436,29 @@ namespace AIAC
         ImGui::EndChild();
     }
 
+    void LayerUI::ShowSaveVideoRecorderFileDialog(){
+        // Set the path for saving the video from UI
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+        if (ImGui::Button("Select Save Directory")) {
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseDirectoryDialog", "Choose Directory", nullptr, ".");
+        }
+
+        if (ImGuiFileDialog::Instance()->Display("ChooseDirectoryDialog")) {
+            if (ImGuiFileDialog::Instance()->IsOk()) {
+                std::string filePathName  = ImGuiFileDialog::Instance()->GetFilePathName();
+                std::string filePath  = ImGuiFileDialog::Instance()->GetCurrentPath();
+                AIAC_APP.GetLayer<AIAC::LayerUtils>()->SetSaveFolderPath(filePathName);
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+    }
     void LayerUI::SetPaneUIUtils(){
+
+        ShowSaveVideoRecorderFileDialog();
+        // Retrieve and display the saved folder path
+        std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
+        ImGui::Text("Selected Path: %s", displayedPath.c_str());
+
         // Set operation in progress flag
         static bool isOperationInProgress = false;
 
@@ -462,6 +484,7 @@ namespace AIAC
 
         ImGui::SameLine();
         // Stop Recording Button
+
         if(ImGui::Button("Stop Recording")  && isOperationInProgress){
             // Set the process flag to false
             isOperationInProgress = false;
