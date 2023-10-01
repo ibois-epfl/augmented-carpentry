@@ -4,6 +4,7 @@
 
 #include "LayerUtils.h"
 #include "utils/VideoRecorder.h"
+#include "Config.h"
 
 namespace AIAC {
     void LayerUtils::OnFrameEnd() {
@@ -35,8 +36,13 @@ namespace AIAC {
     void LayerUtils::SetSaveFolderPath(std::string path){
         AIAC_INFO("LayerUtils::SetSaveFolderPath");
         // set the save folder path for the video recorder
-        m_SaveFolderPath = path;
-        std::cout << "path: " << m_SaveFolderPath << std::endl;
+        if(path.empty()) {
+            // If the user did not specify a path, use the default path.
+            m_SaveFolderPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::RECORDER_DEFAULT_PATH);
+        } else {
+            // If the user specified a path, use it.
+            m_SaveFolderPath = path;
+        }
     };
 
 }
