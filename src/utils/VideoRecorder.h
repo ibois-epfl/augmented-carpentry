@@ -6,6 +6,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <string>
 
@@ -13,7 +14,7 @@ namespace AIAC::Utils {
 
     class VideoRecorder {
     public:///< Public members
-        VideoRecorder();
+        explicit VideoRecorder(const std::string& basePath);
         ~VideoRecorder();
 
         /// @brief Capture frames from the window
@@ -31,14 +32,19 @@ namespace AIAC::Utils {
         void CreateFolders();
         /// @brief Delete the frames folder
         void DeleteFrameFolder();
+        /// @brief Update the paths
+        void UpdatePaths();
+
 
     private:///< Private members
-        /// Path to the image folder
-        std::string m_ImageFolderPath = "./videorecorder";
-        /// Path to the frames folder
-        std::string m_FramesFolderPath = m_ImageFolderPath + "/frames";
-        /// Path to the video folder
-        std::string m_VideoFolderPath = m_ImageFolderPath + "/videos";
+        /// Base path to save the video
+        std::string m_BasePath;
+        /// Path to recorder folder
+        std::string m_RecorderPath;
+        /// Path to frames folder
+        std::string m_FramesPath;
+        /// Path to video folder
+        std::string m_VideoPath;
     };
 
 
