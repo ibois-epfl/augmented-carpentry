@@ -56,10 +56,22 @@ gantt
 
 
     (optional) UI design proposal                             :uidesign, after packcont, 0d
-    Eval campaign                                             :active, eval, after uidesign, 4w
-    ML classifier dev                                         :mlclass, after eval, 15d
-    ML finished                                               :milestone, mlclasmil, after mlclass, 0d
-    Ttool package deliverable                                 :milestone, del1, 2023-10-30, 0d
+
+    section Evaluation Campaign Prep
+    AC exporter                                               :active, acexp, 2023-10-02, 1w
+    design probing plate                                      :crit, active, probplt, after acexp, 3d
+    fabrication of probing plate                              :crit, fabplt, after probplt, 2w
+    testing probing plate                                     :testplt, after fabplt, 2d 
+
+    section Experimental Campaign
+    Eval campaign                                             :eval, after testplt, 2.5w
+
+    section post-processing analysis
+    data processing and graphs                                :crit, dataaprgr, after eval, 1w
+
+    open-source ML infrastructure                             :mlclass, after probplt, 15d
+
+    Ttool package deliverable                                 :milestone, del1, after mlclass, 0d
     
     AC dev                                                    :acdev, after mlclasmil, 12w
 
