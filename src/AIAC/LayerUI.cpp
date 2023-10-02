@@ -490,10 +490,9 @@ namespace AIAC
             // Set the process flag to false
             isOperationInProgress = false;
             // Stop the recording
-            std::thread([=] {
-                AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
-            }).detach(); // Create a detached thread to run the video creation operation
+            AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
         };
+
     }
 
     void LayerUI::SetPaneUIToolhead()
