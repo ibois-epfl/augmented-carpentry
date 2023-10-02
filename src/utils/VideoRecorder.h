@@ -1,6 +1,3 @@
-//
-// Created by zholmaga on 11.09.23.
-//
 #pragma once
 
 #include <GL/glew.h>
@@ -13,17 +10,19 @@
 namespace AIAC::Utils {
 
     class VideoRecorder {
-    public:///< Public members
+    public:
         explicit VideoRecorder(const std::string& basePath);
         ~VideoRecorder();
 
         /// @brief Capture frames from the window
         void CaptureFrames();
-
-        /// @brief Save frames to the frame folder
-        /// @param height Height of the window
-        /// @param width Width of the window
-        /// @param pixels Vector to hold the data
+        /**
+         * @brief Save frames to the frame folder
+         *
+         * @param height Height of the window
+         * @param width Width of the window
+         * @param pixels Vector to hold the data
+         */
         void SaveFrames(int height, int width, std::vector<unsigned char> pixels);
 
         /// @brief Create video from the frames
@@ -35,8 +34,7 @@ namespace AIAC::Utils {
         /// @brief Update the paths
         void UpdatePaths();
 
-
-    private:///< Private members
+    private:
         /// Base path to save the video
         std::string m_BasePath;
         /// Path to recorder folder
@@ -46,6 +44,4 @@ namespace AIAC::Utils {
         /// Path to video folder
         std::string m_VideoPath;
     };
-
-
 }
