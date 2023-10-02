@@ -454,6 +454,7 @@ namespace AIAC
     }
     void LayerUI::SetPaneUIUtils(){
 
+        // Set the path for saving the video from UI
         ShowSaveVideoRecorderFileDialog();
         // Retrieve and display the saved folder path
         std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
