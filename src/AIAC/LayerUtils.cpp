@@ -1,6 +1,7 @@
 #include "LayerUtils.h"
 #include "utils/VideoRecorder.h"
 #include "Config.h"
+#include <thread>
 
 namespace AIAC {
     void LayerUtils::OnFrameEnd() {
@@ -25,10 +26,12 @@ namespace AIAC {
         AIAC_INFO("Stopped Recording");
         // set the recording flag to false
         this->m_Recording = false;
-        // create the video from the frames
-        this->m_VideoRecorder->MakeVideoFromFrames();
-        // delete the frames folder and video recorder object
-        this->m_VideoRecorder.reset();
+        // create the video from the frames in a separate thread
+        std::thread([this]{
+            this->m_VideoRecorder->MakeVideoFromFrames();
+            // delete the frames folder and video recorder object
+            this->m_VideoRecorder.reset();
+        }).detach();
     };
 
     void LayerUtils::SetSaveFolderPath(std::string path){
