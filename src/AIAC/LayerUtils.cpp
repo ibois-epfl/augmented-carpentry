@@ -1,7 +1,3 @@
-//
-// Created by zholmaga on 11.09.23.
-//
-
 #include "LayerUtils.h"
 #include "utils/VideoRecorder.h"
 #include "Config.h"
@@ -11,7 +7,7 @@ namespace AIAC {
         // check if the recording flag is set to true
         if(this->m_Recording){
             // capture the frames
-            this->videoRecorder->CaptureFrames();
+            this->m_VideoRecorder->CaptureFrames();
         }
     }
 
@@ -22,7 +18,7 @@ namespace AIAC {
         // get the save path
         std::string savePath = this->GetSaveFolderPath();
         // create the video recorder object
-        this->videoRecorder = std::make_unique<AIAC::Utils::VideoRecorder>(savePath);
+        this->m_VideoRecorder = std::make_unique<AIAC::Utils::VideoRecorder>(savePath);
     };
 
     void LayerUtils::StopRecording(){
@@ -30,9 +26,9 @@ namespace AIAC {
         // set the recording flag to false
         this->m_Recording = false;
         // create the video from the frames
-        this->videoRecorder->MakeVideoFromFrames();
+        this->m_VideoRecorder->MakeVideoFromFrames();
         // delete the frames folder and video recorder object
-        this->videoRecorder.reset();
+        this->m_VideoRecorder.reset();
     };
 
     void LayerUtils::SetSaveFolderPath(std::string path){
@@ -44,6 +40,5 @@ namespace AIAC {
             AIAC_INFO("Using specified path: {}", m_SaveFolderPath);
         }
     };
-
 }
 
