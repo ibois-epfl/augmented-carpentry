@@ -20,9 +20,9 @@ namespace AIAC::Utils {
     }
 
     void VideoRecorder::UpdatePaths() {
-        m_RecorderPath = m_BasePath + "/recorder";
-        m_FramesPath = m_RecorderPath + "/frames";
-        m_VideoPath = m_RecorderPath + "/video";
+        this->m_RecorderPath = this->m_BasePath + "/recorder";
+        this->m_FramesPath = this->m_RecorderPath + "/frames";
+        this->m_VideoPath = this->m_RecorderPath + "/video";
     }
 
     void VideoRecorder::CaptureFrames() {
@@ -89,7 +89,7 @@ namespace AIAC::Utils {
         videoname << std::setfill('0') << std::setw(13) << timestamp << ".mp4";
 
         // run the ffmpeg command to create the video and save it in the /video folder
-        const std::string videoPath = m_VideoPath + "/" + videoname.str();
+        const std::string videoPath = this->m_VideoPath + "/" + videoname.str();
         std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath + " 2>/dev/null";
 
         // check if the video was created successfully
@@ -105,7 +105,9 @@ namespace AIAC::Utils {
     }
 
     void VideoRecorder::CreateFolders(){
-        for(const auto& path: {m_BasePath, m_RecorderPath, m_FramesPath, m_VideoPath}) {
+        // create the folders if they don't exist
+        for(const auto& path: {this->m_BasePath, this->m_RecorderPath,
+                                            this->m_FramesPath, this->m_VideoPath}) {
             if(std::filesystem::exists(path)) {
                 AIAC_INFO("{0} folder already exists!", path);
                 continue;
