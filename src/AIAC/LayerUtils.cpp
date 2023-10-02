@@ -16,7 +16,7 @@ namespace AIAC {
     }
 
     void LayerUtils::StartRecording(){
-        AIAC_INFO("LayerUtils::StartRecording");
+        AIAC_INFO("Started Recording");
         // set the recording flag to true
         this->m_Recording = true;
         // get the save path
@@ -26,7 +26,7 @@ namespace AIAC {
     };
 
     void LayerUtils::StopRecording(){
-        AIAC_INFO("LayerUtils::StopRecording");
+        AIAC_INFO("Stopped Recording");
         // set the recording flag to false
         this->m_Recording = false;
         // create the video from the frames
@@ -36,11 +36,9 @@ namespace AIAC {
     };
 
     void LayerUtils::SetSaveFolderPath(std::string path){
-        AIAC_INFO("LayerUtils::SetSaveFolderPath");
-        std::cout << "LayerUtils::SetSaveFolderPath" << std::endl;
         // Set the save folder path for the video recorder
         if(path.empty()) {
-            AIAC_INFO("No path specified, using default path: {}", m_SaveFolderPath);
+            AIAC_INFO("Using default path: {}", m_SaveFolderPath);
         } else {
             m_SaveFolderPath = path;
             AIAC_INFO("Using specified path: {}", m_SaveFolderPath);

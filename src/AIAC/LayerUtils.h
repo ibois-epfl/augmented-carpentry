@@ -25,7 +25,7 @@ namespace AIAC {
     private:///< Private members
         /// Flag to check if the video is being recorded
         bool m_Recording;
-        /// Path to save the video
+        /// Default path to save the video
         std::string m_SaveFolderPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::RECORDER_DEFAULT_PATH);;
         /// Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> videoRecorder;
