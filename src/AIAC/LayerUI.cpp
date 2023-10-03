@@ -503,10 +503,10 @@ namespace AIAC
             // Only execute if it is recording and processing is not ongoing
             if (isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
             {
-            // Set the process flag to false
-            isOperationInProgress = false;
-            // Stop the recording
-            AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+                // Set the process flag to false
+                isOperationInProgress = false;
+                // Stop the recording
+                AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
             }
         };
 
