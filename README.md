@@ -145,6 +145,10 @@ gantt
 
 > - [ ] Load Mesh from UI
 
+> - [ ] VideoRecorder: Implement handling for starting a new video while the previous one is still in the processing phase.
+> - [ ] VideoRecorder: Button color for pressed and unpressed states.
+> - [ ] VideoRecorder: Reduce video file size.
+
 ## Set touch monitor
 
 The prototype is tested on a touch screen 7inch HDMI LCD (B) (WaveShare WS170120) and a laptop running Ubuntu 20/22.04 LTS. To config the touch screen on the pc follow [these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD). Be sure to switch the display on, plug the mini-USB and finally plug the HDMI cable.
