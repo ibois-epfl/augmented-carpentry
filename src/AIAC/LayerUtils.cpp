@@ -24,14 +24,16 @@ namespace AIAC {
 
     void LayerUtils::StopRecording(){
         AIAC_INFO("Stopped Recording");
+        // set the recording flag to false
+        this->m_Recording = false;
         // create the video from the frames in a separate thread
         std::thread([this]{
+            this->m_Processing = true;
             this->m_VideoRecorder->MakeVideoFromFrames();
             // delete the frames folder and video recorder object
             this->m_VideoRecorder.reset();
+            this->m_Processing = false;
         }).detach();
-        // set the recording flag to false
-        this->m_Recording = false;
     };
 
     void LayerUtils::SetSaveFolderPath(std::string path){
