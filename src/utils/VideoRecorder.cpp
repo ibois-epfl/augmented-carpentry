@@ -16,9 +16,13 @@ namespace AIAC::Utils {
     }
 
     void VideoRecorder::UpdatePaths() {
+        // get the timestamp to name the folders
+        auto now = std::chrono::system_clock::now();
+        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+
         this->m_RecorderPath = this->m_BasePath + "/recorder";
-        this->m_FramesPath = this->m_RecorderPath + "/frames";
-        this->m_VideoPath = this->m_RecorderPath + "/video";
+        this->m_FramesPath = this->m_RecorderPath + "/frames_"+ std::to_string(timestamp);
+        this->m_VideoPath = this->m_RecorderPath + "/video_"+ std::to_string(timestamp);
     }
 
     void VideoRecorder::CaptureFrames() {
