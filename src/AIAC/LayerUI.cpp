@@ -15,6 +15,7 @@
 #include "ttool.hh"
 
 #include "utils/utils.h"
+#include "LayerUtils.h"
 
 namespace AIAC
 {
@@ -56,6 +57,8 @@ namespace AIAC
         StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
         StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
+        StackPane(PaneUI("Utils",        true,      AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+
 
         m_IsOpen = new bool(true);
     }
@@ -431,6 +434,82 @@ namespace AIAC
                 }
             }
         ImGui::EndChild();
+    }
+
+    void LayerUI::ShowSaveVideoRecorderFileDialog(){
+        // Set the path for saving the video from UI
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
+        if (ImGui::Button("Select Save Directory")) {
+            ImGuiFileDialog::Instance()->OpenDialog("ChooseDirectoryDialog", "Choose Directory", nullptr, ".");
+        }
+
+        if (ImGuiFileDialog::Instance()->Display("ChooseDirectoryDialog")) {
+            if (ImGuiFileDialog::Instance()->IsOk()) {
+                std::string filePathName  = ImGuiFileDialog::Instance()->GetFilePathName();
+                std::string filePath  = ImGuiFileDialog::Instance()->GetCurrentPath();
+                AIAC_APP.GetLayer<AIAC::LayerUtils>()->SetSaveFolderPath(filePathName);
+            }
+            ImGuiFileDialog::Instance()->Close();
+        }
+    }
+    void LayerUI::SetPaneUIUtils(){
+
+        // Set the path for saving the video from UI
+        ShowSaveVideoRecorderFileDialog();
+        // Retrieve and display the saved folder path
+        std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
+        ImGui::Text("Selected Path: %s", displayedPath.c_str());
+
+        // Set operation in progress flag
+        static bool isOperationInProgress = false;
+        // Recording Status on UI
+        ImGui::Text("Recording: ");
+        ImGui::SameLine();
+        if(isOperationInProgress){
+            ImGui::TextColored(AIAC_UI_GREEN, "Yes");
+        } else {
+            ImGui::TextColored(AIAC_UI_RED, "No");
+        }
+
+        // Set video processing in progress flag
+        ImGui::Text("Video is being processed: ");
+        ImGui::SameLine();
+        if(AIAC_APP.GetLayer<LayerUtils>()->IsProcessing()){
+            ImGui::TextColored(AIAC_UI_GREEN, "Yes");
+        } else {
+            ImGui::TextColored(AIAC_UI_RED, "No");
+        }
+
+
+        // Recording Control Buttons
+        ImGui::Text("Video Recorder Controls: ");
+
+        // Start Recording Button
+        if (ImGui::Button("Start Recording"))
+        {// Only execute if it is not recording and if it is not processing
+            if (!isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+            {
+                // Set the process flag to true
+                isOperationInProgress = true;
+                // Start the recording
+                AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+            }
+        }
+
+        ImGui::SameLine();
+        // Stop Recording Button
+        if (ImGui::Button("Stop Recording"))
+        {
+            // Only execute if it is recording and processing is not ongoing
+            if (isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+            {
+                // Set the process flag to false
+                isOperationInProgress = false;
+                // Stop the recording
+                AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+            }
+        };
+
     }
 
     void LayerUI::SetPaneUIToolhead()

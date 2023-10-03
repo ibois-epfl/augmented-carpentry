@@ -29,9 +29,9 @@
 #include "AIAC/LayerModel.h"
 #include "AIAC/LayerToolhead.h"
 #include "AIAC/LayerFeedback.h"
+#include "AIAC/LayerUtils.h"
 
 #include "AIAC/Render/Renderer.h"
-
 #include "AIAC/GOSys/GO.h"
 
 #include "AIAC/EventSys/Event.h"
