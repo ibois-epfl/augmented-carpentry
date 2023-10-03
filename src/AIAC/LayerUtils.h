@@ -17,10 +17,14 @@ namespace AIAC {
         void SetSaveFolderPath(std::string path);
         /// @brief Get the save folder path for the recorder
         std::string GetSaveFolderPath(){return m_SaveFolderPath;};
+        /// @brief Check if the video is being processed
+        bool IsProcessing(){return m_Processing;};
 
     private:
         /// Flag to check if the video is being recorded
         bool m_Recording;
+        /// Flag to check if the video is being processed
+        bool m_Processing;
         /// Default path to save the video
         std::string m_SaveFolderPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::RECORDER_DEFAULT_PATH);;
         /// Video recorder object
