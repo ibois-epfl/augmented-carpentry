@@ -462,9 +462,8 @@ namespace AIAC
 
         // Set operation in progress flag
         static bool isOperationInProgress = false;
-
         // Recording Status on UI
-        ImGui::Text("Recording is in Progress: ");
+        ImGui::Text("Recording: ");
         ImGui::SameLine();
         if(isOperationInProgress){
             ImGui::TextColored(AIAC_UI_GREEN, "Yes");
@@ -472,25 +471,43 @@ namespace AIAC
             ImGui::TextColored(AIAC_UI_RED, "No");
         }
 
+        // Set video processing in progress flag
+        ImGui::Text("Video is being processed: ");
+        ImGui::SameLine();
+        if(AIAC_APP.GetLayer<LayerUtils>()->IsProcessing()){
+            ImGui::TextColored(AIAC_UI_GREEN, "Yes");
+        } else {
+            ImGui::TextColored(AIAC_UI_RED, "No");
+        }
+
+
         // Recording Control Buttons
         ImGui::Text("Video Recorder Controls: ");
 
         // Start Recording Button
-        if(ImGui::Button("Start Recording") && !isOperationInProgress){
-            // Set the process flag to true
-            isOperationInProgress = true;
-            // Start the recording
-            AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+        if (ImGui::Button("Start Recording"))
+        {// Only execute if it is not recording and if it is not processing
+            if (!isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+            {
+                // Set the process flag to true
+                isOperationInProgress = true;
+                // Start the recording
+                AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+            }
         }
 
         ImGui::SameLine();
         // Stop Recording Button
-
-        if(ImGui::Button("Stop Recording")  && isOperationInProgress){
+        if (ImGui::Button("Stop Recording"))
+        {
+            // Only execute if it is recording and processing is not ongoing
+            if (isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+            {
             // Set the process flag to false
             isOperationInProgress = false;
             // Stop the recording
             AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+            }
         };
 
     }
