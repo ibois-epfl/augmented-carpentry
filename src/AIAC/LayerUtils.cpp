@@ -2,6 +2,7 @@
 #include "utils/VideoRecorder.h"
 #include "Config.h"
 #include <thread>
+#include "Application.h"
 
 namespace AIAC {
     void LayerUtils::OnFrameEnd() {
@@ -45,5 +46,25 @@ namespace AIAC {
             AIAC_INFO("Using specified path: {}", m_SaveFolderPath);
         }
     };
+
+    void LayerUtils::OnFrameStart(){
+        this->GetCurrentDrillbit();
+    }
+
+    void LayerUtils::GetCurrentDrillbit(){
+        // Get the current drillbit
+        std::shared_ptr<GOPoint>ToolbaseGOCopy = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetData<DrillBitData>().ToolbaseGO;
+        float ToolbaseGOCopy_X = ToolbaseGOCopy->X();
+        float ToolbaseGOCopy_Y = ToolbaseGOCopy->Y();
+        float ToolbaseGOCopy_Z = ToolbaseGOCopy->Z();
+        std::cout << "DrillBit ToolBase: (X: " << ToolbaseGOCopy_X << ", Y: " << ToolbaseGOCopy_Y << ", Z: " << ToolbaseGOCopy_Z << ")" << std::endl;
+
+        std::shared_ptr<GOPoint>EattipGOCopy = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetData<DrillBitData>().EattipGO;
+        float EattipGOCopy_X = EattipGOCopy->X();
+        float EattipGOCopy_Y = EattipGOCopy->Y();
+        float EattipGOCopy_Z = EattipGOCopy->Z();
+        std::cout << "DrillBit Eattip: (X: " << EattipGOCopy_X << ", Y: " << EattipGOCopy_Y << ", Z: " << EattipGOCopy_Z << ")" << std::endl;
+    }
+
 }
 
