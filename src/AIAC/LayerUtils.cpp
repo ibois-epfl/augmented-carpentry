@@ -89,5 +89,11 @@ namespace AIAC {
         myfile << toolheadType << "," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
         myfile.close();
     }
+
+    void LayerUtils::GetCurrentHole(){
+
+
+    }
+
 }
 
