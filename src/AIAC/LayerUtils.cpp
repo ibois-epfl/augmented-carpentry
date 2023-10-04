@@ -48,22 +48,76 @@ namespace AIAC {
     };
 
     void LayerUtils::OnFrameStart(){
-        this->GetCurrentDrillbit();
+        this->GetCurrentToolhead();
     }
 
-    void LayerUtils::GetCurrentDrillbit(){
-        // Get the current drillbit
-        std::shared_ptr<GOPoint>ToolbaseGOCopy = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetData<DrillBitData>().ToolbaseGO;
-        float ToolbaseGOCopy_X = ToolbaseGOCopy->X();
-        float ToolbaseGOCopy_Y = ToolbaseGOCopy->Y();
-        float ToolbaseGOCopy_Z = ToolbaseGOCopy->Z();
-        std::cout << "DrillBit ToolBase: (X: " << ToolbaseGOCopy_X << ", Y: " << ToolbaseGOCopy_Y << ", Z: " << ToolbaseGOCopy_Z << ")" << std::endl;
+    void LayerUtils::GetCurrentToolhead(){
+        auto toolheadLayer = AIAC_APP.GetLayer<AIAC::LayerToolhead>();
+        // Get the active toolhead
+        auto activeToolhead = toolheadLayer->ACInfoToolheadManager->GetActiveToolhead();
 
-        std::shared_ptr<GOPoint>EattipGOCopy = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetData<DrillBitData>().EattipGO;
-        float EattipGOCopy_X = EattipGOCopy->X();
-        float EattipGOCopy_Y = EattipGOCopy->Y();
-        float EattipGOCopy_Z = EattipGOCopy->Z();
-        std::cout << "DrillBit Eattip: (X: " << EattipGOCopy_X << ", Y: " << EattipGOCopy_Y << ", Z: " << EattipGOCopy_Z << ")" << std::endl;
+        // Get the type of the active toolhead
+        std::string activeToolheadType = activeToolhead->GetTypeString();
+        if (activeToolheadType == "DRILLBIT"){
+            auto toolbaseGO = activeToolhead->GetData<DrillBitData>().ToolbaseGO;
+            std::cout << "DrillBit ToolBase: "
+                      << "(X: " << toolbaseGO->X()
+                      << ", Y: " << toolbaseGO->Y()
+                      << ", Z: " << toolbaseGO->Z()
+                      << ")" << std::endl;
+            auto tooltipGO = activeToolhead->GetData<DrillBitData>().TooltipGO;
+            std::cout << "DrillBit Tooltip: "
+                      << "(X: " << tooltipGO->X()
+                      << ", Y: " << tooltipGO->Y()
+                      << ", Z: " << tooltipGO->Z()
+                      << ")" << std::endl;
+
+        }
+
+        if (activeToolheadType == "SABERSAW"){
+            auto toolbaseGO = activeToolhead->GetData<SaberSawData>().ToolbaseGO;
+            std::cout << "SaberSaw ToolBase: "
+                      << "(X: " << toolbaseGO->X()
+                      << ", Y: " << toolbaseGO->Y()
+                      << ", Z: " << toolbaseGO->Z()
+                      << ")" << std::endl;
+            auto tooltipGO = activeToolhead->GetData<SaberSawData>().TooltipGO;
+            std::cout << "SaberSaw Tooltip: "
+                      << "(X: " << tooltipGO->X()
+                      << ", Y: " << tooltipGO->Y()
+                      << ", Z: " << tooltipGO->Z()
+                      << ")" << std::endl;
+        }
+
+        if (activeToolheadType == "CIRCULARSAW"){
+            auto normstartGO = activeToolhead->GetData<CircularSawData>().NormStartGO;
+            std::cout << "CircularSaw NormStart: "
+                      << "(X: " << normstartGO->X()
+                      << ", Y: " << normstartGO->Y()
+                      << ", Z: " << normstartGO->Z()
+                      << ")" << std::endl;
+            auto normendGO = activeToolhead->GetData<CircularSawData>().NormEndGO;
+            std::cout << "CircularSaw NormEnd: "
+                      << "(X: " << normendGO->X()
+                      << ", Y: " << normendGO->Y()
+                      << ", Z: " << normendGO->Z()
+                      << ")" << std::endl;
+        }
+
+        if (activeToolheadType == "CHAINSAW"){
+            auto chainbaseGO = activeToolhead->GetData<ChainSawData>().ChainBaseGO;
+            std::cout << "ChainSaw ChainBase: "
+                      << "(X: " << chainbaseGO->X()
+                      << ", Y: " << chainbaseGO->Y()
+                      << ", Z: " << chainbaseGO->Z()
+                      << ")" << std::endl;
+            auto chainendGO = activeToolhead->GetData<ChainSawData>().ChainEndGO;
+            std::cout << "ChainSaw ChainEnd: "
+                      << "(X: " << chainendGO->X()
+                      << ", Y: " << chainendGO->Y()
+                      << ", Z: " << chainendGO->Z()
+                      << ")" << std::endl;
+        }
     }
 
 }
