@@ -52,6 +52,7 @@ namespace AIAC {
     }
 
     void LayerUtils::GetCurrentToolhead(){
+        std::cout << "Getting current toolhead" << std::endl;
         auto toolheadLayer = AIAC_APP.GetLayer<AIAC::LayerToolhead>();
         // Get the active toolhead
         auto activeToolhead = toolheadLayer->ACInfoToolheadManager->GetActiveToolhead();
@@ -59,65 +60,37 @@ namespace AIAC {
         // Get the type of the active toolhead
         std::string activeToolheadType = activeToolhead->GetTypeString();
         if (activeToolheadType == "DRILLBIT"){
-            auto toolbaseGO = activeToolhead->GetData<DrillBitData>().ToolbaseGO;
-            std::cout << "DrillBit ToolBase: "
-                      << "(X: " << toolbaseGO->X()
-                      << ", Y: " << toolbaseGO->Y()
-                      << ", Z: " << toolbaseGO->Z()
-                      << ")" << std::endl;
-            auto tooltipGO = activeToolhead->GetData<DrillBitData>().TooltipGO;
-            std::cout << "DrillBit Tooltip: "
-                      << "(X: " << tooltipGO->X()
-                      << ", Y: " << tooltipGO->Y()
-                      << ", Z: " << tooltipGO->Z()
-                      << ")" << std::endl;
-
+            auto drillBitData = activeToolhead->GetData<DrillBitData>();
+            this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
+            this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);
         }
 
         if (activeToolheadType == "SABERSAW"){
-            auto toolbaseGO = activeToolhead->GetData<SaberSawData>().ToolbaseGO;
-            std::cout << "SaberSaw ToolBase: "
-                      << "(X: " << toolbaseGO->X()
-                      << ", Y: " << toolbaseGO->Y()
-                      << ", Z: " << toolbaseGO->Z()
-                      << ")" << std::endl;
-            auto tooltipGO = activeToolhead->GetData<SaberSawData>().TooltipGO;
-            std::cout << "SaberSaw Tooltip: "
-                      << "(X: " << tooltipGO->X()
-                      << ", Y: " << tooltipGO->Y()
-                      << ", Z: " << tooltipGO->Z()
-                      << ")" << std::endl;
+            auto saberSawData = activeToolhead->GetData<SaberSawData>();
+            this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", saberSawData.ToolbaseGO);
+            this->WriteCoordToFile(activeToolheadType, "TooltipGO", saberSawData.TooltipGO);
         }
 
         if (activeToolheadType == "CIRCULARSAW"){
-            auto normstartGO = activeToolhead->GetData<CircularSawData>().NormStartGO;
-            std::cout << "CircularSaw NormStart: "
-                      << "(X: " << normstartGO->X()
-                      << ", Y: " << normstartGO->Y()
-                      << ", Z: " << normstartGO->Z()
-                      << ")" << std::endl;
-            auto normendGO = activeToolhead->GetData<CircularSawData>().NormEndGO;
-            std::cout << "CircularSaw NormEnd: "
-                      << "(X: " << normendGO->X()
-                      << ", Y: " << normendGO->Y()
-                      << ", Z: " << normendGO->Z()
-                      << ")" << std::endl;
+            auto circularSawData = activeToolhead->GetData<CircularSawData>();
+            this->WriteCoordToFile(activeToolheadType, "NormStartGO", circularSawData.NormStartGO);
+            this->WriteCoordToFile(activeToolheadType, "NormEndGO", circularSawData.NormEndGO);
         }
 
         if (activeToolheadType == "CHAINSAW"){
-            auto chainbaseGO = activeToolhead->GetData<ChainSawData>().ChainBaseGO;
-            std::cout << "ChainSaw ChainBase: "
-                      << "(X: " << chainbaseGO->X()
-                      << ", Y: " << chainbaseGO->Y()
-                      << ", Z: " << chainbaseGO->Z()
-                      << ")" << std::endl;
-            auto chainendGO = activeToolhead->GetData<ChainSawData>().ChainEndGO;
-            std::cout << "ChainSaw ChainEnd: "
-                      << "(X: " << chainendGO->X()
-                      << ", Y: " << chainendGO->Y()
-                      << ", Z: " << chainendGO->Z()
-                      << ")" << std::endl;
+            auto chainSawData = activeToolhead->GetData<ChainSawData>();
+            this->WriteCoordToFile(activeToolheadType, "ChainBaseGO", chainSawData.ChainBaseGO);
+            this->WriteCoordToFile(activeToolheadType, "ChainEndGO", chainSawData.ChainEndGO);
         }
+    }
+
+    void LayerUtils::WriteCoordToFile(const std::string& toolheadType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint){
+        std::cout << "Writing coordinates to file" << std::endl;
+        std::ofstream myfile;
+        // append mode
+        myfile.open(this->m_SaveToolCoordDefaultPath + "/coordinates.log", std::ios_base::app);
+        myfile << toolheadType << "," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
+        myfile.close();
     }
 
 }
