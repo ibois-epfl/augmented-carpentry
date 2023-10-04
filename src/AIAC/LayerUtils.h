@@ -24,7 +24,7 @@ namespace AIAC {
     public:
         virtual void OnFrameStart() override;
         /// @brief Get the current drillbit
-        void GetCurrentDrillbit();
+        void GetCurrentToolhead();
 
     private:
         /// Flag to check if the video is being recorded
