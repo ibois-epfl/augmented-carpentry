@@ -24,6 +24,8 @@ namespace AIAC {
         virtual void OnFrameStart() override;
         /// @brief Get the current toolhead
         void GetCurrentToolhead();
+        /// @brief Get the current hole
+        void GetCurrentHole();
         /// @brief Write the coordinates of the toolhead to a file
         void WriteCoordToFile(const std::string& toolheadType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint);
 
