@@ -20,6 +20,12 @@ namespace AIAC {
         /// @brief Check if the video is being processed
         bool IsProcessing(){return m_Processing;};
 
+
+    public:
+        virtual void OnFrameStart() override;
+        /// @brief Get the current drillbit
+        void GetCurrentDrillbit();
+
     private:
         /// Flag to check if the video is being recorded
         bool m_Recording;
