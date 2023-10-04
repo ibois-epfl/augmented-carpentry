@@ -3,6 +3,7 @@
 #include "AIAC/Layer.h"
 #include "utils/VideoRecorder.h"
 #include "Config.h"
+#include "AIAC/GOSys/GOPrimitive.h"
 
 namespace AIAC {
 
@@ -20,11 +21,11 @@ namespace AIAC {
         /// @brief Check if the video is being processed
         bool IsProcessing(){return m_Processing;};
 
-
-    public:
         virtual void OnFrameStart() override;
-        /// @brief Get the current drillbit
+        /// @brief Get the current toolhead
         void GetCurrentToolhead();
+        /// @brief Write the coordinates of the toolhead to a file
+        void WriteCoordToFile(const std::string& toolheadType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint);
 
     private:
         /// Flag to check if the video is being recorded
@@ -35,6 +36,8 @@ namespace AIAC {
         std::string m_SaveFolderPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::RECORDER_DEFAULT_PATH);;
         /// Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> m_VideoRecorder;
+
+        std::string m_SaveToolCoordDefaultPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::SAVE_TOOL_COORD_DEFAULT_PATH);
     };
 }
 

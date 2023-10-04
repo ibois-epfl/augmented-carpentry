@@ -36,6 +36,7 @@ public:
 
     inline static const std::string SEC_UTILS = "Utils";
     inline static const std::string RECORDER_DEFAULT_PATH = "RecorderDefaultPath";
+    inline static const std::string SAVE_TOOL_COORD_DEFAULT_PATH = "SaveToolCoordDefaultPath";
 
 public:
     Config(std::string filename, bool updateFile=true):
