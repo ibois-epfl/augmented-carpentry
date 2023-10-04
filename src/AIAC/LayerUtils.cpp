@@ -53,32 +53,29 @@ namespace AIAC {
 
     void LayerUtils::GetCurrentToolhead(){
         std::cout << "Getting current toolhead" << std::endl;
-        auto toolheadLayer = AIAC_APP.GetLayer<AIAC::LayerToolhead>();
-        // Get the active toolhead
-        auto activeToolhead = toolheadLayer->ACInfoToolheadManager->GetActiveToolhead();
 
         // Get the type of the active toolhead
-        std::string activeToolheadType = activeToolhead->GetTypeString();
+        std::string activeToolheadType = AC_FF_TOOL->GetTypeString();
         if (activeToolheadType == "DRILLBIT"){
-            auto drillBitData = activeToolhead->GetData<DrillBitData>();
+            auto drillBitData = AC_FF_TOOL->GetData<DrillBitData>();
             this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
             this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);
         }
 
         if (activeToolheadType == "SABERSAW"){
-            auto saberSawData = activeToolhead->GetData<SaberSawData>();
+            auto saberSawData = AC_FF_TOOL->GetData<SaberSawData>();
             this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", saberSawData.ToolbaseGO);
             this->WriteCoordToFile(activeToolheadType, "TooltipGO", saberSawData.TooltipGO);
         }
 
         if (activeToolheadType == "CIRCULARSAW"){
-            auto circularSawData = activeToolhead->GetData<CircularSawData>();
+            auto circularSawData = AC_FF_TOOL->GetData<CircularSawData>();
             this->WriteCoordToFile(activeToolheadType, "NormStartGO", circularSawData.NormStartGO);
             this->WriteCoordToFile(activeToolheadType, "NormEndGO", circularSawData.NormEndGO);
         }
 
         if (activeToolheadType == "CHAINSAW"){
-            auto chainSawData = activeToolhead->GetData<ChainSawData>();
+            auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
             this->WriteCoordToFile(activeToolheadType, "ChainBaseGO", chainSawData.ChainBaseGO);
             this->WriteCoordToFile(activeToolheadType, "ChainEndGO", chainSawData.ChainEndGO);
         }
@@ -92,6 +89,5 @@ namespace AIAC {
         myfile << toolheadType << "," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
         myfile.close();
     }
-
 }
 
