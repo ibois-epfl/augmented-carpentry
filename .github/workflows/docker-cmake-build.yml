@@ -28,11 +28,15 @@ jobs:
     container:
       image: ghcr.io/ibois-epfl/augmented-carpentry-ubuntu:latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: true
-          submodules: true
-          token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: false
+      - name: Configure
+        run: |
+          cd dev
+          tar xvzf ../assets/tslam*.tgz
+          tar xvzf ../assets/ttool*.tgz
       - name: Configure
         run: cmake -B build .
       - uses: actions/upload-artifact@v3

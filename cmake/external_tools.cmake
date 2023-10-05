@@ -198,7 +198,8 @@ endfunction()
 # Download and update submodules with latest remote version
 function(download_submodule_project project_name)
   find_package(Git QUIET)
-  if(NOT GIT_FOUND OR NOT EXISTS "${PROJECT_SOURCE_DIR}/.git")
+  if(NOT GIT_FOUND OR NOT EXISTS "${PROJECT_SOURCE_DIR}/.git" OR NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/${project_name}/.git")
+    return()
   endif()
   message(STATUS "Submodule update with latest commit")
 
