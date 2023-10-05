@@ -34,7 +34,7 @@ jobs:
           submodules: false
       - name: Configure
         run: |
-          cd dev
+          cd deps
           tar xvzf ../assets/tslam*.tgz
           tar xvzf ../assets/ttool*.tgz
       - name: Configure
