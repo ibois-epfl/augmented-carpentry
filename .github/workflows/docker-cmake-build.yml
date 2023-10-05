@@ -40,7 +40,7 @@ jobs:
           cp ../cmake/external_tools.cmake TSlam/cmake
           cp ../cmake/external_tools.cmake TTool/cmake
       - name: Configure
-        run: cmake -B build .
+        run: cmake -B build . -DAC_SYNC_GIT_SUBMODULES:BOOL=OFF
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
@@ -48,4 +48,4 @@ jobs:
           path: build/
           retention-days: 1
       - name: Build
-        run: cmake --build build -DAC_SYNC_GIT_SUBMODULES:BOOL=OFF
+        run: cmake --build build
