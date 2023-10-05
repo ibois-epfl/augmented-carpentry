@@ -37,6 +37,8 @@ jobs:
           cd deps
           tar xvzf ../assets/tslam*.tgz
           tar xvzf ../assets/ttool*.tgz
+          cp ../cmake/external_tools.cmake TSlam/cmake
+          cp ../cmake/external_tools.cmake TTool/cmake
       - name: Configure
         run: cmake -B build .
       - uses: actions/upload-artifact@v3
