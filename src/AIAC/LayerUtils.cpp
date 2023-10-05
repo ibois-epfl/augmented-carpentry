@@ -3,6 +3,7 @@
 #include "Config.h"
 #include <thread>
 #include "Application.h"
+#include "ACInfoModel.h"
 
 namespace AIAC {
     void LayerUtils::OnFrameEnd() {
@@ -49,6 +50,7 @@ namespace AIAC {
 
     void LayerUtils::OnFrameStart(){
         this->GetCurrentToolhead();
+        this->GetCurrentHole();
     }
 
     void LayerUtils::GetCurrentToolhead(){
@@ -58,41 +60,52 @@ namespace AIAC {
         std::string activeToolheadType = AC_FF_TOOL->GetTypeString();
         if (activeToolheadType == "DRILLBIT"){
             auto drillBitData = AC_FF_TOOL->GetData<DrillBitData>();
-            this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
-            this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);
+            std::cout << activeToolheadType << std::endl;
+            /*this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
+            this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);*/
         }
-
-        if (activeToolheadType == "SABERSAW"){
-            auto saberSawData = AC_FF_TOOL->GetData<SaberSawData>();
-            this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", saberSawData.ToolbaseGO);
-            this->WriteCoordToFile(activeToolheadType, "TooltipGO", saberSawData.TooltipGO);
+        if (activeToolheadType == "CHAINSAW"){
+            auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
+            this->WriteCoordToFile(activeToolheadType, "ChainBaseGO", chainSawData.ChainBaseGO);
+            this->WriteCoordToFile(activeToolheadType, "NormStartGO", chainSawData.NormStartGO);
         }
 
         if (activeToolheadType == "CIRCULARSAW"){
             auto circularSawData = AC_FF_TOOL->GetData<CircularSawData>();
+            this->WriteCoordToFile(activeToolheadType, "CenterGO", circularSawData.CenterGO);
             this->WriteCoordToFile(activeToolheadType, "NormStartGO", circularSawData.NormStartGO);
-            this->WriteCoordToFile(activeToolheadType, "NormEndGO", circularSawData.NormEndGO);
-        }
-
-        if (activeToolheadType == "CHAINSAW"){
-            auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
-            this->WriteCoordToFile(activeToolheadType, "ChainBaseGO", chainSawData.ChainBaseGO);
-            this->WriteCoordToFile(activeToolheadType, "ChainEndGO", chainSawData.ChainEndGO);
         }
     }
 
-    void LayerUtils::WriteCoordToFile(const std::string& toolheadType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint){
+    void LayerUtils::WriteCoordToFile(const std::string& objType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint){
         std::cout << "Writing coordinates to file" << std::endl;
         std::ofstream myfile;
         // append mode
         myfile.open(this->m_SaveToolCoordDefaultPath + "/coordinates.log", std::ios_base::app);
-        myfile << toolheadType << "," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
+        myfile << objType << "," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
         myfile.close();
     }
 
     void LayerUtils::GetCurrentHole(){
+        std::cout << "Getting current hole" << std::endl;
+        std::string activeHoleType = AC_FF_COMP->GetTypeString();
+        //AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
+        TimberInfo::Component* currentComponent = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
+        if (activeHoleType == "HOLE"){
+        std::cout << activeHoleType << std::endl;
+        TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(currentComponent);
+            if (hole) {
+                auto startPoint = hole->GetStartPointGO();
+                auto endPoint = hole->GetEndPointGO();
 
+                std::cout << "Start point: " << startPoint->X() << ", " << startPoint->Y() << ", " << startPoint->Z() << std::endl;
+                std::cout << "End point: " << endPoint->X() << ", " << endPoint->Y() << ", " << endPoint->Z() << std::endl;
 
+                WriteCoordToFile(activeHoleType, "StartPoint", startPoint);
+                WriteCoordToFile(activeHoleType, "EndPoint", endPoint);
+
+            }
+        }
     }
 
 }
