@@ -48,19 +48,32 @@ gantt
     Start                                                     :milestone, crit, strt, 2023-08-02, 0d
 
     section WP1 - TTool
-    Eval protocol design                                      :cmkprj, 2023-08-14, 1w
-    State-of-art interface eval                               :ref, 2023-08-14, 4d
-    Eval protocol                                             :milestone, milttol, 2023-08-23, 0d
+    Eval protocol design                                      :done, cmkprj, 2023-08-14, 6.2w
+    State-of-art interface eval                               :done, ref, 2023-08-14, 5w
+    Eval protocol                                             :done, milestone, milttol, 2023-09-26, 0d
+    
+    TTool packaging                                           :done, packcont, 2023-09-01, 2.5w
 
-    ML classifier dev                                         :mlclass, after milttol, 3.5w
-    ML finished                                               :milestone, mlclasmil, after mlclass, 0d
 
-    (optional) UI design proposal                             :uidesign, after mlclass, 0d
-    Eval campaign                                             :eval, after uidesign, 2w
-    TTool packaging                                           :packcont, after eval, 4d
+    (optional) UI design proposal                             :uidesign, after packcont, 0d
 
-    Ttool package deliverable                                 :milestone, del1, 2023-10-30, 0d
+    section Evaluation Campaign Prep
+    AC exporter                                               :active, acexp, 2023-10-02, 1w
+    design probing plate                                      :crit, active, probplt, after acexp, 3d
+    fabrication of probing plate                              :crit, fabplt, after probplt, 2w
+    testing probing plate                                     :testplt, after fabplt, 2d 
 
+    section Experimental Campaign
+    Eval campaign                                             :eval, after testplt, 2.5w
+
+    section post-processing analysis
+    data processing and graphs                                :crit, dataaprgr, after eval, 1w
+
+    open-source ML infrastructure                             :mlclass, after probplt, 15d
+
+    Ttool package deliverable                                 :milestone, del1, after mlclass, 0d
+    
+    AC dev                                                    :acdev, after mlclasmil, 12w
 
     Andrea off                                                :crit, 2023-08-24, 2023-09-17
 
@@ -145,6 +158,10 @@ gantt
 
 > - [ ] Load Mesh from UI
 
+> - [ ] VideoRecorder: Implement handling for starting a new video while the previous one is still in the processing phase.
+> - [ ] VideoRecorder: Button color for pressed and unpressed states.
+> - [ ] VideoRecorder: Reduce video file size.
+
 ## Set touch monitor
 
 The prototype is tested on a touch screen 7inch HDMI LCD (B) (WaveShare WS170120) and a laptop running Ubuntu 20/22.04 LTS. To config the touch screen on the pc follow [these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD). Be sure to switch the display on, plug the mini-USB and finally plug the HDMI cable.
@@ -178,7 +195,34 @@ They are made to be print as stickers. The code to generate them can be found ![
 <br />
 
 
-## Build
+## System dependecies
+AC needs some local libraries already installed before compilation with cmake. 
+
+Before start you will need many dependencies but the largest will be opencv `4.5.5`. Be sure to have installed this version in your local system.
+
+Next we need glm dependencies and libraries:
+```bash
+sudo apt-get -y install libmpfr-dev libboost-dev libgoogle-glog-dev \
+                        freeglut3-dev libglew-dev libglfw3 libglfw3-dev \
+                        git-lfs libassimp-dev libglm-dev libimgui-dev
+```
+
+For tbb and opencv you will also need these:
+```bash
+sudo apt -y install build-essential cmake git pkg-config libgtk-3-dev \
+    libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
+    libxvidcore-dev libx264-dev libjpeg-dev libpng-dev libtiff-dev \
+    gfortran openexr libatlas-base-dev python3-dev python3-numpy \
+    libtbb2 libtbb-dev libdc1394-dev libopenexr-dev \
+    libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev 
+```
+For the video recorder you will need opencv too and ffmpeg
+```bash
+sudo apt -y install ffmpeg
+```
+
+```bash
+## Build & run
 Cloning the repo with submodules
 ```bash
 git clone --recursive git@github.com:ibois-epfl/augmented-carpentry.git
@@ -190,17 +234,23 @@ git submodule sync
 git pull --recurse-submodules
 ```
 
-If it is the first time you are installing AC, set all the dependecies options in the `CMakeLists.txt` file to **ON**.
+Next you need to pull the PyTorch dependency with the Large File System in git, to do this:
+```bash
+cd deps/TTool
+git lfs pull
+```
+
+Time to build.. If you are deploying on a touch monitor set the flag `-DDEPLOY_ON_TOUCH=ON`, you can config:
 
 ```bash
-    ./cmake/install_TSlam.sh (Although CMakeList.txt run this when INSTALL_TSLAM option is on, you might need to install TSlam with this command manually as its need sudo priviledge)
-    ./cmake/install_TTool.sh
-    ./configure.sh (or ./configure.sh -c for cleaning out the build folder)
-    ./build.sh  # or cmake --build . --target AC
+cd augmented-carpentry
+cmake -S . -B build
+cmake --build build
 ```
+
 To run the code:
 ```bash
-./run.sh
+./build/bin/AC
 ```
 
 ## How to contribute
