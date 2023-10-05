@@ -201,7 +201,7 @@ function(download_submodule_project project_name)
   if(NOT GIT_FOUND OR NOT EXISTS "${PROJECT_SOURCE_DIR}/.git" OR NOT EXISTS "${PROJECT_SOURCE_DIR}/deps/${project_name}/.git")
     return()
   endif()
-  message(STATUS "Submodule update with latest commit")
+  message(STATUS "Update submodule ${project_name} to the latest commit")
 
   execute_process(
     COMMAND ${GIT_EXECUTABLE} --version
