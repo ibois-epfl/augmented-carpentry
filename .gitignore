@@ -55,6 +55,7 @@ scanned_map
 **/compile_commands.json
 
 include/divisible/*
+temp/*
 
 # Local 
 [Bb][Uu][Ii][Ll][Dd]/**/*
