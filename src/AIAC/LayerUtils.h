@@ -2,6 +2,7 @@
 
 #include "AIAC/Layer.h"
 #include "utils/VideoRecorder.h"
+#include "utils/HoleToolheadAxisExporter.h"
 #include "Config.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 
@@ -10,6 +11,7 @@ namespace AIAC {
     class LayerUtils : public AIAC::Layer {
     public:
         virtual void OnFrameEnd() override;
+        virtual void OnFrameStart() override;
         /// @brief Start recording the video of a window
         void StartRecording();
         /// @brief Stop recording the video of a window
@@ -21,13 +23,9 @@ namespace AIAC {
         /// @brief Check if the video is being processed
         bool IsProcessing(){return m_Processing;};
 
-        virtual void OnFrameStart() override;
-        /// @brief Get the current toolhead
-        void GetCurrentToolhead();
-        /// @brief Get the current hole
-        void GetCurrentHole();
-        /// @brief Write the coordinates of the toolhead to a file
-        void WriteCoordToFile(const std::string& toolheadType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint);
+        void StartHoleToolheadAxisExport();
+        void StopHoleToolheadAxisExport();
+
 
     private:
         /// Flag to check if the video is being recorded
@@ -39,7 +37,10 @@ namespace AIAC {
         /// Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> m_VideoRecorder;
 
-        std::string m_SaveToolCoordDefaultPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::SAVE_TOOL_COORD_DEFAULT_PATH);
+        /// Hole Toolhead exporter object
+        std::unique_ptr<AIAC::Utils::HoleToolheadAxisExporter> m_HoleToolheadAxisExporter;
+        /// Flag to check if the hole and toolhead is being exported
+        bool m_HoleToolheadExporting;
     };
 }
 
