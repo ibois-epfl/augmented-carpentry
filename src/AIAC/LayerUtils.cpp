@@ -55,14 +55,12 @@ namespace AIAC {
 
     void LayerUtils::GetCurrentToolhead(){
         std::cout << "Getting current toolhead" << std::endl;
-
         // Get the type of the active toolhead
         std::string activeToolheadType = AC_FF_TOOL->GetTypeString();
         if (activeToolheadType == "DRILLBIT"){
             auto drillBitData = AC_FF_TOOL->GetData<DrillBitData>();
-            std::cout << activeToolheadType << std::endl;
-            /*this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
-            this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);*/
+            this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
+            this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);
         }
         if (activeToolheadType == "CHAINSAW"){
             auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
@@ -89,24 +87,14 @@ namespace AIAC {
     void LayerUtils::GetCurrentHole(){
         std::cout << "Getting current hole" << std::endl;
         std::string activeHoleType = AC_FF_COMP->GetTypeString();
-        //AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
         TimberInfo::Component* currentComponent = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
         if (activeHoleType == "HOLE"){
-        std::cout << activeHoleType << std::endl;
-        TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(currentComponent);
+            TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(currentComponent);
             if (hole) {
-                auto startPoint = hole->GetStartPointGO();
-                auto endPoint = hole->GetEndPointGO();
-
-                std::cout << "Start point: " << startPoint->X() << ", " << startPoint->Y() << ", " << startPoint->Z() << std::endl;
-                std::cout << "End point: " << endPoint->X() << ", " << endPoint->Y() << ", " << endPoint->Z() << std::endl;
-
-                WriteCoordToFile(activeHoleType, "StartPoint", startPoint);
-                WriteCoordToFile(activeHoleType, "EndPoint", endPoint);
-
+                WriteCoordToFile(activeHoleType, "StartPoint", hole->GetStartPointGO());
+                WriteCoordToFile(activeHoleType, "EndPoint", hole->GetEndPointGO());
             }
         }
     }
-
 }
 
