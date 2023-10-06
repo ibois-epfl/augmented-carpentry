@@ -462,12 +462,12 @@ namespace AIAC
             std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
             ImGui::Text("Selected Path: %s", displayedPath.c_str());
 
-            // Set operation in progress flag
-            static bool isOperationInProgress = false;
+            // Set recording in progress flag
+            static bool isRecordingInProgress = false;
             // Recording Status on UI
             ImGui::Text("Recording: ");
             ImGui::SameLine();
-            if(isOperationInProgress){
+            if(isRecordingInProgress){
                 ImGui::TextColored(AIAC_UI_GREEN, "Yes");
             } else {
                 ImGui::TextColored(AIAC_UI_RED, "No");
@@ -482,31 +482,28 @@ namespace AIAC
                 ImGui::TextColored(AIAC_UI_RED, "No");
             }
 
-
             // Recording Control Buttons
             ImGui::Text("Video Recorder Controls: ");
-
             // Start Recording Button
             if (ImGui::Button("Start Recording"))
             {// Only execute if it is not recording and if it is not processing
-                if (!isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+                if (!isRecordingInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
                 {
                     // Set the process flag to true
-                    isOperationInProgress = true;
+                    isRecordingInProgress = true;
                     // Start the recording
                     AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
                 }
             }
-
             ImGui::SameLine();
             // Stop Recording Button
             if (ImGui::Button("Stop Recording"))
             {
                 // Only execute if it is recording and processing is not ongoing
-                if (isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+                if (isRecordingInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
                 {
                     // Set the process flag to false
-                    isOperationInProgress = false;
+                    isRecordingInProgress = false;
                     // Stop the recording
                     AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
                 }
