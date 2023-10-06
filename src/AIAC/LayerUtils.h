@@ -23,7 +23,9 @@ namespace AIAC {
         /// @brief Check if the video is being processed
         bool IsProcessing(){return m_Processing;};
 
+        /// @brief Start exporting the hole and toolhead coordinates
         void StartHoleToolheadAxisExport();
+        /// @brief Stop exporting the hole and toolhead coordinates
         void StopHoleToolheadAxisExport();
 
 
@@ -37,10 +39,10 @@ namespace AIAC {
         /// Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> m_VideoRecorder;
 
-        /// Hole Toolhead exporter object
+        /// Hole toolhead exporter object
         std::unique_ptr<AIAC::Utils::HoleToolheadAxisExporter> m_HoleToolheadAxisExporter;
         /// Flag to check if the hole and toolhead is being exported
-        bool m_HoleToolheadExporting;
+        bool m_Exporting;
     };
 }
 
