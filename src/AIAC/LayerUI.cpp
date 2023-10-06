@@ -512,15 +512,19 @@ namespace AIAC
 
         ImGui::Text("Hole Toolhead Axis Exporter:");
         ImGui::BeginChild("Hole Toolhead Axis Exporter", ImVec2(0, 42), true);
+        // Set recording in progress flag
+        static bool isExportingInProgress = false;
             // Start Recording Button
-            if (ImGui::Button("Start Exporting"))
+            if (ImGui::Button("Start Exporting") && !isExportingInProgress)
             {
+                isExportingInProgress = true;
                 AIAC_APP.GetLayer<LayerUtils>()->StartHoleToolheadAxisExport();
             }
             ImGui::SameLine();
             // Stop Recording Button
-            if (ImGui::Button("Stop Exporting"))
+            if (ImGui::Button("Stop Exporting") && isExportingInProgress)
             {
+                isExportingInProgress = false;
                 AIAC_APP.GetLayer<LayerUtils>()->StopHoleToolheadAxisExport();
             };
         ImGui::EndChild();
