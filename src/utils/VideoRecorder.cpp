@@ -6,8 +6,8 @@
 namespace AIAC::Utils {
     VideoRecorder::VideoRecorder(const std::string& basePath)
     : m_BasePath(basePath)
-    {   this-> UpdatePaths();
-        this->CreateFolders();
+    {   this->UpdatePaths();
+        this->InitializeDirectories();
     }
 
     VideoRecorder::~VideoRecorder() {
@@ -104,20 +104,25 @@ namespace AIAC::Utils {
         std::remove(imageListFile.c_str());
     }
 
-    void VideoRecorder::CreateFolders(){
+    void VideoRecorder::InitializeDirectories(){
         // create the folders if they don't exist
         for(const auto& path: {this->m_BasePath, this->m_RecorderPath,
                                             this->m_FramesPath, this->m_VideoPath}) {
-            if(std::filesystem::exists(path)) {
-                AIAC_INFO("{0} folder already exists!", path);
-                continue;
-            }
+            this->CreateFolder(path);
+        }
+    }
 
-            if(std::filesystem::create_directory(path)) {
-                AIAC_INFO("Created {0} folder", path);
-            } else {
-                AIAC_ERROR("Failed to create {0} folder", path);
-            }
+    bool VideoRecorder::CreateFolder(const std::string& path) {
+        if(std::filesystem::exists(path)) {
+            AIAC_INFO("{0} folder already exists!", path);
+            return true;
+        }
+        if(std::filesystem::create_directory(path)) {
+            AIAC_INFO("Created {0} folder", path);
+            return true;
+        } else {
+            AIAC_ERROR("Failed to create {0} folder", path);
+            return false;
         }
     }
 
