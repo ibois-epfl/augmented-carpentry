@@ -51,7 +51,7 @@ namespace AIAC {
 
     void LayerUtils::OnFrameStart(){
         // check if the exporting flag is set to true
-        if(this->m_HoleToolheadExporting){
+        if(this->m_Exporting){
             // export the hole and toolhead coordinates
             this->m_HoleToolheadAxisExporter->ExportToolheadAxis();
             this->m_HoleToolheadAxisExporter->ExportHoleAxis();
@@ -59,16 +59,17 @@ namespace AIAC {
     }
 
     void LayerUtils::StartHoleToolheadAxisExport(){
+        AIAC_INFO("Started hole and toolhead axis export");
         // set the exporting flag to true
-        this->m_HoleToolheadExporting = true;
+        this->m_Exporting = true;
         // create the exporter object
         this->m_HoleToolheadAxisExporter = std::make_unique<AIAC::Utils::HoleToolheadAxisExporter>();
     };
 
     void LayerUtils::StopHoleToolheadAxisExport(){
-        AIAC_INFO("Stopped Recording");
+        AIAC_INFO("Stopped hole and toolhead axis export");
         // set the exporting flag to false
-        this->m_HoleToolheadExporting = false;
+        this->m_Exporting = false;
     };
 }
 
