@@ -28,11 +28,20 @@ namespace AIAC::Utils {
         /// @brief Create video from the frames
         void MakeVideoFromFrames();
         /// @brief Create folders for captured frames and videos
-        void CreateFolders();
+        void InitializeDirectories();
         /// @brief Delete the frames folder
         void DeleteFrameFolder();
         /// @brief Update the paths
         void UpdatePaths();
+        /**
+         * @brief Create a folder if it does not exist
+         *
+         * @param path Path to the folder
+         * @return true if the folder is created
+         * @return false if the folder already exists
+         */
+        static bool CreateFolder(const std::string& path);
+
 
     private:
         /// Base path to save the video
