@@ -2,11 +2,12 @@
 #include "AIAC/ACInfoModel.h"
 #include "AIAC/Application.h"
 #include "utils/VideoRecorder.h"
+#include "AIAC/LayerUtils.h"
 
 namespace AIAC::Utils {
 
     HoleToolheadAxisExporter::HoleToolheadAxisExporter(){
-        VideoRecorder::CreateFolder(this->m_SaveCoordDefaultPath);
+        LayerUtils::CreateFolder(this->m_SaveCoordDefaultPath);
     };
 
     void HoleToolheadAxisExporter::ExportToolheadAxis(){
@@ -38,7 +39,9 @@ namespace AIAC::Utils {
         //#define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
 
         if (activeHoleType == "HOLE"){
+            // checking if the component is a hole
             TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
+
             if (hole) {
                 // Write start and end point to a file
                 this->WriteCoordToFile(activeHoleType, "StartPoint", hole->GetStartPointGO());
@@ -59,5 +62,8 @@ namespace AIAC::Utils {
         myFile.open(filePath, std::ios_base::app);
         myFile << itemType << "," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
         myFile.close();
+
+        AIAC_INFO("[{0},{1},(X:{2},Y:{3},Z:{4})]",itemType, pointType, goPoint->X(), goPoint->Y(), goPoint->Z());
+
     }
 }
