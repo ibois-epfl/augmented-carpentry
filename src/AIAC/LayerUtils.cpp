@@ -57,7 +57,21 @@ namespace AIAC {
         // export the hole and toolhead coordinates
         this->m_HoleToolheadAxisExporter->ExportToolheadAxis();
         this->m_HoleToolheadAxisExporter->ExportHoleAxis();
-    };
+    }
+
+    bool LayerUtils::CreateFolder(const std::string& path) {
+        if(std::filesystem::exists(path)) {
+            AIAC_INFO("{0} folder already exists!", path);
+            return true;
+        }
+        if(std::filesystem::create_directory(path)) {
+            AIAC_INFO("Created {0} folder", path);
+            return true;
+        } else {
+            AIAC_ERROR("Failed to create {0} folder", path);
+            return false;
+        }
+    }
 
 }
 
