@@ -2,6 +2,7 @@
 #include "../AIAC/Application.h"
 #include <opencv2/opencv.hpp>
 #include <filesystem>
+#include "AIAC/LayerUtils.h"
 
 namespace AIAC::Utils {
     VideoRecorder::VideoRecorder(const std::string& basePath)
@@ -108,11 +109,11 @@ namespace AIAC::Utils {
         // create the folders if they don't exist
         for(const auto& path: {this->m_BasePath, this->m_RecorderPath,
                                             this->m_FramesPath, this->m_VideoPath}) {
-            this->CreateFolder(path);
+            LayerUtils::CreateFolder(path);
         }
     }
 
-    bool VideoRecorder::CreateFolder(const std::string& path) {
+/*    bool VideoRecorder::CreateFolder(const std::string& path) {
         if(std::filesystem::exists(path)) {
             AIAC_INFO("{0} folder already exists!", path);
             return true;
@@ -124,7 +125,7 @@ namespace AIAC::Utils {
             AIAC_ERROR("Failed to create {0} folder", path);
             return false;
         }
-    }
+    }*/
 
     void VideoRecorder::DeleteFrameFolder(){
         // delete the /frames folder
