@@ -515,18 +515,12 @@ namespace AIAC
         // Set recording in progress flag
         static bool isExportingInProgress = false;
             // Start Recording Button
-            if (ImGui::Button("Start Exporting") && !isExportingInProgress)
+            if (ImGui::Button("Export Hole Toolhead Coordinates") && !isExportingInProgress)
             {
                 isExportingInProgress = true;
-                AIAC_APP.GetLayer<LayerUtils>()->StartHoleToolheadAxisExport();
-            }
-            ImGui::SameLine();
-            // Stop Recording Button
-            if (ImGui::Button("Stop Exporting") && isExportingInProgress)
-            {
+                AIAC_APP.GetLayer<LayerUtils>()->ExportHoleToolheadAxis();
                 isExportingInProgress = false;
-                AIAC_APP.GetLayer<LayerUtils>()->StopHoleToolheadAxisExport();
-            };
+            }
         ImGui::EndChild();
     }
 
