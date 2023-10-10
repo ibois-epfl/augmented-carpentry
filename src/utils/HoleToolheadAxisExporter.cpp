@@ -10,34 +10,35 @@ namespace AIAC::Utils {
     };
 
     void HoleToolheadAxisExporter::ExportToolheadAxis(){
-        // Get the type of the active toolhead
-        std::string activeToolheadType = AC_FF_TOOL->GetTypeString();
-        if (activeToolheadType == "DRILLBIT"){
+        ACToolHeadType activeToolheadType = AC_FF_TOOL->GetType();
+        if (activeToolheadType == ACToolHeadType::DRILLBIT){
             auto drillBitData = AC_FF_TOOL->GetData<DrillBitData>();
             // Write toolbase and tooltip to a file
-            this->WriteCoordToFile(activeToolheadType, "ToolbaseGO", drillBitData.ToolbaseGO);
-            this->WriteCoordToFile(activeToolheadType, "TooltipGO", drillBitData.TooltipGO);
+            this->WriteCoordToFile("Toolhead", "ToolbaseGO", drillBitData.ToolbaseGO);
+            this->WriteCoordToFile("Toolhead", "TooltipGO", drillBitData.TooltipGO);
         }
-        if (activeToolheadType == "CHAINSAW"){
+        if (activeToolheadType == ACToolHeadType::CHAINSAW){
             auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
             // Write chainbase and normstart to a file
-            this->WriteCoordToFile(activeToolheadType, "ChainBaseGO", chainSawData.ChainBaseGO);
-            this->WriteCoordToFile(activeToolheadType, "NormStartGO", chainSawData.NormStartGO);
+            this->WriteCoordToFile("Toolhead", "ChainBaseGO", chainSawData.ChainBaseGO);
+            this->WriteCoordToFile("Toolhead", "NormStartGO", chainSawData.NormStartGO);
         }
-        if (activeToolheadType == "CIRCULARSAW"){
+        if (activeToolheadType == ACToolHeadType::CIRCULARSAW){
             auto circularSawData = AC_FF_TOOL->GetData<CircularSawData>();
             // Write center and normstart to a file
-            this->WriteCoordToFile(activeToolheadType, "CenterGO", circularSawData.CenterGO);
-            this->WriteCoordToFile(activeToolheadType, "NormStartGO", circularSawData.NormStartGO);
+            this->WriteCoordToFile("Toolhead", "CenterGO", circularSawData.CenterGO);
+            this->WriteCoordToFile("Toolhead", "NormEndGO", circularSawData.NormEndGO);
         }
     }
 
     void HoleToolheadAxisExporter::ExportHoleAxis(){
         // Get the type of the active hole
         std::string activeHoleType = AC_FF_COMP->GetTypeString();
-        TimberInfo::Component* currentComponent = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
+        //TimberInfo::Component
+        //#define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
+
         if (activeHoleType == "HOLE"){
-            TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(currentComponent);
+            TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
             if (hole) {
                 // Write start and end point to a file
                 this->WriteCoordToFile(activeHoleType, "StartPoint", hole->GetStartPointGO());
