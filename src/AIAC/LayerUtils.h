@@ -11,7 +11,8 @@ namespace AIAC {
     class LayerUtils : public AIAC::Layer {
     public:
         virtual void OnFrameEnd() override;
-        virtual void OnFrameStart() override;
+
+    public: ///< video recorder
         /// @brief Start recording the video of a window
         void StartRecording();
         /// @brief Stop recording the video of a window
@@ -23,10 +24,9 @@ namespace AIAC {
         /// @brief Check if the video is being processed
         bool IsProcessing(){return m_Processing;};
 
+    public: ///< toolhead exporter
         /// @brief Start exporting the hole and toolhead coordinates
-        void StartHoleToolheadAxisExport();
-        /// @brief Stop exporting the hole and toolhead coordinates
-        void StopHoleToolheadAxisExport();
+        void ExportHoleToolheadAxis();
 
 
     private:
@@ -41,8 +41,6 @@ namespace AIAC {
 
         /// Hole toolhead exporter object
         std::unique_ptr<AIAC::Utils::HoleToolheadAxisExporter> m_HoleToolheadAxisExporter;
-        /// Flag to check if the hole and toolhead is being exported
-        bool m_Exporting;
     };
 }
 
