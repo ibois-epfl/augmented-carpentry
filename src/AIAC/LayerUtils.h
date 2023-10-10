@@ -11,6 +11,14 @@ namespace AIAC {
     class LayerUtils : public AIAC::Layer {
     public:
         virtual void OnFrameEnd() override;
+        /**
+         * @brief Create a folder if it does not exist
+         *
+         * @param path Path to the folder
+         * @return true if the folder is created
+         * @return false if the folder already exists
+         */
+        static bool CreateFolder(const std::string& path);
 
     public: ///< video recorder
         /// @brief Start recording the video of a window
