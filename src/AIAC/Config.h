@@ -35,7 +35,7 @@ public:
     inline static const std::string MESH_PATHS = "MeshPaths";
 
     inline static const std::string SEC_UTILS = "Utils";
-    inline static const std::string UTILS_DEFAULT_PATH = "UtilsDefaultPath";
+    inline static const std::string UTILS_PATH = "UtilsPath";
 
 public:
     Config(std::string filename, bool updateFile=true):
