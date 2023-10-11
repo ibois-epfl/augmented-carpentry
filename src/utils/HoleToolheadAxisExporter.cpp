@@ -6,8 +6,10 @@
 
 namespace AIAC::Utils {
 
-    HoleToolheadAxisExporter::HoleToolheadAxisExporter(){
-        LayerUtils::CreateFolder(this->m_SaveCoordDefaultPath);
+    HoleToolheadAxisExporter::HoleToolheadAxisExporter(const std::string& basePath)
+    : m_BasePath(basePath)
+    {
+        LayerUtils::CreateFolder(this->m_BasePath);
     };
 
     void HoleToolheadAxisExporter::ExportToolheadAxis(){
@@ -51,7 +53,7 @@ namespace AIAC::Utils {
     }
 
     void HoleToolheadAxisExporter::WriteCoordToFile(const std::string& itemType, const std::string& pointType, std::shared_ptr<GOPoint> goPoint){
-        std::string filePath = this->m_SaveCoordDefaultPath + "/coordinates.log";
+        std::string filePath = this->m_BasePath + "/coordinates.log";
         std::ofstream myFile;
         // Check if file doesn't exist or is empty, and if so, write the header.
         if (!std::filesystem::exists(filePath) || std::filesystem::file_size(filePath) == 0) {

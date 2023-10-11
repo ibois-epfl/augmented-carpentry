@@ -6,7 +6,7 @@
 namespace AIAC::Utils {
     class HoleToolheadAxisExporter {
     public:
-        HoleToolheadAxisExporter();
+        HoleToolheadAxisExporter(const std::string& basePath);
         ~HoleToolheadAxisExporter() = default;
 
         /// @brief Export the toolhead coordinates
@@ -26,7 +26,6 @@ namespace AIAC::Utils {
 
     private:
         /// Default path to save the hole and toolhead coordinates
-        std::string m_SaveCoordDefaultPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS,
-                                                                            AIAC::Config::SAVE_COORD_DEFAULT_PATH);
+        std::string m_BasePath;
     };
 }
