@@ -67,16 +67,11 @@ namespace AIAC::Utils {
     void HoleToolheadAxisExporter::WriteBufferToFile(){
         std::string filePath = this->m_BasePath + "/" + this->m_FileName;
         std::ofstream myFile;
-        // Check if file doesn't exist or is empty, and if so, write the header.
-        if (!std::filesystem::exists(filePath) || std::filesystem::file_size(filePath) == 0) {
-            myFile.open(filePath, std::ios_base::out); // Open in out mode to create/truncate the file.
-            myFile << "ItemType,PointType,X,Y,Z\n";
-            myFile.close(); // Close and reopen in append mode.
-        }
 
         myFile.open(filePath, std::ios_base::app);
         if (myFile.is_open()) {
             myFile << this->GetCurrentTimestamp() << "\n";
+            myFile << "ItemType,PointType,X,Y,Z\n";
             myFile << m_Buffer.str();
             myFile << "\n";
             myFile.close();
