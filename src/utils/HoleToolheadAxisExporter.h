@@ -20,13 +20,24 @@ namespace AIAC::Utils {
          * @param pointType Type of the point (start or end)
          * @param goPoint Pointer to the GOPoint object to get the coordinates from
          */
-        void WriteCoordToFile(const std::string& itemType,
+        void WriteCoordToBuffer(const std::string& itemType,
                               std::string itemName,
                               const std::string& pointType,
                               std::shared_ptr<GOPoint> goPoint);
 
+        void WriteBufferToFile();
+        void ExportCoordinates();
+        std::string GetCurrentTimestamp();
+
+
+
     private:
         /// Default path to save the hole and toolhead coordinates
         std::string m_BasePath;
+        /// Default name for .log file
+        std::string m_FileName = "coordinates.log";
+
+        std::ostringstream m_Buffer;
+
     };
 }
