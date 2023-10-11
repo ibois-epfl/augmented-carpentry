@@ -61,8 +61,7 @@ namespace AIAC {
         // create the exporter object
         this->m_HoleToolheadAxisExporter = std::make_unique<AIAC::Utils::HoleToolheadAxisExporter>(savePath);
         // export the hole and toolhead coordinates
-        this->m_HoleToolheadAxisExporter->ExportToolheadAxis();
-        this->m_HoleToolheadAxisExporter->ExportHoleAxis();
+        this->m_HoleToolheadAxisExporter->ExportCoordinates();
     }
 
     bool LayerUtils::CreateFolder(const std::string& path) {
@@ -78,6 +77,5 @@ namespace AIAC {
             return false;
         }
     }
-
 }
 
