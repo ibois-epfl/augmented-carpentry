@@ -35,8 +35,7 @@ public:
     inline static const std::string MESH_PATHS = "MeshPaths";
 
     inline static const std::string SEC_UTILS = "Utils";
-    inline static const std::string RECORDER_DEFAULT_PATH = "RecorderDefaultPath";
-    inline static const std::string SAVE_COORD_DEFAULT_PATH = "SaveCoordDefaultPath";
+    inline static const std::string UTILS_DEFAULT_PATH = "UtilsDefaultPath";
 
 public:
     Config(std::string filename, bool updateFile=true):
