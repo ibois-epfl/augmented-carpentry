@@ -8,59 +8,45 @@
 
 namespace AIAC {
     LayerUtils::LayerUtils() {
-        std::cout << "LayerUtils constructor" << std::endl;
-        CreateFolder(m_UtilsDefaultPath);
+        CreateFolder(m_UtilsPath);
     }
     void LayerUtils::OnFrameEnd() {
-        // check if the recording flag is set to true
         if(this->m_Recording){
-            // capture the frames
             this->m_VideoRecorder->CaptureFrames();
         }
     }
 
     void LayerUtils::StartRecording(){
         AIAC_INFO("Started Recording");
-        // set the recording flag to true
         this->m_Recording = true;
-        // get the save path
         std::string savePath = this->GetSaveFolderPath();
-        // create the video recorder object
         this->m_VideoRecorder = std::make_unique<AIAC::Utils::VideoRecorder>(savePath);
-    };
+    }
 
     void LayerUtils::StopRecording(){
         AIAC_INFO("Stopped Recording");
-        // set the recording flag to false
         this->m_Recording = false;
-        // create the video from the frames in a separate thread
         std::thread([this]{
             this->m_Processing = true;
             this->m_VideoRecorder->MakeVideoFromFrames();
-            // delete the frames folder and video recorder object
             this->m_VideoRecorder.reset();
             this->m_Processing = false;
         }).detach();
-    };
+    }
 
-    void LayerUtils::SetSaveFolderPath(std::string path){
-        // Set the save folder path for the video recorder
+    void LayerUtils::SetSaveFolderPath(const std::string& path){
         if(path.empty()) {
-            AIAC_INFO("Using default path: {}", m_UtilsDefaultPath);
+            AIAC_INFO("Using default path: {}", m_UtilsPath);
         } else {
-            m_UtilsDefaultPath = path;
-            AIAC_INFO("Using specified path: {}", m_UtilsDefaultPath);
+            m_UtilsPath = path;
+            AIAC_INFO("Using specified path: {}", m_UtilsPath);
         }
-    };
-
+    }
 
     void LayerUtils::ExportHoleToolheadAxis(){
         AIAC_INFO("Hole and toolhead axis export");
-        // get the save path
         std::string savePath = this->GetSaveFolderPath();
-        // create the exporter object
         this->m_HoleToolheadAxisExporter = std::make_unique<AIAC::Utils::HoleToolheadAxisExporter>(savePath);
-        // export the hole and toolhead coordinates
         this->m_HoleToolheadAxisExporter->ExportCoordinates();
     }
 
