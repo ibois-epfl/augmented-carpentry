@@ -22,33 +22,27 @@ namespace AIAC::Utils {
         ACToolHeadType activeToolheadType = AC_FF_TOOL->GetType();
         if (activeToolheadType == ACToolHeadType::DRILLBIT){
             auto drillBitData = AC_FF_TOOL->GetData<DrillBitData>();
-            // Write toolbase and tooltip to a file
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "ToolbaseGO", drillBitData.ToolbaseGO);
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "TooltipGO", drillBitData.TooltipGO);
         }
         if (activeToolheadType == ACToolHeadType::CHAINSAW){
             auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
-            // Write chainbase and normstart to a file
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "ChainBaseGO", chainSawData.ChainBaseGO);
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "NormStartGO", chainSawData.NormStartGO);
         }
         if (activeToolheadType == ACToolHeadType::CIRCULARSAW){
             auto circularSawData = AC_FF_TOOL->GetData<CircularSawData>();
-            // Write center and normstart to a file
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "CenterGO", circularSawData.CenterGO);
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "NormEndGO", circularSawData.NormEndGO);
         }
     }
 
     void HoleToolheadAxisExporter::ExportHoleAxis(){
-        // Get the type of the active hole
         std::string activeHoleType = AC_FF_COMP->GetTypeString();
         if (activeHoleType == "HOLE"){
-            // checking if the component is a hole
             TimberInfo::Hole* hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
             if (hole) {
                 std::string currentComponentID = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
-                // Write start and end point to a file
                 this->WriteCoordToBuffer(activeHoleType, currentComponentID, "StartPoint", hole->GetStartPointGO());
                 this->WriteCoordToBuffer(activeHoleType, currentComponentID, "EndPoint", hole->GetEndPointGO());
             }
@@ -76,7 +70,6 @@ namespace AIAC::Utils {
             myFile << "\n";
             myFile.close();
         }
-
         m_Buffer.str("");
         m_Buffer.clear();
     }
