@@ -12,25 +12,31 @@ namespace AIAC::Utils {
         LayerUtils::CreateFolder(this->m_BasePath);
     };
 
+    void HoleToolheadAxisExporter::ExportCoordinates(){
+        this->ExportToolheadAxis();
+        this->ExportHoleAxis();
+        this->WriteBufferToFile();
+    }
+
     void HoleToolheadAxisExporter::ExportToolheadAxis(){
         ACToolHeadType activeToolheadType = AC_FF_TOOL->GetType();
         if (activeToolheadType == ACToolHeadType::DRILLBIT){
             auto drillBitData = AC_FF_TOOL->GetData<DrillBitData>();
             // Write toolbase and tooltip to a file
-            this->WriteCoordToFile("Toolhead", AC_FF_TOOL->GetName(), "ToolbaseGO", drillBitData.ToolbaseGO);
-            this->WriteCoordToFile("Toolhead", AC_FF_TOOL->GetName(), "TooltipGO", drillBitData.TooltipGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "ToolbaseGO", drillBitData.ToolbaseGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "TooltipGO", drillBitData.TooltipGO);
         }
         if (activeToolheadType == ACToolHeadType::CHAINSAW){
             auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
             // Write chainbase and normstart to a file
-            this->WriteCoordToFile("Toolhead", AC_FF_TOOL->GetName(), "ChainBaseGO", chainSawData.ChainBaseGO);
-            this->WriteCoordToFile("Toolhead", AC_FF_TOOL->GetName(), "NormStartGO", chainSawData.NormStartGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "ChainBaseGO", chainSawData.ChainBaseGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "NormStartGO", chainSawData.NormStartGO);
         }
         if (activeToolheadType == ACToolHeadType::CIRCULARSAW){
             auto circularSawData = AC_FF_TOOL->GetData<CircularSawData>();
             // Write center and normstart to a file
-            this->WriteCoordToFile("Toolhead", AC_FF_TOOL->GetName(), "CenterGO", circularSawData.CenterGO);
-            this->WriteCoordToFile("Toolhead", AC_FF_TOOL->GetName(), "NormEndGO", circularSawData.NormEndGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "CenterGO", circularSawData.CenterGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "NormEndGO", circularSawData.NormEndGO);
         }
     }
 
@@ -43,17 +49,23 @@ namespace AIAC::Utils {
             if (hole) {
                 std::string currentComponentID = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
                 // Write start and end point to a file
-                this->WriteCoordToFile(activeHoleType, currentComponentID, "StartPoint", hole->GetStartPointGO());
-                this->WriteCoordToFile(activeHoleType, currentComponentID, "EndPoint", hole->GetEndPointGO());
+                this->WriteCoordToBuffer(activeHoleType, currentComponentID, "StartPoint", hole->GetStartPointGO());
+                this->WriteCoordToBuffer(activeHoleType, currentComponentID, "EndPoint", hole->GetEndPointGO());
             }
         }
     }
 
-    void HoleToolheadAxisExporter::WriteCoordToFile(const std::string& itemType,
+
+    void HoleToolheadAxisExporter::WriteCoordToBuffer(const std::string& itemType,
                                                     std::string itemName,
                                                     const std::string& pointType,
                                                     std::shared_ptr<GOPoint> goPoint){
-        std::string filePath = this->m_BasePath + "/coordinates.log";
+        m_Buffer << itemType << "," << itemName <<"," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
+        AIAC_INFO("[{0},{1},(X:{2},Y:{3},Z:{4})]",itemType, itemName, pointType, goPoint->X(), goPoint->Y(), goPoint->Z());
+    }
+
+    void HoleToolheadAxisExporter::WriteBufferToFile(){
+        std::string filePath = this->m_BasePath + "/" + this->m_FileName;
         std::ofstream myFile;
         // Check if file doesn't exist or is empty, and if so, write the header.
         if (!std::filesystem::exists(filePath) || std::filesystem::file_size(filePath) == 0) {
@@ -61,11 +73,24 @@ namespace AIAC::Utils {
             myFile << "ItemType,PointType,X,Y,Z\n";
             myFile.close(); // Close and reopen in append mode.
         }
+
         myFile.open(filePath, std::ios_base::app);
-        myFile << itemType << "," << itemName <<" ," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
-        myFile.close();
+        if (myFile.is_open()) {
+            myFile << this->GetCurrentTimestamp() << "\n";
+            myFile << m_Buffer.str();
+            myFile << "\n";
+            myFile.close();
+        }
 
-        AIAC_INFO("[{0},{1},(X:{2},Y:{3},Z:{4})]",itemType, itemName, pointType, goPoint->X(), goPoint->Y(), goPoint->Z());
+        m_Buffer.str("");
+        m_Buffer.clear();
+    }
 
+    std::string HoleToolheadAxisExporter::GetCurrentTimestamp() {
+        auto now = std::chrono::system_clock::now();
+        auto now_c = std::chrono::system_clock::to_time_t(now);
+        char buf[100];
+        strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&now_c));
+        return buf;
     }
 }
