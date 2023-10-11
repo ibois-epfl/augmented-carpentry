@@ -7,6 +7,10 @@
 
 
 namespace AIAC {
+    LayerUtils::LayerUtils() {
+        std::cout << "LayerUtils constructor" << std::endl;
+        CreateFolder(m_UtilsDefaultPath);
+    }
     void LayerUtils::OnFrameEnd() {
         // check if the recording flag is set to true
         if(this->m_Recording){
@@ -42,18 +46,20 @@ namespace AIAC {
     void LayerUtils::SetSaveFolderPath(std::string path){
         // Set the save folder path for the video recorder
         if(path.empty()) {
-            AIAC_INFO("Using default path: {}", m_SaveFolderPath);
+            AIAC_INFO("Using default path: {}", m_UtilsDefaultPath);
         } else {
-            m_SaveFolderPath = path;
-            AIAC_INFO("Using specified path: {}", m_SaveFolderPath);
+            m_UtilsDefaultPath = path;
+            AIAC_INFO("Using specified path: {}", m_UtilsDefaultPath);
         }
     };
 
 
     void LayerUtils::ExportHoleToolheadAxis(){
         AIAC_INFO("Hole and toolhead axis export");
+        // get the save path
+        std::string savePath = this->GetSaveFolderPath();
         // create the exporter object
-        this->m_HoleToolheadAxisExporter = std::make_unique<AIAC::Utils::HoleToolheadAxisExporter>();
+        this->m_HoleToolheadAxisExporter = std::make_unique<AIAC::Utils::HoleToolheadAxisExporter>(savePath);
         // export the hole and toolhead coordinates
         this->m_HoleToolheadAxisExporter->ExportToolheadAxis();
         this->m_HoleToolheadAxisExporter->ExportHoleAxis();
@@ -64,7 +70,7 @@ namespace AIAC {
             AIAC_INFO("{0} folder already exists!", path);
             return true;
         }
-        if(std::filesystem::create_directory(path)) {
+        if(std::filesystem::create_directories(path)) {
             AIAC_INFO("Created {0} folder", path);
             return true;
         } else {
