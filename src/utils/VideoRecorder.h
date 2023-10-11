@@ -24,20 +24,17 @@ namespace AIAC::Utils {
          * @param pixels Vector to hold the data
          */
         void SaveFrames(int height, int width, std::vector<unsigned char> pixels);
-
-        /// @brief Create video from the frames
+        /// @brief Create video from the frames using ffmpeg
         void MakeVideoFromFrames();
         /// @brief Create folders for captured frames and videos
         void InitializeDirectories();
-        /// @brief Delete the frames folder
+        /// @brief Delete the /frames folder
         void DeleteFrameFolder();
-        /// @brief Update the paths
+        /// @brief Updates the paths used for video and frame storage
         void UpdatePaths();
 
-
-
     private:
-        /// Base path to save the video
+        /// Base path of utils
         std::string m_BasePath;
         /// Path to recorder folder
         std::string m_RecorderPath;
