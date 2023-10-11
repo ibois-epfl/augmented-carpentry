@@ -453,15 +453,17 @@ namespace AIAC
         }
     }
     void LayerUI::SetPaneUIUtils(){
-
-        ImGui::Text("Video Recorder:");
-        ImGui::BeginChild("Video Recorder", ImVec2(0, 135), true);
-            // Set the path for saving the video from UI
+        ImGui::Text("Set Utils Folder:");
+        ImGui::BeginChild("Set Utils Folder", ImVec2(0, 60), true);
+            // Set the path for utils folder from UI
             ShowSaveVideoRecorderFileDialog();
             // Retrieve and display the saved folder path
             std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
             ImGui::Text("Selected Path: %s", displayedPath.c_str());
+        ImGui::EndChild();
 
+        ImGui::Text("Video Recorder:");
+        ImGui::BeginChild("Video Recorder", ImVec2(0, 100), true);
             // Set recording in progress flag
             static bool isRecordingInProgress = false;
             // Recording Status on UI
