@@ -8,7 +8,7 @@
 
 namespace AIAC {
     LayerUtils::LayerUtils() {
-        CreateFolder(m_UtilsPath);
+        LayerUtils::CreateFolder(m_UtilsPath);
     }
     void LayerUtils::OnFrameEnd() {
         if(this->m_Recording){
