@@ -21,6 +21,7 @@ namespace AIAC::Utils {
          * @param goPoint Pointer to the GOPoint object to get the coordinates from
          */
         void WriteCoordToFile(const std::string& itemType,
+                              std::string itemName,
                               const std::string& pointType,
                               std::shared_ptr<GOPoint> goPoint);
 
