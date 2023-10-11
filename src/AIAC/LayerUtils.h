@@ -10,6 +10,7 @@ namespace AIAC {
 
     class LayerUtils : public AIAC::Layer {
     public:
+        LayerUtils();
         virtual void OnFrameEnd() override;
         /**
          * @brief Create a folder if it does not exist
@@ -28,7 +29,7 @@ namespace AIAC {
         /// @brief Set the save folder path for the recorder
         void SetSaveFolderPath(std::string path);
         /// @brief Get the save folder path for the recorder
-        std::string GetSaveFolderPath(){return m_SaveFolderPath;};
+        std::string GetSaveFolderPath(){return m_UtilsDefaultPath;};
         /// @brief Check if the video is being processed
         bool IsProcessing(){return m_Processing;};
 
@@ -43,7 +44,7 @@ namespace AIAC {
         /// Flag to check if the video is being processed
         bool m_Processing;
         /// Default path to save the video
-        std::string m_SaveFolderPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::RECORDER_DEFAULT_PATH);;
+        std::string m_UtilsDefaultPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS, AIAC::Config::UTILS_DEFAULT_PATH);;
         /// Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> m_VideoRecorder;
 
