@@ -65,7 +65,6 @@ namespace AIAC::Utils {
         myFile.open(filePath, std::ios_base::app);
         if (myFile.is_open()) {
             myFile << this->GetCurrentTimestamp() << "\n";
-            myFile << "ItemType,PointType,X,Y,Z\n";
             myFile << m_Buffer.str();
             myFile << "\n";
             myFile.close();
