@@ -25,7 +25,12 @@ namespace AIAC::Utils {
         void ExportToolheadAxis();
         /// @brief Export the hole coordinates
         void ExportHoleAxis();
-        /// @brief Write the buffer to a file
+        /**
+         * @brief Write the buffer to a file.
+         *
+         * The data is written in the following format:
+         * ItemType,ItemName,PointType,X,Y,Z
+         */
         void WriteBufferToFile();
         /** @brief Get the current timestamp
          *
