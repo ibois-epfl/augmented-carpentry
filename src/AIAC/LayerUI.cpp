@@ -437,7 +437,6 @@ namespace AIAC
     }
 
     void LayerUI::ShowSaveVideoRecorderFileDialog(){
-        // Set the path for saving the video from UI
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
         if (ImGui::Button("Select Save Directory")) {
             ImGuiFileDialog::Instance()->OpenDialog("ChooseDirectoryDialog", "Choose Directory", nullptr, ".");
@@ -453,63 +452,59 @@ namespace AIAC
         }
     }
     void LayerUI::SetPaneUIUtils(){
+        ImGui::Text("Set Utils Folder:");
+        ImGui::BeginChild("Set Utils Folder", ImVec2(0, 60), true);
+            ShowSaveVideoRecorderFileDialog();
+            std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
+            ImGui::Text("Selected Path: %s", displayedPath.c_str());
+        ImGui::EndChild();
 
-        // Set the path for saving the video from UI
-        ShowSaveVideoRecorderFileDialog();
-        // Retrieve and display the saved folder path
-        std::string displayedPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
-        ImGui::Text("Selected Path: %s", displayedPath.c_str());
-
-        // Set operation in progress flag
-        static bool isOperationInProgress = false;
-        // Recording Status on UI
-        ImGui::Text("Recording: ");
-        ImGui::SameLine();
-        if(isOperationInProgress){
-            ImGui::TextColored(AIAC_UI_GREEN, "Yes");
-        } else {
-            ImGui::TextColored(AIAC_UI_RED, "No");
-        }
-
-        // Set video processing in progress flag
-        ImGui::Text("Video is being processed: ");
-        ImGui::SameLine();
-        if(AIAC_APP.GetLayer<LayerUtils>()->IsProcessing()){
-            ImGui::TextColored(AIAC_UI_GREEN, "Yes");
-        } else {
-            ImGui::TextColored(AIAC_UI_RED, "No");
-        }
-
-
-        // Recording Control Buttons
-        ImGui::Text("Video Recorder Controls: ");
-
-        // Start Recording Button
-        if (ImGui::Button("Start Recording"))
-        {// Only execute if it is not recording and if it is not processing
-            if (!isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
-            {
-                // Set the process flag to true
-                isOperationInProgress = true;
-                // Start the recording
-                AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+        ImGui::Text("Video Recorder:");
+        ImGui::BeginChild("Video Recorder", ImVec2(0, 100), true);
+            static bool isRecordingInProgress = false;
+            ImGui::Text("Recording: ");
+            ImGui::SameLine();
+            if(isRecordingInProgress){
+                ImGui::TextColored(AIAC_UI_GREEN, "Yes");
+            } else {
+                ImGui::TextColored(AIAC_UI_RED, "No");
             }
-        }
 
-        ImGui::SameLine();
-        // Stop Recording Button
-        if (ImGui::Button("Stop Recording"))
-        {
-            // Only execute if it is recording and processing is not ongoing
-            if (isOperationInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
-            {
-                // Set the process flag to false
-                isOperationInProgress = false;
-                // Stop the recording
-                AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+            ImGui::Text("Video is being processed: ");
+            ImGui::SameLine();
+            if(AIAC_APP.GetLayer<LayerUtils>()->IsProcessing()){
+                ImGui::TextColored(AIAC_UI_GREEN, "Yes");
+            } else {
+                ImGui::TextColored(AIAC_UI_RED, "No");
             }
-        };
 
+            ImGui::Text("Video Recorder Controls: ");
+            if (ImGui::Button("Start Recording"))
+            {
+                if (!isRecordingInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+                {
+                    isRecordingInProgress = true;
+                    AIAC_APP.GetLayer<LayerUtils>()->StartRecording();
+                }
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Stop Recording"))
+            {
+                if (isRecordingInProgress && !AIAC_APP.GetLayer<LayerUtils>()->IsProcessing())
+                {
+                    isRecordingInProgress = false;
+                    AIAC_APP.GetLayer<LayerUtils>()->StopRecording();
+                }
+            };
+        ImGui::EndChild();
+
+        ImGui::Text("Hole Toolhead Axis Exporter:");
+        ImGui::BeginChild("Hole Toolhead Axis Exporter", ImVec2(0, 42), true);
+            if (ImGui::Button("Export Hole Toolhead Coordinates"))
+            {
+                AIAC_APP.GetLayer<LayerUtils>()->ExportHoleToolheadAxis();
+            }
+        ImGui::EndChild();
     }
 
     void LayerUI::SetPaneUIToolhead()
