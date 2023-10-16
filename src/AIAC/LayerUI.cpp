@@ -505,6 +505,20 @@ namespace AIAC
                 AIAC_APP.GetLayer<LayerUtils>()->ExportHoleToolheadAxis();
             }
         ImGui::EndChild();
+
+        ImGui::Text("Window Photo:");
+        ImGui::BeginChild("Window Photo", ImVec2(0, 42), true);
+        if (ImGui::Button("Take a window photo"))
+        {
+            AIAC_APP.GetLayer<LayerUtils>()->TakeWindowScreenshot();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Take a colored buffer photo"))
+        {
+            AIAC_APP.GetLayer<LayerUtils>()->TakeBufferScreenshot();
+        }
+        ImGui::EndChild();
+
     }
 
     void LayerUI::SetPaneUIToolhead()

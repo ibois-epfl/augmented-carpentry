@@ -45,6 +45,12 @@ namespace AIAC {
         /// @brief Export and write the hole and toolhead coordinates
         void ExportHoleToolheadAxis();
 
+    public: ///< screenshot
+        /// @brief Take a screenshot of the current window
+        void TakeWindowScreenshot();
+        void CapturePhoto(std::string& savePath);
+        void CaptureBuffer(std::string& savePath);
+        void TakeBufferScreenshot();
 
     private:
         /// Default path to utils folder
