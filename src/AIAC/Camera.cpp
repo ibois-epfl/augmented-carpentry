@@ -81,7 +81,7 @@ namespace AIAC
         return true;
     }
 
-    const AIAC::Image Camera::GetNextFrame()
+/*    const AIAC::Image Camera::GetNextFrame()
     {
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
 
@@ -104,7 +104,35 @@ namespace AIAC
         m_CalibratedCurrentFrame = calibratedFrame;
 
         return m_CalibratedCurrentFrame;
+    }*/
+
+    const AIAC::Image Camera::GetNextFrame()
+    {
+        if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
+
+        cv::Mat frame;
+        m_VideoCapture >> frame;
+
+        // raw frame
+        m_RawCurrentFrame = frame;
+        // undistorted frame
+        cv::Mat resizedFrame, calibratedFrame;
+        cv::remap(frame, calibratedFrame, m_UndistortMap[0], m_UndistortMap[1], cv::INTER_LINEAR);
+
+        if(!IsPhysicalAndParamWidthHeightMatched()){
+            cv::resize(calibratedFrame, resizedFrame, cv::Size(m_ParamWidth, m_ParamHeight));
+        } else {
+            calibratedFrame.copyTo(resizedFrame);
+        }
+
+        cv::Mat tempGrayMat;
+        cv::cvtColor(calibratedFrame, tempGrayMat, cv::COLOR_BGR2GRAY);
+        cv::cvtColor(tempGrayMat, tempGrayMat, cv::COLOR_GRAY2BGR);
+        m_GrayCalibratedCurrentFrame = tempGrayMat;
+        m_CalibratedCurrentFrame = calibratedFrame;
+        return m_GrayCalibratedCurrentFrame;
     }
+
 
     AIAC::Image &Camera::GetCenterCroppedCurrentFrame(float ratioX, float ratioY){
         cv::Mat centerCroppedFrame(m_PhysicalHeight, m_PhysicalWidth,
