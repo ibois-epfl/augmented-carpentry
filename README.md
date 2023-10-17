@@ -33,10 +33,12 @@ gantt
     9 Eval campaign                                             :eval, after fabplt, 1.5w
     10 data processing and graphs                               :active, dataaprgr, after eval, 1w
     11 ML docker image (2d per w)                               :mlclass, after probplt, 5w
+    Yves's meeting ttool                                        :milestone, crit, after mlclass, 0d
 
     section AC
     12 point-cloud 3D model evaluation                          :acdev, after mlclass, 9w
     13 integration of mortaise tools                            :acdev, after mlclass, 9w
+    Yves's meeting ac                                        :milestone, crit, 2024-01-28, 0d
 
     End                                                         :milestone, crit, ender, 2024-01-31, 0d
 ```
