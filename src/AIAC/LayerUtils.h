@@ -48,8 +48,6 @@ namespace AIAC {
     public: ///< screenshot
         /// @brief Take a screenshot of the current window
         void TakeWindowScreenshot();
-        void CapturePhoto(std::string& savePath);
-        void CaptureBuffer(std::string& savePath);
         void TakeBufferScreenshot();
 
     private:

@@ -1,21 +1,21 @@
-#include "VideoRecorder.h"
+#include "Recorder.h"
 #include "../AIAC/Application.h"
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 #include "AIAC/LayerUtils.h"
 
 namespace AIAC::Utils {
-    VideoRecorder::VideoRecorder(const std::string& basePath)
+    Recorder::Recorder(const std::string& basePath)
     : m_BasePath(basePath)
     {   this->UpdatePaths();
         this->InitializeDirectories();
     }
 
-    VideoRecorder::~VideoRecorder() {
+    Recorder::~Recorder() {
         this->DeleteFrameFolder();
     }
 
-    void VideoRecorder::UpdatePaths() {
+    void Recorder::UpdatePaths() {
         auto now = std::chrono::system_clock::now();
         auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
 
@@ -24,7 +24,7 @@ namespace AIAC::Utils {
         this->m_VideoPath = this->m_RecorderPath + "/video_"+ std::to_string(timestamp);
     }
 
-    void VideoRecorder::CaptureFrames() {
+    void Recorder::CaptureFrames() {
         int width = AIAC_APP.GetWindow()->GetDisplayW();
         int height = AIAC_APP.GetWindow()->GetDisplayH();
         std::vector<unsigned char> pixels(width * height * 4);  // 4 for RGBA
@@ -38,7 +38,7 @@ namespace AIAC::Utils {
     }
     }
 
-    void VideoRecorder::SaveFrames(int height, int width, std::vector<unsigned char> pixels) {
+    void Recorder::SaveFrames(int height, int width, std::vector<unsigned char> pixels) {
         cv::Mat image(height, width, CV_8UC4, pixels.data());
 
         cv::flip(image, image, 0);
@@ -53,7 +53,7 @@ namespace AIAC::Utils {
         cv::imwrite(this->m_FramesPath + "/" + filename.str(), image);
     }
 
-    void VideoRecorder::MakeVideoFromFrames() {
+    void Recorder::MakeVideoFromFrames() {
         const std::string framesFolder = this->m_FramesPath;
 
         std::vector<std::string> framePaths;
@@ -79,7 +79,7 @@ namespace AIAC::Utils {
         std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath + " 2>/dev/null";
 
         int result = std::system(ffmpegCommand.c_str());
-        if (result == 0) {
+        if (result) {
             AIAC_INFO("Video saved to: {0}", videoPath);
         } else {
             AIAC_ERROR("Error: ffmpeg could not create video!");
@@ -88,16 +88,50 @@ namespace AIAC::Utils {
         std::remove(imageListFile.c_str());
     }
 
-    void VideoRecorder::InitializeDirectories(){
+    void Recorder::InitializeDirectories(){
         for(const auto& path: {this->m_RecorderPath,this->m_FramesPath, this->m_VideoPath}) {
             LayerUtils::CreateFolder(path);
         }
     }
 
-    void VideoRecorder::DeleteFrameFolder(){
+    void Recorder::DeleteFrameFolder(){
         if (std::filesystem::exists(this->m_FramesPath)) {
             std::filesystem::remove_all(this->m_FramesPath);
         } else {
         AIAC_ERROR("Could not delete {0} folder", this->m_FramesPath);}
     }
+
+
+    void Recorder::CapturePhoto(std::string& savePath){
+        int width = AIAC_APP.GetWindow()->GetDisplayW();
+        int height = AIAC_APP.GetWindow()->GetDisplayH();
+
+        std::vector<unsigned char> pixels(width * height * 4);
+
+        glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+        cv::Mat image(height, width, CV_8UC4, pixels.data());
+        cv::flip(image, image, 0);
+        cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
+
+        if(std::filesystem::exists(savePath)) {
+            // Save the image
+            cv::imwrite(savePath + "/output.png", image);
+        } else {
+            AIAC_ERROR("Error: {0} does not exist!", savePath);
+        }
+    }
+
+
+    void Recorder::CaptureBuffer(std::string &savePath) {
+        cv::Mat currentFrame;
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCalibratedCurrentFrame().GetCvMat().copyTo(currentFrame);
+        if(std::filesystem::exists(savePath)) {
+            // Save the image
+            cv::imwrite(savePath + "/output.png", currentFrame);
+        } else {
+            AIAC_ERROR("Error: {0} does not exist!", savePath);
+        }
+    }
+
+
 }

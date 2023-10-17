@@ -9,10 +9,11 @@
 
 namespace AIAC::Utils {
 
-    class VideoRecorder {
+    class Recorder {
     public:
-        explicit VideoRecorder(const std::string& basePath);
-        ~VideoRecorder();
+        explicit Recorder(const std::string& basePath);
+        Recorder() = default;
+        ~Recorder();
 
         /// @brief Capture frames from the window
         void CaptureFrames();
@@ -32,6 +33,9 @@ namespace AIAC::Utils {
         void DeleteFrameFolder();
         /// @brief Updates the paths used for video and frame storage
         void UpdatePaths();
+    public:
+        void CapturePhoto(std::string& savePath);
+        void CaptureBuffer(std::string& savePath);
 
     private:
         /// Base path of utils

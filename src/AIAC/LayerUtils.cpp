@@ -4,9 +4,7 @@
 #include "Application.h"
 #include "utils/VideoRecorder.h"
 #include "utils/HoleToolheadAxisExporter.h"
-#include "AIAC/Camera.h"
-#include "LayerCameraCalib.h"
-
+#include "utils/Screenshot.h"
 
 namespace AIAC {
     LayerUtils::LayerUtils() {
@@ -66,46 +64,18 @@ namespace AIAC {
         }
     }
 
-    void LayerUtils::CapturePhoto(std::string& savePath){
-        int width = AIAC_APP.GetWindow()->GetDisplayW();
-        int height = AIAC_APP.GetWindow()->GetDisplayH();
-
-        std::vector<unsigned char> pixels(width * height * 4);
-
-        glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
-        cv::Mat image(height, width, CV_8UC4, pixels.data());
-        cv::flip(image, image, 0);
-        cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
-
-        if(std::filesystem::exists(savePath)) {
-            // Save the image
-            cv::imwrite(savePath + "/output.png", image);
-        } else {
-            AIAC_ERROR("Error: {0} does not exist!", savePath);
-        }
-    }
-
-    void LayerUtils::CaptureBuffer(std::string &savePath) {
-        cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCalibratedCurrentFrame().GetCvMat().copyTo(currentFrame);
-        if(std::filesystem::exists(savePath)) {
-            // Save the image
-            cv::imwrite(savePath + "/output.png", currentFrame);
-        } else {
-            AIAC_ERROR("Error: {0} does not exist!", savePath);
-        }
-    }
-
     void LayerUtils::TakeWindowScreenshot(){
         AIAC_INFO("Screenshot of the current window");
         std::string savePath = this->GetSaveFolderPath();
-        this->CapturePhoto(savePath);
+        AIAC::Utils::Screenshot recorder(savePath);
+        recorder.CapturePhoto();
     }
 
     void LayerUtils::TakeBufferScreenshot(){
         AIAC_INFO("Colored buffer of the current window");
         std::string savePath = this->GetSaveFolderPath();
-        this->CaptureBuffer(savePath);
+        AIAC::Utils::Screenshot recorder(savePath);
+        recorder.CaptureBuffer();
     }
 }
 
