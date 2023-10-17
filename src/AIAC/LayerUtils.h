@@ -48,6 +48,7 @@ namespace AIAC {
     public: ///< screenshot
         /// @brief Take a screenshot of the current window
         void TakeWindowScreenshot();
+        /// @brief Take a screenshot of the colored buffer
         void TakeBufferScreenshot();
 
     private:
