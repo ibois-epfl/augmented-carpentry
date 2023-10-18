@@ -35,7 +35,7 @@ namespace AIAC::Utils{
 
     void Screenshot::CaptureBuffer() {
         cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCalibratedCurrentFrame().GetCvMat().copyTo(currentFrame);
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetColorCurrentFrame().GetCvMat().copyTo(currentFrame);
         this->GenerateImageName(false);
         if (std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
             // Save the image
