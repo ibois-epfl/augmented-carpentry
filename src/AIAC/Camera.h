@@ -17,9 +17,8 @@ namespace AIAC
         inline void UpdateFov();
 
         const AIAC::Image GetNextFrame();
-        //inline AIAC::Image &GetCurrentFrame() { return m_CalibratedCurrentFrame; }
+        inline AIAC::Image &GetColorCurrentFrame() { return m_CalibratedCurrentFrame; }
         inline AIAC::Image &GetCurrentFrame() { return m_GrayCalibratedCurrentFrame; }
-        inline AIAC::Image &GetCalibratedCurrentFrame() { return m_CalibratedCurrentFrame; }
         inline AIAC::Image &GetRawCurrentFrame() { return m_RawCurrentFrame; }
         /**
          * @brief Get the raw current frame, but borders are set to black according to the specified ratio.

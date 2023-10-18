@@ -88,7 +88,7 @@ namespace AIAC
     void LayerToolhead::DetectToolhead()
     {
         cv::Mat currentFrame;
-        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetPureCvMat().copyTo(currentFrame);
+        AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetColorCurrentFrame().GetPureCvMat().copyTo(currentFrame);
 
         m_ClassifierToolList = TTool->ClassifyWithSortedLabels(currentFrame);
         std::string toolhead = m_ClassifierToolList[0];
