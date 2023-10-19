@@ -50,6 +50,12 @@ namespace AIAC {
         void TakeWindowScreenshot();
         /// @brief Take a screenshot of the colored buffer
         void TakeBufferScreenshot();
+        /**
+         * @brief Set the flag to check if the screenshot is of the window
+         *
+         * @param value True if the screenshot is of the window
+         */
+        void SetWindowScreenshot(bool value){m_WindowScreenshot = value;};
 
     private:
         /// Default path to utils folder

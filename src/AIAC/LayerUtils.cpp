@@ -70,18 +70,17 @@ namespace AIAC {
     }
 
     void LayerUtils::TakeWindowScreenshot(){
-        this->m_WindowScreenshot = true;
         std::string savePath = this->GetSaveFolderPath();
-        AIAC_INFO("Screenshot of the current window");
         AIAC::Utils::Screenshot recorder(savePath);
         recorder.CaptureWindow();
+        AIAC_INFO("Captured screenshot of the current window");
     }
 
     void LayerUtils::TakeBufferScreenshot(){
-        AIAC_INFO("Colored buffer of the current window");
         std::string savePath = this->GetSaveFolderPath();
         AIAC::Utils::Screenshot recorder(savePath);
         recorder.CaptureBuffer();
+        AIAC_INFO("Captured colored buffer of the current window");
     }
 }
 

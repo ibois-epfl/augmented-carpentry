@@ -510,7 +510,7 @@ namespace AIAC
         ImGui::BeginChild("Window Photo", ImVec2(0, 42), true);
         if (ImGui::Button("Take a window photo"))
         {
-            AIAC_APP.GetLayer<LayerUtils>()->TakeWindowScreenshot();
+            AIAC_APP.GetLayer<LayerUtils>()->SetWindowScreenshot(true);
         }
         ImGui::SameLine();
         if (ImGui::Button("Take a colored buffer photo"))

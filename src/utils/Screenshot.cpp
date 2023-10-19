@@ -56,7 +56,7 @@ namespace AIAC::Utils{
     void Screenshot::SaveScreenshot(cv::Mat image){
         if(std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
             cv::imwrite(m_ImageName, image);
-            AIAC_INFO("The window screenshot is saved to : {0}", m_ImageName);
+            AIAC_INFO("The image is saved to : {0}", m_ImageName);
         } else {
             AIAC_ERROR("Error: {0} does not exist!", this->m_BasePath + this->m_ScreenshotPath);
         }
