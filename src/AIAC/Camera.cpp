@@ -31,7 +31,6 @@ namespace AIAC
             AIAC_INFO("Camera Resolution: {0}x{1}.", m_PhysicalWidth, m_PhysicalHeight);
         }
 
-        // load camera params
         m_CalibFilePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
         LoadCameraParams(m_CalibFilePath);
     }
@@ -81,31 +80,6 @@ namespace AIAC
         return true;
     }
 
-/*    const AIAC::Image Camera::GetNextFrame()
-    {
-        if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
-
-        cv::Mat frame;
-        m_VideoCapture >> frame;
-
-        // raw frame
-        m_RawCurrentFrame = frame;
-
-        // undistorted frame
-        cv::Mat resizedFrame, calibratedFrame;
-        cv::remap(frame, calibratedFrame, m_UndistortMap[0], m_UndistortMap[1], cv::INTER_LINEAR);
-
-        if(!IsPhysicalAndParamWidthHeightMatched()){
-            cv::resize(calibratedFrame, resizedFrame, cv::Size(m_ParamWidth, m_ParamHeight));
-        } else {
-            calibratedFrame.copyTo(resizedFrame);
-        }
-
-        m_CalibratedCurrentFrame = calibratedFrame;
-
-        return m_CalibratedCurrentFrame;
-    }*/
-
     const AIAC::Image Camera::GetNextFrame()
     {
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
@@ -113,9 +87,8 @@ namespace AIAC
         cv::Mat frame;
         m_VideoCapture >> frame;
 
-        // raw frame
         m_RawCurrentFrame = frame;
-        // undistorted frame
+
         cv::Mat resizedFrame, calibratedFrame;
         cv::remap(frame, calibratedFrame, m_UndistortMap[0], m_UndistortMap[1], cv::INTER_LINEAR);
 
@@ -150,8 +123,6 @@ namespace AIAC
                 }
             }
         }
-
-        // cv::imwrite("centerCroppedFrame.png", centerCroppedFrame);
 
         m_CenterCroppedCurrentFrame = centerCroppedFrame;
         return m_CenterCroppedCurrentFrame;
