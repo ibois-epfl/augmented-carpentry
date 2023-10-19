@@ -6,11 +6,13 @@ namespace AIAC::Utils{
     public:
         explicit Screenshot(const std::string& basePath);
         /// @brief Capture pixels of the current window
-        void CapturePhoto();
+        void CaptureWindow();
         /// @brief Capture current buffer (color)
         void CaptureBuffer();
         /// @brief Generate the name of the image
         void GenerateImageName(bool isWindow);
+        /// @brief Save the screenshot
+        void SaveScreenshot(cv::Mat image);
 
     private:
         /// Base path of utils

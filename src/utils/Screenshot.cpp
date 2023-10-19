@@ -11,7 +11,7 @@ namespace AIAC::Utils{
         LayerUtils::CreateFolder(this->m_BasePath + this->m_ScreenshotPath);
     }
 
-    void Screenshot::CapturePhoto(){
+    void Screenshot::CaptureWindow(){
         int width = AIAC_APP.GetWindow()->GetDisplayW();
         int height = AIAC_APP.GetWindow()->GetDisplayH();
 
@@ -23,27 +23,15 @@ namespace AIAC::Utils{
         cv::cvtColor(image, image, cv::COLOR_RGBA2BGR);
 
         this->GenerateImageName(true);
-
-        if(std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
-            // Save the image
-            cv::imwrite(m_ImageName, image);
-            AIAC_INFO("The window screenshot is saved to : {0}", m_ImageName);
-        } else {
-            AIAC_ERROR("Error: {0} does not exist!", this->m_BasePath + this->m_ScreenshotPath);
-        }
+        this->SaveScreenshot(image);
     }
 
     void Screenshot::CaptureBuffer() {
         cv::Mat currentFrame;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetColorCurrentFrame().GetCvMat().copyTo(currentFrame);
+
         this->GenerateImageName(false);
-        if (std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
-            // Save the image
-            cv::imwrite(m_ImageName, currentFrame);
-            AIAC_INFO("The buffer screenshot is saved to : {0}", m_ImageName);
-        } else {
-            AIAC_ERROR("Error: {0} does not exist!", this->m_BasePath + this->m_ScreenshotPath);
-        }
+        this->SaveScreenshot(currentFrame);
     }
 
     void Screenshot::GenerateImageName(bool isWindow){
@@ -63,5 +51,14 @@ namespace AIAC::Utils{
 
         const std::string imagePath = this->m_BasePath + this->m_ScreenshotPath + "/" + imagename.str();
         this->m_ImageName = imagePath;
+    }
+
+    void Screenshot::SaveScreenshot(cv::Mat image){
+        if(std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
+            cv::imwrite(m_ImageName, image);
+            AIAC_INFO("The window screenshot is saved to : {0}", m_ImageName);
+        } else {
+            AIAC_ERROR("Error: {0} does not exist!", this->m_BasePath + this->m_ScreenshotPath);
+        }
     }
 }

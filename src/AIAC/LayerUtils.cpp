@@ -19,7 +19,7 @@ namespace AIAC {
             std::string savePath = this->GetSaveFolderPath();
             AIAC_INFO("Screenshot of the current window");
             AIAC::Utils::Screenshot recorder(savePath);
-            recorder.CapturePhoto();
+            recorder.CaptureWindow();
             this->m_WindowScreenshot = false;
         }
     }
