@@ -79,7 +79,7 @@ namespace AIAC::Utils {
         std::string ffmpegCommand = "ffmpeg -y -f concat -safe 0 -i " + imageListFile + " -vf \"fps=30\" -c:v libx264 -pix_fmt yuv420p " + videoPath + " 2>/dev/null";
 
         int result = std::system(ffmpegCommand.c_str());
-        if (result) {
+        if (result == 0) {
             AIAC_INFO("Video saved to: {0}", videoPath);
         } else {
             AIAC_ERROR("Error: ffmpeg could not create video!");
