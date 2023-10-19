@@ -55,7 +55,6 @@ namespace AIAC {
         /// Default path to utils folder
         std::string m_UtilsPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS,
                                                                  AIAC::Config::UTILS_PATH);
-
     private: ///< video recorder
         /// Flag to check if the video is being recorded
         bool m_Recording;
@@ -67,6 +66,10 @@ namespace AIAC {
     private: ///< hole and toolhead exporter
         /// Hole and toolhead exporter object
         std::unique_ptr<AIAC::Utils::HoleToolheadAxisExporter> m_HoleToolheadAxisExporter;
+
+    private: ///< screenshot
+        /// Flag to check if the screenshot is of the window
+        bool m_WindowScreenshot;
     };
 }
 
