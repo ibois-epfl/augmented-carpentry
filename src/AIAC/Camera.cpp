@@ -31,7 +31,6 @@ namespace AIAC
             AIAC_INFO("Camera Resolution: {0}x{1}.", m_PhysicalWidth, m_PhysicalHeight);
         }
 
-        // load camera params
         m_CalibFilePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
         LoadCameraParams(m_CalibFilePath);
     }
@@ -88,10 +87,8 @@ namespace AIAC
         cv::Mat frame;
         m_VideoCapture >> frame;
 
-        // raw frame
         m_RawCurrentFrame = frame;
 
-        // undistorted frame
         cv::Mat resizedFrame, calibratedFrame;
         cv::remap(frame, calibratedFrame, m_UndistortMap[0], m_UndistortMap[1], cv::INTER_LINEAR);
 
@@ -101,10 +98,14 @@ namespace AIAC
             calibratedFrame.copyTo(resizedFrame);
         }
 
+        cv::Mat tempGrayMat;
+        cv::cvtColor(calibratedFrame, tempGrayMat, cv::COLOR_BGR2GRAY);
+        cv::cvtColor(tempGrayMat, tempGrayMat, cv::COLOR_GRAY2BGR);
+        m_GrayCalibratedCurrentFrame = tempGrayMat;
         m_CalibratedCurrentFrame = calibratedFrame;
-
-        return m_CalibratedCurrentFrame;
+        return m_GrayCalibratedCurrentFrame;
     }
+
 
     AIAC::Image &Camera::GetCenterCroppedCurrentFrame(float ratioX, float ratioY){
         cv::Mat centerCroppedFrame(m_PhysicalHeight, m_PhysicalWidth,
@@ -122,8 +123,6 @@ namespace AIAC
                 }
             }
         }
-
-        // cv::imwrite("centerCroppedFrame.png", centerCroppedFrame);
 
         m_CenterCroppedCurrentFrame = centerCroppedFrame;
         return m_CenterCroppedCurrentFrame;
