@@ -9,9 +9,17 @@ namespace AIAC::Utils{
         void CaptureWindow();
         /// @brief Capture current buffer (color)
         void CaptureBuffer();
-        /// @brief Generate the name of the image
+        /**
+         * @brief Generate the name of the image
+         *
+         * @param isWindow Flag to check if the image is a window screenshot if not it is a buffer screenshot
+         */
         void GenerateImageName(bool isWindow);
-        /// @brief Save the screenshot
+        /**
+         * @brief Save the screenshot
+         *
+         * @param image Image to save
+         */
         void SaveScreenshot(cv::Mat image);
 
     private:
