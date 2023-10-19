@@ -16,10 +16,7 @@ namespace AIAC {
             this->m_VideoRecorder->CaptureFrames();
         }
         if(this->m_WindowScreenshot){
-            std::string savePath = this->GetSaveFolderPath();
-            AIAC_INFO("Screenshot of the current window");
-            AIAC::Utils::Screenshot recorder(savePath);
-            recorder.CaptureWindow();
+            this->TakeWindowScreenshot();
             this->m_WindowScreenshot = false;
         }
     }
@@ -74,6 +71,10 @@ namespace AIAC {
 
     void LayerUtils::TakeWindowScreenshot(){
         this->m_WindowScreenshot = true;
+        std::string savePath = this->GetSaveFolderPath();
+        AIAC_INFO("Screenshot of the current window");
+        AIAC::Utils::Screenshot recorder(savePath);
+        recorder.CaptureWindow();
     }
 
     void LayerUtils::TakeBufferScreenshot(){
