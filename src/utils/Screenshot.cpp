@@ -1,4 +1,3 @@
-
 #include "Screenshot.h"
 #include "AIAC/Config.h"
 #include "../AIAC/Application.h"
@@ -28,6 +27,7 @@ namespace AIAC::Utils{
         if(std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
             // Save the image
             cv::imwrite(m_ImageName, image);
+            AIAC_INFO("The window screenshot is saved to : {0}", m_ImageName);
         } else {
             AIAC_ERROR("Error: {0} does not exist!", this->m_BasePath + this->m_ScreenshotPath);
         }
@@ -40,6 +40,7 @@ namespace AIAC::Utils{
         if (std::filesystem::exists(this->m_BasePath + this->m_ScreenshotPath)) {
             // Save the image
             cv::imwrite(m_ImageName, currentFrame);
+            AIAC_INFO("The buffer screenshot is saved to : {0}", m_ImageName);
         } else {
             AIAC_ERROR("Error: {0} does not exist!", this->m_BasePath + this->m_ScreenshotPath);
         }
@@ -47,15 +48,18 @@ namespace AIAC::Utils{
 
     void Screenshot::GenerateImageName(bool isWindow){
         auto now = std::chrono::system_clock::now();
-        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+        auto timestamp = std::chrono::system_clock::to_time_t(now);
 
         std::stringstream imagename;
         if (isWindow) {
-            imagename << "window_";
+            imagename << "window-";
         } else {
-            imagename << "color_";
+            imagename << "buffer-";
         }
-        imagename << std::setfill('0') << std::setw(13) << timestamp << ".png";
+        struct std::tm* tm;
+        tm = std::localtime(&timestamp);
+
+        imagename << std::put_time(tm, "%Y-%m-%d-%H-%M-%S") << ".png";
 
         const std::string imagePath = this->m_BasePath + this->m_ScreenshotPath + "/" + imagename.str();
         this->m_ImageName = imagePath;
