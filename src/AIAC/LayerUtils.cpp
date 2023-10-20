@@ -4,15 +4,20 @@
 #include "Application.h"
 #include "utils/VideoRecorder.h"
 #include "utils/HoleToolheadAxisExporter.h"
-
+#include "utils/Screenshot.h"
 
 namespace AIAC {
     LayerUtils::LayerUtils() {
         LayerUtils::CreateFolder(m_UtilsPath);
     }
+
     void LayerUtils::OnFrameEnd() {
         if(this->m_Recording){
             this->m_VideoRecorder->CaptureFrames();
+        }
+        if(this->m_WindowScreenshot){
+            this->TakeWindowScreenshot();
+            this->m_WindowScreenshot = false;
         }
     }
 
@@ -62,6 +67,20 @@ namespace AIAC {
             AIAC_ERROR("Failed to create {0} folder", path);
             return false;
         }
+    }
+
+    void LayerUtils::TakeWindowScreenshot(){
+        std::string savePath = this->GetSaveFolderPath();
+        AIAC::Utils::Screenshot recorder(savePath);
+        recorder.CaptureWindow();
+        AIAC_INFO("Captured screenshot of the current window");
+    }
+
+    void LayerUtils::TakeBufferScreenshot(){
+        std::string savePath = this->GetSaveFolderPath();
+        AIAC::Utils::Screenshot recorder(savePath);
+        recorder.CaptureBuffer();
+        AIAC_INFO("Captured colored buffer of the current window");
     }
 }
 

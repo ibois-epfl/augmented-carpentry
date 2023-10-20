@@ -45,12 +45,22 @@ namespace AIAC {
         /// @brief Export and write the hole and toolhead coordinates
         void ExportHoleToolheadAxis();
 
+    public: ///< screenshot
+        /// @brief Take a screenshot of the current window
+        void TakeWindowScreenshot();
+        /// @brief Take a screenshot of the colored buffer
+        void TakeBufferScreenshot();
+        /**
+         * @brief Set the flag to check if the screenshot is of the window
+         *
+         * @param value True if the screenshot is of the window
+         */
+        void SetWindowScreenshot(bool value){m_WindowScreenshot = value;};
 
     private:
         /// Default path to utils folder
         std::string m_UtilsPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS,
                                                                  AIAC::Config::UTILS_PATH);
-
     private: ///< video recorder
         /// Flag to check if the video is being recorded
         bool m_Recording;
@@ -62,6 +72,10 @@ namespace AIAC {
     private: ///< hole and toolhead exporter
         /// Hole and toolhead exporter object
         std::unique_ptr<AIAC::Utils::HoleToolheadAxisExporter> m_HoleToolheadAxisExporter;
+
+    private: ///< screenshot
+        /// Flag to check if the screenshot is of the window
+        bool m_WindowScreenshot;
     };
 }
 

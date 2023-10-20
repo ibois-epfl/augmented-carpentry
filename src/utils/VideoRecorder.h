@@ -33,6 +33,7 @@ namespace AIAC::Utils {
         /// @brief Updates the paths used for video and frame storage
         void UpdatePaths();
 
+
     private:
         /// Base path of utils
         std::string m_BasePath;
