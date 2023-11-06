@@ -34,6 +34,7 @@ gantt
     10 data processing and graphs                               :active, dataaprgr, after eval, 1w
     11 ML docker image (2d per w)                               :mlclass, after probplt, 5w
     Yves's meeting ttool                                        :milestone, crit, after mlclass, 0d
+    Yves's meeting ac                                           :milestone, crit, 2023-12-13, 0d
 
     section AC
     12 point-cloud 3D model evaluation                          :acdev, after mlclass, 9w
