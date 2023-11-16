@@ -64,7 +64,7 @@ namespace AIAC
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
         void syncTToolAndACInfoToolhead();
     
-    public: ///< Public members
+    public:
         /// The ttool object
         std::shared_ptr<ttool::TTool> TTool;
         /// The UI state of the toolhead (None, PoseInput, Tracking)
@@ -78,7 +78,7 @@ namespace AIAC
         /// Save pose log
         bool IsSavePoseLog = false;
 
-    private: ///< Private members
+    private:
         /// The current state of the ttool (None, PoseInput, Tracking)
         ttool::EventType m_TtoolState;
         /// The current pose of the ttool
