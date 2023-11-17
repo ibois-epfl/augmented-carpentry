@@ -27,8 +27,8 @@ namespace AIAC::Utils {
         }
         if (activeToolheadType == ACToolHeadType::CHAINSAW){
             auto chainSawData = AC_FF_TOOL->GetData<ChainSawData>();
-            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "ChainBaseGO", chainSawData.ChainBaseGO);
             this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "NormStartGO", chainSawData.NormStartGO);
+            this->WriteCoordToBuffer("Toolhead", AC_FF_TOOL->GetName(), "NormEndGO", chainSawData.NormEndGO);
         }
         if (activeToolheadType == ACToolHeadType::CIRCULARSAW){
             auto circularSawData = AC_FF_TOOL->GetData<CircularSawData>();
