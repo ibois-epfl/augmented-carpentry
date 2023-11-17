@@ -55,7 +55,7 @@ namespace AIAC::Utils {
                                                     const std::string& pointType,
                                                     std::shared_ptr<GOPoint> goPoint){
         m_Buffer << itemType << "," << itemName <<"," << pointType << "," << goPoint->X() << "," << goPoint->Y() << "," << goPoint->Z() << "\n";
-        AIAC_INFO("[{0},{1},(X:{2},Y:{3},Z:{4})]",itemType, itemName, pointType, goPoint->X(), goPoint->Y(), goPoint->Z());
+        AIAC_INFO("[{0},{1},{2},(X:{3},Y:{4},Z:{5})]",itemType, itemName, pointType, goPoint->X(), goPoint->Y(), goPoint->Z());
     }
 
     void HoleToolheadAxisExporter::WriteBufferToFile(){
