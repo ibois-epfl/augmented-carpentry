@@ -1,1 +1,0 @@
-Run `main.py` from Rhino to output `.acim` file.
