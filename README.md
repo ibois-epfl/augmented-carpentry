@@ -28,13 +28,12 @@ gantt
     4 TTool packaging                                           :done, packcont, 2023-09-01, 2.5w
     5 (optional) UI design proposal                             :uidesign, after packcont, 0d
     6 AC exporter                                               :done, acexp, 2023-10-02, 1w
-    7 design probing plate                                      :active, active, probplt, after acexp, 12d
-    8 fabrication of probing plate                              :active, fabplt, after probplt, 1w
-    9 Eval campaign                                             :eval, after fabplt, 1.5w
-    10 data processing and graphs                               :active, dataaprgr, after eval, 1w
-    11 ML docker image (2d per w)                               :mlclass, after probplt, 5w
-    Yves's meeting ttool                                        :milestone, crit, after mlclass, 0d
-    Yves's meeting ac                                           :milestone, crit, 2023-12-13, 0d
+    7 design probing plate                                      :done, probplt, after acexp, 12d
+    8 fabrication of probing plate                              :done, fabplt, after probplt, 1w
+    9 Eval campaign                                             :crit, eval, after fabplt, 2.5w
+    10 data processing and graphs                               :active, dataaprgr, after eval, 2w
+    11 ML docker image (2d per w)                               :active, mlclass, after probplt, 7w
+    Yves's meeting ttool                                        :milestone, crit, 2023-11-22, 0d
 
     section AC
     12 point-cloud 3D model evaluation                          :acdev, after mlclass, 9w
