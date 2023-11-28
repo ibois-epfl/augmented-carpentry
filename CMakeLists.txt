@@ -46,6 +46,9 @@ option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal if on." ON)
 # -------------------- TEST OPTIONS --------------------------------
 option(TEST_GRAPHICS "Test graphics by launching opengl with glfw window." ON)
+option(AC_SYNC_GIT_SUBMODULES "Sync to the latest version of submodules" ON)
+mark_as_advanced(AC_SYNC_GIT_SUBMODULES)
+
 
 # pre-compile variables
 target_compile_definitions(${PROJECT_NAME}
