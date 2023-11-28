@@ -4,6 +4,8 @@
     <img src="./assets/images/logos/logo_linux_gray_mc.png" width="200">
 </p>
 
+![build](https://github.com/ibois-epfl/ac-exporter/actions/workflows/docker-cmake-build.yml/badge.svg?event=push)
+
 
 AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
 
