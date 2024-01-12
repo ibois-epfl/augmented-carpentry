@@ -63,9 +63,9 @@ namespace AIAC {
                                                                  AIAC::Config::UTILS_PATH);
     private: ///< video recorder
         /// Flag to check if the video is being recorded
-        bool m_Recording;
+        bool m_Recording = false;
         /// Flag to check if the video is being processed
-        bool m_Processing;
+        bool m_Processing = false;
         /// Video recorder object
         std::unique_ptr<AIAC::Utils::VideoRecorder> m_VideoRecorder;
 
@@ -75,7 +75,7 @@ namespace AIAC {
 
     private: ///< screenshot
         /// Flag to check if the screenshot is of the window
-        bool m_WindowScreenshot;
+        bool m_WindowScreenshot = false;
     };
 }
 
