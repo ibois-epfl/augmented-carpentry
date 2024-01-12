@@ -31,8 +31,8 @@ namespace AIAC {
     void LayerUtils::StopRecording(){
         AIAC_INFO("Stopped Recording");
         this->m_Recording = false;
+        this->m_Processing = true;
         std::thread([this]{
-            this->m_Processing = true;
             this->m_VideoRecorder->MakeVideoFromFrames();
             this->m_VideoRecorder.reset();
             this->m_Processing = false;

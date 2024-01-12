@@ -29,12 +29,11 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();
     acApp_ptr->PushLayer<AIAC::LayerUI>();
-    // acApp_ptr->PushLayer<AIAC::LayerUtils>();
+    acApp_ptr->PushLayer<AIAC::LayerUtils>();
 
     acApp_ptr->GetRenderer()->Init();
 
     acApp_ptr->GetEventBus()->Init();
-
     acApp_ptr->Run();
 
     return 0;
