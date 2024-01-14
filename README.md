@@ -32,15 +32,15 @@ gantt
     6 AC exporter                                               :done, acexp, 2023-10-02, 1w
     7 design probing plate                                      :done, probplt, after acexp, 12d
     8 fabrication of probing plate                              :done, fabplt, after probplt, 1w
-    9 Eval campaign                                             :crit, eval, after fabplt, 2.5w
+    9 Eval campaign                                             :crit, eval, after fabplt, 4.5w
     10 data processing and graphs                               :active, dataaprgr, after eval, 2w
-    11 ML docker image (2d per w)                               :active, mlclass, after probplt, 7w
+    11 ML docker image (2d per w)                               :active, mlclass, after probplt, 12w
     Yves's meeting ttool                                        :milestone, crit, 2023-11-22, 0d
 
     section AC
-    12 point-cloud 3D model evaluation                          :acdev, after mlclass, 9w
-    13 integration of mortaise tools                            :acdev, after mlclass, 9w
-    Yves's meeting ac                                        :milestone, crit, 2024-01-28, 0d
+    12 point-cloud 3D model evaluation                          :acdev, after mlclass, 2.5w
+    13 integration of mortaise tools                            :acdev, after mlclass, 2.5w
+    Yves's meeting ac                                        :milestone, crit, 2024-01-15, 0d
 
     End                                                         :milestone, crit, ender, 2024-01-31, 0d
 ```
