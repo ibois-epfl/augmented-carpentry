@@ -273,10 +273,10 @@ namespace AIAC
 
     void Renderer::RenderMainView() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        
+
         glBindVertexArray(m_VAO);
         glUseProgram(m_BasicShaderProgram);
-        
+
         glDisable(GL_DEPTH_TEST);        
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
@@ -307,6 +307,8 @@ namespace AIAC
             DrawAllGOs(finalPoseMatrix);
         }
     }
+
+    // can be a graphics rendering issue?
 
     void Renderer::RenderCameraFrame(int w, int h, Renderer::CameraFrameType frameType) {
         if ( w <= 0 || h <= 0 ){

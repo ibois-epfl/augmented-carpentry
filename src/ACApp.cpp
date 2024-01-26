@@ -13,6 +13,8 @@ int main(int argc, char* argv[]) {
     appSpec.WinWidth = 800;
     appSpec.WinHeight = 480;
     appSpec.IsResizable = false;
+
+    // track down the vsync (meant to synchronize the framerate with the refresh rate of the monitor)
     appSpec.VSync = true;
     appSpec.WindowBackColor = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 
@@ -33,6 +35,7 @@ int main(int argc, char* argv[]) {
 
     acApp_ptr->GetRenderer()->Init();
 
+    // event bus can also cause the flickering issue. maybe it behaves differently on full window?
     acApp_ptr->GetEventBus()->Init();
     acApp_ptr->Run();
 
