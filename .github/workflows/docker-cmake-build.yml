@@ -34,6 +34,7 @@ jobs:
           submodules: true
       - name: Configure
         run: |
+          git config --global --add safe.directory ${{ github.workspace }}
           cmake -B build .
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
