@@ -33,7 +33,10 @@ jobs:
           lfs: true
           submodules: true
       - name: Configure
-        run: cmake -B build . -DAC_SYNC_GIT_SUBMODULES:BOOL=OFF
+        run: |
+          cp cmake/external_tools.cmake deps/TSlam/cmake
+          cp cmake/external_tools.cmake deps/TTool/cmake
+          cmake -B build . -DAC_SYNC_GIT_SUBMODULES:BOOL=OFF
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
