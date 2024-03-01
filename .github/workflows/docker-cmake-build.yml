@@ -34,9 +34,7 @@ jobs:
           submodules: true
       - name: Configure
         run: |
-          cp cmake/external_tools.cmake deps/TSlam/cmake
-          cp cmake/external_tools.cmake deps/TTool/cmake
-          cmake -B build . -DAC_SYNC_GIT_SUBMODULES:BOOL=OFF
+          cmake -B build .
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
