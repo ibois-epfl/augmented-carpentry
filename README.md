@@ -14,11 +14,11 @@ The first structure is a a typical roof parametrized and modified to complexify 
 
 <p align="center">
     <img src="mockups/proto_x.png" width="500">
-    <img src="mockups/gh_snap.png" height="300">
+    <img src="mockups/gh_snap.png">
 </p>
 
 ```
-0. Timber bill for AC prototype
+1. Timber bill for AC prototype
 Catalog: https://www.getaz-miauton.ch/fileadmin/CrhOneInternet/user_upload/2022-03-02_Massivholz_SR-FR_2022.pdf
 
 section: 0.2,0.14 m / serial number: 61201420 / Total linear length: 123.83 m
