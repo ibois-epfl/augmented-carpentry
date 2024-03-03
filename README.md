@@ -2,6 +2,9 @@
 <p align="center">
     <img src="./assets/images/logos/logo_linux_gray_mc.png" width="140">
 </p>
+<p align="center">
+    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build.yml/badge.svg">
+</p>
 
 
 # Augmented Carpentry
