@@ -1,87 +1,32 @@
-# Augmented Carpentry
 
-<p>
-    <img src="./assets/images/logos/logo_linux_gray_mc.png" width="200">
+<p align="center">
+    <img src="./assets/images/logos/logo_linux_gray_mc.png" width="140">
 </p>
 
-![build](https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build.yml/badge.svg?event=push)
 
+# Augmented Carpentry
 
-AR app is a linux desktop application containing a custom-made framework for augmented carpentry.
+## Roof prototype
+The first structure is a a typical roof parametrized and modified to complexify the fabrication. The optimization of the structure was meant to obtain a structure where each element is unique either by length, angle or shape. The goal was to demonstrate the utility of the technology in a manufacturing a complex structure without the need of 2D drawings or marking on the timber pieces.
 
----
----
----
+<p align="center">
+    <img src="mockups/proto_x.png" width="500">
+    <img src="mockups/gh_snap.png" height="300">
+</p>
 
-# Guli dev
+```
+0. Timber bill for AC prototype
+Catalog: https://www.getaz-miauton.ch/fileadmin/CrhOneInternet/user_upload/2022-03-02_Massivholz_SR-FR_2022.pdf
 
-```mermaid
-gantt
-    dateFormat  YYYY-MM-DD
-    title       Guli AC dev
-    axisFormat %Y-%m
+section: 0.2,0.14 m / serial number: 61201420 / Total linear length: 123.83 m
+section: 0.14,0.08 m / serial number: 7925785 / Total linear length: 64.86 m
+section: 0.14,0.14 m / serial number: 61201414 / Total linear length: 24.26 m
+section: 0.08,0.06 m / serial number: 61130607 / Total linear length: 94.89 m
 
-    Start                                                     :milestone, crit, strt, 2023-08-02, 0d
-
-    section TTool
-    1 Eval protocol design                                      :done, cmkprj, 2023-08-14, 6.2w
-    2 State-of-art interface eval                               :done, ref, 2023-08-14, 5w
-    3 Eval protocol                                             :done, milestone, milttol, 2023-09-26, 0d
-    4 TTool packaging                                           :done, packcont, 2023-09-01, 2.5w
-    5 (optional) UI design proposal                             :uidesign, after packcont, 0d
-    6 AC exporter                                               :done, acexp, 2023-10-02, 1w
-    7 design probing plate                                      :done, probplt, after acexp, 12d
-    8 fabrication of probing plate                              :done, fabplt, after probplt, 1w
-    9 Eval campaign                                             :crit, eval, after fabplt, 2.5w
-    10 data processing and graphs                               :active, dataaprgr, after eval, 2w
-    11 ML docker image (2d per w)                               :active, mlclass, after probplt, 7w
-    Yves's meeting ttool                                        :milestone, crit, 2023-11-22, 0d
-
-    section AC
-    12 point-cloud 3D model evaluation                          :acdev, after mlclass, 9w
-    13 integration of mortaise tools                            :acdev, after mlclass, 9w
-    Yves's meeting ac                                        :milestone, crit, 2024-01-28, 0d
-
-    End                                                         :milestone, crit, ender, 2024-01-31, 0d
 ```
 
-This is the current time that should be spent on which tasks weekly **until working package 9-10-11 are done**. The time is in days:
 
-```mermaid
-pie showData
-    title Guli's weekly dev time
-    "11 ML docker image" : 2
-    "9 Eval campaign - 10 graph" : 4
-```
-Prepare a stand-up with minimum documents of your advancements **every Monday** to discuss during our weekly meeting. The deadlines are the ones indicated in the following descriptions of working packages.
-Working packages' goals, deliverables and deadlines are the following:
 
-- **9 Eval campaign**:
-    - **Goal**: Evaluate the TTool. The user evaluation in TTool is reported to the evaluation of AC, it will not be present in TTool. The TTool will be only evaluated on the pose accuracy with the probing plate and only one person. Only the ML version will be evaluated and tests are repeated *30 times* for all tools. The goal is to collect data about the pose's accuracy as described in the protocol.
-    - **Deliverables**: 
-        - **9.1** - **Exported eval data**: Perform physically TTool on all tools as in the protocol and export the data with the AC exporter for each tools 30 times as an exported `.txt` log files (as developed in AC exporter).
-        - **9.2** - **Video recording of each cycle**: video recording of AC for each cycle during the evaluation. Total of 30 videos (one for each cycle) need to be saved and stored in IBois server.
-    - **Deadline**: 2023-11-10th 🎯
-
-- **10 data processing and graphs**:
-    - **Goal**: Process the data collected in the previous working package, store it properly in `.csv` files, create box plot graphs for each tool and export LaTex tables of main evaluation benchmark (e.g. min, max, std, mean, median). The entire evaluation should be done in `TTool/eval`, please organize a sub-folder structure and python project as the one in [TSlam](https://github.com/ibois-epfl/TSlam/tree/main/eval)
-    - **Deliverables**: 
-        - **10.1** - **Processed data**: All the processed data in `.csv` files format and stored in the `TTool/eval` folder. The csv should contains all the data divided by number of session and at the beginning it should present a summary of the data (e.g. min, max, std, mean, median).
-        - **10.2** - **Box plot graphs**: One box plot graph of all tools for the position ([example](https://github.com/ibois-epfl/TSlam/blob/main/eval/img/boxplot_position_graph(2).png)) + one box plot graph of all tools for the orientation ([example](https://github.com/ibois-epfl/TSlam/blob/main/eval/img/boxplot_rotation_graph(2).png)). The graphs should be stored in the `TTool/eval` folder and should be have the same style as TSlam as shown in the example images. As an hint check out the python code I used to generate them, [here](https://github.com/ibois-epfl/TSlam/blob/c2a7a65b9ad44018487afb30074c758e83317fcb/eval/script/visuals.py#L271).
-        - **10.3** - **LaTex tables**: LaTex tables presenting the summary of deliverable 10.1 (e.g. min, max, std, mean, median). Also this deliverable should be stored in the `TTool/eval` folder.
-        - **10.4** - **Basic documentation of data processing**: a README file in `TTool/eval` that explains how to reproduce the scripts for the analysis and the data visualization.
-    - **Deadline**: 2023-11-23rd 🎯
-
-- **11 ML docker image**:
-    - **Goal**: Create a docker image of the classifier for ttool that is able to store, organize and train the model based on a select set of tools. The docker image's <u>target is our IBOIS fix station</u>, this image and its API should run only on that machine. Note that the web ui and integration into server <u>are not part of this package and will not be developed before February 2024</u>. All the code should be developed and stored in sub-folder of the `TTool` repository.
-    - **Deliverables**:
-        - **11.1** - **Collecting new images for the dataset**: retake videos of each tools that we are currently using (the totality at our disposal and with a corresponding 3d model) under multiple light conditions and with different backgrounds. Store the video in the IBOIS server and the IBOIS fix station. Videos should be taken with the camera and free hand but always within the area of where the camera would be mounted in normal AC conditions.
-        - **11.2** - **Docker image and API**: with Florian develop a microservice image that could run on the IBOIS pc. The image should be able to store, organize and train the model based on a select set of tools.
-        - **11.3** - **Extensive Documentation**: extensive README file that explains how to use the docker image and the API and a **brief** explanation of how the image works.
-    - **Deadline**: 2023-12-01st 🎯
-
----
----
 ---
 
 ## TODOList
