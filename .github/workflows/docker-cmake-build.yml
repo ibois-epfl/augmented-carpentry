@@ -31,16 +31,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
-          submodules: false
+          submodules: true
       - name: Configure
         run: |
-          cd deps
-          tar xvzf ../assets/tslam*.tgz
-          tar xvzf ../assets/ttool*.tgz
-          cp ../cmake/external_tools.cmake TSlam/cmake
-          cp ../cmake/external_tools.cmake TTool/cmake
-      - name: Configure
-        run: cmake -B build . -DAC_SYNC_GIT_SUBMODULES:BOOL=OFF
+          git config --global --add safe.directory ${PWD}
+          cmake -B build .
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
