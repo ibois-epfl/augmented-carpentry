@@ -23,4 +23,5 @@ RUN apt-get -qq update && apt-get -qq -y install \
     libmpfr-dev \
     libimgui-dev \
     libopencv-dev=4.5.4+dfsg-9ubuntu4 \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
