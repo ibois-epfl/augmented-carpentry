@@ -28,7 +28,7 @@ if __name__ == "__main__":
         
     # add a 10% tolerance for each entry
     for key in dict_timber_dims:
-        dict_timber_dims[key][1] *= 1.1
+        dict_timber_dims[key][1] *= 1.15
 
     # output
     # round the total length to 2 decimal places
