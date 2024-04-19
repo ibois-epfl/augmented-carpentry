@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="augmented-carpentry-py",
+    name="AugmentedCarpentryPy",
     version="0.0.1",
     packages=find_packages(),
     install_requires=[
         "numpy",
         # other dependencies...
     ],
-    description="augmented-carpentry-py for the Augmented Carpentry research at IBOIS, EPFL.",
+    description="AugmentedCarpentryPy for the Augmented Carpentry research at IBOIS, EPFL.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Andrea Settimi",
