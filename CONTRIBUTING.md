@@ -42,11 +42,11 @@ Follow these steps to develop and test the Python GH plug-in:
 ## GHPy: A) preparation
 Download this repo if you haven't already.
 
-Next, if you used AugmentedCarpentryPy before as an end-user clean all the `AugmentedCarpentryPy folders` in the following directory (the last name will change):
+Next, if you used ACPy (AugmentedCarpentryPython) before as an end-user clean all the `ACPy folders` in the following directory (the last name will change):
 ```terminal
 C:\Users\<user-name>\.rhinocode\py39-rh8\site-envs\default-wMh5LZL3
 ```
-> note that if you drop an official released AugmentedCarpentryPy component from yak, this one will have the `#r : AugmentedCarpentryPy==<version_number>` notation at the top of the script. Get rid of all these release components before to start and be sur to erase again the previous folders (they recreated each time `#r : AugmentedCarpentryPy` is called).
+> note that if you drop an official released ACPy component from yak, this one will have the `#r : ACPy==<version_number>` notation at the top of the script. Get rid of all these release components before to start and be sur to erase again the previous folders (they recreated each time `#r : ACPy` is called).
 
 Build the package from the py source code's directory:
 ```py
@@ -55,27 +55,27 @@ python setup.py sdist bdist_wheel
 
 Lastly, install the pip pacakge from the repository in editable mode. This way, all the modifications made to the source code of the repository will be reflected in the installed package. Open a terminal and run the following command (replace the path with where you download the repository):
 ```terminal
-C:\Users\<your-username>\.rhinocode\py39-rh8\python.exe -m pip install -e "<path-to-repository-root>\src\gh\AugmentedCarpentryPy"
+C:\Users\<your-username>\.rhinocode\py39-rh8\python.exe -m pip install -e "<path-to-repository-root>\src\gh\ACPy"
 ```
 
 For your info the packages is installed in `C:\Users\andre\.rhinocode\py39-rh8\Lib\site-packages`.
 
-That's it you are now a contributor to the AugmentedCarpentryPy! We raccomand to not download anymore from yak package but rather use the source code in the repository. If you want the latest AugmentedCarpentryPy, checkout and pull the main.
+That's it you are now a contributor to the ACPy! We raccomand to not download anymore from yak package but rather use the source code in the repository. If you want the latest ACPy, checkout and pull the main.
 
 ## GHPy: B) development/debug
 
 ### B.1) Code structure
 For DiffCheck there are 2 main folders in the repository:
-* `src/gh/AugmentedCarpentryPy/components` here you can add new components or modify existing ones (for more info on how to create one we point you to [this documentation](https://github.com/compas-dev/compas-actions.ghpython_components)). Here we call the 
-* `src/gh/AugmentedCarpentryPy/AugmentedCarpentryPy` this is our package where the core functionalities are implemented.
+* `src/gh/ACPy/components` here you can add new components or modify existing ones (for more info on how to create one we point you to [this documentation](https://github.com/compas-dev/compas-actions.ghpython_components)). Here we call the 
+* `src/gh/ACPy/ACPy` this is our package where the core functionalities are implemented.
 
 ### B.2) Developing component's content
-The idea is to start by developing the content of the component in the file `src/gh/AugmentedCarpentryPy/diffCgeck_app.py`. This would be a simple script that contains the logic of the component. Once the script `AugmentedCarpentryPy_app.py` is working correctly, you can move the code to the component file in the `src/gh/AugmentedCarpentryPy/components` folder. This is because the component file is the one that will be componentized and distributed via yak.
+The idea is to start by developing the content of the component in the file `src/gh/ACPy/diffCgeck_app.py`. This would be a simple script that contains the logic of the component. Once the script `ACPy_app.py` is working correctly, you can move the code to the component file in the `src/gh/ACPy/components` folder. This is because the component file is the one that will be componentized and distributed via yak.
 
 We reccomand to use `VSCode` as IDE for developing the components. This is because it has a good integration with the `Grasshopper` environment and it is easy to debug the components. To set up the IDE follow these steps:
 1. Install the `ScriptSync` extension for `VSCode`.
 2. Install the `ScriptSync` from the yak manager in Rhino.
-3. Open the `AugmentedCarpentryPyApp.py` from the `src/gh/AugmentedCarpentryPy/components` folder you are working on in `VSCode`, and set its path to the ScriptSync ghcomponent.
+3. Open the `ACPyApp.py` from the `src/gh/ACPy/components` folder you are working on in `VSCode`, and set its path to the ScriptSync ghcomponent.
 4. If you modify the code in `VSCode`, the changes will be reflected in the Grasshopper component as soon as you save in `VSCode` again the `code.py`.
 5. Once your code is working, prepare the code and componentize it.
 
@@ -84,7 +84,7 @@ If you want to use the GHEditor it's ok but everytime you modify the pakcage or 
 ### B.3) Componentize the code
 Prepare your component as explained here. You can componentize it locally and test it in Grasshopper. Here's how to componentize:
 ```terminal
-python f:\AugmentedCarpentryPy\src\gh\util\componentizer_cpy.py --ghio "C:\Users\andre\.nuget\packages\grasshopper\8.2.23346.13001\lib\net48\" .\src\gh\components\ .\build\gh
+python f:\ACPy\src\gh\util\componentizer_cpy.py --ghio "C:\Users\andre\.nuget\packages\grasshopper\8.2.23346.13001\lib\net48\" .\src\gh\components\ .\build\gh
 ```
 > Note that you need to find the path to your GHIO folder. This is the folder where the `Grasshopper.dll` is located. E.g. You can find it in the `nuget` folder in the Rhino installation directory.
 
