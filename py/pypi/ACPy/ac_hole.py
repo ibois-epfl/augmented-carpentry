@@ -19,14 +19,7 @@ def _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt):
             axis_ln = rg.Line(start_pt, end_pt)
             radius = axis_ln.DistanceTo(pt_base, False)
             radius = round(radius, 3)
-            # log.info("radius: " + str(radius))
     return round(radius, 3)
-
-# def _get_single_face_brep_center(brep):
-#     bbox = brep.GetBoundingBox(True)
-#     bbox_b = bbox.ToBrep()
-#     center_point = bbox_b.GetBoundingBox(True).Center
-#     return center_point
 
 def parse_data_from_brep(ACIM,
                          p_GUID,

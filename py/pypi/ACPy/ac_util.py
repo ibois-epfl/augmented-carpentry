@@ -105,3 +105,22 @@ def compute_ordered_vertices(brep_face):
         sorted_vertices.append(edge.PointAtStart)
 
     return sorted_vertices
+
+def get_brep_object_name(brep, guid):
+    """
+        Get the name of a brep object
+
+        :param brep: The brep object representing the beam
+        :param guid: The associated guid of the brep object
+        (yes, it must exist in the Rhino document)
+        :return str: The name of the brep object
+    """
+    ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
+    doc_beam = ACTIVE_DOC.Objects.Find(guid)
+    if doc_beam is None:
+        raise ValueError("Beam not found in the document. Beams must be in the document.")
+    name_doc_beam = doc_beam.Name
+    if name_doc_beam is None:
+        raise ValueError("Beam must have a name. Setting it before passing to this component")
+    ghdoc = ACTIVE_DOC
+    return name_doc_beam
