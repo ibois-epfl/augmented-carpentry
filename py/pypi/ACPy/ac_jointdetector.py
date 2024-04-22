@@ -4,12 +4,34 @@ import Rhino.Geometry as rg
 import ACPy.ac_util
 
 TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
+ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
 
-def distinguish_holes_cuts(breps):
+def distinguish_holes_cuts(beam : rg.Brep,
+                           ACIM, 
+                           beam_name : str):
     """ 
         Analyse the result breps from the boolean difference operation
         and distinguish between holes and cuts
+
+        :param beam: The brep object representing the beam
+        :param ACIM: The ACIM object to export xml
+        :param beam_name: The name of the beam
+        :return tuple: A tuple containing the AABB, holes and cuts breps
     """
+    ##########################################################################
+    # -- get negatives between beam and AABB --
+    ##########################################################################
+    bbox = beam.GetBoundingBox(True)
+    bbox_b = bbox.ToBrep()
+    ACIM.add_bbox(beam_name, bbox.GetCorners())
+
+    breps = rg.Brep.CreateBooleanDifference(bbox.ToBrep(), beam, ACTIVE_DOC.ModelAbsoluteTolerance)
+    if breps is None or len(breps) == 0:
+        raise ValueError("No breps found after boolean difference. Exiting...")
+
+    ##########################################################################
+    # -- detect holes, cuts (and mixes) --
+    ##########################################################################
     is_hole = False
     is_cut = False
     is_mix = False
@@ -99,5 +121,5 @@ def distinguish_holes_cuts(breps):
                 if f_b.IsSolid:
                     holes_b.append(f_b)
 
-    return holes_b, cuts_b
+    return bbox_b, holes_b, cuts_b
 
