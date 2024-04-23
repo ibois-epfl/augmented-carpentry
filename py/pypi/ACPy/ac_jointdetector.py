@@ -4,12 +4,13 @@ import Rhino.Geometry as rg
 import ACPy.ac_util
 
 # note the tolerance had to be doubled to avoid boolean difference errors
-TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance * 2
+TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
 ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
 
 def distinguish_holes_cuts(beam : rg.Brep,
                            ACIM, 
-                           beam_name : str):
+                           beam_name : str,
+                           i_inflate_AABB=True):
     """ 
         Analyse the result breps from the boolean difference operation
         and distinguish between holes and cuts
@@ -17,6 +18,7 @@ def distinguish_holes_cuts(beam : rg.Brep,
         :param beam: The brep object representing the beam
         :param ACIM: The ACIM object to export xml
         :param beam_name: The name of the beam
+        :param i_inflate_AABB: Inflate the AABB to avoid boolean difference errors
         :return tuple: A tuple containing the AABB, holes and cuts breps (and extra breps for debugging)
     """
     holes_b = []
@@ -28,14 +30,20 @@ def distinguish_holes_cuts(beam : rg.Brep,
     # -- get negatives between beam and AABB --
     ##########################################################################
     bbox = beam.GetBoundingBox(True)
-    # the AABB is inflated to avoid boolean difference errors
-    bbox.Inflate(0, -TOL_DOC, -TOL_DOC)
+    if i_inflate_AABB:
+        units = ACTIVE_DOC.ModelUnitSystem
+        if units == Rhino.UnitSystem.Millimeters:
+            bbox.Inflate(0, -0.1, -0.1)
+        elif units == Rhino.UnitSystem.Centimeters:
+            bbox.Inflate(0, -0.01, -0.01)
+        elif units == Rhino.UnitSystem.Meters:
+            bbox.Inflate(0, -0.0001, -0.0001)
     ACIM.add_bbox(beam_name, bbox.GetCorners())
 
     bbox_b = bbox.ToBrep()
-    breps = rg.Brep.CreateBooleanDifference(bbox_b, beam, TOL_DOC)
+    breps = rg.Brep.CreateBooleanDifference(bbox_b, beam, TOL_DOC/2)
     if breps is None or len(breps) == 0:
-        raise ValueError("No breps found after boolean difference. Exiting...")
+        raise ValueError(f"No breps found after boolean difference with AABB for {beam_name}. Exiting...")
     for b in breps:
         if not b.IsValid:
             b.Repair(TOL_DOC)
@@ -51,7 +59,6 @@ def distinguish_holes_cuts(beam : rg.Brep,
     is_cut = False
     is_mix = False
     for b in breps:
-        # __debugger__.append(b)
         is_cut = True
         for f in b.Faces:
             f_brep = f.ToBrep()
