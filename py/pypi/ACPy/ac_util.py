@@ -75,32 +75,23 @@ def compute_ordered_vertices(brep_face):
     sorted_vertices = []
 
     edges = brep_face.DuplicateEdgeCurves()
-    edges = list(set(edges))
+    edges_dict = {i: edge for i, edge in enumerate(edges)}
 
     edges_sorted = []
-    while len(edges) > 0:
-        if len(edges_sorted) == 0:
-            edges_sorted.append(edges[0])
-            edges.pop(0)
+    while edges_dict:
+        if not edges_sorted:
+            i, edge = edges_dict.popitem()
+            edges_sorted.append(edge)
         else:
-            for edge in edges:
-                if edges_sorted[-1].PointAtStart == edge.PointAtStart:
+            for i, edge in list(edges_dict.items()):
+                if (edges_sorted[-1].PointAtStart == edge.PointAtStart or
+                    edges_sorted[-1].PointAtStart == edge.PointAtEnd or
+                    edges_sorted[-1].PointAtEnd == edge.PointAtStart or
+                    edges_sorted[-1].PointAtEnd == edge.PointAtEnd):
                     edges_sorted.append(edge)
-                    edges.pop(edges.index(edge))
+                    del edges_dict[i]
                     break
-                elif edges_sorted[-1].PointAtStart == edge.PointAtEnd:
-                    edges_sorted.append(edge)
-                    edges.pop(edges.index(edge))
-                    break
-                elif edges_sorted[-1].PointAtEnd == edge.PointAtStart:
-                    edges_sorted.append(edge)
-                    edges.pop(edges.index(edge))
-                    break
-                elif edges_sorted[-1].PointAtEnd == edge.PointAtEnd:
-                    edges_sorted.append(edge)
-                    edges.pop(edges.index(edge))
-                    break
-    
+
     for edge in edges_sorted:
         sorted_vertices.append(edge.PointAtStart)
 

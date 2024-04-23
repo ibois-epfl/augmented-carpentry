@@ -27,9 +27,9 @@ class ACIM:
     def dump_data(self, is_overwrite=False):
         self._prettify(self._root)
         self._tree = ET.ElementTree(self._root)
-        if os.path.exists(self._out_path_xml):
+        # check if the file exists
+        if os.path.isfile(self._out_path_xml):
             if is_overwrite:
-                print("Overwriting existing file: " + self._out_path_xml)
                 os.remove(self._out_path_xml)
             else:
                 return

@@ -21,31 +21,37 @@ def distinguish_holes_cuts(beam : rg.Brep,
     """
     holes_b = []
     cuts_b = []
+    mix_b = []
     bbox_b = None
     __debugger__ = []  # extra breps that are not holes or cuts for debugging
     ##########################################################################
     # -- get negatives between beam and AABB --
     ##########################################################################
     bbox = beam.GetBoundingBox(True)
+    # the AABB is inflated to avoid boolean difference errors
+    bbox.Inflate(0, -TOL_DOC, -TOL_DOC)
     ACIM.add_bbox(beam_name, bbox.GetCorners())
 
     bbox_b = bbox.ToBrep()
     breps = rg.Brep.CreateBooleanDifference(bbox_b, beam, TOL_DOC)
     if breps is None or len(breps) == 0:
         raise ValueError("No breps found after boolean difference. Exiting...")
+    for b in breps:
+        if not b.IsValid:
+            b.Repair(TOL_DOC)
+            if not b.IsValid:
+                raise ValueError(f"Brep is not valid after boolean difference with AABB for {beam_name}. Exiting...")
+                return
 
     ##########################################################################
     # -- detect holes, cuts (and mixes) --
     ##########################################################################
+    # parse holes, cuts and mix
     is_hole = False
     is_cut = False
     is_mix = False
-    holes_b = []
-    cuts_b = []
-    mix_b = []
-
-    # parse holes, cuts and mix
     for b in breps:
+        # __debugger__.append(b)
         is_cut = True
         for f in b.Faces:
             f_brep = f.ToBrep()
@@ -108,9 +114,9 @@ def distinguish_holes_cuts(beam : rg.Brep,
         non_flat_faces_b = rg.Brep.CreateBooleanUnion(non_flat_faces_b, TOL_DOC)
 
         # (3) cap candidate cuts
-        # if there ia None value in falt_faces_b raise an error
         if flat_faces_b is None:
             raise ValueError(f"No breps found after boolean union for {beam_name} Exiting...")
+            return
         flat_faces_b = [f_b.CapPlanarHoles(TOL_DOC) for f_b in flat_faces_b]
 
         # (*) merge all coplanar faces in breps cut candidates
