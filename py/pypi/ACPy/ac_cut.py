@@ -2,10 +2,7 @@ import Rhino
 import Rhino.Geometry as rg
 import rhinoscriptsyntax as rs
 
-# import log
-import util
-import acim
-# import visual_debug as vd
+import ACPy.ac_util
 
 import random
 
@@ -22,10 +19,11 @@ def parse_data_from_brep(ACIM,
         :param box_b: the brep defining the cut
         :param bbox_b: the brep of the bounding box
     """
-    # log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    debug_objects = []
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     # log.info("Parsing cut data..")
-    bbox_faces_b = util.explode_brep(bbox_b)
-    cut_faces_b = util.explode_brep(cut_b)
+    bbox_faces_b = ACPy.ac_util.explode_brep(bbox_b)
+    cut_faces_b = ACPy.ac_util.explode_brep(cut_b)
     # log.info("Cut faces: " + str(len(cut_faces_b)))
 
     acim_faces = []
@@ -71,7 +69,7 @@ def parse_data_from_brep(ACIM,
         acim_edges.append(acim_edge_dict.copy())
 
         # vd.addPtName(face_edge.PointAtStart, str(i), clr_edge)
-        # vd.addLine(rg.Line(face_edge.PointAtStart, face_edge.PointAtEnd), clr_edge)
+        debug_objects.append(rg.Line(face_edge.PointAtStart, face_edge.PointAtEnd))  # vd.addLine(rg.Line(face_edge.PointAtStart, face_edge.PointAtEnd), clr_edge)
 
         TEMP_line_ids.append(i)
         TEMP_line_midpoints.append(face_edge_center)
@@ -87,7 +85,7 @@ def parse_data_from_brep(ACIM,
         is_on_face = False
 
         # corners
-        corners = util.compute_ordered_vertices(face)
+        corners = ACPy.ac_util.compute_ordered_vertices(face)
         corners_str = []
         for corner in corners:
             corners_str.append(str(corner.X) + " " + str(corner.Y) + " " + str(corner.Z))
@@ -96,7 +94,7 @@ def parse_data_from_brep(ACIM,
         # edges indices
         for i, face_edge in enumerate(face_edges):
             face_edge_center = face_edge.PointAtNormalizedLength(0.5)
-            idx = util.detect_idx_pt_in_list(face_edge_center, TEMP_line_midpoints)
+            idx = ACPy.ac_util.detect_idx_pt_in_list(face_edge_center, TEMP_line_midpoints)
             if idx != -1:
                 edges_candidate_ids.append(TEMP_line_ids[idx])
             vertex = face_edge.PointAtStart
@@ -106,10 +104,10 @@ def parse_data_from_brep(ACIM,
         polyline_corners = corners
         polyline_corners.append(corners[0])
         polyline = rg.Polyline(corners)
-        # vd.addPolyline(polyline, (0,0,0))
+        debug_objects.append(polyline)  # vd.addPolyline(polyline, (0,0,0))
         face_center = polyline.CenterPoint()
         # log.info("Face center: " + str(face_center))
-        # vd.addBrep(bbox_b, (0,0,0))
+        debug_objects.append(bbox_b)  # vd.addBrep(bbox_b, (0,0,0))
         if bbox_b.IsPointInside(face_center, TOL_DOC, True):
             is_on_face = False
             clr_face = (0,255,0)

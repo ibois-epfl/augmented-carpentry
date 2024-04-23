@@ -3,7 +3,8 @@ import Rhino.Geometry as rg
 
 import ACPy.ac_util
 
-TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
+# note the tolerance had to be doubled to avoid boolean difference errors
+TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance * 2
 ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
 
 def distinguish_holes_cuts(beam : rg.Brep,
@@ -16,16 +17,20 @@ def distinguish_holes_cuts(beam : rg.Brep,
         :param beam: The brep object representing the beam
         :param ACIM: The ACIM object to export xml
         :param beam_name: The name of the beam
-        :return tuple: A tuple containing the AABB, holes and cuts breps
+        :return tuple: A tuple containing the AABB, holes and cuts breps (and extra breps for debugging)
     """
+    holes_b = []
+    cuts_b = []
+    bbox_b = None
+    __debugger__ = []  # extra breps that are not holes or cuts for debugging
     ##########################################################################
     # -- get negatives between beam and AABB --
     ##########################################################################
     bbox = beam.GetBoundingBox(True)
-    bbox_b = bbox.ToBrep()
     ACIM.add_bbox(beam_name, bbox.GetCorners())
 
-    breps = rg.Brep.CreateBooleanDifference(bbox.ToBrep(), beam, ACTIVE_DOC.ModelAbsoluteTolerance)
+    bbox_b = bbox.ToBrep()
+    breps = rg.Brep.CreateBooleanDifference(bbox_b, beam, TOL_DOC)
     if breps is None or len(breps) == 0:
         raise ValueError("No breps found after boolean difference. Exiting...")
 
@@ -103,8 +108,10 @@ def distinguish_holes_cuts(beam : rg.Brep,
         non_flat_faces_b = rg.Brep.CreateBooleanUnion(non_flat_faces_b, TOL_DOC)
 
         # (3) cap candidate cuts
+        # if there ia None value in falt_faces_b raise an error
+        if flat_faces_b is None:
+            raise ValueError(f"No breps found after boolean union for {beam_name} Exiting...")
         flat_faces_b = [f_b.CapPlanarHoles(TOL_DOC) for f_b in flat_faces_b]
-        # non_flat_faces_b = [f_b.CapPlanarHoles(TOL_DOC) for f_b in non_flat_faces_b]
 
         # (*) merge all coplanar faces in breps cut candidates
         for f_b in flat_faces_b:
@@ -116,10 +123,11 @@ def distinguish_holes_cuts(beam : rg.Brep,
             if f_b is not None:
                 if f_b.IsSolid:
                     cuts_b.append(f_b)
+
         for f_b in non_flat_faces_b:
             if f_b is not None:
                 if f_b.IsSolid:
                     holes_b.append(f_b)
 
-    return bbox_b, holes_b, cuts_b
+    return bbox_b, holes_b, cuts_b, __debugger__
 

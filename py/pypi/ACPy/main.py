@@ -231,9 +231,7 @@ def main():
             + "\t --holes: " +  str(len(holes_b)) + "\n" \
             + "\t --cuts: " + str(len(cuts_b)) + "\n")
 
-
         ############################################################
-
         # analyse and loading holes and cuts into .acim
         if holes_b.__len__() != 0:
             for hole_b in holes_b:
