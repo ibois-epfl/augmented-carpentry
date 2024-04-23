@@ -115,3 +115,12 @@ def get_brep_object_name(brep, guid):
         raise ValueError("Beam must have a name. Setting it before passing to this component")
     ghdoc = ACTIVE_DOC
     return name_doc_beam
+
+def highlight_object_by_GUID(guid):
+    """ Highlight an object in the Rhino document by its GUID for debugging reasons"""
+    ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
+    obj = ACTIVE_DOC.Objects.Find(guid)
+    if obj is not None:
+        obj.Select(True)
+        ACTIVE_DOC.Views.Redraw()
+    ghdoc = ACTIVE_DOC
