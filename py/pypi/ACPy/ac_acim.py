@@ -12,8 +12,11 @@ __ACIM_STATE__ = {
             }
 
 class ACIM:
-    def __init__(self, out_dir):
-        self._out_path_xml = out_dir + ".acim"
+    def __init__(self, 
+        out_dir : str,
+        out_name : str
+        ):
+        self._out_path_xml = os.path.join(out_dir, out_name) + ".acim"
 
         self._root = ET.Element("acim")
         self._root.set("version", __ACIM_VERSION__)
@@ -24,20 +27,13 @@ class ACIM:
     def dump_data(self, is_overwrite=False):
         self._prettify(self._root)
         self._tree = ET.ElementTree(self._root)
-        # temp_out_file = self._out_path_xml + ".acim"
-        # print("Creating ACIM file at: " + self._out_path_xml)
         if os.path.exists(self._out_path_xml):
             if is_overwrite:
+                print("Overwriting existing file: " + self._out_path_xml)
                 os.remove(self._out_path_xml)
             else:
-                print("File already exists. Exiting...")
                 return
         self._tree.write(self._out_path_xml, encoding="utf-8", xml_declaration=True)
-        #split from the xml extension
-        # base, ext = os.path.splitext(self._out_path_xml)
-        # print("ACIM file created at: " + base + ".acim")
-        # os.rename(self._out_path_xml, base + ".acim")
-
 
     def add_timber(self, guid):
         timber_et = ET.SubElement(self._root, "timber")
@@ -60,7 +56,7 @@ class ACIM:
             :param corners: the corners of the bounding box as points
         """
         if len(corners) != 8:
-            print("BBox must have 8 corners")
+            # print("BBox must have 8 corners")
             return
         bbox_et = ET.SubElement(self._timber_ets[guid], "bbox")
         for i, corner in enumerate(corners):
@@ -90,11 +86,6 @@ class ACIM:
             :param is_end_exposed: is the ending point accessible from outside
             :param radius: the radius of the hole
         """
-
-        # print all keys in a dictionnary
-        for key in self._timber_ets.keys():
-            print(key)
-
         hole_et = ET.SubElement(self._timber_ets[guid], "hole")
         hole_id_nbr = str(len(self._timber_ets[guid].findall("hole")))
         hole_id = "Hole#" + hole_id_nbr

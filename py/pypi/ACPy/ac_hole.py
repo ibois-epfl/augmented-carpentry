@@ -3,9 +3,6 @@ import Rhino.Geometry as rg
 import rhinoscriptsyntax as rs
 import random
 
-# import log
-# import ACPy.ac_acim
-# import visual_debug as vd
 import ACPy.ac_util
 
 TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
@@ -31,11 +28,14 @@ def parse_data_from_brep(ACIM,
         :param p_GUID: the guid of the timber
         :param cylinder_b: the brep defining the hole
         :param bbox_b: the brep of the bounding box
+
+        :return list: A list of objects and text for debugging
     """
-    # log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    debug_objects = []
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     bbox_faces_b = ACPy.ac_util.explode_brep(bbox_b)
     cylinder_faces_b = ACPy.ac_util.explode_brep(cylinder_b)
-    # log.info("cylinder faces: " + str(len(cylinder_faces_b)))
+    # print("cylinder faces: " + str(len(cylinder_faces_b)))
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     # get the centers of the cylinder's bases and if they are exposed
     acim_centers = {}
@@ -49,33 +49,33 @@ def parse_data_from_brep(ACIM,
             if bbox_b.IsPointInside(face_crv_center, TOL_DOC, True):
                 if ACPy.ac_util.is_pt_unique_in_dict(face_crv_center, acim_centers):
                     acim_centers[face_crv_center] = is_on_face
-                    # vd.addPt(face_crv_center, (0,255,0))
+                    debug_objects.append(face_crv_center)  # vd.addPt(face_crv_center, (0,255,0))
                     continue
             if rs.IsPointOnSurface(face, face_crv_center):
                 is_on_face = True
             if ACPy.ac_util.is_pt_unique_in_dict(face_crv_center, acim_centers):
                 acim_centers[face_crv_center] = is_on_face
-                # vd.addPt(face_crv_center, (255,0,0))
-    # log.info("length of acim_centers: " + str(len(acim_centers)))
+                debug_objects.append(face_crv_center)  # vd.addPt(face_crv_center, (255,0,0))
+    # print("length of acim_centers: " + str(len(acim_centers)))
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     # parse simple holes or sub-holes
     centers_len = len(acim_centers)
+    acim_centers_values = list(acim_centers.values())
+    acim_centers_keys = list(acim_centers.keys())
     
     if centers_len == 0:
-        print("No center found for the hole. Exiting...")
+        # print("No center found for the hole. Exiting...")
         return
     if centers_len == 1:
-        print("Single center found for the hole. Exiting...")
+        # print("Single center found for the hole. Exiting...")
         return
     if centers_len == 2:
-        print("Simple 2-points hole detected")
+        # print("Simple 2-points hole detected")
         start_pt = rg.Point3d(0,0,0)
         end_pt = rg.Point3d(0,0,0)
         is_start_pt_accessible = False
         is_end_pt_accessible = False
-        acim_centers_values = list(acim_centers.values())
-        acim_centers_keys = list(acim_centers.keys())
         if acim_centers_values[0]:
             start_pt = acim_centers_keys[0]
             end_pt = acim_centers_keys[1]
@@ -88,15 +88,15 @@ def parse_data_from_brep(ACIM,
             is_end_pt_accessible = acim_centers_values[0]
 
         radius = _get_radius_from_curved_brep_faces(cylinder_faces_b, start_pt, end_pt)
-        # log.info("radius: " + str(radius))
-        # vd.addLine(rg.Line(start_pt, end_pt), (255,165,0))
+        # print("radius: " + str(radius))
+        debug_objects.append(rg.Line(start_pt, end_pt))  # vd.addLine(rg.Line(start_pt, end_pt), (255,165,0))
         # vd.addDotPt(ptA=start_pt, ptB=end_pt, clr=(0,255,0), txt=str(ACIM.peek_current_hole_id(p_GUID)))
         
         for face in cylinder_faces_b:
             if not face.Faces[0].IsPlanar():
                 face_curves = face.DuplicateEdgeCurves(True)
-                # vd.addCurve(face_curves[0], (255,0,255))
-                # vd.addCurve(face_curves[1], (255,0,255))
+                debug_objects.append(face_curves[0])  # vd.addCurve(face_curves[0], (255,0,255))
+                debug_objects.append(face_curves[1])  # vd.addCurve(face_curves[1], (255,0,255))
 
         ACIM.add_hole(p_GUID,
                     start_pt,
@@ -105,7 +105,7 @@ def parse_data_from_brep(ACIM,
                     is_end_pt_accessible,
                     radius)
     if centers_len > 2:
-        print("Complex hole detected")
+        # print("Complex hole detected")
         holes = []
         
         # get longest line
@@ -113,19 +113,19 @@ def parse_data_from_brep(ACIM,
         extreme_pts = []
         for i in range(0, centers_len):
             for j in range(i+1, centers_len):
-                pt1 = acim_centers.keys()[i]
-                pt2 = acim_centers.keys()[j]
+                pt1 = acim_centers_keys[i]
+                pt2 = acim_centers_keys[j]
                 dist = pt1.DistanceTo(pt2)
                 dists.append(dist)
                 if dist >= max(dists) or len(dists) == 0:
                     extreme_pts = [i, j]
 
-        extreme_pts = [acim_centers.keys()[extreme_pts[0]],
-                       acim_centers.keys()[extreme_pts[1]]]
+        extreme_pts = [acim_centers_keys[extreme_pts[0]],
+                       acim_centers_keys[extreme_pts[1]]]
         longest_ln = rg.Line(extreme_pts[0], extreme_pts[1])
         longest_crv = longest_ln.ToNurbsCurve()
 
-        centers_lst_reorder = list(acim_centers.keys())
+        centers_lst_reorder = list(acim_centers_keys)
         centers_lst_reorder.sort(key=lambda x: extreme_pts[0].DistanceTo(x))
 
         #create segments
@@ -148,13 +148,13 @@ def parse_data_from_brep(ACIM,
                 if hole_axis_ln[i].DistanceTo(hole_axis_ln[j].To, False) < 0.01:
                     neighbor_lst.append([i, j])
                     break
-        # log.info("neighbor pattern for current hole set: " + str(neighbor_lst))
+        # print("neighbor pattern for current hole set: " + str(neighbor_lst))
         next_hole_ids = []
         current_hole_id = ACIM.peek_current_hole_id(p_GUID)
         for i in range(1, len(neighbor_lst)+1):
             next_hole_ids.append(current_hole_id)
             current_hole_id += 1
-        # log.info("next hole ids: " + str(next_hole_ids))
+        # print("next hole ids: " + str(next_hole_ids))
         neighbor_acim_str = []
         for i in range(0, len(neighbor_lst)):
             temp_str = ""
@@ -162,10 +162,10 @@ def parse_data_from_brep(ACIM,
                 temp_str += str(next_hole_ids[neighbor_lst[i][j]]) + " "
             temp_str = temp_str[:-1]
             neighbor_acim_str.append(temp_str)
-        # log.info("neighbor acim str: " + str(neighbor_acim_str))
+        # print("neighbor acim str: " + str(neighbor_acim_str))
 
         for i, axis_ln in enumerate(hole_axis_ln):
-            # vd.addLine(axis_ln, (255,165,0))
+            debug_objects.append(axis_ln)  # vd.addLine(axis_ln, (255,165,0))
             # vd.addDotLn(ln=axis_ln, clr=(30,255,230), txt=str(ACIM.peek_current_hole_id(p_GUID)))
 
             start_pt = rg.Point3d(0,0,0)
@@ -192,8 +192,8 @@ def parse_data_from_brep(ACIM,
                     face_center_A = ACPy.ac_util.get_crv_circle_center(face_curves[0])
                     face_center_B = ACPy.ac_util.get_crv_circle_center(face_curves[1])
 
-                    # vd.addCurve(face_curves[0], (255,0,255))
-                    # vd.addCurve(face_curves[1], (255,0,255))
+                    debug_objects.append(face_curves[0])  # vd.addCurve(face_curves[0], (255,0,255))
+                    debug_objects.append(face_curves[1])  # vd.addCurve(face_curves[1], (255,0,255))
 
                     f_0X = round(face_center_A.X, 3)
                     f_0Y = round(face_center_A.Y, 3)
@@ -216,7 +216,6 @@ def parse_data_from_brep(ACIM,
                             ellipse_pt = face_curves[0].PointAtStart
                             radius = axis_ln.DistanceTo(ellipse_pt, False)
                             radius = round(radius, 3)
-                            # log.info("radius: " + str(radius))
                             break
 
             ACIM.add_hole(p_GUID,
@@ -226,3 +225,5 @@ def parse_data_from_brep(ACIM,
                         is_end_pt_accessible,
                         radius,
                         neighbours=neighbor_acim_str[i])
+
+    return debug_objects
