@@ -5,6 +5,8 @@
 import Rhino
 import Rhino.Geometry as rg
 
+from Grasshopper.Kernel import GH_RuntimeMessageLevel as RML
+
 TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
 ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
 
@@ -22,6 +24,7 @@ if __name__ == "__main__":
     # list to output visual debug information
     debug_holes = []
     debug_cuts = []
+    __debugger__ = []
     debug_bbox = None
 
     for idx, i_beam in enumerate(i_beams):
@@ -41,13 +44,14 @@ if __name__ == "__main__":
             debug_bbox = bbox_b
         except ValueError as e:
             print(e)
+            ghenv.Component.AddRuntimeMessage(RML.Error, str(e))
             break
         
         print("Joint detector found:\n" \
             + "\t --holes: " +  str(len(holes_b)) + "\n" \
             + "\t --cuts: " + str(len(cuts_b)) + "\n")
 
-        # loading holes and cuts into .acim to export
+        # loading holes and cuts into .acim to exports
         if holes_b.__len__() != 0:
             for hole_b in holes_b:
                 hole_objects = ACPy.ac_hole.parse_data_from_brep(ACIM, str(beam_name), hole_b, bbox_b)
@@ -60,18 +64,15 @@ if __name__ == "__main__":
                 if cut_objects is not None:
                     debug_cuts = debug_cuts + cut_objects
 
-        ACIM.dump_data(is_overwrite=True)
-        
-    # transform back for visualization
-    if i_transform_back:
-        x_form_back = ACPy.ac_transformations.get_inverse_transform(x_form)
-        _ = [h.Transform(x_form_back) for h in debug_holes]
-        _ = [c.Transform(x_form_back) for c in debug_cuts]
-        _ = [d.Transform(x_form_back) for d in __debugger__]
-        _ = debug_bbox.Transform(x_form_back)
-
-    
-
+        # ACIM.dump_data(is_overwrite=True)
+            
+        # transform back for visualization
+        if i_transform_back:
+            x_form_back = ACPy.ac_transformations.get_inverse_transform(x_form)
+            _ = [h.Transform(x_form_back) for h in debug_holes]
+            _ = [c.Transform(x_form_back) for c in debug_cuts]
+            _ = [d.Transform(x_form_back) for d in __debugger__]
+            _ = debug_bbox.Transform(x_form_back)
 
     o_holes = debug_holes
     o_cuts = debug_cuts
