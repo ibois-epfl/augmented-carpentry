@@ -1,0 +1,20 @@
+---
+name: augmented-carpentry
+version: 0.3.0
+authors:
+- Andrea Settimi
+- Hong-Bin Yang
+- Naravich Chutisilp
+- Nazgul Zholmagambetova
+- Florian Aymanns
+- Nicolas Richart
+
+description: Augmented carpentry allows to design and fabricate timber structures for AR manual fabrication with ordinary tools.
+url: https://github.com/ibois-epfl/augmented-carpentry
+keywords:
+- Rhino
+- Grasshopper
+- AR
+- TimberConstruction
+- Ubuntu
+icon: logo.png
