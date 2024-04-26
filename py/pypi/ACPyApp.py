@@ -38,12 +38,13 @@ if __name__ == "__main__":
 
         # bring the beam to the XY axis for AC system axis compatibility
         x_form = ACPy.ac_transformations.pln_2_pln_world_transform(i_beam)
-
+        
         try:
             bbox_b, holes_b, cuts_b, __debugger__ = ACPy.ac_jointdetector.distinguish_holes_cuts(
                 i_beam,
                 ACIM,
                 beam_name,
+                i_divide_tolerance,
                 i_inflate_AABB)
             _ = [debug_holes.append(h) for h in holes_b]
             _ = [debug_cuts.append(c) for c in cuts_b]
@@ -74,7 +75,7 @@ if __name__ == "__main__":
 
         if i_dump_data:
             ACIM.dump_data(is_overwrite=True)
-            
+        
         # transform back for visualization
         if i_transform_back:
             x_form_back = ACPy.ac_transformations.get_inverse_transform(x_form)
@@ -83,10 +84,10 @@ if __name__ == "__main__":
             _ = [d.Transform(x_form_back) for d in __debugger_o__]
             _ = [b.Transform(x_form_back) for b in debug_bbox]
 
-            _ = [o_debug_holes.append(h) for h in debug_holes]
-            _ = [o_debug_cuts.append(c) for c in debug_cuts]
-            _ = [o__debugger_o__.append(d) for d in __debugger_o__]
-            _ = [o_debug_bbox.append(b) for b in debug_bbox]
+        _ = [o_debug_holes.append(h) for h in debug_holes]
+        _ = [o_debug_cuts.append(c) for c in debug_cuts]
+        _ = [o__debugger_o__.append(d) for d in __debugger_o__]
+        _ = [o_debug_bbox.append(b) for b in debug_bbox]
 
     o_holes = o_debug_holes
     o_cuts = o_debug_cuts

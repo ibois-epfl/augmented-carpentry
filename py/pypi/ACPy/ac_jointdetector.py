@@ -3,14 +3,11 @@ import Rhino.Geometry as rg
 
 import ACPy.ac_util
 
-# note the tolerance had to be doubled to avoid boolean difference errors
-TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
-ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
-
 def distinguish_holes_cuts(beam : rg.Brep,
                            ACIM, 
                            beam_name : str,
-                           i_inflate_AABB=True):
+                           is_divide_tolerance : bool=False,
+                           is_inflate_AABB : bool=True):
     """ 
         Analyse the result breps from the boolean difference operation
         and distinguish between holes and cuts
@@ -18,7 +15,7 @@ def distinguish_holes_cuts(beam : rg.Brep,
         :param beam: The brep object representing the beam
         :param ACIM: The ACIM object to export xml
         :param beam_name: The name of the beam
-        :param i_inflate_AABB: Inflate the AABB to avoid boolean difference errors
+        :param is_inflate_AABB: Inflate the AABB to avoid boolean difference errors
         :return tuple: A tuple containing the AABB, holes and cuts breps (and extra breps for debugging)
     """
     holes_b = []
@@ -29,19 +26,25 @@ def distinguish_holes_cuts(beam : rg.Brep,
     ##########################################################################
     # -- get negatives between beam and AABB --
     ##########################################################################
+    # note the tolerance had to be doubled to avoid boolean difference errors
+    ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
+    TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
+    if is_divide_tolerance:
+        TOL_DOC = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance / 2
+
     bbox = beam.GetBoundingBox(True)
-    if i_inflate_AABB:
+    if is_inflate_AABB:
         units = ACTIVE_DOC.ModelUnitSystem
         if units == Rhino.UnitSystem.Millimeters:
-            bbox.Inflate(0, -0.1, -0.1)
+            bbox.Inflate(TOL_DOC*2, -0.1, -0.1)
         elif units == Rhino.UnitSystem.Centimeters:
-            bbox.Inflate(0, -0.01, -0.01)
+            bbox.Inflate(TOL_DOC*2, -0.01, -0.01)
         elif units == Rhino.UnitSystem.Meters:
-            bbox.Inflate(0, -0.0001, -0.0001)
+            bbox.Inflate(TOL_DOC*2, -0.0001, -0.0001)
     ACIM.add_bbox(beam_name, bbox.GetCorners())
 
     bbox_b = bbox.ToBrep()
-    breps = rg.Brep.CreateBooleanDifference(bbox_b, beam, TOL_DOC/2)
+    breps = rg.Brep.CreateBooleanDifference(bbox_b, beam, TOL_DOC)
     if breps is None or len(breps) == 0:
         raise ValueError(f"No breps found after boolean difference with AABB for {beam_name}. Exiting...")
     for b in breps:
