@@ -97,6 +97,8 @@ def compute_ordered_vertices(brep_face):
 
     return sorted_vertices
 
+
+
 def get_brep_object_name(brep, guid):
     """
         Get the name of a brep object
