@@ -1,4 +1,4 @@
-name: "Configure and build"
+name: ubuntu-build
 
 on:
   push:
