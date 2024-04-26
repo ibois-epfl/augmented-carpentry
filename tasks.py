@@ -10,4 +10,8 @@ def ghcomponentize(c):
 def versionize(c):
     path_versionize = "./invokes/versionize.py"
     c.run(f"python {path_versionize} --from-manifest")
-    
+
+@task
+def flagerize(c, package_name="ACPy"):
+    path_flagerize = "./invokes/flagerize.py"
+    c.run(f"python {path_flagerize} --package {package_name} --from-manifest")
