@@ -22,6 +22,6 @@ RUN apt-get -qq update && apt-get -qq -y install \
     libgoogle-glog-dev \
     libmpfr-dev \
     libimgui-dev \
-    libopencv-dev=4.5.4+dfsg-9ubuntu4 \
+    libopencv-dev \
     unzip \
     && rm -rf /var/lib/apt/lists/*

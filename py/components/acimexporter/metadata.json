@@ -1,0 +1,129 @@
+{
+    "name": "acpy - acim exporter",
+    "nickname": "acpy-acim-exporter",
+    "category": "acpy",
+    "subcategory": "utilities",
+    "description": "This component allows you to export the beams as acim files.",
+    "exposure": 4,
+    "instanceGuid": "cf06cb34-3528-4912-adc2-9d46c8048c5f",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_acim_path",
+                "nickname": "i_acim_path",
+                "description": "The directory where to export the acims files.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_transform_back",
+                "nickname": "i_transform_back",
+                "description": "Connect a boolean toggle. If True, the debug visualization will be transformed back to the original coordinate system of  the beam.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_inflate_AABB",
+                "nickname": "i_inflate_AABB",
+                "description": "Connect a boolean toggle. If True, the bounding box used for the joint detection will be inflated on the long axis.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_divide_tolerance",
+                "nickname": "i_divide_tolerance",
+                "description": "Connect a boolean toggle. If True, the tolerance of the joint detector will be doubled.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_dump_data",
+                "nickname": "i_dump_data",
+                "description": "Connect a boolean button. When ready, export the acims files.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_beams",
+                "nickname": "i_beams",
+                "description": "The list of the brep beams of the structure to export.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "list",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "brep",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_GUIDs",
+                "nickname": "i_GUIDs",
+                "description": "The list of the guids associated to the brep beams of the structure to export. Note that your structure needs to inhabit the Rhino document to be exported.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "list",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "guid",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "o_holes",
+                "nickname": "o_holes",
+                "description": "The breps of the holes detected.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_cuts",
+                "nickname": "o_cuts",
+                "description": "The breps of the detected cuts.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

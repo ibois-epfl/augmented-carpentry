@@ -97,8 +97,6 @@ def compute_ordered_vertices(brep_face):
 
     return sorted_vertices
 
-
-
 def get_brep_object_name(brep, guid):
     """
         Get the name of a brep object
@@ -126,3 +124,22 @@ def highlight_object_by_GUID(guid):
         obj.Select(True)
         ACTIVE_DOC.Views.Redraw()
     ghdoc = ACTIVE_DOC
+
+def find_beam_by_name(beam_name : str):
+    """
+        Find a beam by its name in the Rhino document
+
+        :param beam_name: The name of the beam
+        :return rg.Brep: The brep object representing the beam
+    """
+    ACTIVE_DOC = Rhino.RhinoDoc.ActiveDoc
+    objects = ACTIVE_DOC.Objects
+    found_breps = []
+    objects = [obj for obj in objects if obj.Name is not None]
+    for obj in objects:
+        if beam_name in obj.Name:
+            brep = obj.Geometry
+            found_breps.append(brep)
+    ghdoc = ACTIVE_DOC
+    
+    return found_breps

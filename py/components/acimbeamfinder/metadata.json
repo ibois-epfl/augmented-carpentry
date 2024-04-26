@@ -1,0 +1,38 @@
+{
+    "name": "acpy - beam finder",
+    "nickname": "acpy-beam-finder",
+    "category": "acpy",
+    "subcategory": "utilities",
+    "description": "Find the beam in the Rhino document by name.",
+    "exposure": 4,
+    "instanceGuid": "6f889d00-c859-4ba8-8ee5-552185512b0f",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_beam_name",
+                "nickname": "i_beam_name",
+                "description": "The beam name to find.",
+                "optional": true,
+                "allowTreeAccess": true,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "o_found",
+                "nickname": "o_found",
+                "description": "The beams breps found in the document.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

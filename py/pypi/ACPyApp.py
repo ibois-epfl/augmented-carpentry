@@ -19,6 +19,8 @@ import ACPy.ac_hole
 import ACPy.ac_cut
 
 if __name__ == "__main__":
+    print(f"{type(i_GUIDs[0])}")
+
     print(f"ACPyApp v{ACPy.__version__}")
     o_debug_holes = []
     o_debug_cuts = []
