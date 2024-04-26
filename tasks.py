@@ -7,6 +7,7 @@ def ghcomponentize(c):
     c.run(f"python {path_ghcomponentizer} --ghio ./invokes/ghcomponentize/ghio ./py/components ./build/gh")
 
 @task
-def versionize(c, version):
+def versionize(c):
     path_versionize = "./invokes/versionize.py"
-    c.run(f"python {path_versionize} --version {version}")
+    c.run(f"python {path_versionize} --from-manifest")
+    

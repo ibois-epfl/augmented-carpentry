@@ -13,27 +13,28 @@ def main(
     path_manifest: str,
     path_setup: str,
     path_init: str,
+    is_from_manifest: bool,
     *args, **kwargs
 ) -> None:
     # modify the manifest file
-    manifest_crt_version = None
-    with open(path_manifest, "r") as f:
-        manifest = f.read()
-        match = re.search(r"version: (\d+\.\d+\.\d+)", manifest)
-        if match:
-            manifest_crt_version = match.group(1)
-    if manifest_crt_version is not None:
-        if version <= manifest_crt_version:
-            raise ValueError(f"Version {version} is equal or smaller than the current version {manifest_crt_version}.\
-                Please provide a version number bigger than the current one.")
-    else:
-        print("Could not find the current version in the manifest file.")
-        sys.exit(1)
-    with open(path_manifest, "r") as f:
-        manifest = f.read()
-    manifest = re.sub(r"version: \d+\.\d+\.\d+", f"version: {version}", manifest)
-    with open(path_manifest, "w") as f:
-        f.write(manifest)
+    if not is_from_manifest:
+        manifest_crt_version = None
+        with open(path_manifest, "r") as f:
+            manifest = f.read()
+            match = re.search(r"version: (\d+\.\d+\.\d+)", manifest)
+            if match:
+                manifest_crt_version = match.group(1)
+        if manifest_crt_version is not None:
+            if version <= manifest_crt_version:
+                raise ValueError(f"Version {version} is equal or smaller than the current version {manifest_crt_version}. Please provide a version number bigger than the current one.")
+        else:
+            print("Could not find the current version in the manifest file.")
+            sys.exit(1)
+        with open(path_manifest, "r") as f:
+            manifest = f.read()
+        manifest = re.sub(r"version: \d+\.\d+\.\d+", f"version: {version}", manifest)
+        with open(path_manifest, "w") as f:
+            f.write(manifest)
 
     # modify the setup file
     setup_crt_version = None
@@ -44,8 +45,7 @@ def main(
             setup_crt_version = match.group(1)
     if setup_crt_version is not None:
         if version <= setup_crt_version:
-            raise ValueError(f"Version {version} is equal or smaller than the current version {setup_crt_version}.\
-                Please provide a version number bigger than the current one.")
+            raise ValueError(f"Version {version} is equal or smaller than the current version {setup_crt_version}. Please provide a version number bigger than the current one.")
     else:
         print("Could not find the current version in the setup file.")
         sys.exit(1)
@@ -64,8 +64,7 @@ def main(
             init_crt_version = match.group(1)
     if init_crt_version is not None:
         if version <= init_crt_version:
-            raise ValueError(f"Version {version} is equal or smaller than the current version {init_crt_version}.\
-                Please provide a version number bigger than the current one.")
+            raise ValueError(f"Version {version} is equal or smaller than the current version {init_crt_version}. Please provide a version number bigger than the current one.")
     else:
         print("Could not find the current version in the __init__ file.")
         sys.exit(1)
@@ -83,9 +82,15 @@ if __name__ == "__main__":
         description="Update the version number everywhere in code base."
     )
     parser.add_argument(
+        "--from-manifest",
+        action='store_true',
+        default=False,
+        help="Whether to update the version from the manifest file's version."
+    )
+    parser.add_argument(
         "--version",
         type=str,
-        required=True,
+        required=False,
         help="The version number to update and overwrite in the code base."
     )
     parser.add_argument(
@@ -113,6 +118,19 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     parse_errors = []
+
+    _manifest_version = None
+    if args.from_manifest:
+        if not os.path.isfile(args.path_manifest):
+            parse_errors.append(f"Path to manifest file is invalid: {args.path_manifest}")
+        with open(args.path_manifest, "r") as f:
+            manifest = f.read()
+            match = re.search(r"version: (\d+\.\d+\.\d+)", manifest)
+            if match:
+                _manifest_version = match.group(1)
+        if _manifest_version is None:
+            parse_errors.append("Could not find the version number in the manifest file.")
+        args.version = _manifest_version
 
     is_version_ok = True
     _version = args.version
@@ -163,5 +181,6 @@ if __name__ == "__main__":
         version=_version,
         path_manifest=args.path_manifest,
         path_setup=args.path_setup,
-        path_init=args.path_init
+        path_init=args.path_init,
+        is_from_manifest=args.from_manifest
     )
