@@ -21,3 +21,10 @@ def pypireize(c):
     path_pypireize = "./invokes/pypireize.py"
     c.run(f"python {path_pypireize} --setup-path ./py/pypi/setup.py")
 
+@task
+def yakerize(c):
+    path_yakerize = "./invokes/yakerize/yakerize.py"
+    gh_components_dir = "./build/gh"
+    build_yak_dir = "./build/yak"
+    c.run(f"python {path_yakerize} --gh-components-dir {gh_components_dir} --build-dir {build_yak_dir}")
+
