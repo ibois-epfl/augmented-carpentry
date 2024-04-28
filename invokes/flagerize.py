@@ -12,7 +12,7 @@ def main(
     from_manifest: bool,
     path_manifest: str,
     *args, **kwargs
-) -> None:
+) -> bool:
     # for all the files that are called code.py in the components folder
     # stamp on the second line of the file by not overwriting the first line
     for root, dirs, files in os.walk("./py/components/"):
@@ -21,12 +21,17 @@ def main(
                 path = os.path.join(root, file)
                 with open(path, "r") as f:
                     lines = f.readlines()
+                # check if the line # r: package_name is already in the first 10 lines
+                if any([re.search(r"# r: .+==", line) for line in lines[:10]]):
+                    print(f"File {path} is already stamped with the package version.")
+                    return False
                 with open(path, "w") as f:
                     f.write(lines[0])
                     f.write(f"# r: {package}=={kwargs['version']}\n")
                     for line in lines[1:]:
                         f.write(line)
     print("Done stamping components with version number of the pypi package.")
+    return True
 
 
 if __name__ == "__main__":
@@ -70,7 +75,6 @@ if __name__ == "__main__":
     if args.package is None:
         parser.print_help()
         sys.exit(1)
-
 
     parse_errors = []
 
@@ -129,12 +133,15 @@ if __name__ == "__main__":
     print("Stamping components with version number of the pypi package:")
     print(f"\t# r: {args.package}=={_version}")
 
-    main(
+    res = main(
         package=args.package,
         from_manifest=args.from_manifest,
         path_manifest=args.path_manifest,
         version=_version
     )
 
-
-
+    if res:
+        print("[x] Done flagerizing components.")
+    else:
+        print("[ ] Failed flagerizing components.")
+        sys.exit(1)

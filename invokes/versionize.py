@@ -15,7 +15,7 @@ def main(
     path_init: str,
     is_from_manifest: bool,
     *args, **kwargs
-) -> None:
+) -> bool:
     # modify the manifest file
     if not is_from_manifest:
         manifest_crt_version = None
@@ -26,7 +26,8 @@ def main(
                 manifest_crt_version = match.group(1)
         if manifest_crt_version is not None:
             if version <= manifest_crt_version:
-                raise ValueError(f"Version {version} is equal or smaller than the current version {manifest_crt_version}. Please provide a version number bigger than the current one.")
+                print(f"Version {version} is equal or smaller than the current version {manifest_crt_version}. Please provide a version number bigger than the current one.")
+                return
         else:
             print("Could not find the current version in the manifest file.")
             sys.exit(1)
@@ -45,7 +46,8 @@ def main(
             setup_crt_version = match.group(1)
     if setup_crt_version is not None:
         if version <= setup_crt_version:
-            raise ValueError(f"Version {version} is equal or smaller than the current version {setup_crt_version}. Please provide a version number bigger than the current one.")
+            print(f"Version {version} is equal or smaller than the current version {setup_crt_version}. Please provide a version number bigger than the current one.")
+            return False
     else:
         print("Could not find the current version in the setup file.")
         sys.exit(1)
@@ -64,7 +66,8 @@ def main(
             init_crt_version = match.group(1)
     if init_crt_version is not None:
         if version <= init_crt_version:
-            raise ValueError(f"Version {version} is equal or smaller than the current version {init_crt_version}. Please provide a version number bigger than the current one.")
+            print(f"Version {version} is equal or smaller than the current version {init_crt_version}. Please provide a version number bigger than the current one.")
+            return False
     else:
         print("Could not find the current version in the __init__ file.")
         sys.exit(1)
@@ -74,8 +77,7 @@ def main(
     with open(path_init, "w") as f:
         f.write(init)
 
-    print("Versionizer completed successfully.")
-
+    return True
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -177,10 +179,16 @@ if __name__ == "__main__":
     else:
         print("Starting versionizer...")
 
-    main(
+    res = main(
         version=_version,
         path_manifest=args.path_manifest,
         path_setup=args.path_setup,
         path_init=args.path_init,
         is_from_manifest=args.from_manifest
     )
+
+    if res:
+        print("[x] Versionizer completed successfully.")
+    else:
+        print("[ ] Versionizer failed.")
+        sys.exit(1)
