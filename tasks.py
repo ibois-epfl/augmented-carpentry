@@ -15,3 +15,9 @@ def versionize(c):
 def flagerize(c, package_name="ACPy"):
     path_flagerize = "./invokes/flagerize.py"
     c.run(f"python {path_flagerize} --package {package_name} --from-manifest")
+
+@task
+def pypireize(c):
+    path_pypireize = "./invokes/pypireize.py"
+    c.run(f"python {path_pypireize} --setup-path ./py/pypi/setup.py")
+

@@ -118,7 +118,6 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
     parse_errors = []
 
     _manifest_version = None
