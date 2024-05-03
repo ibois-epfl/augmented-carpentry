@@ -30,7 +30,6 @@ section: 0.08,0.06 m / serial number: 61130607 / Total linear length: 94.89 m
 ```
 
 
-
 ---
 
 
