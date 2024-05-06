@@ -207,7 +207,9 @@ namespace AIAC
             m_CutOrientationVisualizer.m_LineFaceNormal->SetPts(faceCenter, faceCenter + faceNormal);
 
             auto bladeNormal = glm::normalize(m_NormEnd - m_NormStart);
-            m_CutOrientationVisualizer.m_LineBladeNormal->SetPts(m_NormStart, m_NormStart + bladeNormal);
+            m_CutOrientationVisualizer.m_LineBladeNormal->SetPts(faceCenter, faceCenter + bladeNormal);
+
+
         }
         else
         {

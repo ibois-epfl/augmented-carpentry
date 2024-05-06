@@ -20,7 +20,7 @@ namespace AIAC
         virtual void OnFrameStart() override;
 
     public:
-        bool ToShowCutPlane = true;
+        bool ToShowCutPlane = false;
         void EnableCutPlane(bool enable)
         {
             ToShowCutPlane = enable;
