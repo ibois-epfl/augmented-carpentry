@@ -21,7 +21,8 @@ namespace AIAC
 
     public:
         bool ToShowCutPlane = true;
-        void EnableCutPlane(bool enable) {
+        void EnableCutPlane(bool enable)
+        {
             ToShowCutPlane = enable;
             m_CutChainSawFeedback.EnableCutPlane(enable);
             m_CutCircularSawFeedback.EnableCutPlane(enable);

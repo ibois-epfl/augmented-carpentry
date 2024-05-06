@@ -129,7 +129,6 @@ namespace AIAC {
                 }
             }
         }
-
         // Highlight the face
         cut->HighlightFace(nearestParallelFaceID);
 
@@ -334,14 +333,14 @@ namespace AIAC {
     void CutChainSawFeedback::Activate(){
         Update();
         // m_Visualizer.Activate();
-        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Activate();
+        if(m_ToShowCutPlane) this->m_CutPlaneVisualizer.Activate();
     }
-
+ 
     void CutChainSawFeedback::Deactivate(){
-        m_Visualizer.Deactivate();
-        m_CutPlaneVisualizer.Deactivate();
-        m_Visualizer.m_AngleFeedVisualizer.Deactivate();
-        m_Visualizer.m_DepthFeedVisualizer.Deactivate();
+        this->m_Visualizer.Deactivate();
+        this->m_CutPlaneVisualizer.Deactivate();
+        this->m_Visualizer.m_AngleFeedVisualizer.Deactivate();
+        this->m_Visualizer.m_DepthFeedVisualizer.Deactivate();
     }
 }
 
