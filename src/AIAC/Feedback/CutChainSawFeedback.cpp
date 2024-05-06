@@ -6,8 +6,25 @@
 #include "CutChainSawFeedback.h"
 #include "utils/GeometryUtils.h"
 
-namespace AIAC {
-    CutChainSawAngleFeedVisualizer::CutChainSawAngleFeedVisualizer(){
+namespace AIAC
+{
+    CutOrientationVisualizer::CutOrientationVisualizer()
+    {
+        // Normal face line 
+        m_LineFaceNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineBladeNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+
+        m_LineFaceNormal->SetColor(GOColor::CYAN);
+        m_LineBladeNormal->SetColor(GOColor::MAGENTA);
+        
+        m_AllPrimitives.push_back(m_LineFaceNormal);
+        m_AllPrimitives.push_back(m_LineBladeNormal);
+
+        Deactivate();
+    }
+
+    CutChainSawAngleFeedVisualizer::CutChainSawAngleFeedVisualizer()
+    {
         // Line
         m_LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
@@ -24,7 +41,8 @@ namespace AIAC {
         Deactivate();
     }
 
-    CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer(){
+    CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer()
+    {
         // Line
         m_LineIntersect = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
@@ -42,7 +60,8 @@ namespace AIAC {
         Deactivate();
     }
 
-    CutChainSawFeedVisualizer::CutChainSawFeedVisualizer(){
+    CutChainSawFeedVisualizer::CutChainSawFeedVisualizer()
+    {
         // Text
         m_GuideTxtEnd = GOText::Add("End", GOPoint(0.f, 0.f, 0.f));
         m_GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
@@ -68,11 +87,13 @@ namespace AIAC {
         Deactivate();
     }
 
-    void CutChainSawFeedback::updateCutPlane (){
+    void CutChainSawFeedback::updateCutPlane ()
+    {
         if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_NormalVec, m_NormStart);
     }
 
-    void CutChainSawFeedback::Update(){
+    void CutChainSawFeedback::Update()
+    {
         // calculate tool normal
         m_NormStart = AC_FF_TOOL->GetData<ChainSawData>().NormStartGO->GetPosition();
         m_NormEnd = AC_FF_TOOL->GetData<ChainSawData>().NormEndGO->GetPosition();
@@ -89,7 +110,7 @@ namespace AIAC {
         
         // if it's a single face, only show the red cutting plane
         if(cut->IsSingleFace()) {
-            m_Visualizer.Deactivate();
+            this->m_Visualizer.Deactivate();
             angleVisualizer.Deactivate();
             depthVisualizer.Deactivate();
             return;
@@ -143,7 +164,8 @@ namespace AIAC {
         glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
         // update angle visualizer
-        if(!nearestParallelFaceID.empty()){
+        if(!nearestParallelFaceID.empty())
+        {
             hasParallelFace = true;
             angleVisualizer.Activate();
 
@@ -168,12 +190,33 @@ namespace AIAC {
             angleVisualizer.m_LineEnd->SetColor(parallelEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
             angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
             angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
-        } else {
+        }
+        else
+        {
             angleVisualizer.Deactivate();
         }
 
+        // TODO: test:: orientation visualizer
+        if (!nearestParallelFaceID.empty())
+        {
+            m_CutOrientationVisualizer.Activate();
+
+            auto faceInfo = cut->GetFace(nearestParallelFaceID);
+            auto faceNormal = faceInfo.GetNormal();
+            auto faceCenter = faceInfo.GetCenter();
+            m_CutOrientationVisualizer.m_LineFaceNormal->SetPts(faceCenter, faceCenter + faceNormal);
+
+            auto bladeNormal = glm::normalize(m_NormEnd - m_NormStart);
+            m_CutOrientationVisualizer.m_LineBladeNormal->SetPts(m_NormStart, m_NormStart + bladeNormal);
+        }
+        else
+        {
+            m_CutOrientationVisualizer.Deactivate();
+        }
+
         // Perpendicular face
-        if(!nearestPerpendicularFaceID.empty()){
+        if(!nearestPerpendicularFaceID.empty())
+        {
             hasPerpendicularFace = true;
 
             // find the projection point of the 2 points on the face
@@ -266,11 +309,13 @@ namespace AIAC {
             } else {
                 depthVisualizer.Deactivate();    
             }
-        } else {
+        } else
+        {
             depthVisualizer.Deactivate();
         }
 
-        if(hasParallelFace || hasPerpendicularFace) {
+        if(hasParallelFace || hasPerpendicularFace)
+        {
             m_Visualizer.Activate();
 
             auto strEnd = FeedbackVisualizer::toString(parallelEndDist);
@@ -330,17 +375,25 @@ namespace AIAC {
         else m_Visualizer.Deactivate();
     }
 
-    void CutChainSawFeedback::Activate(){
+    void CutChainSawFeedback::Activate()
+    {
         Update();
         // m_Visualizer.Activate();
-        if(m_ToShowCutPlane) this->m_CutPlaneVisualizer.Activate();
+        if(m_ToShowCutPlane)
+        {
+            this->m_CutPlaneVisualizer.Activate();
+        }
     }
  
-    void CutChainSawFeedback::Deactivate(){
+    void CutChainSawFeedback::Deactivate()
+    {
         this->m_Visualizer.Deactivate();
+
         this->m_CutPlaneVisualizer.Deactivate();
         this->m_Visualizer.m_AngleFeedVisualizer.Deactivate();
         this->m_Visualizer.m_DepthFeedVisualizer.Deactivate();
+
+        this->m_CutOrientationVisualizer.Deactivate();
     }
 }
 

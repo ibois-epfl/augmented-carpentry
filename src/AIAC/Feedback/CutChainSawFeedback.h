@@ -10,7 +10,27 @@
 
 #include <vector>
 
-namespace AIAC {
+namespace AIAC
+{
+    /**
+     * @brief Visualizer for the cut orientation of the chainsaw to be visualized as 
+     * a two vector lines in the center of the blade. One represents the normal of the blade,
+     * the other represents the normal of the selected face.
+     *
+    */
+    class CutOrientationVisualizer : public FeedbackVisualizer
+    {
+        public:
+            CutOrientationVisualizer();
+
+        private:
+            std::shared_ptr<GOLine> m_LineFaceNormal;
+            std::shared_ptr<GOLine> m_LineBladeNormal;
+        
+        friend class CutChainSawFeedback;
+
+    };
+
     class CutChainSawAngleFeedVisualizer : public FeedbackVisualizer
     {
         public:
@@ -99,5 +119,6 @@ namespace AIAC {
         private:
             CutChainSawFeedVisualizer m_Visualizer;
             ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;
+            CutOrientationVisualizer m_CutOrientationVisualizer;
     };
 }
