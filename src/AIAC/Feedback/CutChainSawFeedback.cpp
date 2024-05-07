@@ -13,12 +13,27 @@ namespace AIAC
         // Normal face line 
         m_LineFaceNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineBladeNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugA = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugB = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugC = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugD = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugE = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineFaceNormal->SetColor(GOColor::CYAN);
+        m_LineFaceNormal->SetColor(GOColor::BLUE);
         m_LineBladeNormal->SetColor(GOColor::MAGENTA);
-        
+        m_LineDebugA->SetColor(GOColor::ORANGE);
+        m_LineDebugB->SetColor(GOColor::GREEN);
+        m_LineDebugC->SetColor(GOColor::RED);
+        m_LineDebugD->SetColor(GOColor::YELLOW);
+        m_LineDebugE->SetColor(GOColor::WHITE);
+
         m_AllPrimitives.push_back(m_LineFaceNormal);
         m_AllPrimitives.push_back(m_LineBladeNormal);
+        m_AllPrimitives.push_back(m_LineDebugA);
+        m_AllPrimitives.push_back(m_LineDebugB);
+        m_AllPrimitives.push_back(m_LineDebugC);
+        m_AllPrimitives.push_back(m_LineDebugD);
+        m_AllPrimitives.push_back(m_LineDebugE);
 
         Deactivate();
     }
@@ -196,18 +211,72 @@ namespace AIAC
             angleVisualizer.Deactivate();
         }
 
-        // TODO: test:: orientation visualizer
+        // TODO: test:: orientation visualizer <<<<<<<<<<<<<<<<<<<<<<<<<<
         if (!nearestParallelFaceID.empty())
         {
             m_CutOrientationVisualizer.Activate();
 
+            // face normal
             auto faceInfo = cut->GetFace(nearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
             m_CutOrientationVisualizer.m_LineFaceNormal->SetPts(faceCenter, faceCenter + faceNormal);
 
+            // blade normal
             auto bladeNormal = glm::normalize(m_NormEnd - m_NormStart);
             m_CutOrientationVisualizer.m_LineBladeNormal->SetPts(faceCenter, faceCenter + bladeNormal);
+
+            //---------
+            // get the plane where the faceNormal is its normal
+            glm::vec3 planeNormal = glm::normalize(glm::cross(faceNormal, bladeNormal));
+            glm::vec3 planeCenter = faceCenter;
+            glm::vec3 planePt1 = planeCenter + planeNormal;
+
+            // draw the x axis as a GOLine
+            m_CutOrientationVisualizer.m_LineDebugB->SetPts(planeCenter, planePt1);
+
+            // rotate the x axis by 90 degrees around the faceNormal (glm does not have a function)
+            glm::vec3 xVec = glm::normalize(planePt1 - planeCenter);
+            glm::vec3 yVec = glm::normalize(glm::cross(faceNormal, xVec));
+            glm::vec3 zVec = glm::normalize(glm::cross(xVec, yVec));
+            glm::vec3 rotatedXVec = glm::cos(1.5708f) * xVec + glm::sin(1.5708f) * yVec;
+
+            // draw the rotated x axis as a GOLine
+            m_CutOrientationVisualizer.m_LineDebugC->SetPts(planeCenter, planeCenter + rotatedXVec);
+            //---------
+            // draw the line between the end of the m_LineBladeNormal and the end of the lineDebugC
+            m_CutOrientationVisualizer.m_LineDebugD->SetPts(
+                m_CutOrientationVisualizer.m_LineBladeNormal->GetPEnd(),
+                m_CutOrientationVisualizer.m_LineDebugB->GetPEnd());
+            // draw the line between the end of the m_LineBladeNormal and the end of the lineDebugB
+            m_CutOrientationVisualizer.m_LineDebugE->SetPts(
+                m_CutOrientationVisualizer.m_LineBladeNormal->GetPEnd(),
+                m_CutOrientationVisualizer.m_LineDebugC->GetPEnd());
+            //---------
+            // calculare the angle between m_LineDebugE and m_LineDebugC
+            // FIXME: we are missing the sign of the angle
+            float angleRoll = m_CutOrientationVisualizer.m_LineDebugE->ComputeSignedAngle(
+                m_CutOrientationVisualizer.m_LineDebugC
+                );
+
+            float anglePitch = m_CutOrientationVisualizer.m_LineDebugD->ComputeSignedAngle(
+                m_CutOrientationVisualizer.m_LineDebugB
+                );
+
+            std::string anglesPrint = "\n Angle Roll: " + std::to_string(angleRoll) + "\n Angle Pitch: " + std::to_string(anglePitch);
+
+
+            // print the angle
+            AIAC_INFO(anglesPrint);
+
+
+
+
+
+
+
+
+
 
 
         }

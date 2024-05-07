@@ -24,8 +24,14 @@ namespace AIAC
             CutOrientationVisualizer();
 
         private:
-            std::shared_ptr<GOLine> m_LineFaceNormal;
-            std::shared_ptr<GOLine> m_LineBladeNormal;
+            std::shared_ptr<GOLine> m_LineFaceNormal;  // BLUE (face_z)
+            std::shared_ptr<GOLine> m_LineBladeNormal;  // MAGENTA
+
+            std::shared_ptr<GOLine> m_LineDebugA;  // ORANGE
+            std::shared_ptr<GOLine> m_LineDebugB;  // GREEN (face_y)
+            std::shared_ptr<GOLine> m_LineDebugC;  // RED (face_x)
+            std::shared_ptr<GOLine> m_LineDebugD;  // YELLOW
+            std::shared_ptr<GOLine> m_LineDebugE;  // WHITE
         
         friend class CutChainSawFeedback;
 
@@ -113,7 +119,7 @@ namespace AIAC
             glm::vec3 m_ChainMid;
             glm::vec3 m_ChainEnd;
 
-            bool m_ToShowCutPlane = true;
+            bool m_ToShowCutPlane = false;
 
 
         private:

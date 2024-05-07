@@ -225,6 +225,14 @@ namespace AIAC
          */
         float ComputeAngle(std::shared_ptr<GOLine> ptrGO2);
 
+        /**
+         * @brief Compute the angle between the current line object and another one with a sign
+         *
+         * @param ptrGO2 the second line
+         * @return float the angle in degrees
+         */
+        float ComputeSignedAngle(std::shared_ptr<GOLine> ptrGO2);
+
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);
             m_PEnd.Transform(transformMat);

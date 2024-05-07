@@ -224,7 +224,8 @@ namespace AIAC
         m_CurrentComponentID = id;
         m_Components[id]->SetAsCurrent();
 
-        if(auto cut = dynamic_cast<Cut*>(m_Components[id])){
+        if(auto cut = dynamic_cast<Cut*>(m_Components[id]))
+        {
             if(cut -> IsSingleFace()){
                 AIAC_APP.GetLayer<LayerFeedback>()->EnableCutPlane(true);
             } else {
