@@ -606,7 +606,7 @@ namespace AIAC
             return ACIMState::CURRENT;
         }
         else {
-            AIAC_ERROR("Invalid state string: {0}", state);
+            AIAC_ERROR("Invalid state string: \"{0}\"", state);
             return ACIMState::NOT_DONE;
         }
     }

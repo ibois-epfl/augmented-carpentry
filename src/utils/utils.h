@@ -62,6 +62,15 @@ inline void CvtCvMat2GlmMat(const cv::Mat &cvMat, glm::mat3 &glmMat)
     }
 }
 
+inline cv::Vec4f ConvertRotationMatrixToQuaternion(cv::Mat R) {
+    cv::Vec4f q;
+    q[3] = sqrt(1.0 + R.at<float>(0,0) + R.at<float>(1,1) + R.at<float>(2,2)) / 2.0;
+    q[0] = (R.at<float>(2,1) - R.at<float>(1,2)) / (4.0 * q[3]);
+    q[1] = (R.at<float>(0,2) - R.at<float>(2,0)) / (4.0 * q[3]);
+    q[2] = (R.at<float>(1,0) - R.at<float>(0,1)) / (4.0 * q[3]);
+    return q;
+}
+
 inline std::vector<std::string> GetFolderPaths(const std::string& dirPath)
 {
     // check the dirPath is a directory and it exists
@@ -132,6 +141,11 @@ inline std::vector<std::string> ParseConfigFile(const std::string& configPath, s
     }
 
     return filePaths;
+}
+
+inline long GetCurrentTimestamp()
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 #define AC_UTILS_H
