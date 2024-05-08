@@ -33,10 +33,14 @@ namespace AIAC
             std::shared_ptr<GOLine> m_LineDebugD;  // YELLOW
             std::shared_ptr<GOLine> m_LineDebugE;  // WHITE
 
-            std::shared_ptr<GOLine> m_LineRollFeed;  // GREEN
+            std::shared_ptr<GOLine> m_LineRollFeed;  // RED
             std::shared_ptr<GOLine> m_LinePitchFeed;  // RED
 
             std::shared_ptr<GOText> m_GuideTxtRollPitch;  // WHITE
+
+        private:
+            /// @brief The angle acceptance for the cut orientation, under this value is conside correct
+            float m_tolAangleAcceptance = 0.5f;  // half of a degree
         
         friend class CutChainSawFeedback;
 
