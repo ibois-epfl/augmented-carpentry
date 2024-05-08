@@ -32,6 +32,11 @@ namespace AIAC
             std::shared_ptr<GOLine> m_LineDebugC;  // RED (face_x)
             std::shared_ptr<GOLine> m_LineDebugD;  // YELLOW
             std::shared_ptr<GOLine> m_LineDebugE;  // WHITE
+
+            std::shared_ptr<GOLine> m_LineRollFeed;  // GREEN
+            std::shared_ptr<GOLine> m_LinePitchFeed;  // RED
+
+            std::shared_ptr<GOText> m_GuideTxtRollPitch;  // WHITE
         
         friend class CutChainSawFeedback;
 
