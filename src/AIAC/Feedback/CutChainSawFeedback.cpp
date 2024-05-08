@@ -239,29 +239,35 @@ namespace AIAC
             //---------------------------
             // get the plane where the faceNormal is its normal
             glm::vec3 zVec = glm::normalize(faceNormal);
-            // define another point on the plane with a scalene triangle
-            glm::vec3 planeCenter = faceCenter;
             // get the xVec as the cross product of the faceNormal and the planeCenter
-            glm::vec3 xVec = glm::normalize(glm::cross(faceNormal, planeCenter));
+            glm::vec3 xVec = glm::normalize(glm::cross(faceNormal, faceCenter));
             // get the yVec as the cross product of the faceNormal and the xVec
             glm::vec3 yVec = glm::normalize(glm::cross(faceNormal, xVec));
             // get the rotated xVec of 90deg around the zVec
             // glm::vec3 rotatedXVec = glm::cos(1.5708f) * xVec + glm::sin(1.5708f) * yVec;
 
+            // project the bladeNormal on the plane defined by zVec, xVec and yVec
+            glm::vec3 bladeNormalProjOnFace = glm::normalize(m_NormEnd - m_NormStart);
+            glm::vec3 facePlane = glm::normalize(glm::dot(bladeNormalProjOnFace, xVec) * xVec + glm::dot(bladeNormalProjOnFace, yVec) * yVec);
+            // get the angle between the bladeNormal and the facePlane
+            // glm::vec3 facePlaneNorm = glm::normalize(facePlane);
+
+            // m_CutOrientationVisualizer.m_LineDebugA->SetPts(faceCenter, faceCenter + facePlane);
+
+            xVec = bladeNormalProjOnFace;
+
+            yVec = glm::normalize(glm::cross(facePlane, xVec));
 
 
 
-
-            
-            
 
 
             // glm::vec3 zVec = glm::normalize(glm::cross(xVec, yVec));
             // glm::vec3 rotatedXVec = glm::cos(1.5708f) * xVec + glm::sin(1.5708f) * yVec;
 
             // draw the rotated x axis as a GOLine
-            m_CutOrientationVisualizer.m_LineDebugB->SetPts(planeCenter, planeCenter + yVec);
-            m_CutOrientationVisualizer.m_LineDebugC->SetPts(planeCenter, planeCenter + xVec);
+            m_CutOrientationVisualizer.m_LineDebugB->SetPts(faceCenter, faceCenter + yVec);
+            m_CutOrientationVisualizer.m_LineDebugC->SetPts(faceCenter, faceCenter + facePlane);
             
             //---------------------------
             // draw the line between the end of the m_LineBladeNormal and the end of the lineDebugC
