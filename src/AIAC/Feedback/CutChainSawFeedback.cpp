@@ -205,6 +205,7 @@ namespace AIAC
             angleVisualizer.Deactivate();
         }
 
+        // extra orientation
         if (!nearestParallelFaceID.empty())
         {
             m_CutOrientationVisualizer.Activate();
