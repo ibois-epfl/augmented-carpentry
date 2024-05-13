@@ -15,6 +15,8 @@ TEST
 ## Roof prototype
 The first structure is a a typical roof parametrized and modified to complexify the fabrication. The optimization of the structure was meant to obtain a structure where each element is unique either by length, angle or shape. The goal was to demonstrate the utility of the technology in a manufacturing a complex structure without the need of 2D drawings or marking on the timber pieces.
 
+test CI
+
 <p align="center">
     <img src="mockups/proto_x.png" width="500">
     <img src="mockups/gh_snap.png">
