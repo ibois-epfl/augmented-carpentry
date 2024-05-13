@@ -13,9 +13,11 @@
 namespace AIAC
 {
     /**
-     * @brief Visualizer for the cut orientation of the chainsaw to be visualized as 
-     * a two vector lines in the center of the blade. One represents the normal of the blade,
-     * the other represents the normal of the selected face.
+     * @brief This visualizer gives a bit of guidance on the cut orientation. Although it is not possible
+     * to determine the exact orientation of the cut, this visualizer gives a rough idea of the pitch and roll.
+     * The way this is done is by projecting the blade normal onto the face normal, and then projecting the
+     * resulting vector onto the face normal. If we close the triangle of these two lines we can monitor the angle
+     * that must be 45*. This way we can also have the direction towards which the blade needs to be tilted.
      *
     */
     class CutOrientationVisualizer : public FeedbackVisualizer
@@ -33,14 +35,13 @@ namespace AIAC
             std::shared_ptr<GOLine> m_LineDebugD;  // YELLOW
             std::shared_ptr<GOLine> m_LineDebugE;  // WHITE
 
-            std::shared_ptr<GOLine> m_LineRollFeed;  // RED
-            std::shared_ptr<GOLine> m_LinePitchFeed;  // RED
+            std::shared_ptr<GOLine> m_LinePitchFeed;  // RED or MAGENTA
 
             std::shared_ptr<GOText> m_GuideTxtRollPitch;  // WHITE
 
         private:
             /// @brief The angle acceptance for the cut orientation, under this value is conside correct
-            float m_tolAangleAcceptance = 0.5f;  // half of a degree
+            float m_tolAangleAcceptance = 0.9f;  // decimal fraction of a degree
         
         friend class CutChainSawFeedback;
 
