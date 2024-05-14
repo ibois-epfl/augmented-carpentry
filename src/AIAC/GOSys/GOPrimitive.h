@@ -208,6 +208,8 @@ namespace AIAC
         inline void ExtendFromEnd(float length) { m_PEnd.SetPosition(m_PEnd.GetPosition() + glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
 
         inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
+        inline GOPoint GetMidPoint() const { return GOPoint(GetMidPointValues()); }
+
         inline glm::vec3 GetNormalValues() const { return glm::normalize(glm::cross(m_PEnd.GetPosition() - m_PStart.GetPosition(), glm::vec3(0, 0, 1))); }
 
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
@@ -224,6 +226,14 @@ namespace AIAC
          * @return float the angle in degrees
          */
         float ComputeAngle(std::shared_ptr<GOLine> ptrGO2);
+
+        /**
+         * @brief Compute the angle between the current line object and another one with a sign
+         *
+         * @param ptrGO2 the second line
+         * @return float the angle in degrees
+         */
+        float ComputeSignedAngle(std::shared_ptr<GOLine> ptrGO2);
 
         inline void Transform(const glm::mat4x4& transformMat) /* override */ {
             m_PStart.Transform(transformMat);

@@ -28,8 +28,12 @@ namespace AIAC
         }
         if (this->m_ACInfoToolheadMap.empty())
             AIAC_ERROR("No toolhead models loaded!");
-        
-        this->SetActiveToolhead(this->m_ACInfoToolheadMap.begin()->first);
+
+        // if the config has no names, set the first one as active
+        if (AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CACHED_TOOLHEAD).empty())
+            this->SetActiveToolhead(this->m_ACInfoToolheadMap.begin()->first);
+        else
+            this->SetActiveToolhead(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CACHED_TOOLHEAD));
     }
 
     void ACInfoToolheadManager::SetActiveToolhead(const std::string& toolheadName)
@@ -38,6 +42,7 @@ namespace AIAC
         if (this->m_ACInfoToolheadMap.find(toolheadName) != this->m_ACInfoToolheadMap.end())
         {
             *this->m_ActiveACInfoToolhead = *this->m_ACInfoToolheadMap[toolheadName];
+            AIAC::Config::UpdateEntry("TTool", "CachedToolhead", toolheadName);
         }
         else
             AIAC_ERROR("Toolhead model {} not found!", toolheadName);

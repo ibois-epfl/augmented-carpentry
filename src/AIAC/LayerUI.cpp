@@ -354,6 +354,11 @@ namespace AIAC
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
             });
         }
+        // Scanned Model reloader
+        ImGui::SameLine();
+        if(ImGui::Button("Reload ACIM")){
+            AIAC_APP.GetLayer<AIAC::LayerModel>()->ReloadACInfoModel();
+        }
         // Scanned Model Loader
         ImGui::SameLine();
         if(ImGui::Button("Load Scanned Model")){

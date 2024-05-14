@@ -6,8 +6,50 @@
 #include "CutChainSawFeedback.h"
 #include "utils/GeometryUtils.h"
 
-namespace AIAC {
-    CutChainSawAngleFeedVisualizer::CutChainSawAngleFeedVisualizer(){
+#include <sstream>
+#include <iomanip>
+
+namespace AIAC
+{
+    CutOrientationVisualizer::CutOrientationVisualizer()
+    {
+        // Normal face line 
+        m_LineFaceNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineBladeNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugA = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugB = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugC = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugD = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineDebugE = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::ExtraThick);
+        m_GuideTxtRollPitch = GOText::Add("RollPitch", GOPoint(0.f, 0.f, 0.f));
+
+
+        m_LineFaceNormal->SetColor(GOColor::BLUE);
+        m_LineBladeNormal->SetColor(GOColor::MAGENTA);
+        m_LineDebugA->SetColor(GOColor::ORANGE);
+        m_LineDebugB->SetColor(GOColor::GREEN);
+        m_LineDebugC->SetColor(GOColor::RED);
+        m_LineDebugD->SetColor(GOColor::YELLOW);
+        m_LineDebugE->SetColor(GOColor::WHITE);
+        m_LinePitchFeed->SetColor(GOColor::RED);
+        m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
+
+        m_AllPrimitives.push_back(m_LineFaceNormal);
+        m_AllPrimitives.push_back(m_LineBladeNormal);
+        m_AllPrimitives.push_back(m_LineDebugA);
+        m_AllPrimitives.push_back(m_LineDebugB);
+        m_AllPrimitives.push_back(m_LineDebugC);
+        m_AllPrimitives.push_back(m_LineDebugD);
+        m_AllPrimitives.push_back(m_LineDebugE);
+        m_AllPrimitives.push_back(m_LinePitchFeed);
+        m_AllPrimitives.push_back(m_GuideTxtRollPitch);
+
+        Deactivate();
+    }
+
+    CutChainSawAngleFeedVisualizer::CutChainSawAngleFeedVisualizer()
+    {
         // Line
         m_LineEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineChainBase = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
@@ -24,7 +66,8 @@ namespace AIAC {
         Deactivate();
     }
 
-    CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer(){
+    CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer()
+    {
         // Line
         m_LineIntersect = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
@@ -42,37 +85,34 @@ namespace AIAC {
         Deactivate();
     }
 
-    CutChainSawFeedVisualizer::CutChainSawFeedVisualizer(){
+    CutChainSawFeedVisualizer::CutChainSawFeedVisualizer()
+    {
         // Text
         m_GuideTxtEnd = GOText::Add("End", GOPoint(0.f, 0.f, 0.f));
         m_GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
-        m_GuideTxtChainEnd = GOText::Add("ChainEnd", GOPoint(0.f, 0.f, 0.f));
 
-        m_GuideTxtFaceEdgeDepth1 = GOText::Add("FaceEdgeDepth1", GOPoint(0.f, 0.f, 0.f));
         m_GuideTxtFaceEdgeDepth2 = GOText::Add("FaceEdgeDepth2", GOPoint(0.f, 0.f, 0.f));
 
         m_GuideTxtEnd->SetColor(GOColor::WHITE);
         m_GuideTxtChainBase->SetColor(GOColor::WHITE);
-        m_GuideTxtChainEnd->SetColor(GOColor::WHITE);
 
-        m_GuideTxtFaceEdgeDepth1->SetColor(GOColor::WHITE);
         m_GuideTxtFaceEdgeDepth2->SetColor(GOColor::WHITE);
 
         m_AllPrimitives.push_back(m_GuideTxtEnd);
         m_AllPrimitives.push_back(m_GuideTxtChainBase);
-        m_AllPrimitives.push_back(m_GuideTxtChainEnd);
 
-        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth1);
         m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth2);
 
         Deactivate();
     }
 
-    void CutChainSawFeedback::updateCutPlane (){
+    void CutChainSawFeedback::updateCutPlane ()
+    {
         if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_NormalVec, m_NormStart);
     }
 
-    void CutChainSawFeedback::Update(){
+    void CutChainSawFeedback::Update()
+    {
         // calculate tool normal
         m_NormStart = AC_FF_TOOL->GetData<ChainSawData>().NormStartGO->GetPosition();
         m_NormEnd = AC_FF_TOOL->GetData<ChainSawData>().NormEndGO->GetPosition();
@@ -89,7 +129,7 @@ namespace AIAC {
         
         // if it's a single face, only show the red cutting plane
         if(cut->IsSingleFace()) {
-            m_Visualizer.Deactivate();
+            this->m_Visualizer.Deactivate();
             angleVisualizer.Deactivate();
             depthVisualizer.Deactivate();
             return;
@@ -129,7 +169,6 @@ namespace AIAC {
                 }
             }
         }
-
         // Highlight the face
         cut->HighlightFace(nearestParallelFaceID);
 
@@ -138,13 +177,13 @@ namespace AIAC {
 
         double parallelEndDist = 0.0f;
         double parallelChainBaseDist = 0.0f;
-        double parallelChainEndDist = 0.0f;
         double perpendicularFaceEdge1Dist = 0.0f;
         double perpendicularFaceEdge2Dist = 0.0f;
         glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
         // update angle visualizer
-        if(!nearestParallelFaceID.empty()){
+        if(!nearestParallelFaceID.empty())
+        {
             hasParallelFace = true;
             angleVisualizer.Activate();
 
@@ -155,26 +194,117 @@ namespace AIAC {
 
             auto projNormStart = GetProjectionPointOnPlane(faceNormal, faceCenter, m_NormStart);
             auto projChainBase = GetProjectionPointOnPlane(faceNormal, faceCenter, m_ChainBase);
-            auto projChainEnd = GetProjectionPointOnPlane(faceNormal, faceCenter, m_ChainEnd);
 
             // update the m_Visualizer
-            angleVisualizer.m_LineEnd->SetPts(m_NormStart, projNormStart);
             angleVisualizer.m_LineChainBase->SetPts(m_ChainBase, projChainBase);
-            angleVisualizer.m_LineChainEnd->SetPts(m_ChainEnd, projChainEnd);
-
-            parallelEndDist = glm::distance(m_NormStart, projNormStart);
             parallelChainBaseDist = glm::distance(m_ChainBase, projChainBase);
-            parallelChainEndDist = glm::distance(m_ChainEnd, projChainEnd);
-
-            angleVisualizer.m_LineEnd->SetColor(parallelEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
-            angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
-            angleVisualizer.m_LineChainEnd->SetColor(parallelChainEndDist < 0.5f ? GOColor::YELLOW : GOColor::WHITE);
-        } else {
+            angleVisualizer.m_LineChainBase->SetColor(parallelChainBaseDist < 0.5f ? GOColor::GREEN : GOColor::WHITE);
+        }
+        else
+        {
             angleVisualizer.Deactivate();
         }
 
+        // extra orientation
+        if (!nearestParallelFaceID.empty())
+        {
+            m_CutOrientationVisualizer.Activate();
+
+            // face and blade normal
+            auto faceInfo = cut->GetFace(nearestParallelFaceID);
+            auto faceNormal = faceInfo.GetNormal();
+            auto faceCenter = faceInfo.GetCenter();
+            m_CutOrientationVisualizer.m_LineFaceNormal->SetPts(faceCenter, faceCenter + faceNormal);
+
+            auto bladeNormal = glm::normalize(m_NormEnd - m_NormStart);
+            m_CutOrientationVisualizer.m_LineBladeNormal->SetPts(faceCenter, faceCenter + bladeNormal);
+
+            // get the axis system of the face with the projection of the blade normal
+            glm::vec3 zVec = glm::normalize(faceNormal);
+            glm::vec3 xVec = glm::normalize(glm::cross(faceNormal, faceCenter));
+            glm::vec3 yVec = glm::normalize(glm::cross(faceNormal, xVec));
+            glm::vec3 bladeNormalProjOnFace = (m_NormEnd - m_NormStart) - glm::dot(m_NormEnd - m_NormStart, zVec) * zVec;
+
+            xVec = glm::normalize(bladeNormalProjOnFace);
+            yVec = glm::normalize(glm::cross(zVec, xVec));
+
+            // draw the rotated x axis as a GOLine
+            m_CutOrientationVisualizer.m_LineDebugB->SetPts(faceCenter, faceCenter + xVec);
+            m_CutOrientationVisualizer.m_LineDebugC->SetPts(faceCenter, faceCenter + yVec);
+
+            // draw the line between the end of the m_LineBladeNormal and the end of the lineDebugC
+            float pitch = glm::degrees(atan2(bladeNormalProjOnFace.y, bladeNormalProjOnFace.z));
+            m_CutOrientationVisualizer.m_LineDebugD->SetPts(
+                m_CutOrientationVisualizer.m_LineBladeNormal->GetPEnd(),
+                m_CutOrientationVisualizer.m_LineDebugB->GetPEnd());
+            // draw the line between the end of the m_LineBladeNormal and the end of the lineDebugB
+            m_CutOrientationVisualizer.m_LineDebugE->SetPts(
+                m_CutOrientationVisualizer.m_LineBladeNormal->GetPEnd(),
+                m_CutOrientationVisualizer.m_LineDebugC->GetPEnd());
+            
+            // calculare the angle between m_LineDebugE and m_LineDebugC (the pitch)
+            float anglePitch = m_CutOrientationVisualizer.m_LineDebugD->ComputeSignedAngle(
+                m_CutOrientationVisualizer.m_LineDebugB
+                );
+            float anglePitchDiffNeg = -45.0f - anglePitch;
+            float anglePitchDiffPos = 45.0f - anglePitch;
+            float anglePitchDiff = std::abs(anglePitchDiffNeg) < std::abs(anglePitchDiffPos) ? anglePitchDiffNeg : anglePitchDiffPos;
+            anglePitchDiff = std::round(anglePitchDiff * 10) / 10;
+            
+            // Set the axis system on the blade
+            glm::vec3 bladeZVec = glm::normalize(m_NormEnd - m_NormStart);
+            glm::vec3 bladeXVec = glm::normalize(glm::cross(m_ChainMid - m_ChainBase, bladeZVec));
+            glm::vec3 bladeYVec = glm::normalize(glm::cos(1.5708f) * bladeXVec + glm::sin(1.5708f) * bladeZVec);
+
+            // Pitch guidance
+            // show the degree difference in text
+            m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetAnchor(m_ChainMid + bladeYVec * 0.5f);
+            std::ostringstream stream;
+            stream << std::fixed << std::setprecision(1) << anglePitchDiff;
+            std::string anglePitchDiffStr = stream.str();
+            m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetText("r:" + anglePitchDiffStr +"°");
+            if (anglePitchDiff > -m_CutOrientationVisualizer.m_tolAangleAcceptance && anglePitchDiff < m_CutOrientationVisualizer.m_tolAangleAcceptance)
+                m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetColor(GOColor::GREEN);
+            else
+                m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
+            
+            // give a visual line feedback on the orientation
+            if (anglePitchDiff > m_CutOrientationVisualizer.m_tolAangleAcceptance)
+            {
+                m_CutOrientationVisualizer.m_LinePitchFeed->SetColor(GOColor::MAGENTA);
+                m_CutOrientationVisualizer.m_LinePitchFeed->SetPts(m_ChainMid, m_ChainMid + bladeYVec * anglePitchDiff);
+            }
+            else if (anglePitchDiff < -m_CutOrientationVisualizer.m_tolAangleAcceptance)
+            {
+                m_CutOrientationVisualizer.m_LinePitchFeed->SetColor(GOColor::RED);
+                m_CutOrientationVisualizer.m_LinePitchFeed->SetPts(m_ChainMid, m_ChainMid + bladeYVec * anglePitchDiff);
+            }
+            else if (anglePitchDiff > -m_CutOrientationVisualizer.m_tolAangleAcceptance && anglePitchDiff < m_CutOrientationVisualizer.m_tolAangleAcceptance)
+            {
+                m_CutOrientationVisualizer.m_LinePitchFeed->SetColor(GOColor::GREEN);
+                m_CutOrientationVisualizer.m_LinePitchFeed->SetPts(m_ChainMid, m_ChainMid + bladeYVec * 0.3f);
+            }
+
+            // set the visibility off for the debug lines
+            m_CutOrientationVisualizer.m_LineFaceNormal->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LineBladeNormal->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LineDebugA->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LineDebugB->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LineDebugC->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LineDebugD->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LineDebugE->SetVisibility(false);
+            m_CutOrientationVisualizer.m_LinePitchFeed->SetVisibility(true);
+            m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetVisibility(true);
+
+        }
+        else
+        {
+            m_CutOrientationVisualizer.Deactivate();
+        }
+
         // Perpendicular face
-        if(!nearestPerpendicularFaceID.empty()){
+        if(!nearestPerpendicularFaceID.empty())
+        {
             hasPerpendicularFace = true;
 
             // find the projection point of the 2 points on the face
@@ -267,29 +397,26 @@ namespace AIAC {
             } else {
                 depthVisualizer.Deactivate();    
             }
-        } else {
+        } else
+        {
             depthVisualizer.Deactivate();
         }
 
-        if(hasParallelFace || hasPerpendicularFace) {
+        if(hasParallelFace || hasPerpendicularFace)
+        {
             m_Visualizer.Activate();
 
             auto strEnd = FeedbackVisualizer::toString(parallelEndDist);
             auto strChainBase = FeedbackVisualizer::toString(parallelChainBaseDist);
-            auto strChainEnd = FeedbackVisualizer::toString(parallelChainEndDist);
 
             this->m_Visualizer.m_GuideTxtEnd->SetText(strEnd);
-            this->m_Visualizer.m_GuideTxtChainBase->SetText(strChainBase);
-            this->m_Visualizer.m_GuideTxtChainEnd->SetText(strChainEnd);
+            this->m_Visualizer.m_GuideTxtChainBase->SetText("s:"+strChainBase);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetText(FeedbackVisualizer::toString(perpendicularFaceEdge1Dist));
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText(FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText("d:"+FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
 
             this->m_Visualizer.m_GuideTxtEnd->SetAnchor(m_NormStart);
             this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(m_ChainBase);
-            this->m_Visualizer.m_GuideTxtChainEnd->SetAnchor(m_ChainEnd);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetAnchor(perpIntersectLineSegPt1);
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetAnchor(perpIntersectLineSegPt2);
 
             auto endColor = GOColor::WHITE;
@@ -300,17 +427,14 @@ namespace AIAC {
             auto faceEdgeTxt2Color = GOColor::WHITE;
 
             if(parallelEndDist != 0 && parallelEndDist < 0.5f){
-                endColor = GOColor::YELLOW;
+                endColor = GOColor::GREEN;
             }
             if(parallelChainBaseDist != 0 && parallelChainBaseDist < 0.5f){
-                chainBaseColor = GOColor::YELLOW;
-            }
-            if(parallelChainEndDist != 0 && parallelChainEndDist < 0.5f){
-                chainEndColor = GOColor::YELLOW;
+                chainBaseColor = GOColor::GREEN;
             }
 
             if(perpendicularFaceEdge1Dist > 0 && perpendicularFaceEdge1Dist < 0.5f){
-                faceEdgeTxt1Color = GOColor::YELLOW;
+                faceEdgeTxt1Color = GOColor::GREEN;
             } else if (perpendicularFaceEdge1Dist < 0){
                 faceEdgeTxt1Color = GOColor::RED;
             }
@@ -322,26 +446,30 @@ namespace AIAC {
 
             this->m_Visualizer.m_GuideTxtEnd->SetColor(endColor);
             this->m_Visualizer.m_GuideTxtChainBase->SetColor(chainBaseColor);
-            this->m_Visualizer.m_GuideTxtChainEnd->SetColor(chainEndColor);
-
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth1->SetColor(faceEdgeTxt1Color);
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetColor(faceEdgeTxt2Color);
 
         }
         else m_Visualizer.Deactivate();
     }
 
-    void CutChainSawFeedback::Activate(){
+    void CutChainSawFeedback::Activate()
+    {
         Update();
-        // m_Visualizer.Activate();
-        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Activate();
+        if(m_ToShowCutPlane)
+        {
+            this->m_CutPlaneVisualizer.Activate();
+        }
     }
+ 
+    void CutChainSawFeedback::Deactivate()
+    {
+        this->m_Visualizer.Deactivate();
 
-    void CutChainSawFeedback::Deactivate(){
-        m_Visualizer.Deactivate();
-        m_CutPlaneVisualizer.Deactivate();
-        m_Visualizer.m_AngleFeedVisualizer.Deactivate();
-        m_Visualizer.m_DepthFeedVisualizer.Deactivate();
+        this->m_CutPlaneVisualizer.Deactivate();
+        this->m_Visualizer.m_AngleFeedVisualizer.Deactivate();
+        this->m_Visualizer.m_DepthFeedVisualizer.Deactivate();
+
+        this->m_CutOrientationVisualizer.Deactivate();
     }
 }
 

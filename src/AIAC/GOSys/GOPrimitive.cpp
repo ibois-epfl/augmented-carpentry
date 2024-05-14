@@ -139,6 +139,17 @@ namespace AIAC
         return angle * 180.0f / glm::pi<float>();
     }
 
+    float GOLine::ComputeSignedAngle(std::shared_ptr<GOLine> ptrGO2)
+    {
+        glm::vec3 v1 = this->m_PEnd.GetPosition() - this->m_PStart.GetPosition();
+        glm::vec3 v2 = ptrGO2->m_PEnd.GetPosition() - ptrGO2->m_PStart.GetPosition();
+        auto angle = glm::acos(glm::dot(v1, v2) / (glm::length(v1) * glm::length(v2)));
+        auto cross = glm::cross(v1, v2);
+        if (cross.z < 0)
+            angle = -angle;
+        return angle * 180.0f / glm::pi<float>();
+    }
+
     void GOLine::InitGLObject()
     {
         ClearGLObject();
