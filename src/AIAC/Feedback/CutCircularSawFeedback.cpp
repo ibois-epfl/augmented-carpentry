@@ -5,8 +5,26 @@
 #include "AIAC/Application.h"
 #include "CutCircularSawFeedback.h"
 
+#include <sstream>
+#include <iomanip>
+
+
 namespace AIAC
 {
+    CutCircularSawPositionStartVisualizer::CutCircularSawPositionStartVisualizer()
+    {
+        this->m_LineDistStart = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::Thick);
+        this->m_TxtDistStart = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
+
+        this->m_LineDistStart->SetColor(GOColor::YELLOW);
+        this->m_TxtDistStart->SetColor(GOColor::WHITE);
+
+        this->m_AllPrimitives.push_back(m_LineDistStart);
+        this->m_AllPrimitives.push_back(m_TxtDistStart);
+
+        Deactivate();
+    }
+
     CutCircularOrientationVisualizer::CutCircularOrientationVisualizer()
     {
         m_LineFaceNormal = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
@@ -16,7 +34,7 @@ namespace AIAC
         m_LineDebugC = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDebugD = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDebugE = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::ExtraThick);
         m_GuideTxtRollPitch = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
         m_LineFaceNormal->SetColor(GOColor::BLUE);
@@ -178,17 +196,27 @@ namespace AIAC
 
         // distance to the bottom face
         auto projBtmPt = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, m_BottomPoint);
+        m_GeneralVisualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
         auto dist = glm::distance(projBtmPt, m_BottomPoint);
+        m_GeneralVisualizer.m_TxtBottomDist->SetText("d:" + FeedbackVisualizer::toString(dist));
 
-        if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt)){
+        if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt))
+        {
             m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
-        } else {
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
+        }
+        else if (-1.f < glm::distance(m_BottomPoint, projBtmPt) < 1.f)
+        {
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
+        }
+        else
+        {
             dist = -dist;
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
             m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
         }
 
-        m_GeneralVisualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
-        m_GeneralVisualizer.m_TxtBottomDist->SetText(FeedbackVisualizer::toString(dist));
 
         // Projection line on face
         // Find all intersection points on the edges of the perpendicular face, and form the longest segment
@@ -265,7 +293,7 @@ namespace AIAC
             std::ostringstream stream;
             stream << std::fixed << std::setprecision(1) << anglePitchDiff;
             std::string anglePitchDiffStr = stream.str();
-            this->m_OrientationVisualizer.m_GuideTxtRollPitch->SetText("r:" + anglePitchDiffStr +"°");
+            this->m_OrientationVisualizer.m_GuideTxtRollPitch->SetText("r:" + anglePitchDiffStr);
             if (anglePitchDiff > -this->m_OrientationVisualizer.m_tolAangleAcceptance && anglePitchDiff < this->m_OrientationVisualizer.m_tolAangleAcceptance)
                 this->m_OrientationVisualizer.m_GuideTxtRollPitch->SetColor(GOColor::GREEN);
             else
@@ -298,17 +326,41 @@ namespace AIAC
             this->m_OrientationVisualizer.m_LineDebugE->SetVisibility(false);
             this->m_OrientationVisualizer.m_LinePitchFeed->SetVisibility(true);
             this->m_OrientationVisualizer.m_GuideTxtRollPitch->SetVisibility(true);
-
-
-
         }
         else
         {
             this->m_OrientationVisualizer.Deactivate();
         }
-        
-    
-    
+
+        // ---------------------------------------------------
+            // starting point visualizer
+        if (!this->m_NearestParallelFaceID.empty())
+        {
+            this->m_PositionStartVisualizer.Activate();
+
+            auto faceInfo = this->m_Cut->GetFace(this->m_NearestParallelFaceID);
+            auto faceNormal = faceInfo.GetNormal();
+            auto faceCenter = faceInfo.GetCenter();
+
+            auto projNormStart = GetProjectionPointOnPlane(faceNormal, faceCenter, m_NormalStart);
+            glm::vec3 midPt = this->m_GeneralVisualizer.m_LineToBottomPt->GetMidPointValues();
+            auto midPtProj = GetProjectionPointOnPlane(faceNormal, faceCenter, midPt);
+
+            this->m_PositionStartVisualizer.m_LineDistStart->SetPts(midPt, midPtProj);
+            float parallelDistMidPtPlane = glm::distance(midPt, midPtProj);
+            this->m_PositionStartVisualizer.m_LineDistStart->SetColor(parallelDistMidPtPlane < 0.9f ? GOColor::GREEN : GOColor::YELLOW);
+
+            std::ostringstream stream;
+            stream << std::fixed << std::setprecision(1) << parallelDistMidPtPlane;
+            std::string parallelDistMidPtPlaneStr = stream.str();
+            this->m_PositionStartVisualizer.m_TxtDistStart->SetAnchor(midPtProj);
+            this->m_PositionStartVisualizer.m_TxtDistStart->SetText("s:" + parallelDistMidPtPlaneStr);
+            this->m_PositionStartVisualizer.m_TxtDistStart->SetColor(parallelDistMidPtPlane < 0.9f ? GOColor::GREEN : GOColor::YELLOW);
+        }
+        else
+        {
+            this->m_PositionStartVisualizer.Deactivate();
+        }
     }
 
     void CutCircularSawFeedback::updateCutPlaneFeedback(){

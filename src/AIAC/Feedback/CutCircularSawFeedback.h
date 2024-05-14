@@ -15,6 +15,21 @@
 namespace AIAC
 {
     /**
+     * @brief This visualizer gives guidance on the start position of the lateral cuts for the circular saw.
+    */
+    class CutCircularSawPositionStartVisualizer : public FeedbackVisualizer
+    {
+        public:
+            CutCircularSawPositionStartVisualizer();
+
+        private:
+            std::shared_ptr<GOLine> m_LineDistStart;
+            std::shared_ptr<GOText> m_TxtDistStart;
+
+        friend class CutCircularSawFeedback;
+    };
+
+    /**
      * @brief This visualizer gives a bit of guidance on the cut orientation. Although it is not possible
      * to determine the exact orientation of the cut, this visualizer gives a rough idea of the pitch and roll.
      * The way this is done is by projecting the blade normal onto the face normal, and then projecting the
@@ -123,6 +138,7 @@ namespace AIAC
         CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
         CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
         CutCircularOrientationVisualizer m_OrientationVisualizer;
+        CutCircularSawPositionStartVisualizer m_PositionStartVisualizer;
     };
 }
 

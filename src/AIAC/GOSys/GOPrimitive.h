@@ -208,6 +208,8 @@ namespace AIAC
         inline void ExtendFromEnd(float length) { m_PEnd.SetPosition(m_PEnd.GetPosition() + glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
 
         inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
+        inline GOPoint GetMidPoint() const { return GOPoint(GetMidPointValues()); }
+
         inline glm::vec3 GetNormalValues() const { return glm::normalize(glm::cross(m_PEnd.GetPosition() - m_PStart.GetPosition(), glm::vec3(0, 0, 1))); }
 
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
