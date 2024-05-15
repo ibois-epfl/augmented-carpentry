@@ -43,12 +43,24 @@ namespace AIAC
         /**
          * @brief Log the SLAM status of the current frame
          */
-        void LogSlamStatus();
+        void m_LogSlamStatus();
+
+        /**
+         * @brief Log the TTool status & pose of the current frame
+         */
+        void m_LogTToolStatus();
 
     private:
         bool m_IsRecording = false;
         std::string m_LogFilename;
         std::ofstream m_LogFile;
         int m_FrameCount = 0;
+
+        std::set<std::string> m_TToolStatusToLog = {
+            "PoseInput",
+            "Tracking",
+        };
+
+        std::string m_PreviousToolheadName;
     };
 }

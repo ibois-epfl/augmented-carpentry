@@ -196,4 +196,12 @@ namespace AIAC
             m_SlamMapGOs.push_back(tag);
         }
     }
+
+    void LayerSlam::GetCamPoseQuaternionAndTvec(cv::Vec4f &quaternion, cv::Vec3f &tvec) {
+        cv::Mat R = m_LastTrackedCamPose(cv::Rect(0, 0, 3, 3));
+        quaternion = ConvertRotationMatrixToQuaternion(R);
+        tvec[0] = m_LastTrackedCamPose.at<float>(0, 3);
+        tvec[1] = m_LastTrackedCamPose.at<float>(1, 3);
+        tvec[2] = m_LastTrackedCamPose.at<float>(2, 3);
+    }
 }
