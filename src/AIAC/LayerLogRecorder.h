@@ -81,6 +81,7 @@ namespace AIAC
 
     private:
         bool m_IsRecording = false;
+        std::string m_LogFolderPath;
         std::string m_LogFilePath;
         std::ofstream m_LogFile;
         int m_FrameCount = 0;

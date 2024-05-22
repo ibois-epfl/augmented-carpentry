@@ -48,23 +48,23 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
         logRootFolderPath += "/";
     }
 
-    std::string logFolderPath = logRootFolderPath + logName;
+    m_LogFolderPath = logRootFolderPath + logName;
 
     // create the directory if not exist
-    if (!std::filesystem::exists(logFolderPath)) {
-        std::filesystem::create_directories(logFolderPath);
+    if (!std::filesystem::exists(m_LogFolderPath)) {
+        std::filesystem::create_directories(m_LogFolderPath);
     }
 
     // copy the dependency files to the log folder
     std::string acimModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath();
     std::string scannedModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath();
     std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
-    CopyFile(acimModelPath, logFolderPath + "/" + GetFileNameFromPath(acimModelPath));
-    CopyFile(scannedModelPath, logFolderPath + "/" + GetFileNameFromPath(scannedModelPath));
-    CopyFile(ttoolModelPath, logFolderPath + "/" + GetFileNameFromPath(ttoolModelPath));
+    CopyFile(acimModelPath, m_LogFolderPath + "/ACIM.acim");
+    CopyFile(scannedModelPath, m_LogFolderPath + "/scanned_model.ply");
+    CopyFile(ttoolModelPath, m_LogFolderPath + "/TTool_config.yaml");
 
     // start recording
-    m_LogFilePath = logFolderPath + "/log.txt";
+    m_LogFilePath = m_LogFolderPath + "/log.txt";
 
     AIAC_INFO("Start recording log to: {}", m_LogFilePath);
     m_IsRecording = true;
@@ -81,10 +81,16 @@ void AIAC::LayerLogRecorder::StopRecording() {
     m_IsRecording = false;
     m_LogFile << "[End]" << std::endl;
     m_LogFile.close();
-
-    m_TToolPreviousToolheadName.clear();
-
     AIAC_INFO("Stop recording log to: {}", m_LogFilePath);
+
+    AIAC_INFO("Compressing the log folder...");
+    std::string cmd = "tar -czf " + m_LogFolderPath + ".tar.gz -C " + m_LogFolderPath;
+    ExecuteSystemCommand(cmd.c_str());
+    AIAC_INFO("Compressed log folder to: {}", m_LogFolderPath + ".tar.gz");
+    AIAC_INFO("Removing the log folder...");
+    cmd = "rm -rf " + m_LogFolderPath;
+    ExecuteSystemCommand(cmd.c_str());
+    AIAC_INFO("Done!");
 }
 
 void AIAC::LayerLogRecorder::LogHeader() {
