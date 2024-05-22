@@ -20,7 +20,7 @@ void AIAC::LayerLogRecorder::OnFrameStart() {
     m_FrameCount++;
 }
 
-void AIAC::LayerLogRecorder::StartRecording(std::string logFilename) {
+void AIAC::LayerLogRecorder::StartRecording(std::string logFilePath) {
     if (m_IsRecording) {
         AIAC_WARN("Already recording, stop the current recording first.");
         return;
@@ -28,13 +28,29 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logFilename) {
 
     std::string acimModelName = GetFileNameFromPath(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath(), false);
     std::string currentDateTime = GetCurrentDateTime();
-    logFilename = acimModelName + "_" + currentDateTime + ".txt";
+    std::string logFilename = acimModelName + "_" + currentDateTime + ".txt";
+
+    if (logFilePath.empty()) {
+        logFilePath = "./temp/log_recorder/";
+    } else {
+        if (logFilePath.back() != '/') {
+            logFilePath += "/";
+        }
+    }
+
+    // create the directory if not exist
+    if (!std::filesystem::exists(logFilePath)) {
+        std::filesystem::create_directories(logFilePath);
+    }
+
+    logFilePath += logFilename;
+
 
     // start recording
-    AIAC_INFO("Start recording log to: {}", logFilename);
+    AIAC_INFO("Start recording log to: {}", logFilePath);
     m_IsRecording = true;
-    m_LogFilename = std::move(logFilename);
-    m_LogFile.open(m_LogFilename, std::ios::out);
+    m_LogFilePath = std::move(logFilePath);
+    m_LogFile.open(m_LogFilePath, std::ios::out);
     m_FrameCount = 0;
 
     LogHeader();
@@ -50,7 +66,7 @@ void AIAC::LayerLogRecorder::StopRecording() {
 
     m_TToolPreviousToolheadName.clear();
 
-    AIAC_INFO("Stop recording log to: {}", m_LogFilename);
+    AIAC_INFO("Stop recording log to: {}", m_LogFilePath);
 }
 
 void AIAC::LayerLogRecorder::LogHeader() {
@@ -78,12 +94,8 @@ void AIAC::LayerLogRecorder::LogSlamStatus() {
     bool isTracked = AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked();
 
     if (!isTracked) {
-//        m_LogFile << "0" << endl;
         return;
     }
-    // tracked
-//    m_LogFile << "SLAM ";
-//    m_LogFile << "1 ";
 
     // get pose
     cv::Vec4f quaternion;
@@ -123,7 +135,7 @@ void AIAC::LayerLogRecorder::LogTTool() {
     }
 
     // The status is not "PoseInput" or "Tracking", meaning that the position is the same, no need to log
-    if (status == "None" && !toolheadChanged) {
+    if (status[0] == 'N' && !toolheadChanged) { // 'N' for "None"
         return;
     }
 

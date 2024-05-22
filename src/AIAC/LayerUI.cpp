@@ -1143,7 +1143,7 @@ namespace AIAC
 
         if (!AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsRecording()){
             if(ImGui::Button("Start")){
-                AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording("test.txt");
+                AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording();
             }
         } else {
             if(ImGui::Button("Stop")){

@@ -19,9 +19,9 @@ namespace AIAC
         /**
          * @brief Start recording the log to a file
          *
-         * @param logFilename The filename of the log file
+         * @param logFilePath The filename of the log file
          */
-        void StartRecording(std::string logFilename);
+        void StartRecording(std::string logFilePath = "");
 
         /**
          * @brief Stop recording the log to a file
@@ -81,7 +81,7 @@ namespace AIAC
 
     private:
         bool m_IsRecording = false;
-        std::string m_LogFilename;
+        std::string m_LogFilePath;
         std::ofstream m_LogFile;
         int m_FrameCount = 0;
 
