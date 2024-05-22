@@ -108,6 +108,18 @@ inline std::vector<std::string> GetFilePaths(const std::string& dirPath, const s
 
 
 /**
+ * @brief Copy the file from source to destination
+ *
+ * @param source the source file path
+ * @param destination the destination file path
+ */
+inline void CopyFile(const std::string& source, const std::string& destination)
+{
+    std::filesystem::copy_file(source, destination, std::filesystem::copy_options::overwrite_existing);
+}
+
+
+/**
  * @brief Parse the config file and get the file paths
  *
  * @param configPath

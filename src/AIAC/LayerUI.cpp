@@ -1142,11 +1142,11 @@ namespace AIAC
         ImGui::Begin("Log Recorder", m_IsOpen);
 
         if (!AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsRecording()){
-            if(ImGui::Button("Start")){
+            if(ImGui::Button("Start", ImVec2(-1, 40))){
                 AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording();
             }
         } else {
-            if(ImGui::Button("Stop")){
+            if(ImGui::Button("Stop", ImVec2(-1, 40))){
                 AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StopRecording();
             }
         }

@@ -3,6 +3,7 @@
 #include "utils/MatrixUtils.h"
 #include "utils/utils.h"
 #include "utils/SystemUtils.h"
+#include "LayerUtils.h"
 
 #include <utility>
 
@@ -20,36 +21,53 @@ void AIAC::LayerLogRecorder::OnFrameStart() {
     m_FrameCount++;
 }
 
-void AIAC::LayerLogRecorder::StartRecording(std::string logFilePath) {
+void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
     if (m_IsRecording) {
         AIAC_WARN("Already recording, stop the current recording first.");
         return;
     }
 
+    // The default log file path will be './temp/log_recorders/<logName>/log.txt'
+    // Where <logName> is the <acim_model_name>_<current_date_time>
+
     std::string acimModelName = GetFileNameFromPath(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath(), false);
     std::string currentDateTime = GetCurrentDateTime();
-    std::string logFilename = acimModelName + "_" + currentDateTime + ".txt";
+    std::string logName = acimModelName + "_" + currentDateTime;
 
-    if (logFilePath.empty()) {
-        logFilePath = "./temp/log_recorder/";
-    } else {
-        if (logFilePath.back() != '/') {
-            logFilePath += "/";
+    if (logRootFolderPath.empty()) {
+        logRootFolderPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();
+        if (logRootFolderPath.empty()) {
+            logRootFolderPath = "./temp/";
         }
+        if (logRootFolderPath.back() != '/') {
+            logRootFolderPath += "/";
+        }
+        logRootFolderPath += "log_recorders/";
     }
+    if (logRootFolderPath.back() != '/') {
+        logRootFolderPath += "/";
+    }
+
+    std::string logFolderPath = logRootFolderPath + logName;
 
     // create the directory if not exist
-    if (!std::filesystem::exists(logFilePath)) {
-        std::filesystem::create_directories(logFilePath);
+    if (!std::filesystem::exists(logFolderPath)) {
+        std::filesystem::create_directories(logFolderPath);
     }
 
-    logFilePath += logFilename;
-
+    // copy the dependency files to the log folder
+    std::string acimModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath();
+    std::string scannedModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath();
+    std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
+    CopyFile(acimModelPath, logFolderPath + "/" + GetFileNameFromPath(acimModelPath));
+    CopyFile(scannedModelPath, logFolderPath + "/" + GetFileNameFromPath(scannedModelPath));
+    CopyFile(ttoolModelPath, logFolderPath + "/" + GetFileNameFromPath(ttoolModelPath));
 
     // start recording
-    AIAC_INFO("Start recording log to: {}", logFilePath);
+    m_LogFilePath = logFolderPath + "/log.txt";
+
+    AIAC_INFO("Start recording log to: {}", m_LogFilePath);
     m_IsRecording = true;
-    m_LogFilePath = std::move(logFilePath);
     m_LogFile.open(m_LogFilePath, std::ios::out);
     m_FrameCount = 0;
 
@@ -80,8 +98,15 @@ void AIAC::LayerLogRecorder::LogHeader() {
     m_LogFile << "AC Info Model path: " << AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath() << std::endl;
     m_LogFile << "Scanned Model path: " << AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath() << std::endl;
     m_LogFile << "TTool Zenodo Version: " << ttoolZenodoVersion << std::endl;
+    m_LogFile << std::endl;
 
-    // m_LogFile << "SLAM format: " << "SLAM <isTracked> [<t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>]" << std::endl;
+    m_LogFile << "[Format]" << std::endl;
+    m_LogFile << "SLAM <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>  // SLAM Camera Pose" << std::endl;
+    m_LogFile << "TTool-head <toolhead_name>  // TTool Head Changed" << std::endl;
+    m_LogFile << "TTool-pose <status> <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>  // TTool Pose" << std::endl;
+    m_LogFile << "ACIM-activate-component <component_id>  // ACIM Activated Component" << std::endl;
+    m_LogFile << "ACIM-component-status <component_id> <status>  // ACIM Component Status" << std::endl;
+    m_LogFile << "ACIM-transform <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>  // ACIM Transformation" << std::endl;
     m_LogFile << std::endl;
 
     m_LogFile << "[Init]" << std::endl;

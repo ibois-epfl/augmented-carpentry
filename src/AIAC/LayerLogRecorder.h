@@ -19,9 +19,9 @@ namespace AIAC
         /**
          * @brief Start recording the log to a file
          *
-         * @param logFilePath The filename of the log file
+         * @param logRootFolderPath The filename of the log file
          */
-        void StartRecording(std::string logFilePath = "");
+        void StartRecording(std::string logRootFolderPath = "");
 
         /**
          * @brief Stop recording the log to a file
