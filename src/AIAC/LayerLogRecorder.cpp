@@ -15,7 +15,7 @@ void AIAC::LayerLogRecorder::OnFrameStart() {
 
     m_LogFile << "#" << m_FrameCount << " " << GetCurrentTimestamp() << std::endl;
     LogSlamStatus();
-    LogTToolStatus();
+    LogTTool();
     LogACIM();
     m_FrameCount++;
 }
@@ -26,12 +26,9 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logFilename) {
         return;
     }
 
-    // init variables storing the state
-    m_TToolPreviousToolheadName.clear();
-    m_ACIMPreviousActivatedComponentID.clear();
-    m_ACIMOffset = INFINITY;
-    m_ACIMRotation = INT_MAX;
-    m_ACIMComponentStatus.clear();
+    std::string acimModelName = GetFileNameFromPath(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath(), false);
+    std::string currentDateTime = GetCurrentDateTime();
+    logFilename = acimModelName + "_" + currentDateTime + ".txt";
 
     // start recording
     AIAC_INFO("Start recording log to: {}", logFilename);
@@ -68,12 +65,12 @@ void AIAC::LayerLogRecorder::LogHeader() {
     m_LogFile << "Scanned Model path: " << AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath() << std::endl;
     m_LogFile << "TTool Zenodo Version: " << ttoolZenodoVersion << std::endl;
 
-    m_LogFile << "SLAM format: " << "SLAM <isTracked> [<t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>]" << std::endl;
+    // m_LogFile << "SLAM format: " << "SLAM <isTracked> [<t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>]" << std::endl;
     m_LogFile << std::endl;
 
     m_LogFile << "[Init]" << std::endl;
     InitACIMStatus();
-    LogTToolStatus();
+    InitTToolStatus();
     m_LogFile << std::endl;
 }
 
@@ -85,8 +82,8 @@ void AIAC::LayerLogRecorder::LogSlamStatus() {
         return;
     }
     // tracked
-    m_LogFile << "SLAM ";
-    m_LogFile << "1 ";
+//    m_LogFile << "SLAM ";
+//    m_LogFile << "1 ";
 
     // get pose
     cv::Vec4f quaternion;
@@ -94,11 +91,11 @@ void AIAC::LayerLogRecorder::LogSlamStatus() {
     AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseQuaternionAndTvec(quaternion, tvec);
 
     // pose[x, y, z] = (0, 0, 0) and quaternion[x, y, z, w]
-    m_LogFile << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
+    m_LogFile << "SLAM " << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
               << quaternion[0] << " " << quaternion[1] << " " << quaternion[2] << " " << quaternion[3] << endl;
 }
 
-void AIAC::LayerLogRecorder::LogTToolStatus() {
+void AIAC::LayerLogRecorder::LogTTool() {
     // toolhead change event
     bool toolheadChanged = false;
     std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetName();
@@ -126,29 +123,28 @@ void AIAC::LayerLogRecorder::LogTToolStatus() {
     }
 
     // The status is not "PoseInput" or "Tracking", meaning that the position is the same, no need to log
-    if (m_TToolStatusToLog.find(status) == m_TToolStatusToLog.end() && !toolheadChanged) {
+    if (status == "None" && !toolheadChanged) {
         return;
     }
 
+    LogTToolTransformation(status);
+}
+
+void AIAC::LayerLogRecorder::InitTToolStatus() {
+    m_TToolPreviousToolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetName();
+    m_LogFile << "TTool-head " << m_TToolPreviousToolheadName << endl;
+    LogTToolTransformation("Init");
+}
+
+void AIAC::LayerLogRecorder::LogTToolTransformation(const std::string& status){
     // Get the relative pose to the camera
     auto ttoolPose = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->GetPose();
     cv::Vec3f tvec;
     cv::Vec4f qvec;
     ConvertTransMatToTvecAndQvec(ttoolPose, tvec, qvec);
 
-
-///  World coordinate
-//    auto toolPoseInWorldGlm = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetWorldPose();
-//    auto toolPoseInWorld = cv::Mat();
-//    CvtGlmMat2CvMat(toolPoseInWorldGlm, toolPoseInWorld);
-//
-//    cv::Vec3f tvec;
-//    cv::Vec4f qvec;
-//    ConvertTransMatToTvecAndQvec(toolPoseInWorld, tvec, qvec);
-
     m_LogFile << "TTool-pose " << status << " " << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
               << qvec[0] << " " << qvec[1] << " " << qvec[2] << " " << qvec[3] << endl;
-
 }
 
 
@@ -186,6 +182,9 @@ void AIAC::LayerLogRecorder::LogACIM() {
 }
 
 void AIAC::LayerLogRecorder::InitACIMStatus() {
+    // init variables storing the state
+    m_ACIMComponentStatus.clear();
+
     m_ACIMPreviousActivatedComponentID = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
     m_LogFile << "ACIM-activate-component " << m_ACIMPreviousActivatedComponentID << endl;
 

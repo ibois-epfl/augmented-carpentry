@@ -1140,11 +1140,15 @@ namespace AIAC
 
     void LayerUI::ShowLogRecorderUI() {
         ImGui::Begin("Log Recorder", m_IsOpen);
-        if(ImGui::Button("Start")){
-            AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording("test.txt");
-        }
-        if(ImGui::Button("Stop")){
-            AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StopRecording();
+
+        if (!AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsRecording()){
+            if(ImGui::Button("Start")){
+                AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording("test.txt");
+            }
+        } else {
+            if(ImGui::Button("Stop")){
+                AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StopRecording();
+            }
         }
         ImGui::End();
     }

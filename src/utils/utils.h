@@ -140,3 +140,16 @@ inline std::vector<std::string> ParseConfigFile(const std::string& configPath, c
 
     return filePaths;
 }
+
+/**
+* @brief Get the name of the file from the given path
+*/
+inline std::string GetFileNameFromPath(const std::string& path, bool withExtension = true)
+{
+    std::filesystem::path p(path);
+    if (withExtension)
+    {
+        return p.filename().string();
+    }
+    return p.stem().string();
+}

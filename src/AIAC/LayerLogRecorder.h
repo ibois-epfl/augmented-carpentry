@@ -35,6 +35,7 @@ namespace AIAC
          */
         bool IsRecording() const { return m_IsRecording; }
 
+    private:
         /**
          * @brief log header information to the file
          */
@@ -48,7 +49,19 @@ namespace AIAC
         /**
          * @brief Log the TTool status & pose of the current frame
          */
-        void LogTToolStatus();
+        void LogTTool();
+
+        /**
+         * @brief Initialize the variables storing TTool's state
+         */
+        void InitTToolStatus();
+
+        /**
+         * @brief Log TTool's transformation
+         *
+         * @param status The status of the TTool
+         */
+        void LogTToolTransformation(const std::string& status);
 
         /**
          * @brief Log the ACInfoModel status of the current frame
