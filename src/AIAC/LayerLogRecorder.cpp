@@ -1,6 +1,8 @@
 #include "LayerLogRecorder.h"
 #include "Application.h"
+#include "utils/MatrixUtils.h"
 #include "utils/utils.h"
+#include "utils/SystemUtils.h"
 
 #include <utility>
 
@@ -12,8 +14,8 @@ void AIAC::LayerLogRecorder::OnFrameStart() {
     if (!m_IsRecording) return;
 
     m_LogFile << "#" << m_FrameCount << " " << GetCurrentTimestamp() << std::endl;
-    m_LogSlamStatus();
-    m_LogTToolStatus();
+    LogSlamStatus();
+    LogTToolStatus();
     LogACIM();
     m_FrameCount++;
 }
@@ -38,7 +40,7 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logFilename) {
     m_LogFile.open(m_LogFilename, std::ios::out);
     m_FrameCount = 0;
 
-    m_LogHeader();
+    LogHeader();
     m_LogFile << "[Content]" << std::endl;
 }
 
@@ -54,19 +56,28 @@ void AIAC::LayerLogRecorder::StopRecording() {
     AIAC_INFO("Stop recording log to: {}", m_LogFilename);
 }
 
-void AIAC::LayerLogRecorder::m_LogHeader() {
+void AIAC::LayerLogRecorder::LogHeader() {
+    // get the latest version of the TTool files on Zenodo
+    std::string cmd = "curl -Ls -o /dev/null -w %{url_effective} https://zenodo.org/doi/10.5281/zenodo.7956930";
+    std::string ttoolZenodoVersion = ExecuteSystemCommand(cmd.c_str());
+
+
     m_LogFile << "[Header]" << std::endl;
     m_LogFile << "Created Time: " << GetCurrentTimestamp() << std::endl;
+    m_LogFile << "AC Info Model path: " << AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath() << std::endl;
+    m_LogFile << "Scanned Model path: " << AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath() << std::endl;
+    m_LogFile << "TTool Zenodo Version: " << ttoolZenodoVersion << std::endl;
+
     m_LogFile << "SLAM format: " << "SLAM <isTracked> [<t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>]" << std::endl;
     m_LogFile << std::endl;
 
     m_LogFile << "[Init]" << std::endl;
     InitACIMStatus();
-    m_LogTToolStatus();
+    LogTToolStatus();
     m_LogFile << std::endl;
 }
 
-void AIAC::LayerLogRecorder::m_LogSlamStatus() {
+void AIAC::LayerLogRecorder::LogSlamStatus() {
     bool isTracked = AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked();
 
     if (!isTracked) {
@@ -87,7 +98,7 @@ void AIAC::LayerLogRecorder::m_LogSlamStatus() {
               << quaternion[0] << " " << quaternion[1] << " " << quaternion[2] << " " << quaternion[3] << endl;
 }
 
-void AIAC::LayerLogRecorder::m_LogTToolStatus() {
+void AIAC::LayerLogRecorder::LogTToolStatus() {
     // toolhead change event
     bool toolheadChanged = false;
     std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetName();

@@ -284,6 +284,11 @@ public:
      * @brief Save the current state to the loaded .acim file.
      */
     void Save();
+
+    /**
+     * @brief Get the filepath to the loaded ACInfoModel.
+     */
+    inline const std::string& GetFilePath() const { return m_FilePath; }
     
     /**
      * @brief Get the pugi::xml_document object

@@ -6,7 +6,7 @@
 #include "AIAC/Log.h"
 #include "AIAC/Application.h"
 
-#include "utils/utils.h"
+#include "utils/MatrixUtils.h"
 
 //for test
 #include "glm/gtx/string_cast.hpp"
@@ -34,7 +34,6 @@ namespace AIAC
             AIAC_WARN("SLAM map file doesn't exist: \"{}\". Init empty map.", pathToMapFile);
             Slam.clearMap();
         }
-        
 
         // load vocabulary
         Slam.setVocabulary(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::VocFile, "assets/tslam/orb.fbow"));
