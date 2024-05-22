@@ -53,12 +53,17 @@ namespace AIAC
         /**
          * @brief Log the ACInfoModel status of the current frame
          */
-        void m_LogACIMStatus();
+        void LogACIM();
 
         /**
          * @brief Initialize the variables storing ACIM's state
          */
         void InitACIMStatus();
+
+        /**
+         * @brief Log ACIM's transformation
+         */
+        void LogACIMTransformation();
 
 
     private:
@@ -76,6 +81,7 @@ namespace AIAC
 
         // variables for ACInfoModel
         std::string m_ACIMPreviousActivatedComponentID;
+        bool m_IsActivatedComponentDone = false;
         double m_ACIMOffset = INFINITY;
         int m_ACIMRotation = INT_MAX;
         bool m_ACIMFlip = false;

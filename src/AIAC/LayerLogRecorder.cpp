@@ -14,7 +14,7 @@ void AIAC::LayerLogRecorder::OnFrameStart() {
     m_LogFile << "#" << m_FrameCount << " " << GetCurrentTimestamp() << std::endl;
     m_LogSlamStatus();
     m_LogTToolStatus();
-    m_LogACIMStatus();
+    LogACIM();
     m_FrameCount++;
 }
 
@@ -142,16 +142,36 @@ void AIAC::LayerLogRecorder::m_LogTToolStatus() {
 
 
 
-void AIAC::LayerLogRecorder::m_LogACIMStatus() {
-    // activated component changed event
-    bool componentChanged = false;
+void AIAC::LayerLogRecorder::LogACIM() {
+    // if activated component changed
     std::string componentID = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
     if (m_ACIMPreviousActivatedComponentID.empty() || (!componentID.empty() && componentID != m_ACIMPreviousActivatedComponentID)) {
-        componentChanged = true;
-
         m_LogFile << "ACIM-activate-component " << componentID << endl;
         m_ACIMPreviousActivatedComponentID = componentID;
+
+        m_IsActivatedComponentDone = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModel().GetTimberInfo().GetComponent(componentID)->IsMarkedDone;
     }
+
+    // if activated is activated done / not done
+    bool isActivatedComponentDone = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone;
+    if (m_IsActivatedComponentDone != isActivatedComponentDone) {
+        m_LogFile << "ACIM-component-status " << AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID() << " "
+                  << (isActivatedComponentDone ? "Done" : "NotDone") << endl;
+        m_IsActivatedComponentDone = isActivatedComponentDone;
+    }
+
+    // if transformation changed
+    float offset = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset();
+    int rotation = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignRotation();
+    bool flip = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignFlip();
+    if (m_ACIMOffset != offset || m_ACIMRotation != rotation || m_ACIMFlip != flip) {
+        m_ACIMOffset = offset;
+        m_ACIMRotation = rotation;
+        m_ACIMFlip = flip;
+
+        LogACIMTransformation();
+    }
+
 }
 
 void AIAC::LayerLogRecorder::InitACIMStatus() {
@@ -169,6 +189,10 @@ void AIAC::LayerLogRecorder::InitACIMStatus() {
     m_ACIMRotation = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignRotation();
     m_ACIMFlip = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignFlip();
 
+    LogACIMTransformation();
+}
+
+void AIAC::LayerLogRecorder::LogACIMTransformation() {
     glm::mat4x4 transformMat = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetTransformMat();
     cv::Mat transformMatCv;
     CvtGlmMat2CvMat(transformMat, transformMatCv);
@@ -178,3 +202,4 @@ void AIAC::LayerLogRecorder::InitACIMStatus() {
     m_LogFile << "ACIM-transform " << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
               << qvec[0] << " " << qvec[1] << " " << qvec[2] << " " << qvec[3] << endl;
 }
+
