@@ -96,5 +96,6 @@ namespace AIAC
 
         auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
         m_ACInfoModel.Transform(transMat);
+        m_TransformMat = glm::mat4x4(transMat);
     }
 }

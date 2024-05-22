@@ -220,7 +220,7 @@ public:
 
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
-    inline Component* GetComponent(std::string id) { return m_Components[id]; }
+    inline Component* GetComponent(const std::string& id) { return m_Components[id]; }
     inline Component* GetCurrentComponent() { 
         if(m_Components.find(m_CurrentComponentID) == m_Components.end())
             return nullptr;

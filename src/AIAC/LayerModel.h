@@ -37,14 +37,31 @@ namespace AIAC
          * @brief Return the ACInfoModel.
          */
         inline ACInfoModel& GetACInfoModel() { return m_ACInfoModel; }
+
         /**
          * @brief Get the Scanned Model object
          */
         inline ScannedModel& GetScannedModel() { return m_ScannedModel; }
+
         /**
-         * @brief Get the Align Offset object
+         * @brief Get the Align Offset of the model
          */
         inline float GetAlignOffset() { return m_AlignOffset; }
+
+        /**
+         * @brief Get the rotation position of the model
+         */
+        inline int GetAlignRotation() const { return m_AlignRotation; }
+
+        /**
+         * @brief Get the flip status of the model
+         */
+        inline bool GetAlignFlip() const { return m_AlignFlip; }
+
+        /**
+         * @brief Get the transform matrix of the model
+         */
+        inline glm::mat4x4 GetTransformMat() const { return m_TransformMat; }
 
         /**
          * @brief Change the align offset. The value is in TSLAM unit.
@@ -119,5 +136,6 @@ namespace AIAC
         float m_AlignOffset = 0.0f;
         int m_AlignRotation = 0;
         bool m_AlignFlip = false;
+        glm::mat4x4 m_TransformMat;
     };
 }

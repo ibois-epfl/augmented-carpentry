@@ -523,8 +523,6 @@ namespace AIAC
     }
 
     void ACInfoModel::Transform(glm::mat4x4 transformMat) {
-        auto rotationMat = glm::mat3x3(transformMat);
-
         // bounding box
         auto bbox = m_TimberInfo.m_Bbox;
         for(int i = 0 ; i < bbox.size() ; i++){

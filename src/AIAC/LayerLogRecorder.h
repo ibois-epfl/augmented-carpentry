@@ -50,17 +50,35 @@ namespace AIAC
          */
         void m_LogTToolStatus();
 
+        /**
+         * @brief Log the ACInfoModel status of the current frame
+         */
+        void m_LogACIMStatus();
+
+        /**
+         * @brief Initialize the variables storing ACIM's state
+         */
+        void InitACIMStatus();
+
+
     private:
         bool m_IsRecording = false;
         std::string m_LogFilename;
         std::ofstream m_LogFile;
         int m_FrameCount = 0;
 
+        // variables for TTool
         std::set<std::string> m_TToolStatusToLog = {
             "PoseInput",
             "Tracking",
         };
+        std::string m_TToolPreviousToolheadName;
 
-        std::string m_PreviousToolheadName;
+        // variables for ACInfoModel
+        std::string m_ACIMPreviousActivatedComponentID;
+        double m_ACIMOffset = INFINITY;
+        int m_ACIMRotation = INT_MAX;
+        bool m_ACIMFlip = false;
+        std::unordered_map<std::string, bool> m_ACIMComponentStatus;
     };
 }
