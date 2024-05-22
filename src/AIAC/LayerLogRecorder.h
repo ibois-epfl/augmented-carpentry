@@ -38,17 +38,17 @@ namespace AIAC
         /**
          * @brief log header information to the file
          */
-        void m_LogHeader();
+        void LogHeader();
 
         /**
          * @brief Log the SLAM status of the current frame
          */
-        void m_LogSlamStatus();
+        void LogSlamStatus();
 
         /**
          * @brief Log the TTool status & pose of the current frame
          */
-        void m_LogTToolStatus();
+        void LogTToolStatus();
 
         /**
          * @brief Log the ACInfoModel status of the current frame
