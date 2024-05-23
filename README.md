@@ -32,7 +32,8 @@ Next we need glm dependencies and libraries:
 ```bash
 sudo apt-get -y install libmpfr-dev libboost-dev libgoogle-glog-dev \
                         freeglut3-dev libglew-dev libglfw3 libglfw3-dev \
-                        git-lfs libassimp-dev libglm-dev libimgui-dev
+                        git-lfs libassimp-dev libglm-dev libimgui-dev \
+                        libcgal-dev
 ```
 
 For tbb and opencv you will also need these:
@@ -78,20 +79,24 @@ Set the display properties in the `config.ini` properties (to find them run the 
 
 The following specs works on the X11 display server. If you are using wayland and wanting to switch to X11 follow [this link](https://helpdesk.psionline.com/hc/en-gb/articles/13470827149332-How-to-perform-the-switch-from-the-Wayland-display-server-to-Xorg-X11-on-Linux-Ubuntu-22-04-LTS)
 ./
+
 ```c++
 [MonitorSpecs]
 monitor_name = WaveShare WS170120
 monitor_link_t = HDMI
 monitor_resolution = 800x480
 ```
+
 For wayland display server. WARNING: Wayland display and touchscreen are not compatible yet as the touchscreen register for the main display and not the small display.
+
 ```c++
 [MonitorSpecs]
 LinkMode = XWAYLAND1
 Name = Virtual core pointer
 Resolution = 800x480
 ```
-**You can build AS with the touch screen or on a non-touch screen.** To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` in the `CMakeLists.txt`:
+
+> You can build AC with the touch screen or on a non-touch screen. To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` in the `CMakeLists.txt`:
 
 <br />
 
