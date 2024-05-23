@@ -8,8 +8,6 @@ set(BUILD_SHARED_LIBS ON)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(external_tools)
-#set(CMAKE_CXX_STANDARD 17)
-#TODO: check for Opencv 4.5.4 that cannot be installed or detected
 
 file(GLOB_RECURSE AIAC_SRC "src/*.cpp")
 
@@ -30,16 +28,6 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE src/aiacpch.h)
 #-------------------------------------------------------------------------------
 # Add options
 #-------------------------------------------------------------------------------
-
-# *As a fresh new compile, put everything ON
-# -------------------- COMPILE OPTIONS -----------------------------
-# option(INSTALL_TSLAM "Install TSlam in case it has been updated" OFF)
-# option(INSTALL_TTOOL "Install TTool in case it has been updated" OFF)
-# ------------------------------------------------------------------------------
-# option(INSTALL_GLFW33 "Install glfw3 with dpkg" OFF)
-# option(INSTALL_OPENGL "Install OpenGL with dpkg" OFF)
-# option(INSTALL_OPENCV455 "Install Opencv4.5.4" OFF)
-# option(INSTALL_ASSIMP "Install assimp with dpkg" OFF)
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" OFF)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
@@ -71,19 +59,8 @@ endif()
 # GLOBAL 3rd libs (NOT compatible with add_subdirectory())
 #------------------------------------------------------------------------------------------------------------
 # OpenGL
-# if(UNIX AND INSTALL_OPENGL)
-#     message(WARNING "OpenGL not found, trying to install it...")
-#     execute_process(COMMAND ./cmake/install_opengl.sh)
-# endif()
 set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
-
-# execute_process(COMMAND glxinfo -B OUTPUT_VARIABLE GLXINFO
-#                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-# string(REGEX MATCH "OpenGL version string: ([0-9.]+)" GLXINFO ${GLXINFO})
-# message(STATUS "OpenGL version: ${CMAKE_MATCH_1}")
-#message(STATUS "OpenGL icnlude dir: ${OPENGL_INCLUDE_DIR}")
-#message(STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}")
 
 set(BUILD_V4_API ON)
 add_external_package(TSlam)
