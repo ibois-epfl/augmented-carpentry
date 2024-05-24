@@ -187,9 +187,11 @@ void AIAC::LayerLogRecorder::InitTToolStatus() {
 
 void AIAC::LayerLogRecorder::LogTToolTransformation(const std::string& status){
     // Get the relative pose to the camera
-    auto ttoolPose = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->GetPose();
+    cv::Mat ttoolPose(4, 4, CV_32F);
     cv::Vec3f tvec;
     cv::Vec4f qvec;
+    auto ttoolPoseGlm = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetWorldPose();
+    CvtGlmMat2CvMat(ttoolPoseGlm, ttoolPose);
     ConvertTransMatToTvecAndQvec(ttoolPose, tvec, qvec);
 
     m_LogFile << "TTool-pose " << status << " " << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
