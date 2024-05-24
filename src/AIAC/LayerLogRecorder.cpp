@@ -59,7 +59,7 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
     std::string acimModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath();
     std::string scannedModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath();
     std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
-    CopyFile(acimModelPath, m_LogFolderPath + "/ACIM.acim");
+    CopyFile(acimModelPath, m_LogFolderPath + "/AC_info_model.acim");
     CopyFile(scannedModelPath, m_LogFolderPath + "/scanned_model.ply");
     CopyFile(ttoolModelPath, m_LogFolderPath + "/TTool_config.yaml");
 
@@ -83,13 +83,19 @@ void AIAC::LayerLogRecorder::StopRecording() {
     m_LogFile.close();
     AIAC_INFO("Stop recording log to: {}", m_LogFilePath);
 
+    // compress to a zip file
     AIAC_INFO("Compressing the log folder...");
-    std::string cmd = "tar -czf " + m_LogFolderPath + ".tar.gz -C " + m_LogFolderPath;
+    std::string zipPath = m_LogFolderPath + ".zip";
+    std::string cmd = "zip -r -j " + zipPath + " " + m_LogFolderPath;
+    AIAC_INFO("Run zip Command: {}", cmd);
     ExecuteSystemCommand(cmd.c_str());
-    AIAC_INFO("Compressed log folder to: {}", m_LogFolderPath + ".tar.gz");
+    AIAC_INFO("Compressed log folder to: {}", zipPath);
+
+    // remove the original log folder
     AIAC_INFO("Removing the log folder...");
     cmd = "rm -rf " + m_LogFolderPath;
     ExecuteSystemCommand(cmd.c_str());
+
     AIAC_INFO("Done!");
 }
 
