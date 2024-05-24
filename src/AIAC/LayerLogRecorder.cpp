@@ -112,13 +112,13 @@ void AIAC::LayerLogRecorder::LogHeader() {
     m_LogFile << "TTool Zenodo Version: " << ttoolZenodoVersion << std::endl;
     m_LogFile << std::endl;
 
-    m_LogFile << "[Format]" << std::endl;
-    m_LogFile << "SLAM <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>  // SLAM Camera Pose" << std::endl;
-    m_LogFile << "TTool-head <toolhead_name>  // TTool Head Changed" << std::endl;
-    m_LogFile << "TTool-pose <status> <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>  // TTool Pose" << std::endl;
-    m_LogFile << "ACIM-activate-component <component_id>  // ACIM Activated Component" << std::endl;
-    m_LogFile << "ACIM-component-status <component_id> <status>  // ACIM Component Status" << std::endl;
-    m_LogFile << "ACIM-transform <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>  // ACIM Transformation" << std::endl;
+    m_LogFile << "[Legend]" << std::endl;
+    m_LogFile << "SLAM <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>                    // SLAM Camera Pose"         << std::endl;
+    m_LogFile << "TTool-head <toolhead_name>                                        // TTool Head Changed"       << std::endl;
+    m_LogFile << "TTool-pose <status> <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>     // TTool Pose"               << std::endl;
+    m_LogFile << "ACIM-activate-component <component_id>                            // ACIM Activated Component" << std::endl;
+    m_LogFile << "ACIM-component-status <component_id> <status>                     // ACIM Component Status"    << std::endl;
+    m_LogFile << "ACIM-transform <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>          // ACIM Transformation"      << std::endl;
     m_LogFile << std::endl;
 
     m_LogFile << "[Init]" << std::endl;
