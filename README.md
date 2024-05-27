@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img src="./logo.png" width="140">
+    <img src="./logo.png" width="200">
 </p>
 <p align="center">
     <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build.yml/badge.svg">
