@@ -55,6 +55,25 @@ namespace AIAC
             AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: SCANNED_MODEL, path);
             AlignModels();
         }
+        AIAC_INFO("ACIM model from path: " + path + " is loaded.");
+    }
+
+    void LayerModel::ReloadACInfoModel()
+    {
+        std::string path = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
+        if(!std::filesystem::exists(path))
+        {
+            AIAC_WARN("LayerModel::ReloadACInfoModel()from path: " + path + " failed to load models");
+            return;
+        }
+        bool succeed = m_ACInfoModel.Load(path);
+        if (!succeed)
+        {
+            AIAC_WARN("LayerModel::ReloadACInfoModel() from path: " + path + " failed to load models");
+            return;
+        }
+        AIAC_INFO("ACIM model from path: " + path + " is loaded.");
+        AlignModels();
     }
 
     void LayerModel::AlignModels() {

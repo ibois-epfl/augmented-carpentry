@@ -29,6 +29,11 @@ namespace AIAC
         void LoadACInfoModel(const std::string& path);
 
         /**
+         * @brief Reload the ACInfoModel from the current path from config.
+         */
+        void ReloadACInfoModel();
+
+        /**
          * @brief Load a .ply model from a file.
          */
         void LoadScannedModel(const std::string& path);

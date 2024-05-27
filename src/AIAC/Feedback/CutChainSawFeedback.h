@@ -10,89 +10,131 @@
 
 #include <vector>
 
-namespace AIAC {
-    class CutChainSawAngleFeedVisualizer : public FeedbackVisualizer {
-    public:
-        CutChainSawAngleFeedVisualizer();
+namespace AIAC
+{
+    /**
+     * @brief This visualizer gives a bit of guidance on the cut orientation. Although it is not possible
+     * to determine the exact orientation of the cut, this visualizer gives a rough idea of the pitch and roll.
+     * The way this is done is by projecting the blade normal onto the face normal, and then projecting the
+     * resulting vector onto the face normal. If we close the triangle of these two lines we can monitor the angle
+     * that must be 45*. This way we can also have the direction towards which the blade needs to be tilted.
+     *
+    */
+    class CutOrientationVisualizer : public FeedbackVisualizer
+    {
+        public:
+            CutOrientationVisualizer();
 
-    private:
-        std::shared_ptr<GOLine> m_LineEnd;
-        std::shared_ptr<GOLine> m_LineChainBase;
-        std::shared_ptr<GOLine> m_LineChainEnd;
+        private:
+            std::shared_ptr<GOLine> m_LineFaceNormal;  // BLUE (face_z)
+            std::shared_ptr<GOLine> m_LineBladeNormal;  // MAGENTA
 
-    friend class CutChainSawFeedback;
-    };
+            std::shared_ptr<GOLine> m_LineDebugA;  // ORANGE
+            std::shared_ptr<GOLine> m_LineDebugB;  // GREEN (face_y)
+            std::shared_ptr<GOLine> m_LineDebugC;  // RED (face_x)
+            std::shared_ptr<GOLine> m_LineDebugD;  // YELLOW
+            std::shared_ptr<GOLine> m_LineDebugE;  // WHITE
 
-    class CutChainSawDepthFeedVisualizer : public FeedbackVisualizer {
-    public:
-        CutChainSawDepthFeedVisualizer();
+            std::shared_ptr<GOLine> m_LinePitchFeed;  // RED or MAGENTA
 
-    private:
-        std::shared_ptr<GOLine> m_LineIntersect;
-        std::shared_ptr<GOLine> m_LineDepthFaceEdge1;
-        std::shared_ptr<GOLine> m_LineDepthFaceEdge2;
+            std::shared_ptr<GOText> m_GuideTxtRollPitch;  // WHITE
 
-    friend class CutChainSawFeedback;
-    };
-
-    class ChainSawCutPlaneVisualizer: public CutPlaneVisualizer {
-    public:
-        ChainSawCutPlaneVisualizer() = default;
-
-    friend class CutChainSawFeedback;
-    };
-
-    class CutChainSawFeedVisualizer : public FeedbackVisualizer {
-    public:
-        CutChainSawFeedVisualizer();
+        private:
+            /// @brief The angle acceptance for the cut orientation, under this value is conside correct
+            float m_tolAangleAcceptance = 0.9f;  // decimal fraction of a degree
         
-        CutChainSawAngleFeedVisualizer& GetAngleFeedVisualizer() { return m_AngleFeedVisualizer; }
-        CutChainSawDepthFeedVisualizer& GetDepthFeedVisualizer() { return m_DepthFeedVisualizer; }
+        friend class CutChainSawFeedback;
 
-    private:
-        CutChainSawAngleFeedVisualizer m_AngleFeedVisualizer;
-        CutChainSawDepthFeedVisualizer m_DepthFeedVisualizer;
+    };
 
-        std::shared_ptr<GOText> m_GuideTxtEnd;
-        std::shared_ptr<GOText> m_GuideTxtChainBase;
-        std::shared_ptr<GOText> m_GuideTxtChainEnd;
+    class CutChainSawAngleFeedVisualizer : public FeedbackVisualizer
+    {
+        public:
+            CutChainSawAngleFeedVisualizer();
 
-        std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth1;
-        std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth2;
+        private:
+            std::shared_ptr<GOLine> m_LineEnd;
+            std::shared_ptr<GOLine> m_LineChainBase;
+            std::shared_ptr<GOLine> m_LineChainEnd;
+
+        friend class CutChainSawFeedback;
+        };
+
+        class CutChainSawDepthFeedVisualizer : public FeedbackVisualizer
+        {
+        public:
+            CutChainSawDepthFeedVisualizer();
+
+        private:
+            std::shared_ptr<GOLine> m_LineIntersect;
+            std::shared_ptr<GOLine> m_LineDepthFaceEdge1;
+            std::shared_ptr<GOLine> m_LineDepthFaceEdge2;
 
         friend class CutChainSawFeedback;
     };
 
-    class CutChainSawFeedback : public FabFeedback {
-    public:
-        CutChainSawFeedback() = default;
+    class ChainSawCutPlaneVisualizer: public CutPlaneVisualizer
+    {
+        public:
+            ChainSawCutPlaneVisualizer() = default;
 
-        void Update() override;
-        void Activate() override;
-        void Deactivate() override;
+        friend class CutChainSawFeedback;
+        };
 
-        // FIXME: maybe we can have a "CutFeedback" class for such fuctions
-        inline void EnableCutPlane(bool enable) { 
-            m_ToShowCutPlane = enable;
-            if(enable) m_CutPlaneVisualizer.Activate();
-            else m_CutPlaneVisualizer.Deactivate();
-        }
-    
-    private:
-        void updateCutPlane();
+        class CutChainSawFeedVisualizer : public FeedbackVisualizer
+        {
+        public:
+            CutChainSawFeedVisualizer();
+            
+            CutChainSawAngleFeedVisualizer& GetAngleFeedVisualizer() { return m_AngleFeedVisualizer; }
+            CutChainSawDepthFeedVisualizer& GetDepthFeedVisualizer() { return m_DepthFeedVisualizer; }
 
-        glm::vec3 m_NormStart;
-        glm::vec3 m_NormEnd;
-        glm::vec3 m_NormalVec;
-        glm::vec3 m_ChainBase;
-        glm::vec3 m_ChainMid;
-        glm::vec3 m_ChainEnd;
+        private:
+            CutChainSawAngleFeedVisualizer m_AngleFeedVisualizer;
+            CutChainSawDepthFeedVisualizer m_DepthFeedVisualizer;
 
-        bool m_ToShowCutPlane = true;
+            std::shared_ptr<GOText> m_GuideTxtEnd;
+            std::shared_ptr<GOText> m_GuideTxtChainBase;
+            std::shared_ptr<GOText> m_GuideTxtChainEnd;
+
+            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth1;
+            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth2;
+
+            friend class CutChainSawFeedback;
+    };
+
+    class CutChainSawFeedback : public FabFeedback
+    {
+        public:
+            CutChainSawFeedback() = default;
+
+            void Update() override;
+            void Activate() override;
+            void Deactivate() override;
+
+            // FIXME: maybe we can have a "CutFeedback" class for such fuctions
+            inline void EnableCutPlane(bool enable) { 
+                m_ToShowCutPlane = enable;
+                if(enable) m_CutPlaneVisualizer.Activate();
+                else m_CutPlaneVisualizer.Deactivate();
+            }
+        
+        private:
+            void updateCutPlane();
+
+            glm::vec3 m_NormStart;
+            glm::vec3 m_NormEnd;
+            glm::vec3 m_NormalVec;
+            glm::vec3 m_ChainBase;
+            glm::vec3 m_ChainMid;
+            glm::vec3 m_ChainEnd;
+
+            bool m_ToShowCutPlane = false;
 
 
-    private:
-        CutChainSawFeedVisualizer m_Visualizer;
-        ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;
+        private:
+            CutChainSawFeedVisualizer m_Visualizer;
+            ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;
+            CutOrientationVisualizer m_CutOrientationVisualizer;
     };
 }
