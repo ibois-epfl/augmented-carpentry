@@ -31,6 +31,8 @@ scanned_map
 *.so
 *.dylib
 *.dll
+# make an exception for GH_IO.dll
+!GH_IO.dll
 
 # Fortran module files
 *.mod
