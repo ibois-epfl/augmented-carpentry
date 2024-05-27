@@ -11,11 +11,13 @@
 #include "AIAC/UI/ClrPalette.h"
 #include "AIAC/UI/CustomLogos.h"
 #include "LayerCameraCalib.h"
+#include "LayerLogRecorder.h"
 
 #include "ttool.hh"
 
 #include "utils/utils.h"
 #include "LayerUtils.h"
+
 
 namespace AIAC
 {
@@ -59,7 +61,6 @@ namespace AIAC
         StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
         StackPane(PaneUI("Utils",        true,      AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
-
         m_IsOpen = new bool(true);
     }
 
@@ -85,6 +86,7 @@ namespace AIAC
             ShowMenuBar();
             ShowMainUI();
             ShowSceneViewport();
+            ShowLogRecorderUI();
 
             if(m_IsCombiningMap){
                 ShowCombineMapPopup();
@@ -1139,5 +1141,20 @@ namespace AIAC
         if (m_FileSelectDefaultPath[m_FileSelectDefaultPath.length()-1] != '/') {
             m_FileSelectDefaultPath += "/";
         };
+    }
+
+    void LayerUI::ShowLogRecorderUI() {
+        ImGui::Begin("Log Recorder", m_IsOpen);
+
+        if (!AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsRecording()){
+            if(ImGui::Button("Start", ImVec2(-1, 40))){
+                AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording();
+            }
+        } else {
+            if(ImGui::Button("Stop", ImVec2(-1, 40))){
+                AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StopRecording();
+            }
+        }
+        ImGui::End();
     }
 }

@@ -8,13 +8,9 @@
     <img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" href="https://github.com/ellerbrock/open-source-badges/">
 </p>
 
-TEST
 
 # Augmented Carpentry
 
-## Download the repo
-```bash
-git clone --recursive https://github.com/ibois-epfl/augmented-carpentry.git
 ```
 or
 ```bash

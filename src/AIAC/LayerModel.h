@@ -26,7 +26,7 @@ namespace AIAC
         /**
          * @brief Load a .acim model from a file.
          */
-        void LoadACInfoModel(std::string path);
+        void LoadACInfoModel(const std::string& path);
 
         /**
          * @brief Reload the ACInfoModel from the current path from config.
@@ -36,20 +36,47 @@ namespace AIAC
         /**
          * @brief Load a .ply model from a file.
          */
-        void LoadScannedModel(std::string path);
+        void LoadScannedModel(const std::string& path);
+
+        /**
+         * @brief Return the filepath to the loaded ACInfoModel.
+         */
+        inline const std::string& GetACInfoModelPath() const { return m_ACInfoModelPath; }
+
+        /**
+         * @brief Return the filepath to the loaded ScannedModel.
+         */
+        inline const std::string& GetScannedModelPath() const { return m_ScannedModelPath; }
 
         /**
          * @brief Return the ACInfoModel.
          */
         inline ACInfoModel& GetACInfoModel() { return m_ACInfoModel; }
+
         /**
          * @brief Get the Scanned Model object
          */
         inline ScannedModel& GetScannedModel() { return m_ScannedModel; }
+
         /**
-         * @brief Get the Align Offset object
+         * @brief Get the Align Offset of the model
          */
         inline float GetAlignOffset() { return m_AlignOffset; }
+
+        /**
+         * @brief Get the rotation position of the model
+         */
+        inline int GetAlignRotation() const { return m_AlignRotation; }
+
+        /**
+         * @brief Get the flip status of the model
+         */
+        inline bool GetAlignFlip() const { return m_AlignFlip; }
+
+        /**
+         * @brief Get the transform matrix of the model
+         */
+        inline glm::mat4x4 GetTransformMat() const { return m_CumulativeTransformMat; }
 
         /**
          * @brief Change the align offset. The value is in TSLAM unit.
@@ -118,11 +145,18 @@ namespace AIAC
         }
 
     private:
+        std::string m_ACInfoModelPath;
+        std::string m_ScannedModelPath;
+
         // ModelLoader m_ModelLoader;
         ACInfoModel m_ACInfoModel;
         ScannedModel m_ScannedModel;
         float m_AlignOffset = 0.0f;
         int m_AlignRotation = 0;
         bool m_AlignFlip = false;
+
+        // The cumulative transformation matrix of the model, from ACIM to ScannedModel, regarding the offset, rotation, and flip.
+        // Since the model is transformed multiple times relatively during adjusting, we need to recorded it in this way.
+        glm::mat4x4 m_CumulativeTransformMat = glm::mat4(1.0f);
     };
 }

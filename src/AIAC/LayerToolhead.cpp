@@ -49,6 +49,7 @@ namespace AIAC
             {
                 TTool->DrawShaded(currentFrame);
             }
+            m_Pose = TTool->GetPose();
         }
 
         if (m_TtoolState == ttool::EventType::Tracking)

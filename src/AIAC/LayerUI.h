@@ -63,6 +63,8 @@ namespace AIAC {
         void LoadReconstructParams();
         void ShowSaveVideoRecorderFileDialog();
 
+        void ShowLogRecorderUI();
+
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         void SetPaneUICamera();
         void SetPaneUISlam();
