@@ -28,6 +28,8 @@ namespace AIAC
         inline const cv::Mat GetCamPoseCv() { return m_CamPose; }
         glm::mat4 GetCamPoseGlm();
         glm::mat4 GetInvCamPoseGlm();
+        void GetCamPoseQuaternionAndTvec(cv::Vec4f &quaternion, cv::Vec3f &tvec);
+
         inline AIAC::Image &GetProcessedFrame() { return m_ProcessedFrame; }
 
         void GetCamPoseInObjCoord(cv::Mat &rotationMatrix, cv::Mat &tvec);
