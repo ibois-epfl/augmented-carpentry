@@ -64,7 +64,7 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
     std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
     CopyFile(acimModelPath, m_LogFolderPath + "/AC_info_model.acim");
     CopyFile(scannedModelPath, m_LogFolderPath + "/scanned_model.ply");
-    CopyFile(ttoolModelPath, m_LogFolderPath + "/TTool_config.yaml");
+//    CopyFile(ttoolModelPath, m_LogFolderPath + "/TTool_config.yaml");
 
     // start recording
     m_LogFilePath = m_LogFolderPath + "/log.txt";
