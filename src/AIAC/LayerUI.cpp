@@ -1145,31 +1145,14 @@ namespace AIAC
 
     void LayerUI::ShowLogRecorderUI() {
         ImGui::Begin("Log Recorder", m_IsOpen);
+
         if (!AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsRecording()){
-//            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GREEN);
             if(ImGui::Button("Start", ImVec2(-1, 40))){
                 AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording();
             }
-//            ImGui::PopStyleColor();
         } else {
-            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_RED);
             if(ImGui::Button("Stop", ImVec2(-1, 40))){
                 AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StopRecording();
-            }
-            ImGui::PopStyleColor();
-
-            if(AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsPaused()) {
-                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_YELLOW);
-                if(ImGui::Button("Resume", ImVec2(-1, 40))){
-                    AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->ResumeRecording();
-                }
-                ImGui::PopStyleColor();
-            } else {
-                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GREY);
-                if(ImGui::Button("Pause", ImVec2(-1, 40))) {
-                    AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->PauseRecording();
-                }
-                ImGui::PopStyleColor();
             }
         }
         ImGui::End();

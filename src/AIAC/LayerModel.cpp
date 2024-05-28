@@ -50,6 +50,7 @@ namespace AIAC
         bool succeed = m_ScannedModel.Load(path);
         if(succeed) {
             m_ScannedModelPath = path;
+            m_CumulativeTransformMat = glm::mat4(1.0f);
 
             AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: SCANNED_MODEL, path);
             AlignModels();
