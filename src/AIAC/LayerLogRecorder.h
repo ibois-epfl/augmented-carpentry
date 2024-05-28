@@ -29,12 +29,26 @@ namespace AIAC
         void StopRecording();
 
         /**
-         * @brief Check if the recorder is on
+         * @brief Pause recording
+         */
+        void PauseRecording();
+
+        /**
+         * @brief Pause recording
+         */
+        void ResumeRecording();
+
+        /**
+         * @brief the recorder is on
          *
          * @return true if it's recording, false otherwise
          */
         bool IsRecording() const { return m_IsRecording; }
 
+        /**
+         * @brief the recoder is paused
+         */
+         bool IsPaused() const { return m_IsPaused; }
     private:
         /**
          * @brief log header information to the file
@@ -49,7 +63,12 @@ namespace AIAC
         /**
          * @brief Log the TTool status & pose of the current frame
          */
-        void LogTTool();
+        void LogTToolHead();
+
+        /**
+         * @brief Log the TTool pose
+         */
+        void LogTToolPose();
 
         /**
          * @brief Initialize the variables storing TTool's state
@@ -81,6 +100,7 @@ namespace AIAC
 
     private:
         bool m_IsRecording = false;
+        bool m_IsPaused = false;
         std::string m_LogFolderPath;
         std::string m_LogFilePath;
         std::ofstream m_LogFile;

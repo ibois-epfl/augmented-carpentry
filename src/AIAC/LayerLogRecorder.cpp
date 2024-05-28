@@ -12,11 +12,14 @@ void AIAC::LayerLogRecorder::OnAttach() {
 }
 
 void AIAC::LayerLogRecorder::OnFrameStart() {
-    if (!m_IsRecording) return;
+    if (!m_IsRecording || m_IsPaused) return;
+
+    bool isTracked = AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked();
 
     m_LogFile << "#" << m_FrameCount << " " << GetCurrentTimestamp() << std::endl;
-    LogSlamStatus();
-    LogTTool();
+    if (isTracked) LogSlamStatus();
+    LogTToolHead();
+    if (isTracked) LogTToolPose();
     LogACIM();
     m_FrameCount++;
 }
@@ -61,7 +64,6 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
     std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
     CopyFile(acimModelPath, m_LogFolderPath + "/AC_info_model.acim");
     CopyFile(scannedModelPath, m_LogFolderPath + "/scanned_model.ply");
-    CopyFile(ttoolModelPath, m_LogFolderPath + "/TTool_config.yaml");
 
     // start recording
     m_LogFilePath = m_LogFolderPath + "/log.txt";
@@ -99,6 +101,16 @@ void AIAC::LayerLogRecorder::StopRecording() {
     AIAC_INFO("Done!");
 }
 
+void AIAC::LayerLogRecorder::PauseRecording() {
+    m_IsPaused = true;
+    m_LogFile << "Pause" << std::endl;
+}
+
+void AIAC::LayerLogRecorder::ResumeRecording() {
+    m_IsPaused = false;
+    InitACIMStatus();
+    InitTToolStatus();
+}
 void AIAC::LayerLogRecorder::LogHeader() {
     // get the latest version of the TTool files on Zenodo
     std::string cmd = "curl -Ls -o /dev/null -w %{url_effective} https://zenodo.org/doi/10.5281/zenodo.7956930";
@@ -119,6 +131,8 @@ void AIAC::LayerLogRecorder::LogHeader() {
     m_LogFile << "ACIM-activate-component <component_id>                            // ACIM Activated Component" << std::endl;
     m_LogFile << "ACIM-component-status <component_id> <status>                     // ACIM Component Status"    << std::endl;
     m_LogFile << "ACIM-transform <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>          // ACIM Transformation"      << std::endl;
+    m_LogFile << "Pause                                                             // Paused by user"           << std::endl;
+
     m_LogFile << std::endl;
 
     m_LogFile << "[Init]" << std::endl;
@@ -144,17 +158,15 @@ void AIAC::LayerLogRecorder::LogSlamStatus() {
               << quaternion[0] << " " << quaternion[1] << " " << quaternion[2] << " " << quaternion[3] << endl;
 }
 
-void AIAC::LayerLogRecorder::LogTTool() {
-    // toolhead change event
-    bool toolheadChanged = false;
+void AIAC::LayerLogRecorder::LogTToolHead() {
     std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetName();
     if (m_TToolPreviousToolheadName.empty() || (!toolheadName.empty() && toolheadName != m_TToolPreviousToolheadName)) {
-        toolheadChanged = true;
-
         m_LogFile << "TTool-head " << toolheadName << endl;
         m_TToolPreviousToolheadName = toolheadName;
     }
+}
 
+void AIAC::LayerLogRecorder::LogTToolPose() {
     // position
     std::string status;
 
@@ -182,7 +194,7 @@ void AIAC::LayerLogRecorder::LogTTool() {
 void AIAC::LayerLogRecorder::InitTToolStatus() {
     m_TToolPreviousToolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->GetName();
     m_LogFile << "TTool-head " << m_TToolPreviousToolheadName << endl;
-    LogTToolTransformation("Init");
+    LogTToolPose();
 }
 
 void AIAC::LayerLogRecorder::LogTToolTransformation(const std::string& status){
