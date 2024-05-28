@@ -184,7 +184,7 @@ void AIAC::LayerLogRecorder::LogTToolPose() {
     }
 
     // The status is not "PoseInput" or "Tracking", meaning that the position is the same, no need to log
-    if (status[0] == 'N' && !toolheadChanged) { // 'N' for "None"
+    if (status[0] == 'N') { // 'N' for "None"
         return;
     }
 
@@ -275,4 +275,3 @@ void AIAC::LayerLogRecorder::LogACIMTransformation() {
     m_LogFile << "ACIM-transform " << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
               << qvec[0] << " " << qvec[1] << " " << qvec[2] << " " << qvec[3] << endl;
 }
-
