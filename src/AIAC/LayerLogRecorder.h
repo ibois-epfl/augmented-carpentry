@@ -49,7 +49,6 @@ namespace AIAC
          * @brief the recoder is paused
          */
          bool IsPaused() const { return m_IsPaused; }
-
     private:
         /**
          * @brief log header information to the file
