@@ -64,6 +64,7 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
     std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
     CopyFile(acimModelPath, m_LogFolderPath + "/AC_info_model.acim");
     CopyFile(scannedModelPath, m_LogFolderPath + "/scanned_model.ply");
+//    CopyFile(ttoolModelPath, m_LogFolderPath + "/TTool_config.yaml");
 
     // start recording
     m_LogFilePath = m_LogFolderPath + "/log.txt";
@@ -111,6 +112,7 @@ void AIAC::LayerLogRecorder::ResumeRecording() {
     InitACIMStatus();
     InitTToolStatus();
 }
+
 void AIAC::LayerLogRecorder::LogHeader() {
     // get the latest version of the TTool files on Zenodo
     std::string cmd = "curl -Ls -o /dev/null -w %{url_effective} https://zenodo.org/doi/10.5281/zenodo.7956930";
@@ -132,7 +134,6 @@ void AIAC::LayerLogRecorder::LogHeader() {
     m_LogFile << "ACIM-component-status <component_id> <status>                     // ACIM Component Status"    << std::endl;
     m_LogFile << "ACIM-transform <t.x> <t.y> <t.z> <q.x> <q.y> <q.z> <q.w>          // ACIM Transformation"      << std::endl;
     m_LogFile << "Pause                                                             // Paused by user"           << std::endl;
-
     m_LogFile << std::endl;
 
     m_LogFile << "[Init]" << std::endl;
@@ -181,11 +182,6 @@ void AIAC::LayerLogRecorder::LogTToolPose() {
         default:
             status = "None";
             break;
-    }
-
-    // The status is not "PoseInput" or "Tracking", meaning that the position is the same, no need to log
-    if (status[0] == 'N' && !toolheadChanged) { // 'N' for "None"
-        return;
     }
 
     LogTToolTransformation(status);
@@ -275,4 +271,3 @@ void AIAC::LayerLogRecorder::LogACIMTransformation() {
     m_LogFile << "ACIM-transform " << tvec[0] << " " << tvec[1] << " " << tvec[2] << " "
               << qvec[0] << " " << qvec[1] << " " << qvec[2] << " " << qvec[3] << endl;
 }
-
