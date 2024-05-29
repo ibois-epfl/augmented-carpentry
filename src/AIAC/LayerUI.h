@@ -68,7 +68,6 @@ namespace AIAC {
         inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
         void SetPaneUICamera();
         void SetPaneUISlam();
-        void SetPaneUIRender();
         void SetPaneUIToolhead();
         void SetPaneUIACIM();
         void SetPaneUIFeedback();
@@ -78,8 +77,6 @@ namespace AIAC {
         void SetGlobalViewUI(ImVec2 viewportSize);
 
     private:
-        int m_testSlider = 0;
-
         AIAC::Image m_LogoBlack;
         AIAC::Image m_LogoLightClr;
 

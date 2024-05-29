@@ -28,11 +28,13 @@ namespace AIAC
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
 
+        // styling of the main window
         ImGui::StyleColorsLight();
         ImGuiStyle& style = ImGui::GetStyle();
         style.Colors[ImGuiCol_MenuBarBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.05f);
         style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
-        style.ScrollbarSize = 20.0f;
+        
+        style.ScrollbarSize = 30.0f;
 
         style.WindowRounding = 4.0f;
         style.ChildRounding = 4.0f;
@@ -53,13 +55,12 @@ namespace AIAC
 
         // Set panes UI for layers
         //                 Label       Collapse             PaneContent
-        StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-        StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
-        StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
-        StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
-        StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
-        StackPane(PaneUI("Utils",        true,      AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+        StackPane(PaneUI("Camera",          false,       AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Mapping",         true,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("ACIM",            true,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
+        StackPane(PaneUI("Feedback",        true,        AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
+        StackPane(PaneUI("Toolhead",        true,        AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
+        StackPane(PaneUI("Utils",           false,       AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
         m_IsOpen = new bool(true);
     }
@@ -137,7 +138,7 @@ namespace AIAC
         ImGui::Image(m_LogoLightClr.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
-        
+
         for (auto& pane : m_PaneUIStack) pane->Show();
 
         ImGui::End();
@@ -317,35 +318,18 @@ namespace AIAC
             ImGui::PopStyleColor();
         ImGui::EndChild();
 
+#ifdef ENABLE_DEV_UI
         ImGui::Checkbox("Show Tag", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToShowTag);
         ImGui::Checkbox("Process Frames", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToProcess);
         ImGui::Checkbox("Enhance Photo", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToEnhance);
 
         ImGui::Text("Tracked: %s", AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked() ? "Yes" : "No");
+#endif
 
+#ifdef ENABLE_DEV_UI
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
-    }
-
-    void LayerUI::SetPaneUIRender()
-    {
-        // ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
-//         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
-//         if(ImGui::Button("Load Digital Model")){
-//             ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
-//         }
-//         if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
-//         {
-//             if (ImGuiFileDialog::Instance()->IsOk())
-//             {
-//                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-//                 // TODO: Add ply to renderer
-//                 AIAC_INFO("Loading Digital Model: {}", filePathName);
-//                 AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
-// //                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
-//             }
-//             ImGuiFileDialog::Instance()->Close();
-//         }
+#endif
     }
 
     void LayerUI::SetPaneUIACIM()
