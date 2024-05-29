@@ -266,3 +266,8 @@ scanned_map/*
 # do not track the files contained in "temp" folder
 temp/*
 !temp/.gitkeep
+
+# the following files are inside for convinience and for cross-machine compatibility of paths in config.ini
+AC_acims/*
+AC_scanned_map/*
+AC_videorec/*

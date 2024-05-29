@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img src="./assets/images/logos/logo_linux_gray_mc.png" width="140">
+    <img src="./logo.png" width="200">
 </p>
 <p align="center">
     <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build.yml/badge.svg">
@@ -8,13 +8,9 @@
     <img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" href="https://github.com/ellerbrock/open-source-badges/">
 </p>
 
-TEST
 
 # Augmented Carpentry
 
-## Download the repo
-```bash
-git clone --recursive https://github.com/ibois-epfl/augmented-carpentry.git
 ```
 or
 ```bash

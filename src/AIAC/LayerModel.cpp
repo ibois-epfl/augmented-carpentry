@@ -16,11 +16,12 @@ namespace AIAC
     
     void LayerModel::OnAttach()
     {
-        auto acInfoModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
-        auto scannedModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::SCANNED_MODEL, "assets/ACModel/28_scanned_model.ply");
-        bool acimLoaded = m_ACInfoModel.Load(acInfoModelPath);
-        bool scannedModelLoded = m_ScannedModel.Load(scannedModelPath);
-        if(!acimLoaded || !scannedModelLoded){
+        m_ACInfoModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
+        m_ScannedModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::SCANNED_MODEL, "assets/ACModel/28_scanned_model.ply");
+
+        bool acimLoaded = m_ACInfoModel.Load(m_ACInfoModelPath);
+        bool scannedModelLoaded = m_ScannedModel.Load(m_ScannedModelPath);
+        if(!acimLoaded || !scannedModelLoaded){
             AIAC_ERROR("LayerModel::OnAttach() failed to load models");
             return;
         }
@@ -32,19 +33,24 @@ namespace AIAC
     
     void LayerModel::OnFrameStart() {}
 
-    void LayerModel::LoadACInfoModel(std::string path)
+    void LayerModel::LoadACInfoModel(const std::string &path)
     {
         bool succeed = m_ACInfoModel.Load(path);
         if(succeed){
+            m_ACInfoModelPath = path;
+            m_CumulativeTransformMat = glm::mat4(1.0f);
+
             AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: AC_INFO_MODEL, path);
             AlignModels();
         }
     }
 
-    void LayerModel::LoadScannedModel(std::string path)
+    void LayerModel::LoadScannedModel(const std::string& path)
     {
         bool succeed = m_ScannedModel.Load(path);
         if(succeed) {
+            m_ScannedModelPath = path;
+
             AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: SCANNED_MODEL, path);
             AlignModels();
         }
@@ -115,5 +121,6 @@ namespace AIAC
 
         auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
         m_ACInfoModel.Transform(transMat);
+        m_CumulativeTransformMat = transMat * m_CumulativeTransformMat;
     }
 }
