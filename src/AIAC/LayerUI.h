@@ -76,7 +76,6 @@ namespace AIAC {
         void SetGlobalViewUI(ImVec2 viewportSize);
 
     private:
-        AIAC::Image m_LogoBlack;
         AIAC::Image m_LogoLightClr;
 
         AIAC::ImTexture m_SceneViewportImTexture;

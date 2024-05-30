@@ -198,8 +198,6 @@ namespace AIAC
         }
     }
 
-
-
     std::vector<std::string> TimberInfo::GetAllComponentsIDs() const {
         // This is only for C++20, but we're using C++17, I leave it here for future reference
         // #include <ranges>
@@ -235,6 +233,34 @@ namespace AIAC
 
         ShowAllComponents();
         HideAllComponentsExceptCurrent();
+    }
+
+    void TimberInfo::SetNextComponentAsCurrent()
+    {
+        auto ids = GetAllComponentsIDs();
+        auto it = std::find(ids.begin(), ids.end(), m_CurrentComponentID);
+        if(it == ids.end()){
+            AIAC_ERROR("TimberInfo::SetNextComponentAsCurrent() : Current Component ID not found");
+            return;
+        }
+        if(++it == ids.end()){
+            it = ids.begin();
+        }
+        SetCurrentComponentTo(*it);
+    }
+
+    void TimberInfo::SetPrevComponentAsCurrent()
+    {
+        auto ids = GetAllComponentsIDs();
+        auto it = std::find(ids.begin(), ids.end(), m_CurrentComponentID);
+        if(it == ids.end()){
+            AIAC_ERROR("TimberInfo::SetPrevComponentAsCurrent() : Current Component ID not found");
+            return;
+        }
+        if(it == ids.begin()){
+            it = ids.end();
+        }
+        SetCurrentComponentTo(*--it);
     }
 
     void TimberInfo::HideAllComponentsExceptCurrent() {

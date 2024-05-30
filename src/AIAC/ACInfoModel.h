@@ -228,12 +228,31 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+    void SetNextComponentAsCurrent();
+    void SetPrevComponentAsCurrent();
 
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
     inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
+
+public: ///< small utilities to calculate the progress of fabrication
+    /// @brief Get the number of fabricate components
+    inline int GetFabricatedComponents() {
+        int count = 0;
+        for(auto& comp : m_Components){
+            if(comp.second->m_State == ACIMState::DONE)
+                count++;
+        }
+        return count;
+    }
+    /// @brief Get the total number of components
+    inline int GetTotalComponents() { return m_Components.size(); }
+    /// @brief Get the progress of fabrication in percentage
+    inline float GetFabricationProgress() {
+        return (float)GetFabricatedComponents() / GetTotalComponents() * 100;
+    }
 
 public:
     bool IsShowingAllComponents = false;
