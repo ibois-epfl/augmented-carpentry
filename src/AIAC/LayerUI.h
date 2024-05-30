@@ -70,7 +70,6 @@ namespace AIAC {
         void SetPaneUISlam();
         void SetPaneUIToolhead();
         void SetPaneUIACIM();
-        void SetPaneUIFeedback();
         void SetPaneUIUtils();
 
     private:

@@ -59,7 +59,7 @@ namespace AIAC
         /// @brief Get the current classifier log of the ttool
         std::string GetClassifierLog() const { return TTool ? TTool->GetClassifierLog() : "TTool not initialized"; }
         std::vector<std::string> GetClassifierToolheadList() const {return m_ClassifierToolList; }
-    
+
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
         void syncTToolAndACInfoToolhead();
