@@ -122,6 +122,9 @@ public:
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
         std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
 
+    public:  __always_inline
+        double GetRadius() const { return m_Radius; }
+
     private:
         // These values uses original coordinate in xml file
         // i.e. not transformation (rotation / translation) is applied
@@ -220,6 +223,7 @@ public:
 
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
+
     inline Component* GetComponent(const std::string& id) { return m_Components[id]; }
     inline Component* GetCurrentComponent() { 
         if(m_Components.find(m_CurrentComponentID) == m_Components.end())
@@ -253,6 +257,16 @@ public: ///< small utilities to calculate the progress of fabrication
     inline float GetFabricationProgress() {
         return (float)GetFabricatedComponents() / GetTotalComponents() * 100;
     }
+
+private:  ///< utils for visualization
+    /**
+     * @brief Transform the notation from .acim into more lightweight notation
+     * for visuals (e.g. "Hole#1" -> "H1" and "Cut#1" -> "C1")
+     * 
+     * @param id the original id of the component
+     * @return std::string the shortened id for visualization
+     */
+    std::string ShortenComponentID(std::string id);
 
 public:
     bool IsShowingAllComponents = false;

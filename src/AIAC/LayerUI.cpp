@@ -492,6 +492,8 @@ namespace AIAC
             auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
             if (auto hole = dynamic_cast<TimberInfo::Hole*>(currentComp)){
                 if(ImGui::Button("Swap S/E")) hole->SwapStartEnd();
+                ImGui::SameLine();
+                ImGui::Text("Diameter: %.f mm", hole->GetRadius()*2000);
             }
             ImGui::PopStyleVar();
 
