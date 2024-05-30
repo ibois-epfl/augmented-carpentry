@@ -21,7 +21,6 @@
 
 namespace AIAC
 {
-
     void LayerUI::OnAttach()
     {
         IMGUI_CHECKVERSION();
@@ -54,7 +53,7 @@ namespace AIAC
         style.Colors[ImGuiCol_TextSelectedBg]        = AIAC_UI_SPARK_ORANGE;
         
         style.Colors[ImGuiCol_TitleBg]               = AIAC_UI_DARK_GREY;
-        style.Colors[ImGuiCol_TitleBgCollapsed] = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_TitleBgCollapsed]      = AIAC_UI_DARK_GREY;
         style.Colors[ImGuiCol_TitleBgActive]         = AIAC_UI_SPARK_ORANGE;
 
         style.Colors[ImGuiCol_Header]                = AIAC_UI_DARK_GREY;
@@ -67,12 +66,11 @@ namespace AIAC
         style.Colors[ImGuiCol_FrameBg]               = AIAC_UI_DARK_GREY;
 
         style.Colors[ImGuiCol_ScrollbarBg] = AIAC_UI_LIGHT_GREY;
-        style.Colors[ImGuiCol_ScrollbarGrab] = AIAC_UI_DARK_GREY;
-        style.Colors[ImGuiCol_ScrollbarGrabHovered] = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_ScrollbarGrab] = AIAC_UI_LIGHT_GREY;
+        style.Colors[ImGuiCol_ScrollbarGrabHovered] = AIAC_UI_SPARK_ORANGE;
         style.Colors[ImGuiCol_ScrollbarGrabActive] = AIAC_UI_SPARK_ORANGE;
 
         style.ScrollbarSize = 30.0f;
-
         style.WindowRounding = 4.0f;
         style.ChildRounding = 4.0f;
         style.FrameRounding = 4.0f;
@@ -554,22 +552,21 @@ namespace AIAC
         // selection of toolhead
         float windowHeigh = ImGui::GetWindowHeight();
         float availableHeight = ImGui::GetContentRegionAvail().y;
-        ImGui::BeginChild(
-            "toolhead_selection",
-            ImVec2(0, windowHeigh+400),
-            false,
-            ImGuiWindowFlags_NoScrollbar
-        );
         std::string toolheadNameActive = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolheadName();
-        ImGui::Text("Active toolhead: %s", toolheadNameActive.c_str());
-
         std::vector<std::string> toolheadNames;
         for (auto& toolhead : AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetToolheadNames())
             toolheadNames.emplace_back(toolhead);
-
         int numbButtonPerRow = 4;
         ImVec2 sizeButton = ImVec2(80, 80);
+        int totalHeight = toolheadNames.size() / numbButtonPerRow * sizeButton.y;
 
+        ImGui::Text("Active toolhead: %s", toolheadNameActive.c_str());
+        ImGui::BeginChild(
+            "toolhead_selection",
+            ImVec2(0, totalHeight+sizeButton.y),
+            false,
+            ImGuiWindowFlags_NoScrollbar
+        );
         for (int i = 0; i < toolheadNames.size(); i++)
         {
             if (i % numbButtonPerRow != 0)
@@ -605,9 +602,13 @@ namespace AIAC
 
             ImGui::PopStyleColor();
         }
+        ImGui::EndChild();
 
+        ImGui::Text("Tools graphics:");
+        ImGui::BeginChild("toolhead_graphics", ImVec2(-1, 40));
         // draw the ttool silhouette
         if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
+        ImGui::SameLine();
 
 #ifdef ENABLE_DEV_UI
         if(ImGui::Checkbox("Draw Shaded", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowShaded));
@@ -623,6 +624,7 @@ namespace AIAC
                 AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
             }
         };
+        ImGui::EndChild();
 
 #ifdef ENABLE_DEV_UI
         ImGui::Text("Toolhead Classifier:");
@@ -689,98 +691,120 @@ namespace AIAC
         }
 #endif
 
-        ImGui::Text("TTool control:");
-        ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
-        ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
-        ImGui::SameLine();
-        ImGui::RadioButton("Track", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 0);
-        ImGui::SameLine();
-        ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
-        ImGui::EndChild();
+        ImGui::Text("Toolhead control:");
+        ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 400), true, ImGuiWindowFlags_HorizontalScrollbar);
+        
+        ImVec2 sizeSquareButton = ImVec2(70, 70);
+        ImGui::PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0.5, 0.5));
 
-        if (AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI != -1)
+        ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_SEA_GREEN);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_GREEN);
+        if(ImGui::Button("save \npose", sizeSquareButton))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
+        ImGui::SameLine();
+        ImGui::PopStyleColor(2);
+
+        static bool isButtonPressed = false;
+        std::string buttonLabel = isButtonPressed ? "Stop \nrefine" : "Start \nrefine";
+        if (!isButtonPressed) 
         {
-            ImGui::Text("Toolhead pose inputs:");
-            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 350), true, ImGuiWindowFlags_HorizontalScrollbar);
-            
-            if(ImGui::Button("save pose", ImVec2(-1, 40)))
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
-
-            if(ImGui::Button("reset to last saved pose", ImVec2(-1, 40)))
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetToLastSavedPose();
-
-            if(ImGui::Button("reset to original config pose", ImVec2(-1, 40)))
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetPoseFromConfig();
-            
-            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
-            ImGui::PushStyleVar(ImGuiStyleVar_GrabMinSize, 100);
-            ImGui::PushStyleVar(ImGuiStyleVar_GrabRounding, 5);
-            ImGui::PushItemWidth(-30);
-            float sliderF = 0.f;
-            ImGui::SliderFloat("Teq", &sliderF, -0.01f, 0.01f, "<backward T forward>", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderF != 0.f)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
-                if (sliderF > 0.f)
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('e');
-                else
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('q');
-            }
-            sliderF = 0.f;
-            ImGui::SliderFloat("Tda", &sliderF, -0.01f, 0.01f, "<left T right>", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderF != 0.f)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
-                if (sliderF > 0.f)
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('d');
-                else
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('a');
-            }
-            sliderF = 0.f;
-            ImGui::SliderFloat("Tws", &sliderF, -0.01f, 0.01f, "<down T up>", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderF != 0.f)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
-                if (sliderF > 0.f)
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('w');
-                else
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('s');
-            }
-            sliderF = 0.f;
-            ImGui::SliderFloat("Rjl", &sliderF, -3.0f, 3.0f, "<left R right>", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderF != 0.f)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
-                if (sliderF > 0.f)
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('j');
-                else
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('l');
-            }
-            sliderF = 0.f;
-            ImGui::SliderFloat("Rik", &sliderF, -3.0f, 3.0f, "<down R up>", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderF != 0.f)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
-                if (sliderF > 0.f)
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('i');
-                else
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('k');
-            }
-            sliderF = 0.f;
-            ImGui::SliderFloat("Ruo", &sliderF, -3.0f, 3.0f, "<backward R forward>", ImGuiSliderFlags_AlwaysClamp);
-            if (sliderF != 0.f)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
-                if (sliderF > 0.f)
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('u');
-                else
-                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('o');
-            }
-            ImGui::PopStyleVar(3);
-            ImGui::PopItemWidth();
-            ImGui::EndChild();
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GRAPE_PURPLE);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_GRAPE_PURPLE);
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI = -1;
         }
+        else
+        {
+            // When the button is pressed, set it to red and change the value
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_CARMINE_RED);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_CARMINE_RED);
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI = 0;
+        }
+        if (ImGui::Button(buttonLabel.c_str(), sizeSquareButton))
+            isButtonPressed = !isButtonPressed;
+        ImGui::SameLine();
+        ImGui::PopStyleColor(2);
 
+        ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_LIGHT_GREY);
+        if(ImGui::Button("reset \nlast \npose", sizeSquareButton))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetToLastSavedPose();
+        ImGui::SameLine();
+        ImGui::PopStyleColor(2);
+
+        ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_LIGHT_GREY);
+        if(ImGui::Button("reset \nconfig \npose", sizeSquareButton))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetPoseFromConfig();
+        ImGui::PopStyleColor(2);
+
+        ImGui::PopStyleVar();
+        
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
+        ImGui::PushStyleVar(ImGuiStyleVar_GrabMinSize, 100);
+        ImGui::PushStyleVar(ImGuiStyleVar_GrabRounding, 5);
+        ImGui::PushItemWidth(-30);
+        float sliderF = 0.f;
+        ImGui::SliderFloat("Teq", &sliderF, -0.01f, 0.01f, "<backward T forward>", ImGuiSliderFlags_AlwaysClamp);
+        if (sliderF != 0.f)
+        {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
+            if (sliderF > 0.f)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('e');
+            else
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('q');
+        }
+        sliderF = 0.f;
+        ImGui::SliderFloat("Tda", &sliderF, -0.01f, 0.01f, "<left T right>", ImGuiSliderFlags_AlwaysClamp);
+        if (sliderF != 0.f)
+        {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
+            if (sliderF > 0.f)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('d');
+            else
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('a');
+        }
+        sliderF = 0.f;
+        ImGui::SliderFloat("Tws", &sliderF, -0.01f, 0.01f, "<down T up>", ImGuiSliderFlags_AlwaysClamp);
+        if (sliderF != 0.f)
+        {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationTranslationScale(abs(sliderF));
+            if (sliderF > 0.f)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('w');
+            else
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('s');
+        }
+        sliderF = 0.f;
+        ImGui::SliderFloat("Rjl", &sliderF, -3.0f, 3.0f, "<left R right>", ImGuiSliderFlags_AlwaysClamp);
+        if (sliderF != 0.f)
+        {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
+            if (sliderF > 0.f)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('j');
+            else
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('l');
+        }
+        sliderF = 0.f;
+        ImGui::SliderFloat("Rik", &sliderF, -3.0f, 3.0f, "<down R up>", ImGuiSliderFlags_AlwaysClamp);
+        if (sliderF != 0.f)
+        {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
+            if (sliderF > 0.f)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('i');
+            else
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('k');
+        }
+        sliderF = 0.f;
+        ImGui::SliderFloat("Ruo", &sliderF, -3.0f, 3.0f, "<backward R forward>", ImGuiSliderFlags_AlwaysClamp);
+        if (sliderF != 0.f)
+        {
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->SetModelManipulationRotationScale(abs(sliderF));
+            if (sliderF > 0.f)
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('u');
+            else
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('o');
+        }
+        ImGui::PopStyleVar(3);
+        ImGui::PopItemWidth();
         ImGui::EndChild();
     }
 
