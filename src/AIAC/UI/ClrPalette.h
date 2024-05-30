@@ -26,3 +26,5 @@
 #define AIAC_UI_SEA_GREEN ImVec4(0.18f, 0.545f, 0.341f, 1.0f)
 #define AIAC_UI_GRAPE_PURPLE ImVec4(0.56f, 0.35f, 0.62f, 1.0f)
 #define AIAC_UI_CARMINE_RED ImVec4(0.59f, 0.0f, 0.09f, 1.0f)
+#define AIAC_UI_YALE_BLUE ImVec4(0.06f, 0.3f, 0.57f, 1.0f)
+#define AIAC_UI_HIBISCUS_RED ImVec4(0.79f, 0.0f, 0.09f, 1.0f)

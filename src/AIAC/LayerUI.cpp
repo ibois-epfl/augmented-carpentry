@@ -78,6 +78,7 @@ namespace AIAC
         style.ScrollbarRounding = 4.0f;
         style.GrabRounding = 4.0f;
         style.TabRounding = 4.0f;
+        style.FramePadding = ImVec2(5, 5);
 
         //---------------------------------------------------------------------------------
 
@@ -563,7 +564,7 @@ namespace AIAC
         ImGui::Text("Active toolhead: %s", toolheadNameActive.c_str());
         ImGui::BeginChild(
             "toolhead_selection",
-            ImVec2(0, totalHeight+sizeButton.y),
+            ImVec2(0, totalHeight+sizeButton.y+30),
             false,
             ImGuiWindowFlags_NoScrollbar
         );
@@ -606,9 +607,6 @@ namespace AIAC
 
         ImGui::Text("Tools graphics:");
         ImGui::BeginChild("toolhead_graphics", ImVec2(-1, 40));
-        // draw the ttool silhouette
-        if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
-        ImGui::SameLine();
 
 #ifdef ENABLE_DEV_UI
         if(ImGui::Checkbox("Draw Shaded", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowShaded));
@@ -692,10 +690,30 @@ namespace AIAC
 #endif
 
         ImGui::Text("Toolhead control:");
-        ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 400), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 470), true, ImGuiWindowFlags_HorizontalScrollbar);
         
-        ImVec2 sizeSquareButton = ImVec2(70, 70);
         ImGui::PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0.5, 0.5));
+
+        ImVec2 sizeShowToolHeadVisualsButton = ImVec2(-1, 60);
+        static bool isButtonVisualsPress = false;
+        std::string buttonVisualLabel = isButtonVisualsPress ? "Show Silhouette" : "Hide Silhouette";
+        if (!isButtonVisualsPress) 
+        {
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_HIBISCUS_RED);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_HIBISCUS_REDs);
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = true;
+        }
+        else
+        {
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_YALE_BLUE);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_YALE_BLUE);
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = false;
+        }
+        if (ImGui::Button(buttonVisualLabel.c_str(), sizeShowToolHeadVisualsButton))
+            isButtonVisualsPress = !isButtonVisualsPress;
+        ImGui::PopStyleColor(2);
+
+        ImVec2 sizeSquareButton = ImVec2(70, 70);
 
         ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_SEA_GREEN);
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_GREEN);
@@ -714,7 +732,6 @@ namespace AIAC
         }
         else
         {
-            // When the button is pressed, set it to red and change the value
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_CARMINE_RED);
             ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_CARMINE_RED);
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI = 0;
