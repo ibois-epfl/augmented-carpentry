@@ -14,7 +14,7 @@ namespace AIAC
     {
     public:
         LayerToolhead()
-            : IsShowSilouhette(true),
+            : IsShowSilouhette(false),
               ToolheadStateUI(-1),
               IsShowToolheadGOInfo(false),
               m_ACScaleFactor(50.0f),

@@ -237,9 +237,9 @@ namespace AIAC
 
     std::string TimberInfo::ShortenComponentID(std::string id) {
         if(id.find("Hole") != std::string::npos){
-            return "H" + id.substr(4);
+            return "H" + id.substr(5);
         } else if(id.find("Cut") != std::string::npos){
-            return "C" + id.substr(3);
+            return "C" + id.substr(4);
         }
         return id;
     }

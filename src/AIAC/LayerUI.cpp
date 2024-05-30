@@ -93,7 +93,7 @@ namespace AIAC
         // Set panes UI for layers
         //                 Label       Collapse             PaneContent
         StackPane(PaneUI("Camera",                            false,        AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Mapping",                           true,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("Mapping",                           false,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
         StackPane(PaneUI("ACIM (Execution model)",            false,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",                          false,         AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
         StackPane(PaneUI("Utils",                             false,        AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
