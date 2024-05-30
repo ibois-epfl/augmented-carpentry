@@ -93,8 +93,8 @@ namespace AIAC
         // Set panes UI for layers
         //                 Label       Collapse             PaneContent
         StackPane(PaneUI("Camera",                            false,        AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Mapping",                           false,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-        StackPane(PaneUI("ACIM (Execution model)",            true,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
+        StackPane(PaneUI("Mapping",                           true,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("ACIM (Execution model)",            false,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
         StackPane(PaneUI("Toolhead",                          false,         AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
         StackPane(PaneUI("Utils",                             false,        AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
@@ -303,12 +303,12 @@ namespace AIAC
 
     void LayerUI::SetPaneUISlam()
     {
-        ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+        ImVec2 sizeButtons = ImVec2(110, 50);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
-            if (ImGui::Button("Open SLAM map"))
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
+            if (ImGui::Button("Open SLAM map", sizeButtons))
                 ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
-
             if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
             {
                 if (ImGuiFileDialog::Instance()->IsOk())
@@ -319,7 +319,10 @@ namespace AIAC
                 ImGuiFileDialog::Instance()->Close();
             }
             ImGui::SameLine();
-            if (ImGui::Button("Open Vocab"))
+            ImGui::PopStyleColor();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GRAPE_PURPLE);
+            if (ImGui::Button("Open Vocab", sizeButtons))
                 ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
 
             if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
@@ -331,10 +334,13 @@ namespace AIAC
                 }
                 ImGuiFileDialog::Instance()->Close();
             }
+            ImGui::PopStyleColor();
         ImGui::EndChild();
+
         ImGui::Text("Mapping Functions:");
-        ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
-            if(ImGui::Button("Start Mapping")){
+        ImGui::BeginChild("mapping_function_child", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
+            if(ImGui::Button("Start Mapping", sizeButtons)){
                 std::string defaultPath = "";
                 defaultPath += "./scanned_map/map-";
                 defaultPath += GetCurrentDateTime();
@@ -343,11 +349,14 @@ namespace AIAC
                 AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStartMappingEvent>());
             }
             ImGui::SameLine();
-            if(ImGui::Button("Combine Map")){
+            ImGui::PopStyleColor();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_PRUSSIAN_BLUE);
+            if(ImGui::Button("Combine Map", sizeButtons)){
                 m_IsCombiningMap = true;
             }
             ImGui::SameLine();
-            if(ImGui::Button("Reconstruct 3D")){
+            if(ImGui::Button("Reconstruct 3D", sizeButtons)){
                 m_IsReconstructing3D = true;
             }
             ImGui::PopStyleColor();
@@ -473,7 +482,6 @@ namespace AIAC
                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
                     }
                     if (isSelected)
-                        // change the color of the selected item
                         ImGui::SetItemDefaultFocus();
                     ImGui::PopStyleColor();
                 }

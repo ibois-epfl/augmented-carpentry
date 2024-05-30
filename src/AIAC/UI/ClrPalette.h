@@ -35,3 +35,5 @@
 #define AIAC_UI_SAPPHIRE_BLUE ImVec4(0.06f, 0.32f, 0.73f, 1.0f)
 #define AIAC_UI_PRUSSIAN_BLUE ImVec4(0.0f, 0.19f, 0.33f, 1.0f)
 #define AIAC_UI_CINNAMON_RED ImVec4(0.82f, 0.41f, 0.12f, 1.0f)
+#define AIAC_UI_APRICOT_ORANGE ImVec4(0.98f, 0.81f, 0.69f, 1.0f)
+#define AIAC_UI_BRONZE_ORANGE ImVec4(0.8f, 0.5f, 0.2f, 1.0f)
