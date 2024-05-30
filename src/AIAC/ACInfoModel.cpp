@@ -38,7 +38,6 @@ namespace AIAC
         AIAC_INFO("Set Current Component to Hole #" + m_ID);
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::CURRENT]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::CURRENT]);
-        m_RadiusLabelGO->SetVisibility(true);
     }
 
     void TimberInfo::Hole::SetAsDone() {
@@ -46,7 +45,6 @@ namespace AIAC
         AIAC_INFO("Set " + m_ID + " as Done");
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::DONE]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::DONE]);
-        m_RadiusLabelGO->SetVisibility(false);
     }
 
     void TimberInfo::Hole::SetAsNotDone() {
@@ -54,7 +52,6 @@ namespace AIAC
         AIAC_INFO("Set " + m_ID + " as Not Done");
         m_AxisGO->SetColor(HOLE_AXIS_COLOR[ACIMState::NOT_DONE]);
         m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[ACIMState::NOT_DONE]);
-        m_RadiusLabelGO->SetVisibility(false);
     }
 
     void TimberInfo::Hole::SwapStartEnd() {
@@ -362,8 +359,6 @@ namespace AIAC
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_StartPointGO);
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_EndPointGO);
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_IDLabelGO);
-                // FIXME: the radius is not pushed to be visualized and it is out of scale (almost the double)
-                // holeInfo.m_GOPrimitives.push_back(holeInfo.m_RadiusLabelGO);
 
                 m_TimberInfo.m_Holes[holeInfo.m_ID] = holeInfo;
                 m_TimberInfo.m_Components[holeInfo.m_ID] = &m_TimberInfo.m_Holes[holeInfo.m_ID];

@@ -53,6 +53,10 @@ namespace AIAC
 
         m_AllPrimitives.push_back(m_LineFaceNormal);
         m_AllPrimitives.push_back(m_LineBladeNormal);
+        m_AllPrimitives.push_back(m_LinePitchFeed);
+        m_AllPrimitives.push_back(m_GuideTxtRollPitch);
+
+        Deactivate();
     }
 
     CutCircularSawFeedbackVisualizer::CutCircularSawFeedbackVisualizer()
@@ -92,8 +96,10 @@ namespace AIAC
     }
 
     void CutCircularSawFeedback::Deactivate() {
-        m_CutPlaneVisualizer.Deactivate();
         m_GeneralVisualizer.Deactivate();
+        m_CutPlaneVisualizer.Deactivate();
+        m_OrientationVisualizer.Deactivate();
+        m_PositionStartVisualizer.Deactivate();
     }
 
     void CutCircularSawFeedback::updateToolPosition() {

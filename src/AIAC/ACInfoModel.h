@@ -140,7 +140,6 @@ public:
         std::shared_ptr<GOCylinder> m_CylinderGO;
         std::shared_ptr<GOPoint> m_StartPointGO;
         std::shared_ptr<GOPoint> m_EndPointGO;
-        std::shared_ptr<GOText> m_RadiusLabelGO;
         std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
