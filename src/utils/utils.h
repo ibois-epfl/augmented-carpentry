@@ -19,13 +19,13 @@ inline std::string GetCurrentDateTime() {
     std::tm* now = std::localtime(&t);
     
     std::ostringstream ss;
-    ss << (now->tm_year + 1900) << '-' 
-       << (now->tm_mon + 1) << '-'
-       <<  now->tm_mday << '-'
-       <<  now->tm_hour << '-'
-       <<  now->tm_min << '-'
-       <<  now->tm_sec;
-    
+    ss << (now->tm_year + 1900) << '-'
+       << std::setw(2) << std::setfill('0') << (now->tm_mon + 1) << '-'
+       << std::setw(2) << std::setfill('0') <<  now->tm_mday << '-'
+       << std::setw(2) << std::setfill('0') <<  now->tm_hour << '-'
+       << std::setw(2) << std::setfill('0') <<  now->tm_min << '-'
+       << std::setw(2) << std::setfill('0') <<  now->tm_sec;
+
     return ss.str();
 }
 
