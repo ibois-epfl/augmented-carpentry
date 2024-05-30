@@ -700,7 +700,7 @@ namespace AIAC
         if (!isButtonVisualsPress) 
         {
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_HIBISCUS_RED);
-            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_HIBISCUS_REDs);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_HIBISCUS_RED);
             AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = true;
         }
         else
