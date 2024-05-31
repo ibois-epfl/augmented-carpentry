@@ -271,3 +271,6 @@ temp/*
 AC_acims/*
 AC_scanned_map/*
 AC_videorec/*
+
+# we are keeping out the .mp4 files on the root
+*.mp4
