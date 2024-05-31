@@ -296,6 +296,14 @@ namespace AIAC
             AIAC_ERROR("ACInfoModel::Load() file does not exist");
             return false;
         }
+        if (std::filesystem::is_directory(path)){
+            AIAC_ERROR("ACInfoModel::Load() path is a directory");
+            return false;
+        }
+        if (path.find(".acim") == std::string::npos){
+            AIAC_ERROR("ACInfoModel::Load() file is not .acim");
+            return false;
+        }
 
         m_FilePath = path;
         
@@ -349,10 +357,6 @@ namespace AIAC
                 auto centerPoint = (holeInfo.m_Start + holeInfo.m_End) * 0.5f;
                 std::string shortenHoleID = m_TimberInfo.ShortenComponentID(holeInfo.m_ID);
                 holeInfo.m_IDLabelGO = GOText::Add(shortenHoleID, centerPoint, m_LabelSize);
-                auto radiusText = std::to_string(holeInfo.m_Radius);
-                radiusText = radiusText.substr(0, radiusText.find(".") + 3);
-                holeInfo.m_RadiusLabelGO = GOText::Add(radiusText, holeInfo.m_Start, m_LabelSize);
-                holeInfo.m_RadiusLabelGO->SetVisibility(false);
 
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_AxisGO);
                 holeInfo.m_GOPrimitives.push_back(holeInfo.m_CylinderGO);
