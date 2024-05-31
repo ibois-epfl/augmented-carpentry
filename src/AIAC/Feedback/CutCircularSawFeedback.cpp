@@ -19,6 +19,8 @@ namespace AIAC
         this->m_LineDistStart->SetColor(GOColor::YELLOW);
         this->m_TxtDistStart->SetColor(GOColor::WHITE);
 
+        this->m_TxtDistStart->SetTextSize(GOTextSize::ExtraSmall);
+
         this->m_AllPrimitives.push_back(m_LineDistStart);
         this->m_AllPrimitives.push_back(m_TxtDistStart);
 
@@ -47,8 +49,14 @@ namespace AIAC
         m_LinePitchFeed->SetColor(GOColor::RED);
         m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
 
+        m_GuideTxtRollPitch->SetTextSize(GOTextSize::ExtraSmall);
+
         m_AllPrimitives.push_back(m_LineFaceNormal);
         m_AllPrimitives.push_back(m_LineBladeNormal);
+        m_AllPrimitives.push_back(m_LinePitchFeed);
+        m_AllPrimitives.push_back(m_GuideTxtRollPitch);
+
+        Deactivate();
     }
 
     CutCircularSawFeedbackVisualizer::CutCircularSawFeedbackVisualizer()
@@ -64,6 +72,8 @@ namespace AIAC
         m_ProjLineOnFace->SetColor(GOColor::CYAN);
         m_ProjLineOfBlade->SetColor(GOColor::CYAN);
         m_TxtBottomDist->SetColor(GOColor::WHITE);
+
+        m_TxtBottomDist->SetTextSize(GOTextSize::ExtraSmall);
 
         m_AllPrimitives.push_back(m_BottomPoint);
         m_AllPrimitives.push_back(m_LineToBottomPt);
@@ -86,8 +96,10 @@ namespace AIAC
     }
 
     void CutCircularSawFeedback::Deactivate() {
-        m_CutPlaneVisualizer.Deactivate();
         m_GeneralVisualizer.Deactivate();
+        m_CutPlaneVisualizer.Deactivate();
+        m_OrientationVisualizer.Deactivate();
+        m_PositionStartVisualizer.Deactivate();
     }
 
     void CutCircularSawFeedback::updateToolPosition() {

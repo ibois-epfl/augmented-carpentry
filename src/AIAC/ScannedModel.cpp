@@ -11,7 +11,6 @@ namespace AIAC
             AIAC_ERROR("ACInfoModel::Load() path is empty");
             return false;
         }
-        
         if(!std::filesystem::exists(path)){
             AIAC_ERROR("ACInfoModel::Load() file does not exist");
             return false;

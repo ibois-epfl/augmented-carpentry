@@ -9,7 +9,7 @@ namespace AIAC
         auto pt2 = GOPoint::Add(5.f, 5.f, 5.f); pt2->SetVisibility(false);
         
         this->m_InfoText = GOText::Add("///", *pt1);
-        this->m_InfoText->SetTextSize(GOTextSize::Small);
+        this->m_InfoText->SetTextSize(GOTextSize::ExtraSmall);
         this->m_InfoText->SetColor(GOColor::WHITE);
 
         this->m_AllPrimitives.push_back(this->m_InfoText);
@@ -24,9 +24,11 @@ namespace AIAC
         
         this->m_HoleLine2ToolEnd = GOLine::Add(*pt1, *pt2);
         this->m_HoleLine2ToolEnd->SetColor(GOColor::RED);
+        this->m_HoleLine2ToolEnd->SetWeight(GOWeight::Bold);
 
         this->m_HoleLine2ToolStart = GOLine::Add(*pt1, *pt2);
         this->m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
+        this->m_HoleLine2ToolStart->SetWeight(GOWeight::Bold);
 
         this->m_HoleLine2ToolEnd->SetVisibility(false);
         this->m_HoleLine2ToolStart->SetVisibility(true);
@@ -42,7 +44,8 @@ namespace AIAC
         auto pt2 = GOPoint::Add(5.f, 5.f, 5.f); pt2->SetVisibility(false);
 
         this->m_GUILineOrientation = GOLine::Add(*pt1, *pt2);
-        this->m_GUILineOrientation->SetColor(GOColor::WHITE);
+        this->m_GUILineOrientation->SetColor(GOColor::MAGENTA);
+        this->m_GUILineOrientation->SetWeight(GOWeight::Thick);
 
         this->m_GUILineOrientation->SetVisibility(true);
 
@@ -129,7 +132,7 @@ namespace AIAC
         std::string depthDrilledScaledMMStr = std::to_string(depthDrilledScaledMM);
 
         // >>>>>>>>>>>>>>>>>
-        // (v) computed feedbacks
+        // (v) computed/visual feedbacks
         this->m_VisText.m_InfoText->SetColor(GOColor::WHITE);
         if ((180.f - this->m_InsideOutDetection) < angle && angle < (180.f + m_InsideOutDetection))
         {
@@ -153,13 +156,26 @@ namespace AIAC
                 this->m_VisText.m_InfoText->SetColor(GOColor::RED);
             }
         }
+        
+        // if the orientation is under 1 degree, change the color to green
         if (angleOrient < this->m_OrientationTolerance)
-            // this->m_VisRotation.m_GUILineOrientation->SetVisibility(false);
-            this->m_VisRotation.Activate();
+            this->m_VisRotation.m_GUILineOrientation->SetColor(GOColor::GREEN);
+        else if (this->m_OrientationTolerance < angleOrient && angleOrient < 5.f)
+            this->m_VisRotation.m_GUILineOrientation->SetColor(GOColor::YELLOW);
+        else if (angleOrient < 10.f && angleOrient >= 5.f)
+        {
+            this->m_VisRotation.m_GUILineOrientation->SetColor(GOColor::ORANGE);
+            this->m_VisText.m_InfoText->SetColor(GOColor::ORANGE);
+        }
+        else if (angleOrient >= 10.f)
+        {
+            this->m_VisRotation.m_GUILineOrientation->SetColor(GOColor::RED);
+            this->m_VisText.m_InfoText->SetColor(GOColor::RED);
+        }
         else
-            // this->m_VisRotation.m_GUILineOrientation->SetVisibility(true);
-            this->m_VisRotation.Deactivate();
+            this->m_VisRotation.m_GUILineOrientation->SetColor(GOColor::MAGENTA);
 
+        // text setting
         std::string test = " s:" + distScaledMMStr + "/a:" + angleOrientRoundedStr + "/e:" + depthDrilledScaledMMStr;
         this->m_VisText.m_InfoText->SetText(test);
         this->m_VisText.m_InfoText->SetAnchor(midPtToolAxis);

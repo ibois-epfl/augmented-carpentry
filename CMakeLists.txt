@@ -36,6 +36,10 @@ option(SILENT_LOGGING "Do not log messages in the terminal if on." ON)
 option(TEST_GRAPHICS "Test graphics by launching opengl with glfw window." ON)
 option(AC_SYNC_GIT_SUBMODULES "Sync to the latest version of submodules" ON)
 mark_as_advanced(AC_SYNC_GIT_SUBMODULES)
+# -------------------- DEV UI OPTIONS --------------------------------
+# This preprocessor variable is used to enable the dev ui in the application.
+# In order to light up the beta tester's experience, the dev ui is disabled by default.
+option(ENABLE_DEV_UI "Enable the dev ui in the application" OFF)
 
 
 # pre-compile variables
@@ -53,6 +57,9 @@ if(ENABLE_ASSERT)
 endif()
 if(SILENT_LOGGING)
     target_compile_definitions(${PROJECT_NAME} PRIVATE SILENT_LOGGING=true)
+endif()
+if(ENABLE_DEV_UI)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE ENABLE_DEV_UI=true)
 endif()
 
 #------------------------------------------------------------------------------------------------------------

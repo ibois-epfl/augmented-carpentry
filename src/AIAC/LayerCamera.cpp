@@ -16,12 +16,13 @@ namespace AIAC
                 m_CurrentDeviceIndex = AIAC::Config::Get<int>("AIAC", "CamID", 0);
                 SetCurrentDeviceIndex(m_CurrentDeviceIndex);
             } else {
-                throw std::runtime_error("No camera found");
+                throw std::runtime_error("No camera found, connect a camera");
             }
         }
         catch(const std::runtime_error& e)
         {
             AIAC_ERROR(e.what());
+            AIAC::Application::GetInstance().Close();
         }
     }
 
