@@ -122,6 +122,9 @@ public:
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
         std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
 
+    public:  __always_inline
+        double GetRadius() const { return m_Radius; }
+
     private:
         // These values uses original coordinate in xml file
         // i.e. not transformation (rotation / translation) is applied
@@ -137,7 +140,6 @@ public:
         std::shared_ptr<GOCylinder> m_CylinderGO;
         std::shared_ptr<GOPoint> m_StartPointGO;
         std::shared_ptr<GOPoint> m_EndPointGO;
-        std::shared_ptr<GOText> m_RadiusLabelGO;
         std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
@@ -220,6 +222,7 @@ public:
 
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
+
     inline Component* GetComponent(const std::string& id) { return m_Components[id]; }
     inline Component* GetCurrentComponent() { 
         if(m_Components.find(m_CurrentComponentID) == m_Components.end())
@@ -228,12 +231,41 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+    void SetNextComponentAsCurrent();
+    void SetPrevComponentAsCurrent();
 
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
     inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
+
+public: ///< small utilities to calculate the progress of fabrication
+    /// @brief Get the number of fabricate components
+    inline int GetFabricatedComponents() {
+        int count = 0;
+        for(auto& comp : m_Components){
+            if(comp.second->m_State == ACIMState::DONE)
+                count++;
+        }
+        return count;
+    }
+    /// @brief Get the total number of components
+    inline int GetTotalComponents() { return m_Components.size(); }
+    /// @brief Get the progress of fabrication in percentage
+    inline float GetFabricationProgress() {
+        return (float)GetFabricatedComponents() / GetTotalComponents() * 100;
+    }
+
+private:  ///< utils for visualization
+    /**
+     * @brief Transform the notation from .acim into more lightweight notation
+     * for visuals (e.g. "Hole#1" -> "H1" and "Cut#1" -> "C1")
+     * 
+     * @param id the original id of the component
+     * @return std::string the shortened id for visualization
+     */
+    std::string ShortenComponentID(std::string id);
 
 public:
     bool IsShowingAllComponents = false;
