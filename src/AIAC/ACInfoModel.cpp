@@ -354,7 +354,6 @@ namespace AIAC
                 holeInfo.m_CylinderGO->SetColor(HOLE_CYLINDER_COLOR[holeInfo.m_State]);
                 holeInfo.m_StartPointGO = GOPoint::Add(holeInfo.m_Start, 2.0f);
                 holeInfo.m_EndPointGO = GOPoint::Add(holeInfo.m_End, 2.0f);
-                auto centerPoint = (holeInfo.m_Start + holeInfo.m_End) * 0.5f;
                 std::string shortenHoleID = m_TimberInfo.ShortenComponentID(holeInfo.m_ID);
                 holeInfo.m_IDLabelGO = GOText::Add(shortenHoleID, holeInfo.m_End, m_LabelSize);
 
