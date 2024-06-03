@@ -21,19 +21,56 @@
 
 namespace AIAC
 {
-
     void LayerUI::OnAttach()
     {
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-        ImGui::StyleColorsLight();
+        //---------------------------------------------------------------------------------
+        // styling of the main window
+        ImGui::StyleColorsDark();
         ImGuiStyle& style = ImGui::GetStyle();
-        style.Colors[ImGuiCol_MenuBarBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.05f);
-        style.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.70f);
-        style.ScrollbarSize = 20.0f;
 
+        style.Colors[ImGuiCol_MenuBarBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.20f);
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.90f);
+        style.Colors[ImGuiCol_Border] = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+
+        style.Colors[ImGuiCol_FrameBg] = AIAC_UI_LIGHT_GREY;
+        style.Colors[ImGuiCol_FrameBgHovered] = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_FrameBgActive] = AIAC_UI_SPARK_ORANGE;
+
+        style.Colors[ImGuiCol_CheckMark] = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_SliderGrab] = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_SliderGrabActive] = AIAC_UI_SPARK_ORANGE;
+        
+        style.Colors[ImGuiCol_ResizeGrip]            = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_ResizeGripHovered]     = AIAC_UI_LIGHT_GREY;
+        style.Colors[ImGuiCol_ResizeGripActive]      = AIAC_UI_SPARK_ORANGE;
+        
+        style.Colors[ImGuiCol_PlotHistogramHovered]  = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_TextSelectedBg]        = AIAC_UI_SPARK_ORANGE;
+        
+        style.Colors[ImGuiCol_TitleBg]               = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_TitleBgCollapsed]      = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_TitleBgActive]         = AIAC_UI_SPARK_ORANGE;
+
+        style.Colors[ImGuiCol_Header]                = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_HeaderHovered]         = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_HeaderActive]          = AIAC_UI_SPARK_ORANGE;
+
+        style.Colors[ImGuiCol_Button]                = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_ButtonHovered]         = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_ButtonActive]          = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_FrameBg]               = AIAC_UI_DARK_GREY;
+
+        style.Colors[ImGuiCol_ScrollbarBg] = AIAC_UI_LIGHT_GREY;
+        style.Colors[ImGuiCol_ScrollbarGrab] = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_ScrollbarGrabHovered] = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_ScrollbarGrabActive] = AIAC_UI_SPARK_ORANGE;
+
+        style.ScrollbarSize = 30.0f;
         style.WindowRounding = 4.0f;
         style.ChildRounding = 4.0f;
         style.FrameRounding = 4.0f;
@@ -41,6 +78,9 @@ namespace AIAC
         style.ScrollbarRounding = 4.0f;
         style.GrabRounding = 4.0f;
         style.TabRounding = 4.0f;
+        style.FramePadding = ImVec2(6, 6);
+
+        //---------------------------------------------------------------------------------
 
         ImGui_ImplGlfw_InitForOpenGL(AIAC_APP.GetWindow()->GetGLFWWindow(), true);
         ImGui_ImplOpenGL3_Init(AIAC_APP.GetWindow()->GetGlslVersion());
@@ -48,18 +88,15 @@ namespace AIAC
         io.Fonts->AddFontFromFileTTF("assets/fonts/UbuntuMono-R.ttf", 14.0f);  // default
 
         // Load images from memory
-        m_LogoBlack = AIAC::Image(AIAC_LOGO_BLACK);
         m_LogoLightClr = AIAC::Image(AIAC_LOGO_COLOR);
 
         // Set panes UI for layers
         //                 Label       Collapse             PaneContent
-        StackPane(PaneUI("Camera",       true,      AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Slam",         true,      AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-        StackPane(PaneUI("Render",       true,      AIAC_BIND_EVENT_FN(SetPaneUIRender)    ));
-        StackPane(PaneUI("ACIM",         true,      AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
-        StackPane(PaneUI("Toolhead",     true,      AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
-        StackPane(PaneUI("Feedback",     true,      AIAC_BIND_EVENT_FN(SetPaneUIFeedback)  ));
-        StackPane(PaneUI("Utils",        true,      AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+        StackPane(PaneUI("Camera",                            false,        AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Mapping",                           false,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("ACIM (Execution model)",            false,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
+        StackPane(PaneUI("Toolhead",                          false,         AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
+        StackPane(PaneUI("Utils",                             false,        AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
         m_IsOpen = new bool(true);
     }
@@ -115,7 +152,7 @@ namespace AIAC
     {
         if (ImGui::BeginMainMenuBar())
         {
-            ImGui::Image(m_LogoBlack.GetImTexture().ID, ImVec2(18, 18), ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::Image(m_LogoLightClr.GetImTexture().ID, ImVec2(18, 18), ImVec2(0, 1), ImVec2(1, 0));
             ImGui::SameLine();
 
             if (ImGui::BeginMenu("App"))
@@ -134,10 +171,12 @@ namespace AIAC
     void LayerUI::ShowMainUI()
     {
         ImGui::Begin("augmented_carpentry", m_IsOpen);
+#ifdef ENABLE_DEV_UI
         ImGui::Image(m_LogoLightClr.GetImTexture().ID, ImVec2(60, 60), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::SameLine();
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
-        
+#endif
+
         for (auto& pane : m_PaneUIStack) pane->Show();
 
         ImGui::End();
@@ -264,26 +303,26 @@ namespace AIAC
 
     void LayerUI::SetPaneUISlam()
     {
-        ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+        ImVec2 sizeButtons = ImVec2(110, 50);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
-            if (ImGui::Button("Open SLAM map"))
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
+            if (ImGui::Button("Open SLAM map", sizeButtons))
                 ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
-
             if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
             {
                 if (ImGuiFileDialog::Instance()->IsOk())
                 {
                     std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-                    //                std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-                    // action
-                    //                AIAC_APP.GetLayer<LayerSlam>()->Slam.setMap(filePathName, true);
                     AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(filePathName));
                 }
                 ImGuiFileDialog::Instance()->Close();
             }
             ImGui::SameLine();
-            if (ImGui::Button("Open Vocab"))
+            ImGui::PopStyleColor();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GRAPE_PURPLE);
+            if (ImGui::Button("Open Vocab", sizeButtons))
                 ImGuiFileDialog::Instance()->OpenDialog("ChooseVocab", "Open Vocab", ".fbow", ".");
 
             if (ImGuiFileDialog::Instance()->Display("ChooseVocab"))
@@ -295,10 +334,13 @@ namespace AIAC
                 }
                 ImGuiFileDialog::Instance()->Close();
             }
+            ImGui::PopStyleColor();
         ImGui::EndChild();
+
         ImGui::Text("Mapping Functions:");
-        ImGui::BeginChild("mapping_function_child", ImVec2(0, 36), true, ImGuiWindowFlags_HorizontalScrollbar);
-            if(ImGui::Button("Start Mapping")){
+        ImGui::BeginChild("mapping_function_child", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
+            if(ImGui::Button("Start Mapping", sizeButtons)){
                 std::string defaultPath = "";
                 defaultPath += "./scanned_map/map-";
                 defaultPath += GetCurrentDateTime();
@@ -307,71 +349,58 @@ namespace AIAC
                 AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStartMappingEvent>());
             }
             ImGui::SameLine();
-            if(ImGui::Button("Combine Map")){
+            ImGui::PopStyleColor();
+
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_PRUSSIAN_BLUE);
+            if(ImGui::Button("Combine Map", sizeButtons)){
                 m_IsCombiningMap = true;
             }
             ImGui::SameLine();
-            if(ImGui::Button("Reconstruct 3D")){
+            if(ImGui::Button("Reconstruct 3D", sizeButtons)){
                 m_IsReconstructing3D = true;
             }
             ImGui::PopStyleColor();
         ImGui::EndChild();
 
+#ifdef ENABLE_DEV_UI
         ImGui::Checkbox("Show Tag", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToShowTag);
         ImGui::Checkbox("Process Frames", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToProcess);
         ImGui::Checkbox("Enhance Photo", &AIAC_APP.GetLayer<AIAC::LayerSlam>()->ToEnhance);
 
         ImGui::Text("Tracked: %s", AIAC_APP.GetLayer<AIAC::LayerSlam>()->IsTracked() ? "Yes" : "No");
+#endif
 
+#ifdef ENABLE_DEV_UI
         std::string camPoseStr; camPoseStr << AIAC_APP.GetLayer<AIAC::LayerSlam>()->GetCamPoseCv();
         ImGui::Text("Estimated Camera Pose: \n%s", camPoseStr.c_str());
-    }
-
-    void LayerUI::SetPaneUIRender()
-    {
-        // ImGui::Checkbox("Point Cloud Map", &AIAC_APP.GetRenderer()->ShowPointCloudMap);
-//         ImGui::Checkbox("Digital Model", &AIAC_APP.GetRenderer()->ShowDigitalModel);
-//         if(ImGui::Button("Load Digital Model")){
-//             ImGuiFileDialog::Instance()->OpenDialog("ChooseDigitalModel", "Open Digital Model", ".ply", ".");
-//         }
-//         if (ImGuiFileDialog::Instance()->Display("ChooseDigitalModel"))
-//         {
-//             if (ImGuiFileDialog::Instance()->IsOk())
-//             {
-//                 std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-//                 // TODO: Add ply to renderer
-//                 AIAC_INFO("Loading Digital Model: {}", filePathName);
-//                 AIAC_APP.GetRenderer()->Meshes.emplace_back(filePathName);
-// //                AIAC_EBUS->EnqueueEvent(std::make_shared<CameraCalibrationLoadedEvent>(filePathName));
-//             }
-//             ImGuiFileDialog::Instance()->Close();
-//         }
+#endif
     }
 
     void LayerUI::SetPaneUIACIM()
     {
-        // ACIM Loader
-        if(ImGui::Button("Load ACIM")){
-            OpenFileSelectDialog("Open ACIM file", ".acim", m_TmpPathBuf, [&]{
-                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
-            });
-        }
-        // Scanned Model reloader
-        ImGui::SameLine();
-        if(ImGui::Button("Reload ACIM")){
-            AIAC_APP.GetLayer<AIAC::LayerModel>()->ReloadACInfoModel();
-        }
-        // Scanned Model Loader
-        ImGui::SameLine();
-        if(ImGui::Button("Load Scanned Model")){
-            OpenFileSelectDialog("Open Scanned Model", ".ply", m_TmpPathBuf, [&]{
-                AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_TmpPathBuf);
-            });
-        }
+        // ACIM file manager (ACIM Loader, Scanned model re/loader)
+        ImGui::Text("ACIM File Manager:");
+        ImGui::BeginChild("ACIM File Manager", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
+            if(ImGui::Button("Load ACIM")){
+                OpenFileSelectDialog("Open ACIM file", ".acim", m_TmpPathBuf, [&]{
+                    AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
+                });
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Reload ACIM")){
+                AIAC_APP.GetLayer<AIAC::LayerModel>()->ReloadACInfoModel();
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("Load Scanned Model")){
+                OpenFileSelectDialog("Open Scanned Model", ".ply", m_TmpPathBuf, [&]{
+                    AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_TmpPathBuf);
+                });
+            }
+        ImGui::EndChild();
         
         // Re-position the ACIM model
-        ImGui::Text("Adjust model alignment:");
-        ImGui::BeginChild("Adjust model alignment", ImVec2(0, 84), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::Text("ACIM position:");
+        ImGui::BeginChild("adjust_model_alignment", ImVec2(0, 110), true, ImGuiWindowFlags_HorizontalScrollbar);
             float sliderVal = 0.f;
             ImGui::SliderFloat("## Model Offset", &sliderVal, -1.0f, 1.0f, "Model Offset", ImGuiSliderFlags_AlwaysClamp);
                 if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
@@ -379,57 +408,106 @@ namespace AIAC
             ImGui::SameLine();
             ImGui::Text(std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
             
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_ROYAL_PURPLE);
             if(ImGui::Button("Align Center")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignOffset();
             }
+            ImGui::PopStyleColor();
             ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LOLLIPOP_PURPLE);
             if(ImGui::Button("Align End 1")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ForceAlignToEnd(1);
             }
+            ImGui::PopStyleColor();
             ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_PLUM_PURPLE);
             if(ImGui::Button("Align End 2")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ForceAlignToEnd(0);
             }
+            ImGui::PopStyleColor();
             
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_EGYPTIAN_BLUE);
             if(ImGui::Button("Rotate +")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(1);
             }
+            ImGui::PopStyleColor();
             ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_EGYPTIAN_BLUE);
             if(ImGui::Button("Rotate -")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ChangeAlignRotation(-1);
             }
+            ImGui::PopStyleColor();
             ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_SAPPHIRE_BLUE);
             if(ImGui::Button("Reset Rotation")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->ResetAlignRotation();
             }
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_CINNAMON_RED);
+            ImGui::PopStyleColor();
             ImGui::SameLine();
             if(ImGui::Button("Flip")){
                 AIAC_APP.GetLayer<AIAC::LayerModel>()->FlipAlign();
             }
+            ImGui::PopStyleColor();
         ImGui::EndChild();
 
-        ImGui::Text("Components Control:");
-        ImGui::BeginChild("Components Control Panel", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
-            ImGui::Text("Current Component:");
+        // current component to execute
+        std::string isCurrentDone = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone ? "Done" : "Not done";
+        if (AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone)
+            ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_GREEN);
+        else
+            ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
+        ImGui::Text("Current Execution: %s", isCurrentDone.c_str());
+        ImGui::PopStyleColor();
+        ImGui::BeginChild("components_control_panel", ImVec2(0, 160), true, ImGuiWindowFlags_HorizontalScrollbar);
+            // print the progress
+            ImGui::Text("Progress: %d / %d ( %.2f%% )", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetFabricatedComponents(),
+                                                        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetTotalComponents(),
+                                                        AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetFabricationProgress());
+
+            // control the component to fabricate
             string currentCompoID = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponentID();
             static const char* previewValue = currentCompoID.c_str();
-            if(ImGui::BeginCombo("##AvailableDevices", previewValue)){
+            ImGui::SetNextItemWidth(300);
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(7, 7));
+            if(ImGui::BeginCombo("##ACIMComponents", previewValue))
+            {
                 for (auto& componentID : AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetAllComponentsIDs()) {
                     bool isSelected = (currentCompoID == componentID);
+                    if (AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetComponent(componentID)->IsMarkedDone)
+                        ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_GREEN);
+                    else
+                        ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
                     if (ImGui::Selectable(componentID.c_str(), isSelected)){
                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
                     }
                     if (isSelected)
                         ImGui::SetItemDefaultFocus();
+                    ImGui::PopStyleColor();
                 }
                 ImGui::EndCombo();
             }
+
+            // go to next or previous component (<,>)
+            float halfWidth = ImGui::GetWindowWidth() / 2;
+            if(ImGui::Button("<", ImVec2(halfWidth-30, 0)))
+                AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetPrevComponentAsCurrent();
+            ImGui::SameLine();
+            if (ImGui::Button(">", ImVec2(halfWidth-30, 0)))
+                AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetNextComponentAsCurrent();
+
+            // swap ends for holes only
             auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
             if (auto hole = dynamic_cast<TimberInfo::Hole*>(currentComp)){
                 if(ImGui::Button("Swap S/E")) hole->SwapStartEnd();
                 ImGui::SameLine();
+                ImGui::Text("Diameter: %.f mm", hole->GetRadius()*2000);
             }
+            ImGui::PopStyleVar();
+
+            ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
+            ImGui::PopStyleColor();
             ImGui::SameLine();
             if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
@@ -530,75 +608,72 @@ namespace AIAC
 
     void LayerUI::SetPaneUIToolhead()
     {
-        if(ImGui::Checkbox("Draw Silhouette", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette));
-        if(ImGui::Checkbox("Draw Shaded", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowShaded));
-        if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
-            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
-
-        ImGui::Text("Toolhead Classifier:");
-        ImGui::BeginChild("toolhead_classifier", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
-        if(ImGui::Button("Detect Toolhead", ImVec2(-1, 40)))
-            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->DetectToolhead();
-        std::string classifierLog = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierLog();
-        ImGui::BeginChild("toolhead_selection_ml", ImVec2(0, 150), true, ImGuiWindowFlags_HorizontalScrollbar);
-        std::vector<std::string> toolheadNamesML;
-        for (auto& toolhead : AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierToolheadList())
-            toolheadNamesML.emplace_back(toolhead);
-        for (int i = 0; i < toolheadNamesML.size(); i++)
-        {
-            auto toolNameButton = ImGui::Button(toolheadNamesML[i].c_str());
-            if (toolNameButton)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SetCurrentObject(toolheadNamesML[i]);
-            }
-        }
-        ImGui::EndChild();
-        ImGui::Text("Classifier Log: \n%s", classifierLog.c_str());
-        ImGui::EndChild();
-
-        std::string poseLogButtonText = "Log TTool Pose";
-        bool deferPoseLogUI = false;
-        if(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog)
-        {
-            deferPoseLogUI = true;
-            poseLogButtonText = "Stop Log TTool Pose";
-            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREEN);
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, AIAC_UI_GREEN);
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, AIAC_UI_GREEN);
-        }
-        if (ImGui::Button(poseLogButtonText.c_str(), ImVec2(-1, 40)))
-            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog = !AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog;
-        if (deferPoseLogUI)
-        {
-            ImGui::PopStyleColor(3);
-        }
-
-        ImGui::Text("TTool control:");
-        ImGui::BeginChild("ttool_control", ImVec2(0, 37), true, ImGuiWindowFlags_HorizontalScrollbar);
-        ImGui::RadioButton("None", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, -1);
-        ImGui::SameLine();
-        ImGui::RadioButton("Track", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 0);
-        ImGui::SameLine();
-        ImGui::RadioButton("Input Pose", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI, 1);
-        ImGui::EndChild();
-
-        std::stringstream toolheadPose; toolheadPose << AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetPose();
-        ImGui::Text("Estimated Toolhead Pose: \n%s", toolheadPose.str().c_str());
-        ImGui::Text("Tracking Status: %s", AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI == 0 ? AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetTrackingStatus().c_str() : "Not Tracking");
-
-        if (AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI != -1)
-        {
-            ImGui::Text("Toolhead pose inputs:");
-            ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 350), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::Text("Toolhead control:");
+        ImGui::BeginChild("toolhead_pose_inputs", ImVec2(0, 470), true, ImGuiWindowFlags_HorizontalScrollbar);
             
-            if(ImGui::Button("save pose", ImVec2(-1, 40)))
+            ImGui::PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0.5, 0.5));
+
+            ImVec2 sizeShowToolHeadVisualsButton = ImVec2(-1, 60);
+            static bool isButtonVisualsPress = false;
+            std::string buttonVisualLabel = isButtonVisualsPress ? "Show Silhouette" : "Hide Silhouette";
+            if (!isButtonVisualsPress) 
+            {
+                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_HIBISCUS_RED);
+                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_HIBISCUS_RED);
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = true;
+            }
+            else
+            {
+                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_YALE_BLUE);
+                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_YALE_BLUE);
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = false;
+            }
+            if (ImGui::Button(buttonVisualLabel.c_str(), sizeShowToolHeadVisualsButton))
+                isButtonVisualsPress = !isButtonVisualsPress;
+            ImGui::PopStyleColor(2);
+
+            ImVec2 sizeSquareButton = ImVec2(70, 70);
+
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_SEA_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_GREEN);
+            if(ImGui::Button("save \npose", sizeSquareButton))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->TTool->ManipulateModel('y');
+            ImGui::SameLine();
+            ImGui::PopStyleColor(2);
 
-            if(ImGui::Button("reset to last saved pose", ImVec2(-1, 40)))
+            static bool isButtonPressed = false;
+            std::string buttonLabel = isButtonPressed ? "Stop \nrefine" : "Start \nrefine";
+            if (!isButtonPressed) 
+            {
+                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GRAPE_PURPLE);
+                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_GRAPE_PURPLE);
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI = -1;
+            }
+            else
+            {
+                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_CARMINE_RED);
+                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_CARMINE_RED);
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI = 0;
+            }
+            if (ImGui::Button(buttonLabel.c_str(), sizeSquareButton))
+                isButtonPressed = !isButtonPressed;
+            ImGui::SameLine();
+            ImGui::PopStyleColor(2);
+
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_LIGHT_GREY);
+            if(ImGui::Button("reset \nlast \npose", sizeSquareButton))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetToLastSavedPose();
+            ImGui::SameLine();
+            ImGui::PopStyleColor(2);
 
-            if(ImGui::Button("reset to original config pose", ImVec2(-1, 40)))
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, AIAC_UI_LIGHT_GREY);
+            if(ImGui::Button("reset \nconfig \npose", sizeSquareButton))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ResetPoseFromConfig();
+            ImGui::PopStyleColor(2);
+
+            ImGui::PopStyleVar();
             
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(200, 15));
             ImGui::PushStyleVar(ImGuiStyleVar_GrabMinSize, 100);
@@ -666,35 +741,145 @@ namespace AIAC
             }
             ImGui::PopStyleVar(3);
             ImGui::PopItemWidth();
-            ImGui::EndChild();
-        }
+        ImGui::EndChild();
 
-        std::string toolheadName = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolheadName();
-        ImGui::Text("Toolhead active: %s", toolheadName.c_str());
-        ImGui::BeginChild("toolhead_selection", ImVec2(0, 70), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::Text("Tools graphics:");
+            ImGui::BeginChild("toolhead_graphics", ImVec2(-1, 40));
+
+#ifdef ENABLE_DEV_UI
+            if(ImGui::Checkbox("Draw Shaded", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowShaded));
+            if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
+#endif
+
+            // for cutting tools show the red plane for cutting guidance
+            if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
+                if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
+                    AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
+                } else {
+                    AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
+                }
+            };
+        ImGui::EndChild();
+
+#ifdef ENABLE_DEV_UI
+        ImGui::Text("Toolhead Classifier:");
+        ImGui::BeginChild("toolhead_classifier", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
+            if(ImGui::Button("Detect Toolhead", ImVec2(-1, 40)))
+                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->DetectToolhead();
+            std::string classifierLog = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierLog();
+            ImGui::BeginChild("toolhead_selection_ml", ImVec2(0, 150), true, ImGuiWindowFlags_HorizontalScrollbar);
+                std::vector<std::string> toolheadNamesML;
+                for (auto& toolhead : AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetClassifierToolheadList())
+                    toolheadNamesML.emplace_back(toolhead);
+                for (int i = 0; i < toolheadNamesML.size(); i++)
+                {
+                    auto toolNameButton = ImGui::Button(toolheadNamesML[i].c_str());
+                    if (toolNameButton)
+                    {
+                        AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SetCurrentObject(toolheadNamesML[i]);
+                    }
+                }
+            ImGui::EndChild();
+            ImGui::Text("Classifier Log: \n%s", classifierLog.c_str());
+        ImGui::EndChild();
+#endif
+
+#ifdef ENABLE_DEV_UI
+        std::string poseLogButtonText = "Log TTool Pose";
+        bool deferPoseLogUI = false;
+        if(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog)
+        {
+            deferPoseLogUI = true;
+            poseLogButtonText = "Stop Log TTool Pose";
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, AIAC_UI_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, AIAC_UI_GREEN);
+        }
+        if (ImGui::Button(poseLogButtonText.c_str(), ImVec2(-1, 40)))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog = !AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog;
+        if (deferPoseLogUI)
+        {
+            ImGui::PopStyleColor(3);
+        }
+#endif
+
+#ifdef ENABLE_DEV_UI
+        std::stringstream toolheadPose; toolheadPose << AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetPose();
+        ImGui::Text("Estimated Toolhead Pose: \n%s", toolheadPose.str().c_str());
+        ImGui::Text("Tracking Status: %s", AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI == 0 ? AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetTrackingStatus().c_str() : "Not Tracking");
+
+        std::string poseLogButtonText = "Log TTool Pose";
+        bool deferPoseLogUI = false;
+        if(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog)
+        {
+            deferPoseLogUI = true;
+            poseLogButtonText = "Stop Log TTool Pose";
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, AIAC_UI_GREEN);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, AIAC_UI_GREEN);
+        }
+        if (ImGui::Button(poseLogButtonText.c_str(), ImVec2(-1, 40)))
+            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog = !AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog;
+        if (deferPoseLogUI)
+        {
+            ImGui::PopStyleColor(3);
+        }
+#endif
+        // selection of toolhead
+        float windowHeigh = ImGui::GetWindowHeight();
+        float availableHeight = ImGui::GetContentRegionAvail().y;
+        std::string toolheadNameActive = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolheadName();
         std::vector<std::string> toolheadNames;
         for (auto& toolhead : AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetToolheadNames())
             toolheadNames.emplace_back(toolhead);
-        for (int i = 0; i < toolheadNames.size(); i++)
-        {
-            auto toolNameButton = ImGui::Button(toolheadNames[i].c_str());
-            if (toolNameButton)
-            {
-                AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SetCurrentObject(toolheadNames[i]);
-            }
-        }
-        ImGui::EndChild();
-    }
+        int numbButtonPerRow = 4;
+        ImVec2 sizeButton = ImVec2(80, 80);
+        int totalHeight = toolheadNames.size() / numbButtonPerRow * sizeButton.y;
 
-    void LayerUI::SetPaneUIFeedback()
-    {
-        if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
-            if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
-                AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
-            } else {
-                AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
+        ImGui::Text("Active toolhead: %s", toolheadNameActive.c_str());
+        ImGui::BeginChild(
+            "toolhead_selection",
+            ImVec2(0, totalHeight+sizeButton.y+30),
+            false,
+            ImGuiWindowFlags_NoScrollbar
+        );
+            for (int i = 0; i < toolheadNames.size(); i++)
+            {
+                if (i % numbButtonPerRow != 0)
+                    ImGui::SameLine();
+
+                std::string label = toolheadNames[i];
+                int charPerLine = sizeButton.x / 10;
+                for (int j = label.length() - 1; j > 0; j--)
+                {
+                    if (j % charPerLine == 0)
+                    {
+                        label.insert(j, "\n");
+                    }
+                }
+
+                ImVec4 buttonClr = AIAC_UI_DARK_GREY;
+                ACToolHeadType toolheadType = AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetToolheadType(toolheadNames[i]);
+                if (toolheadType == ACToolHeadType::DRILLBIT)
+                    ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_PURPLE);
+                else if (toolheadType == ACToolHeadType::CIRCULARSAW)
+                    ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_DARK_GREEN);
+                else if (toolheadType == ACToolHeadType::SABERSAW)
+                    ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
+                else if (toolheadType == ACToolHeadType::CHAINSAW)
+                    ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_BLUE);
+                else if (label == toolheadNameActive)
+                    ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_SPARK_ORANGE);
+                else
+                    ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_DARK_GREY);
+
+                if (ImGui::Button(label.c_str(), sizeButton))
+                    AIAC_APP.GetLayer<AIAC::LayerToolhead>()->SetCurrentObject(toolheadNames[i]);
+
+                ImGui::PopStyleColor();
             }
-        };
+        ImGui::EndChild();
     }
 
     void LayerUI::ShowMappingPopup()
@@ -1145,14 +1330,31 @@ namespace AIAC
 
     void LayerUI::ShowLogRecorderUI() {
         ImGui::Begin("Log Recorder", m_IsOpen);
-
         if (!AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsRecording()){
+//            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GREEN);
             if(ImGui::Button("Start", ImVec2(-1, 40))){
                 AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StartRecording();
             }
+//            ImGui::PopStyleColor();
         } else {
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_RED);
             if(ImGui::Button("Stop", ImVec2(-1, 40))){
                 AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->StopRecording();
+            }
+            ImGui::PopStyleColor();
+
+            if(AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->IsPaused()) {
+                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_YELLOW);
+                if(ImGui::Button("Resume", ImVec2(-1, 40))){
+                    AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->ResumeRecording();
+                }
+                ImGui::PopStyleColor();
+            } else {
+                ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_GREY);
+                if(ImGui::Button("Pause", ImVec2(-1, 40))) {
+                    AIAC_APP.GetLayer<AIAC::LayerLogRecorder>()->PauseRecording();
+                }
+                ImGui::PopStyleColor();
             }
         }
         ImGui::End();

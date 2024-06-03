@@ -110,7 +110,7 @@ namespace AIAC
         /// @brief the tolerance to detect if the tooltip is inside or outside the  hole
         float m_InsideOutDetection = 20.f;
         /// @brief acceptable tolerance for the correct rotation detection
-        float m_OrientationTolerance = 0.5f;
+        float m_OrientationTolerance = 1.1f;
 
     };
 }

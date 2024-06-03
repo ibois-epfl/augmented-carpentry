@@ -111,7 +111,7 @@
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="8">
+                  <items count="7">
                     <item name="Description" type_name="gh_string" type_code="10">Contains a collection of Breps (Boundary REPresentations)</item>
                     <item name="Hidden" type_name="gh_bool" type_code="1">true</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">e4a856b6-9d14-4fdf-9161-58fb0d62895f</item>
