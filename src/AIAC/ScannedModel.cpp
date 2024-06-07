@@ -2,6 +2,7 @@
 
 #include "GeometryUtils.h"
 #include "ScannedModel.h"
+#include "utils/GeometryUtils.h"
 
 namespace AIAC
 {
@@ -37,6 +38,33 @@ namespace AIAC
         };
 
         auto vertices = m_Mesh->GetVertices();
+
+        if(vertices.size() > 8){
+            glm::vec3 massCenter = GetMassCenter(vertices);
+            int basePtIdx = -1;
+            double maxDistance = -1;
+            for (int i = 0 ; i < vertices.size() ; i++){
+                double distance = glm::length(vertices[i] - massCenter);
+                if (distance > maxDistance){
+                    maxDistance = distance;
+                    basePtIdx = i;
+                }
+            }
+            double maxDistanceMeter = maxDistance * 0.02;
+
+            auto basePt = vertices[basePtIdx];
+
+            std::vector<glm::vec3> filteredVertices;
+            for(auto &v : vertices){
+                double distanceMeter = glm::length(v - basePt) * 0.02;
+                if(distanceMeter < 0.3 || abs(distanceMeter - maxDistanceMeter) < 0.2){
+                    filteredVertices.emplace_back(v);
+                }
+            }
+
+            vertices = std::move(filteredVertices);
+        }
+        
         auto basePt = vertices[0];
         std::vector<Neighbor> neighbors;
 
@@ -45,7 +73,7 @@ namespace AIAC
             auto dist = glm::length(vec);
             neighbors.emplace_back(dist, vec, v);
         }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
         // sort by distance
         std::sort(neighbors.begin(), neighbors.end(), [](Neighbor& a, Neighbor& b) {
             return a.dist < b.dist;

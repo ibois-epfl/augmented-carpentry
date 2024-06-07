@@ -2,6 +2,7 @@
 // #ifndef GEOMETRY_UTILS_H
 // #define GEOMETRY_UTILS_H
 
+#include <vector>
 #include "glm/glm.hpp"
 
 // --------------------------- //
@@ -283,6 +284,24 @@ inline bool GetIntersectLineOf2Planes(glm::vec3 p1Norm, glm::vec3 pt1,
         return true;
     }
     return false;
+}
+
+
+/**
+ * @brief Get the mass center of a list of 3d points
+ * 
+ * @param points
+ */
+inline glm::vec3 GetMassCenter(const std::vector<glm::vec3> &points){
+    glm::vec3 massCenter(0, 0, 0);
+
+    for(auto p: points){
+        massCenter += p;
+    }
+
+    massCenter /= points.size();
+
+    return massCenter;
 }
 
 // #endif //GEOMETRY_UTILS_H
