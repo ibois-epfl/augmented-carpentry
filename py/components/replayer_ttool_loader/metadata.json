@@ -1,0 +1,38 @@
+{
+    "name": "acpy - replayer ttool loader",
+    "nickname": "acpy-replayer-ttool-loader",
+    "category": "acpy",
+    "subcategory": "replayer",
+    "description": "This component load the mesh of all TTool.",
+    "exposure": 4,
+    "instanceGuid": "84e45f15-73f8-486b-b277-c003c617a1da",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_ttool_model_root_path",
+                "nickname": "i_ttool_model_root_path",
+                "description": "The directory where the TTool models are downloaded.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "o_ttool_meshes",
+                "nickname": "o_ttool_meshes",
+                "description": "A dictionary contains {name: mesh} of the TTool model.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}
