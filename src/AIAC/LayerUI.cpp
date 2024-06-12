@@ -308,7 +308,10 @@ namespace AIAC
         ImGui::BeginChild("slam_info_child", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
             if (ImGui::Button("Open SLAM map", sizeButtons))
-                ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", ".");
+            {
+                std::string mapFolderDefault = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::SAVE_DIR_MAPS, ".");
+                ImGuiFileDialog::Instance()->OpenDialog("ChooseSLAMmap", "Open SLAM map", ".map", mapFolderDefault.c_str());
+            }
             if (ImGuiFileDialog::Instance()->Display("ChooseSLAMmap"))
             {
                 if (ImGuiFileDialog::Instance()->IsOk())
@@ -1159,8 +1162,28 @@ namespace AIAC
 
             ImGui::Text("Reconstruct Params");
             ImGui::SameLine();
-            if(ImGui::Button("Load from file", ImVec2(106, 0))){
-                OpenFileSelectDialog("Load Reconstruction Parameter", ".ini", m_TmpPathBuf, [&]{
+            if(ImGui::Button("Load from file", ImVec2(106, 0)))
+            {
+                std::string defaultConfigDir = AIAC::Config::Get<std::string>(
+                    AIAC::Config::SEC_TSLAM, AIAC::Config::RECONSTRUCT_CONFIG_DEFAULT_FILE);
+                if (!defaultConfigDir.empty()) {
+                    AIAC_INFO("Default config for reconstruction dir: ");
+                    AIAC_INFO(defaultConfigDir);
+                    const char* defaultConfigDirCStr = defaultConfigDir.c_str();
+                    this->m_TmpPathBuf[0] = '\0';
+                    strcpy(this->m_TmpPathBuf, defaultConfigDirCStr);
+                }
+                else
+                    AIAC_WARN("Default config for reconstruction dir is empty.");
+
+                AIAC_INFO("TmpPathBuf1: ");
+                AIAC_INFO(this->m_TmpPathBuf);
+                
+                OpenFileSelectDialog("Load Reconstruction Parameter", ".ini", m_TmpPathBuf, [&]
+                {
+                    AIAC_INFO("TmpPathBuf2: ");
+                    AIAC_INFO(this->m_TmpPathBuf);
+
                     LoadReconstructParamsFromFile(m_TmpPathBuf);
                 });
             }
@@ -1305,7 +1328,16 @@ namespace AIAC
 
     void LayerUI::OpenFileSelectDialog(const char* title, const char* fileExt, char *path, std::function<void()> callback) {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x * 0.8, ImGui::GetIO().DisplaySize.y * 0.75));
-        ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, m_FileSelectDefaultPath);
+        if (strlen(path) == 0) {
+            ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, m_FileSelectDefaultPath);
+        }
+        else {
+            char* pathBuf = new char[PATH_BUF_SIZE];
+            memset(pathBuf, 0, PATH_BUF_SIZE);
+            memcpy(pathBuf, path, strlen(path));
+            ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, pathBuf);
+            ImGuiFileDialog::Instance()->OpenDialog("SelectFileDialog", title, fileExt, path);
+        }
         m_FileSelectionTargetBuf = path;
         m_FileSelectionCallback = callback;
     }

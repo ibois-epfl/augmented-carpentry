@@ -127,13 +127,13 @@ namespace AIAC
 
         if(m_ToShowCutPlane) updateCutPlane();
         
-        // if it's a single face, only show the red cutting plane
-        if(cut->IsSingleFace()) {
-            this->m_Visualizer.Deactivate();
-            angleVisualizer.Deactivate();
-            depthVisualizer.Deactivate();
-            return;
-        }
+        // // if it's a single face, only show the red cutting plane
+        // if(cut->IsSingleFace()) {
+        //     this->m_Visualizer.Deactivate();
+        //     angleVisualizer.Deactivate();
+        //     depthVisualizer.Deactivate();
+        //     return;
+        // }
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
