@@ -51,8 +51,8 @@ namespace AIAC
 
         m_GuideTxtRollPitch->SetTextSize(GOTextSize::BitSmall);
 
-        m_AllPrimitives.push_back(m_LineFaceNormal);
-        m_AllPrimitives.push_back(m_LineBladeNormal);
+        // m_AllPrimitives.push_back(m_LineFaceNormal);
+        // m_AllPrimitives.push_back(m_LineBladeNormal);
         m_AllPrimitives.push_back(m_LinePitchFeed);
         m_AllPrimitives.push_back(m_GuideTxtRollPitch);
 
@@ -64,12 +64,14 @@ namespace AIAC
         m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
         m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_ProjLineOnFaceThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
         m_BottomPoint->SetColor(GOColor::YELLOW);
         m_LineToBottomPt->SetColor(GOColor::YELLOW);
-        m_ProjLineOnFace->SetColor(GOColor::CYAN);
+        m_ProjLineOnFace->SetColor(GOColor::ORANGE);
+        m_ProjLineOnFaceThickness->SetColor(GOColor::ORANGE);
         m_ProjLineOfBlade->SetColor(GOColor::CYAN);
         m_TxtBottomDist->SetColor(GOColor::WHITE);
 
@@ -78,6 +80,7 @@ namespace AIAC
         m_AllPrimitives.push_back(m_BottomPoint);
         m_AllPrimitives.push_back(m_LineToBottomPt);
         m_AllPrimitives.push_back(m_ProjLineOnFace);
+        m_AllPrimitives.push_back(m_ProjLineOnFaceThickness);
         m_AllPrimitives.push_back(m_ProjLineOfBlade);
         m_AllPrimitives.push_back(m_TxtBottomDist);
 
@@ -215,6 +218,7 @@ namespace AIAC
         glm::vec3 projSidePt1, projSidePt2;
         GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
         GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
+        
         m_GeneralVisualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
 
         // distance to the bottom face
@@ -256,8 +260,22 @@ namespace AIAC
             }
         }
         FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
-        m_GeneralVisualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1, perpIntersectLineSegPt2);
-    
+
+        // TODO: clean up values from import
+        // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        float bladeThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
+        float overHangThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
+        float displacementTowardsCamera = bladeThicknessScaled;
+        float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
+        glm::vec3 normalVec = glm::normalize(m_NormalEnd - m_NormalStart);
+        glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormalEnd - m_NormalStart));
+        auto perpIntersectLineSegPt1TowardsCamera = perpIntersectLineSegPt1 + normalVec * displacementTowardsCamera;
+        auto perpIntersectLineSegPt2TowardsCamera = perpIntersectLineSegPt2 + normalVec * displacementTowardsCamera;
+        m_GeneralVisualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1TowardsCamera, perpIntersectLineSegPt2TowardsCamera);
+        auto perpIntersectLineSegPt1AwayFromCamera = perpIntersectLineSegPt1 + oppositeNormalVec * displacementAwayFromCamera;
+        auto perpIntersectLineSegPt2AwayFromCamera = perpIntersectLineSegPt2 + oppositeNormalVec * displacementAwayFromCamera;
+        m_GeneralVisualizer.m_ProjLineOnFaceThickness->SetPts(perpIntersectLineSegPt1AwayFromCamera, perpIntersectLineSegPt2AwayFromCamera);
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         //------------------------------------------------
         if (!this->m_NearestParallelFaceID.empty())

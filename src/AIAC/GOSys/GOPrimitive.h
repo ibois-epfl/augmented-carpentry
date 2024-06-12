@@ -30,6 +30,7 @@ namespace AIAC
     struct GOWeight
     {
         static constexpr float Default            = 1.01f;
+        static constexpr float Medium             = 1.8f;
         static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
         static constexpr float MediumThick        = 7.0f;
@@ -223,7 +224,6 @@ namespace AIAC
         // inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); InitGLObject(); }
         // inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); InitGLObject(); }
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
-
 
         /**
          * @brief Compute the angle between the current line object and another one

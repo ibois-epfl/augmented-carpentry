@@ -36,13 +36,13 @@ namespace AIAC
         m_LinePitchFeed->SetColor(GOColor::RED);
         m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
 
-        m_AllPrimitives.push_back(m_LineFaceNormal);
-        m_AllPrimitives.push_back(m_LineBladeNormal);
-        m_AllPrimitives.push_back(m_LineDebugA);
-        m_AllPrimitives.push_back(m_LineDebugB);
-        m_AllPrimitives.push_back(m_LineDebugC);
-        m_AllPrimitives.push_back(m_LineDebugD);
-        m_AllPrimitives.push_back(m_LineDebugE);
+        // m_AllPrimitives.push_back(m_LineFaceNormal);
+        // m_AllPrimitives.push_back(m_LineBladeNormal);
+        // m_AllPrimitives.push_back(m_LineDebugA);
+        // m_AllPrimitives.push_back(m_LineDebugB);
+        // m_AllPrimitives.push_back(m_LineDebugC);
+        // m_AllPrimitives.push_back(m_LineDebugD);
+        // m_AllPrimitives.push_back(m_LineDebugE);
         m_AllPrimitives.push_back(m_LinePitchFeed);
         m_AllPrimitives.push_back(m_GuideTxtRollPitch);
 
@@ -80,13 +80,13 @@ namespace AIAC
         m_LineDepthFaceEdge1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDepthFaceEdge2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineIntersect->SetColor(GOColor::CYAN);  // TODO: change color
+        m_LineIntersect->SetColor(GOColor::ORANGE);
         m_LineIntersectThickness->SetColor(GOColor::ORANGE);
         m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
         m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
 
-        m_LineIntersect->SetWeight(GOWeight::Bold);
-        m_LineIntersectThickness->SetWeight(GOWeight::Bold);
+        m_LineIntersect->SetWeight(GOWeight::Medium);
+        m_LineIntersectThickness->SetWeight(GOWeight::Medium);
         m_LineDepthFaceEdge1->SetWeight(GOWeight::MediumThick);
         m_LineDepthFaceEdge2->SetWeight(GOWeight::MediumThick);
 
@@ -348,18 +348,27 @@ namespace AIAC
             }
             FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
 
-            // update the m_Visualizer
-            // FIXME: Change to intersection of two planes
+            // TODO: clean up the thickness section
+            // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            float bladeThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().ThicknessACIT;
+            float overHangThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().OverhangACIT;
+            float displacementTowardsCamera = bladeThicknessScaled;
+            float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
+
             // Lines based on tool
             auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainBase);
             auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainEnd);
+            glm::vec3 normalVec = glm::normalize(m_NormEnd - m_NormStart);
+            auto projChainBaseTranslatedTwardsoCamera = projChainBase + normalVec * displacementTowardsCamera;
+            auto projChainEndTranslatedTwardsoCamera = projChainEnd + normalVec * displacementTowardsCamera;
+            depthVisualizer.m_LineIntersect->SetPts(projChainBaseTranslatedTwardsoCamera, projChainEndTranslatedTwardsoCamera);
 
             // depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
-            // glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormEnd - m_NormStart));
-            // float bladeThickness = 0.00465f;  // in meters TODO: replace in acit model
-
-            // auto projChainBaseTranslated 
-            depthVisualizer.m_LineIntersectThickness->SetPts(projChainBase, projChainEnd);
+            glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormEnd - m_NormStart));
+            auto projChainBaseTranslatedAwayFromCamera = projChainBase + oppositeNormalVec * displacementAwayFromCamera;
+            auto projChainEndTranslatedAwayFromCamera = projChainEnd + oppositeNormalVec * displacementAwayFromCamera;
+            depthVisualizer.m_LineIntersectThickness->SetPts(projChainBaseTranslatedAwayFromCamera, projChainEndTranslatedAwayFromCamera);
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             // Lines based on face edge
             // for face edge dist, we need to find the projection point of the two points on the saw first
