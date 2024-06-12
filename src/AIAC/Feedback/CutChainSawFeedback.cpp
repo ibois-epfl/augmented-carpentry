@@ -137,13 +137,13 @@ namespace AIAC
 
         if(m_ToShowCutPlane) updateCutPlane();
         
-        // // if it's a single face, only show the red cutting plane
-        // if(cut->IsSingleFace()) {
-        //     this->m_Visualizer.Deactivate();
-        //     angleVisualizer.Deactivate();
-        //     depthVisualizer.Deactivate();
-        //     return;
-        // }
+        // if it's a single face show the cutting plane
+        if(cut->IsSingleFace()) {
+            this->EnableCutPlane(true);
+        }
+        else {
+            this->EnableCutPlane(false);
+        }
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
@@ -216,7 +216,7 @@ namespace AIAC
         }
 
         // extra orientation
-        if (!nearestParallelFaceID.empty())
+        if (!nearestParallelFaceID.empty() or cut->IsSingleFace())
         {
             m_CutOrientationVisualizer.Activate();
 
@@ -384,9 +384,8 @@ namespace AIAC
                 perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
                 perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
                 float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
-
-                float realPerpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, perpIntersectLineSegPt2) / scaleFactor;
-                float realPerpendicularFaceEdge2Dist = glm::distance(pt1ProjPt, pt2ProjPt) / scaleFactor;
+                float realPerpendicularFaceEdge1Dist = perpendicularFaceEdge1Dist / scaleFactor;
+                float realPerpendicularFaceEdge2Dist = perpendicularFaceEdge2Dist / scaleFactor;
 
                 // get the direction of tool
                 auto toolUpVec = glm::normalize(m_NormStart - m_ChainBase);

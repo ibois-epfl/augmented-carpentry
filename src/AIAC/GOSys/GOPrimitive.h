@@ -21,6 +21,7 @@ namespace AIAC
         static constexpr glm::vec4 BLACK = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
         static constexpr glm::vec4 GRAY = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
         static constexpr glm::vec4 ORANGE = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
+        static constexpr glm::vec4 ORANGE_TRANSP = glm::vec4(1.0f, 0.5f, 0.0f, 0.5f);
         static constexpr glm::vec4 PURPLE = glm::vec4(0.5f, 0.0f, 0.5f, 1.0f);
         static constexpr glm::vec4 PINK = glm::vec4(1.0f, 0.0f, 0.5f, 1.0f);
         static constexpr glm::vec4 BROWN = glm::vec4(0.5f, 0.25f, 0.0f, 1.0f);

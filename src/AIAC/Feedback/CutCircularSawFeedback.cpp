@@ -86,12 +86,23 @@ namespace AIAC
 
     void CutCircularSawFeedback::Update() {
         m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
-        updateToolPosition();
-        updateRefFaces();
-        updateFeedback();
+
+        if(m_Cut->IsSingleFace()) {
+            this->EnableCutPlane(true);
+        }
+        else {
+            this->EnableCutPlane(false);
+        }
+
+        UpdateToolPosition();
+        UpdateRefFaces();
+        UpdateFeedback();
     }
 
     void CutCircularSawFeedback::Activate() {
+        m_GeneralVisualizer.Activate();
+        m_OrientationVisualizer.Activate();
+        m_PositionStartVisualizer.Activate();
         Update();
     }
 
@@ -102,7 +113,7 @@ namespace AIAC
         m_PositionStartVisualizer.Deactivate();
     }
 
-    void CutCircularSawFeedback::updateToolPosition() {
+    void CutCircularSawFeedback::UpdateToolPosition() {
         m_Radius = AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
         m_Center = AC_FF_TOOL->GetData<CircularSawData>().CenterGO->GetPosition();
         m_NormalStart = m_Center; // AC_FF_TOOL->GetData<CircularSawData>().NormStartGO->GetPosition(); // this value is not initialized
@@ -110,7 +121,7 @@ namespace AIAC
         m_Normal = glm::normalize(m_NormalEnd - m_NormalStart);
     }
 
-    void CutCircularSawFeedback::updateRefFaces()
+    void CutCircularSawFeedback::UpdateRefFaces()
     {
         float nearestParallelFaceDist = 0.f;
         std::string nearestParallelFaceID;
@@ -165,7 +176,7 @@ namespace AIAC
         }
     }
 
-    void CutCircularSawFeedback::updateFeedback() {
+    void CutCircularSawFeedback::UpdateFeedback() {
         if(!m_NearestPerpendicularFaceID.empty()){
             m_GeneralVisualizer.Activate();
             updateGeneralFeedback();
@@ -252,7 +263,8 @@ namespace AIAC
         if (!this->m_NearestParallelFaceID.empty())
         {
             //the following is the update for the orientation feedback
-            this->m_Cut->HighlightFace(m_NearestParallelFaceID);
+            if (!m_Cut->IsSingleFace())
+                this->m_Cut->HighlightFace(m_NearestParallelFaceID);
 
             auto faceInfo = m_Cut->GetFace(m_NearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();

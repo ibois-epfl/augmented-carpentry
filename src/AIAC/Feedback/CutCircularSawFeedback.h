@@ -122,9 +122,9 @@ namespace AIAC
         // config
         bool m_ToShowCutPlane = false;
 
-        void updateToolPosition();
-        void updateRefFaces();
-        void updateFeedback();
+        void UpdateToolPosition();
+        void UpdateRefFaces();
+        void UpdateFeedback();
         /**
         * @brief The "General" situation means that we have a perpendicular face that served as 
         * the "bottom" face, where the bottom of the saw blade should be placed on. Therefore, the

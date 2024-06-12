@@ -100,7 +100,8 @@ namespace AIAC
 
             std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth;
 
-            float m_DistDepthAcceptance = 0.00675f;
+            ///< @brief This is the tolerance difference between the two depth line indicators of the chainsaw
+            float m_DistDepthAcceptance = 0.0025f;
 
             friend class CutChainSawFeedback;
     };

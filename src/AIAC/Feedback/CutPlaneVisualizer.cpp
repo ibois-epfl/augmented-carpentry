@@ -25,12 +25,12 @@ CutPlaneVisualizer::DistanceVisualizer::DistanceVisualizer(){
 CutPlaneVisualizer::CutPlaneVisualizer(){
     m_IntersectFace = GOMesh::Add();
     m_IntersectFace->SetIndices({0, 1, 2, 1, 2, 3});
-    m_IntersectFace->SetColor(glm::vec4(1.0f, 0.3f, 0.3f, 0.5f));
+    m_IntersectFace->SetColor(AIAC::GOColor::ORANGE_TRANSP);
 
     m_IntersectPolyline = GOPolyline::Add();
     m_IntersectPolyline->SetClosed(true);
     m_IntersectPolyline->SetWeight(2.0f);
-    m_IntersectPolyline->SetColor(glm::vec4(1.0f, 0.3f, 0.3f, 1.0f));
+    m_IntersectPolyline->SetColor(AIAC::GOColor::ORANGE);
 
     m_AllPrimitives.push_back(m_IntersectFace);
     m_AllPrimitives.push_back(m_IntersectPolyline);
@@ -40,12 +40,15 @@ CutPlaneVisualizer::CutPlaneVisualizer(){
 
 void CutPlaneVisualizer::CutPlaneVisualizer::Activate(){
     FeedbackVisualizer::Activate();
-    m_DistanceVisualizer.Activate();
+    m_DistanceVisualizer.Deactivate();
 }
 
 void CutPlaneVisualizer::CutPlaneVisualizer::Deactivate(){
     FeedbackVisualizer::Deactivate();
     m_DistanceVisualizer.Deactivate();
+    for (auto &p : m_AllPrimitives) {
+        p->SetVisibility(false);
+    }
 }
 
 std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 facePt){
@@ -90,7 +93,9 @@ std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 
     // Update distance indicator
     TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
     if(cut->GetAllNonExposedFaceIDs().size() == 1){
-        m_DistanceVisualizer.Activate();
+        // m_DistanceVisualizer.Activate();
+        // m_DistanceVisualizer.Deactivate());
+
         auto nonExposedFaceID = *(cut->GetAllNonExposedFaceIDs().begin());
         auto nonExposedFace = cut->GetFace(nonExposedFaceID);
 
