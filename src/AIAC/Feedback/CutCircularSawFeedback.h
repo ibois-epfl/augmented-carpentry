@@ -30,7 +30,7 @@ namespace AIAC
     };
 
     /**
-     * @brief This visualizer gives a bit of guidance on the cut orientation. Although it is not possible
+     * @brief This visualizer ggdb  ives a bit of guidance on the cut orientation. Although it is not possible
      * to determine the exact orientation of the cut, this visualizer gives a rough idea of the pitch and roll.
      * The way this is done is by projecting the blade normal onto the face normal, and then projecting the
      * resulting vector onto the face normal. If we close the triangle of these two lines we can monitor the angle

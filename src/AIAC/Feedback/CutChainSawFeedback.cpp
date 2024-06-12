@@ -180,7 +180,8 @@ namespace AIAC
             }
         }
         // Highlight the face
-        cut->HighlightFace(nearestParallelFaceID);
+        if (!cut->IsSingleFace())
+            cut->HighlightFace(nearestParallelFaceID);
 
         // Update the m_Visualizer for the closest parallel face
         bool hasParallelFace = false, hasPerpendicularFace = false;
@@ -322,6 +323,7 @@ namespace AIAC
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
 
+
             // Get the intersection line of the tool plane and the face plane
             glm::vec3 intersectLineVec, intersectLinePt;
             if(!GetIntersectLineOf2Planes(faceNormal, faceCenter,
@@ -352,7 +354,12 @@ namespace AIAC
             auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainBase);
             auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainEnd);
 
-            depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
+            // depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
+            // glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormEnd - m_NormStart));
+            // float bladeThickness = 0.00465f;  // in meters TODO: replace in acit model
+
+            // auto projChainBaseTranslated 
+            depthVisualizer.m_LineIntersectThickness->SetPts(projChainBase, projChainEnd);
 
             // Lines based on face edge
             // for face edge dist, we need to find the projection point of the two points on the saw first
@@ -409,7 +416,6 @@ namespace AIAC
 
                 // if the two guide lines have a close same distance than mark as yellow
                 float diffPerpendicularFaceEdgeDist = std::abs(realPerpendicularFaceEdge1Dist - realPerpendicularFaceEdge2Dist);
-                AIAC_INFO("Perpendicular face edge dist diff: {}", diffPerpendicularFaceEdgeDist);
                 if(diffPerpendicularFaceEdgeDist < this->m_Visualizer.m_DistDepthAcceptance){
                     depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::GREEN);
                     depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::GREEN);
