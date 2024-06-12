@@ -516,13 +516,12 @@ namespace AIAC
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(true);
+                    AIAC_APP.GetLayer<LayerFeedback>()->DeactivateCurrentFeedbackVisibility();
                 } else {
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
+                    AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
                 }
-
-                // deactivate the current feedback visuals for better visibility
-                AIAC_APP.GetLayer<LayerFeedback>()->SwitchCurrentFeedbackVisibility();
             }
         ImGui::EndChild();
     }

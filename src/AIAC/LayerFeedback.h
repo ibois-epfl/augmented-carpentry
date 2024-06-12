@@ -28,9 +28,14 @@ namespace AIAC
             m_CutCircularSawFeedback.EnableCutPlane(enable);
         };
 
-        void SwitchCurrentFeedbackVisibility()
+        void DeactivateCurrentFeedbackVisibility()
         {
-            m_IsCurrentFabFeedbackVisible = !m_IsCurrentFabFeedbackVisible;
+            m_IsCurrentFabFeedbackVisible = false;
+        }
+
+        void ActivateCurrentFeedbackVisibility()
+        {
+            m_IsCurrentFabFeedbackVisible = true;
         }
 
     private:

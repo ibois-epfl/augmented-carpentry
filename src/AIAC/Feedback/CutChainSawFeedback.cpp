@@ -21,9 +21,10 @@ namespace AIAC
         m_LineDebugC = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDebugD = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDebugE = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::ExtraThick);
+        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::MediumThick);
         m_GuideTxtRollPitch = GOText::Add("RollPitch", GOPoint(0.f, 0.f, 0.f));
 
+        m_GuideTxtRollPitch->SetTextSize(GOTextSize::Average);
 
         m_LineFaceNormal->SetColor(GOColor::BLUE);
         m_LineBladeNormal->SetColor(GOColor::MAGENTA);
@@ -59,6 +60,10 @@ namespace AIAC
         m_LineChainBase->SetColor(GOColor::WHITE);
         m_LineChainEnd->SetColor(GOColor::WHITE);
 
+        m_LineEnd->SetWeight(GOWeight::Bold);
+        m_LineChainBase->SetWeight(GOWeight::MediumThick);
+        m_LineChainEnd->SetWeight(GOWeight::MediumThick);
+
         m_AllPrimitives.push_back(m_LineEnd);
         m_AllPrimitives.push_back(m_LineChainBase);
         m_AllPrimitives.push_back(m_LineChainEnd);
@@ -70,15 +75,23 @@ namespace AIAC
     {
         // Line
         m_LineIntersect = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineIntersectThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
         m_LineDepthFaceEdge1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDepthFaceEdge2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineIntersect->SetColor(GOColor::CYAN);
+        m_LineIntersect->SetColor(GOColor::CYAN);  // TODO: change color
+        m_LineIntersectThickness->SetColor(GOColor::ORANGE);
         m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
         m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
 
+        m_LineIntersect->SetWeight(GOWeight::Bold);
+        m_LineIntersectThickness->SetWeight(GOWeight::Bold);
+        m_LineDepthFaceEdge1->SetWeight(GOWeight::MediumThick);
+        m_LineDepthFaceEdge2->SetWeight(GOWeight::MediumThick);
+
         m_AllPrimitives.push_back(m_LineIntersect);
+        m_AllPrimitives.push_back(m_LineIntersectThickness);
         m_AllPrimitives.push_back(m_LineDepthFaceEdge1);
         m_AllPrimitives.push_back(m_LineDepthFaceEdge2);
 
@@ -88,20 +101,17 @@ namespace AIAC
     CutChainSawFeedVisualizer::CutChainSawFeedVisualizer()
     {
         // Text
-        m_GuideTxtEnd = GOText::Add("End", GOPoint(0.f, 0.f, 0.f));
         m_GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtFaceEdgeDepth = GOText::Add("FaceEdgeDepth2", GOPoint(0.f, 0.f, 0.f));
 
-        m_GuideTxtFaceEdgeDepth2 = GOText::Add("FaceEdgeDepth2", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtChainBase->SetTextSize(GOTextSize::Small);
+        m_GuideTxtFaceEdgeDepth->SetTextSize(GOTextSize::Average);
 
-        m_GuideTxtEnd->SetColor(GOColor::WHITE);
         m_GuideTxtChainBase->SetColor(GOColor::WHITE);
+        m_GuideTxtFaceEdgeDepth->SetColor(GOColor::WHITE);
 
-        m_GuideTxtFaceEdgeDepth2->SetColor(GOColor::WHITE);
-
-        m_AllPrimitives.push_back(m_GuideTxtEnd);
         m_AllPrimitives.push_back(m_GuideTxtChainBase);
-
-        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth2);
+        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth);
 
         Deactivate();
     }
@@ -373,6 +383,10 @@ namespace AIAC
 
                 perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
                 perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
+                float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
+
+                float realPerpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, perpIntersectLineSegPt2) / scaleFactor;
+                float realPerpendicularFaceEdge2Dist = glm::distance(pt1ProjPt, pt2ProjPt) / scaleFactor;
 
                 // get the direction of tool
                 auto toolUpVec = glm::normalize(m_NormStart - m_ChainBase);
@@ -393,9 +407,19 @@ namespace AIAC
                 } else {
                     depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
                 }
+
+                // if the two guide lines have a close same distance than mark as yellow
+                float diffPerpendicularFaceEdgeDist = std::abs(realPerpendicularFaceEdge1Dist - realPerpendicularFaceEdge2Dist);
+                AIAC_INFO("Perpendicular face edge dist diff: {}", diffPerpendicularFaceEdgeDist);
+                if(diffPerpendicularFaceEdgeDist < this->m_Visualizer.m_DistDepthAcceptance){
+                    depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::GREEN);
+                    depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::GREEN);
+                }
+
+
                 depthVisualizer.Activate();
             } else {
-                depthVisualizer.Deactivate();    
+                depthVisualizer.Deactivate();
             }
         } else
         {
@@ -409,15 +433,13 @@ namespace AIAC
             auto strEnd = FeedbackVisualizer::toString(parallelEndDist);
             auto strChainBase = FeedbackVisualizer::toString(parallelChainBaseDist);
 
-            this->m_Visualizer.m_GuideTxtEnd->SetText(strEnd);
             this->m_Visualizer.m_GuideTxtChainBase->SetText("s:"+strChainBase);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText("d:"+FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetText("d:"+FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
 
-            this->m_Visualizer.m_GuideTxtEnd->SetAnchor(m_NormStart);
             this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(m_ChainBase);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetAnchor(perpIntersectLineSegPt2);
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetAnchor(perpIntersectLineSegPt1);
 
             auto endColor = GOColor::WHITE;
             auto chainBaseColor = GOColor::WHITE;
@@ -444,10 +466,8 @@ namespace AIAC
                 faceEdgeTxt2Color = GOColor::RED;
             }
 
-            this->m_Visualizer.m_GuideTxtEnd->SetColor(endColor);
             this->m_Visualizer.m_GuideTxtChainBase->SetColor(chainBaseColor);
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetColor(faceEdgeTxt2Color);
-
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetColor(faceEdgeTxt2Color);
         }
         else m_Visualizer.Deactivate();
     }

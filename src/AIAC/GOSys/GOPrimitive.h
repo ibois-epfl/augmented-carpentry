@@ -31,6 +31,7 @@ namespace AIAC
         static constexpr float Default            = 1.01f;
         static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
+        static constexpr float MediumThick        = 7.0f;
         static constexpr float ExtraThick         = 10.0f;
         static constexpr float BoldThick          = 15.0f;
         static constexpr float MaxThick           = 20.0f;
@@ -42,6 +43,7 @@ namespace AIAC
         static constexpr double ExtraSmall         = 0.35;
         static constexpr double BitSmall           = 0.4;
         static constexpr double Small              = 0.5;
+        static constexpr double Average            = 0.75;
         static constexpr double Medium             = 5.0;
         static constexpr double Big                = 10.0;
     };
