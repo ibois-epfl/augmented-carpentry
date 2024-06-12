@@ -19,7 +19,7 @@ namespace AIAC
         this->m_LineDistStart->SetColor(GOColor::YELLOW);
         this->m_TxtDistStart->SetColor(GOColor::WHITE);
 
-        this->m_TxtDistStart->SetTextSize(GOTextSize::ExtraSmall);
+        this->m_TxtDistStart->SetTextSize(GOTextSize::BitSmall);
 
         this->m_AllPrimitives.push_back(m_LineDistStart);
         this->m_AllPrimitives.push_back(m_TxtDistStart);
@@ -49,7 +49,7 @@ namespace AIAC
         m_LinePitchFeed->SetColor(GOColor::RED);
         m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
 
-        m_GuideTxtRollPitch->SetTextSize(GOTextSize::ExtraSmall);
+        m_GuideTxtRollPitch->SetTextSize(GOTextSize::BitSmall);
 
         m_AllPrimitives.push_back(m_LineFaceNormal);
         m_AllPrimitives.push_back(m_LineBladeNormal);
@@ -73,7 +73,7 @@ namespace AIAC
         m_ProjLineOfBlade->SetColor(GOColor::CYAN);
         m_TxtBottomDist->SetColor(GOColor::WHITE);
 
-        m_TxtBottomDist->SetTextSize(GOTextSize::ExtraSmall);
+        m_TxtBottomDist->SetTextSize(GOTextSize::BitSmall);
 
         m_AllPrimitives.push_back(m_BottomPoint);
         m_AllPrimitives.push_back(m_LineToBottomPt);

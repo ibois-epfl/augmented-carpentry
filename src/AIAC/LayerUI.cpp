@@ -520,6 +520,9 @@ namespace AIAC
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
                 }
+
+                // deactivate the current feedback visuals for better visibility
+                AIAC_APP.GetLayer<LayerFeedback>()->SwitchCurrentFeedbackVisibility();
             }
         ImGui::EndChild();
     }

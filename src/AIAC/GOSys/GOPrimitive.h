@@ -39,7 +39,8 @@ namespace AIAC
     struct GOTextSize
     {
         static constexpr double Default            = 1.0;
-        static constexpr double ExtraSmall              = 0.35;
+        static constexpr double ExtraSmall         = 0.35;
+        static constexpr double BitSmall           = 0.4;
         static constexpr double Small              = 0.5;
         static constexpr double Medium             = 5.0;
         static constexpr double Big                = 10.0;
@@ -77,6 +78,7 @@ namespace AIAC
 
         inline void SetName(std::string name) { m_Name = std::move(name); }
         inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }
+        inline bool GetVisibility() { return m_IsVisible; }
         inline void SetColor(glm::vec4 color) { m_Color = color; InitGLObject();}
         inline void SetState(bool state) { m_State = state; }
 
