@@ -3,7 +3,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 # import log
-from config import __ACIM_VERSION__
+# from config import __ACIM_VERSION__
 
 
 __ACIM_STATE__ = {
@@ -19,7 +19,7 @@ class ACIM:
         self._out_path_xml = os.path.join(out_dir, out_name) + ".acim"
 
         self._root = ET.Element("acim")
-        self._root.set("version", __ACIM_VERSION__)
+        # self._root.set("version", __ACIM_VERSION__)
         self._tree = None
         
         self._timber_ets = {}
