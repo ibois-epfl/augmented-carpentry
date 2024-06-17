@@ -66,7 +66,6 @@ namespace AIAC
 
     void HoleFeedback::Update()
     {
-        
         auto hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
         float scaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
 
