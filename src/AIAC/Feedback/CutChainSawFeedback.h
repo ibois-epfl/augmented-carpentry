@@ -67,6 +67,7 @@ namespace AIAC
 
         private:
             std::shared_ptr<GOLine> m_LineIntersect;
+            std::shared_ptr<GOLine> m_LineIntersectThickness;
             std::shared_ptr<GOLine> m_LineDepthFaceEdge1;
             std::shared_ptr<GOLine> m_LineDepthFaceEdge2;
 
@@ -97,8 +98,10 @@ namespace AIAC
             std::shared_ptr<GOText> m_GuideTxtChainBase;
             std::shared_ptr<GOText> m_GuideTxtChainEnd;
 
-            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth1;
-            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth2;
+            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth;
+
+            ///< @brief This is the tolerance difference between the two depth line indicators of the chainsaw
+            float m_DistDepthAcceptance = 0.0025f;
 
             friend class CutChainSawFeedback;
     };

@@ -28,6 +28,8 @@ namespace AIAC
             inline std::string GetActiveToolheadName() const { return this->m_ActiveACInfoToolhead->GetName(); }
             /// @brief Get the toolhead's type by its name
             inline ACToolHeadType GetToolheadType(const std::string& toolheadName) const { return this->m_ACInfoToolheadMap.at(toolheadName)->GetType(); }
+            /// @brief Get the current active toolhead's type
+            inline ACToolHeadType GetActiveToolheadType() const { return this->m_ActiveACInfoToolhead->GetType(); }
 
 
             /// @brief Return the  list of names of the toolheads loaded

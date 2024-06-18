@@ -37,6 +37,8 @@ namespace AIAC
             m_CircularSawD.NormStartACIT = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_CircularSawD.NormEndACIT = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
             m_CircularSawD.RadiusACIT = toolhead.child("radius").text().as_float() * this->GetScaleF();
+            m_CircularSawD.ThicknessACIT = toolhead.child("bladeThickness").text().as_float() * this->GetScaleF();
+            m_CircularSawD.OverhangACIT = toolhead.child("bladeOverhang").text().as_float() * this->GetScaleF();
         }
         else if (type == "chainsaw")
         {
@@ -49,6 +51,8 @@ namespace AIAC
             m_ChainSawD.NormStartACIT = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_ChainSawD.NormEndACIT = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
             m_ChainSawD.WidthACIT = toolhead.child("width").text().as_float() * this->GetScaleF();
+            m_ChainSawD.ThicknessACIT = toolhead.child("bladeThickness").text().as_float() * this->GetScaleF();
+            m_ChainSawD.OverhangACIT = toolhead.child("bladeOverhang").text().as_float() * this->GetScaleF();
         }
         else if (type == "sabersaw")
         {
