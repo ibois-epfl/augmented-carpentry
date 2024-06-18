@@ -34,7 +34,7 @@ namespace AIAC{
         void CalcBoardCornerPositions(std::vector<cv::Point3f>& corners) const;
 
     public:
-        cv::Size boardSize = cv::Size(13, 9);  // The size of the board -> Number of items by width and height
+        cv::Size boardSize = cv::Size(19, 13);  // The size of the board -> Number of items by width and height
         Pattern calibrationPattern = Pattern::CHESSBOARD;   // One of the Chessboard, circles, or asymmetric circle pattern
         float squareSize = 20.0f;                           // The size of a square in your defined unit (point, millimeter,etc).
         float aspectRatio = 0.0f;                           // The aspect ratio, can be 0 if no need
