@@ -33,6 +33,9 @@ namespace AIAC
 
         m_CalibFilePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
         LoadCameraParams(m_CalibFilePath);
+
+        FlipHorizontal = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_HORIZONTAL, false);
+        FlipVertical = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_VERTICAL, false);
     }
 
     void Camera::InitCameraParamsFromFile(const std::string &filePath) {
