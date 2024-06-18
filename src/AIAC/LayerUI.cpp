@@ -274,6 +274,12 @@ namespace AIAC
             AIAC_APP.GetLayer<LayerCamera>()->UpdateAvailableDevices();
         }
 
+        ImGui::Text("Flip ");
+        ImGui::SameLine();
+        ImGui::Checkbox("Horizontal", &AIAC_APP.GetLayer<LayerCamera>()->MainCamera.FlipHorizontal);
+        ImGui::SameLine();
+        ImGui::Checkbox("Vertical", &AIAC_APP.GetLayer<LayerCamera>()->MainCamera.FlipVertical);
+
         AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
         ImGui::Text("Resolution: (%d x %d) > (%d x %d)", camera.GetRawWidth(), camera.GetRawHeight(), camera.GetWidth(), camera.GetHeight());
 
