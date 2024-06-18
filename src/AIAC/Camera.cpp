@@ -87,6 +87,9 @@ namespace AIAC
         cv::Mat frame;
         m_VideoCapture >> frame;
 
+        cv::flip(frame, frame, 1);
+        cv::flip(frame, frame, 0);
+
         m_RawCurrentFrame = frame;
 
         cv::Mat resizedFrame, calibratedFrame;
