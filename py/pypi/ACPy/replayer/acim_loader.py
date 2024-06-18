@@ -1,5 +1,12 @@
+import Rhino
+import ghpythonlib.components as ghcomp
+
 import xml.etree.ElementTree as ET
 
+from acim_data import ACIMData
+
+scale = 50
+tolerance = 0.01
 
 def load(log_file_path):
     tree = ET.parse(log_file_path)
@@ -8,19 +15,17 @@ def load(log_file_path):
     timber = root.find("timber")
     bbox = _parseBBox(timber.find("bbox"))
 
-    cuts = []
+    cuts = {}
     for cutNode in timber.findall("cut"):
-        cuts.append(_parseCut(cutNode))
+        id, faces = _parseCut(cutNode)
+        cuts[id] = faces
     
-    holes = []
+    holes = {}
     for holeNode in timber.findall("hole"):
-        holes.append(_parseHole(holeNode))
+        id, cylinder = _parseHole(holeNode)
+        holes[id] = cylinder
 
-    acim_data = {
-        "bbox": bbox,
-        "cuts": cuts,
-        "holes": holes
-    }
+    acim_data = ACIMData(bbox, cuts, holes)
 
     return acim_data
 
@@ -29,39 +34,87 @@ def _parseBBox(bboxNode):
     corners = []
     for cornerNode in bboxNode.findall("corner"):
         position = _parsePosition(cornerNode.text)
-        id = cornerNode.attrib["id"]
+        id = int(cornerNode.attrib["id"])
 
         corners.append((id, position))
 
     corners.sort(key=lambda x: x[0])
     corners = list(map(lambda x: x[1], corners))
 
-    return corners
+    # bbox, _ = Rhino.Geometry.Mesh.CreateConvexHull3D(corners, tolerance, tolerance)
+
+    faces = []
+    faces_indices = [
+        [0, 3, 2, 1],
+        [4, 5, 6, 7],
+        [0, 1, 5, 4],
+        [3, 7, 6, 2],
+        [0, 4, 7, 3],
+        [1, 2, 6, 5]
+    ]
+    for indices in faces_indices:
+        face = ghcomp.x4PointSurface(corners[indices[0]], corners[indices[1]], corners[indices[2]], corners[indices[3]])
+        faces.append(face)
+    
+    bbox = Rhino.Geometry.Brep.MergeBreps(faces, tolerance)
+
+    return bbox
 
 
 def _parseCut(cutNode):
     id = cutNode.attrib["id"]
     faces = []
     for faceNode in cutNode.find("faces").findall("face"):
-        id = faceNode.attrib["id"]
+        corner_id = int(faceNode.attrib["id"])
         corners = []
         for corner in faceNode.find("corners").findall("corner"):
             corners.append(_parsePosition(corner.text))
 
-        faces.append((id, corners))
+        face = ghcomp.x4PointSurface(corners[0], corners[1], corners[2], corners[3])
+        faces.append(face)
 
-    return (id, faces)
+    cutBrep = Rhino.Geometry.Brep.MergeBreps(faces, tolerance)
+
+    return (id, cutBrep)
 
 
 def _parseHole(holeNode):
-    pass
+    id = holeNode.attrib["id"]
+    radius = float(holeNode.find("radius").text) * scale
+    start = _parsePosition(holeNode.find("start").find("coordinates").text)
+    end = _parsePosition(holeNode.find("end").find("coordinates").text)\
+    
+    if start.Z > end.Z:
+        start, end = end, start
+
+    vec = end - start
+    
+    basePlane = Rhino.Geometry.Plane(start, vec)
+    circle = Rhino.Geometry.Circle(basePlane, radius)
+    cylinder = Rhino.Geometry.Cylinder(circle, vec.Length).ToBrep(True, True)
+    
+    return (id, cylinder)
 
 
 def _parsePosition(positionString):
-    return list(map(float, positionString.split(" ")))
+    x, y, z = tuple(map(float, positionString.split(" ")))
+    x *= scale
+    y *= scale
+    z *= scale
+    return Rhino.Geometry.Point3d(x, y, z)
     
     
 if __name__ == "__main__":
     from pprint import pprint
     acim_data = load("/Users/petingo/p/augmented-carpentry/py/expirment/mybeam (1).acim")
     pprint(acim_data)
+
+    bbox = acim_data.bbox
+
+    all_cut_faces = []
+    for _, faces in acim_data.cuts.items():
+        all_cut_faces.append(faces)
+
+    all_holes = []
+    for _, cylinder in acim_data.holes.items():
+        all_holes.append(cylinder)
