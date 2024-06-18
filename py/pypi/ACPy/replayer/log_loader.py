@@ -13,7 +13,7 @@ def load(root_path: str, exp_id: str):
     Load the log data from the given root path and experiment ID.
     
     Returns:
-        all_event_data: a dictionary containing all the log event data.
+        all_event_data: LogData
     """
 
     log_events = [
@@ -138,7 +138,8 @@ def _get_exp_folder_paths(root_path: str, exp_id: str):
                 zip_ref.extractall(root_path)
             path = path[:-4]
 
-        if basename.startswith(exp_id):
+        folder_exp_id = basename.split("_")[0]
+        if folder_exp_id == exp_id:
             exp_folders.append(path)
     exp_folders.sort()
 

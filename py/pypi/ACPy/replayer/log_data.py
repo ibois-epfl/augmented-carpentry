@@ -16,10 +16,10 @@ class LogEventData:
         """
         Add a data point at the given index.
         """
-        if index < self.frameIDs[-1]:
+        if len(self.frameIDs) > 0 and index < self.frameIDs[-1]:
             raise ValueError("The pose data should be constructed in chronological order.")
 
-        if index == self.frameIDs[-1]:
+        if len(self.frameIDs) > 0 and index == self.frameIDs[-1]:
             self.dataCollection[-1] = data
         else:
             self.frameIDs.append(index)

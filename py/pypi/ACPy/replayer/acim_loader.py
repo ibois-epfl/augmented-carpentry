@@ -70,7 +70,8 @@ def _parseCut(cutNode):
         for corner in faceNode.find("corners").findall("corner"):
             corners.append(_parsePosition(corner.text))
 
-        face = ghcomp.x4PointSurface(corners[0], corners[1], corners[2], corners[3])
+        boundary = Rhino.Geometry.Polyline(corners + [corners[0]])
+        face = ghcomp.BoundarySurfaces(boundary)
         faces.append(face)
 
     cutBrep = Rhino.Geometry.Brep.MergeBreps(faces, tolerance)
@@ -82,7 +83,7 @@ def _parseHole(holeNode):
     id = holeNode.attrib["id"]
     radius = float(holeNode.find("radius").text) * scale
     start = _parsePosition(holeNode.find("start").find("coordinates").text)
-    end = _parsePosition(holeNode.find("end").find("coordinates").text)\
+    end = _parsePosition(holeNode.find("end").find("coordinates").text)
     
     if start.Z > end.Z:
         start, end = end, start
@@ -106,7 +107,7 @@ def _parsePosition(positionString):
     
 if __name__ == "__main__":
     from pprint import pprint
-    acim_data = load("/Users/petingo/p/augmented-carpentry/py/expirment/mybeam (1).acim")
+    acim_data = load("/Users/petingo/p/augmented-carpentry/py/expirment/all_log/Z4Z2_2024-5-27-16-40-21/AC_info_model.acim")
     pprint(acim_data)
 
     bbox = acim_data.bbox
@@ -118,3 +119,7 @@ if __name__ == "__main__":
     all_holes = []
     for _, cylinder in acim_data.holes.items():
         all_holes.append(cylinder)
+
+
+
+        
