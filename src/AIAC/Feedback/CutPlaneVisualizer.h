@@ -35,6 +35,8 @@ namespace AIAC{
     protected:
         std::shared_ptr<GOPolyline> m_IntersectPolyline;
         std::shared_ptr<GOMesh> m_IntersectFace;
+        // std::shared_ptr<GOPolyline> m_IntersectPolylineThickness;
+        // std::shared_ptr<GOMesh> m_IntersectFaceThickness;
         DistanceVisualizer m_DistanceVisualizer;
     };
 }

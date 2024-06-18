@@ -21,9 +21,10 @@ namespace AIAC
         m_LineDebugC = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDebugD = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDebugE = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::ExtraThick);
+        m_LinePitchFeed = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::MediumThick);
         m_GuideTxtRollPitch = GOText::Add("RollPitch", GOPoint(0.f, 0.f, 0.f));
 
+        m_GuideTxtRollPitch->SetTextSize(GOTextSize::Average);
 
         m_LineFaceNormal->SetColor(GOColor::BLUE);
         m_LineBladeNormal->SetColor(GOColor::MAGENTA);
@@ -35,13 +36,13 @@ namespace AIAC
         m_LinePitchFeed->SetColor(GOColor::RED);
         m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
 
-        m_AllPrimitives.push_back(m_LineFaceNormal);
-        m_AllPrimitives.push_back(m_LineBladeNormal);
-        m_AllPrimitives.push_back(m_LineDebugA);
-        m_AllPrimitives.push_back(m_LineDebugB);
-        m_AllPrimitives.push_back(m_LineDebugC);
-        m_AllPrimitives.push_back(m_LineDebugD);
-        m_AllPrimitives.push_back(m_LineDebugE);
+        // m_AllPrimitives.push_back(m_LineFaceNormal);
+        // m_AllPrimitives.push_back(m_LineBladeNormal);
+        // m_AllPrimitives.push_back(m_LineDebugA);
+        // m_AllPrimitives.push_back(m_LineDebugB);
+        // m_AllPrimitives.push_back(m_LineDebugC);
+        // m_AllPrimitives.push_back(m_LineDebugD);
+        // m_AllPrimitives.push_back(m_LineDebugE);
         m_AllPrimitives.push_back(m_LinePitchFeed);
         m_AllPrimitives.push_back(m_GuideTxtRollPitch);
 
@@ -59,6 +60,10 @@ namespace AIAC
         m_LineChainBase->SetColor(GOColor::WHITE);
         m_LineChainEnd->SetColor(GOColor::WHITE);
 
+        m_LineEnd->SetWeight(GOWeight::Bold);
+        m_LineChainBase->SetWeight(GOWeight::MediumThick);
+        m_LineChainEnd->SetWeight(GOWeight::MediumThick);
+
         m_AllPrimitives.push_back(m_LineEnd);
         m_AllPrimitives.push_back(m_LineChainBase);
         m_AllPrimitives.push_back(m_LineChainEnd);
@@ -70,15 +75,23 @@ namespace AIAC
     {
         // Line
         m_LineIntersect = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_LineIntersectThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
         m_LineDepthFaceEdge1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDepthFaceEdge2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineIntersect->SetColor(GOColor::CYAN);
+        m_LineIntersect->SetColor(GOColor::ORANGE);
+        m_LineIntersectThickness->SetColor(GOColor::ORANGE);
         m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
         m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
 
+        m_LineIntersect->SetWeight(GOWeight::Medium);
+        m_LineIntersectThickness->SetWeight(GOWeight::Medium);
+        m_LineDepthFaceEdge1->SetWeight(GOWeight::MediumThick);
+        m_LineDepthFaceEdge2->SetWeight(GOWeight::MediumThick);
+
         m_AllPrimitives.push_back(m_LineIntersect);
+        m_AllPrimitives.push_back(m_LineIntersectThickness);
         m_AllPrimitives.push_back(m_LineDepthFaceEdge1);
         m_AllPrimitives.push_back(m_LineDepthFaceEdge2);
 
@@ -88,20 +101,17 @@ namespace AIAC
     CutChainSawFeedVisualizer::CutChainSawFeedVisualizer()
     {
         // Text
-        m_GuideTxtEnd = GOText::Add("End", GOPoint(0.f, 0.f, 0.f));
         m_GuideTxtChainBase = GOText::Add("ChainBase", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtFaceEdgeDepth = GOText::Add("FaceEdgeDepth2", GOPoint(0.f, 0.f, 0.f));
 
-        m_GuideTxtFaceEdgeDepth2 = GOText::Add("FaceEdgeDepth2", GOPoint(0.f, 0.f, 0.f));
+        m_GuideTxtChainBase->SetTextSize(GOTextSize::Small);
+        m_GuideTxtFaceEdgeDepth->SetTextSize(GOTextSize::Average);
 
-        m_GuideTxtEnd->SetColor(GOColor::WHITE);
         m_GuideTxtChainBase->SetColor(GOColor::WHITE);
+        m_GuideTxtFaceEdgeDepth->SetColor(GOColor::WHITE);
 
-        m_GuideTxtFaceEdgeDepth2->SetColor(GOColor::WHITE);
-
-        m_AllPrimitives.push_back(m_GuideTxtEnd);
         m_AllPrimitives.push_back(m_GuideTxtChainBase);
-
-        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth2);
+        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth);
 
         Deactivate();
     }
@@ -127,12 +137,12 @@ namespace AIAC
 
         if(m_ToShowCutPlane) updateCutPlane();
         
-        // // if it's a single face, only show the red cutting plane
-        // if(cut->IsSingleFace()) {
-        //     this->m_Visualizer.Deactivate();
-        //     angleVisualizer.Deactivate();
-        //     depthVisualizer.Deactivate();
-        //     return;
+        // if it's a single face show the cutting plane
+        if(cut->IsSingleFace()) {
+            this->EnableCutPlane(true);
+        }
+        // else {
+        //     this->EnableCutPlane(false);
         // }
 
         float nearestParallelFaceDist = 1e9f;
@@ -170,7 +180,8 @@ namespace AIAC
             }
         }
         // Highlight the face
-        cut->HighlightFace(nearestParallelFaceID);
+        if (!cut->IsSingleFace())
+            cut->HighlightFace(nearestParallelFaceID);
 
         // Update the m_Visualizer for the closest parallel face
         bool hasParallelFace = false, hasPerpendicularFace = false;
@@ -206,7 +217,7 @@ namespace AIAC
         }
 
         // extra orientation
-        if (!nearestParallelFaceID.empty())
+        if (!nearestParallelFaceID.empty() or cut->IsSingleFace())
         {
             m_CutOrientationVisualizer.Activate();
 
@@ -303,7 +314,7 @@ namespace AIAC
         }
 
         // Perpendicular face
-        if(!nearestPerpendicularFaceID.empty())
+        if(!nearestPerpendicularFaceID.empty() and !cut->IsSingleFace())
         {
             hasPerpendicularFace = true;
 
@@ -311,6 +322,7 @@ namespace AIAC
             auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
+
 
             // Get the intersection line of the tool plane and the face plane
             glm::vec3 intersectLineVec, intersectLinePt;
@@ -336,13 +348,27 @@ namespace AIAC
             }
             FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
 
-            // update the m_Visualizer
-            // FIXME: Change to intersection of two planes
+            // TODO: clean up the thickness section
+            // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            float bladeThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().ThicknessACIT;
+            float overHangThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().OverhangACIT;
+            float displacementTowardsCamera = bladeThicknessScaled;
+            float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
+
             // Lines based on tool
             auto projChainBase = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainBase);
             auto projChainEnd = GetNearestPtOnLine(intersectLineVec, intersectLinePt, m_ChainEnd);
+            glm::vec3 normalVec = glm::normalize(m_NormEnd - m_NormStart);
+            auto projChainBaseTranslatedTwardsoCamera = projChainBase + normalVec * displacementTowardsCamera;
+            auto projChainEndTranslatedTwardsoCamera = projChainEnd + normalVec * displacementTowardsCamera;
+            depthVisualizer.m_LineIntersect->SetPts(projChainBaseTranslatedTwardsoCamera, projChainEndTranslatedTwardsoCamera);
 
-            depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
+            // depthVisualizer.m_LineIntersect->SetPts(projChainBase, projChainEnd);
+            glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormEnd - m_NormStart));
+            auto projChainBaseTranslatedAwayFromCamera = projChainBase + oppositeNormalVec * displacementAwayFromCamera;
+            auto projChainEndTranslatedAwayFromCamera = projChainEnd + oppositeNormalVec * displacementAwayFromCamera;
+            depthVisualizer.m_LineIntersectThickness->SetPts(projChainBaseTranslatedAwayFromCamera, projChainEndTranslatedAwayFromCamera);
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             // Lines based on face edge
             // for face edge dist, we need to find the projection point of the two points on the saw first
@@ -373,6 +399,9 @@ namespace AIAC
 
                 perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
                 perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
+                float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
+                float realPerpendicularFaceEdge1Dist = perpendicularFaceEdge1Dist / scaleFactor;
+                float realPerpendicularFaceEdge2Dist = perpendicularFaceEdge2Dist / scaleFactor;
 
                 // get the direction of tool
                 auto toolUpVec = glm::normalize(m_NormStart - m_ChainBase);
@@ -393,9 +422,18 @@ namespace AIAC
                 } else {
                     depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
                 }
+
+                // if the two guide lines have a close same distance than mark as yellow
+                float diffPerpendicularFaceEdgeDist = std::abs(realPerpendicularFaceEdge1Dist - realPerpendicularFaceEdge2Dist);
+                if(diffPerpendicularFaceEdgeDist < this->m_Visualizer.m_DistDepthAcceptance){
+                    depthVisualizer.m_LineDepthFaceEdge1->SetColor(GOColor::GREEN);
+                    depthVisualizer.m_LineDepthFaceEdge2->SetColor(GOColor::GREEN);
+                }
+
+
                 depthVisualizer.Activate();
             } else {
-                depthVisualizer.Deactivate();    
+                depthVisualizer.Deactivate();
             }
         } else
         {
@@ -409,15 +447,13 @@ namespace AIAC
             auto strEnd = FeedbackVisualizer::toString(parallelEndDist);
             auto strChainBase = FeedbackVisualizer::toString(parallelChainBaseDist);
 
-            this->m_Visualizer.m_GuideTxtEnd->SetText(strEnd);
             this->m_Visualizer.m_GuideTxtChainBase->SetText("s:"+strChainBase);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetText("d:"+FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetText("d:"+FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
 
-            this->m_Visualizer.m_GuideTxtEnd->SetAnchor(m_NormStart);
             this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(m_ChainBase);
 
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetAnchor(perpIntersectLineSegPt2);
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetAnchor(perpIntersectLineSegPt1);
 
             auto endColor = GOColor::WHITE;
             auto chainBaseColor = GOColor::WHITE;
@@ -444,10 +480,8 @@ namespace AIAC
                 faceEdgeTxt2Color = GOColor::RED;
             }
 
-            this->m_Visualizer.m_GuideTxtEnd->SetColor(endColor);
             this->m_Visualizer.m_GuideTxtChainBase->SetColor(chainBaseColor);
-            this->m_Visualizer.m_GuideTxtFaceEdgeDepth2->SetColor(faceEdgeTxt2Color);
-
+            this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetColor(faceEdgeTxt2Color);
         }
         else m_Visualizer.Deactivate();
     }
