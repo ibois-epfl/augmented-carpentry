@@ -141,9 +141,9 @@ namespace AIAC
         if(cut->IsSingleFace()) {
             this->EnableCutPlane(true);
         }
-        else {
-            this->EnableCutPlane(false);
-        }
+        // else {
+        //     this->EnableCutPlane(false);
+        // }
 
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
@@ -314,7 +314,7 @@ namespace AIAC
         }
 
         // Perpendicular face
-        if(!nearestPerpendicularFaceID.empty())
+        if(!nearestPerpendicularFaceID.empty() and !cut->IsSingleFace())
         {
             hasPerpendicularFace = true;
 

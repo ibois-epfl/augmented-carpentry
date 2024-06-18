@@ -23,28 +23,28 @@ CutPlaneVisualizer::DistanceVisualizer::DistanceVisualizer(){
 }
 
 CutPlaneVisualizer::CutPlaneVisualizer(){
-    // m_IntersectFace = GOMesh::Add();
-    // m_IntersectFace->SetIndices({0, 1, 2, 1, 2, 3});
-    // m_IntersectFace->SetColor(AIAC::GOColor::ORANGE_TRANSP);
+    m_IntersectFace = GOMesh::Add();
+    m_IntersectFace->SetIndices({0, 1, 2, 1, 2, 3});
+    m_IntersectFace->SetColor(AIAC::GOColor::ORANGE_TRANSP);
 
-    m_IntersectFaceThickness = GOMesh::Add();
-    m_IntersectFaceThickness->SetIndices({0, 1, 2, 1, 2, 3});
-    m_IntersectFaceThickness->SetColor(AIAC::GOColor::ORANGE_TRANSP);
+    // m_IntersectFaceThickness = GOMesh::Add();
+    // m_IntersectFaceThickness->SetIndices({0, 1, 2, 1, 2, 3});
+    // m_IntersectFaceThickness->SetColor(AIAC::GOColor::ORANGE_TRANSP);
 
     m_IntersectPolyline = GOPolyline::Add();
     m_IntersectPolyline->SetClosed(true);
     m_IntersectPolyline->SetWeight(2.0f);
     m_IntersectPolyline->SetColor(AIAC::GOColor::ORANGE);
 
-    m_IntersectPolylineThickness = GOPolyline::Add();
-    m_IntersectPolylineThickness->SetClosed(true);
-    m_IntersectPolylineThickness->SetWeight(2.0f);
-    m_IntersectPolylineThickness->SetColor(AIAC::GOColor::ORANGE);
+    // m_IntersectPolylineThickness = GOPolyline::Add();
+    // m_IntersectPolylineThickness->SetClosed(true);
+    // m_IntersectPolylineThickness->SetWeight(2.0f);
+    // m_IntersectPolylineThickness->SetColor(AIAC::GOColor::ORANGE);
 
-    // m_AllPrimitives.push_back(m_IntersectFace);
+    m_AllPrimitives.push_back(m_IntersectFace);
     m_AllPrimitives.push_back(m_IntersectPolyline);
-    m_AllPrimitives.push_back(m_IntersectPolylineThickness);
-    m_AllPrimitives.push_back(m_IntersectFaceThickness);
+    // m_AllPrimitives.push_back(m_IntersectPolylineThickness);
+    // m_AllPrimitives.push_back(m_IntersectFaceThickness);
 
     Deactivate();
 }
@@ -92,9 +92,9 @@ std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 
         return std::vector<glm::vec3>();
     }
 
-    std::vector<glm::vec3> intersectPtsThickness = intersectPts;
 
     // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // std::vector<glm::vec3> intersectPtsThickness = intersectPts;
     float bladeThicknessScaled;
     float overHangThicknessScaled;
     if (currentToolType == ACToolHeadType::CHAINSAW) {
@@ -114,17 +114,17 @@ std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 
     glm::vec3 displacementAwayFromCameraVec = displacementAwayFromCamera * oppositeNormalVec;
 
     for (int i = 0; i < intersectPts.size(); i++) {
-        intersectPts[i] += displacementTowardsCameraVec;
+        intersectPts[i] += displacementAwayFromCameraVec;  //TODO: test if works
     }
-    for (int i = 0; i < intersectPtsThickness.size(); i++) {
-        intersectPtsThickness[i] += displacementAwayFromCameraVec;
-    }
+    // for (int i = 0; i < intersectPtsThickness.size(); i++) {
+    //     intersectPtsThickness[i] += displacementAwayFromCameraVec;
+    // }
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
     // Update the intersect face
-    // m_IntersectFace->SetVertices(intersectPts);
-    m_IntersectFaceThickness->SetVertices(intersectPtsThickness);
+    m_IntersectFace->SetVertices(intersectPts);
+    // m_IntersectFaceThickness->SetVertices(intersectPtsThickness);
 
     // Update the intersect polyline
     // To place the points in the correct order, we take [0], [1], [2] as the initial triangle,
@@ -137,15 +137,15 @@ std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 
     auto angle12 = GetAngleBetweenVectors(vec1, vec2);
     if(angle01 > angle02 && angle01 > angle12){  // 0 2 1 --- 3 => swap 1 and 2
         std::swap(intersectPts[1], intersectPts[2]);
-        std::swap(intersectPtsThickness[1], intersectPtsThickness[2]);
+        // std::swap(intersectPtsThickness[1], intersectPtsThickness[2]);
     }
     else if(angle12 > angle01 && angle12 > angle02){ // 1 0 2 --- 3 => swap 0 and 1
         std::swap(intersectPts[0], intersectPts[1]);
-        std::swap(intersectPtsThickness[0], intersectPtsThickness[1]);
+        // std::swap(intersectPtsThickness[0], intersectPtsThickness[1]);
     }
 
     m_IntersectPolyline->SetPoints(intersectPts);
-    m_IntersectPolylineThickness->SetPoints(intersectPtsThickness);
+    // m_IntersectPolylineThickness->SetPoints(intersectPtsThickness);
 
     m_DistanceVisualizer.Deactivate();
 
