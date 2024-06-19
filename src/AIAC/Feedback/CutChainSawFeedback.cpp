@@ -80,8 +80,11 @@ namespace AIAC
         m_LineDepthFaceEdge1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_LineDepthFaceEdge2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-        m_LineIntersect->SetColor(GOColor::ORANGE);
-        m_LineIntersectThickness->SetColor(GOColor::ORANGE);
+        m_LineIntersect->SetWeight(GOWeight::Light);
+        m_LineIntersectThickness->SetWeight(GOWeight::Light);
+
+        m_LineIntersect->SetColor(GOColor::RED);
+        m_LineIntersectThickness->SetColor(GOColor::RED);
         m_LineDepthFaceEdge1->SetColor(GOColor::YELLOW);
         m_LineDepthFaceEdge2->SetColor(GOColor::YELLOW);
 
@@ -107,8 +110,8 @@ namespace AIAC
         m_GuideTxtChainBase->SetTextSize(GOTextSize::Small);
         m_GuideTxtFaceEdgeDepth->SetTextSize(GOTextSize::Average);
 
-        m_GuideTxtChainBase->SetColor(GOColor::WHITE);
-        m_GuideTxtFaceEdgeDepth->SetColor(GOColor::WHITE);
+        m_GuideTxtChainBase->SetColor(GOColor::BLACK);
+        m_GuideTxtFaceEdgeDepth->SetColor(GOColor::BLACK);
 
         m_AllPrimitives.push_back(m_GuideTxtChainBase);
         m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth);
@@ -459,8 +462,8 @@ namespace AIAC
             auto chainBaseColor = GOColor::WHITE;
             auto chainEndColor = GOColor::WHITE;
 
-            auto faceEdgeTxt1Color = GOColor::WHITE;
-            auto faceEdgeTxt2Color = GOColor::WHITE;
+            auto faceEdgeTxt1Color = GOColor::BLACK;
+            auto faceEdgeTxt2Color = GOColor::BLACK;
 
             if(parallelEndDist != 0 && parallelEndDist < 0.5f){
                 endColor = GOColor::GREEN;

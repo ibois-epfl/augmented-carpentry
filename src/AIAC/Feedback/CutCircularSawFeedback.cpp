@@ -68,12 +68,15 @@ namespace AIAC
         m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
+        m_ProjLineOnFace->SetWeight(GOWeight::Light);
+        m_ProjLineOnFaceThickness->SetWeight(GOWeight::Light);
+
         m_BottomPoint->SetColor(GOColor::YELLOW);
         m_LineToBottomPt->SetColor(GOColor::YELLOW);
-        m_ProjLineOnFace->SetColor(GOColor::ORANGE);
-        m_ProjLineOnFaceThickness->SetColor(GOColor::ORANGE);
+        m_ProjLineOnFace->SetColor(GOColor::RED);
+        m_ProjLineOnFaceThickness->SetColor(GOColor::RED);
         m_ProjLineOfBlade->SetColor(GOColor::CYAN);
-        m_TxtBottomDist->SetColor(GOColor::WHITE);
+        m_TxtBottomDist->SetColor(GOColor::BLACK);
 
         m_TxtBottomDist->SetTextSize(GOTextSize::BitSmall);
 
@@ -93,9 +96,9 @@ namespace AIAC
         if(m_Cut->IsSingleFace()) {
             this->EnableCutPlane(true);
         }
-        else {
-            this->EnableCutPlane(false);
-        }
+        // else {
+        //     this->EnableCutPlane(false);
+        // }
 
         UpdateToolPosition();
         UpdateRefFaces();
@@ -231,8 +234,8 @@ namespace AIAC
 
         if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt))
         {
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::WHITE);
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
+            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
         }
         else if (-1.f < glm::distance(m_BottomPoint, projBtmPt) < 1.f)
         {

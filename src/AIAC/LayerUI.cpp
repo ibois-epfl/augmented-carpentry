@@ -508,6 +508,18 @@ namespace AIAC
             }
             ImGui::PopStyleVar();
 
+            // this is a button for enable the plane visualizer
+            // for cutting tools show the red plane for cutting guidance
+            if (auto cut = dynamic_cast<TimberInfo::Cut*>(currentComp)){
+                if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
+                    if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
+                        AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
+                    } else {
+                        AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
+                    }
+                };
+            }
+
             ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
             ImGui::PopStyleColor();
@@ -756,15 +768,6 @@ namespace AIAC
             if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
 #endif
-            // this is a button for enable the plane visualizer
-            // for cutting tools show the red plane for cutting guidance
-            if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
-                if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
-                    AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
-                } else {
-                    AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
-                }
-            };
         ImGui::EndChild();
 
 #ifdef ENABLE_DEV_UI

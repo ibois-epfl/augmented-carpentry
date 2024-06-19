@@ -21,9 +21,18 @@ namespace AIAC{
         std::vector<glm::vec3> Update(glm::vec3 faceNorm, glm::vec3 facePt);
 
     protected:
-        std::shared_ptr<GOLine> m_LongestIntersectSegmentAppCenter;
-        std::shared_ptr<GOLine> m_LongestIntersectSegment1;
-        std::shared_ptr<GOLine> m_LongestIntersectSegment2;
+        ///< @brief the intersection of the top plane of the blade from the closest side to the center of the blade
+        std::shared_ptr<GOLine> m_LongestIntersectSegmentAppCenterA;
+        ///< @brief the intersection of the top plane of the blade from the second closest side to the center of the blade
+        std::shared_ptr<GOLine> m_LongestIntersectSegmentAppCenterB;
+        ///< @brief the intersection line of the blade indicating the thickness towards the camera
+        std::shared_ptr<GOLine> m_LongestIntersectSegmentA1;
+        ///< @brief the intersection line of the blade indicating the thickness away from the camera
+        std::shared_ptr<GOLine> m_LongestIntersectSegmentA2;
+        ///< @brief the intersection line of the blade indicating the thickness towards the camera
+        std::shared_ptr<GOLine> m_LongestIntersectSegmentB1;
+        ///< @brief the intersection line of the blade indicating the thickness away from the camera
+        std::shared_ptr<GOLine> m_LongestIntersectSegmentB2;
     };
 }
 

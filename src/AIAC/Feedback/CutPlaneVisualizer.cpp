@@ -5,20 +5,31 @@
 namespace AIAC{
 
 CutPlaneVisualizer::CutPlaneVisualizer(){
-    m_LongestIntersectSegmentAppCenter = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-    m_LongestIntersectSegment1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-    m_LongestIntersectSegment2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+    m_LongestIntersectSegmentAppCenterA = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+    m_LongestIntersectSegmentA1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+    m_LongestIntersectSegmentA2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+    m_LongestIntersectSegmentAppCenterB = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+    m_LongestIntersectSegmentB1 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+    m_LongestIntersectSegmentB2 = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
-    m_LongestIntersectSegment1->SetWeight(GOWeight::Medium);
-    m_LongestIntersectSegment2->SetWeight(GOWeight::Medium);
+    m_LongestIntersectSegmentB1->SetWeight(GOWeight::Light);
+    m_LongestIntersectSegmentB2->SetWeight(GOWeight::Light);
+    m_LongestIntersectSegmentA1->SetWeight(GOWeight::Light);
+    m_LongestIntersectSegmentA2->SetWeight(GOWeight::Light);
 
-    m_LongestIntersectSegmentAppCenter->SetColor(AIAC::GOColor::CYAN);
-    m_LongestIntersectSegment1->SetColor(AIAC::GOColor::ORANGE);
-    m_LongestIntersectSegment2->SetColor(AIAC::GOColor::ORANGE);
+    m_LongestIntersectSegmentAppCenterA->SetColor(AIAC::GOColor::CYAN);
+    m_LongestIntersectSegmentA1->SetColor(AIAC::GOColor::MAGENTA);
+    m_LongestIntersectSegmentA2->SetColor(AIAC::GOColor::MAGENTA);
+    m_LongestIntersectSegmentAppCenterB->SetColor(AIAC::GOColor::CYAN);
+    m_LongestIntersectSegmentB1->SetColor(AIAC::GOColor::MAGENTA);
+    m_LongestIntersectSegmentB2->SetColor(AIAC::GOColor::MAGENTA);
 
-    m_AllPrimitives.push_back(m_LongestIntersectSegmentAppCenter);
-    m_AllPrimitives.push_back(m_LongestIntersectSegment1);
-    m_AllPrimitives.push_back(m_LongestIntersectSegment2);
+    m_AllPrimitives.push_back(m_LongestIntersectSegmentAppCenterA);
+    m_AllPrimitives.push_back(m_LongestIntersectSegmentA1);
+    m_AllPrimitives.push_back(m_LongestIntersectSegmentA2);
+    m_AllPrimitives.push_back(m_LongestIntersectSegmentAppCenterB);
+    m_AllPrimitives.push_back(m_LongestIntersectSegmentB1);
+    m_AllPrimitives.push_back(m_LongestIntersectSegmentB2);
 
     Deactivate();
 }
@@ -106,19 +117,40 @@ std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 
 
         if (dist1 < dist2 && dist1 < dist3 && dist1 < dist4) {
             closestMidPt = m_SegmentMid1;
-            m_LongestIntersectSegmentAppCenter->SetPts(intersectPts[0], intersectPts[1]);
+            m_LongestIntersectSegmentAppCenterA->SetPts(intersectPts[0], intersectPts[1]);
+            // find the closest between 2 and 4
+            if (dist2 < dist4) {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[1], intersectPts[2]);
+            } else {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[3], intersectPts[0]);
+            }
         } else if (dist2 < dist1 && dist2 < dist3 && dist2 < dist4) {
             closestMidPt = m_SegmentMid2;
-            m_LongestIntersectSegmentAppCenter->SetPts(intersectPts[1], intersectPts[2]);
+            m_LongestIntersectSegmentAppCenterA->SetPts(intersectPts[1], intersectPts[2]);
+            if (dist1 < dist3) {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[0], intersectPts[1]);
+            } else {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[2], intersectPts[3]);
+            }
         } else if (dist3 < dist1 && dist3 < dist2 && dist3 < dist4) {
             closestMidPt = m_SegmentMid3;
-            m_LongestIntersectSegmentAppCenter->SetPts(intersectPts[2], intersectPts[3]);
+            m_LongestIntersectSegmentAppCenterA->SetPts(intersectPts[2], intersectPts[3]);
+            if (dist2 < dist4) {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[1], intersectPts[2]);
+            } else {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[3], intersectPts[0]);
+            }
         } else {
             closestMidPt = m_SegmentMid4;
-            m_LongestIntersectSegmentAppCenter->SetPts(intersectPts[3], intersectPts[0]);
+            m_LongestIntersectSegmentAppCenterA->SetPts(intersectPts[3], intersectPts[0]);
+            if (dist1 < dist3) {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[0], intersectPts[1]);
+            } else {
+                m_LongestIntersectSegmentAppCenterB->SetPts(intersectPts[2], intersectPts[3]);
+            }
         }
 
-        // add the thickness
+        // add the thickness of the blade
         float bladeThicknessScaled;
         float overHangThicknessScaled;
         if (currentToolType == ACToolHeadType::CHAINSAW) {
@@ -130,25 +162,31 @@ std::vector<glm::vec3> CutPlaneVisualizer::Update(glm::vec3 faceNorm, glm::vec3 
         }
         float displacementTowardsCamera = bladeThicknessScaled;
         float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
-
         glm::vec3 normalVec = glm::normalize(normEnd - normStart);
         glm::vec3 oppositeNormalVec = -normalVec;
-
         glm::vec3 displacementTowardsCameraVec = displacementTowardsCamera * normalVec;
         glm::vec3 displacementAwayFromCameraVec = displacementAwayFromCamera * oppositeNormalVec;
 
-        glm::vec3 startAppCenter = m_LongestIntersectSegmentAppCenter->GetPStart();
-        glm::vec3 endAppCenter = m_LongestIntersectSegmentAppCenter->GetPEnd();
+        glm::vec3 startAppCenterA = m_LongestIntersectSegmentAppCenterA->GetPStart();
+        glm::vec3 endAppCenterA = m_LongestIntersectSegmentAppCenterA->GetPEnd();
+        glm::vec3 startAppCenterATowardsCameraVec = startAppCenterA + displacementTowardsCameraVec;
+        glm::vec3 endAppCenterATowardsCameraVec = endAppCenterA + displacementTowardsCameraVec;
+        glm::vec3 startAppCenterAAwayFromCameraVec = startAppCenterA + displacementAwayFromCameraVec;
+        glm::vec3 endAppCenterAAwayFromCameraVec = endAppCenterA + displacementAwayFromCameraVec;
+        m_LongestIntersectSegmentA1->SetPts(startAppCenterATowardsCameraVec, endAppCenterATowardsCameraVec);
+        m_LongestIntersectSegmentA2->SetPts(startAppCenterAAwayFromCameraVec, endAppCenterAAwayFromCameraVec);
 
-        glm::vec3 startAppCenterTowardsCameraVec = startAppCenter + displacementTowardsCameraVec;
-        glm::vec3 endAppCenterTowardsCameraVec = endAppCenter + displacementTowardsCameraVec;
+        glm::vec3 startAppCenterB = m_LongestIntersectSegmentAppCenterB->GetPStart();
+        glm::vec3 endAppCenterB = m_LongestIntersectSegmentAppCenterB->GetPEnd();
+        glm::vec3 startAppCenterBTowardsCameraVec = startAppCenterB + displacementTowardsCameraVec;
+        glm::vec3 endAppCenterBTowardsCameraVec = endAppCenterB + displacementTowardsCameraVec;
+        glm::vec3 startAppCenterBAwayFromCameraVec = startAppCenterB + displacementAwayFromCameraVec;
+        glm::vec3 endAppCenterBAwayFromCameraVec = endAppCenterB + displacementAwayFromCameraVec;
+        m_LongestIntersectSegmentB1->SetPts(startAppCenterBTowardsCameraVec, endAppCenterBTowardsCameraVec);
+        m_LongestIntersectSegmentB2->SetPts(startAppCenterBAwayFromCameraVec, endAppCenterBAwayFromCameraVec);
 
-        glm::vec3 startAppCenterAwayFromCameraVec = startAppCenter + displacementAwayFromCameraVec;
-        glm::vec3 endAppCenterAwayFromCameraVec = endAppCenter + displacementAwayFromCameraVec;
-
-        m_LongestIntersectSegment1->SetPts(startAppCenterTowardsCameraVec, endAppCenterTowardsCameraVec);
-        m_LongestIntersectSegment2->SetPts(startAppCenterAwayFromCameraVec, endAppCenterAwayFromCameraVec);
-        m_LongestIntersectSegmentAppCenter->ExtendBothEnds(2.f);
+        m_LongestIntersectSegmentAppCenterA->ExtendBothEnds(2.f);
+        m_LongestIntersectSegmentAppCenterB->ExtendBothEnds(2.f);
     }
 
     return intersectPts;

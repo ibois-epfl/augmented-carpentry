@@ -30,6 +30,7 @@ namespace AIAC
     struct GOWeight
     {
         static constexpr float Default            = 1.01f;
+        static constexpr float Light              = 1.4f;
         static constexpr float Medium             = 1.8f;
         static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
