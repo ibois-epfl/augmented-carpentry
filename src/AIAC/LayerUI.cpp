@@ -483,6 +483,7 @@ namespace AIAC
                         ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
                     if (ImGui::Selectable(componentID.c_str(), isSelected)){
                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
+                        AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
                     }
                     if (isSelected)
                         ImGui::SetItemDefaultFocus();
@@ -494,10 +495,16 @@ namespace AIAC
             // go to next or previous component (<,>)
             float halfWidth = ImGui::GetWindowWidth() / 2;
             if(ImGui::Button("<", ImVec2(halfWidth-30, 0)))
+            {
                 AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetPrevComponentAsCurrent();
+                AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
+            }
             ImGui::SameLine();
             if (ImGui::Button(">", ImVec2(halfWidth-30, 0)))
+            {
                 AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetNextComponentAsCurrent();
+                AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
+            }
 
             // swap ends for holes only
             auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
