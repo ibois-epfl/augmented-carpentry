@@ -213,6 +213,7 @@ namespace AIAC
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
         inline void ExtendFromStart(float length) { m_PStart.SetPosition(m_PStart.GetPosition() - glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
         inline void ExtendFromEnd(float length) { m_PEnd.SetPosition(m_PEnd.GetPosition() + glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
+        inline void ExtendBothEnds(float length) { ExtendFromStart(length/2); ExtendFromEnd(length/2); }
 
         inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
         inline GOPoint GetMidPoint() const { return GOPoint(GetMidPointValues()); }

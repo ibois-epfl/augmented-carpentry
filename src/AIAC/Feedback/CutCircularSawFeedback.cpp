@@ -104,6 +104,7 @@ namespace AIAC
 
     void CutCircularSawFeedback::Activate() {
         m_GeneralVisualizer.Activate();
+
         m_OrientationVisualizer.Activate();
         m_PositionStartVisualizer.Activate();
         Update();
@@ -190,7 +191,8 @@ namespace AIAC
         }
     }
 
-    void CutCircularSawFeedback::updateGeneralFeedback(){
+    void CutCircularSawFeedback::updateGeneralFeedback()
+    {
         auto prepFaceInfo = m_Cut->GetFace(m_NearestPerpendicularFaceID);
         auto prepPlnCenter = prepFaceInfo.GetCenter();
         auto perpPlnNormal = prepFaceInfo.GetNormal();
