@@ -13,6 +13,8 @@ public:
     inline static const std::string SEC_AIAC = "AIAC";
     inline static const std::string CAM_ID = "CamID";
     inline static const std::string CAM_PARAMS_FILE = "CamParamsFile";
+    inline static const std::string CAM_FLIP_HORIZONTAL = "CamFlipHorizontal";
+    inline static const std::string CAM_FLIP_VERTICAL = "CamFlipVertical";
     inline static const std::string AC_INFO_MODEL = "ACInfoModel";
     inline static const std::string SCANNED_MODEL = "ScannedModel";
     inline static const std::string ALIGN_OFFSET = "AlignOffset";
