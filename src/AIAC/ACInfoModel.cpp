@@ -546,9 +546,9 @@ namespace AIAC
         m_BboxGOLines.push_back(GOLine::Add(bbox[2], bbox[6], 2.0f));
         m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[7], 2.0f));
 
-        // change color of the bounding box
+        // color of the bounding box
         for(auto line : m_BboxGOLines)
-            line->SetColor(glm::vec4(0.7f, 0.7f, 0.5f, 0.5f));
+            line->SetColor(GOColor::PURPLE);
 
         SetBboxVisibility(false);
     }

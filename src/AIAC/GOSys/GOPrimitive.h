@@ -30,6 +30,7 @@ namespace AIAC
     struct GOWeight
     {
         static constexpr float Default            = 1.01f;
+        static constexpr float Light              = 1.4f;
         static constexpr float Medium             = 1.8f;
         static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
@@ -213,6 +214,7 @@ namespace AIAC
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
         inline void ExtendFromStart(float length) { m_PStart.SetPosition(m_PStart.GetPosition() - glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
         inline void ExtendFromEnd(float length) { m_PEnd.SetPosition(m_PEnd.GetPosition() + glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
+        inline void ExtendBothEnds(float length) { ExtendFromStart(length/2); ExtendFromEnd(length/2); }
 
         inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
         inline GOPoint GetMidPoint() const { return GOPoint(GetMidPointValues()); }

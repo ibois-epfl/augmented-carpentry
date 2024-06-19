@@ -153,6 +153,11 @@ namespace AIAC
          */
         bool IsPhysicalAndParamWidthHeightMatched() const { return m_PhysicalWidth == m_ParamWidth && m_PhysicalHeight == m_ParamHeight; }
 
+    public:
+        /// Flag indicating if the captured image should be flipped.
+        bool FlipHorizontal = false;
+        bool FlipVertical = false;
+
     private:
         ///  Flag indicating if the camera matrix is initialized.
         bool m_IsCamMatrixInit = false;
