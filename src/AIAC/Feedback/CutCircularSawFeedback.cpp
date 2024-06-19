@@ -95,6 +95,7 @@ namespace AIAC
 
         if(m_Cut->IsSingleFace()) {
             this->EnableCutPlane(true);
+            m_GeneralVisualizer.Deactivate();
         }
         // else {
         //     this->EnableCutPlane(false);
@@ -107,7 +108,6 @@ namespace AIAC
 
     void CutCircularSawFeedback::Activate() {
         m_GeneralVisualizer.Activate();
-
         m_OrientationVisualizer.Activate();
         m_PositionStartVisualizer.Activate();
         Update();
@@ -192,6 +192,9 @@ namespace AIAC
             m_CutPlaneVisualizer.Activate();
             updateCutPlaneFeedback();
         }
+        if(m_Cut->IsSingleFace()) {
+            m_GeneralVisualizer.Deactivate();
+        }
     }
 
     void CutCircularSawFeedback::updateGeneralFeedback()
@@ -248,7 +251,6 @@ namespace AIAC
             m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
             m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
         }
-
 
         // Projection line on face
         // Find all intersection points on the edges of the perpendicular face, and form the longest segment
