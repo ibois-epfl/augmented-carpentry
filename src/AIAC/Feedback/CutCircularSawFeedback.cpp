@@ -97,9 +97,6 @@ namespace AIAC
             this->EnableCutPlane(true);
             m_GeneralVisualizer.Deactivate();
         }
-        // else {
-        //     this->EnableCutPlane(false);
-        // }
 
         UpdateToolPosition();
         UpdateRefFaces();

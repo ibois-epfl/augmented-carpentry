@@ -112,11 +112,6 @@ namespace AIAC
 
         m_GuideTxtChainBase->SetColor(GOColor::BLACK);
         m_GuideTxtFaceEdgeDepth->SetColor(GOColor::BLACK);
-
-        m_AllPrimitives.push_back(m_GuideTxtChainBase);
-        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth);
-
-        Deactivate();
     }
 
     void CutChainSawFeedback::updateCutPlane ()

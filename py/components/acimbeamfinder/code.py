@@ -49,12 +49,12 @@ class ACPyBeamFinder(component):
 
         return o_found
 
-# ############################################################################################
-# ## only for DEBUG: erase before componentize
-# ############################################################################################
-# if __name__ == "__main__":
+############################################################################################
+## only for DEBUG: erase before componentize
+############################################################################################
+if __name__ == "__main__":
     
-#     comp = ACPyBeamFinder()
-#     o_found = comp.RunScript(
-#         i_beam_name
-#     )
+    comp = ACPyBeamFinder()
+    o_found = comp.RunScript(
+        i_beam_name
+    )
