@@ -51,8 +51,14 @@ namespace AIAC
 
         m_GuideTxtRollPitch->SetTextSize(GOTextSize::BitSmall);
 
-        // m_AllPrimitives.push_back(m_LineFaceNormal);
-        // m_AllPrimitives.push_back(m_LineBladeNormal);
+        m_LineFaceNormal->SetVisibility(false);
+        m_LineBladeNormal->SetVisibility(false);
+        m_LineDebugA->SetVisibility(false);
+        m_LineDebugB->SetVisibility(false);
+        m_LineDebugC->SetVisibility(false);
+        m_LineDebugD->SetVisibility(false);
+        m_LineDebugE->SetVisibility(false);
+
         m_AllPrimitives.push_back(m_LinePitchFeed);
         m_AllPrimitives.push_back(m_GuideTxtRollPitch);
 

@@ -221,11 +221,12 @@ namespace AIAC
 
         if(auto cut = dynamic_cast<Cut*>(m_Components[id]))
         {
-            if(cut -> IsSingleFace()){
+            if(cut -> IsSingleFace())
+            // {
                 AIAC_APP.GetLayer<LayerFeedback>()->EnableCutPlane(true);
-            } else {
-                AIAC_APP.GetLayer<LayerFeedback>()->EnableCutPlane(false);
-            }
+            // } else {
+            //     AIAC_APP.GetLayer<LayerFeedback>()->EnableCutPlane(false);
+            // }
         }
 
         ShowAllComponents();
