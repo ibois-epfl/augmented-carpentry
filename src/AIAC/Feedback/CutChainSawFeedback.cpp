@@ -36,13 +36,14 @@ namespace AIAC
         m_LinePitchFeed->SetColor(GOColor::RED);
         m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
 
-        // m_AllPrimitives.push_back(m_LineFaceNormal);
-        // m_AllPrimitives.push_back(m_LineBladeNormal);
-        // m_AllPrimitives.push_back(m_LineDebugA);
-        // m_AllPrimitives.push_back(m_LineDebugB);
-        // m_AllPrimitives.push_back(m_LineDebugC);
-        // m_AllPrimitives.push_back(m_LineDebugD);
-        // m_AllPrimitives.push_back(m_LineDebugE);
+        m_LineFaceNormal->SetVisibility(false);
+        m_LineBladeNormal->SetVisibility(false);
+        m_LineDebugA->SetVisibility(false);
+        m_LineDebugB->SetVisibility(false);
+        m_LineDebugC->SetVisibility(false);
+        m_LineDebugD->SetVisibility(false);
+        m_LineDebugE->SetVisibility(false);
+        
         m_AllPrimitives.push_back(m_LinePitchFeed);
         m_AllPrimitives.push_back(m_GuideTxtRollPitch);
 
@@ -112,6 +113,11 @@ namespace AIAC
 
         m_GuideTxtChainBase->SetColor(GOColor::BLACK);
         m_GuideTxtFaceEdgeDepth->SetColor(GOColor::BLACK);
+
+        m_AllPrimitives.push_back(m_GuideTxtChainBase);
+        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth);
+
+        Deactivate();
     }
 
     void CutChainSawFeedback::updateCutPlane ()
@@ -295,13 +301,6 @@ namespace AIAC
             }
 
             // set the visibility off for the debug lines
-            m_CutOrientationVisualizer.m_LineFaceNormal->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineBladeNormal->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugA->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugB->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugC->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugD->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugE->SetVisibility(false);
             m_CutOrientationVisualizer.m_LinePitchFeed->SetVisibility(true);
             m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetVisibility(true);
 

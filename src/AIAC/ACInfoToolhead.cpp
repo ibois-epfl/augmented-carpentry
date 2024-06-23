@@ -135,6 +135,7 @@ namespace AIAC
 
         auto lnAxis = GOLine::Add(*data.m_DrillBitD.ToolbaseGO, *data.m_DrillBitD.TooltipGO);
         lnAxis->SetColor(GOColor::MAGENTA);
+
         lnAxis->SetVisibility(false);
 
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ToolbaseGO);
@@ -142,6 +143,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.EattipGO);
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ChucktipGO);
         this->m_GOPrimitivesInfo.push_back(lnAxis);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {
@@ -161,6 +165,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_CircularSawD.CenterGO);
         this->m_GOPrimitivesInfo.push_back(data.m_CircularSawD.NormEndGO);
         this->m_GOPrimitivesInfo.push_back(lnNormal);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
@@ -201,6 +208,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.NormEndGO);
         this->m_GOPrimitivesInfo.push_back(lnBaseMid);
         this->m_GOPrimitivesInfo.push_back(lnMidEnd);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
     void ACInfoToolhead::AddGOsInfoSaberSaw(ToolHeadData& data)
     {
@@ -232,6 +242,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.NormStartGO);
         this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.NormEndGO);
         this->m_GOPrimitivesInfo.push_back(lineAxis);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
 
     void ACInfoToolhead::SetVisibility(bool visible)
