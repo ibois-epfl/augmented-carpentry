@@ -20,6 +20,17 @@ namespace AIAC{
          */
         std::vector<glm::vec3> Update(glm::vec3 faceNorm, glm::vec3 facePt);
 
+    private:  ///< utility
+        /**
+         * @brief Reorder the intersections so that we obtain a romboid with the correct order of points¨
+         * 
+         * @param intersections the reference to the intersections to reorder
+         * @param facePt the point on the face
+         * 
+         */
+        void ReorderIntersectPoints(std::vector<glm::vec3>& intersectPts, const glm::vec3& facePt);
+
+
     protected:
         ///< @brief the intersection of the top plane of the blade from the closest side to the center of the blade
         std::shared_ptr<GOLine> m_LongestIntersectSegmentAppCenterA;

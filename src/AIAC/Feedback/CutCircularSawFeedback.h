@@ -121,7 +121,7 @@ namespace AIAC
         std::string m_NearestPerpendicularFaceID;
 
         // config
-        bool m_ToShowCutPlane = false;
+        bool m_ToShowCutPlane = true;
 
         void UpdateToolPosition();
         void UpdateRefFaces();
