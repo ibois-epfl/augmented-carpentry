@@ -36,13 +36,14 @@ namespace AIAC
         m_LinePitchFeed->SetColor(GOColor::RED);
         m_GuideTxtRollPitch->SetColor(GOColor::WHITE);
 
-        // m_AllPrimitives.push_back(m_LineFaceNormal);
-        // m_AllPrimitives.push_back(m_LineBladeNormal);
-        // m_AllPrimitives.push_back(m_LineDebugA);
-        // m_AllPrimitives.push_back(m_LineDebugB);
-        // m_AllPrimitives.push_back(m_LineDebugC);
-        // m_AllPrimitives.push_back(m_LineDebugD);
-        // m_AllPrimitives.push_back(m_LineDebugE);
+        m_LineFaceNormal->SetVisibility(false);
+        m_LineBladeNormal->SetVisibility(false);
+        m_LineDebugA->SetVisibility(false);
+        m_LineDebugB->SetVisibility(false);
+        m_LineDebugC->SetVisibility(false);
+        m_LineDebugD->SetVisibility(false);
+        m_LineDebugE->SetVisibility(false);
+        
         m_AllPrimitives.push_back(m_LinePitchFeed);
         m_AllPrimitives.push_back(m_GuideTxtRollPitch);
 
@@ -112,6 +113,11 @@ namespace AIAC
 
         m_GuideTxtChainBase->SetColor(GOColor::BLACK);
         m_GuideTxtFaceEdgeDepth->SetColor(GOColor::BLACK);
+
+        m_AllPrimitives.push_back(m_GuideTxtChainBase);
+        m_AllPrimitives.push_back(m_GuideTxtFaceEdgeDepth);
+
+        Deactivate();
     }
 
     void CutChainSawFeedback::updateCutPlane ()
@@ -139,10 +145,8 @@ namespace AIAC
         if(cut->IsSingleFace()) {
             this->EnableCutPlane(true);
         }
-        // else {
-        //     this->EnableCutPlane(false);
-        // }
 
+        // Find the nearest parallel/perpendicular face to highlight
         float nearestParallelFaceDist = 1e9f;
         std::string nearestParallelFaceID;
         float nearestPerpendicularFaceDist = 1e9f;
@@ -295,13 +299,6 @@ namespace AIAC
             }
 
             // set the visibility off for the debug lines
-            m_CutOrientationVisualizer.m_LineFaceNormal->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineBladeNormal->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugA->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugB->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugC->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugD->SetVisibility(false);
-            m_CutOrientationVisualizer.m_LineDebugE->SetVisibility(false);
             m_CutOrientationVisualizer.m_LinePitchFeed->SetVisibility(true);
             m_CutOrientationVisualizer.m_GuideTxtRollPitch->SetVisibility(true);
 
@@ -320,7 +317,6 @@ namespace AIAC
             auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
-
 
             // Get the intersection line of the tool plane and the face plane
             glm::vec3 intersectLineVec, intersectLinePt;
@@ -346,6 +342,7 @@ namespace AIAC
             }
             FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
 
+            // FIXME: here we should intersect instead of translate the lines at the end
             // TODO: clean up the thickness section
             // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             float bladeThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().ThicknessACIT;
@@ -368,6 +365,7 @@ namespace AIAC
             depthVisualizer.m_LineIntersectThickness->SetPts(projChainBaseTranslatedAwayFromCamera, projChainEndTranslatedAwayFromCamera);
             // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+            // TODO: next is depth?? <<
             // Lines based on face edge
             // for face edge dist, we need to find the projection point of the two points on the saw first
             glm::vec3 pt1ProjPt, pt2ProjPt;
@@ -446,11 +444,8 @@ namespace AIAC
             auto strChainBase = FeedbackVisualizer::toString(parallelChainBaseDist);
 
             this->m_Visualizer.m_GuideTxtChainBase->SetText("s:"+strChainBase);
-
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetText("d:"+FeedbackVisualizer::toString(perpendicularFaceEdge2Dist));
-
             this->m_Visualizer.m_GuideTxtChainBase->SetAnchor(m_ChainBase);
-
             this->m_Visualizer.m_GuideTxtFaceEdgeDepth->SetAnchor(perpIntersectLineSegPt1);
 
             auto endColor = GOColor::WHITE;

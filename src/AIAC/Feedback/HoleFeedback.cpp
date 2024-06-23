@@ -5,10 +5,7 @@ namespace AIAC
 {
     HoleFeedbackText::HoleFeedbackText()
     {
-        auto pt1 = GOPoint::Add(0.f, 0.f, 0.f); pt1->SetVisibility(false);
-        auto pt2 = GOPoint::Add(5.f, 5.f, 5.f); pt2->SetVisibility(false);
-        
-        this->m_InfoText = GOText::Add("///", *pt1);
+        this->m_InfoText = GOText::Add("///", GOPoint(0.f, 0.f, 0.f));
         this->m_InfoText->SetTextSize(GOTextSize::ExtraSmall);
         this->m_InfoText->SetColor(GOColor::WHITE);
 
@@ -19,14 +16,11 @@ namespace AIAC
 
     HoleFeedbackPosition::HoleFeedbackPosition()
     {
-        auto pt1 = GOPoint::Add(0.f, 0.f, 0.f); pt1->SetVisibility(false);
-        auto pt2 = GOPoint::Add(5.f, 5.f, 5.f); pt2->SetVisibility(false);
-        
-        this->m_HoleLine2ToolEnd = GOLine::Add(*pt1, *pt2);
+        this->m_HoleLine2ToolEnd = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         this->m_HoleLine2ToolEnd->SetColor(GOColor::RED);
         this->m_HoleLine2ToolEnd->SetWeight(GOWeight::Bold);
 
-        this->m_HoleLine2ToolStart = GOLine::Add(*pt1, *pt2);
+        this->m_HoleLine2ToolStart = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         this->m_HoleLine2ToolStart->SetColor(GOColor::YELLOW);
         this->m_HoleLine2ToolStart->SetWeight(GOWeight::Bold);
 
@@ -40,28 +34,26 @@ namespace AIAC
 
     HoleFeedbackRotation::HoleFeedbackRotation()
     {
-        auto pt1 = GOPoint::Add(0.f, 0.f, 0.f); pt1->SetVisibility(false);
-        auto pt2 = GOPoint::Add(5.f, 5.f, 5.f); pt2->SetVisibility(false);
-
-        this->m_GUILineOrientation = GOLine::Add(*pt1, *pt2);
+        this->m_GUILineOrientation = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         this->m_GUILineOrientation->SetColor(GOColor::MAGENTA);
         this->m_GUILineOrientation->SetWeight(GOWeight::Thick);
 
         this->m_GUILineOrientation->SetVisibility(true);
 
         this->m_AllPrimitives.push_back(this->m_GUILineOrientation);
+
+        Deactivate();
     }
 
     HoleFeedback::HoleFeedback()
     {
-        auto pt1 = GOPoint::Add(0.f, 0.f, 0.f); pt1->SetVisibility(false);
-        auto pt2 = GOPoint::Add(5.f, 5.f, 5.f); pt2->SetVisibility(false);
-
-        this->m_DrillBitLineAxis = GOLine::Add(*pt1, *pt2);
-        this->m_HoleLineAxis = GOLine::Add(*pt1, *pt2);
+        this->m_DrillBitLineAxis = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        this->m_HoleLineAxis = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
         this->m_DrillBitLineAxis->SetVisibility(false);
         this->m_HoleLineAxis->SetVisibility(false);
+
+        Deactivate();
     }
 
     void HoleFeedback::Update()

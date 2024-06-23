@@ -58,7 +58,7 @@ namespace AIAC
 
         private:
             /// @brief The angle acceptance for the cut orientation, under this value is conside correct
-            float m_tolAangleAcceptance = 0.9f;  // decimal fraction of a degree
+            float m_tolAangleAcceptance = 0.4f;  // decimal fraction of a degree
         
         friend class CutCircularSawFeedback;
     };
@@ -121,7 +121,7 @@ namespace AIAC
         std::string m_NearestPerpendicularFaceID;
 
         // config
-        bool m_ToShowCutPlane = false;
+        bool m_ToShowCutPlane = true;
 
         void UpdateToolPosition();
         void UpdateRefFaces();

@@ -41,7 +41,7 @@ namespace AIAC
 
         private:
             /// @brief The angle acceptance for the cut orientation, under this value is conside correct
-            float m_tolAangleAcceptance = 0.9f;  // decimal fraction of a degree
+            float m_tolAangleAcceptance = 0.4f;  // decimal fraction of a degree
         
         friend class CutChainSawFeedback;
 
@@ -132,7 +132,7 @@ namespace AIAC
             glm::vec3 m_ChainMid;
             glm::vec3 m_ChainEnd;
 
-            bool m_ToShowCutPlane = false;
+            bool m_ToShowCutPlane = true;
 
 
         private:
