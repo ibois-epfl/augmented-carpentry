@@ -21,6 +21,7 @@ namespace AIAC
         static constexpr glm::vec4 BLACK = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
         static constexpr glm::vec4 GRAY = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
         static constexpr glm::vec4 ORANGE = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
+        static constexpr glm::vec4 ORANGE_TRANSP = glm::vec4(1.0f, 0.5f, 0.0f, 0.5f);
         static constexpr glm::vec4 PURPLE = glm::vec4(0.5f, 0.0f, 0.5f, 1.0f);
         static constexpr glm::vec4 PINK = glm::vec4(1.0f, 0.0f, 0.5f, 1.0f);
         static constexpr glm::vec4 BROWN = glm::vec4(0.5f, 0.25f, 0.0f, 1.0f);
@@ -29,8 +30,11 @@ namespace AIAC
     struct GOWeight
     {
         static constexpr float Default            = 1.01f;
+        static constexpr float Light              = 1.4f;
+        static constexpr float Medium             = 1.8f;
         static constexpr float Bold               = 2.5f;
         static constexpr float Thick              = 5.0f;
+        static constexpr float MediumThick        = 7.0f;
         static constexpr float ExtraThick         = 10.0f;
         static constexpr float BoldThick          = 15.0f;
         static constexpr float MaxThick           = 20.0f;
@@ -39,8 +43,10 @@ namespace AIAC
     struct GOTextSize
     {
         static constexpr double Default            = 1.0;
-        static constexpr double ExtraSmall              = 0.35;
+        static constexpr double ExtraSmall         = 0.35;
+        static constexpr double BitSmall           = 0.4;
         static constexpr double Small              = 0.5;
+        static constexpr double Average            = 0.75;
         static constexpr double Medium             = 5.0;
         static constexpr double Big                = 10.0;
     };
@@ -77,6 +83,7 @@ namespace AIAC
 
         inline void SetName(std::string name) { m_Name = std::move(name); }
         inline void SetVisibility(bool isVisible) { m_IsVisible = isVisible; }
+        inline bool GetVisibility() { return m_IsVisible; }
         inline void SetColor(glm::vec4 color) { m_Color = color; InitGLObject();}
         inline void SetState(bool state) { m_State = state; }
 
@@ -207,6 +214,7 @@ namespace AIAC
         inline float GetLength() const { return glm::distance(m_PStart.GetPosition(), m_PEnd.GetPosition()); }
         inline void ExtendFromStart(float length) { m_PStart.SetPosition(m_PStart.GetPosition() - glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
         inline void ExtendFromEnd(float length) { m_PEnd.SetPosition(m_PEnd.GetPosition() + glm::normalize(m_PEnd.GetPosition() - m_PStart.GetPosition()) * length); InitGLObject(); }
+        inline void ExtendBothEnds(float length) { ExtendFromStart(length/2); ExtendFromEnd(length/2); }
 
         inline glm::vec3 GetMidPointValues() const { return (m_PStart.GetPosition() + m_PEnd.GetPosition()) / 2.0f; }
         inline GOPoint GetMidPoint() const { return GOPoint(GetMidPointValues()); }
@@ -218,7 +226,6 @@ namespace AIAC
         // inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); InitGLObject(); }
         // inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); InitGLObject(); }
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
-
 
         /**
          * @brief Compute the angle between the current line object and another one

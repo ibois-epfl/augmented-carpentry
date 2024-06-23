@@ -274,3 +274,15 @@ AC_videorec/*
 
 # we are keeping out the .mp4 files on the root
 *.mp4
+
+
+###############################################################
+# AC settings
+###############################################################
+
+# FIXME: replace with a default config-ini mechanism
+# for convinience do not version the config-ini
+config.ini
+
+# do not version the imgui.ini
+imgui.ini

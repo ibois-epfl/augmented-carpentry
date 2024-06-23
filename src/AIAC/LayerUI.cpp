@@ -274,6 +274,16 @@ namespace AIAC
             AIAC_APP.GetLayer<LayerCamera>()->UpdateAvailableDevices();
         }
 
+        ImGui::Text("Flip ");
+        ImGui::SameLine();
+        if(ImGui::Checkbox("Horizontal", &AIAC_APP.GetLayer<LayerCamera>()->MainCamera.FlipHorizontal)){
+            AIAC::Config::UpdateEntry(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_HORIZONTAL, AIAC_APP.GetLayer<LayerCamera>()->MainCamera.FlipHorizontal);
+        }
+        ImGui::SameLine();
+        if(ImGui::Checkbox("Vertical", &AIAC_APP.GetLayer<LayerCamera>()->MainCamera.FlipVertical)){
+            AIAC::Config::UpdateEntry(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_VERTICAL, AIAC_APP.GetLayer<LayerCamera>()->MainCamera.FlipVertical);
+        };
+
         AIAC::Camera& camera = AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera;
         ImGui::Text("Resolution: (%d x %d) > (%d x %d)", camera.GetRawWidth(), camera.GetRawHeight(), camera.GetWidth(), camera.GetHeight());
 
@@ -483,6 +493,7 @@ namespace AIAC
                         ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
                     if (ImGui::Selectable(componentID.c_str(), isSelected)){
                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetCurrentComponentTo(componentID.c_str());
+                        AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
                     }
                     if (isSelected)
                         ImGui::SetItemDefaultFocus();
@@ -494,10 +505,16 @@ namespace AIAC
             // go to next or previous component (<,>)
             float halfWidth = ImGui::GetWindowWidth() / 2;
             if(ImGui::Button("<", ImVec2(halfWidth-30, 0)))
+            {
                 AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetPrevComponentAsCurrent();
+                AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
+            }
             ImGui::SameLine();
             if (ImGui::Button(">", ImVec2(halfWidth-30, 0)))
+            {
                 AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetNextComponentAsCurrent();
+                AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
+            }
 
             // swap ends for holes only
             auto currentComp = AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent();
@@ -508,6 +525,18 @@ namespace AIAC
             }
             ImGui::PopStyleVar();
 
+            // this is a button for enable the plane visualizer
+            // for cutting tools show the red plane for cutting guidance
+            if (auto cut = dynamic_cast<TimberInfo::Cut*>(currentComp)){
+                if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
+                    if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
+                        AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
+                    } else {
+                        AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
+                    }
+                };
+            }
+
             ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
             ImGui::PopStyleColor();
@@ -516,9 +545,11 @@ namespace AIAC
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(true);
+                    AIAC_APP.GetLayer<LayerFeedback>()->DeactivateCurrentFeedbackVisibility();
                 } else {
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponentsExceptCurrent();
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
+                    AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
                 }
             }
         ImGui::EndChild();
@@ -754,15 +785,6 @@ namespace AIAC
             if(ImGui::Checkbox("Draw Toolhead GOData", &AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo))
                 AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()->SetVisibility(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowToolheadGOInfo);
 #endif
-
-            // for cutting tools show the red plane for cutting guidance
-            if(ImGui::Checkbox("Show Cut Plane", &AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane)){
-                if(AIAC_APP.GetLayer<AIAC::LayerFeedback>()->ToShowCutPlane){
-                    AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(true);
-                } else {
-                    AIAC_APP.GetLayer<AIAC::LayerFeedback>()->EnableCutPlane(false);
-                }
-            };
         ImGui::EndChild();
 
 #ifdef ENABLE_DEV_UI
