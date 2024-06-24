@@ -9,6 +9,7 @@
 #include "AIAC/ACInfoModel.h"
 #include "FeedbackVisualizer.h"
 #include "CutPlaneVisualizer.h"
+#include "CutBladeThicknessVisualizer.h"
 #include "FabFeedback.h"
 #include "utils/GeometryUtils.h"
 
@@ -88,6 +89,27 @@ namespace AIAC
     friend class CutCircularSawFeedback;
     };
 
+    /**
+     * @brief This is an inherited class to show the thickness of the blade
+     * on circular saws.
+     * 
+     */
+    class CircularSawCutBladeThicknessVisualizer : public CutBladeThicknessVisualizer
+    {
+    public:
+        CircularSawCutBladeThicknessVisualizer() = default;
+
+    public:
+        void UpdateToolheadsData() override;
+        bool IntersectBladeWithNeighbours(
+            TimberInfo::Cut* cut,
+            TimberInfo::Cut::Face& face,
+            bool isTowardsCamera,
+            std::shared_ptr<GOLine>& lineIntersection) override;
+
+    friend class CutCircularSawFeedback;
+    };
+
     class CutCircularSawFeedback : public FabFeedback
     {
     public:
@@ -107,6 +129,7 @@ namespace AIAC
     private:
         // data
         TimberInfo::Cut* m_Cut;
+
         float m_Radius;
         glm::vec3 m_Center;
         glm::vec3 m_NormalStart;
@@ -133,13 +156,15 @@ namespace AIAC
         * is calculated based on the perpendicular face.
         * 
         */
-        void updateGeneralFeedback();
-        void updateCutPlaneFeedback();
+        void UpdateGeneralFeedback();
+        void UpdateCutPlaneFeedback();
+        void UpdateThicknessFeedback();
 
         CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
         CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
         CutCircularOrientationVisualizer m_OrientationVisualizer;
         CutCircularSawPositionStartVisualizer m_PositionStartVisualizer;
+        CircularSawCutBladeThicknessVisualizer m_ThicknessVisualizer;
     };
 }
 

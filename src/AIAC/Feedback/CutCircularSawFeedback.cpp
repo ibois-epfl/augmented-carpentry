@@ -113,6 +113,7 @@ namespace AIAC
         m_GeneralVisualizer.Activate();
         m_OrientationVisualizer.Activate();
         m_PositionStartVisualizer.Activate();
+        m_ThicknessVisualizer.Activate();
         Update();
     }
 
@@ -121,6 +122,7 @@ namespace AIAC
         m_CutPlaneVisualizer.Deactivate();
         m_OrientationVisualizer.Deactivate();
         m_PositionStartVisualizer.Deactivate();
+        m_ThicknessVisualizer.Deactivate();
     }
 
     void CutCircularSawFeedback::UpdateToolPosition() {
@@ -189,18 +191,20 @@ namespace AIAC
     void CutCircularSawFeedback::UpdateFeedback() {
         if(!m_NearestPerpendicularFaceID.empty()){
             m_GeneralVisualizer.Activate();
-            updateGeneralFeedback();
+            UpdateGeneralFeedback();
         }
         if(m_ToShowCutPlane) {
             m_CutPlaneVisualizer.Activate();
-            updateCutPlaneFeedback();
+            UpdateCutPlaneFeedback();
         }
         if(m_Cut->IsSingleFace()) {
             m_GeneralVisualizer.Deactivate();
         }
+
+        UpdateThicknessFeedback();
     }
 
-    void CutCircularSawFeedback::updateGeneralFeedback()
+    void CutCircularSawFeedback::UpdateGeneralFeedback()
     {
         auto prepFaceInfo = m_Cut->GetFace(m_NearestPerpendicularFaceID);
         auto prepPlnCenter = prepFaceInfo.GetCenter();
@@ -273,18 +277,18 @@ namespace AIAC
 
         // TODO: clean up values from import
         // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        float bladeThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
-        float overHangThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
-        float displacementTowardsCamera = overHangThicknessScaled;
-        float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
-        glm::vec3 normalVec = glm::normalize(m_NormalEnd - m_NormalStart);
-        glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormalEnd - m_NormalStart));
-        auto perpIntersectLineSegPt1TowardsCamera = perpIntersectLineSegPt1 + normalVec * displacementTowardsCamera;
-        auto perpIntersectLineSegPt2TowardsCamera = perpIntersectLineSegPt2 + normalVec * displacementTowardsCamera;
-        m_GeneralVisualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1TowardsCamera, perpIntersectLineSegPt2TowardsCamera);
-        auto perpIntersectLineSegPt1AwayFromCamera = perpIntersectLineSegPt1 + oppositeNormalVec * displacementAwayFromCamera;
-        auto perpIntersectLineSegPt2AwayFromCamera = perpIntersectLineSegPt2 + oppositeNormalVec * displacementAwayFromCamera;
-        m_GeneralVisualizer.m_ProjLineOnFaceThickness->SetPts(perpIntersectLineSegPt1AwayFromCamera, perpIntersectLineSegPt2AwayFromCamera);
+        // float bladeThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
+        // float overHangThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
+        // float displacementTowardsCamera = overHangThicknessScaled;
+        // float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
+        // glm::vec3 normalVec = glm::normalize(m_NormalEnd - m_NormalStart);
+        // glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormalEnd - m_NormalStart));
+        // auto perpIntersectLineSegPt1TowardsCamera = perpIntersectLineSegPt1 + normalVec * displacementTowardsCamera;
+        // auto perpIntersectLineSegPt2TowardsCamera = perpIntersectLineSegPt2 + normalVec * displacementTowardsCamera;
+        // m_GeneralVisualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1TowardsCamera, perpIntersectLineSegPt2TowardsCamera);
+        // auto perpIntersectLineSegPt1AwayFromCamera = perpIntersectLineSegPt1 + oppositeNormalVec * displacementAwayFromCamera;
+        // auto perpIntersectLineSegPt2AwayFromCamera = perpIntersectLineSegPt2 + oppositeNormalVec * displacementAwayFromCamera;
+        // m_GeneralVisualizer.m_ProjLineOnFaceThickness->SetPts(perpIntersectLineSegPt1AwayFromCamera, perpIntersectLineSegPt2AwayFromCamera);
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         //------------------------------------------------
@@ -415,7 +419,136 @@ namespace AIAC
         }
     }
 
-    void CutCircularSawFeedback::updateCutPlaneFeedback(){
+    void CutCircularSawFeedback::UpdateCutPlaneFeedback()
+    {
         if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_Normal, m_Center);
+    }
+
+    void CircularSawCutBladeThicknessVisualizer::UpdateToolheadsData()
+    {
+        this->m_BladeTotalThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
+        this->m_BladeOverhangScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
+        this->m_ToolheadRefCenter = AC_FF_TOOL->GetData<CircularSawData>().CenterGO->GetPosition();
+        this->m_ToolheadRefNormStart = this->m_ToolheadRefCenter;
+        this->m_ToolheadRefNormEnd = AC_FF_TOOL->GetData<CircularSawData>().NormEndGO->GetPosition();
+        this->m_NormalUnitized = glm::normalize(this->m_ToolheadRefNormEnd - this->m_ToolheadRefNormStart);
+        this->m_NormalOppositeUnitized = -this->m_NormalUnitized;
+        this->m_DisplacedCenterTowardsCamera = this->m_ToolheadRefCenter + this->m_NormalUnitized * this->m_BladeOverhangScaled;
+        this->m_DisplacedCenterAwayFromCamera = this->m_ToolheadRefCenter + this->m_NormalOppositeUnitized * (this->m_BladeTotalThicknessScaled - this->m_BladeOverhangScaled);
+    }
+
+    bool CircularSawCutBladeThicknessVisualizer::IntersectBladeWithNeighbours(
+        TimberInfo::Cut* cut,
+        TimberInfo::Cut::Face& face,
+        bool isTowardsCamera,
+        std::shared_ptr<GOLine>& lineIntersection)
+    {
+        glm::vec3 centerBlade;
+        glm::vec3 normalBlade;
+        if (isTowardsCamera)
+        {
+            normalBlade = this->m_NormalUnitized;
+            centerBlade = this->m_DisplacedCenterTowardsCamera;
+        }
+        else
+        {
+            normalBlade = this->m_NormalOppositeUnitized;
+            centerBlade = this->m_DisplacedCenterAwayFromCamera;
+        }
+        glm::vec3 downVecBlade;
+        auto prepFaceACenter = face.GetCenter();
+        auto perpFaceANormal = face.GetNormal();
+        glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(normalBlade, perpFaceANormal));
+        glm::vec3 _ptPlaceHolder;
+        GetIntersectLineOf2Planes(
+            normalBlade,
+            centerBlade,
+            perpFaceOfBladeVec,
+            centerBlade,
+            downVecBlade,
+            _ptPlaceHolder
+        );
+
+        auto sidePt1 = centerBlade + perpFaceOfBladeVec * AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
+        auto sidePt2 = centerBlade - perpFaceOfBladeVec * AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
+        glm::vec3 projSidePt1, projSidePt2;
+        GetIntersectPointOfLineAndPlane(downVecBlade, sidePt1, perpFaceANormal, prepFaceACenter, projSidePt1);
+        GetIntersectPointOfLineAndPlane(downVecBlade, sidePt2, perpFaceANormal, prepFaceACenter, projSidePt2);
+        if (projSidePt1 == projSidePt2)
+        {
+            lineIntersection->SetPts(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f));
+            return false;
+        }
+
+        std::vector<glm::vec3> intersectPts;
+        glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2;
+        for(auto const& edgeID: face.GetEdges()){
+            auto edge = cut->GetEdge(edgeID);
+            auto edgePt1 = edge.GetStartPt().GetPosition();
+            auto edgePt2 = edge.GetEndPt().GetPosition();
+            ExtendLineSeg(edgePt1, edgePt2, 1.0f);
+            glm::vec3 intersectPt;
+            if(GetIntersectPointOfLineAndLineSeg((projSidePt2 - projSidePt1), projSidePt1, edgePt1, edgePt2, intersectPt)) {
+                intersectPts.push_back(intersectPt);
+            }
+        }
+        FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+
+        if (intersectPts.size() == 0)
+        {
+            lineIntersection->SetPts(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f));
+            return false;
+        }
+        lineIntersection->SetPts(perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+        return true;
+    }
+
+    void CutCircularSawFeedback::UpdateThicknessFeedback()
+    {
+        this->m_ThicknessVisualizer.UpdateToolheadsData();
+        
+        std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces = 
+            this->m_Cut->GetHighlightedFaceNeighbors();
+
+        if (neighbouringFaces.size() > 2)
+        {
+            AIAC_WARN("The neighbouring faces are more than 2, this is not possible to show the thickness feedback");
+            return;
+        }
+
+        auto faceNeighbour1 = neighbouringFaces.begin()->second;
+
+        if (neighbouringFaces.size() == 1)
+        {
+            bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+            bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+        }
+        else if (neighbouringFaces.size() == 2)
+        {
+            auto faceNeighbour2 = (++neighbouringFaces.begin())->second;
+
+            bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+            bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+            bool isfaceNeighbour2IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour2, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB);
+            bool isfaceNeighbour2IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour2, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB);
+
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB->SetVisibility((isfaceNeighbour2IntersectedOnce && isfaceNeighbour2IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB->SetVisibility((isfaceNeighbour2IntersectedOnce && isfaceNeighbour2IntersectedTwice));
+        }
+        else
+        {
+            this->m_ThicknessVisualizer.Deactivate();
+        }
     }
 }

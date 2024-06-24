@@ -452,6 +452,22 @@ namespace AIAC
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
+
+                // here we compute and add the neighbors
+                // compare the edges for each face and understand which faces are neighbors
+                for(auto& [faceID, face] : cutInfo.m_Faces){
+                    for(auto& [edgeID, edge] : cutInfo.m_Edges){
+                        if(face.m_Edges.find(edgeID) != face.m_Edges.end()){
+                            for(auto& [otherFaceID, otherFace] : cutInfo.m_Faces){
+                                if(faceID == otherFaceID) continue;
+                                if(otherFace.m_Edges.find(edgeID) != otherFace.m_Edges.end()){
+                                    face.m_Neighbors.insert(otherFaceID);
+                                }
+                            }
+                        }
+                    }
+                }
+
                 m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
                 m_TimberInfo.m_Components[cutInfo.m_ID] = &m_TimberInfo.m_Cuts[cutInfo.m_ID];
             }
