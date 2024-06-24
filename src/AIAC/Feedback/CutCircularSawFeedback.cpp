@@ -275,7 +275,7 @@ namespace AIAC
         // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         float bladeThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
         float overHangThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
-        float displacementTowardsCamera = bladeThicknessScaled;
+        float displacementTowardsCamera = overHangThicknessScaled;
         float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
         glm::vec3 normalVec = glm::normalize(m_NormalEnd - m_NormalStart);
         glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormalEnd - m_NormalStart));
