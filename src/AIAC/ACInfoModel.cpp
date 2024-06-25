@@ -478,7 +478,8 @@ namespace AIAC
         }
         
         UpdateBboxGOLine();
-        m_TimberInfo.HideAllComponentsExceptCurrent();
+        // m_TimberInfo.HideAllComponentsExceptCurrent();
+        m_TimberInfo.IsShowingAllComponents = true;
 
         return true;
     }
