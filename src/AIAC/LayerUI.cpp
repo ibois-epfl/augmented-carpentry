@@ -405,8 +405,12 @@ namespace AIAC
             }
             ImGui::SameLine();
             if(ImGui::Button("Load Scanned Model")){
-                OpenFileSelectDialog("Open Scanned Model", ".ply", m_TmpPathBuf, [&]{
-                    AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(m_TmpPathBuf);
+                std::string saveDirMap = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::SAVE_DIR_MAPS, ".");
+                const char* saveDirMapCStr = saveDirMap.c_str();
+                this->m_TmpPathBuf[0] = '\0';
+                strcpy(this->m_TmpPathBuf, saveDirMapCStr);
+                OpenFileSelectDialog("Open Scanned Model", ".ply", this->m_TmpPathBuf, [&]{
+                    AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(this->m_TmpPathBuf);
                 });
             }
         ImGui::EndChild();

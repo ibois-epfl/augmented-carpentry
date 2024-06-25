@@ -593,6 +593,7 @@ namespace AIAC
             for(auto& objs : cutInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
+
             // Face
             for(auto& kv : cutInfo.m_Faces){
                 auto& faceInfo = kv.second;
@@ -616,7 +617,6 @@ namespace AIAC
                 }
             }
         }
-
     }
 
     float ACInfoModel::GetLength(){
