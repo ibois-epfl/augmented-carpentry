@@ -94,9 +94,6 @@ namespace AIAC
             // Reload Tag to GL for rendering
             AIAC_APP.GetLayer<AIAC::LayerSlam>()->InitSlamMapGOs();
 
-            // Save the .map file to the config
-            AIAC::Config::UpdateEntry(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, nativeMapPath);
-
             // Reconstruct 3D
             bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
                 ymlTagMapPath,
