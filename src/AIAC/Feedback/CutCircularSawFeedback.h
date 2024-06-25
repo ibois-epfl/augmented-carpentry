@@ -16,6 +16,23 @@
 namespace AIAC
 {
     /**
+     * @brief Visualizer for showing the depth of the cut.
+     * 
+     */
+    class CutCircularSawDepthVisualizer : public FeedbackVisualizer
+    {
+    public:
+        CutCircularSawDepthVisualizer();
+
+    private:
+        std::shared_ptr<GOLine> m_LineDepth;
+        std::shared_ptr<GOText> m_TxtDepth;
+        float m_ToleranceDepthThreshold = 2.f;
+
+    friend class CutCircularSawFeedback;
+    };
+    
+    /**
      * @brief This visualizer gives guidance on the start position of the lateral cuts for the circular saw.
     */
     class CutCircularSawPositionStartVisualizer : public FeedbackVisualizer
@@ -26,6 +43,7 @@ namespace AIAC
         private:
             std::shared_ptr<GOLine> m_LineDistStart;
             std::shared_ptr<GOText> m_TxtDistStart;
+            std::shared_ptr<GOLine> m_LineToBottomPt;
 
         public:
             float ToleranceStartThreshold = 0.2f;
@@ -73,13 +91,13 @@ namespace AIAC
         CutCircularSawFeedbackVisualizer();
 
     private:
-        std::shared_ptr<GOPoint> m_BottomPoint;
-        std::shared_ptr<GOLine> m_LineToBottomPt;
+        // std::shared_ptr<GOPoint> m_BottomPoint;
+        // std::shared_ptr<GOLine> m_LineToBottomPt;
         // std::shared_ptr<GOLine> m_ProjLineOnFace;
         // std::shared_ptr<GOLine> m_ProjLineOnFaceThickness;
         std::shared_ptr<GOLine> m_ProjLineOfBlade;
+        // std::shared_ptr<GOText> m_TxtBottomDist;
 
-        std::shared_ptr<GOText> m_TxtBottomDist;
 
     friend class CutCircularSawFeedback;
     };
@@ -151,6 +169,7 @@ namespace AIAC
         ///< @brief the closest neighbour face to the highlighted face and to the blade
         std::string m_NearestNeighbourFaceIDToParallelFace;
 
+
         // config
         bool m_ToShowCutPlane = true;
 
@@ -169,12 +188,14 @@ namespace AIAC
         void UpdateCutPlaneFeedback();
         void UpdateThicknessFeedback();
         void UpdateStartPosFeedback();
+        void UpdateDepthFeedback();
 
         CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
         CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
         CutCircularOrientationVisualizer m_OrientationVisualizer;
         CutCircularSawPositionStartVisualizer m_PositionStartVisualizer;
         CircularSawCutBladeThicknessVisualizer m_ThicknessVisualizer;
+        CutCircularSawDepthVisualizer m_DepthVisualizer;
     };
 }
 
