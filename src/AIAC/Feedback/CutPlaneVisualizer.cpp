@@ -108,7 +108,11 @@ namespace AIAC
         }
         glm::vec3 normalVec = glm::normalize(normEnd - normStart);
         glm::vec3 oppositeNormalVec = -normalVec;
+<<<<<<< HEAD
         float displacementTowardsCamera = overHangThicknessScaled;
+=======
+        float displacementTowardsCamera = bladeThicknessScaled;
+>>>>>>> a9afb5e24028218d8eea346380738f2a4cf653aa
         float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
         glm::vec3 displacementTowardsCameraVec = displacementTowardsCamera * normalVec;
         glm::vec3 displacementAwayFromCameraVec = displacementAwayFromCamera * oppositeNormalVec;
