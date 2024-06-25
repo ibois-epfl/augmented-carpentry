@@ -27,6 +27,9 @@ namespace AIAC
             std::shared_ptr<GOLine> m_LineDistStart;
             std::shared_ptr<GOText> m_TxtDistStart;
 
+        public:
+            float ToleranceStartThreshold = 0.2f;
+
         friend class CutCircularSawFeedback;
     };
 
@@ -72,8 +75,8 @@ namespace AIAC
     private:
         std::shared_ptr<GOPoint> m_BottomPoint;
         std::shared_ptr<GOLine> m_LineToBottomPt;
-        std::shared_ptr<GOLine> m_ProjLineOnFace;
-        std::shared_ptr<GOLine> m_ProjLineOnFaceThickness;
+        // std::shared_ptr<GOLine> m_ProjLineOnFace;
+        // std::shared_ptr<GOLine> m_ProjLineOnFaceThickness;
         std::shared_ptr<GOLine> m_ProjLineOfBlade;
 
         std::shared_ptr<GOText> m_TxtBottomDist;
@@ -140,12 +143,18 @@ namespace AIAC
         glm::vec3 m_DownVec;
         glm::vec3 m_BottomPoint;
 
+    private:  ///< @brief the important faces
+        ///< @brief the face that is going to be updated
         std::string m_NearestParallelFaceID;
+        ///< @brief the face that is perpendicular to the highlighted face
         std::string m_NearestPerpendicularFaceID;
+        ///< @brief the closest neighbour face to the highlighted face and to the blade
+        std::string m_NearestNeighbourFaceIDToParallelFace;
 
         // config
         bool m_ToShowCutPlane = true;
 
+    private:
         void UpdateToolPosition();
         void UpdateRefFaces();
         void UpdateFeedback();
@@ -159,6 +168,7 @@ namespace AIAC
         void UpdateGeneralFeedback();
         void UpdateCutPlaneFeedback();
         void UpdateThicknessFeedback();
+        void UpdateStartPosFeedback();
 
         CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
         CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
