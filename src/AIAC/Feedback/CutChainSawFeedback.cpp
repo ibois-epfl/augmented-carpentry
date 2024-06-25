@@ -347,7 +347,7 @@ namespace AIAC
             // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             float bladeThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().ThicknessACIT;
             float overHangThicknessScaled = AC_FF_TOOL->GetData<ChainSawData>().OverhangACIT;
-            float displacementTowardsCamera = bladeThicknessScaled;
+            float displacementTowardsCamera = overHangThicknessScaled;
             float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
 
             // Lines based on tool

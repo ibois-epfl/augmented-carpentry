@@ -11,13 +11,32 @@
 
 namespace AIAC
 {
+    CutCircularSawDepthVisualizer::CutCircularSawDepthVisualizer()
+    {
+        m_LineDepth = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_TxtDepth = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
+
+        m_LineDepth->SetColor(GOColor::YELLOW);
+        m_TxtDepth->SetColor(GOColor::YELLOW);
+
+        m_TxtDepth->SetTextSize(GOTextSize::BitSmall);
+
+        m_AllPrimitives.push_back(m_LineDepth);
+        m_AllPrimitives.push_back(m_TxtDepth);
+
+        Deactivate();
+    }
+
     CutCircularSawPositionStartVisualizer::CutCircularSawPositionStartVisualizer()
     {
         this->m_LineDistStart = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f), GOWeight::Thick);
         this->m_TxtDistStart = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
+        this->m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
 
         this->m_LineDistStart->SetColor(GOColor::YELLOW);
         this->m_TxtDistStart->SetColor(GOColor::WHITE);
+        this->m_LineToBottomPt->SetColor(GOColor::YELLOW);
+        this->m_LineToBottomPt->SetVisibility(false);  // only for debugging
 
         this->m_TxtDistStart->SetTextSize(GOTextSize::BitSmall);
 
@@ -67,31 +86,31 @@ namespace AIAC
 
     CutCircularSawFeedbackVisualizer::CutCircularSawFeedbackVisualizer()
     {
-        m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
-        m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_ProjLineOnFaceThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
+        // m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
+        // m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        // m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        // m_ProjLineOnFaceThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));  // FIXME: this one might disappear
+        // m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
-        m_ProjLineOnFace->SetWeight(GOWeight::Light);
-        m_ProjLineOnFaceThickness->SetWeight(GOWeight::Light);
+        // m_ProjLineOnFace->SetWeight(GOWeight::Light);
+        // m_ProjLineOnFaceThickness->SetWeight(GOWeight::Light);
 
-        m_BottomPoint->SetColor(GOColor::YELLOW);
-        m_LineToBottomPt->SetColor(GOColor::YELLOW);
-        m_ProjLineOnFace->SetColor(GOColor::RED);
-        m_ProjLineOnFaceThickness->SetColor(GOColor::RED);
+        // m_BottomPoint->SetColor(GOColor::YELLOW);
+        // m_LineToBottomPt->SetColor(GOColor::YELLOW);
+        // m_ProjLineOnFace->SetColor(GOColor::RED);
+        // m_ProjLineOnFaceThickness->SetColor(GOColor::RED);
         m_ProjLineOfBlade->SetColor(GOColor::CYAN);
-        m_TxtBottomDist->SetColor(GOColor::BLACK);
+        // m_TxtBottomDist->SetColor(GOColor::BLACK);
 
-        m_TxtBottomDist->SetTextSize(GOTextSize::BitSmall);
+        // m_TxtBottomDist->SetTextSize(GOTextSize::BitSmall);
 
-        m_AllPrimitives.push_back(m_BottomPoint);
-        m_AllPrimitives.push_back(m_LineToBottomPt);
-        m_AllPrimitives.push_back(m_ProjLineOnFace);
-        m_AllPrimitives.push_back(m_ProjLineOnFaceThickness);
+        // m_AllPrimitives.push_back(m_BottomPoint);
+        // m_AllPrimitives.push_back(m_LineToBottomPt);
+        // m_AllPrimitives.push_back(m_ProjLineOnFace);
+        // m_AllPrimitives.push_back(m_ProjLineOnFaceThickness);
         m_AllPrimitives.push_back(m_ProjLineOfBlade);
-        m_AllPrimitives.push_back(m_TxtBottomDist);
+        // m_AllPrimitives.push_back(m_TxtBottomDist);
 
         Deactivate();
     }
@@ -113,6 +132,8 @@ namespace AIAC
         m_GeneralVisualizer.Activate();
         m_OrientationVisualizer.Activate();
         m_PositionStartVisualizer.Activate();
+        m_ThicknessVisualizer.Activate();
+        m_DepthVisualizer.Activate();
         Update();
     }
 
@@ -121,6 +142,8 @@ namespace AIAC
         m_CutPlaneVisualizer.Deactivate();
         m_OrientationVisualizer.Deactivate();
         m_PositionStartVisualizer.Deactivate();
+        m_ThicknessVisualizer.Deactivate();
+        m_DepthVisualizer.Deactivate();
     }
 
     void CutCircularSawFeedback::UpdateToolPosition() {
@@ -184,108 +207,116 @@ namespace AIAC
                 m_NearestPerpendicularFaceID.clear();
             }
         }
+
+        // get the closest neighbour face to the highlightesd face and to the blade's center
+        std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces = 
+            this->m_Cut->GetHighlightedFaceNeighbors();
+        float minDist = std::numeric_limits<float>::max();
+        for (auto const& [faceID, faceInfo] : neighbouringFaces)
+        {
+            auto projCenter = GetProjectionPointOnPlane(
+                faceInfo.GetNormal(),
+                faceInfo.GetCenter(),
+                m_Center);
+            float distAbs = glm::abs(glm::distance(m_Center, projCenter));
+            if (distAbs < minDist && distAbs > m_Radius)
+            {
+                minDist = distAbs;
+                m_NearestNeighbourFaceIDToParallelFace = faceID;
+            }
+        } 
     }
 
     void CutCircularSawFeedback::UpdateFeedback() {
         if(!m_NearestPerpendicularFaceID.empty()){
             m_GeneralVisualizer.Activate();
-            updateGeneralFeedback();
+            UpdateGeneralFeedback();
         }
         if(m_ToShowCutPlane) {
             m_CutPlaneVisualizer.Activate();
-            updateCutPlaneFeedback();
+            UpdateCutPlaneFeedback();
         }
         if(m_Cut->IsSingleFace()) {
             m_GeneralVisualizer.Deactivate();
         }
+
+        UpdateThicknessFeedback();
+        UpdateStartPosFeedback();
+        UpdateDepthFeedback();
     }
 
-    void CutCircularSawFeedback::updateGeneralFeedback()
+    void CutCircularSawFeedback::UpdateGeneralFeedback()
     {
-        auto prepFaceInfo = m_Cut->GetFace(m_NearestPerpendicularFaceID);
-        auto prepPlnCenter = prepFaceInfo.GetCenter();
-        auto perpPlnNormal = prepFaceInfo.GetNormal();
-        glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
-        glm::vec3 _ptPlaceHolder;
-        GetIntersectLineOf2Planes(
-            m_Normal, m_Center,
-            perpFaceOfBladeVec, m_Center,
-            m_DownVec, _ptPlaceHolder
-        );
+        // auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
+        // auto prepPlnCenter = prepFaceInfo.GetCenter();
+        // auto perpPlnNormal = prepFaceInfo.GetNormal();
+        // glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
+        // glm::vec3 _ptPlaceHolder;
+        // GetIntersectLineOf2Planes(
+        //     m_Normal, m_Center,
+        //     perpFaceOfBladeVec, m_Center,
+        //     m_DownVec, _ptPlaceHolder
+        // );
 
-        if(glm::distance(m_Center + m_DownVec * m_Radius, prepFaceInfo.GetCenter()) >
-           glm::distance(m_Center - m_DownVec * m_Radius, prepFaceInfo.GetCenter())){
-            m_DownVec = -m_DownVec;
-        }
+        // if(glm::distance(m_Center + m_DownVec * m_Radius, prepFaceInfo.GetCenter()) >
+        //    glm::distance(m_Center - m_DownVec * m_Radius, prepFaceInfo.GetCenter())){
+        //     m_DownVec = -m_DownVec;
+        // }
 
-        // get the bottom point and update
-        m_BottomPoint = m_Center + m_DownVec * m_Radius;
-        m_GeneralVisualizer.m_BottomPoint->SetPosition(m_BottomPoint);
-        m_GeneralVisualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
+        // // get the bottom point and update
+        // m_BottomPoint = m_Center + m_DownVec * m_Radius;
+        // m_GeneralVisualizer.m_BottomPoint->SetPosition(m_BottomPoint);
+        // m_GeneralVisualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
 
-        // side point of the blade
-        auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
-        auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
-        glm::vec3 projSidePt1, projSidePt2;
-        GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
-        GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
+        // // side point of the blade
+        // auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
+        // auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
+        // glm::vec3 projSidePt1, projSidePt2;
+        // GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
+        // GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
         
-        m_GeneralVisualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
+        // m_GeneralVisualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
 
-        // distance to the bottom face
-        auto projBtmPt = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, m_BottomPoint);
-        m_GeneralVisualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
-        auto dist = glm::distance(projBtmPt, m_BottomPoint);
-        m_GeneralVisualizer.m_TxtBottomDist->SetText("d:" + FeedbackVisualizer::toString(dist));
+        // // FIXME: this might be adapted for in-depth cuts
+        // // distance to the bottom face
+        // auto projBtmPt = GetProjectionPointOnPlane(perpPlnNormal, prepPlnCenter, m_BottomPoint);
+        // m_GeneralVisualizer.m_TxtBottomDist->SetAnchor(projBtmPt);
+        // auto dist = glm::distance(projBtmPt, m_BottomPoint);
+        // m_GeneralVisualizer.m_TxtBottomDist->SetText("d:" + FeedbackVisualizer::toString(dist));
 
-        if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt))
-        {
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
-        }
-        else if (-1.f < glm::distance(m_BottomPoint, projBtmPt) < 1.f)
-        {
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
-        }
-        else
-        {
-            dist = -dist;
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
-            m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
-        }
+        // if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt))
+        // {
+        //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
+        //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
+        // }
+        // else if (-1.f < glm::distance(m_BottomPoint, projBtmPt) < 1.f)
+        // {
+        //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
+        //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
+        // }
+        // else
+        // {
+        //     dist = -dist;
+        //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
+        //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
+        // }
 
-        // Projection line on face
-        // Find all intersection points on the edges of the perpendicular face, and form the longest segment
-        std::vector<glm::vec3> intersectPts;
-        glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2;
-        for(auto const& edgeID: prepFaceInfo.GetEdges()){
-            auto edge = m_Cut->GetEdge(edgeID);
-            auto edgePt1 = edge.GetStartPt().GetPosition();
-            auto edgePt2 = edge.GetEndPt().GetPosition();
-            ExtendLineSeg(edgePt1, edgePt2, 1.0f);
-            glm::vec3 intersectPt;
-            if(GetIntersectPointOfLineAndLineSeg((projSidePt2 - projSidePt1), projSidePt1, edgePt1, edgePt2, intersectPt)) {
-                intersectPts.push_back(intersectPt);
-            }
-        }
-        FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
-
-        // TODO: clean up values from import
-        // Thicknesses >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        float bladeThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
-        float overHangThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
-        float displacementTowardsCamera = bladeThicknessScaled;
-        float displacementAwayFromCamera = bladeThicknessScaled - overHangThicknessScaled;
-        glm::vec3 normalVec = glm::normalize(m_NormalEnd - m_NormalStart);
-        glm::vec3 oppositeNormalVec = -(glm::normalize(m_NormalEnd - m_NormalStart));
-        auto perpIntersectLineSegPt1TowardsCamera = perpIntersectLineSegPt1 + normalVec * displacementTowardsCamera;
-        auto perpIntersectLineSegPt2TowardsCamera = perpIntersectLineSegPt2 + normalVec * displacementTowardsCamera;
-        m_GeneralVisualizer.m_ProjLineOnFace->SetPts(perpIntersectLineSegPt1TowardsCamera, perpIntersectLineSegPt2TowardsCamera);
-        auto perpIntersectLineSegPt1AwayFromCamera = perpIntersectLineSegPt1 + oppositeNormalVec * displacementAwayFromCamera;
-        auto perpIntersectLineSegPt2AwayFromCamera = perpIntersectLineSegPt2 + oppositeNormalVec * displacementAwayFromCamera;
-        m_GeneralVisualizer.m_ProjLineOnFaceThickness->SetPts(perpIntersectLineSegPt1AwayFromCamera, perpIntersectLineSegPt2AwayFromCamera);
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // // FIXME: this is the line of the axis thickness to export
+        // // Projection line on face
+        // // Find all intersection points on the edges of the perpendicular face, and form the longest segment
+        // std::vector<glm::vec3> intersectPts;
+        // glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2;
+        // for(auto const& edgeID: prepFaceInfo.GetEdges()){
+        //     auto edge = m_Cut->GetEdge(edgeID);
+        //     auto edgePt1 = edge.GetStartPt().GetPosition();
+        //     auto edgePt2 = edge.GetEndPt().GetPosition();
+        //     ExtendLineSeg(edgePt1, edgePt2, 1.0f);
+        //     glm::vec3 intersectPt;
+        //     if(GetIntersectPointOfLineAndLineSeg((projSidePt2 - projSidePt1), projSidePt1, edgePt1, edgePt2, intersectPt)) {
+        //         intersectPts.push_back(intersectPt);
+        //     }
+        // }
+        // FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
 
         //------------------------------------------------
         if (!this->m_NearestParallelFaceID.empty())
@@ -384,30 +415,234 @@ namespace AIAC
             this->m_OrientationVisualizer.Deactivate();
         }
 
-        // ---------------------------------------------------
-            // starting point visualizer
+    }
+
+    void CutCircularSawFeedback::UpdateCutPlaneFeedback()
+    {
+        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_Normal, m_Center);
+    }
+
+    void CircularSawCutBladeThicknessVisualizer::UpdateToolheadsData()
+    {
+        this->m_BladeTotalThicknessScaled = AC_FF_TOOL->GetData<CircularSawData>().ThicknessACIT;
+        this->m_BladeOverhangScaled = AC_FF_TOOL->GetData<CircularSawData>().OverhangACIT;
+        this->m_ToolheadRefCenter = AC_FF_TOOL->GetData<CircularSawData>().CenterGO->GetPosition();
+        this->m_ToolheadRefNormStart = this->m_ToolheadRefCenter;
+        this->m_ToolheadRefNormEnd = AC_FF_TOOL->GetData<CircularSawData>().NormEndGO->GetPosition();
+        this->m_NormalUnitized = glm::normalize(this->m_ToolheadRefNormEnd - this->m_ToolheadRefNormStart);
+        this->m_NormalOppositeUnitized = -this->m_NormalUnitized;
+        this->m_DisplacedCenterTowardsCamera = this->m_ToolheadRefCenter + this->m_NormalUnitized * this->m_BladeOverhangScaled;
+        this->m_DisplacedCenterAwayFromCamera = this->m_ToolheadRefCenter + this->m_NormalOppositeUnitized * (this->m_BladeTotalThicknessScaled - this->m_BladeOverhangScaled);
+    }
+
+    bool CircularSawCutBladeThicknessVisualizer::IntersectBladeWithNeighbours(
+        TimberInfo::Cut* cut,
+        TimberInfo::Cut::Face& face,
+        bool isTowardsCamera,
+        std::shared_ptr<GOLine>& lineIntersection)
+    {
+        glm::vec3 centerBlade;
+        glm::vec3 normalBlade;
+        if (isTowardsCamera)
+        {
+            normalBlade = this->m_NormalUnitized;
+            centerBlade = this->m_DisplacedCenterTowardsCamera;
+        }
+        else
+        {
+            normalBlade = this->m_NormalOppositeUnitized;
+            centerBlade = this->m_DisplacedCenterAwayFromCamera;
+        }
+        glm::vec3 downVecBlade;
+        auto prepFaceACenter = face.GetCenter();
+        auto perpFaceANormal = face.GetNormal();
+        glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(normalBlade, perpFaceANormal));
+        glm::vec3 _ptPlaceHolder;
+        GetIntersectLineOf2Planes(
+            normalBlade,
+            centerBlade,
+            perpFaceOfBladeVec,
+            centerBlade,
+            downVecBlade,
+            _ptPlaceHolder
+        );
+
+        auto sidePt1 = centerBlade + perpFaceOfBladeVec * AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
+        auto sidePt2 = centerBlade - perpFaceOfBladeVec * AC_FF_TOOL->GetData<CircularSawData>().RadiusACIT;
+        glm::vec3 projSidePt1, projSidePt2;
+        GetIntersectPointOfLineAndPlane(downVecBlade, sidePt1, perpFaceANormal, prepFaceACenter, projSidePt1);
+        GetIntersectPointOfLineAndPlane(downVecBlade, sidePt2, perpFaceANormal, prepFaceACenter, projSidePt2);
+        if (projSidePt1 == projSidePt2)
+        {
+            lineIntersection->SetPts(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f));
+            return false;
+        }
+
+        std::vector<glm::vec3> intersectPts;
+        glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2;
+        for(auto const& edgeID: face.GetEdges()){
+            auto edge = cut->GetEdge(edgeID);
+            auto edgePt1 = edge.GetStartPt().GetPosition();
+            auto edgePt2 = edge.GetEndPt().GetPosition();
+            ExtendLineSeg(edgePt1, edgePt2, 1.0f);
+            glm::vec3 intersectPt;
+            if(GetIntersectPointOfLineAndLineSeg((projSidePt2 - projSidePt1), projSidePt1, edgePt1, edgePt2, intersectPt)) {
+                intersectPts.push_back(intersectPt);
+            }
+        }
+        FormLongestLineSeg(intersectPts, perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+
+        if (intersectPts.size() == 0)
+        {
+            lineIntersection->SetPts(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f));
+            return false;
+        }
+        lineIntersection->SetPts(perpIntersectLineSegPt1, perpIntersectLineSegPt2);
+        return true;
+    }
+
+    void CutCircularSawFeedback::UpdateThicknessFeedback()
+    {
+        this->m_ThicknessVisualizer.UpdateToolheadsData();
+        
+        std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces = 
+            this->m_Cut->GetHighlightedFaceNeighbors();
+
+        if (neighbouringFaces.size() > 2)
+        {
+            AIAC_WARN("The neighbouring faces are more than 2, this is not possible to show the thickness feedback");
+            return;
+        }
+
+        // FIXME: these faces neighbours shoould be updated in the update face refs up here
+        auto faceNeighbour1 = neighbouringFaces.begin()->second;
+
+        if (neighbouringFaces.size() == 1)
+        {
+            bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+            bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+        }
+        else if (neighbouringFaces.size() == 2)
+        {
+            auto faceNeighbour2 = (++neighbouringFaces.begin())->second;
+
+            bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+            bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+            bool isfaceNeighbour2IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour2, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB);
+            bool isfaceNeighbour2IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour2, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB);
+
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB->SetVisibility((isfaceNeighbour2IntersectedOnce && isfaceNeighbour2IntersectedTwice));
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB->SetVisibility((isfaceNeighbour2IntersectedOnce && isfaceNeighbour2IntersectedTwice));
+        }
+        else
+        {
+            this->m_ThicknessVisualizer.Deactivate();
+        }
+    }
+
+    void CutCircularSawFeedback::UpdateStartPosFeedback()
+    {
         if (!this->m_NearestParallelFaceID.empty())
         {
             this->m_PositionStartVisualizer.Activate();
 
-            auto faceInfo = this->m_Cut->GetFace(this->m_NearestParallelFaceID);
-            auto faceNormal = faceInfo.GetNormal();
-            auto faceCenter = faceInfo.GetCenter();
+            AIAC::TimberInfo::Cut::Face faceInfo = this->m_Cut->GetFace(this->m_NearestParallelFaceID);
+            glm::vec3 faceNormal = faceInfo.GetNormal();
+            glm::vec3 faceCenter = faceInfo.GetCenter();
 
-            auto projNormStart = GetProjectionPointOnPlane(faceNormal, faceCenter, m_NormalStart);
-            glm::vec3 midPt = this->m_GeneralVisualizer.m_LineToBottomPt->GetMidPointValues();
-            auto midPtProj = GetProjectionPointOnPlane(faceNormal, faceCenter, midPt);
+            // closest displaced center of the blade (towards or away from the camera)
+            glm::vec3 projBladeNorm;
+            glm::vec3 centerBlade;
+            glm::vec3 projBladeCenterTowards2Face = GetProjectionPointOnPlane(
+                faceNormal,
+                faceCenter,
+                this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera
+            );
+            glm::vec3 projBladeCenterAway2Face = GetProjectionPointOnPlane(
+                faceNormal,
+                faceCenter,
+                this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera
+            );
+            // get the closest one
+            float distTowards = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera, projBladeCenterTowards2Face));
+            float distAway = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera, projBladeCenterAway2Face));
+            if (distTowards < distAway)
+            {
+                projBladeNorm = projBladeCenterTowards2Face;
+                centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera;
+            }
+            else
+            {
+                projBladeNorm = projBladeCenterAway2Face;
+                centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera;
+            }
 
-            this->m_PositionStartVisualizer.m_LineDistStart->SetPts(midPt, midPtProj);
-            float parallelDistMidPtPlane = glm::distance(midPt, midPtProj);
-            this->m_PositionStartVisualizer.m_LineDistStart->SetColor(parallelDistMidPtPlane < 0.9f ? GOColor::GREEN : GOColor::YELLOW);
+            // calculate the distance
+            glm::vec3 centerBladeProjOnFace = GetProjectionPointOnPlane(
+                faceNormal,
+                faceCenter,
+                centerBlade);
+            float parallelDistCtrBlade2PtFace = glm::distance(
+                centerBlade,
+                centerBladeProjOnFace);
+
+            ////////////////////////////
+            // set the visuals and print the distance feed
+            // move the center down of half the radius
+            // FIXME: the indication should not use the nearest perpendicular Face!
+            auto prepFaceInfo = m_Cut->GetFace(this->m_NearestPerpendicularFaceID);
+            auto prepPlnCenter = prepFaceInfo.GetCenter();
+            auto perpPlnNormal = prepFaceInfo.GetNormal();
+            glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
+            glm::vec3 _ptPlaceHolder;
+            GetIntersectLineOf2Planes(
+                m_Normal, m_Center,
+                perpFaceOfBladeVec, m_Center,
+                m_DownVec, _ptPlaceHolder
+            );
+
+            if(glm::distance(m_Center + m_DownVec * m_Radius, faceInfo.GetCenter()) >
+            glm::distance(m_Center - m_DownVec * m_Radius, faceInfo.GetCenter())){
+                m_DownVec = -m_DownVec;
+            }
+
+            // get the bottom point and update
+            glm::vec3 bottomPoint = m_Center + m_DownVec * m_Radius;
+            this->m_PositionStartVisualizer.m_LineToBottomPt->SetPts(m_Center, bottomPoint);
+            ////////////////////////////
+
+            // set the visuals and print the distance feed
+            glm::vec3 midPt = this->m_PositionStartVisualizer.m_LineToBottomPt->GetMidPointValues();
+            glm::vec3 midPtProj = GetProjectionPointOnPlane(
+                faceNormal,
+                faceCenter,
+                midPt);
+            this->m_PositionStartVisualizer.m_LineDistStart->SetPts(
+                midPt,
+                midPtProj);
 
             std::ostringstream stream;
-            stream << std::fixed << std::setprecision(1) << parallelDistMidPtPlane;
-            std::string parallelDistMidPtPlaneStr = stream.str();
-            this->m_PositionStartVisualizer.m_TxtDistStart->SetAnchor(midPtProj);
-            this->m_PositionStartVisualizer.m_TxtDistStart->SetText("s:" + parallelDistMidPtPlaneStr);
-            this->m_PositionStartVisualizer.m_TxtDistStart->SetColor(parallelDistMidPtPlane < 0.9f ? GOColor::GREEN : GOColor::YELLOW);
+            stream << std::fixed << std::setprecision(1) << parallelDistCtrBlade2PtFace;
+            std::string parallelDistCtrBlade2PtFaceStr = stream.str();
+            this->m_PositionStartVisualizer.m_TxtDistStart->SetAnchor(
+                midPtProj
+                );
+            this->m_PositionStartVisualizer.m_TxtDistStart->SetText("s:" + parallelDistCtrBlade2PtFaceStr);
+            this->m_PositionStartVisualizer.m_TxtDistStart->SetColor(
+                parallelDistCtrBlade2PtFace < this->m_PositionStartVisualizer.ToleranceStartThreshold ? GOColor::GREEN : GOColor::YELLOW);
+            this->m_PositionStartVisualizer.m_LineDistStart->SetColor(
+                parallelDistCtrBlade2PtFace < this->m_PositionStartVisualizer.ToleranceStartThreshold ? GOColor::GREEN : GOColor::YELLOW);
         }
         else
         {
@@ -415,7 +650,93 @@ namespace AIAC
         }
     }
 
-    void CutCircularSawFeedback::updateCutPlaneFeedback(){
-        if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_Normal, m_Center);
+    void CutCircularSawFeedback::UpdateDepthFeedback()
+    {
+        if (!this->m_NearestParallelFaceID.empty() && !m_Cut->IsSingleFace() && !this->m_NearestPerpendicularFaceID.empty())
+        {
+            auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
+            auto prepPlnCenter = prepFaceInfo.GetCenter();
+            auto perpPlnNormal = prepFaceInfo.GetNormal();
+            // glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
+            // glm::vec3 _ptPlaceHolder;
+            // GetIntersectLineOf2Planes(
+            //     m_Normal, m_Center,
+            //     perpFaceOfBladeVec, m_Center,
+            //     m_DownVec, _ptPlaceHolder
+            // );
+
+            // if(glm::distance(m_Center + m_DownVec * m_Radius, prepFaceInfo.GetCenter()) >
+            // glm::distance(m_Center - m_DownVec * m_Radius, prepFaceInfo.GetCenter())){
+            //     m_DownVec = -m_DownVec;
+            // }
+
+            // // get the bottom point and update
+            // m_BottomPoint = m_Center + m_DownVec * m_Radius;
+            // m_GeneralVisualizer.m_BottomPoint->SetPosition(m_BottomPoint);
+            // m_GeneralVisualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
+
+            // // side point of the blade
+            // auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
+            // auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
+            // glm::vec3 projSidePt1, projSidePt2;
+            // GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
+            // GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
+            
+            // m_GeneralVisualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
+
+            // FIXME: this might be adapted for in-depth cuts
+
+            // distance to the bottom face
+            auto projBladeCenter = GetProjectionPointOnPlane(
+                perpPlnNormal,
+                prepPlnCenter,
+                m_Center);
+
+
+
+            this->m_DepthVisualizer.m_TxtDepth->SetAnchor(projBladeCenter);
+
+
+
+            // calculate distance
+            auto distDepthAbs = glm::abs(glm::abs(glm::distance(projBladeCenter, m_Center)) - m_Radius);
+            auto distDepth = glm::distance(projBladeCenter, m_Center) - m_Radius;
+
+            // get the sign of the distance
+            
+            // visualization
+
+            this->m_DepthVisualizer.m_LineDepth->SetPts(m_Center, projBladeCenter);
+
+            this->m_DepthVisualizer.m_TxtDepth->SetText("d:" + FeedbackVisualizer::toString(distDepth));
+            if (distDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold)
+                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::RED);
+            else if (distDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold + 4.f)
+                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::YELLOW);
+            else
+                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::GREEN);
+            // if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt))
+            // {
+            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
+            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
+            // }
+            // else if (-1.f < glm::distance(m_BottomPoint, projBtmPt) < 1.f)
+            // {
+            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
+            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
+            // }
+            // else
+            // {
+            //     dist = -dist;
+            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
+            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
+            // }
+
+        }
+        else
+        {
+            this->m_DepthVisualizer.Deactivate();
+        }
     }
+
 }
