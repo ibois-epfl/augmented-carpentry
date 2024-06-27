@@ -1,7 +1,12 @@
+# import sys
+# sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
+
 import log_loader
 import acim_loader
 import ttool_mesh_loader
 import camera_model
+
+import Rhino
 
 class Replayer:
     def __init__(self):
@@ -107,18 +112,18 @@ class Replayer:
         return transformation
     
 
-if __name__ == "__main__":
-    replayer = Replayer()
-    replayer.load(log_root_path, exp_id, ttool_download_path)
+# if __name__ == "__main__":
+#     replayer = Replayer()
+#     replayer.load(log_root_path, exp_id, ttool_download_path)
 
-    camera = replayer.camera_model
-    bbox = replayer.acim_data.bbox
-    all_cuts = [x[1] for x in replayer.acim_data.cuts.items()]
-    all_holes = [x[1] for x in replayer.acim_data.holes.items()]
+#     camera = replayer.camera_model
+#     bbox = replayer.acim_data.bbox
+#     all_cuts = [x[1] for x in replayer.acim_data.cuts.items()]
+#     all_holes = [x[1] for x in replayer.acim_data.holes.items()]
 
-    frame_count = replayer.log_data.frame_count
+#     frame_count = replayer.log_data.frame_count
 
-    scene = replayer.generate_scene_at_frame(100)
-    tool_mesh = scene["tool_mesh"]
-    camera_model = scene["camera_model"]
-    acim_breps = [scene["acim_bbox"]] + scene["acim_activated_component"] + scene["acim_done_component"] + scene["acim_not_done_component"]
+#     scene = replayer.generate_scene_at_frame(100)
+#     tool_mesh = scene["tool_mesh"]
+#     camera_model = scene["camera_model"]
+#     acim_breps = [scene["acim_bbox"]] + scene["acim_activated_component"] + scene["acim_done_component"] + scene["acim_not_done_component"]

@@ -6,7 +6,10 @@ import os
 import Rhino
 import ghpythonlib
 
-from pypi.ACPy.replayer.replayer import Replayer
+# import sys
+# sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi")
+
+from ACPy.replayer.replayer import Replayer
 
 class ACPyReplayerInitializer(component):
     def __init__(self):
@@ -20,3 +23,6 @@ class ACPyReplayerInitializer(component):
             replayer.set_camera_model(i_camera_model)
 
         return replayer, replayer.log_data.frame_count
+    
+# if __name__ == "__main__":
+#     replayer, frame_count = ACPyReplayerInitializer().RunScript(log_root_path, exp_id, ttool_download_path, camera_model) 
