@@ -32,16 +32,18 @@ class LogEventData:
         """
 
         targetArrIdx = bisect.bisect_left(self.frameIDs, index) - 1
-        if targetArrIdx < len(self.frameIDs[targetArrIdx]) and self.frameIDs[targetArrIdx] == index:
+        if targetArrIdx < len(self.frameIDs) and self.frameIDs[targetArrIdx] == index:
             return self.dataCollection[targetArrIdx]
         else:
             return self.dataCollection[targetArrIdx - 1]
         
 class LogData:
     def __init__(self, log_event_data, timestamp, frame_count, acim_model_path, scanned_model_path, ttool_zenodo_version_url):
-        self.data = log_event_data
+        self.all_event_data = log_event_data
         self.timestamp = timestamp
         self.frame_count = frame_count
         self.acim_model_path = acim_model_path
         self.scanned_model_path = scanned_model_path
         self.ttool_zenodo_version_url = ttool_zenodo_version_url
+
+        

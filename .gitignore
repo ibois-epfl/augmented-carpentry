@@ -6,6 +6,9 @@
 assets/tslam/*.map
 scanned_map
 
+## other assets
+py/expirment
+
 ## >>>>>>>>> vscode >>>>>>>>>
 
 # VScode config

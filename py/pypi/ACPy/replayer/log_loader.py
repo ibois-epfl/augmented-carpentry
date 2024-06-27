@@ -46,12 +46,16 @@ def load(root_path: str, exp_id: str):
             start_flag = False
 
             for line in f:
+                line = line.strip()
+                if len(line) == 0:
+                    continue
+
                 # parse header for the fist log file
                 if i == 0 and not start_flag:
                     if line.startswith("Created Time"):
                         timestamp = line.split(":")[1].strip()
                     elif line.startswith("TTool Zenodo Version"):
-                        ttool_zenodo_version_url = line.split(":")[1].strip()
+                        ttool_zenodo_version_url = "".join(line.split(":")[1:]).strip()
 
                 # start flag
                 if "[Init]" in line:

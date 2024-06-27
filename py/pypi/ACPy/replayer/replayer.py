@@ -15,10 +15,98 @@ class Replayer:
 
         # load tool mesh
         self.ttool_models = ttool_mesh_loader.load(ttool_download_path, self.log_data.ttool_zenodo_version_url)
+        print(self.ttool_models.keys())
 
         # camera model
         self.camera_model = camera_model.get_brep()
 
+    def get_scene_at_frame(self, frame_index: int):
+        """
+        Export the 3D model with the transformation at the given frame index.
+        """
+        if frame_index < 0 or frame_index >= self.log_data.frame_count:
+            raise ValueError("The frame index is out of range.")
+        
+        # get the pose data at the given frame index
+        # print(self.log_data.all_event_data["ACIM-transform"].frameIDs)
+
+        acim_transform = self._transform_matrix_to_gh_transform(self.log_data.all_event_data["ACIM-transform"].get(frame_index))
+        slam_transform = self._transform_matrix_to_gh_transform(self.log_data.all_event_data["SLAM"].get(frame_index))
+        
+        ttool_head = self.log_data.all_event_data["TTool-head"].get(frame_index)
+        ttool_status, ttool_transformation = self.log_data.all_event_data["TTool-pose"].get(frame_index)
+        ttool_transformation = self._transform_matrix_to_gh_transform(ttool_transformation)
+
+        # get the component status at the given frame index
+        acim_activate_component = self.log_data.all_event_data["ACIM-activate-component"].get(frame_index)
+        acim_component_status = self.log_data.all_event_data["ACIM-component-status"].get(frame_index)
+
+        # get the 3d models and transform them
+        camera_brep = self.camera_model.Duplicate()
+        camera_brep.Transform(slam_transform)
+
+        tool_mesh = Rhino.Geometry.Mesh()
+        tool_mesh.CopyFrom(self.ttool_models[ttool_head])
+        tool_mesh.Transform(ttool_transformation)
+
+        acim_bbox = self.acim_data.bbox.Duplicate()
+        acim_bbox.Transform(acim_transform)
+        
+        acim_activated_component = []
+        acim_done_component = []
+        acim_not_done_component = []
+
+        all_components = list(self.acim_data.cuts.items()) + list(self.acim_data.holes.items())
+        for name, brep in all_components:
+            brep = brep.Duplicate()
+            brep.Transform(acim_transform)
+
+            if name == acim_activate_component:
+                acim_activated_component.append(brep)
+            
+            elif acim_component_status[name] == "done":
+                acim_done_component.append(brep)
+            
+            else:
+                acim_not_done_component.append(brep)
+
+        # set the scene
+        scene = {}
+        scene["camera_brep"] = camera_brep
+        scene["tool_mesh"] = tool_mesh
+        scene["acim_bbox"] = acim_bbox
+        scene["acim_activated_component"] = acim_activated_component
+        scene["acim_done_component"] = acim_done_component
+        scene["acim_not_done_component"] = acim_not_done_component
+
+        return scene
+    
+
+    def _transform_matrix_to_gh_transform(self, matrix):
+        """
+        Convert a 4x4 matrix to a Grasshopper Transform object.
+        """
+
+        transformation = Rhino.Geometry.Transform()
+        transformation.M00 = matrix[0][0]
+        transformation.M01 = matrix[0][1]
+        transformation.M02 = matrix[0][2]
+        transformation.M03 = matrix[0][3]
+        transformation.M10 = matrix[1][0]
+        transformation.M11 = matrix[1][1]
+        transformation.M12 = matrix[1][2]
+        transformation.M13 = matrix[1][3]
+        transformation.M20 = matrix[2][0]
+        transformation.M21 = matrix[2][1]
+        transformation.M22 = matrix[2][2]
+        transformation.M23 = matrix[2][3]
+        transformation.M30 = matrix[3][0]
+        transformation.M31 = matrix[3][1]
+        transformation.M32 = matrix[3][2]
+        transformation.M33 = matrix[3][3]
+
+        return transformation
+    
 
 if __name__ == "__main__":
     replayer = Replayer()
@@ -29,3 +117,12 @@ if __name__ == "__main__":
     all_holes = [x[1] for x in replayer.acim_data.holes.items()]
 
     camera = replayer.camera_model
+
+    frame_count = replayer.log_data.frame_count
+
+    scene = replayer.get_scene_at_frame(100)
+    tool_mesh = scene["tool_mesh"]
+    camera_brep = scene["camera_brep"]
+    acim_breps = scene["acim_activated_component"] + scene["acim_done_component"] + scene["acim_not_done_component"]
+
+    
