@@ -41,8 +41,8 @@
         ],
         "outputParameters": [
             {
-                "name": "o_camera_brep",
-                "nickname": "o_camera_brep",
+                "name": "o_camera_model",
+                "nickname": "o_camera_model",
                 "description": "Transformed camera brep.",
                 "optional": false,
                 "sourceCount": 0

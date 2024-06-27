@@ -19,6 +19,9 @@ class Replayer:
         # camera model
         self.camera_model = camera_model.get_brep()
 
+    def set_camera_model(self, camera_model):
+        self.camera_model = camera_model
+
     def generate_scene_at_frame(self, frame_index: int):
         """
         Export the 3D model with the transformation at the given frame index.
@@ -38,8 +41,8 @@ class Replayer:
         acim_component_status = self.log_data.all_event_data["ACIM-component-status"].get(frame_index)
 
         # copy the 3d models and transform them
-        camera_brep = self.camera_model.Duplicate()
-        camera_brep.Transform(slam_transform)
+        camera_model = self.camera_model.Duplicate()
+        camera_model.Transform(slam_transform)
 
         tool_mesh = Rhino.Geometry.Mesh()
         tool_mesh.CopyFrom(self.ttool_models[ttool_head])
@@ -68,7 +71,7 @@ class Replayer:
 
         # save the model to the scene
         scene = {}
-        scene["camera_brep"] = camera_brep
+        scene["camera_model"] = camera_model
         scene["tool_mesh"] = tool_mesh
         scene["acim_bbox"] = acim_bbox
         scene["acim_activated_component"] = acim_activated_component
@@ -117,5 +120,5 @@ if __name__ == "__main__":
 
     scene = replayer.generate_scene_at_frame(100)
     tool_mesh = scene["tool_mesh"]
-    camera_brep = scene["camera_brep"]
+    camera_model = scene["camera_model"]
     acim_breps = [scene["acim_bbox"]] + scene["acim_activated_component"] + scene["acim_done_component"] + scene["acim_not_done_component"]

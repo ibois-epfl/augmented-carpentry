@@ -1,0 +1,87 @@
+{
+    "name": "acpy - replayer scene generator",
+    "nickname": "acpy-replayer-scene-generator",
+    "category": "acpy",
+    "subcategory": "replayer",
+    "description": "Generate scene at the given frame id.",
+    "exposure": 4,
+    "instanceGuid": "9c838817-2335-47fe-ad2b-22b80f76fbfd",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_log_root_path",
+                "nickname": "i_log_root_path",
+                "description": "The root path where the log files are stored.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_exp_id",
+                "nickname": "i_exp_id",
+                "description": "The experiment id.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_ttool_download_path",
+                "nickname": "i_ttool_download_path",
+                "description": "The directory where the TTool models are downloaded.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_camera_model",
+                "nickname": "i_camera_model",
+                "description": "Custom camera brep. If not provided, the default camera will be used. The camera brep should facing the positive z-axis.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "GeometryBase",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "o_replayer",
+                "nickname": "o_replayer",
+                "description": "The initialized replayer object.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_frame_count",
+                "nickname": "o_frame_count",
+                "description": "The total number of frames of the loaded log.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}
