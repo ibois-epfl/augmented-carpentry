@@ -15,21 +15,18 @@ class Replayer:
 
         # load tool mesh
         self.ttool_models = ttool_mesh_loader.load(ttool_download_path, self.log_data.ttool_zenodo_version_url)
-        print(self.ttool_models.keys())
 
         # camera model
         self.camera_model = camera_model.get_brep()
 
-    def get_scene_at_frame(self, frame_index: int):
+    def generate_scene_at_frame(self, frame_index: int):
         """
         Export the 3D model with the transformation at the given frame index.
         """
         if frame_index < 0 or frame_index >= self.log_data.frame_count:
             raise ValueError("The frame index is out of range.")
         
-        # get the pose data at the given frame index
-        # print(self.log_data.all_event_data["ACIM-transform"].frameIDs)
-
+        # get the data at the given frame index
         acim_transform = self._transform_matrix_to_gh_transform(self.log_data.all_event_data["ACIM-transform"].get(frame_index))
         slam_transform = self._transform_matrix_to_gh_transform(self.log_data.all_event_data["SLAM"].get(frame_index))
         
@@ -37,11 +34,10 @@ class Replayer:
         ttool_status, ttool_transformation = self.log_data.all_event_data["TTool-pose"].get(frame_index)
         ttool_transformation = self._transform_matrix_to_gh_transform(ttool_transformation)
 
-        # get the component status at the given frame index
         acim_activate_component = self.log_data.all_event_data["ACIM-activate-component"].get(frame_index)
         acim_component_status = self.log_data.all_event_data["ACIM-component-status"].get(frame_index)
 
-        # get the 3d models and transform them
+        # copy the 3d models and transform them
         camera_brep = self.camera_model.Duplicate()
         camera_brep.Transform(slam_transform)
 
@@ -64,13 +60,13 @@ class Replayer:
             if name == acim_activate_component:
                 acim_activated_component.append(brep)
             
-            elif acim_component_status[name] == "done":
+            elif acim_component_status[name] == "Done":
                 acim_done_component.append(brep)
             
             else:
                 acim_not_done_component.append(brep)
 
-        # set the scene
+        # save the model to the scene
         scene = {}
         scene["camera_brep"] = camera_brep
         scene["tool_mesh"] = tool_mesh
@@ -112,17 +108,14 @@ if __name__ == "__main__":
     replayer = Replayer()
     replayer.load(log_root_path, exp_id, ttool_download_path)
 
+    camera = replayer.camera_model
     bbox = replayer.acim_data.bbox
     all_cuts = [x[1] for x in replayer.acim_data.cuts.items()]
     all_holes = [x[1] for x in replayer.acim_data.holes.items()]
 
-    camera = replayer.camera_model
-
     frame_count = replayer.log_data.frame_count
 
-    scene = replayer.get_scene_at_frame(100)
+    scene = replayer.generate_scene_at_frame(100)
     tool_mesh = scene["tool_mesh"]
     camera_brep = scene["camera_brep"]
-    acim_breps = scene["acim_activated_component"] + scene["acim_done_component"] + scene["acim_not_done_component"]
-
-    
+    acim_breps = [scene["acim_bbox"]] + scene["acim_activated_component"] + scene["acim_done_component"] + scene["acim_not_done_component"]
