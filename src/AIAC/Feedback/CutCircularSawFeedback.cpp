@@ -86,15 +86,18 @@ namespace AIAC
 
     CutCircularSawFeedbackVisualizer::CutCircularSawFeedbackVisualizer()
     {
+
         // m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
         // m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         // m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         // m_ProjLineOnFaceThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
+        m_BladeCircle = GOCircle::Add(GOPoint(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), 0.f);
         m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));  // FIXME: this one might disappear
         // m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
 
         // m_ProjLineOnFace->SetWeight(GOWeight::Light);
         // m_ProjLineOnFaceThickness->SetWeight(GOWeight::Light);
+        m_BladeCircle->SetWeight(GOWeight::Light);
 
         // m_BottomPoint->SetColor(GOColor::YELLOW);
         // m_LineToBottomPt->SetColor(GOColor::YELLOW);
@@ -102,6 +105,9 @@ namespace AIAC
         // m_ProjLineOnFaceThickness->SetColor(GOColor::RED);
         m_ProjLineOfBlade->SetColor(GOColor::CYAN);
         // m_TxtBottomDist->SetColor(GOColor::BLACK);
+        m_BladeCircle->SetColor(GOColor::RED);
+
+        m_BladeCircle->SetVisibility(false);
 
         // m_TxtBottomDist->SetTextSize(GOTextSize::BitSmall);
 
@@ -110,6 +116,7 @@ namespace AIAC
         // m_AllPrimitives.push_back(m_ProjLineOnFace);
         // m_AllPrimitives.push_back(m_ProjLineOnFaceThickness);
         m_AllPrimitives.push_back(m_ProjLineOfBlade);
+        // m_AllPrimitives.push_back(m_BladeCircle);
         // m_AllPrimitives.push_back(m_TxtBottomDist);
 
         Deactivate();
@@ -223,8 +230,15 @@ namespace AIAC
             {
                 minDist = distAbs;
                 m_NearestNeighbourFaceIDToParallelFace = faceID;
+                AIAC_INFO("Nearest neighbour face to the parallel face: " + faceID);
             }
-        } 
+            else if (distAbs < minDist)
+            {
+                minDist = distAbs;
+                m_SecondNearestNeighbourFaceIDToParallelFace = faceID;
+                AIAC_INFO("Second nearest neighbour face to the parallel face: " + faceID);
+            }
+        }
     }
 
     void CutCircularSawFeedback::UpdateFeedback() {
@@ -247,27 +261,10 @@ namespace AIAC
 
     void CutCircularSawFeedback::UpdateGeneralFeedback()
     {
-        // auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
-        // auto prepPlnCenter = prepFaceInfo.GetCenter();
-        // auto perpPlnNormal = prepFaceInfo.GetNormal();
-        // glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
-        // glm::vec3 _ptPlaceHolder;
-        // GetIntersectLineOf2Planes(
-        //     m_Normal, m_Center,
-        //     perpFaceOfBladeVec, m_Center,
-        //     m_DownVec, _ptPlaceHolder
-        // );
-
-        // if(glm::distance(m_Center + m_DownVec * m_Radius, prepFaceInfo.GetCenter()) >
-        //    glm::distance(m_Center - m_DownVec * m_Radius, prepFaceInfo.GetCenter())){
-        //     m_DownVec = -m_DownVec;
-        // }
-
-        // // get the bottom point and update
-        // m_BottomPoint = m_Center + m_DownVec * m_Radius;
-        // m_GeneralVisualizer.m_BottomPoint->SetPosition(m_BottomPoint);
-        // m_GeneralVisualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
-
+        // FIXME: testing circle distance
+        this->m_GeneralVisualizer.m_BladeCircle->SetCenter(m_Center);
+        this->m_GeneralVisualizer.m_BladeCircle->SetNormal(m_Normal);
+        this->m_GeneralVisualizer.m_BladeCircle->SetRadius(m_Radius);
         // // side point of the blade
         // auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
         // auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
@@ -574,6 +571,7 @@ namespace AIAC
                 faceCenter,
                 this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera
             );
+
             // get the closest one
             float distTowards = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera, projBladeCenterTowards2Face));
             float distAway = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera, projBladeCenterAway2Face));
@@ -598,9 +596,9 @@ namespace AIAC
                 centerBladeProjOnFace);
 
             ////////////////////////////
+            // FIXME: the anchor of the widget should be more stable
             // set the visuals and print the distance feed
             // move the center down of half the radius
-            // FIXME: the indication should not use the nearest perpendicular Face!
             auto prepFaceInfo = m_Cut->GetFace(this->m_NearestPerpendicularFaceID);
             auto prepPlnCenter = prepFaceInfo.GetCenter();
             auto perpPlnNormal = prepFaceInfo.GetNormal();
@@ -654,58 +652,23 @@ namespace AIAC
     {
         if (!this->m_NearestParallelFaceID.empty() && !m_Cut->IsSingleFace() && !this->m_NearestPerpendicularFaceID.empty())
         {
+            // get the nearest neighbour face to the parallel face
             auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
             auto prepPlnCenter = prepFaceInfo.GetCenter();
             auto perpPlnNormal = prepFaceInfo.GetNormal();
-            // glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
-            // glm::vec3 _ptPlaceHolder;
-            // GetIntersectLineOf2Planes(
-            //     m_Normal, m_Center,
-            //     perpFaceOfBladeVec, m_Center,
-            //     m_DownVec, _ptPlaceHolder
-            // );
 
-            // if(glm::distance(m_Center + m_DownVec * m_Radius, prepFaceInfo.GetCenter()) >
-            // glm::distance(m_Center - m_DownVec * m_Radius, prepFaceInfo.GetCenter())){
-            //     m_DownVec = -m_DownVec;
-            // }
-
-            // // get the bottom point and update
-            // m_BottomPoint = m_Center + m_DownVec * m_Radius;
-            // m_GeneralVisualizer.m_BottomPoint->SetPosition(m_BottomPoint);
-            // m_GeneralVisualizer.m_LineToBottomPt->SetPts(m_Center, m_BottomPoint);
-
-            // // side point of the blade
-            // auto sidePt1 = m_Center + perpFaceOfBladeVec * m_Radius;
-            // auto sidePt2 = m_Center - perpFaceOfBladeVec * m_Radius;
-            // glm::vec3 projSidePt1, projSidePt2;
-            // GetIntersectPointOfLineAndPlane(m_DownVec, sidePt1, perpPlnNormal, prepPlnCenter, projSidePt1);
-            // GetIntersectPointOfLineAndPlane(m_DownVec, sidePt2, perpPlnNormal, prepPlnCenter, projSidePt2);
-            
-            // m_GeneralVisualizer.m_ProjLineOfBlade->SetPts(projSidePt1, projSidePt2);
-
-            // FIXME: this might be adapted for in-depth cuts
-
-            // distance to the bottom face
+            // distance to blade center to nearest neighbour face
             auto projBladeCenter = GetProjectionPointOnPlane(
                 perpPlnNormal,
                 prepPlnCenter,
                 m_Center);
-
-
-
             this->m_DepthVisualizer.m_TxtDepth->SetAnchor(projBladeCenter);
-
-
 
             // calculate distance
             auto distDepthAbs = glm::abs(glm::abs(glm::distance(projBladeCenter, m_Center)) - m_Radius);
             auto distDepth = glm::distance(projBladeCenter, m_Center) - m_Radius;
 
-            // get the sign of the distance
-            
             // visualization
-
             this->m_DepthVisualizer.m_LineDepth->SetPts(m_Center, projBladeCenter);
 
             this->m_DepthVisualizer.m_TxtDepth->SetText("d:" + FeedbackVisualizer::toString(distDepth));
@@ -715,23 +678,6 @@ namespace AIAC
                 this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::YELLOW);
             else
                 this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::GREEN);
-            // if(IsPointBetweenLineSeg(m_BottomPoint, m_Center, projBtmPt))
-            // {
-            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
-            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::BLACK);
-            // }
-            // else if (-1.f < glm::distance(m_BottomPoint, projBtmPt) < 1.f)
-            // {
-            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
-            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::GREEN);
-            // }
-            // else
-            // {
-            //     dist = -dist;
-            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
-            //     m_GeneralVisualizer.m_TxtBottomDist->SetColor(GOColor::RED);
-            // }
-
         }
         else
         {

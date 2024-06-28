@@ -293,6 +293,14 @@ namespace AIAC
 
         virtual ~GOCircle() = default;
 
+        /**
+         * @brief Compute the closest point on the circle to a given line
+         * 
+         * @param std::shared_ptr<GOLine> ptrLine the line
+         * @return std::vector<std::shared_ptr<GO::Point>> the closest point on the circle and the point on the line
+         */
+        std::vector<std::shared_ptr<GOPoint>> ClosestPointToLine(std::shared_ptr<GOLine> ptrLine);
+
         static std::shared_ptr<GOCircle> Get(const uint32_t& id);
         static std::vector<std::shared_ptr<GOCircle>> GetAll();
 
