@@ -215,7 +215,7 @@ namespace AIAC
             }
         }
 
-        // get the closest neighbour face to the highlightesd face and to the blade's center
+        // get the closestfirst and second neighbour face to the highlightesd face and to the blade's center
         std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces = 
             this->m_Cut->GetHighlightedFaceNeighbors();
         float minDist = std::numeric_limits<float>::max();
@@ -232,9 +232,6 @@ namespace AIAC
                 m_NearestNeighbourFaceIDToParallelFace = faceID;
             }
         }
-
-        // FIXME: the second and maybe first face is not working properly
-        // get the second closest neighbour face to the highlighted face and to the blade's center
         minDist = std::numeric_limits<float>::max();
         for (auto const& [faceID, faceInfo] : neighbouringFaces)
         {
@@ -472,10 +469,9 @@ namespace AIAC
             return;
         }
 
-        AIAC::TimberInfo::Cut::Face faceNeighbour1 = neighbouringFaces.begin()->second;
+        AIAC::TimberInfo::Cut::Face faceNeighbour1 = this->m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
         if (neighbouringFaces.size() == 1)
         {
-            // faceNeighbour1 = this->m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
             bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
                 this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
             bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
@@ -486,8 +482,7 @@ namespace AIAC
         }
         else if (neighbouringFaces.size() == 2)
         {
-            AIAC::TimberInfo::Cut::Face faceNeighbour2 = (++neighbouringFaces.begin())->second;
-            // auto faceNeighbour2 = this->m_Cut->GetFace(this->m_SecondNearestNeighbourFaceIDToParallelFace);
+            AIAC::TimberInfo::Cut::Face faceNeighbour2 = this->m_Cut->GetFace(this->m_SecondNearestNeighbourFaceIDToParallelFace);
             bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
                 this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
             bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
