@@ -91,7 +91,7 @@ namespace AIAC
         CutCircularSawFeedbackVisualizer();
 
     private:
-        std::shared_ptr<GOCircle> m_BladeCircle;
+        // std::shared_ptr<GOCircle> m_BladeCircle;
         // std::shared_ptr<GOPoint> m_BottomPoint;
         // std::shared_ptr<GOLine> m_LineToBottomPt;
         // std::shared_ptr<GOLine> m_ProjLineOnFace;
@@ -174,7 +174,7 @@ namespace AIAC
 
 
         // config
-        bool m_ToShowCutPlane = true;
+        bool m_ToShowCutPlane = false;
 
     private:
         void UpdateToolPosition();
