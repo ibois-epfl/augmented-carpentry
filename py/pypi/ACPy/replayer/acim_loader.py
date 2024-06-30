@@ -71,7 +71,7 @@ def _parseCut(cutNode):
             corners.append(_parsePosition(corner.text))
 
         boundary = Rhino.Geometry.Polyline(corners + [corners[0]])
-        face = ghcomp.BoundarySurfaces(boundary)
+        face = ghcomp.FragmentPatch(boundary)
         faces.append(face)
 
     cutBrep = Rhino.Geometry.Brep.MergeBreps(faces, tolerance)
