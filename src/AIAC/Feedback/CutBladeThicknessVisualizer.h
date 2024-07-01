@@ -46,7 +46,7 @@ namespace AIAC
 
     public:
         ///< @brief if the segment of the detected blade is visible
-        bool IsSegmenDetectToolPlaneVisible = true;
+        bool IsSegmenDetectToolPlaneVisible = false;
 
     protected:
         ///< @brief the segment where the blade is detected by the toolhead

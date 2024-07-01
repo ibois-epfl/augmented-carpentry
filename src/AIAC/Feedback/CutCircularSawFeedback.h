@@ -85,24 +85,6 @@ namespace AIAC
         friend class CutCircularSawFeedback;
     };
 
-    class CutCircularSawFeedbackVisualizer : public FeedbackVisualizer
-    {
-    public:
-        CutCircularSawFeedbackVisualizer();
-
-    private:
-        // std::shared_ptr<GOCircle> m_BladeCircle;
-        // std::shared_ptr<GOPoint> m_BottomPoint;
-        // std::shared_ptr<GOLine> m_LineToBottomPt;
-        // std::shared_ptr<GOLine> m_ProjLineOnFace;
-        // std::shared_ptr<GOLine> m_ProjLineOnFaceThickness;
-        std::shared_ptr<GOLine> m_ProjLineOfBlade;
-        // std::shared_ptr<GOText> m_TxtBottomDist;
-
-
-    friend class CutCircularSawFeedback;
-    };
-
     class CircularSawCutPlaneVisualizer : public CutPlaneVisualizer
     {
     public:
@@ -174,7 +156,7 @@ namespace AIAC
         std::string m_SecondNearestNeighbourFaceIDToParallelFace;
 
         // config
-        bool m_ToShowCutPlane = true;  // TODO: go back to false
+        bool m_ToShowCutPlane = false;
 
     private:
         void UpdateToolPosition();
@@ -187,13 +169,12 @@ namespace AIAC
         * is calculated based on the perpendicular face.
         * 
         */
-        void UpdateGeneralFeedback();
+        void UpdateOrientationFeedback();
         void UpdateCutPlaneFeedback();
         void UpdateThicknessFeedback();
         void UpdateStartPosFeedback();
         void UpdateDepthFeedback();
 
-        CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
         CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
         CutCircularOrientationVisualizer m_OrientationVisualizer;
         CutCircularSawPositionStartVisualizer m_PositionStartVisualizer;
@@ -201,6 +182,4 @@ namespace AIAC
         CutCircularSawDepthVisualizer m_DepthVisualizer;
     };
 }
-
-
 #endif //AC_CUTCIRCULARSAWFEEDBACK_H
