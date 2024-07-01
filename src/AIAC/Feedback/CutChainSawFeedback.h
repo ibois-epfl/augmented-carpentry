@@ -134,7 +134,6 @@ namespace AIAC
 
             bool m_ToShowCutPlane = false;
 
-
         private:
             CutChainSawFeedVisualizer m_Visualizer;
             ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;

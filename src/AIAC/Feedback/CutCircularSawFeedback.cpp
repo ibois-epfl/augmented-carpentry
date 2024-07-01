@@ -84,50 +84,11 @@ namespace AIAC
         Deactivate();
     }
 
-    CutCircularSawFeedbackVisualizer::CutCircularSawFeedbackVisualizer()
-    {
-
-        // m_BottomPoint = GOPoint::Add(GOPoint(0.f, 0.f, 0.f), 5.0f);
-        // m_LineToBottomPt = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        // m_ProjLineOnFace = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        // m_ProjLineOnFaceThickness = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
-        // m_BladeCircle = GOCircle::Add(GOPoint(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), 0.f);
-        m_ProjLineOfBlade = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));  // FIXME: this one might disappear
-        // m_TxtBottomDist = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
-
-        // m_ProjLineOnFace->SetWeight(GOWeight::Light);
-        // m_ProjLineOnFaceThickness->SetWeight(GOWeight::Light);
-        // m_BladeCircle->SetWeight(GOWeight::Light);
-
-        // m_BottomPoint->SetColor(GOColor::YELLOW);
-        // m_LineToBottomPt->SetColor(GOColor::YELLOW);
-        // m_ProjLineOnFace->SetColor(GOColor::RED);
-        // m_ProjLineOnFaceThickness->SetColor(GOColor::RED);
-        m_ProjLineOfBlade->SetColor(GOColor::CYAN);
-        // m_TxtBottomDist->SetColor(GOColor::BLACK);
-        // m_BladeCircle->SetColor(GOColor::RED);
-
-        // m_BladeCircle->SetVisibility(false);
-
-        // m_TxtBottomDist->SetTextSize(GOTextSize::BitSmall);
-
-        // m_AllPrimitives.push_back(m_BottomPoint);
-        // m_AllPrimitives.push_back(m_LineToBottomPt);
-        // m_AllPrimitives.push_back(m_ProjLineOnFace);
-        // m_AllPrimitives.push_back(m_ProjLineOnFaceThickness);
-        m_AllPrimitives.push_back(m_ProjLineOfBlade);
-        // m_AllPrimitives.push_back(m_BladeCircle);
-        // m_AllPrimitives.push_back(m_TxtBottomDist);
-
-        Deactivate();
-    }
-
     void CutCircularSawFeedback::Update() {
         m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
 
         if(m_Cut->IsSingleFace()) {
             this->EnableCutPlane(true);
-            m_GeneralVisualizer.Deactivate();
         }
 
         UpdateToolPosition();
@@ -136,7 +97,6 @@ namespace AIAC
     }
 
     void CutCircularSawFeedback::Activate() {
-        m_GeneralVisualizer.Activate();
         m_OrientationVisualizer.Activate();
         m_PositionStartVisualizer.Activate();
         m_ThicknessVisualizer.Activate();
@@ -145,7 +105,6 @@ namespace AIAC
     }
 
     void CutCircularSawFeedback::Deactivate() {
-        m_GeneralVisualizer.Deactivate();
         m_CutPlaneVisualizer.Deactivate();
         m_OrientationVisualizer.Deactivate();
         m_PositionStartVisualizer.Deactivate();
@@ -250,39 +209,26 @@ namespace AIAC
     }
 
     void CutCircularSawFeedback::UpdateFeedback() {
-        if(!m_NearestPerpendicularFaceID.empty()){
-            m_GeneralVisualizer.Activate();
-            UpdateGeneralFeedback();
-        }
-        if(m_ToShowCutPlane) {
-            m_CutPlaneVisualizer.Activate();
+        if(this->m_ToShowCutPlane || this->m_Cut->IsSingleFace())
+        {
+            this->m_CutPlaneVisualizer.Activate();
             UpdateCutPlaneFeedback();
         }
         else
-            m_CutPlaneVisualizer.Deactivate();
-            
-        if(m_Cut->IsSingleFace()) {
-            m_GeneralVisualizer.Deactivate();
-        }
+            this->m_CutPlaneVisualizer.Deactivate();
 
-        UpdateThicknessFeedback();
-        UpdateStartPosFeedback();
-        UpdateDepthFeedback();
+        this->UpdateOrientationFeedback();
+        this->UpdateThicknessFeedback();
+        this->UpdateStartPosFeedback();
+        this->UpdateDepthFeedback();
     }
 
-    void CutCircularSawFeedback::UpdateGeneralFeedback()
+    // TODO: this one shopuld be opne independent FeedbackVisualizer inherited composite object
+    void CutCircularSawFeedback::UpdateOrientationFeedback()
     {
-        // // TODO: testing circle distance (test on hold)
-        // this->m_GeneralVisualizer.m_BladeCircle->SetCenter(m_Center);
-        // this->m_GeneralVisualizer.m_BladeCircle->SetNormal(m_Normal);
-        // this->m_GeneralVisualizer.m_BladeCircle->SetRadius(m_Radius);
-        // // side point of the blade
         if (!this->m_NearestParallelFaceID.empty())
         {
-            //the following is the update for the orientation feedback
-            if (!m_Cut->IsSingleFace())
-                this->m_Cut->HighlightFace(m_NearestParallelFaceID);
-
+            this->m_Cut->HighlightFace(m_NearestParallelFaceID);
             auto faceInfo = m_Cut->GetFace(m_NearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
@@ -397,19 +343,28 @@ namespace AIAC
         TimberInfo::Cut* cut,
         TimberInfo::Cut::Face& face,
         bool isTowardsCamera,
+        bool isDetectToolPlane,
         std::shared_ptr<GOLine>& lineIntersection)
     {
         glm::vec3 centerBlade;
         glm::vec3 normalBlade;
-        if (isTowardsCamera)
+        if (!isDetectToolPlane)
         {
-            normalBlade = this->m_NormalUnitized;
-            centerBlade = this->m_DisplacedCenterTowardsCamera;
+            if (isTowardsCamera)
+            {
+                normalBlade = this->m_NormalUnitized;
+                centerBlade = this->m_DisplacedCenterTowardsCamera;
+            }
+            else
+            {
+                normalBlade = this->m_NormalOppositeUnitized;
+                centerBlade = this->m_DisplacedCenterAwayFromCamera;
+            }
         }
         else
         {
-            normalBlade = this->m_NormalOppositeUnitized;
-            centerBlade = this->m_DisplacedCenterAwayFromCamera;
+            normalBlade = this->m_NormalUnitized;
+            centerBlade = this->m_ToolheadRefCenter;
         }
         glm::vec3 downVecBlade;
         auto prepFaceACenter = face.GetCenter();
@@ -475,26 +430,34 @@ namespace AIAC
         AIAC::TimberInfo::Cut::Face faceNeighbour1 = this->m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
         if (neighbouringFaces.size() == 1)
         {
+            bool isfaceNeighbour1Intersected = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane);
             bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+                this->m_Cut, faceNeighbour1, true, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
             bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+                this->m_Cut, faceNeighbour1, false, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
 
+            if (this->m_ThicknessVisualizer.IsSegmenDetectToolPlaneVisible)
+                this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane->SetVisibility(isfaceNeighbour1Intersected);
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
         }
         else if (neighbouringFaces.size() == 2)
         {
             AIAC::TimberInfo::Cut::Face faceNeighbour2 = this->m_Cut->GetFace(this->m_SecondNearestNeighbourFaceIDToParallelFace);
+            bool isfaceNeighbour1Intersected = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane);
             bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+                this->m_Cut, faceNeighbour1, true, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
             bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+                this->m_Cut, faceNeighbour1, false, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
             bool isfaceNeighbour2IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour2, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB);
+                this->m_Cut, faceNeighbour2, true, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB);
             bool isfaceNeighbour2IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour2, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB);
+                this->m_Cut, faceNeighbour2, false, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB);
 
+            if (this->m_ThicknessVisualizer.IsSegmenDetectToolPlaneVisible)
+                this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane->SetVisibility(isfaceNeighbour1Intersected);
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB->SetVisibility((isfaceNeighbour2IntersectedOnce && isfaceNeighbour2IntersectedTwice));
@@ -519,35 +482,29 @@ namespace AIAC
             // closest displaced center of the blade (towards or away from the camera)
             glm::vec3 projBladeNorm;
             glm::vec3 centerBlade;
-
-            if (!this->m_Cut->IsSingleFace())
+            glm::vec3 projBladeCenterTowards2Face = GetProjectionPointOnPlane(
+                faceNormal,
+                faceCenter,
+                this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera
+            );
+            glm::vec3 projBladeCenterAway2Face = GetProjectionPointOnPlane(
+                faceNormal,
+                faceCenter,
+                this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera
+            );
+            // get the closest one
+            float distTowards = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera, projBladeCenterTowards2Face));
+            float distAway = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera, projBladeCenterAway2Face));
+            if (distTowards < distAway)
             {
-                glm::vec3 projBladeCenterTowards2Face = GetProjectionPointOnPlane(
-                    faceNormal,
-                    faceCenter,
-                    this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera
-                );
-                glm::vec3 projBladeCenterAway2Face = GetProjectionPointOnPlane(
-                    faceNormal,
-                    faceCenter,
-                    this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera
-                );
-
-                // get the closest one
-                float distTowards = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera, projBladeCenterTowards2Face));
-                float distAway = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera, projBladeCenterAway2Face));
-                if (distTowards < distAway)
-                {
-                    projBladeNorm = projBladeCenterTowards2Face;
-                    centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera;
-                }
-                else
-                {
-                    projBladeNorm = projBladeCenterAway2Face;
-                    centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera;
-                }
+                projBladeNorm = projBladeCenterTowards2Face;
+                centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera;
             }
-
+            else
+            {
+                projBladeNorm = projBladeCenterAway2Face;
+                centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera;
+            }
             // calculate the distance
             glm::vec3 centerBladeProjOnFace = GetProjectionPointOnPlane(
                 faceNormal,

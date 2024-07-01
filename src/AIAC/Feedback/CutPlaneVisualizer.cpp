@@ -92,7 +92,7 @@ namespace AIAC
             normStart = AC_FF_TOOL->GetData<ChainSawData>().NormStartGO->GetPosition();
             normEnd = AC_FF_TOOL->GetData<ChainSawData>().NormEndGO->GetPosition();
         } else if (currentToolType == ACToolHeadType::CIRCULARSAW) {
-            normStart = AC_FF_TOOL->GetData<CircularSawData>().NormStartGO->GetPosition();
+            normStart = AC_FF_TOOL->GetData<CircularSawData>().CenterGO->GetPosition();
             normEnd = AC_FF_TOOL->GetData<CircularSawData>().NormEndGO->GetPosition();
         }
 
@@ -113,8 +113,13 @@ namespace AIAC
         glm::vec3 displacementTowardsCameraVec = displacementTowardsCamera * normalVec;
         glm::vec3 displacementAwayFromCameraVec = displacementAwayFromCamera * oppositeNormalVec;
 
-        glm::vec3 facePtTowardsCamera = facePt + displacementTowardsCameraVec;
-        glm::vec3 facePtAwayFromCamera = facePt + displacementAwayFromCameraVec;
+        glm::vec3 normStartTC = normStart + displacementTowardsCameraVec;
+        glm::vec3 normStartAC = normStart + displacementAwayFromCameraVec;
+        glm::vec3 normEndTC = normEnd + displacementTowardsCameraVec;
+        glm::vec3 normEndAC = normEnd + displacementAwayFromCameraVec;
+
+        glm::vec3 normTC = glm::normalize(normEndTC - normStartTC);
+        glm::vec3 normAC = glm::normalize(normEndAC - normStartAC);
 
         std::vector<glm::vec3> intersectPtsTowardsCamera;
         std::vector<glm::vec3> intersectPtsAwayFromCamera;
@@ -126,11 +131,11 @@ namespace AIAC
                 intersectPts.push_back(intersectPt);
             }
             glm::vec3 intersectPtTC;
-            if(GetIntersectPointOfLineSegAndPlane(bbox[i], bbox[j], faceNorm, facePtTowardsCamera, intersectPtTC)){
+            if(GetIntersectPointOfLineSegAndPlane(bbox[i], bbox[j], normTC, normStartTC, intersectPtTC)){
                 intersectPtsTowardsCamera.push_back(intersectPtTC);
             }
             glm::vec3 intersectPtAC;
-            if(GetIntersectPointOfLineSegAndPlane(bbox[i], bbox[j], faceNorm, facePtAwayFromCamera, intersectPtAC)){
+            if(GetIntersectPointOfLineSegAndPlane(bbox[i], bbox[j], normAC, normStartAC, intersectPtAC)){
                 intersectPtsAwayFromCamera.push_back(intersectPtAC);
             }
         }
@@ -142,8 +147,8 @@ namespace AIAC
         }
 
         this->ReorderIntersectPoints(intersectPts, facePt);
-        this->ReorderIntersectPoints(intersectPtsTowardsCamera, facePtTowardsCamera);
-        this->ReorderIntersectPoints(intersectPtsAwayFromCamera, facePtAwayFromCamera);
+        this->ReorderIntersectPoints(intersectPtsTowardsCamera, normTC);
+        this->ReorderIntersectPoints(intersectPtsAwayFromCamera, normAC);
 
 
         // get the closest segment to the toolhead's face point
@@ -223,6 +228,9 @@ namespace AIAC
 
         m_LongestIntersectSegmentAppCenterA->ExtendBothEnds(2.f);
         m_LongestIntersectSegmentAppCenterB->ExtendBothEnds(2.f);
+
+        m_LongestIntersectSegmentAppCenterA->SetVisibility(false);
+        m_LongestIntersectSegmentAppCenterB->SetVisibility(false);
 
         return intersectPts;
     }

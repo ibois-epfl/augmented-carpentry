@@ -32,6 +32,7 @@ namespace AIAC
          * @param cut the TimberInfo::Cut object
          * @param face the face belonging to the cut to intersect with
          * @param isTowardsCamera the boolean to indicate if we intersect the blade's edge close to the camera
+         * @param isDetectToolPlane the intersection is for the reference toolhead's plane
          * @param lineIntersection the reference to the line intersection
          * 
          * @return bool true if the intersection is successful, false otherwise
@@ -40,9 +41,16 @@ namespace AIAC
             AIAC::TimberInfo::Cut* cut, 
             AIAC::TimberInfo::Cut::Face& face,
             bool isTowardsCamera,
+            bool isDetectToolPlane,
             std::shared_ptr<GOLine>& lineIntersection) = 0;
 
+    public:
+        ///< @brief if the segment of the detected blade is visible
+        bool IsSegmenDetectToolPlaneVisible = false;
+
     protected:
+        ///< @brief the segment where the blade is detected by the toolhead
+        std::shared_ptr<GOLine> m_LongestIntersectSegmenDetectToolPlane;
         ///< @brief the thickness of the blade towards the camera on first neighbour side
         std::shared_ptr<GOLine> m_LongestIntersectSegmentTowardsCameraA;
         ///< @brief the thickness of the blade towards the camera on second neighbour side
