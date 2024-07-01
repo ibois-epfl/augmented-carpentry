@@ -127,6 +127,7 @@ namespace AIAC
             TimberInfo::Cut* cut,
             TimberInfo::Cut::Face& face,
             bool isTowardsCamera,
+            bool isDetectToolPlane,
             std::shared_ptr<GOLine>& lineIntersection) override;
 
     friend class CutCircularSawFeedback;
@@ -172,9 +173,8 @@ namespace AIAC
         ///< @brief the second closest neighbour face to the highlighted face and to the blade
         std::string m_SecondNearestNeighbourFaceIDToParallelFace;
 
-
         // config
-        bool m_ToShowCutPlane = false;
+        bool m_ToShowCutPlane = true;  // TODO: go back to false
 
     private:
         void UpdateToolPosition();

@@ -260,7 +260,7 @@ namespace AIAC
         }
         else
             m_CutPlaneVisualizer.Deactivate();
-            
+
         if(m_Cut->IsSingleFace()) {
             m_GeneralVisualizer.Deactivate();
         }
@@ -397,19 +397,28 @@ namespace AIAC
         TimberInfo::Cut* cut,
         TimberInfo::Cut::Face& face,
         bool isTowardsCamera,
+        bool isDetectToolPlane,
         std::shared_ptr<GOLine>& lineIntersection)
     {
         glm::vec3 centerBlade;
         glm::vec3 normalBlade;
-        if (isTowardsCamera)
+        if (!isDetectToolPlane)
         {
-            normalBlade = this->m_NormalUnitized;
-            centerBlade = this->m_DisplacedCenterTowardsCamera;
+            if (isTowardsCamera)
+            {
+                normalBlade = this->m_NormalUnitized;
+                centerBlade = this->m_DisplacedCenterTowardsCamera;
+            }
+            else
+            {
+                normalBlade = this->m_NormalOppositeUnitized;
+                centerBlade = this->m_DisplacedCenterAwayFromCamera;
+            }
         }
         else
         {
-            normalBlade = this->m_NormalOppositeUnitized;
-            centerBlade = this->m_DisplacedCenterAwayFromCamera;
+            normalBlade = this->m_NormalUnitized;
+            centerBlade = this->m_ToolheadRefCenter;
         }
         glm::vec3 downVecBlade;
         auto prepFaceACenter = face.GetCenter();
@@ -475,26 +484,34 @@ namespace AIAC
         AIAC::TimberInfo::Cut::Face faceNeighbour1 = this->m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
         if (neighbouringFaces.size() == 1)
         {
+            bool isfaceNeighbour1Intersected = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane);
             bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+                this->m_Cut, faceNeighbour1, true, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
             bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+                this->m_Cut, faceNeighbour1, false, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
 
+            if (this->m_ThicknessVisualizer.IsSegmenDetectToolPlaneVisible)
+                this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane->SetVisibility(isfaceNeighbour1Intersected);
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
         }
         else if (neighbouringFaces.size() == 2)
         {
             AIAC::TimberInfo::Cut::Face faceNeighbour2 = this->m_Cut->GetFace(this->m_SecondNearestNeighbourFaceIDToParallelFace);
+            bool isfaceNeighbour1Intersected = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
+                this->m_Cut, faceNeighbour1, true, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane);
             bool isfaceNeighbour1IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
+                this->m_Cut, faceNeighbour1, true, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA);
             bool isfaceNeighbour1IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour1, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
+                this->m_Cut, faceNeighbour1, false, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA);
             bool isfaceNeighbour2IntersectedOnce = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour2, true, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB);
+                this->m_Cut, faceNeighbour2, true, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB);
             bool isfaceNeighbour2IntersectedTwice = this->m_ThicknessVisualizer.IntersectBladeWithNeighbours(
-                this->m_Cut, faceNeighbour2, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB);
+                this->m_Cut, faceNeighbour2, false, false, this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraB);
 
+            if (this->m_ThicknessVisualizer.IsSegmenDetectToolPlaneVisible)
+                this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane->SetVisibility(isfaceNeighbour1Intersected);
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentAwayFromCameraA->SetVisibility((isfaceNeighbour1IntersectedOnce && isfaceNeighbour1IntersectedTwice));
             this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraB->SetVisibility((isfaceNeighbour2IntersectedOnce && isfaceNeighbour2IntersectedTwice));
