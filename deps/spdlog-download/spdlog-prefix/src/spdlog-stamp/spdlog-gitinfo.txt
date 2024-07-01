@@ -1,0 +1,3 @@
+repository='https://github.com/ibois-epfl/spdlog.git'
+module=''
+tag='origin'

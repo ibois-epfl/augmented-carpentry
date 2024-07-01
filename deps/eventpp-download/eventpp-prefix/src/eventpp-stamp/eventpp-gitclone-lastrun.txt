@@ -1,0 +1,3 @@
+repository='https://www.github.com/ibois-epfl/eventpp.git'
+module=''
+tag='origin'
