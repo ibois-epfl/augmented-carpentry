@@ -132,7 +132,7 @@ namespace AIAC
             glm::vec3 m_ChainMid;
             glm::vec3 m_ChainEnd;
 
-            bool m_ToShowCutPlane = true;
+            bool m_ToShowCutPlane = false;
 
 
         private:

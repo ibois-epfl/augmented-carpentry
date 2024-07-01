@@ -258,6 +258,9 @@ namespace AIAC
             m_CutPlaneVisualizer.Activate();
             UpdateCutPlaneFeedback();
         }
+        else
+            m_CutPlaneVisualizer.Deactivate();
+            
         if(m_Cut->IsSingleFace()) {
             m_GeneralVisualizer.Deactivate();
         }
@@ -516,29 +519,33 @@ namespace AIAC
             // closest displaced center of the blade (towards or away from the camera)
             glm::vec3 projBladeNorm;
             glm::vec3 centerBlade;
-            glm::vec3 projBladeCenterTowards2Face = GetProjectionPointOnPlane(
-                faceNormal,
-                faceCenter,
-                this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera
-            );
-            glm::vec3 projBladeCenterAway2Face = GetProjectionPointOnPlane(
-                faceNormal,
-                faceCenter,
-                this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera
-            );
 
-            // get the closest one
-            float distTowards = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera, projBladeCenterTowards2Face));
-            float distAway = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera, projBladeCenterAway2Face));
-            if (distTowards < distAway)
+            if (!this->m_Cut->IsSingleFace())
             {
-                projBladeNorm = projBladeCenterTowards2Face;
-                centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera;
-            }
-            else
-            {
-                projBladeNorm = projBladeCenterAway2Face;
-                centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera;
+                glm::vec3 projBladeCenterTowards2Face = GetProjectionPointOnPlane(
+                    faceNormal,
+                    faceCenter,
+                    this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera
+                );
+                glm::vec3 projBladeCenterAway2Face = GetProjectionPointOnPlane(
+                    faceNormal,
+                    faceCenter,
+                    this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera
+                );
+
+                // get the closest one
+                float distTowards = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera, projBladeCenterTowards2Face));
+                float distAway = glm::abs(glm::distance(this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera, projBladeCenterAway2Face));
+                if (distTowards < distAway)
+                {
+                    projBladeNorm = projBladeCenterTowards2Face;
+                    centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterTowardsCamera;
+                }
+                else
+                {
+                    projBladeNorm = projBladeCenterAway2Face;
+                    centerBlade = this->m_ThicknessVisualizer.m_DisplacedCenterAwayFromCamera;
+                }
             }
 
             // calculate the distance
@@ -550,7 +557,9 @@ namespace AIAC
                 centerBlade,
                 centerBladeProjOnFace);
 
-            ////////////////////////////
+            ////////////////////////////////////////////////////////
+            // Visualization
+            ////////////////////////////////////////////////////////
             // FIXME: the anchor of the widget should be more stable
             // set the visuals and print the distance feed
             // move the center down of half the radius
