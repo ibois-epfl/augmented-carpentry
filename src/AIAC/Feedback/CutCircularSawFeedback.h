@@ -91,6 +91,7 @@ namespace AIAC
         CutCircularSawFeedbackVisualizer();
 
     private:
+        // std::shared_ptr<GOCircle> m_BladeCircle;
         // std::shared_ptr<GOPoint> m_BottomPoint;
         // std::shared_ptr<GOLine> m_LineToBottomPt;
         // std::shared_ptr<GOLine> m_ProjLineOnFace;
@@ -168,10 +169,12 @@ namespace AIAC
         std::string m_NearestPerpendicularFaceID;
         ///< @brief the closest neighbour face to the highlighted face and to the blade
         std::string m_NearestNeighbourFaceIDToParallelFace;
+        ///< @brief the second closest neighbour face to the highlighted face and to the blade
+        std::string m_SecondNearestNeighbourFaceIDToParallelFace;
 
 
         // config
-        bool m_ToShowCutPlane = true;
+        bool m_ToShowCutPlane = false;
 
     private:
         void UpdateToolPosition();
