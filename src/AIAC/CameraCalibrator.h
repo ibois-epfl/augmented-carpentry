@@ -39,8 +39,8 @@ namespace AIAC{
         float squareSize = 20.0f;                           // The size of a square in your defined unit (point, millimeter,etc).
         float aspectRatio = 0.0f;                           // The aspect ratio, can be 0 if no need
         bool writeExtrinsics = true;                        // Write extrinsic parameters
-        bool calibZeroTangentDist = true;                   // Assume zero tangential distortion
-        bool calibFixPrincipalPoint = true;                 // Fix the principal point at the center
+        bool calibZeroTangentDist = false;                  // Assume zero tangential distortion
+        bool calibFixPrincipalPoint = false;                // Fix the principal point at the center
         bool flipVertical = false;                          // Flip the captured images around the horizontal axis
         bool useFisheye = false;                            // use fisheye camera model for calibration
         bool fixDistortion = false;                         // fix K1 distortion coefficient
