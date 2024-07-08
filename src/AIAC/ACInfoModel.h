@@ -206,7 +206,21 @@ public:
         inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
         inline std::set<std::string>& GetAllNonExposedEdgeIDs() { return m_NonExposedEdgeIDs; }
         inline glm::vec3 GetCenter() const { return m_Center; }
+
         void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
+        inline std::string GetHighlightedFaceID() const { return m_HighlightedFaceID; }
+        inline TimberInfo::Cut::Face GetHighlightedFace() { return m_Faces[m_HighlightedFaceID]; }
+        
+        inline std::map<std::string, Face> GetFaceNeighbors(std::string faceID) {
+            std::map<std::string, Face> neighbors;
+            for(auto& neighborID : m_Faces[faceID].m_Neighbors){
+                neighbors[neighborID] = m_Faces[neighborID];
+            }
+            return neighbors;
+        }
+        inline std::map<std::string, Face> GetHighlightedFaceNeighbors() {
+            return GetFaceNeighbors(m_HighlightedFaceID);
+        }
     
     private:
         std::string m_HighlightedFaceID;

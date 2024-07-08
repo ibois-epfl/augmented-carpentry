@@ -452,6 +452,22 @@ namespace AIAC
 
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
+
+                // here we compute and add the neighbors
+                // compare the edges for each face and understand which faces are neighbors
+                for(auto& [faceID, face] : cutInfo.m_Faces){
+                    for(auto& [edgeID, edge] : cutInfo.m_Edges){
+                        if(face.m_Edges.find(edgeID) != face.m_Edges.end()){
+                            for(auto& [otherFaceID, otherFace] : cutInfo.m_Faces){
+                                if(faceID == otherFaceID) continue;
+                                if(otherFace.m_Edges.find(edgeID) != otherFace.m_Edges.end()){
+                                    face.m_Neighbors.insert(otherFaceID);
+                                }
+                            }
+                        }
+                    }
+                }
+
                 m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
                 m_TimberInfo.m_Components[cutInfo.m_ID] = &m_TimberInfo.m_Cuts[cutInfo.m_ID];
             }
@@ -462,7 +478,8 @@ namespace AIAC
         }
         
         UpdateBboxGOLine();
-        m_TimberInfo.HideAllComponentsExceptCurrent();
+        // m_TimberInfo.HideAllComponentsExceptCurrent();
+        m_TimberInfo.IsShowingAllComponents = true;
 
         return true;
     }
@@ -577,6 +594,7 @@ namespace AIAC
             for(auto& objs : cutInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
+
             // Face
             for(auto& kv : cutInfo.m_Faces){
                 auto& faceInfo = kv.second;
@@ -600,7 +618,6 @@ namespace AIAC
                 }
             }
         }
-
     }
 
     float ACInfoModel::GetLength(){

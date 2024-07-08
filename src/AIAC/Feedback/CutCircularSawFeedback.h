@@ -9,11 +9,29 @@
 #include "AIAC/ACInfoModel.h"
 #include "FeedbackVisualizer.h"
 #include "CutPlaneVisualizer.h"
+#include "CutBladeThicknessVisualizer.h"
 #include "FabFeedback.h"
 #include "utils/GeometryUtils.h"
 
 namespace AIAC
 {
+    /**
+     * @brief Visualizer for showing the depth of the cut.
+     * 
+     */
+    class CutCircularSawDepthVisualizer : public FeedbackVisualizer
+    {
+    public:
+        CutCircularSawDepthVisualizer();
+
+    private:
+        std::shared_ptr<GOLine> m_LineDepth;
+        std::shared_ptr<GOText> m_TxtDepth;
+        float m_ToleranceDepthThreshold = 2.f;
+
+    friend class CutCircularSawFeedback;
+    };
+    
     /**
      * @brief This visualizer gives guidance on the start position of the lateral cuts for the circular saw.
     */
@@ -25,6 +43,10 @@ namespace AIAC
         private:
             std::shared_ptr<GOLine> m_LineDistStart;
             std::shared_ptr<GOText> m_TxtDistStart;
+            std::shared_ptr<GOLine> m_LineToBottomPt;
+
+        public:
+            float ToleranceStartThreshold = 0.2f;
 
         friend class CutCircularSawFeedback;
     };
@@ -63,27 +85,32 @@ namespace AIAC
         friend class CutCircularSawFeedback;
     };
 
-    class CutCircularSawFeedbackVisualizer : public FeedbackVisualizer
-    {
-    public:
-        CutCircularSawFeedbackVisualizer();
-
-    private:
-        std::shared_ptr<GOPoint> m_BottomPoint;
-        std::shared_ptr<GOLine> m_LineToBottomPt;
-        std::shared_ptr<GOLine> m_ProjLineOnFace;
-        std::shared_ptr<GOLine> m_ProjLineOnFaceThickness;
-        std::shared_ptr<GOLine> m_ProjLineOfBlade;
-
-        std::shared_ptr<GOText> m_TxtBottomDist;
-
-    friend class CutCircularSawFeedback;
-    };
-
     class CircularSawCutPlaneVisualizer : public CutPlaneVisualizer
     {
     public:
         CircularSawCutPlaneVisualizer() = default;
+
+    friend class CutCircularSawFeedback;
+    };
+
+    /**
+     * @brief This is an inherited class to show the thickness of the blade
+     * on circular saws.
+     * 
+     */
+    class CircularSawCutBladeThicknessVisualizer : public CutBladeThicknessVisualizer
+    {
+    public:
+        CircularSawCutBladeThicknessVisualizer() = default;
+
+    public:
+        void UpdateToolheadsData() override;
+        bool IntersectBladeWithNeighbours(
+            TimberInfo::Cut* cut,
+            TimberInfo::Cut::Face& face,
+            bool isTowardsCamera,
+            bool isDetectToolPlane,
+            std::shared_ptr<GOLine>& lineIntersection) override;
 
     friend class CutCircularSawFeedback;
     };
@@ -107,6 +134,7 @@ namespace AIAC
     private:
         // data
         TimberInfo::Cut* m_Cut;
+
         float m_Radius;
         glm::vec3 m_Center;
         glm::vec3 m_NormalStart;
@@ -117,12 +145,20 @@ namespace AIAC
         glm::vec3 m_DownVec;
         glm::vec3 m_BottomPoint;
 
+    private:  ///< @brief the important faces
+        ///< @brief the face that is going to be updated
         std::string m_NearestParallelFaceID;
+        ///< @brief the face that is perpendicular to the highlighted face
         std::string m_NearestPerpendicularFaceID;
+        ///< @brief the closest neighbour face to the highlighted face and to the blade
+        std::string m_NearestNeighbourFaceIDToParallelFace;
+        ///< @brief the second closest neighbour face to the highlighted face and to the blade
+        std::string m_SecondNearestNeighbourFaceIDToParallelFace;
 
         // config
-        bool m_ToShowCutPlane = true;
+        bool m_ToShowCutPlane = false;
 
+    private:
         void UpdateToolPosition();
         void UpdateRefFaces();
         void UpdateFeedback();
@@ -133,15 +169,17 @@ namespace AIAC
         * is calculated based on the perpendicular face.
         * 
         */
-        void updateGeneralFeedback();
-        void updateCutPlaneFeedback();
+        void UpdateOrientationFeedback();
+        void UpdateCutPlaneFeedback();
+        void UpdateThicknessFeedback();
+        void UpdateStartPosFeedback();
+        void UpdateDepthFeedback();
 
-        CutCircularSawFeedbackVisualizer m_GeneralVisualizer;
         CircularSawCutPlaneVisualizer m_CutPlaneVisualizer;
         CutCircularOrientationVisualizer m_OrientationVisualizer;
         CutCircularSawPositionStartVisualizer m_PositionStartVisualizer;
+        CircularSawCutBladeThicknessVisualizer m_ThicknessVisualizer;
+        CutCircularSawDepthVisualizer m_DepthVisualizer;
     };
 }
-
-
 #endif //AC_CUTCIRCULARSAWFEEDBACK_H
