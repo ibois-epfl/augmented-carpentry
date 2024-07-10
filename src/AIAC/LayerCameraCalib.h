@@ -29,7 +29,7 @@ namespace AIAC
         bool AutoCapture = true;
         bool JustCaptured = false;
         int Delay = 1500;
-        int NumOfFrame = 50;
+        int NumOfFrame = 100;
         std::string SaveFilename = "assets/tslam/calibration.yml";
 
     private:
