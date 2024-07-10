@@ -122,33 +122,111 @@ namespace AIAC
 
     void CutCircularSawFeedback::UpdateRefFaces()
     {
-        float nearestParallelFaceDist = 0.f;
+        float nearestParallelFaceDist = 0.1f * 50.f;
         std::string nearestParallelFaceID;
+        float nearestParallelFaceAngleDeg = 0.f;
+
+        std::vector<std::pair<std::string, float>> allValidFaces;
 
         std::vector<std::pair<std::string, float>> perpenFaces;
 
+        AIAC_INFO("-------------------------------------");
         for(auto const& [faceID, faceInfo]: m_Cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
-            auto faceNormal = faceInfo.GetNormal();
-            auto theta = glm::acos(
-                            glm::dot(faceNormal, m_Normal) / 
-                            (glm::length(faceNormal) * glm::length(m_Normal))
-                        );
+            // auto faceNormal = faceInfo.GetNormal();
+            // auto theta = glm::acos(
+            //                 glm::dot(faceNormal, m_Normal) / 
+            //                 (glm::length(faceNormal) * glm::length(m_Normal))
+            //             );
 
-            auto dist = glm::distance(faceInfo.GetCenter(), m_Center);
+            glm::vec3 ptOnCircleBlade = GOCircle::ClosestPointToCircle(
+                faceInfo.GetCenter(),
+                m_Center,
+                m_Normal,
+                m_Radius
+            );
+            // auto dist = glm::abs(glm::distance(m_Center, faceInfo.GetCenter()));
+            auto dist = glm::abs(glm::distance(ptOnCircleBlade, faceInfo.GetCenter()));
 
-            // for parallel faces, find the nearest one in terms of angle and distance
-            auto thresholdAngle = 0.7853f; // 45 degrees
-            if(theta < thresholdAngle || (3.14159 - theta) < thresholdAngle) {
-                // update nearest parallel face
-                if(nearestParallelFaceID.empty() || dist < nearestParallelFaceDist){
-                    nearestParallelFaceID = faceID;
-                    nearestParallelFaceDist = dist;
-                }
-            } else {
-                perpenFaces.push_back(std::make_pair(faceID, dist));
-            }
+
+            // // for parallel faces, find the nearest one in terms of angle and distance
+            // auto thresholdAngle = 0.7853f; // 45 degrees
+            // if(theta < thresholdAngle || (3.14159 - theta) < thresholdAngle) {
+                
+                
+            //     if(nearestParallelFaceID.empty() || dist < nearestParallelFaceDist){
+            //         nearestParallelFaceID = faceID;
+            //         nearestParallelFaceDist = dist;
+            //     }
+            // } else {
+            //     perpenFaces.push_back(std::make_pair(faceID, dist));
+            // }
+
+            allValidFaces.push_back(std::make_pair(faceID, dist));
+
+            AIAC_INFO("Distance to face " + faceID + ": " + std::to_string(dist) + " mm");
         }
+        AIAC_INFO("-------------------------------------");
+
+
+
+
+
+        // filter the vector with an angle threshold, erase those elements in the vector that do not respect the check
+        auto thresholdAngle = 0.7853f; // 45 degrees
+        allValidFaces.erase(
+            std::remove_if(allValidFaces.begin(), allValidFaces.end(), [this, thresholdAngle](auto const& a){
+                auto faceInfo = m_Cut->GetFace(a.first);
+                auto faceNormal = faceInfo.GetNormal();
+                auto theta = glm::acos(
+                    glm::dot(faceNormal, m_Normal) / 
+                    (glm::length(faceNormal) * glm::length(m_Normal))
+                );
+                return theta > thresholdAngle && (3.14159 - theta) > thresholdAngle;
+            }),
+            allValidFaces.end()
+        );
+        
+
+        // reorder the faces by the abs distance
+        std::sort(allValidFaces.begin(), allValidFaces.end(), [](auto const& a, auto const& b){
+            return a.second < b.second;
+        });
+
+        nearestParallelFaceAngleDeg = glm::degrees(
+            glm::acos(
+                glm::dot(m_Cut->GetFace(nearestParallelFaceID).GetNormal(), m_Normal) / 
+                (glm::length(m_Cut->GetFace(nearestParallelFaceID).GetNormal()) * glm::length(m_Normal))
+            )
+        );
+        AIAC_WARN("Nearest parallel face angle: " + std::to_string(nearestParallelFaceAngleDeg));
+
+
+        // set the first face as the nearest parallel face if none is found
+        if(!allValidFaces.empty())
+        {
+            nearestParallelFaceID = allValidFaces[0].first;
+            nearestParallelFaceDist = allValidFaces[0].second;
+        }
+        // put the rest in the perpendicular faces
+        for (auto const& [faceID, dist]: allValidFaces){
+            if(faceID == nearestParallelFaceID) continue;
+            perpenFaces.push_back(std::make_pair(faceID, dist));
+        }
+
+        // if it is the first time, nearestParallelFaceID.empty() gives the first face as the nearest parallel face
+        nearestParallelFaceID = nearestParallelFaceID.empty() ? allValidFaces[0].first : nearestParallelFaceID;
+
+        AIAC_WARN("Nearest parallel face: " + nearestParallelFaceID);
+        AIAC_INFO("Nearest parallel face dist: " + std::to_string(nearestParallelFaceDist));
+
+
+
+
+
+
+
+
 
         // sort perpendicular faces by distance
         std::sort(perpenFaces.begin(), perpenFaces.end(), [](auto const& a, auto const& b){

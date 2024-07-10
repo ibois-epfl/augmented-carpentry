@@ -347,7 +347,7 @@ namespace AIAC
             if (lastSlashPos != std::string::npos) {
                 currentSLAMMap = currentSLAMMap.substr(lastSlashPos + 1);
             }
-            ImGui::Text("Current SLAM Map: %s", currentSLAMMap.c_str());$
+            ImGui::Text("Current SLAM Map: %s", currentSLAMMap.c_str());
             
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
             if (ImGui::Button("Open SLAM map", sizeButtons))

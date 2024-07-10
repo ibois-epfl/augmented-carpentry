@@ -301,6 +301,34 @@ namespace AIAC
          */
         std::vector<std::shared_ptr<GOPoint>> ClosestPointToLine(std::shared_ptr<GOLine> ptrLine);
 
+        /**
+         * @brief Get the closest point to the circle from a given point
+         * 
+         * @param point the point
+         * @return glm::vec3
+         */
+        glm::vec3 ClosestPointToPoint(glm::vec3 point);
+
+        /**
+         * @brief Calculates the closest point on a circle to a given point in 3D.
+         * 
+         * @param point The point from which to find the closest point on the circle.
+         * @param circleCenter The center of the circle.
+         * @param circleNormal The normal vector of the circle's plane.
+         * @param circleRadius The radius of the circle.
+         * @return The closest point on the circle to the given point.
+         */
+        inline static glm::vec3 ClosestPointToCircle(const glm::vec3& point, const glm::vec3& circleCenter, const glm::vec3& circleNormal, float circleRadius) {
+            glm::vec3 normalizedCircleNormal = glm::normalize(circleNormal);
+
+            glm::vec3 circleToPoint = point - circleCenter;
+            glm::vec3 projectionOntoPlane = circleToPoint - normalizedCircleNormal * glm::dot(circleToPoint, normalizedCircleNormal);
+
+            glm::vec3 closestPointOnCircumference = circleCenter + glm::normalize(projectionOntoPlane) * circleRadius;
+
+            return closestPointOnCircumference;
+        }
+
         static std::shared_ptr<GOCircle> Get(const uint32_t& id);
         static std::vector<std::shared_ptr<GOCircle>> GetAll();
 
