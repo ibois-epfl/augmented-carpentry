@@ -236,11 +236,10 @@ namespace AIAC
 
         this->UpdateOrientationFeedback();
         this->UpdateThicknessFeedback();
-        this->UpdateStartPosFeedback();
         this->UpdateDepthFeedback();
+        this->UpdateStartPosFeedback();
     }
 
-    // TODO: this one shopuld be opne independent FeedbackVisualizer inherited composite object
     void CutCircularSawFeedback::UpdateOrientationFeedback()
     {
         if (!this->m_NearestParallelFaceID.empty())
@@ -537,7 +536,7 @@ namespace AIAC
             // FIXME: the anchor of the widget should be more stable
             // set the visuals and print the distance feed
             // move the center down of half the radius
-            auto prepFaceInfo = m_Cut->GetFace(this->m_NearestPerpendicularFaceID);
+            auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
             auto prepPlnCenter = prepFaceInfo.GetCenter();
             auto perpPlnNormal = prepFaceInfo.GetNormal();
             glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
