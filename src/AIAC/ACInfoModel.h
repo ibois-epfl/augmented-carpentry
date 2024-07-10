@@ -335,6 +335,14 @@ public:
      * @brief Get the filepath to the loaded ACInfoModel.
      */
     inline const std::string& GetFilePath() const { return m_FilePath; }
+
+    /**
+     * @brief Get the name of the loaded ACInfoModel without the extension.
+     */
+    inline const std::string GetName() const {
+        auto nameWithExtension = m_FilePath.substr(m_FilePath.find_last_of("/\\") + 1);
+        std::string nameWithoutExtension = nameWithExtension.substr(0, nameWithExtension.find_last_of("."));
+        return nameWithoutExtension; }
     
     /**
      * @brief Get the pugi::xml_document object
