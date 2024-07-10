@@ -7,6 +7,8 @@
 
 #include <sstream>
 #include <iomanip>
+#include <climits> // For INT_MIN and INT_MAX
+#include <cmath> // For std::isfinite☺
 
 
 namespace AIAC
@@ -15,14 +17,23 @@ namespace AIAC
     {
         m_LineDepth = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_TxtDepth = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
+        m_PtBlade2ThicknessLineA = GOPoint::Add(GOPoint(0.f, 0.f, 0.f));
+        m_PtBlade2ThicknessLineB = GOPoint::Add(GOPoint(0.f, 0.f, 0.f));
 
-        m_LineDepth->SetColor(GOColor::YELLOW);
+        m_LineDepth->SetColor(GOColor::PINK_TRANSP);
         m_TxtDepth->SetColor(GOColor::YELLOW);
+        m_PtBlade2ThicknessLineA->SetColor(GOColor::PURPLE_TRANSP07);
+        m_PtBlade2ThicknessLineB->SetColor(GOColor::PINK_TRANSP07);
+
+        m_PtBlade2ThicknessLineA->SetWeight(GOWeight::MediumThick);
+        m_PtBlade2ThicknessLineB->SetWeight(GOWeight::MediumThick);
 
         m_TxtDepth->SetTextSize(GOTextSize::BitSmall);
 
         m_AllPrimitives.push_back(m_LineDepth);
         m_AllPrimitives.push_back(m_TxtDepth);
+        m_AllPrimitives.push_back(m_PtBlade2ThicknessLineA);
+        m_AllPrimitives.push_back(m_PtBlade2ThicknessLineB);
 
         Deactivate();
     }
@@ -122,39 +133,55 @@ namespace AIAC
 
     void CutCircularSawFeedback::UpdateRefFaces()
     {
-        float nearestParallelFaceDist = 0.f;
+        // --------------------------------------------------------------------
+        // update the highlighted face
         std::string nearestParallelFaceID;
-
+        std::vector<std::pair<std::string, float>> allValidFaces;
         std::vector<std::pair<std::string, float>> perpenFaces;
 
+        // get the distances to the blade circle
         for(auto const& [faceID, faceInfo]: m_Cut->GetAllFaces()){
             if (faceInfo.IsExposed()) continue;
-            auto faceNormal = faceInfo.GetNormal();
-            auto theta = glm::acos(
-                            glm::dot(faceNormal, m_Normal) / 
-                            (glm::length(faceNormal) * glm::length(m_Normal))
-                        );
-
-            auto dist = glm::distance(faceInfo.GetCenter(), m_Center);
-
-            // for parallel faces, find the nearest one in terms of angle and distance
-            auto thresholdAngle = 0.7853f; // 45 degrees
-            if(theta < thresholdAngle || (3.14159 - theta) < thresholdAngle) {
-                // update nearest parallel face
-                if(nearestParallelFaceID.empty() || dist < nearestParallelFaceDist){
-                    nearestParallelFaceID = faceID;
-                    nearestParallelFaceDist = dist;
-                }
-            } else {
-                perpenFaces.push_back(std::make_pair(faceID, dist));
-            }
+            glm::vec3 ptOnCircleBlade = GOCircle::ClosestPointToCircle(
+                faceInfo.GetCenter(),
+                m_Center,
+                m_Normal,
+                m_Radius
+            );
+            auto dist = glm::abs(glm::distance(ptOnCircleBlade, faceInfo.GetCenter()));
+            allValidFaces.push_back(std::make_pair(faceID, dist));
         }
-
+        // filter the vector with an angle threshold, erase those elements in the vector that do not respect the check
+        auto thresholdAngle = 0.7853f; // 45 degrees
+        allValidFaces.erase(
+            std::remove_if(allValidFaces.begin(), allValidFaces.end(), [this, thresholdAngle](auto const& a){
+                auto faceInfo = m_Cut->GetFace(a.first);
+                auto faceNormal = faceInfo.GetNormal();
+                auto theta = glm::acos(
+                    glm::dot(faceNormal, m_Normal) / 
+                    (glm::length(faceNormal) * glm::length(m_Normal))
+                );
+                return theta > thresholdAngle && (3.14159 - theta) > thresholdAngle;
+            }),
+            allValidFaces.end()
+        );
+        // reorder the faces by the abs distance
+        std::sort(allValidFaces.begin(), allValidFaces.end(), [](auto const& a, auto const& b){
+            return a.second < b.second;
+        });
+        // put the rest in the perpendicular faces
+        for (auto const& [faceID, dist]: allValidFaces){
+            if(faceID == nearestParallelFaceID) continue;
+            perpenFaces.push_back(std::make_pair(faceID, dist));
+        }
+        // if it is the first time, nearestParallelFaceID.empty() gives the first face as the nearest parallel face
+        nearestParallelFaceID = nearestParallelFaceID.empty() ? allValidFaces[0].first : nearestParallelFaceID;
         // sort perpendicular faces by distance
         std::sort(perpenFaces.begin(), perpenFaces.end(), [](auto const& a, auto const& b){
             return a.second < b.second;
         });
 
+        // --------------------------------------------------------------------
         // update class members
         // if the saw is place on the side for adjusting the height, there should be no parallel face
         if(nearestParallelFaceID.empty())
@@ -174,6 +201,7 @@ namespace AIAC
             }
         }
 
+        // --------------------------------------------------------------------
         // get the closestfirst and second neighbour face to the highlightesd face and to the blade's center
         std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces = 
             this->m_Cut->GetHighlightedFaceNeighbors();
@@ -219,11 +247,10 @@ namespace AIAC
 
         this->UpdateOrientationFeedback();
         this->UpdateThicknessFeedback();
-        this->UpdateStartPosFeedback();
         this->UpdateDepthFeedback();
+        this->UpdateStartPosFeedback();
     }
 
-    // TODO: this one shopuld be opne independent FeedbackVisualizer inherited composite object
     void CutCircularSawFeedback::UpdateOrientationFeedback()
     {
         if (!this->m_NearestParallelFaceID.empty())
@@ -517,10 +544,9 @@ namespace AIAC
             ////////////////////////////////////////////////////////
             // Visualization
             ////////////////////////////////////////////////////////
-            // FIXME: the anchor of the widget should be more stable
             // set the visuals and print the distance feed
             // move the center down of half the radius
-            auto prepFaceInfo = m_Cut->GetFace(this->m_NearestPerpendicularFaceID);
+            auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
             auto prepPlnCenter = prepFaceInfo.GetCenter();
             auto perpPlnNormal = prepFaceInfo.GetNormal();
             glm::vec3 perpFaceOfBladeVec = glm::normalize(glm::cross(m_Normal, perpPlnNormal));
@@ -573,32 +599,56 @@ namespace AIAC
     {
         if (!this->m_NearestParallelFaceID.empty() && !m_Cut->IsSingleFace() && !this->m_NearestPerpendicularFaceID.empty())
         {
-            // get the nearest neighbour face to the parallel face
+            // calculate distances (closest point to line/segment to circle)
+            float distLineDepth = GOCircle::ClosestDistanceFromLineToCircle(
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane,
+                m_Center,
+                m_Radius
+            );
+            std::pair<float, std::pair<glm::vec3, glm::vec3>> res = GOCircle::ClosestDistanceFromSegmentToCircle(
+                this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA,
+                m_Center,
+                m_Radius
+            );
+            float distSegDepth = res.first;
+            float distLineDepthAbs = glm::abs(distLineDepth);
+            float distSegDepthAbs = glm::abs(distSegDepth);
+
+            // visualization
             auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
             auto prepPlnCenter = prepFaceInfo.GetCenter();
             auto perpPlnNormal = prepFaceInfo.GetNormal();
-
-            // distance to blade center to nearest neighbour face
             auto projBladeCenter = GetProjectionPointOnPlane(
                 perpPlnNormal,
                 prepPlnCenter,
                 m_Center);
             this->m_DepthVisualizer.m_TxtDepth->SetAnchor(projBladeCenter);
-
-            // calculate distance
-            auto distDepthAbs = glm::abs(glm::abs(glm::distance(projBladeCenter, m_Center)) - m_Radius);
-            auto distDepth = glm::distance(projBladeCenter, m_Center) - m_Radius;
-
-            // visualization
             this->m_DepthVisualizer.m_LineDepth->SetPts(m_Center, projBladeCenter);
 
-            this->m_DepthVisualizer.m_TxtDepth->SetText("d:" + FeedbackVisualizer::toString(distDepth));
-            if (distDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold)
-                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::RED);
-            else if (distDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold + 4.f)
-                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::YELLOW);
+            this->m_DepthVisualizer.m_TxtDepth->SetText(
+                "d:" + FeedbackVisualizer::toString(distLineDepth) +
+                "|" + FeedbackVisualizer::toString(distSegDepthAbs) + ""
+                );
+            if (std::isfinite(distLineDepth) && distLineDepth > static_cast<float>(INT_MIN) && distLineDepth < static_cast<float>(INT_MAX))
+            {
+                if (distLineDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold)
+                    this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::GREEN);
+                else if (distLineDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold * 20)
+                    this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::YELLOW);
+                else
+                    this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::RED);
+            }
             else
-                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::GREEN);
+            {
+                this->m_DepthVisualizer.m_TxtDepth->SetText("///");
+                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::MAGENTA);
+            }
+
+
+            this->m_DepthVisualizer.m_PtBlade2ThicknessLineA->SetPosition(res.second.first);
+            this->m_DepthVisualizer.m_PtBlade2ThicknessLineB->SetPosition(res.second.second);
+
+
         }
         else
         {
