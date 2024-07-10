@@ -7,6 +7,8 @@
 
 #include <sstream>
 #include <iomanip>
+#include <climits> // For INT_MIN and INT_MAX
+#include <cmath> // For std::isfinite☺
 
 
 namespace AIAC
@@ -15,14 +17,23 @@ namespace AIAC
     {
         m_LineDepth = GOLine::Add(GOPoint(0.f, 0.f, 0.f), GOPoint(0.f, 0.f, 0.f));
         m_TxtDepth = GOText::Add("0.0", GOPoint(0.f, 0.f, 0.f));
+        m_PtBlade2ThicknessLineA = GOPoint::Add(GOPoint(0.f, 0.f, 0.f));
+        m_PtBlade2ThicknessLineB = GOPoint::Add(GOPoint(0.f, 0.f, 0.f));
 
-        m_LineDepth->SetColor(GOColor::YELLOW);
+        m_LineDepth->SetColor(GOColor::PINK_TRANSP);
         m_TxtDepth->SetColor(GOColor::YELLOW);
+        m_PtBlade2ThicknessLineA->SetColor(GOColor::PURPLE_TRANSP07);
+        m_PtBlade2ThicknessLineB->SetColor(GOColor::PINK_TRANSP07);
+
+        m_PtBlade2ThicknessLineA->SetWeight(GOWeight::MediumThick);
+        m_PtBlade2ThicknessLineB->SetWeight(GOWeight::MediumThick);
 
         m_TxtDepth->SetTextSize(GOTextSize::BitSmall);
 
         m_AllPrimitives.push_back(m_LineDepth);
         m_AllPrimitives.push_back(m_TxtDepth);
+        m_AllPrimitives.push_back(m_PtBlade2ThicknessLineA);
+        m_AllPrimitives.push_back(m_PtBlade2ThicknessLineB);
 
         Deactivate();
     }
@@ -533,7 +544,6 @@ namespace AIAC
             ////////////////////////////////////////////////////////
             // Visualization
             ////////////////////////////////////////////////////////
-            // FIXME: the anchor of the widget should be more stable
             // set the visuals and print the distance feed
             // move the center down of half the radius
             auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
@@ -589,32 +599,56 @@ namespace AIAC
     {
         if (!this->m_NearestParallelFaceID.empty() && !m_Cut->IsSingleFace() && !this->m_NearestPerpendicularFaceID.empty())
         {
-            // get the nearest neighbour face to the parallel face
+            // calculate distances (closest point to line/segment to circle)
+            float distLineDepth = GOCircle::ClosestDistanceFromLineToCircle(
+            this->m_ThicknessVisualizer.m_LongestIntersectSegmenDetectToolPlane,
+                m_Center,
+                m_Radius
+            );
+            std::pair<float, std::pair<glm::vec3, glm::vec3>> res = GOCircle::ClosestDistanceFromSegmentToCircle(
+                this->m_ThicknessVisualizer.m_LongestIntersectSegmentTowardsCameraA,
+                m_Center,
+                m_Radius
+            );
+            float distSegDepth = res.first;
+            float distLineDepthAbs = glm::abs(distLineDepth);
+            float distSegDepthAbs = glm::abs(distSegDepth);
+
+            // visualization
             auto prepFaceInfo = m_Cut->GetFace(this->m_NearestNeighbourFaceIDToParallelFace);
             auto prepPlnCenter = prepFaceInfo.GetCenter();
             auto perpPlnNormal = prepFaceInfo.GetNormal();
-
-            // distance to blade center to nearest neighbour face
             auto projBladeCenter = GetProjectionPointOnPlane(
                 perpPlnNormal,
                 prepPlnCenter,
                 m_Center);
             this->m_DepthVisualizer.m_TxtDepth->SetAnchor(projBladeCenter);
-
-            // calculate distance
-            auto distDepthAbs = glm::abs(glm::abs(glm::distance(projBladeCenter, m_Center)) - m_Radius);
-            auto distDepth = glm::distance(projBladeCenter, m_Center) - m_Radius;
-
-            // visualization
             this->m_DepthVisualizer.m_LineDepth->SetPts(m_Center, projBladeCenter);
 
-            this->m_DepthVisualizer.m_TxtDepth->SetText("d:" + FeedbackVisualizer::toString(distDepth));
-            if (distDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold)
-                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::RED);
-            else if (distDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold + 4.f)
-                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::YELLOW);
+            this->m_DepthVisualizer.m_TxtDepth->SetText(
+                "d:" + FeedbackVisualizer::toString(distLineDepth) +
+                "|" + FeedbackVisualizer::toString(distSegDepthAbs) + ""
+                );
+            if (std::isfinite(distLineDepth) && distLineDepth > static_cast<float>(INT_MIN) && distLineDepth < static_cast<float>(INT_MAX))
+            {
+                if (distLineDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold)
+                    this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::GREEN);
+                else if (distLineDepthAbs < this->m_DepthVisualizer.m_ToleranceDepthThreshold * 20)
+                    this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::YELLOW);
+                else
+                    this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::RED);
+            }
             else
-                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::GREEN);
+            {
+                this->m_DepthVisualizer.m_TxtDepth->SetText("///");
+                this->m_DepthVisualizer.m_TxtDepth->SetColor(GOColor::MAGENTA);
+            }
+
+
+            this->m_DepthVisualizer.m_PtBlade2ThicknessLineA->SetPosition(res.second.first);
+            this->m_DepthVisualizer.m_PtBlade2ThicknessLineB->SetPosition(res.second.second);
+
+
         }
         else
         {
