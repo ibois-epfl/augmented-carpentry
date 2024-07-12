@@ -59,7 +59,7 @@ namespace AIAC
         ImGuiStyle& style = ImGui::GetStyle();
 
         style.Colors[ImGuiCol_MenuBarBg]             = ImVec4(0.00f, 0.00f, 0.00f, 0.20f);
-        style.Colors[ImGuiCol_WindowBg]              = ImVec4(0.00f, 0.00f, 0.00f, 0.30f);
+        style.Colors[ImGuiCol_WindowBg]              = ImVec4(0.00f, 0.00f, 0.00f, 0.50f);
         style.Colors[ImGuiCol_Border]                = AIAC_UI_DARK_GREY;
         style.Colors[ImGuiCol_BorderShadow]          = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 
