@@ -285,6 +285,7 @@ public:
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
+    void SetAllCotasVisibility(bool visible);
 
 public: ///< small utilities to calculate the progress of fabrication
     /// @brief Get the number of fabricate components

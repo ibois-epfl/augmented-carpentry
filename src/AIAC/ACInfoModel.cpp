@@ -278,13 +278,13 @@ namespace AIAC
         for (const auto& [_, component] : m_Components) {
             if(component->m_ID != m_CurrentComponentID){
                 component->SetVisibility(false);
-                // if the component is a cut, we hide all the cotas
+                // if the component is a cut, we hide all the other cotas
                 if(auto cut = dynamic_cast<Cut*>(component)){
                     cut->SetVisibilityAllCotas(false);
                 }
             }
         }
-        IsShowingAllComponents = false;
+        this->IsShowingAllComponents = false;
     }
 
     void TimberInfo::ShowAllComponents() {
@@ -294,7 +294,18 @@ namespace AIAC
             }
             // if the component is a cut, we show all the cotas
             if(auto cut = dynamic_cast<Cut*>(component)){
-                cut->SetVisibilityAllCotas(true);
+                if(IsShowingCotas)
+                    cut->SetVisibilityAllCotas(true);
+            }
+        }
+    }
+
+    void TimberInfo::SetAllCotasVisibility(bool visible)
+    {
+        this->IsShowingCotas = visible;
+        for (const auto& [_, component] : m_Components) {
+            if(auto cut = dynamic_cast<Cut*>(component)){
+                cut->SetVisibilityAllCotas(visible);
             }
         }
     }
