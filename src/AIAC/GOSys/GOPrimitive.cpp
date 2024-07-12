@@ -172,28 +172,13 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOCircle;
     }
 
-    std::vector<std::shared_ptr<GOPoint>> GOCircle::ClosestPointToLine(std::shared_ptr<GOLine> ptrLine)
+    glm::vec3 GOCircle::ClosestPointToPoint(glm::vec3 point)
     {
-        std::vector<std::shared_ptr<GOPoint>> points;
-        auto p1 = ptrLine->GetPStart().GetPosition();
-        auto p2 = ptrLine->GetPEnd().GetPosition();
-        auto p3 = this->m_Center.GetPosition();
+        auto p1 = this->m_Center.GetPosition();
+        auto p2 = point;
         auto v = p2 - p1;
-        auto w = p3 - p1;
-        auto c1 = glm::dot(w, v);
-        if (c1 <= 0) {
-            points.push_back(GOPoint::Add(p1));
-            return points;
-        }
-        auto c2 = glm::dot(v, v);
-        if (c2 <= c1) {
-            points.push_back(GOPoint::Add(p2));
-            return points;
-        }
-        auto b = c1 / c2;
-        auto pb = p1 + b * v;
-        points.push_back(GOPoint::Add(pb));
-        return points;
+        auto mag = glm::length(v);
+        return p1 + (v / mag) * this->m_Radius;
     }
 
     void GOCircle::InitGLObject()

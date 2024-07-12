@@ -26,8 +26,12 @@ namespace AIAC
 
     private:
         std::shared_ptr<GOLine> m_LineDepth;
+        std::shared_ptr<GOPoint> m_PtBlade2ThicknessLineA;
+        std::shared_ptr<GOPoint> m_PtBlade2ThicknessLineB;
         std::shared_ptr<GOText> m_TxtDepth;
-        float m_ToleranceDepthThreshold = 2.f;
+        float m_ToleranceDepthThreshold = 0.1f;
+
+
 
     friend class CutCircularSawFeedback;
     };

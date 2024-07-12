@@ -44,6 +44,11 @@ namespace AIAC
         inline const std::string& GetACInfoModelPath() const { return m_ACInfoModelPath; }
 
         /**
+         * @brief Return the file name of the loaded ACInfoModel.
+         */
+        inline const std::string GetACInfoModelName() const { return m_ACInfoModel.GetName(); }
+
+        /**
          * @brief Return the filepath to the loaded ScannedModel.
          */
         inline const std::string& GetScannedModelPath() const { return m_ScannedModelPath; }

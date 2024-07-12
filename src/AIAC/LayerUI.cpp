@@ -18,6 +18,32 @@
 #include "utils/utils.h"
 #include "LayerUtils.h"
 
+#include <filesystem>
+#include <optional>
+#include <string>
+
+std::optional<std::string> GetLatestFilePath(const std::string& directoryPath, const std::string& extension);
+std::optional<std::string> GetLatestFilePath(const std::string& directoryPath, const std::string& extension) {
+    std::optional<std::filesystem::path> latestFilePath;
+    std::filesystem::file_time_type latestModificationTime;
+
+    for (const auto& entry : std::filesystem::directory_iterator(directoryPath)) {
+        if (entry.is_regular_file() && entry.path().extension() == extension) {
+            auto currentFileModificationTime = std::filesystem::last_write_time(entry);
+            if (!latestFilePath || currentFileModificationTime > latestModificationTime) {
+                latestFilePath = entry.path();
+                latestModificationTime = currentFileModificationTime;
+            }
+        }
+    }
+
+    if (latestFilePath) {
+        return latestFilePath->string();
+    } else {
+        return std::nullopt;
+    }
+}
+
 
 namespace AIAC
 {
@@ -315,7 +341,14 @@ namespace AIAC
     {
         ImVec2 sizeButtons = ImVec2(110, 50);
         ImGui::Text("Import files:");
-        ImGui::BeginChild("slam_info_child", ImVec2(0, 80), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("slam_info_child", ImVec2(0, 95), true, ImGuiWindowFlags_HorizontalScrollbar);
+            std::string currentSLAMMap = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::MAP_FILE, ".");
+            size_t lastSlashPos = currentSLAMMap.find_last_of("/\\");
+            if (lastSlashPos != std::string::npos) {
+                currentSLAMMap = currentSLAMMap.substr(lastSlashPos + 1);
+            }
+            ImGui::Text("Current SLAM Map: %s", currentSLAMMap.c_str());
+            
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_BRONZE_ORANGE);
             if (ImGui::Button("Open SLAM map", sizeButtons))
             {
@@ -348,6 +381,24 @@ namespace AIAC
                 ImGuiFileDialog::Instance()->Close();
             }
             ImGui::PopStyleColor();
+
+            ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_PLUM_PURPLE);
+            if (ImGui::Button("Open latest Map", sizeButtons))
+            {
+                std::string mapFolderDefault = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TSLAM, AIAC::Config::SAVE_DIR_MAPS, ".");
+                auto latestMapFilePathOpt = GetLatestFilePath(mapFolderDefault, ".map");
+
+                if (latestMapFilePathOpt.has_value())
+                {
+                    std::string latestMapFilePath = latestMapFilePathOpt.value();
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMMapLoadedEvent>(latestMapFilePath));
+                } else {
+                    AIAC_INFO("No latest map file found in the directory: {0}", mapFolderDefault);
+                }
+            }
+            ImGui::PopStyleColor();
+
         ImGui::EndChild();
 
         ImGui::Text("Mapping Functions:");
@@ -393,7 +444,9 @@ namespace AIAC
     {
         // ACIM file manager (ACIM Loader, Scanned model re/loader)
         ImGui::Text("ACIM File Manager:");
-        ImGui::BeginChild("ACIM File Manager", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("ACIM File Manager", ImVec2(0, 60), true, ImGuiWindowFlags_HorizontalScrollbar);
+            std::string currentACIMFileEntry = "Current ACIM:  " + AIAC_APP.GetLayer<LayerModel>()->GetACInfoModelName();
+            ImGui::Text(currentACIMFileEntry.c_str());
             if(ImGui::Button("Load ACIM")){
                 OpenFileSelectDialog("Open ACIM file", ".acim", m_TmpPathBuf, [&]{
                     AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
@@ -1009,7 +1062,22 @@ namespace AIAC
                     ImGui::Text("%.1e", m_ReconstructParams.Eps);
 
                 ImGui::EndChild();
-                if(ImGui::Button("Done & Exit", ImVec2(ImGui::GetContentRegionAvail().x, 40))){
+                if(ImGui::Button("Discard", ImVec2(ImGui::GetContentRegionAvail().x, 40))){
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStopMappingEvent>(
+                        false,
+                        m_MappingParams.MapSavingPath,
+                        false,
+                        m_ReconstructParams.RadiusSearch,
+                        m_ReconstructParams.CreaseAngleThreshold,
+                        m_ReconstructParams.MinClusterSize,
+                        m_ReconstructParams.AABBScaleFactor,
+                        m_ReconstructParams.MaxPolyDist,
+                        m_ReconstructParams.MaxPlnDist,
+                        m_ReconstructParams.MaxPlnAngle,
+                        m_ReconstructParams.Eps
+                    ));
+                }
+                if(ImGui::Button("Save & Exit", ImVec2(ImGui::GetContentRegionAvail().x, 40))){
                     AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMStopMappingEvent>(
                         m_MappingParams.ToSaveMap,
                         m_MappingParams.MapSavingPath,

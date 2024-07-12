@@ -6,6 +6,9 @@
 #include "AIAC/Render/GLObject.h"
 #include "AIAC/Base.h"
 #include "glm/glm.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtx/norm.hpp> // For glm::length2
+#include <glm/gtc/constants.hpp> // For glm::pi
 
 namespace AIAC
 {
@@ -23,7 +26,11 @@ namespace AIAC
         static constexpr glm::vec4 ORANGE = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
         static constexpr glm::vec4 ORANGE_TRANSP = glm::vec4(1.0f, 0.5f, 0.0f, 0.5f);
         static constexpr glm::vec4 PURPLE = glm::vec4(0.5f, 0.0f, 0.5f, 1.0f);
+        static constexpr glm::vec4 PURPLE_TRANSP = glm::vec4(0.5f, 0.0f, 0.5f, 0.5f);
+        static constexpr glm::vec4 PURPLE_TRANSP07 = glm::vec4(0.5f, 0.0f, 0.5f, 0.7f);
         static constexpr glm::vec4 PINK = glm::vec4(1.0f, 0.0f, 0.5f, 1.0f);
+        static constexpr glm::vec4 PINK_TRANSP = glm::vec4(1.0f, 0.0f, 0.5f, 0.5f);
+        static constexpr glm::vec4 PINK_TRANSP07 = glm::vec4(1.0f, 0.0f, 0.5f, 0.7f);
         static constexpr glm::vec4 BROWN = glm::vec4(0.5f, 0.25f, 0.0f, 1.0f);
     };
 
@@ -294,13 +301,105 @@ namespace AIAC
         virtual ~GOCircle() = default;
 
         /**
-         * @brief Compute the closest point on the circle to a given line
+         * @brief Get the closest point to the circle from a given point
          * 
-         * @param std::shared_ptr<GOLine> ptrLine the line
-         * @return std::vector<std::shared_ptr<GO::Point>> the closest point on the circle and the point on the line
+         * @param point the point
+         * @return glm::vec3
          */
-        std::vector<std::shared_ptr<GOPoint>> ClosestPointToLine(std::shared_ptr<GOLine> ptrLine);
+        glm::vec3 ClosestPointToPoint(glm::vec3 point);
 
+    // FIXME: ideally all these static functions should be not and integrated with the GOCircle class
+    public:  ///< Static geometry functions
+        /**
+         * @brief Calculates the closest point on a circle to a given point in 3D.
+         * 
+         * @param point The point from which to find the closest point on the circle.
+         * @param circleCenter The center of the circle.
+         * @param circleNormal The normal vector of the circle's plane.
+         * @param circleRadius The radius of the circle.
+         * @return The closest point on the circle to the given point.
+         */
+        inline static glm::vec3 ClosestPointToCircle(const glm::vec3& point, const glm::vec3& circleCenter, const glm::vec3& circleNormal, float circleRadius) {
+            glm::vec3 normalizedCircleNormal = glm::normalize(circleNormal);
+
+            glm::vec3 circleToPoint = point - circleCenter;
+            glm::vec3 projectionOntoPlane = circleToPoint - normalizedCircleNormal * glm::dot(circleToPoint, normalizedCircleNormal);
+
+            glm::vec3 closestPointOnCircumference = circleCenter + glm::normalize(projectionOntoPlane) * circleRadius;
+
+            return closestPointOnCircumference;
+        }
+
+        /**
+         * @brief This function calculates the closest distance from a line, 
+         * defined by a point and a direction, to a circle in 3D space. 
+         * If the line intersects the circle, the function returns 0, indicating 
+         * the minimum distance is inside the circle.
+         * 
+         * @param ptrLine the pointer to the line.
+         * @param circleCenter The center of the circle.
+         * @param circleRadius The radius of the circle.
+         * @return The closest distance from the line to the circle
+         */
+        inline static float ClosestDistanceFromLineToCircle(
+            std::shared_ptr<GOLine> ptrLine,
+            const glm::vec3& circleCenter,
+            float circleRadius)
+        {
+            glm::vec3 lineStart = ptrLine->GetPStart().GetPosition();
+            glm::vec3 lineEnd = ptrLine->GetPEnd().GetPosition();
+            glm::vec3 lineDirection = glm::normalize(lineEnd - lineStart);
+            glm::vec3 lineToCircle = circleCenter - lineStart;
+            glm::vec3 projectionOntoLine = lineStart + lineDirection * glm::dot(lineToCircle, lineDirection);
+            float distance = glm::distance(circleCenter, projectionOntoLine) - circleRadius;
+            return distance;
+        }
+
+        /**
+         * @brief This function calculates the closest distance from a segment.
+         * defined by two points, to a circle in 3D space.
+         * 
+         * @param ptrLine the pointer to the line.
+         * @param circleCenter The center of the circle.
+         * @param circleRadius The radius of the circle.
+         * @return The closest distance from the line to the circle and the closest point on the line and the circle
+         */
+        inline static std::pair<float, std::pair<glm::vec3, glm::vec3>> ClosestDistanceFromSegmentToCircle(
+            std::shared_ptr<GOLine> ptrLine,
+            const glm::vec3& circleCenter,
+            float circleRadius)
+        {
+            glm::vec3 lineStart = ptrLine->GetPStart().GetPosition();
+            glm::vec3 lineEnd = ptrLine->GetPEnd().GetPosition();
+            glm::vec3 lineDirection = glm::normalize(lineEnd - lineStart);
+            glm::vec3 lineToCircleCenter = circleCenter - lineStart;
+
+            // Project circleCenter onto line, clamping to the segment
+            float t = glm::dot(lineToCircleCenter, lineDirection);
+            t = std::max(0.0f, std::min(t, glm::length(lineEnd - lineStart)));
+            glm::vec3 closestPointOnLine = lineStart + t * lineDirection;
+
+            // Calculate the direction from the circle center to the closest point on the line
+            glm::vec3 directionToClosestPoint = closestPointOnLine - circleCenter;
+            float distanceToLine = glm::length(directionToClosestPoint);
+
+            glm::vec3 closestPointOnCircle;
+            if (distanceToLine < circleRadius) {
+                // The line segment intersects the circle, set the closest point on the circle to the closest point on the line
+                closestPointOnCircle = closestPointOnLine;
+            } else {
+                // Calculate the closest point on the circle to the line segment
+                glm::vec3 direction = glm::normalize(directionToClosestPoint);
+                closestPointOnCircle = circleCenter + direction * circleRadius;
+            }
+
+            // Calculate the final distance from the line segment to the circle
+            float finalDistance = glm::max(0.0f, distanceToLine - circleRadius);
+
+            return std::make_pair(finalDistance, std::make_pair(closestPointOnLine, closestPointOnCircle));
+        }
+
+    public:
         static std::shared_ptr<GOCircle> Get(const uint32_t& id);
         static std::vector<std::shared_ptr<GOCircle>> GetAll();
 
