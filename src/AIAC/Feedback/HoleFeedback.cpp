@@ -61,14 +61,18 @@ namespace AIAC
         auto hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
         float scaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
 
-        this->m_VisPosition.m_HoleLine2ToolStart->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,  // start
-                                           *hole->GetStartPointGO());                       // end
-        this->m_VisPosition.m_HoleLine2ToolEnd->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,    // start
-                                         *hole->GetEndPointGO());                           // end
-        this->m_DrillBitLineAxis->SetPts(*AC_FF_TOOL->GetData<DrillBitData>().ToolbaseGO,   // start
-                                         *AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);   // end
-        this->m_HoleLineAxis->SetPts(*hole->GetStartPointGO(),                              // start
-                                     *hole->GetEndPointGO());                               // end
+        this->m_VisPosition.m_HoleLine2ToolStart->SetPts(
+            *AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,    // start
+            *hole->GetStartPointGO());                         // end
+        this->m_VisPosition.m_HoleLine2ToolEnd->SetPts(
+            *AC_FF_TOOL->GetData<DrillBitData>().TooltipGO,    // start
+            *hole->GetEndPointGO());                           // end
+        this->m_DrillBitLineAxis->SetPts(
+            *AC_FF_TOOL->GetData<DrillBitData>().ToolbaseGO,   // start
+            *AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);   // end
+        this->m_HoleLineAxis->SetPts(
+            *hole->GetStartPointGO(),                          // start
+            *hole->GetEndPointGO());                           // end
 
         // angle orientation guidance
         glm::vec3 midPtToolAxis = this->m_DrillBitLineAxis->GetMidPointValues();
@@ -100,9 +104,9 @@ namespace AIAC
         float distScaled = dist / scaleF;
         int distScaledMM = std::round(distScaled * 1000.f);
         if (distScaledMM > 99) distScaledMM = 99;
-        // make the text always 2 digits like 01, 02, 03, ...
         std::string distScaledMMStr = std::to_string(distScaledMM);
-        if (distScaledMMStr.size() == 1) distScaledMMStr = "0" + distScaledMMStr;
+        if (distScaledMMStr.size() == 1)
+            distScaledMMStr = "0" + distScaledMMStr;
 
         // (ii) detect if inside
         float angle = this->m_VisPosition.m_HoleLine2ToolStart->ComputeAngle(this->m_VisPosition.m_HoleLine2ToolEnd);

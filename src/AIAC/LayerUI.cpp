@@ -58,18 +58,18 @@ namespace AIAC
         ImGui::StyleColorsDark();
         ImGuiStyle& style = ImGui::GetStyle();
 
-        style.Colors[ImGuiCol_MenuBarBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.20f);
-        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.90f);
-        style.Colors[ImGuiCol_Border] = AIAC_UI_DARK_GREY;
-        style.Colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+        style.Colors[ImGuiCol_MenuBarBg]             = ImVec4(0.00f, 0.00f, 0.00f, 0.20f);
+        style.Colors[ImGuiCol_WindowBg]              = ImVec4(0.00f, 0.00f, 0.00f, 0.30f);
+        style.Colors[ImGuiCol_Border]                = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_BorderShadow]          = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 
-        style.Colors[ImGuiCol_FrameBg] = AIAC_UI_LIGHT_GREY;
-        style.Colors[ImGuiCol_FrameBgHovered] = AIAC_UI_DARK_GREY;
-        style.Colors[ImGuiCol_FrameBgActive] = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_FrameBg]               = AIAC_UI_LIGHT_GREY;
+        style.Colors[ImGuiCol_FrameBgHovered]        = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_FrameBgActive]         = AIAC_UI_SPARK_ORANGE;
 
-        style.Colors[ImGuiCol_CheckMark] = AIAC_UI_SPARK_ORANGE;
-        style.Colors[ImGuiCol_SliderGrab] = AIAC_UI_DARK_GREY;
-        style.Colors[ImGuiCol_SliderGrabActive] = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_CheckMark]             = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_SliderGrab]            = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_SliderGrabActive]      = AIAC_UI_SPARK_ORANGE;
         
         style.Colors[ImGuiCol_ResizeGrip]            = AIAC_UI_DARK_GREY;
         style.Colors[ImGuiCol_ResizeGripHovered]     = AIAC_UI_LIGHT_GREY;
@@ -91,10 +91,10 @@ namespace AIAC
         style.Colors[ImGuiCol_ButtonActive]          = AIAC_UI_SPARK_ORANGE;
         style.Colors[ImGuiCol_FrameBg]               = AIAC_UI_DARK_GREY;
 
-        style.Colors[ImGuiCol_ScrollbarBg] = AIAC_UI_LIGHT_GREY;
-        style.Colors[ImGuiCol_ScrollbarGrab] = AIAC_UI_DARK_GREY;
-        style.Colors[ImGuiCol_ScrollbarGrabHovered] = AIAC_UI_SPARK_ORANGE;
-        style.Colors[ImGuiCol_ScrollbarGrabActive] = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_ScrollbarBg]           = AIAC_UI_LIGHT_GREY;
+        style.Colors[ImGuiCol_ScrollbarGrab]         = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_ScrollbarGrabHovered]  = AIAC_UI_SPARK_ORANGE;
+        style.Colors[ImGuiCol_ScrollbarGrabActive]   = AIAC_UI_SPARK_ORANGE;
 
         style.ScrollbarSize = 30.0f;
         style.WindowRounding = 4.0f;
@@ -894,28 +894,6 @@ namespace AIAC
         }
 #endif
 
-#ifdef ENABLE_DEV_UI
-        std::stringstream toolheadPose; toolheadPose << AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetPose();
-        ImGui::Text("Estimated Toolhead Pose: \n%s", toolheadPose.str().c_str());
-        ImGui::Text("Tracking Status: %s", AIAC_APP.GetLayer<AIAC::LayerToolhead>()->ToolheadStateUI == 0 ? AIAC_APP.GetLayer<AIAC::LayerToolhead>()->GetTrackingStatus().c_str() : "Not Tracking");
-
-        std::string poseLogButtonText = "Log TTool Pose";
-        bool deferPoseLogUI = false;
-        if(AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog)
-        {
-            deferPoseLogUI = true;
-            poseLogButtonText = "Stop Log TTool Pose";
-            ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREEN);
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, AIAC_UI_GREEN);
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, AIAC_UI_GREEN);
-        }
-        if (ImGui::Button(poseLogButtonText.c_str(), ImVec2(-1, 40)))
-            AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog = !AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsSavePoseLog;
-        if (deferPoseLogUI)
-        {
-            ImGui::PopStyleColor(3);
-        }
-#endif
         // selection of toolhead
         float windowHeigh = ImGui::GetWindowHeight();
         float availableHeight = ImGui::GetContentRegionAvail().y;
