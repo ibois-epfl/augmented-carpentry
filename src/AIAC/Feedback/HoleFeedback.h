@@ -35,8 +35,12 @@ namespace AIAC
     private:
         /// @brief the line from the drillbit tip to the end of the hole
         std::shared_ptr<GOLine> m_HoleLine2ToolEnd;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolEnd_A;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolEnd_B;
         /// @brief the line from the drillbit tip to the start of the hole (aka start distance)
         std::shared_ptr<GOLine> m_HoleLine2ToolStart;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolStart_A;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolStart_B;
 
     friend class HoleFeedback;
     };
@@ -52,6 +56,8 @@ namespace AIAC
     private:
         /// @brief UI indicator for orientation
         std::shared_ptr<GOLine> m_GUILineOrientation;
+        std::shared_ptr<GOPoint> m_GUILineOrientation_A;
+        std::shared_ptr<GOPoint> m_GUILineOrientation_B;
 
     friend class HoleFeedback;
     };
