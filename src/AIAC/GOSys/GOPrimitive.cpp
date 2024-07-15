@@ -172,6 +172,15 @@ namespace AIAC
         m_Type = GOTypeFlags::_GOCircle;
     }
 
+    glm::vec3 GOCircle::ClosestPointToPoint(glm::vec3 point)
+    {
+        auto p1 = this->m_Center.GetPosition();
+        auto p2 = point;
+        auto v = p2 - p1;
+        auto mag = glm::length(v);
+        return p1 + (v / mag) * this->m_Radius;
+    }
+
     void GOCircle::InitGLObject()
     {
         ClearGLObject();

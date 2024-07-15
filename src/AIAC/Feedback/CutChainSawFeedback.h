@@ -41,7 +41,7 @@ namespace AIAC
 
         private:
             /// @brief The angle acceptance for the cut orientation, under this value is conside correct
-            float m_tolAangleAcceptance = 0.9f;  // decimal fraction of a degree
+            float m_tolAangleAcceptance = 0.4f;  // decimal fraction of a degree
         
         friend class CutChainSawFeedback;
 
@@ -67,6 +67,7 @@ namespace AIAC
 
         private:
             std::shared_ptr<GOLine> m_LineIntersect;
+            std::shared_ptr<GOLine> m_LineIntersectThickness;
             std::shared_ptr<GOLine> m_LineDepthFaceEdge1;
             std::shared_ptr<GOLine> m_LineDepthFaceEdge2;
 
@@ -97,8 +98,10 @@ namespace AIAC
             std::shared_ptr<GOText> m_GuideTxtChainBase;
             std::shared_ptr<GOText> m_GuideTxtChainEnd;
 
-            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth1;
-            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth2;
+            std::shared_ptr<GOText> m_GuideTxtFaceEdgeDepth;
+
+            ///< @brief This is the tolerance difference between the two depth line indicators of the chainsaw
+            float m_DistDepthAcceptance = 0.0025f;
 
             friend class CutChainSawFeedback;
     };
@@ -130,7 +133,6 @@ namespace AIAC
             glm::vec3 m_ChainEnd;
 
             bool m_ToShowCutPlane = false;
-
 
         private:
             CutChainSawFeedVisualizer m_Visualizer;

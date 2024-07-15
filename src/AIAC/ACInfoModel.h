@@ -102,6 +102,7 @@ public:
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
+
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
 
     friend class ACInfoModel;
@@ -122,6 +123,9 @@ public:
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
         std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
 
+    public:  __always_inline
+        double GetRadius() const { return m_Radius; }
+
     private:
         // These values uses original coordinate in xml file
         // i.e. not transformation (rotation / translation) is applied
@@ -137,7 +141,6 @@ public:
         std::shared_ptr<GOCylinder> m_CylinderGO;
         std::shared_ptr<GOPoint> m_StartPointGO;
         std::shared_ptr<GOPoint> m_EndPointGO;
-        std::shared_ptr<GOText> m_RadiusLabelGO;
         std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
@@ -184,12 +187,37 @@ public:
             GOPoint GetEndPt() { return m_GO->GetPEnd(); }
             Edge() : Component("EDGE") {}
 
+            /**
+             * @brief Set the Cotas Visibility object
+             * 
+             * @param visible if true, the cotas will be visible
+             */
+            inline void SetCotasVisibility(bool visible) {
+                for(auto& cota : m_Cotas) cota->SetVisibility(visible);
+                for(auto& cotaLine : m_CotaLines) cotaLine->SetVisibility(visible);
+                for(auto& cotaPt : m_CotaPts) cotaPt->SetVisibility(visible);
+            }
+            /**
+             * @brief Clear the cotas
+             * 
+             */
+            inline void ClearCotas() {
+                m_Cotas.clear();
+                m_CotaLines.clear();
+                m_CotaPts.clear();
+            }
+
         private:
             // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
             std::shared_ptr<GOLine> m_GO;
+
+            /// @brief The visualization of the cotas/mesures
+            std::vector<std::shared_ptr<GOText>> m_Cotas;
+            std::vector<std::shared_ptr<GOLine>> m_CotaLines;
+            std::vector<std::shared_ptr<GOPoint>> m_CotaPts;
 
             friend class Cut;
             friend class TimberInfo;
@@ -204,8 +232,28 @@ public:
         inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
         inline std::set<std::string>& GetAllNonExposedEdgeIDs() { return m_NonExposedEdgeIDs; }
         inline glm::vec3 GetCenter() const { return m_Center; }
+
         void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
-    
+        inline std::string GetHighlightedFaceID() const { return m_HighlightedFaceID; }
+        inline TimberInfo::Cut::Face GetHighlightedFace() { return m_Faces[m_HighlightedFaceID]; }
+        
+        inline std::map<std::string, Face> GetFaceNeighbors(std::string faceID) {
+            std::map<std::string, Face> neighbors;
+            for(auto& neighborID : m_Faces[faceID].m_Neighbors){
+                neighbors[neighborID] = m_Faces[neighborID];
+            }
+            return neighbors;
+        }
+        inline std::map<std::string, Face> GetHighlightedFaceNeighbors() {
+            return GetFaceNeighbors(m_HighlightedFaceID);
+        }
+
+        inline void SetVisibilityAllCotas(bool visible) {
+            for(auto& edge : m_Edges){
+                edge.second.SetCotasVisibility(visible);
+            }
+        }
+
     private:
         std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
@@ -220,6 +268,7 @@ public:
 
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
+
     inline Component* GetComponent(const std::string& id) { return m_Components[id]; }
     inline Component* GetCurrentComponent() { 
         if(m_Components.find(m_CurrentComponentID) == m_Components.end())
@@ -228,15 +277,46 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+    void SetNextComponentAsCurrent();
+    void SetPrevComponentAsCurrent();
 
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
     inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
+    void SetAllCotasVisibility(bool visible);
+
+public: ///< small utilities to calculate the progress of fabrication
+    /// @brief Get the number of fabricate components
+    inline int GetFabricatedComponents() {
+        int count = 0;
+        for(auto& comp : m_Components){
+            if(comp.second->m_State == ACIMState::DONE)
+                count++;
+        }
+        return count;
+    }
+    /// @brief Get the total number of components
+    inline int GetTotalComponents() { return m_Components.size(); }
+    /// @brief Get the progress of fabrication in percentage
+    inline float GetFabricationProgress() {
+        return (float)GetFabricatedComponents() / GetTotalComponents() * 100;
+    }
+
+private:  ///< utils for visualization
+    /**
+     * @brief Transform the notation from .acim into more lightweight notation
+     * for visuals (e.g. "Hole#1" -> "H1" and "Cut#1" -> "C1")
+     * 
+     * @param id the original id of the component
+     * @return std::string the shortened id for visualization
+     */
+    std::string ShortenComponentID(std::string id);
 
 public:
     bool IsShowingAllComponents = false;
+    bool IsShowingCotas = false;
 
 private:
     std::string m_ID;
@@ -262,7 +342,6 @@ private:
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
-    
 
     friend class ACInfoModel;
 };
@@ -289,6 +368,14 @@ public:
      * @brief Get the filepath to the loaded ACInfoModel.
      */
     inline const std::string& GetFilePath() const { return m_FilePath; }
+
+    /**
+     * @brief Get the name of the loaded ACInfoModel without the extension.
+     */
+    inline const std::string GetName() const {
+        auto nameWithExtension = m_FilePath.substr(m_FilePath.find_last_of("/\\") + 1);
+        std::string nameWithoutExtension = nameWithExtension.substr(0, nameWithExtension.find_last_of("."));
+        return nameWithoutExtension; }
     
     /**
      * @brief Get the pugi::xml_document object
@@ -309,6 +396,11 @@ public:
      * @brief Update the bounding box of the timber (use the current Active TimberInfo)
      */
     void UpdateBboxGOLine();
+
+    // /**
+    //  * @brief Update the cotas
+    //  */
+    // void UpdateCotas();
 
     /**
      * @brief transform all the GOPrimitive belonging to the ACInfoModel

@@ -22,9 +22,16 @@ namespace AIAC
             void SetActiveToolhead(const std::string& toolheadName);
             /// @brief Get the active toolhead model
             inline std::shared_ptr<ACInfoToolhead> GetActiveToolhead() const { return this->m_ActiveACInfoToolhead; }
+            /// @brief Get the toolhead model by its name
+            inline std::shared_ptr<ACInfoToolhead> GetToolhead(const std::string& toolheadName) const { return this->m_ACInfoToolheadMap.at(toolheadName); }
             /// @brief Get the active toolhead model's name
             inline std::string GetActiveToolheadName() const { return this->m_ActiveACInfoToolhead->GetName(); }
-            
+            /// @brief Get the toolhead's type by its name
+            inline ACToolHeadType GetToolheadType(const std::string& toolheadName) const { return this->m_ACInfoToolheadMap.at(toolheadName)->GetType(); }
+            /// @brief Get the current active toolhead's type
+            inline ACToolHeadType GetActiveToolheadType() const { return this->m_ActiveACInfoToolhead->GetType(); }
+
+
             /// @brief Return the  list of names of the toolheads loaded
             inline std::vector<std::string> GetToolheadNames() const
             {
