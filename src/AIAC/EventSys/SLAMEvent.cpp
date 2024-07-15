@@ -57,14 +57,14 @@ namespace AIAC
     {
         AIAC_INFO("Start mapping");
 
-        // update the camera parameters for SLAM
-        auto camParamFilepath = AIAC::Config::Get<string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE);
-        AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromFile(camParamFilepath);
-        AIAC_APP.GetLayer<LayerSlam>()->Slam.setCamParams(camParamFilepath);
-        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
-        AIAC_APP.GetLayer<LayerToolhead>()->ReloadCameraFromFile();
-        // update projection matrix
-        AIAC_APP.GetRenderer()->InitProjMatrix();
+        // // // update the camera parameters for SLAM
+        // auto camParamFilepath = AIAC::Config::Get<string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE);
+        // AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromFile(camParamFilepath);
+        // AIAC_APP.GetLayer<LayerSlam>()->Slam.setCamParams(camParamFilepath);
+        // AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
+        // AIAC_APP.GetLayer<LayerToolhead>()->ReloadCameraFromFile();
+        // // // update projection matrix
+        // AIAC_APP.GetRenderer()->InitProjMatrix();
 
         // start mapping
         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
