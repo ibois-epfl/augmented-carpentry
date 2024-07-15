@@ -183,11 +183,6 @@ void AIAC::LayerLogRecorder::LogTToolPose() {
             break;
     }
 
-    // The status is not "PoseInput" or "Tracking", meaning that the position is the same, no need to log
-    if (status[0] == 'N') { // 'N' for "None"
-        return;
-    }
-
     LogTToolTransformation(status);
 }
 
