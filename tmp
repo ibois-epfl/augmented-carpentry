@@ -1,0 +1,13 @@
+1. Error running script: script-sync::Error in the code: local variable 'timestamp' referenced before assignment
+Traceback (most recent call last):
+  File "rhinocode:///grasshopper/1/bdeac961-cf02-41cb-aed9-5095cbcae89f/ca596835-17ab-4c90-a3dd-1ce29e754ccf", line 379, in safe_exec
+  File "/Users/petingo/p/augmented-carpentry/py/components/replayer_initializer/code.py", line 29, in <module>
+    replayer, frame_count = ACPyReplayerInitializer().RunScript(log_root_path, exp_id, ttool_download_path, camera_model)
+  File "/Users/petingo/p/augmented-carpentry/py/components/replayer_initializer/code.py", line 21, in RunScript
+    replayer.load(i_log_root_path, i_exp_id, i_ttool_download_path)
+  File "/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer/replayer.py", line 17, in load
+    self.log_data = log_loader.load(log_root_path, exp_id)
+  File "/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer/log_loader.py", line 118, in load
+    log_data = LogData(all_event_data, timestamp, current_frame, acim_model_path, scanned_model_path, ttool_zenodo_version_url)
+UnboundLocalError: local variable 'timestamp' referenced before assignment
+ [379:1]

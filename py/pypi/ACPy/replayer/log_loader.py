@@ -142,7 +142,7 @@ def _get_exp_folder_paths(root_path: str, exp_id: str):
                 zip_ref.extractall(root_path)
             path = path[:-4]
 
-        folder_exp_id = basename.split("_")[0]
+        folder_exp_id = "_".join(basename.split("_")[0:-1])
         if folder_exp_id == exp_id:
             exp_folders.append(path)
     exp_folders.sort()

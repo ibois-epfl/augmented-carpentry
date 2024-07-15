@@ -1,6 +1,6 @@
 # ## FOR DEBUG
-# import sys
-# sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
+import sys
+sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
 
 import log_loader
 import acim_loader
