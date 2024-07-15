@@ -102,6 +102,7 @@ public:
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
+
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
 
     friend class ACInfoModel;
@@ -186,12 +187,37 @@ public:
             GOPoint GetEndPt() { return m_GO->GetPEnd(); }
             Edge() : Component("EDGE") {}
 
+            /**
+             * @brief Set the Cotas Visibility object
+             * 
+             * @param visible if true, the cotas will be visible
+             */
+            inline void SetCotasVisibility(bool visible) {
+                for(auto& cota : m_Cotas) cota->SetVisibility(visible);
+                for(auto& cotaLine : m_CotaLines) cotaLine->SetVisibility(visible);
+                for(auto& cotaPt : m_CotaPts) cotaPt->SetVisibility(visible);
+            }
+            /**
+             * @brief Clear the cotas
+             * 
+             */
+            inline void ClearCotas() {
+                m_Cotas.clear();
+                m_CotaLines.clear();
+                m_CotaPts.clear();
+            }
+
         private:
             // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
             std::shared_ptr<GOLine> m_GO;
+
+            /// @brief The visualization of the cotas/mesures
+            std::vector<std::shared_ptr<GOText>> m_Cotas;
+            std::vector<std::shared_ptr<GOLine>> m_CotaLines;
+            std::vector<std::shared_ptr<GOPoint>> m_CotaPts;
 
             friend class Cut;
             friend class TimberInfo;
@@ -221,7 +247,13 @@ public:
         inline std::map<std::string, Face> GetHighlightedFaceNeighbors() {
             return GetFaceNeighbors(m_HighlightedFaceID);
         }
-    
+
+        inline void SetVisibilityAllCotas(bool visible) {
+            for(auto& edge : m_Edges){
+                edge.second.SetCotasVisibility(visible);
+            }
+        }
+
     private:
         std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
@@ -253,6 +285,7 @@ public:
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
+    void SetAllCotasVisibility(bool visible);
 
 public: ///< small utilities to calculate the progress of fabrication
     /// @brief Get the number of fabricate components
@@ -283,6 +316,7 @@ private:  ///< utils for visualization
 
 public:
     bool IsShowingAllComponents = false;
+    bool IsShowingCotas = false;
 
 private:
     std::string m_ID;
@@ -308,7 +342,6 @@ private:
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
-    
 
     friend class ACInfoModel;
 };
@@ -363,6 +396,11 @@ public:
      * @brief Update the bounding box of the timber (use the current Active TimberInfo)
      */
     void UpdateBboxGOLine();
+
+    // /**
+    //  * @brief Update the cotas
+    //  */
+    // void UpdateCotas();
 
     /**
      * @brief transform all the GOPrimitive belonging to the ACInfoModel

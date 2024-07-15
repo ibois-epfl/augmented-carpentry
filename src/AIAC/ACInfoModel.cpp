@@ -2,6 +2,10 @@
 
 #include "AIAC/Application.h"
 #include "ACInfoModel.h"
+#include "AIAC/Config.h"
+
+#include <cmath>
+
 
 namespace AIAC
 {
@@ -274,15 +278,34 @@ namespace AIAC
         for (const auto& [_, component] : m_Components) {
             if(component->m_ID != m_CurrentComponentID){
                 component->SetVisibility(false);
+                // if the component is a cut, we hide all the other cotas
+                if(auto cut = dynamic_cast<Cut*>(component)){
+                    cut->SetVisibilityAllCotas(false);
+                }
             }
         }
-        IsShowingAllComponents = false;
+        this->IsShowingAllComponents = false;
     }
 
     void TimberInfo::ShowAllComponents() {
         for (const auto& [_, component] : m_Components) {
             for(auto& go: component->m_GOPrimitives){
                 component->SetVisibility(true);
+            }
+            // if the component is a cut, we show all the cotas
+            if(auto cut = dynamic_cast<Cut*>(component)){
+                if(IsShowingCotas)
+                    cut->SetVisibilityAllCotas(true);
+            }
+        }
+    }
+
+    void TimberInfo::SetAllCotasVisibility(bool visible)
+    {
+        this->IsShowingCotas = visible;
+        for (const auto& [_, component] : m_Components) {
+            if(auto cut = dynamic_cast<Cut*>(component)){
+                cut->SetVisibilityAllCotas(visible);
             }
         }
     }
@@ -443,13 +466,57 @@ namespace AIAC
                     edgeInfo.m_Start = StringToVec3(edge.child("start").child_value()) * m_Scale;
                     edgeInfo.m_End = StringToVec3(edge.child("end").child_value()) * m_Scale;
 
-                    // build GOPrimitive, only on non-exposed edges
+                    // build GOPrimitive edges and cotas, only on non-exposed edges
                     if(cutInfo.m_NonExposedEdgeIDs.find(id) != cutInfo.m_NonExposedEdgeIDs.end()){
+                        // GOLines for edges
                         edgeInfo.m_GO = GOLine::Add(edgeInfo.m_Start, edgeInfo.m_End, m_EdgeWeight);
                         edgeInfo.m_GO->SetColor(CUT_EDGE_COLOR[cutInfo.m_State]);
                         edgeInfo.m_GOPrimitives.push_back(edgeInfo.m_GO);
-                    }
 
+                        // ----------------------------------------------
+                        // GOTexts for cotas
+                        float scale_f = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
+                        auto mid = (edgeInfo.m_Start + edgeInfo.m_End) / 2.0f;
+                        
+                        glm::vec3 cutCtr = cutInfo.m_Center;
+                        float displacement = 0.02f * scale_f;
+                        glm::vec3 vecMidCtr = glm::normalize(mid - cutCtr);
+                        // random value between 0 and 1
+                        auto midMoved = mid + (vecMidCtr * displacement);
+                        auto lineCotas = GOLine::Add(GOPoint(mid), GOPoint(midMoved));
+                        lineCotas->SetColor(GOColor::GREEN_PUNK_TRANSP07);
+                        lineCotas->SetWeight(GOWeight::Default);
+                        edgeInfo.m_CotaLines.push_back(lineCotas);
+
+                        auto cotasPt = GOPoint::Add(mid);
+                        cotasPt->SetColor(GOColor::GREEN_DARKER_TRANSP07);
+                        cotasPt->SetWeight(GOWeight::MediumThick);
+                        edgeInfo.m_CotaPts.push_back(cotasPt);
+                        
+                        float dist = glm::distance(edgeInfo.m_Start, edgeInfo.m_End);
+                        float distmm = dist / scale_f * 1000;
+                        int roundedDistmm = std::round(distmm);
+                        auto cotas = GOText::Add(
+                            std::to_string(roundedDistmm) + "mm",
+                            midMoved,
+                            GOTextSize::Small);
+                        cotas->SetColor(GOColor::GREEN);
+                        edgeInfo.m_Cotas.push_back(cotas);
+
+                        if (this->m_TimberInfo.IsShowingCotas) {
+                            lineCotas->SetVisibility(true);
+                            cotasPt->SetVisibility(true);
+                            cotas->SetVisibility(true);
+                        } else {
+                            lineCotas->SetVisibility(false);
+                            cotasPt->SetVisibility(false);
+                            cotas->SetVisibility(false);
+                        }
+                        
+                        edgeInfo.m_GOPrimitives.push_back(lineCotas);
+                        edgeInfo.m_GOPrimitives.push_back(cotasPt);
+                        edgeInfo.m_GOPrimitives.push_back(cotas);
+                    }
                     cutInfo.m_Edges[edgeInfo.m_ID] = edgeInfo;
                 }
 
@@ -471,6 +538,7 @@ namespace AIAC
                 m_TimberInfo.m_Cuts[cutInfo.m_ID] = cutInfo;
                 m_TimberInfo.m_Components[cutInfo.m_ID] = &m_TimberInfo.m_Cuts[cutInfo.m_ID];
             }
+            
             if(m_TimberInfo.GetCurrentComponent() == nullptr){
                 m_TimberInfo.m_CurrentComponentID = m_TimberInfo.m_Components.begin()->first;
             }
@@ -478,14 +546,13 @@ namespace AIAC
         }
         
         UpdateBboxGOLine();
-        // m_TimberInfo.HideAllComponentsExceptCurrent();
         m_TimberInfo.IsShowingAllComponents = true;
 
         return true;
     }
 
     void ACInfoModel::Save() {
-        m_ACIMDoc.save_file(m_FilePath.c_str());        
+        m_ACIMDoc.save_file(m_FilePath.c_str());
     }
 
     void ACInfoModel::Clear() {
@@ -509,6 +576,7 @@ namespace AIAC
             for(auto& edge : cut.second.m_Edges){
                 for(auto& primitive : edge.second.m_GOPrimitives)
                     GOPrimitive::Remove(primitive);
+                edge.second.ClearCotas();
             }
         }
         m_TimberInfo.m_Cuts.clear();
