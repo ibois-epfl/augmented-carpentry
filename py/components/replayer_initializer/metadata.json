@@ -1,9 +1,9 @@
 {
-    "name": "acpy - replayer scene generator",
-    "nickname": "acpy-replayer-scene-generator",
+    "name": "acpy - replayer initializer",
+    "nickname": "acpy-replayer-initializer",
     "category": "acpy",
     "subcategory": "replayer",
-    "description": "Generate scene at the given frame id.",
+    "description": "Initialize the replayer object.",
     "exposure": 4,
     "instanceGuid": "9c838817-2335-47fe-ad2b-22b80f76fbfd",
     "ghpython": {
