@@ -22,6 +22,6 @@ class ACPyReplayerSceneGenerator(component):
 
         return camera_model, tool_mesh, acim_bbox, acim_activated_component, acim_done_component, acim_not_done_component
 
-if __name__ == "__main__":
-    camera_model, tool_mesh, acim_bbox, acim_activated_component, acim_done_component, acim_not_done_component = \
-        ACPyReplayerSceneGenerator().RunScript(i_replayer, i_frame_id)
+# if __name__ == "__main__":
+#     camera_model, tool_mesh, acim_bbox, acim_activated_component, acim_done_component, acim_not_done_component = \
+#         ACPyReplayerSceneGenerator().RunScript(i_replayer, i_frame_id)
