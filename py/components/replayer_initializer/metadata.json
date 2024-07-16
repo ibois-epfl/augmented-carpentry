@@ -62,7 +62,7 @@
                 "scriptParamAccess": "item",
                 "wireDisplay": "default",
                 "sourceCount": 0,
-                "typeHintID": "brep",
+                "typeHintID": "geometrybase",
                 "reverse": false,
                 "simplify": false
             }

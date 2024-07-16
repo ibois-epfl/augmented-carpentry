@@ -20,7 +20,7 @@
                 "scriptParamAccess": "item",
                 "wireDisplay": "default",
                 "sourceCount": 0,
-                "typeHintID": "No Type Hint",
+                "typeHintID": "none",
                 "reverse": false,
                 "simplify": false
             },
