@@ -69,6 +69,9 @@ namespace AIAC
         fs["distortion_coefficients"] >> m_DistortionCoef;
         fs["camera_matrix"] >> m_CameraMatrix;
 
+        m_DistortionCoef.convertTo(m_DistortionCoef, CV_32F);
+        m_CameraMatrix.convertTo(m_CameraMatrix, CV_32F);
+
         if(m_DistortionCoef.rows == 4) {
             m_IsFisheye = true;
             cv::fisheye::initUndistortRectifyMap(m_CameraMatrix, m_DistortionCoef, cv::Mat(),
