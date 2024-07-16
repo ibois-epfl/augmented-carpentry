@@ -31,11 +31,8 @@ class LogEventData:
         Get the pose data at the given index.
         """
 
-        targetArrIdx = bisect.bisect_left(self.frameIDs, index) - 1
-        if targetArrIdx < len(self.frameIDs) and self.frameIDs[targetArrIdx] == index:
-            return self.dataCollection[targetArrIdx]
-        else:
-            return self.dataCollection[targetArrIdx - 1]
+        targetArrIdx = bisect.bisect_right(self.frameIDs, index) - 1
+        return self.dataCollection[targetArrIdx]
         
 class LogData:
     def __init__(self, log_event_data, timestamp, frame_count, acim_model_path, scanned_model_path, ttool_zenodo_version_url):
