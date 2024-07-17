@@ -78,6 +78,7 @@ def _parse_position(positionString):
 
 
 def parse_acit(acit_path, scale):
+    """Parse the ACIT file and return the data in a dictionary."""
     tree = ET.parse(acit_path)
     acit = tree.getroot()
 
