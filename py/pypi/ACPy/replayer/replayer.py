@@ -4,7 +4,7 @@ sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
 
 import log_loader
 import acim_loader
-import ttool_mesh_loader
+import py.pypi.ACPy.replayer.ttool_loader as ttool_loader
 import camera_model
 
 import Rhino
@@ -20,7 +20,7 @@ class Replayer:
         self.acim_data = acim_loader.load(self.log_data.acim_model_path)
 
         # load tool mesh
-        self.ttool_models = ttool_mesh_loader.load(ttool_download_path, self.log_data.ttool_zenodo_version_url)
+        self.ttool_models = ttool_loader.load(ttool_download_path, self.log_data.ttool_zenodo_version_url)
 
         # camera model
         self.camera_model = camera_model.get_brep()

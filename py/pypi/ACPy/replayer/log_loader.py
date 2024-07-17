@@ -30,6 +30,8 @@ def load(root_path: str, exp_id: str):
         all_event_data[e] = LogEventData()
 
     exp_folders = _get_exp_folder_paths(root_path, exp_id)
+    if exp_folders is None or len(exp_folders) == 0:
+        raise ValueError("No log files found in the path with the experiment ID")
 
     component_status = {}
     

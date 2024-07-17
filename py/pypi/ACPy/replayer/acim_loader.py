@@ -8,21 +8,21 @@ from acim_data import ACIMData
 scale = 50
 tolerance = 0.01
 
-def load(log_file_path):
-    tree = ET.parse(log_file_path)
+def load(acim_path):
+    tree = ET.parse(acim_path)
     root = tree.getroot()
 
     timber = root.find("timber")
-    bbox = _parseBBox(timber.find("bbox"))
+    bbox = _parse_bbox(timber.find("bbox"))
 
     cuts = {}
     for cutNode in timber.findall("cut"):
-        id, faces = _parseCut(cutNode)
+        id, faces = _parse_cut(cutNode)
         cuts[id] = faces
     
     holes = {}
     for holeNode in timber.findall("hole"):
-        id, cylinder = _parseHole(holeNode)
+        id, cylinder = _parse_hole(holeNode)
         holes[id] = cylinder
 
     acim_data = ACIMData(bbox, cuts, holes)
@@ -30,10 +30,10 @@ def load(log_file_path):
     return acim_data
 
 
-def _parseBBox(bboxNode):
+def _parse_bbox(bboxNode):
     corners = []
     for cornerNode in bboxNode.findall("corner"):
-        position = _parsePosition(cornerNode.text)
+        position = _parse_position(cornerNode.text)
         id = int(cornerNode.attrib["id"])
 
         corners.append((id, position))
@@ -61,14 +61,14 @@ def _parseBBox(bboxNode):
     return bbox
 
 
-def _parseCut(cutNode):
+def _parse_cut(cutNode):
     id = cutNode.attrib["id"]
     faces = []
     for faceNode in cutNode.find("faces").findall("face"):
         corner_id = int(faceNode.attrib["id"])
         corners = []
         for corner in faceNode.find("corners").findall("corner"):
-            corners.append(_parsePosition(corner.text))
+            corners.append(_parse_position(corner.text))
 
         boundary = Rhino.Geometry.Polyline(corners + [corners[0]])
         face = ghcomp.FragmentPatch(boundary)
@@ -79,11 +79,11 @@ def _parseCut(cutNode):
     return (id, cutBrep)
 
 
-def _parseHole(holeNode):
+def _parse_hole(holeNode):
     id = holeNode.attrib["id"]
     radius = float(holeNode.find("radius").text) * scale
-    start = _parsePosition(holeNode.find("start").find("coordinates").text)
-    end = _parsePosition(holeNode.find("end").find("coordinates").text)
+    start = _parse_position(holeNode.find("start").find("coordinates").text)
+    end = _parse_position(holeNode.find("end").find("coordinates").text)
     
     if start.Z > end.Z:
         start, end = end, start
@@ -97,7 +97,7 @@ def _parseHole(holeNode):
     return (id, cylinder)
 
 
-def _parsePosition(positionString):
+def _parse_position(positionString):
     x, y, z = tuple(map(float, positionString.split(" ")))
     x *= scale
     y *= scale
@@ -119,7 +119,3 @@ if __name__ == "__main__":
     all_holes = []
     for _, cylinder in acim_data.holes.items():
         all_holes.append(cylinder)
-
-
-
-        
