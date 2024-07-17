@@ -475,7 +475,7 @@ namespace AIAC
 
                         // ----------------------------------------------
                         // GOTexts for cotas
-                        float scale_f = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
+                        float scale_f = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
                         auto mid = (edgeInfo.m_Start + edgeInfo.m_End) / 2.0f;
                         
                         glm::vec3 cutCtr = cutInfo.m_Center;

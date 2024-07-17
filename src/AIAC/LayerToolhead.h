@@ -17,9 +17,9 @@ namespace AIAC
             : IsShowSilouhette(false),
               ToolheadStateUI(-1),
               IsShowToolheadGOInfo(false),
-              m_ACScaleFactor(50.0f),
             m_TtoolState(ttool::EventType::None)
         {
+            this->m_ACScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
             this->ACInfoToolheadManager = std::make_shared<AIAC::ACInfoToolheadManager>();
         };
 
