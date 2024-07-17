@@ -158,4 +158,19 @@ namespace AIAC
         ss << "Camera Parameter Updated (using slam map): \n" << m_CameraMatrix;
         AIAC_INFO(ss.str());
     }
+
+    void Camera::UpdateCameraParamFromSlamMap(const std::shared_ptr<tslam::Map>& map){
+        m_IsCamMatrixInit = true;
+
+        // extract the camera calibration file path from the SLAM map and update for camera and SLAM
+        m_ParamHeight  = map->keyframes.begin()->imageParams.CamSize.height;
+        m_ParamWidth   = map->keyframes.begin()->imageParams.CamSize.width;
+        m_CameraMatrix = map->keyframes.begin()->imageParams.CameraMatrix;
+
+        UpdateFov();
+
+        stringstream ss;
+        ss << "Camera Parameter Updated (using slam map): \n" << m_CameraMatrix;
+        AIAC_INFO(ss.str());
+    }
 }

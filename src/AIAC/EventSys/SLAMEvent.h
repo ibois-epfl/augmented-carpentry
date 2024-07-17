@@ -5,6 +5,11 @@
 
 namespace AIAC
 {
+    namespace SLAMEventUtils
+    {
+        void UpdateCameraParametersUsingTheLoadedMap();
+    }
+
     class SLAMMapLoadedEvent : public Event
     {
     public:

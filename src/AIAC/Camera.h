@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map.h>
 #include "AIAC/Image.h"
 
 namespace AIAC
@@ -90,6 +91,13 @@ namespace AIAC
          * @param cameraMatrix The camera matrix
          */
         void UpdateCameraParamFromSlamMap(const int paramWidth, const int paramHeight, const cv::Mat &cameraMatrix);
+
+        /**
+         * @brief Update the camera parameters from the SLAM-generated map.
+         *
+         * @param map The SLAM-generated map.
+         */
+        void UpdateCameraParamFromSlamMap(const std::shared_ptr<tslam::Map>& map);
 
         /**
          * @brief Get the camera matrix.

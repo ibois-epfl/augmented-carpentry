@@ -6,6 +6,29 @@
 
 namespace AIAC
 {
+    void SLAMEventUtils::UpdateCameraParametersUsingTheLoadedMap()
+    {
+        // extract the camera calibration file path from the SLAM map and update for camera and SLAM
+        auto paramHeight = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.height;
+        auto paramWidth = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.width;
+        auto cameraMatrix = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CameraMatrix;
+
+        // update the camera parameters for camera
+        AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromSlamMap(paramWidth, paramHeight,
+        cameraMatrix);
+
+        // update the camera parameters for SLAM
+        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CameraMatrix = cameraMatrix;
+        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.height = paramHeight;
+        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.width = paramWidth;
+
+        // update the camera parameters for TTool
+        AIAC_APP.GetLayer<LayerToolhead>()->ReloadCameraFromMatrix(cameraMatrix, cv::Size(paramWidth, paramHeight));
+
+        // update projection matrix
+        AIAC_APP.GetRenderer()->InitProjMatrix();
+    }
+
     void SLAMMapLoadedEvent::OnSLAMMapLoaded()
     {
         AIAC_INFO("SLAM map file changed to: \"{}\"", m_FilePath);
@@ -18,24 +41,7 @@ namespace AIAC
         }
         AIAC_APP.GetLayer<LayerSlam>()->UpdateMap(m_FilePath);
 
-        // extract the camera calibration file path from the SLAM map and update for camera and SLAM
-        auto paramHeight  = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.height;
-        auto paramWidth   = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CamSize.width;
-        auto cameraMatrix = AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap()->keyframes.begin()->imageParams.CameraMatrix;
-
-        // update the camera parameters for camera
-        AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromSlamMap(paramWidth, paramHeight, cameraMatrix);
-
-        // update the camera parameters for SLAM
-        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CameraMatrix = cameraMatrix;
-        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.height = paramHeight;
-        AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.CamSize.width = paramWidth;
-
-        // update the camera parameters for TTool
-        AIAC_APP.GetLayer<LayerToolhead>()->ReloadCameraFromMatrix(cameraMatrix, cv::Size(paramWidth, paramHeight));
-
-        // update projection matrix
-        AIAC_APP.GetRenderer()->InitProjMatrix();
+        SLAMEventUtils::UpdateCameraParametersUsingTheLoadedMap();
 
         // enable SLAM
         AIAC_APP.GetLayer<LayerSlam>()->ToProcess = true;
@@ -88,6 +94,9 @@ namespace AIAC
         if(m_ToOptimize && m_ToSave) {
             AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->optimize();
         }
+
+        // Update the camera parameters according to the optimized map
+        SLAMEventUtils::UpdateCameraParametersUsingTheLoadedMap();
         
         // Save the map & reconstruct 3D
         if(m_ToSave) {
