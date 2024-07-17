@@ -18,6 +18,6 @@ namespace AIAC {
         virtual void Deactivate() {};
     
     protected:
-        float m_ScaleFactor = 50.f;
+        float m_ScaleFactor = 0.0f;
     };
 }
