@@ -7,6 +7,8 @@
 #include "tslam.h"
 #include "AIAC/Image.h"
 #include "AIAC/Layer.h"
+#include "AIAC/Config.h"
+#include "utils/CircularBuffer.h"
 
 
 namespace AIAC
@@ -47,6 +49,12 @@ namespace AIAC
         AIAC::Image m_ProcessedFrame;
         cv::Mat m_CamPose = cv::Mat();
         cv::Mat m_LastTrackedCamPose = cv::Mat::eye(4, 4, CV_32FC1);
+
+        int m_NumLostFrame = 0;
+        int m_NumLongDistFrame = 0;
+        CircularBuffer<cv::Mat> m_CamPoseBuffer{ size_t(AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::STABILIZATION_FRAME_COUNT, 5)) };
+        int m_MaxCamPoseBufferSize = AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::STABILIZATION_FRAME_COUNT, 5);
+
         bool m_IsTracked = false;
         bool m_IsMapping = false;
         bool m_IsShowingTag = false;
