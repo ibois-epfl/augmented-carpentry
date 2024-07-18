@@ -4,8 +4,11 @@
 #include <set>
 #include <string>
 #include <glm/glm.hpp>
-#include "AIAC/GOSys/GOPrimitive.h"
+
 #include "pugixml.hpp"
+
+#include "AIAC/GOSys/GOPrimitive.h"
+#include "AIAC/Config.h"
 
 namespace AIAC{
 
@@ -84,7 +87,9 @@ class TimberInfo{
 public:
     class Component {
     public:
-        Component(std::string type) : m_Type(type) {}
+        Component(std::string type) : m_Type(type) {
+            m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+        }
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
@@ -97,7 +102,7 @@ public:
         std::string GetTypeString() const { return m_Type; }
 
     protected:
-        float m_Scale = 50.0f; // When converting to real world unit, divide by this number
+        float m_Scale; // When converting to SLAM world's coordinate, multiply this scale
         ACIMState m_State;
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
@@ -349,7 +354,9 @@ private:
 class ACInfoModel
 {
 public:
-    ACInfoModel(){};
+    ACInfoModel(){
+        m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+    };
     ~ACInfoModel(){};
 
     /**
@@ -423,7 +430,7 @@ private:
     float m_EdgeWeight = 1.1f;
     float m_LabelSize = 0.75f;
 
-    float m_Scale = 50.0f;
+    float m_Scale;
     std::string m_FilePath;
     pugi::xml_document m_ACIMDoc;
 

@@ -4,6 +4,7 @@
 
 #include "AIAC/GOSys/GO.h"
 #include "AIAC/GOSys/GOPrimitive.h"
+#include "Config.h"
 
 #include <glm/glm.hpp>
 
@@ -146,7 +147,9 @@ namespace AIAC
     class ToolHeadData
     {
         public:
-            ToolHeadData() = default;
+            ToolHeadData(){
+                this->m_ScaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+            }
             ~ToolHeadData() = default;
         private:
             /**
@@ -205,7 +208,7 @@ namespace AIAC
 
         private:
             /// @brief Scaling factor from meters to AC scale
-            float m_ScaleF = 50.0f;
+            float m_ScaleF = 0.0f;
 
             /// @brief Type of the toolhead
             ACToolHeadType m_Type;
