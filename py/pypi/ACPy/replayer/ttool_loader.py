@@ -169,18 +169,21 @@ def construct_drillbit_primitive_model(acit_data):
     base_plane = Rhino.Geometry.Plane(acit_data["chuck_tip"], acit_data["normal"])
     base_circle = Rhino.Geometry.Circle(base_plane, acit_data["radius"])
     primitive_cylinder = Rhino.Geometry.Cylinder(base_circle, acit_data["length"])
+    brep = primitive_cylinder.ToBrep(True, True)
 
-    return primitive_cylinder
+    return brep
 
 
 def construct_circularsaw_primitive_model(acit_data):
     """Construct a primitive model of the circularsaw from the ACIT file."""
     
-    base_plane = Rhino.Geometry.Plane(acit_data["center"], acit_data["normal"])
+    # the normal will facing the outside of the blade (facing the camera), thus * -1
+    base_plane = Rhino.Geometry.Plane(acit_data["center"], -acit_data["normal"])
     base_circle = Rhino.Geometry.Circle(base_plane, acit_data["radius"])
     primitive_cylinder = Rhino.Geometry.Cylinder(base_circle, acit_data["blade_thickness"])
+    brep = primitive_cylinder.ToBrep(True, True)
 
-    return primitive_cylinder
+    return brep
 
 
 def construct_chainsaw_primitive_model(acit_data):
@@ -207,7 +210,9 @@ def rebuild_circularsaw_model(raw_mesh_model, acit_data):
     """Rebuild the model to give it thickness."""
     normal = acit_data["normal"]
     normal.Unitize()
-    extrude_vec = normal * acit_data["blade_thickness"]
+    # the normal will facing the outside of the blade (facing the camera), thus * -1
+    extrude_vec = -normal * acit_data["blade_thickness"]
+    
 
     naked_edges = raw_mesh_model.GetNakedEdges()
     sorted_edges = sorted(naked_edges, key=lambda e: e.Length, reverse=True)
@@ -223,7 +228,7 @@ def rebuild_circularsaw_model(raw_mesh_model, acit_data):
         [blade_face_1, blade_face_2, extrusion],
         Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance,
         Rhino.RhinoDoc.ActiveDoc.ModelAngleToleranceRadians,
-    )
+    )[0]
     
     return model
 
@@ -260,10 +265,6 @@ def load(ttool_model_root_path, ttool_zenodo_version_url, scale=50):
         if "chain" in path or "saber" in path:
             # TODO: skip those that are not in used at the moment
             continue
-        
-        # for debugging
-        if "circular_saw_blade_mafel_237" not in path:
-            continue
 
         model_name = os.path.basename(path)
         ttool_models[model_name] = {}
@@ -287,10 +288,16 @@ def load(ttool_model_root_path, ttool_zenodo_version_url, scale=50):
         else:
             fine_model = Rhino.Geometry.Brep.CreateFromMesh(raw_model, True)
         
+        # export the data
+        ttool_models[model_name]["type"] = acit_data["type"]
+
+        # if ttool_models[model_name]["type"] == "circularsaw":
+        #     ttool_models[model_name]["center"] = acit_data["center"]
+        #     ttool_models[model_name]["normal"] = acit_data["normal"]
+        #     ttool_models[model_name]["blade_thickness"] = acit_data["blade_thickness"]
 
         ttool_models[model_name]["raw_model"] = raw_model
         ttool_models[model_name]["model"] = fine_model
-        ttool_models[model_name]["normal"] = acit_data["normal"]
         ttool_models[model_name]["primitive_model"] = primitive_model
 
     return ttool_models

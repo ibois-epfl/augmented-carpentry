@@ -48,9 +48,16 @@
                 "sourceCount": 0
             },
             {
-                "name": "o_tool_mesh",
-                "nickname": "o_tool_mesh",
-                "description": "Transformed tool mesh.",
+                "name": "o_tool_model",
+                "nickname": "o_tool_model",
+                "description": "Transformed tool model (Brep).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_tool_primitive_model",
+                "nickname": "o_tool_primitive_model",
+                "description": "Transformed tool primitve model (Brep).",
                 "optional": false,
                 "sourceCount": 0
             },

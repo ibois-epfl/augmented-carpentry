@@ -4,7 +4,7 @@ sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
 
 import log_loader
 import acim_loader
-import py.pypi.ACPy.replayer.ttool_loader as ttool_loader
+import ttool_loader
 import camera_model
 
 import Rhino
@@ -50,9 +50,11 @@ class Replayer:
         camera_model = self.camera_model.Duplicate()
         camera_model.Transform(slam_transform)
 
-        tool_mesh = Rhino.Geometry.Mesh()
-        tool_mesh.CopyFrom(self.ttool_models[ttool_head])
-        tool_mesh.Transform(ttool_transformation)
+        tool_model = self.ttool_models[ttool_head]["model"].Duplicate()
+        tool_model.Transform(ttool_transformation)
+
+        ttool_primitive_model = self.ttool_models[ttool_head]["primitive_model"].Duplicate()
+        ttool_primitive_model.Transform(ttool_transformation)
 
         acim_bbox = self.acim_data.bbox.Duplicate()
         acim_bbox.Transform(acim_transform)
@@ -78,7 +80,8 @@ class Replayer:
         # save the model to the scene
         scene = {}
         scene["camera_model"] = camera_model
-        scene["tool_mesh"] = tool_mesh
+        scene["tool_model"] = tool_model
+        scene["tool_primitive_model"] = ttool_primitive_model
         scene["acim_bbox"] = acim_bbox
         scene["acim_activated_component"] = acim_activated_component
         scene["acim_done_component"] = acim_done_component
