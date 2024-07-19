@@ -22,6 +22,7 @@ namespace AIAC
         void OnAttach() override;
         virtual void OnFrameStart() override;
 
+        inline const int GetNumLostFrame() { return m_NumLostFrame; }
         inline const bool IsTracked() { return m_IsTracked; }
         inline const bool IsMapping() const { return m_IsMapping; }
         void StartMapping();
