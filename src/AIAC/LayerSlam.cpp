@@ -101,12 +101,62 @@ namespace AIAC
 
         m_IsTracked = Slam.process(currentFrame, m_CamPose);
         m_ProcessedFrame = currentFrame.clone();
+
         if(m_IsTracked) {
-            auto poseDifference = cv::norm(m_CamPose - m_LastTrackedCamPose);
-            if (poseDifference < 1.0) {
-                m_LastTrackedCamPose = m_CamPose * 0.2 + m_LastTrackedCamPose * 0.8;
+            m_NumLostFrame = 0;
+
+            // perform stabilization
+            if (m_CamPoseBuffer.empty()) {
+                // if no pose in the buffer, take the current one
+                m_CamPoseBuffer.push_back(m_CamPose.clone());
+                m_LastTrackedCamPose = m_CamPose.clone();
+            } else {
+                // calculate the average of the pose in the buffer
+                cv::Mat avg_pose = cv::Mat::zeros(4, 4, CV_32FC1);
+                for(auto &pose: m_CamPoseBuffer){
+                    avg_pose += pose;
+                }
+                avg_pose = avg_pose / double(m_CamPoseBuffer.size());
+
+                auto poseDifference = cv::norm(m_CamPose - avg_pose);
+                if (poseDifference < 3.0f) {
+                    m_NumLongDistFrame = 0;
+                    m_CamPoseBuffer.push_back(m_CamPose.clone());
+                } else {
+                    m_NumLongDistFrame++;
+                }
+
+                if (m_CamPoseBuffer.size() > m_MaxCamPoseBufferSize) {
+                    m_CamPoseBuffer.pop_front();
+                }
+
+                // perform a linear interpolation to get the stabilized pose
+                m_LastTrackedCamPose = cv::Mat::zeros(4, 4, CV_32FC1);
+
+                // OPTION 1: calculate the weighted average
+                int divider = 0;
+                for(int i = 0 ; i < m_CamPoseBuffer.size() ; i++){
+                    m_LastTrackedCamPose += m_CamPoseBuffer[i] * (i + 1);
+                    divider += (i + 1);
+                }
+                m_LastTrackedCamPose = m_LastTrackedCamPose / divider;
+
+                // OPTION 2: just calculate the average
+//                cout << "CamPoseBuffer: " << endl;
+//                for(auto &pose : m_CamPoseBuffer){
+//                    cout << pose << endl;
+//                    m_LastTrackedCamPose += pose / double(m_CamPoseBuffer.size());
+//                }
             }
-            m_LastTrackedCamPose = m_CamPose;
+        } else {
+            m_NumLostFrame ++;
+        }
+
+        if((m_NumLongDistFrame > 1 || m_NumLostFrame > m_MaxCamPoseBufferSize)
+                && !m_CamPoseBuffer.empty()){
+            m_CamPoseBuffer.clear();
+            m_NumLostFrame = 0;
+            m_NumLongDistFrame = 0;
         }
     }
 

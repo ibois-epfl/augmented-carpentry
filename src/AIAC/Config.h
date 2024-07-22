@@ -27,6 +27,7 @@ public:
     inline static const std::string VocFile = "VocFile";
     inline static const std::string RECONSTRUCT_CONFIG_DEFAULT_FILE = "ReconstructConfigDefaultFile";
     inline static const std::string SAVE_DIR_MAPS = "SaveDirMaps";
+    inline static const std::string STABILIZATION_FRAME_COUNT = "SaveDirMaps";
 
     inline static const std::string SEC_TTOOL = "TTool";
     inline static const std::string CONFIG_FILE = "ConfigFile";
