@@ -5,8 +5,8 @@ import os
 import Rhino
 
 ## FOR DEBUG
-import sys
-sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi")
+# import sys
+# sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi")
 
 from ACPy.replayer.capture_img import capture_img
 
