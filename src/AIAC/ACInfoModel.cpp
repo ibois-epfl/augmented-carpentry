@@ -475,11 +475,10 @@ namespace AIAC
 
                         // ----------------------------------------------
                         // GOTexts for cotas
-                        float scale_f = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
                         auto mid = (edgeInfo.m_Start + edgeInfo.m_End) / 2.0f;
                         
                         glm::vec3 cutCtr = cutInfo.m_Center;
-                        float displacement = 0.02f * scale_f;
+                        float displacement = 0.02f * m_Scale;
                         glm::vec3 vecMidCtr = glm::normalize(mid - cutCtr);
                         // random value between 0 and 1
                         auto midMoved = mid + (vecMidCtr * displacement);
@@ -494,7 +493,7 @@ namespace AIAC
                         edgeInfo.m_CotaPts.push_back(cotasPt);
                         
                         float dist = glm::distance(edgeInfo.m_Start, edgeInfo.m_End);
-                        float distmm = dist / scale_f * 1000;
+                        float distmm = dist / m_Scale * 1000;
                         int roundedDistmm = std::round(distmm);
                         auto cotas = GOText::Add(
                             std::to_string(roundedDistmm) + "mm",
@@ -547,6 +546,9 @@ namespace AIAC
         
         UpdateBboxGOLine();
         m_TimberInfo.IsShowingAllComponents = true;
+
+        // Update the real world length
+        m_MeasuredBboxLength = GetRealWorldLength();
 
         return true;
     }
@@ -707,6 +709,17 @@ namespace AIAC
         }
     }
 
+    void ACInfoModel::AddMeasuredBboxLength(const float diff) {
+        m_MeasuredBboxLength += diff;
+    }
+
+    void ACInfoModel::AdjustScale(){
+        float newScale = (GetLength() / m_Scale) / m_MeasuredBboxLength * m_Scale;
+        m_Scale = newScale;
+        AIAC::Config::UpdateEntry(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, newScale);
+    }
+
+    ///< Utils
     ACIMState StringToState(std::string state){
         std::string notDoneStr = "NotDone";
         std::string doneStr = "Done";
@@ -776,7 +789,5 @@ namespace AIAC
         ss << vec.x << " " << vec.y << " " << vec.z;
         return ss.str();
     }
-
-
 } // namespace AIAC
 
