@@ -68,7 +68,7 @@ namespace AIAC
         style.Colors[ImGuiCol_FrameBgActive]         = AIAC_UI_SPARK_ORANGE;
 
         style.Colors[ImGuiCol_CheckMark]             = AIAC_UI_SPARK_ORANGE;
-        style.Colors[ImGuiCol_SliderGrab]            = AIAC_UI_DARK_GREY;
+        style.Colors[ImGuiCol_SliderGrab]            = AIAC_UI_SPARK_ORANGE;
         style.Colors[ImGuiCol_SliderGrabActive]      = AIAC_UI_SPARK_ORANGE;
         
         style.Colors[ImGuiCol_ResizeGrip]            = AIAC_UI_DARK_GREY;
@@ -619,11 +619,11 @@ namespace AIAC
             }
         ImGui::EndChild();
 
-        ImGui::BeginChild("adjust_model_scale_factor", ImVec2(0, 110), true, ImGuiWindowFlags_HorizontalScrollbar);
-            ImGui::Text("Scaling Factor Adjustment:");
-            ImGui::Text("ACIM Length: %.2f", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetRealWorldLength() * 1000);
+        ImGui::Text("Scaling Factor Adjustment:");
+        ImGui::BeginChild("adjust_model_scale_factor", ImVec2(0, 90), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::Text("ACIM BBox Length: %.2f", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetRealWorldLength() * 1000);
             ImGui::SameLine();
-            ImGui::Text("/ Real World Length: %.2f", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetMeasuredBboxLength() * 1000);
+            ImGui::Text("/ Measured Length: %.2f", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetMeasuredBboxLength() * 1000);
             sliderVal = 0.f;
             ImGui::SliderFloat("## Adjust measured length", &sliderVal, -1e-3f, 1e-3f, "Adjust measured length", ImGuiSliderFlags_AlwaysClamp);
             if (sliderVal != 0.f) AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().AddMeasuredBboxLength(sliderVal);
