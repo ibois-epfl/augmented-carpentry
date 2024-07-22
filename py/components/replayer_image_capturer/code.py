@@ -1,13 +1,8 @@
 """Grasshopper Script Instance"""
-# # requirements: python-ffmpeg
-# from ffmpeg import FFmpeg
-
 import subprocess
 
 import os
 import Rhino
-import ghpythonlib
-import scriptcontext as sc
 
 ## FOR DEBUG
 import sys
@@ -40,11 +35,14 @@ class ACPyReplayerCaptureImg(component):
             if i_ffmpeg_path is None or len(i_ffmpeg_path) == 0:
                 i_ffmpeg_path = "ffmpeg"
             ffmpeg_command = [i_ffmpeg_path, "-y", "-framerate", str(i_frame_rate), "-pattern_type",  "glob", "-i", glob_pattern, "-c:v", "libx264", "-pix_fmt", "yuv420p", video_output_path]
-
-            result = subprocess.run(ffmpeg_command,stderr=subprocess.PIPE)
+            
+            result = subprocess.run(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
             if result.returncode != 0:
-                Rhino.RhinoApp.WriteLine(f"Error generating video")
+                Rhino.RhinoApp.WriteLine(f"FFmpeg encounter error while generating video.")
+                Rhino.RhinoApp.WriteLine(" ".join(ffmpeg_command))
+                Rhino.RhinoApp.WriteLine(result.stdout.decode('utf-8'))
+                Rhino.RhinoApp.WriteLine(result.stderr.decode('utf-8'))
                 return False
             else:
                 return True
