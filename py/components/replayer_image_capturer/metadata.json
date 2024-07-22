@@ -1,0 +1,87 @@
+{
+    "name": "acpy - replayer image capturer",
+    "nickname": "acpy-replayer-image-capturer",
+    "category": "acpy",
+    "subcategory": "replayer",
+    "description": "Capture the image and generate video afterward.",
+    "exposure": 4,
+    "instanceGuid": "6cb52a46-8fcd-41fb-ab74-60039bbcc192",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_frame_idx",
+                "nickname": "i_frame_idx",
+                "description": "The current frame index.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_frame_count",
+                "nickname": "i_frame_count",
+                "description": "The total frame count of the sequence.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_frame_rate",
+                "nickname": "i_frame_rate",
+                "description": "The frame rate of the output video.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_output_path",
+                "nickname": "i_output_path",
+                "description": "The output folder.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_ffmpeg_path",
+                "nickname": "i_ffmpeg_path",
+                "description": "The path to the ffmpeg executable.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+        ]
+    }
+}
