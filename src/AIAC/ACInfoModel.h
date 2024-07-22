@@ -416,21 +416,44 @@ public:
     void Transform(glm::mat4x4 transformMat);
 
     /**
-     * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
-     * @return The length of the scanned model. (in TSLAM unit)
+     * @brief Get the length of the acim, which is calculated by averaging the four long edges of the bounding box.
+     * @return The length of the acim bounding box. (in TSLAM unit)
      */
     float GetLength();
+
+    /**
+     * @brief Get the length of the acim, which is calculated by averaging the four long edges of the bounding box.
+     * @return The length of the acim bounding box. (in Real World unit, meter)
+     */
+    inline float GetRealWorldLength() { return GetLength() / m_Scale; }
 
     /**
      * Set the visibility of bbox to true or false
      */
     void SetBboxVisibility(bool visible);
 
+    /**
+     * Increase / decrease real world length based on the measurement
+     */
+    void AddMeasuredBboxLength(const float diff);
+
+    /**
+     * Get the real world length of the bounding box (in Real World unit, meter)
+     */
+    inline float GetMeasuredBboxLength() const { return m_MeasuredBboxLength; };
+
+    /**
+     * Adjust the scale of the model based on the measured result
+     */
+    void AdjustScale();
+
 private:
     float m_EdgeWeight = 1.1f;
     float m_LabelSize = 0.75f;
 
     float m_Scale;
+    float m_MeasuredBboxLength;
+
     std::string m_FilePath;
     pugi::xml_document m_ACIMDoc;
 
