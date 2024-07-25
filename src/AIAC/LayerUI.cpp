@@ -642,6 +642,18 @@ namespace AIAC
                 *m_IsOpen = false;
                 AIAC_EBUS->EnqueueEvent(std::make_shared<AppCloseEvent>());
             }
+
+            ImGui::SameLine();
+            if(ImGui::Checkbox("Scale is Calibrated", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().IsScaleCalibrated)){
+                if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().IsScaleCalibrated){
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowCurrentComponent();
+                    AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
+                } else {
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().HideAllComponents();
+                    AIAC_APP.GetLayer<LayerFeedback>()->DeactivateCurrentFeedbackVisibility();
+                }
+
+            }
         ImGui::EndChild();
     }
 

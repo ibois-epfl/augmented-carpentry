@@ -37,6 +37,6 @@ namespace AIAC
         CutCircularSawFeedback m_CutCircularSawFeedback;
 
         FabFeedback* m_CurrentFabFeedbackPtr = nullptr;
-        bool m_IsCurrentFabFeedbackVisible = true;
+        bool m_IsCurrentFabFeedbackVisible = false;
     };
 }

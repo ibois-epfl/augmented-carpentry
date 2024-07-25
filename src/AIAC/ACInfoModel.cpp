@@ -222,6 +222,7 @@ namespace AIAC
         }
         m_CurrentComponentID = id;
         m_Components[id]->SetAsCurrent();
+        m_Components[id]->SetVisibility(true);
 
         if(auto cut = dynamic_cast<Cut*>(m_Components[id]))
         {
@@ -233,7 +234,8 @@ namespace AIAC
             // }
         }
 
-        ShowAllComponents();
+//        ShowAllComponents();
+
         HideAllComponentsExceptCurrent();
     }
 
@@ -272,6 +274,25 @@ namespace AIAC
             it = ids.end();
         }
         SetCurrentComponentTo(*--it);
+    }
+
+    void TimberInfo::HideAllComponents() {
+        for (const auto& [_, component] : m_Components) {
+            component->SetVisibility(false);
+            // if the component is a cut, we hide all the other cotas
+            if(auto cut = dynamic_cast<Cut*>(component)){
+                cut->SetVisibilityAllCotas(false);
+            }
+        }
+        this->IsShowingAllComponents = false;
+    }
+
+    void TimberInfo::ShowCurrentComponent() {
+        m_Components[m_CurrentComponentID]->SetVisibility(true);
+        if(auto cut = dynamic_cast<Cut*>(m_Components[m_CurrentComponentID])){
+            if(IsShowingCotas)
+                cut->SetVisibilityAllCotas(true);
+        }
     }
 
     void TimberInfo::HideAllComponentsExceptCurrent() {
@@ -545,7 +566,10 @@ namespace AIAC
         }
         
         UpdateBboxGOLine();
-        m_TimberInfo.IsShowingAllComponents = true;
+
+        // initially, hide all components until the user specify that the scale is calibrated
+        m_TimberInfo.HideAllComponents();
+        m_TimberInfo.IsShowingAllComponents = false;
 
         // Update the real world length
         m_MeasuredBboxLength = GetRealWorldLength();
@@ -704,7 +728,7 @@ namespace AIAC
     }
 
     void ACInfoModel::SetBboxVisibility(bool visible){
-        for(auto line : m_BboxGOLines){
+        for(auto& line : m_BboxGOLines){
             line->SetVisibility(visible);
         }
     }

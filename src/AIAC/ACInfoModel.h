@@ -289,6 +289,8 @@ public:
     inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
     
     void HideAllComponentsExceptCurrent();
+    void HideAllComponents();
+    void ShowCurrentComponent();
     void ShowAllComponents();
     void SetAllCotasVisibility(bool visible);
 
@@ -448,7 +450,8 @@ public:
     void AdjustScale();
 
 public:
-    bool IsShowingBbox = false;
+    bool IsScaleCalibrated = false;
+    bool IsShowingBbox = true;
 
 private:
     float m_EdgeWeight = 1.1f;
