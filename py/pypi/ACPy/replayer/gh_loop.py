@@ -28,6 +28,7 @@ class GHLoop:
         self.ghenv.Component.ExpireSolution(False)
 
     def reset(self):
+        self.ghenv.Component.Message = ""
         if self.STATUS_WIP in sc.sticky:
             sc.sticky.pop(self.STATUS_WIP)
         if self.LOOP_INDEX in sc.sticky:
