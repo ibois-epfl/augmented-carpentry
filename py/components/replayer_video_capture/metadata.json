@@ -1,6 +1,6 @@
 {
-    "name": "acpy - replayer image capturer",
-    "nickname": "acpy-replayer-image-capturer",
+    "name": "acpy - replayer video capturer",
+    "nickname": "acpy-replayer-video-capturer",
     "category": "acpy",
     "subcategory": "replayer",
     "description": "Capture the image and generate video afterward.",
