@@ -6,6 +6,8 @@ import os
 import Rhino
 import ghpythonlib
 
+import ACPy
+
 class ACPyReplayerSceneGenerator(component):
     def __init__(self):
         super(ACPyReplayerSceneGenerator, self).__init__()

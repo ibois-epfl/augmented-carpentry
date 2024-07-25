@@ -1,15 +1,17 @@
 """Grasshopper Script Instance"""
-import System
-import Rhino
-
 import os
+
+import System
+
 import Rhino
 import ghpythonlib
+from ghpythonlib.componentbase import executingcomponent as component
 
-## FOR DEBUG
+# FOR DEBUG
 # import sys
 # sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi")
 
+import ACPy
 from ACPy.replayer.replayer import Replayer
 
 class ACPyReplayerInitializer(component):

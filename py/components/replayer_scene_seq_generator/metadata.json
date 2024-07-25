@@ -53,9 +53,23 @@
                 "simplify": false
             },
             {
+                "name": "i_run",
+                "nickname": "i_run",
+                "description": "Regenerate the video sequence.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
+            },
+            {
                 "name": "i_reset",
                 "nickname": "i_reset",
-                "description": "Regenerate the video sequence.",
+                "description": "Reset and generate the video sequence.",
                 "optional": false,
                 "allowTreeAccess": false,
                 "showTypeHints": true,

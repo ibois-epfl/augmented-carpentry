@@ -1,38 +1,64 @@
+"""Grasshopper Script Instance"""
+import subprocess
+import os
+from glob import glob
+
+import Rhino
+
 ## FOR DEBUG
 # import sys
 # sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi")
 
-from ACPy.replayer.gh_loop import GHLoop
+import ACPy
+from ACPy.replayer.capture_img import capture_img
 
-class ACPyReplayerSceneSeqGenerator(component):
+class ACPyReplayerCaptureImg(component):
     def __init__(self):
-        super(ACPyReplayerSceneSeqGenerator, self).__init__()
+        super(ACPyReplayerCaptureImg, self).__init__()
 
     def RunScript(self,
-            i_replayer,
-            i_frame_start: int,
-            i_frame_end: int,
-            i_reset: bool):
+            i_frame_idx,
+            i_frame_count,
+            i_frame_rate,
+            i_output_path,
+            i_ffmpeg_path,
+            i_clean_imgs):
         
-        loop = GHLoop(range(i_frame_start, i_frame_end), ghenv)
+        # create folder if not exists
+        if not os.path.exists(i_output_path):
+            os.makedirs(i_output_path)
 
-        if i_reset:
-            loop.reset()
-    
-        frame_idx, frame_absolute_idx = loop.get_next()
-        frame_count = len(loop)
-        
-        scene = i_replayer.generate_scene_at_frame(frame_absolute_idx)
+        # if the button of clean_img is pressed, only delete the image and do nothing else:
+        if i_clean_imgs:
+            glob_pattern = os.path.join(i_output_path, "frame_*.png")
+            img_files = glob(glob_pattern)
+            for f in img_files:
+                os.remove(f)
+            
+            return
 
-        # object to return
-        frame_idx = frame_idx
-        frame_count = frame_count
-        camera_model = scene["camera_model"]
-        tool_model = scene["tool_model"]
-        tool_primitive_model = scene["tool_primitive_model"]
-        acim_bbox = scene["acim_bbox"]
-        acim_activated_component = scene["acim_activated_component"]
-        acim_done_component = scene["acim_done_component"]
-        acim_not_done_component = scene["acim_not_done_component"]
+        img_output_path = os.path.join(i_output_path, f"frame_{i_frame_idx:06}.png")
+        capture_img(img_output_path)
 
-        return frame_idx, frame_count, camera_model, tool_model, tool_primitive_model, acim_bbox, acim_activated_component, acim_done_component, acim_not_done_component
+        if i_frame_idx == i_frame_count - 1:
+            glob_pattern = os.path.join(i_output_path, "frame_*.png")
+            video_output_path = os.path.join(i_output_path, "output.mp4")
+
+            if i_ffmpeg_path is None or len(i_ffmpeg_path) == 0:
+                i_ffmpeg_path = "ffmpeg"
+            ffmpeg_command = [i_ffmpeg_path, "-y", "-framerate", str(i_frame_rate), "-pattern_type",  "glob", "-i", glob_pattern, "-c:v", "libx264", "-pix_fmt", "yuv420p", video_output_path]
+            
+            result = subprocess.run(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
+            if result.returncode != 0:
+                Rhino.RhinoApp.WriteLine(f"FFmpeg encounter error while generating video.")
+                Rhino.RhinoApp.WriteLine(" ".join(ffmpeg_command))
+                Rhino.RhinoApp.WriteLine(result.stdout.decode('utf-8'))
+                Rhino.RhinoApp.WriteLine(result.stderr.decode('utf-8'))
+                return False
+            else:
+                return True
+
+# if __name__ == "__main__":
+#     ACPyReplayerCaptureImg.RunScript(frame_idx, frame_count, frame_rate, output_path)
