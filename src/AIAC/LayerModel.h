@@ -81,7 +81,7 @@ namespace AIAC
         /**
          * @brief Get the transform matrix of the model
          */
-        inline glm::mat4x4 GetTransformMat() const { return m_CumulativeTransformMat; }
+        inline glm::mat4x4 GetTransformMat() const { return m_ACIMTransformMat; }
 
         /**
          * @brief Change the align offset. The value is in TSLAM unit.
@@ -162,6 +162,10 @@ namespace AIAC
 
         // The cumulative transformation matrix of the model, from ACIM to ScannedModel, regarding the offset, rotation, and flip.
         // Since the model is transformed multiple times relatively during adjusting, we need to recorded it in this way.
-        glm::mat4x4 m_CumulativeTransformMat = glm::mat4(1.0f);
+
+        // Abandon as now everytime when alignment happens it's re-calculated
+        // glm::mat4x4 m_CumulativeTransformMat = glm::mat4(1.0f);
+
+        glm::mat4x4 m_ACIMTransformMat;
     };
 }
