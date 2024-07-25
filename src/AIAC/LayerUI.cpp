@@ -655,6 +655,23 @@ namespace AIAC
 
             }
         ImGui::EndChild();
+
+        ImGui::Text("Scaling Factor Adjustment:");
+        ImGui::BeginChild("adjust_model_scale_factor", ImVec2(0, 90), true, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::Text("ACIM BBox Length: %.2f", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetRealWorldLength() * 1000);
+            ImGui::SameLine();
+            ImGui::Text("/ Measured Length: %.2f", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetMeasuredBboxLength() * 1000);
+            sliderVal = 0.f;
+            ImGui::SliderFloat("## Adjust measured length", &sliderVal, -1e-3f, 1e-3f, "Adjust measured length", ImGuiSliderFlags_AlwaysClamp);
+            if (sliderVal != 0.f) AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().AddMeasuredBboxLength(sliderVal);
+
+            if(ImGui::Button("Confirm & Close APP")){
+                // restart APP
+                AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().AdjustScale();
+                *m_IsOpen = false;
+                AIAC_EBUS->EnqueueEvent(std::make_shared<AppCloseEvent>());
+            }
+        ImGui::EndChild();
     }
 
     void LayerUI::ShowSaveVideoRecorderFileDialog(){

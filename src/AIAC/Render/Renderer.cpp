@@ -291,19 +291,22 @@ namespace AIAC
         // Draw the essential objects: map, point cloud map and digital model !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glm::vec4 edgeColor;
-        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
-            // if(ShowPointCloudMap){
-            //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-            // }
-            // if(ShowDigitalModel){
-            //     DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-            //     DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-            // }
-            // for (auto& mesh : Meshes) {
-            //     mesh.DrawEdges(m_DefaultEdgeColor);
-            // }
-            // Draw All objects
-            // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+//        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
+//            // if(ShowPointCloudMap){
+//            //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
+//            // }
+//            // if(ShowDigitalModel){
+//            //     DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
+//            //     DigitalModel.DrawFaces(m_DigitalModelFaceColor);
+//            // }
+//            // for (auto& mesh : Meshes) {
+//            //     mesh.DrawEdges(m_DefaultEdgeColor);
+//            // }
+//            // Draw All objects
+//            // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
+//            DrawAllGOs(finalPoseMatrix);
+//        }
+        if (AIAC_APP.GetLayer<LayerSlam>()->GetNumLostFrame() <= 3){
             DrawAllGOs(finalPoseMatrix);
         }
     }

@@ -574,6 +574,9 @@ namespace AIAC
         // Update the real world length
         m_MeasuredBboxLength = GetRealWorldLength();
 
+        // Update the real world length
+        m_MeasuredBboxLength = GetRealWorldLength();
+
         return true;
     }
 
