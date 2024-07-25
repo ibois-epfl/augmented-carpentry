@@ -79,6 +79,20 @@
                 "typeHintID": "str",
                 "reverse": false,
                 "simplify": false
+            },
+            {
+                "name": "i_clean_imgs",
+                "nickname": "i_clean_imgs",
+                "description": "Button to clean the exported frames after generating the video.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
             }
         ],
         "outputParameters": [
