@@ -529,7 +529,7 @@ namespace AIAC
             ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
         ImGui::Text("Current Execution: %s", isCurrentDone.c_str());
         ImGui::PopStyleColor();
-        ImGui::BeginChild("components_control_panel", ImVec2(0, 160), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("components_control_panel", ImVec2(0, 184), true, ImGuiWindowFlags_HorizontalScrollbar);
             // print the progress
             ImGui::Text("Progress: %d / %d ( %.2f%% )", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetFabricatedComponents(),
                                                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetTotalComponents(),
@@ -605,7 +605,6 @@ namespace AIAC
             ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
             ImGui::PopStyleColor();
-            ImGui::SameLine();
             if(ImGui::Checkbox("Show All Components", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents)){
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingAllComponents){
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().ShowAllComponents();
@@ -617,6 +616,15 @@ namespace AIAC
                     AIAC_APP.GetLayer<LayerFeedback>()->ActivateCurrentFeedbackVisibility();
                 }
             }
+            ImGui::SameLine();
+            if(ImGui::Checkbox("Show BBox", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().IsShowingBbox)){
+                if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().IsShowingBbox){
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(true);
+                } else {
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().SetBboxVisibility(false);
+                }
+            }
+
         ImGui::EndChild();
 
         ImGui::Text("Scaling Factor Adjustment:");

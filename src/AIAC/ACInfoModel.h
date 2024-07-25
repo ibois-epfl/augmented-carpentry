@@ -342,7 +342,7 @@ private:
         {4, 5}, {5, 6}, {6, 7}, {7, 4}, // top
         {0, 4}, {1, 5}, {2, 6}, {3, 7}  // vertical
     };
-    ACIMState m_State = ACIMState::NOT_DONE; // TODO: states instead of executed?
+    ACIMState m_State = ACIMState::NOT_DONE;
     std::map<std::string, Hole> m_Holes;
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
@@ -446,6 +446,9 @@ public:
      * Adjust the scale of the model based on the measured result
      */
     void AdjustScale();
+
+public:
+    bool IsShowingBbox = false;
 
 private:
     float m_EdgeWeight = 1.1f;

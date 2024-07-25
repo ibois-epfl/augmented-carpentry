@@ -635,10 +635,10 @@ namespace AIAC
         m_BboxGOLines.push_back(GOLine::Add(bbox[3], bbox[7], 2.0f));
 
         // color of the bounding box
-        for(auto line : m_BboxGOLines)
+        for(const auto& line : m_BboxGOLines)
             line->SetColor(GOColor::PURPLE);
 
-        SetBboxVisibility(false);
+        SetBboxVisibility(this->IsShowingBbox);
     }
 
     void ACInfoModel::Transform(glm::mat4x4 transformMat) {
