@@ -67,6 +67,20 @@
                 "simplify": false
             },
             {
+                "name": "i_output_name",
+                "nickname": "i_output_name",
+                "description": "The output name (output file will be {output_name.mp4}).",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
                 "name": "i_ffmpeg_path",
                 "nickname": "i_ffmpeg_path",
                 "description": "The path to the ffmpeg executable.",
@@ -83,7 +97,7 @@
             {
                 "name": "i_clean_imgs",
                 "nickname": "i_clean_imgs",
-                "description": "Button to clean the exported frames after generating the video.",
+                "description": "Set to True to clean the exported frames after generating the video.",
                 "optional": true,
                 "allowTreeAccess": false,
                 "showTypeHints": true,
