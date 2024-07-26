@@ -3,6 +3,7 @@
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/Application.h"
 #include <filesystem>
+#include <cstdlib>
 
 namespace AIAC
 {
@@ -121,5 +122,54 @@ namespace AIAC
             if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(recPlyPath);
             else AIAC_WARN("Reconstruction failed, skip loading the model");
         }
+    }
+
+    void SLAMCombineMapEvent::OnSLAMCombineMap()
+    {
+        if (m_OutputPath.empty()) {
+            auto basePathA = m_MapPathA.substr(0, m_MapPathA.find_last_of('.'));
+            auto filenameB = m_MapPathB.substr(m_MapPathB.find_last_of('/') + 1);
+            m_OutputPath = basePathA + "_combined_" + filenameB;
+        }
+
+        // FIXME: nasty workaround
+        string command = "tslam_combine_map ";
+        command += m_MapPathA + " " + m_MapPathB + " " + m_OutputPath;
+        std::system(command.c_str());
+
+        auto basePath = m_OutputPath.substr(0, m_OutputPath.find_last_of("."));
+        auto ymlTagMapPath = basePath + ".yml";
+        auto recPlyPath = basePath + ".ply";
+
+        /// FIXME: Some tag disappears after combining maps, don't know why
+//        AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
+//                m_MapPathA, m_MapPathB, m_OutputPath,
+//                false, false, nullptr, m_OptimizeIterations);
+//
+//        AIAC_APP.GetLayer<LayerSlam>()->UpdateMap(m_OutputPath);
+//
+//        AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToFile(ymlTagMapPath);
+//        if(AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->map_markers.size() == 0){
+//            AIAC_WARN("No tag in the map, skip rest of the process");
+//            return;
+//        }
+
+        // Reconstruct 3D
+        bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
+                ymlTagMapPath,
+                recPlyPath,
+                m_RadiusSearch,
+                m_CreaseAngleThreshold,
+                m_MinClusterSize,
+                m_AABBScaleFactor,
+                m_MaxPolyTagDist,
+                m_MaxPlnDist2Merge,
+                m_MaxPlnAngle2Merge,
+                m_EPS
+        );
+
+        // Load reconstructed 3D model
+        if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(recPlyPath);
+        else AIAC_WARN("Reconstruction failed, skip loading the model");
     }
 }

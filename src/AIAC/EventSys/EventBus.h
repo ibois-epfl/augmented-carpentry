@@ -32,6 +32,10 @@ namespace AIAC
                 auto& slamEvent = static_cast<SLAMStopMappingEvent&>(*event);
                 slamEvent.OnSLAMStopMapping();
             });
+            m_EventQueue.appendListener(EventType::SLAMCombineMapEvent, [](const EventPointer& event) {
+                auto& slamEvent = static_cast<SLAMCombineMapEvent&>(*event);
+                slamEvent.OnSLAMCombineMap();
+            });
             m_EventQueue.appendListener(EventType::CameraCalibrationLoaded, [](const EventPointer& event) {
                 auto& cameraEvent = static_cast<CameraCalibrationLoadedEvent&>(*event);
                 cameraEvent.OnCameraCalibrationFileLoaded();
