@@ -38,7 +38,7 @@ namespace AIAC
         bool succeed = m_ACInfoModel.Load(path);
         if(succeed){
             m_ACInfoModelPath = path;
-            m_CumulativeTransformMat = glm::mat4(1.0f);
+            m_ACIMTransformMat = glm::mat4(1.0f);
 
             AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: AC_INFO_MODEL, path);
             AlignModels();
@@ -50,7 +50,7 @@ namespace AIAC
         bool succeed = m_ScannedModel.Load(path);
         if(succeed) {
             m_ScannedModelPath = path;
-            m_CumulativeTransformMat = glm::mat4(1.0f);
+            m_ACIMTransformMat = glm::mat4(1.0f);
 
             AIAC::Config::UpdateEntry<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config:: SCANNED_MODEL, path);
             
@@ -68,6 +68,7 @@ namespace AIAC
             return;
         }
         bool succeed = m_ACInfoModel.Load(path);
+        m_ACIMTransformMat = glm::mat4(1.0f);
         if (!succeed)
         {
             AIAC_WARN("LayerModel::ReloadACInfoModel() from path: " + path + " failed to load models");
@@ -81,6 +82,7 @@ namespace AIAC
         // TODO: there must be a better way but we need to refresh the models
         bool acimLoaded = m_ACInfoModel.Load(m_ACInfoModelPath);
         bool scannedModelLoaded = m_ScannedModel.Load(m_ScannedModelPath);
+        m_ACIMTransformMat = glm::mat4(1.0f);
 
         auto acInfoModelBbox = m_ACInfoModel.GetTimberInfo().GetBoundingBox();
         auto scannedModelBbox = m_ScannedModel.GetBoundingBox();
@@ -132,8 +134,7 @@ namespace AIAC
             std::swap(subBbox[3], subBbox[6]);
         }
 
-        auto transMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
-        m_ACInfoModel.Transform(transMat);
-        m_CumulativeTransformMat = transMat * m_CumulativeTransformMat;
+        m_ACIMTransformMat = GetRigidTransformationMatrix(acInfoModelBbox, subBbox);
+        m_ACInfoModel.Transform(m_ACIMTransformMat);
     }
 }
