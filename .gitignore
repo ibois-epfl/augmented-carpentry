@@ -352,3 +352,14 @@ config.ini
 
 # do not version the imgui.ini
 imgui.ini
+
+###############################################################
+# Automatically downloaded deps
+###############################################################
+
+deps/*-download
+deps/eventpp
+deps/freetype
+deps/imgui
+deps/pugixml
+deps/spdlog
