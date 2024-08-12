@@ -8,7 +8,7 @@ import numpy as np
 
 from log_data import LogEventData, LogData
 
-def load(root_path: str, exp_id: str):
+def load(root_path: str, exp_id: str, default_ttool_version: str = "12578820"):
     """
     Load the log data from the given root path and experiment ID.
     
@@ -58,6 +58,8 @@ def load(root_path: str, exp_id: str):
                         timestamp = line.split(":")[1].strip()
                     elif line.startswith("TTool Zenodo Version"):
                         ttool_zenodo_version_url = "".join(line.split(":")[1:]).strip()
+                        if len(ttool_zenodo_version_url) < 3:
+                            ttool_zenodo_version_url = f"https://zenodo.org/records/{default_ttool_version}"
 
                 # start flag
                 if "[Init]" in line:
