@@ -2,6 +2,7 @@ import os
 import json
 import subprocess
 from glob import glob
+import zipfile
 
 import xml.etree.ElementTree as ET
 
@@ -11,14 +12,10 @@ import ghpythonlib
 
 def unzip_file(zip_file_path, dest_folder):
     """Unzip a file to a destination folder."""
-    unzip_command = ["unzip", zip_file_path, "-d", dest_folder]
-    result = subprocess.run(unzip_command)
-
-    if result.returncode != 0:
-        Rhino.RhinoApp.WriteLine(f"Error unzipping {zip_file_path}")
-        return False
-    else:
-        return True
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(dest_folder)
+        
+    return True
 
 
 def download_file(url, dest_path):

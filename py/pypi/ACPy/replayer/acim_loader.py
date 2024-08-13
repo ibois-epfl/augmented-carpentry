@@ -3,7 +3,7 @@ import ghpythonlib.components as ghcomp
 
 import xml.etree.ElementTree as ET
 
-from acim_data import ACIMData
+from .acim_data import ACIMData
 
 scale = 50
 tolerance = 0.01

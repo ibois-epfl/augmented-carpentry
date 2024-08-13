@@ -6,7 +6,7 @@ from glob import glob
 
 import numpy as np
 
-from log_data import LogEventData, LogData
+from .log_data import LogEventData, LogData
 
 def load(root_path: str, exp_id: str, default_ttool_version: str = "12578820"):
     """

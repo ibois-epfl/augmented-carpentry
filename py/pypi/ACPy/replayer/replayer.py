@@ -2,10 +2,10 @@
 import sys
 sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
 
-import log_loader
-import acim_loader
-import ttool_loader
-import camera_model
+from . import log_loader
+from . import acim_loader
+from . import ttool_loader
+from . import camera_model
 
 import Rhino
 

@@ -18,5 +18,8 @@ def capture_img(output_path):
         bitmap = view_capture.CaptureToBitmap(view)
         if bitmap:
             bitmap.Save(output_path, System.Drawing.Imaging.ImageFormat.Png)
-        del bitmap
-        gc.collect()
+    
+    del view
+    del view_capture
+    del bitmap
+    gc.collect()

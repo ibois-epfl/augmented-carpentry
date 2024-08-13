@@ -32,12 +32,12 @@ class ACPyReplayerCaptureImg(component):
         capture_img(img_output_path)
 
         if i_frame_idx == i_frame_count - 1:
-            glob_pattern = os.path.join(i_output_path, "frame_*.png")
+            glob_pattern = os.path.join(i_output_path, "frame_%06d.png")
             video_output_path = os.path.join(i_output_path, f"{i_output_name}.mp4")
 
             if i_ffmpeg_path is None or len(i_ffmpeg_path) == 0:
                 i_ffmpeg_path = "ffmpeg"
-            ffmpeg_command = [i_ffmpeg_path, "-y", "-framerate", str(i_frame_rate), "-pattern_type",  "glob", "-i", glob_pattern, "-c:v", "libx264", "-pix_fmt", "yuv420p", video_output_path]
+            ffmpeg_command = [i_ffmpeg_path, "-y", "-framerate", str(i_frame_rate), "-i", glob_pattern, "-c:v", "libx264", video_output_path]
             
             result = subprocess.run(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
