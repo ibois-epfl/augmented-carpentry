@@ -1,6 +1,3 @@
-## FOR DEBUG
-# import sys
-# sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi")
 import ACPy
 from ACPy.replayer.gh_loop import GHLoop
 
