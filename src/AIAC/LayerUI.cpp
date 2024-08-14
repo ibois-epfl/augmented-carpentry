@@ -276,6 +276,22 @@ namespace AIAC
             m_IsMouseLDown = true;
             m_LastMouseLPos = ImGui::GetMousePos();
         }
+        ImGui::SameLine();
+        if(ImGui::Button("NW")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::NW);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("NE")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::NE);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("SW")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::SW);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("SE")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::SE);
+        }
         ImGui::PopStyleColor();
     }
 

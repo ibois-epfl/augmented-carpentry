@@ -14,6 +14,8 @@ namespace AIAC
         m_State = ACIMState::CURRENT;
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetDoc().child("acim").child("timber").child("current").last_child().set_value(m_ID.c_str());
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
+
+        AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::TOP);
     }
 
     void TimberInfo::Component::SetAsDone() {
@@ -34,6 +36,10 @@ namespace AIAC
         for (auto& go : m_GOPrimitives) {
             go->SetVisibility(visible);
         }
+    }
+
+    glm::vec3 TimberInfo::Component::GetCenter() const {
+        throw std::logic_error("GetCenter() is not defined for the derived class.");
     }
 
     ///< Hole 
@@ -656,6 +662,9 @@ namespace AIAC
             for(auto& objs : holeInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
+            holeInfo.m_Start = glm::vec3(transformMat * glm::vec4(holeInfo.m_Start, 1.0f));
+            holeInfo.m_End = glm::vec3(transformMat * glm::vec4(holeInfo.m_End, 1.0f));
+            holeInfo.m_Center = (holeInfo.m_Start + holeInfo.m_End) * 0.5f;
         }
 
         // cuts
@@ -664,6 +673,7 @@ namespace AIAC
             for(auto& objs : cutInfo.m_GOPrimitives){
                 objs->Transform(transformMat);
             }
+            cutInfo.m_Center = glm::vec3(transformMat * glm::vec4(cutInfo.m_Center, 1.0f));
 
             // Face
             for(auto& kv : cutInfo.m_Faces){
