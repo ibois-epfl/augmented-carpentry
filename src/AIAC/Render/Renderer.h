@@ -101,6 +101,7 @@ namespace AIAC
         glm::vec3 m_GlobalCamLookAtCenter = glm::vec3(0, 0, 0);
         glm::mat4 m_GlobalCamMatrix;
         glm::mat4 m_GlobalProjMatrix;
+        float m_GlobalProjOrthoSize = 15.f;
 
         // Mapping view
         Viewport m_MappingView;

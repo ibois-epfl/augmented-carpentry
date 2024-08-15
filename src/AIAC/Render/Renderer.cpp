@@ -142,11 +142,7 @@ namespace AIAC
         m_CamVisualizationEdges.emplace_back(  0,   0,-h);
         m_CamVisualizationEdges.emplace_back( bW, -bH, 0);
 
-        m_GlobalProjMatrix = glm::perspective(
-                glm::radians(35.0f),
-                float(m_GlobalView.GetW()) / float(m_GlobalView.GetH()), 0.01f, 100.0f
-        );
-
+        m_GlobalProjMatrix = glm::ortho(-m_GlobalProjOrthoSize, m_GlobalProjOrthoSize, -m_GlobalProjOrthoSize, m_GlobalProjOrthoSize, 0.0f, 1000.0f);
 
         m_GlobalCamMatrix = glm::lookAt(
                 glm::vec3(20, 20, 20),   // the position of your camera, in world space
@@ -178,10 +174,6 @@ namespace AIAC
 
     void Renderer::SetGlobalViewSize(float w, float h) {
         m_GlobalView.SetSize(w, h);
-        m_GlobalProjMatrix = glm::perspective(
-                glm::radians(50.0f),
-                w / h, 0.1f,300.0f
-        );
     }
 
     void Renderer::UpdateGlobalViewCameraRotation(double diffX, double diffY){
@@ -198,7 +190,12 @@ namespace AIAC
     }
 
     void Renderer::UpdateGlobalViewCameraScale(double diff) {
-        m_GlobalCamMatrix[3][2] += float(diff) / 10;
+        // m_GlobalCamMatrix[3][2] += float(diff) / 10; // this is for perspective projection
+        m_GlobalProjOrthoSize -= diff / 30;
+        if (m_GlobalProjOrthoSize < .1f) {
+            m_GlobalProjOrthoSize = .1f;
+        }
+        m_GlobalProjMatrix = glm::ortho(-m_GlobalProjOrthoSize, m_GlobalProjOrthoSize, -m_GlobalProjOrthoSize, m_GlobalProjOrthoSize, 0.0f, 1000.0f);
     }
 
     void Renderer::SetGlobalViewToActivatedComponent(StandardView standardView){
@@ -275,7 +272,7 @@ namespace AIAC
         // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
         // Draw All objects
-        DrawAllGOs(finalPoseMatrix);
+        DrawAllGOs(finalPoseMatrix, 0.05f);
 
         // Bind back to the main framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
