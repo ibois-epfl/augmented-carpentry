@@ -213,7 +213,7 @@ namespace AIAC
         ImGui::Begin("Scene Viewport", m_IsOpen);
 
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-        viewportSize.y -= (ImGui::GetTextLineHeight() + 10);
+        viewportSize.y -= (ImGui::GetTextLineHeight() + 16);
         AIAC_APP.GetRenderer()->SetGlobalViewSize(viewportSize.x, viewportSize.y);
 
         SetGlobalViewUI(viewportSize);
