@@ -31,7 +31,7 @@ namespace AIAC
      * @brief Draw all the GOs present in the GORegistry.
      * @param projection OpenGL projection matrix.
      */
-    void DrawAllGOs(glm::mat4 projection = glm::mat4(1.0f));
+    void DrawAllGOs(glm::mat4 projection = glm::mat4(1.0f), float textScale = 1.0f);
 
     /**
      * @brief Draw a GOPrimitive. (This function neglects the "isVisible" attribute of the object and will draw it anyway)
@@ -101,6 +101,6 @@ namespace AIAC
     void DrawMesh(const GOMesh& goMesh);
     void DrawMeshes(const std::vector<std::shared_ptr<GOMesh>> &goMeshes);
 
-    void DrawText(const GOText& goText, const glm::mat4& projection = glm::mat4(1.0f));
-    void DrawTexts(std::vector<GOText> goTexts, const glm::mat4& projection = glm::mat4(1.0f));
+    void DrawText(const GOText& goText, float scale = 1.0f, const glm::mat4& projection = glm::mat4(1.0f));
+    void DrawTexts(std::vector<GOText> goTexts, float scale = 1.0f, const glm::mat4& projection = glm::mat4(1.0f));
 }

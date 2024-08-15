@@ -8,7 +8,7 @@
 
 namespace AIAC
 {
-    void DrawAllGOs(glm::mat4 projection)
+    void DrawAllGOs(glm::mat4 projection, float textScale)
     {
         std::vector<std::shared_ptr<GOPrimitive>> gos;
         AIAC_GOREG->GetAllGOs(gos);
@@ -17,17 +17,19 @@ namespace AIAC
         for(auto& go: gos){
             if(!go->IsVisible()){
                 continue;
-            }   
+            }
             if(go->GetType() == _GOText){
-                goTexts.emplace_back(go);
+                if (textScale > 0) goTexts.emplace_back(go);
             } else{
                 DrawGO(go);
             }
         }
 
-        TextRenderer::SetProjection(projection);
-        for(auto& goText: goTexts){
-            DrawGO(goText);
+        if (textScale > 0) {
+            TextRenderer::SetProjection(projection);
+            for(auto& goText: goTexts){
+                DrawText(*std::dynamic_pointer_cast<GOText>(goText), textScale);
+            }
         }
     }
 
@@ -51,7 +53,7 @@ namespace AIAC
         }
     }
 
-    void DrawText(const GOText& goText, const glm::mat4& projection) {
+    void DrawText(const GOText& goText, float scale, const glm::mat4& projection) {
         if(projection != glm::mat4(1.0f)){
             TextRenderer::SetProjection(projection);
         }
@@ -59,11 +61,11 @@ namespace AIAC
                 goText.GetText(),
                 goText.GetAnchor(),
                 goText.GetColor(),
-                goText.GetTextSize());
+                goText.GetTextSize() * scale);
 
     }
 
-    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts, const glm::mat4& projection) {
+    void DrawTexts(const std::vector<std::shared_ptr<GOText>> &goTexts, float scale, const glm::mat4& projection) {
         if(projection != glm::mat4(1.0f)){
             TextRenderer::SetProjection(projection);
         }
@@ -71,7 +73,7 @@ namespace AIAC
             if(!goText->IsVisible()){
                 continue;
             }
-            DrawText(*goText, projection);
+            DrawText(*goText, scale, projection);
         }
     }
 

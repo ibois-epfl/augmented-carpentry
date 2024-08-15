@@ -17,6 +17,18 @@ namespace AIAC
     class Renderer
     {
     public:
+        // For navigating the global view
+        enum class StandardView
+        {
+            TOP,
+            BOTTOM,
+            NW,
+            NE,
+            SW,
+            SE
+        };
+
+    public:
         Renderer() = default;
         virtual ~Renderer() = default;
 
@@ -26,6 +38,7 @@ namespace AIAC
 
         GLuint GetGlobalView() const { return m_GlobalView.GetTexture(); };
         void SetGlobalViewSize(float w, float h);
+        void SetGlobalViewToActivatedComponent(StandardView standardView);
         void UpdateGlobalViewCameraTranslation(double diffX, double diffY);
         void UpdateGlobalViewCameraRotation(double diffX, double diffY);
         void UpdateGlobalViewCameraScale(double diff);
@@ -85,8 +98,10 @@ namespace AIAC
 
         // Global view
         Viewport m_GlobalView;
+        glm::vec3 m_GlobalCamLookAtCenter = glm::vec3(0, 0, 0);
         glm::mat4 m_GlobalCamMatrix;
         glm::mat4 m_GlobalProjMatrix;
+        float m_GlobalProjOrthoSize = 15.f;
 
         // Mapping view
         Viewport m_MappingView;
