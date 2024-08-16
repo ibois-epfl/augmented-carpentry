@@ -1,7 +1,11 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
+#include "map.h" // TSLAM map
+
 #include "TextRenderer.h"
-#include "GlUtils.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 
 namespace AIAC

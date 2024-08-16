@@ -332,7 +332,6 @@ namespace AIAC
         ImGui::BeginChild("camera_function_child", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
             if(ImGui::Button("Start Calibration")){
-                AIAC_APP.GetRenderer()->StartCamCalib();
                 AIAC_APP.GetLayer<LayerCameraCalib>()->StartCalibration();
             }
             ImGui::SameLine();
@@ -462,7 +461,7 @@ namespace AIAC
         ImGui::Text("ACIM File Manager:");
         ImGui::BeginChild("ACIM File Manager", ImVec2(0, 60), true, ImGuiWindowFlags_HorizontalScrollbar);
             std::string currentACIMFileEntry = "Current ACIM:  " + AIAC_APP.GetLayer<LayerModel>()->GetACInfoModelName();
-            ImGui::Text(currentACIMFileEntry.c_str());
+            ImGui::Text("%s", currentACIMFileEntry.c_str());
             if(ImGui::Button("Load ACIM")){
                 OpenFileSelectDialog("Open ACIM file", ".acim", m_TmpPathBuf, [&]{
                     AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
@@ -492,7 +491,7 @@ namespace AIAC
                 if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
                 sliderVal = 0.f;
             ImGui::SameLine();
-            ImGui::Text(std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
+            ImGui::Text("%s", std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
             
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_ROYAL_PURPLE);
             if(ImGui::Button("Align Center")){
@@ -1200,7 +1199,6 @@ namespace AIAC
                 ImGui::SameLine();
                 if(ImGui::Button("Exit")){
                     AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->StopCalibration();
-                    AIAC_APP.GetRenderer()->StopCamCalib();
                 }
             } ImGui::EndChild();
         } ImGui::EndChild();

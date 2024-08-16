@@ -1,9 +1,10 @@
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
+#include "GlUtils.h"
 #include "RenderAPI.h"
 #include "TextRenderer.h"
 #include "AIAC/Log.h"
-
-#include <ft2build.h>
-#include FT_FREETYPE_H
 #include "AIAC/Application.h"
 
 namespace AIAC

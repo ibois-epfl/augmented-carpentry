@@ -4,7 +4,6 @@
 
 #include "glm/glm.hpp"
 
-#include "AIAC/Mesh.h"
 #include "AIAC/GlHeader.h"
 #include "AIAC/Layer.h"
 
@@ -44,14 +43,10 @@ namespace AIAC
         void UpdateGlobalViewCameraScale(double diff);
 
         // Mapping View
-        void StartMapping() { ShowDigitalModel = false; ShowPointCloudMap = false; }
-        void StopMapping() { ShowDigitalModel = true; ShowPointCloudMap = true; }
         GLuint GetMappingView() const { return m_MappingView.GetTexture(); };
         void SetMappingViewSize(float w, float h);
 
         // CamCalib view
-        void StartCamCalib() { Meshes.clear(); ShowDigitalModel = false; ShowPointCloudMap = false; }
-        void StopCamCalib() { ShowDigitalModel = true; ShowPointCloudMap = true; }
         GLuint GetCamCalibView() const { return m_CamCalibView.GetTexture(); };
         void SetCamCalibViewSize(float w, float h);
 
@@ -62,14 +57,6 @@ namespace AIAC
             UNDISTORTED,
             SLAM_PROCESSED
         };
-
-    public:
-        AIAC::Mesh PointCloudMap;
-        AIAC::Mesh DigitalModel;
-        std::vector<AIAC::Mesh> Meshes;
-
-        bool ShowPointCloudMap = true;
-        bool ShowDigitalModel = true;
 
     private:
         void RenderMainView();
