@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 #include "AIAC/Layer.h"
 
 #include "AIAC/Image.h"
@@ -16,20 +18,48 @@ namespace AIAC {
 
     class PaneUI {
     public:
+        enum CollapseState {
+            OPEN,
+            ON_COLLAPSING,
+            COLLAPSE
+        };
+
         typedef std::function<void()> Func;
 
-        PaneUI(const char *label, bool isCollapsed, Func func)
-                : m_Label(label), m_IsCollapsed(isCollapsed), m_func(std::move(func)) {}
+        PaneUI(const char *label, bool isCollapsed, Func func, Func onCollapseCallback=[]{})
+                : m_Label(label), m_IsCollapsed(isCollapsed), m_func(std::move(func)), m_onCollapseCallback(std::move(onCollapseCallback)) {
+            if (m_IsCollapsed) m_CollapseState = CollapseState::COLLAPSE;
+            else m_CollapseState = CollapseState::OPEN;
+        }
 
         template<typename... Args>
         void Show(Args &&... args) {
-            if (ImGui::CollapsingHeader(m_Label, m_IsCollapsed ? ImGuiTreeNodeFlags_DefaultOpen : 0)) {
+            bool isOpened = ImGui::CollapsingHeader(m_Label, m_IsCollapsed ? ImGuiTreeNodeFlags_DefaultOpen : 0);
+            if (isOpened) {
+                m_CollapseState = CollapseState::OPEN;
                 m_func(std::forward<Args>(args)...);
+            }
+
+            // check if it's just collapsed
+            if (!isOpened) {
+                if (m_CollapseState == CollapseState::OPEN) {
+                    m_CollapseState = CollapseState::ON_COLLAPSING;
+                }
+            }
+        }
+
+        template<typename... Args>
+        void CheckOnCollapsing(Args &&... args) {
+            if (m_CollapseState == CollapseState::ON_COLLAPSING) {
+                m_onCollapseCallback();
+                m_CollapseState = CollapseState::COLLAPSE;
             }
         }
 
     private:
+        CollapseState m_CollapseState;
         Func m_func;
+        Func m_onCollapseCallback;
         const char *m_Label;
         bool m_IsCollapsed;
     };
@@ -69,6 +99,7 @@ namespace AIAC {
         void SetPaneUICamera();
         void SetPaneUISlam();
         void SetPaneUIToolhead();
+        void OnCollapsingPaneUIToolhead();
         void SetPaneUIACIM();
         void SetPaneUIUtils();
 

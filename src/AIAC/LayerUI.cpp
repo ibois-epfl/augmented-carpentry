@@ -117,12 +117,12 @@ namespace AIAC
         m_LogoLightClr = AIAC::Image(AIAC_LOGO_COLOR);
 
         // Set panes UI for layers
-        //                 Label       Collapse             PaneContent
-        StackPane(PaneUI("Camera",                            false,        AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Mapping",                           false,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-        StackPane(PaneUI("ACIM (Execution model)",            false,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
-        StackPane(PaneUI("Toolhead",                          false,         AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
-        StackPane(PaneUI("Utils",                             false,        AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+        //                Label                    Collapse   PaneContent
+        StackPane(PaneUI("Camera",                 false,     AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Mapping",                false,     AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("ACIM (Execution model)", false,     AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
+        StackPane(PaneUI("Toolhead",               false,     AIAC_BIND_EVENT_FN(SetPaneUIToolhead), AIAC_BIND_EVENT_FN(OnCollapsingPaneUIToolhead)));
+        StackPane(PaneUI("Utils",                  false,     AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
         m_IsOpen = new bool(true);
     }
@@ -203,7 +203,10 @@ namespace AIAC
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
 #endif
 
-        for (auto& pane : m_PaneUIStack) pane->Show();
+        for (auto& pane : m_PaneUIStack) {
+            pane->Show();
+            pane->CheckOnCollapsing();
+        }
 
         ImGui::End();
     }
@@ -981,6 +984,10 @@ namespace AIAC
                 ImGui::PopStyleColor();
             }
         ImGui::EndChild();
+    }
+
+    void LayerUI::OnCollapsingPaneUIToolhead(){
+        AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = false;
     }
 
     void LayerUI::ShowMappingPopup()
