@@ -2,7 +2,7 @@ name: gh-build
 
 on:
     push:
-        branches: ["main"]
+        branches: ["main", "ac_replayer"]
     pull_request:
         branches: ["main"]
 

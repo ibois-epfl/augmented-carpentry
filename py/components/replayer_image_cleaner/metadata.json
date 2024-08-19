@@ -1,0 +1,45 @@
+{
+    "name": "Image Cleaner",
+    "nickname": "acpy-replayer-image-cleaner",
+    "category": "acpy",
+    "subcategory": "replayer",
+    "description": "Delete the exported frame in the folder.",
+    "exposure": 4,
+    "instanceGuid": "299cb466-7c95-4cf1-bf06-b644ec02de49",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_path",
+                "nickname": "i_path",
+                "description": "The folder to clean.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "str",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_run",
+                "nickname": "i_run",
+                "description": "Set to True to clean the exported frames.",
+                "optional": true,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "bool",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+        ]
+    }
+}
