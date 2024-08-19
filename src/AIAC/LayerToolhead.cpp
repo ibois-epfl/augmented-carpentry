@@ -6,6 +6,7 @@
 #include "AIAC/Application.h"
 #include "AIAC/LayerToolhead.h"
 #include "GeometryUtils.h"
+#include "AIAC/UI/ClrPalette.h"
 
 namespace AIAC
 {
@@ -36,22 +37,6 @@ namespace AIAC
         
         cv::Mat currentFramePure;
         AIAC_APP.GetLayer<AIAC::LayerCamera>()->MainCamera.GetCurrentFrame().GetCvMat().copyTo(currentFramePure);
-
-        if (m_TtoolState == ttool::EventType::PoseInput)
-        {
-            // (?) if it is not called x2 it does not work on setting pose (?)
-            if (IsShowSilouhette)
-            {
-                TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
-                TTool->DrawSilhouette(currentFrame, glm::vec3(255.0f, 153.0f, 255.0f));
-            }
-            if (IsShowShaded)
-            {
-                TTool->DrawShaded(currentFrame);
-            }
-            m_Pose = TTool->GetPose();
-        }
-
         if (m_TtoolState == ttool::EventType::Tracking)
         {
             TTool->RunOnAFrame(currentFrame);
@@ -73,7 +58,11 @@ namespace AIAC
         {
             if (IsShowSilouhette)
             {
-                TTool->DrawSilhouette(currentFrame, glm::vec3(0.0f, 128.0f, 255.0f));
+                // convert ImVec4 to glm::vec3
+                glm::vec3 color = glm::vec3(AIAC_UI_SPARK_ORANGE.x, AIAC_UI_SPARK_ORANGE.y, AIAC_UI_SPARK_ORANGE.z);
+                // (?) if it is not called x2 it does not work on setting pose (?)
+                TTool->DrawSilhouette(currentFrame, color * 255.0f);
+                TTool->DrawSilhouette(currentFrame, color * 255.0f);
             }
             if (IsShowShaded)
             {
@@ -156,9 +145,6 @@ namespace AIAC
         {
         case 0:
             m_TtoolState = ttool::EventType::Tracking;
-            break;
-        case 1:
-            m_TtoolState = ttool::EventType::PoseInput;
             break;
         default:
             m_TtoolState = ttool::EventType::None;

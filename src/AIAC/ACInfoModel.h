@@ -4,8 +4,11 @@
 #include <set>
 #include <string>
 #include <glm/glm.hpp>
-#include "AIAC/GOSys/GOPrimitive.h"
+
 #include "pugixml.hpp"
+
+#include "AIAC/GOSys/GOPrimitive.h"
+#include "AIAC/Config.h"
 
 namespace AIAC{
 
@@ -84,11 +87,14 @@ class TimberInfo{
 public:
     class Component {
     public:
-        Component(std::string type) : m_Type(type) {}
+        Component(std::string type) : m_Type(type) {
+            m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+        }
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+        virtual glm::vec3 GetCenter() const;
 
     public:
         bool IsMarkedDone; // This one is for UI
@@ -97,11 +103,13 @@ public:
         std::string GetTypeString() const { return m_Type; }
 
     protected:
-        float m_Scale = 50.0f; // When converting to real world unit, divide by this number
+        float m_Scale; // When converting to SLAM world's coordinate, multiply this scale
         ACIMState m_State;
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
+        glm::vec3 m_Center;
+
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
 
     friend class ACInfoModel;
@@ -116,11 +124,16 @@ public:
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+        glm::vec3 GetCenter() const override { return (m_Start + m_End) * 0.5f; };
         void SwapStartEnd();
+
 
     public:  __always_inline
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
         std::shared_ptr<GOPoint> GetEndPointGO() { return m_EndPointGO; }
+
+    public:  __always_inline
+        double GetRadius() const { return m_Radius; }
 
     private:
         // These values uses original coordinate in xml file
@@ -137,7 +150,6 @@ public:
         std::shared_ptr<GOCylinder> m_CylinderGO;
         std::shared_ptr<GOPoint> m_StartPointGO;
         std::shared_ptr<GOPoint> m_EndPointGO;
-        std::shared_ptr<GOText> m_RadiusLabelGO;
         std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
@@ -151,14 +163,16 @@ public:
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+        glm::vec3 GetCenter() const override { return m_Center; };
 
         // Sub-class Face
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
+            glm::vec3 GetCenter() const override { return m_Center; };
+
             bool IsExposed() const { return m_Exposed; }
             glm::vec3 GetNormal() const { return m_Normal; }
-            glm::vec3 GetCenter() const { return m_Center; }
             std::vector<glm::vec3> GetCorners() const { return m_Corners; }
             std::set<std::string> GetEdges() const { return m_Edges; }
             std::set<std::string> GetNeighbors() const { return m_Neighbors; }
@@ -166,7 +180,6 @@ public:
         private:
             bool m_Exposed;
             glm::vec3 m_Normal;
-            glm::vec3 m_Center;
             std::vector<glm::vec3> m_Corners;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
@@ -184,12 +197,37 @@ public:
             GOPoint GetEndPt() { return m_GO->GetPEnd(); }
             Edge() : Component("EDGE") {}
 
+            /**
+             * @brief Set the Cotas Visibility object
+             * 
+             * @param visible if true, the cotas will be visible
+             */
+            inline void SetCotasVisibility(bool visible) {
+                for(auto& cota : m_Cotas) cota->SetVisibility(visible);
+                for(auto& cotaLine : m_CotaLines) cotaLine->SetVisibility(visible);
+                for(auto& cotaPt : m_CotaPts) cotaPt->SetVisibility(visible);
+            }
+            /**
+             * @brief Clear the cotas
+             * 
+             */
+            inline void ClearCotas() {
+                m_Cotas.clear();
+                m_CotaLines.clear();
+                m_CotaPts.clear();
+            }
+
         private:
             // These Start and End are original value (not transformed)
             glm::vec3 m_Start;
             glm::vec3 m_End;
             std::set<std::string> m_Neighbors;
             std::shared_ptr<GOLine> m_GO;
+
+            /// @brief The visualization of the cotas/mesures
+            std::vector<std::shared_ptr<GOText>> m_Cotas;
+            std::vector<std::shared_ptr<GOLine>> m_CotaLines;
+            std::vector<std::shared_ptr<GOPoint>> m_CotaPts;
 
             friend class Cut;
             friend class TimberInfo;
@@ -203,16 +241,34 @@ public:
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
         inline std::set<std::string>& GetAllNonExposedEdgeIDs() { return m_NonExposedEdgeIDs; }
-        inline glm::vec3 GetCenter() const { return m_Center; }
+
         void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
-    
+        inline std::string GetHighlightedFaceID() const { return m_HighlightedFaceID; }
+        inline TimberInfo::Cut::Face GetHighlightedFace() { return m_Faces[m_HighlightedFaceID]; }
+        
+        inline std::map<std::string, Face> GetFaceNeighbors(std::string faceID) {
+            std::map<std::string, Face> neighbors;
+            for(auto& neighborID : m_Faces[faceID].m_Neighbors){
+                neighbors[neighborID] = m_Faces[neighborID];
+            }
+            return neighbors;
+        }
+        inline std::map<std::string, Face> GetHighlightedFaceNeighbors() {
+            return GetFaceNeighbors(m_HighlightedFaceID);
+        }
+
+        inline void SetVisibilityAllCotas(bool visible) {
+            for(auto& edge : m_Edges){
+                edge.second.SetCotasVisibility(visible);
+            }
+        }
+
     private:
         std::string m_HighlightedFaceID;
         std::map<std::string, Face> m_Faces;
         std::map<std::string, Edge> m_Edges;
         std::set<std::string> m_NonExposedFaceIDs;
         std::set<std::string> m_NonExposedEdgeIDs;
-        glm::vec3 m_Center;
         std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
@@ -220,6 +276,7 @@ public:
 
     inline std::string GetID() const { return m_ID; }
     std::vector<std::string> GetAllComponentsIDs() const;
+
     inline Component* GetComponent(const std::string& id) { return m_Components[id]; }
     inline Component* GetCurrentComponent() { 
         if(m_Components.find(m_CurrentComponentID) == m_Components.end())
@@ -228,15 +285,46 @@ public:
     }
     std::string GetCurrentComponentID() { return m_CurrentComponentID; }
     void SetCurrentComponentTo(std::string id);
+    void SetNextComponentAsCurrent();
+    void SetPrevComponentAsCurrent();
 
     inline std::vector<glm::vec3> GetBoundingBox() const { return m_Bbox; }
     inline std::vector<std::pair<int, int> > GetBboxEdgesIndices() const { return m_BboxEdgesIndices; }
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
+    void UpdateCotasVisibility(bool visible);
+
+public: ///< small utilities to calculate the progress of fabrication
+    /// @brief Get the number of fabricate components
+    inline int GetFabricatedComponents() {
+        int count = 0;
+        for(auto& comp : m_Components){
+            if(comp.second->m_State == ACIMState::DONE)
+                count++;
+        }
+        return count;
+    }
+    /// @brief Get the total number of components
+    inline int GetTotalComponents() { return m_Components.size(); }
+    /// @brief Get the progress of fabrication in percentage
+    inline float GetFabricationProgress() {
+        return (float)GetFabricatedComponents() / GetTotalComponents() * 100;
+    }
+
+private:  ///< utils for visualization
+    /**
+     * @brief Transform the notation from .acim into more lightweight notation
+     * for visuals (e.g. "Hole#1" -> "H1" and "Cut#1" -> "C1")
+     * 
+     * @param id the original id of the component
+     * @return std::string the shortened id for visualization
+     */
+    std::string ShortenComponentID(std::string id);
 
 public:
     bool IsShowingAllComponents = false;
+    bool IsShowingCotas = false;
 
 private:
     std::string m_ID;
@@ -262,7 +350,6 @@ private:
     std::map<std::string, Cut> m_Cuts;
     std::map<std::string, Component*> m_Components;  // FIXME: refactor with smart pointers
     std::string m_CurrentComponentID = "";
-    
 
     friend class ACInfoModel;
 };
@@ -270,7 +357,9 @@ private:
 class ACInfoModel
 {
 public:
-    ACInfoModel(){};
+    ACInfoModel(){
+        m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+    };
     ~ACInfoModel(){};
 
     /**
@@ -289,6 +378,14 @@ public:
      * @brief Get the filepath to the loaded ACInfoModel.
      */
     inline const std::string& GetFilePath() const { return m_FilePath; }
+
+    /**
+     * @brief Get the name of the loaded ACInfoModel without the extension.
+     */
+    inline const std::string GetName() const {
+        auto nameWithExtension = m_FilePath.substr(m_FilePath.find_last_of("/\\") + 1);
+        std::string nameWithoutExtension = nameWithExtension.substr(0, nameWithExtension.find_last_of("."));
+        return nameWithoutExtension; }
     
     /**
      * @brief Get the pugi::xml_document object
@@ -310,6 +407,11 @@ public:
      */
     void UpdateBboxGOLine();
 
+    // /**
+    //  * @brief Update the cotas
+    //  */
+    // void UpdateCotas();
+
     /**
      * @brief transform all the GOPrimitive belonging to the ACInfoModel
      * @param transformMat transformation matrix
@@ -317,21 +419,44 @@ public:
     void Transform(glm::mat4x4 transformMat);
 
     /**
-     * @brief Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box.
-     * @return The length of the scanned model. (in TSLAM unit)
+     * @brief Get the length of the acim, which is calculated by averaging the four long edges of the bounding box.
+     * @return The length of the acim bounding box. (in TSLAM unit)
      */
     float GetLength();
+
+    /**
+     * @brief Get the length of the acim, which is calculated by averaging the four long edges of the bounding box.
+     * @return The length of the acim bounding box. (in Real World unit, meter)
+     */
+    inline float GetRealWorldLength() { return GetLength() / m_Scale; }
 
     /**
      * Set the visibility of bbox to true or false
      */
     void SetBboxVisibility(bool visible);
 
+    /**
+     * Increase / decrease real world length based on the measurement
+     */
+    void AddMeasuredBboxLength(const float diff);
+
+    /**
+     * Get the real world length of the bounding box (in Real World unit, meter)
+     */
+    inline float GetMeasuredBboxLength() const { return m_MeasuredBboxLength; };
+
+    /**
+     * Adjust the scale of the model based on the measured result
+     */
+    void AdjustScale();
+
 private:
     float m_EdgeWeight = 1.1f;
     float m_LabelSize = 0.75f;
 
-    float m_Scale = 50.0f;
+    float m_Scale;
+    float m_MeasuredBboxLength;
+
     std::string m_FilePath;
     pugi::xml_document m_ACIMDoc;
 

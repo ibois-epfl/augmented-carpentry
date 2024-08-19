@@ -37,6 +37,8 @@ namespace AIAC
             m_CircularSawD.NormStartACIT = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_CircularSawD.NormEndACIT = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
             m_CircularSawD.RadiusACIT = toolhead.child("radius").text().as_float() * this->GetScaleF();
+            m_CircularSawD.ThicknessACIT = toolhead.child("bladeThickness").text().as_float() * this->GetScaleF();
+            m_CircularSawD.OverhangACIT = toolhead.child("bladeOverhang").text().as_float() * this->GetScaleF();
         }
         else if (type == "chainsaw")
         {
@@ -49,6 +51,8 @@ namespace AIAC
             m_ChainSawD.NormStartACIT = ParseString2GlmVector(toolhead.child("normalstart").child_value()) * this->GetScaleF();
             m_ChainSawD.NormEndACIT = ParseString2GlmVector(toolhead.child("normalend").child_value()) * this->GetScaleF();
             m_ChainSawD.WidthACIT = toolhead.child("width").text().as_float() * this->GetScaleF();
+            m_ChainSawD.ThicknessACIT = toolhead.child("bladeThickness").text().as_float() * this->GetScaleF();
+            m_ChainSawD.OverhangACIT = toolhead.child("bladeOverhang").text().as_float() * this->GetScaleF();
         }
         else if (type == "sabersaw")
         {
@@ -131,6 +135,7 @@ namespace AIAC
 
         auto lnAxis = GOLine::Add(*data.m_DrillBitD.ToolbaseGO, *data.m_DrillBitD.TooltipGO);
         lnAxis->SetColor(GOColor::MAGENTA);
+
         lnAxis->SetVisibility(false);
 
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ToolbaseGO);
@@ -138,6 +143,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.EattipGO);
         this->m_GOPrimitivesInfo.push_back(data.m_DrillBitD.ChucktipGO);
         this->m_GOPrimitivesInfo.push_back(lnAxis);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
     void ACInfoToolhead::AddGOsInfoCircularSaw(ToolHeadData& data)
     {
@@ -157,6 +165,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_CircularSawD.CenterGO);
         this->m_GOPrimitivesInfo.push_back(data.m_CircularSawD.NormEndGO);
         this->m_GOPrimitivesInfo.push_back(lnNormal);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
     void ACInfoToolhead::AddGOsInfoChainSaw(ToolHeadData& data)
     {
@@ -197,6 +208,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_ChainSawD.NormEndGO);
         this->m_GOPrimitivesInfo.push_back(lnBaseMid);
         this->m_GOPrimitivesInfo.push_back(lnMidEnd);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
     void ACInfoToolhead::AddGOsInfoSaberSaw(ToolHeadData& data)
     {
@@ -228,6 +242,9 @@ namespace AIAC
         this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.NormStartGO);
         this->m_GOPrimitivesInfo.push_back(data.m_SaberSawD.NormEndGO);
         this->m_GOPrimitivesInfo.push_back(lineAxis);
+
+        for (auto& go : this->m_GOPrimitivesInfo)
+            go->SetVisibility(false);
     }
 
     void ACInfoToolhead::SetVisibility(bool visible)

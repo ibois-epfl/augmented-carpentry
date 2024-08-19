@@ -49,6 +49,15 @@ namespace AIAC
             AIAC_WARN("no matching tool and component found");
         }
 
-        if(m_CurrentFabFeedbackPtr != nullptr) m_CurrentFabFeedbackPtr->Activate();
+        if(m_CurrentFabFeedbackPtr != nullptr)
+        {
+            if (m_IsCurrentFabFeedbackVisible)
+            {
+                m_CurrentFabFeedbackPtr->Activate();
+                m_CurrentFabFeedbackPtr->Update();
+            }
+            else
+                m_CurrentFabFeedbackPtr->Deactivate();
+        }
     }
 }

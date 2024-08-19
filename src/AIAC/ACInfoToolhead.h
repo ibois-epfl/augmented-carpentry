@@ -4,6 +4,7 @@
 
 #include "AIAC/GOSys/GO.h"
 #include "AIAC/GOSys/GOPrimitive.h"
+#include "Config.h"
 
 #include <glm/glm.hpp>
 
@@ -54,6 +55,10 @@ namespace AIAC
         std::string NameACIT;
         /// @brief radius of the circular blade
         float RadiusACIT;
+        /// @brief the overhaul thickness of the blade
+        float ThicknessACIT;
+        /// @brief the overhang width of the teeth of the blade from one side
+        float OverhangACIT;
 
         /// @brief center of the circle defining the circular blade
         glm::vec3 CenterACIT;
@@ -79,6 +84,10 @@ namespace AIAC
         std::string NameACIT;
         /// @brief width of the chain
         float WidthACIT;
+        /// @brief the overhaul thickness of the blade
+        float ThicknessACIT;
+        /// @brief the overhang width of the teeth of the blade from one side
+        float OverhangACIT;
 
         /// @brief point start of the basetool
         glm::vec3 ChainBaseACIT;
@@ -138,7 +147,9 @@ namespace AIAC
     class ToolHeadData
     {
         public:
-            ToolHeadData() = default;
+            ToolHeadData(){
+                this->m_ScaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+            }
             ~ToolHeadData() = default;
         private:
             /**
@@ -197,7 +208,7 @@ namespace AIAC
 
         private:
             /// @brief Scaling factor from meters to AC scale
-            float m_ScaleF = 50.0f;
+            float m_ScaleF = 0.0f;
 
             /// @brief Type of the toolhead
             ACToolHeadType m_Type;

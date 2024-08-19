@@ -13,6 +13,8 @@ public:
     inline static const std::string SEC_AIAC = "AIAC";
     inline static const std::string CAM_ID = "CamID";
     inline static const std::string CAM_PARAMS_FILE = "CamParamsFile";
+    inline static const std::string CAM_FLIP_HORIZONTAL = "CamFlipHorizontal";
+    inline static const std::string CAM_FLIP_VERTICAL = "CamFlipVertical";
     inline static const std::string AC_INFO_MODEL = "ACInfoModel";
     inline static const std::string SCANNED_MODEL = "ScannedModel";
     inline static const std::string ALIGN_OFFSET = "AlignOffset";
@@ -23,6 +25,9 @@ public:
     inline static const std::string SEC_TSLAM = "TSlam";
     inline static const std::string MAP_FILE = "MapFile";
     inline static const std::string VocFile = "VocFile";
+    inline static const std::string RECONSTRUCT_CONFIG_DEFAULT_FILE = "ReconstructConfigDefaultFile";
+    inline static const std::string SAVE_DIR_MAPS = "SaveDirMaps";
+    inline static const std::string STABILIZATION_FRAME_COUNT = "SaveDirMaps";
 
     inline static const std::string SEC_TTOOL = "TTool";
     inline static const std::string CONFIG_FILE = "ConfigFile";

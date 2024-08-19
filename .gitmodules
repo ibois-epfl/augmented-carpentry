@@ -10,7 +10,3 @@
 	branch = main
 	path = deps/TTool
 	url = git@github.com:ibois-epfl/TTool.git
-[submodule "deps/eventpp"]
-	branch = main
-	path = deps/eventpp
-	url = git@github.com:ibois-epfl/eventpp.git

@@ -33,6 +33,9 @@ namespace AIAC
 
         m_CalibFilePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
         LoadCameraParams(m_CalibFilePath);
+
+        FlipHorizontal = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_HORIZONTAL, false);
+        FlipVertical = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_VERTICAL, false);
     }
 
     void Camera::InitCameraParamsFromFile(const std::string &filePath) {
@@ -66,6 +69,9 @@ namespace AIAC
         fs["distortion_coefficients"] >> m_DistortionCoef;
         fs["camera_matrix"] >> m_CameraMatrix;
 
+        m_DistortionCoef.convertTo(m_DistortionCoef, CV_32F);
+        m_CameraMatrix.convertTo(m_CameraMatrix, CV_32F);
+
         if(m_DistortionCoef.rows == 4) {
             m_IsFisheye = true;
             cv::fisheye::initUndistortRectifyMap(m_CameraMatrix, m_DistortionCoef, cv::Mat(),
@@ -86,6 +92,9 @@ namespace AIAC
 
         cv::Mat frame;
         m_VideoCapture >> frame;
+
+        if (FlipHorizontal) cv::flip(frame, frame, 1);
+        if (FlipVertical) cv::flip(frame, frame, 0);
 
         m_RawCurrentFrame = frame;
 

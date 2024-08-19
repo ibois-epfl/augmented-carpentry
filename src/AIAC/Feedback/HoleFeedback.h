@@ -35,8 +35,12 @@ namespace AIAC
     private:
         /// @brief the line from the drillbit tip to the end of the hole
         std::shared_ptr<GOLine> m_HoleLine2ToolEnd;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolEnd_A;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolEnd_B;
         /// @brief the line from the drillbit tip to the start of the hole (aka start distance)
         std::shared_ptr<GOLine> m_HoleLine2ToolStart;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolStart_A;
+        std::shared_ptr<GOPoint> m_HoleLine2ToolStart_B;
 
     friend class HoleFeedback;
     };
@@ -52,6 +56,8 @@ namespace AIAC
     private:
         /// @brief UI indicator for orientation
         std::shared_ptr<GOLine> m_GUILineOrientation;
+        std::shared_ptr<GOPoint> m_GUILineOrientation_A;
+        std::shared_ptr<GOPoint> m_GUILineOrientation_B;
 
     friend class HoleFeedback;
     };
@@ -110,7 +116,7 @@ namespace AIAC
         /// @brief the tolerance to detect if the tooltip is inside or outside the  hole
         float m_InsideOutDetection = 20.f;
         /// @brief acceptable tolerance for the correct rotation detection
-        float m_OrientationTolerance = 0.5f;
+        float m_OrientationTolerance = 1.1f;
 
     };
 }

@@ -34,6 +34,9 @@ if __name__ == "__main__":
 
         # retrieve the name of the beam from document
         beam_name = ACPy.ac_util.get_brep_object_name(i_beam, i_GUIDs[idx])
+        # split by `_` to get the beam name as the last part of the name
+        beam_name = beam_name.split("_")[-1]
+
         ACIM = ACPy.ac_acim.ACIM(out_dir=i_acim_path, 
                                  out_name=beam_name)
         ACIM.add_timber(beam_name)

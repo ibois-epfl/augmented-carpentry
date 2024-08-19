@@ -28,11 +28,15 @@ namespace AIAC
             m_CutCircularSawFeedback.EnableCutPlane(enable);
         };
 
+        inline void DeactivateCurrentFeedbackVisibility() { m_IsCurrentFabFeedbackVisible = false; }
+        inline void ActivateCurrentFeedbackVisibility() { m_IsCurrentFabFeedbackVisible = true; }
+
     private:
         HoleFeedback m_HoleFeedback;
         CutChainSawFeedback m_CutChainSawFeedback;
         CutCircularSawFeedback m_CutCircularSawFeedback;
 
         FabFeedback* m_CurrentFabFeedbackPtr = nullptr;
+        bool m_IsCurrentFabFeedbackVisible = true;
     };
 }

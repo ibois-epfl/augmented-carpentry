@@ -1,7 +1,11 @@
 #include "aiacpch.h"
 
+#include "assimp/Importer.hpp"      // C++ importer interface
+#include "assimp/scene.h"           // Output data structure
+#include "assimp/postprocess.h"     // Post processing flags
 
 #include "glm/gtx/string_cast.hpp"
+
 #include "AIAC/Log.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Application.h"
@@ -170,6 +174,15 @@ namespace AIAC
         : m_Center(center), m_Normal(normal), m_Radius(radius)
     {
         m_Type = GOTypeFlags::_GOCircle;
+    }
+
+    glm::vec3 GOCircle::ClosestPointToPoint(glm::vec3 point)
+    {
+        auto p1 = this->m_Center.GetPosition();
+        auto p2 = point;
+        auto v = p2 - p1;
+        auto mag = glm::length(v);
+        return p1 + (v / mag) * this->m_Radius;
     }
 
     void GOCircle::InitGLObject()

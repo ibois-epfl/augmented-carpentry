@@ -9,7 +9,7 @@ namespace AIAC {
     class FabFeedback {
     public:
         FabFeedback() {
-            this->m_ScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 50.f);
+            this->m_ScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
         };
         ~FabFeedback() = default;
 
@@ -18,6 +18,6 @@ namespace AIAC {
         virtual void Deactivate() {};
     
     protected:
-        float m_ScaleFactor = 50.f;
+        float m_ScaleFactor = 0.0f;
     };
 }

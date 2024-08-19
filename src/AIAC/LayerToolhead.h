@@ -14,12 +14,12 @@ namespace AIAC
     {
     public:
         LayerToolhead()
-            : IsShowSilouhette(true),
+            : IsShowSilouhette(false),
               ToolheadStateUI(-1),
               IsShowToolheadGOInfo(false),
-              m_ACScaleFactor(50.0f),
             m_TtoolState(ttool::EventType::None)
         {
+            this->m_ACScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
             this->ACInfoToolheadManager = std::make_shared<AIAC::ACInfoToolheadManager>();
         };
 
@@ -59,7 +59,7 @@ namespace AIAC
         /// @brief Get the current classifier log of the ttool
         std::string GetClassifierLog() const { return TTool ? TTool->GetClassifierLog() : "TTool not initialized"; }
         std::vector<std::string> GetClassifierToolheadList() const {return m_ClassifierToolList; }
-    
+
     private:
         /// @brief Sync the ttool tool manager and the acitoolhead to point to the same object
         void syncTToolAndACInfoToolhead();
