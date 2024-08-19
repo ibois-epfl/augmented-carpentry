@@ -68,7 +68,6 @@ namespace AIAC
 
         // start mapping
         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
-        AIAC_APP.GetRenderer()->StartMapping();
     }
 
     void SLAMStopMappingEvent::OnSLAMStopMapping()
@@ -82,7 +81,6 @@ namespace AIAC
 
         AIAC_INFO("Stop mapping");
         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
-        AIAC_APP.GetRenderer()->StopMapping();
 
         // Optimize Map
         if(m_ToOptimize && m_ToSave) {

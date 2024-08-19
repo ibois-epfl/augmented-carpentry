@@ -45,45 +45,6 @@ namespace AIAC
         InitCamCalibView();
 
         m_MappingView.SetSize(600, 442);
-
-        // auto pt = GOPoint::Add(0, 0, 0, 5.0f);
-        // pt->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-
-        // GOLine::Add(glm::vec3(0,0,0), glm::vec3(0,0,10), 10.0f);
-        
-        // cout << "--------------------" << endl;
-        // auto myCylinder = GOCylinder::Add(glm::vec3(50,10,0), glm::vec3(50,0,10), 32.0f);
-        // myCylinder->SetColor(glm::vec4(0.5f, 0.5f, 0.0f, 0.2f));
-        // cout << "--------------------" << endl;
-
-        // vector<glm::vec3> pts;
-        // pts.push_back(glm::vec3(4,0,0));
-        // pts.push_back(glm::vec3(99,5,10));
-        // pts.push_back(glm::vec3(9,10,10));
-        // auto myPolyline = GOPolyline::Add(pts);
-        // myPolyline->SetColor(glm::vec4(0.5f, 0.2f, 0.0f, 1.0f));
-
-        // auto circle = GOCircle::Add(glm::vec3(0, 5, 0), 10.0f);
-        // circle->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-
-        // std::vector<glm::vec3> vertices = {
-        //     glm::vec3(0.0f, 0.0f, 10.0f),
-        //     glm::vec3(0.0f, 0.0f, 0.0f),
-        //     glm::vec3(0.0f, 10.0f, 0.0f),
-        //     glm::vec3(10.0f, 0.0f, 0.0f),
-        // };
-        // std::vector<glm::vec4> colors = {
-        //     glm::vec4(1.0f, 0.0f, 0.0f, 1.0f),
-        //     glm::vec4(0.0f, 1.0f, 1.0f, 1.0f),
-        //     glm::vec4(0.0f, 1.0f, 0.0f, 1.0f),
-        //     glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
-        // };
-
-        // m_TestGLObject = std::make_shared<GLPointObject>(vertices, colors, 3.0f);
-        // glBindVertexArray(m_VAO);
-        // m_TestGLObject = glCreatePoints(vertices, colors, 3);
-        // cout << "m_TestGLObject: " << m_TestGLObject.vertexBuf << endl;
-
     }
 
     void Renderer::InitProjMatrix(){
@@ -254,23 +215,6 @@ namespace AIAC
         glm::mat4 finalPoseMatrix = m_GlobalProjMatrix * m_GlobalCamMatrix;
         glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
 
-        // if(ShowPointCloudMap){
-        //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-        // }
-        // if(ShowDigitalModel){
-            // DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-            // DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-        // }
-
-        // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
-
-        // visualize camera
-        // auto camPoseInv = AIAC_APP.GetLayer<LayerSlam>()->GetInvCamPoseGlm(); // camera pose in world space
-        // glm::mat4 cameraSpaceMVP = m_GlobalProjMatrix * m_GlobalCamMatrix * camPoseInv;
-        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &cameraSpaceMVP[0][0]);
-        // // glDrawLines3d(m_CamVisualizationEdges, glm::vec4(0, 0, 1, 1));
-        // glUniformMatrix4fv(m_MatrixId, 1, GL_FALSE, &finalPoseMatrix[0][0]);
-
         // Draw All objects
         DrawAllGOs(finalPoseMatrix, 0.05f);
 
@@ -326,21 +270,6 @@ namespace AIAC
         // Draw the essential objects: map, point cloud map and digital model !
         // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glm::vec4 edgeColor;
-//        if(AIAC_APP.GetLayer<LayerSlam>()->IsTracked()) {
-//            // if(ShowPointCloudMap){
-//            //     PointCloudMap.DrawVertices(m_PointCloudMapColor, 1);
-//            // }
-//            // if(ShowDigitalModel){
-//            //     DigitalModel.DrawBoundingBoxEdges(m_DigitalModelBoundingBoxColor);
-//            //     DigitalModel.DrawFaces(m_DigitalModelFaceColor);
-//            // }
-//            // for (auto& mesh : Meshes) {
-//            //     mesh.DrawEdges(m_DefaultEdgeColor);
-//            // }
-//            // Draw All objects
-//            // DrawSlamMap(AIAC_APP.GetLayer<LayerSlam>()->Slam.getMap(), glm::vec4(1, 0, 0, 1));
-//            DrawAllGOs(finalPoseMatrix);
-//        }
         if (AIAC_APP.GetLayer<LayerSlam>()->GetNumLostFrame() <= 3){
             DrawAllGOs(finalPoseMatrix);
         }

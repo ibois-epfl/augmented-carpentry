@@ -1,7 +1,11 @@
 #include "aiacpch.h"
 
+#include "assimp/Importer.hpp"      // C++ importer interface
+#include "assimp/scene.h"           // Output data structure
+#include "assimp/postprocess.h"     // Post processing flags
 
 #include "glm/gtx/string_cast.hpp"
+
 #include "AIAC/Log.h"
 #include "AIAC/GOSys/GOPrimitive.h"
 #include "AIAC/Application.h"
