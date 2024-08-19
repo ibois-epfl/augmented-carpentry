@@ -48,9 +48,9 @@ namespace AIAC
     // ----------------- //
     GLPointObject::GLPointObject(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors, GLfloat pointSize) {
         this->type = GLObjectType::POINTS;
-        this->size = vertices.size();
+        this->size = int(vertices.size());
         this->pointSize = pointSize;
-        
+
         GLObject::BufferData(vertices, colors);
     }
     
@@ -60,7 +60,7 @@ namespace AIAC
         GLfloat prevPointSize;
         glGetFloatv(GL_POINT_SIZE, &prevPointSize);
         glPointSize(pointSize);
-        glDrawArrays(GL_POINTS, 0, pointSize);
+        glDrawArrays(GL_POINTS, 0, size);
         glPointSize(prevPointSize);
     }
 
