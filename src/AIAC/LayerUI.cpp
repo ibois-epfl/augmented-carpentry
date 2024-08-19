@@ -117,12 +117,12 @@ namespace AIAC
         m_LogoLightClr = AIAC::Image(AIAC_LOGO_COLOR);
 
         // Set panes UI for layers
-        //                Label                    Collapse   PaneContent
-        StackPane(PaneUI("Camera",                 false,     AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Mapping",                false,     AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-        StackPane(PaneUI("ACIM (Execution model)", false,     AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
-        StackPane(PaneUI("Toolhead",               false,     AIAC_BIND_EVENT_FN(SetPaneUIToolhead), AIAC_BIND_EVENT_FN(OnCollapsingPaneUIToolhead)));
-        StackPane(PaneUI("Utils",                  false,     AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+        //                Label                    Collapse  PaneContent
+        StackPane(PaneUI("Camera",                 false,    AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Mapping",                false,    AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("ACIM (Execution model)", false,    AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
+        StackPane(PaneUI("Toolhead",               false,    AIAC_BIND_EVENT_FN(SetPaneUIToolhead), AIAC_BIND_EVENT_FN(OnCollapsingPaneUIToolhead)));
+        StackPane(PaneUI("Utils",                  false,    AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
         m_IsOpen = new bool(true);
     }
@@ -174,6 +174,39 @@ namespace AIAC
         ImGui::DestroyContext();
     }
 
+    template<typename... Args>
+    void PaneUI::Show(Args &&... args) {
+        bool isOpened = ImGui::CollapsingHeader(m_Label, m_IsCollapsed ? ImGuiTreeNodeFlags_DefaultOpen : 0);
+        if (isOpened) {
+            // if this one is not opened yet, close the previously opened one
+            if (m_CollapseState != CollapseState::OPEN) {
+                auto lastOpenedPaneUI = AIAC_APP.GetLayer<LayerUI>()->GetOpenedPaneUI();
+                if (lastOpenedPaneUI != nullptr && lastOpenedPaneUI->m_Label != m_Label) {
+                    ImGui::GetStateStorage()->SetInt(ImGui::GetID(lastOpenedPaneUI->m_Label), 0);
+                    lastOpenedPaneUI->Show();
+                }
+                AIAC_APP.GetLayer<LayerUI>()->SetOpenedPaneUI(this);
+            }
+            m_CollapseState = CollapseState::OPEN;
+            m_func(std::forward<Args>(args)...);
+        }
+
+        // check if it's just collapsed
+        if (!isOpened) {
+            if (m_CollapseState == CollapseState::OPEN) {
+                m_CollapseState = CollapseState::ON_COLLAPSING;
+            }
+        }
+    }
+
+    template<typename... Args>
+    void PaneUI::CheckOnCollapsing(Args &&... args) {
+        if (m_CollapseState == CollapseState::ON_COLLAPSING) {
+            m_onCollapseCallback(std::forward<Args>(args)...);
+            m_CollapseState = CollapseState::COLLAPSE;
+        }
+    }
+
     void LayerUI::ShowMenuBar()
     {
         if (ImGui::BeginMainMenuBar())
@@ -204,8 +237,8 @@ namespace AIAC
 #endif
 
         for (auto& pane : m_PaneUIStack) {
-            pane->Show();
-            pane->CheckOnCollapsing();
+            pane.Show();
+            pane.CheckOnCollapsing();
         }
 
         ImGui::End();
