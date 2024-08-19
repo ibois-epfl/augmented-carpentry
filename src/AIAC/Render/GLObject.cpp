@@ -59,8 +59,8 @@ namespace AIAC
         BindVBOs();
         GLfloat prevPointSize;
         glGetFloatv(GL_POINT_SIZE, &prevPointSize);
-        glPointSize(pointSize);
-        glDrawArrays(GL_POINTS, 0, size);
+        glPointSize(this->pointSize);
+        glDrawArrays(GL_POINTS, 0, this->size);
         glPointSize(prevPointSize);
     }
 
