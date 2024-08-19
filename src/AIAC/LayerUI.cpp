@@ -615,9 +615,9 @@ namespace AIAC
             ImGui::SameLine();
             if(ImGui::Checkbox("Show Cotas", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingCotas)){
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingCotas){
-                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetAllCotasVisibility(true);
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().UpdateCotasVisibility(true);
                 } else {
-                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetAllCotasVisibility(false);
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().UpdateCotasVisibility(false);
                 }
             }
 

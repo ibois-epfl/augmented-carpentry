@@ -304,13 +304,20 @@ namespace AIAC
                     cut->SetVisibilityAllCotas(true);
             }
         }
+        this->IsShowingAllComponents = true;
     }
 
-    void TimberInfo::SetAllCotasVisibility(bool visible)
+    void TimberInfo::UpdateCotasVisibility(bool visible)
     {
-        this->IsShowingCotas = visible;
-        for (const auto& [_, component] : m_Components) {
-            if(auto cut = dynamic_cast<Cut*>(component)){
+        if (!visible || IsShowingAllComponents) {
+            this->IsShowingCotas = visible;
+            for (const auto& [_, component] : m_Components) {
+                if(auto cut = dynamic_cast<Cut*>(component)){
+                    cut->SetVisibilityAllCotas(visible);
+                }
+            }
+        } else {
+            if(auto cut = dynamic_cast<Cut*>(this->GetCurrentComponent())){
                 cut->SetVisibilityAllCotas(visible);
             }
         }
