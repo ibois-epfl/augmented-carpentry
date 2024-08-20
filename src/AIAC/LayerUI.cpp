@@ -619,6 +619,21 @@ namespace AIAC
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().UpdateCotasVisibility(false);
                 }
             }
+            if (auto feedback = dynamic_cast<CutCircularSawFeedback*>(AIAC_APP.GetLayer<LayerFeedback>()->GetCurrentFabFeedback())){
+                ImGui::Checkbox("Manually Select Face", &feedback->IsRefFacesSelectedManually);
+                if (feedback->IsRefFacesSelectedManually) {
+                    if(ImGui::Button("<##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(-1);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button(">##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(1);
+                    }
+                }
+            }
+
 
             ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
