@@ -547,7 +547,7 @@ namespace AIAC
             ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
         ImGui::Text("Current Execution: %s", isCurrentDone.c_str());
         ImGui::PopStyleColor();
-        ImGui::BeginChild("components_control_panel", ImVec2(0, 160), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("components_control_panel", ImVec2(0, 216), true, ImGuiWindowFlags_HorizontalScrollbar);
             // print the progress
             ImGui::Text("Progress: %d / %d ( %.2f%% )", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetFabricatedComponents(),
                                                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetTotalComponents(),
