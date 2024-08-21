@@ -35,10 +35,7 @@ public:
     inline static const std::string TTOOL_ROOT_PATH = "TToolRootPath";
     inline static const std::string CACHED_TOOLHEAD = "CachedToolhead";
 
-    inline static const std::string SEC_RENDERER = "Renderer";
-    inline static const std::string PCD_MAP_PATH = "PointCloudMapPath";
-    inline static const std::string DIGITAL_MODEL_PATH = "DigitalModelPath";
-    inline static const std::string MESH_PATHS = "MeshPaths";
+
 
     inline static const std::string SEC_UTILS = "Utils";
     inline static const std::string UTILS_PATH = "UtilsPath";

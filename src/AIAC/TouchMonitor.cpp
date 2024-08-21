@@ -62,9 +62,9 @@ namespace AIAC
         }
     }
 
-    inline std::string TouchMonitor::ImportNameFromConfig() { return  AIAC::Config::Get<std::string>("TouchMonitorSpecs", "Name"); }
-    inline std::string TouchMonitor::ImportVideoModeFromConfig() { return AIAC::Config::Get<std::string>("TouchMonitorSpecs", "LinkMode"); }
-    inline std::string TouchMonitor::ImportResolutionFromConfig(){ return AIAC::Config::Get<std::string>("TouchMonitorSpecs", "Resolution"); }
+    inline std::string TouchMonitor::ImportNameFromConfig() { return  AIAC::Config::Get<std::string>("TouchMonitorSpecs", "Name", "WaveShare WS170120"); }
+    inline std::string TouchMonitor::ImportVideoModeFromConfig() { return AIAC::Config::Get<std::string>("TouchMonitorSpecs", "LinkMode", "HDMI"); }
+    inline std::string TouchMonitor::ImportResolutionFromConfig(){ return AIAC::Config::Get<std::string>("TouchMonitorSpecs", "Resolution", "800x400"); }
 
     void TouchMonitor::Init()
     {
