@@ -1,8 +1,8 @@
 import os
 import json
 import subprocess
-from glob import glob
 import zipfile
+from glob import glob
 
 import xml.etree.ElementTree as ET
 
@@ -14,7 +14,7 @@ def unzip_file(zip_file_path, dest_folder):
     """Unzip a file to a destination folder."""
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extractall(dest_folder)
-        
+
     return True
 
 
@@ -49,7 +49,7 @@ def download_and_unzip_zenodo_file(url, dest_folder, filename):
 def download_ttool_model(ttool_zenodo_version, download_root_path):
     """Download all the TTool models of a specific version from Zenodo."""
 
-    Rhino.RhinoApp.WriteLine("Downloading TTool models...")
+    # Rhino.RhinoApp.WriteLine("Downloading TTool models...")
 
     metadata_url = "https://zenodo.org/api/records/" + ttool_zenodo_version
     curl_command = ["curl", metadata_url]
@@ -185,9 +185,8 @@ def construct_circularsaw_primitive_model(acit_data):
 
 def construct_chainsaw_primitive_model(acit_data):
     """Construct a primitive model of the chainsaw from the ACIT file."""
-    # TODO: implement this
-
-    raise NotImplementedError
+    # The primitive model for chainsaw can just take the normal rebuilt model
+    return None
 
 
 def construct_primitive_model(acit_data):
@@ -203,14 +202,13 @@ def construct_primitive_model(acit_data):
         raise ValueError("Unknown toolhead type")
 
 
-def rebuild_circularsaw_model(raw_mesh_model, acit_data):
+def rebuild_saw_blade_model(raw_mesh_model, acit_data):
     """Rebuild the model to give it thickness."""
     normal = acit_data["normal"]
     normal.Unitize()
     # the normal will facing the outside of the blade (facing the camera), thus * -1
     extrude_vec = -normal * acit_data["blade_thickness"]
     
-
     naked_edges = raw_mesh_model.GetNakedEdges()
     sorted_edges = sorted(naked_edges, key=lambda e: e.Length, reverse=True)
 
@@ -259,7 +257,7 @@ def load(ttool_model_root_path, ttool_zenodo_version_url, scale=50):
         if path.endswith(".zip"):
             continue
         
-        if "chain" in path or "saber" in path:
+        if "saber" in path:
             # TODO: skip those that are not in used at the moment
             continue
 
@@ -280,19 +278,14 @@ def load(ttool_model_root_path, ttool_zenodo_version_url, scale=50):
             raise ValueError(f"Error loading .obj file. If the file exists, try re-open Rhino.")
 
         raw_model.Scale(scale)
-        if acit_data["type"] == "circularsaw":
-            fine_model = rebuild_circularsaw_model(raw_model, acit_data)
+        saw_blade_type_to_rebuild = ["circularsaw", "chainsaw"]
+        if acit_data["type"] in saw_blade_type_to_rebuild:
+            fine_model = rebuild_saw_blade_model(raw_model, acit_data)
         else:
             fine_model = Rhino.Geometry.Brep.CreateFromMesh(raw_model, True)
         
         # export the data
         ttool_models[model_name]["type"] = acit_data["type"]
-
-        # if ttool_models[model_name]["type"] == "circularsaw":
-        #     ttool_models[model_name]["center"] = acit_data["center"]
-        #     ttool_models[model_name]["normal"] = acit_data["normal"]
-        #     ttool_models[model_name]["blade_thickness"] = acit_data["blade_thickness"]
-
         ttool_models[model_name]["raw_model"] = raw_model
         ttool_models[model_name]["model"] = fine_model
         ttool_models[model_name]["primitive_model"] = primitive_model
@@ -301,8 +294,8 @@ def load(ttool_model_root_path, ttool_zenodo_version_url, scale=50):
 
 
 if __name__ == "__main__":
-    ttool_model_root_path = "/Users/petingo/p/augmented-carpentry/assets/replayer_example/TTool_dataset"
+    ttool_model_root_path = "C:\\Users\\localuser\\Documents\\hong-bin\\replayer\\ttool_dataset_new"
     ttool_zenodo_version_url = "https://zenodo.org/record/12578820"
     ttool_models = load(ttool_model_root_path, ttool_zenodo_version_url)
     
-    a = ttool_models["circular_saw_blade_mafel_237"]
+    # a = ttool_models["circular_saw_blade_mafel_237"]
