@@ -132,27 +132,13 @@ namespace AIAC
             m_OutputPath = basePathA + "_combined_" + filenameB;
         }
 
-        // FIXME: nasty workaround
-        string command = "tslam_combine_map ";
-        command += m_MapPathA + " " + m_MapPathB + " " + m_OutputPath;
-        std::system(command.c_str());
-
         auto basePath = m_OutputPath.substr(0, m_OutputPath.find_last_of("."));
         auto ymlTagMapPath = basePath + ".yml";
-        auto recPlyPath = basePath + ".ply";
+        auto recPlyPath = basePath + "_reconstruct.ply";
 
-        /// FIXME: Some tag disappears after combining maps, don't know why
-//        AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
-//                m_MapPathA, m_MapPathB, m_OutputPath,
-//                false, false, nullptr, m_OptimizeIterations);
-//
-//        AIAC_APP.GetLayer<LayerSlam>()->UpdateMap(m_OutputPath);
-//
-//        AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->saveToFile(ymlTagMapPath);
-//        if(AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.getMap()->map_markers.size() == 0){
-//            AIAC_WARN("No tag in the map, skip rest of the process");
-//            return;
-//        }
+        AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
+                m_MapPathA, m_MapPathB, m_OutputPath,
+                true, true, nullptr, m_OptimizeIterations);
 
         // Reconstruct 3D
         bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
