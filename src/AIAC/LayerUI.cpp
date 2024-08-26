@@ -1310,14 +1310,27 @@ namespace AIAC
             if(ImGui::Button("Cancel", ImVec2(80, 0))){ m_IsCombiningMap = false; }
             ImGui::SameLine();
             if(ImGui::Button("Confirm", ImVec2(80, 0))){
-                if(strlen(m_CombMapParams.MapPathA) == 0 || strlen(m_CombMapParams.MapPathB) == 0 || strlen(m_CombMapParams.OutputPath) == 0){
+                if(strlen(m_CombMapParams.MapPathA) == 0 || strlen(m_CombMapParams.MapPathB) == 0){
                     AIAC_ERROR("Path not selected.");
-
                 } else {
-                    AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
-                            m_CombMapParams.MapPathA, m_CombMapParams.MapPathB, m_CombMapParams.OutputPath,
-                            true, true, nullptr, 2);
-                    memset(m_CombMapParams.MapPathA, 0, PATH_BUF_SIZE * 3);
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMCombineMapEvent>(
+                            m_CombMapParams.MapPathA,
+                            m_CombMapParams.MapPathB,
+                            m_CombMapParams.OutputPath,
+                            50,
+                            m_ReconstructParams.RadiusSearch,
+                            m_ReconstructParams.CreaseAngleThreshold,
+                            m_ReconstructParams.MinClusterSize,
+                            m_ReconstructParams.AABBScaleFactor,
+                            m_ReconstructParams.MaxPolyDist,
+                            m_ReconstructParams.MaxPlnDist,
+                            m_ReconstructParams.MaxPlnAngle,
+                            m_ReconstructParams.Eps
+                    ));
+
+                    memset(m_CombMapParams.MapPathA, 0, PATH_BUF_SIZE);
+                    memset(m_CombMapParams.MapPathB, 0, PATH_BUF_SIZE);
+                    memset(m_CombMapParams.OutputPath, 0, PATH_BUF_SIZE);
                     m_IsCombiningMap = false;
                 }
             }

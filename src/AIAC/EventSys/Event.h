@@ -13,6 +13,7 @@ namespace AIAC
         None = 0,
         AppClose,
         SLAMMapLoaded, SLAMVocabularyLoaded, SLAMStartMapping, SLAMStopMapping,
+        SLAMCombineMapEvent,
         CameraCalibrationLoaded
         /* add types of events here */
     };
