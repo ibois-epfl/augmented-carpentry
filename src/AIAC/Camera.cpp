@@ -85,6 +85,7 @@ namespace AIAC
         m_VideoCapture >> frame;
 
         if (frame.empty()) {
+            AIAC_APP.Close();
             return frame;
         }
 
