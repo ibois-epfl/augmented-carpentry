@@ -44,3 +44,5 @@ jobs:
           retention-days: 1
       - name: Build
         run: cmake --build build
+      - name: Smoke Test
+        run: ./build/bin/AC
