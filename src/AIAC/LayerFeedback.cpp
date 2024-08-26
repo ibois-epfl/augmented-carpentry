@@ -15,6 +15,10 @@ namespace AIAC
     void LayerFeedback::OnFrameStart()
     {
         if(m_CurrentFabFeedbackPtr != nullptr) m_CurrentFabFeedbackPtr->Deactivate();
+        if(AC_FF_COMP == nullptr) {
+            m_CurrentFabFeedbackPtr = nullptr;
+            return;
+        }
 
         if (AC_FF_TOOL->GetTypeString() == "DRILLBIT"){
             if (AC_FF_COMP->GetTypeString() == "HOLE") {

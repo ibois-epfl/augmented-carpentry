@@ -134,6 +134,16 @@ namespace AIAC
             if(enable) m_CutPlaneVisualizer.Activate();
             else m_CutPlaneVisualizer.Deactivate();
         };
+
+        /**
+         * Manually select the reference face (the nearest parallel face)
+         * @param scrollDirection when > 0, goes to next; <= 0, goes back.
+         */
+        void ManuallyScrollRefFace(int scrollDirection);
+
+    public:
+        // config exposed to UI
+        bool IsRefFacesSelectedManually = false;
         
     private:
         // data
@@ -152,8 +162,6 @@ namespace AIAC
     private:  ///< @brief the important faces
         ///< @brief the face that is going to be updated
         std::string m_NearestParallelFaceID;
-        ///< @brief the face that is perpendicular to the highlighted face
-        std::string m_NearestPerpendicularFaceID;
         ///< @brief the closest neighbour face to the highlighted face and to the blade
         std::string m_NearestNeighbourFaceIDToParallelFace;
         ///< @brief the second closest neighbour face to the highlighted face and to the blade
@@ -165,6 +173,7 @@ namespace AIAC
     private:
         void UpdateToolPosition();
         void UpdateRefFaces();
+
         void UpdateFeedback();
         /**
         * @brief The "General" situation means that we have a perpendicular face that served as 

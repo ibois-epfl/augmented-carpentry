@@ -31,6 +31,8 @@ namespace AIAC
         inline void DeactivateCurrentFeedbackVisibility() { m_IsCurrentFabFeedbackVisible = false; }
         inline void ActivateCurrentFeedbackVisibility() { m_IsCurrentFabFeedbackVisible = true; }
 
+        FabFeedback* GetCurrentFabFeedback() { return m_CurrentFabFeedbackPtr; };
+
     private:
         HoleFeedback m_HoleFeedback;
         CutChainSawFeedback m_CutChainSawFeedback;

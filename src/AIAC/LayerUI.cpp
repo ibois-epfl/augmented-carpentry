@@ -547,7 +547,7 @@ namespace AIAC
             ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
         ImGui::Text("Current Execution: %s", isCurrentDone.c_str());
         ImGui::PopStyleColor();
-        ImGui::BeginChild("components_control_panel", ImVec2(0, 160), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("components_control_panel", ImVec2(0, 216), true, ImGuiWindowFlags_HorizontalScrollbar);
             // print the progress
             ImGui::Text("Progress: %d / %d ( %.2f%% )", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetFabricatedComponents(),
                                                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetTotalComponents(),
@@ -619,6 +619,37 @@ namespace AIAC
                     AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().UpdateCotasVisibility(false);
                 }
             }
+
+            if (auto feedback = dynamic_cast<CutCircularSawFeedback*>(AIAC_APP.GetLayer<LayerFeedback>()->GetCurrentFabFeedback())){
+                ImGui::Checkbox("Manually Select Face", &feedback->IsRefFacesSelectedManually);
+                if (feedback->IsRefFacesSelectedManually) {
+                    if(ImGui::Button("<##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(-1);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button(">##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(1);
+                    }
+                }
+            }
+
+            if (auto feedback = dynamic_cast<CutChainSawFeedback*>(AIAC_APP.GetLayer<LayerFeedback>()->GetCurrentFabFeedback())){
+                ImGui::Checkbox("Manually Select Face", &feedback->IsRefFacesSelectedManually);
+                if (feedback->IsRefFacesSelectedManually) {
+                    if(ImGui::Button("<##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(-1);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button(">##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(1);
+                    }
+                }
+            }
+
 
             ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));

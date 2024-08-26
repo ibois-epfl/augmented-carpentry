@@ -120,9 +120,96 @@ namespace AIAC
         Deactivate();
     }
 
-    void CutChainSawFeedback::updateCutPlane ()
+    void CutChainSawFeedback::UpdateCutPlane ()
     {
         if(m_ToShowCutPlane) m_CutPlaneVisualizer.Update(m_NormalVec, m_NormStart);
+    }
+
+    void CutChainSawFeedback::UpdateRefFaces() {
+        if (IsRefFacesSelectedManually) {
+            // In manually selection mode, when the m_cut is switched, we have to update the face
+            if (m_Cut->GetAllFaces().find(m_NearestParallelFaceID) == m_Cut->GetAllFaces().end()){
+                m_NearestParallelFaceID = m_Cut->GetAllFaces().begin()->first;
+            }
+
+            // get the first closest neighbour face to the highlighted face as the perpendicular face
+            // ** As we're limiting the cut to have maximum 3 faces, it doesn't really matter how to calculate.
+            // the perpendicular plane. I think a better idea is to take the furthest neighbor of the nearest parallel
+            // face or the face that maximum the length of the projection line formed by the m_ChainBase and m_ChainEnd.
+            // However, since it's working, I'm not dare to touch it :3
+            m_NearestPerpendicularFaceID = "";
+            std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces =
+                    this->m_Cut->GetFaceNeighbors(m_NearestParallelFaceID);
+            float minDist = std::numeric_limits<float>::max();
+            for (auto const& [faceID, faceInfo] : neighbouringFaces)
+            {
+                auto projCenter = GetProjectionPointOnPlane(
+                        faceInfo.GetNormal(),
+                        faceInfo.GetCenter(),
+                        m_ChainMid);
+                float distAbs = glm::abs(glm::distance(m_ChainMid, projCenter));
+                if (distAbs < minDist)
+                {
+                    minDist = distAbs;
+                    m_NearestPerpendicularFaceID = faceID;
+                }
+            }
+        } else {
+            // Find the nearest parallel/perpendicular face to highlight
+            float nearestParallelFaceDist = 1e9f;
+            float nearestPerpendicularFaceDist = 1e9f;
+            std::vector<std::string> parallelFaceIDs;
+            std::vector<std::string> perpendicularFaceIDs;
+
+            for (auto const &[faceID, faceInfo]: m_Cut->GetAllFaces()) {
+                if (faceInfo.IsExposed()) continue;
+                auto faceNormal = faceInfo.GetNormal();
+                auto theta = glm::acos(
+                        glm::dot(faceNormal, m_NormalVec) / (glm::length(faceNormal) * glm::length(m_NormalVec)));
+
+                auto distChainBase = glm::distance(faceInfo.GetCenter(), m_ChainBase);
+                auto distChainEnd = glm::distance(faceInfo.GetCenter(), m_ChainEnd);
+                auto totalDist = distChainBase + distChainEnd;
+
+                // for parallel faces, find the nearest one
+                auto threshold = 0.7853f; // 45 degrees
+                if (theta < threshold || (3.14159 - theta) < threshold) {
+                    parallelFaceIDs.push_back(faceID);
+                    // update nearest parallel face
+                    if (m_NearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist) {
+                        m_NearestParallelFaceID = faceID;
+                        nearestParallelFaceDist = totalDist;
+                    }
+                } else {
+                    perpendicularFaceIDs.push_back(faceID);
+                    // update nearest perpendicular face
+                    if (m_NearestPerpendicularFaceID.empty() || totalDist < nearestPerpendicularFaceDist) {
+                        m_NearestPerpendicularFaceID = faceID;
+                        nearestPerpendicularFaceDist = totalDist;
+                    }
+                }
+            }
+        }
+    }
+
+    void CutChainSawFeedback::ManuallyScrollRefFace(int scrollDirection) {
+        auto iter = m_Cut->GetAllFaces().find(m_NearestParallelFaceID);
+
+        // if scroll direction > 0 => goes to next, otherwise, goes back
+        if (scrollDirection > 0) {
+            iter++;
+            if (iter == m_Cut->GetAllFaces().end()){
+                iter = m_Cut->GetAllFaces().begin();
+            }
+        } else {
+            if (iter == m_Cut->GetAllFaces().begin()){
+                iter = m_Cut->GetAllFaces().end();
+            }
+            iter--;
+        }
+
+        m_NearestParallelFaceID = iter->first;
+
     }
 
     void CutChainSawFeedback::Update()
@@ -135,55 +222,22 @@ namespace AIAC
         m_ChainEnd = AC_FF_TOOL->GetData<ChainSawData>().ChainEndGO->GetPosition();
         m_NormalVec = glm::normalize(m_NormEnd - m_NormStart);
 
-        TimberInfo::Cut* cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
+        m_Cut = dynamic_cast<TimberInfo::Cut*>(AC_FF_COMP);
         auto& angleVisualizer = this->m_Visualizer.GetAngleFeedVisualizer();
         auto& depthVisualizer = this->m_Visualizer.GetDepthFeedVisualizer();
 
-        if(m_ToShowCutPlane) updateCutPlane();
+        if(m_ToShowCutPlane) UpdateCutPlane();
         
         // if it's a single face show the cutting plane
-        if(cut->IsSingleFace()) {
+        if(m_Cut->IsSingleFace()) {
             this->EnableCutPlane(true);
         }
 
-        // Find the nearest parallel/perpendicular face to highlight
-        float nearestParallelFaceDist = 1e9f;
-        std::string nearestParallelFaceID;
-        float nearestPerpendicularFaceDist = 1e9f;
-        std::string nearestPerpendicularFaceID;
-        std::vector<std::string> parallelFaceIDs;
-        std::vector<std::string> perpendicularFaceIDs;
+        this->UpdateRefFaces();
 
-        for(auto const& [faceID, faceInfo]: cut->GetAllFaces()){
-            if (faceInfo.IsExposed()) continue;
-            auto faceNormal = faceInfo.GetNormal();
-            auto theta = glm::acos(glm::dot(faceNormal, m_NormalVec)/(glm::length(faceNormal)*glm::length(m_NormalVec)));
-
-            auto distChainBase = glm::distance(faceInfo.GetCenter(), m_ChainBase);
-            auto distChainEnd = glm::distance(faceInfo.GetCenter(), m_ChainEnd);
-            auto totalDist = distChainBase + distChainEnd;
-
-            // for parallel faces, find the nearest one
-            auto threshold = 0.7853f; // 45 degrees
-            if(theta < threshold || (3.14159 - theta) < threshold) {
-                parallelFaceIDs.push_back(faceID);
-                // update nearest parallel face
-                if(nearestParallelFaceID.empty() || totalDist < nearestParallelFaceDist){
-                    nearestParallelFaceID = faceID;
-                    nearestParallelFaceDist = totalDist;
-                }
-            } else {
-                perpendicularFaceIDs.push_back(faceID);
-                // update nearest perpendicular face
-                if(nearestPerpendicularFaceID.empty() || totalDist < nearestPerpendicularFaceDist){
-                    nearestPerpendicularFaceID = faceID;
-                    nearestPerpendicularFaceDist = totalDist;
-                }
-            }
-        }
         // Highlight the face
-        if (!cut->IsSingleFace())
-            cut->HighlightFace(nearestParallelFaceID);
+        if (!m_Cut->IsSingleFace())
+            m_Cut->HighlightFace(m_NearestParallelFaceID);
 
         // Update the m_Visualizer for the closest parallel face
         bool hasParallelFace = false, hasPerpendicularFace = false;
@@ -195,13 +249,13 @@ namespace AIAC
         glm::vec3 perpIntersectLineSegPt1, perpIntersectLineSegPt2; // for depth text anchor
 
         // update angle visualizer
-        if(!nearestParallelFaceID.empty())
+        if(!m_NearestParallelFaceID.empty())
         {
             hasParallelFace = true;
             angleVisualizer.Activate();
 
             // find the projection point of the three points on the face
-            auto faceInfo = cut->GetFace(nearestParallelFaceID);
+            auto faceInfo = m_Cut->GetFace(m_NearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
 
@@ -219,12 +273,12 @@ namespace AIAC
         }
 
         // extra orientation
-        if (!nearestParallelFaceID.empty() or cut->IsSingleFace())
+        if (!m_NearestParallelFaceID.empty() or m_Cut->IsSingleFace())
         {
             m_CutOrientationVisualizer.Activate();
 
             // face and blade normal
-            auto faceInfo = cut->GetFace(nearestParallelFaceID);
+            auto faceInfo = m_Cut->GetFace(m_NearestParallelFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
             m_CutOrientationVisualizer.m_LineFaceNormal->SetPts(faceCenter, faceCenter + faceNormal);
@@ -309,12 +363,12 @@ namespace AIAC
         }
 
         // Perpendicular face
-        if(!nearestPerpendicularFaceID.empty() and !cut->IsSingleFace())
+        if(!m_NearestPerpendicularFaceID.empty() and !m_Cut->IsSingleFace())
         {
             hasPerpendicularFace = true;
 
             // find the projection point of the 2 points on the face
-            auto faceInfo = cut->GetFace(nearestPerpendicularFaceID);
+            auto faceInfo = m_Cut->GetFace(m_NearestPerpendicularFaceID);
             auto faceNormal = faceInfo.GetNormal();
             auto faceCenter = faceInfo.GetCenter();
 
@@ -331,7 +385,7 @@ namespace AIAC
             // Get the intersection point of the intersect line and the face's edges
             std::vector<glm::vec3> intersectPts;
             for(auto const& edgeID: faceInfo.GetEdges()){
-                auto edge = cut->GetEdge(edgeID);
+                auto edge = m_Cut->GetEdge(edgeID);
                 auto edgePt1 = edge.GetStartPt().GetPosition();
                 auto edgePt2 = edge.GetEndPt().GetPosition();
                 ExtendLineSeg(edgePt1, edgePt2, 0.5f);
