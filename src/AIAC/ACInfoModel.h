@@ -88,7 +88,7 @@ public:
     class Component {
     public:
         Component(std::string type) : m_Type(type) {
-            m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+            m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
         }
         virtual void SetAsCurrent();
         virtual void SetAsDone();
@@ -358,7 +358,7 @@ class ACInfoModel
 {
 public:
     ACInfoModel(){
-        m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+        m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
     };
     ~ACInfoModel(){};
 

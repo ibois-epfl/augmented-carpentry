@@ -35,7 +35,7 @@ namespace AIAC{
         */
         static std::string toString(double val) {
             // TODO: / 50 * 1000 => convert to right scale in mm, change this to a variable based on config
-            auto scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+            auto scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
             int valInt = (int)(val / scale * 1000);
             if(valInt > 99) valInt = 99;
             auto retVal = std::to_string(valInt);

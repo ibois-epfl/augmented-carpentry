@@ -449,7 +449,7 @@ namespace AIAC
 
                 perpendicularFaceEdge1Dist = glm::distance(perpIntersectLineSegPt1, pt1ProjPt);
                 perpendicularFaceEdge2Dist = glm::distance(perpIntersectLineSegPt2, pt2ProjPt);
-                float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+                float scaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
                 float realPerpendicularFaceEdge1Dist = perpendicularFaceEdge1Dist / scaleFactor;
                 float realPerpendicularFaceEdge2Dist = perpendicularFaceEdge2Dist / scaleFactor;
 

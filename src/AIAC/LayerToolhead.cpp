@@ -14,9 +14,9 @@ namespace AIAC
     {
         // init ttool
         TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "deps/TTool"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "deps/TTool/assets/config.yml"),
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "assets/tslam/calibration_orange_A_1280_720_000B.yml")
             );
 
         // load the datasets acits
@@ -95,9 +95,9 @@ namespace AIAC
     {
         TTool->DestrolView();
         TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "Missign camera calib file path")
+                AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "deps/TTool"),
+                AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "deps/TTool/assets/config.yml"),
+                AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "assets/tslam/calibration_orange_A_1280_720_000B.yml")
             );
         syncTToolAndACInfoToolhead();
     }
@@ -106,8 +106,8 @@ namespace AIAC
     {
         TTool->DestrolView();
         TTool = std::make_shared<ttool::TTool>(
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "Missing TTool root path"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "Missing config file path"),
+                AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "deps/TTool"),
+                AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "deps/TTool/assets/config.yml"),
             cameraMatrix,
             cameraSize
             );

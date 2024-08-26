@@ -35,7 +35,9 @@ namespace AIAC
             AIAC_INFO("Camera Resolution: {0}x{1}.", m_PhysicalWidth, m_PhysicalHeight);
         }
 
-        m_CalibFilePath = AIAC::Config::Get<std::string>("AIAC", "CamParamsFile", "assets/tslam/calibration_webcam.yml");
+        m_CalibFilePath = AIAC::Config::Get<std::string>(Config::SEC_AIAC,
+                                                         Config::CAM_PARAMS_FILE,
+                                                         "assets/tslam/calibration_orange_A_1280_720_000B.yml");
         LoadCameraParams(m_CalibFilePath);
 
         FlipHorizontal = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_HORIZONTAL, false);
