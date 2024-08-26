@@ -9,7 +9,7 @@
 
 void AIAC::LayerLogRecorder::OnAttach() {
 #ifdef HEADLESS_SMOKE_TEST
-    m_IsRecording = true;
+    StartRecording();
 #endif
 }
 
