@@ -35,7 +35,7 @@ jobs:
       - name: Configure
         run: |
           git config --global --add safe.directory ${PWD}
-          cmake -B build .
+          cmake . -B build/ -D SMOKE_TEST=ON
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
@@ -45,4 +45,4 @@ jobs:
       - name: Build
         run: cmake --build build
       - name: Smoke Test
-        run: ./build/bin/AC
+        run: ./build/bin/AC tests/assets/config_smoke_test.ini

@@ -5,7 +5,12 @@ int main(int argc, char* argv[]) {
 #ifdef __linux__
     AIAC::Log::Init();
 
-    AIAC::Config config("config.ini", true);
+    // by default, take the config.ini in the root folder
+    std::string configPath = "config.ini";
+    if (argc >= 2){
+        configPath = argv[1];
+    }
+    AIAC::Config config(configPath, true);
 
     AIAC::ApplicationSpecification appSpec;
     appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
