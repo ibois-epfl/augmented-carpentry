@@ -70,7 +70,7 @@ set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
 
 set(BUILD_V4_API ON)
-add_external_package(TSlam)
+add_external_package(TSlam IGNORE_SYSTEM)
 add_external_package(TTool IGNORE_SYSTEM)
 
 find_package(glfw3 3.3 REQUIRED)
