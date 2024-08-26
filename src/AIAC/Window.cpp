@@ -35,6 +35,8 @@ namespace AIAC
 
     void Window::Init()
     {
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
         if(s_GLFWWindowCount == 0)
         {
             glfwSetErrorCallback(GLFWErrorCallback);
@@ -66,6 +68,9 @@ namespace AIAC
         m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, m_Data.Title, m_TouchMonitor->GetGLFWMonitor(), NULL);
 
 #else
+#ifdef HEADLESS_SMOKE_TEST
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+#endif
         m_GLFWWindow = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title, NULL, NULL);
 #endif
         if (m_GLFWWindow == NULL) {

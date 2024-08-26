@@ -16,10 +16,10 @@ namespace AIAC
 
     void Camera::Open(int id)
     {
-#ifdef SMOKE_TEST
-        m_VideoCapture = cv::VideoCapture(id);
-#else
+#ifdef HEADLESS_SMOKE_TEST
         m_VideoCapture = cv::VideoCapture("/home/tpp/TSlam/tests/example_video.mp4");
+#else
+        m_VideoCapture = cv::VideoCapture(id);
 #endif
         if(!m_VideoCapture.isOpened())
         {
