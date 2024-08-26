@@ -17,13 +17,6 @@ namespace AIAC
         void Open(int id);
 
         /**
-         * @brief Initialize camera parameters from a configuration file.
-         *
-         * @param filePath The path to the camera parameter configuration file.
-         */
-        void InitCameraParamsFromFile(const std::string &filePath);
-
-        /**
          * @brief Loads camera parameters from a configuration file.
          *
          * @param filePath The path to the camera parameter configuration file.

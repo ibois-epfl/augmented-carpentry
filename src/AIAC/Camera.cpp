@@ -16,7 +16,11 @@ namespace AIAC
 
     void Camera::Open(int id)
     {
+#ifdef SMOKE_TEST
         m_VideoCapture = cv::VideoCapture(id);
+#else
+        m_VideoCapture = cv::VideoCapture("/home/tpp/TSlam/tests/example_video.mp4");
+#endif
         if(!m_VideoCapture.isOpened())
         {
             throw std::runtime_error("Camera " + std::to_string(id) + " can't be opened.");
@@ -36,19 +40,6 @@ namespace AIAC
 
         FlipHorizontal = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_HORIZONTAL, false);
         FlipVertical = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_VERTICAL, false);
-    }
-
-    void Camera::InitCameraParamsFromFile(const std::string &filePath) {
-//        int w, h;
-//        cv::Mat cameraMatrix;
-
-//        LoadCameraParams(filePath, w, h, cameraMatrix, m_DistortionCoef);
-
-//        if(!m_IsCamMatrixInit){
-//            m_ParamWidth = w;
-//            m_ParamHeight = h;
-//            m_CameraMatrix = cameraMatrix;
-//        }
     }
 
     inline void Camera::UpdateFov(){
@@ -92,6 +83,10 @@ namespace AIAC
 
         cv::Mat frame;
         m_VideoCapture >> frame;
+
+        if (frame.empty()) {
+            return frame;
+        }
 
         if (FlipHorizontal) cv::flip(frame, frame, 1);
         if (FlipVertical) cv::flip(frame, frame, 0);
