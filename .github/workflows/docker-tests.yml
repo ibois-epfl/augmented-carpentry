@@ -1,4 +1,4 @@
-name: ubuntu-build
+name: ubuntu-build-and-test
 
 on:
   push:
