@@ -16,8 +16,12 @@ namespace AIAC
 
     void Camera::Open(int id)
     {
-#ifdef HEADLESS_SMOKE_TEST
-        m_VideoCapture = cv::VideoCapture("/home/tpp/TSlam/tests/example_video.mp4");
+#ifdef HEADLESS_TEST
+        std::string videoPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TEST, AIAC::Config::VIDEO_PATH, "");
+        if (videoPath.empty()) {
+            throw std::invalid_argument("Video path for test is empty!");
+        }
+        m_VideoCapture = cv::VideoCapture(videoPath);
 #else
         m_VideoCapture = cv::VideoCapture(id);
 #endif
