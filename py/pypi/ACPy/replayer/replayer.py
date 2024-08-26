@@ -1,3 +1,7 @@
+# ## FOR DEBUG
+import sys
+sys.path.append("/Users/petingo/p/augmented-carpentry/py/pypi/ACPy/replayer")
+
 from . import log_loader
 from . import acim_loader
 from . import ttool_loader
@@ -49,8 +53,10 @@ class Replayer:
         tool_model = self.ttool_models[ttool_head]["model"].Duplicate()
         tool_model.Transform(ttool_transformation)
 
-        ttool_primitive_model = self.ttool_models[ttool_head]["primitive_model"].Duplicate()
-        ttool_primitive_model.Transform(ttool_transformation)
+        ttool_primitive_model = None
+        if self.ttool_models[ttool_head]["primitive_model"] is not None:
+            ttool_primitive_model = self.ttool_models[ttool_head]["primitive_model"].Duplicate()
+            ttool_primitive_model.Transform(ttool_transformation)
 
         acim_bbox = self.acim_data.bbox.Duplicate()
         acim_bbox.Transform(acim_transform)
