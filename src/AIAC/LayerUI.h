@@ -33,28 +33,10 @@ namespace AIAC {
         }
 
         template<typename... Args>
-        void Show(Args &&... args) {
-            bool isOpened = ImGui::CollapsingHeader(m_Label, m_IsCollapsed ? ImGuiTreeNodeFlags_DefaultOpen : 0);
-            if (isOpened) {
-                m_CollapseState = CollapseState::OPEN;
-                m_func(std::forward<Args>(args)...);
-            }
-
-            // check if it's just collapsed
-            if (!isOpened) {
-                if (m_CollapseState == CollapseState::OPEN) {
-                    m_CollapseState = CollapseState::ON_COLLAPSING;
-                }
-            }
-        }
+        void Show(Args &&... args);
 
         template<typename... Args>
-        void CheckOnCollapsing(Args &&... args) {
-            if (m_CollapseState == CollapseState::ON_COLLAPSING) {
-                m_onCollapseCallback();
-                m_CollapseState = CollapseState::COLLAPSE;
-            }
-        }
+        void CheckOnCollapsing(Args &&... args);
 
     private:
         CollapseState m_CollapseState;
@@ -95,13 +77,15 @@ namespace AIAC {
 
         void ShowLogRecorderUI();
 
-        inline void StackPane(PaneUI pane) { m_PaneUIStack.push_back(std::make_shared<PaneUI>(pane)); }
+        inline void StackPane(PaneUI pane) { m_PaneUIStack.emplace_back(std::move(pane)); }
         void SetPaneUICamera();
         void SetPaneUISlam();
         void SetPaneUIToolhead();
         void OnCollapsingPaneUIToolhead();
         void SetPaneUIACIM();
         void SetPaneUIUtils();
+        PaneUI* GetOpenedPaneUI() { return m_OpenedPaneUI; }
+        void SetOpenedPaneUI(PaneUI* paneUI) { m_OpenedPaneUI = paneUI; }
 
     private:
         void SetGlobalViewUI(ImVec2 viewportSize);
@@ -125,7 +109,8 @@ namespace AIAC {
 
         bool *m_IsOpen = nullptr;
 
-        std::vector<std::shared_ptr<PaneUI>> m_PaneUIStack;
+        std::vector<PaneUI> m_PaneUIStack;
+        PaneUI* m_OpenedPaneUI = nullptr;
         
         // UI File Selection
         std::string m_FileSelectDefaultPath = ".";
