@@ -10,7 +10,9 @@ namespace AIAC{
 class Config
 {
 public:
+    //-------------------------------------------------------
     inline static const std::string SEC_AIAC = "AIAC";
+
     inline static const std::string CAM_ID = "CamID";
     inline static const std::string CAM_PARAMS_FILE = "CamParamsFile";
     inline static const std::string CAM_FLIP_HORIZONTAL = "CamFlipHorizontal";
@@ -22,22 +24,34 @@ public:
     inline static const std::string ALIGN_FLIP = "AlignFlip";
     inline static const std::string SCALE_FACTOR = "ScaleFactor";
 
+    //-------------------------------------------------------
     inline static const std::string SEC_TSLAM = "TSlam";
+
     inline static const std::string MAP_FILE = "MapFile";
     inline static const std::string VocFile = "VocFile";
     inline static const std::string RECONSTRUCT_CONFIG_DEFAULT_FILE = "ReconstructConfigDefaultFile";
     inline static const std::string SAVE_DIR_MAPS = "SaveDirMaps";
     inline static const std::string STABILIZATION_FRAME_COUNT = "SaveDirMaps";
 
+    //-------------------------------------------------------
     inline static const std::string SEC_TTOOL = "TTool";
+
     inline static const std::string CONFIG_FILE = "ConfigFile";
     inline static const std::string DATASET_DIR = "DatasetDir";
     inline static const std::string TTOOL_ROOT_PATH = "TToolRootPath";
     inline static const std::string CACHED_TOOLHEAD = "CachedToolhead";
 
+    //-------------------------------------------------------
+    inline static const std::string SEC_TOUCH_MONITOR_SPECS = "TouchMonitorSpecs";
+
+    inline static const std::string NAME = "Name";
+    inline static const std::string LINK_MODE = "LinkMode";
+    inline static const std::string RESOLUTION = "Resolution";
 
 
+    //-------------------------------------------------------
     inline static const std::string SEC_UTILS = "Utils";
+
     inline static const std::string UTILS_PATH = "UtilsPath";
 
 public:

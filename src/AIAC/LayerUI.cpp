@@ -1283,7 +1283,9 @@ namespace AIAC
             if(ImGui::Button("Load from file", ImVec2(106, 0)))
             {
                 std::string defaultConfigDir = AIAC::Config::Get<std::string>(
-                    AIAC::Config::SEC_TSLAM, AIAC::Config::RECONSTRUCT_CONFIG_DEFAULT_FILE);
+                    AIAC::Config::SEC_TSLAM,
+                    AIAC::Config::RECONSTRUCT_CONFIG_DEFAULT_FILE,
+                    "assets/tslam/reconstruct_default.ini");
                 if (!defaultConfigDir.empty()) {
                     AIAC_INFO("Default config for reconstruction dir: ");
                     AIAC_INFO(defaultConfigDir);

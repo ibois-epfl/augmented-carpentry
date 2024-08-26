@@ -83,7 +83,7 @@ namespace AIAC
     void HoleFeedback::Update()
     {
         auto hole = dynamic_cast<TimberInfo::Hole*>(AC_FF_COMP);
-        float scaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+        float scaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
 
         this->m_VisPosition.m_HoleLine2ToolStart_A->SetPosition(*AC_FF_TOOL->GetData<DrillBitData>().TooltipGO);
         this->m_VisPosition.m_HoleLine2ToolStart_B->SetPosition(*hole->GetStartPointGO());

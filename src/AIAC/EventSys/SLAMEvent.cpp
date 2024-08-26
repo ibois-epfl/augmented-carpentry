@@ -58,7 +58,10 @@ namespace AIAC
         AIAC_INFO("Start mapping");
 
         // update the camera parameters for SLAM
-        auto camParamFilepath = AIAC::Config::Get<string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE);
+        auto camParamFilepath = AIAC::Config::Get<string>(
+                AIAC::Config::SEC_AIAC,
+                AIAC::Config::CAM_PARAMS_FILE,
+                "assets/tslam/calibration_orange_A_1280_720_000B.yml");
         AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromFile(camParamFilepath);
         AIAC_APP.GetLayer<LayerSlam>()->Slam.setCamParams(camParamFilepath);
         AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
