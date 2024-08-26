@@ -18,15 +18,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build container
-        run: docker build -t ghcr.io/ibois-epfl/augmented-carpentry-ubuntu:latest ${{ github.workspace }}/tests/dockerfiles/ubuntu
+        run: docker build -t ghcr.io/ibois-epfl/augmented-carpentry-ubuntu-testsuite:latest ${{ github.workspace }}/tests/dockerfiles/ubuntu
       - name: Push
-        run: docker push ghcr.io/ibois-epfl/augmented-carpentry-ubuntu:latest
+        run: docker push ghcr.io/ibois-epfl/augmented-carpentry-ubuntu-testsuite:latest
 
   configure-and-build:
     needs: build-container
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/ibois-epfl/augmented-carpentry-ubuntu:latest
+      image: ghcr.io/ibois-epfl/augmented-carpentry-ubuntu-testsuite:latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,3 +44,5 @@ jobs:
           retention-days: 1
       - name: Build
         run: cmake --build build
+      - name: Smoke Test
+        run: ./build/bin/AC
