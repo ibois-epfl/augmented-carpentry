@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16.)
 project(AC VERSION 0.1.0 LANGUAGES CXX C)
 
-include(CTest)
-enable_testing()
 
 set(BUILD_SHARED_LIBS ON)
 
@@ -129,3 +127,7 @@ target_link_libraries(${PROJECT_NAME}
 # if(TEST_GRAPHICS)
 #     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/graphics)
 # endif()
+
+if(HEADLESS_TEST)
+    include(tests)
+endif()
