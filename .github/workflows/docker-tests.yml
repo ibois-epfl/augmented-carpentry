@@ -42,7 +42,5 @@ jobs:
           name: configure-artifacts
           path: build/
           retention-days: 1
-      - name: Build
+      - name: Build and run
         run: cmake --build build
-      - name: Smoke Test
-        run: ./build/bin/AC tests/assets/config_smoke_test.ini

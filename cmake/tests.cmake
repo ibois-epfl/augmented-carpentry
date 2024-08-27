@@ -16,7 +16,10 @@ add_executable(${AC_TESTSUITE}
 target_include_directories(${AC_TESTSUITE}
 PUBLIC
     ${OpenCV_INCLUDE_DIRS}
+    ${CMAKE_SOURCE_DIR}/src
 )
+
+target_precompile_headers(${AC_TESTSUITE} PRIVATE src/aiacpch.h)
 
 target_link_libraries(${AC_TESTSUITE} 
     ${OpenCV_LIBS}

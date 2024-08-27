@@ -120,14 +120,6 @@ target_link_libraries(${PROJECT_NAME}
 #------------------------------------------------------------------------------------------------------------
 # CTest (unit tests)
 #------------------------------------------------------------------------------------------------------------
-# Testing adds
-# if (TEST_PLATFORM)
-#     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/platform)
-# endif()
-# if(TEST_GRAPHICS)
-#     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/graphics)
-# endif()
-
 if(HEADLESS_TEST)
     include(tests)
 endif()
