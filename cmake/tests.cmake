@@ -9,6 +9,7 @@ add_external_package(googletest)
 # add new test suites .cc here
 set(AC_TESTSUITE ac_tests)
 add_executable(${AC_TESTSUITE}
+    tests/smoke_tests/dry_run_test.cc
     tests/allCppTests.cc
     )
 

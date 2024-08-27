@@ -27,7 +27,7 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE src/aiacpch.h)
 # Add options
 #-------------------------------------------------------------------------------
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
-option(HEADLESS_TEST "Build for headless smoke test" OFF)
+option(HEADLESS_TEST "Build and run for headless smoke test" OFF)
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" ON)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal if on." ON)
