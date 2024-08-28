@@ -312,7 +312,6 @@ namespace AIAC
          */
         glm::vec3 ClosestPointToPoint(glm::vec3 point);
 
-    // FIXME: ideally all these static functions should be not and integrated with the GOCircle class
     public:  ///< Static geometry functions
         /**
          * @brief Calculates the closest point on a circle to a given point in 3D.

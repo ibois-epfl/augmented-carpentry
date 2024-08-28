@@ -52,6 +52,6 @@ add_test(NAME ${AC_TESTSUITE} COMMAND ${AC_TESTSUITE})
 add_custom_command(
                 TARGET ${AC_TESTSUITE} POST_BUILD
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-                COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIGURATION> --verbose
+                COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIGURATION> --verbose --gtest_color=yes
                 COMMENT "Running all tests"
             )
