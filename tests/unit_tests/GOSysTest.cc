@@ -14,15 +14,58 @@
 #include <glm/gtc/constants.hpp> // For glm::pi
 
 
-class GOPointTest : public ::testing::Test {
+class GOPrimitiveTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // Code for setting up initial conditions for tests
+        primitive = std::make_shared<AIAC::GOPrimitive>();
     }
 
-    void TearDown() override {
-        // Code for cleaning up after tests
-    }
+    std::shared_ptr<AIAC::GOPrimitive> primitive;
+};
+
+TEST_F(GOPrimitiveTest, Constructor_DefaultValues) {
+    EXPECT_TRUE(primitive->IsVisible());
+    EXPECT_EQ(primitive->GetColor(), glm::vec4(0, 0, 0, 1.0));
+    EXPECT_EQ(primitive->GetWeight(), AIAC::GOWeight::Default);
+}
+
+TEST_F(GOPrimitiveTest, SetName_GetName) {
+    std::string name = "TestPrimitive";
+    primitive->SetName(name);
+    EXPECT_EQ(primitive->GetName(), name);
+}
+
+TEST_F(GOPrimitiveTest, SetVisibility_GetVisibility) {
+    primitive->SetVisibility(false);
+    EXPECT_FALSE(primitive->GetVisibility());
+    primitive->SetVisibility(true);
+    EXPECT_TRUE(primitive->GetVisibility());
+}
+
+TEST_F(GOPrimitiveTest, SetColor_GetColor) {
+    glm::vec4 color(1.0, 0.0, 0.0, 1.0);
+    primitive->SetColor(color);
+    EXPECT_EQ(primitive->GetColor(), color);
+}
+
+TEST_F(GOPrimitiveTest, SetWeight_GetWeight) {
+    float weight = AIAC::GOWeight::Bold;
+    primitive->SetWeight(weight);
+    EXPECT_EQ(primitive->GetWeight(), weight);
+}
+
+TEST_F(GOPrimitiveTest, GenerateId) {
+    uint32_t id = primitive->GenerateId();
+    if (AIAC_GOREG->CheckIfKeyExists(id))
+        FAIL() << "Id already exists in the registry";
+}
+
+
+class GOPointTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+
+    void TearDown() override {}
 };
 
 TEST_F(GOPointTest, ConstructorTest) {
