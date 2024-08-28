@@ -8,15 +8,20 @@ add_external_package(googletest)
 # ------------------------------------------------------------------------------
 # add new test suites .cc here
 set(AC_TESTSUITE ac_tests)
+
+file(GLOB_RECURSE AIAC_SRC "src/*.cpp")
+list(REMOVE_ITEM AIAC_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/ACApp.cpp)
+
+file(GLOB_RECURSE AIAC_TEST_SRC "tests/*.cc")
+
 add_executable(${AC_TESTSUITE}
-    tests/smoke_tests/dry_run_test.cc
-    tests/allCppTests.cc
+    ${AIAC_SRC}
+    ${AIAC_TEST_SRC}
     )
 
 target_include_directories(${AC_TESTSUITE}
-PUBLIC
-    ${OpenCV_INCLUDE_DIRS}
-    ${CMAKE_SOURCE_DIR}/src
+    PUBLIC ${OpenCV_INCLUDE_DIRS}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
 target_precompile_headers(${AC_TESTSUITE} PRIVATE src/aiacpch.h)
