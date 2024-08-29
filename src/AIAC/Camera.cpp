@@ -82,7 +82,7 @@ namespace AIAC
 
         return true;
     }
-
+static int frameCounter = 0;
     const AIAC::Image Camera::GetNextFrame()
     {
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
@@ -90,9 +90,13 @@ namespace AIAC
         cv::Mat frame;
         m_VideoCapture >> frame;
 
+        frameCounter += 1;
+        if (frameCounter >= 729) {
+            AIAC_INFO("Frame: {0}", frameCounter);
+        }
+
         if (frame.empty()) {
             AIAC_APP.Close();
-            return frame;
         }
 
         if (FlipHorizontal) cv::flip(frame, frame, 1);
