@@ -121,9 +121,20 @@ namespace AIAC
                 if(enable) m_CutPlaneVisualizer.Activate();
                 else m_CutPlaneVisualizer.Deactivate();
             }
-        
+
+            /**
+             * Manually select the reference face (the nearest parallel face)
+             * @param scrollDirection when > 0, goes to next; <= 0, goes back.
+             */
+            void ManuallyScrollRefFace(int scrollDirection);
+
+        public:
+            // config exposed to UI
+            bool IsRefFacesSelectedManually = false;
+
         private:
-            void updateCutPlane();
+            void UpdateCutPlane();
+            void UpdateRefFaces();
 
             glm::vec3 m_NormStart;
             glm::vec3 m_NormEnd;
@@ -135,6 +146,10 @@ namespace AIAC
             bool m_ToShowCutPlane = false;
 
         private:
+            TimberInfo::Cut* m_Cut;
+            std::string m_NearestParallelFaceID;
+            std::string m_NearestPerpendicularFaceID;
+
             CutChainSawFeedVisualizer m_Visualizer;
             ChainSawCutPlaneVisualizer m_CutPlaneVisualizer;
             CutOrientationVisualizer m_CutOrientationVisualizer;

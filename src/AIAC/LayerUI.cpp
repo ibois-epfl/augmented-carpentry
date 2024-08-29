@@ -117,12 +117,12 @@ namespace AIAC
         m_LogoLightClr = AIAC::Image(AIAC_LOGO_COLOR);
 
         // Set panes UI for layers
-        //                 Label       Collapse             PaneContent
-        StackPane(PaneUI("Camera",                            false,        AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
-        StackPane(PaneUI("Mapping",                           false,        AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
-        StackPane(PaneUI("ACIM (Execution model)",            false,        AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
-        StackPane(PaneUI("Toolhead",                          false,         AIAC_BIND_EVENT_FN(SetPaneUIToolhead)  ));
-        StackPane(PaneUI("Utils",                             false,        AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
+        //                Label                    Collapse  PaneContent
+        StackPane(PaneUI("Camera",                 false,    AIAC_BIND_EVENT_FN(SetPaneUICamera)    ));
+        StackPane(PaneUI("Mapping",                false,    AIAC_BIND_EVENT_FN(SetPaneUISlam)      ));
+        StackPane(PaneUI("ACIM (Execution model)", false,    AIAC_BIND_EVENT_FN(SetPaneUIACIM)      ));
+        StackPane(PaneUI("Toolhead",               false,    AIAC_BIND_EVENT_FN(SetPaneUIToolhead), AIAC_BIND_EVENT_FN(OnCollapsingPaneUIToolhead)));
+        StackPane(PaneUI("Utils",                  false,    AIAC_BIND_EVENT_FN(SetPaneUIUtils)     ));
 
         m_IsOpen = new bool(true);
     }
@@ -174,6 +174,39 @@ namespace AIAC
         ImGui::DestroyContext();
     }
 
+    template<typename... Args>
+    void PaneUI::Show(Args &&... args) {
+        bool isOpened = ImGui::CollapsingHeader(m_Label, m_IsCollapsed ? ImGuiTreeNodeFlags_DefaultOpen : 0);
+        if (isOpened) {
+            // if this one is not opened yet, close the previously opened one
+            if (m_CollapseState != CollapseState::OPEN) {
+                auto lastOpenedPaneUI = AIAC_APP.GetLayer<LayerUI>()->GetOpenedPaneUI();
+                if (lastOpenedPaneUI != nullptr && lastOpenedPaneUI->m_Label != m_Label) {
+                    ImGui::GetStateStorage()->SetInt(ImGui::GetID(lastOpenedPaneUI->m_Label), 0);
+                    lastOpenedPaneUI->Show();
+                }
+                AIAC_APP.GetLayer<LayerUI>()->SetOpenedPaneUI(this);
+            }
+            m_CollapseState = CollapseState::OPEN;
+            m_func(std::forward<Args>(args)...);
+        }
+
+        // check if it's just collapsed
+        if (!isOpened) {
+            if (m_CollapseState == CollapseState::OPEN) {
+                m_CollapseState = CollapseState::ON_COLLAPSING;
+            }
+        }
+    }
+
+    template<typename... Args>
+    void PaneUI::CheckOnCollapsing(Args &&... args) {
+        if (m_CollapseState == CollapseState::ON_COLLAPSING) {
+            m_onCollapseCallback(std::forward<Args>(args)...);
+            m_CollapseState = CollapseState::COLLAPSE;
+        }
+    }
+
     void LayerUI::ShowMenuBar()
     {
         if (ImGui::BeginMainMenuBar())
@@ -203,7 +236,10 @@ namespace AIAC
         ImGui::Text("This is a prototype for augmented_carpentry \n Version 01.00.00 \n Build 2021-01-01 00:00:00 \n IBOIS, EPFL");
 #endif
 
-        for (auto& pane : m_PaneUIStack) pane->Show();
+        for (auto& pane : m_PaneUIStack) {
+            pane.Show();
+            pane.CheckOnCollapsing();
+        }
 
         ImGui::End();
     }
@@ -213,7 +249,7 @@ namespace AIAC
         ImGui::Begin("Scene Viewport", m_IsOpen);
 
         ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-        viewportSize.y -= (ImGui::GetTextLineHeight() + 10);
+        viewportSize.y -= (ImGui::GetTextLineHeight() + 16);
         AIAC_APP.GetRenderer()->SetGlobalViewSize(viewportSize.x, viewportSize.y);
 
         SetGlobalViewUI(viewportSize);
@@ -276,6 +312,22 @@ namespace AIAC
             m_IsMouseLDown = true;
             m_LastMouseLPos = ImGui::GetMousePos();
         }
+        ImGui::SameLine();
+        if(ImGui::Button("NW")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::NW);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("NE")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::NE);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("SW")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::SW);
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("SE")){
+            AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::SE);
+        }
         ImGui::PopStyleColor();
     }
 
@@ -316,7 +368,6 @@ namespace AIAC
         ImGui::BeginChild("camera_function_child", ImVec2(0, 50), true, ImGuiWindowFlags_HorizontalScrollbar);
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_LIGHT_GREY);
             if(ImGui::Button("Start Calibration")){
-                AIAC_APP.GetRenderer()->StartCamCalib();
                 AIAC_APP.GetLayer<LayerCameraCalib>()->StartCalibration();
             }
             ImGui::SameLine();
@@ -446,7 +497,7 @@ namespace AIAC
         ImGui::Text("ACIM File Manager:");
         ImGui::BeginChild("ACIM File Manager", ImVec2(0, 60), true, ImGuiWindowFlags_HorizontalScrollbar);
             std::string currentACIMFileEntry = "Current ACIM:  " + AIAC_APP.GetLayer<LayerModel>()->GetACInfoModelName();
-            ImGui::Text(currentACIMFileEntry.c_str());
+            ImGui::Text("%s", currentACIMFileEntry.c_str());
             if(ImGui::Button("Load ACIM")){
                 OpenFileSelectDialog("Open ACIM file", ".acim", m_TmpPathBuf, [&]{
                     AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadACInfoModel(m_TmpPathBuf);
@@ -476,7 +527,7 @@ namespace AIAC
                 if (sliderVal != 0.f) AIAC_APP.GetLayer<AIAC::LayerModel>()->AddAlignOffset(sliderVal);
                 sliderVal = 0.f;
             ImGui::SameLine();
-            ImGui::Text(std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
+            ImGui::Text("%s", std::to_string(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetAlignOffset()).c_str());
             
             ImGui::PushStyleColor(ImGuiCol_Button, AIAC_UI_ROYAL_PURPLE);
             if(ImGui::Button("Align Center")){
@@ -529,7 +580,7 @@ namespace AIAC
             ImGui::PushStyleColor(ImGuiCol_Text, AIAC_UI_RED);
         ImGui::Text("Current Execution: %s", isCurrentDone.c_str());
         ImGui::PopStyleColor();
-        ImGui::BeginChild("components_control_panel", ImVec2(0, 160), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("components_control_panel", ImVec2(0, 216), true, ImGuiWindowFlags_HorizontalScrollbar);
             // print the progress
             ImGui::Text("Progress: %d / %d ( %.2f%% )", AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetFabricatedComponents(),
                                                         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetTotalComponents(),
@@ -596,11 +647,42 @@ namespace AIAC
             ImGui::SameLine();
             if(ImGui::Checkbox("Show Cotas", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingCotas)){
                 if(AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().IsShowingCotas){
-                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetAllCotasVisibility(true);
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().UpdateCotasVisibility(true);
                 } else {
-                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().SetAllCotasVisibility(false);
+                    AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().UpdateCotasVisibility(false);
                 }
             }
+
+            if (auto feedback = dynamic_cast<CutCircularSawFeedback*>(AIAC_APP.GetLayer<LayerFeedback>()->GetCurrentFabFeedback())){
+                ImGui::Checkbox("Manually Select Face", &feedback->IsRefFacesSelectedManually);
+                if (feedback->IsRefFacesSelectedManually) {
+                    if(ImGui::Button("<##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(-1);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button(">##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(1);
+                    }
+                }
+            }
+
+            if (auto feedback = dynamic_cast<CutChainSawFeedback*>(AIAC_APP.GetLayer<LayerFeedback>()->GetCurrentFabFeedback())){
+                ImGui::Checkbox("Manually Select Face", &feedback->IsRefFacesSelectedManually);
+                if (feedback->IsRefFacesSelectedManually) {
+                    if(ImGui::Button("<##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(-1);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button(">##FaceSelect", ImVec2(halfWidth-30, 0)))
+                    {
+                        feedback->ManuallyScrollRefFace(1);
+                    }
+                }
+            }
+
 
             ImGui::PushStyleColor(ImGuiCol_CheckMark, AIAC_UI_LIGHT_GREEN);
             if(ImGui::Checkbox("Mark as Done", &AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()->IsMarkedDone));
@@ -967,6 +1049,10 @@ namespace AIAC
         ImGui::EndChild();
     }
 
+    void LayerUI::OnCollapsingPaneUIToolhead(){
+        AIAC_APP.GetLayer<AIAC::LayerToolhead>()->IsShowSilouhette = false;
+    }
+
     void LayerUI::ShowMappingPopup()
     {
         ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y));
@@ -1184,7 +1270,6 @@ namespace AIAC
                 ImGui::SameLine();
                 if(ImGui::Button("Exit")){
                     AIAC_APP.GetLayer<AIAC::LayerCameraCalib>()->StopCalibration();
-                    AIAC_APP.GetRenderer()->StopCamCalib();
                 }
             } ImGui::EndChild();
         } ImGui::EndChild();
@@ -1225,14 +1310,27 @@ namespace AIAC
             if(ImGui::Button("Cancel", ImVec2(80, 0))){ m_IsCombiningMap = false; }
             ImGui::SameLine();
             if(ImGui::Button("Confirm", ImVec2(80, 0))){
-                if(strlen(m_CombMapParams.MapPathA) == 0 || strlen(m_CombMapParams.MapPathB) == 0 || strlen(m_CombMapParams.OutputPath) == 0){
+                if(strlen(m_CombMapParams.MapPathA) == 0 || strlen(m_CombMapParams.MapPathB) == 0){
                     AIAC_ERROR("Path not selected.");
-
                 } else {
-                    AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
-                            m_CombMapParams.MapPathA, m_CombMapParams.MapPathB, m_CombMapParams.OutputPath,
-                            true, true, nullptr, 2);
-                    memset(m_CombMapParams.MapPathA, 0, PATH_BUF_SIZE * 3);
+                    AIAC_EBUS->EnqueueEvent(std::make_shared<SLAMCombineMapEvent>(
+                            m_CombMapParams.MapPathA,
+                            m_CombMapParams.MapPathB,
+                            m_CombMapParams.OutputPath,
+                            50,
+                            m_ReconstructParams.RadiusSearch,
+                            m_ReconstructParams.CreaseAngleThreshold,
+                            m_ReconstructParams.MinClusterSize,
+                            m_ReconstructParams.AABBScaleFactor,
+                            m_ReconstructParams.MaxPolyDist,
+                            m_ReconstructParams.MaxPlnDist,
+                            m_ReconstructParams.MaxPlnAngle,
+                            m_ReconstructParams.Eps
+                    ));
+
+                    memset(m_CombMapParams.MapPathA, 0, PATH_BUF_SIZE);
+                    memset(m_CombMapParams.MapPathB, 0, PATH_BUF_SIZE);
+                    memset(m_CombMapParams.OutputPath, 0, PATH_BUF_SIZE);
                     m_IsCombiningMap = false;
                 }
             }
@@ -1262,7 +1360,9 @@ namespace AIAC
             if(ImGui::Button("Load from file", ImVec2(106, 0)))
             {
                 std::string defaultConfigDir = AIAC::Config::Get<std::string>(
-                    AIAC::Config::SEC_TSLAM, AIAC::Config::RECONSTRUCT_CONFIG_DEFAULT_FILE);
+                    AIAC::Config::SEC_TSLAM,
+                    AIAC::Config::RECONSTRUCT_CONFIG_DEFAULT_FILE,
+                    "assets/tslam/reconstruct_default.ini");
                 if (!defaultConfigDir.empty()) {
                     AIAC_INFO("Default config for reconstruction dir: ");
                     AIAC_INFO(defaultConfigDir);

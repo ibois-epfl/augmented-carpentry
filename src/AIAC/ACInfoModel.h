@@ -88,12 +88,13 @@ public:
     class Component {
     public:
         Component(std::string type) : m_Type(type) {
-            m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+            m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
         }
         virtual void SetAsCurrent();
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+        virtual glm::vec3 GetCenter() const;
 
     public:
         bool IsMarkedDone; // This one is for UI
@@ -107,6 +108,7 @@ public:
         std::string m_Type;
         pugi::xml_node m_ACIMDocNode;
         std::string m_ID;
+        glm::vec3 m_Center;
 
         std::vector<std::shared_ptr<GOPrimitive>> m_GOPrimitives;
 
@@ -122,7 +124,9 @@ public:
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+        glm::vec3 GetCenter() const override { return (m_Start + m_End) * 0.5f; };
         void SwapStartEnd();
+
 
     public:  __always_inline
         std::shared_ptr<GOPoint> GetStartPointGO() { return m_StartPointGO; }
@@ -159,14 +163,16 @@ public:
         virtual void SetAsDone();
         virtual void SetAsNotDone();
         virtual void SetVisibility(bool visible);
+        glm::vec3 GetCenter() const override { return m_Center; };
 
         // Sub-class Face
         class Face: public Component{
         public:
             Face() : Component("FACE") {}
+            glm::vec3 GetCenter() const override { return m_Center; };
+
             bool IsExposed() const { return m_Exposed; }
             glm::vec3 GetNormal() const { return m_Normal; }
-            glm::vec3 GetCenter() const { return m_Center; }
             std::vector<glm::vec3> GetCorners() const { return m_Corners; }
             std::set<std::string> GetEdges() const { return m_Edges; }
             std::set<std::string> GetNeighbors() const { return m_Neighbors; }
@@ -174,7 +180,6 @@ public:
         private:
             bool m_Exposed;
             glm::vec3 m_Normal;
-            glm::vec3 m_Center;
             std::vector<glm::vec3> m_Corners;
             std::set<std::string> m_Edges;
             std::set<std::string> m_Neighbors;
@@ -236,7 +241,6 @@ public:
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
         inline std::set<std::string>& GetAllNonExposedEdgeIDs() { return m_NonExposedEdgeIDs; }
-        inline glm::vec3 GetCenter() const { return m_Center; }
 
         void HighlightFace(const std::string& faceId, glm::vec4 color = glm::vec4(0));
         inline std::string GetHighlightedFaceID() const { return m_HighlightedFaceID; }
@@ -265,7 +269,6 @@ public:
         std::map<std::string, Edge> m_Edges;
         std::set<std::string> m_NonExposedFaceIDs;
         std::set<std::string> m_NonExposedEdgeIDs;
-        glm::vec3 m_Center;
         std::shared_ptr<GOText> m_IDLabelGO;
 
         friend class ACInfoModel;
@@ -290,7 +293,7 @@ public:
     
     void HideAllComponentsExceptCurrent();
     void ShowAllComponents();
-    void SetAllCotasVisibility(bool visible);
+    void UpdateCotasVisibility(bool visible);
 
 public: ///< small utilities to calculate the progress of fabrication
     /// @brief Get the number of fabricate components
@@ -355,7 +358,7 @@ class ACInfoModel
 {
 public:
     ACInfoModel(){
-        m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+        m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
     };
     ~ACInfoModel(){};
 

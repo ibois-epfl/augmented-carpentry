@@ -11,9 +11,11 @@ namespace AIAC
             this->m_ACInfoToolheadMap.clear();
 
         std::string configPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
-                                                                AIAC::Config::CONFIG_FILE);
+                                                                AIAC::Config::CONFIG_FILE,
+                                                                "deps/TTool/assets/config.yml");
         std::string ttoolRootPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL,
-                                                                   AIAC::Config::TTOOL_ROOT_PATH);
+                                                                   AIAC::Config::TTOOL_ROOT_PATH,
+                                                                   "deps/TTool/assets/toolheads");
         std::vector<std::string> toolheadACITPaths = ParseConfigFile(configPath, "acitFiles");
         std::vector<std::string> toolheadOBJPaths = ParseConfigFile(configPath, "modelFiles");
         
@@ -30,10 +32,11 @@ namespace AIAC
             AIAC_ERROR("No toolhead models loaded!");
 
         // if the config has no names, set the first one as active
-        if (AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CACHED_TOOLHEAD).empty())
+        auto cachedToolhead = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CACHED_TOOLHEAD);
+        if (cachedToolhead.empty())
             this->SetActiveToolhead(this->m_ACInfoToolheadMap.begin()->first);
         else
-            this->SetActiveToolhead(AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CACHED_TOOLHEAD));
+            this->SetActiveToolhead(cachedToolhead);
     }
 
     void ACInfoToolheadManager::SetActiveToolhead(const std::string& toolheadName)

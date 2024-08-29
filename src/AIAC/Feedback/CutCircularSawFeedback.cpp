@@ -131,80 +131,107 @@ namespace AIAC
         m_Normal = glm::normalize(m_NormalEnd - m_NormalStart);
     }
 
+    void CutCircularSawFeedback::ManuallyScrollRefFace(int scrollDirection) {
+        auto iter = m_Cut->GetAllFaces().find(m_NearestParallelFaceID);
+
+        // if scroll direction > 0 => goes to next, otherwise, goes back
+        if (scrollDirection > 0) {
+            iter++;
+            if (iter == m_Cut->GetAllFaces().end()){
+                iter = m_Cut->GetAllFaces().begin();
+            }
+        } else {
+            if (iter == m_Cut->GetAllFaces().begin()){
+                iter = m_Cut->GetAllFaces().end();
+            }
+            iter--;
+        }
+
+        m_NearestParallelFaceID = iter->first;
+
+    }
+
     void CutCircularSawFeedback::UpdateRefFaces()
     {
         // --------------------------------------------------------------------
-        // update the highlighted face
-        std::string nearestParallelFaceID;
-        std::vector<std::pair<std::string, float>> allValidFaces;
-        std::vector<std::pair<std::string, float>> perpenFaces;
-
-        // get the distances to the blade circle
-        for(auto const& [faceID, faceInfo]: m_Cut->GetAllFaces()){
-            if (faceInfo.IsExposed()) continue;
-            glm::vec3 ptOnCircleBlade = GOCircle::ClosestPointToCircle(
-                faceInfo.GetCenter(),
-                m_Center,
-                m_Normal,
-                m_Radius
-            );
-            auto dist = glm::abs(glm::distance(ptOnCircleBlade, faceInfo.GetCenter()));
-            allValidFaces.push_back(std::make_pair(faceID, dist));
-        }
-        // filter the vector with an angle threshold, erase those elements in the vector that do not respect the check
-        auto thresholdAngle = 0.7853f; // 45 degrees
-        allValidFaces.erase(
-            std::remove_if(allValidFaces.begin(), allValidFaces.end(), [this, thresholdAngle](auto const& a){
-                auto faceInfo = m_Cut->GetFace(a.first);
-                auto faceNormal = faceInfo.GetNormal();
-                auto theta = glm::acos(
-                    glm::dot(faceNormal, m_Normal) / 
-                    (glm::length(faceNormal) * glm::length(m_Normal))
-                );
-                return theta > thresholdAngle && (3.14159 - theta) > thresholdAngle;
-            }),
-            allValidFaces.end()
-        );
-        // reorder the faces by the abs distance
-        std::sort(allValidFaces.begin(), allValidFaces.end(), [](auto const& a, auto const& b){
-            return a.second < b.second;
-        });
-        // put the rest in the perpendicular faces
-        for (auto const& [faceID, dist]: allValidFaces){
-            if(faceID == nearestParallelFaceID) continue;
-            perpenFaces.push_back(std::make_pair(faceID, dist));
-        }
-        // if it is the first time, nearestParallelFaceID.empty() gives the first face as the nearest parallel face
-        nearestParallelFaceID = nearestParallelFaceID.empty() ? allValidFaces[0].first : nearestParallelFaceID;
-        // sort perpendicular faces by distance
-        std::sort(perpenFaces.begin(), perpenFaces.end(), [](auto const& a, auto const& b){
-            return a.second < b.second;
-        });
-
-        // --------------------------------------------------------------------
-        // update class members
-        // if the saw is place on the side for adjusting the height, there should be no parallel face
-        if(nearestParallelFaceID.empty())
-        {
-            if(perpenFaces.size() < 2) {
-                // TODO: catch error
-                return;
+        // update the reference faces (parallel / perpendicular)
+        if (IsRefFacesSelectedManually) {
+            // In manually selection mode, when the m_cut is switched, we have to update the face
+            if (m_Cut->GetAllFaces().find(m_NearestParallelFaceID) == m_Cut->GetAllFaces().end()){
+                m_NearestParallelFaceID = m_Cut->GetAllFaces().begin()->first;
             }
-            m_NearestParallelFaceID = perpenFaces[0].first;
-            m_NearestPerpendicularFaceID = perpenFaces[1].first;
         } else {
-            m_NearestParallelFaceID = nearestParallelFaceID;
-            if(!perpenFaces.empty()){
-                m_NearestPerpendicularFaceID = perpenFaces[0].first;
+            // automatically determine the reference faces
+            std::string nearestParallelFaceID;
+            std::vector<std::pair<std::string, float>> allValidFaces;
+            std::vector<std::pair<std::string, float>> perpenFaces;
+
+            // get the distances to the blade circle
+            for(auto const& [faceID, faceInfo]: m_Cut->GetAllFaces()){
+                if (faceInfo.IsExposed()) continue;
+                glm::vec3 ptOnCircleBlade = GOCircle::ClosestPointToCircle(
+                        faceInfo.GetCenter(),
+                        m_Center,
+                        m_Normal,
+                        m_Radius
+                );
+                auto dist = glm::abs(glm::distance(ptOnCircleBlade, faceInfo.GetCenter()));
+                allValidFaces.push_back(std::make_pair(faceID, dist));
+            }
+            // filter the vector with an angle threshold, erase those elements in the vector that do not respect the check
+            auto thresholdAngle = 0.7853f; // 45 degrees
+            allValidFaces.erase(
+                    std::remove_if(allValidFaces.begin(), allValidFaces.end(), [this, thresholdAngle](auto const& a){
+                        auto faceInfo = m_Cut->GetFace(a.first);
+                        auto faceNormal = faceInfo.GetNormal();
+                        auto theta = glm::acos(
+                                glm::dot(faceNormal, m_Normal) /
+                                (glm::length(faceNormal) * glm::length(m_Normal))
+                        );
+                        return theta > thresholdAngle && (3.14159 - theta) > thresholdAngle;
+                    }),
+                    allValidFaces.end()
+            );
+            // reorder the faces by the abs distance
+            std::sort(allValidFaces.begin(), allValidFaces.end(), [](auto const& a, auto const& b){
+                return a.second < b.second;
+            });
+            // put the rest in the perpendicular faces
+            for (auto const& [faceID, dist]: allValidFaces){
+                if(faceID == nearestParallelFaceID) continue;
+                perpenFaces.push_back(std::make_pair(faceID, dist));
+            }
+            // if it is the first time, nearestParallelFaceID.empty() gives the first face as the nearest parallel face
+            nearestParallelFaceID = nearestParallelFaceID.empty() ? allValidFaces[0].first : nearestParallelFaceID;
+            // sort perpendicular faces by distance
+            std::sort(perpenFaces.begin(), perpenFaces.end(), [](auto const& a, auto const& b){
+                return a.second < b.second;
+            });
+
+            // --------------------------------------------------------------------
+            // update class members
+
+            // Case 1: If the saw is place on the side for adjusting the height, there should be no parallel face
+            // Therefore, the closest face would be considered as the face to be cut,
+            // and the secondly closest face would be considered as the perpendicular surface that sits
+            // at the bottom of the blade.
+            // Case 2: During cut, everything is defined as normal
+            if(nearestParallelFaceID.empty())
+            {
+                if(perpenFaces.size() < 2) {
+                    // TODO: catch error
+                    return;
+                }
+                m_NearestParallelFaceID = perpenFaces[0].first;
             } else {
-                m_NearestPerpendicularFaceID.clear();
+                m_NearestParallelFaceID = nearestParallelFaceID;
             }
         }
 
         // --------------------------------------------------------------------
-        // get the closestfirst and second neighbour face to the highlightesd face and to the blade's center
+        // get the first and secondly closest neighbour face to the highlighted face and to the blade's center
         std::map<std::string, AIAC::TimberInfo::Cut::Face> neighbouringFaces = 
-            this->m_Cut->GetHighlightedFaceNeighbors();
+            this->m_Cut->GetFaceNeighbors(m_NearestParallelFaceID);
         float minDist = std::numeric_limits<float>::max();
         for (auto const& [faceID, faceInfo] : neighbouringFaces)
         {
@@ -597,7 +624,7 @@ namespace AIAC
 
     void CutCircularSawFeedback::UpdateDepthFeedback()
     {
-        if (!this->m_NearestParallelFaceID.empty() && !m_Cut->IsSingleFace() && !this->m_NearestPerpendicularFaceID.empty())
+        if (!this->m_NearestParallelFaceID.empty() && !m_Cut->IsSingleFace())
         {
             // calculate distances (closest point to line/segment to circle)
             float distLineDepth = GOCircle::ClosestDistanceFromLineToCircle(

@@ -148,7 +148,7 @@ namespace AIAC
     {
         public:
             ToolHeadData(){
-                this->m_ScaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 0.0f);
+                this->m_ScaleF = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
             }
             ~ToolHeadData() = default;
         private:

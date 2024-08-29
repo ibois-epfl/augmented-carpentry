@@ -1,0 +1,94 @@
+{
+    "name": "acpy - replayer scene generator",
+    "nickname": "acpy-replayer-scene-generator",
+    "category": "acpy",
+    "subcategory": "replayer",
+    "description": "Generate scene at the given frame id.",
+    "exposure": 4,
+    "instanceGuid": "84e45f15-73f8-486b-b277-c003c617a1da",
+    "ghpython": {
+        "marshalGuids": true,
+        "iconDisplay": 2,
+        "inputParameters": [
+            {
+                "name": "i_replayer",
+                "nickname": "i_replayer",
+                "description": "The initialized replayer object.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "none",
+                "reverse": false,
+                "simplify": false
+            },
+            {
+                "name": "i_frame_id",
+                "nickname": "i_frame_id",
+                "description": "The target frame index.",
+                "optional": false,
+                "allowTreeAccess": false,
+                "showTypeHints": true,
+                "scriptParamAccess": "item",
+                "wireDisplay": "default",
+                "sourceCount": 0,
+                "typeHintID": "int",
+                "reverse": false,
+                "simplify": false
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "o_camera_model",
+                "nickname": "o_camera_model",
+                "description": "Transformed camera brep.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_tool_model",
+                "nickname": "o_tool_model",
+                "description": "Transformed tool model (Brep).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_tool_primitive_model",
+                "nickname": "o_tool_primitive_model",
+                "description": "Transformed tool primitve model (Brep).",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_acim_bbox",
+                "nickname": "o_acim_bbox",
+                "description": "Transformed acim bounding box.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_acim_activated_component",
+                "nickname": "o_acim_activated_component",
+                "description": "Transformed acim activated component.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_acim_done_component",
+                "nickname": "o_acim_done_component",
+                "description": "Transformed acim done component.",
+                "optional": false,
+                "sourceCount": 0
+            },
+            {
+                "name": "o_acim_not_done_component",
+                "nickname": "o_acim_not_done_component",
+                "description": "Transformed acim not done component.",
+                "optional": false,
+                "sourceCount": 0
+            }
+        ]
+    }
+}

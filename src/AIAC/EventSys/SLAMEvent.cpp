@@ -3,6 +3,7 @@
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/Application.h"
 #include <filesystem>
+#include <cstdlib>
 
 namespace AIAC
 {
@@ -58,7 +59,10 @@ namespace AIAC
         AIAC_INFO("Start mapping");
 
         // update the camera parameters for SLAM
-        auto camParamFilepath = AIAC::Config::Get<string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE);
+        auto camParamFilepath = AIAC::Config::Get<string>(
+                AIAC::Config::SEC_AIAC,
+                AIAC::Config::CAM_PARAMS_FILE,
+                "assets/tslam/calibration_orange_A_1280_720_000B.yml");
         AIAC_APP.GetLayer<LayerCamera>()->MainCamera.UpdateCameraParamFromFile(camParamFilepath);
         AIAC_APP.GetLayer<LayerSlam>()->Slam.setCamParams(camParamFilepath);
         AIAC_APP.GetLayer<LayerSlam>()->Slam.imageParams.Distorsion.setTo(cv::Scalar::all(0));
@@ -68,7 +72,6 @@ namespace AIAC
 
         // start mapping
         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StartMapping();
-        AIAC_APP.GetRenderer()->StartMapping();
     }
 
     void SLAMStopMappingEvent::OnSLAMStopMapping()
@@ -82,7 +85,6 @@ namespace AIAC
 
         AIAC_INFO("Stop mapping");
         AIAC_APP.GetLayer<AIAC::LayerSlam>()->StopMapping();
-        AIAC_APP.GetRenderer()->StopMapping();
 
         // Optimize Map
         if(m_ToOptimize && m_ToSave) {
@@ -123,5 +125,40 @@ namespace AIAC
             if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(recPlyPath);
             else AIAC_WARN("Reconstruction failed, skip loading the model");
         }
+    }
+
+    void SLAMCombineMapEvent::OnSLAMCombineMap()
+    {
+        if (m_OutputPath.empty()) {
+            auto basePathA = m_MapPathA.substr(0, m_MapPathA.find_last_of('.'));
+            auto filenameB = m_MapPathB.substr(m_MapPathB.find_last_of('/') + 1);
+            m_OutputPath = basePathA + "_combined_" + filenameB;
+        }
+
+        auto basePath = m_OutputPath.substr(0, m_OutputPath.find_last_of("."));
+        auto ymlTagMapPath = basePath + ".yml";
+        auto recPlyPath = basePath + "_reconstruct.ply";
+
+        AIAC_APP.GetLayer<LayerSlam>()->Slam.CombineMap(
+                m_MapPathA, m_MapPathB, m_OutputPath,
+                true, true, nullptr, m_OptimizeIterations);
+
+        // Reconstruct 3D
+        bool isReconstructed = AIAC_APP.GetLayer<AIAC::LayerSlam>()->Slam.Reconstruct3DModelAndExportPly(
+                ymlTagMapPath,
+                recPlyPath,
+                m_RadiusSearch,
+                m_CreaseAngleThreshold,
+                m_MinClusterSize,
+                m_AABBScaleFactor,
+                m_MaxPolyTagDist,
+                m_MaxPlnDist2Merge,
+                m_MaxPlnAngle2Merge,
+                m_EPS
+        );
+
+        // Load reconstructed 3D model
+        if(isReconstructed) AIAC_APP.GetLayer<AIAC::LayerModel>()->LoadScannedModel(recPlyPath);
+        else AIAC_WARN("Reconstruction failed, skip loading the model");
     }
 }

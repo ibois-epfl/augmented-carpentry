@@ -34,13 +34,13 @@ namespace AIAC{
         void CalcBoardCornerPositions(std::vector<cv::Point3f>& corners) const;
 
     public:
-        cv::Size boardSize = cv::Size(13, 9);  // The size of the board -> Number of items by width and height
+        cv::Size boardSize = cv::Size(19, 13);  // The size of the board -> Number of items by width and height
         Pattern calibrationPattern = Pattern::CHESSBOARD;   // One of the Chessboard, circles, or asymmetric circle pattern
         float squareSize = 20.0f;                           // The size of a square in your defined unit (point, millimeter,etc).
         float aspectRatio = 0.0f;                           // The aspect ratio, can be 0 if no need
         bool writeExtrinsics = true;                        // Write extrinsic parameters
-        bool calibZeroTangentDist = true;                   // Assume zero tangential distortion
-        bool calibFixPrincipalPoint = true;                 // Fix the principal point at the center
+        bool calibZeroTangentDist = false;                  // Assume zero tangential distortion
+        bool calibFixPrincipalPoint = false;                // Fix the principal point at the center
         bool flipVertical = false;                          // Flip the captured images around the horizontal axis
         bool useFisheye = false;                            // use fisheye camera model for calibration
         bool fixDistortion = false;                         // fix K1 distortion coefficient

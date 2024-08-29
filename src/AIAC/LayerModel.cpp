@@ -16,8 +16,14 @@ namespace AIAC
     
     void LayerModel::OnAttach()
     {
-        m_ACInfoModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
-        m_ScannedModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::SCANNED_MODEL, "assets/ACModel/28_scanned_model.ply");
+        m_ACInfoModelPath = AIAC::Config::Get<std::string>(
+                AIAC::Config::SEC_AIAC,
+                AIAC::Config::AC_INFO_MODEL,
+                "assets/ACModel/test.acim");
+        m_ScannedModelPath = AIAC::Config::Get<std::string>(
+                AIAC::Config::SEC_AIAC,
+                AIAC::Config::SCANNED_MODEL,
+                "assets/ACModel/28_scanned_model.ply");
         m_AlignOffset = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_OFFSET, 0.0f);
         m_AlignRotation = AIAC::Config::Get<int>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_ROTATION, 0);
         m_AlignFlip = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::ALIGN_FLIP, false);
@@ -61,7 +67,8 @@ namespace AIAC
 
     void LayerModel::ReloadACInfoModel()
     {
-        std::string path = AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
+        std::string path = AIAC::Config::Get<std::string>(
+                AIAC::Config::SEC_AIAC, AIAC::Config::AC_INFO_MODEL, "assets/ACModel/test.acim");
         if(!std::filesystem::exists(path))
         {
             AIAC_WARN("LayerModel::ReloadACInfoModel()from path: " + path + " failed to load models");

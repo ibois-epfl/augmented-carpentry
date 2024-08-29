@@ -25,7 +25,7 @@ void CameraCalibrator::CalcBoardCornerPositions(
   }
 }
 
-//! [board_corners]
+//! [board_corners
 bool CameraCalibrator::RunCalibration(cv::Mat * imgForDisplay) {
   ValidateAndUpdateFlag();
   DetectPattern(imgForDisplay);

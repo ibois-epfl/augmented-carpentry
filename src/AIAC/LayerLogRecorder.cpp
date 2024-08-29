@@ -61,7 +61,8 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
     // copy the dependency files to the log folder
     std::string acimModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath();
     std::string scannedModelPath = AIAC_APP.GetLayer<AIAC::LayerModel>()->GetScannedModelPath();
-    std::string ttoolModelPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "");
+    std::string ttoolModelPath = AIAC::Config::Get<std::string>(
+            AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "deps/TTool/assets/config.yml");
     CopyFile(acimModelPath, m_LogFolderPath + "/AC_info_model.acim");
     CopyFile(scannedModelPath, m_LogFolderPath + "/scanned_model.ply");
 

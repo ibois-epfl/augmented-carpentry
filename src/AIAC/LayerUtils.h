@@ -60,7 +60,8 @@ namespace AIAC {
     private:
         /// Default path to utils folder
         std::string m_UtilsPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_UTILS,
-                                                                 AIAC::Config::UTILS_PATH);
+                                                                 AIAC::Config::UTILS_PATH,
+                                                                 "./temp");
     private: ///< video recorder
         /// Flag to check if the video is being recorded
         bool m_Recording = false;
