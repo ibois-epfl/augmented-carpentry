@@ -58,11 +58,11 @@ namespace AIAC
                 layer->OnFrameStart(); 
 
             m_Window->OnUpdate();
-
+#ifndef HEADLESS_TEST
             m_Renderer->OnRender();
 
             GetLayer<AIAC::LayerUI>()->OnUIRender();
-
+#endif
 
             for (auto& layer : m_LayerStack)
                 layer->OnFrameEnd();
@@ -92,6 +92,8 @@ namespace AIAC
         m_Window->Shutdown();
 
         AIAC::Log::Shutdown();
+
+
 
         exit(EXIT_SUCCESS);
     }

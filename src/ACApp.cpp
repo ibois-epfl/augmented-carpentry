@@ -5,7 +5,12 @@ int main(int argc, char* argv[]) {
 #ifdef __linux__
     AIAC::Log::Init();
 
-    AIAC::Config config("config.ini", true);
+    // by default, take the config.ini in the root folder
+    std::string configPath = "config.ini";
+    if (argc >= 2){
+        configPath = argv[1];
+    }
+    AIAC::Config config(configPath, true);
 
     AIAC::ApplicationSpecification appSpec;
     appSpec.Name = "augmented_carpentry";  // かくちょう_だいく
@@ -27,7 +32,9 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerModel>();
     acApp_ptr->PushLayer<AIAC::LayerToolhead>();
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();
+#ifndef HEADLESS_TEST
     acApp_ptr->PushLayer<AIAC::LayerUI>();
+#endif
     acApp_ptr->PushLayer<AIAC::LayerUtils>();
     acApp_ptr->PushLayer<AIAC::LayerLogRecorder>();
 

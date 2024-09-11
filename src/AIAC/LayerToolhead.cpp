@@ -12,11 +12,18 @@ namespace AIAC
 {
     void LayerToolhead::OnAttach()
     {
+        bool initDraw = true;
+
+#ifdef HEADLESS_TEST
+        initDraw = false;
+#endif
+
         // init ttool
         TTool = std::make_shared<ttool::TTool>(
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::TTOOL_ROOT_PATH, "deps/TTool"),
             AIAC::Config::Get<std::string>(AIAC::Config::SEC_TTOOL, AIAC::Config::CONFIG_FILE, "deps/TTool/assets/config.yml"),
-            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "assets/tslam/calibration_orange_A_1280_720_000B.yml")
+            AIAC::Config::Get<std::string>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_PARAMS_FILE, "assets/tslam/calibration_orange_A_1280_720_000B.yml"),
+            initDraw
             );
 
         // load the datasets acits

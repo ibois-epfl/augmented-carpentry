@@ -1,7 +1,5 @@
 FROM ubuntu:latest
 
-ARG DEBIAN_FRONTEND=noninteractive # ignore user input required
-
 # install required dependencies
 # # install required dependencies
 RUN apt-get -qq update && apt-get -qq -y install \
@@ -24,4 +22,5 @@ RUN apt-get -qq update && apt-get -qq -y install \
     libimgui-dev \
     libopencv-dev \
     unzip \
-    && rm -rf /var/lib/apt/lists/*
+    xvfb \
+    && rm -rf /var/lib/apt/lists/* \

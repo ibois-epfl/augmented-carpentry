@@ -1,12 +1,12 @@
 [submodule "deps/rgb-camera-calibration"]
 	branch = main
 	path = deps/rgb-camera-calibration
-	url = git@github.com:ibois-epfl/rgb-camera-calibration.git
+	url = https://github.com/ibois-epfl/rgb-camera-calibration.git
 [submodule "deps/TSlam"]
 	branch = main
 	path = deps/TSlam
-	url = git@github.com:ibois-epfl/TSlam.git
+	url = https://github.com/ibois-epfl/TSlam.git
 [submodule "deps/TTool"]
 	branch = main
 	path = deps/TTool
-	url = git@github.com:ibois-epfl/TTool.git
+	url = https://github.com/ibois-epfl/TTool.git

@@ -50,6 +50,9 @@ namespace AIAC
     }
 
     void LayerCamera::SetCurrentDeviceIndex(int index) {
+#ifdef HEADLESS_TEST
+        MainCamera.Open(0);
+#else
         try {
             if (index >= 0 && index < AvailableDevices.size()) {
                 MainCamera.Open(index);
@@ -63,9 +66,13 @@ namespace AIAC
         } catch (const std::runtime_error &e) {
             AIAC_ERROR(e.what());
         }
+#endif
     }
 
     bool LayerCamera::UpdateAvailableDevices(){
+#ifdef HEADLESS_TEST
+        return true;
+#endif
         AvailableDevices.clear();
         glob::glob glob("/dev/video*");
         while(glob){
