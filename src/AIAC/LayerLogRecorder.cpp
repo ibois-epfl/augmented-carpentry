@@ -37,7 +37,11 @@ void AIAC::LayerLogRecorder::StartRecording(std::string logRootFolderPath) {
 
     std::string acimModelName = GetFileNameFromPath(AIAC_APP.GetLayer<AIAC::LayerModel>()->GetACInfoModelPath(), false);
     std::string currentDateTime = GetCurrentDateTime();
+#ifdef HEADLESS_TEST
+    const std::string logName = acimModelName;
+#else
     std::string logName = acimModelName + "_" + currentDateTime;
+#endif
 
     if (logRootFolderPath.empty()) {
         logRootFolderPath = AIAC_APP.GetLayer<AIAC::LayerUtils>()->GetSaveFolderPath();

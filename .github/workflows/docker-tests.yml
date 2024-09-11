@@ -35,7 +35,7 @@ jobs:
       - name: Configure
         run: |
           git config --global --add safe.directory ${PWD}
-          cmake . -B build/ -D HEADLESS_TEST=ON
+          cmake . -B build/ -D HEADLESS_TEST=ON -D DEPLOY_ON_TOUCH=OFF
       - uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
@@ -44,3 +44,9 @@ jobs:
           retention-days: 1
       - name: Build and run
         run: cmake --build build
+      - name: Run integration tests
+        run: |
+          export DISPLAY=:77
+          Xvfb :77 -screen 0 800x600x24 &
+          build/bin/AC tests/assets/config_smoke_test.ini
+          cat tests/output/log_recorders/test/log.txt

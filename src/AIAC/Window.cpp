@@ -35,10 +35,6 @@ namespace AIAC
 
     void Window::Init()
     {
-#ifdef HEADLESS_TEST
-        glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_NULL);
-#endif
-
         if(s_GLFWWindowCount == 0)
         {
             glfwSetErrorCallback(GLFWErrorCallback);
@@ -54,16 +50,12 @@ namespace AIAC
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef HEADLESS_TEST
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_FALSE);
-        glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_OSMESA_CONTEXT_API);
-#else
+
 #ifdef AIAC_DEPLOY_ON_TOUCH
         glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_FALSE);
 #else
         glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_TRUE);
         glfwWindowHint(GLFW_RESIZABLE, m_Data.IsResizable);
-#endif
 #endif
 
 #ifdef AIAC_DEPLOY_ON_TOUCH
