@@ -10,3 +10,11 @@
 	branch = main
 	path = deps/TTool
 	url = https://github.com/ibois-epfl/TTool.git
+[submodule "deps/googletest"]
+	path = deps/googletest
+	url = https://github.com/google/googletest
+	branch = main
+[submodule "deps/stb"]
+	path = deps/stb
+	url = https://github.com/nothings/stb.git
+	branch = main

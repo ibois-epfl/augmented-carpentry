@@ -94,7 +94,6 @@ add_external_package(spdlog)
 add_external_package(pugixml)
 add_external_package(Freetype)
 add_external_package(eventpp)
-add_external_package(googletest)
 
 
 target_include_directories(${PROJECT_NAME}
