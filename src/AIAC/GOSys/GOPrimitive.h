@@ -236,8 +236,6 @@ namespace AIAC
 
         inline void SetPStart(GOPoint pStart) { m_PStart = pStart; InitGLObject(); }
         inline void SetPEnd(GOPoint pEnd) { m_PEnd = pEnd; InitGLObject(); }
-        // inline void SetPStartValues(float x, float y, float z) { m_PStart.SetX(x); m_PStart.SetY(y); m_PStart.SetZ(z); InitGLObject(); }
-        // inline void SetPEndValues(float x, float y, float z) { m_PEnd.SetX(x); m_PEnd.SetY(y); m_PEnd.SetZ(z); InitGLObject(); }
         inline void SetPts(GOPoint pStart, GOPoint pEnd) { m_PStart = pStart; m_PEnd = pEnd; InitGLObject(); }
 
         /**
@@ -314,7 +312,6 @@ namespace AIAC
          */
         glm::vec3 ClosestPointToPoint(glm::vec3 point);
 
-    // FIXME: ideally all these static functions should be not and integrated with the GOCircle class
     public:  ///< Static geometry functions
         /**
          * @brief Calculates the closest point on a circle to a given point in 3D.

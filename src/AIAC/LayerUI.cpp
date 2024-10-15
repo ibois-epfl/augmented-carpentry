@@ -167,8 +167,6 @@ namespace AIAC
 
     void LayerUI::OnDetach()
     {
-        ImGui::EndMainMenuBar();
-
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
