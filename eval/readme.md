@@ -1,0 +1,1 @@
+This folder contains the necessary code and data for the evaluation of the Augmented Carpentry project.
