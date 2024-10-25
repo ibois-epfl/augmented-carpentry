@@ -35,9 +35,10 @@ namespace AIAC
 
     void Window::Init()
     {
+        glfwSetErrorCallback(GLFWErrorCallback);
+
         if(s_GLFWWindowCount == 0)
         {
-            glfwSetErrorCallback(GLFWErrorCallback);
             AIAC_ASSERT(glfwInit(), "Could not initialize GLFW!");
         } else { AIAC_CRITICAL("Multiple windows not supported."); exit(EXIT_FAILURE); }
 
