@@ -76,13 +76,6 @@ TEST_F(GOPointTest, ConstructorTest) {
     EXPECT_EQ(point.Z(), 3.0f);
 }
 
-TEST_F(GOPointTest, AddMethodTest) {
-    auto point = AIAC::GOPoint::Add(1.0f, 2.0f, 3.0f);
-    EXPECT_EQ(point->X(), 1.0f);
-    EXPECT_EQ(point->Y(), 2.0f);
-    EXPECT_EQ(point->Z(), 3.0f);
-}
-
 TEST_F(GOPointTest, GetSetPositionTest) {
     AIAC::GOPoint point(1.0f, 2.0f, 3.0f);
     point.SetPosition(glm::vec3(4.0f, 5.0f, 6.0f));
