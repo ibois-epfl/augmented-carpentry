@@ -38,6 +38,11 @@ def main(
                 abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
                 pandas_data_beam = pd.read_csv(abs_path_csv)
                 pandas_data_beam['beam_name'] = p
+                # -- filtering --
+                # pandas_data_beam = pandas_data_beam[pandas_data_beam['mean'] != 'None']
+
+
+
                 pandas_beams_joints_dataset = pd.concat([pandas_beams_joints_dataset, pandas_data_beam], ignore_index=True)
             if f.endswith('_jointfaces.csv'):
                 abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
@@ -52,6 +57,7 @@ def main(
     # calculate the mean of all distances
     joint_means: typing.List[float] = []
     joint_std: typing.List[float] = []
+    joint_total_nbr: int = 0
     # retrieve the value of the column 'mean' and calculate the mean
     for i in range(len(pandas_beams_joints_dataset)):
         rawdata_mean = pandas_beams_joints_dataset['mean'][i]
@@ -61,7 +67,11 @@ def main(
             continue
         joint_means.append(rawdata_mean)
         joint_std.append(rawdata_std)
+        joint_total_nbr += 1
     jointfaces_means: typing.List[float] = []
+
+
+
     # retrieve the value of the column 'mean' and calculate the mean
     for i in range(len(pandas_beams_jointfaces_dataset)):
         rawdata_mean = pandas_beams_jointfaces_dataset['mean'][i]
@@ -70,7 +80,9 @@ def main(
             continue
         jointfaces_means.append(rawdata_mean)
 
+    print(f'Total number of joint distances: {joint_total_nbr}')
     print(f'Mean of all joint distances: {sum(joint_means) / len(joint_means)}±{sum(joint_std) / len(joint_std)}')
+
     print(f'Mean of all jointfaces distances: {sum(jointfaces_means) / len(jointfaces_means)}')
 
 
@@ -81,6 +93,9 @@ def main(
     ###################################################################################################
     # folder_name_assembly: str = "b_assembly"
     # path_dir_assembly: str = os.path.join(_path, folder_name_assembly)
+
+    ## TODO: here we need to filter the too high values by capping the values farther than 5cm for example 
+    # due to an inaxitude of measuring of DF
 
 if __name__ == '__main__':
     def _check_dir_sanity(_path: str) -> bool:
