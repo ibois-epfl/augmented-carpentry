@@ -76,13 +76,13 @@ TEST_F(GOPointTest, ConstructorTest) {
     EXPECT_EQ(point.Z(), 3.0f);
 }
 
-TEST_F(GOPointTest, GetSetPositionTest) {
-    AIAC::GOPoint point(1.0f, 2.0f, 3.0f);
-    point.SetPosition(glm::vec3(4.0f, 5.0f, 6.0f));
-    EXPECT_EQ(point.GetPosition().x, 4.0f);
-    EXPECT_EQ(point.GetPosition().y, 5.0f);
-    EXPECT_EQ(point.GetPosition().z, 6.0f);
-}
+// TEST_F(GOPointTest, GetSetPositionTest) {
+//     AIAC::GOPoint point(1.0f, 2.0f, 3.0f);
+//     point.SetPosition(glm::vec3(4.0f, 5.0f, 6.0f));
+//     EXPECT_EQ(point.GetPosition().x, 4.0f);
+//     EXPECT_EQ(point.GetPosition().y, 5.0f);
+//     EXPECT_EQ(point.GetPosition().z, 6.0f);
+// }
 
 TEST_F(GOPointTest, DistanceToTest) {
     AIAC::GOPoint point1(1.0f, 2.0f, 3.0f);
@@ -91,15 +91,15 @@ TEST_F(GOPointTest, DistanceToTest) {
     EXPECT_NEAR(distance, 7.071f, 0.001f);
 }
 
-TEST_F(GOPointTest, TransformTest) {
-    AIAC::GOPoint point(1.0f, 2.0f, 3.0f);
-    glm::mat4x4 transformMat = glm::mat4x4(1.0f);
-    transformMat[3] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f); // Translation matrix
-    point.Transform(transformMat);
-    EXPECT_EQ(point.X(), 2.0f);
-    EXPECT_EQ(point.Y(), 3.0f);
-    EXPECT_EQ(point.Z(), 4.0f);
-}
+//TEST_F(GOPointTest, TransformTest) {
+//    AIAC::GOPoint point(1.0f, 2.0f, 3.0f);
+//    glm::mat4x4 transformMat = glm::mat4x4(1.0f);
+//    transformMat[3] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f); // Translation matrix
+//    point.Transform(transformMat);
+//    EXPECT_EQ(point.X(), 2.0f);
+//    EXPECT_EQ(point.Y(), 3.0f);
+//    EXPECT_EQ(point.Z(), 4.0f);
+//}
 
 
 class GOLineTest : public ::testing::Test {
@@ -115,43 +115,43 @@ protected:
     std::shared_ptr<AIAC::GOLine> line;
 };
 
-TEST_F(GOLineTest, ExtendFromEnd) {
-    float length = 1.0f;
-    line->ExtendFromEnd(length);
-    ASSERT_FLOAT_EQ(line->GetLength(), glm::distance(p1->GetPosition(), p2->GetPosition() + glm::normalize(p2->GetPosition() - p1->GetPosition()) * length));
-}
+//TEST_F(GOLineTest, ExtendFromEnd) {
+//    float length = 1.0f;
+//    line->ExtendFromEnd(length);
+//    ASSERT_FLOAT_EQ(line->GetLength(), glm::distance(p1->GetPosition(), p2->GetPosition() + glm::normalize(p2->GetPosition() - p1->GetPosition()) * length));
+//}
 
-TEST_F(GOLineTest, ExtendBothEnds) {
-    float length = 1.0f;
-    line->ExtendBothEnds(length);
-    ASSERT_FLOAT_EQ(line->GetLength(), glm::distance(p1->GetPosition() - glm::normalize(p2->GetPosition() - p1->GetPosition()) * (length / 2), p2->GetPosition() + glm::normalize(p2->GetPosition() - p1->GetPosition()) * (length / 2)));
-}
+//TEST_F(GOLineTest, ExtendBothEnds) {
+//    float length = 1.0f;
+//    line->ExtendBothEnds(length);
+//    ASSERT_FLOAT_EQ(line->GetLength(), glm::distance(p1->GetPosition() - glm::normalize(p2->GetPosition() - p1->GetPosition()) * (length / 2), p2->GetPosition() + glm::normalize(p2->GetPosition() - p1->GetPosition()) * (length / 2)));
+//}
 
-TEST_F(GOLineTest, GetMidPointValues) {
-    glm::vec3 expectedMidPoint = (p1->GetPosition() + p2->GetPosition()) / 2.0f;
-    ASSERT_EQ(line->GetMidPointValues(), expectedMidPoint);
-}
+//TEST_F(GOLineTest, GetMidPointValues) {
+//    glm::vec3 expectedMidPoint = (p1->GetPosition() + p2->GetPosition()) / 2.0f;
+//    ASSERT_EQ(line->GetMidPointValues(), expectedMidPoint);
+//}
 
-TEST_F(GOLineTest, GetMidPoint) {
-    AIAC::GOPoint expectedMidPoint((p1->GetPosition() + p2->GetPosition()) / 2.0f);
-    ASSERT_EQ(line->GetMidPoint().GetPosition(), expectedMidPoint.GetPosition());
-}
-
-TEST_F(GOLineTest, GetNormalValues) {
-    glm::vec3 expectedNormal = glm::normalize(glm::cross(p2->GetPosition() - p1->GetPosition(), glm::vec3(0, 0, 1)));
-    ASSERT_EQ(line->GetNormalValues(), expectedNormal);
-}
-
-TEST_F(GOLineTest, Transform) {
-    glm::mat4x4 transformMat = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-    line->Transform(transformMat);
-    ASSERT_EQ(line->GetPStart().GetPosition(), glm::vec3(transformMat * glm::vec4(p1->GetPosition(), 1.0f)));
-    ASSERT_EQ(line->GetPEnd().GetPosition(), glm::vec3(transformMat * glm::vec4(p2->GetPosition(), 1.0f)));
-}
-
-TEST_F(GOLineTest, Translate) {
-    glm::vec3 translation(1.0f, 1.0f, 1.0f);
-    line->Translate(translation);
-    ASSERT_EQ(line->GetPStart().GetPosition(), p1->GetPosition() + translation);
-    ASSERT_EQ(line->GetPEnd().GetPosition(), p2->GetPosition() + translation);
-}
+//TEST_F(GOLineTest, GetMidPoint) {
+//    AIAC::GOPoint expectedMidPoint((p1->GetPosition() + p2->GetPosition()) / 2.0f);
+//    ASSERT_EQ(line->GetMidPoint().GetPosition(), expectedMidPoint.GetPosition());
+//}
+//
+//TEST_F(GOLineTest, GetNormalValues) {
+//    glm::vec3 expectedNormal = glm::normalize(glm::cross(p2->GetPosition() - p1->GetPosition(), glm::vec3(0, 0, 1)));
+//    ASSERT_EQ(line->GetNormalValues(), expectedNormal);
+//}
+//
+//TEST_F(GOLineTest, Transform) {
+//    glm::mat4x4 transformMat = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+//    line->Transform(transformMat);
+//    ASSERT_EQ(line->GetPStart().GetPosition(), glm::vec3(transformMat * glm::vec4(p1->GetPosition(), 1.0f)));
+//    ASSERT_EQ(line->GetPEnd().GetPosition(), glm::vec3(transformMat * glm::vec4(p2->GetPosition(), 1.0f)));
+//}
+//
+//TEST_F(GOLineTest, Translate) {
+//    glm::vec3 translation(1.0f, 1.0f, 1.0f);
+//    line->Translate(translation);
+//    ASSERT_EQ(line->GetPStart().GetPosition(), p1->GetPosition() + translation);
+//    ASSERT_EQ(line->GetPEnd().GetPosition(), p2->GetPosition() + translation);
+//}

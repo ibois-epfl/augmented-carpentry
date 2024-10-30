@@ -17,9 +17,13 @@ namespace AIAC
     void Camera::Open(int id)
     {
 #ifdef HEADLESS_TEST
+        AIAC_INFO("Running in headless mode, load video from " + AIAC::Config::VIDEO_PATH);
         std::string videoPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TEST, AIAC::Config::VIDEO_PATH, "");
         if (videoPath.empty()) {
             throw std::invalid_argument("Video path for test is empty!");
+        }
+        if(!std::filesystem::exists(videoPath)){
+            throw std::invalid_argument("No video file found at " + videoPath);
         }
         m_VideoCapture = cv::VideoCapture(videoPath);
 #else

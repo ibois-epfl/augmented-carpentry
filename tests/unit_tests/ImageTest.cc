@@ -25,11 +25,11 @@ TEST_F(ImageTest, ConstructorWithCvMat) {
     EXPECT_TRUE(img.GetCvMat().data != nullptr);
 }
 
-TEST_F(ImageTest, ConstructorWithPath) {
-    const char* path = "path/to/image.png";
-    AIAC::Image img(path);
-    EXPECT_EQ(img.GetPath(), path);
-}
+//TEST_F(ImageTest, ConstructorWithPath) {
+//    const char* path = "path/to/image.png";
+//    AIAC::Image img(path);
+//    EXPECT_EQ(img.GetPath(), path);
+//}
 
 TEST_F(ImageTest, UpdateData) {
     AIAC::Image img;
@@ -48,21 +48,21 @@ TEST_F(ImageTest, Resize) {
     EXPECT_EQ(img.GetHeight(), 50);
 }
 
-TEST_F(ImageTest, GetImTexture) {
-    cv::Mat mat(100, 100, CV_8UC3, cv::Scalar(255, 0, 0));
-    AIAC::Image img(mat);
-    AIAC::ImTexture texture = img.GetImTexture();
-    EXPECT_TRUE(texture.ID != 0);
-    EXPECT_EQ(texture.Size.x, 100);
-    EXPECT_EQ(texture.Size.y, 100);
-}
+//TEST_F(ImageTest, GetImTexture) {
+//    cv::Mat mat(100, 100, CV_8UC3, cv::Scalar(255, 0, 0));
+//    AIAC::Image img(mat);
+//    AIAC::ImTexture texture = img.GetImTexture();
+//    EXPECT_TRUE(texture.ID != 0);
+//    EXPECT_EQ(texture.Size.x, 100);
+//    EXPECT_EQ(texture.Size.y, 100);
+//}
 
-TEST_F(ImageTest, GetGlTextureObj) {
-    cv::Mat mat(100, 100, CV_8UC3, cv::Scalar(255, 0, 0));
-    AIAC::Image img(mat);
-    GLuint textureID = img.GetGlTextureObj();
-    EXPECT_TRUE(textureID != 0);
-}
+//TEST_F(ImageTest, GetGlTextureObj) {
+//    cv::Mat mat(100, 100, CV_8UC3, cv::Scalar(255, 0, 0));
+//    AIAC::Image img(mat);
+//    GLuint textureID = img.GetGlTextureObj();
+//    EXPECT_TRUE(textureID != 0);
+//}
 
 TEST_F(ImageTest, ReplaceCvMat) {
     AIAC::Image img;

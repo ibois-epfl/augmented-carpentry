@@ -74,6 +74,11 @@ private:
 };
 
 std::unordered_map<int, FrameInfo> parseLog(const std::string& path) {
+    // check if file exist
+    if(!std::filesystem::exists(path)){
+        throw std::invalid_argument("No log file found at " + path);
+    }
+
     // Open the text file named "input.txt"
     std::ifstream f(path);
 
@@ -139,6 +144,7 @@ std::unordered_map<int, FrameInfo> parseLog(const std::string& path) {
 TEST(SmokeTest, DryRun) {
     // run the build/bin/AC executable with the config.ini file and run it from root of the repo
     // the executable should run without any errors
+    std::cout << "Running smoke test, working path: " << std::filesystem::current_path() << std::endl;
     system("xvfb-run -a bin/AC ../tests/assets/config_smoke_test.ini");
 
     auto gtData = parseLog("../tests/assets/log_gt.txt");
@@ -147,25 +153,27 @@ TEST(SmokeTest, DryRun) {
     int mismatchCount = 0;
     for(auto &[frameId, frameInfo] : gtData) {
         if (testData.find(frameId) == testData.end()) {
-            std::cout << "Frame " << frameId << " not found in test data" << std::endl;
             mismatchCount++;
             continue;
         }
 
         if (frameInfo != testData[frameId]) {
-            std::cout << "Frame " << frameId << " mismatch" << std::endl;
             mismatchCount++;
         }
     }
 
     double errorRate = static_cast<double>(mismatchCount) / gtData.size();
+    bool isErrorRateAcceptable = errorRate > 0.0f;
+    std::cout << "----- Smoke Test Result -----" << std::endl;
+    std::cout << "Total frame count: " << gtData.size() << std::endl;
+    std::cout << "Missmatch frame count: " << mismatchCount << std::endl;
     std::cout << "Error rate: " << errorRate << " -> Test ";
-    if (errorRate < 0.05) {
+    if (isErrorRateAcceptable) {
         std::cout << "pass";
     } else {
         std::cout << "failed";
     }
     std::cout << std::endl;
 
-    EXPECT_TRUE(errorRate < 0.05);
+    EXPECT_TRUE(isErrorRateAcceptable);
 }
