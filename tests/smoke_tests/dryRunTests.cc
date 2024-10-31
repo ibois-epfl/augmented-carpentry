@@ -6,10 +6,10 @@
 #include <sstream>
 #include <unordered_map>
 
-class SLAMInfo {
+class PoseInfo {
 public:
-    SLAMInfo() = default;
-    SLAMInfo(const bool isTracked, const std::array<float, 7> &data) {
+    PoseInfo() = default;
+    PoseInfo(const bool isTracked, const std::array<float, 7> &data) {
         // copy data to member
         m_IsTracked = isTracked;
         m_Data = data;
@@ -24,7 +24,7 @@ public:
         }
     }
 
-    bool operator==(const SLAMInfo &other) const {
+    bool operator==(const PoseInfo &other) const {
         if (m_IsTracked != other.m_IsTracked) {
             return false;
         }
@@ -38,30 +38,56 @@ public:
         return true;
     }
 
+    bool operator!=(const PoseInfo &other) const {
+        return !(*this == other);
+    };
+
 private:
     bool m_IsTracked = false;
     std::array<float, 7> m_Data = {0};
 };
 
+
 class FrameInfo {
 public:
     FrameInfo() = default;
-    FrameInfo(const int frameId, const SLAMInfo &slamInfo) {
+    FrameInfo(const int frameId, const PoseInfo &slamPoseInfo, const PoseInfo &ttoolPoseInfo) {
         m_FrameId = frameId;
-        m_SLAMInfo = slamInfo;
+        m_SLAMPoseInfo = slamPoseInfo;
+        m_TToolPoseInfo = ttoolPoseInfo;
     }
 
-    void SetSLAMInfo(const SLAMInfo &slamInfo) {
-        m_SLAMInfo = slamInfo;
+    void SetSLAMInfo(const PoseInfo &slamInfo) {
+        m_SLAMPoseInfo = slamInfo;
+    }
+
+    void SetTToolInfo(const PoseInfo &ttoolInfo) {
+        m_TToolPoseInfo = ttoolInfo;
     }
 
     void print() {
-        std::cout << "FrameId: " << m_FrameId << " ";
-        m_SLAMInfo.print();
+        std::cout << "FrameId: " << m_FrameId << std::endl;
+        std::cout << "SLAM Pose: ";
+        m_SLAMPoseInfo.print();
+
+        std::cout << "TTool Pose: ";
+        m_TToolPoseInfo.print();
     }
 
     bool operator==(const FrameInfo &other) const {
-        return m_FrameId == other.m_FrameId && m_SLAMInfo == other.m_SLAMInfo;
+        if (m_FrameId != other.m_FrameId) {
+            return false;
+        }
+
+        if (m_SLAMPoseInfo != other.m_SLAMPoseInfo) {
+            return false;
+        }
+
+        if (m_TToolPoseInfo != other.m_TToolPoseInfo) {
+            return false;
+        }
+
+        return true;
     }
 
     bool operator!=(const FrameInfo &other) const {
@@ -70,7 +96,8 @@ public:
 
 private:
     int m_FrameId = 0;
-    SLAMInfo m_SLAMInfo;
+    PoseInfo m_SLAMPoseInfo;
+    PoseInfo m_TToolPoseInfo;
 };
 
 std::unordered_map<int, FrameInfo> parseLog(const std::string& path) {
@@ -104,7 +131,7 @@ std::unordered_map<int, FrameInfo> parseLog(const std::string& path) {
     int frameId;
     long long timestamp;
     FrameInfo frameInfo;
-    bool hasSLAMData = false;
+    bool hasSLAMData = false, hasTToolData = false;
 
     while (getline(f, s)) {
         if(s.front() == '#') {
@@ -128,12 +155,27 @@ std::unordered_map<int, FrameInfo> parseLog(const std::string& path) {
             std::string tmp;
             ss >> tmp;
 
-            // Parse the SLAM data
+            // Parse the Pose data
             std::array<float, 7> data{};
             for(int i = 0 ; i < 7 ; i++) {
                 ss >> data[i];
             }
-            frameInfo.SetSLAMInfo(SLAMInfo(true, data));
+            frameInfo.SetSLAMInfo(PoseInfo(true, data));
+        }
+
+        else if (s.rfind("TTool-pose", 0) == 0) {
+            std::stringstream ss(s);
+
+            // Consume the "TTool-pose" and "None"(status) string
+            std::string tmp;
+            ss >> tmp >> tmp;
+
+            // Parse the Pose data
+            std::array<float, 7> data{};
+            for(int i = 0 ; i < 7 ; i++) {
+                ss >> data[i];
+            }
+            frameInfo.SetTToolInfo(PoseInfo(true, data));
         }
     }
 
@@ -163,7 +205,7 @@ TEST(SmokeTest, DryRun) {
     }
 
     double errorRate = static_cast<double>(mismatchCount) / gtData.size();
-    bool isErrorRateAcceptable = errorRate > 0.0f;
+    bool isErrorRateAcceptable = errorRate < 0.05f;
     std::cout << "----- Smoke Test Result -----" << std::endl;
     std::cout << "Total frame count: " << gtData.size() << std::endl;
     std::cout << "Missmatch frame count: " << mismatchCount << std::endl;
@@ -174,6 +216,7 @@ TEST(SmokeTest, DryRun) {
         std::cout << "failed";
     }
     std::cout << std::endl;
+    std::cout << "-----------------------------" << std::endl;
 
     EXPECT_TRUE(isErrorRateAcceptable);
 }

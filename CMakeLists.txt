@@ -71,7 +71,10 @@ endif()
 set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 set(BUILD_V4_API ON)
+set(TSLAM_BUILD_TESTS OFF)
+set(TSLAM_BUILD_UTILS OFF)
 add_external_package(TSlam IGNORE_SYSTEM)
 add_external_package(TTool IGNORE_SYSTEM)
 
