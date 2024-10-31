@@ -8,6 +8,10 @@ RUN apt-get -qq update && apt-get -qq -y install \
 
 # install tslam deps
 RUN apt-get -qq update && apt-get -qq -y install \
+    wget \
+    curl \
+    unzip \
+    xvfb \
     freeglut3-dev \
     libfreetype-dev \
     libassimp-dev \
@@ -21,6 +25,4 @@ RUN apt-get -qq update && apt-get -qq -y install \
     libmpfr-dev \
     libimgui-dev \
     libopencv-dev \
-    unzip \
-    xvfb \
     && rm -rf /var/lib/apt/lists/* \
