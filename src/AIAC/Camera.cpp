@@ -16,7 +16,19 @@ namespace AIAC
 
     void Camera::Open(int id)
     {
+#ifdef HEADLESS_TEST
+        AIAC_INFO("Running in headless mode, load video from " + AIAC::Config::VIDEO_PATH);
+        std::string videoPath = AIAC::Config::Get<std::string>(AIAC::Config::SEC_TEST, AIAC::Config::VIDEO_PATH, "");
+        if (videoPath.empty()) {
+            throw std::invalid_argument("Video path for test is empty!");
+        }
+        if(!std::filesystem::exists(videoPath)){
+            throw std::invalid_argument("No video file found at " + videoPath);
+        }
+        m_VideoCapture = cv::VideoCapture(videoPath);
+#else
         m_VideoCapture = cv::VideoCapture(id);
+#endif
         if(!m_VideoCapture.isOpened())
         {
             throw std::runtime_error("Camera " + std::to_string(id) + " can't be opened.");
@@ -38,19 +50,6 @@ namespace AIAC
 
         FlipHorizontal = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_HORIZONTAL, false);
         FlipVertical = AIAC::Config::Get<bool>(AIAC::Config::SEC_AIAC, AIAC::Config::CAM_FLIP_VERTICAL, false);
-    }
-
-    void Camera::InitCameraParamsFromFile(const std::string &filePath) {
-//        int w, h;
-//        cv::Mat cameraMatrix;
-
-//        LoadCameraParams(filePath, w, h, cameraMatrix, m_DistortionCoef);
-
-//        if(!m_IsCamMatrixInit){
-//            m_ParamWidth = w;
-//            m_ParamHeight = h;
-//            m_CameraMatrix = cameraMatrix;
-//        }
     }
 
     inline void Camera::UpdateFov(){
@@ -87,13 +86,22 @@ namespace AIAC
 
         return true;
     }
-
+static int frameCounter = 0;
     const AIAC::Image Camera::GetNextFrame()
     {
         if (!m_IsOpened) { AIAC_CRITICAL("Camera is not opened"); exit(-1); }
 
         cv::Mat frame;
         m_VideoCapture >> frame;
+
+        frameCounter += 1;
+        if (frameCounter >= 729) {
+            AIAC_INFO("Frame: {0}", frameCounter);
+        }
+
+        if (frame.empty()) {
+            AIAC_APP.Close();
+        }
 
         if (FlipHorizontal) cv::flip(frame, frame, 1);
         if (FlipVertical) cv::flip(frame, frame, 0);
