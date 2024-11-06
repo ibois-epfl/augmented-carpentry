@@ -12,8 +12,7 @@
 
 # Augmented Carpentry
 
-```
-or
+Donwnload the repo first:
 ```bash
 git clone https://github.com/ibois-epfl/augmented-carpentry.git
 git submodule sync
