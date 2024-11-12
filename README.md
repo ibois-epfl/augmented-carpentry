@@ -66,6 +66,7 @@ To run the code:
 ```bash
 ./build/bin/AC
 ```
+While running the code, make sure that `config.ini` and `assets/` exists in the current directory. If errors related to config present, please reconfigure the `config.ini` by copy-pasting the content from `/assets/default_config.ini`.
 
 ## Set touch monitor
 
