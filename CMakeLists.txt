@@ -128,3 +128,11 @@ if(HEADLESS_TEST)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
     include(tests)
 endif()
+
+#------------------------------------------------------------------------------------------------------------
+# Initialize default config.ini
+#------------------------------------------------------------------------------------------------------------
+if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/config.ini")
+    file(COPY ${CMAKE_CURRENT_LIST_DIR}/assets/default_config.ini DESTINATION ${CMAKE_CURRENT_LIST_DIR})
+    file(RENAME ${CMAKE_CURRENT_LIST_DIR}/default_config.ini ${CMAKE_CURRENT_LIST_DIR}/config.ini)
+endif()
