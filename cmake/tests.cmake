@@ -19,6 +19,29 @@ add_executable(${AC_TESTSUITE}
     ${AIAC_TEST_SRC}
     )
 
+# pre-compile variables
+target_compile_definitions(${AC_TESTSUITE}
+        PUBLIC AC_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
+        PUBLIC AC_VERSION_MINOR=${PROJECT_VERSION_MINOR}
+        PUBLIC AC_VERSION_PATCH=${PROJECT_VERSION_PATCH}
+        )
+
+if(HEADLESS_TEST)
+    target_compile_definitions(${AC_TESTSUITE} PRIVATE HEADLESS_TEST=true)
+endif()
+if(DEPLOY_ON_TOUCH)
+    target_compile_definitions(${AC_TESTSUITE} PRIVATE AIAC_DEPLOY_ON_TOUCH=true)
+endif()
+if(ENABLE_ASSERT)
+    target_compile_definitions(${AC_TESTSUITE} PRIVATE AIAC_ENABLE_ASSERTS=true)
+endif()
+if(SILENT_LOGGING)
+    target_compile_definitions(${AC_TESTSUITE} PRIVATE SILENT_LOGGING=true)
+endif()
+if(ENABLE_DEV_UI)
+    target_compile_definitions(${AC_TESTSUITE} PRIVATE ENABLE_DEV_UI=true)
+endif()
+
 target_include_directories(${AC_TESTSUITE}
     PUBLIC ${OpenCV_INCLUDE_DIRS}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
