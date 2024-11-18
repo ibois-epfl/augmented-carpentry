@@ -1,0 +1,2 @@
+beam id,min_deviation,max_deviation,std_deviation,rmse,mean
+15,0.0,0.0141,0.0041,0.0057,0.004

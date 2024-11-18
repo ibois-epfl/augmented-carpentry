@@ -55,6 +55,8 @@ def process_joint_face_id(df: pd.DataFrame, joint_face_id_col: str, beam_col: st
 
     return df
 
+
+# TODO: explain why we remove single joint faces (too precise due to registration pipeline)
 def remove_single_joint_faces(df: pd.DataFrame, joint_label_col: str, beam_col: str) -> pd.DataFrame:
     """
     Remove all rows where there is only a single joint face per joint. We do this because in our analysis methodology, every joint is registered
@@ -81,7 +83,8 @@ def main(
     ###################################################################################################
     ## Beams - Joint/JointFaces
     ###################################################################################################
-    # ======= importing data into memory =======
+    # =================================================================================================
+    # importing data into memory
     folder_name_beams: str = "a_beams"
     path_dir_beams: str = os.path.join(_path, folder_name_beams)
 
@@ -103,14 +106,16 @@ def main(
                 elif f.endswith('_jointfaces.csv'):
                     df_jointfaces_dataset = pd.concat([df_jointfaces_dataset, pandas_data_beam], ignore_index=True)
 
-    # ======= joint analysis =======
+    # =================================================================================================
+    # joint analysis
     df_joints_dataset = clean_missing_data(df_joints_dataset)
 
     err_joint_mean = np.mean(np.array(df_joints_dataset['mean'].tolist()))
     err_joint_std = np.mean(np.array(df_joints_dataset['std_deviation'].tolist()))
     err_joint_total_nbr = len(df_joints_dataset)
 
-    # ======= jointfaces analysis =======
+    # =================================================================================================
+    # jointfaces analysis
     df_jointfaces_dataset = process_joint_face_id(df_jointfaces_dataset, 'joint_face id', 'beam_name')
     df_jointfaces_dataset = remove_single_joint_faces(df_jointfaces_dataset, 'joint_label', 'beam_name')
     df_jointfaces_dataset = clean_missing_data(df_jointfaces_dataset)
@@ -118,10 +123,35 @@ def main(
     err_jointface_mean = np.mean(np.array(df_jointfaces_dataset['mean'].tolist()))
     err_jointface_std = np.mean(np.array(df_jointfaces_dataset['std_deviation'].tolist()))
 
-    print(f"Total number of joint distances: {err_joint_total_nbr}")
+    """
+        - possible info can be the angles of the joints? (not)
+        - TODO: for sure is the length of the beam that it's interesting to analyse in function
+        - TODO: we should try to analyse only the upper tower
+    """
+
+
+    ###################################################################################################
+    ## Printing
+    ###################################################################################################
+
+    print(f"Total number of joint evaluated: {err_joint_total_nbr}")
+    print(f"Average number faces per joint: {np.mean(df_jointfaces_dataset['joint_face_count'])}")
     print(f"Mean of all joint distances: {err_joint_mean}±{err_joint_std}")
     print(f"Mean of all jointfaces distances: {err_jointface_mean}±{err_jointface_std}")
 
+
+    ###################################################################################################
+    ## Printing
+    ###################################################################################################
+    # create a double boxplot of the joint distances and jointfaces distances
+    fig, ax = plt.subplots()
+    ax.boxplot([df_joints_dataset['mean'], df_jointfaces_dataset['mean']], labels=['Location Error\n(Joint level)', 'Joint Quality\n(JointFace level)'])
+    ax.set_ylabel('Distance Error (m)')
+    ax.set_title('Scan-CAD Accuracy Evaluation')
+    plt.savefig(os.path.join(_output_path, f'boxplot_{__time_stamp__}.png'))
+    plt.show()
+
+    
 
     ###################################################################################################
     ## Assembly
