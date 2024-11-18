@@ -5,7 +5,7 @@ namespace AIAC
     static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0f / 64.0f;
     // GLObject
     void GLObject::BindVBOs(){
-#ifdef HEADLESS_TEST
+#ifndef HEADLESS_TEST
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuf);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(
@@ -31,7 +31,7 @@ namespace AIAC
     }
 
     void GLObject::BufferData(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors) {
-#ifdef HEADLESS_TEST
+#ifndef HEADLESS_TEST
         glGenBuffers(1, &this->vertexBuf);
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuf);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
@@ -43,7 +43,7 @@ namespace AIAC
     }
 
     void GLObject::DeleteVBOs() {
-#ifdef HEADLESS_TEST
+#ifndef HEADLESS_TEST
         glDeleteBuffers(1, &vertexBuf);
         glDeleteBuffers(1, &colorBuf);
 #endif
