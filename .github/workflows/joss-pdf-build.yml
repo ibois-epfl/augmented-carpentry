@@ -1,4 +1,4 @@
-name: Build-add-JOSS-paper
+name: joss-pdf-build
 
 # #TODO: to activate when ready to release
 # on:
