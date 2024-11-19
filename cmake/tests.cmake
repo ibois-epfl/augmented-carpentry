@@ -19,6 +19,8 @@ add_executable(${AC_TESTSUITE}
     ${AIAC_TEST_SRC}
     )
 
+# TODO: these preprocessor variable setters are a repetion from the main CMakeLists.txt,
+# mybe there is a better refactor to avoid this repetition (only changing the target)
 # pre-compile variables
 target_compile_definitions(${AC_TESTSUITE}
         PUBLIC AC_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
