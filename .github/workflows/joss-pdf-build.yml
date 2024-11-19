@@ -1,9 +1,17 @@
 name: Build-add-JOSS-paper
+
+# #TODO: to activate when ready to release
+# on:
+#   push:
+#     paths:
+#     - paper/**
+#     - .github/workflows/joss-pdf-build.yml
+
 on:
   push:
-    paths:
-    - paper/**
-    - .github/workflows/joss-pdf-build.yml
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   paper-build:

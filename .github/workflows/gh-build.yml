@@ -1,10 +1,10 @@
 name: gh-build
 
 on:
-    push:
-        branches: ["main", "ac_replayer"]
-    pull_request:
-        branches: ["main"]
+  push:
+      branches: ["main", "ac_replayer"]
+  pull_request:
+      branches: ["main"]
 
 jobs:
   build_ghuser_components:
