@@ -19,7 +19,7 @@ authors:
     affiliation: 2
   - name: Yves Weinand
     orcid: 0000-0002-8088-6504
-    affiliation: 2
+    affiliation: 1
 
 affiliations:
  - name: Institution Name, Country
@@ -47,7 +47,7 @@ bibliography: paper.bib
 
 # Summary
 
-test13
+test 31
 <!-- this is a sort of abstract. (MAX 50 words) -->
 <!-- ![Test image captation.](01_fig_placeholder.png){ width=20% } -->
 
