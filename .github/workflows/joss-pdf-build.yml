@@ -1,7 +1,7 @@
 name: joss-pdf-build
 
 on:
-  push: ["joss_paper"]  # TODO: to check when validating
+  push:
     paths:
     - paper/**
     - .github/workflows/joss-pdf-build.yml
