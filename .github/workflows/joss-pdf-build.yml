@@ -84,30 +84,29 @@ jobs:
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git checkout -b joss-pdf-ac-branch
           git add paper/paper.pdf
           git commit -m "ACTION_BOT: AC JOSS paper draft PDF"
-          git push --set-upstream origin joss-pdf-ac-branch
+          git push --set-upstream origin $current_branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Close existing pull requests for joss-pdf-ac-branch
-        run: |
-          gh pr list --state open --head joss-pdf-ac-branch --json number --jq '.[].number' | xargs -I {} gh pr close {}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
+      # - name: Close existing pull requests for joss-pdf-ac-branch
+      #   run: |
+      #     gh pr list --state open --head joss-pdf-ac-branch --json number --jq '.[].number' | xargs -I {} gh pr close {}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   shell: bash
 
-      - name: Create pull request
-        run: |
-          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base "$current_branch" --head "joss-pdf-ac-branch" --label ACTION_BOT
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create pull request
+      #   run: |
+      #     gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base "$current_branch" --head "joss-pdf-ac-branch" --label ACTION_BOT
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Merge pull request
-        run: |
-          pr=$(gh pr list --head joss-pdf-ac-branch --json number --jq '.[0].number')
-          gh pr merge $pr --squash --delete-branch --admin
-        env:
-          GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
-        shell: bash
+      # - name: Merge pull request
+      #   run: |
+      #     pr=$(gh pr list --head joss-pdf-ac-branch --json number --jq '.[0].number')
+      #     gh pr merge $pr --squash --delete-branch --admin
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
+      #   shell: bash
