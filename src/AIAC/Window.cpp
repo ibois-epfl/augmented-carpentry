@@ -35,24 +35,29 @@ namespace AIAC
 
     void Window::Init()
     {
+        glfwSetErrorCallback(GLFWErrorCallback);
+
         if(s_GLFWWindowCount == 0)
         {
-            glfwSetErrorCallback(GLFWErrorCallback);
             AIAC_ASSERT(glfwInit(), "Could not initialize GLFW!");
         } else { AIAC_CRITICAL("Multiple windows not supported."); exit(EXIT_FAILURE); }
 
         m_GlslVersion = "#version 130";
+
+        int verMajor, verMinor, rev;
+        glfwGetVersion(&verMajor, &verMinor, &rev);
+        std::cout << "glfw version: " << verMajor << "." << verMinor << "." << rev << std::endl;
+
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
 #ifdef AIAC_DEPLOY_ON_TOUCH
         glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_FALSE);
 #else
         glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_TRUE);
         glfwWindowHint(GLFW_RESIZABLE, m_Data.IsResizable);
 #endif
-
 
 #ifdef AIAC_DEPLOY_ON_TOUCH
         m_TouchMonitor = new AIAC::TouchMonitor();
@@ -62,12 +67,12 @@ namespace AIAC
         glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
         glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
-        
-        m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, m_Data.Title, m_TouchMonitor->GetGLFWMonitor(), NULL);
 
+        m_GLFWWindow = glfwCreateWindow(mode->width, mode->height, m_Data.Title, m_TouchMonitor->GetGLFWMonitor(), NULL);
 #else
         m_GLFWWindow = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title, NULL, NULL);
 #endif
+
         if (m_GLFWWindow == NULL) {
             AIAC_CRITICAL("Failed to create GLFW window");
             glfwTerminate();

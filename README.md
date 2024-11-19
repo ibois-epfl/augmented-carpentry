@@ -3,17 +3,16 @@
     <img src="./logo.png" width="200">
 </p>
 <p align="center">
-    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build.yml/badge.svg">
+    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-ubuntu-build.yml/badge.svg">
+    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-ubuntu-build-and-test.yml/badge.svg">
     <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/gh-build.yml/badge.svg">
-    <img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" href="https://github.com/ellerbrock/open-source-badges/">
 </p>
 
 
 
 # Augmented Carpentry
 
-```
-or
+Donwnload the repo first:
 ```bash
 git clone https://github.com/ibois-epfl/augmented-carpentry.git
 git submodule sync
@@ -67,6 +66,7 @@ To run the code:
 ```bash
 ./build/bin/AC
 ```
+While running the code, make sure that `config.ini` and `assets/` exists in the current directory. If errors related to config present, please reconfigure the `config.ini` by copy-pasting the content from `/assets/default_config.ini`.
 
 ## Set touch monitor
 

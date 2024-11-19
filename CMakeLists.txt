@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16.)
 project(AC VERSION 0.1.0 LANGUAGES CXX C)
 
-include(CTest)
-enable_testing()
 
 set(BUILD_SHARED_LIBS ON)
 
@@ -29,6 +27,7 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE src/aiacpch.h)
 # Add options
 #-------------------------------------------------------------------------------
 # -------------------- PREPROCESSOR VAR OPTIONS --------------------
+option(HEADLESS_TEST "Build and run for headless smoke test" OFF)
 option(DEPLOY_ON_TOUCH "Build AC for testing on an external touch monitor" ON)
 option(ENABLE_ASSERT "Enable assertion in code" ON)
 option(SILENT_LOGGING "Do not log messages in the terminal if on." ON)
@@ -49,6 +48,9 @@ target_compile_definitions(${PROJECT_NAME}
     PUBLIC AC_VERSION_PATCH=${PROJECT_VERSION_PATCH}
 )
 
+if(HEADLESS_TEST)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE HEADLESS_TEST=true)
+endif()
 if(DEPLOY_ON_TOUCH)
     target_compile_definitions(${PROJECT_NAME} PRIVATE AIAC_DEPLOY_ON_TOUCH=true)
 endif()
@@ -69,7 +71,10 @@ endif()
 set(OpenGL_GL_PREFERENCE LEGACY)  # <-- temp fix: or GLVIND?
 find_package(OpenGL REQUIRED)
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 set(BUILD_V4_API ON)
+set(TSLAM_BUILD_TESTS OFF)
+set(TSLAM_BUILD_UTILS OFF)
 add_external_package(TSlam IGNORE_SYSTEM)
 add_external_package(TTool IGNORE_SYSTEM)
 
@@ -118,10 +123,16 @@ target_link_libraries(${PROJECT_NAME}
 #------------------------------------------------------------------------------------------------------------
 # CTest (unit tests)
 #------------------------------------------------------------------------------------------------------------
-# Testing adds
-if (TEST_PLATFORM)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/platform)
+if(HEADLESS_TEST)
+    # copy data to build directory
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+    include(tests)
 endif()
-if(TEST_GRAPHICS)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/graphics)
+
+#------------------------------------------------------------------------------------------------------------
+# Initialize default config.ini
+#------------------------------------------------------------------------------------------------------------
+if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/config.ini")
+    file(COPY ${CMAKE_CURRENT_LIST_DIR}/assets/default_config.ini DESTINATION ${CMAKE_CURRENT_LIST_DIR})
+    file(RENAME ${CMAKE_CURRENT_LIST_DIR}/default_config.ini ${CMAKE_CURRENT_LIST_DIR}/config.ini)
 endif()

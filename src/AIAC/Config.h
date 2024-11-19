@@ -54,6 +54,11 @@ public:
 
     inline static const std::string UTILS_PATH = "UtilsPath";
 
+    //-------------------------------------------------------
+    inline static const std::string SEC_TEST = "Test";
+
+    inline static const std::string VIDEO_PATH = "VideoPath";
+
 public:
     Config(std::string filename, bool updateFile=true):
         m_Filename(filename),
