@@ -35,6 +35,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: If exists the paper file paper/paper.pdf, remove it
+        run: |
+          if [ -f paper/paper.pdf ]; then
+            rm paper/paper.pdf
+          else
+            echo "File paper/paper.pdf does not exist."
+          fi
+        shell: bash
+
       - name: Download
         uses: actions/download-artifact@v4
         with:
@@ -62,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
 
-      - name: Create new branch and commit version change
+      - name: Create new branch and commit pdf addtion/replacement
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
