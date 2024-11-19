@@ -3,8 +3,10 @@ name: gh-build
 on:
   push:
     branches: ["main"]
+    branches-ignore: ["joss_paper"]
   pull_request:
     branches: ["main"]
+    branches-ignore: ["joss_paper"]
 
 jobs:
   build_ghuser_components:

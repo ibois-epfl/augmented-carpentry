@@ -3,8 +3,10 @@ name: ubuntu-testsuite
 on:
   push:
     branches: ["main"]
+    branches-ignore: ["joss_paper"]
   pull_request:
     branches: ["main"]
+    branches-ignore: ["joss_paper"]
 
 jobs:
   build-container:
