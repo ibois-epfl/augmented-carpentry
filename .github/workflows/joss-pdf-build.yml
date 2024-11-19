@@ -28,6 +28,8 @@ jobs:
           # paper.md
           path: paper/paper.pdf
 
+
+  # FIXME: the PR is opened against the main branch
   paper-add-to-repo:
     runs-on: ubuntu-latest
     name: add-pdf-to-repo
@@ -90,16 +92,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
 
+      - name: Get current branch name
+        run: |
+          current_branch=$(git branch --show-current)
+          echo "Current branch: $current_branch"
+        shell: bash
+
       - name: Create pull request
         run: |
-          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base main --head joss-pdf-ac-branch --label ACTION_BOT
+          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base $current_branch --head joss-pdf-ac-branch --label ACTION_BOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Merge pull request
         run: |
           pr=$(gh pr list --head joss-pdf-ac-branch --json number --jq '.[0].number')
-          gh pr merge $pr --squash --delete-branch --admin
+          gh pr merge $pr --squash --delete-branch --admin  --strategy-option ours
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
         shell: bash
