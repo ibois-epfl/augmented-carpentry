@@ -22,7 +22,7 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: paper-artifact
+          name: paper
           # This is the output path where Pandoc will write the compiled
           # PDF. Note, this should be the same directory as the input
           # paper.md
@@ -38,7 +38,7 @@ jobs:
       - name: Download
         uses: actions/download-artifact@v4
         with:
-          name: paper-artifact
+          name: paper
           path: paper
 
       - name: Install GitHub CLI
