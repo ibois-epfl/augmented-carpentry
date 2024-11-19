@@ -100,7 +100,7 @@ jobs:
 
       - name: Create pull request
         run: |
-          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base $current_branch --head joss-pdf-ac-branch --label ACTION_BOT
+          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base "$current_branch" --head "joss-pdf-ac-branch" --label ACTION_BOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
