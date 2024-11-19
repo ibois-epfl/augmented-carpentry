@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - ac_replayer
     branches-ignore:
       - joss_paper
   pull_request:
