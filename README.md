@@ -3,7 +3,8 @@
     <img src="./logo.png" width="200">
 </p>
 <p align="center">
-    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build-and-test.yml/badge.svg">
+    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/ubuntu-build.yml/badge.svg">
+    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/test-suite.yml/badge.svg">
     <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/gh-build.yml/badge.svg">
 </p>
 
