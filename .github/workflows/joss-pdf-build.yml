@@ -1,0 +1,99 @@
+name: joss-pdf-build
+
+# #TODO: to activate when ready to release
+# on:
+#   push:
+#     paths:
+#     - paper/**
+#     - .github/workflows/joss-pdf-build.yml
+
+on:
+  push:
+    branches: ["main", "joss_paper"]
+  pull_request:
+    branches: ["main", "joss_paper"]
+
+jobs:
+  paper-build:
+    runs-on: ubuntu-latest
+    name: JOSS-paper-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build draft PDF
+        uses: openjournals/openjournals-draft-action@master
+        with:
+          journal: joss
+          # This should be the path to the paper within your repo.
+          paper-path: paper/paper.md
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-artifact
+          # This is the output path where Pandoc will write the compiled
+          # PDF. Note, this should be the same directory as the input
+          # paper.md
+          path: paper/paper.pdf
+
+  paper-commit:
+    runs-on: ubuntu-latest
+    name: add-pdf-to-repo
+    needs: JOSS-paper-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download
+        uses: actions/download-artifact@v2
+        with:
+          name: paper-artifact
+          path: paper
+
+      - name: Install GitHub CLI
+        run: |
+          choco install gh
+      - name: Authenticate GitHub CLI
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+
+      - name: Delete branch remotely version-ac-branch (if exists)
+        run: |
+          git fetch --prune
+          if git branch -r | grep -q 'origin/version-ac-branch'; then
+            git push origin --delete version-ac-branch
+          else
+            echo "Branch version-ac-branch does not exist."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+
+      - name: Create new branch and commit version change
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git checkout -b version-ac-branch
+          git commit -am "ACTION_BOT: AC JOSS paper draft PDF"
+          git push --set-upstream origin version-ac-branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Close existing pull requests for version-ac-branch
+        run: |
+          gh pr list --state open --head version-ac-branch --json number --jq '.[].number' | ForEach-Object { gh pr close $_ }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+
+      - name: Create pull request
+        run: |
+          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base main --head version-ac-branch --label ACTION_BOT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge pull request
+        run: |
+          $pr = gh pr list --head version-ac-branch --json number --jq '.[0].number'
+          gh pr merge $pr --squash --delete-branch --admin
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
+        shell: pwsh
