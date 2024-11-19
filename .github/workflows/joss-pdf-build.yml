@@ -43,19 +43,20 @@ jobs:
 
       - name: Install GitHub CLI
         run: |
-          choco install gh
+          sudo apt-get update
+          sudo apt-get install -y gh
 
       - name: Authenticate GitHub CLI
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
 
-      - name: Delete branch remotely version-ac-branch (if exists)
+      - name: Delete branch remotely joss-pdf-ac-branch (if exists)
         run: |
           git fetch --prune
-          if git branch -r | grep -q 'origin/version-ac-branch'; then
-            git push origin --delete version-ac-branch
+          if git branch -r | grep -q 'origin/joss-pdf-ac-branch'; then
+            git push origin --delete joss-pdf-ac-branch
           else
-            echo "Branch version-ac-branch does not exist."
+            echo "Branch joss-pdf-ac-branch does not exist."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,29 +66,35 @@ jobs:
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git checkout -b version-ac-branch
+          git checkout -b joss-pdf-ac-branch
           git commit -am "ACTION_BOT: AC JOSS paper draft PDF"
-          git push --set-upstream origin version-ac-branch
+          git push --set-upstream origin joss-pdf-ac-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Close existing pull requests for version-ac-branch
+      - name: Close existing pull requests for joss-pdf-ac-branch
         run: |
-          gh pr list --state open --head version-ac-branch --json number --jq '.[].number' | ForEach-Object { gh pr close $_ }
+          gh pr list --state open --head joss-pdf-ac-branch --json number --jq '.[].number' | ForEach-Object { gh pr close $_ }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: pwsh
+        shell: bash
+
+      - name: Get the current branch and store it in a variable
+        run: |
+          current_branch=$(git branch --show-current)
+          echo "Current branch is $current_branch"
+        shell: bash
 
       - name: Create pull request
         run: |
-          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base main --head version-ac-branch --label ACTION_BOT
+          gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base $current_branch --head joss-pdf-ac-branch --label ACTION_BOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Merge pull request
         run: |
-          $pr = gh pr list --head version-ac-branch --json number --jq '.[0].number'
+          $pr = gh pr list --head joss-pdf-ac-branch --json number --jq '.[0].number'
           gh pr merge $pr --squash --delete-branch --admin
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
-        shell: pwsh
+        shell: bash
