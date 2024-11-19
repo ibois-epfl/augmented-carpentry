@@ -1,5 +1,5 @@
 ---
-title: 'UNIX C++ Engine for Augmented Reality Digital Woodworking'
+title: 'Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Woodworking'  # TODO: improve title
 tags:
   - C++
   - UNIX
@@ -31,64 +31,81 @@ bibliography: paper.bib
 
 ---
 
+# Structure of the paper
 
-
-
-# <<<<<<<<<<<<<<<< tempalte down >>>>>>>>>>>>>>>>
+<!--
+- (0) Summary (MAX 50 words) - ANDREA
+- (1) Statement of need (MAX 125 words) - ANDREA
+- (2) Functionalities (MAX 100 words) - ANDREA
+- (1.1) Layer-stack flow (MAX 150 words) - ANDREA
+- (1.2) Geometry framework (MAX 200 words) - HONG-BIN
+- (1.3) AR rendering (MAX 150 words) - HONG-BIN
+- (1.4) Computed Feedback System (MAX 150 words) - ANDREA
+- (2) Acknowledgements - ANDREA
+- (3) References - ANDREA
+-->
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+<!-- this is a sort of abstract. (MAX 50 words) -->
+<!-- ![Test image captation.](01_fig_placeholder.png){ width=20% } -->
+
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+<!--
+aka "state-of-the-art". This is a context introduction and brief state-of-the-art. (MAX 125 words)
+-->
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
+# Functionalities
 
-# Mathematics
+<!--
+brief introduction to the general functioning and the following sections. (MAX 75 words)
+It might include details that are no more mentioned in the following sections like:
+- the hardware used (x64, monocular camera, etc.)
+- ...
+-->
 
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
+## Layer-stack flow
 
-Double dollars make self-standing equations:
+<!--
+this section should illustrate the layer stack system and the applicaton.h how ti workds. To be included:
+    -a) a scheme (mermaid))
+    -b) a description (MAX 150 words)
+-->
 
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
+## Geometry framework
 
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
+<!--
+this section should illustrate the layer stack system and the applicaton.h how it workds. To be included:
+    -a) a scheme (mermaid))
+    -b) a description (MAX 150 words)
+-->
 
-# Citations
 
+## Computed Feedback System
+
+<!--
+this section should illustrate the feedback system and how the layerFeeddback can get all the information from the other layers and use the geometry system at its convinience. To be included:
+    -a) a scheme (mermaid))
+    -b) a description (MAX 150 words)
+-->
+
+## AR rendering
+
+<!--
+this section should include:
+    -a) a scheme of the layer system and general application.h structure
+    -b) a brief description of its functioning (maybe with a smal snippet of code on how to instantiate a  point (MAX 150 words)
+-->
+
+# Acknowledgements
+
+<!-- list of contributors -->
+
+# References
+
+<!--
 Citations to entries in paper.bib should be in
 [rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
 format.
@@ -100,19 +117,6 @@ For a quick reference, the following citation commands can be used:
 - `@author:2001`  ->  "Author et al. (2001)"
 - `[@author:2001]` -> "(Author et al., 2001)"
 - `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
+-->
 
-# Figures
 
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
-
-# Acknowledgements
-
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
-
-# References
