@@ -2,9 +2,16 @@ name: ubuntu-build
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+      - ac_replayer
+    branches-ignore:
+      - joss_paper
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
+    branches-ignore:
+      - joss_paper
 
 jobs:
   build-container:
