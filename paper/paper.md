@@ -31,9 +31,9 @@ bibliography: paper.bib
 
 ---
 
+<!--
 # Structure of the paper
 
-<!--
 - (0) Summary (MAX 50 words) - ANDREA
 - (1) Statement of need (MAX 125 words) - ANDREA
 - (2) Functionalities (MAX 100 words) - ANDREA
