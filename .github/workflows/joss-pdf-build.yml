@@ -107,7 +107,7 @@ jobs:
       - name: Merge pull request
         run: |
           pr=$(gh pr list --head joss-pdf-ac-branch --json number --jq '.[0].number')
-          gh pr merge $pr --squash --delete-branch --admin  --strategy-option ours
+          gh pr merge $pr --squash --delete-branch --admin
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
         shell: bash
