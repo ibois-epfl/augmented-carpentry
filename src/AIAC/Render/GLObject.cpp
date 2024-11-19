@@ -1,10 +1,10 @@
 #include "GLObject.h"
-
 namespace AIAC
 {
     static const float WEIGHT_TO_CYLINDER_RADIUS_RATE = 1.0f / 64.0f;
     // GLObject
     void GLObject::BindVBOs(){
+#ifndef HEADLESS_TEST
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuf);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(
@@ -26,9 +26,11 @@ namespace AIAC
                 0,                  // stride
                 (GLvoid *) 0        // array buffer offset
         );
+#endif
     }
 
     void GLObject::BufferData(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec4> &colors) {
+#ifndef HEADLESS_TEST
         glGenBuffers(1, &this->vertexBuf);
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuf);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
@@ -36,11 +38,14 @@ namespace AIAC
         glGenBuffers(1, &this->colorBuf);
         glBindBuffer(GL_ARRAY_BUFFER, this->colorBuf);
         glBufferData(GL_ARRAY_BUFFER, sizeof(colors) * sizeof(glm::vec4), &colors[0], GL_STATIC_DRAW);
+#endif
     }
 
     void GLObject::DeleteVBOs() {
+#ifndef HEADLESS_TEST
         glDeleteBuffers(1, &vertexBuf);
         glDeleteBuffers(1, &colorBuf);
+#endif
     }
 
     // ----------------- //
@@ -96,10 +101,12 @@ namespace AIAC
         this->m_Vertices = vertices;
         this->m_Colors = colors;
 
+#ifndef HEADLESS_TEST
         glGenBuffers(1, &this->indexBuf);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuf);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
         GLObject::BufferData(vertices, colors);
+#endif
     }
 
     void GLMeshObject::Draw()
