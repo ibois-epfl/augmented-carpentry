@@ -3,9 +3,8 @@
     <img src="./logo.png" width="200">
 </p>
 <p align="center">
-    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/docker-cmake-build.yml/badge.svg">
+    <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/ubuntu-build-and-test.yml/badge.svg">
     <img src="https://github.com/ibois-epfl/augmented-carpentry/actions/workflows/gh-build.yml/badge.svg">
-    <img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" href="https://github.com/ellerbrock/open-source-badges/">
 </p>
 
 
