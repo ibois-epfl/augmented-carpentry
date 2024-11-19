@@ -19,7 +19,7 @@ authors:
     affiliation: 2
   - name: Yves Weinand
     orcid: 0000-0002-8088-6504
-    affiliation: 2
+    affiliation: 1
 
 affiliations:
  - name: Institution Name, Country
