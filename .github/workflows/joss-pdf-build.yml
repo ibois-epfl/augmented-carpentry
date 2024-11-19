@@ -74,6 +74,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
 
+      - name: Get current branch name
+        run: |
+          current_branch=$(git branch --show-current)
+          echo "Current branch: $current_branch"
+        shell: bash
+
       - name: Create new branch and commit pdf addtion/replacement
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -90,12 +96,6 @@ jobs:
           gh pr list --state open --head joss-pdf-ac-branch --json number --jq '.[].number' | xargs -I {} gh pr close {}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
-
-      - name: Get current branch name
-        run: |
-          current_branch=$(git branch --show-current)
-          echo "Current branch: $current_branch"
         shell: bash
 
       - name: Create pull request
