@@ -9,13 +9,9 @@ name: joss-pdf-build
 
 on:
   push:
-    branches:
-      - main
-      - joss_paper
+    branches: ["main", "joss_paper"]
   pull_request:
-    branches:
-      - main
-      - joss_paper
+    branches: ["main", "joss_paper"]
 
 jobs:
   paper-build:
