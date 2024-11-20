@@ -29,7 +29,6 @@ jobs:
           path: paper/paper.pdf
 
 
-  # FIXME: the PR is opened against the main branch
   paper-add-to-repo:
     runs-on: ubuntu-latest
     name: add-pdf-to-repo
@@ -37,6 +36,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Check if on protected branch
+        run: |
+          if [ "${GITHUB_REF##*/}" = "main" ]; then
+            echo "Warning: The pdf will not be commit to to the protected branch 'main'. You should do this manuallly if on main."
+            exit 1
+          fi
+        shell: bash
 
       - name: If exists the paper file paper/paper.pdf, remove it
         run: |
@@ -89,24 +96,3 @@ jobs:
           git push --set-upstream origin $current_branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Close existing pull requests for joss-pdf-ac-branch
-      #   run: |
-      #     gh pr list --state open --head joss-pdf-ac-branch --json number --jq '.[].number' | xargs -I {} gh pr close {}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   shell: bash
-
-      # - name: Create pull request
-      #   run: |
-      #     gh pr create --title "ACTION_BOT: AC JOSS paper draft PDF" --body "AC JOSS paper draft PDF" --base "$current_branch" --head "joss-pdf-ac-branch" --label ACTION_BOT
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Merge pull request
-      #   run: |
-      #     pr=$(gh pr list --head joss-pdf-ac-branch --json number --jq '.[0].number')
-      #     gh pr merge $pr --squash --delete-branch --admin
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.ADMIN_PAT_TOKEN }}
-      #   shell: bash
