@@ -119,7 +119,11 @@ Follow our [online documentation](missinglink) to learn how to use the AC.
 To cite the software follow the following BibTeX entry:
 ```bibtex
 @software{AugmentedCarpentrySoftware2024,
-  author = {Andrea Settimi, Hong-Bin Yang, Naravich Chutisilp, Nazgul Zholmagambetova, Florian Aymanns, Edward Andò and Nicolas Richart},
+    title = {{Augmented Carpentry Software}},
+    author = {Andrea Settimi, Hong-Bin Yang, Naravich Chutisilp, Nazgul Zholmagambetova, Florian Aymanns, Edward Andò and Nicolas Richart},
+    year = {2024},
+    doi = {10.5281/zenodo.14191429},
+    url = {https://github.com/ibois-epfl/augmented-carpentry}
 ```
 or the associated Zenodo DOI:
 
