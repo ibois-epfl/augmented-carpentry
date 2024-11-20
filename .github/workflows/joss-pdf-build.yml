@@ -69,18 +69,6 @@ jobs:
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
-      - name: Delete branch remotely joss-pdf-ac-branch (if exists)
-        run: |
-          git fetch --prune
-          if git branch -r | grep -q 'origin/joss-pdf-ac-branch'; then
-            git push origin --delete joss-pdf-ac-branch
-          else
-            echo "Branch joss-pdf-ac-branch does not exist."
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
-
       - name: Get current branch name
         run: |
           current_branch=$(git branch --show-current)
