@@ -30,7 +30,7 @@ repo_name: ibois-epfl/augmented-carpentry
 repo_url: https://github.com/ibois-epfl/augmented-carpentry
 
 # Copyright
-copyright: Copyright for the online documentation &copy; 2021 - 2024 Andrea Settimi
+copyright: Copyright &copy; 2021 - 2024 IBOIS, EPFL
 
 # Configuration
 theme:
@@ -117,6 +117,10 @@ extra:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
   social:
+    - icon: official/ibois_logo_black  # FIXME: test
+      link: https://www.epfl.ch/labs/ibois/
+    - icon: official/epfl_logo_black  # FIXME: test
+      link: https://www.epfl.ch/en/
     - icon: fontawesome/brands/github
       link: https://github.com/ibois-epfl/augmented-carpentry
     - icon: fontawesome/brands/docker
@@ -127,6 +131,8 @@ extra:
       link: https://www.linkedin.com/school/ibois/
     - icon: fontawesome/brands/instagram
       link: https://www.instagram.com/ibois_epfl/
+    - icon: fontawesome/brands/vimeo
+      link: https://vimeo.com/user87001008
 # Extensions
 markdown_extensions:
   - abbr
