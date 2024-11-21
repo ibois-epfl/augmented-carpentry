@@ -70,16 +70,12 @@ theme:
         icon: material/link
         name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
+      scheme: astral-dark
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: indigo
+      scheme: astral-dark
       toggle:
         icon: material/toggle-switch-off
         name: Switch to system preference
@@ -117,9 +113,9 @@ extra:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
   social:
-    - icon: official/ibois_logo_black  # FIXME: test
+    - icon: official/ibois_logo_black 
       link: https://www.epfl.ch/labs/ibois/
-    - icon: official/epfl_logo_black  # FIXME: test
+    - icon: official/epfl_logo_black 
       link: https://www.epfl.ch/en/
     - icon: fontawesome/brands/github
       link: https://github.com/ibois-epfl/augmented-carpentry

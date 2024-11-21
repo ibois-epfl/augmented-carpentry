@@ -1,8 +1,10 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="1296.000000pt" height="377.000000pt" viewBox="0 0 1296.000000 377.000000"
- preserveAspectRatio="xMidYMid meet">
+ width="100%"
+ height="100%"
+ viewBox="-30 -20 600 300"
+>s
 
-<g transform="translate(0.000000,377.000000) scale(0.100000,-0.100000)">
+<g transform="translate(-20,150) scale(0.045,-0.045)">
 <path d="M0 3000 l0 -770 405 0 405 0 0 -345 0 -345 -405 0 -405 0 0 -770 0
 -770 1363 2 1362 3 3 348 2 347 -955 0 -955 0 0 420 0 420 870 0 870 0 0 345
 0 345 -870 0 -870 0 0 420 0 420 955 0 955 0 -2 348 -3 347 -1362 3 -1363 2 0
