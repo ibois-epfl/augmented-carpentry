@@ -13,14 +13,28 @@
     
     /* Override background */
     .mdx-container {
-      background: none; /* Remove existing background */
+      background: none;
+      position: relative;
+      z-index: 0;
+    }
+    .mdx-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/images/test_homeland.jpg') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.2; /* Adjust the opacity value as needed */
+      z-index: -1;
     }
   </style>
   <section class="mdx-container">
     <div class="md-grid md-typeset">
       <div class="mdx-hero">
         <div class="mdx-hero__content">
-          <h1>A prototype for Augmented Reality (AR) Assistance for Woodworking in Timber Construction.</h1>
+          <h1>A prototype for Augmented Reality for Woodworking in Timber Construction.</h1>
           <p>{{ config.site_description }} Everywhere.</p>
           <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | e }}" class="md-button md-button--primary">
             Quick start
