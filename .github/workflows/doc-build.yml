@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-doc:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -22,9 +22,7 @@ jobs:
         run: conda env create -f environment.yml
       
       - name: Activate ac conda environment
-        run: |
-          conda init
-          conda activate ac
+        run: conda activate ac
 
       - name: Build the documentation
         run: mkdocs build
