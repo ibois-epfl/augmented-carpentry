@@ -98,20 +98,22 @@ plugins:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
       minify_html: true
-  - mkdoxy:
-      enabled: !ENV [ENABLE_MKDOXY, True]
-      projects:
-        acdoxygen:
-          src-dirs: src
-          full-doc: True
-          doxy-cfg:
-            FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
-            RECURSIVE: True
-      # save-api: docs/.mkdoxy  # to output the .md files
-      full-doc: True
-      debug: False
-      ignore-errors: False
-      emojis-enabled: True
+  # TODO: add also the project for tests section + documentation
+  # FIXME: uncomment for release
+  # - mkdoxy:
+  #     enabled: !ENV [ENABLE_MKDOXY, True]
+  #     projects:
+  #       acdoxygen:
+  #         src-dirs: src
+  #         full-doc: True
+  #         doxy-cfg:
+  #           FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
+  #           RECURSIVE: True
+  #     # save-api: docs/.mkdoxy  # to output the .md files
+  #     full-doc: True
+  #     debug: False
+  #     ignore-errors: False
+  #     emojis-enabled: True
 
 # Hooks
 hooks:
@@ -212,31 +214,33 @@ nav:
       - How to upgrade: upgrade.md
 
   - Augmented Woodworking:
-    - augmented-woodworking/index.html
+    - augmented-woodworking/index.md
     - test1: augmented-woodworking/placeholder1.md
     - test2: augmented-woodworking/placeholder2.md
+    - Camera calibration: augmented-woodworking/camera-calibration.md
 
+  # FIXME: uncomment for release
   - C++ docs: 
     - cpp-docs/index.md
-    - Files: "acdoxygen/files.md"
-    - Functions: "acdoxygen/functions.md"
-    - Classes:
-        - Class List: "acdoxygen/annotated.md"
-        - Class Hierarchy: "acdoxygen/hierarchy.md"
-        - Class Members: "acdoxygen/class_members.md"
-        - Class Member Functions: "acdoxygen/class_member_functions.md"
-        - Class Member Variables: "acdoxygen/class_member_variables.md"
-        - Class Member Typedefs: "acdoxygen/class_member_typedefs.md"
-        - Class Member Enumerations: "acdoxygen/class_member_enums.md"
-    - Namespaces:
-        - Namespace List: "acdoxygen/namespaces.md"
-        - Namespace Members: "acdoxygen/namespace_members.md"
-        - Namespace Member Functions: "acdoxygen/namespace_member_functions.md"
-        - Namespace Member Variables: "acdoxygen/namespace_member_variables.md"
-        - Namespace Member Typedefs: "acdoxygen/namespace_member_typedefs.md"
-        - Namespace Member Enumerations: "acdoxygen/namespace_member_enums.md"
-    - Variables: "acdoxygen/variables.md"
-    - Macros: "acdoxygen/macros.md"
+    # - Files: "acdoxygen/files.md"
+    # - Functions: "acdoxygen/functions.md"
+    # - Classes:
+    #     - Class List: "acdoxygen/annotated.md"
+    #     - Class Hierarchy: "acdoxygen/hierarchy.md"
+    #     - Class Members: "acdoxygen/class_members.md"
+    #     - Class Member Functions: "acdoxygen/class_member_functions.md"
+    #     - Class Member Variables: "acdoxygen/class_member_variables.md"
+    #     - Class Member Typedefs: "acdoxygen/class_member_typedefs.md"
+    #     - Class Member Enumerations: "acdoxygen/class_member_enums.md"
+    # - Namespaces:
+    #     - Namespace List: "acdoxygen/namespaces.md"
+    #     - Namespace Members: "acdoxygen/namespace_members.md"
+    #     - Namespace Member Functions: "acdoxygen/namespace_member_functions.md"
+    #     - Namespace Member Variables: "acdoxygen/namespace_member_variables.md"
+    #     - Namespace Member Typedefs: "acdoxygen/namespace_member_typedefs.md"
+    #     - Namespace Member Enumerations: "acdoxygen/namespace_member_enums.md"
+    # - Variables: "acdoxygen/variables.md"
+    # - Macros: "acdoxygen/macros.md"
 
   - Developer guide:
     - developer-guide/index.md
