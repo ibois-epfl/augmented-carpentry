@@ -23,7 +23,7 @@ site_name: Augmented Carpentry
 site_url: https://ibois-epfl.github.io/augmented-carpentry/
 site_author: Andrea Settimi
 site_description: >-
-  A research to allows digital fabrication in timber construction with ordinary tools, without 2D drawings or marking..
+  An open-source research to allow digital fabrication in timber construction with ordinary tools, without 2D drawings or marking, freely and..
 
 # Repository
 repo_name: ibois-epfl/augmented-carpentry
@@ -186,12 +186,21 @@ not_in_nav: |
 nav:
   - Home: index.md
   - Getting started:
-    - Hardware: hardware-requirements.md
-    - Installation: getting-started.md
+
+    - Hardware:
+      - Interface: interface.md
+      - Sensors: sensors.md
+      - Woodworking tools: woodworking-tools.md
+      - Stickers: stickers.md
+
+    - Software:
+      - Installation: installation.md
+
     - Changelog:
       - changelog/index.md
       - How to upgrade: upgrade.md
-  - C++ API: cpp-api/index.md
+
+  - C++ docs: cpp-docs/index.md
   - Augmented Woodworking:
     - augmented-woodworking/index.md
     - test1: augmented-woodworking/placeholder1.md
