@@ -16,7 +16,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: true
-          python-version: 3.9.1
+          python-version: 3.9.2
 
       - name: Create ac conda environment
         run: conda env create -f environment.yml
