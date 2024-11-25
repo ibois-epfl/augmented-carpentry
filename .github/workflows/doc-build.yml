@@ -21,8 +21,5 @@ jobs:
       - name: Create ac conda environment
         run: conda env create -f environment.yml
       
-      - name: Activate ac conda environment
-        run: conda activate ac
-
       - name: Build the documentation
-        run: mkdocs build
+        run: conda run -n ac mkdocs build
