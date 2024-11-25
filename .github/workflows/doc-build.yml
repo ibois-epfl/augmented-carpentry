@@ -19,12 +19,12 @@ jobs:
           python-version: 3.9.2
 
       - name: Create ac conda environment
-        run: |
-          conda init bash
-          conda env create -f environment.yml
+        run: conda env create -f environment.yml
       
       - name: Activate ac conda environment
-        run: conda activate ac
+        run: |
+          conda init bash
+          conda activate ac
 
       - name: Build the documentation
         run: mkdocs build
