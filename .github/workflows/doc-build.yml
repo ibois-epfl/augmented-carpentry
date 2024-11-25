@@ -23,7 +23,7 @@ jobs:
       
       - name: Activate ac conda environment
         run: |
-          conda init bash
+          conda init
           conda activate ac
 
       - name: Build the documentation
