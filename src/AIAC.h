@@ -39,6 +39,7 @@
 #include "AIAC/EventSys/SLAMEvent.h"
 #include "AIAC/EventSys/CameraEvent.h"
 #include "AIAC/EventSys/ApplicationEvent.h"
+
 /* >> add types of events here << */
 #include "AIAC/EventSys/EventBus.h"
 

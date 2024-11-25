@@ -472,3 +472,8 @@ cmake-build-debug-event-trace/
 
 /examples/html/*
 /examples/latex/*
+
+# avoid the generated doxygen in docs for mkdocs
+docs/.mkdoxy/
+docs/.mkdoxy/*
+docs/.mkdoxy/**
