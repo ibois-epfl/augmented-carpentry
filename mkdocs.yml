@@ -215,7 +215,6 @@ nav:
       - Installation: installation.md
     - Changelog:
       - changelog/index.md
-      - How to upgrade: upgrade.md
 
   - Augmented Woodworking:
     - augmented-woodworking/index.md

@@ -4,9 +4,6 @@ AC's prototype is built for x64 machines running on Ubuntu 22.04 LTS. The system
 
 === ":fontawesome-solid-briefcase:&nbsp;&nbsp; Wearable"
 
-
-    In our current prototype we wanted to develop a computing unit that could be easily transported and used in construction sites and shops. For this reason we decided to use a x64 machine of type [NUC](https://en.wikipedia.org/wiki/Next_Unit_of_Computing).
-
     /// html | div[style='float: left; width: 40%;']
     
     ![pc hardware view](../assets/images/getting_started/only_pc.JPG){width="380" class="rounded-corners"}
@@ -14,27 +11,28 @@ AC's prototype is built for x64 machines running on Ubuntu 22.04 LTS. The system
     ///
 
     /// html | div[style='float: right;width: 60%;']
-    
-    <div style="padding: 10px; overflow: auto;">
-    <pre>
-    OS: Ubuntu 22.04.3 LTS x86_64 
-    Host: NUC13ANHi7 M89903-203 
-    Kernel: 6.8.0-40-generic 
-    Uptime: 8 mins 
-    Packages: 2299 (dpkg), 17 (snap) 
-    Shell: bash 5.1.16 
-    Resolution: 1024x600 
-    DE: GNOME 42.9 
-    WM: Mutter 
-    WM Theme: Adwaita 
-    Theme: Yaru [GTK2/3] 
-    Icons: Yaru [GTK2/3] 
-    Terminal: gnome-terminal 
-    CPU: 13th Gen Intel i7-1360P (16) @ 5.000GHz 
-    GPU: Intel Device a7a0 
-    Memory: 1622MiB / 31645MiB 
-    </pre>
-    </div>
+
+    In our current prototype we wanted to develop a computing unit that could be easily transported and used in construction sites and shops. For this reason we decided to use a x64 machine of type [NUC](https://en.wikipedia.org/wiki/Next_Unit_of_Computing) with these specifics:
+
+    !!! quote ""
+        ```bash
+        OS: Ubuntu 22.04.3 LTS x86_64 
+        Host: NUC13ANHi7 M89903-203 
+        Kernel: 6.8.0-40-generic 
+        Uptime: 8 mins 
+        Packages: 2299 (dpkg), 17 (snap) 
+        Shell: bash 5.1.16 
+        Resolution: 1024x600 
+        DE: GNOME 42.9 
+        WM: Mutter 
+        WM Theme: Adwaita 
+        Theme: Yaru [GTK2/3] 
+        Icons: Yaru [GTK2/3] 
+        Terminal: gnome-terminal 
+        CPU: 13th Gen Intel i7-1360P (16) @ 5.000GHz 
+        GPU: Intel Device a7a0 
+        Memory: 1622MiB / 31645MiB
+        ```
     
     ///
 
