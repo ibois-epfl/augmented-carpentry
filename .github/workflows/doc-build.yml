@@ -21,8 +21,8 @@ jobs:
           auto-update-conda: true
           python-version: 3.9.2
 
-      - name: Replace the changelog/index.md with the latest CHANGELOG.md
-        run: cp CHANGELOG.md docs/changelog/index.md
+      - name: Replace the changelog/index.md with the latest CHANGELOG.md but convert it to UTF8
+        run: iconv -f ISO-8859-1 -t UTF-8 CHANGELOG.md > docs/changelog/index.md
 
       - name: Create ac conda environment
         run: conda env create -f environment.yml
