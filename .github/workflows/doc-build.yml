@@ -21,6 +21,9 @@ jobs:
           auto-update-conda: true
           python-version: 3.9.2
 
+      - name: Replace the changelog/index.md with the latest CHANGELOG.md
+        run: cp CHANGELOG.md docs/changelog/index.md
+
       - name: Create ac conda environment
         run: conda env create -f environment.yml
       

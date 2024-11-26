@@ -139,3 +139,7 @@ img[alt$="><"] {
   float: none!important;
 }
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+
+.rounded-corners {
+  border-radius: 6px;
+}

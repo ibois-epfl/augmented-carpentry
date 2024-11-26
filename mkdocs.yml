@@ -96,6 +96,7 @@ plugins:
   - blog
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - tags
   - minify:
       minify_html: true
   # TODO: add also the project for tests section + documentation
@@ -159,6 +160,7 @@ markdown_extensions:
       generic: true
   - pymdownx.betterem:
       smart_enable: all
+  - pymdownx.blocks.html
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
@@ -203,10 +205,12 @@ nav:
   - Home: index.md
   - Getting started:
     - Hardware:
-      - Interface: interface.md
-      - Sensors: sensors.md
-      - Woodworking tools: woodworking-tools.md
-      - Stickers: stickers.md
+      - hardware/index.md
+      - Computer: hardware/computing.md
+      - Interface: hardware/interface.md
+      - Sensors: hardware/sensors.md
+      - Tools: hardware/woodworking-tools.md
+      - Stickers: hardware/stickers.md
     - Software:
       - Installation: installation.md
     - Changelog:

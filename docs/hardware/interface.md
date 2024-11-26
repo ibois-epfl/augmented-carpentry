@@ -1,19 +1,17 @@
-AC needs just a simple x64 machine running on Ubuntu 22.04 LTS an interface and a monocular camera. It does not exploit GPU acceleration and can run on a laptop, a portable computing unit (e.g. [NUC](https://en.wikipedia.org/wiki/Next_Unit_of_Computing)) or a desktop.
+# Interface
 
-![AC Hardware setup ><](assets/images/getting_started/setup_AC.png){width="900"}
+AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface). This means that it can work with a touch screen (via HDMI) or a laptop. The interface is designed to be simple and intuitive. The main goal is to provide a quick and familiar way to interact with the system where every touch operations is in reality a click operation. This way we can develop our AR software without bodering for dedicated development on more complex [HMDs](https://en.wikipedia.org/wiki/Head-mounted_display) or advanced AR interfaces that would offer more ergonomic value to the cost of an increase complexity during the deployement. 
 
 
-For a quick start, you can use use your laptop. If you want to build on a touch screen, you can use the WaveShare WS170120 and follow the instructions below:
-
-=== "Touch screen"
-
+=== ":fontawesome-solid-briefcase:&nbsp;&nbsp; Wearable"
+    <!-- TODO: add here sub chapters and the hardware necessary -->
     If you use a touch screen be sure to set this option when configuring the build:
 
     ``` c++
     cmake -S . -B build -DDEPLOY_ON_TOUCH=ON
     ```
 
-    You can use the WaveShare WS170120 and follow the instructions below:
+    You can use the [WaveShare WS170120](https://www.waveshare.com/wiki/7inch_HDMI_LCD_(B)) as in the current prototype and follow the instructions below:
 
     To config the touch screen on the pc follow [these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD). Be sure to switch the display on, plug the mini-USB and finally plug the HDMI cable.
 
@@ -39,7 +37,7 @@ For a quick start, you can use use your laptop. If you want to build on a touch 
         Resolution = 1280 x 720
         ```
 
-=== "Laptop"
+=== ":fontawesome-solid-laptop-code:&nbsp;&nbsp; Laptop"
 
     For a quick test or development you can use a laptop and the webcam. Just adjust later the CMake config option.
 
