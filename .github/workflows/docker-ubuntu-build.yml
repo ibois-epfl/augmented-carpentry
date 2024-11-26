@@ -1,18 +1,7 @@
 name: ubuntu-build
 
-# FIXME: this is not working still running
 on:
   push:
-    branches: ["main"]
-    paths:
-      - 'src/**'
-      - 'cmake/**'
-      - 'CMakeLists.txt'
-      - 'Dockerfile'
-      - 'assets/**'
-      - 'deps/**'
-  pull_request:
-    branches: ["main"]
     paths:
       - 'src/**'
       - 'cmake/**'

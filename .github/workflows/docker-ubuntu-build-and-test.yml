@@ -1,19 +1,7 @@
 name: ubuntu-testsuite
 
-# FIXME: this is not working still running
 on:
   push:
-    branches: ["main"]
-    paths:
-      - 'tests/**'
-      - 'src/**'
-      - 'cmake/**'
-      - 'CMakeLists.txt'
-      - 'Dockerfile'
-      - 'assets/**'
-      - 'deps/**'
-  pull_request:
-    branches: ["main"]
     paths:
       - 'tests/**'
       - 'src/**'
