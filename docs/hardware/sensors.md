@@ -5,11 +5,20 @@ AC functions on a unique simple [moncoular camera](https://en.wikipedia.org/wiki
 We decided to take up the challange to build the entire sensing system to boost the accessibility and the portability of the sensing system. Through the raster feed from the camera, AC is capable of providing all the computed information necessary for the fabrication. Plus, it is compact, lightweight and easy to install on any tool.
 Finally, we believe that this can ensure a better future-proofing of any AR system.
 
-The camera is installed on the tool itself and follows the tool movements. This is a key feature to ensure that the tool head can be robustly tracked while detecting background features at once.
+/// html | div[style='float: left; width: 60%;']
 
-![view of the camera used](../assets/images/getting_started/camera_panorama_light.JPG){height="500" class="rounded-corners"}
+![view of the camera used](../assets/images/getting_started/camera_panorama_light_half2.JPG){width="600" class="rounded-corners"}
 
-## Recommended Specifics
+///
+
+/// html | div[style='float: right;width: 38%;']
+
+The camera is installed on the tool itself with a locline and an articulated arm. This ensures to follows the tool movements and adapt the camera's view for each tool. This is a key feature to ensure that the tool head can be robustly tracked while detecting also the background features.
+
+///
+
+/// html | div[style='clear: both;']
+///
 
 For the AC prototype we integrated a monocular camera specifically developed for drone applications: [RunCam 2 4K](https://shop.runcam.com/runcam2-4k-edition/)[^1]. Here are the features of the camera we were interested in given the constraints during the fabrication. If you pick another camera we recommend you to pick one with similar specifics:
 
@@ -78,6 +87,7 @@ The calibration file can be found and set manually from the `config.ini` file.
 --8<-- "assets/default_config.ini"
 ```
 
+<!-- TODO: update -->
 ## Components list
 
 !!! print-parts "Parts"
