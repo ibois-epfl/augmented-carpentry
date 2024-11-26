@@ -29,6 +29,7 @@ AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graph
 
         - [x] &nbsp;&nbsp; WaveShare WS170120
         - [ ] &nbsp;&nbsp; Support and tool-side attach for the screen
+            * [x] &nbsp;&nbsp; locline (1/2" - passage 12 mm)
             * [x] &nbsp;&nbsp; 3D printed parts
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/nuts_ecran.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/nuts_ecran.stl)
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/reinforce_attachusb.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/reinforce_attachusb.stl)

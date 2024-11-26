@@ -64,10 +64,11 @@ AC's prototype is built for x64 machines running on Ubuntu 22.04 LTS. The system
         Here's the list of the parts you will need to obtain or realize:
 
         - [x] &nbsp;&nbsp; NUC
-        - [x] &nbsp;&nbsp; Protective case: the NUC is contained in a 3D printed protection[^1] case that we designed specifically for extra resistance and to include an attachment for the battery.
+        - [x] &nbsp;&nbsp; Protective case for the NUC:
             - x1 [:octicons-file-code-16: `assets/hardware_parts/nuc/nucpoite2.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/nuc/nucpoite2.stl)
         - [x] &nbsp;&nbsp; 1x Power tool battery 18v (5.0Ah)
         - [x] &nbsp;&nbsp; Battery adapter
+        - [x] &nbsp;&nbsp; 1x Metal support to connect NUC case, battery adapter, and belt clip
         - [x] &nbsp;&nbsp; 1x 5v regulator (LM785)
         - [x] &nbsp;&nbsp; 1x Battery monitor
 
