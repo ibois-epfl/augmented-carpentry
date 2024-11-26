@@ -36,24 +36,36 @@ libopencv-dev
 
 The rest of the other dependecies will be automatically downloaded and installed by the CMake build system in the next steps.
 
-## Build and Run
+## Config and Build
 
-```bash
-cd augmented-carpentry
-cmake -S . -B build
-cmake --build build
-```
+=== ":fontawesome-solid-briefcase:&nbsp;&nbsp; Wearable"
 
-To run the code be sure that your USB-Camera is connected and run the following command:
+    ```bash
+    cd augmented-carpentry
+    cmake -S . -B build -DDEPLOY_ON_TOUCH=ON
+    cmake --build build
+    ```
 
-```bash
-./build/bin/AC
-```
+=== ":fontawesome-solid-laptop-code:&nbsp;&nbsp; Laptop"
+
+    ```bash
+    cd augmented-carpentry
+    cmake -S . -B build
+    cmake --build build
+    ```
 
 !!! Tip
     
     :octicons-file-code-16: [`default_config.ini`](assets/default_config.ini)
 
     While running the code, make sure that `config.ini` and `assets/` exists in the current directory. If errors related to config present, please reconfigure the `config.ini` by copy-pasting the content from `/assets/default_config.ini`.
+
+## Run
+
+To run the code be sure that your USB-Camera is connected and run the following command:
+
+```bash
+./build/bin/AC
+```
 
 That's it your are running Augmented Carpentry🪚!

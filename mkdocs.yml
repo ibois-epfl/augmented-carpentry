@@ -206,7 +206,7 @@ nav:
   - Getting started:
     - Hardware:
       - hardware/index.md
-      - Computer: hardware/computing.md
+      - Computing unit: hardware/computing.md
       - Interface: hardware/interface.md
       - Sensors: hardware/sensors.md
       - Tools: hardware/woodworking-tools.md
