@@ -94,9 +94,9 @@ extra_css:
 # Plugins
 plugins:
   - blog
+  - tags
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  - tags
   - minify:
       minify_html: true
   # TODO: add also the project for tests section + documentation
