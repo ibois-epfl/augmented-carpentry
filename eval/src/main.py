@@ -5,6 +5,8 @@ import os
 import argparse
 import typing
 
+from tqdm import tqdm
+
 import pandas as pd
 pd.set_option('display.max_rows', None)  ## do not truncate in the print
 
@@ -13,6 +15,21 @@ __time_stamp__: str = datetime.now().strftime('%Y%m%d%H%M%S')
 
 import matplotlib.pyplot as plt
 import numpy as np
+
+"""
+        TODO:
+        --> in relation to length of beam / error of joint's positioning
+        - add tje length of beam out from csv file
+        - get position of joint
+
+        --> in relation to the jointface's quality 
+        - with the angle of each joint
+
+        --> assembly analysis:
+        - just the general error + view of the point cloud colored
+
+        --> analyse holess (scna to take)
+    """
 
 
 def clean_missing_data(df: pd.DataFrame) -> pd.DataFrame:
@@ -26,7 +43,8 @@ def clean_missing_data(df: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: The DataFrame with rows with missing data removed.
     """
     df_clean = pd.DataFrame()
-    for i in range(len(df)):
+    for i in (pbar := tqdm(range(len(df)))):
+        pbar.set_description(f"Cleaning missing data")
         rawmean_data = df['mean'][i]
         if isinstance(rawmean_data, str):
             continue
@@ -55,12 +73,10 @@ def process_joint_face_id(df: pd.DataFrame, joint_face_id_col: str, beam_col: st
 
     return df
 
-
-# TODO: explain why we remove single joint faces (too precise due to registration pipeline)
 def remove_single_joint_faces(df: pd.DataFrame, joint_label_col: str, beam_col: str) -> pd.DataFrame:
     """
     Remove all rows where there is only a single joint face per joint. We do this because in our analysis methodology, every joint is registered
-    to the CAD joint model and if there is only one face the results would be perfect anyways because we would registering a plane to a plane.
+    to the CAD joint model and if there is only one face the results would be overfitting anyways because we would registering a plane to a plane.
 
     Args:
         df (pd.DataFrame): The DataFrame containing the joint label and beam columns.
@@ -95,7 +111,7 @@ def main(
     df_jointfaces_dataset['beam_name'] = pd.Series([], dtype=str)
 
     for p in os.listdir(path_dir_beams):
-        csv_path = os.path.join(path_dir_beams, p, '_csv')
+        csv_path = os.path.join(path_dir_beams, p)
         for i, f in enumerate(os.listdir(csv_path)):
             if f.endswith('.csv'):
                 abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
@@ -122,13 +138,6 @@ def main(
 
     err_jointface_mean = np.mean(np.array(df_jointfaces_dataset['mean'].tolist()))
     err_jointface_std = np.mean(np.array(df_jointfaces_dataset['std_deviation'].tolist()))
-
-    """
-        - possible info can be the angles of the joints? (not)
-        - TODO: for sure is the length of the beam that it's interesting to analyse in function
-        - TODO: we should try to analyse only the upper tower
-    """
-
 
     ###################################################################################################
     ## Printing
