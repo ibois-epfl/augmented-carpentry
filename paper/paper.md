@@ -22,9 +22,9 @@ authors:
     affiliation: 1
 
 affiliations:
- - name: Institution Name, Country
+ - name: IBOIS EPFL, Switzerland
    index: 1
- - name: Independent Researcher, Country
+ - name: Independent Researcher, Switzerland
    index: 2
 date: 18 November 2024
 bibliography: paper.bib
@@ -77,7 +77,7 @@ this section illustrates the layer stack system and the applicaton.h how ti work
 
 The layer stack is primarily responsible for managing the flow control of the AR engine. Designed as a modular system, each layer encapsulates the logic for a specific domain of the AR application, such as camera processing, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`.
 
-Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, ). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (contained in ApplicationEvent.h), which includes an event queue that processes events at the end of the main loop before triggering them.
+Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, ). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (ApplicationEvent.h), which is capable of queuing events from layers and trigger in the next main loop.
 
 
 
