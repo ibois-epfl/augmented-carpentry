@@ -237,9 +237,11 @@ nav:
     # - Macros: "acdoxygen/macros.md"
 
   - Developer guide:
-    - developer-guide/index.md
     - AR engine:
       - Layer stack: developer-guide/AR-engine/layer-stack.md
+      - Geometry framework: developer-guide/AR-engine/geometry-framework.md
+      - Feedback system: developer-guide/AR-engine/feedback-system.md
+      - AR rendering: developer-guide/AR-engine/AR-rendering.md
 
     - Guidelines: 
       - developer-guide/CONTRIBUTING.md
@@ -254,10 +256,7 @@ nav:
       - Making a pull request: contributing/making-a-pull-request.md
       - Asking a question: https://github.com/squidfunk/mkdocs-material/discussions
   
-  - Publications:
-    - publications/index.md
-    - test1: publications/placeholder1.md
-    - test2: publications/placeholder2.md
+  - Publications: publications/index.md
   
   - Team:
     - team/index.md
