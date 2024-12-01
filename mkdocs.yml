@@ -233,22 +233,16 @@ nav:
     #     - Class Members: "acdoxygen/class_members.md"
     #     - Class Member Functions: "acdoxygen/class_member_functions.md"
     #     - Class Member Variables: "acdoxygen/class_member_variables.md"
-    #     - Class Member Typedefs: "acdoxygen/class_member_typedefs.md"
-    #     - Class Member Enumerations: "acdoxygen/class_member_enums.md"
-    # - Namespaces:
-    #     - Namespace List: "acdoxygen/namespaces.md"
-    #     - Namespace Members: "acdoxygen/namespace_members.md"
-    #     - Namespace Member Functions: "acdoxygen/namespace_member_functions.md"
-    #     - Namespace Member Variables: "acdoxygen/namespace_member_variables.md"
-    #     - Namespace Member Typedefs: "acdoxygen/namespace_member_typedefs.md"
-    #     - Namespace Member Enumerations: "acdoxygen/namespace_member_enums.md"
     # - Variables: "acdoxygen/variables.md"
     # - Macros: "acdoxygen/macros.md"
 
   - Developer guide:
     - developer-guide/index.md
-    - test1: developer-guide/placeholder1.md
-    - test2: developer-guide/placeholder2.md
+    - AR engine:
+      - Layer stack: developer-guide/AR-engine/layer-stack.md
+
+    - Guidelines: 
+      - developer-guide/CONTRIBUTING.md
   
   - Community:
     - Contributing:
@@ -259,8 +253,6 @@ nav:
       - Adding translations: contributing/adding-translations.md
       - Making a pull request: contributing/making-a-pull-request.md
       - Asking a question: https://github.com/squidfunk/mkdocs-material/discussions
-    - Guides:
-      - Creating a reproduction: guides/creating-a-reproduction.md
   
   - Publications:
     - publications/index.md

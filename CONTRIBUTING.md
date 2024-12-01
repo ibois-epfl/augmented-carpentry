@@ -21,9 +21,8 @@ You can merge few tags e.g.:
 git commit -m "WIP-CAP:<description>      <--- for cap moment in not finished work 
 ```
 ---
+
 ## Python
----
-# Python
 DiffCheck is distributed as a Python Grasshopperr plug-in via yak and its source code via PyPI. The plug-in is composed by a series of `.ghuser` components.
 
 There are 3 ways you can contribute to the Python GH plug-in:
