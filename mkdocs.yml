@@ -85,6 +85,11 @@ theme:
   logo: assets/logo.png
   favicon: assets/favicon.ico
   icon:
+    # FIXME: understand how tags' icons work
+    tag:
+      html: fontawesome/brands/github
+      js: fontawesome/brands/js
+      css:  fontawesome/brands/css3
     logo: logo
 
 # Custom CSS
@@ -93,8 +98,12 @@ extra_css:
 
 # Plugins
 plugins:
+  # FIXME: understand how tags work
+  - tags:
+      HTML5: html
+      JavaScript: js
+      CSS: css
   - blog
-  - tags
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
@@ -146,6 +155,7 @@ extra:
       link: https://www.instagram.com/ibois_epfl/
     - icon: fontawesome/brands/vimeo
       link: https://vimeo.com/user87001008
+
 # Extensions
 markdown_extensions:
   - abbr
@@ -243,8 +253,9 @@ nav:
       - Feedback system: developer-guide/AR-engine/feedback-system.md
       - AR rendering: developer-guide/AR-engine/AR-rendering.md
 
-    - Guidelines: 
-      - developer-guide/CONTRIBUTING.md
+    - Guidelines:
+      - Code: developer-guide/CONTRIBUTING.md
+      - Tags: developer-guide/tags.md
   
   - Community:
     - Contributing:
