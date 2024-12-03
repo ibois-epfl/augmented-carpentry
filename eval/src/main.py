@@ -14,6 +14,8 @@ from datetime import datetime
 __time_stamp__: str = datetime.now().strftime('%Y%m%d%H%M%S')
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+
 import numpy as np
 
 """
@@ -130,13 +132,18 @@ def main(
     # joint analysis
     df_joints_dataset = clean_missing_data(df_joints_dataset)
 
+    df_joints_dataset['mean'] = df_joints_dataset['mean'] * 1000
     err_joint_mean = np.mean(np.array(df_joints_dataset['mean'].tolist()))
+    df_joints_dataset['std_deviation'] = df_joints_dataset['std_deviation'] * 1000
     err_joint_std = np.mean(np.array(df_joints_dataset['std_deviation'].tolist()))
     err_joint_total_nbr = len(df_joints_dataset)
 
     err_beam_lengths = np.array(df_joints_dataset['beam_length'].tolist())
     err_joint_distances_to_beam_midpoint = np.array(df_joints_dataset['joint_distance_to_beam_midpoint'].tolist())
     
+    
+
+
 
     # =================================================================================================
     # jointfaces analysis
@@ -144,8 +151,11 @@ def main(
     df_jointfaces_dataset = remove_single_joint_faces(df_jointfaces_dataset, 'joint_label', 'beam_name')
     df_jointfaces_dataset = clean_missing_data(df_jointfaces_dataset)
 
+    df_jointfaces_dataset['mean'] = df_jointfaces_dataset['mean'] * 1000
     err_jointface_mean = np.mean(np.array(df_jointfaces_dataset['mean'].tolist()))
+    df_jointfaces_dataset['std_deviation'] = df_jointfaces_dataset['std_deviation'] * 1000
     err_jointface_std = np.mean(np.array(df_jointfaces_dataset['std_deviation'].tolist()))
+    err_jointface_total_nbr = len(df_jointfaces_dataset)
 
     ###################################################################################################
     ## Printing
@@ -158,25 +168,54 @@ def main(
 
     print(f"{'Average number of faces per joint:':<40} {np.mean(df_jointfaces_dataset['joint_face_count']):<20.0f} {'#'}")
 
-    err_joint_mean_std_str = f"{err_joint_mean:.4f}" + " ± " + f"{err_joint_std:.4f}"
-    err_jointface_mean_std_str = f"{err_jointface_mean:.4f}" + " ± " + f"{err_jointface_std:.4f}"
-    print(f"{'Mean of all joint distance error:':<40} {err_joint_mean_std_str:<20} {'m'}")
-    print(f"{'Mean of all jointfaces distance error:':<40} {err_jointface_mean_std_str:<20} {'m'}")
+    err_joint_mean_std_str = f"{err_joint_mean:.1f}" + " ± " + f"{err_joint_std:.1f}"
+    err_jointface_mean_std_str = f"{err_jointface_mean:.1f}" + " ± " + f"{err_jointface_std:.1f}"
+    print(f"{'Mean of all joint distance error:':<40} {err_joint_mean_std_str:<20} {'mm'}")
+    print(f"{'Mean of all jointfaces distance error:':<40} {err_jointface_mean_std_str:<20} {'mm'}")
 
 
     ###################################################################################################
     ## Printing
     ###################################################################################################
-    # create a double boxplot of the joint distances and jointfaces distances
-    # fig, ax = plt.subplots()
-    # ax.boxplot([df_joints_dataset['mean'], df_jointfaces_dataset['mean']], labels=['Location Error\n(Joint level)', 'Joint Quality\n(JointFace level)'])
-    # ax.set_ylabel('Distance Error (m)')
-    # ax.set_title('Scan-CAD Accuracy Evaluation')
-    # plt.savefig(os.path.join(output_path, f'boxplot_{__time_stamp__}.png'))
-    # plt.show()
-
+    # create a single plot with multiple boxplots organized by axis x with the beam bin lengths (0-0.2, 0.2-0.4, 0.4-0.6, 0.6-0.8, 0.8-1.0),
+    # and the y axis with the error of the joint's positioning
     
+    # take the range between the smallest and the largest beam length and make 7 bins
+    bins = np.linspace(np.min(err_beam_lengths), np.max(err_beam_lengths), 8)
 
+    # generate the labels for the bins
+    labels = [f'{bins[i+1]:.1f}' for i in range(len(bins)-1)]
+
+    df_joints_dataset['beam_length_bin'] = pd.cut(df_joints_dataset['beam_length'], bins=bins, labels=labels)
+
+    clr_markers = 'red'
+    flierprops: dict =  dict(marker='+', markeredgecolor=clr_markers, markersize=9)
+    boxprops = dict(linewidth=0.9, color='black')
+    whiskerprops = dict(linewidth=0.9, linestyle=(0, (10, 10)), color='black')
+    medianprops = dict(color=clr_markers)
+
+    fig, ax = plt.subplots(figsize=(4.2, 5.8))
+    df_joints_dataset.boxplot(
+        column='mean',
+        by='beam_length_bin',
+        ax=ax,
+        flierprops=flierprops,
+        boxprops=boxprops,
+        whiskerprops=whiskerprops,
+        medianprops=medianprops
+        )
+    plt.suptitle('')
+    plt.title('(A)')
+    plt.xlabel('beam length range (m)')
+    plt.ylabel('error (mm)')
+    plt.grid()
+
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    plt.tight_layout()
+
+    plt.show()
     ###################################################################################################
     ## Assembly
     ###################################################################################################
