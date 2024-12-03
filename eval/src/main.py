@@ -195,6 +195,7 @@ def main(
     medianprops = dict(color=clr_markers)
 
     fig, ax = plt.subplots(figsize=(4.2, 5.8))
+
     df_joints_dataset.boxplot(
         column='mean',
         by='beam_length_bin',
@@ -206,11 +207,11 @@ def main(
         )
     plt.suptitle('')
     plt.title('(A)')
-    plt.xlabel('beam length range (m)')
-    plt.ylabel('error (mm)')
+    plt.xlabel('beam length range (m)', fontsize=12)
+    plt.ylabel('error (mm)', fontsize=12)
     plt.grid()
 
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True)
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=8)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.tight_layout()
