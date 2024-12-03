@@ -93,8 +93,8 @@ def remove_single_joint_faces(df: pd.DataFrame, joint_label_col: str, beam_col: 
 
 
 def main(
-    _path: str,
-    _output_path: str
+    paths: typing.List[str],
+    output_path: str
     ) -> None:
     ###################################################################################################
     ## Beams - Joint/JointFaces
@@ -102,7 +102,6 @@ def main(
     # =================================================================================================
     # importing data into memory
     folder_name_beams: str = "a_beams"
-    path_dir_beams: str = os.path.join(_path, folder_name_beams)
 
     df_joints_dataset: pd.DataFrame = pd.DataFrame()
     df_joints_dataset['beam_name'] = pd.Series([], dtype=str)
@@ -110,17 +109,22 @@ def main(
     df_jointfaces_dataset: pd.DataFrame = pd.DataFrame()
     df_jointfaces_dataset['beam_name'] = pd.Series([], dtype=str)
 
-    for p in os.listdir(path_dir_beams):
-        csv_path = os.path.join(path_dir_beams, p)
-        for i, f in enumerate(os.listdir(csv_path)):
-            if f.endswith('.csv'):
-                abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
-                pandas_data_beam = pd.read_csv(abs_path_csv)
-                pandas_data_beam['beam_name'] = p
-                if f.endswith('_joint.csv'):
-                    df_joints_dataset = pd.concat([df_joints_dataset, pandas_data_beam], ignore_index=True)
-                elif f.endswith('_jointfaces.csv'):
-                    df_jointfaces_dataset = pd.concat([df_jointfaces_dataset, pandas_data_beam], ignore_index=True)
+    path_csvs_beams: typing.List[str] = []
+    for p in paths:
+        print(f"Processing path: {p}")
+        # pbar.set_description(f"Loading csv into panda frames in memory")
+        path_dir_beams: str = os.path.join(p, folder_name_beams)
+        for p in os.listdir(path_dir_beams):
+            csv_path = os.path.join(path_dir_beams, p)
+            for i, f in enumerate(os.listdir(csv_path)):
+                if f.endswith('.csv'):
+                    abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
+                    pandas_data_beam = pd.read_csv(abs_path_csv)
+                    pandas_data_beam['beam_name'] = p
+                    if f.endswith('_joint.csv'):
+                        df_joints_dataset = pd.concat([df_joints_dataset, pandas_data_beam], ignore_index=True)
+                    elif f.endswith('_jointfaces.csv'):
+                        df_jointfaces_dataset = pd.concat([df_jointfaces_dataset, pandas_data_beam], ignore_index=True)
 
     # =================================================================================================
     # joint analysis
@@ -129,6 +133,10 @@ def main(
     err_joint_mean = np.mean(np.array(df_joints_dataset['mean'].tolist()))
     err_joint_std = np.mean(np.array(df_joints_dataset['std_deviation'].tolist()))
     err_joint_total_nbr = len(df_joints_dataset)
+
+    err_beam_lengths = np.array(df_joints_dataset['beam_length'].tolist())
+    err_joint_distances_to_beam_midpoint = np.array(df_joints_dataset['joint_distance_to_beam_midpoint'].tolist())
+    
 
     # =================================================================================================
     # jointfaces analysis
@@ -142,23 +150,30 @@ def main(
     ###################################################################################################
     ## Printing
     ###################################################################################################
+    print(f"{'Title':<40} {'Value':<20} {'Unit'}")
 
-    print(f"Total number of joint evaluated: {err_joint_total_nbr}")
-    print(f"Average number faces per joint: {np.mean(df_jointfaces_dataset['joint_face_count'])}")
-    print(f"Mean of all joint distances: {err_joint_mean}±{err_joint_std}")
-    print(f"Mean of all jointfaces distances: {err_jointface_mean}±{err_jointface_std}")
+    print(f"{'Total number of joints evaluated:':<40} {err_joint_total_nbr:<20} {'#'}")
+    print(f"{'Average beam length:':<40} {np.mean(err_beam_lengths):<20.3f} {'m'}")
+    print(f"{'Average distance to beam midpoint:':<40} {np.mean(err_joint_distances_to_beam_midpoint):<20.3f} {'m'}")
+
+    print(f"{'Average number of faces per joint:':<40} {np.mean(df_jointfaces_dataset['joint_face_count']):<20.0f} {'#'}")
+
+    err_joint_mean_std_str = f"{err_joint_mean:.4f}" + " ± " + f"{err_joint_std:.4f}"
+    err_jointface_mean_std_str = f"{err_jointface_mean:.4f}" + " ± " + f"{err_jointface_std:.4f}"
+    print(f"{'Mean of all joint distance error:':<40} {err_joint_mean_std_str:<20} {'m'}")
+    print(f"{'Mean of all jointfaces distance error:':<40} {err_jointface_mean_std_str:<20} {'m'}")
 
 
     ###################################################################################################
     ## Printing
     ###################################################################################################
     # create a double boxplot of the joint distances and jointfaces distances
-    fig, ax = plt.subplots()
-    ax.boxplot([df_joints_dataset['mean'], df_jointfaces_dataset['mean']], labels=['Location Error\n(Joint level)', 'Joint Quality\n(JointFace level)'])
-    ax.set_ylabel('Distance Error (m)')
-    ax.set_title('Scan-CAD Accuracy Evaluation')
-    plt.savefig(os.path.join(_output_path, f'boxplot_{__time_stamp__}.png'))
-    plt.show()
+    # fig, ax = plt.subplots()
+    # ax.boxplot([df_joints_dataset['mean'], df_jointfaces_dataset['mean']], labels=['Location Error\n(Joint level)', 'Joint Quality\n(JointFace level)'])
+    # ax.set_ylabel('Distance Error (m)')
+    # ax.set_title('Scan-CAD Accuracy Evaluation')
+    # plt.savefig(os.path.join(output_path, f'boxplot_{__time_stamp__}.png'))
+    # plt.show()
 
     
 
@@ -179,16 +194,28 @@ if __name__ == '__main__':
         return True
 
     parser = argparse.ArgumentParser(description='Evaluate the performance of AC')
-    parser.add_argument('--path', type=str,
-                        help='path to the directory containing the results. This should be the root containing the a_beams and b_assembly folders')
+    parser.add_argument('--paths', type=str,
+                        help="path(s) to the directory containing the results. This should be the root containing the a_beams and b_assembly folders.\n \
+                            NB: if you have multiple paths, start with [] and separate them with commas")
     parser.add_argument('--output_path', type=str, default=f'./',
                         help='path to the directory to save the results')
 
     args = parser.parse_args()
 
-    _path :str = args.path if _check_dir_sanity(args.path) else sys.exit(1)
+    _paths: typing.List[str] = []
+    if args.paths.startswith('[') and args.paths.endswith(']'):
+        print("Multiple paths detected")
+        _paths_temp = args.paths[1:-1].split(',')
+        _paths_temp = [p.strip() for p in _paths_temp]
+        for _p in _paths_temp:
+            if not _check_dir_sanity(_p):
+                sys.exit(1)
+            _paths.append(_p)
+    else:
+        _paths = [args.paths] if _check_dir_sanity(args.paths) else sys.exit(1)
+
     _output_path: str = args.output_path if _check_dir_sanity(args.output_path) else sys.exit(1)
 
-    main(_path,
+    main(_paths,
         _output_path)
 
