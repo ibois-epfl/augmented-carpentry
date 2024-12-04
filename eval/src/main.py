@@ -15,22 +15,17 @@ __time_stamp__: str = datetime.now().strftime('%Y%m%d%H%M%S')
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
+from mpl_toolkits.mplot3d import Axes3D
 
 import numpy as np
 
+import open3d as o3d
+
 """
         TODO:
-        --> in relation to length of beam / error of joint's positioning
-        - add tje length of beam out from csv file
-        - get position of joint
-
-        --> in relation to the jointface's quality 
-        - with the angle of each joint
-
-        --> assembly analysis:
-        - just the general error + view of the point cloud colored
-
-        --> analyse holess (scna to take)
+        --> load assembly in memory for assembly
+        --> representation for assembly
+        --> compute rrors for the drilling holes
     """
 
 
@@ -104,6 +99,7 @@ def main(
     # =================================================================================================
     # importing data into memory
     folder_name_beams: str = "a_beams"
+    folder_name_assembly: str = "b_assembly"
 
     df_joints_dataset: pd.DataFrame = pd.DataFrame()
     df_joints_dataset['beam_name'] = pd.Series([], dtype=str)
@@ -111,22 +107,40 @@ def main(
     df_jointfaces_dataset: pd.DataFrame = pd.DataFrame()
     df_jointfaces_dataset['beam_name'] = pd.Series([], dtype=str)
 
+    df_assessment_dataset: pd.DataFrame = pd.DataFrame()
+
+
+    # TODO: add for the assembly
+
     path_csvs_beams: typing.List[str] = []
-    for p in paths:
-        print(f"Processing path: {p}")
-        # pbar.set_description(f"Loading csv into panda frames in memory")
+
+    for i, p in (pbar := tqdm(enumerate(paths))):
+        pbar.set_description(f"Loading csv into memory.")
         path_dir_beams: str = os.path.join(p, folder_name_beams)
-        for p in os.listdir(path_dir_beams):
-            csv_path = os.path.join(path_dir_beams, p)
+        # joint loading
+        for p_beam in os.listdir(path_dir_beams):
+            csv_path = os.path.join(path_dir_beams, p_beam)
             for i, f in enumerate(os.listdir(csv_path)):
                 if f.endswith('.csv'):
                     abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
                     pandas_data_beam = pd.read_csv(abs_path_csv)
-                    pandas_data_beam['beam_name'] = p
+                    pandas_data_beam['beam_name'] = p_beam
                     if f.endswith('_joint.csv'):
                         df_joints_dataset = pd.concat([df_joints_dataset, pandas_data_beam], ignore_index=True)
                     elif f.endswith('_jointfaces.csv'):
                         df_jointfaces_dataset = pd.concat([df_jointfaces_dataset, pandas_data_beam], ignore_index=True)
+        # assembly loading
+        # FIXME: load assembly data online
+        path_dir_assembly = os.path.join(p, folder_name_assembly)
+        # for p_assembly in os.listdir(path_dir_assembly):
+        #     csv_path = os.path.join(path_dir_assembly, p_assembly)
+        #     for i, f in enumerate(os.listdir(csv_path)):
+        #         if f.endswith('.csv'):
+        #             abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
+        #             pandas_data_beam = pd.read_csv(abs_path_csv)
+        #             df_assessment_dataset = pd.concat([df_assessment_dataset, pandas_data_beam], ignore_index=True)
+
+    print(f"{'<' * 100}\n{'Data loaded'}\n{'<' * 100}")
 
     # =================================================================================================
     # joint analysis
@@ -140,9 +154,6 @@ def main(
 
     err_beam_lengths = np.array(df_joints_dataset['beam_length'].tolist())
     err_joint_distances_to_beam_midpoint = np.array(df_joints_dataset['joint_distance_to_beam_midpoint'].tolist())
-    
-    
-
 
 
     # =================================================================================================
@@ -160,7 +171,8 @@ def main(
     ###################################################################################################
     ## Printing
     ###################################################################################################
-    print(f"{'Title':<40} {'Value':<20} {'Unit'}")
+    num_chars = 100
+    print(f"{'-' * num_chars}\n{'joint analysis'}\n{'-' * num_chars}")
 
     print(f"{'Total number of joints evaluated:':<40} {err_joint_total_nbr:<20} {'#'}")
     print(f"{'Average beam length:':<40} {np.mean(err_beam_lengths):<20.3f} {'m'}")
@@ -177,25 +189,25 @@ def main(
     ###################################################################################################
     ## Printing
     ###################################################################################################
-    # create a single plot with multiple boxplots organized by axis x with the beam bin lengths (0-0.2, 0.2-0.4, 0.4-0.6, 0.6-0.8, 0.8-1.0),
-    # and the y axis with the error of the joint's positioning
-    
-    # take the range between the smallest and the largest beam length and make 7 bins
+    # -----------------------------------------------------------------------------------------------
+    # Joint position error - beam length
+    # -----------------------------------------------------------------------------------------------
+    # take the range between the smallest and the largest beam length and make 8 bins
     bins = np.linspace(np.min(err_beam_lengths), np.max(err_beam_lengths), 8)
-
-    # generate the labels for the bins
     labels = [f'{bins[i+1]:.1f}' for i in range(len(bins)-1)]
-
     df_joints_dataset['beam_length_bin'] = pd.cut(df_joints_dataset['beam_length'], bins=bins, labels=labels)
 
     clr_markers = 'red'
     flierprops: dict =  dict(marker='+', markeredgecolor=clr_markers, markersize=9)
-    boxprops = dict(linewidth=0.9, color='black')
+    boxprops = dict(linewidth=0.9, color='blue')
     whiskerprops = dict(linewidth=0.9, linestyle=(0, (10, 10)), color='black')
     medianprops = dict(color=clr_markers)
+    pad = 8
+    labelpad_y = 2
 
-    fig, ax = plt.subplots(figsize=(4.2, 5.8))
+    fig, axs = plt.subplots(1, 3, figsize=(10, 5))  # ori (4.2, 5.8)
 
+    ax = axs[0]
     df_joints_dataset.boxplot(
         column='mean',
         by='beam_length_bin',
@@ -205,18 +217,138 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    plt.suptitle('')
-    plt.title('(A)')
-    plt.xlabel('beam length range (m)', fontsize=12)
-    plt.ylabel('error (mm)', fontsize=12)
-    plt.grid()
+    # plt.suptitle('')  # remove the default title
+    ax.set_title('(A)')
+    ax.set_xlabel('beam length (m)', fontsize=12)
+    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.grid()
 
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=8)
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
-    plt.tight_layout()
+    # plt.tight_layout()
+    # plt.show()  # TODO: debug
 
+    # -----------------------------------------------------------------------------------------------
+    # Joint position error - distance from beam midpoint 
+    # -----------------------------------------------------------------------------------------------
+    # if a value is bigger than the beam's length, it means that the joint is not on the beam and we should not consider it
+    df_joints_dataset_copy = df_joints_dataset.copy()
+    df_joints_dataset_copy = df_joints_dataset_copy[df_joints_dataset_copy['joint_distance_to_beam_midpoint'] < np.mean(err_beam_lengths)]
+    # compute 8 bins from biggest to smallest distance to mid point beam
+    bins = np.linspace(np.min(
+            np.array(df_joints_dataset_copy["joint_distance_to_beam_midpoint"].tolist())),
+        np.max(
+            np.array(df_joints_dataset_copy["joint_distance_to_beam_midpoint"].tolist())),
+        8)
+    labels = [f'{bins[i+1]:.1f}' for i in range(len(bins)-1)]
+    df_joints_dataset_copy['joint_distance_to_beam_midpoint_bin'] = pd.cut(df_joints_dataset_copy['joint_distance_to_beam_midpoint'], bins=bins, labels=labels)
+
+    # fig, ax = plt.subplots(figsize=(4.2, 5.8))
+
+    ax = axs[1]
+    df_joints_dataset_copy.boxplot(
+        column='mean',
+        by='joint_distance_to_beam_midpoint_bin',
+        ax=ax,
+        flierprops=flierprops,
+        boxprops=boxprops,
+        whiskerprops=whiskerprops,
+        medianprops=medianprops
+        )
+    # ax.suptitle('')
+    ax.set_title('(B)')
+    ax.set_xlabel('distance from mid-beam (m)', fontsize=12)
+    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.grid()
+
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    # plt.tight_layout()
+    # plt.show()  # TODO: debug
+
+    # -----------------------------------------------------------------------------------------------
+    # Jointfaces quality - angles
+    # -----------------------------------------------------------------------------------------------
+    df_jointfaces_dataset_copy = df_jointfaces_dataset.copy()
+    df_jointfaces_dataset_copy = df_jointfaces_dataset_copy[df_jointfaces_dataset_copy['jointface_angle'] >= 0]
+    bins = np.linspace(30, 90, 8)  # [30, 40, 50, 60, 70, 80, 90]
+    labels = [f'{bins[i+1]:.0f}' for i in range(len(bins)-1)]
+    df_jointfaces_dataset_copy['jointface_angle_bin'] = pd.cut(df_jointfaces_dataset_copy['jointface_angle'], bins=bins, labels=labels)
+
+    # fig, ax = plt.subplots(figsize=(4.2, 5.8))
+
+    ax = axs[2]
+    df_jointfaces_dataset_copy.boxplot(
+        column='mean',
+        by='jointface_angle_bin',
+        ax=ax,
+        flierprops=flierprops,
+        boxprops=boxprops,
+        whiskerprops=whiskerprops,
+        medianprops=medianprops
+        )
+    # ax.suptitle('')
+    ax.set_title('(C)')
+    ax.set_xlabel('cut angle (°)', fontsize=12)
+    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.grid()
+
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    # format the x-acis lables to integer
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+
+    plt.tight_layout()
     plt.show()
+
+    # # save the figure
+    # fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.png'), dpi=300, bbox_inches='tight')
+
+    # -----------------------------------------------------------------------------------------------
+    # Drilling holes
+    # -----------------------------------------------------------------------------------------------
+    # TODO: to be done
+
+    # -----------------------------------------------------------------------------------------------
+    # Assembly display
+    # -----------------------------------------------------------------------------------------------
+    # pcd = o3d.io.read_point_cloud(R"F:\augmented-carpentry\eval\test_data\tower_upper\b_assembly\tower_upper_trm_cloud_clr.ply")
+    # points = np.asarray(pcd.points)
+    # colors = np.asarray(pcd.colors)
+    
+    # # Extract x, y, z coordinates
+    # x = points[:, 0]
+    # y = points[:, 1]
+    # z = points[:, 2]
+
+    # # Extract RGB colors
+    # r = colors[:, 0]
+    # g = colors[:, 1]
+    # b = colors[:, 2]
+
+    # # Create a 3D scatter plot
+    # fig = plt.figure(figsize=(10, 7))
+    # ax = fig.add_subplot(111, projection='3d')
+
+    # # Scatter plot with colors
+    # sc = ax.scatter(x, y, z, c=colors, marker='+')
+
+    # # Set labels
+    # ax.set_xlabel('X')
+    # ax.set_ylabel('Y')
+    # ax.set_zlabel('Z')
+
+    # # Set title
+    # ax.set_title('3D Point Cloud with Colors')
+
+    # ax.set_box_aspect([1, 1, 1.2])
+
+    # plt.show()
+
+
     ###################################################################################################
     ## Assembly
     ###################################################################################################

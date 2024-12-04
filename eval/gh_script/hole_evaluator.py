@@ -101,11 +101,17 @@ def main(
     # drilling angle
     refrence_vector = rg.Vector3d(0, 0, -1)
     gt_angles = []
-    
+    cp_angles = []
+
     for gt_axis in gt_axes:
         angle = rg.Vector3d.VectorAngle(gt_axis, refrence_vector)
         degree = truncate_float((angle * 180 / 3.141592653589793), 1)
         gt_angles.append(degree)
+
+    for cp_axis in cp_axes:
+        angle = rg.Vector3d.VectorAngle(cp_axis, refrence_vector)
+        degree = truncate_float((angle * 180 / 3.141592653589793), 1)
+        cp_angles.append(degree)
 
     ## 3) compute the evaluation metrics
     # difference angles
@@ -143,8 +149,9 @@ def main(
             writer = csv.writer(file)
             writer.writerow(["Hole ID", "Drilling Angle (GT)", "Drilling Angle (CP)", "Difference Angle (deg)", "Starting Point Difference (m)", "Ending Point Difference (m)"])
             for i in range(len(id_holes)):
-                writer.writerow([id_holes[i], gt_angles[i], gt_angles[i], err_diff_angles[i], err_dist_start[i], err_dist_end[i]])
+                writer.writerow([id_holes[i], gt_angles[i], cp_angles[i], err_diff_angles[i], err_dist_start[i], err_dist_end[i]])
 
+    o_debug = err_diff_angles
 
     return [gt_axes, cp_axes], [gt_anchors, cp_anchors], o_debug
 
