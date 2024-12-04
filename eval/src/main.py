@@ -4,6 +4,7 @@ import sys
 import os
 import argparse
 import typing
+import shutil
 
 from tqdm import tqdm
 
@@ -23,11 +24,16 @@ import open3d as o3d
 
 """
         TODO:
-        --> load assembly in memory for assembly
         --> representation for assembly
         --> compute rrors for the drilling holes
     """
 
+def print_separator(char='-', length=None):
+    if length is None:
+        # Get the terminal size
+        terminal_size = shutil.get_terminal_size((80, 20))
+        length = terminal_size.columns
+    print(char * length)
 
 def clean_missing_data(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -94,9 +100,10 @@ def main(
     output_path: str
     ) -> None:
     ###################################################################################################
-    ## Beams - Joint/JointFaces
+    print_separator()
+    print("Error computation")
+    print_separator()
     ###################################################################################################
-    # =================================================================================================
     # importing data into memory
     folder_name_beams: str = "a_beams"
     folder_name_assembly: str = "b_assembly"
@@ -107,12 +114,9 @@ def main(
     df_jointfaces_dataset: pd.DataFrame = pd.DataFrame()
     df_jointfaces_dataset['beam_name'] = pd.Series([], dtype=str)
 
-    df_assessment_dataset: pd.DataFrame = pd.DataFrame()
+    df_assembly_dataset: pd.DataFrame = pd.DataFrame()
 
-
-    # TODO: add for the assembly
-
-    path_csvs_beams: typing.List[str] = []
+    df_holeplate_dataset: pd.DataFrame = pd.DataFrame()
 
     for i, p in (pbar := tqdm(enumerate(paths))):
         pbar.set_description(f"Loading csv into memory.")
@@ -130,17 +134,20 @@ def main(
                     elif f.endswith('_jointfaces.csv'):
                         df_jointfaces_dataset = pd.concat([df_jointfaces_dataset, pandas_data_beam], ignore_index=True)
         # assembly loading
-        # FIXME: load assembly data online
         path_dir_assembly = os.path.join(p, folder_name_assembly)
-        # for p_assembly in os.listdir(path_dir_assembly):
-        #     csv_path = os.path.join(path_dir_assembly, p_assembly)
-        #     for i, f in enumerate(os.listdir(csv_path)):
-        #         if f.endswith('.csv'):
-        #             abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
-        #             pandas_data_beam = pd.read_csv(abs_path_csv)
-        #             df_assessment_dataset = pd.concat([df_assessment_dataset, pandas_data_beam], ignore_index=True)
-
-    print(f"{'<' * 100}\n{'Data loaded'}\n{'<' * 100}")
+        for i, f in enumerate(os.listdir(path_dir_assembly)):
+            if f.endswith('.csv'):
+                abs_path_csv = os.path.abspath(os.path.join(path_dir_assembly, f))
+                pandas_data_beam = pd.read_csv(abs_path_csv)
+                df_assembly_dataset = pd.concat([df_assembly_dataset, pandas_data_beam], ignore_index=True)
+    # holeplate
+    path_dir_holeplate = os.path.dirname(paths[0])
+    csv_path = os.path.join(path_dir_holeplate, 'holeplate')
+    for i, f in enumerate(os.listdir(csv_path)):
+        if f.endswith('.csv'):
+            abs_path_csv = os.path.abspath(os.path.join(csv_path, f))
+            pandas_data_beam = pd.read_csv(abs_path_csv)
+            df_holeplate_dataset = pd.concat([df_holeplate_dataset, pandas_data_beam], ignore_index=True)
 
     # =================================================================================================
     # joint analysis
@@ -155,8 +162,6 @@ def main(
     err_beam_lengths = np.array(df_joints_dataset['beam_length'].tolist())
     err_joint_distances_to_beam_midpoint = np.array(df_joints_dataset['joint_distance_to_beam_midpoint'].tolist())
 
-
-    # =================================================================================================
     # jointfaces analysis
     df_jointfaces_dataset = process_joint_face_id(df_jointfaces_dataset, 'joint_face id', 'beam_name')
     df_jointfaces_dataset = remove_single_joint_faces(df_jointfaces_dataset, 'joint_label', 'beam_name')
@@ -168,12 +173,33 @@ def main(
     err_jointface_std = np.mean(np.array(df_jointfaces_dataset['std_deviation'].tolist()))
     err_jointface_total_nbr = len(df_jointfaces_dataset)
 
-    ###################################################################################################
-    ## Printing
-    ###################################################################################################
-    num_chars = 100
-    print(f"{'-' * num_chars}\n{'joint analysis'}\n{'-' * num_chars}")
+    # hole analysis (we define it only with start distance and angle error)
+    df_holeplate_dataset['Starting Point Difference (m)'] = df_holeplate_dataset['Starting Point Difference (m)'] * 1000
+    df_holeplate_dataset['Ending Point Difference (m)'] = df_holeplate_dataset['Ending Point Difference (m)'] * 1000
+    df_holeplate_dataset['Drilling Angle (GT)'] = 90 - df_holeplate_dataset['Drilling Angle (GT)']
+    df_holeplate_dataset['Drilling Angle (CP)'] = 90 - df_holeplate_dataset['Drilling Angle (CP)']
+    err_holeplate_anglediff_mean = np.mean(np.array(df_holeplate_dataset['Difference Angle (deg)'].tolist()))
+    err_holeplate_startdist_mean = np.mean(np.array(df_holeplate_dataset['Starting Point Difference (m)'].tolist()))
+    err_holeplate_anglediff_std = np.std(np.array(df_holeplate_dataset['Difference Angle (deg)'].tolist()))
+    err_holeplate_startdist_std = np.std(np.array(df_holeplate_dataset['Starting Point Difference (m)'].tolist()))
+    err_holeplate_total_nbr = len(df_holeplate_dataset)
 
+    # assembly analysis
+    df_assembly_dataset = clean_missing_data(df_assembly_dataset)
+
+    df_assembly_dataset['mean'] = df_assembly_dataset['mean'] * 1000
+    err_assembly_mean = np.mean(np.array(df_assembly_dataset['mean'].tolist()))
+    df_assembly_dataset['std_deviation'] = df_assembly_dataset['std_deviation'] * 1000
+    err_assembly_std = np.mean(np.array(df_assembly_dataset['std_deviation'].tolist()))
+    err_assembly_total_nbr = len(df_assembly_dataset)
+    err_assembly_total_nbr = len(df_assembly_dataset)
+
+    ###################################################################################################
+    print_separator()
+    print("Results")
+    print_separator()
+    ###################################################################################################
+    print("cutting joint analysis:")
     print(f"{'Total number of joints evaluated:':<40} {err_joint_total_nbr:<20} {'#'}")
     print(f"{'Average beam length:':<40} {np.mean(err_beam_lengths):<20.3f} {'m'}")
     print(f"{'Average distance to beam midpoint:':<40} {np.mean(err_joint_distances_to_beam_midpoint):<20.3f} {'m'}")
@@ -184,10 +210,29 @@ def main(
     err_jointface_mean_std_str = f"{err_jointface_mean:.1f}" + " ± " + f"{err_jointface_std:.1f}"
     print(f"{'Mean of all joint distance error:':<40} {err_joint_mean_std_str:<20} {'mm'}")
     print(f"{'Mean of all jointfaces distance error:':<40} {err_jointface_mean_std_str:<20} {'mm'}")
+    print_separator()
 
+    print("Drilling hole analysis:")
+    print(f"{'Total number of holes evaluated:':<40} {err_holeplate_total_nbr:<20} {'#'}")
+    err_holeplate_anglediff_mean_std_str = f"{err_holeplate_anglediff_mean:.1f}" + " ± " + f"{err_holeplate_anglediff_std:.1f}"
+    err_holeplate_startdist_mean_std_str = f"{err_holeplate_startdist_mean:.1f}" + " ± " + f"{err_holeplate_startdist_std:.1f}"
+    print(f"{'Mean of all hole angle error:':<40} {err_holeplate_anglediff_mean_std_str:<20} {'°'}")
+    print(f"{'Mean of all hole starting point error:':<40} {err_holeplate_startdist_mean_std_str:<20} {'mm'}")
+    print_separator()
+
+    print("Assemblied structure analysis:")
+    print(f"{'Total number of beams evaluated:':<40} {err_assembly_total_nbr:<20} {'#'}")
+    err_assembly_mean_std_str = f"{err_assembly_mean:.1f}" + " ± " + f"{err_assembly_std:.1f}"
+    print(f"{'Mean of all assembly distance error:':<40} {err_assembly_mean_std_str:<20} {'mm'}")
+    print_separator()
 
     ###################################################################################################
-    ## Printing
+    ## Latex table
+    ###################################################################################################
+    # FIXME: todo
+
+    ###################################################################################################
+    ## Graphs
     ###################################################################################################
     # -----------------------------------------------------------------------------------------------
     # Joint position error - beam length
@@ -205,7 +250,7 @@ def main(
     pad = 8
     labelpad_y = 2
 
-    fig, axs = plt.subplots(1, 3, figsize=(10, 5))  # ori (4.2, 5.8)
+    fig, axs = plt.subplots(1, 5, figsize=(13.5, 5))  # ori (4.2, 5.8)
 
     ax = axs[0]
     df_joints_dataset.boxplot(
@@ -217,7 +262,6 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    # plt.suptitle('')  # remove the default title
     ax.set_title('(A)')
     ax.set_xlabel('beam length (m)', fontsize=12)
     ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
@@ -244,8 +288,6 @@ def main(
     labels = [f'{bins[i+1]:.1f}' for i in range(len(bins)-1)]
     df_joints_dataset_copy['joint_distance_to_beam_midpoint_bin'] = pd.cut(df_joints_dataset_copy['joint_distance_to_beam_midpoint'], bins=bins, labels=labels)
 
-    # fig, ax = plt.subplots(figsize=(4.2, 5.8))
-
     ax = axs[1]
     df_joints_dataset_copy.boxplot(
         column='mean',
@@ -256,9 +298,8 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    # ax.suptitle('')
     ax.set_title('(B)')
-    ax.set_xlabel('distance from mid-beam (m)', fontsize=12)
+    ax.set_xlabel('beam center distance (m)', fontsize=12)
     ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
     ax.grid()
 
@@ -273,7 +314,7 @@ def main(
     # -----------------------------------------------------------------------------------------------
     df_jointfaces_dataset_copy = df_jointfaces_dataset.copy()
     df_jointfaces_dataset_copy = df_jointfaces_dataset_copy[df_jointfaces_dataset_copy['jointface_angle'] >= 0]
-    bins = np.linspace(30, 90, 8)  # [30, 40, 50, 60, 70, 80, 90]
+    bins = np.array([20, 30, 40, 50, 60, 70, 80, 90])
     labels = [f'{bins[i+1]:.0f}' for i in range(len(bins)-1)]
     df_jointfaces_dataset_copy['jointface_angle_bin'] = pd.cut(df_jointfaces_dataset_copy['jointface_angle'], bins=bins, labels=labels)
 
@@ -289,7 +330,6 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    # ax.suptitle('')
     ax.set_title('(C)')
     ax.set_xlabel('cut angle (°)', fontsize=12)
     ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
@@ -301,16 +341,70 @@ def main(
     # format the x-acis lables to integer
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
+    # plt.tight_layout()
+    # plt.show()
+
+    # -----------------------------------------------------------------------------------------------
+    # Drilling holes - angles
+    # -----------------------------------------------------------------------------------------------
+    df_holeplate_dataset_copy = df_holeplate_dataset.copy()
+    df_holeplate_dataset_copy = df_holeplate_dataset_copy[df_holeplate_dataset_copy['Drilling Angle (GT)'] >= 0]
+    bins = np.array([30, 40, 50, 60, 70, 80, 90])
+    labels = [f'{bins[i+1]:.0f}' for i in range(len(bins)-1)]
+    df_holeplate_dataset_copy['Drilling Angle (GT)_bin'] = pd.cut(df_holeplate_dataset_copy['Drilling Angle (GT)'], bins=bins, labels=labels)
+
+    # fig, ax = plt.subplots(figsize=(4.2, 5.8))
+
+    ax = axs[3]
+    df_holeplate_dataset_copy.boxplot(
+        column='Difference Angle (deg)',
+        by='Drilling Angle (GT)_bin',
+        ax=ax,
+        flierprops=flierprops,
+        boxprops=boxprops,
+        whiskerprops=whiskerprops,
+        medianprops=medianprops
+        )
+    ax.set_title('(D)')
+    ax.set_xlabel('drill angle (°)', fontsize=12)
+    ax.set_ylabel('error (°)', fontsize=12, labelpad=labelpad_y)
+    ax.grid()
+
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+
+    # plt.tight_layout()
+    # plt.show()
+
+    # -----------------------------------------------------------------------------------------------
+    # Drilling holes - starting point distance
+    # -----------------------------------------------------------------------------------------------
+    ax = axs[4]
+    df_holeplate_dataset_copy.boxplot(
+        column='Starting Point Difference (m)',
+        by='Drilling Angle (GT)_bin',
+        ax=ax,
+        flierprops=flierprops,
+        boxprops=boxprops,
+        whiskerprops=whiskerprops,
+        medianprops=medianprops
+        )
+    ax.set_title('(E)')
+    ax.set_xlabel('drill angle (°)', fontsize=12)
+    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.grid()
+
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    # ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+
+    plt.suptitle('')
     plt.tight_layout()
     plt.show()
 
     # # save the figure
-    # fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.png'), dpi=300, bbox_inches='tight')
-
-    # -----------------------------------------------------------------------------------------------
-    # Drilling holes
-    # -----------------------------------------------------------------------------------------------
-    # TODO: to be done
+    fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.png'), dpi=300, bbox_inches='tight')
 
     # -----------------------------------------------------------------------------------------------
     # Assembly display
