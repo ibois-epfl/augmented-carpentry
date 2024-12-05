@@ -66,19 +66,14 @@ It might include details that are no more mentioned in the following sections li
 - ...
 -->
 
-## Layer-stack flow
-
-<!--
-this section illustrates the layer stack system and the applicaton.h how ti workds. To be included:
-    -a) a scheme (mermaid))
-    -b) a description (MAX 150 words)
--->
+## Layer-stack flow  <!-- 167/150 words -->
 
 The layer stack is primarily responsible for managing the flow control of the AR engine. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`.
 
 Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, etc). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (`ApplicationEvent.h`), which is capable of queuing events from layers and trigger them in the next main loop.
 
 ![Illustration of the layer-stack design and the main loop for the AR engine.](fig_layer-stack.svg){ width=60%}
+
 
 ## Geometry framework
 
@@ -89,13 +84,17 @@ this section should illustrate the layer stack system and the applicaton.h how i
 -->
 
 
-## Computed Feedback System
+## Computed Feedback System  <!-- 193/150 words -->
 
-<!--
-this section should illustrate the feedback system and how the layerFeeddback can get all the information from the other layers and use the geometry system at its convinience. To be included:
-    -a) a scheme (mermaid))
-    -b) a description (MAX 150 words)
--->
+The `LayerFeedback.h` module handles the computation of all essential data required to deliver visual guidance to the user during the fabrication process. This system occupies one of the final positions in the stack, positioned just before the `LayerUI`. To compute feedback, information is primarily retrieved from two preceding layers: 
+
+1. `LayerModel.h`: Contains the execution model and the geometries associated with the currently active hole or cut.
+2. `LayerToolhead.h`: Provides similar information, but specific to the current toolhead attached to the tool.
+
+Feedback is computed in tool-specific sets, categorized by tool families such as drilling (`HoldeFeedback.h`), circular cutting (`CutCircularSawFeedback.h`), and chainsaw cutting (`CutChainSawFeedback.h`). Each feedback category is inherits fnrom a interface class (`AIAC/Feedback/FabFeedback.h`), which provides top-level control functions such as `Update()`, `Activate()`, and `Deactivate()`. Each tool's visual guidance might consists of multiple visual cues, most of which are built on the template `FeedbackVisualizer.h`. These internal components (e.g. `CutBladeThicknessVisualizer.h` or `CutPlaneVisualizer.h`) manage their own geometric visual cues calculation and representation stored as graphic object (`GO`) instances in the belonging superclass member vector. Thus, visualization of these `GO` elements, hence of the feedback itself, can be selectively enabled or entirely toggled on/off using the `Activate()`/`Deactivate()` functions.
+
+![Illustration of the layer-stack design and the main loop for the AR engine.](fig_layer-stack.svg){ width=60%}
+
 
 ## AR rendering
 
