@@ -55,6 +55,12 @@ bibliography: paper.bib
 
 <!--
 aka "state-of-the-art". This is a context introduction and brief state-of-the-art. (MAX 125 words)
+
+- #lightweight and fast developing cycles: we needed an engine lightweight and able to prototype and be scalable later (ideally the engine should have a compiler for devices)
+- #too many functionalities: other game engine are cumbersome due to too many functionalities (> we ripped down to the minimum needed in AC for fast prototyping)
+- #not free-software: besides Godot non it's really free-software and completely open-source (with full access to sdk, this is often needed in research when we need to craft or explore very inexplored and corner case scenarios)
+- #absence of c++ system free Linux platform to integrate robotics: there is Unreal (that is compilable for linux though, but we exclude it because proprietary and too complex -> to be clarified). We need c++ and unix in robotics to import custom bleeding edge robotic vision technologies and researches for AR.
+
 -->
 
 # Functionalities
@@ -77,14 +83,14 @@ Each layer in the stack inherits from a superclass interface defined in `Layer.h
 
 ## Geometry framework  <!-- 157/200 words -->
 
-The geometry framework provides a uniform infrastructure to handle all 3D objects present in the scene, including the CAD model, scanned models, and virtual instructions. This framework not only allows application layers to interact with the 3D object easily but is also tightly integrated with the rendering system and manages the OpenGL resources implicitly to ease the work for application layers.
+The geometry framework provides a uniform infrastructure to handle all 3D objects present in the scene, including the CAD model, scanned models, and the fabrication instructions. This framework not only allows application layers to interact with the 3D object easily but is also tightly integrated with the rendering system and manages the OpenGL resources implicitly to ease the work for application layers.
 
 The geometry is classified by the following primitive shapes: point, line, circle, cylinder, polyline, triangle, mesh, and text. Each primitive shape is a class (e.g. `GOPoint`, `GOLine`, `GOCircle`, etc) inheriting from the base class `GOPrimitive`, where GO stands for Geometry Object. The system also maintains a global table `GORegistry` to keep track of all the geometry objects. When a GO initializes, it registers itself in a global table with a unique UUID. As the table is exposed to the entire system, application layers can acquire specific objects through their UUIDs or iterate through all objects to perform operations.
 
 
 ## Computed Feedback System  <!-- 193/150 words -->
 
-The `LayerFeedback.h` module handles the computation of all essential data required to deliver visual guidance to the user during the fabrication process. This system occupies one of the final positions in the stack, positioned just before the `LayerUI`. To compute feedback, information is primarily retrieved from two preceding layers: 
+The `LayerFeedback.h` module handles the computation of all essential data required to deliver visual guidance to the user during the fabrication process. This system occupies one of the final positions in the stack, just before the `LayerUI`. To compute feedback, information is primarily retrieved from two preceding layers: 
 
 1. `LayerModel.h`: Contains the execution model and the geometries associated with the currently active hole or cut.
 2. `LayerToolhead.h`: Provides similar information, but specific to the current toolhead attached to the tool.
@@ -94,7 +100,7 @@ Feedback is computed in tool-specific sets, categorized by tool families such as
 ![Dataflow for the functioning of the Augmented Carpentry's feedback system.](fig_feedback-sys.svg){ width=100%}
 
 
-## AR rendering
+## AR rendering  <!-- /150 words>
 The rendering system synthesizes the captured video and virtual objects, such as CAD models and feedback graphics, to create an AR view.
 
 The rendering system is built using OpenGL, where the infrastructure is mainly defined in `Renderer.h`. When a GOPrimitive object is constructed or modified, a corresponding OpenGL instance is initialized. As OpenGL only renders points, lines, and meshes, the primitive shapes of circles and cylinders construct corresponding meshes implicitly. Additionally, the geometry system allows users to define the width of lines, while OpenGL's line rendering does not. Therefore, a mesh of a cylinder is created for rendering thick lines.
