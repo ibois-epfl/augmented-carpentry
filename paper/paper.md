@@ -72,7 +72,7 @@ The layer stack is primarily responsible for managing the flow control of the AR
 
 Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, etc). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (`ApplicationEvent.h`), which is capable of queuing events from layers and trigger them in the next main loop.
 
-![Illustration of the layer-stack design and the main loop for the AR engine.](fig_layer-stack.svg){ width=60%}
+![Illustration of the layer-stack design and the main loop for the AR engine.](fig_layer-stack.png){ width=60%}
 
 
 ## Geometry framework
@@ -90,7 +90,7 @@ The `LayerFeedback.h` module handles the computation of all essential data requi
 
 Feedback is computed in tool-specific sets, categorized by tool families such as drilling (`HoldeFeedback.h`), circular cutting (`CutCircularSawFeedback.h`), and chainsaw cutting (`CutChainSawFeedback.h`). Each feedback category is inherits fnrom a interface class (`AIAC/Feedback/FabFeedback.h`), which provides top-level control functions such as `Update()`, `Activate()`, and `Deactivate()`. Each tool's visual guidance might consists of multiple visual cues, most of which are built on the template `FeedbackVisualizer.h`. These internal components (e.g. `CutBladeThicknessVisualizer.h` or `CutPlaneVisualizer.h`) manage their own geometric visual cues calculation and representation stored as a `GO` instances in the belonging superclass member vector. Thus, visualization of these `GO` elements, hence of the feedback itself, can be selectively enabled or entirely toggled on/off using the `Activate()`/`Deactivate()` functions.
 
-![Illustration of the layer-stack design and the main loop for the AR engine.](fig_feedback-sys.svg){ width=100%}
+![Dataflow for the functioning of the Augmented Carpentry's feedback system.](fig_feedback-sys.png){ width=100%}
 
 
 ## AR rendering
