@@ -88,14 +88,17 @@ The geometry framework provides a uniform infrastructure to handle all 3D object
 The geometry is classified by the following primitive shapes: point, line, circle, cylinder, polyline, triangle, mesh, and text. Each primitive shape is a class (e.g. `GOPoint`, `GOLine`, `GOCircle`, etc) inheriting from the base class `GOPrimitive`, where GO stands for Geometry Object. The system also maintains a global table `GORegistry` to keep track of all the geometry objects. When a GO initializes, it registers itself in a global table with a unique UUID. As the table is exposed to the entire system, application layers can acquire specific objects through their UUIDs or iterate through all objects to perform operations.
 
 
-## Computed Feedback System  <!-- 193/150 words -->
+## Computed Feedback System  <!-- 170/150 words -->
 
-The `LayerFeedback.h` module handles the computation of all essential data required to deliver visual guidance to the user during the fabrication process. This system occupies one of the final positions in the stack, just before the `LayerUI`. To compute feedback, information is primarily retrieved from two preceding layers: 
+The `LayerFeedback.h` module manages the computation of all essential data required to provide visual guidance to users during the fabrication process. Feedback computation primarily relies on data retrieved from two preceding layers:
 
-1. `LayerModel.h`: Contains the execution model and the geometries associated with the currently active hole or cut.
-2. `LayerToolhead.h`: Provides similar information, but specific to the current toolhead attached to the tool.
+1. `LayerModel.h`: contains the execution model and geometries associated with the currently active hole or cut.
+2. `LayerToolhead.h`: provides similar information, but specific to the toolhead currently attached to the tool.
 
-Feedback is computed in tool-specific sets, categorized by tool families such as drilling (`HoldeFeedback.h`), circular cutting (`CutCircularSawFeedback.h`), and chainsaw cutting (`CutChainSawFeedback.h`). Each feedback category is inherits fnrom a interface class (`AIAC/Feedback/FabFeedback.h`), which provides top-level control functions such as `Update()`, `Activate()`, and `Deactivate()`. Each tool's visual guidance might consists of multiple visual cues, most of which are built on the template `FeedbackVisualizer.h`. These internal components (e.g. `CutBladeThicknessVisualizer.h` or `CutPlaneVisualizer.h`) manage their own geometric visual cues calculation and representation stored as a `GO` instances in the belonging superclass member vector. Thus, visualization of these `GO` elements, hence of the feedback itself, can be selectively enabled or entirely toggled on/off using the `Activate()`/`Deactivate()` functions.
+Feedback is categorized based on similar operations, such as drilling (`HoleFeedback.h`), circular cutting (`CutCircularSawFeedback.h`), and chainsaw cutting (`CutChainSawFeedback.h`). Each feedback category inherits from an interface class (`AIAC/Feedback/FabFeedback.h`), which defines high-level control functions like `Update()`, `Activate()`, and `Deactivate()`.
+
+The visual guidance for each tool may consist of multiple visual cues, most of which are implemented using the template `FeedbackVisualizer.h`. These internal components (e.g., `CutBladeThicknessVisualizer.h` or `CutPlaneVisualizer.h`) handle their own geometric visual cue calculations and store representations as `GO` instances in a member vector of the corresponding superclass. Visualization of these `GO` elements, and thus the feedback itself, can be selectively enabled or entirely toggled on/off using the `Activate()` and `Deactivate()` functions.
+
 
 ![Dataflow for the functioning of the Augmented Carpentry's feedback system.](fig_feedback-sys.svg){ width=100%}
 

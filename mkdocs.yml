@@ -254,7 +254,7 @@ nav:
       - AR rendering: developer-guide/AR-engine/AR-rendering.md
 
     - Guidelines:
-      - Code: developer-guide/CONTRIBUTING.md
+      - Code: developer-guide/CONTRIBUTING_copy.md  # TODO: add a copy in the githhub action
       - Tags: developer-guide/tags.md
   
   - Community:
