@@ -36,18 +36,17 @@ bibliography: paper.bib
 
 - (0) Summary (MAX 50 words) - ANDREA
 - (1) Statement of need (MAX 125 words) - ANDREA
-- (2) Functionalities (MAX 100 words) - ANDREA
-- (1.1) Layer-stack flow (MAX 150 words) - ANDREA
-- (1.2) Geometry framework (MAX 200 words) - HONG-BIN
-- (1.3) AR rendering (MAX 150 words) - HONG-BIN
-- (1.4) Computed Feedback System (MAX 150 words) - ANDREA
-- (2) Acknowledgements - ANDREA
-- (3) References - ANDREA
+- (2.1) Layer-stack flow (MAX 150 words) - ANDREA
+- (2.2) Geometry framework (MAX 200 words) - HONG-BIN
+- (2.3) AR rendering (MAX 150 words) - HONG-BIN
+- (2.4) Computed Feedback System (MAX 150 words) - ANDREA
+- (3) Acknowledgements - ANDREA
+- (4) References - ANDREA
 -->
 
 # Summary  <!-- 167/50 words -->
 
-Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyping and scaling AR applications. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions with the real world.
+Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyping and scaling AR applications. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions with monocular camera feeds. The engine is designed for free software and open-source research in robotics and digital fabrication, providing a Unix platform for integrating cutting-edge technologies.
 
 
 # Statement of need
@@ -62,18 +61,9 @@ aka "state-of-the-art". This is a context introduction and brief state-of-the-ar
 
 -->
 
-# Functionalities
-
-<!--
-brief introduction to the general functioning and the following sections. (MAX 75 words)
-It might include details that are no more mentioned in the following sections like:
-- the hardware used (x64, monocular camera, etc.)
-- ...
--->
-
 ## Layer-stack flow  <!-- 167/150 words -->
 
-The layer stack is primarily responsible for managing the flow control of the AR engine. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`.
+The main AR engin flow is managed by a modular layer-stack system. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`.
 
 Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, etc). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (`ApplicationEvent.h`), which is capable of queuing events from layers and trigger them in the next main loop.
 
@@ -114,6 +104,8 @@ On each frame, the rendering layer (`LayerRendering.h`) takes the estimated came
 # Acknowledgements
 
 <!-- list of contributors -->
+
+We would like to thank all the contributors to the Augmented Carpentry project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
 
 # References
 
