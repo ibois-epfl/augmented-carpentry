@@ -44,9 +44,9 @@ bibliography: paper.bib
 - (4) References - ANDREA
 -->
 
-# Summary  <!-- 71/50 words -->
+# Summary  <!-- 55/50 words -->
 
-Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyping and scaling AR applications in Unix envirnoments for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a monocular camera feed.
+Augmented Carpentry is a lightweight and fast-developing UNIX C++ engine for prototyping AR applications leveraging bleeding-edge robotic vision research for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a simple monocular camera feed.
 
 
 # Statement of need
@@ -54,12 +54,22 @@ Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyp
 <!--
 aka "state-of-the-art". This is a context introduction and brief state-of-the-art. (MAX 125 words)
 
+# in fabrications
+- #compasXR?: this we should cite it as the only AR tool available and open source for digital fabrication BUT limited to assembly mainly, not allowing for rintegration of bleeding robotic vision technologies and researches for AR (because it's wraped around Unityy and needs for C# wrapping anyways).
+- -- #fologram: but it's private and bounded to rhino
+
+# game engine
 - #lightweight and fast developing cycles: we needed an engine lightweight and able to prototype and be scalable later (ideally the engine should have a compiler for devices)
 - #too many functionalities: other game engine are cumbersome due to too many functionalities (> we ripped down to the minimum needed in AC for fast prototyping)
 - #not free-software: besides Godot non it's really free-software and completely open-source (with full access to sdk, this is often needed in research when we need to craft or explore very inexplored and corner case scenarios)
 - #absence of c++ system free Linux platform to integrate robotics: there is Unreal (that is compilable for linux though, but we exclude it because proprietary and too complex -> to be clarified). We need c++ and unix in robotics to import custom bleeding edge robotic vision technologies and researches for AR.
 
 -->
+
+test [@godot]
+
+
+Augmented Carpentry (AC) addresses critical limitations in existing augmented reality (AR) tools for digital fabrication. For example, CompasXR, the only open-source AR tool available, focuses on assembly tasks but lacks integration with advanced robotic vision technologies due to its reliance on Unity and C# wrapping. AC provides a lightweight, scalable C++ engine tailored for UNIX platforms, enabling rapid prototyping while remaining open-source to facilitate customization and exploration of niche research scenarios. Unlike cumbersome game engines with excessive features or proprietary constraints, AC is streamlined to support bleeding-edge robotics applications and maintain full compatibility with Linux systems, which is crucial for integrating custom vision pipelines in AR.
 
 ## Layer-stack flow  <!-- 167/150 words -->
 
@@ -92,7 +102,7 @@ The visual guidance for each tool may consist of multiple visual cues, most of w
 ![Dataflow for the functioning of the Augmented Carpentry's feedback system.](fig_feedback-sys.svg){ width=100%}
 
 
-## AR rendering  <!-- /150 words>
+## AR rendering  <!-- 202/150 words>
 The rendering system synthesizes the captured video and virtual objects, such as CAD models and feedback graphics, to create an AR view.
 
 The rendering system is built using OpenGL, where the infrastructure is mainly defined in `Renderer.h`. When a GOPrimitive object is constructed or modified, a corresponding OpenGL instance is initialized. As OpenGL only renders points, lines, and meshes, the primitive shapes of circles and cylinders construct corresponding meshes implicitly. Additionally, the geometry system allows users to define the width of lines, while OpenGL's line rendering does not. Therefore, a mesh of a cylinder is created for rendering thick lines.
@@ -101,9 +111,8 @@ Text rendering is handled separately using `TextRenderer.h` since we intend to m
 
 On each frame, the rendering layer (`LayerRendering.h`) takes the estimated camera position from the SLAM layer to calculate the projection matrix and iterates through the geometry table to render visible objects. While iterating, the system checks the type of shape and calls the corresponding function to render either text or non-text objects, additively depicting objects on the captured image, ultimately creating the AR view.
 
-# Acknowledgements
 
-<!-- list of contributors -->
+# Acknowledgements  <!-- 45 words -->
 
 We would like to thank all the contributors to the Augmented Carpentry project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
 
