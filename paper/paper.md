@@ -44,9 +44,9 @@ bibliography: paper.bib
 - (4) References - ANDREA
 -->
 
-# Summary  <!-- 167/50 words -->
+# Summary  <!-- 71/50 words -->
 
-Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyping and scaling AR applications. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions with monocular camera feeds. The engine is designed for free software and open-source research in robotics and digital fabrication, providing a Unix platform for integrating cutting-edge technologies.
+Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyping and scaling AR applications in Unix envirnoments for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a monocular camera feed.
 
 
 # Statement of need
