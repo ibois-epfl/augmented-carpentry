@@ -1,5 +1,5 @@
 ---
-title: 'Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Woodworking'  # TODO: improve title
+title: 'Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Digital Fabrication'
 tags:
   - C++
   - UNIX
@@ -49,31 +49,15 @@ bibliography: paper.bib
 Augmented Carpentry is a lightweight and fast-developing UNIX C++ engine for prototyping AR applications leveraging bleeding-edge robotic vision research for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a simple monocular camera feed.
 
 
-# Statement of need
+# Statement of need  <!-- 197/125 words -->
 
-<!--
-aka "state-of-the-art". This is a context introduction and brief state-of-the-art. (MAX 125 words)
+Augmented Carpentry (AC) addresses critical limitations in existing augmented reality (AR) tools for digital fabrication. CompasXR [@compas-xr], the only open-source AR tool available in the digital fabrication field, provides a valuable common platform, particularly for assembly tasks. However, it currently lacks a streamlined integration pipeline for advanced robotic vision technologies due to its reliance on Unity [@unity] and the Windows operating system (OS). In the field of AR fabrication, developers from the current Incon.ai [@incon] represent the peak of AR engine innovation with robotic vision algorithm integration for digital fabrication in research [@sandy:2016; @sandy:2018; @mitterberger:2020], nevertheless, its codebase remains unavailable to the public.
 
-# in fabrications
-- #compasXR?: this we should cite it as the only AR tool available and open source for digital fabrication BUT limited to assembly mainly, not allowing for rintegration of bleeding robotic vision technologies and researches for AR (because it's wraped around Unityy and needs for C# wrapping anyways).
-- -- #fologram: but it's private and bounded to rhino
+AC aims to fill this gap by providing a lightweight, open-source, and UNIX-compatible C++ engine for AR applications in digital fabrication. Its software architecture is similar to existing free engines [@godot; @torque3d; @ezengine], yet it prioritizes rapid prototyping, flexibility, and customization for extended reality (XR) manufacturing using accessible sensors and hardware. Unlike feature-rich game engines with excessive functionalities or proprietary constraints [@unity; @unreal], AC is lightweight, aided by the adoption of a bloat-free UI system [@dearimgui], and maintains full compatibility with Linux systems—crucial for integrating the latest open-source robotic vision technologies in AR manufacturing.
 
-# game engine
-- #lightweight and fast developing cycles: we needed an engine lightweight and able to prototype and be scalable later (ideally the engine should have a compiler for devices)
-- #too many functionalities: other game engine are cumbersome due to too many functionalities (> we ripped down to the minimum needed in AC for fast prototyping)
-- #not free-software: besides Godot non it's really free-software and completely open-source (with full access to sdk, this is often needed in research when we need to craft or explore very inexplored and corner case scenarios)
-- #absence of c++ system free Linux platform to integrate robotics: there is Unreal (that is compilable for linux though, but we exclude it because proprietary and too complex -> to be clarified). We need c++ and unix in robotics to import custom bleeding edge robotic vision technologies and researches for AR.
+## Layer-stack flow  <!-- 198/150 words -->
 
--->
-
-test [@godot]
-
-
-Augmented Carpentry (AC) addresses critical limitations in existing augmented reality (AR) tools for digital fabrication. For example, CompasXR, the only open-source AR tool available, focuses on assembly tasks but lacks integration with advanced robotic vision technologies due to its reliance on Unity and C# wrapping. AC provides a lightweight, scalable C++ engine tailored for UNIX platforms, enabling rapid prototyping while remaining open-source to facilitate customization and exploration of niche research scenarios. Unlike cumbersome game engines with excessive features or proprietary constraints, AC is streamlined to support bleeding-edge robotics applications and maintain full compatibility with Linux systems, which is crucial for integrating custom vision pipelines in AR.
-
-## Layer-stack flow  <!-- 167/150 words -->
-
-The main AR engin flow is managed by a modular layer-stack system. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`.
+The main AR engine is managed by a layer-stack flow. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, sensor's self-localization, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`. This architecture offers the chance to customize many AR core features as needed, such as adding new sensors, changing the rendering pipeline, or integrating specific robotic vision algorithms for e.g. the camera pose estimation.
 
 Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, etc). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (`ApplicationEvent.h`), which is capable of queuing events from layers and trigger them in the next main loop.
 
@@ -117,19 +101,3 @@ On each frame, the rendering layer (`LayerRendering.h`) takes the estimated came
 We would like to thank all the contributors to the Augmented Carpentry project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
 
 # References
-
-<!--
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
--->
-
-
