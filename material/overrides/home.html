@@ -1,0 +1,58 @@
+{#-
+  This file was automatically generated - do not edit
+-#}
+{% extends "main.html" %}
+{% block tabs %}
+  {{ super() }}
+  <style>
+    .md-header { position: initial; }
+    .md-main__inner { margin: 0; }
+    .md-content { display: none; }
+    @media screen and (min-width: 60em) { .md-sidebar--secondary { display: none; } }
+    @media screen and (min-width: 76.25em) { .md-sidebar--primary { display: none; } }
+    
+    /* Override background */
+    .mdx-container {
+      background: none;
+      position: relative;
+      z-index: 0;
+    }
+    .mdx-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/images/test_homeland.jpg') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.2; /* Adjust the opacity value as needed */
+      z-index: -1;
+    }
+  </style>
+  <section class="mdx-container">
+    <div class="md-grid md-typeset">
+      <div class="mdx-hero">
+        <div class="mdx-hero__content">
+          <h1>Augmented Reality for Woodworking in Timber Construction.</h1>
+          <p>{{ config.site_description }} Everywhere.</p>
+          <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | e }}" class="md-button md-button--primary">
+            Quick start
+          </a>
+          <a href="{{ 'cpp-docs/' | url }}" title="Augmented Carpentry Documentation" class="md-button">
+            C++ docs
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+  <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+{% endblock %}

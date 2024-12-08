@@ -3,8 +3,12 @@ name: gh-build
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'py/**'
   pull_request:
     branches: ["main"]
+    paths:
+      - 'py/**'
 
 jobs:
   build_ghuser_components:
