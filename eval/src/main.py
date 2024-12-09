@@ -196,6 +196,7 @@ def main(
     err_assembly_total_nbr = len(df_assembly_dataset)
 
     ###################################################################################################
+    # FIXME: these results need to be printed after the graphs?
     print_separator()
     print("Results")
     print_separator()
@@ -360,10 +361,7 @@ def main(
     ###################################################################################################
     ## Latex table
     ###################################################################################################
-    # FIXME: generate the total scoe
-
     latex_file_path = os.path.join(output_path, f'joint_analysis_{__time_stamp__}.tex')
-    latex_file_path = os.path.join(output_path, f'joint_analysis.tex')  # FIXME: get rid before release
 
     grouped_joint_location_stats = (df_joints_dataset.groupby('beam_length_bin')['mean'].agg(['mean', 'std'])).round(1)
     grouped_joint_location_stats_beamlen = (grouped_joint_location_stats.index).tolist()
