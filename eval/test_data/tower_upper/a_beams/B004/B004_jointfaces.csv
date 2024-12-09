@@ -1,0 +1,7 @@
+joint_face id,min_deviation,max_deviation,std_deviation,rmse,mean,jointface_angle
+0--0--0,0.0,0.0018,0.0004,0.0007,0.0006,-1
+0--0--1,0.0,0.0018,0.0003,0.0004,0.0003,1
+0--0--2,0.0,0.0012,0.0004,0.0005,0.0004,0
+0--1--0,MISSING_PCD,MISSING_PCD,MISSING_PCD,MISSING_PCD,MISSING_PCD,MISSING_PCD
+0--1--1,0.0001,0.0024,0.0003,0.0006,0.0005,6
+0--1--2,0.0,0.0023,0.0004,0.0006,0.0004,-1
