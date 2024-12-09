@@ -25,7 +25,7 @@ import open3d as o3d
 """
         TODO:
         --> representation for assembly
-        --> compute rrors for the drilling holes
+        --> get out latex table
     """
 
 def print_separator(char='-', length=None):
@@ -250,7 +250,7 @@ def main(
     pad = 8
     labelpad_y = 2
 
-    fig, axs = plt.subplots(1, 5, figsize=(13.5, 5))  # ori (4.2, 5.8)
+    fig, axs = plt.subplots(1, 4, figsize=(13.5, 5))
 
     ax = axs[0]
     df_joints_dataset.boxplot(
@@ -269,45 +269,6 @@ def main(
 
     ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-
-    # plt.tight_layout()
-    # plt.show()  # TODO: debug
-
-    # -----------------------------------------------------------------------------------------------
-    # Joint position error - distance from beam midpoint 
-    # -----------------------------------------------------------------------------------------------
-    # if a value is bigger than the beam's length, it means that the joint is not on the beam and we should not consider it
-    df_joints_dataset_copy = df_joints_dataset.copy()
-    df_joints_dataset_copy = df_joints_dataset_copy[df_joints_dataset_copy['joint_distance_to_beam_midpoint'] < np.mean(err_beam_lengths)]
-    # compute 8 bins from biggest to smallest distance to mid point beam
-    bins = np.linspace(np.min(
-            np.array(df_joints_dataset_copy["joint_distance_to_beam_midpoint"].tolist())),
-        np.max(
-            np.array(df_joints_dataset_copy["joint_distance_to_beam_midpoint"].tolist())),
-        8)
-    labels = [f'{bins[i+1]:.1f}' for i in range(len(bins)-1)]
-    df_joints_dataset_copy['joint_distance_to_beam_midpoint_bin'] = pd.cut(df_joints_dataset_copy['joint_distance_to_beam_midpoint'], bins=bins, labels=labels)
-
-    ax = axs[1]
-    df_joints_dataset_copy.boxplot(
-        column='mean',
-        by='joint_distance_to_beam_midpoint_bin',
-        ax=ax,
-        flierprops=flierprops,
-        boxprops=boxprops,
-        whiskerprops=whiskerprops,
-        medianprops=medianprops
-        )
-    ax.set_title('(B)')
-    ax.set_xlabel('beam center distance (m)', fontsize=12)
-    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
-    ax.grid()
-
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
-    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-
-    # plt.tight_layout()
-    # plt.show()  # TODO: debug
 
     # -----------------------------------------------------------------------------------------------
     # Jointfaces quality - angles
@@ -404,7 +365,7 @@ def main(
     plt.show()
 
     # # save the figure
-    fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.png'), dpi=300, bbox_inches='tight')
+    fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.pdf'), dpi=300, bbox_inches='tight')
 
     # -----------------------------------------------------------------------------------------------
     # Assembly display
