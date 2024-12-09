@@ -5,6 +5,7 @@ import os
 import argparse
 import typing
 import shutil
+from itertools import zip_longest
 
 from tqdm import tqdm
 
@@ -227,11 +228,6 @@ def main(
     print_separator()
 
     ###################################################################################################
-    ## Latex table
-    ###################################################################################################
-    # FIXME: todo
-
-    ###################################################################################################
     ## Graphs
     ###################################################################################################
     # -----------------------------------------------------------------------------------------------
@@ -242,6 +238,8 @@ def main(
     labels = [f'{bins[i+1]:.1f}' for i in range(len(bins)-1)]
     df_joints_dataset['beam_length_bin'] = pd.cut(df_joints_dataset['beam_length'], bins=bins, labels=labels)
 
+    df_joints_dataset['mean'] = df_joints_dataset['mean'].clip(upper=12) # outliers capping
+
     clr_markers = 'red'
     flierprops: dict =  dict(marker='+', markeredgecolor=clr_markers, markersize=9)
     boxprops = dict(linewidth=0.9, color='blue')
@@ -249,6 +247,7 @@ def main(
     medianprops = dict(color=clr_markers)
     pad = 8
     labelpad_y = 2
+    subtitle_fontsize = 15
 
     fig, axs = plt.subplots(1, 4, figsize=(13.5, 5))
 
@@ -262,7 +261,7 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    ax.set_title('(A)')
+    ax.set_title('(A)', fontsize=subtitle_fontsize)
     ax.set_xlabel('beam length (m)', fontsize=12)
     ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
     ax.grid()
@@ -273,16 +272,15 @@ def main(
     # -----------------------------------------------------------------------------------------------
     # Jointfaces quality - angles
     # -----------------------------------------------------------------------------------------------
-    df_jointfaces_dataset_copy = df_jointfaces_dataset.copy()
-    df_jointfaces_dataset_copy = df_jointfaces_dataset_copy[df_jointfaces_dataset_copy['jointface_angle'] >= 0]
+    df_jointfaces_dataset = df_jointfaces_dataset[df_jointfaces_dataset['jointface_angle'] >= 0]
     bins = np.array([20, 30, 40, 50, 60, 70, 80, 90])
     labels = [f'{bins[i+1]:.0f}' for i in range(len(bins)-1)]
-    df_jointfaces_dataset_copy['jointface_angle_bin'] = pd.cut(df_jointfaces_dataset_copy['jointface_angle'], bins=bins, labels=labels)
+    df_jointfaces_dataset['jointface_angle_bin'] = pd.cut(df_jointfaces_dataset['jointface_angle'], bins=bins, labels=labels)
 
-    # fig, ax = plt.subplots(figsize=(4.2, 5.8))
+    df_jointfaces_dataset['mean'] = df_jointfaces_dataset['mean'].clip(upper=4.5)  # outliers capping
 
-    ax = axs[2]
-    df_jointfaces_dataset_copy.boxplot(
+    ax = axs[1]
+    df_jointfaces_dataset.boxplot(
         column='mean',
         by='jointface_angle_bin',
         ax=ax,
@@ -291,7 +289,7 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    ax.set_title('(C)')
+    ax.set_title('(B)', fontsize=subtitle_fontsize)
     ax.set_xlabel('cut angle (°)', fontsize=12)
     ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
     ax.grid()
@@ -302,22 +300,18 @@ def main(
     # format the x-acis lables to integer
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
-    # plt.tight_layout()
-    # plt.show()
-
     # -----------------------------------------------------------------------------------------------
     # Drilling holes - angles
     # -----------------------------------------------------------------------------------------------
-    df_holeplate_dataset_copy = df_holeplate_dataset.copy()
-    df_holeplate_dataset_copy = df_holeplate_dataset_copy[df_holeplate_dataset_copy['Drilling Angle (GT)'] >= 0]
+    df_holeplate_dataset = df_holeplate_dataset[df_holeplate_dataset['Drilling Angle (GT)'] >= 0]
     bins = np.array([30, 40, 50, 60, 70, 80, 90])
     labels = [f'{bins[i+1]:.0f}' for i in range(len(bins)-1)]
-    df_holeplate_dataset_copy['Drilling Angle (GT)_bin'] = pd.cut(df_holeplate_dataset_copy['Drilling Angle (GT)'], bins=bins, labels=labels)
+    df_holeplate_dataset['Drilling Angle (GT)_bin'] = pd.cut(df_holeplate_dataset['Drilling Angle (GT)'], bins=bins, labels=labels)
 
-    # fig, ax = plt.subplots(figsize=(4.2, 5.8))
+    df_holeplate_dataset['Difference Angle (deg)'] = df_holeplate_dataset['Difference Angle (deg)'].clip(upper=3.5)  # outliers capping
 
-    ax = axs[3]
-    df_holeplate_dataset_copy.boxplot(
+    ax = axs[2]
+    df_holeplate_dataset.boxplot(
         column='Difference Angle (deg)',
         by='Drilling Angle (GT)_bin',
         ax=ax,
@@ -326,7 +320,7 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    ax.set_title('(D)')
+    ax.set_title('(C.1)', fontsize=subtitle_fontsize)
     ax.set_xlabel('drill angle (°)', fontsize=12)
     ax.set_ylabel('error (°)', fontsize=12, labelpad=labelpad_y)
     ax.grid()
@@ -335,14 +329,11 @@ def main(
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
-    # plt.tight_layout()
-    # plt.show()
-
     # -----------------------------------------------------------------------------------------------
     # Drilling holes - starting point distance
     # -----------------------------------------------------------------------------------------------
-    ax = axs[4]
-    df_holeplate_dataset_copy.boxplot(
+    ax = axs[3]
+    df_holeplate_dataset.boxplot(
         column='Starting Point Difference (m)',
         by='Drilling Angle (GT)_bin',
         ax=ax,
@@ -351,21 +342,126 @@ def main(
         whiskerprops=whiskerprops,
         medianprops=medianprops
         )
-    ax.set_title('(E)')
+    ax.set_title('(C.2)', fontsize=subtitle_fontsize)
     ax.set_xlabel('drill angle (°)', fontsize=12)
     ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
     ax.grid()
 
     ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
-    # ax.yaxis.set_major_locator(MaxNLocator(integer=True))
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.suptitle('')
     plt.tight_layout()
-    plt.show()
+    # plt.show()
 
-    # # save the figure
+    # save the figure locally
     fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.pdf'), dpi=300, bbox_inches='tight')
+
+    ###################################################################################################
+    ## Latex table
+    ###################################################################################################
+    # FIXME: generate the total scoe
+
+    latex_file_path = os.path.join(output_path, f'joint_analysis_{__time_stamp__}.tex')
+    latex_file_path = os.path.join(output_path, f'joint_analysis.tex')  # FIXME: get rid before release
+
+    grouped_joint_location_stats = (df_joints_dataset.groupby('beam_length_bin')['mean'].agg(['mean', 'std'])).round(1)
+    grouped_joint_location_stats_beamlen = (grouped_joint_location_stats.index).tolist()
+    grouped_joint_location_stats_mean = grouped_joint_location_stats['mean'].tolist()
+    grouped_joint_location_stats_std = grouped_joint_location_stats['std'].tolist()
+    grouped_joint_location_stats_specimen_nbr = df_joints_dataset.groupby('beam_length_bin').size()
+    total_joint_location_stats_nbr = df_joints_dataset.groupby('beam_length_bin').size().sum()
+    total_joint_location_stats_mean = np.mean(np.array(df_joints_dataset['mean'].tolist())).round(1)
+    total_joint_location_stats_std = np.std(np.array(df_joints_dataset['mean'].tolist())).round(1)
+
+    grouped_jointface_quality_stats = (df_jointfaces_dataset.groupby('jointface_angle_bin')['mean'].agg(['mean', 'std'])).round(1)
+    grouped_jointface_quality_stats_cutangle = (grouped_jointface_quality_stats.index).tolist()
+    grouped_jointface_quality_stats_mean = grouped_jointface_quality_stats['mean'].tolist()
+    grouped_jointface_quality_stats_std = grouped_jointface_quality_stats['std'].tolist()
+    grouped_jointface_quality_stats_specimen_nbr = df_jointfaces_dataset.groupby('jointface_angle_bin').size()
+    total_jointface_quality_stats_nbr = df_jointfaces_dataset.groupby('jointface_angle_bin').size().sum()
+    total_jointface_quality_stats_mean = np.mean(np.array(df_jointfaces_dataset['mean'].tolist())).round(1)
+    total_jointface_quality_stats_std = np.std(np.array(df_jointfaces_dataset['mean'].tolist())).round(1)
+
+    grouped_drilling_orientation_stats = (df_holeplate_dataset.groupby('Drilling Angle (GT)_bin')['Difference Angle (deg)'].agg(['mean', 'std'])).round(1)
+    grouped_drilling_orientation_stats_angle = (grouped_drilling_orientation_stats.index).tolist()
+    grouped_drilling_orientation_stats_mean = grouped_drilling_orientation_stats['mean'].tolist()
+    grouped_drilling_orientation_stats_std = grouped_drilling_orientation_stats['std'].tolist()
+    grouped_drilling_startdist_stats = (df_holeplate_dataset.groupby('Drilling Angle (GT)_bin')['Starting Point Difference (m)'].agg(['mean', 'std'])).round(1)
+    grouped_drilling_startdist_stats_mean = grouped_drilling_startdist_stats['mean'].tolist()
+    grouped_drilling_startdist_stats_std = grouped_drilling_startdist_stats['std'].tolist()
+    grouped_drilling_orientation_stats_specimen_nbr = df_holeplate_dataset.groupby('Drilling Angle (GT)_bin').size()
+    total_drilling_orientation_stats_nbr = df_holeplate_dataset.groupby('Drilling Angle (GT)_bin').size().sum()
+    total_drilling_orientation_stats_mean = np.mean(np.array(df_holeplate_dataset['Difference Angle (deg)'].tolist())).round(1)
+    total_drilling_orientation_stats_std = np.std(np.array(df_holeplate_dataset['Difference Angle (deg)'].tolist())).round(1)
+    total_drilling_startdist_stats_mean = np.mean(np.array(df_holeplate_dataset['Starting Point Difference (m)'].tolist())).round(1)
+    total_drilling_startdist_stats_std = np.std(np.array(df_holeplate_dataset['Starting Point Difference (m)'].tolist())).round(1)
+
+    rows = []
+    for i in range(max(len(grouped_joint_location_stats), len(grouped_jointface_quality_stats), len(grouped_drilling_orientation_stats), len(grouped_drilling_startdist_stats))):
+        jl_beamlen = grouped_joint_location_stats.index[i]
+        il_nbr = grouped_joint_location_stats_specimen_nbr[i]
+        jl_mean = grouped_joint_location_stats['mean'][i]
+        jl_std = grouped_joint_location_stats['std'][i]
+        
+        jq_cutangle = grouped_jointface_quality_stats.index[i]
+        jq_nbr = grouped_jointface_quality_stats_specimen_nbr[i]
+        jq_mean = grouped_jointface_quality_stats['mean'][i]
+        jq_std = grouped_jointface_quality_stats['std'][i]
+        
+        if i == 0:
+            rows.append(f"    {jl_beamlen} [{il_nbr}] & {jl_mean} $\\pm$ {jl_std}\\textsuperscript{{**}} & {jq_cutangle} [{jq_nbr}] & {jq_mean} $\\pm$ {jq_std} & -- & -- & -- \\\\")
+        else:
+            do_i = i - 1
+            do_angle = grouped_drilling_orientation_stats.index[do_i]
+            do_nbr = grouped_drilling_orientation_stats_specimen_nbr[do_i]
+            do_mean = grouped_drilling_orientation_stats['mean'][do_i]
+            do_std = grouped_drilling_orientation_stats['std'][do_i]
+            ds_mean = grouped_drilling_startdist_stats['mean'][do_i]
+            ds_std = grouped_drilling_startdist_stats['std'][do_i]
+            
+            rows.append(f"    {jl_beamlen} [{il_nbr}] & {jl_mean} $\\pm$ {jl_std} & {jq_cutangle} [{jq_nbr}] & {jq_mean} $\\pm$ {jq_std} & {do_angle} [{do_nbr}] & {do_mean} $\\pm$ {do_std} & {ds_mean} $\\pm$ {ds_std} \\\\")
+
+    total: str = (
+        f"    \\multicolumn{{1}}{{c}}{{[{total_joint_location_stats_nbr}]}} & "
+        f"{total_joint_location_stats_mean} $\\pm$ {total_joint_location_stats_std} & "
+        f"\\multicolumn{{1}}{{c}}{{[{total_jointface_quality_stats_nbr}]}} & "
+        f"{total_jointface_quality_stats_mean} $\\pm$ {total_jointface_quality_stats_std} & "
+        f"\\multicolumn{{1}}{{c}}{{[{total_drilling_orientation_stats_nbr}]}} & "
+        f"{total_drilling_orientation_stats_mean} $\\pm$ {total_drilling_orientation_stats_std} & "
+        f"{total_drilling_startdist_stats_mean} $\\pm$ {total_drilling_startdist_stats_std} \\\\"
+    )
+
+    latex_table = (
+        "\\begin{table}[htbp]\n"
+        "  \\centering\n"
+        "  \\caption{Computed errors for sawing (i.e. joint) and drilling (i.e. perforation) experimental parameters.}\n"
+        "  \\renewcommand{\\arraystretch}{0.9}\n"
+        "  \\begin{tabular}{c|c c|c c|c c c}\n"
+        "    \\multicolumn{4}{c}{Joint} & \\multicolumn{3}{c}{\\multirow{2}{*}{Perforation}} \\\\\n"
+        "    \\cmidrule(r){1-4}\n"
+        "    \\multicolumn{2}{c}{Location} & \\multicolumn{2}{c}{Faces} & \\multicolumn{3}{c}{} \\\\\n"
+        "    \\cmidrule(r){1-2} \\cmidrule(r){3-4} \\cmidrule(r){5-7}\n"
+        "    Beam   & Distance & Sawing & Distance & Drilling & Orientation & Start position \\\\\n"
+        "    length & error    & angle  & error    & angle    & error       & error \\\\\n"
+        "    (\degree)[N\\textsuperscript{*}] & (mm) & (\degree)[N] & (mm) & (\degree)[N] & (\degree) & (mm) \\\\\n"
+        "    \\cmidrule(r){1-2} \\cmidrule(r){3-4} \\cmidrule(r){5-7}\n"
+    )
+    latex_table += "\n".join(rows)
+    latex_table += (
+        "    \n"
+        "    \\cmidrule(r){1-2} \\cmidrule(r){3-4} \\cmidrule(r){5-7}\n")
+    latex_table += f"{total}\n"
+    latex_table += (
+        "    \\multicolumn{7}{r}{(\\textsuperscript{*}) {The number of specimens; } \\newline (\\textsuperscript{**}) {the errors are represented as mean $\\pm$ standard deviation.}}\n"
+        "  \\end{tabular}\n"
+        "  \\label{tab:eval:resume}\n"
+        "\\end{table}\n"
+    )
+
+    with open(latex_file_path, 'w') as f:
+        f.write(latex_table)
+
 
     # -----------------------------------------------------------------------------------------------
     # Assembly display
@@ -403,15 +499,6 @@ def main(
 
     # plt.show()
 
-
-    ###################################################################################################
-    ## Assembly
-    ###################################################################################################
-    # folder_name_assembly: str = "b_assembly"
-    # path_dir_assembly: str = os.path.join(_path, folder_name_assembly)
-
-    ## TODO: here we need to filter the too high values by capping the values farther than 5cm for example 
-    # due to an inaxitude of measuring of DF
 
 if __name__ == '__main__':
     def _check_dir_sanity(_path: str) -> bool:
