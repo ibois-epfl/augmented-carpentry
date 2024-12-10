@@ -82,10 +82,13 @@ Each layer in the stack inherits from a superclass interface defined in `Layer.h
 
 ## Geometry framework  <!-- 157/200 words -->
 
-The geometry framework provides a uniform infrastructure to handle all 3D objects present in the scene, including the CAD model, scanned models, and the fabrication instructions. This framework not only allows application layers to interact with the 3D object easily but is also tightly integrated with the rendering system and manages the OpenGL resources implicitly to ease the work for application layers.
+The geometry framework provides a unified infrastructure for handling all 3D objects in the scene, including CAD models, scanned models, and fabrication instructions. This framework enables easy interaction between application layers and 3D objects while being tightly integrated with the rendering system, which implicitly manages OpenGL resources, simplifying the workload for application layers.
 
-The geometry is classified by the following primitive shapes: point, line, circle, cylinder, polyline, triangle, mesh, and text. Each primitive shape is a class (e.g. `GOPoint`, `GOLine`, `GOCircle`, etc) inheriting from the base class `GOPrimitive`, where GO stands for Geometry Object. The system also maintains a global table `GORegistry` to keep track of all the geometry objects. When a GO initializes, it registers itself in a global table with a unique UUID. As the table is exposed to the entire system, application layers can acquire specific objects through their UUIDs or iterate through all objects to perform operations.
+The geometry is organized into the following primitive shapes: point, line, circle, cylinder, polyline, triangle, mesh, and text. Each of them is a class (e.g., `GOPoint`, `GOLine`, `GOCircle`, etc.) that inherits the base class `GOPrimitive`, where "GO" stands for Geometry Object. The base class manages general attributes and provides interfaces such as visibility and transformation, while the subclasses handle their specific data and functions.
 
+Additionally, the system maintains a global registry, `GORegistry`, to keep track of all GOs. To add a GO to the scene, the static function `Add()` of the desired shape must be called, e.g., GOPoint::Add() or GOLine::Add(). Upon initialization, each GO acquires a unique UUID and registers itself in the global hash table. Since this table is accessible throughout the system, application layers can retrieve specific objects by their UUIDs or iterate through all objects to perform operations.
+
+![Structure of the Geometry Framework.](fig_geometry-framework.svg){ width=100%}
 
 ## Computed Feedback System  <!-- 170/150 words -->
 
@@ -103,13 +106,13 @@ The visual guidance for each tool may consist of multiple visual cues, most of w
 
 
 ## AR rendering  <!-- /150 words>
-The rendering system synthesizes the captured video and virtual objects, such as CAD models and feedback graphics, to create an AR view.
+The rendering system combines the captured video frame and virtual objects, such as CAD models and feedback graphics, to create an AR view.
 
-The rendering system is built using OpenGL, where the infrastructure is mainly defined in `Renderer.h`. When a GOPrimitive object is constructed or modified, a corresponding OpenGL instance is initialized. As OpenGL only renders points, lines, and meshes, the primitive shapes of circles and cylinders construct corresponding meshes implicitly. Additionally, the geometry system allows users to define the width of lines, while OpenGL's line rendering does not. Therefore, a mesh of a cylinder is created for rendering thick lines.
+Built using OpenGL, the system's core infrastructure is defined in `Renderer.h`. After all layers are executed, `RenderMainView()` is called to perform the AR rendering. On each frame, the renderer first acquires the captured image from `LayerCamera` and renders it as the background. Next, it retrieves the estimated camera position from `LayerSLAM` and updates the model-view-projection matrix for the current view. Finally, the renderer iterates through each GO in the `GORegistry` to render the visible objects. Each GO maintains a list of `GLObject`s, which manage the OpenGL buffer containing the geometry to be rendered and provide the `Draw()` interface for rendering.
 
-Text rendering is handled separately using `TextRenderer.h` since we intend to make the text always face the screen instead of floating in 3D space. To achieve this, a different shader is created to perform a unique projection method.
+Text rendering is handled separately via `TextRenderer`. To ensure text always faces the screen, rather than floating in 3D space, a special shader and projection are used.
 
-On each frame, the rendering layer (`LayerRendering.h`) takes the estimated camera position from the SLAM layer to calculate the projection matrix and iterates through the geometry table to render visible objects. While iterating, the system checks the type of shape and calls the corresponding function to render either text or non-text objects, additively depicting objects on the captured image, ultimately creating the AR view.
+![Dataflow of the rendering system and the pipeline for AR rendering.](fig_AR-rendering.svg){ width=100%}
 
 # Acknowledgements
 
