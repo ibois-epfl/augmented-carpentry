@@ -1,5 +1,5 @@
 ---
-title: 'Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Digital Fabrication'
+title: 'ACEngine: Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Digital Fabrication'
 tags:
   - C++
   - UNIX
@@ -33,14 +33,14 @@ bibliography: paper.bib
 
 # Summary  <!-- 55/50 words -->
 
-Augmented Carpentry is a lightweight and fast-developing UNIX C++ engine for prototyping AR applications leveraging bleeding-edge robotic vision research for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a simple monocular camera feed.
+ACEngine is a lightweight and fast-developing UNIX C++ engine for prototyping AR applications leveraging bleeding-edge robotic vision research for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a simple monocular camera feed.
 
 
 # Statement of need  <!-- 197/125 words -->
 
-Augmented Carpentry (AC) addresses critical limitations in existing augmented reality (AR) tools for digital fabrication. CompasXR [@compas-xr], the only open-source AR tool available in the digital fabrication field, provides a valuable common platform, particularly for assembly tasks. However, it currently lacks a streamlined integration pipeline for advanced robotic vision technologies due to its reliance on Unity [@unity] and the Windows operating system (OS). In the field of AR fabrication, developers from the current Incon.ai [@incon] represent the peak of AR engine innovation with robotic vision algorithm integration for digital fabrication in research [@sandy:2016; @sandy:2018; @mitterberger:2020], nevertheless, its codebase remains unavailable to the public.
+ACEngine (ACE) addresses critical limitations in existing augmented reality (AR) tools for digital fabrication. CompasXR [@compas-xr], the only open-source AR tool available in the digital fabrication field, provides a valuable common platform, particularly for assembly tasks. However, it currently lacks a streamlined integration pipeline for advanced robotic vision technologies due to its reliance on Unity [@unity] and the Windows operating system (OS). In the field of AR fabrication, developers from the current Incon.ai [@incon] represent the peak of AR engine innovation with robotic vision algorithm integration for digital fabrication in research [@sandy:2016; @sandy:2018; @mitterberger:2020], nevertheless, its codebase remains unavailable to the public.
 
-AC aims to fill this gap by providing a lightweight, open-source, and UNIX-compatible C++ engine for AR applications in digital fabrication. Its software architecture is similar to existing free engines [@godot; @torque3d; @ezengine], yet it prioritizes rapid prototyping, flexibility, and customization for extended reality (XR) manufacturing using accessible sensors and hardware. Unlike feature-rich game engines with excessive functionalities or proprietary constraints [@unity; @unreal], AC is lightweight, aided by the adoption of a bloat-free UI system [@dearimgui], and maintains full compatibility with Linux systems—crucial for integrating the latest open-source robotic vision technologies in AR manufacturing.
+AC aims to fill this gap by providing a lightweight, open-source, and UNIX-compatible C++ engine for AR applications in digital fabrication. Its software architecture is similar to existing free engines [@godot; @torque3d; @ezengine], yet it prioritizes rapid prototyping, flexibility, and customization for extended reality (XR) manufacturing using accessible sensors and hardware. Unlike feature-rich game engines with excessive functionalities or proprietary constraints [@unity; @unreal], ACE is lightweight, aided by the adoption of a bloat-free UI system [@dearimgui], and maintains full compatibility with Linux systems—crucial for integrating the latest open-source robotic vision technologies in AR manufacturing.
 
 ## Layer-stack flow  <!-- 198/150 words -->
 
@@ -85,6 +85,6 @@ On each frame, the rendering layer (`LayerRendering.h`) takes the estimated came
 
 # Acknowledgements  <!-- 45 words -->
 
-We would like to thank all the contributors to the Augmented Carpentry project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
+We would like to thank all the contributors to the ACEngine project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
 
 # References
