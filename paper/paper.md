@@ -76,7 +76,7 @@ The visual guidance for each tool may consist of multiple visual cues, most of w
 ![Dataflow for the functioning of the Augmented Carpentry's feedback system.](fig_feedback-sys.svg){ width=100%}
 
 
-## AR rendering  <!-- /150 words>
+## AR rendering  <!-- /150 words -->
 
 The rendering system combines the captured video frame and virtual objects, such as CAD models and feedback graphics, to create an AR view.
 
