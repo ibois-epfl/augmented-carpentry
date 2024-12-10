@@ -77,6 +77,7 @@ The visual guidance for each tool may consist of multiple visual cues, most of w
 
 
 ## AR rendering  <!-- /150 words>
+
 The rendering system combines the captured video frame and virtual objects, such as CAD models and feedback graphics, to create an AR view.
 
 Built using OpenGL, the system's core infrastructure is defined in `Renderer.h`. After all layers are executed, `RenderMainView()` is called to perform the AR rendering. On each frame, the renderer first acquires the captured image from `LayerCamera` and renders it as the background. Next, it retrieves the estimated camera position from `LayerSLAM` and updates the model-view-projection matrix for the current view. Finally, the renderer iterates through each GO in the `GORegistry` to render the visible objects. Each GO maintains a list of `GLObject`s, which manage the OpenGL buffer containing the geometry to be rendered and provide the `Draw()` interface for rendering.
