@@ -1,5 +1,5 @@
 ---
-title: 'Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Woodworking'  # TODO: improve title
+title: 'ACEngine: Augmented Reality UNIX C++ Engine for Enhanced Visual Guidance in Digital Fabrication'
 tags:
   - C++
   - UNIX
@@ -31,49 +31,20 @@ bibliography: paper.bib
 
 ---
 
-<!--
-# Structure of the paper
+# Summary  <!-- 55/50 words -->
 
-- (0) Summary (MAX 50 words) - ANDREA
-- (1) Statement of need (MAX 125 words) - ANDREA
-- (2) Functionalities (MAX 100 words) - ANDREA
-- (1.1) Layer-stack flow (MAX 150 words) - ANDREA
-- (1.2) Geometry framework (MAX 200 words) - HONG-BIN
-- (1.3) AR rendering (MAX 150 words) - HONG-BIN
-- (1.4) Computed Feedback System (MAX 150 words) - ANDREA
-- (2) Acknowledgements - ANDREA
-- (3) References - ANDREA
--->
-
-# Summary  <!-- 167/50 words -->
-
-Augmented Carpentry is a lightweight and fast-developing C++ engine for prototyping and scaling AR applications. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions with the real world.
+ACEngine is a lightweight and fast-developing UNIX C++ engine for prototyping AR applications leveraging bleeding-edge robotic vision research for digital fabrication. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a simple monocular camera feed.
 
 
-# Statement of need
+# Statement of need  <!-- 197/125 words -->
 
-<!--
-aka "state-of-the-art". This is a context introduction and brief state-of-the-art. (MAX 125 words)
+ACEngine (ACE) addresses critical limitations in existing augmented reality (AR) tools for digital fabrication. CompasXR [@compas-xr], the only open-source AR tool available in the digital fabrication field, provides a valuable common platform, particularly for assembly tasks. However, it currently lacks a streamlined integration pipeline for advanced robotic vision technologies due to its reliance on Unity [@unity] and the Windows operating system (OS). In the field of AR fabrication, developers from the current Incon.ai [@incon] represent the peak of AR engine innovation with robotic vision algorithm integration for digital fabrication in research [@sandy:2016; @sandy:2018; @mitterberger:2020], nevertheless, its codebase remains unavailable to the public.
 
-- #lightweight and fast developing cycles: we needed an engine lightweight and able to prototype and be scalable later (ideally the engine should have a compiler for devices)
-- #too many functionalities: other game engine are cumbersome due to too many functionalities (> we ripped down to the minimum needed in AC for fast prototyping)
-- #not free-software: besides Godot non it's really free-software and completely open-source (with full access to sdk, this is often needed in research when we need to craft or explore very inexplored and corner case scenarios)
-- #absence of c++ system free Linux platform to integrate robotics: there is Unreal (that is compilable for linux though, but we exclude it because proprietary and too complex -> to be clarified). We need c++ and unix in robotics to import custom bleeding edge robotic vision technologies and researches for AR.
+AC aims to fill this gap by providing a lightweight, open-source, and UNIX-compatible C++ engine for AR applications in digital fabrication. Its software architecture is similar to existing free engines [@godot; @torque3d; @ezengine], yet it prioritizes rapid prototyping, flexibility, and customization for extended reality (XR) manufacturing using accessible sensors and hardware. Unlike feature-rich game engines with excessive functionalities or proprietary constraints [@unity; @unreal], ACE is lightweight, aided by the adoption of a bloat-free UI system [@dearimgui], and maintains full compatibility with Linux systems—crucial for integrating the latest open-source robotic vision technologies in AR manufacturing.
 
--->
+## Layer-stack flow  <!-- 198/150 words -->
 
-# Functionalities
-
-<!--
-brief introduction to the general functioning and the following sections. (MAX 75 words)
-It might include details that are no more mentioned in the following sections like:
-- the hardware used (x64, monocular camera, etc.)
-- ...
--->
-
-## Layer-stack flow  <!-- 167/150 words -->
-
-The layer stack is primarily responsible for managing the flow control of the AR engine. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`.
+The main AR engine is managed by a layer-stack flow. Designed as a modular system, each layer encapsulates the code for a specific domain of the AR application, such as camera processing, sensor's self-localization, object tracking, UI, and rendering. The general order and expansion of these layers can be configured in the top-level main file `ACApp.cpp`. This architecture provides flexibility to customize key AR features as needed, including integrating new sensors, modifying the rendering pipeline, or adapting camera pose estimation methods. For instance, users can implement pose estimation based on tags [@salinas:2019], features [@compos:2021], or hybrid [@settimi:2024] approaches as supported by the software out of the box.
 
 Each layer in the stack inherits from a superclass interface defined in `Layer.h`, which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, etc). These methods are invoked by the main `Run()` function in the singleton application loop from `Application.h`. This design allows application tasks to be containerized and executed sequentially while facilitating data exchange between specific layers through the `AIAC_APP` macro, enabling the retrieval of any particular layer data. Exchange between layers can also take place in a more structured way with the integrated event system (`ApplicationEvent.h`), which is capable of queuing events from layers and trigger them in the next main loop.
 
@@ -114,24 +85,9 @@ Text rendering is handled separately via `TextRenderer`. To ensure text always f
 
 ![Dataflow of the rendering system and the pipeline for AR rendering.](fig_AR-rendering.svg){ width=100%}
 
-# Acknowledgements
 
-<!-- list of contributors -->
+# Acknowledgements  <!-- 45 words -->
+
+We would like to thank all the contributors to the ACEngine project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
 
 # References
-
-<!--
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
--->
-
-
