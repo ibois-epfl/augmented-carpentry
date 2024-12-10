@@ -273,7 +273,7 @@ def main(
     # -----------------------------------------------------------------------------------------------
     # Jointfaces quality - angles
     # -----------------------------------------------------------------------------------------------
-    df_jointfaces_dataset = df_jointfaces_dataset[df_jointfaces_dataset['jointface_angle'] >= 0]
+    # df_jointfaces_dataset = df_jointfaces_dataset[df_jointfaces_dataset['jointface_angle'] >= 0]
     bins = np.array([20, 30, 40, 50, 60, 70, 80, 90])
     labels = [f'{bins[i+1]:.0f}' for i in range(len(bins)-1)]
     df_jointfaces_dataset['jointface_angle_bin'] = pd.cut(df_jointfaces_dataset['jointface_angle'], bins=bins, labels=labels)
@@ -353,7 +353,7 @@ def main(
 
     plt.suptitle('')
     plt.tight_layout()
-    # plt.show()
+    plt.show()
 
     # save the figure locally
     fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.pdf'), dpi=300, bbox_inches='tight')
