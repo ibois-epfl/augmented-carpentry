@@ -76,13 +76,15 @@ The visual guidance for each tool may consist of multiple visual cues, most of w
 ![Dataflow for the functioning of the Augmented Carpentry's feedback system.](fig_feedback-sys.svg){ width=100%}
 
 
-## AR rendering  <!-- /150 words -->
+## AR rendering  <!-- 155/150 words -->
 
-The rendering system combines the captured video frame and virtual objects, such as CAD models and feedback graphics, to create an AR view.
+The rendering system draws two viewports: the main AR view and the 3D viewport. The AR view combines the captured image and virtual objects, such as CAD models and feedback graphics, and the 3D viewport allows user to navigate through the entire scene. The system mainly consists of the following components:
 
-Built using OpenGL, the system's core infrastructure is defined in `Renderer.h`. After all layers are executed, `RenderMainView()` is called to perform the AR rendering. On each frame, the renderer first acquires the captured image from `LayerCamera` and renders it as the background. Next, it retrieves the estimated camera position from `LayerSLAM` and updates the model-view-projection matrix for the current view. Finally, the renderer iterates through each GO in the `GORegistry` to render the visible objects. Each GO maintains a list of `GLObject`s, which manage the OpenGL buffer containing the geometry to be rendered and provide the `Draw()` interface for rendering.
+1. `Renderer.h`: Defines the main logic of the rendering pipeline and manages the necessary attributes.
+2. `Viewport.h`: Manages the sub-frame buffer. The Renderer calls the `Activate()` function to switch to the buffer to be rendered.
+3. `GLObject.h`: Manages the OpenGL vertex buffer object containing the geometry to be rendered. Each `GO` contains a list of `GLObjects`. By calling the `Draw()` function, the content is rendered to the currently active frame buffer.
 
-Text rendering is handled separately via `TextRenderer`. To ensure text always faces the screen, rather than floating in 3D space, a special shader and projection are used.
+Once all the layers are executed, the main thread calls the `Renderer::OnRender()` function, which triggers `RenderMainView()` and `RenderGlobalView()` to render the main AR view and the 3D viewport, respectively.
 
 ![Dataflow of the rendering system and the pipeline for AR rendering.](fig_AR-rendering.svg){ width=100%}
 
