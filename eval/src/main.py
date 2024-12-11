@@ -252,6 +252,7 @@ def main(
 
     fig, axs = plt.subplots(1, 4, figsize=(13.5, 5))
 
+    # TODO: write a console parameter switch for 1x4 or 2x2
     ax = axs[0]
     df_joints_dataset.boxplot(
         column='mean',
@@ -353,7 +354,7 @@ def main(
 
     plt.suptitle('')
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # TODO: write switch for visualization
 
     # save the figure locally
     fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.pdf'), dpi=300, bbox_inches='tight')
