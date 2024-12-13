@@ -78,13 +78,16 @@ The visual guidance for each tool may consist of multiple visual cues, most of w
 
 ## AR rendering  <!-- 155/150 words -->
 
-The rendering system draws two viewports: the main AR view and the 3D viewport. The AR view combines the captured image and virtual objects, such as CAD models and feedback graphics, and the 3D viewport allows user to navigate through the entire scene. The system mainly consists of the following components:
+The rendering system manages two viewports: the main AR view and the 3D viewport. The AR view combines captured images with virtual objects, such as CAD models and feedback graphics, to provide clear and intuitive instructions. The 3D viewport serves as an interface for navigating the entire scene, enabling users to easily inspect different components. The system consists of the following key components:
 
-1. `Renderer.h`: Defines the main logic of the rendering pipeline and manages the necessary attributes.
-2. `Viewport.h`: Manages the sub-frame buffer. The Renderer calls the `Activate()` function to switch to the buffer to be rendered.
-3. `GLObject.h`: Manages the OpenGL vertex buffer object containing the geometry to be rendered. Each `GO` contains a list of `GLObjects`. By calling the `Draw()` function, the content is rendered to the currently active frame buffer.
+1. `Renderer.h`: Defines the core logic of the rendering pipeline and manages essential attributes.
+2. `Viewport.h`: Handles the sub-frame buffer. The renderer calls `Activate()` to switch the buffer for rendering.
+3. `GLObject.h`: Helps GO manage OpenGL resources, allocating memory and buffering data for rendering. Each GO may contain one or multiple GLObjects stored in a list. By invoking Draw(), the content is rendered to the currently active frame buffer.
 
-Once all the layers are executed, the main thread calls the `Renderer::OnRender()` function, which triggers `RenderMainView()` and `RenderGlobalView()` to render the main AR view and the 3D viewport, respectively.
+The `Renderer::OnRender()` function is executed after all layers are processed. Within this function:
+
+1. `RenderMainView()` renders the main AR view by calculating the projection matrix using the estimated position from `LayerSLAM` and overlays all geometry from the `GORegistry` onto the captured image.
+2. `RenderGlobalView()` switches the frame buffer to the 3D viewport and renders the geometry with a projection based on the user's navigation.
 
 ![Dataflow of the rendering system and the pipeline for AR rendering.](fig_AR-rendering.svg){ width=100%}
 
