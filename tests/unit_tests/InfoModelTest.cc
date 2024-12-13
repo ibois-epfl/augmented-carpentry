@@ -16,7 +16,7 @@ protected:
 TEST_F(InfoModelTest, FileIO) {
     AIAC::ACInfoModel acim;
 
-    std::string path = "/mnt/augmented-carpentry/assets/ACModel/test.acim";
+    std::string path = "../assets/ACModel/test.acim";
     acim.Load(path);
 
     EXPECT_EQ(acim.GetFilePath(), path);
@@ -26,7 +26,7 @@ TEST_F(InfoModelTest, FileIO) {
 TEST_F(InfoModelTest, ContentParsing) {
     AIAC::ACInfoModel acim;
 
-    std::string path = "/mnt/augmented-carpentry/assets/ACModel/test.acim";
+    std::string path = "../assets/ACModel/test.acim";
     acim.Load(path);
 
     auto& timberInfo = acim.GetTimberInfo();
