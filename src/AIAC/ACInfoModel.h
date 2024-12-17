@@ -88,7 +88,9 @@ public:
     class Component {
     public:
         Component(std::string type) : m_Type(type) {
+#ifndef HEADLESS_TEST
             m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
+#endif
         }
         virtual void SetAsCurrent();
         virtual void SetAsDone();
@@ -235,8 +237,8 @@ public:
         };
 
         inline bool IsSingleFace() const { return m_NonExposedFaceIDs.size() == 1; }
-        inline Face& GetFace(std::string id) { return m_Faces[id]; }
-        inline Edge& GetEdge(std::string id) { return m_Edges[id]; }
+        inline Face& GetFace(std::string id) { if(m_Faces.count(id) == 0) throw std::invalid_argument("Face ID does not exist."); return m_Faces[id]; }
+        inline Edge& GetEdge(std::string id) { if(m_Edges.count(id) == 0) throw std::invalid_argument("Edge ID does not exist."); return m_Edges[id]; }
         inline std::map<std::string, Face>& GetAllFaces() { return m_Faces; }
         inline std::map<std::string, Edge>& GetAllEdges() { return m_Edges; }
         inline std::set<std::string>& GetAllNonExposedFaceIDs() { return m_NonExposedFaceIDs; }
@@ -358,7 +360,9 @@ class ACInfoModel
 {
 public:
     ACInfoModel(){
+#ifndef HEADLESS_TEST
         m_Scale = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
+#endif
     };
     ~ACInfoModel(){};
 
@@ -454,7 +458,7 @@ private:
     float m_EdgeWeight = 1.1f;
     float m_LabelSize = 0.75f;
 
-    float m_Scale;
+    float m_Scale = 1.0f;
     float m_MeasuredBboxLength;
 
     std::string m_FilePath;

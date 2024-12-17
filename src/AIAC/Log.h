@@ -21,7 +21,7 @@ namespace AIAC
     };
 }
 
-#ifdef SILENT_LOGGING
+#if (defined SILENT_LOGGING && !defined HEADLESS_TEST)
     #define AIAC_INFO(...)                     SPDLOG_LOGGER_INFO(AIAC::Log::GetLogger(), __VA_ARGS__)
     #define AIAC_WARN(...)                     SPDLOG_LOGGER_WARN(AIAC::Log::GetLogger(), __VA_ARGS__)
     #define AIAC_ERROR(...)                    SPDLOG_LOGGER_ERROR(AIAC::Log::GetLogger(), __VA_ARGS__)
