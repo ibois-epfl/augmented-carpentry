@@ -1,0 +1,406 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15" version="25.0.3">
+  <diagram name="第 1 页" id="snpj3ztaKo2k1ySWsPX_">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="520" pageHeight="320" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-108" value="TextRenderer.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="525" y="1797.11" width="285" height="173.12" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-107" value="Renderer.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-400.05" y="1364" width="470" height="243.77" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-69" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1331" width="375" height="749.23" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-18" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;dashed=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="1503.23" width="335" height="557" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-4" value="LayerCamera" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="525" y="1403.23" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-5" value="LayerSLAM" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="525" y="1453.23" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endArrow=open;endFill=0;endSize=12;dashed=1;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-7" target="o_5G32n-oqTmlAOBVCSS-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-48" value="Get Frame" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-8">
+          <mxGeometry x="0.0144" y="-1" relative="1" as="geometry">
+            <mxPoint x="-6" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-7" target="o_5G32n-oqTmlAOBVCSS-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-7" value="RenderCameraFrame()" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="190" y="1403.23" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-9" target="o_5G32n-oqTmlAOBVCSS-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-9" value="Setup OpenGL env" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="200" y="1353.23" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;endSize=12;dashed=1;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-14" target="o_5G32n-oqTmlAOBVCSS-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-49" value="Get Estimated&lt;div&gt;Transformation&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-15">
+          <mxGeometry x="0.129" y="-3" relative="1" as="geometry">
+            <mxPoint x="-13" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-14" target="o_5G32n-oqTmlAOBVCSS-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-14" value="Update Projection Matrix" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="190" y="1453.23" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-19" target="o_5G32n-oqTmlAOBVCSS-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-19" value="GetAllGOs()" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="190" y="1537.23" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-20" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GORegistry&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="525" y="1512.23" width="90" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-19" target="o_5G32n-oqTmlAOBVCSS-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="99.99624277456633" y="1552.23" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-47" value="Read" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-21">
+          <mxGeometry x="0.2976" y="-2" relative="1" as="geometry">
+            <mxPoint x="-39" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-22" value="Render GOs" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="155" y="1507.23" width="173.94" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-23" target="o_5G32n-oqTmlAOBVCSS-85">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="1598.23" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="180" y="1671.23" />
+              <mxPoint x="180" y="1603.23" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-27" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-26">
+          <mxGeometry x="-0.7158" y="2" relative="1" as="geometry">
+            <mxPoint x="3" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-23" target="o_5G32n-oqTmlAOBVCSS-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-32" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-31">
+          <mxGeometry x="-0.3832" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-23" value="Visible?" style="rhombus;whiteSpace=wrap;html=1;flipV=1;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="1651.23" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-85" target="o_5G32n-oqTmlAOBVCSS-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-91" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-25">
+          <mxGeometry x="0.3832" y="-1" relative="1" as="geometry">
+            <mxPoint x="1" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-30" target="o_5G32n-oqTmlAOBVCSS-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-46" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-40">
+          <mxGeometry x="-0.2562" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-30" target="o_5G32n-oqTmlAOBVCSS-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-45" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-43">
+          <mxGeometry x="-0.3667" y="2" relative="1" as="geometry">
+            <mxPoint x="-25" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-30" value="Is Text?" style="rhombus;whiteSpace=wrap;html=1;flipV=1;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="1720.23" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-38" target="o_5G32n-oqTmlAOBVCSS-85">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="1590.73" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="384" y="1843.23" />
+              <mxPoint x="160" y="1843.23" />
+              <mxPoint x="160" y="1603.23" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-38" value="Put it in a temp array" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="328.94" y="1793.23" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-39" target="o_5G32n-oqTmlAOBVCSS-85">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="1590.73" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="270" y="1843.23" />
+              <mxPoint x="160" y="1843.23" />
+              <mxPoint x="160" y="1603.23" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-39" target="bLNUvRQRzBAcGo8U7qjH-51">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="1808" />
+              <mxPoint x="90" y="1778" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-39" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;Draw()&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;flipV=1;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="225" y="1793.23" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-50" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Renderer&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" vertex="1" parent="1">
+          <mxGeometry x="-360.08" y="1416.55" width="390.06" height="166.08247422680415" as="geometry">
+            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-51" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Init()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-50">
+          <mxGeometry y="30" width="390.06" height="34.02061855670104" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="o_5G32n-oqTmlAOBVCSS-50" source="bLNUvRQRzBAcGo8U7qjH-1" target="o_5G32n-oqTmlAOBVCSS-52">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-20" y="81" />
+              <mxPoint x="-20" y="115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-6" value="Use" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-2">
+          <mxGeometry x="-0.0053" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="o_5G32n-oqTmlAOBVCSS-50" source="bLNUvRQRzBAcGo8U7qjH-1" target="9At_oX4Ld0F6sZnhP62n-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-30" y="81" />
+              <mxPoint x="-30" y="149" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-5" value="Use" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-4">
+          <mxGeometry x="0.0276" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-1" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void OnRender()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-50">
+          <mxGeometry y="64.02061855670104" width="390.06" height="34.02061855670104" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-52" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void RenderMainView()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-50">
+          <mxGeometry y="98.04123711340208" width="390.06" height="34.02061855670104" as="geometry" />
+        </mxCell>
+        <mxCell id="9At_oX4Ld0F6sZnhP62n-2" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void RenderGlobalView()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-50">
+          <mxGeometry y="132.0618556701031" width="390.06" height="34.02061855670104" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-57" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class Text&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Renderer&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" vertex="1" parent="1">
+          <mxGeometry x="545" y="1852.37" width="235" height="98.04123711340208" as="geometry">
+            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-94" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;SetProjection()&lt;/span&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-57">
+          <mxGeometry y="30" width="235" height="34.02061855670104" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-59" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void &lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;RenderTextIn3DSpace()&lt;/span&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-57">
+          <mxGeometry y="64.02061855670104" width="235" height="34.02061855670104" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-74" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;RenderMainView()&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="234.47000000000003" y="1301" width="146.06" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-76" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=-0.006;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-52" target="o_5G32n-oqTmlAOBVCSS-69">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="1374" as="sourcePoint" />
+            <mxPoint x="120" y="1094" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-78" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1.002;exitY=1.031;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-52" target="o_5G32n-oqTmlAOBVCSS-69">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="50" y="1228" as="sourcePoint" />
+            <mxPoint x="130" y="1104" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-80" target="o_5G32n-oqTmlAOBVCSS-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-100" value="Initialize" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-82">
+          <mxGeometry x="-0.6009" y="1" relative="1" as="geometry">
+            <mxPoint y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-80" target="bLNUvRQRzBAcGo8U7qjH-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-101" value="Call Each&lt;div&gt;Frame&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-84">
+          <mxGeometry x="-0.6107" y="1" relative="1" as="geometry">
+            <mxPoint y="11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-80" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;AIAC_APP&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="1331" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-85" target="o_5G32n-oqTmlAOBVCSS-109">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="1603.23" />
+              <mxPoint x="455" y="1860.23" />
+              <mxPoint x="270" y="1860.23" />
+            </Array>
+            <mxPoint x="270" y="1876.23" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-115" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="o_5G32n-oqTmlAOBVCSS-110">
+          <mxGeometry x="-0.8377" y="-2" relative="1" as="geometry">
+            <mxPoint x="-32" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-85" value="Is there&lt;div&gt;unvisited GO?&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;flipV=1;flipH=1;fontSize=7;" vertex="1" parent="1">
+          <mxGeometry x="220" y="1583.23" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-97" value="End" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="2002.81" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-109" target="o_5G32n-oqTmlAOBVCSS-111">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-109" target="bLNUvRQRzBAcGo8U7qjH-94">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-109" value="Update Projection Matrix For Text" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="170" y="1884.38" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-114" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-111" target="o_5G32n-oqTmlAOBVCSS-97">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="o_5G32n-oqTmlAOBVCSS-111" target="o_5G32n-oqTmlAOBVCSS-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_5G32n-oqTmlAOBVCSS-111" value="Render Texts" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;flipV=1;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="1942.81" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-7" value="GOPrimitive.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-400.05" y="1690.23" width="470" height="161.96" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-37" value="GLObject.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-400.05" y="1886.39" width="470" height="193.84" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-38" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;perimeterSpacing=5;arcSize=3;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-158.3" y="1930.23" width="208.25" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=0;endSize=12;" edge="1" parent="1" source="bLNUvRQRzBAcGo8U7qjH-44">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-173.05" y="1957.2300000000002" />
+              <mxPoint x="-173.05" y="2002.2300000000002" />
+            </Array>
+            <mxPoint x="-203.55" y="2001.82793814433" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-44" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GLPointObject&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="-142.43" y="1942.81" width="176.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=block;endFill=0;endSize=12;" edge="1" parent="1" source="bLNUvRQRzBAcGo8U7qjH-46">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-203.55" y="2001.7813043478263" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-46" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GLLineObject&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="-142.43" y="1987.1099999999997" width="176.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=block;endFill=0;endSize=12;" edge="1" parent="1" source="bLNUvRQRzBAcGo8U7qjH-48">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-173.05" y="2042.2300000000005" />
+              <mxPoint x="-173.05" y="2002.2300000000002" />
+            </Array>
+            <mxPoint x="-203.55" y="2002.2160869565218" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-48" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GLPointObject&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="-142.43" y="2027.65" width="176.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-49" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;OpenGL Object&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-110.67" y="1900.2300000000002" width="113" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-50" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPrimitive&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" vertex="1" parent="1">
+          <mxGeometry x="-360.05" y="1733.19" width="400" height="102.53606774668631" as="geometry">
+            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="bLNUvRQRzBAcGo8U7qjH-50" source="bLNUvRQRzBAcGo8U7qjH-51" target="bLNUvRQRzBAcGo8U7qjH-54">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-20" y="45" />
+              <mxPoint x="-20" y="84" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-84" value="Iterate&lt;div&gt;all&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-82">
+          <mxGeometry x="-0.055" y="-3" relative="1" as="geometry">
+            <mxPoint x="3" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-51" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Draw()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-50">
+          <mxGeometry y="30" width="400" height="30.15463917525774" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-70" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-50">
+          <mxGeometry y="60.15463917525774" width="400" height="5.571428571428572" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-54" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;#&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;std::vector&amp;lt;std::shared_ptr&amp;lt;GLObject&amp;gt;&amp;gt; GLObjects&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-50">
+          <mxGeometry y="65.72606774668631" width="400" height="36.81" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-55" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;enum&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GLObject&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" vertex="1" parent="1">
+          <mxGeometry x="-380.05" y="1946.0500000000004" width="176.5" height="112.11782032400592" as="geometry">
+            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-69" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Draw()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-55">
+          <mxGeometry y="30" width="176.5" height="30.15463917525774" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-53" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-55">
+          <mxGeometry y="60.15463917525774" width="176.5" height="5.571428571428572" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-56" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GLuint VertexBuffer&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-55">
+          <mxGeometry y="65.72606774668631" width="176.5" height="23.195876288659797" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-57" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GLuint ColorBuffer&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-55">
+          <mxGeometry y="88.92194403534612" width="176.5" height="23.195876288659797" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;endArrow=open;endFill=0;endSize=12;" edge="1" parent="1" source="bLNUvRQRzBAcGo8U7qjH-51" target="bLNUvRQRzBAcGo8U7qjH-69">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-450.05" y="1843.44" as="sourcePoint" />
+            <mxPoint x="-450.05" y="1911.44" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-430" y="1778.23" />
+              <mxPoint x="-430" y="1991.23" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-77" value="Use" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="bLNUvRQRzBAcGo8U7qjH-76">
+          <mxGeometry x="0.0276" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="bLNUvRQRzBAcGo8U7qjH-100" target="o_5G32n-oqTmlAOBVCSS-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bLNUvRQRzBAcGo8U7qjH-100" value="Start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="1348.23" width="40" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
