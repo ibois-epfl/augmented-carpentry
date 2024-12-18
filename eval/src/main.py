@@ -172,6 +172,12 @@ def main(
     err_jointface_mean = np.mean(np.array(df_jointfaces_dataset['mean'].tolist()))
     df_jointfaces_dataset['std_deviation'] = df_jointfaces_dataset['std_deviation'] * 1000
     err_jointface_std = np.mean(np.array(df_jointfaces_dataset['std_deviation'].tolist()))
+    err_not_signed_jointface_angles = df_jointfaces_dataset['jointface_angle'].tolist()
+    err_not_signed_jointface_angles = [90 - a if a < 0 else a for a in err_not_signed_jointface_angles]
+    err_jointface_angle_mean = np.mean(np.array(err_not_signed_jointface_angles))
+    err_jointface_angle_std = np.std(np.array(err_not_signed_jointface_angles))
+    err_jointface_angle_max = np.max(np.array(err_not_signed_jointface_angles))
+    err_jointface_angle_min = np.min(np.array(err_not_signed_jointface_angles))
     err_jointface_total_nbr = len(df_jointfaces_dataset)
 
     # hole analysis (we define it only with start distance and angle error)
@@ -196,18 +202,23 @@ def main(
     err_assembly_total_nbr = len(df_assembly_dataset)
 
     ###################################################################################################
-    # FIXME: these results need to be printed after the graphs?
     print_separator()
-    print("Results")
+    print("Raw results summary")
     print_separator()
     ###################################################################################################
     print("cutting joint analysis:")
     print(f"{'Total number of joints evaluated:':<40} {err_joint_total_nbr:<20} {'#'}")
     print(f"{'Average beam length:':<40} {np.mean(err_beam_lengths):<20.3f} {'m'}")
+    min_beam_length = np.min(err_beam_lengths)
+    max_beam_length = np.max(err_beam_lengths)
+    print(f"{'Smallest beam length:':<40} {min_beam_length:<20.3f} {'m'}")
+    print(f"{'Largest beam length:':<40} {max_beam_length:<20.3f} {'m'}")
     print(f"{'Average distance to beam midpoint:':<40} {np.mean(err_joint_distances_to_beam_midpoint):<20.3f} {'m'}")
-
     print(f"{'Average number of faces per joint:':<40} {np.mean(df_jointfaces_dataset['joint_face_count']):<20.0f} {'#'}")
-
+    err_jointface_angle_mean_std_str = f"{err_jointface_angle_mean:.1f}" + " ± " + f"{err_jointface_angle_std:.1f}"
+    print(f"{'Mean of all jointfaces angle error:':<40} {err_jointface_angle_mean_std_str:<20} {'°'}")
+    print(f"{'Smallest cutting angle:':<40} {err_jointface_angle_min:<20.1f} {'°'}")
+    print(f"{'Largest cutting angle:':<40} {err_jointface_angle_max:<20.1f} {'°'}")
     err_joint_mean_std_str = f"{err_joint_mean:.1f}" + " ± " + f"{err_joint_std:.1f}"
     err_jointface_mean_std_str = f"{err_jointface_mean:.1f}" + " ± " + f"{err_jointface_std:.1f}"
     print(f"{'Mean of all joint distance error:':<40} {err_joint_mean_std_str:<20} {'mm'}")
