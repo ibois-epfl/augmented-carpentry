@@ -6,20 +6,27 @@ The geometry framework provides a unified infrastructure for handling all 3D obj
 The geometry is organized into the following primitive shapes: point, line, circle, cylinder, polyline, triangle, mesh, and text. Each of them is a class (e.g., `GOPoint`, `GOLine`, `GOCircle`, etc.) that inherits the base class `GOPrimitive`, where "GO" stands for Geometry Object. The base class manages general attributes and provides interfaces such as visibility and transformation, while the subclasses handle their specific data and functions.
 
 To initialize a `GO` object, instead of calling the constructor, one must use the static function `Add()` of the corresponding class to create an object. The function returns a `std::shared_ptr<GO>`. For example, to create a point at the origin:
-```
+```c++
 std::shared_ptr<GOPoint> origin = GOPoint::Add(0, 0, 0);
+```
+
+The only exception that you can create without using the `Add()` function is `GOPoint`, as they are used as parameters in other `GO`s. For example, to create a `GOLine`:
+```c++
+GOPoint p1 = GOPoint(0, 0, 0);
+GOPoint p2 = GOPoint(1, 1, 1);
+std::shared_ptr<GOLine> line = GOLine::Add(p1, p2);
 ```
 
 ## GO Registry
 The system maintains a global registry, `GORegistry`, to keep track of all GOs. When the `Add()` function is called, it acquires a unique UUID and registers itself in the global hash table. Since this table is accessible throughout the system, application layers can retrieve specific objects by their UUIDs or iterate through all objects to perform operations.
 
 To retrieve a `GO` with id:
-```
+```c++
 std::shared_ptr<GOPoint> obj = AIAC_GOREG->GetGO<GOPoint>(id);
 ```
 
 To get all `GO`s in the registry:
-```
+```c++
 std::vector<std::shared_ptr<GOPrimitive>> gos;
 AIAC_GOREG->GetAllGOs(gos);
 ```
