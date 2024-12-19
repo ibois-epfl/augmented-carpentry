@@ -31,5 +31,6 @@ dependencies:
     - mkdocs-glightbox~=0.4.0
     - mkdocs-open-in-new-tab~=1.0.8
     - mkdocs-git-revision-date-localized-plugin~=1.3.0
+    - mkdocs-macros-plugin~=1.3.7
 
 

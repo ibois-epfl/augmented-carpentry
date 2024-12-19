@@ -1,3 +1,9 @@
+---
+tags:
+  - layer-stack
+  - backend
+---
+
 # Layer stack
 
 /// html | div[style='float: left; width: 50%;']
@@ -68,7 +74,36 @@ int main(int argc, char* argv[]) {
 Each layer in the stack inherits from a superclass interface defined in [`Layer.h`](https://github.com/ibois-epfl/augmented-carpentry/tree/main/src/AIAC/Layer.h), which includes event-like methods triggered at various points during frame processing (e.g., `OnFrameAwake()`, `OnFrameStart()`, etc.). These methods are invoked by the main `Run()` function in the singleton application loop from [`Application.h`](https://github.com/ibois-epfl/augmented-carpentry/tree/main/src/AIAC/Application.h). This design allows application tasks to be containerized and executed sequentially and in a temporal fashion.
 
 ``` cpp title="src/AIAC/Layer.h" linenums="1"
-    --8<-- "src/AIAC/Layer.h"
+#pragma once
+
+#include "AIAC/Log.h"
+
+namespace AIAC
+{
+    class Layer
+    {
+    public:
+        virtual ~Layer() = default;
+
+        /// Is called when the layer is attached to the application.
+        virtual void OnAttach() {}
+
+        /// Is calle before GLFW poll events, GL frame and Imgui Frame
+        virtual void OnFrameAwake() {}
+
+        /// Is called when frame starts
+        virtual void OnFrameStart() {}
+
+        /// Is called when frame ends
+        virtual void OnFrameEnd() {}
+
+        /// Is called when the GLFW, GL and Imgui frame is updated and rendered
+        virtual void OnFrameFall() {}
+
+        /// Is called when the layer is detached from the application (~app).
+        virtual void OnDetach() {}
+    };
+}
 ```
 
 So, if you were to add a new layer to the stack, you would need to create a new class that inherits from the `Layer` class and implement the necessary methods. Then, you would push this new layer to the stack in the main file [`ACApp.cpp`](https://github.com/ibois-epfl/augmented-carpentry/tree/main/src/ACApp.cpp).

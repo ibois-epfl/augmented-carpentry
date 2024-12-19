@@ -108,6 +108,8 @@ plugins:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
       minify_html: true
+  - macros:
+      module_name: docs/scripts/main
   # TODO: add also the project for tests section + documentation
   # FIXME: uncomment for release
   # - mkdoxy:
