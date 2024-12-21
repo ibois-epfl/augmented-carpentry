@@ -7,7 +7,7 @@ def list_zenodo_entries(zenodo_record_id):
     if response.status_code == 200:
         data = response.json()
         
-        print('| Filename | type | size (MB) | Download |')
+        print('| Toolhead | type | size (MB) | Download |')
         print('|----------|------|-----------|----------|')
 
         for file in data.get('files', []):
@@ -17,7 +17,7 @@ def list_zenodo_entries(zenodo_record_id):
             file_size = file['size'] / (1024 * 1024)  # Convert size to MB
             
             # Detect type of object
-            obj_type = "test"
+            obj_type = "none"
             type_pool = re.split('[-_]', filename)
             type_drill_keys = ['drill', 'mesh', 'bit']
             type_saw_keys = ['saw', 'blade']
@@ -27,21 +27,21 @@ def list_zenodo_entries(zenodo_record_id):
 
             for key in type_drill_keys:
                 if key in type_pool:
-                    obj_type = 'drill'
+                    obj_type = ":material-screw-machine-flat-top:`drill`"
                     break
             for key in type_saw_keys:
                 if key in type_pool:
                     if 'chain' in type_pool:
-                        obj_type = 'chain saw'
+                        obj_type = ":material-hand-saw:`chain saw`"
                     elif 'circular' in type_pool:
-                        obj_type = 'circular saw'
+                        obj_type = ":material-saw-blade:`circular saw`"
                     elif 'saber' in type_pool:
-                        obj_type = 'saber saw'
+                        obj_type = ":material-hand-saw:`saber saw`"
                     else:
-                        obj_type = 'saw'
+                        obj_type = 'None'
                     break
             
-            print(f"| {filename} | `{obj_type}` | {file_size:.2f} | [:octicons-download-24:]({download_link}) |")
+            print(f"| {filename} | {obj_type} | {file_size:.2f} | [:octicons-download-24:]({download_link}) |")
     else:
         print('!!! bug \n\tError fetching data from Zenodo')
 

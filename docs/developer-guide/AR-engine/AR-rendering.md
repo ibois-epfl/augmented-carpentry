@@ -1,3 +1,10 @@
+---
+tags:
+  - AREngine
+  - render
+---
+
+
 # AR rendering
 
 ## Main Rendering Pipeline

@@ -1,3 +1,9 @@
+---
+tags:
+  - AREngine
+  - go
+---
+
 # Geometry framework
 
 The geometry framework provides a unified infrastructure for handling all 3D objects in the scene, including CAD models, scanned models, and fabrication instructions. This framework enables easy interaction between application layers and 3D objects while being tightly integrated with the rendering system, which implicitly manages OpenGL resources, simplifying the workload for application layers.

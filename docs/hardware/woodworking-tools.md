@@ -1,7 +1,5 @@
 
-# Tools
-
-<!-- AC is designed to be *machine independent*, it is only dependent on the toolheads (e.g.: drill bits, circular saw blades and chainsaw boards). You can find a list of the available toolheads [here](https://zenodo.org/records/12578820). If you want to add your own, open a Pull Request to the repo [TTool](https://github.com/ibois-epfl/TTool) and follow the [Wiki](https://github.com/ibois-epfl/TTool/wiki). -->
+# Woodworking tools
 
 /// html | div[style='float: left; width: 52%;']
 
@@ -10,8 +8,6 @@
 ///
 
 /// html | div[style='float: right;width: 45%;']
-
-<!-- TODO: rearrange better this intro -->
 
 AC is designed to seamlessly integrate with virtually any woodworking tool, new or old, provided you can:
 
@@ -30,25 +26,49 @@ If you want to add your own 3d-printable mount or tool head model and share it w
 ///
 
 
+## Available Toolheads
 
-## Tool mounts
+<!-- TODO: add rotating svg of the toolhead -->
 
-<!-- TODO: make a split tab: existing dataset VS add new -->
+The following is a list of the available toolheads that are already integrated into the AC system. You will need to use or acquire the corresponding physical toolhead to use the AC system.
 
-The camera and the display needs to be mounted on the tool itself and follow its movement. To do so we share here the system we designed for our current prototype. You can download
+The Zenodo repository containing the dataset is [here](https://zenodo.org/records/12578820).
+
+<!-- TODO: add icons for the type of tool -->
 
 {{ run_python_script('docs/scripts/get_zenodo_toolheads.py') }}
 
+!!! tip "Want to add a new toolhead?"
+    If you want to add your own toolhead to the AC system, follow the instructions in the section [contributing](../contributing/index.md).
 
-## Tool heads dataset
-
-<!-- TODO: make a split tab: existing dataset VS add new -->
-<!-- TODO: try to add a macros mkdocs to autogenerate the table -->
+!!! note "Toolhead integration"
+    If you want to know more about the details of the integration and how toolhead are managed in the AC system, you can read the [developer guide](../developer-guide/toolheads.md).
 
 
-AC is designed to be *machine independent*, meaning that it is only dependent on the toolheads (e.g.: drill bits, circular saw blades and chainsaw boards). This means that you can attach any toolhead to the machine and the system will adapt to it if the toolhead is in the list of those integrated in AC.
+## Available 3D mounts
 
-You can find a list of the available toolheads already available here [here](https://zenodo.org/records/12578820). If you want to add your own and share it with the community, follow the 
+<div class="grid" markdown>
+![](../assets/images/getting_started/hardware_mounts/mount_ex_1.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_2.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_3.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_4.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_9.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_5.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_6.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_7.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_8.png){width="200"} ![](../assets/images/getting_started/hardware_mounts/mount_ex_10.png){width="200"}
+</div>
+
+Each mount is designed with a flexible integration mechanism, allowing for the attachment of various clipping solutions. Our reference implementation utilizes magnetic clips and a loc-line arm to ensure secure, tool-safe mounting of the sensors and interfaces and easy removal. However, the design files allow users to incorporate their preferred fastening methods—ranging from simple clips to more complex spring-loaded solutions—enabling adaptation to a broad range of tool geometries.
+ 
+- Identify the corresponding mount file that matches your tool brand and model.
+- Download and 3D print the STL file(s).
+- Integrate your desired clipping mechanism.
+- Attach the completed mount to your woodworking tool.
+
+The Zenodo repository containing the dataset is [here](https://zenodo.org/records/14531724).
+
+For convinience, here is a list of the available mounts regrouped by brands:
+
+{{ run_python_script('docs/scripts/get_zenodo_mounts.py') }}
+
+!!! tip "Want to add a new mount?"
+    If you want to add your own toolhead to the AC system, follow the instructions in the section [contributing](../contributing/index.md).
+
+<!-- TODO: add example and images on how to integrate our prototype with the loc line and the magnet -->
+
 
 <!-- TODO: update -->
 ## Components list

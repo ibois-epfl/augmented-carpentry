@@ -254,6 +254,7 @@ nav:
       - Geometry framework: developer-guide/AR-engine/geometry-framework.md
       - Feedback system: developer-guide/AR-engine/feedback-system.md
       - AR rendering: developer-guide/AR-engine/AR-rendering.md
+    - Toolhead: developer-guide/toolhead.md
 
     - Guidelines:
       - Code: developer-guide/CONTRIBUTING_copy.md  # TODO: add a copy in the githhub action

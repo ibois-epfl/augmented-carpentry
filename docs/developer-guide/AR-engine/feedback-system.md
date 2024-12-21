@@ -1,3 +1,9 @@
+---
+tags:
+  - AREngine
+  - feedback-system
+---
+
 # Feedback system
 
 ![Dataflow for the functioning of the Augmented Carpentry's feedback system. ><](../../assets/images/AR_engine/fig_feedback-sys.svg){align=center width=100% style='fill-color: #000000; filter: invert(100%);'}
@@ -31,7 +37,29 @@ Each feedback category inherits from an interface class ([`AIAC/Feedback/FabFeed
 
 
 ``` cpp title="src/AIAC/Feedback/FabFeedback.h" linenums="1"  hl_lines="5-6 16-18"
---8<-- "src/AIAC/Feedback/FabFeedback.h"
+#pragma once
+
+#include "AIAC/Config.h"
+
+#define AC_FF_COMP AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetTimberInfo().GetCurrentComponent()
+#define AC_FF_TOOL AIAC_APP.GetLayer<LayerToolhead>()->ACInfoToolheadManager->GetActiveToolhead()
+
+namespace AIAC {
+    class FabFeedback {
+    public:
+        FabFeedback() {
+            this->m_ScaleFactor = AIAC::Config::Get<float>(AIAC::Config::SEC_AIAC, AIAC::Config::SCALE_FACTOR, 1.0f);
+        };
+        ~FabFeedback() = default;
+
+        virtual void Update() {};
+        virtual void Activate() {};
+        virtual void Deactivate() {};
+
+    protected:
+        float m_ScaleFactor = 0.0f;
+    };
+}
 ```
 
 !!! Tip
