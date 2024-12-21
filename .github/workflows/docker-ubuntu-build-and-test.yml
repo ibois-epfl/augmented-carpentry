@@ -2,9 +2,14 @@ name: ubuntu-testsuite
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    paths:
+      - 'tests/**'
+      - 'src/**'
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'Dockerfile'
+      - 'assets/**'
+      - 'deps/**'
 
 jobs:
   build-container:

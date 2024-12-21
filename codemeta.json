@@ -1,0 +1,42 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "0000-0001-5020-7331",
+      "@type": "Person",
+      "email": "andrea.settimi@epfl.ch",
+      "name": "Andrea Settimi",
+      "affiliation": "IBOIS EPFL"
+    },
+    {
+      "@id": "0000-0001-8422-5263",
+      "@type": "Person",
+      "email": "hong-bin.yang@epfl.ch",
+      "name": "Hong-Bin Yang",
+      "affiliation": "IBOIS EPFL"
+    },
+    {
+      "@type": "Person",
+      "email": "naravich.chutisilp@epfl.ch",
+      "name": "Naravich Chutsilp",
+      "affiliation": "IBOIS EPFL"
+    },
+    {
+      "@type": "Person",
+      "email": "nicolas,richard@epfl.ch",
+      "name": "Nicolas Richard",
+      "affiliation": "EPFL"
+    }
+  ],
+  "identifier": "https://zenodo.org/records/14191429",
+  "codeRepository": "https://github.com/ibois-epfl/augmented-carpentry",
+  "datePublished": "2024-12-19",
+  "dateModified": "2024-12-19",
+  "dateCreated": "2024-12-19",
+  "description": "AugmentedCarpentryEngine (ACEngine) is a lightweight and fast-developing UNIX C++ engine for prototyping AR applications leveraging bleeding-edge robotic vision research for digital fabrication. Here an example of its adoption for Augmented Carpentry: a AR-based assistant for digital wood-working with manual tools. It features a modular layer-stack flow, a geometry framework for managing 3D objects, a computed feedback system for visual guidance, and an AR rendering system for synthesizing digital instructions into a simple monocular camera feed.",
+  "keywords": "augmented reality, engine, digital fabrication, c++, opengl, geometry framework, computer vision, robotic vision",
+  "license": "GPL v3.0",
+  "title": "Augmented Carpentry Engine (ACEngine)",
+  "version": "v1.0.0"
+}
