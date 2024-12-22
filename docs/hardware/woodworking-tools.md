@@ -25,25 +25,35 @@ If you want to add your own 3d-printable mount or tool head model and share it w
 /// html | div[style='clear: both;']
 ///
 
+<!-- TODO: add drawing axo of the system of the mount on the tool with locline and camera and screen -->
+
+
 
 ## Available Toolheads
 
-<!-- TODO: add rotating svg of the toolhead -->
+/// html | div[style='float: left; width: 52%;']
 
-The following is a list of the available toolheads that are already integrated into the AC system. You will need to use or acquire the corresponding physical toolhead to use the AC system.
-
-The Zenodo repository containing the dataset is [here](https://zenodo.org/records/12578820).
-
-<!-- TODO: add icons for the type of tool -->
-
-{{ run_python_script('docs/scripts/get_zenodo_toolheads.py') }}
-
-!!! tip "Want to add a new toolhead?"
-    If you want to add your own toolhead to the AC system, follow the instructions in the section [contributing](../contributing/index.md).
+The following is a list of the available toolheads that are already integrated into the AC system. You will need to use or acquire the corresponding physical toolhead to use the AC system. Each toolhead is digitize and integrated to the dataset, the digital model is necessary to allow AC to detect the 3D position of the toolhead from the sensor stream. The Zenodo repository containing the dataset is [here](https://zenodo.org/records/12578820).
 
 !!! note "Toolhead integration"
     If you want to know more about the details of the integration and how toolhead are managed in the AC system, you can read the [developer guide](../developer-guide/toolheads.md).
 
+!!! tip "Want to add a new toolhead?"
+    If you want to add your own toolhead to the AC system, follow the instructions in the section [contributing](../contributing/index.md).
+
+///
+
+/// html | div[style='float: right;width: 45%;']
+
+![rotating model drill bit](../assets/images/getting_started/drill_anim.gif){width="500" class="rounded-corners"}
+
+///
+
+/// html | div[style='clear: both;']
+///
+
+
+{{ run_python_script('docs/scripts/get_zenodo_toolheads.py') }}
 
 ## Available 3D mounts
 
@@ -60,15 +70,12 @@ Each mount is designed with a flexible integration mechanism, allowing for the a
 
 The Zenodo repository containing the dataset is [here](https://zenodo.org/records/14531724).
 
-For convinience, here is a list of the available mounts regrouped by brands:
-
-{{ run_python_script('docs/scripts/get_zenodo_mounts.py') }}
-
 !!! tip "Want to add a new mount?"
     If you want to add your own toolhead to the AC system, follow the instructions in the section [contributing](../contributing/index.md).
 
-<!-- TODO: add example and images on how to integrate our prototype with the loc line and the magnet -->
+{{ run_python_script('docs/scripts/get_zenodo_mounts.py') }}
 
+<!-- TODO: add example and images on how to integrate our prototype with the loc line and the magnet -->
 
 <!-- TODO: update -->
 ## Components list
