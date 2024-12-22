@@ -57,7 +57,7 @@ def main() -> None:
     go.EnableHighlight(False)
     __OPT_is_saving_gif = Rhino.Input.Custom.OptionToggle(False, "Off", "On")
     __OPT_transparent_background = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
-    __OPT_fps = Rhino.Input.Custom.OptionInteger(60, 0, 120)
+    __OPT_fps = Rhino.Input.Custom.OptionInteger(30, 0, 120)
     __OPT_duration = Rhino.Input.Custom.OptionInteger(3500, 1, 10000)
     _build_folder = os.path.dirname(Rhino.RhinoDoc.ActiveDoc.Path)
     __OPT_width = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
@@ -93,17 +93,17 @@ def main() -> None:
     _is_saving_gif = __OPT_is_saving_gif.CurrentValue
     _transparent_background = __OPT_transparent_background.CurrentValue
     _fps = __OPT_fps.CurrentValue
-    _duration = __OPT_duration.CurrentValue  # FIXME: to integrate
+    _duration = __OPT_duration.CurrentValue
     _width = __OPT_width.CurrentValue
     _height = __OPT_height.CurrentValue
     num_frames = int(_fps * (_duration / 1000))
-    frame_duration = int(1000 / _fps)
+    gif_delay = int(1000 / _fps) // 10 
     print("\nOptions values:")
     print(f"\tSaving gif: {_is_saving_gif}")
     print(f"\tTransparent background: {_transparent_background}")
     print(f"\tFPS: {_fps}")
     print(f"\tNumber of frames: {num_frames}")
-    print(f"\tFrame duration: {frame_duration}")
+    print(f"\tGif delay (hundredths secs): {gif_delay}")
     print(f"\tDuration: {_duration}")
     print(f"\tWidth: {_width}")
     print(f"\tHeight: {_height}\n")
@@ -131,37 +131,34 @@ def main() -> None:
     #------------------------------------------------------------
     # Animation + save bitmpas on memory
     #------------------------------------------------------------
-    
-    # FIXME: there is a small final lag/jump in the animation
-
-    # FIXME: this needs to be set as a ratio not as input (frame per sec 30fps etc)
-    # num_steps = 30       # << input (default: 800)
+    # FIXME: add sub-options for rotation
     total_rotation = 360  # << input (default: 360)
 
     mu = num_frames // 2
     sigma = num_frames // 6
     gaussian_values = [gaussian(x, mu, sigma) for x in range(num_frames)]
     max_gaussian = max(gaussian_values)
+    normalized_gaussian_values = [val / max_gaussian for val in gaussian_values]
+    total_gaussian_sum = sum(normalized_gaussian_values)
+    normalized_gaussian_values = [val / total_gaussian_sum for val in normalized_gaussian_values]
 
     total_angle = 0
     mesh_ctr = mesh.GetBoundingBox(True).Center
     for i in range(num_frames):
-        angle = gaussian_values[i] * total_rotation  # scale the angle by the Gaussian value
+        angle = normalized_gaussian_values[i] * total_rotation  # scale the angle by the Gaussian value
         total_angle += angle
         xform = rg.Transform.Rotation(math.radians(angle), rg.Vector3d.ZAxis, mesh_ctr)
         mesh.Transform(xform)
         Rhino.RhinoDoc.ActiveDoc.Objects.Replace(obj_ref, mesh)
         Rhino.RhinoDoc.ActiveDoc.Views.Redraw()
-        print_progress_bar(i + 1, num_frames, prefix='Animate:', suffix='Complete')
-
+        
         if _is_saving_gif:
             bitmap = view_capture.CaptureToBitmap(view)
             if bitmap is None:
                 raise Exception("Failed to capture view to bitmap")
             bitmap.Save(os.path.join(build_folder, f"frame_{i}.png"), System.Drawing.Imaging.ImageFormat.Png)
-        
-        if _fps != 1:
-            rs.Sleep(frame_duration)
+            print_progress_bar(i + 1, num_frames, prefix='Animate:', suffix='Complete')
+            rs.Sleep(1)
 
     rs.UnselectAllObjects()
 
@@ -184,7 +181,7 @@ def main() -> None:
                     new_gif.wand,
                     img_path.encode('utf-8')
                 )
-                new_gif.delay = frame_duration  # TODO: check if ok
+                new_gif.delay = gif_delay
                 print_progress_bar(frames.index(img_path) + 1, len(frames), prefix='Saving:', suffix='Complete')
                 rs.Sleep(1)
             Rhino.RhinoApp.SetCommandPrompt("Saving gif, please wait..")
