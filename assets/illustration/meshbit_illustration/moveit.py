@@ -55,6 +55,7 @@ def main() -> None:
     go.AcceptNothing(True)
     go.ClearCommandOptions()
     go.EnableHighlight(False)
+
     __OPT_is_saving_gif = Rhino.Input.Custom.OptionToggle(False, "Off", "On")
     __OPT_transparent_background = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
     __OPT_fps = Rhino.Input.Custom.OptionInteger(30, 0, 120)
@@ -62,20 +63,31 @@ def main() -> None:
     _build_folder = os.path.dirname(Rhino.RhinoDoc.ActiveDoc.Path)
     __OPT_width = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
     __OPT_height = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
-    go.AddOptionToggle("isSavingGif", __OPT_is_saving_gif)
-    go.AddOptionToggle("TransparentBackground", __OPT_transparent_background)
-    go.AddOptionInteger("Fps", __OPT_fps)
-    go.AddOptionInteger("Duration_ms", __OPT_duration)
-    go.AddOption("BuildDirectory")
-    go.AddOptionInteger("Width", __OPT_width)
-    go.AddOptionInteger("Height", __OPT_height)
+    __OPT_rot_degrees = Rhino.Input.Custom.OptionInteger(360, 0, 360)
+    __OPT_gaussian_move = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
+    
+    is_subopt = False
+
     while True:
+        if not is_subopt:
+            go.ClearCommandOptions()
+            go.AddOptionToggle("isSavingGif", __OPT_is_saving_gif)
+            go.AddOptionToggle("TransparentBackground", __OPT_transparent_background)
+            go.AddOptionInteger("Fps", __OPT_fps)
+            go.AddOptionInteger("Duration_ms", __OPT_duration)
+            go.AddOption("BuildDirectory")
+            go.AddOptionInteger("Width", __OPT_width)
+            go.AddOptionInteger("Height", __OPT_height)
+            go.AddOption("Rotation")
+
         get_rc: Rhino.Input.GetResult = go.Get()
-        if go.CommandResult() == Rhino.Commands.Result.Cancel:
-            return go.CommandResult()
+
         if get_rc == Rhino.Input.GetResult.Object:
             break
         elif get_rc == Rhino.Input.GetResult.Cancel:
+            if is_subopt:
+                is_subopt = False
+                continue
             return Rhino.Commands.Result.Cancel
         elif get_rc == Rhino.Input.GetResult.Option:
             option = go.Option().EnglishName
@@ -83,9 +95,14 @@ def main() -> None:
                 folder = rs.BrowseForFolder("Select folder to save the animation")
                 if folder:
                     _build_folder = folder
+            elif option == "Rotation":
+                is_subopt = True
+                go.ClearCommandOptions()
+                go.AddOptionInteger("TotalRotation", __OPT_rot_degrees)
+                go.AddOptionToggle("GaussianMove", __OPT_gaussian_move)
             continue
         break
-
+ 
     go.Get()
     obj_ref = go.Object(0)
     mesh = obj_ref.Mesh()
@@ -96,6 +113,8 @@ def main() -> None:
     _duration = __OPT_duration.CurrentValue
     _width = __OPT_width.CurrentValue
     _height = __OPT_height.CurrentValue
+    _total_rotation = __OPT_rot_degrees.CurrentValue
+    _is_gaussian_move = __OPT_gaussian_move.CurrentValue
     num_frames = int(_fps * (_duration / 1000))
     gif_delay = int(1000 / _fps) // 10 
     print("\nOptions values:")
@@ -131,21 +150,25 @@ def main() -> None:
     #------------------------------------------------------------
     # Animation + save bitmpas on memory
     #------------------------------------------------------------
-    # FIXME: add sub-options for rotation
-    total_rotation = 360  # << input (default: 360)
-
-    mu = num_frames // 2
-    sigma = num_frames // 6
-    gaussian_values = [gaussian(x, mu, sigma) for x in range(num_frames)]
-    max_gaussian = max(gaussian_values)
-    normalized_gaussian_values = [val / max_gaussian for val in gaussian_values]
-    total_gaussian_sum = sum(normalized_gaussian_values)
-    normalized_gaussian_values = [val / total_gaussian_sum for val in normalized_gaussian_values]
+    if _is_gaussian_move:
+        mu = num_frames // 2
+        sigma = num_frames // 6
+        gaussian_values = [gaussian(x, mu, sigma) for x in range(num_frames)]
+        max_gaussian = max(gaussian_values)
+        normalized_gaussian_values = [val / max_gaussian for val in gaussian_values]
+        total_gaussian_sum = sum(normalized_gaussian_values)
+        normalized_gaussian_values = [val / total_gaussian_sum for val in normalized_gaussian_values]
+    else:
+        standard_value = 1 / num_frames
 
     total_angle = 0
     mesh_ctr = mesh.GetBoundingBox(True).Center
     for i in range(num_frames):
-        angle = normalized_gaussian_values[i] * total_rotation  # scale the angle by the Gaussian value
+        angle = 0
+        if _is_gaussian_move:
+            angle = normalized_gaussian_values[i] * _total_rotation
+        else:
+            angle = standard_value * _total_rotation
         total_angle += angle
         xform = rg.Transform.Rotation(math.radians(angle), rg.Vector3d.ZAxis, mesh_ctr)
         mesh.Transform(xform)
