@@ -111,7 +111,7 @@ def main() -> None:
     __OPT_is_saving_gif = Rhino.Input.Custom.OptionToggle(False, "Off", "On")
     __OPT_transparent_background = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
     __OPT_fps = Rhino.Input.Custom.OptionInteger(30, 0, 120)
-    __OPT_duration = Rhino.Input.Custom.OptionInteger(3500, 1, 10000)
+    __OPT_duration = Rhino.Input.Custom.OptionInteger(7000, 1, 10000)
     _build_folder = os.path.dirname(Rhino.RhinoDoc.ActiveDoc.Path)
     __OPT_width = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
     __OPT_height = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
@@ -119,7 +119,7 @@ def main() -> None:
     __OPT_rot_degrees = Rhino.Input.Custom.OptionInteger(360, 0, 360)
     __OPT_gaussian_move = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
     __OPT_translation_axis = Rhino.Input.Custom.OptionInteger(2, 0, 2)
-    __OPT_translation_distance = Rhino.Input.Custom.OptionDouble(0.1, 0., 10000.)
+    __OPT_translation_distance = Rhino.Input.Custom.OptionDouble(0.03, 0., 10000.)
     __OPT_translation_go_back = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
     
     is_subopt = False
