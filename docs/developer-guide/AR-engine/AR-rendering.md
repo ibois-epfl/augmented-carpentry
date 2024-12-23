@@ -7,7 +7,7 @@ tags:
 
 # AR rendering
 
-![SVG of the pipeline](n/a now)
+![Illustration of the AR rendering design and main rendering pipeline. ><](../../assets/images/AR_engine/fig_AR-rendering.svg){align=center width=90% style='fill-color: #000000; filter: invert(100%);'}
 
 ## Rendering system
 The rendering system renders the main AR view and multiple sub-viewports during different phases. The system consists of the following key components:
