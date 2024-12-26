@@ -32,6 +32,23 @@ def _generate_normalized_gaussian_values(num_frames: int):
     normalized_gaussian_values = [val / total_gaussian_sum for val in normalized_gaussian_values]
     return normalized_gaussian_values
 
+def get_translation_axis(option_value: int) -> rg.Vector3d:
+    """
+        Returns the axis based on the option value.
+
+        :param option_value: The option value to determine the axis.
+
+        :return The axis based on the option value.
+    """
+    if option_value == 0:
+        return rg.Vector3d.XAxis
+    elif option_value == 1:
+        return rg.Vector3d.YAxis
+    elif option_value == 2:
+        return rg.Vector3d.ZAxis
+    else:
+        return rg.Vector3d(0,0,0)
+
 def generate_animation_values(num_frames: int, is_gaussian_move: bool, animation_magnitude: float):
     """
         Generate a list of values to animate an object.
@@ -111,19 +128,23 @@ def main() -> None:
     __OPT_is_saving_gif = Rhino.Input.Custom.OptionToggle(False, "Off", "On")
     __OPT_transparent_background = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
     __OPT_fps = Rhino.Input.Custom.OptionInteger(30, 0, 120)
-    __OPT_duration = Rhino.Input.Custom.OptionInteger(7000, 1, 10000)
+    __OPT_duration = Rhino.Input.Custom.OptionInteger(3000, 1, 10000)
     _build_folder = os.path.dirname(Rhino.RhinoDoc.ActiveDoc.Path)
     __OPT_width = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
     __OPT_height = Rhino.Input.Custom.OptionInteger(1500, 1, 5000)
 
-    __OPT_rot_degrees = Rhino.Input.Custom.OptionInteger(360, 0, 360)
     __OPT_gaussian_move = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
+
+    __OPT_rot_degrees = Rhino.Input.Custom.OptionInteger(360, 0, 360)
+    __OPT_rotation_axis = Rhino.Input.Custom.OptionInteger(0, 0, 2)
+    __OPT_rotation_clockwise = Rhino.Input.Custom.OptionToggle(False, "Off", "On")
+
     __OPT_translation_axis = Rhino.Input.Custom.OptionInteger(2, 0, 2)
     __OPT_translation_distance = Rhino.Input.Custom.OptionDouble(0.03, 0., 10000.)
     __OPT_translation_go_back = Rhino.Input.Custom.OptionToggle(True, "Off", "On")
     
     is_subopt = False
-    animation_type = AnimationType.TRANSLATION
+    animation_type = AnimationType.ROTATION
 
     while True:
         if not is_subopt:
@@ -174,6 +195,8 @@ def main() -> None:
                 go.ClearCommandOptions()
                 if animation_type == AnimationType.ROTATION:
                     go.AddOptionInteger("TotalRotation", __OPT_rot_degrees)
+                    go.AddOptionInteger("RotationAxis", __OPT_rotation_axis)
+                    go.AddOptionToggle("RotationClockwise", __OPT_rotation_clockwise)
                 if animation_type == AnimationType.TRANSLATION:
                     go.AddOptionInteger("TranslationAxis", __OPT_translation_axis)
                     go.AddOptionDouble("TranslationDistance", __OPT_translation_distance)
@@ -184,7 +207,7 @@ def main() -> None:
  
     go.Get()
     obj_ref = go.Object(0)
-    mesh = obj_ref.Mesh()
+    mesh = obj_ref.Geometry()
 
     _is_saving_gif = __OPT_is_saving_gif.CurrentValue
     _transparent_background = __OPT_transparent_background.CurrentValue
@@ -192,17 +215,17 @@ def main() -> None:
     _duration = __OPT_duration.CurrentValue
     _width = __OPT_width.CurrentValue
     _height = __OPT_height.CurrentValue
-    _total_rotation = __OPT_rot_degrees.CurrentValue
+    
     _is_gaussian_move = __OPT_gaussian_move.CurrentValue
-    _translation_axis = rg.Vector3d(0, 0, 0)
-    if __OPT_translation_axis.CurrentValue == 0:
-        _translation_axis = rg.Vector3d.XAxis
-    elif __OPT_translation_axis.CurrentValue == 1:
-        _translation_axis = rg.Vector3d.YAxis
-    elif __OPT_translation_axis.CurrentValue == 2:
-        _translation_axis = rg.Vector3d.ZAxis
+    
+    _total_rotation = __OPT_rot_degrees.CurrentValue
+    _rotation_axis = get_translation_axis(__OPT_rotation_axis.CurrentValue)
+    _rotation_clockwise = __OPT_rotation_clockwise.CurrentValue
+
+    _translation_axis = get_translation_axis(__OPT_translation_axis.CurrentValue)
     _translation_distance = __OPT_translation_distance.CurrentValue
     _translation_go_back = __OPT_translation_go_back.CurrentValue
+    
     num_frames = int(_fps * (_duration / 1000) / 2) if _translation_go_back else int(_fps * (_duration / 1000))
     gif_delay = int(1000 / _fps) // 10
     sleep_time = _duration / num_frames
@@ -250,9 +273,9 @@ def main() -> None:
         total_angle = 0
         mesh_ctr = mesh.GetBoundingBox(True).Center
         for i in range(num_frames):
-            angle = rotation_values[i]
+            angle = rotation_values[i] if _rotation_clockwise else -rotation_values[i]
             total_angle += angle
-            xform = rg.Transform.Rotation(math.radians(angle), rg.Vector3d.ZAxis, mesh_ctr)
+            xform = rg.Transform.Rotation(math.radians(angle), _rotation_axis, mesh_ctr)
             mesh.Transform(xform)
             Rhino.RhinoDoc.ActiveDoc.Objects.Replace(obj_ref, mesh)
             Rhino.RhinoDoc.ActiveDoc.Views.Redraw()
