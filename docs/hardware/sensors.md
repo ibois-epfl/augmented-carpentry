@@ -87,10 +87,11 @@ The calibration file can be found and set manually from the `config.ini` file.
 --8<-- "assets/default_config.ini"
 ```
 
-<!-- TODO: update -->
 ## Components list
 
 !!! print-parts "Parts"
+
+    ![><](../assets/images/getting_started/hard_detail_cam.png){width=700}
 
     Here's the list of the parts you will need to obtain or realize:
 

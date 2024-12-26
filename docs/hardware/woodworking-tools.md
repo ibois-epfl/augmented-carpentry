@@ -75,15 +75,18 @@ The Zenodo repository containing the dataset is [here](https://zenodo.org/record
 
 {{ run_python_script('docs/scripts/get_zenodo_mounts.py') }}
 
-<!-- TODO: add example and images on how to integrate our prototype with the loc line and the magnet -->
 
-<!-- TODO: update -->
 ## Components list
 
 !!! print-parts "Parts"
 
+    ![><>](../assets/images/getting_started/hard_detail_mount.png){width=500}
+
     Here's the list of the parts you will need to obtain or realize for this section:
 
-    - [x] &nbsp;&nbsp; Machines with available mounts
-    - [x] &nbsp;&nbsp; *3D print the downloaded mounts*
-    - [x] &nbsp;&nbsp; Tool heads present in the model database
+    - [x] &nbsp;&nbsp; electric woodworking tool
+    - [x] &nbsp;&nbsp; (**C**) 3D-printed mount compatible with the tool
+    - [x] &nbsp;&nbsp; (**D**) digitized toolhead
+    - [x] &nbsp;&nbsp; (**B**) clipping mechanism to interchange the camera and interface quickly from tool to tool
+    - [x] &nbsp;&nbsp; (**A**) metal magnet-clipping plate ([:octicons-file-code-16: `assets/hardware_parts/mount/metal_magnet_slot.pdf`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/mount/metal_magnet_slot.pdf))
+    - [ ] lock-line adaptor for magnet-clipping plate

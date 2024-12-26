@@ -55,20 +55,24 @@ AC's prototype is built for x64 machines running on Ubuntu 22.04 LTS. The system
 
     ## Components list
 
-     The battery is a 18v (5.0Ah) battery that can be used for power tools. The battery is connected to the NUC via a 5v regulator (LM785) to ensure a stable power supply. The battery is also connected to a buzzer that will beep when the battery voltage is below a certain threshold (circa 15%). This will inform the user to change the battery.
-
     !!! print-parts "Parts"
 
+        ![><>](../assets/images/getting_started/hard_detail_cu_ensemble.png){width="600"}
+
+        The battery is a 18v (5.0Ah) battery that can be used for power tools. The battery is connected to the NUC via a 5v regulator (LM785) to ensure a stable power supply. The battery is also connected to a buzzer that will beep when the battery voltage is below a certain threshold (circa 15%). This will inform the user to change the battery.
         Here's the list of the parts you will need to obtain or realize:
 
-        - [x] &nbsp;&nbsp; NUC
-        - [x] &nbsp;&nbsp; Protective case for the NUC:
+        - [x] &nbsp;&nbsp; (**C**) NUC
+        - [x] &nbsp;&nbsp; (**B**) Protective case for the NUC:
             - x1 [:octicons-file-code-16: `assets/hardware_parts/nuc/nucpoite2.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/nuc/nucpoite2.stl)
-        - [x] &nbsp;&nbsp; 1x Power tool battery 18v (5.0Ah)
-        - [x] &nbsp;&nbsp; Battery adapter
-        - [x] &nbsp;&nbsp; 1x Metal support to connect NUC case, battery adapter, and belt clip
-        - [x] &nbsp;&nbsp; 1x 5v regulator (LM785)
-        - [x] &nbsp;&nbsp; 1x Battery monitor
+        - [x] &nbsp;&nbsp; (**L**) 1x Power tool battery 18v (5.0Ah)
+        - [x] &nbsp;&nbsp; (**I**) Battery adapter
+        - [x] &nbsp;&nbsp; (**B**) 1x Metal support to connect NUC case, battery adapter, and belt clip
+        - [x] &nbsp;&nbsp; (**G**) 1x 5v regulator (LM785)
+        - [x] &nbsp;&nbsp; (**E**) 1x USB 2.0 input and alimentation for touch screen
+        - [x] &nbsp;&nbsp; (**D**) 1x USB 3.0 camera connection
+        - [x] &nbsp;&nbsp; (**F**) 1x HDMI for touch screen
+        - [x] &nbsp;&nbsp; (**H**) 1x Battery monitor
 
         ???+ example "Battery monitor blueprint"
 

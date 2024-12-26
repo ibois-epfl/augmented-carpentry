@@ -25,12 +25,14 @@ AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graph
 
     !!! print-parts "Parts"
 
+        ![test><](../assets/images/getting_started/hard_detail_int.png){width="600"}
+
         Here's the list of the parts you will need to obtain or realize:
 
-        - [x] &nbsp;&nbsp; WaveShare WS170120
+        - [x] &nbsp;&nbsp; (**C**) WaveShare WS170120
         - [ ] &nbsp;&nbsp; Support and tool-side attach for the screen
-            * [x] &nbsp;&nbsp; locline (1/2" - passage 12 mm)
-            * [x] &nbsp;&nbsp; 3D printed parts
+            * [x] &nbsp;&nbsp; (**A**) locline (1/2" - passage 12 mm)
+            * [x] &nbsp;&nbsp; (**D**) 3D printed parts
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/nuts_ecran.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/nuts_ecran.stl)
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/reinforce_attachusb.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/reinforce_attachusb.stl)
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/screen_board_3.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/screen_board_3.stl)
@@ -45,8 +47,8 @@ AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graph
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/nucpoite2.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/nucpoite2.stl)
             * [x] x10 M3x10 threaded inserts
             * [x] x10 M3x10 nuts
-        - [x] &nbsp;&nbsp; USB 2.0 cable (length: 1.5m)
-        - [x] &nbsp;&nbsp; HDMI (length: cable 1.5m)
+        - [x] &nbsp;&nbsp; (**E**) USB 2.0 cable (length: 1.5m)
+        - [x] &nbsp;&nbsp; (**F**) HDMI (length: cable 1.5m)
         - [x] &nbsp;&nbsp; Cable protections and fixations
         - [x] &nbsp;&nbsp; [:octicons-file-code-16: `assets/hardware_parts/nucpoite2.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/nucpoite2.stl)
 
