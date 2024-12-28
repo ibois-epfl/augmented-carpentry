@@ -1,31 +1,25 @@
 # Documentation issues
 
-Our documentation is composed of more than 80 pages and includes extensive
+Our documentation is constantly growing with
 information on features, configurations, customizations, and much more. If you
 have found an inconsistency or see room for improvement, please follow this
 guide to submit an issue on our [issue tracker].
 
-  [issue tracker]: https://github.com/squidfunk/mkdocs-material/issues
+  [issue tracker]: https://github.com/ibois-epfl/augmented-carpentry/issues
 
 ## Issue template
 
 Reporting a documentation issue is usually less involved than reporting a bug,
-as we don't need a [reproduction]. Please thoroughly read this guide before
+as we don't need a reproduction. Please thoroughly read this guide before
 creating a new documentation issue, and provide the following information as
 part of the issue:
 
-- [Title]
-- [Description]
-- [Related links]
-- [Proposed change] <small>optional</small>
-- [Checklist]
-
-  [reproduction]: ../guides/creating-a-reproduction.md
-  [Title]: #title
-  [Description]: #description
-  [Related links]: #related-links
-  [Proposed change]: #proposed-change
-  [Checklist]: #checklist
+- [Documentation issues](#documentation-issues)
+  - [Issue template](#issue-template)
+    - [Title](#title)
+    - [Description](#description)
+    - [Related links](#related-links)
+    - [Proposed change optional { #proposed-change }](#proposed-change-optional--proposed-change-)
 
 ### Title
 
@@ -80,12 +74,3 @@ proposal. This field is optional but very helpful.
 > __Why we need this__: an improvement proposal can be beneficial for other
 > users who encounter the same issue, as they offer solutions before we
 > maintainers can update the documentation.
-
-### Checklist
-
-Thanks for following the guide and providing valuable feedback for our
-documentation – you are almost done. The checklist ensures that you have read
-this guide and have worked to your best knowledge to provide us with every piece
-of information we need to improve it.
-
-__We'll take it from here.__

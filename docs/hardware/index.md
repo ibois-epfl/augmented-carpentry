@@ -1,6 +1,6 @@
 # Hardware overview
 
-![hardware overview><](../assets/images/getting_started/animation_overview_hardware.gif){width="1000"}
+![hardware overview><](../assets/images/getting_started/overview_hardware.png){width="900"}
 
 This section provides an overview of the hardware requirements for the AC system. AC can run with a simple laptop (:fontawesome-solid-laptop-code:) and connected sensor or as a wearable system (:fontawesome-solid-briefcase:). We include instructions for both layouts. The major XR hardware components for AC are:
 
