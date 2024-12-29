@@ -1,0 +1,276 @@
+# Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+
+# Project information
+site_name: Augmented Carpentry
+site_url: https://ibois-epfl.github.io/augmented-carpentry/
+site_author: Andrea Settimi
+site_description: >-
+  An open-source research to allow digital fabrication in timber construction with ordinary tools, without 2D drawings or marking, freely and..
+
+# Repository
+repo_name: ibois-epfl/augmented-carpentry
+repo_url: https://github.com/ibois-epfl/augmented-carpentry
+
+# Copyright
+copyright: Copyright &copy; 2021 - 2024 IBOIS, EPFL
+
+# Configuration
+theme:
+  name: material
+  custom_dir: material/overrides
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    # - toc.follow
+    - toc.integrate  # to replace toc with main content
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: astral-dark
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: astral-dark
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+  logo: assets/logo.png
+  favicon: assets/favicon.ico
+  icon:
+    # FIXME: understand how tags' icons work
+    tag:
+      html: fontawesome/brands/github
+      js: fontawesome/brands/js
+      css:  fontawesome/brands/css3
+    logo: logo
+
+# Custom CSS
+extra_css:
+  - stylesheets/extra.css
+
+# Plugins
+plugins:
+  # FIXME: understand how tags work
+  - tags:
+      HTML5: html
+      JavaScript: js
+      CSS: css
+  - blog
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+  - macros:
+      module_name: docs/scripts/main
+  # FIXME: >>> DOXY >>> uncomment before release
+  - mkdoxy:
+      enabled: !ENV [ENABLE_MKDOXY, True]
+      projects:
+        acdoxygen:
+          src-dirs: src
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
+            RECURSIVE: True
+      # save-api: docs/.mkdoxy  # to output the .md files
+      full-doc: True
+      debug: False
+      ignore-errors: False
+      emojis-enabled: True
+  # FIXME: <<< DOXY <<< uncomment before release
+
+# Hooks
+hooks:
+  - material/overrides/hooks/shortcodes.py
+  - material/overrides/hooks/translations.py
+
+# Additional configuration
+extra:
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  social:
+    - icon: official/ibois_logo_black 
+      link: https://www.epfl.ch/labs/ibois/
+    - icon: official/epfl_logo_black 
+      link: https://www.epfl.ch/en/
+    - icon: fontawesome/brands/github
+      link: https://github.com/ibois-epfl/augmented-carpentry
+    - icon: fontawesome/brands/docker
+      link: https://github.com/ibois-epfl/augmented-carpentry/pkgs/container/augmented-carpentry-ubuntu
+    - icon: fontawesome/solid/code
+      link: https://github.com/ibois-epfl/augmented-carpentry/releases/latest
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/school/ibois/
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/ibois_epfl/
+    - icon: fontawesome/brands/vimeo
+      link: https://vimeo.com/user87001008
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.blocks.html
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+not_in_nav: |
+  /tutorials/**/*.md
+
+# Page tree
+nav:
+  - Home: index.md
+  - Getting started:
+    - Hardware:
+      - hardware/index.md
+      - Computing unit: hardware/computing.md
+      - Interface: hardware/interface.md
+      - Sensors: hardware/sensors.md
+      - Tools: hardware/woodworking-tools.md
+      - Stickers: hardware/stickers.md
+    - Software:
+      - Installation: installation.md
+    - Changelog:
+      - changelog/index.md
+
+  - Augmented Woodworking:
+    - augmented-woodworking/404.md  # TODO: replace me when done
+    # - augmented-woodworking/index.md
+    - test1: augmented-woodworking/placeholder1.md
+    - test2: augmented-woodworking/placeholder2.md
+    - Camera calibration: augmented-woodworking/camera-calibration.md
+
+    - C++ docs: 
+      - cpp-docs/index.md
+    # FIXME: >>> DOXY >>> uncomment before release
+    - Files: "acdoxygen/files.md"
+    - Functions: "acdoxygen/functions.md"
+    - Classes:
+        - Class List: "acdoxygen/annotated.md"
+        - Class Hierarchy: "acdoxygen/hierarchy.md"
+        - Class Members: "acdoxygen/class_members.md"
+        - Class Member Functions: "acdoxygen/class_member_functions.md"
+        - Class Member Variables: "acdoxygen/class_member_variables.md"
+    # FIXME: <<< DOXY <<< uncomment before release
+        - Variables: "acdoxygen/variables.md"
+    - Macros: "acdoxygen/macros.md"
+
+  - Developer guide:
+    - AR engine:
+      - Layer stack: developer-guide/AR-engine/layer-stack.md
+      - Geometry framework: developer-guide/AR-engine/geometry-framework.md
+      - Feedback system: developer-guide/AR-engine/feedback-system.md
+      - AR rendering: developer-guide/AR-engine/AR-rendering.md
+    - Toolhead: developer-guide/toolhead.md
+
+    - Guidelines:
+      - Code: developer-guide/CONTRIBUTING_copy.md  # TODO: add a copy in the githhub action
+      - Tags: developer-guide/tags.md
+  
+  - Community:
+    - Contributing:
+      - contributing/index.md
+      - Reporting a bug: contributing/reporting-a-bug.md
+      - Reporting a docs issue: contributing/reporting-a-docs-issue.md
+      - Adding tools or mounts: contributing/add-new-tool.md
+      - Making a pull request: contributing/making-a-pull-request.md
+      - Asking a question: https://github.com/ibois-epfl/augmented-carpentry/discussions
+  
+  - Publications: publications/index.md
+  
+  - Research team: team/research_team.md

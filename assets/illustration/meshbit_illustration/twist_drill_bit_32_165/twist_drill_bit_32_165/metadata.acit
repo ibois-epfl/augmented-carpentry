@@ -1,0 +1,9 @@
+<acit version="0.1.0">
+	<toolhead name="twist_drill_bit_32_165" type="drillbit">
+		<toolbase> 0 0 0 </toolbase>
+		<tooltip> 0 0 0.162 </tooltip>
+		<eattip> 0 0 0.149602 </eattip>
+		<chucktip> 0 0 0.0399 </chucktip>
+		<radius> 0.025 </radius>
+	</toolhead>
+</acit>

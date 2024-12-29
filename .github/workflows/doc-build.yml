@@ -1,0 +1,47 @@
+name: doc-build
+
+on:
+  push:
+    paths:
+      - 'tests/**'
+      - 'src/**'
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'Dockerfile'
+      - 'assets/**'
+      - 'deps/**'
+      - 'docs/**'
+      - 'materials/**'
+
+jobs:
+  build-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Doxygen
+        run: sudo apt-get install -y doxygen
+
+      - name: Setup conda environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: 3.9.2
+
+      - name: Replace the changelog/index.md with the latest CHANGELOG.md but convert it to UTF8
+        run: iconv -f ISO-8859-1 -t UTF-8 CHANGELOG.md > docs/changelog/index.md
+
+      - name: Replace the CONTRIBUTING_copy.md with the latest CONTRIBUTING.md but convert it to UTF8
+        run: iconv -f ISO-8859-1 -t UTF-8 CONTRIBUTING.md > docs/contributing/index.md
+
+      - name: Create ac conda environment
+        run: conda env create -f environment.yml
+      
+      - name: Build the documentation
+        run: conda run -n ac mkdocs build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
