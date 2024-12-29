@@ -5,7 +5,6 @@ title: 'Bug: '
 labels: bug
 assignees:
     - 9and3
-
 ---
 
 **Describe the bug**
