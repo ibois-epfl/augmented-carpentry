@@ -3,8 +3,7 @@ name: Documentation issue
 about: Report an inconsistency or suggest an improvement in the documentation
 title: 'Docs: '
 labels: documentation
-assignees: 
-  - 9and3
+assignees: 9and3
 
 ---
 
