@@ -14,6 +14,3 @@ issue_template:
   - name: Documentation Issue
     description: Report an issue or suggest an improvement in the documentation.
     labels: documentation
-  - name: Add Missing Tool
-    description: Contribute a new tool or mount to the AC datasets.
-    labels: enhancement, tool
