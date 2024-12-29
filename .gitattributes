@@ -8,3 +8,7 @@ assets/illustration/hardware_overview/hardware_overview_v10.3dm filter=lfs diff=
 assets/illustration/hardware_overview/hardware_overview_v9.3dm filter=lfs diff=lfs merge=lfs -text
 assets/illustration/hardware_overview/hardware_overview_v9.3dmbak filter=lfs diff=lfs merge=lfs -text
 assets/illustration/hardware_overview/hardware_overview_v9.3dm.rhl filter=lfs diff=lfs merge=lfs -text
+
+*.3dm filter=lfs diff=lfs merge=lfs -text
+*.3dmbak filter=lfs diff=lfs merge=lfs -text
+*.rhl filter=lfs diff=lfs merge=lfs -text
