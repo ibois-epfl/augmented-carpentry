@@ -272,5 +272,4 @@ nav:
   
   - Publications: publications/index.md
   
-  - Research team:
-    - team/index.md
+  - Research team: team/research_team.md

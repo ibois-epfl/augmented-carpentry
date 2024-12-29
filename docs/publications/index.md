@@ -28,7 +28,7 @@ Yves Weinand <a title="ORCID, Yves Weinand" href="https://orcid.org/0000-0002-80
 
 Andrea Settimi <a title="ORCID, Andrea Settimi" href="https://orcid.org/0000-0001-5020-7331"><img width="15" alt="ORCID iD - settimi" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a>,
 Naravich Chutisilp <a title="ORCID, Naravich Chutisilp" href="https://orcid.org/0009-0005-8782-732X"><img width="15" alt="ORCID iD - chutisilp" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a>,
-Florian Aymanns <a title="ORCID, Florain Aymanns" href="https://orcid.org/0000-0003-4290-7244"><img width="15" alt="ORCID iD - aymanns" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a>,
+Florian Aymanns <a title="ORCID, Florain Aymanns" href="http://orcid.org/0000-0003-4290-7244"><img width="15" alt="ORCID iD - aymanns" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a>,
 Julien Gamerro <a title="ORCID, Julien Gamerro" href="https://orcid.org/0000-0001-7802-5345"><img width="15" alt="ORCID iD - gamerro" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a>,
 Yves Weinand <a title="ORCID, Yves Weinand" href="https://orcid.org/0000-0002-8088-6504"><img width="15" alt="ORCID iD - weinand" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a>
 
