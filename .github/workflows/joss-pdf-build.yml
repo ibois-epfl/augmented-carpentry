@@ -28,8 +28,8 @@ jobs:
           # paper.md
           path: paper/paper.pdf
 
-
   paper-add-to-repo:
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     name: add-pdf-to-repo
     needs: paper-build
