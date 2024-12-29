@@ -1,5 +1,5 @@
 ---
-name: Documentation issue
+name: Add Missing Tool
 about: Report an inconsistency or suggest an improvement in the documentation
 title: 'Tool/Mount: '
 labels: documentation

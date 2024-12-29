@@ -1,0 +1,19 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/ibois-epfl/augmented-carpentry/discussions
+    about: Ask questions and discuss ideas with the community.
+
+issue_template:
+  - name: Bug Report
+    description: Report a bug in the project.
+    labels: bug
+  - name: Feature Request
+    description: Suggest a new feature or enhancement.
+    labels: enhancement
+  - name: Documentation Issue
+    description: Report an issue or suggest an improvement in the documentation.
+    labels: documentation
+  - name: Add Missing Tool
+    description: Contribute a new tool or mount to the AC datasets.
+    labels: enhancement, tool
