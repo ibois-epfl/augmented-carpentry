@@ -1,5 +1,5 @@
 ---
-name: Documentation issue
+name: Documentation Issue
 about: Report an inconsistency or suggest an improvement in the documentation
 title: 'Docs: '
 labels: documentation

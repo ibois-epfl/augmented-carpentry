@@ -1,8 +1,8 @@
 ---
 name: Add Missing Tool
-about: Report an inconsistency or suggest an improvement in the documentation
+about: Add a new tool or mount to AC
 title: 'Tool/Mount: '
-labels: documentation
+labels: enhancement
 assignees: 
   - 9and3
 
