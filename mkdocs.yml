@@ -264,13 +264,12 @@ nav:
       - Tags: developer-guide/tags.md
   
   - Community:
-    - Contributing:
-      - contributing/index.md
-      - Reporting a bug: contributing/reporting-a-bug.md
-      - Reporting a docs issue: contributing/reporting-a-docs-issue.md
-      - Adding tools or mounts: contributing/add-new-tool.md
-      - Making a pull request: contributing/making-a-pull-request.md
-      - Asking a question: https://github.com/ibois-epfl/augmented-carpentry/discussions
+    - contributing/index.md
+    - Reporting a bug: contributing/reporting-a-bug.md
+    - Reporting a docs issue: contributing/reporting-a-docs-issue.md
+    - Adding tools or mounts: contributing/add-new-tool.md
+    - Making a pull request: contributing/making-a-pull-request.md
+    - Asking a question: https://github.com/ibois-epfl/augmented-carpentry/discussions
   
   - Publications: publications/index.md
   
