@@ -39,15 +39,15 @@ class ACIM:
         timber_et = ET.SubElement(self._root, "timber")
         timber_et.set("id", guid)
         self._timber_ets[guid] = timber_et
-        timber_executed_et = ET.SubElement(timber_et, "executed")
-        timber_executed_et.text = str(__ACIM_STATE__[0])
+        timber_state_et = ET.SubElement(timber_et, "state")
+        timber_state_et.text = str(__ACIM_STATE__[0])
         timber_current_et = ET.SubElement(timber_et, "current")
         timber_current_et.text = "__NOT_SET__"
 
     def add_timber_state(self, guid, state_value):
         """ Add the execution state of the object, by default False """
-        executed_et = ET.SubElement(self._timber_ets[guid], "executed")
-        executed_et.text = str(__ACIM_STATE__[state_value])
+        state_et = ET.SubElement(self._timber_ets[guid], "state")
+        state_et.text = str(__ACIM_STATE__[state_value])
 
     def add_bbox(self, guid, corners):
         """

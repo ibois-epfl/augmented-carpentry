@@ -45,10 +45,13 @@ namespace AIAC
     ///< Base Component
     void TimberInfo::Component::SetAsCurrent() {
         m_State = ACIMState::CURRENT;
+        
+#ifndef HEADLESS_TEST
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().GetDoc().child("acim").child("timber").child("current").last_child().set_value(m_ID.c_str());
         AIAC_APP.GetLayer<LayerModel>()->GetACInfoModel().Save();
 
         AIAC_APP.GetRenderer()->SetGlobalViewToActivatedComponent(Renderer::StandardView::TOP);
+#endif
     }
 
     void TimberInfo::Component::SetAsDone() {
