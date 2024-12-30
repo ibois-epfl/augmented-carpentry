@@ -127,6 +127,7 @@ plugins:
       emojis-enabled: True
   # FIXME: <<< DOXY <<< uncomment before release
 
+
 # Hooks
 hooks:
   - material/overrides/hooks/shortcodes.py
