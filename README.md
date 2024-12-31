@@ -13,6 +13,8 @@
 
 This is the repo containing the necessary code to run the Augmented Carpentry (AC) software. This is a research thesis project from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [Swiss Federal Institute of Technology in Lausanne (EPFL)](https://www.epfl.ch/). It is an Augmented Reality (AR) application that helps operators to integrate ordinary tools (e.g. power drills, circular saws and chainsaws) into digitally guided woodworking to obtain live computed feedback. The aim is to suppress 2D execution drawings and markings and empower the worker with precise and real-time guidance to replicate even a complex digital designs with manual tools.
 
+Visit the documentation for more info, [here](https://ibois-epfl.github.io/augmented-carpentry/).
+
 ![mendrisio_main](https://github.com/user-attachments/assets/cf0dfbe3-4d4f-4791-a385-930d5c45b789)
 
 
