@@ -10,59 +10,14 @@
 
 
 This is the repo containing the necessary code to run the **Augmented Carpentry (AC)** software. This is a research thesis project from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [Swiss Federal Institute of Technology in Lausanne (EPFL)](https://www.epfl.ch/). It is an Augmented Reality (AR) application that helps operators to integrate ordinary tools (e.g. power drills, circular saws and chainsaws) into digitally guided woodworking to obtain live computed feedback. The aim is to suppress 2D execution drawings and markings and empower the worker with precise and real-time guidance to replicate even a complex digital designs with manual tools.
-
 Here's an overview of the hardware system for AC. Visit the documentation for more info and instructions, [here](https://ibois-epfl.github.io/augmented-carpentry/):
+
 
 <p align="center">
     <img src="./docs/assets/images/getting_started/animation_overview_hardware.gif" width="650">
 </p>
 
-
-    A : the computing unit
-    B : the woodworking electric powertool
-    C : a tool mount
-    D : a digitized toolhead
-    E : an interface
-    F : a monocular camera
-    (*) : Additionally you will also require to print stickers to tag the beams.
-
-
-</br>
-
-## Quickstart
-
-### 1 Software Requirements
-AC is build and tested for *UNIX x64 machines running on Ubuntu 22.04 LTS*. It does not exploit GPU acceleration and can run on a laptop or a desktop. The software is built with *C++*.
-
-First refresh the package list and install the necessary dependencies:
-```bash
-apt-get -qq update && apt-get -qq -y install g++ cmake git git-lfs
-```
-And here's the dependecies for the project:
-```bash
-apt-get -qq update && apt-get -qq -y install \
-wget \
-curl \
-unzip \
-xvfb \
-freeglut3-dev \
-libfreetype-dev \
-libassimp-dev \
-libboost-all-dev \
-libeigen3-dev \
-libglew-dev \
-libglfw3-dev \
-libglm-dev \
-libgmp-dev \
-libgoogle-glog-dev \
-libmpfr-dev \
-libimgui-dev \
-libopencv-dev
-```
-
-### 2 Hardware Requirements
-
-#### 2.1 Computing unit, interface and sensors
+#### (A) Computing unit, (E) interface and (F) sensors
 AC works on *x64 machines* running on *Ubuntu 22.04 LTS* and a simple *monocular camera*. For a quick start, you can use a laptop and your webcam. If you want to build on a touch screen, you can use the WaveShare WS170120 and follow the instructions below:
 
 To config the touch screen on the pc follow [these steps first](https://www.waveshare.com/wiki/7inch_HDMI_LCD). Be sure to switch the display on, plug the mini-USB and finally plug the HDMI cable.
@@ -93,13 +48,48 @@ monitor_resolution = 1280 x 720
 > [!TIP]
 > You can build AC with the touch screen or on a non-touch screen. To do so set ON or OFF the CMake option `DEPLOY_ON_TOUCH` later when configuring the build: `cmake -S . -B build -DDEPLOY_ON_TOUCH=ON`.
 
-#### 2.2 Wood working tools
+#### (B, D) Wood working tools
 AC is designed to be *machine independent*, it is only dependent on the toolheads (e.g.: drill bits, circular saw blades and chainsaw boards). You can find a list of the available toolheads [here](https://zenodo.org/records/12578820). If you want to add your own, open a Pull Request to the repo [TTool](https://github.com/ibois-epfl/TTool) and follow the [Wiki](https://github.com/ibois-epfl/TTool/wiki).
 
+#### (D)
 
-#### 2.3 Stickers
+#### (*) Stickers
 The last thing you need is a set of *STags*. These are the markers that help the camera understand its position and orientation to the timber beam. You can find them as 450 stripes for a total of 21149 tags are available in batches of 50 stripes with an A0 format, ready to print (better as stickers) and can [be downloaded here](https://zenodo.org/record/7738721/files/stag_stickers_ready.zip?download=1). They are made to be print as stickers, but if you want to generate your own you can find a [script here](https://github.com/ibois-epfl/TSlam/tree/main/stag_util).
 
+</br>
+
+---
+    
+## Quickstart
+
+### Software Requirements
+AC is build and tested for *UNIX x64 machines running on Ubuntu 22.04 LTS*. It does not exploit GPU acceleration and can run on a laptop or a desktop. The software is built with *C++*.
+
+First refresh the package list and install the necessary dependencies:
+```bash
+apt-get -qq update && apt-get -qq -y install g++ cmake git git-lfs
+```
+And here's the dependecies for the project:
+```bash
+apt-get -qq update && apt-get -qq -y install \
+wget \
+curl \
+unzip \
+xvfb \
+freeglut3-dev \
+libfreetype-dev \
+libassimp-dev \
+libboost-all-dev \
+libeigen3-dev \
+libglew-dev \
+libglfw3-dev \
+libglm-dev \
+libgmp-dev \
+libgoogle-glog-dev \
+libmpfr-dev \
+libimgui-dev \
+libopencv-dev
+```
 
 ### 3 Build & Run
 
