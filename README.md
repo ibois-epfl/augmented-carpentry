@@ -9,12 +9,12 @@
 </p>
 
 
-This is the repo containing the necessary code to run the Augmented Carpentry (AC) software. This is a research thesis project from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [Swiss Federal Institute of Technology in Lausanne (EPFL)](https://www.epfl.ch/). It is an Augmented Reality (AR) application that helps operators to integrate ordinary tools (e.g. power drills, circular saws and chainsaws) into digitally guided woodworking to obtain live computed feedback. The aim is to suppress 2D execution drawings and markings and empower the worker with precise and real-time guidance to replicate even a complex digital designs with manual tools.
+This is the repo containing the necessary code to run the **Augmented Carpentry (AC)** software. This is a research thesis project from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [Swiss Federal Institute of Technology in Lausanne (EPFL)](https://www.epfl.ch/). It is an Augmented Reality (AR) application that helps operators to integrate ordinary tools (e.g. power drills, circular saws and chainsaws) into digitally guided woodworking to obtain live computed feedback. The aim is to suppress 2D execution drawings and markings and empower the worker with precise and real-time guidance to replicate even a complex digital designs with manual tools.
 
 Here's an overview of the hardware system for AC. Visit the documentation for more info and instructions, [here](https://ibois-epfl.github.io/augmented-carpentry/):
 
 <p align="center">
-    <img src="./docs/assets/images/getting_started/animation_overview_hardware.gif" width="800">
+    <img src="./docs/assets/images/getting_started/animation_overview_hardware.gif" width="650">
 </p>
 
 
