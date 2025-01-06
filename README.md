@@ -9,13 +9,22 @@
 </p>
 
 
-# Augmented Carpentry
-
 This is the repo containing the necessary code to run the Augmented Carpentry (AC) software. This is a research thesis project from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [Swiss Federal Institute of Technology in Lausanne (EPFL)](https://www.epfl.ch/). It is an Augmented Reality (AR) application that helps operators to integrate ordinary tools (e.g. power drills, circular saws and chainsaws) into digitally guided woodworking to obtain live computed feedback. The aim is to suppress 2D execution drawings and markings and empower the worker with precise and real-time guidance to replicate even a complex digital designs with manual tools.
 
-Visit the documentation for more info, [here](https://ibois-epfl.github.io/augmented-carpentry/).
+Here's an overview of the hardware system for AC. Visit the documentation for more info and instructions, [here](https://ibois-epfl.github.io/augmented-carpentry/):
 
-![mendrisio_main](https://github.com/user-attachments/assets/cf0dfbe3-4d4f-4791-a385-930d5c45b789)
+<p align="center">
+    <img src="./docs/assets/images/getting_started/animation_overview_hardware.gif" width="800">
+</p>
+
+
+    A : the computing unit
+    B : the woodworking electric powertool
+    C : a tool mount
+    D : a digitized toolhead
+    E : an interface
+    F : a monocular camera
+    (*) : Additionally you will also require to print stickers to tag the beams.
 
 
 </br>
@@ -69,7 +78,7 @@ monitor_link_t = HDMI
 monitor_resolution = 1280 x 720
 ```
 
-> [!NOTE]
+> [!IMPORTANT]
 > You can use any other touch screen, just make sure to set the correct specs in the `config.ini` file.
 
 > [!WARNING]
