@@ -128,6 +128,7 @@ To cite the software follow the following BibTeX entry:
     year = {2024},
     doi = {10.5281/zenodo.14191429},
     url = {https://github.com/ibois-epfl/augmented-carpentry}
+}
 ```
 or the associated Zenodo DOI:
 
