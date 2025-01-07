@@ -3,7 +3,7 @@ This folder contains the necessary code and data for the evaluation of the Augme
 To run the analysis, you need to create a specific conda environment with the necessary dependencies. You can do this by running the following command:
 
 ```bash
-conda env create -f environment.yml
+conda env create -f environment.eval.yml
 ```
 
 After creating the environment, you can activate it by running:
