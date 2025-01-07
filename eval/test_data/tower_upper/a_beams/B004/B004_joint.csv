@@ -1,0 +1,3 @@
+joint id,min_deviation,max_deviation,std_deviation,rmse,mean,beam_length,joint_distance_to_beam_midpoint
+0--0--0,0.0,0.0033,0.0007,0.0016,0.0015,0.6839943128174947,2.247525828980217
+0--1--0,0.0,0.003,0.0005,0.001,0.0009,0.6839943128174947,2.1796694128334937
