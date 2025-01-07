@@ -23,12 +23,6 @@ import numpy as np
 
 import open3d as o3d
 
-"""
-        TODO:
-        --> representation for assembly
-        --> get out latex table
-    """
-
 def print_separator(char='-', length=None):
     if length is None:
         # Get the terminal size
@@ -98,7 +92,9 @@ def remove_single_joint_faces(df: pd.DataFrame, joint_label_col: str, beam_col: 
 
 def main(
     paths: typing.List[str],
-    output_path: str
+    output_path: str,
+    plot_layout: str,
+    show: bool
     ) -> None:
     ###################################################################################################
     print_separator()
@@ -259,11 +255,14 @@ def main(
     medianprops = dict(color=clr_markers)
     pad = 8
     labelpad_y = 2
-    subtitle_fontsize = 15
+    xylabel_fontsize = 17
+    tick_fontsize = 17
+    subtitle_fontsize = 18
 
     fig, axs = plt.subplots(1, 4, figsize=(13.5, 5))
+    if plot_layout == '2x2':
+        axs = axs.reshape(2, 2)
 
-    # TODO: write a console parameter switch for 1x4 or 2x2
     ax = axs[0]
     df_joints_dataset.boxplot(
         column='mean',
@@ -275,11 +274,11 @@ def main(
         medianprops=medianprops
         )
     ax.set_title('(A)', fontsize=subtitle_fontsize)
-    ax.set_xlabel('beam length (m)', fontsize=12)
-    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.set_xlabel('beam length (m)', fontsize=xylabel_fontsize)
+    ax.set_ylabel('error (mm)', fontsize=xylabel_fontsize, labelpad=labelpad_y)
     ax.grid()
 
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=tick_fontsize, pad=pad)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # -----------------------------------------------------------------------------------------------
@@ -303,11 +302,11 @@ def main(
         medianprops=medianprops
         )
     ax.set_title('(B)', fontsize=subtitle_fontsize)
-    ax.set_xlabel('cut angle (°)', fontsize=12)
-    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.set_xlabel('cut angle (°)', fontsize=xylabel_fontsize)
+    ax.set_ylabel('error (mm)', fontsize=xylabel_fontsize, labelpad=labelpad_y)
     ax.grid()
 
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=tick_fontsize, pad=pad)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # format the x-acis lables to integer
@@ -334,11 +333,11 @@ def main(
         medianprops=medianprops
         )
     ax.set_title('(C.1)', fontsize=subtitle_fontsize)
-    ax.set_xlabel('drill angle (°)', fontsize=12)
-    ax.set_ylabel('error (°)', fontsize=12, labelpad=labelpad_y)
+    ax.set_xlabel('drill angle (°)', fontsize=xylabel_fontsize)
+    ax.set_ylabel('error (°)', fontsize=xylabel_fontsize, labelpad=labelpad_y)
     ax.grid()
 
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=tick_fontsize, pad=pad)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
@@ -356,16 +355,18 @@ def main(
         medianprops=medianprops
         )
     ax.set_title('(C.2)', fontsize=subtitle_fontsize)
-    ax.set_xlabel('drill angle (°)', fontsize=12)
-    ax.set_ylabel('error (mm)', fontsize=12, labelpad=labelpad_y)
+    ax.set_xlabel('drill angle (°)', fontsize=xylabel_fontsize)
+    ax.set_ylabel('error (mm)', fontsize=xylabel_fontsize, labelpad=labelpad_y)
     ax.grid()
 
-    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=11, pad=pad)
+    ax.tick_params(axis='both', which='both', direction='in', top=True, right=True, labelsize=tick_fontsize, pad=pad)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.suptitle('')
     plt.tight_layout()
-    # plt.show()  # TODO: write switch for visualization
+
+    if show:
+        plt.show()
 
     # save the figure locally
     fig.savefig(os.path.join(output_path, f'joint_analysis_{__time_stamp__}.pdf'), dpi=300, bbox_inches='tight')
@@ -473,42 +474,6 @@ def main(
         f.write(latex_table)
 
 
-    # -----------------------------------------------------------------------------------------------
-    # Assembly display
-    # -----------------------------------------------------------------------------------------------
-    # pcd = o3d.io.read_point_cloud(R"F:\augmented-carpentry\eval\test_data\tower_upper\b_assembly\tower_upper_trm_cloud_clr.ply")
-    # points = np.asarray(pcd.points)
-    # colors = np.asarray(pcd.colors)
-    
-    # # Extract x, y, z coordinates
-    # x = points[:, 0]
-    # y = points[:, 1]
-    # z = points[:, 2]
-
-    # # Extract RGB colors
-    # r = colors[:, 0]
-    # g = colors[:, 1]
-    # b = colors[:, 2]
-
-    # # Create a 3D scatter plot
-    # fig = plt.figure(figsize=(10, 7))
-    # ax = fig.add_subplot(111, projection='3d')
-
-    # # Scatter plot with colors
-    # sc = ax.scatter(x, y, z, c=colors, marker='+')
-
-    # # Set labels
-    # ax.set_xlabel('X')
-    # ax.set_ylabel('Y')
-    # ax.set_zlabel('Z')
-
-    # # Set title
-    # ax.set_title('3D Point Cloud with Colors')
-
-    # ax.set_box_aspect([1, 1, 1.2])
-
-    # plt.show()
-
 
 if __name__ == '__main__':
     def _check_dir_sanity(_path: str) -> bool:
@@ -523,6 +488,10 @@ if __name__ == '__main__':
                             NB: if you have multiple paths, start with [] and separate them with commas")
     parser.add_argument('--output_path', type=str, default=f'./',
                         help='path to the directory to save the results')
+    parser.add_argument('--plot_layout', type=str, default='1x4',
+                        help='layout of the plots in the figure, insert 1x4 or 2x2')
+    parser.add_argument('--show', action='store_true', default=False,
+                        help='show the plots in the figure before saving')
 
     args = parser.parse_args()
 
@@ -539,7 +508,11 @@ if __name__ == '__main__':
         _paths = [args.paths] if _check_dir_sanity(args.paths) else sys.exit(1)
 
     _output_path: str = args.output_path if _check_dir_sanity(args.output_path) else sys.exit(1)
+    _plot_layout: str = args.plot_layout
+    _show: bool = args.show
 
     main(_paths,
-        _output_path)
+        _output_path,
+        _plot_layout,
+        _show)
 
