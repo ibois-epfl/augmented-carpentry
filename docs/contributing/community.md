@@ -88,35 +88,6 @@ In this section, we guide your through AC processes.
   [discussion board]: https://github.com/ibois-epfl/augmented-carpentry/discussions
 
 
-## Checklist
-
-Before interacting within the project, please take a moment to consider the
-following questions. By doing so, you can ensure that you are using the correct
-issue template and that you provide all necessary information when interacting
-with our community.
-
-!!! warning "Issues, discussions, and comments are forever"
-
-    Please note that everything you write is permanent and will remain
-    for everyone to read – forever. Therefore, please always be nice and
-    constructive, follow our contribution guidelines, and comply with our
-    [Code of Conduct].
-
-### Before creating an issue
-
-- Are you using the appropriate issue template, or is there another issue
-  template that better fits the context of your request?
-
-- Have you checked if a similar bug report or change request has already been
-  created, or have you stumbled upon something that might be related?
-
-- Did your fill out every field as requested and did you provide all additional
-  information we maintainers need to comprehend your request?
-
-- The PR you want to open exists? It is always worthy to open a issue and discuss
-  opening of your PR and idea.
-
-
 ### Code of Conduct
 
 Our [Code of Conduct] outlines the expectation for all community members to
