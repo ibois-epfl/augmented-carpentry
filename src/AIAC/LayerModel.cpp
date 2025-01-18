@@ -119,7 +119,6 @@ namespace AIAC
     }
 
     void LayerModel::AlignModels() {
-        // TODO: there must be a better way but we need to refresh the models
         bool acimLoaded = m_ACInfoModel.Load(m_ACInfoModelPath);
         bool scannedModelLoaded = m_ScannedModel.Load(m_ScannedModelPath);
         m_ACIMTransformMat = glm::mat4(1.0f);

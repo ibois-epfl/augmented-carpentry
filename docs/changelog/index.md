@@ -1,32 +1,31 @@
-﻿<a id="v0.4.0"></a>
 # [v0.4.0: reformat UI + path recorder](https://github.com/ibois-epfl/augmented-carpentry/releases/tag/v0.4.0) - 2024-11-20
 
-This release introduce a new lighter and more comfortable UI for AC.
-It also add a preliminary version of a 3D recorder to replay the fabrication later on Rhino.
+This release introduces a new, lighter, and more comfortable UI for AC.  
+It also adds a preliminary version of a 3D recorder to replay the fabrication later on Rhino.
 
 [Changes][v0.4.0]
 
+---
 
-<a id="v0.3.0_CMakeRefactor"></a>
 # [v0.3.0_CMakeRefactor](https://github.com/ibois-epfl/augmented-carpentry/releases/tag/v0.3.0_CMakeRefactor) - 2023-09-21
 
-This is a stable release with a refactoring of the entire CMake project. 
-The refactoring consists in:
-- better dependency system
-- less self-contained dependencies
-- general improvements in the CMake project
-
+This is a stable release with a refactoring of the entire CMake project.  
+The refactoring consists of:
+- Better dependency system
+- Fewer self-contained dependencies
+- General improvements in the CMake project
 
 [Changes][v0.3.0_CMakeRefactor]
 
+---
 
-<a id="v0.2.1_FeedbackPatch"></a>
 # [v0.2.1_FeedbackPatch: Hole integrated to feedback system](https://github.com/ibois-epfl/augmented-carpentry/releases/tag/v0.2.1_FeedbackPatch) - 2023-08-21
 
-The  patch refactors and fix bugs in the feedback for the drilling. This is a stable release that completes the feedback system for AC.
+The patch refactors and fixes bugs in the feedback for drilling. This is a stable release that completes the feedback system for AC.
 
 [Changes][v0.2.1_FeedbackPatch]
 
+---
 
 [v0.4.0]: https://github.com/ibois-epfl/augmented-carpentry/compare/v0.3.0_CMakeRefactor...v0.4.0
 [v0.3.0_CMakeRefactor]: https://github.com/ibois-epfl/augmented-carpentry/compare/v0.2.1_FeedbackPatch...v0.3.0_CMakeRefactor
