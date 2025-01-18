@@ -49,8 +49,6 @@ void Renderer::OnRender()
 ### Sub-view Rendering
 While in the mapping phase or performing camera calibration, the main view is blocked, so it will not be rendered. Instead, the corresponding sub-view will be rendered through [`RenderMappingView()`](https://github.com/ibois-epfl/augmented-carpentry/blob/e29ed367a88a3ec412fd1dc5ba136c6cc93f37aa/src/AIAC/Render/Renderer.cpp#L225) or [`RenderCamCalibView()`](https://github.com/ibois-epfl/augmented-carpentry/blob/e29ed367a88a3ec412fd1dc5ba136c6cc93f37aa/src/AIAC/Render/Renderer.cpp#L244).
 
-![Screenshot of the mapping sub-view](n/a now)
-
 ### Main-view Rendering
 During the fabrication phase, there're two viewports that needed to be rendered: The AR view and the global 3D view. The AR view combines captured images with virtual objects, such as CAD models and feedback graphics, to provide clear and intuitive instructions. The global 3D view serves as an interface for navigating through the entire scene, enabling users to easily inspect different components. The rendering of the two viewports are handled by two separate functions:
 
