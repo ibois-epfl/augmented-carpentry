@@ -14,7 +14,7 @@ The `.acim` file represents the execution model in the **AC** system. An executi
 
 During our prototyping phase, we use [*Rhinoceros 3D* with a custom script](https://github.com/ibois-epfl/augmented-carpentry/blob/main/py/components/acimexporter/code.py) that automatically detects joints and holes in the 3D model. With a single click, each element (e.g., beam, panel) can be exported to an `.acim` file without manually creating additional 2D documentation.
 
-![acim export image ><](../../assets/images/developer_guide/only_acim_exporter.png){width=500}
+![acim export image ><](../../assets/images/developer_guide/only_acim_exporter.png){width=700}
 
 
 ## `.acim` file structure
