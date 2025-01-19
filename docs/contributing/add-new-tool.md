@@ -73,25 +73,8 @@ Chances are that you will be needing to acquire the 3D model of our mount (:mate
     We use the circle mesh to do the reference points.
     Depending on the 3D model, there are specific information points you need to add see the [toolhead documentation](../developer-guide/toolheads.md).
     `ACIT` is the information to be parsed by Augmented Carpentry who uses them to derive all the essential information for fabrication process.
-    The tool types for the `ACIT` are defined as a data class in the AC project [here](https://github.com/ibois-epfl/augmented-carpentry/blob/main/src/AIAC/ACInfoToolhead.h).
 
-    Let's do the auger_drill_bit_20_235. The `ACIT` for "DrillBit" is defined in [here](https://github.com/ibois-epfl/augmented-carpentry/blob/c7748687f32cfd36dba3f54ec3434c64861d03d7/src/AIAC/ACInfoToolhead.h#L22). 
-    ```cpp
-            /// @brief name of the toolhead
-            std::string NameACIT;
-            /// @brief radius of the drillbit
-            float RadiusACIT;
-
-            /// @brief original position of the base of the toolhead
-            glm::vec3 ToolbaseACIT;
-            /// @brief original position of the tip of the toolhead
-            glm::vec3 TooltipACIT;
-            /// @brief original position of the tip of the toolhead eating the material
-            glm::vec3 EattipACIT;
-            /// @brief original position of the end of the drill chuck
-            glm::vec3 ChucktipACIT;
-    ```
-    This accords with the final ACIT metadata of the auger_drill_bit_20_235.
+    Let's do the auger_drill_bit_20_235:
     ```xml
     <acit version="0.1.0">
       <toolhead name="auger_drill_bit_20_235" type="drillbit">
