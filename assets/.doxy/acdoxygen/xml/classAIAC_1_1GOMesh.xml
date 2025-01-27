@@ -1,0 +1,577 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GOMesh" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::GOMesh</compoundname>
+    <basecompoundref refid="classAIAC_1_1GOPrimitive" prot="public" virt="non-virtual">AIAC::GOPrimitive</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GOMesh_1ac524b6dc74cedf10ad1923a072afe3e1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; glm::vec3 &gt;</type>
+        <definition>std::vector&lt;glm::vec3&gt; AIAC::GOMesh::m_Vertices</definition>
+        <argsstring></argsstring>
+        <name>m_Vertices</name>
+        <qualifiedname>AIAC::GOMesh::m_Vertices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="745" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="745" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOMesh_1a497e4a035a857e65221a0a61b2c53041" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint32_t &gt;</type>
+        <definition>std::vector&lt;uint32_t&gt; AIAC::GOMesh::m_Indices</definition>
+        <argsstring></argsstring>
+        <name>m_Indices</name>
+        <qualifiedname>AIAC::GOMesh::m_Indices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="746" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="746" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOMesh_1a5312e886e2f2b1efd44601c278d7df7e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; glm::vec3 &gt;</type>
+        <definition>std::vector&lt;glm::vec3&gt; AIAC::GOMesh::m_Normals</definition>
+        <argsstring></argsstring>
+        <name>m_Normals</name>
+        <qualifiedname>AIAC::GOMesh::m_Normals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="747" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="747" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOMesh_1a359cc4d0f77e603831eeec8d3de5d973" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; glm::vec4 &gt;</type>
+        <definition>std::vector&lt;glm::vec4&gt; AIAC::GOMesh::m_Colors</definition>
+        <argsstring></argsstring>
+        <name>m_Colors</name>
+        <qualifiedname>AIAC::GOMesh::m_Colors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="748" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="748" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOMesh_1a86473c317414cd05de5ee6666694b516" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::GOMesh::m_UniformColor</definition>
+        <argsstring></argsstring>
+        <name>m_UniformColor</name>
+        <qualifiedname>AIAC::GOMesh::m_UniformColor</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="749" column="19" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="749" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOMesh_1a0c2e27ea517c568ccde9cc610fe12149" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::GOMesh::m_IsUsingUniformColor</definition>
+        <argsstring></argsstring>
+        <name>m_IsUsingUniformColor</name>
+        <qualifiedname>AIAC::GOMesh::m_IsUsingUniformColor</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="751" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="751" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1GOMesh_1a90732baa5f09060a094a6935f5ad697b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class GOPoint</definition>
+        <argsstring></argsstring>
+        <name>GOPoint</name>
+        <qualifiedname>AIAC::GOMesh::GOPoint</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="753" column="18" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="753" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a55e089240fac140cc4ed75e67f5329f3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOMesh::GOMesh</definition>
+        <argsstring>()</argsstring>
+        <name>GOMesh</name>
+        <qualifiedname>AIAC::GOMesh::GOMesh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="660" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="385" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1acdb1125433c147bbb84f553c681c8e9a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOMesh::GOMesh</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; vertices, std::vector&lt; uint32_t &gt; indices, std::vector&lt; glm::vec3 &gt; normals=std::vector&lt; glm::vec3 &gt;(), std::vector&lt; glm::vec4 &gt; colors=std::vector&lt; glm::vec4 &gt;())</argsstring>
+        <name>GOMesh</name>
+        <qualifiedname>AIAC::GOMesh::GOMesh</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt;</type>
+          <declname>indices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>normals</declname>
+          <defval>std::vector&lt; glm::vec3 &gt;()</defval>
+        </param>
+        <param>
+          <type>std::vector&lt; glm::vec4 &gt;</type>
+          <declname>colors</declname>
+          <defval>std::vector&lt; glm::vec4 &gt;()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="661" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="390" bodyend="394"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a54ec912dcf225c0debbb8a5fb0508b47" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOMesh &gt; AIAC::GOMesh::Add</definition>
+        <argsstring>()</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOMesh::Add</qualifiedname>
+        <briefdescription>
+<para>Add empty <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> to the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="669" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="407" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a12b5f51d0587057eb92fdd2dbcfb7ab3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOMesh &gt; AIAC::GOMesh::Add</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; vertices, std::vector&lt; uint32_t &gt; indices)</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOMesh::Add</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt;</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+<para>Add <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> to the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vertices of the mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of the mesh. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>uint32_t Id of the mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="678" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="414" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1abb7d73f96d85807b5aef014cb221874b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOMesh &gt; AIAC::GOMesh::LoadPly</definition>
+        <argsstring>(std::string)</argsstring>
+        <name>LoadPly</name>
+        <qualifiedname>AIAC::GOMesh::LoadPly</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <defname>path</defname>
+        </param>
+        <briefdescription>
+<para>Load .ply and add the corresponding <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> to the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>uint32_t Id of the mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="684" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="422" bodyend="473"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1ab5252be169a85cfe2e0f47e287403612" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOMesh &gt; AIAC::GOMesh::Get</definition>
+        <argsstring>(const uint32_t &amp;id)</argsstring>
+        <name>Get</name>
+        <qualifiedname>AIAC::GOMesh::Get</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="688" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="475" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a11099e0d11c8de38d8ba9a46f5276a38" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GOMesh &gt; &gt; AIAC::GOMesh::GetAll</definition>
+        <argsstring>()</argsstring>
+        <name>GetAll</name>
+        <qualifiedname>AIAC::GOMesh::GetAll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="689" column="28" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="480" bodyend="483"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1aa723666ae5bf00c3a0ebe98bf2c065e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::GOMesh::~GOMesh</definition>
+        <argsstring>()=default</argsstring>
+        <name>~GOMesh</name>
+        <qualifiedname>AIAC::GOMesh::~GOMesh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="686" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a8e188f7e91758dd9f597bca4f1e24820" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; glm::vec3 &gt;</type>
+        <definition>const std::vector&lt; glm::vec3 &gt; AIAC::GOMesh::GetVertices</definition>
+        <argsstring>() const</argsstring>
+        <name>GetVertices</name>
+        <qualifiedname>AIAC::GOMesh::GetVertices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="691" column="27" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="691" bodyend="691"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a722bce1d7d63d2d84f7bc6f7e73ad266" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; uint32_t &gt;</type>
+        <definition>const std::vector&lt; uint32_t &gt; AIAC::GOMesh::GetIndices</definition>
+        <argsstring>() const</argsstring>
+        <name>GetIndices</name>
+        <qualifiedname>AIAC::GOMesh::GetIndices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="692" column="27" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="692" bodyend="692"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a6c13a5e6a5392450e27ad30379cfb942" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; glm::vec3 &gt;</type>
+        <definition>const std::vector&lt; glm::vec3 &gt; AIAC::GOMesh::GetNormals</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNormals</name>
+        <qualifiedname>AIAC::GOMesh::GetNormals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="693" column="27" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="693" bodyend="693"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a263a650a4c31acb27e01294ef4045332" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; glm::vec4 &gt;</type>
+        <definition>const std::vector&lt; glm::vec4 &gt; AIAC::GOMesh::GetColors</definition>
+        <argsstring>() const</argsstring>
+        <name>GetColors</name>
+        <qualifiedname>AIAC::GOMesh::GetColors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="694" column="27" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="694" bodyend="694"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1aaea9829f42b674c330b8ac400b721537" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::SetColors</definition>
+        <argsstring>(std::vector&lt; glm::vec4 &gt; colors)</argsstring>
+        <name>SetColors</name>
+        <qualifiedname>AIAC::GOMesh::SetColors</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec4 &gt;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="696" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="696" bodyend="700"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a786f8bab1b334ea0c57c7837cdbe478a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::SetColor</definition>
+        <argsstring>(glm::vec4 color)</argsstring>
+        <name>SetColor</name>
+        <qualifiedname>AIAC::GOMesh::SetColor</qualifiedname>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="701" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="701" bodyend="706"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a804773d7a2cd9eadcff37af3e59f91db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::SetVertices</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; vertices)</argsstring>
+        <name>SetVertices</name>
+        <qualifiedname>AIAC::GOMesh::SetVertices</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>vertices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="707" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="707" bodyend="716"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1aed79077ca2ebcfb1398a165f199133f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::SetIndices</definition>
+        <argsstring>(std::vector&lt; uint32_t &gt; indices)</argsstring>
+        <name>SetIndices</name>
+        <qualifiedname>AIAC::GOMesh::SetIndices</qualifiedname>
+        <param>
+          <type>std::vector&lt; uint32_t &gt;</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="717" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="717" bodyend="717"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a92483a7b025cc8acaabb35a9829f7f41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::SetNormals</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; normals)</argsstring>
+        <name>SetNormals</name>
+        <qualifiedname>AIAC::GOMesh::SetNormals</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>normals</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="718" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="718" bodyend="718"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a2413cb0c5e303da960da5ad9da5a6515" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::InitGLObject</definition>
+        <argsstring>()</argsstring>
+        <name>InitGLObject</name>
+        <qualifiedname>AIAC::GOMesh::InitGLObject</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a49f3cf45d5ff50ffad69cc36b14a0e49">InitGLObject</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="721" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="396" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a1d0df971a06caa8c7466cb2f6af4b4cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOMesh::Transform</definition>
+        <argsstring>(const glm::mat4x4 &amp;transformMat)</argsstring>
+        <name>Transform</name>
+        <qualifiedname>AIAC::GOMesh::Transform</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1ab285335f31d4c2ddf2046fe6f73b709c">Transform</reimplements>
+        <param>
+          <type>const glm::mat4x4 &amp;</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="724" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="724" bodyend="734"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOMesh_1a30b8e5785a89b4fb07f949459d9366ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref></type>
+        <definition>GOPrimitive AIAC::GOMesh::operator*</definition>
+        <argsstring>(const glm::mat4x4 &amp;transformMat)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>AIAC::GOMesh::operator*</qualifiedname>
+        <param>
+          <type>const glm::mat4x4 &amp;</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="736" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="736" bodyend="741"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::GOMesh</label>
+        <link refid="classAIAC_1_1GOMesh"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::GOMesh</label>
+        <link refid="classAIAC_1_1GOMesh"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="657" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="658" bodyend="754"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GOMesh_1a54ec912dcf225c0debbb8a5fb0508b47" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a12b5f51d0587057eb92fdd2dbcfb7ab3" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a4aefd9b3b531cf77e3346bda5a4893e9" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>ClearGLObject</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa9ddd2c2904d1e9f5e1755c4a58bf6a1" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>Draw</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a13785fd54f841dae10c39df388038c4d" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GenerateId</name></member>
+      <member refid="classAIAC_1_1GOMesh_1ab5252be169a85cfe2e0f47e287403612" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>Get</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a11099e0d11c8de38d8ba9a46f5276a38" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetAll</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1af06b5575beccb6332e48b928a287a187" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetColor</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a263a650a4c31acb27e01294ef4045332" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetColors</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1472f5ce4a3641dcca7d450c69d70ef8" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetId</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a722bce1d7d63d2d84f7bc6f7e73ad266" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetIndices</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aebac62a9e1b69ec1cfd48644c534aaf2" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a6c13a5e6a5392450e27ad30379cfb942" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetNormals</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a80f79bbd88ca3fe21a0f42fb34255477" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetState</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae9f8303699cea4b8428689317591f12f" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a8e188f7e91758dd9f597bca4f1e24820" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetVertices</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aeb1d8413c37e371533623c88f6fdfba3" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa8d20248ffae40c3e3ac38484e40196c" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GetWeight</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a55e089240fac140cc4ed75e67f5329f3" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GOMesh</name></member>
+      <member refid="classAIAC_1_1GOMesh_1acdb1125433c147bbb84f553c681c8e9a" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GOMesh</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a90732baa5f09060a094a6935f5ad697b" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GOPoint</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1e4561ed741888f900532d421054be6b" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>GOPrimitive</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a2413cb0c5e303da960da5ad9da5a6515" prot="public" virt="virtual"><scope>AIAC::GOMesh</scope><name>InitGLObject</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a3297dec73761f03389616ecf8499e45f" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>IsVisible</name></member>
+      <member refid="classAIAC_1_1GOMesh_1abb7d73f96d85807b5aef014cb221874b" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>LoadPly</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65d77218ad304b17e54ec2fbc9233f8a" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Color</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a359cc4d0f77e603831eeec8d3de5d973" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Colors</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2e707608c9ed77c2f06a643903999460" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_GLObjects</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a50dbae076472c12401fad78575051881" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Id</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a497e4a035a857e65221a0a61b2c53041" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Indices</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a0c2e27ea517c568ccde9cc610fe12149" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_IsUsingUniformColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a68c8ba133a8540aa164e5ebc6e6e08f0" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_IsVisible</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae0cb08a0ec3b500e2703b2c77c72f4a2" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Name</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a5312e886e2f2b1efd44601c278d7df7e" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Normals</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a18ba99dae0b751e36cde6d65b520c8a4" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_State</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac729389e9458753cf5c6c9f4d32fa4b9" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a86473c317414cd05de5ee6666694b516" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_UniformColor</name></member>
+      <member refid="classAIAC_1_1GOMesh_1ac524b6dc74cedf10ad1923a072afe3e1" prot="private" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Vertices</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac1f23dc0823236ae2b364840cae808ed" prot="protected" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>m_Weight</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a30b8e5785a89b4fb07f949459d9366ac" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>operator*</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2f842878f11acd94deee26ba899497a5" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac362718e97f2fe212f6d4af92276d773" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a786f8bab1b334ea0c57c7837cdbe478a" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetColor</name></member>
+      <member refid="classAIAC_1_1GOMesh_1aaea9829f42b674c330b8ac400b721537" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetColors</name></member>
+      <member refid="classAIAC_1_1GOMesh_1aed79077ca2ebcfb1398a165f199133f5" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetIndices</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a39f1285ba9467e1e7c486eac632bc425" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetName</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a92483a7b025cc8acaabb35a9829f7f41" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetNormals</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65a7560b8827c82a121bff95013a2f40" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetState</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2d3133021181776c1a451c2ec2d80a8b" prot="public" virt="virtual"><scope>AIAC::GOMesh</scope><name>SetValueFrom</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a804773d7a2cd9eadcff37af3e59f91db" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetVertices</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a773a24e22df1e14c85c11af52e3b8104" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a641433f07a170345a50809dd9757ad75" prot="public" virt="non-virtual"><scope>AIAC::GOMesh</scope><name>SetWeight</name></member>
+      <member refid="classAIAC_1_1GOMesh_1a1d0df971a06caa8c7466cb2f6af4b4cd" prot="public" virt="virtual"><scope>AIAC::GOMesh</scope><name>Transform</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a8573fe4c64e115849154e927ad15885f" prot="public" virt="virtual"><scope>AIAC::GOMesh</scope><name>Translate</name></member>
+      <member refid="classAIAC_1_1GOMesh_1aa723666ae5bf00c3a0ebe98bf2c065e2" prot="public" virt="virtual"><scope>AIAC::GOMesh</scope><name>~GOMesh</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a04fbe45113efff131e26fa3701965988" prot="public" virt="virtual"><scope>AIAC::GOMesh</scope><name>~GOPrimitive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

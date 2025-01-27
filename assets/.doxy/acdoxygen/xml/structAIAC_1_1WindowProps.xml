@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1WindowProps" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::WindowProps</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1WindowProps_1a363518459e27c00350e899077a11707c" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AIAC::WindowProps::Title</definition>
+        <argsstring></argsstring>
+        <name>Title</name>
+        <qualifiedname>AIAC::WindowProps::Title</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="42" column="20" bodyfile="src/AIAC/Window.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1WindowProps_1a4d06da6968debbdd2f571aa9fe7454df" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::WindowProps::Width</definition>
+        <argsstring></argsstring>
+        <name>Width</name>
+        <qualifiedname>AIAC::WindowProps::Width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="43" column="18" bodyfile="src/AIAC/Window.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1WindowProps_1a807c23ac20de6d8f3e439ac6531f2012" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::WindowProps::Height</definition>
+        <argsstring></argsstring>
+        <name>Height</name>
+        <qualifiedname>AIAC::WindowProps::Height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="44" column="18" bodyfile="src/AIAC/Window.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1WindowProps_1a0b1f04a1c17bed156e194dc781d4adc4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::WindowProps::VSync</definition>
+        <argsstring></argsstring>
+        <name>VSync</name>
+        <qualifiedname>AIAC::WindowProps::VSync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="45" column="14" bodyfile="src/AIAC/Window.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1WindowProps_1af56eac81208612800c4942a48b3f5aa1" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::WindowProps::IsResizable</definition>
+        <argsstring></argsstring>
+        <name>IsResizable</name>
+        <qualifiedname>AIAC::WindowProps::IsResizable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="46" column="14" bodyfile="src/AIAC/Window.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structAIAC_1_1WindowProps_1a8e25f87f00a88f1394a7ea2966efc133" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::WindowProps::WindowProps</definition>
+        <argsstring>(const char *title=&quot;augmented_carpentry&quot;, uint32_t width=800, uint32_t height=480, bool vSync=true, bool isResizable=false)</argsstring>
+        <name>WindowProps</name>
+        <qualifiedname>AIAC::WindowProps::WindowProps</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+          <defval>&quot;augmented_carpentry&quot;</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+          <defval>800</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+          <defval>480</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>vSync</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isResizable</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="48" column="9" bodyfile="src/AIAC/Window.h" bodystart="48" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Window.h" line="40" column="5" bodyfile="src/AIAC/Window.h" bodystart="41" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1WindowProps_1a807c23ac20de6d8f3e439ac6531f2012" prot="public" virt="non-virtual"><scope>AIAC::WindowProps</scope><name>Height</name></member>
+      <member refid="structAIAC_1_1WindowProps_1af56eac81208612800c4942a48b3f5aa1" prot="public" virt="non-virtual"><scope>AIAC::WindowProps</scope><name>IsResizable</name></member>
+      <member refid="structAIAC_1_1WindowProps_1a363518459e27c00350e899077a11707c" prot="public" virt="non-virtual"><scope>AIAC::WindowProps</scope><name>Title</name></member>
+      <member refid="structAIAC_1_1WindowProps_1a0b1f04a1c17bed156e194dc781d4adc4" prot="public" virt="non-virtual"><scope>AIAC::WindowProps</scope><name>VSync</name></member>
+      <member refid="structAIAC_1_1WindowProps_1a4d06da6968debbdd2f571aa9fe7454df" prot="public" virt="non-virtual"><scope>AIAC::WindowProps</scope><name>Width</name></member>
+      <member refid="structAIAC_1_1WindowProps_1a8e25f87f00a88f1394a7ea2966efc133" prot="public" virt="non-virtual"><scope>AIAC::WindowProps</scope><name>WindowProps</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

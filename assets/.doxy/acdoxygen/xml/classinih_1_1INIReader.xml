@@ -1,0 +1,671 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classinih_1_1INIReader" kind="class" language="C++" prot="public">
+    <compoundname>inih::INIReader</compoundname>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classinih_1_1INIReader_1a48b785bc84b8e8ce74704fa79679f292" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int inih::INIReader::_error</definition>
+        <argsstring></argsstring>
+        <name>_error</name>
+        <qualifiedname>inih::INIReader::_error</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="261" column="9" bodyfile="src/utils/Ini.h" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinih_1_1INIReader_1a47f3d952fef6d4fe26f36b56ae853b16" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::unordered_map&lt; std::string, std::string &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::string&gt; &gt; inih::INIReader::_values</definition>
+        <argsstring></argsstring>
+        <name>_values</name>
+        <qualifiedname>inih::INIReader::_values</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="264" column="9" bodyfile="src/utils/Ini.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classinih_1_1INIReader_1a49be637b5e0b1412da9deaeef7d73469" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>inih::INIReader::INIReader</definition>
+        <argsstring>()</argsstring>
+        <name>INIReader</name>
+        <qualifiedname>inih::INIReader::INIReader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="205" column="5" bodyfile="src/utils/Ini.h" bodystart="205" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a24012a6ae221d8a2684d3253d2084b10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>inih::INIReader::INIReader</definition>
+        <argsstring>(std::string filename)</argsstring>
+        <name>INIReader</name>
+        <qualifiedname>inih::INIReader::INIReader</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="209" column="5" bodyfile="src/utils/Ini.h" bodystart="285" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1adbed8f40a9c0274059c27cbc496b4ac5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>inih::INIReader::INIReader</definition>
+        <argsstring>(FILE *file)</argsstring>
+        <name>INIReader</name>
+        <qualifiedname>inih::INIReader::INIReader</qualifiedname>
+        <param>
+          <type>FILE *</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="213" column="5" bodyfile="src/utils/Ini.h" bodystart="290" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a5db3eee53f45dec459a091fa6e5992f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int inih::INIReader::ParseError</definition>
+        <argsstring>() const</argsstring>
+        <name>ParseError</name>
+        <qualifiedname>inih::INIReader::ParseError</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="217" column="9" bodyfile="src/utils/Ini.h" bodystart="295" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a6d34dd183d98acf8a33204ecde93811d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::set&lt; std::string &gt;</type>
+        <definition>const std::set&lt; std::string &gt; inih::INIReader::Sections</definition>
+        <argsstring>() const</argsstring>
+        <name>Sections</name>
+        <qualifiedname>inih::INIReader::Sections</qualifiedname>
+        <briefdescription>
+<para>Return the list of sections found in ini file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The list of sections found in ini file </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="220" column="20" bodyfile="src/utils/Ini.h" bodystart="316" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1af277b96c36b8872e7578468e02067997" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::set&lt; std::string &gt;</type>
+        <definition>const std::set&lt; std::string &gt; inih::INIReader::Keys</definition>
+        <argsstring>(std::string section) const</argsstring>
+        <name>Keys</name>
+        <qualifiedname>inih::INIReader::Keys</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>section</declname>
+        </param>
+        <briefdescription>
+<para>Return the list of keys in the given section. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The section name </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The list of keys in the given section </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="223" column="20" bodyfile="src/utils/Ini.h" bodystart="329" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a000d9b2c7f34ab934d503f52334300ef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::unordered_map&lt; std::string, std::string &gt;</type>
+        <definition>const std::unordered_map&lt; std::string, std::string &gt; inih::INIReader::Get</definition>
+        <argsstring>(std::string section) const</argsstring>
+        <name>Get</name>
+        <qualifiedname>inih::INIReader::Get</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>section</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="225" column="30" bodyfile="src/utils/Ini.h" bodystart="338" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1ad2b59d004e99ebfcd02dba8c7aacf81d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+            <defval>std::string</defval>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T inih::INIReader::Get</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name)</argsstring>
+        <name>Get</name>
+        <qualifiedname>inih::INIReader::Get</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Return the value of the given key in the given section. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The section name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key name </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the given key in the given section </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="229" column="7" bodyfile="src/utils/Ini.h" bodystart="354" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a2b854dfbeb65ebdc3f793f6319959c0d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T inih::INIReader::Get</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name, T &amp;default_v)</argsstring>
+        <name>Get</name>
+        <qualifiedname>inih::INIReader::Get</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>T &amp;</type>
+          <declname>default_v</declname>
+        </param>
+        <briefdescription>
+<para>Return the value of the given key in the given section, return default if not found. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The section name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The default value </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the given key in the given section, return default if not found </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="232" column="7" bodyfile="src/utils/Ini.h" bodystart="385" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1ac71ca0793a3dccf104312f2415a7944b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+            <defval>std::string</defval>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt; T &gt; inih::INIReader::GetVector</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name)</argsstring>
+        <name>GetVector</name>
+        <qualifiedname>inih::INIReader::GetVector</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Return the value array of the given key in the given section. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The section name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key name </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value array of the given key in the given section.</para>
+</simplesect>
+For example: <programlisting filename=".ini"><codeline><highlight class="normal">[section]</highlight></codeline>
+<codeline><highlight class="normal">key<sp/>=<sp/>1<sp/>2<sp/>3<sp/>4</highlight></codeline>
+</programlisting> <programlisting filename=".cpp"><codeline><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vs<sp/>=<sp/>ini.GetVector&lt;std::vector&lt;int&gt;&gt;(</highlight><highlight class="stringliteral">&quot;section&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;key&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>vs<sp/>=<sp/>{1,<sp/>2,<sp/>3,<sp/>4}</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="236" column="17" bodyfile="src/utils/Ini.h" bodystart="412" bodyend="429"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a7e6c41b018018fcbe91d9f038e28f98f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt; T &gt; inih::INIReader::GetVector</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name, const std::vector&lt; T &gt; &amp;default_v)</argsstring>
+        <name>GetVector</name>
+        <qualifiedname>inih::INIReader::GetVector</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>default_v</declname>
+        </param>
+        <briefdescription>
+<para>Return the value array of the given key in the given section, return default if not found. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The section name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The default value </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value array of the given key in the given section, return default if not found</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classinih_1_1INIReader_1ac71ca0793a3dccf104312f2415a7944b" kindref="member">INIReader::GetVector</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="240" column="17" bodyfile="src/utils/Ini.h" bodystart="443" bodyend="452"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a75a8e5327efd5ca3ddf147d687d80c4e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+            <defval>std::string</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void inih::INIReader::InsertEntry</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name, const T &amp;v)</argsstring>
+        <name>InsertEntry</name>
+        <qualifiedname>inih::INIReader::InsertEntry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="245" column="10" bodyfile="src/utils/Ini.h" bodystart="455" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a5bc835325aa877a5211abe595efca5da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+            <defval>std::string</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void inih::INIReader::InsertEntry</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name, const std::vector&lt; T &gt; &amp;vs)</argsstring>
+        <name>InsertEntry</name>
+        <qualifiedname>inih::INIReader::InsertEntry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>vs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="249" column="10" bodyfile="src/utils/Ini.h" bodystart="465" bodyend="473"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a765f6e48c13f43b46265d263a01e265b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+            <defval>std::string</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void inih::INIReader::UpdateEntry</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name, const T &amp;v)</argsstring>
+        <name>UpdateEntry</name>
+        <qualifiedname>inih::INIReader::UpdateEntry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="253" column="10" bodyfile="src/utils/Ini.h" bodystart="476" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1abfdb9985c4e1ec6f5f9c234e5ef6072e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+            <defval>std::string</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void inih::INIReader::UpdateEntry</definition>
+        <argsstring>(const std::string &amp;section, const std::string &amp;name, const std::vector&lt; T &gt; &amp;vs)</argsstring>
+        <name>UpdateEntry</name>
+        <qualifiedname>inih::INIReader::UpdateEntry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>vs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="257" column="10" bodyfile="src/utils/Ini.h" bodystart="486" bodyend="494"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-func">
+      <memberdef kind="function" id="classinih_1_1INIReader_1a3bc0e705556548679c6fa65ad82be206" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int inih::INIReader::ValueHandler</definition>
+        <argsstring>(void *user, const char *section, const char *name, const char *value)</argsstring>
+        <name>ValueHandler</name>
+        <qualifiedname>inih::INIReader::ValueHandler</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>user</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="265" column="16" bodyfile="src/utils/Ini.h" bodystart="541" bodyend="550"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classinih_1_1INIReader_1a14ecdfa9e97600051acbee2d931aa2ff" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T inih::INIReader::Converter</definition>
+        <argsstring>(const std::string &amp;s) const</argsstring>
+        <name>Converter</name>
+        <qualifiedname>inih::INIReader::Converter</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="269" column="7" bodyfile="src/utils/Ini.h" bodystart="516" bodyend="526"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a8f2059b060cf0c8a120c86c4df9a2101" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const bool</type>
+        <definition>const bool inih::INIReader::BoolConverter</definition>
+        <argsstring>(std::string s) const</argsstring>
+        <name>BoolConverter</name>
+        <qualifiedname>inih::INIReader::BoolConverter</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="271" column="16" bodyfile="src/utils/Ini.h" bodystart="528" bodyend="539"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a5c1b73307fbabf76537892b196987cdb" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string inih::INIReader::V2String</definition>
+        <argsstring>(const T &amp;v) const</argsstring>
+        <name>V2String</name>
+        <qualifiedname>inih::INIReader::V2String</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="274" column="17" bodyfile="src/utils/Ini.h" bodystart="497" bodyend="501"/>
+      </memberdef>
+      <memberdef kind="function" id="classinih_1_1INIReader_1a865515da0f8847da3c67f722cafa46bf" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string inih::INIReader::Vec2String</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;v) const</argsstring>
+        <name>Vec2String</name>
+        <qualifiedname>inih::INIReader::Vec2String</qualifiedname>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="277" column="17" bodyfile="src/utils/Ini.h" bodystart="504" bodyend="513"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/Ini.h" line="202" column="1" bodyfile="src/utils/Ini.h" bodystart="202" bodyend="278"/>
+    <listofallmembers>
+      <member refid="classinih_1_1INIReader_1a48b785bc84b8e8ce74704fa79679f292" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>_error</name></member>
+      <member refid="classinih_1_1INIReader_1a47f3d952fef6d4fe26f36b56ae853b16" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>_values</name></member>
+      <member refid="classinih_1_1INIReader_1a8f2059b060cf0c8a120c86c4df9a2101" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>BoolConverter</name></member>
+      <member refid="classinih_1_1INIReader_1a14ecdfa9e97600051acbee2d931aa2ff" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>Converter</name></member>
+      <member refid="classinih_1_1INIReader_1a000d9b2c7f34ab934d503f52334300ef" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>Get</name></member>
+      <member refid="classinih_1_1INIReader_1ad2b59d004e99ebfcd02dba8c7aacf81d" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>Get</name></member>
+      <member refid="classinih_1_1INIReader_1a2b854dfbeb65ebdc3f793f6319959c0d" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>Get</name></member>
+      <member refid="classinih_1_1INIReader_1ac71ca0793a3dccf104312f2415a7944b" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>GetVector</name></member>
+      <member refid="classinih_1_1INIReader_1a7e6c41b018018fcbe91d9f038e28f98f" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>GetVector</name></member>
+      <member refid="classinih_1_1INIReader_1a49be637b5e0b1412da9deaeef7d73469" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>INIReader</name></member>
+      <member refid="classinih_1_1INIReader_1a24012a6ae221d8a2684d3253d2084b10" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>INIReader</name></member>
+      <member refid="classinih_1_1INIReader_1adbed8f40a9c0274059c27cbc496b4ac5" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>INIReader</name></member>
+      <member refid="classinih_1_1INIReader_1a75a8e5327efd5ca3ddf147d687d80c4e" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>InsertEntry</name></member>
+      <member refid="classinih_1_1INIReader_1a5bc835325aa877a5211abe595efca5da" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>InsertEntry</name></member>
+      <member refid="classinih_1_1INIReader_1af277b96c36b8872e7578468e02067997" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>Keys</name></member>
+      <member refid="classinih_1_1INIReader_1a5db3eee53f45dec459a091fa6e5992f2" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>ParseError</name></member>
+      <member refid="classinih_1_1INIReader_1a6d34dd183d98acf8a33204ecde93811d" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>Sections</name></member>
+      <member refid="classinih_1_1INIReader_1a765f6e48c13f43b46265d263a01e265b" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>UpdateEntry</name></member>
+      <member refid="classinih_1_1INIReader_1abfdb9985c4e1ec6f5f9c234e5ef6072e" prot="public" virt="non-virtual"><scope>inih::INIReader</scope><name>UpdateEntry</name></member>
+      <member refid="classinih_1_1INIReader_1a5c1b73307fbabf76537892b196987cdb" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>V2String</name></member>
+      <member refid="classinih_1_1INIReader_1a3bc0e705556548679c6fa65ad82be206" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>ValueHandler</name></member>
+      <member refid="classinih_1_1INIReader_1a865515da0f8847da3c67f722cafa46bf" prot="protected" virt="non-virtual"><scope>inih::INIReader</scope><name>Vec2String</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

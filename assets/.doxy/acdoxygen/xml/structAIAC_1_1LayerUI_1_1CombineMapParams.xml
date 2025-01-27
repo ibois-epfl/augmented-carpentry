@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1LayerUI_1_1CombineMapParams" kind="struct" language="C++" prot="private">
+    <compoundname>AIAC::LayerUI::CombineMapParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1CombineMapParams_1a94f61489eca0e2dee2d983655d31dc7a" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::CombineMapParams::MapPathA[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>MapPathA</name>
+        <qualifiedname>AIAC::LayerUI::CombineMapParams::MapPathA</qualifiedname>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="159" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1CombineMapParams_1a34b8144f5954d39f1cc0c0475e3061ac" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::CombineMapParams::MapPathB[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>MapPathB</name>
+        <qualifiedname>AIAC::LayerUI::CombineMapParams::MapPathB</qualifiedname>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="160" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1CombineMapParams_1a1ad15fb63b3ccf99b88b2c07971a9473" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::CombineMapParams::OutputPath[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>OutputPath</name>
+        <qualifiedname>AIAC::LayerUI::CombineMapParams::OutputPath</qualifiedname>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="161" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="161" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1CombineMapParams_1a8449666f32f50079cc50b4d335aef5f9" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* AIAC::LayerUI::CombineMapParams::FilePathTarget</definition>
+        <argsstring></argsstring>
+        <name>FilePathTarget</name>
+        <qualifiedname>AIAC::LayerUI::CombineMapParams::FilePathTarget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="162" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/LayerUI.h" line="158" column="9" bodyfile="src/AIAC/LayerUI.h" bodystart="158" bodyend="163"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1LayerUI_1_1CombineMapParams_1a8449666f32f50079cc50b4d335aef5f9" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::CombineMapParams</scope><name>FilePathTarget</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1CombineMapParams_1a94f61489eca0e2dee2d983655d31dc7a" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::CombineMapParams</scope><name>MapPathA</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1CombineMapParams_1a34b8144f5954d39f1cc0c0475e3061ac" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::CombineMapParams</scope><name>MapPathB</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1CombineMapParams_1a1ad15fb63b3ccf99b88b2c07971a9473" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::CombineMapParams</scope><name>OutputPath</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

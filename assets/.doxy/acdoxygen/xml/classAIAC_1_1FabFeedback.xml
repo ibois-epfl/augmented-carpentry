@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1FabFeedback" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::FabFeedback</compoundname>
+    <derivedcompoundref refid="classAIAC_1_1CutChainSawFeedback" prot="public" virt="non-virtual">AIAC::CutChainSawFeedback</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutCircularSawFeedback" prot="public" virt="non-virtual">AIAC::CutCircularSawFeedback</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1HoleFeedback" prot="public" virt="non-virtual">AIAC::HoleFeedback</derivedcompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1FabFeedback_1a9bc2828d9ca75f526bedf6515847a529" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::FabFeedback::m_ScaleFactor</definition>
+        <argsstring></argsstring>
+        <name>m_ScaleFactor</name>
+        <qualifiedname>AIAC::FabFeedback::m_ScaleFactor</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FabFeedback.h" line="54" column="15" bodyfile="src/AIAC/Feedback/FabFeedback.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1FabFeedback_1aae983dfcdc6deaf96dd0fd8ab740c2b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::FabFeedback::FabFeedback</definition>
+        <argsstring>()</argsstring>
+        <name>FabFeedback</name>
+        <qualifiedname>AIAC::FabFeedback::FabFeedback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FabFeedback.h" line="44" column="9" bodyfile="src/AIAC/Feedback/FabFeedback.h" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FabFeedback_1a22fa06e384ea2b29074ed688793d9ae0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::FabFeedback::~FabFeedback</definition>
+        <argsstring>()=default</argsstring>
+        <name>~FabFeedback</name>
+        <qualifiedname>AIAC::FabFeedback::~FabFeedback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FabFeedback.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FabFeedback_1a1bae5586f137d46ad1fea20933e2ee1a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::FabFeedback::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>AIAC::FabFeedback::Update</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CutChainSawFeedback_1ac7e196f872d9815138bb145f4f8a736f">Update</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1CutCircularSawFeedback_1acd2993df475f5e067313df2a290917c6">Update</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1HoleFeedback_1a2fbd124214d60b5d924c0cfa7ad807f9">Update</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FabFeedback.h" line="49" column="22" bodyfile="src/AIAC/Feedback/FabFeedback.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FabFeedback_1a48ace70eb7e927228bac3e6e4ef2e41b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::FabFeedback::Activate</definition>
+        <argsstring>()</argsstring>
+        <name>Activate</name>
+        <qualifiedname>AIAC::FabFeedback::Activate</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CutChainSawFeedback_1a90f1650c84a33664258c1142ab1d3fa8">Activate</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1CutCircularSawFeedback_1af046ea3e738e3df4a665eb0e3e2706f9">Activate</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1HoleFeedback_1af54d978c0aed96b6b58765b23c9cb0f2">Activate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FabFeedback.h" line="50" column="22" bodyfile="src/AIAC/Feedback/FabFeedback.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FabFeedback_1a973eec8478cc8de2fa8da95c37d372e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::FabFeedback::Deactivate</definition>
+        <argsstring>()</argsstring>
+        <name>Deactivate</name>
+        <qualifiedname>AIAC::FabFeedback::Deactivate</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CutChainSawFeedback_1a294b0ff112ae5bc2067ad8ba0e7b81d2">Deactivate</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1CutCircularSawFeedback_1aa02859100d6d011561676842986ea5fe">Deactivate</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1HoleFeedback_1a711ba27f1a394de775895397d254728f">Deactivate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FabFeedback.h" line="51" column="22" bodyfile="src/AIAC/Feedback/FabFeedback.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::CutChainSawFeedback</label>
+        <link refid="classAIAC_1_1CutChainSawFeedback"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::CutCircularSawFeedback</label>
+        <link refid="classAIAC_1_1CutCircularSawFeedback"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>AIAC::FabFeedback</label>
+        <link refid="classAIAC_1_1FabFeedback"/>
+      </node>
+      <node id="4">
+        <label>AIAC::HoleFeedback</label>
+        <link refid="classAIAC_1_1HoleFeedback"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/AIAC/Feedback/FabFeedback.h" line="42" column="5" bodyfile="src/AIAC/Feedback/FabFeedback.h" bodystart="42" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FabFeedback_1a48ace70eb7e927228bac3e6e4ef2e41b" prot="public" virt="virtual"><scope>AIAC::FabFeedback</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a973eec8478cc8de2fa8da95c37d372e7" prot="public" virt="virtual"><scope>AIAC::FabFeedback</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1aae983dfcdc6deaf96dd0fd8ab740c2b5" prot="public" virt="non-virtual"><scope>AIAC::FabFeedback</scope><name>FabFeedback</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a9bc2828d9ca75f526bedf6515847a529" prot="protected" virt="non-virtual"><scope>AIAC::FabFeedback</scope><name>m_ScaleFactor</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a1bae5586f137d46ad1fea20933e2ee1a" prot="public" virt="virtual"><scope>AIAC::FabFeedback</scope><name>Update</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a22fa06e384ea2b29074ed688793d9ae0" prot="public" virt="non-virtual"><scope>AIAC::FabFeedback</scope><name>~FabFeedback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

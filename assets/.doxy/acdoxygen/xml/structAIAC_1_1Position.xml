@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1Position" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::Position</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1Position_1a08eb359ef7732bbb7eeeae17fa09a1e0" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::Position::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>AIAC::Position::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.cpp" line="48" column="33" bodyfile="src/AIAC/Window.cpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Position_1af3c9c3b6959897ffdfeeb1f123717cc2" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::Position::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>AIAC::Position::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.cpp" line="48" column="35" bodyfile="src/AIAC/Window.cpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Window.cpp" line="48" column="12" bodyfile="src/AIAC/Window.cpp" bodystart="48" bodyend="48"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1Position_1a08eb359ef7732bbb7eeeae17fa09a1e0" prot="public" virt="non-virtual"><scope>AIAC::Position</scope><name>x</name></member>
+      <member refid="structAIAC_1_1Position_1af3c9c3b6959897ffdfeeb1f123717cc2" prot="public" virt="non-virtual"><scope>AIAC::Position</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

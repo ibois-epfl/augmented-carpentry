@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1SLAMVocabularyLoadedEvent" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::SLAMVocabularyLoadedEvent</compoundname>
+    <basecompoundref refid="classAIAC_1_1Event" prot="public" virt="non-virtual">AIAC::Event</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1SLAMVocabularyLoadedEvent_1a67a364638abf46f4b15d3fd5f531e00d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::SLAMVocabularyLoadedEvent::m_FilePath</definition>
+        <argsstring></argsstring>
+        <name>m_FilePath</name>
+        <qualifiedname>AIAC::SLAMVocabularyLoadedEvent::m_FilePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="64" column="21" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1SLAMVocabularyLoadedEvent_1ac3340c3927428d791ff3c25d35832164" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::SLAMVocabularyLoadedEvent::SLAMVocabularyLoadedEvent</definition>
+        <argsstring>(const std::string filePath)</argsstring>
+        <name>SLAMVocabularyLoadedEvent</name>
+        <qualifiedname>AIAC::SLAMVocabularyLoadedEvent::SLAMVocabularyLoadedEvent</qualifiedname>
+        <param>
+          <type>const std::string</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="57" column="18" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="57" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1SLAMVocabularyLoadedEvent_1a7e88b691b9a4206adb1f049120142cbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::SLAMVocabularyLoadedEvent::OnSLAMVocabularyLoaded</definition>
+        <argsstring>()</argsstring>
+        <name>OnSLAMVocabularyLoaded</name>
+        <qualifiedname>AIAC::SLAMVocabularyLoadedEvent::OnSLAMVocabularyLoaded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="61" column="14" bodyfile="src/AIAC/EventSys/SLAMEvent.cpp" bodystart="80" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="1">
+        <label>AIAC::SLAMVocabularyLoadedEvent</label>
+        <link refid="classAIAC_1_1SLAMVocabularyLoadedEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="1">
+        <label>AIAC::SLAMVocabularyLoadedEvent</label>
+        <link refid="classAIAC_1_1SLAMVocabularyLoadedEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/EventSys/SLAMEvent.h" line="54" column="5" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="55" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Event_1a6cb6fce0f27894b1a82e1c93f348c2ae" prot="public" virt="non-virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>Event</name></member>
+      <member refid="classAIAC_1_1Event_1a2532fd6f2cc7a499d5cd79766a5a366d" prot="public" virt="non-virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>GetCategory</name></member>
+      <member refid="classAIAC_1_1Event_1aaf9a9499f1e427a5d7d036675e41469c" prot="public" virt="non-virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1SLAMVocabularyLoadedEvent_1a67a364638abf46f4b15d3fd5f531e00d" prot="private" virt="non-virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>m_FilePath</name></member>
+      <member refid="classAIAC_1_1SLAMVocabularyLoadedEvent_1a7e88b691b9a4206adb1f049120142cbd" prot="public" virt="non-virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>OnSLAMVocabularyLoaded</name></member>
+      <member refid="classAIAC_1_1SLAMVocabularyLoadedEvent_1ac3340c3927428d791ff3c25d35832164" prot="public" virt="non-virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>SLAMVocabularyLoadedEvent</name></member>
+      <member refid="classAIAC_1_1Event_1a78454dc85c3759d5811f39eff6285728" prot="public" virt="virtual"><scope>AIAC::SLAMVocabularyLoadedEvent</scope><name>~Event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

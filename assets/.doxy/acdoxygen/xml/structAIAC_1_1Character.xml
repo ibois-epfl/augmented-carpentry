@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1Character" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::Character</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1Character_1abf5af028ad5b45a5c21a5768bc9b271c" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int AIAC::Character::TextureID</definition>
+        <argsstring></argsstring>
+        <name>TextureID</name>
+        <qualifiedname>AIAC::Character::TextureID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/TextRenderer.h" line="46" column="22" bodyfile="src/AIAC/Render/TextRenderer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Character_1af494d9cb0898a3c465e5a1b08bc7433b" prot="public" static="no" mutable="no">
+        <type>glm::ivec2</type>
+        <definition>glm::ivec2 AIAC::Character::Size</definition>
+        <argsstring></argsstring>
+        <name>Size</name>
+        <qualifiedname>AIAC::Character::Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/TextRenderer.h" line="47" column="22" bodyfile="src/AIAC/Render/TextRenderer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Character_1a8b2f32c699482008ec13cf88cf505cde" prot="public" static="no" mutable="no">
+        <type>glm::ivec2</type>
+        <definition>glm::ivec2 AIAC::Character::Bearing</definition>
+        <argsstring></argsstring>
+        <name>Bearing</name>
+        <qualifiedname>AIAC::Character::Bearing</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/TextRenderer.h" line="48" column="22" bodyfile="src/AIAC/Render/TextRenderer.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Character_1a96f801ce77aed780f95986058dfb06b5" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int AIAC::Character::Advance</definition>
+        <argsstring></argsstring>
+        <name>Advance</name>
+        <qualifiedname>AIAC::Character::Advance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/TextRenderer.h" line="49" column="22" bodyfile="src/AIAC/Render/TextRenderer.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Render/TextRenderer.h" line="45" column="5" bodyfile="src/AIAC/Render/TextRenderer.h" bodystart="45" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1Character_1a96f801ce77aed780f95986058dfb06b5" prot="public" virt="non-virtual"><scope>AIAC::Character</scope><name>Advance</name></member>
+      <member refid="structAIAC_1_1Character_1a8b2f32c699482008ec13cf88cf505cde" prot="public" virt="non-virtual"><scope>AIAC::Character</scope><name>Bearing</name></member>
+      <member refid="structAIAC_1_1Character_1af494d9cb0898a3c465e5a1b08bc7433b" prot="public" virt="non-virtual"><scope>AIAC::Character</scope><name>Size</name></member>
+      <member refid="structAIAC_1_1Character_1abf5af028ad5b45a5c21a5768bc9b271c" prot="public" virt="non-virtual"><scope>AIAC::Character</scope><name>TextureID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

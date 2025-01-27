@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIGFD__Selection" kind="struct" language="C++" prot="public">
+    <compoundname>IGFD_Selection</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structIGFD__Selection_1ae63d5601b0946a620b896f46981994a3" prot="public" static="no" mutable="no">
+        <type><ref refid="structIGFD__Selection__Pair" kindref="compound">IGFD_Selection_Pair</ref> *</type>
+        <definition>IGFD_Selection_Pair* IGFD_Selection::table</definition>
+        <argsstring></argsstring>
+        <name>table</name>
+        <qualifiedname>IGFD_Selection::table</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ImGuiFileDialog.h" line="1728" column="21" bodyfile="src/AIAC/UI/ImGuiFileDialog.h" bodystart="1728" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIGFD__Selection_1ad507bb1e9059b093b57554112a187383" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t IGFD_Selection::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>IGFD_Selection::count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ImGuiFileDialog.h" line="1729" column="8" bodyfile="src/AIAC/UI/ImGuiFileDialog.h" bodystart="1729" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>IGFD_Selection</label>
+        <link refid="structIGFD__Selection"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IGFD_Selection_Pair</label>
+        <link refid="structIGFD__Selection__Pair"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/UI/ImGuiFileDialog.h" line="1726" column="1" bodyfile="src/AIAC/UI/ImGuiFileDialog.h" bodystart="1727" bodyend="1730"/>
+    <listofallmembers>
+      <member refid="structIGFD__Selection_1ad507bb1e9059b093b57554112a187383" prot="public" virt="non-virtual"><scope>IGFD_Selection</scope><name>count</name></member>
+      <member refid="structIGFD__Selection_1ae63d5601b0946a620b896f46981994a3" prot="public" virt="non-virtual"><scope>IGFD_Selection</scope><name>table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

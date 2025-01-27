@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1ACInfoToolheadManager" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::ACInfoToolheadManager</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolheadManager_1a94af4e2e2d300c96f18abd10ca47e70c" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::shared_ptr&lt; <ref refid="classAIAC_1_1ACInfoToolhead" kindref="compound">ACInfoToolhead</ref> &gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::shared_ptr&lt;ACInfoToolhead&gt; &gt; AIAC::ACInfoToolheadManager::m_ACInfoToolheadMap</definition>
+        <argsstring></argsstring>
+        <name>m_ACInfoToolheadMap</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::m_ACInfoToolheadMap</qualifiedname>
+        <briefdescription>
+<para>Map of toolhead name to toolhead model of all possible toolheads loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="81" column="22" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolheadManager_1a6b82a2ace8b2d01903a07ea77fff9304" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1ACInfoToolhead" kindref="compound">ACInfoToolhead</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;ACInfoToolhead&gt; AIAC::ACInfoToolheadManager::m_ActiveACInfoToolhead</definition>
+        <argsstring></argsstring>
+        <name>m_ActiveACInfoToolhead</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::m_ActiveACInfoToolhead</qualifiedname>
+        <briefdescription>
+<para>The active toolhead model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="83" column="29" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a8f452bdbee34acece0f9473bb55c3915" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ACInfoToolheadManager::ACInfoToolheadManager</definition>
+        <argsstring>()</argsstring>
+        <name>ACInfoToolheadManager</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::ACInfoToolheadManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="43" column="13" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="43" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1ab6e12719cbcbfc4948f3f5630716d03f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolheadManager::LoadToolheadModels</definition>
+        <argsstring>()</argsstring>
+        <name>LoadToolheadModels</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::LoadToolheadModels</qualifiedname>
+        <briefdescription>
+<para>Load each toolhead model acit/obj from the dataset dir. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="51" column="18" bodyfile="src/AIAC/ACInfoToolheadManager.cpp" bodystart="41" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a8c673f0b7f34da1bfeec6c0abd500db5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolheadManager::SetActiveToolhead</definition>
+        <argsstring>(const std::string &amp;toolheadName)</argsstring>
+        <name>SetActiveToolhead</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::SetActiveToolhead</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>toolheadName</declname>
+        </param>
+        <briefdescription>
+<para>Set a toolhead model as active by its name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="55" column="18" bodyfile="src/AIAC/ACInfoToolheadManager.cpp" bodystart="75" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1abbe72ba83cc245f499878a9b8911371d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1ACInfoToolhead" kindref="compound">ACInfoToolhead</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; ACInfoToolhead &gt; AIAC::ACInfoToolheadManager::GetActiveToolhead</definition>
+        <argsstring>() const</argsstring>
+        <name>GetActiveToolhead</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::GetActiveToolhead</qualifiedname>
+        <briefdescription>
+<para>Get the active toolhead model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="57" column="36" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a43a95608f5c9282db513dd637dc3d747" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1ACInfoToolhead" kindref="compound">ACInfoToolhead</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; ACInfoToolhead &gt; AIAC::ACInfoToolheadManager::GetToolhead</definition>
+        <argsstring>(const std::string &amp;toolheadName) const</argsstring>
+        <name>GetToolhead</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::GetToolhead</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>toolheadName</declname>
+        </param>
+        <briefdescription>
+<para>Get the toolhead model by its name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="59" column="36" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a1a689c77d12d2c8aa9a8879e61f17279" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::ACInfoToolheadManager::GetActiveToolheadName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetActiveToolheadName</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::GetActiveToolheadName</qualifiedname>
+        <briefdescription>
+<para>Get the active toolhead model&apos;s name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="61" column="32" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a7b30218b1fa8949494312400cd8460ed" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ACToolHeadType</type>
+        <definition>ACToolHeadType AIAC::ACInfoToolheadManager::GetToolheadType</definition>
+        <argsstring>(const std::string &amp;toolheadName) const</argsstring>
+        <name>GetToolheadType</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::GetToolheadType</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>toolheadName</declname>
+        </param>
+        <briefdescription>
+<para>Get the toolhead&apos;s type by its name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="63" column="35" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a03ad3a09472f8491b1d38d2faa9d5fcf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ACToolHeadType</type>
+        <definition>ACToolHeadType AIAC::ACInfoToolheadManager::GetActiveToolheadType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetActiveToolheadType</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::GetActiveToolheadType</qualifiedname>
+        <briefdescription>
+<para>Get the current active toolhead&apos;s type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="65" column="35" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolheadManager_1a6d922332c3ea24fa2429dd2800f97ade" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; AIAC::ACInfoToolheadManager::GetToolheadNames</definition>
+        <argsstring>() const</argsstring>
+        <name>GetToolheadNames</name>
+        <qualifiedname>AIAC::ACInfoToolheadManager::GetToolheadNames</qualifiedname>
+        <briefdescription>
+<para>Return the list of names of the toolheads loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolheadManager.h" line="69" column="32" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="69" bodyend="77"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoToolheadManager.h" line="40" column="5" bodyfile="src/AIAC/ACInfoToolheadManager.h" bodystart="41" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a8f452bdbee34acece0f9473bb55c3915" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>ACInfoToolheadManager</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1abbe72ba83cc245f499878a9b8911371d" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>GetActiveToolhead</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a1a689c77d12d2c8aa9a8879e61f17279" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>GetActiveToolheadName</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a03ad3a09472f8491b1d38d2faa9d5fcf" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>GetActiveToolheadType</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a43a95608f5c9282db513dd637dc3d747" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>GetToolhead</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a6d922332c3ea24fa2429dd2800f97ade" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>GetToolheadNames</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a7b30218b1fa8949494312400cd8460ed" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>GetToolheadType</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1ab6e12719cbcbfc4948f3f5630716d03f" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>LoadToolheadModels</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a94af4e2e2d300c96f18abd10ca47e70c" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>m_ACInfoToolheadMap</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a6b82a2ace8b2d01903a07ea77fff9304" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>m_ActiveACInfoToolhead</name></member>
+      <member refid="classAIAC_1_1ACInfoToolheadManager_1a8c673f0b7f34da1bfeec6c0abd500db5" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolheadManager</scope><name>SetActiveToolhead</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

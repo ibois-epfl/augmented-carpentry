@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_313caf1132e152dd9b58bea13a4052ca" kind="dir">
+    <compoundname>src/utils</compoundname>
+    <innerfile refid="CircularBuffer_8h">CircularBuffer.h</innerfile>
+    <innerfile refid="utils_2GeometryUtils_8h">GeometryUtils.h</innerfile>
+    <innerfile refid="glob_8cpp">glob.cpp</innerfile>
+    <innerfile refid="glob_8h">glob.h</innerfile>
+    <innerfile refid="HoleToolheadAxisExporter_8cpp">HoleToolheadAxisExporter.cpp</innerfile>
+    <innerfile refid="HoleToolheadAxisExporter_8h">HoleToolheadAxisExporter.h</innerfile>
+    <innerfile refid="Ini_8h">Ini.h</innerfile>
+    <innerfile refid="MatrixUtils_8h">MatrixUtils.h</innerfile>
+    <innerfile refid="Screenshot_8cpp">Screenshot.cpp</innerfile>
+    <innerfile refid="Screenshot_8h">Screenshot.h</innerfile>
+    <innerfile refid="SystemUtils_8h">SystemUtils.h</innerfile>
+    <innerfile refid="utils_8h">utils.h</innerfile>
+    <innerfile refid="VideoRecorder_8cpp">VideoRecorder.cpp</innerfile>
+    <innerfile refid="VideoRecorder_8h">VideoRecorder.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/"/>
+  </compounddef>
+</doxygen>

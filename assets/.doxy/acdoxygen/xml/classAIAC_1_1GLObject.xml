@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GLObject" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>AIAC::GLObject</compoundname>
+    <derivedcompoundref refid="classAIAC_1_1GLLineObject" prot="public" virt="non-virtual">AIAC::GLLineObject</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1GLMeshObject" prot="public" virt="non-virtual">AIAC::GLMeshObject</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1GLPointObject" prot="public" virt="non-virtual">AIAC::GLPointObject</derivedcompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GLObject_1aac46a07822f8af148198eec4eb8980b4" prot="public" static="no" mutable="no">
+        <type>GLObjectType</type>
+        <definition>GLObjectType AIAC::GLObject::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>AIAC::GLObject::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="17" column="22" bodyfile="src/AIAC/Render/GLObject.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GLObject_1a550a4afb141100752c9dd18676ed6b03" prot="public" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::GLObject::vertexBuf</definition>
+        <argsstring></argsstring>
+        <name>vertexBuf</name>
+        <qualifiedname>AIAC::GLObject::vertexBuf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="18" column="16" bodyfile="src/AIAC/Render/GLObject.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GLObject_1a2b3cb09d4502b7699dba1d0c2c22dff0" prot="public" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::GLObject::colorBuf</definition>
+        <argsstring></argsstring>
+        <name>colorBuf</name>
+        <qualifiedname>AIAC::GLObject::colorBuf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="19" column="16" bodyfile="src/AIAC/Render/GLObject.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GLObject_1a95dcf394d81c94fa2aaeb8b5903c703d" prot="public" static="no" mutable="no">
+        <type>GLsizei</type>
+        <definition>GLsizei AIAC::GLObject::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>AIAC::GLObject::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="20" column="17" bodyfile="src/AIAC/Render/GLObject.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1a1e37d6780964b2f96233d4126f884e2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GLObject::GLObject</definition>
+        <argsstring>()=default</argsstring>
+        <name>GLObject</name>
+        <qualifiedname>AIAC::GLObject::GLObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1a48eca9a8c2e4ef91524487ef133ef720" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GLObject::~GLObject</definition>
+        <argsstring>()</argsstring>
+        <name>~GLObject</name>
+        <qualifiedname>AIAC::GLObject::~GLObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="23" column="9" bodyfile="src/AIAC/Render/GLObject.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1ad0e07500b37023c5221a955ba4787ac6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GLObject::GLObject</definition>
+        <argsstring>(const GLObject &amp;other)</argsstring>
+        <name>GLObject</name>
+        <qualifiedname>AIAC::GLObject::GLObject</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="26" column="9" bodyfile="src/AIAC/Render/GLObject.h" bodystart="26" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1a1859ded35f61e3d8299e240b88f89d4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &amp;</type>
+        <definition>GLObject &amp; AIAC::GLObject::operator=</definition>
+        <argsstring>(const GLObject &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>AIAC::GLObject::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="33" column="18" bodyfile="src/AIAC/Render/GLObject.h" bodystart="33" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1a9100544b1658525169db4907e8f6ea71" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::GLObject::Draw</definition>
+        <argsstring>()=0</argsstring>
+        <name>Draw</name>
+        <qualifiedname>AIAC::GLObject::Draw</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1GLPointObject_1ad475a3043d1cfd4673c8b06c7eb75d01">Draw</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1GLLineObject_1a2d7cafceae06bb7899fccace0e308eba">Draw</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1GLMeshObject_1a745f38200b303c3dcc8098dd9d861978">Draw</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="41" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1a382a7f135422b2c89120ae0abfd1b0f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GLObject::DeleteVBOs</definition>
+        <argsstring>()</argsstring>
+        <name>DeleteVBOs</name>
+        <qualifiedname>AIAC::GLObject::DeleteVBOs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="46" column="14" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="44" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1a941a1e8c9870e44a3f09da507f83a235" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GLObject::BindVBOs</definition>
+        <argsstring>()</argsstring>
+        <name>BindVBOs</name>
+        <qualifiedname>AIAC::GLObject::BindVBOs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="49" column="14" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="6" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLObject_1abfdb937cb1a1f3ab48f84e06d605f645" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GLObject::BufferData</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;vertices, const std::vector&lt; glm::vec4 &gt; &amp;colors)</argsstring>
+        <name>BufferData</name>
+        <qualifiedname>AIAC::GLObject::BufferData</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; glm::vec4 &gt; &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="50" column="14" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="32" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::GLLineObject</label>
+        <link refid="classAIAC_1_1GLLineObject"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::GLMeshObject</label>
+        <link refid="classAIAC_1_1GLMeshObject"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>AIAC::GLObject</label>
+        <link refid="classAIAC_1_1GLObject"/>
+      </node>
+      <node id="4">
+        <label>AIAC::GLPointObject</label>
+        <link refid="classAIAC_1_1GLPointObject"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/AIAC/Render/GLObject.h" line="15" column="5" bodyfile="src/AIAC/Render/GLObject.h" bodystart="15" bodyend="51"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GLObject_1a941a1e8c9870e44a3f09da507f83a235" prot="protected" virt="non-virtual"><scope>AIAC::GLObject</scope><name>BindVBOs</name></member>
+      <member refid="classAIAC_1_1GLObject_1abfdb937cb1a1f3ab48f84e06d605f645" prot="protected" virt="non-virtual"><scope>AIAC::GLObject</scope><name>BufferData</name></member>
+      <member refid="classAIAC_1_1GLObject_1a2b3cb09d4502b7699dba1d0c2c22dff0" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>colorBuf</name></member>
+      <member refid="classAIAC_1_1GLObject_1a382a7f135422b2c89120ae0abfd1b0f5" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>DeleteVBOs</name></member>
+      <member refid="classAIAC_1_1GLObject_1a9100544b1658525169db4907e8f6ea71" prot="public" virt="pure-virtual"><scope>AIAC::GLObject</scope><name>Draw</name></member>
+      <member refid="classAIAC_1_1GLObject_1a1e37d6780964b2f96233d4126f884e2d" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>GLObject</name></member>
+      <member refid="classAIAC_1_1GLObject_1ad0e07500b37023c5221a955ba4787ac6" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>GLObject</name></member>
+      <member refid="classAIAC_1_1GLObject_1a1859ded35f61e3d8299e240b88f89d4b" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>operator=</name></member>
+      <member refid="classAIAC_1_1GLObject_1a95dcf394d81c94fa2aaeb8b5903c703d" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>size</name></member>
+      <member refid="classAIAC_1_1GLObject_1aac46a07822f8af148198eec4eb8980b4" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>type</name></member>
+      <member refid="classAIAC_1_1GLObject_1a550a4afb141100752c9dd18676ed6b03" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>vertexBuf</name></member>
+      <member refid="classAIAC_1_1GLObject_1a48eca9a8c2e4ef91524487ef133ef720" prot="public" virt="non-virtual"><scope>AIAC::GLObject</scope><name>~GLObject</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

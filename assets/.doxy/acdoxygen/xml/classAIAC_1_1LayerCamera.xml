@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerCamera" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerCamera</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerCamera_1a23f8efd36101688e204d4209770eb8d8" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; AIAC::LayerCamera::AvailableDevices</definition>
+        <argsstring></argsstring>
+        <name>AvailableDevices</name>
+        <qualifiedname>AIAC::LayerCamera::AvailableDevices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="65" column="21" bodyfile="src/AIAC/LayerCamera.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCamera_1a3b72ee6cf01bad22e5ab0a0b78855fc2" prot="public" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Camera" kindref="compound">AIAC::Camera</ref></type>
+        <definition>AIAC::Camera AIAC::LayerCamera::MainCamera</definition>
+        <argsstring></argsstring>
+        <name>MainCamera</name>
+        <qualifiedname>AIAC::LayerCamera::MainCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="66" column="22" bodyfile="src/AIAC/LayerCamera.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerCamera_1a483331187636a3720fa1c3d45438bbd4" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerCamera::m_CurrentDeviceIndex</definition>
+        <argsstring></argsstring>
+        <name>m_CurrentDeviceIndex</name>
+        <qualifiedname>AIAC::LayerCamera::m_CurrentDeviceIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="69" column="13" bodyfile="src/AIAC/LayerCamera.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a4347e35bed5a1d5f47450f5381436f34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerCamera::LayerCamera</definition>
+        <argsstring>()=default</argsstring>
+        <name>LayerCamera</name>
+        <qualifiedname>AIAC::LayerCamera::LayerCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a826b89a07d0c5aa4121f411170f75de4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::LayerCamera::~LayerCamera</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LayerCamera</name>
+        <qualifiedname>AIAC::LayerCamera::~LayerCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="46" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a3697186ce8fdd7097908f07a9b41bf05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCamera::OnAttach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::LayerCamera::OnAttach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073">OnAttach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="48" column="22" bodyfile="src/AIAC/LayerCamera.cpp" bodystart="44" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a1c5008aa96ff002c92814bca4e13a51a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCamera::OnFrameStart</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::LayerCamera::OnFrameStart</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3">OnFrameStart</reimplements>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="49" column="22" bodyfile="src/AIAC/LayerCamera.cpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a64e74fd37d86fb0f8cf8234facb437be" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerCamera::GetCurrentDevice</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCurrentDevice</name>
+        <qualifiedname>AIAC::LayerCamera::GetCurrentDevice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="51" column="28" bodyfile="src/AIAC/LayerCamera.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a4d8dd0351c21c1a5d6af5122714ca46b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::LayerCamera::GetCurrentDeviceIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCurrentDeviceIndex</name>
+        <qualifiedname>AIAC::LayerCamera::GetCurrentDeviceIndex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="52" column="20" bodyfile="src/AIAC/LayerCamera.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1ace1fc3d8186cfe68ea4fece625459320" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCamera::SetCurrentDevice</definition>
+        <argsstring>(std::string path)</argsstring>
+        <name>SetCurrentDevice</name>
+        <qualifiedname>AIAC::LayerCamera::SetCurrentDevice</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="53" column="14" bodyfile="src/AIAC/LayerCamera.cpp" bodystart="67" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1aebf57d7ea1172d2093e0dd2e0ec58fb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCamera::SetCurrentDeviceIndex</definition>
+        <argsstring>(int index)</argsstring>
+        <name>SetCurrentDeviceIndex</name>
+        <qualifiedname>AIAC::LayerCamera::SetCurrentDeviceIndex</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="54" column="14" bodyfile="src/AIAC/LayerCamera.cpp" bodystart="85" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCamera_1a859b923224e31a26386115c35c3de649" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCamera::UpdateAvailableDevices</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateAvailableDevices</name>
+        <qualifiedname>AIAC::LayerCamera::UpdateAvailableDevices</qualifiedname>
+        <briefdescription>
+<para>Update the list of available devices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the list contains &gt;= 1 device </para>
+</simplesect>
+<simplesect kind="return"><para>false if the list has no devices </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCamera.h" line="62" column="14" bodyfile="src/AIAC/LayerCamera.cpp" bodystart="105" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerCamera</label>
+        <link refid="classAIAC_1_1LayerCamera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>AIAC::Camera</label>
+        <link refid="classAIAC_1_1Camera"/>
+      </node>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerCamera</label>
+        <link refid="classAIAC_1_1LayerCamera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>MainCamera</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerCamera.h" line="42" column="5" bodyfile="src/AIAC/LayerCamera.h" bodystart="43" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerCamera_1a23f8efd36101688e204d4209770eb8d8" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>AvailableDevices</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a64e74fd37d86fb0f8cf8234facb437be" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>GetCurrentDevice</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a4d8dd0351c21c1a5d6af5122714ca46b" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>GetCurrentDeviceIndex</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a4347e35bed5a1d5f47450f5381436f34" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>LayerCamera</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a483331187636a3720fa1c3d45438bbd4" prot="private" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>m_CurrentDeviceIndex</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a3b72ee6cf01bad22e5ab0a0b78855fc2" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>MainCamera</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a3697186ce8fdd7097908f07a9b41bf05" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a1c5008aa96ff002c92814bca4e13a51a" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1ace1fc3d8186cfe68ea4fece625459320" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>SetCurrentDevice</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1aebf57d7ea1172d2093e0dd2e0ec58fb9" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>SetCurrentDeviceIndex</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a859b923224e31a26386115c35c3de649" prot="public" virt="non-virtual"><scope>AIAC::LayerCamera</scope><name>UpdateAvailableDevices</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>~Layer</name></member>
+      <member refid="classAIAC_1_1LayerCamera_1a826b89a07d0c5aa4121f411170f75de4" prot="public" virt="virtual"><scope>AIAC::LayerCamera</scope><name>~LayerCamera</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

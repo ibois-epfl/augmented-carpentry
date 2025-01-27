@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Layer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Layer</compoundname>
+    <derivedcompoundref refid="classAIAC_1_1LayerCamera" prot="public" virt="non-virtual">AIAC::LayerCamera</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerCameraCalib" prot="public" virt="non-virtual">AIAC::LayerCameraCalib</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerFeedback" prot="public" virt="non-virtual">AIAC::LayerFeedback</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerLogRecorder" prot="public" virt="non-virtual">AIAC::LayerLogRecorder</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerModel" prot="public" virt="non-virtual">AIAC::LayerModel</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerSlam" prot="public" virt="non-virtual">AIAC::LayerSlam</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerToolhead" prot="public" virt="non-virtual">AIAC::LayerToolhead</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerUI" prot="public" virt="non-virtual">AIAC::LayerUI</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1LayerUtils" prot="public" virt="non-virtual">AIAC::LayerUtils</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::Layer::~Layer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Layer</name>
+        <qualifiedname>AIAC::Layer::~Layer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="43" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::Layer::OnAttach</definition>
+        <argsstring>()</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::Layer::OnAttach</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1LayerCamera_1a3697186ce8fdd7097908f07a9b41bf05">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerCameraCalib_1a979286ea530cbe0fb79f527374673c4f">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerFeedback_1a3476331a42196093e8338aae494a748c">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerLogRecorder_1af4d23b446a32c95ab800b93783b659af">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerModel_1a4deebf9f9b7ac38e5bb175ac99861e05">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerSlam_1ad9908b3f61e0c01c6d098350d891d73c">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerToolhead_1a9dcd82ebb6a4218cd39f39a73f9eb67a">OnAttach</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerUI_1a19a635f3b90870526f476ffb87598fe2">OnAttach</reimplementedby>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="46" column="22" bodyfile="src/AIAC/Layer.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::Layer::OnFrameAwake</definition>
+        <argsstring>()</argsstring>
+        <name>OnFrameAwake</name>
+        <qualifiedname>AIAC::Layer::OnFrameAwake</qualifiedname>
+        <briefdescription>
+<para>Is calle before GLFW poll events, GL frame and Imgui Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="49" column="22" bodyfile="src/AIAC/Layer.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::Layer::OnFrameStart</definition>
+        <argsstring>()</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::Layer::OnFrameStart</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1LayerCamera_1a1c5008aa96ff002c92814bca4e13a51a">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerCameraCalib_1a12b4ff49b0023e5730013b41154caa41">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerFeedback_1ae7db83864c73cb51093a294c8bce22bc">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerLogRecorder_1a5a0b9343246c0dfba898bfb5b8d1bd62">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerModel_1af6e0d7c60a0b69b89bbe1ddf4976dff1">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerSlam_1a74eb3bca71ebeb01b1203cbc4b68ecd2">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerToolhead_1a0f0a5238ece8402e6b4fb490d26b2838">OnFrameStart</reimplementedby>
+        <reimplementedby refid="classAIAC_1_1LayerUI_1ace7f50e810b4b0bf897bdeb36a8da046">OnFrameStart</reimplementedby>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="52" column="22" bodyfile="src/AIAC/Layer.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::Layer::OnFrameEnd</definition>
+        <argsstring>()</argsstring>
+        <name>OnFrameEnd</name>
+        <qualifiedname>AIAC::Layer::OnFrameEnd</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1LayerUtils_1a88ed6f0a0cdcf526778d4e828be3e19a">OnFrameEnd</reimplementedby>
+        <briefdescription>
+<para>Is called when frame ends. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="55" column="22" bodyfile="src/AIAC/Layer.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::Layer::OnFrameFall</definition>
+        <argsstring>()</argsstring>
+        <name>OnFrameFall</name>
+        <qualifiedname>AIAC::Layer::OnFrameFall</qualifiedname>
+        <briefdescription>
+<para>Is called when the GLFW, GL and Imgui frame is updated and rendered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="58" column="22" bodyfile="src/AIAC/Layer.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::Layer::OnDetach</definition>
+        <argsstring>()</argsstring>
+        <name>OnDetach</name>
+        <qualifiedname>AIAC::Layer::OnDetach</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1LayerUI_1a059e6df9760eb1e4b4ed4c6b19857b60">OnDetach</reimplementedby>
+        <briefdescription>
+<para>Is called when the layer is detached from the application (~app). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Layer.h" line="61" column="22" bodyfile="src/AIAC/Layer.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="2">
+        <label>AIAC::LayerCamera</label>
+        <link refid="classAIAC_1_1LayerCamera"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::LayerCameraCalib</label>
+        <link refid="classAIAC_1_1LayerCameraCalib"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>AIAC::LayerFeedback</label>
+        <link refid="classAIAC_1_1LayerFeedback"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>AIAC::LayerLogRecorder</label>
+        <link refid="classAIAC_1_1LayerLogRecorder"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>AIAC::LayerModel</label>
+        <link refid="classAIAC_1_1LayerModel"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>AIAC::LayerSlam</label>
+        <link refid="classAIAC_1_1LayerSlam"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>AIAC::LayerToolhead</label>
+        <link refid="classAIAC_1_1LayerToolhead"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>AIAC::LayerUI</label>
+        <link refid="classAIAC_1_1LayerUI"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>AIAC::LayerUtils</label>
+        <link refid="classAIAC_1_1LayerUtils"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/AIAC/Layer.h" line="40" column="5" bodyfile="src/AIAC/Layer.h" bodystart="41" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::Layer</scope><name>~Layer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1ACInfoModel" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::ACInfoModel</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1afddaf7255157c13f63ec45f580c50e94" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::m_EdgeWeight</definition>
+        <argsstring></argsstring>
+        <name>m_EdgeWeight</name>
+        <qualifiedname>AIAC::ACInfoModel::m_EdgeWeight</qualifiedname>
+        <initializer>= 1.1f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="491" column="11" bodyfile="src/AIAC/ACInfoModel.h" bodystart="491" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1a7540df3cec06fbbdb02e6976eebdc1e5" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::m_LabelSize</definition>
+        <argsstring></argsstring>
+        <name>m_LabelSize</name>
+        <qualifiedname>AIAC::ACInfoModel::m_LabelSize</qualifiedname>
+        <initializer>= 0.75f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="492" column="11" bodyfile="src/AIAC/ACInfoModel.h" bodystart="492" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1a68076023cd07f48a4e3fbf7be4f9f1d1" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::m_Scale</definition>
+        <argsstring></argsstring>
+        <name>m_Scale</name>
+        <qualifiedname>AIAC::ACInfoModel::m_Scale</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="494" column="11" bodyfile="src/AIAC/ACInfoModel.h" bodystart="494" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1aecda2236c1a5578f3fdfb3b89b3cb8e6" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::m_MeasuredBboxLength</definition>
+        <argsstring></argsstring>
+        <name>m_MeasuredBboxLength</name>
+        <qualifiedname>AIAC::ACInfoModel::m_MeasuredBboxLength</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="495" column="11" bodyfile="src/AIAC/ACInfoModel.h" bodystart="495" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1a1a1b2b8bbc7b3cb8e4f1b42c11e41d02" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::ACInfoModel::m_FilePath</definition>
+        <argsstring></argsstring>
+        <name>m_FilePath</name>
+        <qualifiedname>AIAC::ACInfoModel::m_FilePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="497" column="17" bodyfile="src/AIAC/ACInfoModel.h" bodystart="497" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1a1c9b8e121b954577374a21c96fc07bda" prot="private" static="no" mutable="no">
+        <type>pugi::xml_document</type>
+        <definition>pugi::xml_document AIAC::ACInfoModel::m_ACIMDoc</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMDoc</name>
+        <qualifiedname>AIAC::ACInfoModel::m_ACIMDoc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="498" column="24" bodyfile="src/AIAC/ACInfoModel.h" bodystart="498" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1a5650d0013e346831fcb08100e206a3af" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref></type>
+        <definition>TimberInfo AIAC::ACInfoModel::m_TimberInfo</definition>
+        <argsstring></argsstring>
+        <name>m_TimberInfo</name>
+        <qualifiedname>AIAC::ACInfoModel::m_TimberInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="500" column="16" bodyfile="src/AIAC/ACInfoModel.h" bodystart="500" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoModel_1a6fb78dcc9dcef7d4a3c73b299c8f7a72" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOLine&gt; &gt; AIAC::ACInfoModel::m_BboxGOLines</definition>
+        <argsstring></argsstring>
+        <name>m_BboxGOLines</name>
+        <qualifiedname>AIAC::ACInfoModel::m_BboxGOLines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="502" column="17" bodyfile="src/AIAC/ACInfoModel.h" bodystart="502" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a2a87b5a15d773cc49af7024bb0dae2a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ACInfoModel::ACInfoModel</definition>
+        <argsstring>()</argsstring>
+        <name>ACInfoModel</name>
+        <qualifiedname>AIAC::ACInfoModel::ACInfoModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="395" column="5" bodyfile="src/AIAC/ACInfoModel.h" bodystart="395" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1af1c784d4d892ef8336d8405db9ba4d0d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ACInfoModel::~ACInfoModel</definition>
+        <argsstring>()</argsstring>
+        <name>~ACInfoModel</name>
+        <qualifiedname>AIAC::ACInfoModel::~ACInfoModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="400" column="5" bodyfile="src/AIAC/ACInfoModel.h" bodystart="400" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a53b0e65ca416b65f99d2f5a756ad772f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::ACInfoModel::Load</definition>
+        <argsstring>(std::string path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>AIAC::ACInfoModel::Load</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Load a .acim model from a file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the model file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the file is loaded successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="407" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="362" bodyend="603"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a06dd8ab818c42649334527dfac25d86e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::Save</definition>
+        <argsstring>()</argsstring>
+        <name>Save</name>
+        <qualifiedname>AIAC::ACInfoModel::Save</qualifiedname>
+        <briefdescription>
+<para>Save the current state to the loaded .acim file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="412" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="605" bodyend="607"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a438c98f4202777f943b0a37b5f1fc28c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; AIAC::ACInfoModel::GetFilePath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFilePath</name>
+        <qualifiedname>AIAC::ACInfoModel::GetFilePath</qualifiedname>
+        <briefdescription>
+<para>Get the filepath to the loaded <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="417" column="30" bodyfile="src/AIAC/ACInfoModel.h" bodystart="417" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a8f5073dc39dccd9a58d2260d7f0c0b56" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string AIAC::ACInfoModel::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>AIAC::ACInfoModel::GetName</qualifiedname>
+        <briefdescription>
+<para>Get the name of the loaded <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref> without the extension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="422" column="30" bodyfile="src/AIAC/ACInfoModel.h" bodystart="422" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a774d68581c2802bcf62c84ea306c1508" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>pugi::xml_document &amp;</type>
+        <definition>pugi::xml_document &amp; AIAC::ACInfoModel::GetDoc</definition>
+        <argsstring>()</argsstring>
+        <name>GetDoc</name>
+        <qualifiedname>AIAC::ACInfoModel::GetDoc</qualifiedname>
+        <briefdescription>
+<para>Get the pugi::xml_document object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="430" column="31" bodyfile="src/AIAC/ACInfoModel.h" bodystart="430" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a0f26180f447c4da62d675eca1088f548" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>AIAC::ACInfoModel::Clear</qualifiedname>
+        <briefdescription>
+<para>Clear the loaded data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="435" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="609" bodyend="635"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1ab17df54c3abf0ba415e266e6368ff37a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref> &amp;</type>
+        <definition>TimberInfo &amp; AIAC::ACInfoModel::GetTimberInfo</definition>
+        <argsstring>()</argsstring>
+        <name>GetTimberInfo</name>
+        <qualifiedname>AIAC::ACInfoModel::GetTimberInfo</qualifiedname>
+        <briefdescription>
+<para>Get the <ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="440" column="23" bodyfile="src/AIAC/ACInfoModel.h" bodystart="440" bodyend="440"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1ada6cc5988f62ad1a9e83f40d2a0f3c23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::UpdateBboxGOLine</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateBboxGOLine</name>
+        <qualifiedname>AIAC::ACInfoModel::UpdateBboxGOLine</qualifiedname>
+        <briefdescription>
+<para>Update the bounding box of the timber (use the current Active <ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref>) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="445" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="637" bodyend="691"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a6831d5df56d42f7b6247b7a611da79c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::Transform</definition>
+        <argsstring>(glm::mat4x4 transformMat)</argsstring>
+        <name>Transform</name>
+        <qualifiedname>AIAC::ACInfoModel::Transform</qualifiedname>
+        <param>
+          <type>glm::mat4x4</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+<para>transform all the <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> belonging to the <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>transformMat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>transformation matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="456" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="693" bodyend="744"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1ab271d7263b870cde89a7bece0f0c1913" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::GetLength</definition>
+        <argsstring>()</argsstring>
+        <name>GetLength</name>
+        <qualifiedname>AIAC::ACInfoModel::GetLength</qualifiedname>
+        <briefdescription>
+<para>Get the length of the acim, which is calculated by averaging the four long edges of the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The length of the acim bounding box. (in TSLAM unit) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="462" column="11" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="746" bodyend="757"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1aa63d343a60afa24ea3745ede4cd4e061" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::GetRealWorldLength</definition>
+        <argsstring>()</argsstring>
+        <name>GetRealWorldLength</name>
+        <qualifiedname>AIAC::ACInfoModel::GetRealWorldLength</qualifiedname>
+        <briefdescription>
+<para>Get the length of the acim, which is calculated by averaging the four long edges of the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The length of the acim bounding box. (in Real World unit, meter) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="468" column="18" bodyfile="src/AIAC/ACInfoModel.h" bodystart="468" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1aa8bc64b726d94592e54cdb09eecb371f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::SetBboxVisibility</definition>
+        <argsstring>(bool visible)</argsstring>
+        <name>SetBboxVisibility</name>
+        <qualifiedname>AIAC::ACInfoModel::SetBboxVisibility</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the visibility of bbox to true or false </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="473" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="759" bodyend="763"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a820fb24eda56a2b773102fdc7c926f41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::AddMeasuredBboxLength</definition>
+        <argsstring>(const float diff)</argsstring>
+        <name>AddMeasuredBboxLength</name>
+        <qualifiedname>AIAC::ACInfoModel::AddMeasuredBboxLength</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Increase / decrease real world length based on the measurement </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="478" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="765" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1a560fe337ea663c091b7acf4b771b3f2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::ACInfoModel::GetMeasuredBboxLength</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMeasuredBboxLength</name>
+        <qualifiedname>AIAC::ACInfoModel::GetMeasuredBboxLength</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the real world length of the bounding box (in Real World unit, meter) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="483" column="18" bodyfile="src/AIAC/ACInfoModel.h" bodystart="483" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoModel_1aaba597673c0d839627a918a98747a4b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoModel::AdjustScale</definition>
+        <argsstring>()</argsstring>
+        <name>AdjustScale</name>
+        <qualifiedname>AIAC::ACInfoModel::AdjustScale</qualifiedname>
+        <briefdescription>
+<para>Utils. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Adjust the scale of the model based on the measured result </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="488" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="769" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoModel.h" line="392" column="1" bodyfile="src/AIAC/ACInfoModel.h" bodystart="393" bodyend="503"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1ACInfoModel_1a2a87b5a15d773cc49af7024bb0dae2a1" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>ACInfoModel</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a820fb24eda56a2b773102fdc7c926f41" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>AddMeasuredBboxLength</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1aaba597673c0d839627a918a98747a4b3" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>AdjustScale</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a0f26180f447c4da62d675eca1088f548" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>Clear</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a774d68581c2802bcf62c84ea306c1508" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetDoc</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a438c98f4202777f943b0a37b5f1fc28c" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetFilePath</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1ab271d7263b870cde89a7bece0f0c1913" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetLength</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a560fe337ea663c091b7acf4b771b3f2b" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetMeasuredBboxLength</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a8f5073dc39dccd9a58d2260d7f0c0b56" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1aa63d343a60afa24ea3745ede4cd4e061" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetRealWorldLength</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1ab17df54c3abf0ba415e266e6368ff37a" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>GetTimberInfo</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a53b0e65ca416b65f99d2f5a756ad772f" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>Load</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a1c9b8e121b954577374a21c96fc07bda" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_ACIMDoc</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a6fb78dcc9dcef7d4a3c73b299c8f7a72" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_BboxGOLines</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1afddaf7255157c13f63ec45f580c50e94" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_EdgeWeight</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a1a1b2b8bbc7b3cb8e4f1b42c11e41d02" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_FilePath</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a7540df3cec06fbbdb02e6976eebdc1e5" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_LabelSize</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1aecda2236c1a5578f3fdfb3b89b3cb8e6" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_MeasuredBboxLength</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a68076023cd07f48a4e3fbf7be4f9f1d1" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_Scale</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a5650d0013e346831fcb08100e206a3af" prot="private" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>m_TimberInfo</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a06dd8ab818c42649334527dfac25d86e" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>Save</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1aa8bc64b726d94592e54cdb09eecb371f" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>SetBboxVisibility</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1a6831d5df56d42f7b6247b7a611da79c1" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>Transform</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1ada6cc5988f62ad1a9e83f40d2a0f3c23" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>UpdateBboxGOLine</name></member>
+      <member refid="classAIAC_1_1ACInfoModel_1af1c784d4d892ef8336d8405db9ba4d0d" prot="public" virt="non-virtual"><scope>AIAC::ACInfoModel</scope><name>~ACInfoModel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
