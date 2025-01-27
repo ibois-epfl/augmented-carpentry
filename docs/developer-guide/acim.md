@@ -16,7 +16,7 @@ During our prototyping phase, we use [*Rhinoceros 3D* with a custom script](http
 
 ![acim export image ><](../../assets/images/developer_guide/only_acim_exporter.png){width=700} 
 
-![acim export image ><](../../assets/images/developer_guide/locked_model.png){width=700}
+![acim export image ><](../../assets/images/developer_guide/only_acim_exporter.png){width=700}
 
 
 
