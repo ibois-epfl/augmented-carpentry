@@ -163,8 +163,8 @@ def parse_acit(acit_path, scale):
 def construct_drillbit_primitive_model(acit_data):
     """Construct a primitive model of the drillbit from the ACIT file."""
     
-    base_plane = Rhino.Geometry.Plane(acit_data["chuck_tip"], acit_data["normal"])
-    base_circle = Rhino.Geometry.Circle(base_plane, acit_data["radius"])
+    base_plane = Rhino.Geometry.Plane(acit_data["eat_tip"], acit_data["normal"])
+    base_circle = Rhino.Geometry.Circle(base_plane, acit_data["radius"]/2)
     primitive_cylinder = Rhino.Geometry.Cylinder(base_circle, acit_data["length"])
     brep = primitive_cylinder.ToBrep(True, True)
 
