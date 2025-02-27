@@ -86,7 +86,7 @@ The `Renderer::OnRender()` function triggers after all layers have finished proc
 
 ![Dataflow of the rendering system and the pipeline for AR rendering.](fig_AR-rendering.svg){ width=100%}
 
-# Acknowledgements
+# Acknowledgments
 
 We would like to thank all the contributors to the ACEngine project, including the developers, researchers, and users who have provided valuable feedback and suggestions. Special thanks to the GIS and the Center for Imaging EPFL groups, for their support throughout the development process.
 
