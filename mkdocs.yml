@@ -110,22 +110,22 @@ plugins:
       minify_html: true
   - macros:
       module_name: docs/scripts/main
-  # FIXME: >>> DOXY >>> uncomment before release
-  - mkdoxy:
-      enabled: !ENV [ENABLE_MKDOXY, True]
-      projects:
-        acdoxygen:
-          src-dirs: src
-          full-doc: True
-          doxy-cfg:
-            FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
-            RECURSIVE: True
-      # save-api: docs/.mkdoxy  # to output the .md files
-      full-doc: True
-      debug: False
-      ignore-errors: False
-      emojis-enabled: True
-  # FIXME: <<< DOXY <<< uncomment before release
+  # # FIXME: >>> DOXY >>> uncomment before release
+  # - mkdoxy:
+  #     enabled: !ENV [ENABLE_MKDOXY, True]
+  #     projects:
+  #       acdoxygen:
+  #         src-dirs: src
+  #         full-doc: True
+  #         doxy-cfg:
+  #           FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
+  #           RECURSIVE: True
+  #     # save-api: docs/.mkdoxy  # to output the .md files
+  #     full-doc: True
+  #     debug: False
+  #     ignore-errors: False
+  #     emojis-enabled: True
+  # # FIXME: <<< DOXY <<< uncomment before release
 
 
 # Hooks
@@ -142,9 +142,9 @@ extra:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
   social:
-    - icon: official/ibois_logo_black 
+    - icon: official/ibois_logo_black
       link: https://www.epfl.ch/labs/ibois/
-    - icon: official/epfl_logo_black 
+    - icon: official/epfl_logo_black
       link: https://www.epfl.ch/en/
     - icon: fontawesome/brands/github
       link: https://github.com/ibois-epfl/augmented-carpentry
@@ -167,6 +167,7 @@ markdown_extensions:
   - def_list
   - footnotes
   - md_in_html
+  - pymdownx.blocks.caption
   - toc:
       permalink: true
   - pymdownx.arithmatex:
@@ -231,24 +232,29 @@ nav:
 
   - Augmented Woodworking:
     - augmented-woodworking/index.md
-    - test1: augmented-woodworking/placeholder1.md
-    - test2: augmented-woodworking/placeholder2.md
-    - Camera calibration: augmented-woodworking/camera-calibration.md
+    - Draw: augmented-woodworking/draw.md
+    - Map: augmented-woodworking/map.md
+    - Tool calibration: augmented-woodworking/tool-calib.md
+    - Cut:
+      - Circular saw: augmented-woodworking/cut-circularsaw.md
+      - Chainsaw: augmented-woodworking/cut-chainsaw.md
+    - Drill: augmented-woodworking/drill.md
+    - Inspect: augmented-woodworking/inspect.md
 
-    # FIXME: >>> DOXY >>> uncomment before release
-  - C++ docs: 
-    - cpp-docs/index.md
-    - Files: "acdoxygen/files.md"
-    - Functions: "acdoxygen/functions.md"
-    - Classes:
-        - Class List: "acdoxygen/annotated.md"
-        - Class Hierarchy: "acdoxygen/hierarchy.md"
-        - Class Members: "acdoxygen/class_members.md"
-        - Class Member Functions: "acdoxygen/class_member_functions.md"
-        - Class Member Variables: "acdoxygen/class_member_variables.md"
-        - Variables: "acdoxygen/variables.md"
-    - Macros: "acdoxygen/macros.md"
-    # FIXME: <<< DOXY <<< uncomment before release
+  #   # FIXME: >>> DOXY >>> uncomment before release
+  # - C++ docs:
+  #   - cpp-docs/index.md
+  #   - Files: "acdoxygen/files.md"
+  #   - Functions: "acdoxygen/functions.md"
+  #   - Classes:
+  #       - Class List: "acdoxygen/annotated.md"
+  #       - Class Hierarchy: "acdoxygen/hierarchy.md"
+  #       - Class Members: "acdoxygen/class_members.md"
+  #       - Class Member Functions: "acdoxygen/class_member_functions.md"
+  #       - Class Member Variables: "acdoxygen/class_member_variables.md"
+  #       - Variables: "acdoxygen/variables.md"
+  #   - Macros: "acdoxygen/macros.md"
+  #   # FIXME: <<< DOXY <<< uncomment before release
 
   - Developer guide:
     - AR engine:
@@ -262,7 +268,7 @@ nav:
     - Guidelines:
       - Code: developer-guide/CONTRIBUTING_copy.md
       - Tags: developer-guide/tags.md
-  
+
   - Community:
     - contributing/community.md
     - Reporting a bug: contributing/reporting-a-bug.md
@@ -270,7 +276,7 @@ nav:
     - Adding tools or mounts: contributing/add-new-tool.md
     - Making a pull request: contributing/making-a-pull-request.md
     - Asking a question: https://github.com/ibois-epfl/augmented-carpentry/discussions
-  
+
   - Publications: publications/index.md
-  
+
   - Research team: team/research_team.md
