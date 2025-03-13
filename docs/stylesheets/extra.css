@@ -145,7 +145,7 @@ img[alt$="><"] {
 }
 
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
-/* Display image and legend on the side */
+/* Display image, video and legend on the side */
 .sevinch-display-tutorial {
   display: grid;
   grid-template-columns: 65% 35%;
@@ -157,6 +157,7 @@ img[alt$="><"] {
 .sevinch-display-tutorial figure {
   grid-column: 1;
   margin: 0;
+  position: relative;
 }
 
 .sevinch-display-tutorial .description {
@@ -167,7 +168,6 @@ img[alt$="><"] {
   border-radius: 6px;
   font-size: 0.9em;
   color: var(--comet) !important;
-
   line-height: 1.1;
   margin: 0.5em 0;
 }
@@ -175,9 +175,38 @@ img[alt$="><"] {
 .sevinch-display-tutorial img {
   width: 100%;
   height: auto;
-  /* border-radius: 4px; */
 }
 
+/* Video container with frame overlay */
+.sevinch-display-tutorial .video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: visible;
+  grid-column: 1;
+}
+
+/* Note that all the settings for interface of viemo need
+to be done on the vimeo website (e.g. no logo, no title,
+colors, etc.), just add the pre-settings "ac_documentation"
+to appearance.
+Put also "vide" at thed on "interaction" for end-screen. */
+.sevinch-display-tutorial .video-container iframe {
+  position: absolute;
+  top: +10%;
+  left: +5%;
+  width: 70.8%;
+  height: 79%;
+  z-index: 1;
+}
+
+.sevinch-display-tutorial .frame-overlay {
+  position: relative;
+  grid-column: 1;
+  margin: 0;
+  pointer-events: none;
+  z-index: 2;
+}
 
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 /* Custom ammonition for 3D printing */
