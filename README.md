@@ -14,7 +14,7 @@ Here's a capture from the AC system in action. Visit the documentation for more 
 
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/007a47d5-cb45-478f-b9c8-42a9deddf905" width="800px">
+    <img src="https://github.com/user-attachments/assets/007a47d5-cb45-478f-b9c8-42a9deddf905" width="700px">
 </p>
 
 
