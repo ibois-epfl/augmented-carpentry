@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1ChainSawData" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::ChainSawData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1aaaa5d03a10a7c4c04694efbbb8cb1ee4" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::ChainSawData::NameACIT</definition>
+        <argsstring></argsstring>
+        <name>NameACIT</name>
+        <qualifiedname>AIAC::ChainSawData::NameACIT</qualifiedname>
+        <briefdescription>
+<para>name of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="117" column="21" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1aac4896433048ef19beb58cdfd74b7159" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ChainSawData::WidthACIT</definition>
+        <argsstring></argsstring>
+        <name>WidthACIT</name>
+        <qualifiedname>AIAC::ChainSawData::WidthACIT</qualifiedname>
+        <briefdescription>
+<para>width of the chain </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="119" column="15" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a3b8131b65eaa45cf62c15eae04dbd987" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ChainSawData::ThicknessACIT</definition>
+        <argsstring></argsstring>
+        <name>ThicknessACIT</name>
+        <qualifiedname>AIAC::ChainSawData::ThicknessACIT</qualifiedname>
+        <briefdescription>
+<para>the overhaul thickness of the blade </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="121" column="15" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1aa5bce0ec1a53bab2189a05d026422f3f" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ChainSawData::OverhangACIT</definition>
+        <argsstring></argsstring>
+        <name>OverhangACIT</name>
+        <qualifiedname>AIAC::ChainSawData::OverhangACIT</qualifiedname>
+        <briefdescription>
+<para>the overhang width of the teeth of the blade from one side </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="123" column="15" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a1435db336e918d1c1338804b19ca8513" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::ChainSawData::ChainBaseACIT</definition>
+        <argsstring></argsstring>
+        <name>ChainBaseACIT</name>
+        <qualifiedname>AIAC::ChainSawData::ChainBaseACIT</qualifiedname>
+        <briefdescription>
+<para>point start of the basetool </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="126" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a88ca24ddeaf82094e0a17604a89a160c" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::ChainSawData::ChainMidACIT</definition>
+        <argsstring></argsstring>
+        <name>ChainMidACIT</name>
+        <qualifiedname>AIAC::ChainSawData::ChainMidACIT</qualifiedname>
+        <briefdescription>
+<para>point in the middle of the chain </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="128" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1ab5246ea1d40c64d957f11d97fa5cab56" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::ChainSawData::ChainNormEndACIT</definition>
+        <argsstring></argsstring>
+        <name>ChainNormEndACIT</name>
+        <qualifiedname>AIAC::ChainSawData::ChainNormEndACIT</qualifiedname>
+        <briefdescription>
+<para>point end of the chain before the round tip </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="130" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a9738d22bfa45d41e15300822cb063357" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::ChainSawData::NormStartACIT</definition>
+        <argsstring></argsstring>
+        <name>NormStartACIT</name>
+        <qualifiedname>AIAC::ChainSawData::NormStartACIT</qualifiedname>
+        <briefdescription>
+<para>start of the normal of the plateau plane </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="132" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a2b9e2a144a104e6991b41377cc7bb127" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::ChainSawData::NormEndACIT</definition>
+        <argsstring></argsstring>
+        <name>NormEndACIT</name>
+        <qualifiedname>AIAC::ChainSawData::NormEndACIT</qualifiedname>
+        <briefdescription>
+<para>end of the normal of the plateau plane </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="134" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a8638848b9573afd63d446e4d29a87822" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::ChainSawData::ChainBaseGO</definition>
+        <argsstring></argsstring>
+        <name>ChainBaseGO</name>
+        <qualifiedname>AIAC::ChainSawData::ChainBaseGO</qualifiedname>
+        <briefdescription>
+<para>GOPoints equivalent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="136" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a5580d6c3034c3c94ab5f485ddbe19bef" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::ChainSawData::ChainMidGO</definition>
+        <argsstring></argsstring>
+        <name>ChainMidGO</name>
+        <qualifiedname>AIAC::ChainSawData::ChainMidGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="137" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a8abf0525ed5533c0cec28f573aa9df5e" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::ChainSawData::ChainEndGO</definition>
+        <argsstring></argsstring>
+        <name>ChainEndGO</name>
+        <qualifiedname>AIAC::ChainSawData::ChainEndGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="138" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a384caf6468f18bb72cb131f8b07affce" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::ChainSawData::NormStartGO</definition>
+        <argsstring></argsstring>
+        <name>NormStartGO</name>
+        <qualifiedname>AIAC::ChainSawData::NormStartGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="139" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ChainSawData_1a352c996508769d5fbe1da7ebab32a76a" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::ChainSawData::NormEndGO</definition>
+        <argsstring></argsstring>
+        <name>NormEndGO</name>
+        <qualifiedname>AIAC::ChainSawData::NormEndGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="140" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structAIAC_1_1ChainSawData_1aea760268fed2bda42e500d8ad0c2bf32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ChainSawData::ChainSawData</definition>
+        <argsstring>()</argsstring>
+        <name>ChainSawData</name>
+        <qualifiedname>AIAC::ChainSawData::ChainSawData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="142" column="9" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="142" bodyend="149"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoToolhead.h" line="114" column="5" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="115" bodyend="150"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1ChainSawData_1a1435db336e918d1c1338804b19ca8513" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainBaseACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a8638848b9573afd63d446e4d29a87822" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainBaseGO</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a8abf0525ed5533c0cec28f573aa9df5e" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainEndGO</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a88ca24ddeaf82094e0a17604a89a160c" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainMidACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a5580d6c3034c3c94ab5f485ddbe19bef" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainMidGO</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1ab5246ea1d40c64d957f11d97fa5cab56" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainNormEndACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1aea760268fed2bda42e500d8ad0c2bf32" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ChainSawData</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1aaaa5d03a10a7c4c04694efbbb8cb1ee4" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>NameACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a2b9e2a144a104e6991b41377cc7bb127" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>NormEndACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a352c996508769d5fbe1da7ebab32a76a" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>NormEndGO</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a9738d22bfa45d41e15300822cb063357" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>NormStartACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a384caf6468f18bb72cb131f8b07affce" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>NormStartGO</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1aa5bce0ec1a53bab2189a05d026422f3f" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>OverhangACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1a3b8131b65eaa45cf62c15eae04dbd987" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>ThicknessACIT</name></member>
+      <member refid="structAIAC_1_1ChainSawData_1aac4896433048ef19beb58cdfd74b7159" prot="public" virt="non-virtual"><scope>AIAC::ChainSawData</scope><name>WidthACIT</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

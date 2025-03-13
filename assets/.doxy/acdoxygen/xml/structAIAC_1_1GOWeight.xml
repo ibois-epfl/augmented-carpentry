@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1GOWeight" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::GOWeight</compoundname>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1ad1c21440259e6948ed13bce215bca2e5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::Default</definition>
+        <argsstring></argsstring>
+        <name>Default</name>
+        <qualifiedname>AIAC::GOWeight::Default</qualifiedname>
+        <initializer>= 1.01f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="78" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1af2cc3da874c62764cd05a37cc8ac073d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::Light</definition>
+        <argsstring></argsstring>
+        <name>Light</name>
+        <qualifiedname>AIAC::GOWeight::Light</qualifiedname>
+        <initializer>= 1.4f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="79" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1a53ee79e608071ed91ea2747e187ef5d4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::Medium</definition>
+        <argsstring></argsstring>
+        <name>Medium</name>
+        <qualifiedname>AIAC::GOWeight::Medium</qualifiedname>
+        <initializer>= 1.8f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="80" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1ab56f886dc716f48d4277c8d6fd7af6b8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::Bold</definition>
+        <argsstring></argsstring>
+        <name>Bold</name>
+        <qualifiedname>AIAC::GOWeight::Bold</qualifiedname>
+        <initializer>= 2.5f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="81" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1a7946e91cf8b6faa324d332c859a4042e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::Thick</definition>
+        <argsstring></argsstring>
+        <name>Thick</name>
+        <qualifiedname>AIAC::GOWeight::Thick</qualifiedname>
+        <initializer>= 5.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="82" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1ab63de119d0dd15b1ea420853d77db8d3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::MediumThick</definition>
+        <argsstring></argsstring>
+        <name>MediumThick</name>
+        <qualifiedname>AIAC::GOWeight::MediumThick</qualifiedname>
+        <initializer>= 7.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="83" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1a4742ae9b82af3e25acf9d65d3ac6b971" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::ExtraThick</definition>
+        <argsstring></argsstring>
+        <name>ExtraThick</name>
+        <qualifiedname>AIAC::GOWeight::ExtraThick</qualifiedname>
+        <initializer>= 10.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="84" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1afb1ad2b6ca88baf0e71e851a44f8f5d2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::BoldThick</definition>
+        <argsstring></argsstring>
+        <name>BoldThick</name>
+        <qualifiedname>AIAC::GOWeight::BoldThick</qualifiedname>
+        <initializer>= 15.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="85" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOWeight_1a6fd3e67d54feb6cc5bb521c3ca803696" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float AIAC::GOWeight::MaxThick</definition>
+        <argsstring></argsstring>
+        <name>MaxThick</name>
+        <qualifiedname>AIAC::GOWeight::MaxThick</qualifiedname>
+        <initializer>= 20.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="86" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="76" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="77" bodyend="87"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1GOWeight_1ab56f886dc716f48d4277c8d6fd7af6b8" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>Bold</name></member>
+      <member refid="structAIAC_1_1GOWeight_1afb1ad2b6ca88baf0e71e851a44f8f5d2" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>BoldThick</name></member>
+      <member refid="structAIAC_1_1GOWeight_1ad1c21440259e6948ed13bce215bca2e5" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>Default</name></member>
+      <member refid="structAIAC_1_1GOWeight_1a4742ae9b82af3e25acf9d65d3ac6b971" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>ExtraThick</name></member>
+      <member refid="structAIAC_1_1GOWeight_1af2cc3da874c62764cd05a37cc8ac073d" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>Light</name></member>
+      <member refid="structAIAC_1_1GOWeight_1a6fd3e67d54feb6cc5bb521c3ca803696" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>MaxThick</name></member>
+      <member refid="structAIAC_1_1GOWeight_1a53ee79e608071ed91ea2747e187ef5d4" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>Medium</name></member>
+      <member refid="structAIAC_1_1GOWeight_1ab63de119d0dd15b1ea420853d77db8d3" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>MediumThick</name></member>
+      <member refid="structAIAC_1_1GOWeight_1a7946e91cf8b6faa324d332c859a4042e" prot="public" virt="non-virtual"><scope>AIAC::GOWeight</scope><name>Thick</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
