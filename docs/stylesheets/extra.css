@@ -7,6 +7,7 @@
   --galaxy: #261230;
   --space: #30173d;
   --comet: #6f5d6f;
+  --comet-clear: #d6bdd6;
   --cosmic: #46ffe6;
   --sun: #ffac2f;
   --electron: #46ebe1;
@@ -145,6 +146,14 @@ img[alt$="><"] {
 }
 
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+/* Parallel video*/
+.video-wrapper {
+  padding: 59.6% 0 0 0;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 /* Display image, video and legend on the side */
 .sevinch-display-tutorial {
   display: grid;
@@ -172,18 +181,15 @@ img[alt$="><"] {
   margin: 0.5em 0;
 }
 
+.sevinch-display-tutorial .description-admonition {
+  color: var(--comet-clear) !important;
+  /* line-height: 1.1;
+  margin: 0.5em 0; */
+}
+
 .sevinch-display-tutorial img {
   width: 100%;
   height: auto;
-}
-
-/* Video container with frame overlay */
-.sevinch-display-tutorial .video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: visible;
-  grid-column: 1;
 }
 
 /* Note that all the settings for interface of viemo need

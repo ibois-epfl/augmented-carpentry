@@ -234,6 +234,7 @@ nav:
     - augmented-woodworking/index.md
     - Draw: augmented-woodworking/draw.md
     - Map: augmented-woodworking/map.md
+    - Execution model: augmented-woodworking/execution-model.md
     - Tool calibration: augmented-woodworking/tool-calib.md
     - Cut:
       - Circular saw: augmented-woodworking/cut-circularsaw.md
