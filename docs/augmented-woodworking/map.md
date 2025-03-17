@@ -7,7 +7,6 @@ tags:
 
 Print the [tags](../hardware/stickers.md) and stick them to the timber piece. Cover the middle of each face of the timber beam with the tags. Once it is done, mapping can start. The mapping is the process of capturing the tags with the camera to create a 3D model of the timber piece. By doing this, the system will be able to track the timber piece in real-time during the fabrication.
 
-<!-- FIXME: do the round border -->
 <div class="video-wrapper"><iframe src="https://player.vimeo.com/video/1065880051?h=ea7b8858ac&amp;badge=0&amp;autopause=0&amp;title=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 <br>
@@ -117,7 +116,7 @@ Once the map is loaded together with the `.acim` model, you can visualize if the
         />
     </div>
     </figure>
-    <div markdown>
+    <div class="admonition-seveinch-desc" markdown>
     In case the reconstruction fails, follow **this** procedure. You can try to reconstruct the piece with different parameters. We have several presets available to try based on the element's dimensions.
     </div>
     </div>
@@ -139,7 +138,7 @@ Once the map is loaded together with the `.acim` model, you can visualize if the
         />
     </div>
     </figure>
-    <div markdown>
+    <div class="admonition-seveinch-desc" markdown>
     For now if the beam exceeds `3 m`, the system will sometimes fail to map the piece. In this case, you can try to reduce the number of tags in e.g., the middle of the beam.
     </div>
     </div>

@@ -209,11 +209,15 @@ Put also "vide" at thed on "interaction" for end-screen. */
 .sevinch-display-tutorial .frame-overlay {
   position: relative;
   grid-column: 1;
-  /* margin: 0; */
+  margin: 0;
   pointer-events: none;
   z-index: 2;
 }
 
+.admonition-seveinch-desc {
+  margin-right: 1rem;
+  font-size: 1.05em;
+}
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 /* Custom ammonition for 3D printing */
 :root {
