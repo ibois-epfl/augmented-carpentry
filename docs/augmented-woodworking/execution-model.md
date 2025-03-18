@@ -7,7 +7,7 @@ tags:
 
 Once you mapped the piece, you can load the `.acim` model to lock the execution model to the current timber element. This will allow you to visualize directly in 3D all the augmented cuts, drills and other information directly on the timber piece.
 
-<div class="video-wrapper"><iframe src="https://player.vimeo.com/video/1066589698?h=a4d4abba68&amp;badge=0&amp;autopause=0&amp;title=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="3dacim_view_static"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+<div class="video-wrapper"><iframe src="https://player.vimeo.com/video/1066589698?h=a4d4abba68&amp;badge=0&amp;autopause=0&amp;title=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 <br>
 

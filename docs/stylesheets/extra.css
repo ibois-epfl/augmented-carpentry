@@ -183,8 +183,6 @@ img[alt$="><"] {
 
 .sevinch-display-tutorial .description-admonition {
   color: var(--comet-clear) !important;
-  /* line-height: 1.1;
-  margin: 0.5em 0; */
 }
 
 .sevinch-display-tutorial img {

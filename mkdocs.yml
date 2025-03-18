@@ -238,7 +238,9 @@ nav:
     - Tool calibration: augmented-woodworking/tool-calib.md
     - Cut:
       - Circular saw: augmented-woodworking/cut-circularsaw.md
+      - Miter saw: augmented-woodworking/cut-mitersaw.md
       - Chainsaw: augmented-woodworking/cut-chainsaw.md
+      - Sword saw: augmented-woodworking/cut-swordsaw.md
     - Drill: augmented-woodworking/drill.md
     - Inspect: augmented-woodworking/inspect.md
 
