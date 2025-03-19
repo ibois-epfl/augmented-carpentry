@@ -12,7 +12,7 @@ def versionize(c):
     c.run(f"python {path_versionize} --from-manifest")
 
 @task
-def flagerize(c, package_name="ACPy"):
+def flagerize(c, package_name="augmented-carpentry-py"):
     path_flagerize = "./invokes/flagerize.py"
     c.run(f"python {path_flagerize} --package {package_name} --from-manifest")
 

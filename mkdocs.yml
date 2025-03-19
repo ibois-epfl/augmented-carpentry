@@ -231,8 +231,8 @@ nav:
       - changelog/index.md
 
   - Augmented Woodworking:
-    - augmented-woodworking/index.md
-    - Draw: augmented-woodworking/draw.md
+    # - augmented-woodworking/index.md
+    # - Draw: augmented-woodworking/draw.md
     - Map: augmented-woodworking/map.md
     - Execution model: augmented-woodworking/execution-model.md
     - Tool calibration: augmented-woodworking/tool-calib.md

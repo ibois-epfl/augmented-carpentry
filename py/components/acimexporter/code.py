@@ -1,5 +1,7 @@
 #! python3
 
+# r: augmented-carpentry-py==1.0.0
+
 import sys
 import os
 import time
@@ -122,17 +124,17 @@ class ACPyAcimExporter(component):
         return o_holes, o_cuts
 
 
-############################################################################################
-## only for DEBUG: erase before componentize
-############################################################################################
-if __name__ == "__main__":
-    comp = ACPyAcimExporter()
-    o_holes, o_cuts = comp.RunScript(
-        i_acim_path,
-        i_transform_back,
-        i_inflate_AABB,
-        i_divide_tolerance,
-        i_dump_data,
-        i_beams,
-        i_GUIDs
-    )
+# ############################################################################################
+# ## only for DEBUG: erase before componentize
+# ############################################################################################
+# if __name__ == "__main__":
+#     comp = ACPyAcimExporter()
+#     o_holes, o_cuts = comp.RunScript(
+#         i_acim_path,
+#         i_transform_back,
+#         i_inflate_AABB,
+#         i_divide_tolerance,
+#         i_dump_data,
+#         i_beams,
+#         i_GUIDs
+#     )

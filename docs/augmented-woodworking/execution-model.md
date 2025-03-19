@@ -5,13 +5,27 @@ tags:
   - fab
 ---
 
-Once you mapped the piece, you can load the `.acim` model to lock the execution model to the current timber element. This will allow you to visualize directly in 3D all the augmented cuts, drills and other information directly on the timber piece.
+Once you mapped the piece, you can load the [`.acim`](../developer-guide/acim.md) model to lock the execution model to the current timber element. This will allow you to visualize directly in 3D all the augmented cuts, drills and other information directly on the timber piece.
 
 <div class="video-wrapper"><iframe src="https://player.vimeo.com/video/1066589698?h=a4d4abba68&amp;badge=0&amp;autopause=0&amp;title=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 <br>
 
 # Step-by-step
+
+<div class="sevinch-display-tutorial" markdown>
+<figure markdown>
+![Image title](../../assets/images/woodworking/draw_overview.png)
+</figure>
+<div class="description" markdown>
+To operate machines with AC, you need to export a [`.acim`](../developer-guide/acim.md) file from your 3D modeling software. This file contains all the information required for the fabrication process, such as geometric information (e.g., joints and holes) and fabrication metadata (e.g., ID, fabrication status). For now we only support `.acim` files generated from Grasshopper.
+
+<br>
+
+Install `augmented-carpentry` via the **Package Manager** and export your structure via the component `acpy-acim-exporter`.
+</div>
+</div>
+
 
 <!-- Load acim model (UI interface to select acim navigation) -->
 <div class="sevinch-display-tutorial" markdown>
@@ -30,7 +44,7 @@ Once you mapped the piece, you can load the `.acim` model to lock the execution 
 </div>
 </figure>
 <div class="description" markdown>
-Once the mapping is processed and saved, you can load the `.acim` model to lock the execution model to the current piece.
+Once the mapping is processed and saved, you can load the [`.acim`](../developer-guide/acim.md) model to lock the execution model to the current piece.
 </div>
 </div>
 
