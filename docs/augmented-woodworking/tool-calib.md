@@ -8,7 +8,7 @@ tags:
 
 Here we describe the calibration process of the tool heads. This is a crucial step to ensure the correct tracking of the inserted tool. This procedure needs to be done every time a tool is changed.
 
-<!-- Overview mosaic video of the claibration process -->
+<div class="video-wrapper"><iframe src="https://player.vimeo.com/video/1067338840?h=054bd5b1dc&amp;badge=0&amp;autopause=0&amp;title=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 <br>
 
