@@ -243,6 +243,8 @@ nav:
       - Sword saw: augmented-woodworking/cut-swordsaw.md
     - Drill: augmented-woodworking/drill.md
     - Inspect: augmented-woodworking/inspect.md
+    - Replay: augmented-woodworking/replay.md
+
 
   #   # FIXME: >>> DOXY >>> uncomment before release
   # - C++ docs:

@@ -211,6 +211,17 @@ Put also "vide" at thed on "interaction" for end-screen. */
   pointer-events: none;
   z-index: 2;
 }
+.sevinch-display-tutorial .symbol-overlay {
+  position: absolute;  /* Change from relative to absolute */
+  top: 0;             /* Add top positioning */
+  left: 0;            /* Add left positioning */
+  width: 100%;        /* Add width */
+  height: 100%;       /* Add height */
+  grid-column: 1;
+  margin: 0;
+  pointer-events: none;
+  z-index: 3;
+}
 
 .admonition-seveinch-desc {
   margin-right: 1rem;
