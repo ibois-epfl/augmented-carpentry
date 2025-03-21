@@ -242,8 +242,8 @@ nav:
       - Chainsaw: augmented-woodworking/cut-chainsaw.md
       - Sword saw: augmented-woodworking/cut-swordsaw.md
     - Drill: augmented-woodworking/drill.md
-    - Inspect: augmented-woodworking/inspect.md
-    - Replay: augmented-woodworking/replay.md
+    - Examples: augmented-woodworking/examples.md
+    # - Replay: augmented-woodworking/replay.md  # FIXME: see if pertinet
 
 
   #   # FIXME: >>> DOXY >>> uncomment before release
