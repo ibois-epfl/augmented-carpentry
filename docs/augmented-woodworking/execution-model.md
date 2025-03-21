@@ -32,7 +32,7 @@ Install `augmented-carpentry` via the **Package Manager** and export your struct
 <figure markdown>
 <div class="video-container">
     <iframe 
-        src="https://player.vimeo.com/video/1065784971?h=5fdbc36df8&amp;badge=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=1&amp;byline=0&amp;portrait=0"
+        src="https://player.vimeo.com/video/1065784971?h=5fdbc36df8&amp;badge=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0"
         frameborder="0" 
         allow="autoplay; fullscreen; picture-in-picture" 
         allowfullscreen>
@@ -147,7 +147,7 @@ You are now ready to do some augmented woodworking.
     <figure markdown>
     <div class="video-container">
         <iframe 
-            src="https://player.vimeo.com/video/1066639778?h=943e283a32&amp;badge=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=1&amp;byline=0&amp;portrait=0" 
+            src="https://player.vimeo.com/video/1066639778?h=943e283a32&amp;badge=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0" 
             frameborder="0" 
             allow="autoplay; fullscreen; picture-in-picture" 
             allowfullscreen>
@@ -169,7 +169,7 @@ You are now ready to do some augmented woodworking.
     <figure markdown>
     <div class="video-container">
         <iframe 
-            src="https://player.vimeo.com/video/1066661629?h=43f4383cc5&amp;player_id=0&amp;app_id=58479&amp;title=1&amp;byline=0&amp;portrait=0" 
+            src="https://player.vimeo.com/video/1066661629?h=43f4383cc5&amp;player_id=0&amp;app_id=58479&amp;byline=0&amp;portrait=0" 
             frameborder="0" 
             allow="autoplay; fullscreen; picture-in-picture" 
             allowfullscreen>

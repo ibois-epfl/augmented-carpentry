@@ -246,3 +246,22 @@ Put also "vide" at thed on "interaction" for end-screen. */
   -webkit-mask-image: var(--md-admonition-icon--print-parts);
           mask-image: var(--md-admonition-icon--print-parts);
 }
+
+/* Custom ammonition for joint typo */
+:root {
+  --md-admonition-icon--cut-joint: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16v2a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2"/></svg>')
+}
+.md-typeset .admonition.cut-joint,
+.md-typeset details.cut-joint {
+  border-color: #00ffb7;
+}
+.md-typeset .cut-joint > .admonition-title,
+.md-typeset .cut-joint > summary {
+  background-color: rgba(43, 155, 70, 0.1);
+}
+.md-typeset .cut-joint > .admonition-title::before,
+.md-typeset .cut-joint > summary::before {
+  background-color:#00ffb7;
+  -webkit-mask-image: var(--md-admonition-icon--cut-joint);
+          mask-image: var(--md-admonition-icon--cut-joint);
+}

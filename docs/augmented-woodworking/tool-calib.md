@@ -139,7 +139,7 @@ Your tool head is not calibrated.
     <figure markdown>
     <div class="video-container">
         <iframe 
-            src="https://player.vimeo.com/video/1066942235?h=456358fca7&amp;badge=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=1&amp;byline=0&amp;portrait=0" 
+            src="https://player.vimeo.com/video/1066942235?h=456358fca7&amp;badge=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;byline=0&amp;portrait=0" 
             frameborder="0" 
             allow="autoplay; fullscreen; picture-in-picture" 
             allowfullscreen>
