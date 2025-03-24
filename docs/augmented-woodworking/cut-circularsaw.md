@@ -7,7 +7,7 @@ tags:
   - fab
 ---
 
-Here's the step-by-step guide to show how to use augmented-carpentry with any circular saw to realize basic joints (cross-lap, half-lap, and butt joints).
+Here's the step-by-step guide on how to use augmented-carpentry with any circular saw to realize basic joints (cross-lap, half-lap, and butt joints).
 
 
 <div class="video-wrapper"><iframe src="https://player.vimeo.com/video/1068168766?h=51370fb4a5&amp;badge=0&amp;autopause=0&amp;title=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
@@ -212,7 +212,7 @@ Once you are done hit the button **Done** to set the cut as done (*).
 </div>
 </figure>
 <div class="description" markdown>
-Once you cleaned out the job, you can inspect the full cut with the augmented overlay.
+Once you cleaned out the joint, you can inspect the full cut with the augmented overlay.
 </div>
 </div>
 
