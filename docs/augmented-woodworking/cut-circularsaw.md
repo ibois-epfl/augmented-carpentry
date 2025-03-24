@@ -184,13 +184,13 @@ Now you can do the other side of the cut. Make sure to keep the position and rot
 </div>
 
 
-<!-- Set as done the current cut -->
+<!-- Set as done the current joint -->
 <div class="sevinch-display-tutorial" markdown>
 <figure markdown>
 ![Image title](../assets/images/woodworking/cut_circular_done.png)
 </figure>
 <div class="description" markdown>
-Once you are done hit the button **Done** to set the cut as done (*).
+Once you are done hit the button **Done** to set the joint as done (*).
 </div>
 </div>
 

@@ -158,7 +158,15 @@ Once done, you can inspect the full cut with the augmented overlay.
 </div>
 
 
-
+<!-- Set as done the current joint -->
+<div class="sevinch-display-tutorial" markdown>
+<figure markdown>
+![Image title](../assets/images/woodworking/cut_chainsaw_done.png)
+</figure>
+<div class="description" markdown>
+Once you are done hit the button **Done** to set the joint as done (*).
+</div>
+</div>
 
 
 <!-- hint: example of single end cut -->
