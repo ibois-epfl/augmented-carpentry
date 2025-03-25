@@ -145,7 +145,7 @@ Now you can start cutting. During the cut make sure to keep the position and rot
 <figure markdown>
 <div class="video-container">
     <iframe 
-        src="https://player.vimeo.com/video/1068064840?h=83023d1fce&amp;loop=1&amp;autoplay=1&amp;muted=1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0" 
+        src="https://player.vimeo.com/video/1068064840?h=83023d1fce&amp;background=1&amp;autopause=0&amp;loop=1&amp;autoplay=1&amp;muted=1&amp;controls=0&amp;title=0&amp;byline=0&amp;portrait=0"
         frameborder="0" 
         allow="autoplay; fullscreen; picture-in-picture" 
         allowfullscreen>
@@ -219,7 +219,7 @@ Once you cleaned out the joint, you can inspect the full cut with the augmented 
 
 
 
-<!-- TODO: hint: example of single end cut -->
+<!-- hint: example of single end cut -->
 !!! cut-joint "End half-lap joints"
     <div class="sevinch-display-tutorial" markdown>
     <figure markdown>
