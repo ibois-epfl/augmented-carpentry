@@ -93,8 +93,10 @@ Once you are sure that the component is working correctly, you can push the chan
 The release will be made via CI from main. As a contributor you don't need to worry about this. The plug-in is componentized, pushed to yak/PyPI and the user can download the latest version from yak.
 
 ## GHPy: D) Documentation
-More to come.
-
+To generate the MkDocs documentation first install the conda environment from the `environment.yml` file. Then run the following command from root:
+```terminal
+mkdocs serve
+```
 
 ---
 ## C++
