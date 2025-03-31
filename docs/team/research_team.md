@@ -7,7 +7,7 @@ hide:
 
 Augmented Carpentry is the outcome of a thesis from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [École Polytechnique Fédérale de Lausanne (EPFL)](https://www.epfl.ch/en/) from 2021 to 2025. The software and the documentation are currently maintained by [Andrea Settimi](https://github.com/9and3).
 
-For questions send an email [either here](andrea.settimi@epfl.ch) or [here](andreasettimi39@gmail.com).
+For questions send an email [either here](mailto:andrea.settimi@epfl.ch) or [here](mailto:andreasettimi39@gmail.com).
 
 | Role              | Name                                                                 | Contact | Affiliation |
 |-------------------|----------------------------------------------------------------------|---------|-------------|

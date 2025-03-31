@@ -12,18 +12,27 @@
     @media screen and (min-width: 76.25em) { .md-sidebar--primary { display: none; } }
     
     /* Override background */
-    .mdx-container {
-      background: none;
-      position: relative;
-      z-index: 0;
-      min-height: calc(100vh - var(--md-footer-height) - var(--md-header-height));
+    /* Mobile */
+    @media screen and (max-width: 47.9375em) {
+      .mdx-container {
+        background: none;
+        position: relative;
+        z-index: 0;
+      }
     }
-
-    /* Keep footer visible */
-    .md-footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+    /* Tablet + laptop */
+    @media screen and (min-width: 48em) {
+      .mdx-container {
+        background: none;
+        position: relative;
+        z-index: 0;
+        min-height: calc(100vh - var(--md-footer-height) - var(--md-header-height));
+      }
+        .md-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
     }
     .mdx-container::before {
       content: "";
