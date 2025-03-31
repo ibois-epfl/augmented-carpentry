@@ -32,6 +32,10 @@ repo_url: https://github.com/ibois-epfl/augmented-carpentry
 # Copyright
 copyright: Copyright &copy; 2021 - 2024 IBOIS, EPFL
 
+# Custom JavaScript scripts
+extra_javascript:
+    - javascripts/extra.js
+
 # Configuration
 theme:
   name: material
@@ -242,9 +246,10 @@ nav:
       - Chainsaw: augmented-woodworking/cut-chainsaw.md
       - Sword saw: augmented-woodworking/cut-swordsaw.md
     - Drill: augmented-woodworking/drill.md
-    - Examples: augmented-woodworking/examples.md
+    # - Examples: augmented-woodworking/examples.md
     # - Replay: augmented-woodworking/replay.md  # FIXME: see if pertinet
 
+  - Built Works: augmented-woodworking/examples.md
 
   #   # FIXME: >>> DOXY >>> uncomment before release
   # - C++ docs:
