@@ -145,6 +145,59 @@ img[alt$="><"] {
   border-radius: 6px;
 }
 
+
+/* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+/* Grid images for project showcase */
+
+/* Image grid hover and click functionality */
+.grid-container img {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+
+/* Hover highlight --radiate foreground */
+.grid-container img:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+
+/* Modal styling for enlarged images */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 18, 48, 0.9); /* Using --galaxy with opacity */
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90vh;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: var(--radiate);
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 /* Parallel video*/
 .video-wrapper {

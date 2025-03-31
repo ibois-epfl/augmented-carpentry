@@ -16,6 +16,14 @@
       background: none;
       position: relative;
       z-index: 0;
+      min-height: calc(100vh - var(--md-footer-height) - var(--md-header-height));
+    }
+
+    /* Keep footer visible */
+    .md-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
     .mdx-container::before {
       content: "";
@@ -30,17 +38,32 @@
       z-index: -1;
     }
   </style>
+
+
+
   <section class="mdx-container">
     <div class="md-grid md-typeset">
       <div class="mdx-hero">
         <div class="mdx-hero__content">
           <h1>Augmented Reality for Woodworking in Timber Construction.</h1>
-          <p>{{ config.site_description }} Everywhere.</p>
+          <p>{{ config.site_description }} everywhere.</p>
           <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | e }}" class="md-button md-button--primary">
             Quick start
           </a>
           <a href="{{ 'cpp-docs/' | url }}" title="Augmented Carpentry Documentation" class="md-button">
             C++ docs
+          </a>
+          <a href="{{ 'augmented-woodworking/cut-circularsaw' | url }}" title="Augmented Carpentry User Guide" class="md-button">
+            For workers
+          </a>
+          <a href="{{ 'motivation' | url }}" title="Augmented Carpentry Motivation" class="md-button">
+            Motivation
+          </a>
+          <a href="{{ 'augmented-woodworking/examples' | url }}" title="Augmented Carpentry Built Works" class="md-button">
+            Built works
+          </a>
+          <a href="{{ 'developer-guide/AR-engine/layer-stack' | url }}" title="Augmented Carpentry Developer Guide" class="md-button">
+            For developers
           </a>
         </div>
       </div>

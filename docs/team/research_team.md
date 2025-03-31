@@ -7,6 +7,8 @@ hide:
 
 Augmented Carpentry is the outcome of a thesis from the [Laboratory of Timber Constructions (IBOIS)](https://ibois.epfl.ch/) at the [École Polytechnique Fédérale de Lausanne (EPFL)](https://www.epfl.ch/en/) from 2021 to 2025. The software and the documentation are currently maintained by [Andrea Settimi](https://github.com/9and3).
 
+For questions send an email [either here](andrea.settimi@epfl.ch) or [here](andreasettimi39@gmail.com).
+
 | Role              | Name                                                                 | Contact | Affiliation |
 |-------------------|----------------------------------------------------------------------|---------|-------------|
 | PhD Researcher    | Andrea Settimi <a title="ORCID, Andrea Settimi" href="https://orcid.org/0000-0001-5020-7331"><img width="15" alt="ORCID iD - settimi" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/512px-ORCID_iD.svg.png?20190308043226"></a> | [andrea.settimi@epfl.ch](mailto:andrea.settimi@epfl.ch) | [IBOIS, EPFL](https://ibois.epfl.ch/) |
