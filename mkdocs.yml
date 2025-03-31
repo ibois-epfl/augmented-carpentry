@@ -249,7 +249,7 @@ nav:
     # - Examples: augmented-woodworking/examples.md
     # - Replay: augmented-woodworking/replay.md  # FIXME: see if pertinet
 
-  - Built Works: augmented-woodworking/examples.md
+  - Built works: augmented-woodworking/examples.md
 
   #   # FIXME: >>> DOXY >>> uncomment before release
   # - C++ docs:
@@ -286,6 +286,8 @@ nav:
     - Adding tools or mounts: contributing/add-new-tool.md
     - Making a pull request: contributing/making-a-pull-request.md
     - Asking a question: https://github.com/ibois-epfl/augmented-carpentry/discussions
+
+  - Motivation: motivation.md
 
   - Publications: publications/index.md
 
