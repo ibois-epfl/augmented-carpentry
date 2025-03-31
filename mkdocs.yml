@@ -89,7 +89,7 @@ theme:
   logo: assets/logo.png
   favicon: assets/favicon.ico
   icon:
-    # FIXME: understand how tags' icons work
+    # TODO: understand how tags' icons work
     tag:
       html: fontawesome/brands/github
       js: fontawesome/brands/js
@@ -114,22 +114,22 @@ plugins:
       minify_html: true
   - macros:
       module_name: docs/scripts/main
-  # # FIXME: >>> DOXY >>> uncomment before release
-  # - mkdoxy:
-  #     enabled: !ENV [ENABLE_MKDOXY, True]
-  #     projects:
-  #       acdoxygen:
-  #         src-dirs: src
-  #         full-doc: True
-  #         doxy-cfg:
-  #           FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
-  #           RECURSIVE: True
-  #     # save-api: docs/.mkdoxy  # to output the .md files
-  #     full-doc: True
-  #     debug: False
-  #     ignore-errors: False
-  #     emojis-enabled: True
-  # # FIXME: <<< DOXY <<< uncomment before release
+  # FIXME: >>> DOXY >>> uncomment before release
+  - mkdoxy:
+      enabled: !ENV [ENABLE_MKDOXY, True]
+      projects:
+        acdoxygen:
+          src-dirs: src
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.h* *.c *.cpp *.cc"
+            RECURSIVE: True
+      # save-api: docs/.mkdoxy  # to output the .md files
+      full-doc: True
+      debug: False
+      ignore-errors: False
+      emojis-enabled: True
+  # FIXME: <<< DOXY <<< uncomment before release
 
 
 # Hooks
@@ -246,25 +246,23 @@ nav:
       - Chainsaw: augmented-woodworking/cut-chainsaw.md
       - Sword saw: augmented-woodworking/cut-swordsaw.md
     - Drill: augmented-woodworking/drill.md
-    # - Examples: augmented-woodworking/examples.md
-    # - Replay: augmented-woodworking/replay.md  # FIXME: see if pertinet
 
   - Built works: augmented-woodworking/examples.md
 
-  #   # FIXME: >>> DOXY >>> uncomment before release
-  # - C++ docs:
-  #   - cpp-docs/index.md
-  #   - Files: "acdoxygen/files.md"
-  #   - Functions: "acdoxygen/functions.md"
-  #   - Classes:
-  #       - Class List: "acdoxygen/annotated.md"
-  #       - Class Hierarchy: "acdoxygen/hierarchy.md"
-  #       - Class Members: "acdoxygen/class_members.md"
-  #       - Class Member Functions: "acdoxygen/class_member_functions.md"
-  #       - Class Member Variables: "acdoxygen/class_member_variables.md"
-  #       - Variables: "acdoxygen/variables.md"
-  #   - Macros: "acdoxygen/macros.md"
-  #   # FIXME: <<< DOXY <<< uncomment before release
+    # FIXME: >>> DOXY >>> uncomment before release
+  - C++ docs:
+    - cpp-docs/index.md
+    - Files: "acdoxygen/files.md"
+    - Functions: "acdoxygen/functions.md"
+    - Classes:
+        - Class List: "acdoxygen/annotated.md"
+        - Class Hierarchy: "acdoxygen/hierarchy.md"
+        - Class Members: "acdoxygen/class_members.md"
+        - Class Member Functions: "acdoxygen/class_member_functions.md"
+        - Class Member Variables: "acdoxygen/class_member_variables.md"
+        - Variables: "acdoxygen/variables.md"
+    - Macros: "acdoxygen/macros.md"
+    # FIXME: <<< DOXY <<< uncomment before release
 
   - Developer guide:
     - AR engine:
