@@ -23,7 +23,7 @@ Here's a collection of joints, mock-ups and structures made with the Augmented W
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/g.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/o.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/h.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-    <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/i.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+    <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/i.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/l.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/m.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/post_and_beam/n.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
@@ -33,13 +33,13 @@ Here's a collection of joints, mock-ups and structures made with the Augmented W
 
 
 <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin: 20px 0;">
-    <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/a.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+    <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/a.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/b.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/c.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/d.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/e.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/f.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-    <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/g.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+    <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/g.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/h.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/i.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
     <img src="{{ config.site_url }}/assets/images/woodworking/structure_examples/roof_truss/l.JPG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
