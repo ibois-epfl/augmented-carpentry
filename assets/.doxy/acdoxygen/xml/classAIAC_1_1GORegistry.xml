@@ -1,0 +1,451 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GORegistry" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::GORegistry</compoundname>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GORegistry_1a018db63ffed6db5c582b785d90334260" prot="private" static="yes" mutable="no">
+        <type>std::map&lt; uint32_t, std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &gt;</type>
+        <definition>std::map&lt;uint32_t, std::shared_ptr&lt;GOPrimitive&gt; &gt; AIAC::GORegistry::m_GOMap</definition>
+        <argsstring></argsstring>
+        <name>m_GOMap</name>
+        <qualifiedname>AIAC::GORegistry::m_GOMap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="222" column="32" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a6ed339e50525cabef5f9c04f6b9c11be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GORegistry::GORegistry</definition>
+        <argsstring>()=default</argsstring>
+        <name>GORegistry</name>
+        <qualifiedname>AIAC::GORegistry::GORegistry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a6ae3a4f2d1c7d6d5af6ef402be417d93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GORegistry::~GORegistry</definition>
+        <argsstring>()=default</argsstring>
+        <name>~GORegistry</name>
+        <qualifiedname>AIAC::GORegistry::~GORegistry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="46" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a4929e7d2bbafd81f02453455a0651858" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GORegistry::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::GORegistry::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="48" column="14" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="48" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1ad9687e9988ba96d9d1c2f3cd56e19cd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AIAC::GORegistry::Register</definition>
+        <argsstring>(std::shared_ptr&lt; T &gt; go)</argsstring>
+        <name>Register</name>
+        <qualifiedname>AIAC::GORegistry::Register</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>go</declname>
+        </param>
+        <briefdescription>
+<para>Add a GO to the registry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the object to register. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Smart pointer to the object to register. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="59" column="14" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="59" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1ac7373dcd431c543952e63fec65f27436" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AIAC::GORegistry::Register</definition>
+        <argsstring>(const uint32_t &amp;id, std::shared_ptr&lt; T &gt; go)</argsstring>
+        <name>Register</name>
+        <qualifiedname>AIAC::GORegistry::Register</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; T &gt;</type>
+          <declname>go</declname>
+        </param>
+        <briefdescription>
+<para>Add a GO to the registry with a given id. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the object to register. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Smart pointer to the object to register. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="71" column="14" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="71" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1ab2d5ee556fbd32176a831537d7b801ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GORegistry::Unregister</definition>
+        <argsstring>(const uint32_t &amp;id)</argsstring>
+        <name>Unregister</name>
+        <qualifiedname>AIAC::GORegistry::Unregister</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Erase the GO from the register. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the object to erase from the register. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="81" column="21" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1ac273604e7ad470f02ffdd1f640b98802" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; T &gt;</type>
+        <definition>std::shared_ptr&lt; T &gt; AIAC::GORegistry::GetGO</definition>
+        <argsstring>(const uint32_t &amp;id)</argsstring>
+        <name>GetGO</name>
+        <qualifiedname>AIAC::GORegistry::GetGO</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve the GO pointer from the registry by index and template as GOObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the object when created. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="91" column="25" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="91" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a9715947b04ceee44ea138211d4f27fa0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GORegistry::GetAllGOs</definition>
+        <argsstring>(std::vector&lt; std::shared_ptr&lt; GOPoint &gt; &gt; &amp;points, std::vector&lt; std::shared_ptr&lt; GOLine &gt; &gt; &amp;lines, std::vector&lt; std::shared_ptr&lt; GOCircle &gt; &gt; &amp;circles, std::vector&lt; std::shared_ptr&lt; GOCylinder &gt; &gt; &amp;cylinders, std::vector&lt; std::shared_ptr&lt; GOPolyline &gt; &gt; &amp;polylines, std::vector&lt; std::shared_ptr&lt; GOTriangle &gt; &gt; &amp;triangles, std::vector&lt; std::shared_ptr&lt; GOMesh &gt; &gt; &amp;meshes, std::vector&lt; std::shared_ptr&lt; GOText &gt; &gt; &amp;texts)</argsstring>
+        <name>GetAllGOs</name>
+        <qualifiedname>AIAC::GORegistry::GetAllGOs</qualifiedname>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt; &gt; &amp;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &gt; &amp;</type>
+          <declname>lines</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &gt; &gt; &amp;</type>
+          <declname>circles</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCylinder" kindref="compound">GOCylinder</ref> &gt; &gt; &amp;</type>
+          <declname>cylinders</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt; &gt; &amp;</type>
+          <declname>polylines</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOTriangle" kindref="compound">GOTriangle</ref> &gt; &gt; &amp;</type>
+          <declname>triangles</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt; &gt; &amp;</type>
+          <declname>meshes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt; &gt; &amp;</type>
+          <declname>texts</declname>
+        </param>
+        <briefdescription>
+<para>Get the All GOs by category. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOPoints to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOLines to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOCircles to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cylinders</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOCylinders to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>polylines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOPolylines to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>triangles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOTriangles to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>texts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all GOTexts to pass as reference. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="121" column="14" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="121" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a0ba18637af8cb15bcf8277dccaa7eb79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; std::shared_ptr&lt; T &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; T &gt; &gt; AIAC::GORegistry::GetAllGOs</definition>
+        <argsstring>()</argsstring>
+        <name>GetAllGOs</name>
+        <qualifiedname>AIAC::GORegistry::GetAllGOs</qualifiedname>
+        <briefdescription>
+<para>Get all GOs of a specific type in the registry. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="175" column="21" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="175" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a22e821da59a98f0fcce6f69b88df9571" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GORegistry::GetAllGOs</definition>
+        <argsstring>(std::vector&lt; std::shared_ptr&lt; GOPrimitive &gt; &gt; &amp;goVector)</argsstring>
+        <name>GetAllGOs</name>
+        <qualifiedname>AIAC::GORegistry::GetAllGOs</qualifiedname>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &gt; &amp;</type>
+          <declname>goVector</declname>
+        </param>
+        <briefdescription>
+<para>Get the All GOs as primitives. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>goVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference vector to load with all the GOPrimitives. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="193" column="14" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="193" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a41b3070b3c2201dfe186be682b6a10de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GORegistry::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>AIAC::GORegistry::Clear</qualifiedname>
+        <briefdescription>
+<para>Clear the registry from all the entries. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="208" column="21" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="208" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a7085afae8dd1c055a651939a2299ebd4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::GORegistry::CheckIfKeyExists</definition>
+        <argsstring>(uint32_t key)</argsstring>
+        <name>CheckIfKeyExists</name>
+        <qualifiedname>AIAC::GORegistry::CheckIfKeyExists</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Check if a GO is in the registry by id. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the object to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="214" column="25" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="214" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GORegistry_1a76f586fc62a88ca53cac4e4a2a166c8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::GORegistry::Count</definition>
+        <argsstring>() const</argsstring>
+        <name>Count</name>
+        <qualifiedname>AIAC::GORegistry::Count</qualifiedname>
+        <briefdescription>
+<para>Get the total number of GOs in the registry. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GORegistry.h" line="219" column="25" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="219" bodyend="219"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/GOSys/GORegistry.h" line="42" column="5" bodyfile="src/AIAC/GOSys/GORegistry.h" bodystart="43" bodyend="223"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GORegistry_1a7085afae8dd1c055a651939a2299ebd4" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>CheckIfKeyExists</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a41b3070b3c2201dfe186be682b6a10de" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>Clear</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a76f586fc62a88ca53cac4e4a2a166c8d" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>Count</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a9715947b04ceee44ea138211d4f27fa0" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>GetAllGOs</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a0ba18637af8cb15bcf8277dccaa7eb79" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>GetAllGOs</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a22e821da59a98f0fcce6f69b88df9571" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>GetAllGOs</name></member>
+      <member refid="classAIAC_1_1GORegistry_1ac273604e7ad470f02ffdd1f640b98802" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>GetGO</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a6ed339e50525cabef5f9c04f6b9c11be" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>GORegistry</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a4929e7d2bbafd81f02453455a0651858" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a018db63ffed6db5c582b785d90334260" prot="private" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>m_GOMap</name></member>
+      <member refid="classAIAC_1_1GORegistry_1ad9687e9988ba96d9d1c2f3cd56e19cd7" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>Register</name></member>
+      <member refid="classAIAC_1_1GORegistry_1ac7373dcd431c543952e63fec65f27436" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>Register</name></member>
+      <member refid="classAIAC_1_1GORegistry_1ab2d5ee556fbd32176a831537d7b801ae" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>Unregister</name></member>
+      <member refid="classAIAC_1_1GORegistry_1a6ae3a4f2d1c7d6d5af6ef402be417d93" prot="public" virt="non-virtual"><scope>AIAC::GORegistry</scope><name>~GORegistry</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

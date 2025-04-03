@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceAIAC_1_1Utils" kind="namespace" language="C++">
+    <compoundname>AIAC::Utils</compoundname>
+    <innerclass refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter" prot="public">AIAC::Utils::HoleToolheadAxisExporter</innerclass>
+    <innerclass refid="classAIAC_1_1Utils_1_1Screenshot" prot="public">AIAC::Utils::Screenshot</innerclass>
+    <innerclass refid="classAIAC_1_1Utils_1_1VideoRecorder" prot="public">AIAC::Utils::VideoRecorder</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/HoleToolheadAxisExporter.cpp" line="40" column="1"/>
+  </compounddef>
+</doxygen>

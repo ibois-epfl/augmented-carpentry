@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CutBladeThicknessVisualizer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>AIAC::CutBladeThicknessVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1FeedbackVisualizer" prot="public" virt="non-virtual">AIAC::FeedbackVisualizer</basecompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer" prot="public" virt="non-virtual">AIAC::CircularSawCutBladeThicknessVisualizer</derivedcompoundref>
+    <includes refid="CutBladeThicknessVisualizer_8h" local="no">CutBladeThicknessVisualizer.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1ac3e1aa46a5767d7d52177eb2763d733f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CutBladeThicknessVisualizer::IsSegmenDetectToolPlaneVisible</definition>
+        <argsstring></argsstring>
+        <name>IsSegmenDetectToolPlaneVisible</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::IsSegmenDetectToolPlaneVisible</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>&lt; </para>
+        </briefdescription>
+        <detaileddescription>
+<para>if the segment of the detected blade is visible </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="82" column="14" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a8ffa3bbbcee14e35854749e77fc2184e" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmenDetectToolPlane</definition>
+        <argsstring></argsstring>
+        <name>m_LongestIntersectSegmenDetectToolPlane</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmenDetectToolPlane</qualifiedname>
+        <briefdescription>
+<para>&lt; </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the segment where the blade is detected by the toolhead</para>
+<para>the thickness of the blade towards the camera on first neighbour side </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="86" column="25" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1ae15068257eb7a9232c718b6b6ccd9d49" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentTowardsCameraA</definition>
+        <argsstring></argsstring>
+        <name>m_LongestIntersectSegmentTowardsCameraA</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentTowardsCameraA</qualifiedname>
+        <briefdescription>
+<para>the thickness of the blade towards the camera on second neighbour side </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="88" column="25" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a6cff23db3485c7f1c3fc40845449eefc" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentTowardsCameraB</definition>
+        <argsstring></argsstring>
+        <name>m_LongestIntersectSegmentTowardsCameraB</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentTowardsCameraB</qualifiedname>
+        <briefdescription>
+<para>the thickness A of the blade away from the camera on first neighbour side </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="90" column="25" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1ae2d15d7b8a8cb30efdceb723f5fd3b8d" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentAwayFromCameraA</definition>
+        <argsstring></argsstring>
+        <name>m_LongestIntersectSegmentAwayFromCameraA</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentAwayFromCameraA</qualifiedname>
+        <briefdescription>
+<para>the thickness A of the blade away from the camera on second neighbour side </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="92" column="25" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a4eb0371f01e454fed68dce4ac34113c7" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentAwayFromCameraB</definition>
+        <argsstring></argsstring>
+        <name>m_LongestIntersectSegmentAwayFromCameraB</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_LongestIntersectSegmentAwayFromCameraB</qualifiedname>
+        <briefdescription>
+<para>the scaled thickness of the blade towards the camera </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="94" column="25" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a254164429b1879da4cdffdb14f8a1e89" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CutBladeThicknessVisualizer::m_BladeTotalThicknessScaled</definition>
+        <argsstring></argsstring>
+        <name>m_BladeTotalThicknessScaled</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_BladeTotalThicknessScaled</qualifiedname>
+        <briefdescription>
+<para>the overhang distance of the blade&apos;s teeth from one side only </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="97" column="15" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a3c8885b364a702d854fde6db4a0874b7" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CutBladeThicknessVisualizer::m_BladeOverhangScaled</definition>
+        <argsstring></argsstring>
+        <name>m_BladeOverhangScaled</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_BladeOverhangScaled</qualifiedname>
+        <briefdescription>
+<para>the reference to the current toolhead&apos;s normal start </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="99" column="15" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a11520af3136d81596953046c93895db2" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_ToolheadRefNormStart</definition>
+        <argsstring></argsstring>
+        <name>m_ToolheadRefNormStart</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_ToolheadRefNormStart</qualifiedname>
+        <briefdescription>
+<para>the reference to the current toolhead&apos;s normal end </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="102" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a39764fde9fd787e21f39bc215f465ccb" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_ToolheadRefNormEnd</definition>
+        <argsstring></argsstring>
+        <name>m_ToolheadRefNormEnd</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_ToolheadRefNormEnd</qualifiedname>
+        <briefdescription>
+<para>the reference to the current toolhead&apos;s center </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="104" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a820534a6bf8b813ed35fe48a84a0e4b4" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_ToolheadRefCenter</definition>
+        <argsstring></argsstring>
+        <name>m_ToolheadRefCenter</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_ToolheadRefCenter</qualifiedname>
+        <briefdescription>
+<para>the unitize value of the normal </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="106" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a03d1e587b19266bf7f6cf2240e6625ef" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_NormalUnitized</definition>
+        <argsstring></argsstring>
+        <name>m_NormalUnitized</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_NormalUnitized</qualifiedname>
+        <briefdescription>
+<para>the opposite unitize value of the normal </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="109" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a47f8c35ccc3f852932b2899718f0533e" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_NormalOppositeUnitized</definition>
+        <argsstring></argsstring>
+        <name>m_NormalOppositeUnitized</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_NormalOppositeUnitized</qualifiedname>
+        <briefdescription>
+<para>the displaced center of the face towards the camera </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="111" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a023cf646cc5b97cf3163c1a10fe9a968" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_DisplacedCenterTowardsCamera</definition>
+        <argsstring></argsstring>
+        <name>m_DisplacedCenterTowardsCamera</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_DisplacedCenterTowardsCamera</qualifiedname>
+        <briefdescription>
+<para>the displaced center of the face away from the camera </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="113" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutBladeThicknessVisualizer_1a676674a4e6d162e625a3f18690946e29" prot="protected" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutBladeThicknessVisualizer::m_DisplacedCenterAwayFromCamera</definition>
+        <argsstring></argsstring>
+        <name>m_DisplacedCenterAwayFromCamera</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::m_DisplacedCenterAwayFromCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="115" column="19" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CutBladeThicknessVisualizer_1a36b17fdbdbaba0b6926e15685cf82df6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CutBladeThicknessVisualizer::CutBladeThicknessVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>CutBladeThicknessVisualizer</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::CutBladeThicknessVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="51" column="9" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.cpp" bodystart="40" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classAIAC_1_1CutBladeThicknessVisualizer_1adc3bc8d17c9e1f9a0f59fa6ef3d382ea" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::CutBladeThicknessVisualizer::UpdateToolheadsData</definition>
+        <argsstring>()=0</argsstring>
+        <name>UpdateToolheadsData</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::UpdateToolheadsData</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a1f2f0e932d3bb971abff130c92bfaf4e">UpdateToolheadsData</reimplementedby>
+        <briefdescription>
+<para>Update the current toolhead&apos;s data: normalStart, normEnd and center, as well the thickness. Since there could be multiple cutting toolheads (sawblade or chainsaw), we need to get the correct toolhead&apos;s type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="60" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutBladeThicknessVisualizer_1ad40243025b0a3c3f6bb69b032a65a8e1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool AIAC::CutBladeThicknessVisualizer::IntersectBladeWithNeighbours</definition>
+        <argsstring>(AIAC::TimberInfo::Cut *cut, AIAC::TimberInfo::Cut::Face &amp;face, bool isTowardsCamera, bool isDetectToolPlane, std::shared_ptr&lt; GOLine &gt; &amp;lineIntersection)=0</argsstring>
+        <name>IntersectBladeWithNeighbours</name>
+        <qualifiedname>AIAC::CutBladeThicknessVisualizer::IntersectBladeWithNeighbours</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a643a2f50af9013eb9e90fd653bb27b13">IntersectBladeWithNeighbours</reimplementedby>
+        <param>
+          <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">AIAC::TimberInfo::Cut</ref> *</type>
+          <declname>cut</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">AIAC::TimberInfo::Cut::Face</ref> &amp;</type>
+          <declname>face</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isTowardsCamera</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isDetectToolPlane</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &amp;</type>
+          <declname>lineIntersection</declname>
+        </param>
+        <briefdescription>
+<para>This function intersect the plane of the blade with the two(or one) neighbour faces. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cut</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">TimberInfo::Cut</ref> object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>face</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the face belonging to the cut to intersect with </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isTowardsCamera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the boolean to indicate if we intersect the blade&apos;s edge close to the camera </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isDetectToolPlane</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the intersection is for the reference toolhead&apos;s plane </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineIntersection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the reference to the line intersection</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true if the intersection is successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="73" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The idea behind the <ref refid="classAIAC_1_1CutBladeThicknessVisualizer" kindref="compound">CutBladeThicknessVisualizer</ref> is to give a visual feedback on the thickness of the blade. We do this by intersecting the two neighbours faces of the current highlighted face. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>AIAC::CircularSawCutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>AIAC::CutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CutBladeThicknessVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CutBladeThicknessVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" line="48" column="5" bodyfile="src/AIAC/Feedback/CutBladeThicknessVisualizer.h" bodystart="49" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a36b17fdbdbaba0b6926e15685cf82df6" prot="public" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>CutBladeThicknessVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ad40243025b0a3c3f6bb69b032a65a8e1" prot="protected" virt="pure-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>IntersectBladeWithNeighbours</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ac3e1aa46a5767d7d52177eb2763d733f" prot="public" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>IsSegmenDetectToolPlaneVisible</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a3c8885b364a702d854fde6db4a0874b7" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_BladeOverhangScaled</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a254164429b1879da4cdffdb14f8a1e89" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_BladeTotalThicknessScaled</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a676674a4e6d162e625a3f18690946e29" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_DisplacedCenterAwayFromCamera</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a023cf646cc5b97cf3163c1a10fe9a968" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_DisplacedCenterTowardsCamera</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a8ffa3bbbcee14e35854749e77fc2184e" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmenDetectToolPlane</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ae2d15d7b8a8cb30efdceb723f5fd3b8d" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentAwayFromCameraA</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a4eb0371f01e454fed68dce4ac34113c7" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentAwayFromCameraB</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ae15068257eb7a9232c718b6b6ccd9d49" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentTowardsCameraA</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a6cff23db3485c7f1c3fc40845449eefc" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentTowardsCameraB</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a47f8c35ccc3f852932b2899718f0533e" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_NormalOppositeUnitized</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a03d1e587b19266bf7f6cf2240e6625ef" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_NormalUnitized</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a820534a6bf8b813ed35fe48a84a0e4b4" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_ToolheadRefCenter</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a39764fde9fd787e21f39bc215f465ccb" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_ToolheadRefNormEnd</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a11520af3136d81596953046c93895db2" prot="protected" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>m_ToolheadRefNormStart</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1adc3bc8d17c9e1f9a0f59fa6ef3d382ea" prot="protected" virt="pure-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>UpdateToolheadsData</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::CutBladeThicknessVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

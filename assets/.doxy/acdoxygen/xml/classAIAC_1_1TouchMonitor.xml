@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1TouchMonitor" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::TouchMonitor</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1a24465d865b02a9afb444844211236a90" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::TouchMonitor::m_Name</definition>
+        <argsstring></argsstring>
+        <name>m_Name</name>
+        <qualifiedname>AIAC::TouchMonitor::m_Name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="65" column="21" bodyfile="src/AIAC/TouchMonitor.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1a1434bd8f33e432e253e18c28b6421cd9" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::TouchMonitor::m_VideoMode</definition>
+        <argsstring></argsstring>
+        <name>m_VideoMode</name>
+        <qualifiedname>AIAC::TouchMonitor::m_VideoMode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="66" column="21" bodyfile="src/AIAC/TouchMonitor.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1abee67be7e12bcb6fecfbd0a48292c4b3" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::TouchMonitor::m_Resolution</definition>
+        <argsstring></argsstring>
+        <name>m_Resolution</name>
+        <qualifiedname>AIAC::TouchMonitor::m_Resolution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="67" column="21" bodyfile="src/AIAC/TouchMonitor.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1acc7b3074b84885931e8611586f5bf777" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t AIAC::TouchMonitor::m_ID</definition>
+        <argsstring></argsstring>
+        <name>m_ID</name>
+        <qualifiedname>AIAC::TouchMonitor::m_ID</qualifiedname>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="69" column="17" bodyfile="src/AIAC/TouchMonitor.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1ac60f2cef86dca59d7f5b3aa293c29004" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::TouchMonitor::m_IsPrintMonitorsInfo</definition>
+        <argsstring></argsstring>
+        <name>m_IsPrintMonitorsInfo</name>
+        <qualifiedname>AIAC::TouchMonitor::m_IsPrintMonitorsInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="71" column="14" bodyfile="src/AIAC/TouchMonitor.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1a5c8cb80b1ef81dfbb683642d7c66c39f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::TouchMonitor::m_IsConnected</definition>
+        <argsstring></argsstring>
+        <name>m_IsConnected</name>
+        <qualifiedname>AIAC::TouchMonitor::m_IsConnected</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="72" column="14" bodyfile="src/AIAC/TouchMonitor.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TouchMonitor_1a569451162f7cfdd1d69510a0e8da9e92" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GLFWmonitor * &gt;</type>
+        <definition>std::vector&lt;GLFWmonitor*&gt; AIAC::TouchMonitor::m_SiftedMonitors</definition>
+        <argsstring></argsstring>
+        <name>m_SiftedMonitors</name>
+        <qualifiedname>AIAC::TouchMonitor::m_SiftedMonitors</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="74" column="21" bodyfile="src/AIAC/TouchMonitor.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a868e0d3d5429304d3001de981130d13f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::TouchMonitor::TouchMonitor</definition>
+        <argsstring>()</argsstring>
+        <name>TouchMonitor</name>
+        <qualifiedname>AIAC::TouchMonitor::TouchMonitor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="44" column="9" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="57" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a4ea3c788ebe6b43a46a9c4e5e9364eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::TouchMonitor::TouchMonitor</definition>
+        <argsstring>(bool isPrintMonitorsInfo)</argsstring>
+        <name>TouchMonitor</name>
+        <qualifiedname>AIAC::TouchMonitor::TouchMonitor</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isPrintMonitorsInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="45" column="9" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="62" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a5d48e99056b947f26e687dfeeb7d2514" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::TouchMonitor::~TouchMonitor</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TouchMonitor</name>
+        <qualifiedname>AIAC::TouchMonitor::~TouchMonitor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="46" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a273bec7122c53e1c76ce87a849470f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::TouchMonitor::PrintInfoMonitors</definition>
+        <argsstring>(int count, GLFWmonitor **&amp;monitors)</argsstring>
+        <name>PrintInfoMonitors</name>
+        <qualifiedname>AIAC::TouchMonitor::PrintInfoMonitors</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>GLFWmonitor **&amp;</type>
+          <declname>monitors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="48" column="14" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="68" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a9a743b749bf942427b07bbc833a40811" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLFWmonitor *&amp;</type>
+        <definition>GLFWmonitor *&amp; AIAC::TouchMonitor::GetGLFWMonitor</definition>
+        <argsstring>()</argsstring>
+        <name>GetGLFWMonitor</name>
+        <qualifiedname>AIAC::TouchMonitor::GetGLFWMonitor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="50" column="21" bodyfile="src/AIAC/TouchMonitor.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1acc72f393e29dff80c4854871c9d02aae" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::TouchMonitor::ImportNameFromConfig</definition>
+        <argsstring>()</argsstring>
+        <name>ImportNameFromConfig</name>
+        <qualifiedname>AIAC::TouchMonitor::ImportNameFromConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="53" column="28" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="98" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a9ec73df3a82f5a319acfcc68f682826c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::TouchMonitor::ImportVideoModeFromConfig</definition>
+        <argsstring>()</argsstring>
+        <name>ImportVideoModeFromConfig</name>
+        <qualifiedname>AIAC::TouchMonitor::ImportVideoModeFromConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="54" column="28" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="100" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a5e4b156aefc4d9b08cd9798a702b48a3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::TouchMonitor::ImportResolutionFromConfig</definition>
+        <argsstring>()</argsstring>
+        <name>ImportResolutionFromConfig</name>
+        <qualifiedname>AIAC::TouchMonitor::ImportResolutionFromConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="55" column="28" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="102" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a8b9c1c498271f2b05d2f3ce3668ecc11" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::TouchMonitor::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::TouchMonitor::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="57" column="14" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="105" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a2975ca8c1aa837cffc63bbd56869f0ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::TouchMonitor::SiftMonitorsByMode</definition>
+        <argsstring>(std::string videoMode, int count, GLFWmonitor **&amp;monitors)</argsstring>
+        <name>SiftMonitorsByMode</name>
+        <qualifiedname>AIAC::TouchMonitor::SiftMonitorsByMode</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>videoMode</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>GLFWmonitor **&amp;</type>
+          <declname>monitors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="59" column="14" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="132" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a74d7e67b22fbb7d1e0d0a8991db1112e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::TouchMonitor::SiftMonitorsByResolution</definition>
+        <argsstring>(std::string res, std::vector&lt; GLFWmonitor * &gt; &amp;monitors)</argsstring>
+        <name>SiftMonitorsByResolution</name>
+        <qualifiedname>AIAC::TouchMonitor::SiftMonitorsByResolution</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>res</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; GLFWmonitor * &gt; &amp;</type>
+          <declname>monitors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="60" column="14" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="150" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a1c4b9766c64b76a482901b6275536e85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::TouchMonitor::GetMonitorID</definition>
+        <argsstring>(std::string MonitorName)</argsstring>
+        <name>GetMonitorID</name>
+        <qualifiedname>AIAC::TouchMonitor::GetMonitorID</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>MonitorName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="61" column="14" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="170" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TouchMonitor_1a47082053e39ac29c73c64287327805e0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::TouchMonitor::MapMonitor</definition>
+        <argsstring>(int32_t monitorID, GLFWmonitor *touchMonitor)</argsstring>
+        <name>MapMonitor</name>
+        <qualifiedname>AIAC::TouchMonitor::MapMonitor</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>monitorID</declname>
+        </param>
+        <param>
+          <type>GLFWmonitor *</type>
+          <declname>touchMonitor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.h" line="62" column="14" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="196" bodyend="206"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/TouchMonitor.h" line="41" column="5" bodyfile="src/AIAC/TouchMonitor.h" bodystart="42" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1TouchMonitor_1a9a743b749bf942427b07bbc833a40811" prot="public" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>GetGLFWMonitor</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a1c4b9766c64b76a482901b6275536e85" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>GetMonitorID</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1acc72f393e29dff80c4854871c9d02aae" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>ImportNameFromConfig</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a5e4b156aefc4d9b08cd9798a702b48a3" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>ImportResolutionFromConfig</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a9ec73df3a82f5a319acfcc68f682826c" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>ImportVideoModeFromConfig</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a8b9c1c498271f2b05d2f3ce3668ecc11" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1acc7b3074b84885931e8611586f5bf777" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_ID</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a5c8cb80b1ef81dfbb683642d7c66c39f" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_IsConnected</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1ac60f2cef86dca59d7f5b3aa293c29004" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_IsPrintMonitorsInfo</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a24465d865b02a9afb444844211236a90" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_Name</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1abee67be7e12bcb6fecfbd0a48292c4b3" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_Resolution</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a569451162f7cfdd1d69510a0e8da9e92" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_SiftedMonitors</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a1434bd8f33e432e253e18c28b6421cd9" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>m_VideoMode</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a47082053e39ac29c73c64287327805e0" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>MapMonitor</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a273bec7122c53e1c76ce87a849470f44" prot="public" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>PrintInfoMonitors</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a2975ca8c1aa837cffc63bbd56869f0ab" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>SiftMonitorsByMode</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a74d7e67b22fbb7d1e0d0a8991db1112e" prot="private" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>SiftMonitorsByResolution</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a868e0d3d5429304d3001de981130d13f" prot="public" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>TouchMonitor</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a4ea3c788ebe6b43a46a9c4e5e9364eac" prot="public" virt="non-virtual"><scope>AIAC::TouchMonitor</scope><name>TouchMonitor</name></member>
+      <member refid="classAIAC_1_1TouchMonitor_1a5d48e99056b947f26e687dfeeb7d2514" prot="public" virt="virtual"><scope>AIAC::TouchMonitor</scope><name>~TouchMonitor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

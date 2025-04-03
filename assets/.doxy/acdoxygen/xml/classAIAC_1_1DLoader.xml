@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1DLoader" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::DLoader</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1a834bad5ed68eec3e2a42d3e716e1f6db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::DLoader::DLoader</definition>
+        <argsstring>()=default</argsstring>
+        <name>DLoader</name>
+        <qualifiedname>AIAC::DLoader::DLoader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="48" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1aa7fe7da45641cb4582368d81a0eea369" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::DLoader::~DLoader</definition>
+        <argsstring>()=default</argsstring>
+        <name>~DLoader</name>
+        <qualifiedname>AIAC::DLoader::~DLoader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="49" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1aecea9e142eeec9fcf32d7e03d8a20de3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::DLoader::LoadGOMesh</definition>
+        <argsstring>(const char *path, GOMesh &amp;goMesh)</argsstring>
+        <name>LoadGOMesh</name>
+        <qualifiedname>AIAC::DLoader::LoadGOMesh</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &amp;</type>
+          <declname>goMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="51" column="14" bodyfile="src/AIAC/DLoader.cpp" bodystart="43" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1a19ab6e5569d85f5a80d853cfc57bd866" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::DLoader::CvtAssimpMeshToGOMesh</definition>
+        <argsstring>(const aiMesh *mesh, GOMesh &amp;goMesh)</argsstring>
+        <name>CvtAssimpMeshToGOMesh</name>
+        <qualifiedname>AIAC::DLoader::CvtAssimpMeshToGOMesh</qualifiedname>
+        <param>
+          <type>const aiMesh *</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &amp;</type>
+          <declname>goMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="53" column="14" bodyfile="src/AIAC/DLoader.cpp" bodystart="60" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1acb75b44e44f2b0dfffb9b0b67473cf70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DLoader::CvtAssimpMeshVerticesToGlmVector</definition>
+        <argsstring>(const aiMesh *mesh, std::vector&lt; glm::vec3 &gt; &amp;glmVertices)</argsstring>
+        <name>CvtAssimpMeshVerticesToGlmVector</name>
+        <qualifiedname>AIAC::DLoader::CvtAssimpMeshVerticesToGlmVector</qualifiedname>
+        <param>
+          <type>const aiMesh *</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>glmVertices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="55" column="14" bodyfile="src/AIAC/DLoader.cpp" bodystart="77" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1a4bdfe704285c66ac168a0799644980d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DLoader::CvtAssimpMeshFacesToGlmVector</definition>
+        <argsstring>(const aiMesh *mesh, std::vector&lt; uint32_t &gt; &amp;glmIndices)</argsstring>
+        <name>CvtAssimpMeshFacesToGlmVector</name>
+        <qualifiedname>AIAC::DLoader::CvtAssimpMeshFacesToGlmVector</qualifiedname>
+        <param>
+          <type>const aiMesh *</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>glmIndices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="56" column="14" bodyfile="src/AIAC/DLoader.cpp" bodystart="90" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1a8df94a4eb6a7cc52e4adcfa770d7eb66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DLoader::CvtAssimpMeshNormalsToGlmVector</definition>
+        <argsstring>(const aiMesh *mesh, std::vector&lt; glm::vec3 &gt; &amp;glmNormals)</argsstring>
+        <name>CvtAssimpMeshNormalsToGlmVector</name>
+        <qualifiedname>AIAC::DLoader::CvtAssimpMeshNormalsToGlmVector</qualifiedname>
+        <param>
+          <type>const aiMesh *</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>glmNormals</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="57" column="14" bodyfile="src/AIAC/DLoader.cpp" bodystart="101" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1DLoader_1a5707e534cc3e731b3f0686cbf98dde7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DLoader::CvtAssimpMeshColorsToGlmVector</definition>
+        <argsstring>(const aiMesh *mesh, std::vector&lt; glm::vec3 &gt; &amp;glmColors)</argsstring>
+        <name>CvtAssimpMeshColorsToGlmVector</name>
+        <qualifiedname>AIAC::DLoader::CvtAssimpMeshColorsToGlmVector</qualifiedname>
+        <param>
+          <type>const aiMesh *</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>glmColors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/DLoader.h" line="58" column="14" bodyfile="src/AIAC/DLoader.cpp" bodystart="113" bodyend="123"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/DLoader.h" line="45" column="5" bodyfile="src/AIAC/DLoader.h" bodystart="46" bodyend="59"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1DLoader_1a5707e534cc3e731b3f0686cbf98dde7d" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>CvtAssimpMeshColorsToGlmVector</name></member>
+      <member refid="classAIAC_1_1DLoader_1a4bdfe704285c66ac168a0799644980d4" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>CvtAssimpMeshFacesToGlmVector</name></member>
+      <member refid="classAIAC_1_1DLoader_1a8df94a4eb6a7cc52e4adcfa770d7eb66" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>CvtAssimpMeshNormalsToGlmVector</name></member>
+      <member refid="classAIAC_1_1DLoader_1a19ab6e5569d85f5a80d853cfc57bd866" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>CvtAssimpMeshToGOMesh</name></member>
+      <member refid="classAIAC_1_1DLoader_1acb75b44e44f2b0dfffb9b0b67473cf70" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>CvtAssimpMeshVerticesToGlmVector</name></member>
+      <member refid="classAIAC_1_1DLoader_1a834bad5ed68eec3e2a42d3e716e1f6db" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>DLoader</name></member>
+      <member refid="classAIAC_1_1DLoader_1aecea9e142eeec9fcf32d7e03d8a20de3" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>LoadGOMesh</name></member>
+      <member refid="classAIAC_1_1DLoader_1aa7fe7da45641cb4582368d81a0eea369" prot="public" virt="non-virtual"><scope>AIAC::DLoader</scope><name>~DLoader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

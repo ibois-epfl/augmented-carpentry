@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1AppCloseEvent" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::AppCloseEvent</compoundname>
+    <basecompoundref refid="classAIAC_1_1Event" prot="public" virt="non-virtual">AIAC::Event</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1AppCloseEvent_1aedd792aef69a138aca90bec9b52d41a4" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::AppCloseEvent::AppCloseEvent</definition>
+        <argsstring>()</argsstring>
+        <name>AppCloseEvent</name>
+        <qualifiedname>AIAC::AppCloseEvent::AppCloseEvent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/ApplicationEvent.h" line="43" column="18" bodyfile="src/AIAC/EventSys/ApplicationEvent.h" bodystart="43" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1AppCloseEvent_1a1d0e442856de5c957fe069f7e5da86c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::AppCloseEvent::OnAppClose</definition>
+        <argsstring>()</argsstring>
+        <name>OnAppClose</name>
+        <qualifiedname>AIAC::AppCloseEvent::OnAppClose</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/ApplicationEvent.h" line="47" column="14" bodyfile="src/AIAC/EventSys/ApplicationEvent.cpp" bodystart="40" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::AppCloseEvent</label>
+        <link refid="classAIAC_1_1AppCloseEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::AppCloseEvent</label>
+        <link refid="classAIAC_1_1AppCloseEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/EventSys/ApplicationEvent.h" line="40" column="5" bodyfile="src/AIAC/EventSys/ApplicationEvent.h" bodystart="41" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1AppCloseEvent_1aedd792aef69a138aca90bec9b52d41a4" prot="public" virt="non-virtual"><scope>AIAC::AppCloseEvent</scope><name>AppCloseEvent</name></member>
+      <member refid="classAIAC_1_1Event_1a6cb6fce0f27894b1a82e1c93f348c2ae" prot="public" virt="non-virtual"><scope>AIAC::AppCloseEvent</scope><name>Event</name></member>
+      <member refid="classAIAC_1_1Event_1a2532fd6f2cc7a499d5cd79766a5a366d" prot="public" virt="non-virtual"><scope>AIAC::AppCloseEvent</scope><name>GetCategory</name></member>
+      <member refid="classAIAC_1_1Event_1aaf9a9499f1e427a5d7d036675e41469c" prot="public" virt="non-virtual"><scope>AIAC::AppCloseEvent</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1AppCloseEvent_1a1d0e442856de5c957fe069f7e5da86c0" prot="public" virt="non-virtual"><scope>AIAC::AppCloseEvent</scope><name>OnAppClose</name></member>
+      <member refid="classAIAC_1_1Event_1a78454dc85c3759d5811f39eff6285728" prot="public" virt="virtual"><scope>AIAC::AppCloseEvent</scope><name>~Event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::TimberInfo::Cut::Edge</compoundname>
+    <basecompoundref refid="classAIAC_1_1TimberInfo_1_1Component" prot="public" virt="non-virtual">AIAC::TimberInfo::Component</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a5f1b8721e4106c04b91c4a8337370b36" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::TimberInfo::Cut::Edge::m_Start</definition>
+        <argsstring></argsstring>
+        <name>m_Start</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_Start</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="257" column="23" bodyfile="src/AIAC/ACInfoModel.h" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a56a632a3aca6f6e01b657ec4d4f7e3a2" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::TimberInfo::Cut::Edge::m_End</definition>
+        <argsstring></argsstring>
+        <name>m_End</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_End</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="258" column="23" bodyfile="src/AIAC/ACInfoModel.h" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1af7780136f15c6c4f2227f6799cf41a0c" prot="private" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; AIAC::TimberInfo::Cut::Edge::m_Neighbors</definition>
+        <argsstring></argsstring>
+        <name>m_Neighbors</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_Neighbors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="259" column="22" bodyfile="src/AIAC/ACInfoModel.h" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ad7c264eaad380767e3211d77666743b4" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::TimberInfo::Cut::Edge::m_GO</definition>
+        <argsstring></argsstring>
+        <name>m_GO</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_GO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="260" column="29" bodyfile="src/AIAC/ACInfoModel.h" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a3a5644f6c9e6b6fcb5a75f2dab1ba111" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOText&gt; &gt; AIAC::TimberInfo::Cut::Edge::m_Cotas</definition>
+        <argsstring></argsstring>
+        <name>m_Cotas</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_Cotas</qualifiedname>
+        <briefdescription>
+<para>The visualization of the cotas/mesures. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="263" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1afc9bbe73b18517e4652fa7991808f923" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOLine&gt; &gt; AIAC::TimberInfo::Cut::Edge::m_CotaLines</definition>
+        <argsstring></argsstring>
+        <name>m_CotaLines</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_CotaLines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="264" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ac27db1898ff879b699e5f97b21290a75" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOPoint&gt; &gt; AIAC::TimberInfo::Cut::Edge::m_CotaPts</definition>
+        <argsstring></argsstring>
+        <name>m_CotaPts</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::m_CotaPts</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="265" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a9b2dc5a763bde3eaa4f20b885dd934a8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Cut</definition>
+        <argsstring></argsstring>
+        <name>Cut</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::Cut</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">Cut</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="267" column="26" bodyfile="src/AIAC/ACInfoModel.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ab7414707f9734b57ba0e7586e5a2a291" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class TimberInfo</definition>
+        <argsstring></argsstring>
+        <name>TimberInfo</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::TimberInfo</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="268" column="26" bodyfile="src/AIAC/ACInfoModel.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a0ae6dca3a4e8709d4f21d21b69b42018" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ACInfoModel</definition>
+        <argsstring></argsstring>
+        <name>ACInfoModel</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::ACInfoModel</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="269" column="26" bodyfile="src/AIAC/ACInfoModel.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a95571b62f4f6f63333575338edd2ac7d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::TimberInfo::Cut::Edge::GetStartPt</definition>
+        <argsstring>()</argsstring>
+        <name>GetStartPt</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::GetStartPt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="231" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="231" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a9d30c66a2f013f9f289fa3bd001662ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::TimberInfo::Cut::Edge::GetEndPt</definition>
+        <argsstring>()</argsstring>
+        <name>GetEndPt</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::GetEndPt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="232" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="232" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1afe8779d1070b0c34cbcddc5317c01517" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::TimberInfo::Cut::Edge::Edge</definition>
+        <argsstring>()</argsstring>
+        <name>Edge</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::Edge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="233" column="13" bodyfile="src/AIAC/ACInfoModel.h" bodystart="233" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ab68fc2030c186a8bed5ee40461fc3492" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::Edge::SetCotasVisibility</definition>
+        <argsstring>(bool visible)</argsstring>
+        <name>SetCotasVisibility</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::SetCotasVisibility</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+        </param>
+        <briefdescription>
+<para>Set the Cotas Visibility object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if true, the cotas will be visible </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="240" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="240" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a5a820b42f9c456f7432e4151b9ec0f91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::Edge::ClearCotas</definition>
+        <argsstring>()</argsstring>
+        <name>ClearCotas</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Edge::ClearCotas</qualifiedname>
+        <briefdescription>
+<para>Clear the cotas. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="249" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="249" bodyend="253"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::TimberInfo::Component</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>AIAC::TimberInfo::Cut::Edge</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::TimberInfo::Component</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>AIAC::TimberInfo::Cut::Edge</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/ACInfoModel.h" line="229" column="9" bodyfile="src/AIAC/ACInfoModel.h" bodystart="229" bodyend="270"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a0ae6dca3a4e8709d4f21d21b69b42018" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>ACInfoModel</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a5a820b42f9c456f7432e4151b9ec0f91" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>ClearCotas</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a0db2c2480a374d541fa7dbccf59f89da" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>Component</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a9b2dc5a763bde3eaa4f20b885dd934a8" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>Cut</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1afe8779d1070b0c34cbcddc5317c01517" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>Edge</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1ac0771b78b638392d38e98e520dfcc77e" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>GetCenter</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a9d30c66a2f013f9f289fa3bd001662ff" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>GetEndPt</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a95571b62f4f6f63333575338edd2ac7d" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>GetStartPt</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1aa3e8010567ba060283925d49f31e7355" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>GetTypeString</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a6624bad2576016819859dc4265cff0d0" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>IsMarkedDone</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a74a50ca5491b30552d3f451556377e66" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_ACIMDocNode</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a319cc30f4d4072e25360d717e4b68ba3" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_Center</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1afc9bbe73b18517e4652fa7991808f923" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_CotaLines</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ac27db1898ff879b699e5f97b21290a75" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_CotaPts</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a3a5644f6c9e6b6fcb5a75f2dab1ba111" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_Cotas</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a56a632a3aca6f6e01b657ec4d4f7e3a2" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_End</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ad7c264eaad380767e3211d77666743b4" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_GO</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a1055056358b6578a8c6448bb4abbb6f1" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_GOPrimitives</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a9728d55a1a6183d8d1d624691bc3010e" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_ID</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1af7780136f15c6c4f2227f6799cf41a0c" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_Neighbors</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a6a3f941462b260fae60505a34ac35f37" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_Scale</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a5f1b8721e4106c04b91c4a8337370b36" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_Start</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1ac53c685b518c169b17c05bec17748fd0" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_State</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a24a4af31a4deaa4b4491e7021badd225" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a44747e6cba1e1f5072e0405db0f9c4e6" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>SetAsCurrent</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1aebd3733195cec83c0d8d7cdb6df49dae" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>SetAsDone</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a104ac06d411c3273b11d6f8b8a46053a" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>SetAsNotDone</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ab68fc2030c186a8bed5ee40461fc3492" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>SetCotasVisibility</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1ab047a030ce4764a849f7e8cd2dafc964" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ab7414707f9734b57ba0e7586e5a2a291" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut::Edge</scope><name>TimberInfo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

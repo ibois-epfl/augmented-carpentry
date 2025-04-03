@@ -1,0 +1,827 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classCircularBuffer" kind="class" language="C++" prot="public">
+    <compoundname>CircularBuffer</compoundname>
+    <innerclass refid="structCircularBuffer_1_1BufferIterator" prot="private">CircularBuffer::BufferIterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classCircularBuffer_1ab189933c81c0e48f479755ac59cd3e31" prot="private" static="no">
+        <type>T *</type>
+        <definition>typedef T* CircularBuffer&lt; T &gt;::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>CircularBuffer::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="18" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1af0c998d6a859cdd4571fac7d025c890b" prot="private" static="no">
+        <type>const T *</type>
+        <definition>typedef const T* CircularBuffer&lt; T &gt;::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>CircularBuffer::const_pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="19" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1ad665371c53e7d15ff27cee3ddd9f2ece" prot="private" static="no">
+        <type>T &amp;</type>
+        <definition>typedef T&amp; CircularBuffer&lt; T &gt;::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>CircularBuffer::reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="20" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1abb84566457902db6a5b22cd909c7e10c" prot="private" static="no">
+        <type>const T &amp;</type>
+        <definition>typedef const T&amp; CircularBuffer&lt; T &gt;::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>CircularBuffer::const_reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="21" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1a1dc5fb0636f1b13bf504575fcb9d0595" prot="private" static="no">
+        <type>size_t</type>
+        <definition>typedef size_t CircularBuffer&lt; T &gt;::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>CircularBuffer::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="22" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1a587643196a2571aecab21efad11adf65" prot="private" static="no">
+        <type>ptrdiff_t</type>
+        <definition>typedef ptrdiff_t CircularBuffer&lt; T &gt;::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>CircularBuffer::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="23" column="19" bodyfile="src/utils/CircularBuffer.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classCircularBuffer_1a94fc2df31fd61e18138d2e63310ca4c7" prot="public" static="no">
+        <type>T</type>
+        <definition>typedef T CircularBuffer&lt; T &gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>CircularBuffer::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="28" column="15" bodyfile="src/utils/CircularBuffer.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1a37f240fe7f47772ddc36aac2bf616ab6" prot="public" static="no">
+        <type>BufferIterator&lt; false &gt;</type>
+        <definition>typedef BufferIterator&lt;false&gt; CircularBuffer&lt; T &gt;::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>CircularBuffer::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="107" column="24" bodyfile="src/utils/CircularBuffer.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classCircularBuffer_1a818d2e6f7e2e5c228f443f4a1871a0b7" prot="public" static="no">
+        <type>BufferIterator&lt; true &gt;</type>
+        <definition>typedef BufferIterator&lt;true&gt; CircularBuffer&lt; T &gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>CircularBuffer::const_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="108" column="24" bodyfile="src/utils/CircularBuffer.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classCircularBuffer_1aafcaf5012032bfb40b5bb95898f41df1" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex CircularBuffer&lt; T &gt;::_mtx</definition>
+        <argsstring></argsstring>
+        <name>_mtx</name>
+        <qualifiedname>CircularBuffer::_mtx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="125" column="20" bodyfile="src/utils/CircularBuffer.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCircularBuffer_1a42353cc5295ee8dd37c7e52a8ab05b4b" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; value_type[]&gt;</type>
+        <definition>std::unique_ptr&lt;value_type[]&gt; CircularBuffer&lt; T &gt;::_buff</definition>
+        <argsstring></argsstring>
+        <name>_buff</name>
+        <qualifiedname>CircularBuffer::_buff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="126" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCircularBuffer_1af40a9ac8b59ee140fbd227665427f785" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type CircularBuffer&lt; T &gt;::_head</definition>
+        <argsstring></argsstring>
+        <name>_head</name>
+        <qualifiedname>CircularBuffer::_head</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="127" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCircularBuffer_1ae036922f6f183b29f2730ee509c9b31b" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type CircularBuffer&lt; T &gt;::_tail</definition>
+        <argsstring></argsstring>
+        <name>_tail</name>
+        <qualifiedname>CircularBuffer::_tail</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="128" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCircularBuffer_1a8e94cf33d72c988d7cac6722c28c3d8b" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type CircularBuffer&lt; T &gt;::_size</definition>
+        <argsstring></argsstring>
+        <name>_size</name>
+        <qualifiedname>CircularBuffer::_size</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="129" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classCircularBuffer_1a766c27456d47cc4eb713339ba651436a" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type CircularBuffer&lt; T &gt;::_max_size</definition>
+        <argsstring></argsstring>
+        <name>_max_size</name>
+        <qualifiedname>CircularBuffer::_max_size</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="130" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCircularBuffer_1aed928fe071a15c367bbdf0c551249438" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CircularBuffer&lt; T &gt;::CircularBuffer</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>CircularBuffer</name>
+        <qualifiedname>CircularBuffer::CircularBuffer</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="30" column="10" bodyfile="src/utils/CircularBuffer.h" bodystart="30" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a7881329b9170a160173e13a5b05d3abd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CircularBuffer&lt; T &gt;::CircularBuffer</definition>
+        <argsstring>(const CircularBuffer &amp;other)</argsstring>
+        <name>CircularBuffer</name>
+        <qualifiedname>CircularBuffer::CircularBuffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classCircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="33" column="1" bodyfile="src/utils/CircularBuffer.h" bodystart="33" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a5cdeb3f3276409d099a7a0457e682084" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classCircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+        <definition>CircularBuffer &amp; CircularBuffer&lt; T &gt;::operator=</definition>
+        <argsstring>(const CircularBuffer &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CircularBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classCircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="43" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="43" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a88710b747a9d4fd211fbf5a8288655ae" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>CircularBuffer&lt; T &gt;::CircularBuffer</definition>
+        <argsstring>(CircularBuffer &amp;&amp;other) noexcept</argsstring>
+        <name>CircularBuffer</name>
+        <qualifiedname>CircularBuffer::CircularBuffer</qualifiedname>
+        <param>
+          <type><ref refid="classCircularBuffer" kindref="compound">CircularBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="55" column="1" bodyfile="src/utils/CircularBuffer.h" bodystart="55" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a603bf57e40cda6bb15f91d42b1ed73c7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classCircularBuffer" kindref="compound">CircularBuffer</ref> &amp;</type>
+        <definition>CircularBuffer &amp; CircularBuffer&lt; T &gt;::operator=</definition>
+        <argsstring>(CircularBuffer &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>CircularBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classCircularBuffer" kindref="compound">CircularBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="70" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="70" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1adeda965089392b78f8339975cf7604ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CircularBuffer&lt; T &gt;::push_back</definition>
+        <argsstring>(const value_type &amp;data)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>CircularBuffer::push_back</qualifiedname>
+        <param>
+          <type>const value_type &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="87" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="338" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1aadddc65ee52373af27b5c5d1ff5832b1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CircularBuffer&lt; T &gt;::push_back</definition>
+        <argsstring>(value_type &amp;&amp;data) noexcept</argsstring>
+        <name>push_back</name>
+        <qualifiedname>CircularBuffer::push_back</qualifiedname>
+        <param>
+          <type>value_type &amp;&amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="88" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="348" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a2aad145e7dbc8b2ca9705e8524ffccda" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CircularBuffer&lt; T &gt;::pop_front</definition>
+        <argsstring>()</argsstring>
+        <name>pop_front</name>
+        <qualifiedname>CircularBuffer::pop_front</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="89" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="367" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a7a36f934efc3d39cf2f4b91dd731b1b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>CircularBuffer&lt; T &gt;::reference CircularBuffer&lt; T &gt;::front</definition>
+        <argsstring>()</argsstring>
+        <name>front</name>
+        <qualifiedname>CircularBuffer::front</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="90" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="302" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a11036fd6990fc63ebf65c97520ab3fb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>CircularBuffer&lt; T &gt;::reference CircularBuffer&lt; T &gt;::back</definition>
+        <argsstring>()</argsstring>
+        <name>back</name>
+        <qualifiedname>CircularBuffer::back</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="91" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="311" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1ac6f91a6f44f6d99ea6a14361dc6d9fff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>CircularBuffer&lt; T &gt;::const_reference CircularBuffer&lt; T &gt;::front</definition>
+        <argsstring>() const</argsstring>
+        <name>front</name>
+        <qualifiedname>CircularBuffer::front</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="92" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="320" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a1323fae0c64a873b81be56058c1081ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>CircularBuffer&lt; T &gt;::const_reference CircularBuffer&lt; T &gt;::back</definition>
+        <argsstring>() const</argsstring>
+        <name>back</name>
+        <qualifiedname>CircularBuffer::back</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="93" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="329" bodyend="334"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a26caa4ec94de2f342f32b6558ac697eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CircularBuffer&lt; T &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>CircularBuffer::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="94" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="288" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a7509cc5ef0dd0a9f731c47b05929580c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool CircularBuffer&lt; T &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>CircularBuffer::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="95" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="276" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a2a2f13f00dca028142c250b5f2183097" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool CircularBuffer&lt; T &gt;::full</definition>
+        <argsstring>() const</argsstring>
+        <name>full</name>
+        <qualifiedname>CircularBuffer::full</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="96" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="270" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1aff86688ada8712c3f894e839b80db6d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>CircularBuffer&lt; T &gt;::size_type CircularBuffer&lt; T &gt;::capacity</definition>
+        <argsstring>() const</argsstring>
+        <name>capacity</name>
+        <qualifiedname>CircularBuffer::capacity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="97" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="282" bodyend="284"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a8f9b1b12d2bc545387fa532735702608" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>CircularBuffer&lt; T &gt;::size_type CircularBuffer&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>CircularBuffer::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="98" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="295" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a3001289c7d47910980bed5065214d2f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type CircularBuffer&lt; T &gt;::buffer_size</definition>
+        <argsstring>() const</argsstring>
+        <name>buffer_size</name>
+        <qualifiedname>CircularBuffer::buffer_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="99" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1ae625bad075d93156210d3bb7ca72eeac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_pointer</type>
+        <definition>const_pointer CircularBuffer&lt; T &gt;::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <qualifiedname>CircularBuffer::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="100" column="15" bodyfile="src/utils/CircularBuffer.h" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a207671fdaefa4260a85b622006324e69" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>CircularBuffer&lt; T &gt;::const_reference CircularBuffer&lt; T &gt;::operator[]</definition>
+        <argsstring>(size_type index) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>CircularBuffer::operator[]</qualifiedname>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="102" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="394" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a92ac8a6cdad5ab9dd023d80747b1ca9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>CircularBuffer&lt; T &gt;::reference CircularBuffer&lt; T &gt;::operator[]</definition>
+        <argsstring>(size_type index)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>CircularBuffer::operator[]</qualifiedname>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="103" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="383" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a958ba54ca100b306b8687096acc38612" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>CircularBuffer&lt; T &gt;::const_reference CircularBuffer&lt; T &gt;::at</definition>
+        <argsstring>(size_type index) const</argsstring>
+        <name>at</name>
+        <qualifiedname>CircularBuffer::at</qualifiedname>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="104" column="17" bodyfile="src/utils/CircularBuffer.h" bodystart="416" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a3653972e10a21bbd823a58200753e17b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>CircularBuffer&lt; T &gt;::reference CircularBuffer&lt; T &gt;::at</definition>
+        <argsstring>(size_type index)</argsstring>
+        <name>at</name>
+        <qualifiedname>CircularBuffer::at</qualifiedname>
+        <param>
+          <type>size_type</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="105" column="11" bodyfile="src/utils/CircularBuffer.h" bodystart="405" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1aa04c3fc5c99e27646baa2edbb4b35ad5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::iterator CircularBuffer&lt; T &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>CircularBuffer::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="110" column="10" bodyfile="src/utils/CircularBuffer.h" bodystart="427" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1aff1c96fa4a47784a66cc352b5710625b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::const_iterator CircularBuffer&lt; T &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>CircularBuffer::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="111" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="439" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a3127ee3f1886a2bbd20906966741685a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::iterator CircularBuffer&lt; T &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>CircularBuffer::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="112" column="10" bodyfile="src/utils/CircularBuffer.h" bodystart="451" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a56f556df1297031351eaaf25471a6e60" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::const_iterator CircularBuffer&lt; T &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>CircularBuffer::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="113" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="463" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a4ab8311e2f750fcecc93b4dca73ecb17" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::const_iterator CircularBuffer&lt; T &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>CircularBuffer::cbegin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="114" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="475" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1ad914c73674a5edf8ce4e4a7911ea3302" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::const_iterator CircularBuffer&lt; T &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>CircularBuffer::cend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="115" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="487" bodyend="495"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a9501a23a7eeb581e070f6f62f5330c36" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::iterator CircularBuffer&lt; T &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>CircularBuffer::rbegin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="116" column="10" bodyfile="src/utils/CircularBuffer.h" bodystart="499" bodyend="507"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a50a95e61869e31c47bff8748416e4378" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::const_iterator CircularBuffer&lt; T &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>CircularBuffer::rbegin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="117" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="511" bodyend="519"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1ae928fbebf15d37a0614690f5349c3688" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::iterator CircularBuffer&lt; T &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>CircularBuffer::rend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="118" column="10" bodyfile="src/utils/CircularBuffer.h" bodystart="523" bodyend="531"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1a79fc92befdb1be6b3cfb33ab61061683" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_iterator</type>
+        <definition>CircularBuffer&lt; T &gt;::const_iterator CircularBuffer&lt; T &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>CircularBuffer::rend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="119" column="16" bodyfile="src/utils/CircularBuffer.h" bodystart="535" bodyend="543"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classCircularBuffer_1aa31d80f2c95719070a7e326605406bb1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CircularBuffer&lt; T &gt;::_increment_bufferstate</definition>
+        <argsstring>()</argsstring>
+        <name>_increment_bufferstate</name>
+        <qualifiedname>CircularBuffer::_increment_bufferstate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="123" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="357" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classCircularBuffer_1ae3d9bd44463988d1012f55621d76dc36" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void CircularBuffer&lt; T &gt;::_decrement_bufferstate</definition>
+        <argsstring>()</argsstring>
+        <name>_decrement_bufferstate</name>
+        <qualifiedname>CircularBuffer::_decrement_bufferstate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/CircularBuffer.h" line="124" column="6" bodyfile="src/utils/CircularBuffer.h" bodystart="376" bodyend="379"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/CircularBuffer.h" line="15" column="1" bodyfile="src/utils/CircularBuffer.h" bodystart="15" bodyend="266"/>
+    <listofallmembers>
+      <member refid="classCircularBuffer_1a42353cc5295ee8dd37c7e52a8ab05b4b" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_buff</name></member>
+      <member refid="classCircularBuffer_1ae3d9bd44463988d1012f55621d76dc36" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_decrement_bufferstate</name></member>
+      <member refid="classCircularBuffer_1af40a9ac8b59ee140fbd227665427f785" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_head</name></member>
+      <member refid="classCircularBuffer_1aa31d80f2c95719070a7e326605406bb1" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_increment_bufferstate</name></member>
+      <member refid="classCircularBuffer_1a766c27456d47cc4eb713339ba651436a" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_max_size</name></member>
+      <member refid="classCircularBuffer_1aafcaf5012032bfb40b5bb95898f41df1" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_mtx</name></member>
+      <member refid="classCircularBuffer_1a8e94cf33d72c988d7cac6722c28c3d8b" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_size</name></member>
+      <member refid="classCircularBuffer_1ae036922f6f183b29f2730ee509c9b31b" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>_tail</name></member>
+      <member refid="classCircularBuffer_1a958ba54ca100b306b8687096acc38612" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>at</name></member>
+      <member refid="classCircularBuffer_1a3653972e10a21bbd823a58200753e17b" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>at</name></member>
+      <member refid="classCircularBuffer_1a11036fd6990fc63ebf65c97520ab3fb8" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>back</name></member>
+      <member refid="classCircularBuffer_1a1323fae0c64a873b81be56058c1081ca" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>back</name></member>
+      <member refid="classCircularBuffer_1aa04c3fc5c99e27646baa2edbb4b35ad5" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>begin</name></member>
+      <member refid="classCircularBuffer_1aff1c96fa4a47784a66cc352b5710625b" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>begin</name></member>
+      <member refid="classCircularBuffer_1a3001289c7d47910980bed5065214d2f3" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>buffer_size</name></member>
+      <member refid="classCircularBuffer_1aff86688ada8712c3f894e839b80db6d5" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>capacity</name></member>
+      <member refid="classCircularBuffer_1a4ab8311e2f750fcecc93b4dca73ecb17" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>cbegin</name></member>
+      <member refid="classCircularBuffer_1ad914c73674a5edf8ce4e4a7911ea3302" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>cend</name></member>
+      <member refid="classCircularBuffer_1aed928fe071a15c367bbdf0c551249438" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>CircularBuffer</name></member>
+      <member refid="classCircularBuffer_1a7881329b9170a160173e13a5b05d3abd" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>CircularBuffer</name></member>
+      <member refid="classCircularBuffer_1a88710b747a9d4fd211fbf5a8288655ae" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>CircularBuffer</name></member>
+      <member refid="classCircularBuffer_1a26caa4ec94de2f342f32b6558ac697eb" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>clear</name></member>
+      <member refid="classCircularBuffer_1a818d2e6f7e2e5c228f443f4a1871a0b7" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>const_iterator</name></member>
+      <member refid="classCircularBuffer_1af0c998d6a859cdd4571fac7d025c890b" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>const_pointer</name></member>
+      <member refid="classCircularBuffer_1abb84566457902db6a5b22cd909c7e10c" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>const_reference</name></member>
+      <member refid="classCircularBuffer_1ae625bad075d93156210d3bb7ca72eeac" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>data</name></member>
+      <member refid="classCircularBuffer_1a587643196a2571aecab21efad11adf65" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>difference_type</name></member>
+      <member refid="classCircularBuffer_1a7509cc5ef0dd0a9f731c47b05929580c" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>empty</name></member>
+      <member refid="classCircularBuffer_1a3127ee3f1886a2bbd20906966741685a" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>end</name></member>
+      <member refid="classCircularBuffer_1a56f556df1297031351eaaf25471a6e60" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>end</name></member>
+      <member refid="classCircularBuffer_1a7a36f934efc3d39cf2f4b91dd731b1b3" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>front</name></member>
+      <member refid="classCircularBuffer_1ac6f91a6f44f6d99ea6a14361dc6d9fff" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>front</name></member>
+      <member refid="classCircularBuffer_1a2a2f13f00dca028142c250b5f2183097" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>full</name></member>
+      <member refid="classCircularBuffer_1a37f240fe7f47772ddc36aac2bf616ab6" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>iterator</name></member>
+      <member refid="classCircularBuffer_1a5cdeb3f3276409d099a7a0457e682084" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>operator=</name></member>
+      <member refid="classCircularBuffer_1a603bf57e40cda6bb15f91d42b1ed73c7" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>operator=</name></member>
+      <member refid="classCircularBuffer_1a207671fdaefa4260a85b622006324e69" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>operator[]</name></member>
+      <member refid="classCircularBuffer_1a92ac8a6cdad5ab9dd023d80747b1ca9a" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>operator[]</name></member>
+      <member refid="classCircularBuffer_1ab189933c81c0e48f479755ac59cd3e31" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>pointer</name></member>
+      <member refid="classCircularBuffer_1a2aad145e7dbc8b2ca9705e8524ffccda" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>pop_front</name></member>
+      <member refid="classCircularBuffer_1adeda965089392b78f8339975cf7604ad" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>push_back</name></member>
+      <member refid="classCircularBuffer_1aadddc65ee52373af27b5c5d1ff5832b1" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>push_back</name></member>
+      <member refid="classCircularBuffer_1a9501a23a7eeb581e070f6f62f5330c36" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>rbegin</name></member>
+      <member refid="classCircularBuffer_1a50a95e61869e31c47bff8748416e4378" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>rbegin</name></member>
+      <member refid="classCircularBuffer_1ad665371c53e7d15ff27cee3ddd9f2ece" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>reference</name></member>
+      <member refid="classCircularBuffer_1ae928fbebf15d37a0614690f5349c3688" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>rend</name></member>
+      <member refid="classCircularBuffer_1a79fc92befdb1be6b3cfb33ab61061683" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>rend</name></member>
+      <member refid="classCircularBuffer_1a8f9b1b12d2bc545387fa532735702608" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>size</name></member>
+      <member refid="classCircularBuffer_1a1dc5fb0636f1b13bf504575fcb9d0595" prot="private" virt="non-virtual"><scope>CircularBuffer</scope><name>size_type</name></member>
+      <member refid="classCircularBuffer_1a94fc2df31fd61e18138d2e63310ca4c7" prot="public" virt="non-virtual"><scope>CircularBuffer</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

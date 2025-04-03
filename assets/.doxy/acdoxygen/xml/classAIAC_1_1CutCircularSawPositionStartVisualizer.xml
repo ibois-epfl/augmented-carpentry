@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CutCircularSawPositionStartVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CutCircularSawPositionStartVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1FeedbackVisualizer" prot="public" virt="non-virtual">AIAC::FeedbackVisualizer</basecompoundref>
+    <includes refid="CutCircularSawFeedback_8h" local="no">CutCircularSawFeedback.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a35e63381a0c56841c78dca6999715cdb" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutCircularSawPositionStartVisualizer::m_LineDistStart</definition>
+        <argsstring></argsstring>
+        <name>m_LineDistStart</name>
+        <qualifiedname>AIAC::CutCircularSawPositionStartVisualizer::m_LineDistStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="78" column="29" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawPositionStartVisualizer_1acd8a5632b39fa542b54fb0b08f23b2cb" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOText&gt; AIAC::CutCircularSawPositionStartVisualizer::m_TxtDistStart</definition>
+        <argsstring></argsstring>
+        <name>m_TxtDistStart</name>
+        <qualifiedname>AIAC::CutCircularSawPositionStartVisualizer::m_TxtDistStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="79" column="29" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawPositionStartVisualizer_1ab1bde253d53941858607e07ec1447f4b" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutCircularSawPositionStartVisualizer::m_LineToBottomPt</definition>
+        <argsstring></argsstring>
+        <name>m_LineToBottomPt</name>
+        <qualifiedname>AIAC::CutCircularSawPositionStartVisualizer::m_LineToBottomPt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="80" column="29" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a5528030f18c573726904f5c03ece9036" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CutCircularSawPositionStartVisualizer::ToleranceStartThreshold</definition>
+        <argsstring></argsstring>
+        <name>ToleranceStartThreshold</name>
+        <qualifiedname>AIAC::CutCircularSawPositionStartVisualizer::ToleranceStartThreshold</qualifiedname>
+        <initializer>= 0.2f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="83" column="19" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a570259df4ec35f55d7751ed1245b48c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CutCircularSawFeedback</definition>
+        <argsstring></argsstring>
+        <name>CutCircularSawFeedback</name>
+        <qualifiedname>AIAC::CutCircularSawPositionStartVisualizer::CutCircularSawFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1CutCircularSawFeedback" kindref="compound">CutCircularSawFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="85" column="22" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a63e3a04698fe162af9fec936293c8c11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CutCircularSawPositionStartVisualizer::CutCircularSawPositionStartVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>CutCircularSawPositionStartVisualizer</name>
+        <qualifiedname>AIAC::CutCircularSawPositionStartVisualizer::CutCircularSawPositionStartVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="75" column="13" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.cpp" bodystart="72" bodyend="89"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>This visualizer gives guidance on the start position of the lateral cuts for the circular saw. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::CutCircularSawPositionStartVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularSawPositionStartVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CutCircularSawPositionStartVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularSawPositionStartVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="72" column="5" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="73" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a570259df4ec35f55d7751ed1245b48c6" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>CutCircularSawFeedback</name></member>
+      <member refid="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a63e3a04698fe162af9fec936293c8c11" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>CutCircularSawPositionStartVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a35e63381a0c56841c78dca6999715cdb" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>m_LineDistStart</name></member>
+      <member refid="classAIAC_1_1CutCircularSawPositionStartVisualizer_1ab1bde253d53941858607e07ec1447f4b" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>m_LineToBottomPt</name></member>
+      <member refid="classAIAC_1_1CutCircularSawPositionStartVisualizer_1acd8a5632b39fa542b54fb0b08f23b2cb" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>m_TxtDistStart</name></member>
+      <member refid="classAIAC_1_1CutCircularSawPositionStartVisualizer_1a5528030f18c573726904f5c03ece9036" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>ToleranceStartThreshold</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawPositionStartVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

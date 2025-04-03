@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1GOTextSize" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::GOTextSize</compoundname>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1a64502744cc4c624ec227b30aedc805a8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::Default</definition>
+        <argsstring></argsstring>
+        <name>Default</name>
+        <qualifiedname>AIAC::GOTextSize::Default</qualifiedname>
+        <initializer>= 1.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="91" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1a4a7f03a15cad12d8794a543fb2f9ac7f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::ExtraSmall</definition>
+        <argsstring></argsstring>
+        <name>ExtraSmall</name>
+        <qualifiedname>AIAC::GOTextSize::ExtraSmall</qualifiedname>
+        <initializer>= 0.35</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="92" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1ad38e5fc6a7fb065e4d7cd68416d973f2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::BitSmall</definition>
+        <argsstring></argsstring>
+        <name>BitSmall</name>
+        <qualifiedname>AIAC::GOTextSize::BitSmall</qualifiedname>
+        <initializer>= 0.4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="93" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1af16285543f57aaa2d77fc2d524815266" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::Small</definition>
+        <argsstring></argsstring>
+        <name>Small</name>
+        <qualifiedname>AIAC::GOTextSize::Small</qualifiedname>
+        <initializer>= 0.5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="94" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1a114a2f59dd303ebfc8d38905603c203a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::Average</definition>
+        <argsstring></argsstring>
+        <name>Average</name>
+        <qualifiedname>AIAC::GOTextSize::Average</qualifiedname>
+        <initializer>= 0.75</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="95" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1a274f73bf710262b972b1652d6d4d2a32" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::Medium</definition>
+        <argsstring></argsstring>
+        <name>Medium</name>
+        <qualifiedname>AIAC::GOTextSize::Medium</qualifiedname>
+        <initializer>= 5.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="96" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOTextSize_1a6512eb75c500439bb0f9405f962652da" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr double</type>
+        <definition>constexpr double AIAC::GOTextSize::Big</definition>
+        <argsstring></argsstring>
+        <name>Big</name>
+        <qualifiedname>AIAC::GOTextSize::Big</qualifiedname>
+        <initializer>= 10.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="97" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="89" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="90" bodyend="98"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1GOTextSize_1a114a2f59dd303ebfc8d38905603c203a" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>Average</name></member>
+      <member refid="structAIAC_1_1GOTextSize_1a6512eb75c500439bb0f9405f962652da" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>Big</name></member>
+      <member refid="structAIAC_1_1GOTextSize_1ad38e5fc6a7fb065e4d7cd68416d973f2" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>BitSmall</name></member>
+      <member refid="structAIAC_1_1GOTextSize_1a64502744cc4c624ec227b30aedc805a8" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>Default</name></member>
+      <member refid="structAIAC_1_1GOTextSize_1a4a7f03a15cad12d8794a543fb2f9ac7f" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>ExtraSmall</name></member>
+      <member refid="structAIAC_1_1GOTextSize_1a274f73bf710262b972b1652d6d4d2a32" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>Medium</name></member>
+      <member refid="structAIAC_1_1GOTextSize_1af16285543f57aaa2d77fc2d524815266" prot="public" virt="non-virtual"><scope>AIAC::GOTextSize</scope><name>Small</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

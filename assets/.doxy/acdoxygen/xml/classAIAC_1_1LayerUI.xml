@@ -1,0 +1,997 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerUI" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerUI</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <innerclass refid="structAIAC_1_1LayerUI_1_1CombineMapParams" prot="private">AIAC::LayerUI::CombineMapParams</innerclass>
+    <innerclass refid="structAIAC_1_1LayerUI_1_1MappingParams" prot="private">AIAC::LayerUI::MappingParams</innerclass>
+    <innerclass refid="structAIAC_1_1LayerUI_1_1ReconstructParams" prot="private">AIAC::LayerUI::ReconstructParams</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classAIAC_1_1LayerUI_1a14df43c05375913789f17459136be332" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>AdjustTarget</name>
+        <qualifiedname>AIAC::LayerUI::AdjustTarget</qualifiedname>
+        <enumvalue id="classAIAC_1_1LayerUI_1a14df43c05375913789f17459136be332a127ea1d20becc4dba06d9d152db0c2e5" prot="private">
+          <name>SCALE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1LayerUI_1a14df43c05375913789f17459136be332aa27939099e0fe4086159364fcf8d5f73" prot="private">
+          <name>ROTATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1LayerUI_1a14df43c05375913789f17459136be332a0da044e5b37e6bcb3a8d01dc7362b276" prot="private">
+          <name>TRANSLATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="137" column="9" bodyfile="src/AIAC/LayerUI.h" bodystart="137" bodyend="141"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a0e106e73e8ce9cbfd66f00a9100c17c2" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref></type>
+        <definition>AIAC::Image AIAC::LayerUI::m_LogoLightClr</definition>
+        <argsstring></argsstring>
+        <name>m_LogoLightClr</name>
+        <qualifiedname>AIAC::LayerUI::m_LogoLightClr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="127" column="21" bodyfile="src/AIAC/LayerUI.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a993986185d20b07e405bbf1c569e3d4d" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1ImTexture" kindref="compound">AIAC::ImTexture</ref></type>
+        <definition>AIAC::ImTexture AIAC::LayerUI::m_SceneViewportImTexture</definition>
+        <argsstring></argsstring>
+        <name>m_SceneViewportImTexture</name>
+        <qualifiedname>AIAC::LayerUI::m_SceneViewportImTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="129" column="25" bodyfile="src/AIAC/LayerUI.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a7bccc6b361c17634c423bcc650793a2e" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1ImTexture" kindref="compound">AIAC::ImTexture</ref></type>
+        <definition>AIAC::ImTexture AIAC::LayerUI::m_MappingViewImTexture</definition>
+        <argsstring></argsstring>
+        <name>m_MappingViewImTexture</name>
+        <qualifiedname>AIAC::LayerUI::m_MappingViewImTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="130" column="25" bodyfile="src/AIAC/LayerUI.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a9af39a4d4e5882d741aa22fafe02f702" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1ImTexture" kindref="compound">AIAC::ImTexture</ref></type>
+        <definition>AIAC::ImTexture AIAC::LayerUI::m_CamCalibViewImTexture</definition>
+        <argsstring></argsstring>
+        <name>m_CamCalibViewImTexture</name>
+        <qualifiedname>AIAC::LayerUI::m_CamCalibViewImTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="131" column="25" bodyfile="src/AIAC/LayerUI.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1ac5c9d8e5c2e884f3cc9443bc6b054b0b" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1ImTexture" kindref="compound">AIAC::ImTexture</ref></type>
+        <definition>AIAC::ImTexture AIAC::LayerUI::m_ARCameraViewportImTexture</definition>
+        <argsstring></argsstring>
+        <name>m_ARCameraViewportImTexture</name>
+        <qualifiedname>AIAC::LayerUI::m_ARCameraViewportImTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="132" column="25" bodyfile="src/AIAC/LayerUI.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a93114335064047ea811d380d9c177c0a" prot="private" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 AIAC::LayerUI::m_LastMouseLPos</definition>
+        <argsstring></argsstring>
+        <name>m_LastMouseLPos</name>
+        <qualifiedname>AIAC::LayerUI::m_LastMouseLPos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="134" column="16" bodyfile="src/AIAC/LayerUI.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1add4bf0b1b25a4ed73624392f414698fc" prot="private" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 AIAC::LayerUI::m_LastMouseRPos</definition>
+        <argsstring></argsstring>
+        <name>m_LastMouseRPos</name>
+        <qualifiedname>AIAC::LayerUI::m_LastMouseRPos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="134" column="32" bodyfile="src/AIAC/LayerUI.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a3a52f90e73a30e2e047afd1713289c3d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::m_IsMouseLDown</definition>
+        <argsstring></argsstring>
+        <name>m_IsMouseLDown</name>
+        <qualifiedname>AIAC::LayerUI::m_IsMouseLDown</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="135" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a01ef393b1f2b39b8035c06148b2b8547" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::m_IsMouseRDown</definition>
+        <argsstring></argsstring>
+        <name>m_IsMouseRDown</name>
+        <qualifiedname>AIAC::LayerUI::m_IsMouseRDown</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="135" column="30" bodyfile="src/AIAC/LayerUI.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1aac045c198f44c476a9c8f0dae26e6f68" prot="private" static="no" mutable="no">
+        <type>enum AIAC::LayerUI::AdjustTarget</type>
+        <definition>enum AIAC::LayerUI::AdjustTarget AIAC::LayerUI::m_AdjustTarget</definition>
+        <argsstring></argsstring>
+        <name>m_AdjustTarget</name>
+        <qualifiedname>AIAC::LayerUI::m_AdjustTarget</qualifiedname>
+        <initializer>= AdjustTarget::SCALE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="141" column="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a8fd9b2485bffbe58033bd895327e95ff" prot="private" static="no" mutable="no">
+        <type>bool *</type>
+        <definition>bool* AIAC::LayerUI::m_IsOpen</definition>
+        <argsstring></argsstring>
+        <name>m_IsOpen</name>
+        <qualifiedname>AIAC::LayerUI::m_IsOpen</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="143" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1acec18a4440626eb5c0cb548786f64986" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classAIAC_1_1PaneUI" kindref="compound">PaneUI</ref> &gt;</type>
+        <definition>std::vector&lt;PaneUI&gt; AIAC::LayerUI::m_PaneUIStack</definition>
+        <argsstring></argsstring>
+        <name>m_PaneUIStack</name>
+        <qualifiedname>AIAC::LayerUI::m_PaneUIStack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="145" column="21" bodyfile="src/AIAC/LayerUI.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a932c7e36b802509b4e02331f738ab854" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1PaneUI" kindref="compound">PaneUI</ref> *</type>
+        <definition>PaneUI* AIAC::LayerUI::m_OpenedPaneUI</definition>
+        <argsstring></argsstring>
+        <name>m_OpenedPaneUI</name>
+        <qualifiedname>AIAC::LayerUI::m_OpenedPaneUI</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="146" column="16" bodyfile="src/AIAC/LayerUI.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a410ddb2ced3a879ac1133ba27321415d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerUI::m_FileSelectDefaultPath</definition>
+        <argsstring></argsstring>
+        <name>m_FileSelectDefaultPath</name>
+        <qualifiedname>AIAC::LayerUI::m_FileSelectDefaultPath</qualifiedname>
+        <initializer>= &quot;.&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="149" column="21" bodyfile="src/AIAC/LayerUI.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a33d895e30d83774bce838f1c4f9925af" prot="private" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::m_TmpPathBuf[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>m_TmpPathBuf</name>
+        <qualifiedname>AIAC::LayerUI::m_TmpPathBuf</qualifiedname>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="150" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="150" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1ad5efd389eeda14e6d213087d83e76d0a" prot="private" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* AIAC::LayerUI::m_FileSelectionTargetBuf</definition>
+        <argsstring></argsstring>
+        <name>m_FileSelectionTargetBuf</name>
+        <qualifiedname>AIAC::LayerUI::m_FileSelectionTargetBuf</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="151" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1ab3ed35caa8643bdd46934781dcc063e2" prot="private" static="no" mutable="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>std::function&lt;void()&gt; AIAC::LayerUI::m_FileSelectionCallback</definition>
+        <argsstring></argsstring>
+        <name>m_FileSelectionCallback</name>
+        <qualifiedname>AIAC::LayerUI::m_FileSelectionCallback</qualifiedname>
+        <initializer>= []{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="152" column="23" bodyfile="src/AIAC/LayerUI.h" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a8bf287738bc5e6f433937e71fcc14fcd" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerUI::m_VideoRecorderPathName</definition>
+        <argsstring></argsstring>
+        <name>m_VideoRecorderPathName</name>
+        <qualifiedname>AIAC::LayerUI::m_VideoRecorderPathName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="153" column="21" bodyfile="src/AIAC/LayerUI.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1ac7c52a813a7a746c21ffeff4b27e013a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::m_IsCombiningMap</definition>
+        <argsstring></argsstring>
+        <name>m_IsCombiningMap</name>
+        <qualifiedname>AIAC::LayerUI::m_IsCombiningMap</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="155" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1ab951d0fc0ba913c306157b016226f99c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::m_IsReconstructing3D</definition>
+        <argsstring></argsstring>
+        <name>m_IsReconstructing3D</name>
+        <qualifiedname>AIAC::LayerUI::m_IsReconstructing3D</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="156" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a61f0c0da18f37442baa250d162515d44" prot="private" static="no" mutable="no">
+        <type>struct AIAC::LayerUI::CombineMapParams</type>
+        <definition>struct AIAC::LayerUI::CombineMapParams AIAC::LayerUI::m_CombMapParams</definition>
+        <argsstring></argsstring>
+        <name>m_CombMapParams</name>
+        <qualifiedname>AIAC::LayerUI::m_CombMapParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="163" column="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a485151ef83ce8339d62182c02a9b7af0" prot="private" static="no" mutable="no">
+        <type>struct AIAC::LayerUI::MappingParams</type>
+        <definition>struct AIAC::LayerUI::MappingParams AIAC::LayerUI::m_MappingParams</definition>
+        <argsstring></argsstring>
+        <name>m_MappingParams</name>
+        <qualifiedname>AIAC::LayerUI::m_MappingParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="169" column="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a99f737ea16fd355007e2d7c267e3d690" prot="private" static="no" mutable="no">
+        <type>struct AIAC::LayerUI::ReconstructParams</type>
+        <definition>struct AIAC::LayerUI::ReconstructParams AIAC::LayerUI::m_ReconstructParams</definition>
+        <argsstring></argsstring>
+        <name>m_ReconstructParams</name>
+        <qualifiedname>AIAC::LayerUI::m_ReconstructParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="182" column="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUI_1a66f26b7d7e43281ffc847d0b0a0a2bae" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::m_IsChoosingCamCalibFileSavePath</definition>
+        <argsstring></argsstring>
+        <name>m_IsChoosingCamCalibFileSavePath</name>
+        <qualifiedname>AIAC::LayerUI::m_IsChoosingCamCalibFileSavePath</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="186" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a64d705a05878006cc59f20ac36f22404" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerUI::LayerUI</definition>
+        <argsstring>()=default</argsstring>
+        <name>LayerUI</name>
+        <qualifiedname>AIAC::LayerUI::LayerUI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="84" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ab8760a0ae27e0c8402bfadb167bf4be0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::LayerUI::~LayerUI</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LayerUI</name>
+        <qualifiedname>AIAC::LayerUI::~LayerUI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="85" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a19a635f3b90870526f476ffb87598fe2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::OnAttach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::LayerUI::OnAttach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073">OnAttach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="87" column="22" bodyfile="src/AIAC/LayerUI.cpp" bodystart="83" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ace7f50e810b4b0bf897bdeb36a8da046" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::OnFrameStart</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::LayerUI::OnFrameStart</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3">OnFrameStart</reimplements>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="88" column="22" bodyfile="src/AIAC/LayerUI.cpp" bodystart="163" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a5fbd03723938519203fdf80acdeb5e82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::OnUIRender</definition>
+        <argsstring>()</argsstring>
+        <name>OnUIRender</name>
+        <qualifiedname>AIAC::LayerUI::OnUIRender</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="89" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="170" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a059e6df9760eb1e4b4ed4c6b19857b60" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::OnDetach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnDetach</name>
+        <qualifiedname>AIAC::LayerUI::OnDetach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699">OnDetach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is detached from the application (~app). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="90" column="22" bodyfile="src/AIAC/LayerUI.cpp" bodystart="201" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ad2bd019e7b419b5bfac29278aa2cd607" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowMenuBar</definition>
+        <argsstring>()</argsstring>
+        <name>ShowMenuBar</name>
+        <qualifiedname>AIAC::LayerUI::ShowMenuBar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="92" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="241" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ac020ec3e5c94cb10c03f1c7eb3d353c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowMainUI</definition>
+        <argsstring>()</argsstring>
+        <name>ShowMainUI</name>
+        <qualifiedname>AIAC::LayerUI::ShowMainUI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="93" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="261" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ad070b8a8517e8dafc204671527ca584f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowSceneViewport</definition>
+        <argsstring>()</argsstring>
+        <name>ShowSceneViewport</name>
+        <qualifiedname>AIAC::LayerUI::ShowSceneViewport</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="94" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="278" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a91670a342bc66094ea5c919454bdde3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowFileSelectDialog</definition>
+        <argsstring>()</argsstring>
+        <name>ShowFileSelectDialog</name>
+        <qualifiedname>AIAC::LayerUI::ShowFileSelectDialog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="95" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1573" bodyend="1589"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a6df4cac423bd80e12cbeb5d695bc5b6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::OpenFileSelectDialog</definition>
+        <argsstring>(const char *title, const char *fileExt, char *path, std::function&lt; void()&gt; callback=[]{})</argsstring>
+        <name>OpenFileSelectDialog</name>
+        <qualifiedname>AIAC::LayerUI::OpenFileSelectDialog</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fileExt</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void()&gt;</type>
+          <declname>callback</declname>
+          <defval>[]{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="96" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1557" bodyend="1571"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a1f068c25edbf6650fb315332ae7975f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowCombineMapPopup</definition>
+        <argsstring>()</argsstring>
+        <name>ShowCombineMapPopup</name>
+        <qualifiedname>AIAC::LayerUI::ShowCombineMapPopup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="98" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1311" bodyend="1370"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a7116cde713b8224372b128e07240b138" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowMappingPopup</definition>
+        <argsstring>()</argsstring>
+        <name>ShowMappingPopup</name>
+        <qualifiedname>AIAC::LayerUI::ShowMappingPopup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="99" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1087" bodyend="1225"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1acc40f2937647bc02569527f9f204d7f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowSaveMapFileDialog</definition>
+        <argsstring>()</argsstring>
+        <name>ShowSaveMapFileDialog</name>
+        <qualifiedname>AIAC::LayerUI::ShowSaveMapFileDialog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ac80e2b191644df30c50ec526c3fc84a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowMapFileDialog</definition>
+        <argsstring>(char *path)</argsstring>
+        <name>ShowMapFileDialog</name>
+        <qualifiedname>AIAC::LayerUI::ShowMapFileDialog</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1aae80423f615c49383848e8ad8cf6ab24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowReconstruct3DPopup</definition>
+        <argsstring>()</argsstring>
+        <name>ShowReconstruct3DPopup</name>
+        <qualifiedname>AIAC::LayerUI::ShowReconstruct3DPopup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="103" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1372" bodyend="1522"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a0878692e4b6fae8babf4de17a7d56f37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowReconExportFilePathDialog</definition>
+        <argsstring>()</argsstring>
+        <name>ShowReconExportFilePathDialog</name>
+        <qualifiedname>AIAC::LayerUI::ShowReconExportFilePathDialog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a26902c6d9677b31455d687387fc842a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowCamCalibPopup</definition>
+        <argsstring>()</argsstring>
+        <name>ShowCamCalibPopup</name>
+        <qualifiedname>AIAC::LayerUI::ShowCamCalibPopup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="106" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1227" bodyend="1309"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a326f578053eb391d727cf7f86b682878" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowSaveCamCalibFileDialog</definition>
+        <argsstring>()</argsstring>
+        <name>ShowSaveCamCalibFileDialog</name>
+        <qualifiedname>AIAC::LayerUI::ShowSaveCamCalibFileDialog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="107" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1538" bodyend="1555"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a92eb10829a23a7f264712f48f32c6c36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::LoadReconstructParams</definition>
+        <argsstring>()</argsstring>
+        <name>LoadReconstructParams</name>
+        <qualifiedname>AIAC::LayerUI::LoadReconstructParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="108" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a7bd07e80bb4ce6d9e7782f483cbe4860" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowSaveVideoRecorderFileDialog</definition>
+        <argsstring>()</argsstring>
+        <name>ShowSaveVideoRecorderFileDialog</name>
+        <qualifiedname>AIAC::LayerUI::ShowSaveVideoRecorderFileDialog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="109" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="753" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a3ee6f91e6a86bc6f395fd874aa910f3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::ShowLogRecorderUI</definition>
+        <argsstring>()</argsstring>
+        <name>ShowLogRecorderUI</name>
+        <qualifiedname>AIAC::LayerUI::ShowLogRecorderUI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="111" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1591" bodyend="1621"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1ac2f8ec926da361ac611d86eaaec3692e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::StackPane</definition>
+        <argsstring>(PaneUI pane)</argsstring>
+        <name>StackPane</name>
+        <qualifiedname>AIAC::LayerUI::StackPane</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1PaneUI" kindref="compound">PaneUI</ref></type>
+          <declname>pane</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="113" column="21" bodyfile="src/AIAC/LayerUI.h" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a9706cc15d7c92e70d087d590585b830d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetPaneUICamera</definition>
+        <argsstring>()</argsstring>
+        <name>SetPaneUICamera</name>
+        <qualifiedname>AIAC::LayerUI::SetPaneUICamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="114" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="366" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1aa1e764ecfeec761890a63622bbda6e65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetPaneUISlam</definition>
+        <argsstring>()</argsstring>
+        <name>SetPaneUISlam</name>
+        <qualifiedname>AIAC::LayerUI::SetPaneUISlam</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="115" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="422" bodyend="523"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a2e17f769a2553534d01dc1539dcdae20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetPaneUIToolhead</definition>
+        <argsstring>()</argsstring>
+        <name>SetPaneUIToolhead</name>
+        <qualifiedname>AIAC::LayerUI::SetPaneUIToolhead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="116" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="838" bodyend="1081"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a1700ab71acc6a6516692660df04ffbe8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::OnCollapsingPaneUIToolhead</definition>
+        <argsstring>()</argsstring>
+        <name>OnCollapsingPaneUIToolhead</name>
+        <qualifiedname>AIAC::LayerUI::OnCollapsingPaneUIToolhead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="117" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1083" bodyend="1085"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a590797c2c67abe34f4aa2466234d9986" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetPaneUIACIM</definition>
+        <argsstring>()</argsstring>
+        <name>SetPaneUIACIM</name>
+        <qualifiedname>AIAC::LayerUI::SetPaneUIACIM</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="118" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="525" bodyend="751"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1af9356fed161123d6e7181451707d22fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetPaneUIUtils</definition>
+        <argsstring>()</argsstring>
+        <name>SetPaneUIUtils</name>
+        <qualifiedname>AIAC::LayerUI::SetPaneUIUtils</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="119" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="768" bodyend="836"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a9818fd6fb6c9d95fdf0c34aa3c1a967c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1PaneUI" kindref="compound">PaneUI</ref> *</type>
+        <definition>PaneUI * AIAC::LayerUI::GetOpenedPaneUI</definition>
+        <argsstring>()</argsstring>
+        <name>GetOpenedPaneUI</name>
+        <qualifiedname>AIAC::LayerUI::GetOpenedPaneUI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="120" column="16" bodyfile="src/AIAC/LayerUI.h" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a4ac8b15517bfa8d2f1d61bda9a230bcd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetOpenedPaneUI</definition>
+        <argsstring>(PaneUI *paneUI)</argsstring>
+        <name>SetOpenedPaneUI</name>
+        <qualifiedname>AIAC::LayerUI::SetOpenedPaneUI</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1PaneUI" kindref="compound">PaneUI</ref> *</type>
+          <declname>paneUI</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="121" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="121" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a48331723233bafff97566b875412c844" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::SetGlobalViewUI</definition>
+        <argsstring>(ImVec2 viewportSize)</argsstring>
+        <name>SetGlobalViewUI</name>
+        <qualifiedname>AIAC::LayerUI::SetGlobalViewUI</qualifiedname>
+        <param>
+          <type>ImVec2</type>
+          <declname>viewportSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="124" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="291" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUI_1a86b2f500b34083f540b19a624b5d17df" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUI::LoadReconstructParamsFromFile</definition>
+        <argsstring>(const char *filePath)</argsstring>
+        <name>LoadReconstructParamsFromFile</name>
+        <qualifiedname>AIAC::LayerUI::LoadReconstructParamsFromFile</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="183" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="1525" bodyend="1536"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerUI</label>
+        <link refid="classAIAC_1_1LayerUI"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerUI</label>
+        <link refid="classAIAC_1_1LayerUI"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerUI.h" line="82" column="5" bodyfile="src/AIAC/LayerUI.h" bodystart="82" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerUI_1a14df43c05375913789f17459136be332" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>AdjustTarget</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a9818fd6fb6c9d95fdf0c34aa3c1a967c" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>GetOpenedPaneUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a64d705a05878006cc59f20ac36f22404" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>LayerUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a92eb10829a23a7f264712f48f32c6c36" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>LoadReconstructParams</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a86b2f500b34083f540b19a624b5d17df" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>LoadReconstructParamsFromFile</name></member>
+      <member refid="classAIAC_1_1LayerUI_1aac045c198f44c476a9c8f0dae26e6f68" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_AdjustTarget</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ac5c9d8e5c2e884f3cc9443bc6b054b0b" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_ARCameraViewportImTexture</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a9af39a4d4e5882d741aa22fafe02f702" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_CamCalibViewImTexture</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a61f0c0da18f37442baa250d162515d44" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_CombMapParams</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a410ddb2ced3a879ac1133ba27321415d" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_FileSelectDefaultPath</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ab3ed35caa8643bdd46934781dcc063e2" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_FileSelectionCallback</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ad5efd389eeda14e6d213087d83e76d0a" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_FileSelectionTargetBuf</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a66f26b7d7e43281ffc847d0b0a0a2bae" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_IsChoosingCamCalibFileSavePath</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ac7c52a813a7a746c21ffeff4b27e013a" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_IsCombiningMap</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a3a52f90e73a30e2e047afd1713289c3d" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_IsMouseLDown</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a01ef393b1f2b39b8035c06148b2b8547" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_IsMouseRDown</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a8fd9b2485bffbe58033bd895327e95ff" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_IsOpen</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ab951d0fc0ba913c306157b016226f99c" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_IsReconstructing3D</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a93114335064047ea811d380d9c177c0a" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_LastMouseLPos</name></member>
+      <member refid="classAIAC_1_1LayerUI_1add4bf0b1b25a4ed73624392f414698fc" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_LastMouseRPos</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a0e106e73e8ce9cbfd66f00a9100c17c2" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_LogoLightClr</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a485151ef83ce8339d62182c02a9b7af0" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_MappingParams</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a7bccc6b361c17634c423bcc650793a2e" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_MappingViewImTexture</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a932c7e36b802509b4e02331f738ab854" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_OpenedPaneUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1acec18a4440626eb5c0cb548786f64986" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_PaneUIStack</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a99f737ea16fd355007e2d7c267e3d690" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_ReconstructParams</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a993986185d20b07e405bbf1c569e3d4d" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_SceneViewportImTexture</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a33d895e30d83774bce838f1c4f9925af" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_TmpPathBuf</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a8bf287738bc5e6f433937e71fcc14fcd" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>m_VideoRecorderPathName</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a19a635f3b90870526f476ffb87598fe2" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a1700ab71acc6a6516692660df04ffbe8" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>OnCollapsingPaneUIToolhead</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a059e6df9760eb1e4b4ed4c6b19857b60" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ace7f50e810b4b0bf897bdeb36a8da046" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a5fbd03723938519203fdf80acdeb5e82" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>OnUIRender</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a6df4cac423bd80e12cbeb5d695bc5b6d" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>OpenFileSelectDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a48331723233bafff97566b875412c844" prot="private" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetGlobalViewUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a4ac8b15517bfa8d2f1d61bda9a230bcd" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetOpenedPaneUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a590797c2c67abe34f4aa2466234d9986" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetPaneUIACIM</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a9706cc15d7c92e70d087d590585b830d" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetPaneUICamera</name></member>
+      <member refid="classAIAC_1_1LayerUI_1aa1e764ecfeec761890a63622bbda6e65" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetPaneUISlam</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a2e17f769a2553534d01dc1539dcdae20" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetPaneUIToolhead</name></member>
+      <member refid="classAIAC_1_1LayerUI_1af9356fed161123d6e7181451707d22fd" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>SetPaneUIUtils</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a26902c6d9677b31455d687387fc842a0" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowCamCalibPopup</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a1f068c25edbf6650fb315332ae7975f0" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowCombineMapPopup</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a91670a342bc66094ea5c919454bdde3f" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowFileSelectDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a3ee6f91e6a86bc6f395fd874aa910f3c" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowLogRecorderUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ac020ec3e5c94cb10c03f1c7eb3d353c3" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowMainUI</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ac80e2b191644df30c50ec526c3fc84a9" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowMapFileDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a7116cde713b8224372b128e07240b138" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowMappingPopup</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ad2bd019e7b419b5bfac29278aa2cd607" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowMenuBar</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a0878692e4b6fae8babf4de17a7d56f37" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowReconExportFilePathDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1aae80423f615c49383848e8ad8cf6ab24" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowReconstruct3DPopup</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a326f578053eb391d727cf7f86b682878" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowSaveCamCalibFileDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1acc40f2937647bc02569527f9f204d7f5" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowSaveMapFileDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1a7bd07e80bb4ce6d9e7782f483cbe4860" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowSaveVideoRecorderFileDialog</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ad070b8a8517e8dafc204671527ca584f" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>ShowSceneViewport</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ac2f8ec926da361ac611d86eaaec3692e" prot="public" virt="non-virtual"><scope>AIAC::LayerUI</scope><name>StackPane</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>~Layer</name></member>
+      <member refid="classAIAC_1_1LayerUI_1ab8760a0ae27e0c8402bfadb167bf4be0" prot="public" virt="virtual"><scope>AIAC::LayerUI</scope><name>~LayerUI</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

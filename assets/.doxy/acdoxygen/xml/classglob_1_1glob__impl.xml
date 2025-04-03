@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classglob_1_1glob__impl" kind="class" language="C++" prot="public">
+    <compoundname>glob::glob_impl</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classglob_1_1glob__impl_1af9fa9b716b55aee900ce6db0e95b4680" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string glob::glob_impl::file_pattern</definition>
+        <argsstring></argsstring>
+        <name>file_pattern</name>
+        <qualifiedname>glob::glob_impl::file_pattern</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.cpp" line="101" column="21" bodyfile="src/utils/glob.cpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classglob_1_1glob__impl_1a3c7943b7aab4e26ee25abf043821044e" prot="public" static="no" mutable="no">
+        <type>DIR *</type>
+        <definition>DIR* glob::glob_impl::dir</definition>
+        <argsstring></argsstring>
+        <name>dir</name>
+        <qualifiedname>glob::glob_impl::dir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.cpp" line="102" column="13" bodyfile="src/utils/glob.cpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classglob_1_1glob__impl_1ae631ed6b773e89af6c9925f7e516991e" prot="public" static="no" mutable="no">
+        <type>struct dirent *</type>
+        <definition>struct dirent* glob::glob_impl::dir_entry</definition>
+        <argsstring></argsstring>
+        <name>dir_entry</name>
+        <qualifiedname>glob::glob_impl::dir_entry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.cpp" line="103" column="21" bodyfile="src/utils/glob.cpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classglob_1_1glob__impl_1a2c7eceb9a6012a90e2dcd83afed8f93e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>glob::glob_impl::glob_impl</definition>
+        <argsstring>()</argsstring>
+        <name>glob_impl</name>
+        <qualifiedname>glob::glob_impl::glob_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.cpp" line="96" column="9" bodyfile="src/utils/glob.cpp" bodystart="96" bodyend="99"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/glob.cpp" line="93" column="5" bodyfile="src/utils/glob.cpp" bodystart="94" bodyend="104"/>
+    <listofallmembers>
+      <member refid="classglob_1_1glob__impl_1a3c7943b7aab4e26ee25abf043821044e" prot="public" virt="non-virtual"><scope>glob::glob_impl</scope><name>dir</name></member>
+      <member refid="classglob_1_1glob__impl_1ae631ed6b773e89af6c9925f7e516991e" prot="public" virt="non-virtual"><scope>glob::glob_impl</scope><name>dir_entry</name></member>
+      <member refid="classglob_1_1glob__impl_1af9fa9b716b55aee900ce6db0e95b4680" prot="public" virt="non-virtual"><scope>glob::glob_impl</scope><name>file_pattern</name></member>
+      <member refid="classglob_1_1glob__impl_1a2c7eceb9a6012a90e2dcd83afed8f93e" prot="public" virt="non-virtual"><scope>glob::glob_impl</scope><name>glob_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
