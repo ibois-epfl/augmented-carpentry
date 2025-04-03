@@ -32,5 +32,7 @@ dependencies:
     - mkdocs-open-in-new-tab~=1.0.8
     - mkdocs-git-revision-date-localized-plugin~=1.3.0
     - mkdocs-macros-plugin~=1.3.7
+    # autoclicker
+    - pyautogui~=0.9.54
 
 
