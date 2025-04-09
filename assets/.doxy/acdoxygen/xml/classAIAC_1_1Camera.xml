@@ -1,0 +1,846 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Camera" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Camera</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a5821e4307164ce89640bc59899c5f41b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::FlipHorizontal</definition>
+        <argsstring></argsstring>
+        <name>FlipHorizontal</name>
+        <qualifiedname>AIAC::Camera::FlipHorizontal</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag indicating if the captured image should be flipped. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="184" column="14" bodyfile="src/AIAC/Camera.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a4f476a0250e96ede498292e4e50f7c10" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::FlipVertical</definition>
+        <argsstring></argsstring>
+        <name>FlipVertical</name>
+        <qualifiedname>AIAC::Camera::FlipVertical</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="185" column="14" bodyfile="src/AIAC/Camera.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1ad214e43a7905e1f5907cd46769f6d28a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::m_IsCamMatrixInit</definition>
+        <argsstring></argsstring>
+        <name>m_IsCamMatrixInit</name>
+        <qualifiedname>AIAC::Camera::m_IsCamMatrixInit</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag indicating if the camera matrix is initialized. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="189" column="14" bodyfile="src/AIAC/Camera.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1ac83cbe0dc6bef37c464526e565eca443" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::m_IsFisheye</definition>
+        <argsstring></argsstring>
+        <name>m_IsFisheye</name>
+        <qualifiedname>AIAC::Camera::m_IsFisheye</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag indicating if the camera is fisheye. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="191" column="14" bodyfile="src/AIAC/Camera.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1ab2615bbb22522bb4e5bfbacd72254ec6" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Camera::m_CalibFilePath</definition>
+        <argsstring></argsstring>
+        <name>m_CalibFilePath</name>
+        <qualifiedname>AIAC::Camera::m_CalibFilePath</qualifiedname>
+        <briefdescription>
+<para>Path to the camera calibration file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="193" column="21" bodyfile="src/AIAC/Camera.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a5934ed2f0c8ced16d8a4e65f25660b32" prot="private" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::Camera::m_CameraMatrix</definition>
+        <argsstring></argsstring>
+        <name>m_CameraMatrix</name>
+        <qualifiedname>AIAC::Camera::m_CameraMatrix</qualifiedname>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Camera" kindref="compound">Camera</ref> matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="195" column="17" bodyfile="src/AIAC/Camera.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a6be2ca0bb64e6cfa2019bf411c2c68df" prot="private" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::Camera::m_DistortionCoef</definition>
+        <argsstring></argsstring>
+        <name>m_DistortionCoef</name>
+        <qualifiedname>AIAC::Camera::m_DistortionCoef</qualifiedname>
+        <briefdescription>
+<para>Distortion coefficient matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="197" column="17" bodyfile="src/AIAC/Camera.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a5f330f658b4cd3012a0e076dfa92f0dc" prot="private" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::Camera::m_UndistortMap[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>m_UndistortMap</name>
+        <qualifiedname>AIAC::Camera::m_UndistortMap</qualifiedname>
+        <briefdescription>
+<para>Undistorted map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="199" column="17" bodyfile="src/AIAC/Camera.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a8ae1b4eda656dcc4917d060a5855f1db" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::Camera::m_PhysicalWidth</definition>
+        <argsstring></argsstring>
+        <name>m_PhysicalWidth</name>
+        <qualifiedname>AIAC::Camera::m_PhysicalWidth</qualifiedname>
+        <briefdescription>
+<para>Physical width and height of the camera frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="202" column="13" bodyfile="src/AIAC/Camera.h" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1aa340ec38c91c33d4ed0fbe9d5213186b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::Camera::m_PhysicalHeight</definition>
+        <argsstring></argsstring>
+        <name>m_PhysicalHeight</name>
+        <qualifiedname>AIAC::Camera::m_PhysicalHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="202" column="29" bodyfile="src/AIAC/Camera.h" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a439babf1410e70e23d023404fabbeef1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::Camera::m_ParamWidth</definition>
+        <argsstring></argsstring>
+        <name>m_ParamWidth</name>
+        <qualifiedname>AIAC::Camera::m_ParamWidth</qualifiedname>
+        <briefdescription>
+<para>Width and height of the camera frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="204" column="13" bodyfile="src/AIAC/Camera.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a5dbda31bec44b32c6b0984d401efb117" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::Camera::m_ParamHeight</definition>
+        <argsstring></argsstring>
+        <name>m_ParamHeight</name>
+        <qualifiedname>AIAC::Camera::m_ParamHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="204" column="26" bodyfile="src/AIAC/Camera.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a46e01f963e6c10f348e56a4105eed66e" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::Camera::m_FovX</definition>
+        <argsstring></argsstring>
+        <name>m_FovX</name>
+        <qualifiedname>AIAC::Camera::m_FovX</qualifiedname>
+        <initializer>= -1.0f</initializer>
+        <briefdescription>
+<para>Field of view (FOV) of the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="206" column="15" bodyfile="src/AIAC/Camera.h" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a318eefb7b85db2b37d985725992defe8" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::Camera::m_FovY</definition>
+        <argsstring></argsstring>
+        <name>m_FovY</name>
+        <qualifiedname>AIAC::Camera::m_FovY</qualifiedname>
+        <initializer>= -1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="206" column="23" bodyfile="src/AIAC/Camera.h" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a5a878eff3fdfe59e8e7674c134fc9166" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">Image</ref></type>
+        <definition>Image AIAC::Camera::m_RawCurrentFrame</definition>
+        <argsstring></argsstring>
+        <name>m_RawCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::m_RawCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Current raw (uncalibrated) frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="209" column="15" bodyfile="src/AIAC/Camera.h" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a01acbc4fab53ce321b9bfd0d388db224" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">Image</ref></type>
+        <definition>Image AIAC::Camera::m_CenterCroppedCurrentFrame</definition>
+        <argsstring></argsstring>
+        <name>m_CenterCroppedCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::m_CenterCroppedCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Current center-cropped frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="211" column="15" bodyfile="src/AIAC/Camera.h" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a49f22adbc5c784c709979951e2bfb256" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">Image</ref></type>
+        <definition>Image AIAC::Camera::m_CalibratedCurrentFrame</definition>
+        <argsstring></argsstring>
+        <name>m_CalibratedCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::m_CalibratedCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Current calibrated frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="213" column="15" bodyfile="src/AIAC/Camera.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1aeccdde4326ba4c862d97f49722d1f8e4" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">Image</ref></type>
+        <definition>Image AIAC::Camera::m_GrayCalibratedCurrentFrame</definition>
+        <argsstring></argsstring>
+        <name>m_GrayCalibratedCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::m_GrayCalibratedCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Current grayscale calibrated frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="215" column="15" bodyfile="src/AIAC/Camera.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1ac724909731a558093f8ce16ed7d6dcc3" prot="private" static="no" mutable="no">
+        <type>cv::VideoCapture</type>
+        <definition>cv::VideoCapture AIAC::Camera::m_VideoCapture</definition>
+        <argsstring></argsstring>
+        <name>m_VideoCapture</name>
+        <qualifiedname>AIAC::Camera::m_VideoCapture</qualifiedname>
+        <briefdescription>
+<para>OpenCV video capture object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="218" column="26" bodyfile="src/AIAC/Camera.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Camera_1a85a5e85e8f875d923081794e6e269c91" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::m_IsOpened</definition>
+        <argsstring></argsstring>
+        <name>m_IsOpened</name>
+        <qualifiedname>AIAC::Camera::m_IsOpened</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag indicating if the camera is opened. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="220" column="14" bodyfile="src/AIAC/Camera.h" bodystart="220" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a04bb990f9bf69a30c129a0f610a7f938" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Camera::Camera</definition>
+        <argsstring>()</argsstring>
+        <name>Camera</name>
+        <qualifiedname>AIAC::Camera::Camera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="43" column="9" bodyfile="src/AIAC/Camera.cpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1af50aa9921ec579f5790f436ce63d847c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Camera::~Camera</definition>
+        <argsstring>()</argsstring>
+        <name>~Camera</name>
+        <qualifiedname>AIAC::Camera::~Camera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="44" column="9" bodyfile="src/AIAC/Camera.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a9bee156611f3d91ca0fdf723ab810e33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Camera::Open</definition>
+        <argsstring>(int id)</argsstring>
+        <name>Open</name>
+        <qualifiedname>AIAC::Camera::Open</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Open the camera with the specified id. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The id of the camera to open. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="50" column="14" bodyfile="src/AIAC/Camera.cpp" bodystart="50" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a2bf59d30c3239b6debb1792cfceaa7b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::LoadCameraParams</definition>
+        <argsstring>(const std::string &amp;filePath)</argsstring>
+        <name>LoadCameraParams</name>
+        <qualifiedname>AIAC::Camera::LoadCameraParams</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+<para>Loads camera parameters from a configuration file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filePath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the camera parameter configuration file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the camera parameters are loaded successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="58" column="14" bodyfile="src/AIAC/Camera.cpp" bodystart="94" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a3f75bdcf0e5d4b7b0fd5fef50a234153" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Camera::UpdateFov</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateFov</name>
+        <qualifiedname>AIAC::Camera::UpdateFov</qualifiedname>
+        <briefdescription>
+<para>Update the field of view (FOV) values based on camera parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="61" column="21" bodyfile="src/AIAC/Camera.cpp" bodystart="88" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a280edd44e2b7f36e4280c99c1772edc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref></type>
+        <definition>const AIAC::Image AIAC::Camera::GetNextFrame</definition>
+        <argsstring>()</argsstring>
+        <name>GetNextFrame</name>
+        <qualifiedname>AIAC::Camera::GetNextFrame</qualifiedname>
+        <briefdescription>
+<para>Capture and preprocess the next frame from the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A grayscale image representing the captured and processed frame. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="68" column="27" bodyfile="src/AIAC/Camera.cpp" bodystart="123" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a525b0ea26b7d15013405112ee02c194f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref> &amp;</type>
+        <definition>AIAC::Image &amp; AIAC::Camera::GetColorCurrentFrame</definition>
+        <argsstring>()</argsstring>
+        <name>GetColorCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::GetColorCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Get the current color (calibrated) frame from the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the current color frame image. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="75" column="28" bodyfile="src/AIAC/Camera.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1aa9daa662a6f7f8b7e34aeb9e48748027" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref> &amp;</type>
+        <definition>AIAC::Image &amp; AIAC::Camera::GetCurrentFrame</definition>
+        <argsstring>()</argsstring>
+        <name>GetCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::GetCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Get the current grayscale (calibrated) frame from the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the current grayscale frame image. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="81" column="28" bodyfile="src/AIAC/Camera.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a7fae56895affee27355c8a220b9e79a5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref> &amp;</type>
+        <definition>AIAC::Image &amp; AIAC::Camera::GetRawCurrentFrame</definition>
+        <argsstring>()</argsstring>
+        <name>GetRawCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::GetRawCurrentFrame</qualifiedname>
+        <briefdescription>
+<para>Get the current raw (uncalibrated) frame from the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the current raw frame image. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="87" column="28" bodyfile="src/AIAC/Camera.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a862ffcdbb6bfdb7ee34b2a62b25e25a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref> &amp;</type>
+        <definition>AIAC::Image &amp; AIAC::Camera::GetCenterCroppedCurrentFrame</definition>
+        <argsstring>(float ratioX=0.6f, float ratioY=0.75f)</argsstring>
+        <name>GetCenterCroppedCurrentFrame</name>
+        <qualifiedname>AIAC::Camera::GetCenterCroppedCurrentFrame</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>ratioX</declname>
+          <defval>0.6f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ratioY</declname>
+          <defval>0.75f</defval>
+        </param>
+        <briefdescription>
+<para>Get the raw current frame, but borders are set to black according to the specified ratio. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ratioX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How much of % the width of the image is kept. (default: 0.75, i.e. 75%). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ratioY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How much of % the height of the image is kept. (default: 0.9, i.e. 90%). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the center-cropped current frame image. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="95" column="21" bodyfile="src/AIAC/Camera.cpp" bodystart="157" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1ad44cce99f4f51f024966b25170a5e723" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string AIAC::Camera::GetCalibrationFilePath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCalibrationFilePath</name>
+        <qualifiedname>AIAC::Camera::GetCalibrationFilePath</qualifiedname>
+        <briefdescription>
+<para>Get the path to the camera calibration parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A constant reference to the camera calibration file path. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="102" column="34" bodyfile="src/AIAC/Camera.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a2eedab745cfe9973f96f473c41350d29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Camera::UpdateCameraParamFromFile</definition>
+        <argsstring>(const std::string &amp;filePath)</argsstring>
+        <name>UpdateCameraParamFromFile</name>
+        <qualifiedname>AIAC::Camera::UpdateCameraParamFromFile</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+<para>Force to update the default camera param. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filePath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the camera param file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="109" column="14" bodyfile="src/AIAC/Camera.cpp" bodystart="178" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a7c1118343ef6d28373b8dcec6ec1eb50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Camera::UpdateCameraParamFromSlamMap</definition>
+        <argsstring>(const int paramWidth, const int paramHeight, const cv::Mat &amp;cameraMatrix)</argsstring>
+        <name>UpdateCameraParamFromSlamMap</name>
+        <qualifiedname>AIAC::Camera::UpdateCameraParamFromSlamMap</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>paramWidth</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>paramHeight</declname>
+        </param>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>cameraMatrix</declname>
+        </param>
+        <briefdescription>
+<para>Update the camera parameters from the SLAM-generated map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>paramWidth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classAIAC_1_1Image" kindref="compound">Image</ref> width for camera calibration. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>paramHeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classAIAC_1_1Image" kindref="compound">Image</ref> height for camera calibration. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cameraMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The camera matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="118" column="14" bodyfile="src/AIAC/Camera.cpp" bodystart="188" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1af75783ec14756cee1a9dccad89870bb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const cv::Mat</type>
+        <definition>const cv::Mat AIAC::Camera::GetCameraMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>GetCameraMatrix</name>
+        <qualifiedname>AIAC::Camera::GetCameraMatrix</qualifiedname>
+        <briefdescription>
+<para>Get the camera matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A constant reference to the camera matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="125" column="30" bodyfile="src/AIAC/Camera.h" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a3d1d917e35c3e5d34f3263822b7812dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const cv::Mat</type>
+        <definition>const cv::Mat AIAC::Camera::GetDistortionCoef</definition>
+        <argsstring>()</argsstring>
+        <name>GetDistortionCoef</name>
+        <qualifiedname>AIAC::Camera::GetDistortionCoef</qualifiedname>
+        <briefdescription>
+<para>Get the distortion coefficients matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A constant reference to the distortion coefficient matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="131" column="30" bodyfile="src/AIAC/Camera.h" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1afe1b4f1426e4351f677678b34ee1dc5f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const uint32_t</type>
+        <definition>const uint32_t AIAC::Camera::GetRawWidth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRawWidth</name>
+        <qualifiedname>AIAC::Camera::GetRawWidth</qualifiedname>
+        <briefdescription>
+<para>Get the raw (uncalibrated) width of the camera frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The raw width of the camera frame as an unsigned 32-bit integer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="138" column="31" bodyfile="src/AIAC/Camera.h" bodystart="138" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a16b563adb81faeb2eec1fa8f548880e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const uint32_t</type>
+        <definition>const uint32_t AIAC::Camera::GetRawHeight</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRawHeight</name>
+        <qualifiedname>AIAC::Camera::GetRawHeight</qualifiedname>
+        <briefdescription>
+<para>Get the raw (uncalibrated) height of the camera frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The raw height of the camera frame as an unsigned 32-bit integer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="145" column="31" bodyfile="src/AIAC/Camera.h" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a27ec65d82d49f9f548fa11e293e1ac2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const uint32_t</type>
+        <definition>const uint32_t AIAC::Camera::GetWidth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWidth</name>
+        <qualifiedname>AIAC::Camera::GetWidth</qualifiedname>
+        <briefdescription>
+<para>Get the calibrated width of the camera frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The calibrated width of the camera frame as an unsigned 32-bit integer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="152" column="31" bodyfile="src/AIAC/Camera.h" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a3452facb2b63f9c586fc2d4bcc643344" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const uint32_t</type>
+        <definition>const uint32_t AIAC::Camera::GetHeight</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHeight</name>
+        <qualifiedname>AIAC::Camera::GetHeight</qualifiedname>
+        <briefdescription>
+<para>Get the calibrated height of the camera frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The calibrated height of the camera frame as an unsigned 32-bit integer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="159" column="31" bodyfile="src/AIAC/Camera.h" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a08d34f0f77f1c21cc2dbb972d2b904be" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::pair&lt; float, float &gt;</type>
+        <definition>const std::pair&lt; float, float &gt; AIAC::Camera::GetFov</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFov</name>
+        <qualifiedname>AIAC::Camera::GetFov</qualifiedname>
+        <briefdescription>
+<para>Get the field of view (FOV) of the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A pair of floats representing the horizontal and vertical FOV of the camera. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="166" column="32" bodyfile="src/AIAC/Camera.h" bodystart="166" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1a27757e28dbd356164177a0f47fab60d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::IsOpened</definition>
+        <argsstring>() const</argsstring>
+        <name>IsOpened</name>
+        <qualifiedname>AIAC::Camera::IsOpened</qualifiedname>
+        <briefdescription>
+<para>Check if the camera is opened. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the camera is opened, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="173" column="14" bodyfile="src/AIAC/Camera.h" bodystart="173" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Camera_1ab6ea7f1cb623ac8405fd6efb2517f4b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::Camera::IsPhysicalAndParamWidthHeightMatched</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPhysicalAndParamWidthHeightMatched</name>
+        <qualifiedname>AIAC::Camera::IsPhysicalAndParamWidthHeightMatched</qualifiedname>
+        <briefdescription>
+<para>Check if the physical and parameterized width and height match. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the physical and parameterized width and height match, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Camera.h" line="180" column="14" bodyfile="src/AIAC/Camera.h" bodystart="180" bodyend="180"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Camera.h" line="40" column="5" bodyfile="src/AIAC/Camera.h" bodystart="41" bodyend="221"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Camera_1a04bb990f9bf69a30c129a0f610a7f938" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>Camera</name></member>
+      <member refid="classAIAC_1_1Camera_1a5821e4307164ce89640bc59899c5f41b" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>FlipHorizontal</name></member>
+      <member refid="classAIAC_1_1Camera_1a4f476a0250e96ede498292e4e50f7c10" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>FlipVertical</name></member>
+      <member refid="classAIAC_1_1Camera_1ad44cce99f4f51f024966b25170a5e723" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetCalibrationFilePath</name></member>
+      <member refid="classAIAC_1_1Camera_1af75783ec14756cee1a9dccad89870bb6" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetCameraMatrix</name></member>
+      <member refid="classAIAC_1_1Camera_1a862ffcdbb6bfdb7ee34b2a62b25e25a1" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetCenterCroppedCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a525b0ea26b7d15013405112ee02c194f" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetColorCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1aa9daa662a6f7f8b7e34aeb9e48748027" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a3d1d917e35c3e5d34f3263822b7812dc" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetDistortionCoef</name></member>
+      <member refid="classAIAC_1_1Camera_1a08d34f0f77f1c21cc2dbb972d2b904be" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetFov</name></member>
+      <member refid="classAIAC_1_1Camera_1a3452facb2b63f9c586fc2d4bcc643344" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetHeight</name></member>
+      <member refid="classAIAC_1_1Camera_1a280edd44e2b7f36e4280c99c1772edc1" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetNextFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a7fae56895affee27355c8a220b9e79a5" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetRawCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a16b563adb81faeb2eec1fa8f548880e8" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetRawHeight</name></member>
+      <member refid="classAIAC_1_1Camera_1afe1b4f1426e4351f677678b34ee1dc5f" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetRawWidth</name></member>
+      <member refid="classAIAC_1_1Camera_1a27ec65d82d49f9f548fa11e293e1ac2b" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>GetWidth</name></member>
+      <member refid="classAIAC_1_1Camera_1a27757e28dbd356164177a0f47fab60d2" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>IsOpened</name></member>
+      <member refid="classAIAC_1_1Camera_1ab6ea7f1cb623ac8405fd6efb2517f4b4" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>IsPhysicalAndParamWidthHeightMatched</name></member>
+      <member refid="classAIAC_1_1Camera_1a2bf59d30c3239b6debb1792cfceaa7b5" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>LoadCameraParams</name></member>
+      <member refid="classAIAC_1_1Camera_1ab2615bbb22522bb4e5bfbacd72254ec6" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_CalibFilePath</name></member>
+      <member refid="classAIAC_1_1Camera_1a49f22adbc5c784c709979951e2bfb256" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_CalibratedCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a5934ed2f0c8ced16d8a4e65f25660b32" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_CameraMatrix</name></member>
+      <member refid="classAIAC_1_1Camera_1a01acbc4fab53ce321b9bfd0d388db224" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_CenterCroppedCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a6be2ca0bb64e6cfa2019bf411c2c68df" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_DistortionCoef</name></member>
+      <member refid="classAIAC_1_1Camera_1a46e01f963e6c10f348e56a4105eed66e" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_FovX</name></member>
+      <member refid="classAIAC_1_1Camera_1a318eefb7b85db2b37d985725992defe8" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_FovY</name></member>
+      <member refid="classAIAC_1_1Camera_1aeccdde4326ba4c862d97f49722d1f8e4" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_GrayCalibratedCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1ad214e43a7905e1f5907cd46769f6d28a" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_IsCamMatrixInit</name></member>
+      <member refid="classAIAC_1_1Camera_1ac83cbe0dc6bef37c464526e565eca443" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_IsFisheye</name></member>
+      <member refid="classAIAC_1_1Camera_1a85a5e85e8f875d923081794e6e269c91" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_IsOpened</name></member>
+      <member refid="classAIAC_1_1Camera_1a5dbda31bec44b32c6b0984d401efb117" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_ParamHeight</name></member>
+      <member refid="classAIAC_1_1Camera_1a439babf1410e70e23d023404fabbeef1" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_ParamWidth</name></member>
+      <member refid="classAIAC_1_1Camera_1aa340ec38c91c33d4ed0fbe9d5213186b" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_PhysicalHeight</name></member>
+      <member refid="classAIAC_1_1Camera_1a8ae1b4eda656dcc4917d060a5855f1db" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_PhysicalWidth</name></member>
+      <member refid="classAIAC_1_1Camera_1a5a878eff3fdfe59e8e7674c134fc9166" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_RawCurrentFrame</name></member>
+      <member refid="classAIAC_1_1Camera_1a5f330f658b4cd3012a0e076dfa92f0dc" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_UndistortMap</name></member>
+      <member refid="classAIAC_1_1Camera_1ac724909731a558093f8ce16ed7d6dcc3" prot="private" virt="non-virtual"><scope>AIAC::Camera</scope><name>m_VideoCapture</name></member>
+      <member refid="classAIAC_1_1Camera_1a9bee156611f3d91ca0fdf723ab810e33" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>Open</name></member>
+      <member refid="classAIAC_1_1Camera_1a2eedab745cfe9973f96f473c41350d29" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>UpdateCameraParamFromFile</name></member>
+      <member refid="classAIAC_1_1Camera_1a7c1118343ef6d28373b8dcec6ec1eb50" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>UpdateCameraParamFromSlamMap</name></member>
+      <member refid="classAIAC_1_1Camera_1a3f75bdcf0e5d4b7b0fd5fef50a234153" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>UpdateFov</name></member>
+      <member refid="classAIAC_1_1Camera_1af50aa9921ec579f5790f436ce63d847c" prot="public" virt="non-virtual"><scope>AIAC::Camera</scope><name>~Camera</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

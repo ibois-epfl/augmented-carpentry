@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CutCircularSawDepthVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CutCircularSawDepthVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1FeedbackVisualizer" prot="public" virt="non-virtual">AIAC::FeedbackVisualizer</basecompoundref>
+    <includes refid="CutCircularSawFeedback_8h" local="no">CutCircularSawFeedback.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawDepthVisualizer_1aa93ea3567721aa852909782ad45468b7" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutCircularSawDepthVisualizer::m_LineDepth</definition>
+        <argsstring></argsstring>
+        <name>m_LineDepth</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::m_LineDepth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="58" column="25" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawDepthVisualizer_1a5636f79ff412279de15462a388522079" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::CutCircularSawDepthVisualizer::m_PtBlade2ThicknessLineA</definition>
+        <argsstring></argsstring>
+        <name>m_PtBlade2ThicknessLineA</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::m_PtBlade2ThicknessLineA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="59" column="25" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawDepthVisualizer_1ae1937b843a69d22b1a1884e283e41d9a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::CutCircularSawDepthVisualizer::m_PtBlade2ThicknessLineB</definition>
+        <argsstring></argsstring>
+        <name>m_PtBlade2ThicknessLineB</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::m_PtBlade2ThicknessLineB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="60" column="25" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawDepthVisualizer_1a0eb001b23c3dd777a0e2326b60b9149a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOText&gt; AIAC::CutCircularSawDepthVisualizer::m_TxtDepth</definition>
+        <argsstring></argsstring>
+        <name>m_TxtDepth</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::m_TxtDepth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="61" column="25" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutCircularSawDepthVisualizer_1aea7d49c3eafae2e1cd0206f7b2808347" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CutCircularSawDepthVisualizer::m_ToleranceDepthThreshold</definition>
+        <argsstring></argsstring>
+        <name>m_ToleranceDepthThreshold</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::m_ToleranceDepthThreshold</qualifiedname>
+        <initializer>= 0.1f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="62" column="15" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1CutCircularSawDepthVisualizer_1a570259df4ec35f55d7751ed1245b48c6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CutCircularSawFeedback</definition>
+        <argsstring></argsstring>
+        <name>CutCircularSawFeedback</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::CutCircularSawFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1CutCircularSawFeedback" kindref="compound">CutCircularSawFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="66" column="18" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CutCircularSawDepthVisualizer_1a20ea11b08f044302e2fa9997ad2a6d76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CutCircularSawDepthVisualizer::CutCircularSawDepthVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>CutCircularSawDepthVisualizer</name>
+        <qualifiedname>AIAC::CutCircularSawDepthVisualizer::CutCircularSawDepthVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="55" column="9" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.cpp" bodystart="47" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Visualizer for showing the depth of the cut. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::CutCircularSawDepthVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularSawDepthVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CutCircularSawDepthVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularSawDepthVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="52" column="5" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="53" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1a20ea11b08f044302e2fa9997ad2a6d76" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>CutCircularSawDepthVisualizer</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1a570259df4ec35f55d7751ed1245b48c6" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>CutCircularSawFeedback</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1aa93ea3567721aa852909782ad45468b7" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>m_LineDepth</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1a5636f79ff412279de15462a388522079" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>m_PtBlade2ThicknessLineA</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1ae1937b843a69d22b1a1884e283e41d9a" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>m_PtBlade2ThicknessLineB</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1aea7d49c3eafae2e1cd0206f7b2808347" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>m_ToleranceDepthThreshold</name></member>
+      <member refid="classAIAC_1_1CutCircularSawDepthVisualizer_1a0eb001b23c3dd777a0e2326b60b9149a" prot="private" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>m_TxtDepth</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::CutCircularSawDepthVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

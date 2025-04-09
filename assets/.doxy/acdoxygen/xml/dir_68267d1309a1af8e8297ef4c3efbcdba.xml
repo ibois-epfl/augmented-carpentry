@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>src</compoundname>
+    <innerdir refid="dir_21da83368f7816722f2b707a7b03c84f">src/AIAC</innerdir>
+    <innerdir refid="dir_313caf1132e152dd9b58bea13a4052ca">src/utils</innerdir>
+    <innerfile refid="ACApp_8cpp">ACApp.cpp</innerfile>
+    <innerfile refid="AIAC_8h">AIAC.h</innerfile>
+    <innerfile refid="aiacpch_8cpp">aiacpch.cpp</innerfile>
+    <innerfile refid="aiacpch_8h">aiacpch.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/"/>
+  </compounddef>
+</doxygen>

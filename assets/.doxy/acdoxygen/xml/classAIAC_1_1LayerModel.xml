@@ -1,0 +1,584 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerModel" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerModel</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1a1b9dca75b6fc781c5f3c451151598ddb" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerModel::m_ACInfoModelPath</definition>
+        <argsstring></argsstring>
+        <name>m_ACInfoModelPath</name>
+        <qualifiedname>AIAC::LayerModel::m_ACInfoModelPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="186" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1a3881774d84040df1bcb891c792f6e74e" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerModel::m_ScannedModelPath</definition>
+        <argsstring></argsstring>
+        <name>m_ScannedModelPath</name>
+        <qualifiedname>AIAC::LayerModel::m_ScannedModelPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="187" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1aa1ebd9f9ecd0a586d8bc4fb1cdaa3731" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref></type>
+        <definition>ACInfoModel AIAC::LayerModel::m_ACInfoModel</definition>
+        <argsstring></argsstring>
+        <name>m_ACInfoModel</name>
+        <qualifiedname>AIAC::LayerModel::m_ACInfoModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="190" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1ac76ddcf510ab87dd335cbb114d197ecd" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1ScannedModel" kindref="compound">ScannedModel</ref></type>
+        <definition>ScannedModel AIAC::LayerModel::m_ScannedModel</definition>
+        <argsstring></argsstring>
+        <name>m_ScannedModel</name>
+        <qualifiedname>AIAC::LayerModel::m_ScannedModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="191" column="22" bodyfile="src/AIAC/LayerModel.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1a41f883d06f6aa954c5015a076d466563" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::LayerModel::m_AlignOffset</definition>
+        <argsstring></argsstring>
+        <name>m_AlignOffset</name>
+        <qualifiedname>AIAC::LayerModel::m_AlignOffset</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="192" column="15" bodyfile="src/AIAC/LayerModel.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1a00b044eb2a428612d0240e74f10bc664" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerModel::m_AlignRotation</definition>
+        <argsstring></argsstring>
+        <name>m_AlignRotation</name>
+        <qualifiedname>AIAC::LayerModel::m_AlignRotation</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="193" column="13" bodyfile="src/AIAC/LayerModel.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1a980031d97e0d1d5de39979154e1be3af" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerModel::m_AlignFlip</definition>
+        <argsstring></argsstring>
+        <name>m_AlignFlip</name>
+        <qualifiedname>AIAC::LayerModel::m_AlignFlip</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="194" column="14" bodyfile="src/AIAC/LayerModel.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerModel_1ae4102938d40006b6a3de52884bd89154" prot="private" static="no" mutable="no">
+        <type>glm::mat4x4</type>
+        <definition>glm::mat4x4 AIAC::LayerModel::m_ACIMTransformMat</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMTransformMat</name>
+        <qualifiedname>AIAC::LayerModel::m_ACIMTransformMat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="202" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="202" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a29ac3fb4dd810dba5f0e0c8a876a2a03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerModel::LayerModel</definition>
+        <argsstring>()</argsstring>
+        <name>LayerModel</name>
+        <qualifiedname>AIAC::LayerModel::LayerModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="48" column="9" bodyfile="src/AIAC/LayerModel.cpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a65eed30146dbd01c3900ce1a77a962b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::LayerModel::~LayerModel</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LayerModel</name>
+        <qualifiedname>AIAC::LayerModel::~LayerModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="49" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a4deebf9f9b7ac38e5bb175ac99861e05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::OnAttach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::LayerModel::OnAttach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073">OnAttach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="51" column="22" bodyfile="src/AIAC/LayerModel.cpp" bodystart="50" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1af6e0d7c60a0b69b89bbe1ddf4976dff1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::OnFrameStart</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::LayerModel::OnFrameStart</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3">OnFrameStart</reimplements>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="52" column="22" bodyfile="src/AIAC/LayerModel.cpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1af1511aaefb628f6794fb331994ce0665" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::AlignModels</definition>
+        <argsstring>()</argsstring>
+        <name>AlignModels</name>
+        <qualifiedname>AIAC::LayerModel::AlignModels</qualifiedname>
+        <briefdescription>
+<para>transform the <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref> to the <ref refid="classAIAC_1_1ScannedModel" kindref="compound">ScannedModel</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="57" column="14" bodyfile="src/AIAC/LayerModel.cpp" bodystart="121" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aa57783e7424ff0466d63301a4be4a1ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::LoadACInfoModel</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>LoadACInfoModel</name>
+        <qualifiedname>AIAC::LayerModel::LoadACInfoModel</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Load a .acim model from a file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="62" column="14" bodyfile="src/AIAC/LayerModel.cpp" bodystart="75" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1ad7a9829940a7f7d9aa0bd56ba562280a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::ReloadACInfoModel</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadACInfoModel</name>
+        <qualifiedname>AIAC::LayerModel::ReloadACInfoModel</qualifiedname>
+        <briefdescription>
+<para>Reload the <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref> from the current path from config. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="67" column="14" bodyfile="src/AIAC/LayerModel.cpp" bodystart="101" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a7e5d1b6b3469b8a66f71bbe652b37d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::LoadScannedModel</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>LoadScannedModel</name>
+        <qualifiedname>AIAC::LayerModel::LoadScannedModel</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Load a .ply model from a file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="72" column="14" bodyfile="src/AIAC/LayerModel.cpp" bodystart="87" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a657dd13bf4c184e8dff431fbbbc836e3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; AIAC::LayerModel::GetACInfoModelPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetACInfoModelPath</name>
+        <qualifiedname>AIAC::LayerModel::GetACInfoModelPath</qualifiedname>
+        <briefdescription>
+<para>Return the filepath to the loaded <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="77" column="34" bodyfile="src/AIAC/LayerModel.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aecfc8cf1c28a5519bb95ed7eaff19011" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string AIAC::LayerModel::GetACInfoModelName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetACInfoModelName</name>
+        <qualifiedname>AIAC::LayerModel::GetACInfoModelName</qualifiedname>
+        <briefdescription>
+<para>Return the file name of the loaded <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="82" column="34" bodyfile="src/AIAC/LayerModel.h" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1ae9eb4b5da98368f58289356eb30b9c84" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; AIAC::LayerModel::GetScannedModelPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScannedModelPath</name>
+        <qualifiedname>AIAC::LayerModel::GetScannedModelPath</qualifiedname>
+        <briefdescription>
+<para>Return the filepath to the loaded <ref refid="classAIAC_1_1ScannedModel" kindref="compound">ScannedModel</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="87" column="34" bodyfile="src/AIAC/LayerModel.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a3e1272dc7b06c4f7d0c1494453939af3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref> &amp;</type>
+        <definition>ACInfoModel &amp; AIAC::LayerModel::GetACInfoModel</definition>
+        <argsstring>()</argsstring>
+        <name>GetACInfoModel</name>
+        <qualifiedname>AIAC::LayerModel::GetACInfoModel</qualifiedname>
+        <briefdescription>
+<para>Return the <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="92" column="28" bodyfile="src/AIAC/LayerModel.h" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a551c11651e2bc57692752215c008f528" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1ScannedModel" kindref="compound">ScannedModel</ref> &amp;</type>
+        <definition>ScannedModel &amp; AIAC::LayerModel::GetScannedModel</definition>
+        <argsstring>()</argsstring>
+        <name>GetScannedModel</name>
+        <qualifiedname>AIAC::LayerModel::GetScannedModel</qualifiedname>
+        <briefdescription>
+<para>Get the Scanned Model object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="97" column="29" bodyfile="src/AIAC/LayerModel.h" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1af5727ddd8ab0f78b65a20f3ca165b255" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::LayerModel::GetAlignOffset</definition>
+        <argsstring>()</argsstring>
+        <name>GetAlignOffset</name>
+        <qualifiedname>AIAC::LayerModel::GetAlignOffset</qualifiedname>
+        <briefdescription>
+<para>Get the Align Offset of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="102" column="22" bodyfile="src/AIAC/LayerModel.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a225913bdd42642fba40254d6abbea382" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::LayerModel::GetAlignRotation</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAlignRotation</name>
+        <qualifiedname>AIAC::LayerModel::GetAlignRotation</qualifiedname>
+        <briefdescription>
+<para>Get the rotation position of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="107" column="20" bodyfile="src/AIAC/LayerModel.h" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aa86e8bd4ab1c6322ce348c958d74adfe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerModel::GetAlignFlip</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAlignFlip</name>
+        <qualifiedname>AIAC::LayerModel::GetAlignFlip</qualifiedname>
+        <briefdescription>
+<para>Get the flip status of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="112" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aa52584128f20320a96edd5f60634dda4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::mat4x4</type>
+        <definition>glm::mat4x4 AIAC::LayerModel::GetTransformMat</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTransformMat</name>
+        <qualifiedname>AIAC::LayerModel::GetTransformMat</qualifiedname>
+        <briefdescription>
+<para>Get the transform matrix of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="117" column="28" bodyfile="src/AIAC/LayerModel.h" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aa21e074d091dc018616cd2bf006e0b38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::AddAlignOffset</definition>
+        <argsstring>(float diff)</argsstring>
+        <name>AddAlignOffset</name>
+        <qualifiedname>AIAC::LayerModel::AddAlignOffset</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+<para>Change the align offset. The value is in TSLAM unit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="122" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="122" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aabfd64b1b06e769e6efe5e77c786c1b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::ResetAlignOffset</definition>
+        <argsstring>()</argsstring>
+        <name>ResetAlignOffset</name>
+        <qualifiedname>AIAC::LayerModel::ResetAlignOffset</qualifiedname>
+        <briefdescription>
+<para>Reset the align offset to 0 (Center). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="131" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="131" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1afb4ba7a902a8ca2d0f7140a6ce2c5134" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::ForceAlignToEnd</definition>
+        <argsstring>(bool leftOrRight)</argsstring>
+        <name>ForceAlignToEnd</name>
+        <qualifiedname>AIAC::LayerModel::ForceAlignToEnd</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>leftOrRight</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset make it align to one end. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="140" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="140" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1a34be3c4d2c4d473fb070f1e0b0cdee48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::ChangeAlignRotation</definition>
+        <argsstring>(int diff)</argsstring>
+        <name>ChangeAlignRotation</name>
+        <qualifiedname>AIAC::LayerModel::ChangeAlignRotation</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+<para>Change the align rotation. The value is in degree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>diff</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>+1 or -1 to rotate 90 degree (counter-)clock wise. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="151" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="151" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aeb3d9edbadba54e29b1d4d6037200ab7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::ResetAlignRotation</definition>
+        <argsstring>()</argsstring>
+        <name>ResetAlignRotation</name>
+        <qualifiedname>AIAC::LayerModel::ResetAlignRotation</qualifiedname>
+        <briefdescription>
+<para>Reset the align rotation to 0 (No rotation). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="161" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="161" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1abfb069c240973a8d2e1e77c1bf5c5a06" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::FlipAlign</definition>
+        <argsstring>()</argsstring>
+        <name>FlipAlign</name>
+        <qualifiedname>AIAC::LayerModel::FlipAlign</qualifiedname>
+        <briefdescription>
+<para>Change the align flip. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="170" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="170" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerModel_1aa5235ac2130b57422bf5e59d1f1eb3d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerModel::ResetAlignFlip</definition>
+        <argsstring>()</argsstring>
+        <name>ResetAlignFlip</name>
+        <qualifiedname>AIAC::LayerModel::ResetAlignFlip</qualifiedname>
+        <briefdescription>
+<para>Reset the align flip to false (No flip). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerModel.h" line="179" column="21" bodyfile="src/AIAC/LayerModel.h" bodystart="179" bodyend="183"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerModel</label>
+        <link refid="classAIAC_1_1LayerModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerModel</label>
+        <link refid="classAIAC_1_1LayerModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerModel.h" line="45" column="5" bodyfile="src/AIAC/LayerModel.h" bodystart="46" bodyend="203"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerModel_1aa21e074d091dc018616cd2bf006e0b38" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>AddAlignOffset</name></member>
+      <member refid="classAIAC_1_1LayerModel_1af1511aaefb628f6794fb331994ce0665" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>AlignModels</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a34be3c4d2c4d473fb070f1e0b0cdee48" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>ChangeAlignRotation</name></member>
+      <member refid="classAIAC_1_1LayerModel_1abfb069c240973a8d2e1e77c1bf5c5a06" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>FlipAlign</name></member>
+      <member refid="classAIAC_1_1LayerModel_1afb4ba7a902a8ca2d0f7140a6ce2c5134" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>ForceAlignToEnd</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a3e1272dc7b06c4f7d0c1494453939af3" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetACInfoModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aecfc8cf1c28a5519bb95ed7eaff19011" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetACInfoModelName</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a657dd13bf4c184e8dff431fbbbc836e3" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetACInfoModelPath</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aa86e8bd4ab1c6322ce348c958d74adfe" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetAlignFlip</name></member>
+      <member refid="classAIAC_1_1LayerModel_1af5727ddd8ab0f78b65a20f3ca165b255" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetAlignOffset</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a225913bdd42642fba40254d6abbea382" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetAlignRotation</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a551c11651e2bc57692752215c008f528" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetScannedModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1ae9eb4b5da98368f58289356eb30b9c84" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetScannedModelPath</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aa52584128f20320a96edd5f60634dda4" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>GetTransformMat</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a29ac3fb4dd810dba5f0e0c8a876a2a03" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>LayerModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aa57783e7424ff0466d63301a4be4a1ea" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>LoadACInfoModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a7e5d1b6b3469b8a66f71bbe652b37d18" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>LoadScannedModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1ae4102938d40006b6a3de52884bd89154" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_ACIMTransformMat</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aa1ebd9f9ecd0a586d8bc4fb1cdaa3731" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_ACInfoModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a1b9dca75b6fc781c5f3c451151598ddb" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_ACInfoModelPath</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a980031d97e0d1d5de39979154e1be3af" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_AlignFlip</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a41f883d06f6aa954c5015a076d466563" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_AlignOffset</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a00b044eb2a428612d0240e74f10bc664" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_AlignRotation</name></member>
+      <member refid="classAIAC_1_1LayerModel_1ac76ddcf510ab87dd335cbb114d197ecd" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_ScannedModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a3881774d84040df1bcb891c792f6e74e" prot="private" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>m_ScannedModelPath</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a4deebf9f9b7ac38e5bb175ac99861e05" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1LayerModel_1af6e0d7c60a0b69b89bbe1ddf4976dff1" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerModel_1ad7a9829940a7f7d9aa0bd56ba562280a" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>ReloadACInfoModel</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aa5235ac2130b57422bf5e59d1f1eb3d7" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>ResetAlignFlip</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aabfd64b1b06e769e6efe5e77c786c1b6" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>ResetAlignOffset</name></member>
+      <member refid="classAIAC_1_1LayerModel_1aeb3d9edbadba54e29b1d4d6037200ab7" prot="public" virt="non-virtual"><scope>AIAC::LayerModel</scope><name>ResetAlignRotation</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>~Layer</name></member>
+      <member refid="classAIAC_1_1LayerModel_1a65eed30146dbd01c3900ce1a77a962b3" prot="public" virt="virtual"><scope>AIAC::LayerModel</scope><name>~LayerModel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

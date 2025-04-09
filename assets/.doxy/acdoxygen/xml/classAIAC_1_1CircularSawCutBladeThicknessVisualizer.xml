@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CircularSawCutBladeThicknessVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CircularSawCutBladeThicknessVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1CutBladeThicknessVisualizer" prot="public" virt="non-virtual">AIAC::CutBladeThicknessVisualizer</basecompoundref>
+    <includes refid="CutCircularSawFeedback_8h" local="no">CutCircularSawFeedback.h</includes>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a570259df4ec35f55d7751ed1245b48c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CutCircularSawFeedback</definition>
+        <argsstring></argsstring>
+        <name>CutCircularSawFeedback</name>
+        <qualifiedname>AIAC::CircularSawCutBladeThicknessVisualizer::CutCircularSawFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1CutCircularSawFeedback" kindref="compound">CutCircularSawFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="149" column="18" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a916c80a618c5ec20dd476926c66b5e08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CircularSawCutBladeThicknessVisualizer::CircularSawCutBladeThicknessVisualizer</definition>
+        <argsstring>()=default</argsstring>
+        <name>CircularSawCutBladeThicknessVisualizer</name>
+        <qualifiedname>AIAC::CircularSawCutBladeThicknessVisualizer::CircularSawCutBladeThicknessVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="138" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a1f2f0e932d3bb971abff130c92bfaf4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::CircularSawCutBladeThicknessVisualizer::UpdateToolheadsData</definition>
+        <argsstring>() override</argsstring>
+        <name>UpdateToolheadsData</name>
+        <qualifiedname>AIAC::CircularSawCutBladeThicknessVisualizer::UpdateToolheadsData</qualifiedname>
+        <reimplements refid="classAIAC_1_1CutBladeThicknessVisualizer_1adc3bc8d17c9e1f9a0f59fa6ef3d382ea">UpdateToolheadsData</reimplements>
+        <briefdescription>
+<para>Update the current toolhead&apos;s data: normalStart, normEnd and center, as well the thickness. Since there could be multiple cutting toolheads (sawblade or chainsaw), we need to get the correct toolhead&apos;s type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="141" column="14" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.cpp" bodystart="414" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a643a2f50af9013eb9e90fd653bb27b13" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool AIAC::CircularSawCutBladeThicknessVisualizer::IntersectBladeWithNeighbours</definition>
+        <argsstring>(TimberInfo::Cut *cut, TimberInfo::Cut::Face &amp;face, bool isTowardsCamera, bool isDetectToolPlane, std::shared_ptr&lt; GOLine &gt; &amp;lineIntersection) override</argsstring>
+        <name>IntersectBladeWithNeighbours</name>
+        <qualifiedname>AIAC::CircularSawCutBladeThicknessVisualizer::IntersectBladeWithNeighbours</qualifiedname>
+        <reimplements refid="classAIAC_1_1CutBladeThicknessVisualizer_1ad40243025b0a3c3f6bb69b032a65a8e1">IntersectBladeWithNeighbours</reimplements>
+        <param>
+          <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">TimberInfo::Cut</ref> *</type>
+          <declname>cut</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">TimberInfo::Cut::Face</ref> &amp;</type>
+          <declname>face</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isTowardsCamera</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isDetectToolPlane</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &amp;</type>
+          <declname>lineIntersection</declname>
+        </param>
+        <briefdescription>
+<para>This function intersect the plane of the blade with the two(or one) neighbour faces. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cut</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">TimberInfo::Cut</ref> object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>face</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the face belonging to the cut to intersect with </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isTowardsCamera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the boolean to indicate if we intersect the blade&apos;s edge close to the camera </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isDetectToolPlane</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the intersection is for the reference toolhead&apos;s plane </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineIntersection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the reference to the line intersection</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true if the intersection is successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="142" column="14" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.cpp" bodystart="427" bodyend="500"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>This is an inherited class to show the thickness of the blade on circular saws. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::CircularSawCutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::CutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CutBladeThicknessVisualizer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CircularSawCutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::CutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CutBladeThicknessVisualizer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutCircularSawFeedback.h" line="135" column="5" bodyfile="src/AIAC/Feedback/CutCircularSawFeedback.h" bodystart="136" bodyend="150"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a916c80a618c5ec20dd476926c66b5e08" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>CircularSawCutBladeThicknessVisualizer</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a36b17fdbdbaba0b6926e15685cf82df6" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>CutBladeThicknessVisualizer</name></member>
+      <member refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a570259df4ec35f55d7751ed1245b48c6" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>CutCircularSawFeedback</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a643a2f50af9013eb9e90fd653bb27b13" prot="public" virt="virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>IntersectBladeWithNeighbours</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ac3e1aa46a5767d7d52177eb2763d733f" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>IsSegmenDetectToolPlaneVisible</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a3c8885b364a702d854fde6db4a0874b7" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_BladeOverhangScaled</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a254164429b1879da4cdffdb14f8a1e89" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_BladeTotalThicknessScaled</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a676674a4e6d162e625a3f18690946e29" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_DisplacedCenterAwayFromCamera</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a023cf646cc5b97cf3163c1a10fe9a968" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_DisplacedCenterTowardsCamera</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a8ffa3bbbcee14e35854749e77fc2184e" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmenDetectToolPlane</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ae2d15d7b8a8cb30efdceb723f5fd3b8d" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentAwayFromCameraA</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a4eb0371f01e454fed68dce4ac34113c7" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentAwayFromCameraB</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1ae15068257eb7a9232c718b6b6ccd9d49" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentTowardsCameraA</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a6cff23db3485c7f1c3fc40845449eefc" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_LongestIntersectSegmentTowardsCameraB</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a47f8c35ccc3f852932b2899718f0533e" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_NormalOppositeUnitized</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a03d1e587b19266bf7f6cf2240e6625ef" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_NormalUnitized</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a820534a6bf8b813ed35fe48a84a0e4b4" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_ToolheadRefCenter</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a39764fde9fd787e21f39bc215f465ccb" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_ToolheadRefNormEnd</name></member>
+      <member refid="classAIAC_1_1CutBladeThicknessVisualizer_1a11520af3136d81596953046c93895db2" prot="protected" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>m_ToolheadRefNormStart</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer_1a1f2f0e932d3bb971abff130c92bfaf4e" prot="public" virt="virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>UpdateToolheadsData</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::CircularSawCutBladeThicknessVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

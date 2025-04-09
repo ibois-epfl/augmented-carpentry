@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1SLAMMapLoadedEvent" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::SLAMMapLoadedEvent</compoundname>
+    <basecompoundref refid="classAIAC_1_1Event" prot="public" virt="non-virtual">AIAC::Event</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1SLAMMapLoadedEvent_1a6a13afd14aa8d941596509bccc3409c8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::SLAMMapLoadedEvent::m_FilePath</definition>
+        <argsstring></argsstring>
+        <name>m_FilePath</name>
+        <qualifiedname>AIAC::SLAMMapLoadedEvent::m_FilePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="51" column="21" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1SLAMMapLoadedEvent_1a44c0e227cf77b0782052415e2e453333" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::SLAMMapLoadedEvent::SLAMMapLoadedEvent</definition>
+        <argsstring>(const std::string filePath)</argsstring>
+        <name>SLAMMapLoadedEvent</name>
+        <qualifiedname>AIAC::SLAMMapLoadedEvent::SLAMMapLoadedEvent</qualifiedname>
+        <param>
+          <type>const std::string</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="44" column="18" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1SLAMMapLoadedEvent_1a2f191c313a49523151d15cd4522f826e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::SLAMMapLoadedEvent::OnSLAMMapLoaded</definition>
+        <argsstring>()</argsstring>
+        <name>OnSLAMMapLoaded</name>
+        <qualifiedname>AIAC::SLAMMapLoadedEvent::OnSLAMMapLoaded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="48" column="14" bodyfile="src/AIAC/EventSys/SLAMEvent.cpp" bodystart="43" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="1">
+        <label>AIAC::SLAMMapLoadedEvent</label>
+        <link refid="classAIAC_1_1SLAMMapLoadedEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="1">
+        <label>AIAC::SLAMMapLoadedEvent</label>
+        <link refid="classAIAC_1_1SLAMMapLoadedEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/EventSys/SLAMEvent.h" line="41" column="5" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="42" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Event_1a6cb6fce0f27894b1a82e1c93f348c2ae" prot="public" virt="non-virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>Event</name></member>
+      <member refid="classAIAC_1_1Event_1a2532fd6f2cc7a499d5cd79766a5a366d" prot="public" virt="non-virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>GetCategory</name></member>
+      <member refid="classAIAC_1_1Event_1aaf9a9499f1e427a5d7d036675e41469c" prot="public" virt="non-virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1SLAMMapLoadedEvent_1a6a13afd14aa8d941596509bccc3409c8" prot="private" virt="non-virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>m_FilePath</name></member>
+      <member refid="classAIAC_1_1SLAMMapLoadedEvent_1a2f191c313a49523151d15cd4522f826e" prot="public" virt="non-virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>OnSLAMMapLoaded</name></member>
+      <member refid="classAIAC_1_1SLAMMapLoadedEvent_1a44c0e227cf77b0782052415e2e453333" prot="public" virt="non-virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>SLAMMapLoadedEvent</name></member>
+      <member refid="classAIAC_1_1Event_1a78454dc85c3759d5811f39eff6285728" prot="public" virt="virtual"><scope>AIAC::SLAMMapLoadedEvent</scope><name>~Event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

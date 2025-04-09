@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1EventCompare" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::EventCompare</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structAIAC_1_1EventCompare_1a7421e4f7fb70a98974f621bee5d0ffc0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool AIAC::EventCompare::operator()</definition>
+        <argsstring>(const T &amp;a, const T &amp;b) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>AIAC::EventCompare::operator()</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="85" column="14" bodyfile="src/AIAC/EventSys/Event.h" bodystart="85" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/EventSys/Event.h" line="82" column="5" bodyfile="src/AIAC/EventSys/Event.h" bodystart="83" bodyend="89"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1EventCompare_1a7421e4f7fb70a98974f621bee5d0ffc0" prot="public" virt="non-virtual"><scope>AIAC::EventCompare</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

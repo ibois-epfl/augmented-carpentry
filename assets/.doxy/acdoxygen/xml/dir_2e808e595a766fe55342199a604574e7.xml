@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_2e808e595a766fe55342199a604574e7" kind="dir">
+    <compoundname>src/AIAC/Feedback</compoundname>
+    <innerfile refid="CutBladeThicknessVisualizer_8cpp">CutBladeThicknessVisualizer.cpp</innerfile>
+    <innerfile refid="CutBladeThicknessVisualizer_8h">CutBladeThicknessVisualizer.h</innerfile>
+    <innerfile refid="CutChainSawFeedback_8cpp">CutChainSawFeedback.cpp</innerfile>
+    <innerfile refid="CutChainSawFeedback_8h">CutChainSawFeedback.h</innerfile>
+    <innerfile refid="CutCircularSawFeedback_8cpp">CutCircularSawFeedback.cpp</innerfile>
+    <innerfile refid="CutCircularSawFeedback_8h">CutCircularSawFeedback.h</innerfile>
+    <innerfile refid="CutPlaneVisualizer_8cpp">CutPlaneVisualizer.cpp</innerfile>
+    <innerfile refid="CutPlaneVisualizer_8h">CutPlaneVisualizer.h</innerfile>
+    <innerfile refid="FabFeedback_8h">FabFeedback.h</innerfile>
+    <innerfile refid="FeedbackVisualizer_8cpp">FeedbackVisualizer.cpp</innerfile>
+    <innerfile refid="FeedbackVisualizer_8h">FeedbackVisualizer.h</innerfile>
+    <innerfile refid="HoleFeedback_8cpp">HoleFeedback.cpp</innerfile>
+    <innerfile refid="HoleFeedback_8h">HoleFeedback.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Feedback/"/>
+  </compounddef>
+</doxygen>

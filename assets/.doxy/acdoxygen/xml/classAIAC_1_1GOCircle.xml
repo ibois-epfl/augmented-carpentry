@@ -1,0 +1,732 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GOCircle" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::GOCircle</compoundname>
+    <basecompoundref refid="classAIAC_1_1GOPrimitive" prot="public" virt="non-virtual">AIAC::GOPrimitive</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GOCircle_1ae9fbf622c356b2c9cf760a229e4bc81a" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOCircle::m_Center</definition>
+        <argsstring></argsstring>
+        <name>m_Center</name>
+        <qualifiedname>AIAC::GOCircle::m_Center</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="475" column="17" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="475" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOCircle_1a1371179a4a48681fac2f3fd49a690c5c" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::GOCircle::m_Normal</definition>
+        <argsstring></argsstring>
+        <name>m_Normal</name>
+        <qualifiedname>AIAC::GOCircle::m_Normal</qualifiedname>
+        <initializer>= glm::vec3(0, 0, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="476" column="19" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="476" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOCircle_1a998e66e73f7de82e2a80944a489c4807" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::GOCircle::m_EdgeColor</definition>
+        <argsstring></argsstring>
+        <name>m_EdgeColor</name>
+        <qualifiedname>AIAC::GOCircle::m_EdgeColor</qualifiedname>
+        <initializer>= glm::vec4(1, 0, 0, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="477" column="19" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="477" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOCircle_1afa6ebfb57f2b09eb3857feb073e8c6c7" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::GOCircle::m_Radius</definition>
+        <argsstring></argsstring>
+        <name>m_Radius</name>
+        <qualifiedname>AIAC::GOCircle::m_Radius</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="478" column="15" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="478" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1GOCircle_1a90732baa5f09060a094a6935f5ad697b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class GOPoint</definition>
+        <argsstring></argsstring>
+        <name>GOPoint</name>
+        <qualifiedname>AIAC::GOCircle::GOPoint</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="480" column="18" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="480" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a77a2779b93e8acceb756bad82d524b4d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOCircle::GOCircle</definition>
+        <argsstring>(GOPoint center, float radius)</argsstring>
+        <name>GOCircle</name>
+        <qualifiedname>AIAC::GOCircle::GOCircle</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="324" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="200" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1ac525e1e066cecfbb2856096e397b8c60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOCircle::GOCircle</definition>
+        <argsstring>(GOPoint center, glm::vec3 normal, float radius)</argsstring>
+        <name>GOCircle</name>
+        <qualifiedname>AIAC::GOCircle::GOCircle</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>normal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="325" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="206" bodyend="210"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a4d69f8b476fcdb8f785f11b45159bcf1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOCircle &gt; AIAC::GOCircle::Add</definition>
+        <argsstring>(GOPoint center, float radius)</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOCircle::Add</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+<para>Add <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> to the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>center</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Center of the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radius of the circle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>uint32_t Id of the circle. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="335" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="227" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a7d27eca79f1d9f8b027285e12904e1d4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOCircle &gt; AIAC::GOCircle::Add</definition>
+        <argsstring>(GOPoint center, glm::vec3 normal, float radius)</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOCircle::Add</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>normal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="336" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="234" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a3a12095ff3e20b73901f470ea3c9e5b8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>static glm::vec3 AIAC::GOCircle::ClosestPointToCircle</definition>
+        <argsstring>(const glm::vec3 &amp;point, const glm::vec3 &amp;circleCenter, const glm::vec3 &amp;circleNormal, float circleRadius)</argsstring>
+        <name>ClosestPointToCircle</name>
+        <qualifiedname>AIAC::GOCircle::ClosestPointToCircle</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>point</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>circleCenter</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>circleNormal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>circleRadius</declname>
+        </param>
+        <briefdescription>
+<para>&lt; Static geometry functions </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates the closest point on a circle to a given point in 3D.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The point from which to find the closest point on the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The center of the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleNormal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The normal vector of the circle&apos;s plane. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleRadius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The radius of the circle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The closest point on the circle to the given point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="358" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="358" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1aec4a62f6a96e295529e45a59c0cc2e29" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>static float AIAC::GOCircle::ClosestDistanceFromLineToCircle</definition>
+        <argsstring>(std::shared_ptr&lt; GOLine &gt; ptrLine, const glm::vec3 &amp;circleCenter, float circleRadius)</argsstring>
+        <name>ClosestDistanceFromLineToCircle</name>
+        <qualifiedname>AIAC::GOCircle::ClosestDistanceFromLineToCircle</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+          <declname>ptrLine</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>circleCenter</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>circleRadius</declname>
+        </param>
+        <briefdescription>
+<para>This function calculates the closest distance from a line, defined by a point and a direction, to a circle in 3D space. If the line intersects the circle, the function returns 0, indicating the minimum distance is inside the circle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptrLine</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the pointer to the line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The center of the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleRadius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The radius of the circle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The closest distance from the line to the circle </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="380" column="29" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="380" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a5e020eaa6087589cc449e6c9baae1fc0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; float, std::pair&lt; glm::vec3, glm::vec3 &gt; &gt;</type>
+        <definition>static std::pair&lt; float, std::pair&lt; glm::vec3, glm::vec3 &gt; &gt; AIAC::GOCircle::ClosestDistanceFromSegmentToCircle</definition>
+        <argsstring>(std::shared_ptr&lt; GOLine &gt; ptrLine, const glm::vec3 &amp;circleCenter, float circleRadius)</argsstring>
+        <name>ClosestDistanceFromSegmentToCircle</name>
+        <qualifiedname>AIAC::GOCircle::ClosestDistanceFromSegmentToCircle</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+          <declname>ptrLine</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>circleCenter</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>circleRadius</declname>
+        </param>
+        <briefdescription>
+<para>This function calculates the closest distance from a segment. defined by two points, to a circle in 3D space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptrLine</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the pointer to the line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The center of the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>circleRadius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The radius of the circle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The closest distance from the line to the circle and the closest point on the line and the circle </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="403" column="33" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="403" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1ad0879020f8b4393040fa76a37f2f8f42" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOCircle &gt; AIAC::GOCircle::Get</definition>
+        <argsstring>(const uint32_t &amp;id)</argsstring>
+        <name>Get</name>
+        <qualifiedname>AIAC::GOCircle::Get</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="439" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="241" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a963aa2c5aa2b96170e7d8c196f0b75ad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GOCircle &gt; &gt; AIAC::GOCircle::GetAll</definition>
+        <argsstring>()</argsstring>
+        <name>GetAll</name>
+        <qualifiedname>AIAC::GOCircle::GetAll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="440" column="28" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="246" bodyend="249"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a4c90616eb827ed5c6066a823eaeafc69" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::GOCircle::~GOCircle</definition>
+        <argsstring>()=default</argsstring>
+        <name>~GOCircle</name>
+        <qualifiedname>AIAC::GOCircle::~GOCircle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="338" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a131034a3f2b550f79da39d7b9431a2d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::GOCircle::ClosestPointToPoint</definition>
+        <argsstring>(glm::vec3 point)</argsstring>
+        <name>ClosestPointToPoint</name>
+        <qualifiedname>AIAC::GOCircle::ClosestPointToPoint</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Get the closest point to the circle from a given point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the point </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>glm::vec3 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="346" column="19" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="212" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a3fefc5670f59171e741b989649a30f4b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::GOCircle::GetNormal</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNormal</name>
+        <qualifiedname>AIAC::GOCircle::GetNormal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="442" column="26" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="442" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a9cc250368d519ffc47a2c0d51cb14ee7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOCircle::GetCenter</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCenter</name>
+        <qualifiedname>AIAC::GOCircle::GetCenter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="443" column="24" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="443" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a6e900ba2aab68b0fe4dec390bb827c4a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::GOCircle::GetRadius</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRadius</name>
+        <qualifiedname>AIAC::GOCircle::GetRadius</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="444" column="22" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="444" bodyend="444"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a0ad5bc91275066522c0bbe71a9934ccc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::GOCircle::GetEdgeColor</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEdgeColor</name>
+        <qualifiedname>AIAC::GOCircle::GetEdgeColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="445" column="26" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="445" bodyend="445"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1af2571ed26f5be5f927b96907822a5431" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::SetNormal</definition>
+        <argsstring>(glm::vec3 normal)</argsstring>
+        <name>SetNormal</name>
+        <qualifiedname>AIAC::GOCircle::SetNormal</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>normal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="447" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="447" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a1109b6140ab013a9ae04f437154ab1d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::SetCenter</definition>
+        <argsstring>(GOPoint center)</argsstring>
+        <name>SetCenter</name>
+        <qualifiedname>AIAC::GOCircle::SetCenter</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>center</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="448" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="448" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a73eb5fd0e6f6cfbcda78ff57b3c025e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::SetRadius</definition>
+        <argsstring>(float radius)</argsstring>
+        <name>SetRadius</name>
+        <qualifiedname>AIAC::GOCircle::SetRadius</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="449" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="449" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a237756c7aa553a21d721c77f49d0d674" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::SetEdgeColor</definition>
+        <argsstring>(glm::vec4 edgeColor)</argsstring>
+        <name>SetEdgeColor</name>
+        <qualifiedname>AIAC::GOCircle::SetEdgeColor</qualifiedname>
+        <param>
+          <type>glm::vec4</type>
+          <declname>edgeColor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="450" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="450" bodyend="450"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1a1016486af951a6e751b839ef2e1c0c81" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::Transform</definition>
+        <argsstring>(const glm::mat4x4 &amp;transformMat)</argsstring>
+        <name>Transform</name>
+        <qualifiedname>AIAC::GOCircle::Transform</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1ab285335f31d4c2ddf2046fe6f73b709c">Transform</reimplements>
+        <param>
+          <type>const glm::mat4x4 &amp;</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="452" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="452" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1ad4b09ec9ec446123959ef959caa76c24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::SetValueFrom</definition>
+        <argsstring>(const std::shared_ptr&lt; GOPrimitive &gt; &amp;ptrGO)</argsstring>
+        <name>SetValueFrom</name>
+        <qualifiedname>AIAC::GOCircle::SetValueFrom</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a2d3133021181776c1a451c2ec2d80a8b">SetValueFrom</reimplements>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &amp;</type>
+          <declname>ptrGO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="458" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="458" bodyend="470"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOCircle_1ae2f358214f4f69f3419493ec1535b1cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOCircle::InitGLObject</definition>
+        <argsstring>()</argsstring>
+        <name>InitGLObject</name>
+        <qualifiedname>AIAC::GOCircle::InitGLObject</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a49f3cf45d5ff50ffad69cc36b14a0e49">InitGLObject</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="472" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="221" bodyend="225"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::GOCircle</label>
+        <link refid="classAIAC_1_1GOCircle"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::GOCircle</label>
+        <link refid="classAIAC_1_1GOCircle"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="321" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="322" bodyend="481"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GOCircle_1a4d69f8b476fcdb8f785f11b45159bcf1" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a7d27eca79f1d9f8b027285e12904e1d4" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a4aefd9b3b531cf77e3346bda5a4893e9" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>ClearGLObject</name></member>
+      <member refid="classAIAC_1_1GOCircle_1aec4a62f6a96e295529e45a59c0cc2e29" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>ClosestDistanceFromLineToCircle</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a5e020eaa6087589cc449e6c9baae1fc0" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>ClosestDistanceFromSegmentToCircle</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a3a12095ff3e20b73901f470ea3c9e5b8" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>ClosestPointToCircle</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a131034a3f2b550f79da39d7b9431a2d3" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>ClosestPointToPoint</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa9ddd2c2904d1e9f5e1755c4a58bf6a1" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>Draw</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a13785fd54f841dae10c39df388038c4d" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GenerateId</name></member>
+      <member refid="classAIAC_1_1GOCircle_1ad0879020f8b4393040fa76a37f2f8f42" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>Get</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a963aa2c5aa2b96170e7d8c196f0b75ad" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetAll</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a9cc250368d519ffc47a2c0d51cb14ee7" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetCenter</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1af06b5575beccb6332e48b928a287a187" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetColor</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a0ad5bc91275066522c0bbe71a9934ccc" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetEdgeColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1472f5ce4a3641dcca7d450c69d70ef8" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetId</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aebac62a9e1b69ec1cfd48644c534aaf2" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a3fefc5670f59171e741b989649a30f4b" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetNormal</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a6e900ba2aab68b0fe4dec390bb827c4a" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetRadius</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a80f79bbd88ca3fe21a0f42fb34255477" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetState</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae9f8303699cea4b8428689317591f12f" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aeb1d8413c37e371533623c88f6fdfba3" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa8d20248ffae40c3e3ac38484e40196c" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GetWeight</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a77a2779b93e8acceb756bad82d524b4d" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GOCircle</name></member>
+      <member refid="classAIAC_1_1GOCircle_1ac525e1e066cecfbb2856096e397b8c60" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GOCircle</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a90732baa5f09060a094a6935f5ad697b" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GOPoint</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1e4561ed741888f900532d421054be6b" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>GOPrimitive</name></member>
+      <member refid="classAIAC_1_1GOCircle_1ae2f358214f4f69f3419493ec1535b1cb" prot="public" virt="virtual"><scope>AIAC::GOCircle</scope><name>InitGLObject</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a3297dec73761f03389616ecf8499e45f" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>IsVisible</name></member>
+      <member refid="classAIAC_1_1GOCircle_1ae9fbf622c356b2c9cf760a229e4bc81a" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Center</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65d77218ad304b17e54ec2fbc9233f8a" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Color</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a998e66e73f7de82e2a80944a489c4807" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_EdgeColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2e707608c9ed77c2f06a643903999460" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_GLObjects</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a50dbae076472c12401fad78575051881" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Id</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a68c8ba133a8540aa164e5ebc6e6e08f0" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_IsVisible</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae0cb08a0ec3b500e2703b2c77c72f4a2" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Name</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a1371179a4a48681fac2f3fd49a690c5c" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Normal</name></member>
+      <member refid="classAIAC_1_1GOCircle_1afa6ebfb57f2b09eb3857feb073e8c6c7" prot="private" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Radius</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a18ba99dae0b751e36cde6d65b520c8a4" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_State</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac729389e9458753cf5c6c9f4d32fa4b9" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac1f23dc0823236ae2b364840cae808ed" prot="protected" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>m_Weight</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2f842878f11acd94deee26ba899497a5" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac362718e97f2fe212f6d4af92276d773" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a1109b6140ab013a9ae04f437154ab1d2" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetCenter</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aba89b33e74ef2bdec4d8ee1626d8db3d" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetColor</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a237756c7aa553a21d721c77f49d0d674" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetEdgeColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a39f1285ba9467e1e7c486eac632bc425" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetName</name></member>
+      <member refid="classAIAC_1_1GOCircle_1af2571ed26f5be5f927b96907822a5431" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetNormal</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a73eb5fd0e6f6cfbcda78ff57b3c025e4" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetRadius</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65a7560b8827c82a121bff95013a2f40" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetState</name></member>
+      <member refid="classAIAC_1_1GOCircle_1ad4b09ec9ec446123959ef959caa76c24" prot="public" virt="virtual"><scope>AIAC::GOCircle</scope><name>SetValueFrom</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a773a24e22df1e14c85c11af52e3b8104" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a641433f07a170345a50809dd9757ad75" prot="public" virt="non-virtual"><scope>AIAC::GOCircle</scope><name>SetWeight</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a1016486af951a6e751b839ef2e1c0c81" prot="public" virt="virtual"><scope>AIAC::GOCircle</scope><name>Transform</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a8573fe4c64e115849154e927ad15885f" prot="public" virt="virtual"><scope>AIAC::GOCircle</scope><name>Translate</name></member>
+      <member refid="classAIAC_1_1GOCircle_1a4c90616eb827ed5c6066a823eaeafc69" prot="public" virt="virtual"><scope>AIAC::GOCircle</scope><name>~GOCircle</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a04fbe45113efff131e26fa3701965988" prot="public" virt="virtual"><scope>AIAC::GOCircle</scope><name>~GOPrimitive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

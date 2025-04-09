@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_21da83368f7816722f2b707a7b03c84f" kind="dir">
+    <compoundname>src/AIAC</compoundname>
+    <innerdir refid="dir_bda428afb66b315b23b4e646d7591fb3">src/AIAC/EventSys</innerdir>
+    <innerdir refid="dir_2e808e595a766fe55342199a604574e7">src/AIAC/Feedback</innerdir>
+    <innerdir refid="dir_5f167dfbcc50bcf5ffb2c1a7f5cf90ca">src/AIAC/GOSys</innerdir>
+    <innerdir refid="dir_4231f99b70cbd7a69a19f070b3954fcb">src/AIAC/Render</innerdir>
+    <innerdir refid="dir_1ecaf06ce723c740944fb523b6bd2c55">src/AIAC/UI</innerdir>
+    <innerfile refid="ACInfoModel_8cpp">ACInfoModel.cpp</innerfile>
+    <innerfile refid="ACInfoModel_8h">ACInfoModel.h</innerfile>
+    <innerfile refid="ACInfoToolhead_8cpp">ACInfoToolhead.cpp</innerfile>
+    <innerfile refid="ACInfoToolhead_8h">ACInfoToolhead.h</innerfile>
+    <innerfile refid="ACInfoToolheadManager_8cpp">ACInfoToolheadManager.cpp</innerfile>
+    <innerfile refid="ACInfoToolheadManager_8h">ACInfoToolheadManager.h</innerfile>
+    <innerfile refid="Application_8cpp">Application.cpp</innerfile>
+    <innerfile refid="Application_8h">Application.h</innerfile>
+    <innerfile refid="Assert_8h">Assert.h</innerfile>
+    <innerfile refid="Base_8h">Base.h</innerfile>
+    <innerfile refid="Camera_8cpp">Camera.cpp</innerfile>
+    <innerfile refid="Camera_8h">Camera.h</innerfile>
+    <innerfile refid="CameraCalibrator_8cpp">CameraCalibrator.cpp</innerfile>
+    <innerfile refid="CameraCalibrator_8h">CameraCalibrator.h</innerfile>
+    <innerfile refid="Config_8cpp">Config.cpp</innerfile>
+    <innerfile refid="Config_8h">Config.h</innerfile>
+    <innerfile refid="DLoader_8cpp">DLoader.cpp</innerfile>
+    <innerfile refid="DLoader_8h">DLoader.h</innerfile>
+    <innerfile refid="GeometryUtils_8cpp">GeometryUtils.cpp</innerfile>
+    <innerfile refid="AIAC_2GeometryUtils_8h">GeometryUtils.h</innerfile>
+    <innerfile refid="GlHeader_8h">GlHeader.h</innerfile>
+    <innerfile refid="Image_8cpp">Image.cpp</innerfile>
+    <innerfile refid="Image_8h">Image.h</innerfile>
+    <innerfile refid="Layer_8h">Layer.h</innerfile>
+    <innerfile refid="LayerCamera_8cpp">LayerCamera.cpp</innerfile>
+    <innerfile refid="LayerCamera_8h">LayerCamera.h</innerfile>
+    <innerfile refid="LayerCameraCalib_8cpp">LayerCameraCalib.cpp</innerfile>
+    <innerfile refid="LayerCameraCalib_8h">LayerCameraCalib.h</innerfile>
+    <innerfile refid="LayerFeedback_8cpp">LayerFeedback.cpp</innerfile>
+    <innerfile refid="LayerFeedback_8h">LayerFeedback.h</innerfile>
+    <innerfile refid="LayerLogRecorder_8cpp">LayerLogRecorder.cpp</innerfile>
+    <innerfile refid="LayerLogRecorder_8h">LayerLogRecorder.h</innerfile>
+    <innerfile refid="LayerModel_8cpp">LayerModel.cpp</innerfile>
+    <innerfile refid="LayerModel_8h">LayerModel.h</innerfile>
+    <innerfile refid="LayerSlam_8cpp">LayerSlam.cpp</innerfile>
+    <innerfile refid="LayerSlam_8h">LayerSlam.h</innerfile>
+    <innerfile refid="LayerToolhead_8cpp">LayerToolhead.cpp</innerfile>
+    <innerfile refid="LayerToolhead_8h">LayerToolhead.h</innerfile>
+    <innerfile refid="LayerUI_8cpp">LayerUI.cpp</innerfile>
+    <innerfile refid="LayerUI_8h">LayerUI.h</innerfile>
+    <innerfile refid="LayerUtils_8cpp">LayerUtils.cpp</innerfile>
+    <innerfile refid="LayerUtils_8h">LayerUtils.h</innerfile>
+    <innerfile refid="Log_8cpp">Log.cpp</innerfile>
+    <innerfile refid="Log_8h">Log.h</innerfile>
+    <innerfile refid="ScannedModel_8cpp">ScannedModel.cpp</innerfile>
+    <innerfile refid="ScannedModel_8h">ScannedModel.h</innerfile>
+    <innerfile refid="TouchMonitor_8cpp">TouchMonitor.cpp</innerfile>
+    <innerfile refid="TouchMonitor_8h">TouchMonitor.h</innerfile>
+    <innerfile refid="Window_8cpp">Window.cpp</innerfile>
+    <innerfile refid="Window_8h">Window.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/"/>
+  </compounddef>
+</doxygen>

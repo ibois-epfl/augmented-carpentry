@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classinih_1_1INIWriter" kind="class" language="C++" prot="public">
+    <compoundname>inih::INIWriter</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classinih_1_1INIWriter_1a5304b9e050fc610114ae647a1e9badbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>inih::INIWriter::INIWriter</definition>
+        <argsstring>()</argsstring>
+        <name>INIWriter</name>
+        <qualifiedname>inih::INIWriter::INIWriter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="558" column="5" bodyfile="src/utils/Ini.h" bodystart="558" bodyend="558"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classinih_1_1INIWriter_1ab6cdc20a197eaa02257d9fef77780398" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void inih::INIWriter::write</definition>
+        <argsstring>(const std::string &amp;filepath, INIReader &amp;reader)</argsstring>
+        <name>write</name>
+        <qualifiedname>inih::INIWriter::write</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filepath</declname>
+        </param>
+        <param>
+          <type><ref refid="classinih_1_1INIReader" kindref="compound">INIReader</ref> &amp;</type>
+          <declname>reader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="559" column="24" bodyfile="src/utils/Ini.h" bodystart="559" bodyend="577"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/Ini.h" line="556" column="1" bodyfile="src/utils/Ini.h" bodystart="556" bodyend="578"/>
+    <listofallmembers>
+      <member refid="classinih_1_1INIWriter_1a5304b9e050fc610114ae647a1e9badbe" prot="public" virt="non-virtual"><scope>inih::INIWriter</scope><name>INIWriter</name></member>
+      <member refid="classinih_1_1INIWriter_1ab6cdc20a197eaa02257d9fef77780398" prot="public" virt="non-virtual"><scope>inih::INIWriter</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_4231f99b70cbd7a69a19f070b3954fcb" kind="dir">
+    <compoundname>src/AIAC/Render</compoundname>
+    <innerfile refid="GLObject_8cpp">GLObject.cpp</innerfile>
+    <innerfile refid="GLObject_8h">GLObject.h</innerfile>
+    <innerfile refid="GlUtils_8cpp">GlUtils.cpp</innerfile>
+    <innerfile refid="GlUtils_8h">GlUtils.h</innerfile>
+    <innerfile refid="RenderAPI_8cpp">RenderAPI.cpp</innerfile>
+    <innerfile refid="RenderAPI_8h">RenderAPI.h</innerfile>
+    <innerfile refid="Renderer_8cpp">Renderer.cpp</innerfile>
+    <innerfile refid="Renderer_8h">Renderer.h</innerfile>
+    <innerfile refid="Shader_8cpp">Shader.cpp</innerfile>
+    <innerfile refid="Shader_8hpp">Shader.hpp</innerfile>
+    <innerfile refid="TextRenderer_8cpp">TextRenderer.cpp</innerfile>
+    <innerfile refid="TextRenderer_8h">TextRenderer.h</innerfile>
+    <innerfile refid="Viewport_8cpp">Viewport.cpp</innerfile>
+    <innerfile refid="Viewport_8h">Viewport.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Render/"/>
+  </compounddef>
+</doxygen>

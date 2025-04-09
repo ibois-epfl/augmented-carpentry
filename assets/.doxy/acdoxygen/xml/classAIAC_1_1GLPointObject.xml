@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GLPointObject" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::GLPointObject</compoundname>
+    <basecompoundref refid="classAIAC_1_1GLObject" prot="public" virt="non-virtual">AIAC::GLObject</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GLPointObject_1a5c086ca945d2e9e384bb6f02fecb9135" prot="public" static="no" mutable="no">
+        <type>GLfloat</type>
+        <definition>GLfloat AIAC::GLPointObject::pointSize</definition>
+        <argsstring></argsstring>
+        <name>pointSize</name>
+        <qualifiedname>AIAC::GLPointObject::pointSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="76" column="17" bodyfile="src/AIAC/Render/GLObject.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GLPointObject_1a18f9eec2f6e33d167eb1e03cf5642290" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GLPointObject::GLPointObject</definition>
+        <argsstring>()</argsstring>
+        <name>GLPointObject</name>
+        <qualifiedname>AIAC::GLPointObject::GLPointObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="58" column="9" bodyfile="src/AIAC/Render/GLObject.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLPointObject_1aca1c9d34b6e0b2b00d6ed31a78fd840f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GLPointObject::GLPointObject</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;vertices, const std::vector&lt; glm::vec4 &gt; &amp;colors, GLfloat pointSize=1.0f)</argsstring>
+        <name>GLPointObject</name>
+        <qualifiedname>AIAC::GLPointObject::GLPointObject</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; glm::vec4 &gt; &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <param>
+          <type>GLfloat</type>
+          <declname>pointSize</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="60" column="9" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="54" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLPointObject_1a948d3d0f62cde31291f8d562a5b3cb00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GLPointObject::GLPointObject</definition>
+        <argsstring>(const GLPointObject &amp;other)</argsstring>
+        <name>GLPointObject</name>
+        <qualifiedname>AIAC::GLPointObject::GLPointObject</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GLPointObject" kindref="compound">GLPointObject</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="63" column="9" bodyfile="src/AIAC/Render/GLObject.h" bodystart="63" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLPointObject_1ac8c7705f222a929d44176572411c2326" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GLPointObject" kindref="compound">GLPointObject</ref> &amp;</type>
+        <definition>GLPointObject &amp; AIAC::GLPointObject::operator=</definition>
+        <argsstring>(const GLPointObject &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>AIAC::GLPointObject::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GLPointObject" kindref="compound">GLPointObject</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="67" column="23" bodyfile="src/AIAC/Render/GLObject.h" bodystart="67" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GLPointObject_1ad475a3043d1cfd4673c8b06c7eb75d01" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GLPointObject::Draw</definition>
+        <argsstring>()</argsstring>
+        <name>Draw</name>
+        <qualifiedname>AIAC::GLPointObject::Draw</qualifiedname>
+        <reimplements refid="classAIAC_1_1GLObject_1a9100544b1658525169db4907e8f6ea71">Draw</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="73" column="22" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="62" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::GLObject</label>
+        <link refid="classAIAC_1_1GLObject"/>
+      </node>
+      <node id="1">
+        <label>AIAC::GLPointObject</label>
+        <link refid="classAIAC_1_1GLPointObject"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::GLObject</label>
+        <link refid="classAIAC_1_1GLObject"/>
+      </node>
+      <node id="1">
+        <label>AIAC::GLPointObject</label>
+        <link refid="classAIAC_1_1GLPointObject"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Render/GLObject.h" line="56" column="5" bodyfile="src/AIAC/Render/GLObject.h" bodystart="56" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GLObject_1a941a1e8c9870e44a3f09da507f83a235" prot="protected" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>BindVBOs</name></member>
+      <member refid="classAIAC_1_1GLObject_1abfdb937cb1a1f3ab48f84e06d605f645" prot="protected" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>BufferData</name></member>
+      <member refid="classAIAC_1_1GLObject_1a2b3cb09d4502b7699dba1d0c2c22dff0" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>colorBuf</name></member>
+      <member refid="classAIAC_1_1GLObject_1a382a7f135422b2c89120ae0abfd1b0f5" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>DeleteVBOs</name></member>
+      <member refid="classAIAC_1_1GLPointObject_1ad475a3043d1cfd4673c8b06c7eb75d01" prot="public" virt="virtual"><scope>AIAC::GLPointObject</scope><name>Draw</name></member>
+      <member refid="classAIAC_1_1GLObject_1a1e37d6780964b2f96233d4126f884e2d" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>GLObject</name></member>
+      <member refid="classAIAC_1_1GLObject_1ad0e07500b37023c5221a955ba4787ac6" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>GLObject</name></member>
+      <member refid="classAIAC_1_1GLPointObject_1a18f9eec2f6e33d167eb1e03cf5642290" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>GLPointObject</name></member>
+      <member refid="classAIAC_1_1GLPointObject_1aca1c9d34b6e0b2b00d6ed31a78fd840f" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>GLPointObject</name></member>
+      <member refid="classAIAC_1_1GLPointObject_1a948d3d0f62cde31291f8d562a5b3cb00" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>GLPointObject</name></member>
+      <member refid="classAIAC_1_1GLPointObject_1ac8c7705f222a929d44176572411c2326" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>operator=</name></member>
+      <member refid="classAIAC_1_1GLObject_1a1859ded35f61e3d8299e240b88f89d4b" prot="public" virt="non-virtual" ambiguityscope="AIAC::GLObject::"><scope>AIAC::GLPointObject</scope><name>operator=</name></member>
+      <member refid="classAIAC_1_1GLPointObject_1a5c086ca945d2e9e384bb6f02fecb9135" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>pointSize</name></member>
+      <member refid="classAIAC_1_1GLObject_1a95dcf394d81c94fa2aaeb8b5903c703d" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>size</name></member>
+      <member refid="classAIAC_1_1GLObject_1aac46a07822f8af148198eec4eb8980b4" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>type</name></member>
+      <member refid="classAIAC_1_1GLObject_1a550a4afb141100752c9dd18676ed6b03" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>vertexBuf</name></member>
+      <member refid="classAIAC_1_1GLObject_1a48eca9a8c2e4ef91524487ef133ef720" prot="public" virt="non-virtual"><scope>AIAC::GLPointObject</scope><name>~GLObject</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

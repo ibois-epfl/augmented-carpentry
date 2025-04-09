@@ -1,0 +1,2737 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceAIAC" kind="namespace" language="C++">
+    <compoundname>AIAC</compoundname>
+    <innerclass refid="classAIAC_1_1ACInfoModel" prot="public">AIAC::ACInfoModel</innerclass>
+    <innerclass refid="classAIAC_1_1ACInfoToolhead" prot="public">AIAC::ACInfoToolhead</innerclass>
+    <innerclass refid="classAIAC_1_1ACInfoToolheadManager" prot="public">AIAC::ACInfoToolheadManager</innerclass>
+    <innerclass refid="classAIAC_1_1AppCloseEvent" prot="public">AIAC::AppCloseEvent</innerclass>
+    <innerclass refid="classAIAC_1_1Application" prot="public">AIAC::Application</innerclass>
+    <innerclass refid="structAIAC_1_1ApplicationSpecification" prot="public">AIAC::ApplicationSpecification</innerclass>
+    <innerclass refid="classAIAC_1_1Camera" prot="public">AIAC::Camera</innerclass>
+    <innerclass refid="classAIAC_1_1CameraCalibrationLoadedEvent" prot="public">AIAC::CameraCalibrationLoadedEvent</innerclass>
+    <innerclass refid="classAIAC_1_1CameraCalibrator" prot="public">AIAC::CameraCalibrator</innerclass>
+    <innerclass refid="classAIAC_1_1ChainSawCutPlaneVisualizer" prot="public">AIAC::ChainSawCutPlaneVisualizer</innerclass>
+    <innerclass refid="structAIAC_1_1ChainSawData" prot="public">AIAC::ChainSawData</innerclass>
+    <innerclass refid="structAIAC_1_1Character" prot="public">AIAC::Character</innerclass>
+    <innerclass refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer" prot="public">AIAC::CircularSawCutBladeThicknessVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CircularSawCutPlaneVisualizer" prot="public">AIAC::CircularSawCutPlaneVisualizer</innerclass>
+    <innerclass refid="structAIAC_1_1CircularSawData" prot="public">AIAC::CircularSawData</innerclass>
+    <innerclass refid="classAIAC_1_1Config" prot="public">AIAC::Config</innerclass>
+    <innerclass refid="classAIAC_1_1CutBladeThicknessVisualizer" prot="public">AIAC::CutBladeThicknessVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutChainSawAngleFeedVisualizer" prot="public">AIAC::CutChainSawAngleFeedVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutChainSawDepthFeedVisualizer" prot="public">AIAC::CutChainSawDepthFeedVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutChainSawFeedback" prot="public">AIAC::CutChainSawFeedback</innerclass>
+    <innerclass refid="classAIAC_1_1CutChainSawFeedVisualizer" prot="public">AIAC::CutChainSawFeedVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutCircularOrientationVisualizer" prot="public">AIAC::CutCircularOrientationVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutCircularSawDepthVisualizer" prot="public">AIAC::CutCircularSawDepthVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutCircularSawFeedback" prot="public">AIAC::CutCircularSawFeedback</innerclass>
+    <innerclass refid="classAIAC_1_1CutCircularSawPositionStartVisualizer" prot="public">AIAC::CutCircularSawPositionStartVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutOrientationVisualizer" prot="public">AIAC::CutOrientationVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1CutPlaneVisualizer" prot="public">AIAC::CutPlaneVisualizer</innerclass>
+    <innerclass refid="structAIAC_1_1CylinderPole" prot="public">AIAC::CylinderPole</innerclass>
+    <innerclass refid="classAIAC_1_1DLoader" prot="public">AIAC::DLoader</innerclass>
+    <innerclass refid="structAIAC_1_1DrillBitData" prot="public">AIAC::DrillBitData</innerclass>
+    <innerclass refid="classAIAC_1_1Event" prot="public">AIAC::Event</innerclass>
+    <innerclass refid="classAIAC_1_1EventBus" prot="public">AIAC::EventBus</innerclass>
+    <innerclass refid="structAIAC_1_1EventCompare" prot="public">AIAC::EventCompare</innerclass>
+    <innerclass refid="structAIAC_1_1EventPolicy" prot="public">AIAC::EventPolicy</innerclass>
+    <innerclass refid="classAIAC_1_1FabFeedback" prot="public">AIAC::FabFeedback</innerclass>
+    <innerclass refid="classAIAC_1_1FeedbackVisualizer" prot="public">AIAC::FeedbackVisualizer</innerclass>
+    <innerclass refid="classAIAC_1_1GLLineObject" prot="public">AIAC::GLLineObject</innerclass>
+    <innerclass refid="classAIAC_1_1GLMeshObject" prot="public">AIAC::GLMeshObject</innerclass>
+    <innerclass refid="classAIAC_1_1GLObject" prot="public">AIAC::GLObject</innerclass>
+    <innerclass refid="classAIAC_1_1GLPointObject" prot="public">AIAC::GLPointObject</innerclass>
+    <innerclass refid="classAIAC_1_1GOCircle" prot="public">AIAC::GOCircle</innerclass>
+    <innerclass refid="structAIAC_1_1GOColor" prot="public">AIAC::GOColor</innerclass>
+    <innerclass refid="classAIAC_1_1GOCylinder" prot="public">AIAC::GOCylinder</innerclass>
+    <innerclass refid="classAIAC_1_1GOLine" prot="public">AIAC::GOLine</innerclass>
+    <innerclass refid="classAIAC_1_1GOMesh" prot="public">AIAC::GOMesh</innerclass>
+    <innerclass refid="classAIAC_1_1GOPoint" prot="public">AIAC::GOPoint</innerclass>
+    <innerclass refid="classAIAC_1_1GOPolyline" prot="public">AIAC::GOPolyline</innerclass>
+    <innerclass refid="classAIAC_1_1GOPrimitive" prot="public">AIAC::GOPrimitive</innerclass>
+    <innerclass refid="classAIAC_1_1GORegistry" prot="public">AIAC::GORegistry</innerclass>
+    <innerclass refid="classAIAC_1_1GOText" prot="public">AIAC::GOText</innerclass>
+    <innerclass refid="structAIAC_1_1GOTextSize" prot="public">AIAC::GOTextSize</innerclass>
+    <innerclass refid="classAIAC_1_1GOTriangle" prot="public">AIAC::GOTriangle</innerclass>
+    <innerclass refid="structAIAC_1_1GOWeight" prot="public">AIAC::GOWeight</innerclass>
+    <innerclass refid="classAIAC_1_1HoleFeedback" prot="public">AIAC::HoleFeedback</innerclass>
+    <innerclass refid="classAIAC_1_1HoleFeedbackPosition" prot="public">AIAC::HoleFeedbackPosition</innerclass>
+    <innerclass refid="classAIAC_1_1HoleFeedbackRotation" prot="public">AIAC::HoleFeedbackRotation</innerclass>
+    <innerclass refid="classAIAC_1_1HoleFeedbackText" prot="public">AIAC::HoleFeedbackText</innerclass>
+    <innerclass refid="classAIAC_1_1Image" prot="public">AIAC::Image</innerclass>
+    <innerclass refid="structAIAC_1_1ImTexture" prot="public">AIAC::ImTexture</innerclass>
+    <innerclass refid="classAIAC_1_1Layer" prot="public">AIAC::Layer</innerclass>
+    <innerclass refid="classAIAC_1_1LayerCamera" prot="public">AIAC::LayerCamera</innerclass>
+    <innerclass refid="classAIAC_1_1LayerCameraCalib" prot="public">AIAC::LayerCameraCalib</innerclass>
+    <innerclass refid="classAIAC_1_1LayerFeedback" prot="public">AIAC::LayerFeedback</innerclass>
+    <innerclass refid="classAIAC_1_1LayerLogRecorder" prot="public">AIAC::LayerLogRecorder</innerclass>
+    <innerclass refid="classAIAC_1_1LayerModel" prot="public">AIAC::LayerModel</innerclass>
+    <innerclass refid="classAIAC_1_1LayerSlam" prot="public">AIAC::LayerSlam</innerclass>
+    <innerclass refid="classAIAC_1_1LayerToolhead" prot="public">AIAC::LayerToolhead</innerclass>
+    <innerclass refid="classAIAC_1_1LayerUI" prot="public">AIAC::LayerUI</innerclass>
+    <innerclass refid="classAIAC_1_1LayerUtils" prot="public">AIAC::LayerUtils</innerclass>
+    <innerclass refid="classAIAC_1_1Log" prot="public">AIAC::Log</innerclass>
+    <innerclass refid="classAIAC_1_1PaneUI" prot="public">AIAC::PaneUI</innerclass>
+    <innerclass refid="structAIAC_1_1Position" prot="public">AIAC::Position</innerclass>
+    <innerclass refid="classAIAC_1_1Renderer" prot="public">AIAC::Renderer</innerclass>
+    <innerclass refid="structAIAC_1_1SaberSawData" prot="public">AIAC::SaberSawData</innerclass>
+    <innerclass refid="classAIAC_1_1ScannedModel" prot="public">AIAC::ScannedModel</innerclass>
+    <innerclass refid="classAIAC_1_1SLAMCombineMapEvent" prot="public">AIAC::SLAMCombineMapEvent</innerclass>
+    <innerclass refid="classAIAC_1_1SLAMMapLoadedEvent" prot="public">AIAC::SLAMMapLoadedEvent</innerclass>
+    <innerclass refid="classAIAC_1_1SLAMStartMappingEvent" prot="public">AIAC::SLAMStartMappingEvent</innerclass>
+    <innerclass refid="classAIAC_1_1SLAMStopMappingEvent" prot="public">AIAC::SLAMStopMappingEvent</innerclass>
+    <innerclass refid="classAIAC_1_1SLAMVocabularyLoadedEvent" prot="public">AIAC::SLAMVocabularyLoadedEvent</innerclass>
+    <innerclass refid="classAIAC_1_1TextRenderer" prot="public">AIAC::TextRenderer</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo" prot="public">AIAC::TimberInfo</innerclass>
+    <innerclass refid="classAIAC_1_1ToolHeadData" prot="public">AIAC::ToolHeadData</innerclass>
+    <innerclass refid="classAIAC_1_1TouchMonitor" prot="public">AIAC::TouchMonitor</innerclass>
+    <innerclass refid="classAIAC_1_1Viewport" prot="public">AIAC::Viewport</innerclass>
+    <innerclass refid="classAIAC_1_1Window" prot="public">AIAC::Window</innerclass>
+    <innerclass refid="structAIAC_1_1WindowProps" prot="public">AIAC::WindowProps</innerclass>
+    <innernamespace refid="namespaceAIAC_1_1Utils">AIAC::Utils</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="ACInfoModel_8h_1aaeefac1aace7db25831f007db92dbb1e" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ACIMState</name>
+        <qualifiedname>AIAC::ACIMState</qualifiedname>
+        <enumvalue id="ACInfoModel_8h_1aaeefac1aace7db25831f007db92dbb1eaca083e06db9a4c6bfd9290170c508944" prot="public">
+          <name>NOT_DONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ACInfoModel_8h_1aaeefac1aace7db25831f007db92dbb1eaa2770969c827f0f2910f6179418462df" prot="public">
+          <name>CURRENT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ACInfoModel_8h_1aaeefac1aace7db25831f007db92dbb1ea2ba22e58ca17bb728d522bba36cf8350" prot="public">
+          <name>DONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="48" column="1" bodyfile="src/AIAC/ACInfoModel.h" bodystart="48" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="enum" id="ACInfoToolhead_8h_1aeb4ca09505c2e34102dbe663fbe316ac" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ACToolHeadType</name>
+        <qualifiedname>AIAC::ACToolHeadType</qualifiedname>
+        <enumvalue id="ACInfoToolhead_8h_1aeb4ca09505c2e34102dbe663fbe316acaf632e9a7ff5447668c5089e2f88ea4da" prot="public">
+          <name>DRILLBIT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ACInfoToolhead_8h_1aeb4ca09505c2e34102dbe663fbe316acaeef4841f9913065d9f0f5811443bae03" prot="public">
+          <name>CIRCULARSAW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ACInfoToolhead_8h_1aeb4ca09505c2e34102dbe663fbe316acac0ce3e0094c2c4172f329f42fdeb07ad" prot="public">
+          <name>SABERSAW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ACInfoToolhead_8h_1aeb4ca09505c2e34102dbe663fbe316aca52fd3dc5e7dd73afb4234b6c75875f5e" prot="public">
+          <name>CHAINSAW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>All the possible types of the toolheads in AC. </para>
+        </briefdescription>
+        <detaileddescription>
+<sect1 id="ACInfoToolhead_8h_1Structs">
+<title>holding the data of the toolheads from .acit and the corresponding GOs</title>
+</sect1>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="48" column="5" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="49" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="enum" id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413fa" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>EventType</name>
+        <qualifiedname>AIAC::EventType</qualifiedname>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faa6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faab569e9b21b2f4983198637f6331f79b6" prot="public">
+          <name>AppClose</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faa7e65015c177aa46af731630c06d164cf" prot="public">
+          <name>SLAMMapLoaded</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faa5dd7e2e337ebdb3e9abc8bf514ddc319" prot="public">
+          <name>SLAMVocabularyLoaded</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faa20d6dc50424739bd2d1daf69fbfdb204" prot="public">
+          <name>SLAMStartMapping</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faa86b01e20aa5f5e8312a2c6310fc4ea05" prot="public">
+          <name>SLAMStopMapping</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faac47a4366b9322e5a0daedf24411b88d6" prot="public">
+          <name>SLAMCombineMapEvent</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a4a45a6fb8ad5282edc52c79822a413faa5c1a93e3f8b320173fc8a62694208289" prot="public">
+          <name>CameraCalibrationLoaded</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="44" column="5" bodyfile="src/AIAC/EventSys/Event.h" bodystart="45" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="enum" id="Event_8h_1a0872a815d7e5c571430813192036fc74" prot="public" static="no" strong="no">
+        <type></type>
+        <name>EventCategory</name>
+        <qualifiedname>AIAC::EventCategory</qualifiedname>
+        <enumvalue id="Event_8h_1a0872a815d7e5c571430813192036fc74af25f4f0b575eaec23f3e60140cdac112" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a0872a815d7e5c571430813192036fc74a5cc277b89fcf2bd1925d4a80109a2136" prot="public">
+          <name>EventCategoryApplication</name>
+          <initializer>=              BIT(0)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a0872a815d7e5c571430813192036fc74ad69d489ee5c66e45938d6f1b6a00f18b" prot="public">
+          <name>EventCategorySLAM</name>
+          <initializer>=                     BIT(1)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Event_8h_1a0872a815d7e5c571430813192036fc74a1bb8c08bd6103ba5032a68215aeec8cb" prot="public">
+          <name>EventCategoryCamera</name>
+          <initializer>=                   BIT(2)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="54" column="5" bodyfile="src/AIAC/EventSys/Event.h" bodystart="55" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="enum" id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7" prot="public" static="no" strong="no">
+        <type></type>
+        <name>GOTypeFlags</name>
+        <qualifiedname>AIAC::GOTypeFlags</qualifiedname>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7ab89ad68f2666e2c648db0afb3ccb88e2" prot="public">
+          <name>_GOPrimitive</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7adc0319b2e30d4bba52df9a3e68bd2d14" prot="public">
+          <name>_GOPoint</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7a5d60647a518a2d6d2f2c649936ae7e62" prot="public">
+          <name>_GOLine</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7ac0ea2bb06ff73a89f5797fdf288ff30d" prot="public">
+          <name>_GOCircle</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7afca70e8145dd7bbc8d2d8725bbceed19" prot="public">
+          <name>_GOCylinder</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7acf96ed7dc7f32ce8054c4b15e0f0e933" prot="public">
+          <name>_GOPolyline</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7aa59d7f7c18865aaa153714dcee278fd4" prot="public">
+          <name>_GOTriangle</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7ab1dbf9647fcd03e1fd02b933bd47bc92" prot="public">
+          <name>_GOMesh</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GOPrimitive_8h_1a3e514eedee23246cd65eccd1cb1946b7af3f7aee978b44681db5211b738b8f74d" prot="public">
+          <name>_GOText</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="100" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="101" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="enum" id="Image_8h_1a95fc0538f880c77277d46d105a941d0e" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ImageFormat</name>
+        <qualifiedname>AIAC::ImageFormat</qualifiedname>
+        <enumvalue id="Image_8h_1a95fc0538f880c77277d46d105a941d0ea6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Image_8h_1a95fc0538f880c77277d46d105a941d0ea889574aebacda6bfd3e534e2b49b8028" prot="public">
+          <name>RGB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Image_8h_1a95fc0538f880c77277d46d105a941d0eaea3495a278957dc58165e48a8945469f" prot="public">
+          <name>RGBA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Image_8h_1a95fc0538f880c77277d46d105a941d0eabfc52a030be6cc5e47fe83a81e3175a0" prot="public">
+          <name>GRAYSCALE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum representing different image formats. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.h" line="47" column="5" bodyfile="src/AIAC/Image.h" bodystart="48" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="enum" id="GLObject_8h_1a53a3ad812b7ee9270e8cb1eb2a61b348" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>GLObjectType</name>
+        <qualifiedname>AIAC::GLObjectType</qualifiedname>
+        <enumvalue id="GLObject_8h_1a53a3ad812b7ee9270e8cb1eb2a61b348a70b71cabeeaf8c2bf473c896d5442ddb" prot="public">
+          <name>POINTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GLObject_8h_1a53a3ad812b7ee9270e8cb1eb2a61b348ae585142391f356c60bcfe68279ec2727" prot="public">
+          <name>LINES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="GLObject_8h_1a53a3ad812b7ee9270e8cb1eb2a61b348add3bfee8042d1b85c224f08b42a3fc2e" prot="public">
+          <name>TRIANGLES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.h" line="9" column="5" bodyfile="src/AIAC/Render/GLObject.h" bodystart="9" bodyend="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Base_8h_1ae4c650772471c7ae52c1166557a92d63" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::unique_ptr&lt; T &gt;</type>
+        <definition>using AIAC::Scope = typedef std::unique_ptr&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Scope</name>
+        <qualifiedname>AIAC::Scope</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Base.h" line="50" column="5" bodyfile="src/AIAC/Base.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Base_8h_1acf17dbadb6d63ef68016a8464a787b73" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; T &gt;</type>
+        <definition>using AIAC::Ref = typedef std::shared_ptr&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ref</name>
+        <qualifiedname>AIAC::Ref</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Base.h" line="58" column="5" bodyfile="src/AIAC/Base.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Event_8h_1ac0aedd1f4182babc25d7b65e61953476" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1Event" kindref="compound">Event</ref> &gt;</type>
+        <definition>using AIAC::EventPointer = typedef std::shared_ptr&lt;Event&gt;</definition>
+        <argsstring></argsstring>
+        <name>EventPointer</name>
+        <qualifiedname>AIAC::EventPointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="80" column="5" bodyfile="src/AIAC/EventSys/Event.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EventBus_8h_1a2f127d01b08ab93de7675f66a178afe5" prot="public" static="no">
+        <type>eventpp::EventQueue&lt; EventType, void(const EventPointer &amp;), <ref refid="structAIAC_1_1EventPolicy" kindref="compound">EventPolicy</ref> &gt;</type>
+        <definition>using AIAC::EQ = typedef eventpp::EventQueue&lt;EventType, void(const EventPointer&amp;), EventPolicy&gt;</definition>
+        <argsstring></argsstring>
+        <name>EQ</name>
+        <qualifiedname>AIAC::EQ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="44" column="5" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="ACInfoModel_8h_1a1d9e79ad9987d94581f2c4356a741fd8" prot="public" static="yes" mutable="no">
+        <type>std::map&lt; ACIMState, glm::vec4 &gt;</type>
+        <definition>std::map&lt;ACIMState, glm::vec4&gt; AIAC::HOLE_AXIS_COLOR</definition>
+        <argsstring></argsstring>
+        <name>HOLE_AXIS_COLOR</name>
+        <qualifiedname>AIAC::HOLE_AXIS_COLOR</qualifiedname>
+        <initializer>= {
+    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="54" column="17" bodyfile="src/AIAC/ACInfoModel.h" bodystart="54" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="variable" id="ACInfoModel_8h_1a7ff5f45b58d0d9594cc7e1f476b2b111" prot="public" static="yes" mutable="no">
+        <type>std::map&lt; ACIMState, glm::vec4 &gt;</type>
+        <definition>std::map&lt;ACIMState, glm::vec4&gt; AIAC::HOLE_CYLINDER_COLOR</definition>
+        <argsstring></argsstring>
+        <name>HOLE_CYLINDER_COLOR</name>
+        <qualifiedname>AIAC::HOLE_CYLINDER_COLOR</qualifiedname>
+        <initializer>= {
+    {ACIMState::NOT_DONE, glm::vec4(0.1f, 0.9f, 0.9f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="60" column="17" bodyfile="src/AIAC/ACInfoModel.h" bodystart="60" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="variable" id="ACInfoModel_8h_1af526716fd29d346d86c8ed94d1131937" prot="public" static="yes" mutable="no">
+        <type>std::map&lt; ACIMState, glm::vec4 &gt;</type>
+        <definition>std::map&lt;ACIMState, glm::vec4&gt; AIAC::CUT_FACE_COLOR</definition>
+        <argsstring></argsstring>
+        <name>CUT_FACE_COLOR</name>
+        <qualifiedname>AIAC::CUT_FACE_COLOR</qualifiedname>
+        <initializer>= {
+    {ACIMState::NOT_DONE, glm::vec4(0.9f, 0.6f, 0.2f, 0.2f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 0.2f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.2f)}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="66" column="17" bodyfile="src/AIAC/ACInfoModel.h" bodystart="66" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="variable" id="ACInfoModel_8h_1a3324f4ed631bd283a133b87738a7444c" prot="public" static="yes" mutable="no">
+        <type>std::map&lt; ACIMState, glm::vec4 &gt;</type>
+        <definition>std::map&lt;ACIMState, glm::vec4&gt; AIAC::CUT_EDGE_COLOR</definition>
+        <argsstring></argsstring>
+        <name>CUT_EDGE_COLOR</name>
+        <qualifiedname>AIAC::CUT_EDGE_COLOR</qualifiedname>
+        <initializer>= {
+    {ACIMState::NOT_DONE, glm::vec4(0.9f, 0.6f, 0.2f, 1.0f)},
+    {ACIMState::CURRENT, glm::vec4(0.1f, 0.9f, 0.5f, 1.0f)},
+    {ACIMState::DONE, glm::vec4(0.3f, 0.3f, 0.3f, 0.5f)}
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="72" column="17" bodyfile="src/AIAC/ACInfoModel.h" bodystart="72" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="variable" id="Application_8cpp_1ab96b8cf6011561271c64abdc12667bc9" prot="public" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::VertexArrayID</definition>
+        <argsstring></argsstring>
+        <name>VertexArrayID</name>
+        <qualifiedname>AIAC::VertexArrayID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.cpp" line="43" column="12" bodyfile="src/AIAC/Application.cpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GLObject_8cpp_1af70c5b3560047b17451fc22eaee8a1cb" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float AIAC::WEIGHT_TO_CYLINDER_RADIUS_RATE</definition>
+        <argsstring></argsstring>
+        <name>WEIGHT_TO_CYLINDER_RADIUS_RATE</name>
+        <qualifiedname>AIAC::WEIGHT_TO_CYLINDER_RADIUS_RATE</qualifiedname>
+        <initializer>= 1.0f / 64.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="4" column="24" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1a25cb552458f3e81b062b425144ceb9f1" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_BLACK</definition>
+        <argsstring></argsstring>
+        <name>OGL_BLACK</name>
+        <qualifiedname>AIAC::OGL_BLACK</qualifiedname>
+        <initializer>= glm::vec4(0, 0, 0, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="10" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1a913b50d0e2cd65a9475c58e6a34c581f" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_RED</definition>
+        <argsstring></argsstring>
+        <name>OGL_RED</name>
+        <qualifiedname>AIAC::OGL_RED</qualifiedname>
+        <initializer>= glm::vec4(1, 0, 0, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="11" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1aa60cfbd50d1988d727bfbb8ecff8341d" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_GREEN</definition>
+        <argsstring></argsstring>
+        <name>OGL_GREEN</name>
+        <qualifiedname>AIAC::OGL_GREEN</qualifiedname>
+        <initializer>= glm::vec4(0, 1, 0, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="12" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1a38f57ab40e59d644b80618593bdbc92e" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_BLUE</definition>
+        <argsstring></argsstring>
+        <name>OGL_BLUE</name>
+        <qualifiedname>AIAC::OGL_BLUE</qualifiedname>
+        <initializer>= glm::vec4(0, 0, 1, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="13" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1a610554142bd524880fed27c284a5347c" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_YELLOW</definition>
+        <argsstring></argsstring>
+        <name>OGL_YELLOW</name>
+        <qualifiedname>AIAC::OGL_YELLOW</qualifiedname>
+        <initializer>= glm::vec4(1, 1, 0, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="14" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1a9e1dcf25649f6ce50553cdc6d7a7c3fa" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_MAGENTA</definition>
+        <argsstring></argsstring>
+        <name>OGL_MAGENTA</name>
+        <qualifiedname>AIAC::OGL_MAGENTA</qualifiedname>
+        <initializer>= glm::vec4(1, 0, 1, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="15" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1a1eae36b5c78b6e48bb4cd06cde5afdc7" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_CYAN</definition>
+        <argsstring></argsstring>
+        <name>OGL_CYAN</name>
+        <qualifiedname>AIAC::OGL_CYAN</qualifiedname>
+        <initializer>= glm::vec4(0, 1, 1, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="16" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="GlUtils_8h_1ae169d5f131dc034f8103fae942a11efe" prot="public" static="yes" mutable="no">
+        <type>const glm::vec4</type>
+        <definition>const glm::vec4 AIAC::OGL_WHITE</definition>
+        <argsstring></argsstring>
+        <name>OGL_WHITE</name>
+        <qualifiedname>AIAC::OGL_WHITE</qualifiedname>
+        <initializer>= glm::vec4(1, 1, 1, 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="17" column="28" bodyfile="src/AIAC/Render/GlUtils.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="Window_8cpp_1a86eed4f84235dbb98d8cf7043aa71fe0" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t AIAC::s_GLFWWindowCount</definition>
+        <argsstring></argsstring>
+        <name>s_GLFWWindowCount</name>
+        <qualifiedname>AIAC::s_GLFWWindowCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.cpp" line="46" column="20" bodyfile="src/AIAC/Window.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="Window_8cpp_1aae928a10018b050343be529128c496ea" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::s_IsMouseButtonPressed</definition>
+        <argsstring></argsstring>
+        <name>s_IsMouseButtonPressed</name>
+        <qualifiedname>AIAC::s_IsMouseButtonPressed</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.cpp" line="47" column="17" bodyfile="src/AIAC/Window.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="Window_8cpp_1a3bb95088ea822c9ffb1704c8d7be20f1" prot="public" static="yes" mutable="no">
+        <type>struct AIAC::Position</type>
+        <definition>struct AIAC::Position AIAC::s_CursorPos</definition>
+        <argsstring></argsstring>
+        <name>s_CursorPos</name>
+        <qualifiedname>AIAC::s_CursorPos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.cpp" line="48" column="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="ACInfoModel_8cpp_1ae98cf570b9a9e03247c4b292eb5dcc41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ACIMState</type>
+        <definition>static ACIMState AIAC::StringToState</definition>
+        <argsstring>(std::string m_State)</argsstring>
+        <name>StringToState</name>
+        <qualifiedname>AIAC::StringToState</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>m_State</declname>
+        </param>
+        <briefdescription>
+<para>Convert string m_State to ACIMState. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m_State</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ACIMState </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.cpp" line="776" column="15" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="776" bodyend="793" declfile="src/AIAC/ACInfoModel.h" declline="82" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="ACInfoModel_8cpp_1a65101f054f16fa7a629eec2daae02ced" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>static glm::vec3 AIAC::StringToVec3</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>StringToVec3</name>
+        <qualifiedname>AIAC::StringToVec3</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Convert a string separated by space to glm::vec3. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string separated by space </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>glm::vec3 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.cpp" line="795" column="15" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="795" bodyend="800" declfile="src/AIAC/ACInfoModel.h" declline="89" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="ACInfoModel_8cpp_1af0634e9911fac6136a9f264aaf6dc85d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt; std::string &gt; AIAC::StringToTokens</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>StringToTokens</name>
+        <qualifiedname>AIAC::StringToTokens</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Convert a string separated by space to a list of string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string separated by space </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a std::vector&lt;std::string&gt; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.cpp" line="802" column="17" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="802" bodyend="810" declfile="src/AIAC/ACInfoModel.h" declline="96" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="ACInfoModel_8cpp_1aeb1cc68caa3a40caf660aac6cbd78a93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>static std::set&lt; std::string &gt; AIAC::StringToSet</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>StringToSet</name>
+        <qualifiedname>AIAC::StringToSet</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Convert a string separated by space to a set of tokens. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string separated by space </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a std::set&lt;std::string&gt; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.cpp" line="812" column="14" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="812" bodyend="820" declfile="src/AIAC/ACInfoModel.h" declline="103" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="ACInfoModel_8cpp_1a7e9f3f273d05b8f83babcf18fcbfdece" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool AIAC::StringToBool</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>StringToBool</name>
+        <qualifiedname>AIAC::StringToBool</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Convert a string to bool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.cpp" line="822" column="10" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="822" bodyend="838" declfile="src/AIAC/ACInfoModel.h" declline="110" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="ACInfoModel_8cpp_1ad4907012c922fb48bc95c17b07da8398" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string AIAC::Vec3ToString</definition>
+        <argsstring>(glm::vec3 vec3)</argsstring>
+        <name>Vec3ToString</name>
+        <qualifiedname>AIAC::Vec3ToString</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>vec3</declname>
+        </param>
+        <briefdescription>
+<para>Convert a vec3 to String. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vec3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vec3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>string </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.cpp" line="840" column="17" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="840" bodyend="844" declfile="src/AIAC/ACInfoModel.h" declline="117" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="Application_8cpp_1a65e8b93d2bb56527a2dc46344ee7c60b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; GLubyte &gt;</type>
+        <definition>std::vector&lt; GLubyte &gt; AIAC::CaptureFramePixels</definition>
+        <argsstring>(const ApplicationSpecification &amp;appSpec)</argsstring>
+        <name>CaptureFramePixels</name>
+        <qualifiedname>AIAC::CaptureFramePixels</qualifiedname>
+        <param>
+          <type>const <ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref> &amp;</type>
+          <declname>appSpec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.cpp" line="135" column="17" bodyfile="src/AIAC/Application.cpp" bodystart="135" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="Base_8h_1aa8a0147666461b68e74038b626423cf2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr Scope&lt; T &gt;</type>
+        <definition>constexpr Scope&lt; T &gt; AIAC::CreateScope</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>CreateScope</name>
+        <qualifiedname>AIAC::CreateScope</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Base.h" line="52" column="21" bodyfile="src/AIAC/Base.h" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="Base_8h_1adf325230217abf3e86dc98e94807f4bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr Ref&lt; T &gt;</type>
+        <definition>constexpr Ref&lt; T &gt; AIAC::CreateRef</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>CreateRef</name>
+        <qualifiedname>AIAC::CreateRef</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Base.h" line="60" column="19" bodyfile="src/AIAC/Base.h" bodystart="60" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="GeometryUtils_8cpp_1a2a2318af54e163df3bcb8a78075a995b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::mat3x3</type>
+        <definition>glm::mat3x3 AIAC::GetRotationMatrix</definition>
+        <argsstring>(glm::vec3 axis, float theta)</argsstring>
+        <name>GetRotationMatrix</name>
+        <qualifiedname>AIAC::GetRotationMatrix</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>Get the rotation matrix associated with counterclockwise rotation about the given axis by theta radians. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>axis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis of rotation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>theta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The angle of rotation in radians.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The rotation matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GeometryUtils.cpp" line="37" column="17" bodyfile="src/AIAC/GeometryUtils.cpp" bodystart="37" bodyend="68" declfile="src/AIAC/GeometryUtils.h" declline="47" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GeometryUtils_8cpp_1aebc29a1272cd226434f5c45a4c10b326" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::mat4x4</type>
+        <definition>glm::mat4x4 AIAC::GetTranslationMatrix</definition>
+        <argsstring>(glm::vec3 translationVector)</argsstring>
+        <name>GetTranslationMatrix</name>
+        <qualifiedname>AIAC::GetTranslationMatrix</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>translationVector</declname>
+        </param>
+        <briefdescription>
+<para>Get the translation matrix associated with the given translation vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>translationVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The translation vector</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The translation matrix </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GeometryUtils.cpp" line="70" column="17" bodyfile="src/AIAC/GeometryUtils.cpp" bodystart="70" bodyend="78" declfile="src/AIAC/GeometryUtils.h" declline="56" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GeometryUtils_8cpp_1a75f37c3e82f0ace5287dcb35e29d10e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::mat4x4</type>
+        <definition>glm::mat4x4 AIAC::GetRigidTransformationMatrix</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; srcPts, std::vector&lt; glm::vec3 &gt; dstPts)</argsstring>
+        <name>GetRigidTransformationMatrix</name>
+        <qualifiedname>AIAC::GetRigidTransformationMatrix</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>srcPts</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>dstPts</declname>
+        </param>
+        <briefdescription>
+<para>Get the rigid transformation matrix from two correlated set of 3D points @praam srcPts The source points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dstPts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The destination points </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GeometryUtils.cpp" line="80" column="17" bodyfile="src/AIAC/GeometryUtils.cpp" bodystart="80" bodyend="149" declfile="src/AIAC/GeometryUtils.h" declline="63" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="Image_8cpp_1a409fad8ec343bdcbd1f6270a703246d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::operator&gt;&gt;</definition>
+        <argsstring>(cv::VideoCapture cap, AIAC::Image &amp;img)</argsstring>
+        <name>operator&gt;&gt;</name>
+        <qualifiedname>AIAC::operator&gt;&gt;</qualifiedname>
+        <param>
+          <type>cv::VideoCapture</type>
+          <declname>cap</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1Image" kindref="compound">AIAC::Image</ref> &amp;</type>
+          <declname>img</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.cpp" line="124" column="10" bodyfile="src/AIAC/Image.cpp" bodystart="124" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="Image_8cpp_1a729b633a107845bf781908ecbe125f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CvtGlTextureObj2ImTexture</definition>
+        <argsstring>(GLuint glTextureID, ImTexture &amp;imTexture, ImVec2 size=ImVec2(0, 0))</argsstring>
+        <name>CvtGlTextureObj2ImTexture</name>
+        <qualifiedname>AIAC::CvtGlTextureObj2ImTexture</qualifiedname>
+        <param>
+          <type>GLuint</type>
+          <declname>glTextureID</declname>
+        </param>
+        <param>
+          <type><ref refid="structAIAC_1_1ImTexture" kindref="compound">ImTexture</ref> &amp;</type>
+          <declname>imTexture</declname>
+        </param>
+        <param>
+          <type>ImVec2</type>
+          <declname>size</declname>
+          <defval>ImVec2(0, 0)</defval>
+        </param>
+        <briefdescription>
+<para>Convert OpenGL texture object to ImGui texture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>glTextureID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenGL texture ID. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imTexture</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ImGui texture. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the texture. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.cpp" line="132" column="10" bodyfile="src/AIAC/Image.cpp" bodystart="132" bodyend="136" declfile="src/AIAC/Image.h" declline="238" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Image_8cpp_1aa4af4b769e2a10979f40702ee2682029" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CvtCvMat2GlTextureObj</definition>
+        <argsstring>(cv::Mat &amp;cvMat, GLuint &amp;glTextureObj, GLint glInternalFormat=GL_RGB)</argsstring>
+        <name>CvtCvMat2GlTextureObj</name>
+        <qualifiedname>AIAC::CvtCvMat2GlTextureObj</qualifiedname>
+        <param>
+          <type>cv::Mat &amp;</type>
+          <declname>cvMat</declname>
+        </param>
+        <param>
+          <type>GLuint &amp;</type>
+          <declname>glTextureObj</declname>
+        </param>
+        <param>
+          <type>GLint</type>
+          <declname>glInternalFormat</declname>
+          <defval>GL_RGB</defval>
+        </param>
+        <briefdescription>
+<para>Convert OpenCV matrix to OpenGL texture object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cvMat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenCV matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glTextureObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenGL texture object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glInternalFormat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Internal format of the OpenGL texture. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.cpp" line="138" column="10" bodyfile="src/AIAC/Image.cpp" bodystart="138" bodyend="166" declfile="src/AIAC/Image.h" declline="230" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Image_8cpp_1ad514ca7fdc400958e88c17c3edbf2bc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CvtCvMat2ImTexture</definition>
+        <argsstring>(cv::Mat &amp;cvMat, ImTexture &amp;imTexture, GLuint &amp;glTextureObj, GLint glInternalFormat)</argsstring>
+        <name>CvtCvMat2ImTexture</name>
+        <qualifiedname>AIAC::CvtCvMat2ImTexture</qualifiedname>
+        <param>
+          <type>cv::Mat &amp;</type>
+          <declname>cvMat</declname>
+        </param>
+        <param>
+          <type><ref refid="structAIAC_1_1ImTexture" kindref="compound">ImTexture</ref> &amp;</type>
+          <declname>imTexture</declname>
+        </param>
+        <param>
+          <type>GLuint &amp;</type>
+          <declname>glTextureObj</declname>
+        </param>
+        <param>
+          <type>GLint</type>
+          <declname>glInternalFormat</declname>
+        </param>
+        <briefdescription>
+<para>Convert cv::Mat to <ref refid="structAIAC_1_1ImTexture" kindref="compound">ImTexture</ref>, a glTextureObj is required as a texture holder. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convert OpenCV matrix to ImGui texture.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>imTexture</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output <ref refid="structAIAC_1_1ImTexture" kindref="compound">ImTexture</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glTextureObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The texture holder. Remember to delete it with <computeroutput>glDeleteTextures(1, &amp;glTextureObj)</computeroutput></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cvMat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenCV matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imTexture</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ImGui texture. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glTextureObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenGL texture object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>glInternalFormat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Internal format of the OpenGL texture. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.cpp" line="173" column="10" bodyfile="src/AIAC/Image.cpp" bodystart="173" bodyend="177" declfile="src/AIAC/Image.h" declline="247" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="GLObject_8cpp_1ad67d8ff00fbc4dd09846277ea8648bd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::GetSectorNum</definition>
+        <argsstring>(float radius)</argsstring>
+        <name>GetSectorNum</name>
+        <qualifiedname>AIAC::GetSectorNum</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="127" column="9" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="127" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="GLObject_8cpp_1a9f066be33d45dad94faa19ed10f0544d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::GetTransformed</definition>
+        <argsstring>(glm::mat4 transformMat, float x, float y, float z)</argsstring>
+        <name>GetTransformed</name>
+        <qualifiedname>AIAC::GetTransformed</qualifiedname>
+        <param>
+          <type>glm::mat4</type>
+          <declname>transformMat</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Combine 3 points into a glm::vec3 and transform it based on the given transformation matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>transformMat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 4x4 transformation matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>X coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Z coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="142" column="15" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="142" bodyend="147" declfile="src/AIAC/Render/RenderAPI.h" declline="57" declcolumn="15"/>
+      </memberdef>
+      <memberdef kind="function" id="GLObject_8cpp_1ae51bcd7e88f837566054b4816be0b89f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GLObject &gt; &gt; AIAC::CreateCylinder</definition>
+        <argsstring>(const glm::vec3 &amp;baseCenter, const glm::vec3 &amp;topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum)</argsstring>
+        <name>CreateCylinder</name>
+        <qualifiedname>AIAC::CreateCylinder</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>baseCenter</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>topCenter</declname>
+        </param>
+        <param>
+          <type>GLfloat</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>edgeColor</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sectorNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="149" column="17" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="149" bodyend="248" declfile="src/AIAC/Render/GLObject.h" declline="152" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GLObject_8cpp_1a4711d8392125e90ad2cf481e34b38658" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GLObject &gt; &gt; AIAC::CreateCircle</definition>
+        <argsstring>(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum)</argsstring>
+        <name>CreateCircle</name>
+        <qualifiedname>AIAC::CreateCircle</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>normal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>edgeColor</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>edgeWeight</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sectorNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="250" column="17" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="250" bodyend="310" declfile="src/AIAC/Render/GLObject.h" declline="153" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GLObject_8cpp_1ac082c003fbac2a966fb704f475ca3b4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GLObject &gt; &gt; AIAC::CreatePolyline</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; vertices, bool isClosed, glm::vec4 color, float lineWidth)</argsstring>
+        <name>CreatePolyline</name>
+        <qualifiedname>AIAC::CreatePolyline</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isClosed</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lineWidth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="312" column="17" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="312" bodyend="345" declfile="src/AIAC/Render/GLObject.h" declline="154" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8cpp_1a185765a7113fd662d71babee1bc865d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::glDrawPoints3d</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;vertices, const std::vector&lt; glm::vec4 &gt; &amp;colors, GLfloat pointSize=1.0f)</argsstring>
+        <name>glDrawPoints3d</name>
+        <qualifiedname>AIAC::glDrawPoints3d</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; glm::vec4 &gt; &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <param>
+          <type>GLfloat</type>
+          <declname>pointSize</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+<para>Draw multiple points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of 3d points, indicate the position of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RGBA(0~1.0) color, a vector with the same size of the <computeroutput>vertices</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pointSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.cpp" line="5" column="10" bodyfile="src/AIAC/Render/GlUtils.cpp" bodystart="5" bodyend="45" declfile="src/AIAC/Render/GlUtils.h" declline="26" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8cpp_1a9331503f7870d7a5f7c43e9409478be1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::glDrawPoints3d</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;vertices, const glm::vec4 &amp;color, GLfloat pointSize=1.0f)</argsstring>
+        <name>glDrawPoints3d</name>
+        <qualifiedname>AIAC::glDrawPoints3d</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>GLfloat</type>
+          <declname>pointSize</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+<para>Draw multiple points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of 3d points, indicate the position of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RGBA(0~1.0) color. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pointSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the point. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.cpp" line="47" column="10" bodyfile="src/AIAC/Render/GlUtils.cpp" bodystart="47" bodyend="50" declfile="src/AIAC/Render/GlUtils.h" declline="33" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8cpp_1a1cb80c5273465ce490a8a7a0a31e7f30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::glDrawLines3d</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;edges, const std::vector&lt; glm::vec4 &gt; &amp;colors)</argsstring>
+        <name>glDrawLines3d</name>
+        <qualifiedname>AIAC::glDrawLines3d</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>edges</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; glm::vec4 &gt; &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+<para>Draw multiple points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Draw multiple lines</para>
+<para>(0, 1, 0) <mdash/> (1, 0, 0) <table rows="2" cols="1"><row>
+<entry thead="yes"><para></para>
+</entry></row>
+<row>
+<entry thead="no"><para></para>
+</entry></row>
+</table>
+(0, 0, 0) <mdash/> (0, 0, 1)</para>
+<para>If you want to draw a square like this, you should construct the <computeroutput>edges</computeroutput> as: [ (0, 0, 0), (0, 0, 1), (0, 0, 1), (1, 0, 0), (1, 0, 0), (0, 1, 0), (0, 1, 0), (0, 0, 0) ]</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of 3d points, indicate the position of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RGBA(0~1.0) color, a vector with the same size of the <computeroutput>vertices</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.cpp" line="52" column="10" bodyfile="src/AIAC/Render/GlUtils.cpp" bodystart="52" bodyend="92" declfile="src/AIAC/Render/GlUtils.h" declline="56" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8cpp_1aa31934132287dd9212f1de636b227d47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::glDrawLines3d</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;edges, const glm::vec4 &amp;color)</argsstring>
+        <name>glDrawLines3d</name>
+        <qualifiedname>AIAC::glDrawLines3d</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>edges</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Draw multiple points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of 3d points, indicate the position of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RGBA(0~1.0) color. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.cpp" line="94" column="10" bodyfile="src/AIAC/Render/GlUtils.cpp" bodystart="94" bodyend="97" declfile="src/AIAC/Render/GlUtils.h" declline="62" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8cpp_1a3ec0c10a51aa5e6c45cef9365594cfe2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::glDrawTriangles3d</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, const std::vector&lt; glm::vec4 &gt; &amp;colors)</argsstring>
+        <name>glDrawTriangles3d</name>
+        <qualifiedname>AIAC::glDrawTriangles3d</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>indices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; glm::vec4 &gt; &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+<para>Draw multiple Triangles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>P2(0, 1, 0) <mdash/> P3(1, 0, 0) | / | | / | | / | | / | | / | P0(0, 0, 0) <mdash/> P1(0, 0, 1)</para>
+<para>If you want to draw a mesh of square like this, you should construct the <computeroutput>edges</computeroutput> as: [ (0, 0, 0), // P0 (0, 0, 1), // P1 (1, 0, 0), // P2 (0, 1, 0), // P3 ] with <computeroutput>indices</computeroutput>: [ 0, 1, 3, // Right-bottom triangle 3, 2, 0 // Left-top triangle ]</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of 3d points, indicate the position of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all triangle&apos;s indices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RGBA(0~1.0) color, a vector with the same size of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.cpp" line="99" column="10" bodyfile="src/AIAC/Render/GlUtils.cpp" bodystart="99" bodyend="145" declfile="src/AIAC/Render/GlUtils.h" declline="91" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8cpp_1aaa8a07b0a35d6dc29a36af27d8a59ede" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::glDrawTriangles3d</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;vertices, const std::vector&lt; uint32_t &gt; &amp;indices, const glm::vec4 &amp;colors)</argsstring>
+        <name>glDrawTriangles3d</name>
+        <qualifiedname>AIAC::glDrawTriangles3d</qualifiedname>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>indices</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+<para>Draw multiple Triangles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of 3d points, indicate the position of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of all triangle&apos;s indices. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>colors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RGBA(0~1.0) color, a vector with the same size of the vertices. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.cpp" line="146" column="10" bodyfile="src/AIAC/Render/GlUtils.cpp" bodystart="146" bodyend="149" declfile="src/AIAC/Render/GlUtils.h" declline="98" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="GlUtils_8h_1a5f8feaf2f9f0c55be762df4deb3dc3d0" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawSlamMap</definition>
+        <argsstring>(const std::shared_ptr&lt; tslam::Map &gt; &amp;map, const glm::vec4 &amp;color, float pointSize=1)</argsstring>
+        <name>DrawSlamMap</name>
+        <qualifiedname>AIAC::DrawSlamMap</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; tslam::Map &gt; &amp;</type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>pointSize</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Draw TSlam map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A TSlam map </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color of the point cloud </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GlUtils.h" line="105" column="17" declfile="src/AIAC/Render/GlUtils.h" declline="105" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8cpp_1a606091b4dc36b1e8f9fc975a3f875ba5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawAllGOs</definition>
+        <argsstring>(glm::mat4 projection=glm::mat4(1.0f), float textScale=1.0f)</argsstring>
+        <name>DrawAllGOs</name>
+        <qualifiedname>AIAC::DrawAllGOs</qualifiedname>
+        <param>
+          <type>glm::mat4</type>
+          <declname>projection</declname>
+          <defval>glm::mat4(1.0f)</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>textScale</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+<para>Draw all the GOs present in the <ref refid="classAIAC_1_1GORegistry" kindref="compound">GORegistry</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>projection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenGL projection matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.cpp" line="45" column="10" bodyfile="src/AIAC/Render/RenderAPI.cpp" bodystart="45" bodyend="68" declfile="src/AIAC/Render/RenderAPI.h" declline="71" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8cpp_1a3764bf9375fd33ad0f1baa2eacb920b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawGO</definition>
+        <argsstring>(const shared_ptr&lt; GOPrimitive &gt; &amp;goPrimitive)</argsstring>
+        <name>DrawGO</name>
+        <qualifiedname>AIAC::DrawGO</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &amp;</type>
+          <declname>goPrimitive</declname>
+        </param>
+        <briefdescription>
+<para>Draw a <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref>. (This function neglects the &quot;isVisible&quot; attribute of the object and will draw it anyway) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>goPrimitive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to draw. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.cpp" line="70" column="10" bodyfile="src/AIAC/Render/RenderAPI.cpp" bodystart="70" bodyend="88" declfile="src/AIAC/Render/RenderAPI.h" declline="77" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8cpp_1ab6fcb802d4f401d07e270d69ee4bcfc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawText</definition>
+        <argsstring>(const GOText &amp;goText, float scale, const glm::mat4 &amp;projection)</argsstring>
+        <name>DrawText</name>
+        <qualifiedname>AIAC::DrawText</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &amp;</type>
+          <declname>goText</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>const glm::mat4 &amp;</type>
+          <declname>projection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.cpp" line="90" column="10" bodyfile="src/AIAC/Render/RenderAPI.cpp" bodystart="90" bodyend="100" declfile="src/AIAC/Render/RenderAPI.h" declline="141" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8cpp_1ac92fdd1a0f44617e555093830529ac9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawTexts</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOText &gt; &gt; &amp;goTexts, float scale, const glm::mat4 &amp;projection)</argsstring>
+        <name>DrawTexts</name>
+        <qualifiedname>AIAC::DrawTexts</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt; &gt; &amp;</type>
+          <declname>goTexts</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>const glm::mat4 &amp;</type>
+          <declname>projection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.cpp" line="102" column="10" bodyfile="src/AIAC/Render/RenderAPI.cpp" bodystart="102" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8cpp_1abd7d032355954bf44c35738034ac8120" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawSlamMap</definition>
+        <argsstring>(const shared_ptr&lt; tslam::Map &gt; &amp;map, const glm::vec4 &amp;color, float pointSize)</argsstring>
+        <name>DrawSlamMap</name>
+        <qualifiedname>AIAC::DrawSlamMap</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; tslam::Map &gt; &amp;</type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>pointSize</declname>
+        </param>
+        <briefdescription>
+<para>Render Slam map on the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A tslam map to be rendered. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PointCloud&apos;s color. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pointSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PointCloud&apos;s size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.cpp" line="114" column="10" bodyfile="src/AIAC/Render/RenderAPI.cpp" bodystart="114" bodyend="137" declfile="src/AIAC/Render/RenderAPI.h" declline="65" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a63c3da1e881cfa3f4b16e61a1be4f27a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawPoint</definition>
+        <argsstring>(const GOPoint &amp;goPoint)</argsstring>
+        <name>DrawPoint</name>
+        <qualifiedname>AIAC::DrawPoint</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &amp;</type>
+          <declname>goPoint</declname>
+        </param>
+        <briefdescription>
+<para>Draw a <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>goPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The point to draw. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="83" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="83" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1abaa1fa17c097b4570f67ab6f296d12f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawPoints</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOPoint &gt; &gt; &amp;goPoints)</argsstring>
+        <name>DrawPoints</name>
+        <qualifiedname>AIAC::DrawPoints</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt; &gt; &amp;</type>
+          <declname>goPoints</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="84" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="84" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a6924b05b5ae8277279c64756ebf567ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawLine</definition>
+        <argsstring>(const glm::vec3 &amp;p1, const glm::vec3 &amp;p2, float weight=GOWeight::Default, const glm::vec4 &amp;color=glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))</argsstring>
+        <name>DrawLine</name>
+        <qualifiedname>AIAC::DrawLine</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>p2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+          <defval>GOWeight::Default</defval>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+          <defval>glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)</defval>
+        </param>
+        <briefdescription>
+<para>Draw a line on two glm::vec3. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weight of the line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RGBA Color of the line. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="93" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="93" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1ac47fe7062a945232fa352de0f2353a2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawLines</definition>
+        <argsstring>(const vector&lt; glm::vec3 &gt; &amp;vertices, float weight, const glm::vec4 &amp;color)</argsstring>
+        <name>DrawLines</name>
+        <qualifiedname>AIAC::DrawLines</qualifiedname>
+        <param>
+          <type>const vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Draw multiple lines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of glm::vec3. If you have line [p1, p2] and [p2, p3], the vector should be construct as [p1, p2, p2, p3, ...] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weight of the line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RGBA Color of the line. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="100" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="100" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a8af8117dac1b0edc5af946be623b701b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawLine</definition>
+        <argsstring>(const GOLine &amp;goLine)</argsstring>
+        <name>DrawLine</name>
+        <qualifiedname>AIAC::DrawLine</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &amp;</type>
+          <declname>goLine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="101" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="101" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a43834dbae2ef08450ebc6826a2223879" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawLines</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOLine &gt; &gt; &amp;goLines)</argsstring>
+        <name>DrawLines</name>
+        <qualifiedname>AIAC::DrawLines</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &gt; &amp;</type>
+          <declname>goLines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="102" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="102" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1affd305d974a6fce5d450094bb987b407" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawCircle</definition>
+        <argsstring>(glm::vec3 center, glm::vec3 normal, float radius, glm::vec4 color, glm::vec4 edgeColor, float edgeWeight, int sectorNum=24)</argsstring>
+        <name>DrawCircle</name>
+        <qualifiedname>AIAC::DrawCircle</qualifiedname>
+        <param>
+          <type>glm::vec3</type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>normal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>edgeColor</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>edgeWeight</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sectorNum</declname>
+          <defval>24</defval>
+        </param>
+        <briefdescription>
+<para>Draw a single circle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>center</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Center of the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>normal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The normal of plane on which the circle lays. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radius of the circle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RGBA Color of the face. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edgeColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RGBA Color of the edge. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edgeWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weight of the edge. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sectorNum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of sectors, can be derived from GetSectorNum(radius). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="114" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="114" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1ac937d50bb228e92ff84bb4c6dfa7eab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawCircle</definition>
+        <argsstring>(const GOCircle &amp;goCircle)</argsstring>
+        <name>DrawCircle</name>
+        <qualifiedname>AIAC::DrawCircle</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &amp;</type>
+          <declname>goCircle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="115" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="115" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a20d345dcfa3800504fb145efb8c2d251" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawCircles</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOCircle &gt; &gt; &amp;goCircles)</argsstring>
+        <name>DrawCircles</name>
+        <qualifiedname>AIAC::DrawCircles</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCircle" kindref="compound">GOCircle</ref> &gt; &gt; &amp;</type>
+          <declname>goCircles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="116" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="116" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1aba77562d647201ad90d496da808425f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawCylinder</definition>
+        <argsstring>(const glm::vec3 &amp;baseCenter, const glm::vec3 &amp;topCenter, GLfloat radius, glm::vec4 color, glm::vec4 edgeColor, int sectorNum=24)</argsstring>
+        <name>DrawCylinder</name>
+        <qualifiedname>AIAC::DrawCylinder</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>baseCenter</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>topCenter</declname>
+        </param>
+        <param>
+          <type>GLfloat</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>edgeColor</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sectorNum</declname>
+          <defval>24</defval>
+        </param>
+        <briefdescription>
+<para>Draw a Cylinder, this is also used for drawing lines with heavy weight (&gt;1.0f). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>baseCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Base center (bottom) of the cylinder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>topCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Top center (top) of the cylinder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radius of the cylinder; For drawing line, radius = weight * WEIGHT_TO_CYLINDER_RADIUS_RATE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Color of the cylinder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edgeColor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color of the edges of the caps. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sectorNum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of sectors of the cylinder. Can call <computeroutput>GetSectorNum(radius)</computeroutput> to get the default value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="127" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="127" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1afb760356af916c25483ccf6f9436fecc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawCylinder</definition>
+        <argsstring>(const GOCylinder &amp;goCylinder)</argsstring>
+        <name>DrawCylinder</name>
+        <qualifiedname>AIAC::DrawCylinder</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOCylinder" kindref="compound">GOCylinder</ref> &amp;</type>
+          <declname>goCylinder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="129" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="129" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a27c944d6b8d3870a9383685309e1d742" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawCylinders</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOCylinder &gt; &gt; &amp;goCylinders)</argsstring>
+        <name>DrawCylinders</name>
+        <qualifiedname>AIAC::DrawCylinders</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOCylinder" kindref="compound">GOCylinder</ref> &gt; &gt; &amp;</type>
+          <declname>goCylinders</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="130" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="130" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a2191582175b02d8118c331e37730b69b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawPolyline</definition>
+        <argsstring>(const GOPolyline &amp;goPolyline)</argsstring>
+        <name>DrawPolyline</name>
+        <qualifiedname>AIAC::DrawPolyline</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &amp;</type>
+          <declname>goPolyline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="132" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="132" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1aeec02821c143a593f9c776f6189b1e61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawPolylines</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOPolyline &gt; &gt; &amp;goPolylines)</argsstring>
+        <name>DrawPolylines</name>
+        <qualifiedname>AIAC::DrawPolylines</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt; &gt; &amp;</type>
+          <declname>goPolylines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="133" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="133" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a0c70f65794ad343e4651aba68f895e07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawTriangle</definition>
+        <argsstring>(const GOTriangle &amp;goTriangle)</argsstring>
+        <name>DrawTriangle</name>
+        <qualifiedname>AIAC::DrawTriangle</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOTriangle" kindref="compound">GOTriangle</ref> &amp;</type>
+          <declname>goTriangle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="135" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="135" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a303f6e4bc23f435b124d2d597ab62c0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawTriangles</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOTriangle &gt; &gt; &amp;goTriangles)</argsstring>
+        <name>DrawTriangles</name>
+        <qualifiedname>AIAC::DrawTriangles</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOTriangle" kindref="compound">GOTriangle</ref> &gt; &gt; &amp;</type>
+          <declname>goTriangles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="136" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="136" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1a267d4e8ffe6ffc226412a80aa569e681" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawMesh</definition>
+        <argsstring>(const GOMesh &amp;goMesh)</argsstring>
+        <name>DrawMesh</name>
+        <qualifiedname>AIAC::DrawMesh</qualifiedname>
+        <param>
+          <type>const <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &amp;</type>
+          <declname>goMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="138" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="138" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1aa7623273e95ffae248f74e9ff35a2794" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawMeshes</definition>
+        <argsstring>(const std::vector&lt; std::shared_ptr&lt; GOMesh &gt; &gt; &amp;goMeshes)</argsstring>
+        <name>DrawMeshes</name>
+        <qualifiedname>AIAC::DrawMeshes</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt; &gt; &amp;</type>
+          <declname>goMeshes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="139" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="139" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="RenderAPI_8h_1aadd32b4067bfb4c87085c2814f9e719e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::DrawTexts</definition>
+        <argsstring>(std::vector&lt; GOText &gt; goTexts, float scale=1.0f, const glm::mat4 &amp;projection=glm::mat4(1.0f))</argsstring>
+        <name>DrawTexts</name>
+        <qualifiedname>AIAC::DrawTexts</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt;</type>
+          <declname>goTexts</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+          <defval>1.0f</defval>
+        </param>
+        <param>
+          <type>const glm::mat4 &amp;</type>
+          <declname>projection</declname>
+          <defval>glm::mat4(1.0f)</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/RenderAPI.h" line="142" column="10" declfile="src/AIAC/Render/RenderAPI.h" declline="142" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TouchMonitor_8cpp_1a59e62d600886971c5c9382090c3846b2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool AIAC::IsGlfwInitialized</definition>
+        <argsstring>()</argsstring>
+        <name>IsGlfwInitialized</name>
+        <qualifiedname>AIAC::IsGlfwInitialized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.cpp" line="45" column="17" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="45" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="TouchMonitor_8cpp_1a21bb91e64864c5b50994645fca3266cc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void AIAC::GLFWMonitorCallback</definition>
+        <argsstring>(GLFWmonitor *monitor, int event)</argsstring>
+        <name>GLFWMonitorCallback</name>
+        <qualifiedname>AIAC::GLFWMonitorCallback</qualifiedname>
+        <param>
+          <type>GLFWmonitor *</type>
+          <declname>monitor</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/TouchMonitor.cpp" line="51" column="17" bodyfile="src/AIAC/TouchMonitor.cpp" bodystart="51" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="Window_8cpp_1aef8dbf88b2a7a8e9389d0c26c67136a5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void AIAC::GLFWErrorCallback</definition>
+        <argsstring>(int error, const char *description)</argsstring>
+        <name>GLFWErrorCallback</name>
+        <qualifiedname>AIAC::GLFWErrorCallback</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>error</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.cpp" line="50" column="17" bodyfile="src/AIAC/Window.cpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoModel.cpp" line="43" column="1"/>
+  </compounddef>
+</doxygen>

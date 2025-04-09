@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CutChainSawDepthFeedVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CutChainSawDepthFeedVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1FeedbackVisualizer" prot="public" virt="non-virtual">AIAC::FeedbackVisualizer</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawDepthFeedVisualizer_1af57469b6ede0d3f7e846cdeda8900826" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutChainSawDepthFeedVisualizer::m_LineIntersect</definition>
+        <argsstring></argsstring>
+        <name>m_LineIntersect</name>
+        <qualifiedname>AIAC::CutChainSawDepthFeedVisualizer::m_LineIntersect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="99" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a60271acb32b724347126fc129630d243" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutChainSawDepthFeedVisualizer::m_LineIntersectThickness</definition>
+        <argsstring></argsstring>
+        <name>m_LineIntersectThickness</name>
+        <qualifiedname>AIAC::CutChainSawDepthFeedVisualizer::m_LineIntersectThickness</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="100" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a29fb4d8ec4dd1c58f0473f328e4c131e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutChainSawDepthFeedVisualizer::m_LineDepthFaceEdge1</definition>
+        <argsstring></argsstring>
+        <name>m_LineDepthFaceEdge1</name>
+        <qualifiedname>AIAC::CutChainSawDepthFeedVisualizer::m_LineDepthFaceEdge1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="101" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawDepthFeedVisualizer_1acac18f7202f073c6e095220ec171f67f" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutChainSawDepthFeedVisualizer::m_LineDepthFaceEdge2</definition>
+        <argsstring></argsstring>
+        <name>m_LineDepthFaceEdge2</name>
+        <qualifiedname>AIAC::CutChainSawDepthFeedVisualizer::m_LineDepthFaceEdge2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="102" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a960aac0819ddbb10550c011c787780fd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CutChainSawFeedback</definition>
+        <argsstring></argsstring>
+        <name>CutChainSawFeedback</name>
+        <qualifiedname>AIAC::CutChainSawDepthFeedVisualizer::CutChainSawFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1CutChainSawFeedback" kindref="compound">CutChainSawFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="104" column="22" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a1451bdd453a6478ff1632e4bcb55739d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>CutChainSawDepthFeedVisualizer</name>
+        <qualifiedname>AIAC::CutChainSawDepthFeedVisualizer::CutChainSawDepthFeedVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="96" column="13" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="105" bodyend="133"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::CutChainSawDepthFeedVisualizer</label>
+        <link refid="classAIAC_1_1CutChainSawDepthFeedVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CutChainSawDepthFeedVisualizer</label>
+        <link refid="classAIAC_1_1CutChainSawDepthFeedVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="93" column="9" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="94" bodyend="105"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a1451bdd453a6478ff1632e4bcb55739d" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>CutChainSawDepthFeedVisualizer</name></member>
+      <member refid="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a960aac0819ddbb10550c011c787780fd" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>CutChainSawFeedback</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a29fb4d8ec4dd1c58f0473f328e4c131e" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>m_LineDepthFaceEdge1</name></member>
+      <member refid="classAIAC_1_1CutChainSawDepthFeedVisualizer_1acac18f7202f073c6e095220ec171f67f" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>m_LineDepthFaceEdge2</name></member>
+      <member refid="classAIAC_1_1CutChainSawDepthFeedVisualizer_1af57469b6ede0d3f7e846cdeda8900826" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>m_LineIntersect</name></member>
+      <member refid="classAIAC_1_1CutChainSawDepthFeedVisualizer_1a60271acb32b724347126fc129630d243" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>m_LineIntersectThickness</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawDepthFeedVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

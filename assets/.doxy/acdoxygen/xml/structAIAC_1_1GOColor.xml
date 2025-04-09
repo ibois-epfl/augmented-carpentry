@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1GOColor" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::GOColor</compoundname>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a18478cf15ffd84a034445d07a57f9608" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::RED</definition>
+        <argsstring></argsstring>
+        <name>RED</name>
+        <qualifiedname>AIAC::GOColor::RED</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="50" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a4d9b2a0983d7f30c0b49ca124ad753e3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::RED_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>RED_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::RED_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 0.0f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="51" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1af7d91ec702714d67fd27497ab9830bf8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::GREEN</definition>
+        <argsstring></argsstring>
+        <name>GREEN</name>
+        <qualifiedname>AIAC::GOColor::GREEN</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="52" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a2e697c0f0ab92fb340c5e1d362765691" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::GREEN_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>GREEN_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::GREEN_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 1.0f, 0.0f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="53" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1abb241509c50809c839eadb890c0efeb1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::GREEN_DARKER_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>GREEN_DARKER_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::GREEN_DARKER_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 0.7f, 0.0f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="54" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ad3ccb527756b546f898152901ca2b19d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::GREEN_PUNK_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>GREEN_PUNK_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::GREEN_PUNK_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 0.7f, 0.0f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="55" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ad8c84e998033ecea3687411ac4b1f200" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::BLUE</definition>
+        <argsstring></argsstring>
+        <name>BLUE</name>
+        <qualifiedname>AIAC::GOColor::BLUE</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="56" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a5788e8ab467f810126dc2d71e1bc3e76" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::YELLOW</definition>
+        <argsstring></argsstring>
+        <name>YELLOW</name>
+        <qualifiedname>AIAC::GOColor::YELLOW</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 1.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="57" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a57e83a841211734064723da404560f56" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::YELLOW_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>YELLOW_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::YELLOW_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 1.0f, 0.0f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="58" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ab20c8c938fa36903e2a79e7175daedcc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::MAGENTA</definition>
+        <argsstring></argsstring>
+        <name>MAGENTA</name>
+        <qualifiedname>AIAC::GOColor::MAGENTA</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="59" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a7661c15215a6d0bdbbd26d2205a342c3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::MAGENTA_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>MAGENTA_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::MAGENTA_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 1.0f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="60" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ad1a9c87d6389b7c2c5c33b28863dd772" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::CYAN</definition>
+        <argsstring></argsstring>
+        <name>CYAN</name>
+        <qualifiedname>AIAC::GOColor::CYAN</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="61" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a02ec1af56ea3ba321f482b9ab4003267" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::WHITE</definition>
+        <argsstring></argsstring>
+        <name>WHITE</name>
+        <qualifiedname>AIAC::GOColor::WHITE</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="62" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a6185dc43ebb90fba7e12654f9cd046ff" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::BLACK</definition>
+        <argsstring></argsstring>
+        <name>BLACK</name>
+        <qualifiedname>AIAC::GOColor::BLACK</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="63" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a3556b0e90996a48dc86d01db0bc858d5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::GRAY</definition>
+        <argsstring></argsstring>
+        <name>GRAY</name>
+        <qualifiedname>AIAC::GOColor::GRAY</qualifiedname>
+        <initializer>= glm::vec4(0.5f, 0.5f, 0.5f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="64" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a6f5bad80732d6dabaf7c0392277f5294" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::ORANGE</definition>
+        <argsstring></argsstring>
+        <name>ORANGE</name>
+        <qualifiedname>AIAC::GOColor::ORANGE</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.5f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="65" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a755e08e3e227a1ace39f408920fdfa8b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::ORANGE_TRANSP</definition>
+        <argsstring></argsstring>
+        <name>ORANGE_TRANSP</name>
+        <qualifiedname>AIAC::GOColor::ORANGE_TRANSP</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.5f, 0.0f, 0.5f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="66" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1af658c1b74f2ad59ae85bfbf151a527dd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::PURPLE</definition>
+        <argsstring></argsstring>
+        <name>PURPLE</name>
+        <qualifiedname>AIAC::GOColor::PURPLE</qualifiedname>
+        <initializer>= glm::vec4(0.5f, 0.0f, 0.5f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="67" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a7cac2faacf0fad3ebcd9bc31c7493f13" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::PURPLE_TRANSP</definition>
+        <argsstring></argsstring>
+        <name>PURPLE_TRANSP</name>
+        <qualifiedname>AIAC::GOColor::PURPLE_TRANSP</qualifiedname>
+        <initializer>= glm::vec4(0.5f, 0.0f, 0.5f, 0.5f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="68" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ae0f6d749379aeab534e50dbe0f0f2110" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::PURPLE_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>PURPLE_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::PURPLE_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(0.5f, 0.0f, 0.5f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="69" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ab845105d5baa8422325c18d46f917eba" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::PINK</definition>
+        <argsstring></argsstring>
+        <name>PINK</name>
+        <qualifiedname>AIAC::GOColor::PINK</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 0.5f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="70" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a90cb49efaea122ad3318cec3e4c7008b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::PINK_TRANSP</definition>
+        <argsstring></argsstring>
+        <name>PINK_TRANSP</name>
+        <qualifiedname>AIAC::GOColor::PINK_TRANSP</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 0.5f, 0.5f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="71" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1ab6da102ee9edb5a1b44a682caefa8bd7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::PINK_TRANSP07</definition>
+        <argsstring></argsstring>
+        <name>PINK_TRANSP07</name>
+        <qualifiedname>AIAC::GOColor::PINK_TRANSP07</qualifiedname>
+        <initializer>= glm::vec4(1.0f, 0.0f, 0.5f, 0.7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="72" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1GOColor_1a943979f37a4e9644fa23604a706fc559" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr glm::vec4</type>
+        <definition>constexpr glm::vec4 AIAC::GOColor::BROWN</definition>
+        <argsstring></argsstring>
+        <name>BROWN</name>
+        <qualifiedname>AIAC::GOColor::BROWN</qualifiedname>
+        <initializer>= glm::vec4(0.5f, 0.25f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="73" column="36" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="48" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="49" bodyend="74"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1GOColor_1a6185dc43ebb90fba7e12654f9cd046ff" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>BLACK</name></member>
+      <member refid="structAIAC_1_1GOColor_1ad8c84e998033ecea3687411ac4b1f200" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>BLUE</name></member>
+      <member refid="structAIAC_1_1GOColor_1a943979f37a4e9644fa23604a706fc559" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>BROWN</name></member>
+      <member refid="structAIAC_1_1GOColor_1ad1a9c87d6389b7c2c5c33b28863dd772" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>CYAN</name></member>
+      <member refid="structAIAC_1_1GOColor_1a3556b0e90996a48dc86d01db0bc858d5" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>GRAY</name></member>
+      <member refid="structAIAC_1_1GOColor_1af7d91ec702714d67fd27497ab9830bf8" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>GREEN</name></member>
+      <member refid="structAIAC_1_1GOColor_1abb241509c50809c839eadb890c0efeb1" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>GREEN_DARKER_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1ad3ccb527756b546f898152901ca2b19d" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>GREEN_PUNK_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1a2e697c0f0ab92fb340c5e1d362765691" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>GREEN_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1ab20c8c938fa36903e2a79e7175daedcc" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>MAGENTA</name></member>
+      <member refid="structAIAC_1_1GOColor_1a7661c15215a6d0bdbbd26d2205a342c3" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>MAGENTA_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1a6f5bad80732d6dabaf7c0392277f5294" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>ORANGE</name></member>
+      <member refid="structAIAC_1_1GOColor_1a755e08e3e227a1ace39f408920fdfa8b" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>ORANGE_TRANSP</name></member>
+      <member refid="structAIAC_1_1GOColor_1ab845105d5baa8422325c18d46f917eba" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>PINK</name></member>
+      <member refid="structAIAC_1_1GOColor_1a90cb49efaea122ad3318cec3e4c7008b" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>PINK_TRANSP</name></member>
+      <member refid="structAIAC_1_1GOColor_1ab6da102ee9edb5a1b44a682caefa8bd7" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>PINK_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1af658c1b74f2ad59ae85bfbf151a527dd" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>PURPLE</name></member>
+      <member refid="structAIAC_1_1GOColor_1a7cac2faacf0fad3ebcd9bc31c7493f13" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>PURPLE_TRANSP</name></member>
+      <member refid="structAIAC_1_1GOColor_1ae0f6d749379aeab534e50dbe0f0f2110" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>PURPLE_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1a18478cf15ffd84a034445d07a57f9608" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>RED</name></member>
+      <member refid="structAIAC_1_1GOColor_1a4d9b2a0983d7f30c0b49ca124ad753e3" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>RED_TRANSP07</name></member>
+      <member refid="structAIAC_1_1GOColor_1a02ec1af56ea3ba321f482b9ab4003267" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>WHITE</name></member>
+      <member refid="structAIAC_1_1GOColor_1a5788e8ab467f810126dc2d71e1bc3e76" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>YELLOW</name></member>
+      <member refid="structAIAC_1_1GOColor_1a57e83a841211734064723da404560f56" prot="public" virt="non-virtual"><scope>AIAC::GOColor</scope><name>YELLOW_TRANSP07</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

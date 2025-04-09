@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1HoleFeedbackText" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::HoleFeedbackText</compoundname>
+    <basecompoundref refid="classAIAC_1_1FeedbackVisualizer" prot="public" virt="non-virtual">AIAC::FeedbackVisualizer</basecompoundref>
+    <includes refid="HoleFeedback_8h" local="no">HoleFeedback.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedbackText_1a77034bb72ad58072ceb41ad03fca6b68" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOText&gt; AIAC::HoleFeedbackText::m_InfoText</definition>
+        <argsstring></argsstring>
+        <name>m_InfoText</name>
+        <qualifiedname>AIAC::HoleFeedbackText::m_InfoText</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="55" column="25" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1HoleFeedbackText_1ab1ee61ea0162f42815d4edb800fd9fe2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class HoleFeedback</definition>
+        <argsstring></argsstring>
+        <name>HoleFeedback</name>
+        <qualifiedname>AIAC::HoleFeedbackText::HoleFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1HoleFeedback" kindref="compound">HoleFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="57" column="18" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1HoleFeedbackText_1a0976599786abee6918d05415001dfd73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::HoleFeedbackText::HoleFeedbackText</definition>
+        <argsstring>()</argsstring>
+        <name>HoleFeedbackText</name>
+        <qualifiedname>AIAC::HoleFeedbackText::HoleFeedbackText</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="51" column="9" bodyfile="src/AIAC/Feedback/HoleFeedback.cpp" bodystart="39" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The general visualizer for the info displayed as text. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::HoleFeedbackText</label>
+        <link refid="classAIAC_1_1HoleFeedbackText"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::HoleFeedbackText</label>
+        <link refid="classAIAC_1_1HoleFeedbackText"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/HoleFeedback.h" line="48" column="5" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="49" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::HoleFeedbackText</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::HoleFeedbackText</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1HoleFeedbackText_1ab1ee61ea0162f42815d4edb800fd9fe2" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>HoleFeedback</name></member>
+      <member refid="classAIAC_1_1HoleFeedbackText_1a0976599786abee6918d05415001dfd73" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>HoleFeedbackText</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1HoleFeedbackText_1a77034bb72ad58072ceb41ad03fca6b68" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>m_InfoText</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedbackText</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

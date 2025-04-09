@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1Window_1_1WindowData" kind="struct" language="C++" prot="private">
+    <compoundname>AIAC::Window::WindowData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1Window_1_1WindowData_1aa95f6e3bf58f04fe5be0627f43e534bf" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AIAC::Window::WindowData::Title</definition>
+        <argsstring></argsstring>
+        <name>Title</name>
+        <qualifiedname>AIAC::Window::WindowData::Title</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="99" column="24" bodyfile="src/AIAC/Window.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Window_1_1WindowData_1ad0d866cbb6b769c6b541addf24cfc015" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::Window::WindowData::Width</definition>
+        <argsstring></argsstring>
+        <name>Width</name>
+        <qualifiedname>AIAC::Window::WindowData::Width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="100" column="22" bodyfile="src/AIAC/Window.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Window_1_1WindowData_1a532c5e924ecb7a81069e92217b79499e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::Window::WindowData::Height</definition>
+        <argsstring></argsstring>
+        <name>Height</name>
+        <qualifiedname>AIAC::Window::WindowData::Height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="101" column="22" bodyfile="src/AIAC/Window.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Window_1_1WindowData_1afd3cb13021a7a9e02708e04a82fff81b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Window::WindowData::VSync</definition>
+        <argsstring></argsstring>
+        <name>VSync</name>
+        <qualifiedname>AIAC::Window::WindowData::VSync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="102" column="18" bodyfile="src/AIAC/Window.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1Window_1_1WindowData_1a29f9d000e9993604449543acc3d51179" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Window::WindowData::IsResizable</definition>
+        <argsstring></argsstring>
+        <name>IsResizable</name>
+        <qualifiedname>AIAC::Window::WindowData::IsResizable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="103" column="18" bodyfile="src/AIAC/Window.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Window.h" line="97" column="9" bodyfile="src/AIAC/Window.h" bodystart="98" bodyend="104"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1Window_1_1WindowData_1a532c5e924ecb7a81069e92217b79499e" prot="public" virt="non-virtual"><scope>AIAC::Window::WindowData</scope><name>Height</name></member>
+      <member refid="structAIAC_1_1Window_1_1WindowData_1a29f9d000e9993604449543acc3d51179" prot="public" virt="non-virtual"><scope>AIAC::Window::WindowData</scope><name>IsResizable</name></member>
+      <member refid="structAIAC_1_1Window_1_1WindowData_1aa95f6e3bf58f04fe5be0627f43e534bf" prot="public" virt="non-virtual"><scope>AIAC::Window::WindowData</scope><name>Title</name></member>
+      <member refid="structAIAC_1_1Window_1_1WindowData_1afd3cb13021a7a9e02708e04a82fff81b" prot="public" virt="non-virtual"><scope>AIAC::Window::WindowData</scope><name>VSync</name></member>
+      <member refid="structAIAC_1_1Window_1_1WindowData_1ad0d866cbb6b769c6b541addf24cfc015" prot="public" virt="non-virtual"><scope>AIAC::Window::WindowData</scope><name>Width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

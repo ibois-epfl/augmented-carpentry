@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceinih" kind="namespace" language="C++">
+    <compoundname>inih</compoundname>
+    <innerclass refid="classinih_1_1INIReader" prot="public">inih::INIReader</innerclass>
+    <innerclass refid="classinih_1_1INIWriter" prot="public">inih::INIWriter</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaceinih_1a524428007434396d842e28c79c2f7473" prot="public" static="no">
+        <type>int(*</type>
+        <definition>typedef int(* inih::ini_handler) (void *user, const char *section, const char *name, const char *value)</definition>
+        <argsstring>)(void *user, const char *section, const char *name, const char *value)</argsstring>
+        <name>ini_handler</name>
+        <qualifiedname>inih::ini_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="31" column="9" bodyfile="src/utils/Ini.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceinih_1a6231fae76ae31dd2ed61d4a5f1b723c4" prot="public" static="no">
+        <type>char *(*</type>
+        <definition>typedef char *(* inih::ini_reader) (char *str, int num, void *stream)</definition>
+        <argsstring>)(char *str, int num, void *stream)</argsstring>
+        <name>ini_reader</name>
+        <qualifiedname>inih::ini_reader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="35" column="9" bodyfile="src/utils/Ini.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceinih_1a5329b3c5db82a4991d27e9e4a2c37685" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char *</type>
+        <definition>static char * inih::rstrip</definition>
+        <argsstring>(char *s)</argsstring>
+        <name>rstrip</name>
+        <qualifiedname>inih::rstrip</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="46" column="20" bodyfile="src/utils/Ini.h" bodystart="46" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceinih_1a91cc6f30c79304394b8c74ee5664ab84" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char *</type>
+        <definition>static char * inih::lskip</definition>
+        <argsstring>(const char *s)</argsstring>
+        <name>lskip</name>
+        <qualifiedname>inih::lskip</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="53" column="20" bodyfile="src/utils/Ini.h" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceinih_1a2686e1b6d06a1b31bc9ee258d02cd687" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char *</type>
+        <definition>static char * inih::find_chars_or_comment</definition>
+        <argsstring>(const char *s, const char *chars)</argsstring>
+        <name>find_chars_or_comment</name>
+        <qualifiedname>inih::find_chars_or_comment</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>chars</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="61" column="20" bodyfile="src/utils/Ini.h" bodystart="61" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceinih_1af8d88d98e8f1bb8f07ca37ecd0b879f2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char *</type>
+        <definition>static char * inih::strncpy0</definition>
+        <argsstring>(char *dest, const char *src, size_t size)</argsstring>
+        <name>strncpy0</name>
+        <qualifiedname>inih::strncpy0</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="72" column="20" bodyfile="src/utils/Ini.h" bodystart="72" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceinih_1aff19a3e0cc11f9b18f2deb223679be4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int inih::ini_parse_stream</definition>
+        <argsstring>(ini_reader reader, void *stream, ini_handler handler, void *user)</argsstring>
+        <name>ini_parse_stream</name>
+        <qualifiedname>inih::ini_parse_stream</qualifiedname>
+        <param>
+          <type>ini_reader</type>
+          <declname>reader</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>ini_handler</type>
+          <declname>handler</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>user</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="79" column="12" bodyfile="src/utils/Ini.h" bodystart="79" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceinih_1a8caf79cedc26e5d8bbaed8041e287cb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int inih::ini_parse_file</definition>
+        <argsstring>(FILE *file, ini_handler handler, void *user)</argsstring>
+        <name>ini_parse_file</name>
+        <qualifiedname>inih::ini_parse_file</qualifiedname>
+        <param>
+          <type>FILE *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>ini_handler</type>
+          <declname>handler</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>user</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="178" column="12" bodyfile="src/utils/Ini.h" bodystart="178" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceinih_1a2a9a25c6067aaca98f36a7a912b6402e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int inih::ini_parse</definition>
+        <argsstring>(const char *filename, ini_handler handler, void *user)</argsstring>
+        <name>ini_parse</name>
+        <qualifiedname>inih::ini_parse</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>ini_handler</type>
+          <declname>handler</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>user</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/Ini.h" line="182" column="12" bodyfile="src/utils/Ini.h" bodystart="182" bodyend="193"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Yet another .ini parser for modern c++ (made for cpp17), inspired and extend from @benhoyt&apos;s inih. See project page: <ulink url="https://github.com/SSARCandy/ini-cpp">https://github.com/SSARCandy/ini-cpp</ulink> </para>
+    </detaileddescription>
+    <location file="src/utils/Ini.h" line="28" column="1"/>
+  </compounddef>
+</doxygen>

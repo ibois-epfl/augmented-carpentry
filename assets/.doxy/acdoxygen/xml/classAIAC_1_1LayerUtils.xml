@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerUtils" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerUtils</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerUtils_1a37b42da91054556f39f47d5efd6bf256" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerUtils::m_UtilsPath</definition>
+        <argsstring></argsstring>
+        <name>m_UtilsPath</name>
+        <qualifiedname>AIAC::LayerUtils::m_UtilsPath</qualifiedname>
+        <initializer>= AIAC::Config::Get&lt;std::string&gt;(AIAC::Config::SEC_UTILS,
+                                                                 AIAC::Config::UTILS_PATH,
+                                                                 &quot;./temp&quot;)</initializer>
+        <briefdescription>
+<para>Default path to utils folder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="95" column="21" bodyfile="src/AIAC/LayerUtils.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUtils_1a1414dd353450c64662e886b66c30ec58" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUtils::m_Recording</definition>
+        <argsstring></argsstring>
+        <name>m_Recording</name>
+        <qualifiedname>AIAC::LayerUtils::m_Recording</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag to check if the video is being recorded. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; video recorder </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="100" column="14" bodyfile="src/AIAC/LayerUtils.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUtils_1a1085c44a0e5d90bfc1ba8241bca0e7ca" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUtils::m_Processing</definition>
+        <argsstring></argsstring>
+        <name>m_Processing</name>
+        <qualifiedname>AIAC::LayerUtils::m_Processing</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag to check if the video is being processed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="102" column="14" bodyfile="src/AIAC/LayerUtils.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUtils_1ac5be94bd12a89d487de2eb186a7e4404" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classAIAC_1_1Utils_1_1VideoRecorder" kindref="compound">AIAC::Utils::VideoRecorder</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;AIAC::Utils::VideoRecorder&gt; AIAC::LayerUtils::m_VideoRecorder</definition>
+        <argsstring></argsstring>
+        <name>m_VideoRecorder</name>
+        <qualifiedname>AIAC::LayerUtils::m_VideoRecorder</qualifiedname>
+        <briefdescription>
+<para>Video recorder object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="104" column="25" bodyfile="src/AIAC/LayerUtils.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUtils_1a3ba0a41e739d6cd65ce72a5ab48bd8ab" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter" kindref="compound">AIAC::Utils::HoleToolheadAxisExporter</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;AIAC::Utils::HoleToolheadAxisExporter&gt; AIAC::LayerUtils::m_HoleToolheadAxisExporter</definition>
+        <argsstring></argsstring>
+        <name>m_HoleToolheadAxisExporter</name>
+        <qualifiedname>AIAC::LayerUtils::m_HoleToolheadAxisExporter</qualifiedname>
+        <briefdescription>
+<para>Hole and toolhead exporter object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; hole and toolhead exporter </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="108" column="25" bodyfile="src/AIAC/LayerUtils.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerUtils_1a5a9b15ed4f6ff76e185b96935b91d037" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUtils::m_WindowScreenshot</definition>
+        <argsstring></argsstring>
+        <name>m_WindowScreenshot</name>
+        <qualifiedname>AIAC::LayerUtils::m_WindowScreenshot</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag to check if the screenshot is of the window. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; screenshot </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="112" column="14" bodyfile="src/AIAC/LayerUtils.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a519b1643e89056630959679191d90d7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerUtils::LayerUtils</definition>
+        <argsstring>()</argsstring>
+        <name>LayerUtils</name>
+        <qualifiedname>AIAC::LayerUtils::LayerUtils</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="46" column="9" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="43" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a88ed6f0a0cdcf526778d4e828be3e19a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::OnFrameEnd</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameEnd</name>
+        <qualifiedname>AIAC::LayerUtils::OnFrameEnd</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61">OnFrameEnd</reimplements>
+        <briefdescription>
+<para>Is called when frame ends. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="47" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="47" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a30697efde00eb4b7acf9d5f25e3ec94b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::SetSaveFolderPath</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>SetSaveFolderPath</name>
+        <qualifiedname>AIAC::LayerUtils::SetSaveFolderPath</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Set the save folder path for the utils from UI. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the folder that comes from UI </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="61" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="75" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1afa7f1072048a93eaa583fc2ec466378b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerUtils::GetSaveFolderPath</definition>
+        <argsstring>()</argsstring>
+        <name>GetSaveFolderPath</name>
+        <qualifiedname>AIAC::LayerUtils::GetSaveFolderPath</qualifiedname>
+        <briefdescription>
+<para>Get the current save folder path for the utils. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>std::string Path to the current utils folder </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="67" column="21" bodyfile="src/AIAC/LayerUtils.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1af75f069cccd157ee4774df9f9c1f19f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::StartRecording</definition>
+        <argsstring>()</argsstring>
+        <name>StartRecording</name>
+        <qualifiedname>AIAC::LayerUtils::StartRecording</qualifiedname>
+        <briefdescription>
+<para>Start recording the video of a window. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; video recorder </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="71" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="57" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1ae3de533fd47c635feab9fecb00a65ab7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::StopRecording</definition>
+        <argsstring>()</argsstring>
+        <name>StopRecording</name>
+        <qualifiedname>AIAC::LayerUtils::StopRecording</qualifiedname>
+        <briefdescription>
+<para>Stop recording the video of a window. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="73" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="64" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a09dfd257dd52994429427ec19775cc57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUtils::IsProcessing</definition>
+        <argsstring>()</argsstring>
+        <name>IsProcessing</name>
+        <qualifiedname>AIAC::LayerUtils::IsProcessing</qualifiedname>
+        <briefdescription>
+<para>Check if the video is being processed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="75" column="14" bodyfile="src/AIAC/LayerUtils.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a157e5346a3041a04a152854782eaaf0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::ExportHoleToolheadAxis</definition>
+        <argsstring>()</argsstring>
+        <name>ExportHoleToolheadAxis</name>
+        <qualifiedname>AIAC::LayerUtils::ExportHoleToolheadAxis</qualifiedname>
+        <briefdescription>
+<para>Export and write the hole and toolhead coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; hole and toolhead exporter </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="79" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="84" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a216744e2180e94e897478482ecf85fbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::TakeWindowScreenshot</definition>
+        <argsstring>()</argsstring>
+        <name>TakeWindowScreenshot</name>
+        <qualifiedname>AIAC::LayerUtils::TakeWindowScreenshot</qualifiedname>
+        <briefdescription>
+<para>Take a screenshot of the current window. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; screenshot </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="83" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="105" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1ad118af83e97679866dfcf734fd6975e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::TakeBufferScreenshot</definition>
+        <argsstring>()</argsstring>
+        <name>TakeBufferScreenshot</name>
+        <qualifiedname>AIAC::LayerUtils::TakeBufferScreenshot</qualifiedname>
+        <briefdescription>
+<para>Take a screenshot of the colored buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="85" column="14" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="112" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1a7a85d9f4d78443e2c34a408d80ee6108" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerUtils::SetWindowScreenshot</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>SetWindowScreenshot</name>
+        <qualifiedname>AIAC::LayerUtils::SetWindowScreenshot</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Set the flag to check if the screenshot is of the window. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True if the screenshot is of the window </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="91" column="14" bodyfile="src/AIAC/LayerUtils.h" bodystart="91" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerUtils_1ae57e8ead71baad2215f662d76c858033" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUtils::CreateFolder</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>CreateFolder</name>
+        <qualifiedname>AIAC::LayerUtils::CreateFolder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Create a folder if it does not exist. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the folder </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the folder is created </para>
+</simplesect>
+<simplesect kind="return"><para>false if the folder already exists </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUtils.h" line="55" column="21" bodyfile="src/AIAC/LayerUtils.cpp" bodystart="91" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerUtils</label>
+        <link refid="classAIAC_1_1LayerUtils"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerUtils</label>
+        <link refid="classAIAC_1_1LayerUtils"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerUtils.h" line="44" column="5" bodyfile="src/AIAC/LayerUtils.h" bodystart="44" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerUtils_1ae57e8ead71baad2215f662d76c858033" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>CreateFolder</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a157e5346a3041a04a152854782eaaf0b" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>ExportHoleToolheadAxis</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1afa7f1072048a93eaa583fc2ec466378b" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>GetSaveFolderPath</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a09dfd257dd52994429427ec19775cc57" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>IsProcessing</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a519b1643e89056630959679191d90d7b" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>LayerUtils</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a3ba0a41e739d6cd65ce72a5ab48bd8ab" prot="private" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>m_HoleToolheadAxisExporter</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a1085c44a0e5d90bfc1ba8241bca0e7ca" prot="private" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>m_Processing</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a1414dd353450c64662e886b66c30ec58" prot="private" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>m_Recording</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a37b42da91054556f39f47d5efd6bf256" prot="private" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>m_UtilsPath</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1ac5be94bd12a89d487de2eb186a7e4404" prot="private" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>m_VideoRecorder</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a5a9b15ed4f6ff76e185b96935b91d037" prot="private" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>m_WindowScreenshot</name></member>
+      <member refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a88ed6f0a0cdcf526778d4e828be3e19a" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a30697efde00eb4b7acf9d5f25e3ec94b" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>SetSaveFolderPath</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a7a85d9f4d78443e2c34a408d80ee6108" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>SetWindowScreenshot</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1af75f069cccd157ee4774df9f9c1f19f3" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>StartRecording</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1ae3de533fd47c635feab9fecb00a65ab7" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>StopRecording</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1ad118af83e97679866dfcf734fd6975e0" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>TakeBufferScreenshot</name></member>
+      <member refid="classAIAC_1_1LayerUtils_1a216744e2180e94e897478482ecf85fbd" prot="public" virt="non-virtual"><scope>AIAC::LayerUtils</scope><name>TakeWindowScreenshot</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerUtils</scope><name>~Layer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

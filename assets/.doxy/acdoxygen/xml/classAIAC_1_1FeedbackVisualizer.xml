@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1FeedbackVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::FeedbackVisualizer</compoundname>
+    <derivedcompoundref refid="classAIAC_1_1CutBladeThicknessVisualizer" prot="public" virt="non-virtual">AIAC::CutBladeThicknessVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutChainSawAngleFeedVisualizer" prot="public" virt="non-virtual">AIAC::CutChainSawAngleFeedVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutChainSawDepthFeedVisualizer" prot="public" virt="non-virtual">AIAC::CutChainSawDepthFeedVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutChainSawFeedVisualizer" prot="public" virt="non-virtual">AIAC::CutChainSawFeedVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutCircularOrientationVisualizer" prot="public" virt="non-virtual">AIAC::CutCircularOrientationVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutCircularSawDepthVisualizer" prot="public" virt="non-virtual">AIAC::CutCircularSawDepthVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutCircularSawPositionStartVisualizer" prot="public" virt="non-virtual">AIAC::CutCircularSawPositionStartVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutOrientationVisualizer" prot="public" virt="non-virtual">AIAC::CutOrientationVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CutPlaneVisualizer" prot="public" virt="non-virtual">AIAC::CutPlaneVisualizer</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1HoleFeedbackPosition" prot="public" virt="non-virtual">AIAC::HoleFeedbackPosition</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1HoleFeedbackRotation" prot="public" virt="non-virtual">AIAC::HoleFeedbackRotation</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1HoleFeedbackText" prot="public" virt="non-virtual">AIAC::HoleFeedbackText</derivedcompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOPrimitive&gt; &gt; AIAC::FeedbackVisualizer::m_AllPrimitives</definition>
+        <argsstring></argsstring>
+        <name>m_AllPrimitives</name>
+        <qualifiedname>AIAC::FeedbackVisualizer::m_AllPrimitives</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="80" column="21" bodyfile="src/AIAC/Feedback/FeedbackVisualizer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::FeedbackVisualizer::FeedbackVisualizer</definition>
+        <argsstring>()=default</argsstring>
+        <name>FeedbackVisualizer</name>
+        <qualifiedname>AIAC::FeedbackVisualizer::FeedbackVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::FeedbackVisualizer::~FeedbackVisualizer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~FeedbackVisualizer</name>
+        <qualifiedname>AIAC::FeedbackVisualizer::~FeedbackVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="48" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::FeedbackVisualizer::Activate</definition>
+        <argsstring>()</argsstring>
+        <name>Activate</name>
+        <qualifiedname>AIAC::FeedbackVisualizer::Activate</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CutPlaneVisualizer_1ae44b896f1f5c97af5c9327e7fda95b75">Activate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="50" column="29" bodyfile="src/AIAC/Feedback/FeedbackVisualizer.h" bodystart="50" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void AIAC::FeedbackVisualizer::Deactivate</definition>
+        <argsstring>()</argsstring>
+        <name>Deactivate</name>
+        <qualifiedname>AIAC::FeedbackVisualizer::Deactivate</qualifiedname>
+        <reimplementedby refid="classAIAC_1_1CutPlaneVisualizer_1ad07c17ed90853fe041e844025f9aa0ad">Deactivate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="56" column="29" bodyfile="src/AIAC/Feedback/FeedbackVisualizer.h" bodystart="56" bodyend="60"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string AIAC::FeedbackVisualizer::toString</definition>
+        <argsstring>(double val)</argsstring>
+        <name>toString</name>
+        <qualifiedname>AIAC::FeedbackVisualizer::toString</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>Convert a double value to the real world scale in mm and return a string with 2 digits. If the value in mm is &gt; 99, return &quot;99&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="67" column="28" bodyfile="src/AIAC/Feedback/FeedbackVisualizer.h" bodystart="67" bodyend="77"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="12">
+        <label>AIAC::ChainSawCutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1ChainSawCutPlaneVisualizer"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::CircularSawCutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CircularSawCutBladeThicknessVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>AIAC::CircularSawCutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1CircularSawCutPlaneVisualizer"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::CutBladeThicknessVisualizer</label>
+        <link refid="classAIAC_1_1CutBladeThicknessVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>AIAC::CutChainSawAngleFeedVisualizer</label>
+        <link refid="classAIAC_1_1CutChainSawAngleFeedVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>AIAC::CutChainSawDepthFeedVisualizer</label>
+        <link refid="classAIAC_1_1CutChainSawDepthFeedVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>AIAC::CutChainSawFeedVisualizer</label>
+        <link refid="classAIAC_1_1CutChainSawFeedVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>AIAC::CutCircularOrientationVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularOrientationVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>AIAC::CutCircularSawDepthVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularSawDepthVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>AIAC::CutCircularSawPositionStartVisualizer</label>
+        <link refid="classAIAC_1_1CutCircularSawPositionStartVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>AIAC::CutOrientationVisualizer</label>
+        <link refid="classAIAC_1_1CutOrientationVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>AIAC::CutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1CutPlaneVisualizer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+      <node id="14">
+        <label>AIAC::HoleFeedbackPosition</label>
+        <link refid="classAIAC_1_1HoleFeedbackPosition"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>AIAC::HoleFeedbackRotation</label>
+        <link refid="classAIAC_1_1HoleFeedbackRotation"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>AIAC::HoleFeedbackText</label>
+        <link refid="classAIAC_1_1HoleFeedbackText"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/AIAC/Feedback/FeedbackVisualizer.h" line="45" column="5" bodyfile="src/AIAC/Feedback/FeedbackVisualizer.h" bodystart="45" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::FeedbackVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::FeedbackVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::FeedbackVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::FeedbackVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::FeedbackVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::FeedbackVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

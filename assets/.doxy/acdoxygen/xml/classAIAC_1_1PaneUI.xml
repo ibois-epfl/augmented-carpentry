@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1PaneUI" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::PaneUI</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2" prot="public" static="no" strong="no">
+        <type></type>
+        <name>CollapseState</name>
+        <qualifiedname>AIAC::PaneUI::CollapseState</qualifiedname>
+        <enumvalue id="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2a269fd8fa9df967760d9bf6e0437c1018" prot="public">
+          <name>OPEN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2a83c8f3dc9193c03673d292d1365cc5e0" prot="public">
+          <name>ON_COLLAPSING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2a77337706c04882ab5f69686bd5eca320" prot="public">
+          <name>COLLAPSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="54" column="9" bodyfile="src/AIAC/LayerUI.h" bodystart="54" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classAIAC_1_1PaneUI_1a8734b3bcbf79ca75913c5e58bd59e493" prot="public" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>typedef std::function&lt;void()&gt; AIAC::PaneUI::Func</definition>
+        <argsstring></argsstring>
+        <name>Func</name>
+        <qualifiedname>AIAC::PaneUI::Func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="60" column="31" bodyfile="src/AIAC/LayerUI.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1PaneUI_1a23a9b696b41b1986e5311f087604714a" prot="private" static="no" mutable="no">
+        <type>CollapseState</type>
+        <definition>CollapseState AIAC::PaneUI::m_CollapseState</definition>
+        <argsstring></argsstring>
+        <name>m_CollapseState</name>
+        <qualifiedname>AIAC::PaneUI::m_CollapseState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="75" column="23" bodyfile="src/AIAC/LayerUI.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1PaneUI_1a00411478124ddae78cc2295e03bc36fd" prot="private" static="no" mutable="no">
+        <type>Func</type>
+        <definition>Func AIAC::PaneUI::m_func</definition>
+        <argsstring></argsstring>
+        <name>m_func</name>
+        <qualifiedname>AIAC::PaneUI::m_func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="76" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1PaneUI_1a7ea3ba27120ae4c334b20ad59ce95897" prot="private" static="no" mutable="no">
+        <type>Func</type>
+        <definition>Func AIAC::PaneUI::m_onCollapseCallback</definition>
+        <argsstring></argsstring>
+        <name>m_onCollapseCallback</name>
+        <qualifiedname>AIAC::PaneUI::m_onCollapseCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="77" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1PaneUI_1ac22dad1306b6f81e705134e73b1b78c8" prot="private" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AIAC::PaneUI::m_Label</definition>
+        <argsstring></argsstring>
+        <name>m_Label</name>
+        <qualifiedname>AIAC::PaneUI::m_Label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="78" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1PaneUI_1aff3f95729f4aae97522e1e199d93ee89" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::PaneUI::m_IsCollapsed</definition>
+        <argsstring></argsstring>
+        <name>m_IsCollapsed</name>
+        <qualifiedname>AIAC::PaneUI::m_IsCollapsed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="79" column="14" bodyfile="src/AIAC/LayerUI.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1PaneUI_1aa21fc22503ac7db1c60f428565d68795" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::PaneUI::PaneUI</definition>
+        <argsstring>(const char *label, bool isCollapsed, Func func, Func onCollapseCallback=[]{})</argsstring>
+        <name>PaneUI</name>
+        <qualifiedname>AIAC::PaneUI::PaneUI</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isCollapsed</declname>
+        </param>
+        <param>
+          <type>Func</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Func</type>
+          <declname>onCollapseCallback</declname>
+          <defval>[]{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="62" column="9" bodyfile="src/AIAC/LayerUI.h" bodystart="62" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1PaneUI_1a5e78a65703222a4fef35d4003db6c76c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AIAC::PaneUI::Show</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>Show</name>
+        <qualifiedname>AIAC::PaneUI::Show</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="69" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="209" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1PaneUI_1aabf932d163a5964a2116128df2d3882e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AIAC::PaneUI::CheckOnCollapsing</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>CheckOnCollapsing</name>
+        <qualifiedname>AIAC::PaneUI::CheckOnCollapsing</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="72" column="14" bodyfile="src/AIAC/LayerUI.cpp" bodystart="234" bodyend="239"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/LayerUI.h" line="52" column="5" bodyfile="src/AIAC/LayerUI.h" bodystart="52" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1PaneUI_1aabf932d163a5964a2116128df2d3882e" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>CheckOnCollapsing</name></member>
+      <member refid="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2a77337706c04882ab5f69686bd5eca320" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>COLLAPSE</name></member>
+      <member refid="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>CollapseState</name></member>
+      <member refid="classAIAC_1_1PaneUI_1a8734b3bcbf79ca75913c5e58bd59e493" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>Func</name></member>
+      <member refid="classAIAC_1_1PaneUI_1a23a9b696b41b1986e5311f087604714a" prot="private" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>m_CollapseState</name></member>
+      <member refid="classAIAC_1_1PaneUI_1a00411478124ddae78cc2295e03bc36fd" prot="private" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>m_func</name></member>
+      <member refid="classAIAC_1_1PaneUI_1aff3f95729f4aae97522e1e199d93ee89" prot="private" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>m_IsCollapsed</name></member>
+      <member refid="classAIAC_1_1PaneUI_1ac22dad1306b6f81e705134e73b1b78c8" prot="private" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>m_Label</name></member>
+      <member refid="classAIAC_1_1PaneUI_1a7ea3ba27120ae4c334b20ad59ce95897" prot="private" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>m_onCollapseCallback</name></member>
+      <member refid="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2a83c8f3dc9193c03673d292d1365cc5e0" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>ON_COLLAPSING</name></member>
+      <member refid="classAIAC_1_1PaneUI_1ad3dd11d17ccb7af1661082c5d4b33df2a269fd8fa9df967760d9bf6e0437c1018" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>OPEN</name></member>
+      <member refid="classAIAC_1_1PaneUI_1aa21fc22503ac7db1c60f428565d68795" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>PaneUI</name></member>
+      <member refid="classAIAC_1_1PaneUI_1a5e78a65703222a4fef35d4003db6c76c" prot="public" virt="non-virtual"><scope>AIAC::PaneUI</scope><name>Show</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

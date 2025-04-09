@@ -1,0 +1,533 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerToolhead" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerToolhead</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a548384f4e6c05ff11cd497ae1c17ec96" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; ttool::TTool &gt;</type>
+        <definition>std::shared_ptr&lt;ttool::TTool&gt; AIAC::LayerToolhead::TTool</definition>
+        <argsstring></argsstring>
+        <name>TTool</name>
+        <qualifiedname>AIAC::LayerToolhead::TTool</qualifiedname>
+        <briefdescription>
+<para>The ttool object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="102" column="25" bodyfile="src/AIAC/LayerToolhead.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a5c1b459ec6cbae9a764d078a06c62b5a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerToolhead::ToolheadStateUI</definition>
+        <argsstring></argsstring>
+        <name>ToolheadStateUI</name>
+        <qualifiedname>AIAC::LayerToolhead::ToolheadStateUI</qualifiedname>
+        <briefdescription>
+<para>The UI state of the toolhead (None, PoseInput, Tracking) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="104" column="13" bodyfile="src/AIAC/LayerToolhead.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a8938aa6b2bba9c91b832d5491f8637f8" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerToolhead::IsShowSilouhette</definition>
+        <argsstring></argsstring>
+        <name>IsShowSilouhette</name>
+        <qualifiedname>AIAC::LayerToolhead::IsShowSilouhette</qualifiedname>
+        <briefdescription>
+<para>Show the silouhette of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="106" column="14" bodyfile="src/AIAC/LayerToolhead.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a0bf592c9ad87b06cc9ec1a6f9fa1c5e9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerToolhead::IsShowShaded</definition>
+        <argsstring></argsstring>
+        <name>IsShowShaded</name>
+        <qualifiedname>AIAC::LayerToolhead::IsShowShaded</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Show the silouhette of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="108" column="14" bodyfile="src/AIAC/LayerToolhead.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1aca102d7438872ed77add902e2f1e70bd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerToolhead::IsShowToolheadGOInfo</definition>
+        <argsstring></argsstring>
+        <name>IsShowToolheadGOInfo</name>
+        <qualifiedname>AIAC::LayerToolhead::IsShowToolheadGOInfo</qualifiedname>
+        <briefdescription>
+<para>Show the GOInfo toolhead&apos;s elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="110" column="14" bodyfile="src/AIAC/LayerToolhead.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1afe3eb4899a686c260e9c9345d05acc8b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerToolhead::IsSavePoseLog</definition>
+        <argsstring></argsstring>
+        <name>IsSavePoseLog</name>
+        <qualifiedname>AIAC::LayerToolhead::IsSavePoseLog</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Save pose log. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="112" column="14" bodyfile="src/AIAC/LayerToolhead.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a6c1dc755002d887d72ce6996c2454679" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1ACInfoToolheadManager" kindref="compound">AIAC::ACInfoToolheadManager</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;AIAC::ACInfoToolheadManager&gt; AIAC::LayerToolhead::ACInfoToolheadManager</definition>
+        <argsstring></argsstring>
+        <name>ACInfoToolheadManager</name>
+        <qualifiedname>AIAC::LayerToolhead::ACInfoToolheadManager</qualifiedname>
+        <briefdescription>
+<para>The manager holding the toolheads and setting the active one. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="125" column="25" bodyfile="src/AIAC/LayerToolhead.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a676ce3bfb7efc50cb0be27bb47b702a0" prot="private" static="no" mutable="no">
+        <type>ttool::EventType</type>
+        <definition>ttool::EventType AIAC::LayerToolhead::m_TtoolState</definition>
+        <argsstring></argsstring>
+        <name>m_TtoolState</name>
+        <qualifiedname>AIAC::LayerToolhead::m_TtoolState</qualifiedname>
+        <briefdescription>
+<para>The current state of the ttool (None, PoseInput, Tracking) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="116" column="26" bodyfile="src/AIAC/LayerToolhead.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1afbd66ca51e15cc4888d29363a417bb45" prot="private" static="no" mutable="no">
+        <type>cv::Matx44f</type>
+        <definition>cv::Matx44f AIAC::LayerToolhead::m_Pose</definition>
+        <argsstring></argsstring>
+        <name>m_Pose</name>
+        <qualifiedname>AIAC::LayerToolhead::m_Pose</qualifiedname>
+        <briefdescription>
+<para>The current pose of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="118" column="21" bodyfile="src/AIAC/LayerToolhead.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1aa94b159875d87a3bfb92edec8c851be8" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::LayerToolhead::m_ACScaleFactor</definition>
+        <argsstring></argsstring>
+        <name>m_ACScaleFactor</name>
+        <qualifiedname>AIAC::LayerToolhead::m_ACScaleFactor</qualifiedname>
+        <briefdescription>
+<para>The scaling factor for ttoolhead data to AC space. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="120" column="15" bodyfile="src/AIAC/LayerToolhead.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerToolhead_1a757f7991405da03e162a64bb27382043" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; AIAC::LayerToolhead::m_ClassifierToolList</definition>
+        <argsstring></argsstring>
+        <name>m_ClassifierToolList</name>
+        <qualifiedname>AIAC::LayerToolhead::m_ClassifierToolList</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="121" column="21" bodyfile="src/AIAC/LayerToolhead.h" bodystart="121" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a6988a2a9770ca584a08ebc0a747745d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerToolhead::LayerToolhead</definition>
+        <argsstring>()</argsstring>
+        <name>LayerToolhead</name>
+        <qualifiedname>AIAC::LayerToolhead::LayerToolhead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="49" column="9" bodyfile="src/AIAC/LayerToolhead.h" bodystart="49" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a9dcd82ebb6a4218cd39f39a73f9eb67a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::OnAttach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::LayerToolhead::OnAttach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073">OnAttach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="59" column="22" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="46" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a0f0a5238ece8402e6b4fb490d26b2838" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::OnFrameStart</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::LayerToolhead::OnFrameStart</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3">OnFrameStart</reimplements>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="60" column="22" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="71" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a8ba9b709994c7668b12585acec8e12f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::ReloadCameraFromFile</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadCameraFromFile</name>
+        <qualifiedname>AIAC::LayerToolhead::ReloadCameraFromFile</qualifiedname>
+        <briefdescription>
+<para>Destroy the ttool view and recreate a new ttool object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="63" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="134" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1ac0c22395fa8425deedf50fa7896ecd12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::ReloadCameraFromMatrix</definition>
+        <argsstring>(cv::Mat cameraMatrix, cv::Size cameraSize)</argsstring>
+        <name>ReloadCameraFromMatrix</name>
+        <qualifiedname>AIAC::LayerToolhead::ReloadCameraFromMatrix</qualifiedname>
+        <param>
+          <type>cv::Mat</type>
+          <declname>cameraMatrix</declname>
+        </param>
+        <param>
+          <type>cv::Size</type>
+          <declname>cameraSize</declname>
+        </param>
+        <briefdescription>
+<para>Destroy the ttool view and recreate a new ttool object with given camera params. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="65" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="145" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1aac461badd68fa0b2177ba5e739ed6f35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::DetectToolhead</definition>
+        <argsstring>()</argsstring>
+        <name>DetectToolhead</name>
+        <qualifiedname>AIAC::LayerToolhead::DetectToolhead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="67" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="119" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a22c98ee3edd712952d47ad993656a215" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::UpdateToolheadStateUI</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateToolheadStateUI</name>
+        <qualifiedname>AIAC::LayerToolhead::UpdateToolheadStateUI</qualifiedname>
+        <briefdescription>
+<para>Update the ttool state from the UI. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="70" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="182" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a544059c1f27112a3ca0f2530339e7a5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::SavePose</definition>
+        <argsstring>()</argsstring>
+        <name>SavePose</name>
+        <qualifiedname>AIAC::LayerToolhead::SavePose</qualifiedname>
+        <briefdescription>
+<para>Save the current pose of the ttool to the config file and to the ttool model manager (as a fallback pose for the ttool) It will reset <ref refid="classAIAC_1_1LayerToolhead" kindref="compound">LayerToolhead</ref> state to None (i.e. stop tracking and pose input) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="74" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="211" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a68a85cefccf381fd6261e3c911d90812" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::ResetToLastSavedPose</definition>
+        <argsstring>()</argsstring>
+        <name>ResetToLastSavedPose</name>
+        <qualifiedname>AIAC::LayerToolhead::ResetToLastSavedPose</qualifiedname>
+        <briefdescription>
+<para>Reset the pose of the ttool to the last saved pose. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="76" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="220" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a86b6f2e4d7374d9982e3407a6576cfe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::ResetPoseFromConfig</definition>
+        <argsstring>()</argsstring>
+        <name>ResetPoseFromConfig</name>
+        <qualifiedname>AIAC::LayerToolhead::ResetPoseFromConfig</qualifiedname>
+        <briefdescription>
+<para>Set the pose from the value in the config initially read. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="78" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="225" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1aea1d08157e455acdfd05e240b197a1cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::mat4x4</type>
+        <definition>glm::mat4x4 AIAC::LayerToolhead::GetWorldPose</definition>
+        <argsstring>()</argsstring>
+        <name>GetWorldPose</name>
+        <qualifiedname>AIAC::LayerToolhead::GetWorldPose</qualifiedname>
+        <briefdescription>
+<para>Get the current pose of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the world pose of the toolhead.</para>
+<para><simplesect kind="return"><para>The transformation matrix that transforms from the toolhead frame to the world frame </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="81" column="21" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="162" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a73fb2004eb89881a7984d69cdcd971c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ttool::EventType</type>
+        <definition>ttool::EventType AIAC::LayerToolhead::GetTtoolState</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTtoolState</name>
+        <qualifiedname>AIAC::LayerToolhead::GetTtoolState</qualifiedname>
+        <briefdescription>
+<para>Get the Ttool State object of the ttool event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; Getters and setters </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="85" column="33" bodyfile="src/AIAC/LayerToolhead.h" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1af5e0a6063df0f938d9cacb0c96ada5ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::SetCurrentObject</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>SetCurrentObject</name>
+        <qualifiedname>AIAC::LayerToolhead::SetCurrentObject</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the current active object for both the ttool and acit menager. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="87" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="196" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a726561dd2d50fac1efd3845bfca2c474" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>cv::Matx44f</type>
+        <definition>cv::Matx44f AIAC::LayerToolhead::GetPose</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPose</name>
+        <qualifiedname>AIAC::LayerToolhead::GetPose</qualifiedname>
+        <briefdescription>
+<para>Get the current pose of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="89" column="21" bodyfile="src/AIAC/LayerToolhead.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1abaaf8daa6b8c14946f6be8a04829dc1c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerToolhead::GetTrackingStatus</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTrackingStatus</name>
+        <qualifiedname>AIAC::LayerToolhead::GetTrackingStatus</qualifiedname>
+        <briefdescription>
+<para>Get the current tracking status of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="91" column="21" bodyfile="src/AIAC/LayerToolhead.h" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1a590adae2402487a336032ef950cda929" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerToolhead::GetClassifierLog</definition>
+        <argsstring>() const</argsstring>
+        <name>GetClassifierLog</name>
+        <qualifiedname>AIAC::LayerToolhead::GetClassifierLog</qualifiedname>
+        <briefdescription>
+<para>Get the current classifier log of the ttool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="93" column="21" bodyfile="src/AIAC/LayerToolhead.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1ab949ef69f51f7dafd731a53972d799c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; AIAC::LayerToolhead::GetClassifierToolheadList</definition>
+        <argsstring>() const</argsstring>
+        <name>GetClassifierToolheadList</name>
+        <qualifiedname>AIAC::LayerToolhead::GetClassifierToolheadList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="94" column="21" bodyfile="src/AIAC/LayerToolhead.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerToolhead_1ab4c0d5bbdf2238411013ca461281074a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerToolhead::syncTToolAndACInfoToolhead</definition>
+        <argsstring>()</argsstring>
+        <name>syncTToolAndACInfoToolhead</name>
+        <qualifiedname>AIAC::LayerToolhead::syncTToolAndACInfoToolhead</qualifiedname>
+        <briefdescription>
+<para>Sync the ttool tool manager and the acitoolhead to point to the same object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerToolhead.h" line="98" column="14" bodyfile="src/AIAC/LayerToolhead.cpp" bodystart="230" bodyend="234"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerToolhead</label>
+        <link refid="classAIAC_1_1LayerToolhead"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerToolhead</label>
+        <link refid="classAIAC_1_1LayerToolhead"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerToolhead.h" line="46" column="5" bodyfile="src/AIAC/LayerToolhead.h" bodystart="47" bodyend="126"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerToolhead_1a6c1dc755002d887d72ce6996c2454679" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>ACInfoToolheadManager</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1aac461badd68fa0b2177ba5e739ed6f35" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>DetectToolhead</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a590adae2402487a336032ef950cda929" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>GetClassifierLog</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1ab949ef69f51f7dafd731a53972d799c2" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>GetClassifierToolheadList</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a726561dd2d50fac1efd3845bfca2c474" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>GetPose</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1abaaf8daa6b8c14946f6be8a04829dc1c" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>GetTrackingStatus</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a73fb2004eb89881a7984d69cdcd971c6" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>GetTtoolState</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1aea1d08157e455acdfd05e240b197a1cb" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>GetWorldPose</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1afe3eb4899a686c260e9c9345d05acc8b" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>IsSavePoseLog</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a0bf592c9ad87b06cc9ec1a6f9fa1c5e9" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>IsShowShaded</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a8938aa6b2bba9c91b832d5491f8637f8" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>IsShowSilouhette</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1aca102d7438872ed77add902e2f1e70bd" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>IsShowToolheadGOInfo</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a6988a2a9770ca584a08ebc0a747745d4" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>LayerToolhead</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1aa94b159875d87a3bfb92edec8c851be8" prot="private" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>m_ACScaleFactor</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a757f7991405da03e162a64bb27382043" prot="private" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>m_ClassifierToolList</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1afbd66ca51e15cc4888d29363a417bb45" prot="private" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>m_Pose</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a676ce3bfb7efc50cb0be27bb47b702a0" prot="private" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>m_TtoolState</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a9dcd82ebb6a4218cd39f39a73f9eb67a" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a0f0a5238ece8402e6b4fb490d26b2838" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a8ba9b709994c7668b12585acec8e12f8" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>ReloadCameraFromFile</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1ac0c22395fa8425deedf50fa7896ecd12" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>ReloadCameraFromMatrix</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a86b6f2e4d7374d9982e3407a6576cfe4" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>ResetPoseFromConfig</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a68a85cefccf381fd6261e3c911d90812" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>ResetToLastSavedPose</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a544059c1f27112a3ca0f2530339e7a5f" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>SavePose</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1af5e0a6063df0f938d9cacb0c96ada5ac" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>SetCurrentObject</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1ab4c0d5bbdf2238411013ca461281074a" prot="private" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>syncTToolAndACInfoToolhead</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a5c1b459ec6cbae9a764d078a06c62b5a" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>ToolheadStateUI</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a548384f4e6c05ff11cd497ae1c17ec96" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>TTool</name></member>
+      <member refid="classAIAC_1_1LayerToolhead_1a22c98ee3edd712952d47ad993656a215" prot="public" virt="non-virtual"><scope>AIAC::LayerToolhead</scope><name>UpdateToolheadStateUI</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerToolhead</scope><name>~Layer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

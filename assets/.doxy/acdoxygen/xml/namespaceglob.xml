@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceglob" kind="namespace" language="C++">
+    <compoundname>glob</compoundname>
+    <innerclass refid="classglob_1_1glob" prot="public">glob::glob</innerclass>
+    <innerclass refid="classglob_1_1glob__impl" prot="public">glob::glob_impl</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/glob.cpp" line="14" column="1"/>
+  </compounddef>
+</doxygen>

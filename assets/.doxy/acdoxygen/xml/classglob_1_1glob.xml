@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classglob_1_1glob" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>glob::glob</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classglob_1_1glob_1afc07be3e856f7d124dafabc22015001d" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string glob::glob::dir_path</definition>
+        <argsstring></argsstring>
+        <name>dir_path</name>
+        <qualifiedname>glob::glob::dir_path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="24" column="21" bodyfile="src/utils/glob.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classglob_1_1glob_1a783a4c82a9c756b9520e78b0d9c6206c" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classglob_1_1glob__impl" kindref="compound">glob_impl</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;glob_impl&gt; glob::glob::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <qualifiedname>glob::glob::impl_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="35" column="25" bodyfile="src/utils/glob.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classglob_1_1glob_1aade1ce4e9d544f628210b083bbd7fc4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>glob::glob::glob</definition>
+        <argsstring>(const std::string &amp;pattern)</argsstring>
+        <name>glob</name>
+        <qualifiedname>glob::glob::glob</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="14" column="9" bodyfile="src/utils/glob.cpp" bodystart="106" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1a18e59eb19b45eefc0f6d5d8389a68698" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>glob::glob::~glob</definition>
+        <argsstring>()</argsstring>
+        <name>~glob</name>
+        <qualifiedname>glob::glob::~glob</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="15" column="9" bodyfile="src/utils/glob.cpp" bodystart="112" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1affcdf79e818b9bcd9f9b45a121b564af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>glob::glob::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>glob::glob::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="17" column="9" bodyfile="src/utils/glob.h" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1afa5f7d2b92cb30af4585524226c654aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void glob::glob::open</definition>
+        <argsstring>(const std::string &amp;pattern)</argsstring>
+        <name>open</name>
+        <qualifiedname>glob::glob::open</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="21" column="14" bodyfile="src/utils/glob.cpp" bodystart="117" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1ac7e8d97a5b59665e1c4a40f46eca603e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void glob::glob::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>glob::glob::close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="22" column="14" bodyfile="src/utils/glob.cpp" bodystart="129" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1a0b38bfb2f44cdd2510927e9f33fd4746" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string glob::glob::current_match</definition>
+        <argsstring>() const</argsstring>
+        <name>current_match</name>
+        <qualifiedname>glob::glob::current_match</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="25" column="21" bodyfile="src/utils/glob.cpp" bodystart="137" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1a61034c17df0777b7e57a6f1f3176ce29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool glob::glob::next</definition>
+        <argsstring>()</argsstring>
+        <name>next</name>
+        <qualifiedname>glob::glob::next</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="27" column="14" bodyfile="src/utils/glob.cpp" bodystart="143" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1a78bf1746d3e5f293e9fc1704fd164d78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool glob::glob::is_valid</definition>
+        <argsstring>() const</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>glob::glob::is_valid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="28" column="14" bodyfile="src/utils/glob.cpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classglob_1_1glob_1a5da249d7b58a45addf34715d34037cae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>glob::glob::glob</definition>
+        <argsstring>(const glob &amp;)=delete</argsstring>
+        <name>glob</name>
+        <qualifiedname>glob::glob::glob</qualifiedname>
+        <param>
+          <type>const <ref refid="classglob_1_1glob" kindref="compound">glob</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="31" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classglob_1_1glob_1ac45d09c69df7fba83051d41956015f5a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void glob::glob::operator=</definition>
+        <argsstring>(const glob &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>glob::glob::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classglob_1_1glob" kindref="compound">glob</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/glob.h" line="32" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/glob.h" line="11" column="5" bodyfile="src/utils/glob.h" bodystart="12" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classglob_1_1glob_1ac7e8d97a5b59665e1c4a40f46eca603e" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>close</name></member>
+      <member refid="classglob_1_1glob_1a0b38bfb2f44cdd2510927e9f33fd4746" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>current_match</name></member>
+      <member refid="classglob_1_1glob_1afc07be3e856f7d124dafabc22015001d" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>dir_path</name></member>
+      <member refid="classglob_1_1glob_1aade1ce4e9d544f628210b083bbd7fc4d" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>glob</name></member>
+      <member refid="classglob_1_1glob_1a5da249d7b58a45addf34715d34037cae" prot="private" virt="non-virtual"><scope>glob::glob</scope><name>glob</name></member>
+      <member refid="classglob_1_1glob_1a783a4c82a9c756b9520e78b0d9c6206c" prot="private" virt="non-virtual"><scope>glob::glob</scope><name>impl_</name></member>
+      <member refid="classglob_1_1glob_1a78bf1746d3e5f293e9fc1704fd164d78" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>is_valid</name></member>
+      <member refid="classglob_1_1glob_1a61034c17df0777b7e57a6f1f3176ce29" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>next</name></member>
+      <member refid="classglob_1_1glob_1afa5f7d2b92cb30af4585524226c654aa" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>open</name></member>
+      <member refid="classglob_1_1glob_1affcdf79e818b9bcd9f9b45a121b564af" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>operator bool</name></member>
+      <member refid="classglob_1_1glob_1ac45d09c69df7fba83051d41956015f5a" prot="private" virt="non-virtual"><scope>glob::glob</scope><name>operator=</name></member>
+      <member refid="classglob_1_1glob_1a18e59eb19b45eefc0f6d5d8389a68698" prot="public" virt="non-virtual"><scope>glob::glob</scope><name>~glob</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

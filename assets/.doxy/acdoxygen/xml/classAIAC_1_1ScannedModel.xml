@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1ScannedModel" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::ScannedModel</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1ScannedModel_1a3878dba15ffdd625c8ec1b48c747e156" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; glm::vec3 &gt;</type>
+        <definition>std::vector&lt;glm::vec3&gt; AIAC::ScannedModel::m_Bbox</definition>
+        <argsstring></argsstring>
+        <name>m_Bbox</name>
+        <qualifiedname>AIAC::ScannedModel::m_Bbox</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="80" column="17" bodyfile="src/AIAC/ScannedModel.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ScannedModel_1ae60a1da05997a28d214489b807393897" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::pair&lt; int, int &gt; &gt;</type>
+        <definition>std::vector&lt;std::pair&lt;int, int&gt; &gt; AIAC::ScannedModel::m_BboxEdgesIndices</definition>
+        <argsstring></argsstring>
+        <name>m_BboxEdgesIndices</name>
+        <qualifiedname>AIAC::ScannedModel::m_BboxEdgesIndices</qualifiedname>
+        <initializer>= {
+        {0, 1}, {1, 2}, {2, 3}, {3, 0}, 
+        {4, 5}, {5, 6}, {6, 7}, {7, 4}, 
+        {0, 4}, {1, 5}, {2, 6}, {3, 7}  
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="81" column="17" bodyfile="src/AIAC/ScannedModel.h" bodystart="81" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ScannedModel_1acd94d8d2011bcf5f6cb14c39f087c579" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOMesh" kindref="compound">GOMesh</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOMesh&gt; AIAC::ScannedModel::m_Mesh</definition>
+        <argsstring></argsstring>
+        <name>m_Mesh</name>
+        <qualifiedname>AIAC::ScannedModel::m_Mesh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="87" column="21" bodyfile="src/AIAC/ScannedModel.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ScannedModel_1ab882e7ed160626cc2d7392acc9f1dd1e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOLine&gt; &gt; AIAC::ScannedModel::m_BboxGOLines</definition>
+        <argsstring></argsstring>
+        <name>m_BboxGOLines</name>
+        <qualifiedname>AIAC::ScannedModel::m_BboxGOLines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="88" column="17" bodyfile="src/AIAC/ScannedModel.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1afbdffdce950d88daf92beb61888a2791" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ScannedModel::ScannedModel</definition>
+        <argsstring>()</argsstring>
+        <name>ScannedModel</name>
+        <qualifiedname>AIAC::ScannedModel::ScannedModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="47" column="5" bodyfile="src/AIAC/ScannedModel.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1a8c4aca81d36cff23f1dcbf80699b62c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ScannedModel::~ScannedModel</definition>
+        <argsstring>()</argsstring>
+        <name>~ScannedModel</name>
+        <qualifiedname>AIAC::ScannedModel::~ScannedModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="48" column="5" bodyfile="src/AIAC/ScannedModel.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1af8751f5bda2ea936b896d974d9acda0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::ScannedModel::Load</definition>
+        <argsstring>(std::string path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>AIAC::ScannedModel::Load</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Load a .ply model from a file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the model file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the model is loaded successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="55" column="10" bodyfile="src/AIAC/ScannedModel.cpp" bodystart="41" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1acfa9d759c20212e68023b8211fdf2923" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ScannedModel::BuildBoundingBox</definition>
+        <argsstring>()</argsstring>
+        <name>BuildBoundingBox</name>
+        <qualifiedname>AIAC::ScannedModel::BuildBoundingBox</qualifiedname>
+        <briefdescription>
+<para>Build the bounding box based on the ply model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="60" column="10" bodyfile="src/AIAC/ScannedModel.cpp" bodystart="63" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1af8e0c2f851f4fb02e44670fd4aab3c0d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; glm::vec3 &gt;</type>
+        <definition>std::vector&lt; glm::vec3 &gt; AIAC::ScannedModel::GetBoundingBox</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBoundingBox</name>
+        <qualifiedname>AIAC::ScannedModel::GetBoundingBox</qualifiedname>
+        <briefdescription>
+<para>Get the bounding box of the ply model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The bounding box of the ply model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="66" column="17" bodyfile="src/AIAC/ScannedModel.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1ab3980539d63941fb199e2427be0a02e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::pair&lt; int, int &gt; &gt;</type>
+        <definition>std::vector&lt; std::pair&lt; int, int &gt; &gt; AIAC::ScannedModel::GetBboxEdgesIndices</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBboxEdgesIndices</name>
+        <qualifiedname>AIAC::ScannedModel::GetBboxEdgesIndices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="67" column="17" bodyfile="src/AIAC/ScannedModel.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1a50e991d2b40d14704d7a71732b43460b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ScannedModel::UpdateBboxGOLine</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateBboxGOLine</name>
+        <qualifiedname>AIAC::ScannedModel::UpdateBboxGOLine</qualifiedname>
+        <briefdescription>
+<para>Update Boundary Box <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="71" column="10" bodyfile="src/AIAC/ScannedModel.cpp" bodystart="170" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ScannedModel_1ae480ae048bb152612cbe4492458b1bda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::ScannedModel::GetLength</definition>
+        <argsstring>()</argsstring>
+        <name>GetLength</name>
+        <qualifiedname>AIAC::ScannedModel::GetLength</qualifiedname>
+        <briefdescription>
+<para>Get the length of the scanned model, which is calculated by averaging the four edges of the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The length of the scanned model. (in TSLAM unit) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ScannedModel.h" line="77" column="11" bodyfile="src/AIAC/ScannedModel.cpp" bodystart="183" bodyend="192"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ScannedModel.h" line="45" column="1" bodyfile="src/AIAC/ScannedModel.h" bodystart="45" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1ScannedModel_1acfa9d759c20212e68023b8211fdf2923" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>BuildBoundingBox</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1ab3980539d63941fb199e2427be0a02e0" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>GetBboxEdgesIndices</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1af8e0c2f851f4fb02e44670fd4aab3c0d" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>GetBoundingBox</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1ae480ae048bb152612cbe4492458b1bda" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>GetLength</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1af8751f5bda2ea936b896d974d9acda0e" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>Load</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1a3878dba15ffdd625c8ec1b48c747e156" prot="private" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>m_Bbox</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1ae60a1da05997a28d214489b807393897" prot="private" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>m_BboxEdgesIndices</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1ab882e7ed160626cc2d7392acc9f1dd1e" prot="private" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>m_BboxGOLines</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1acd94d8d2011bcf5f6cb14c39f087c579" prot="private" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>m_Mesh</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1afbdffdce950d88daf92beb61888a2791" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>ScannedModel</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1a50e991d2b40d14704d7a71732b43460b" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>UpdateBboxGOLine</name></member>
+      <member refid="classAIAC_1_1ScannedModel_1a8c4aca81d36cff23f1dcbf80699b62c7" prot="public" virt="non-virtual"><scope>AIAC::ScannedModel</scope><name>~ScannedModel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

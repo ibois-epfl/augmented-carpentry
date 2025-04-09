@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Utils::HoleToolheadAxisExporter</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a9e2eb33713db9af43929a078a08e3a4b" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::HoleToolheadAxisExporter::m_BasePath</definition>
+        <argsstring></argsstring>
+        <name>m_BasePath</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::m_BasePath</qualifiedname>
+        <briefdescription>
+<para>Default path of utils. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="76" column="21" bodyfile="src/utils/HoleToolheadAxisExporter.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a64b474f831722a434cd727859028fdaa" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::HoleToolheadAxisExporter::m_FileName</definition>
+        <argsstring></argsstring>
+        <name>m_FileName</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::m_FileName</qualifiedname>
+        <initializer>= &quot;coordinates.log&quot;</initializer>
+        <briefdescription>
+<para>Default name for .log file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="78" column="21" bodyfile="src/utils/HoleToolheadAxisExporter.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1aebefb4afba33b12e2d767a5fadb13092" prot="private" static="no" mutable="no">
+        <type>std::ostringstream</type>
+        <definition>std::ostringstream AIAC::Utils::HoleToolheadAxisExporter::m_Buffer</definition>
+        <argsstring></argsstring>
+        <name>m_Buffer</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::m_Buffer</qualifiedname>
+        <briefdescription>
+<para>Buffer to hold the coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="80" column="28" bodyfile="src/utils/HoleToolheadAxisExporter.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a007d6d22b09d04abe0f0887d52b67af9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Utils::HoleToolheadAxisExporter::HoleToolheadAxisExporter</definition>
+        <argsstring>(const std::string &amp;basePath)</argsstring>
+        <name>HoleToolheadAxisExporter</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::HoleToolheadAxisExporter</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>basePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="42" column="18" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="42" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a7c86edca51043095c8267039faead907" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Utils::HoleToolheadAxisExporter::~HoleToolheadAxisExporter</definition>
+        <argsstring>()=default</argsstring>
+        <name>~HoleToolheadAxisExporter</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::~HoleToolheadAxisExporter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="43" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a7ab963fed820aa447d5d1e206a9dbbfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::HoleToolheadAxisExporter::WriteCoordToBuffer</definition>
+        <argsstring>(const std::string &amp;itemType, std::string itemName, const std::string &amp;pointType, std::shared_ptr&lt; GOPoint &gt; goPoint)</argsstring>
+        <name>WriteCoordToBuffer</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::WriteCoordToBuffer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>itemType</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>itemName</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>pointType</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+          <declname>goPoint</declname>
+        </param>
+        <briefdescription>
+<para>Write the coordinates to a .log file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>itemType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the item (toolhead or hole) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pointType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the point (start or end) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>goPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> object to get the coordinates from </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="51" column="14" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="86" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a22834ef1603a53156939c66cd04b6d27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::HoleToolheadAxisExporter::ExportCoordinates</definition>
+        <argsstring>()</argsstring>
+        <name>ExportCoordinates</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::ExportCoordinates</qualifiedname>
+        <briefdescription>
+<para>Export and write the hole and toolhead coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="56" column="14" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="48" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1aeadf27ae21397556b1e06ef7ee0e2add" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::HoleToolheadAxisExporter::ExportToolheadAxis</definition>
+        <argsstring>()</argsstring>
+        <name>ExportToolheadAxis</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::ExportToolheadAxis</qualifiedname>
+        <briefdescription>
+<para>Export the toolhead coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="58" column="14" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="54" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a466566b7dc329ae2198baf990f01da1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::HoleToolheadAxisExporter::ExportHoleAxis</definition>
+        <argsstring>()</argsstring>
+        <name>ExportHoleAxis</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::ExportHoleAxis</qualifiedname>
+        <briefdescription>
+<para>Export the hole coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="60" column="14" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="73" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a6734e76cc5d95a4883a59d5461399ffa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::HoleToolheadAxisExporter::WriteBufferToFile</definition>
+        <argsstring>()</argsstring>
+        <name>WriteBufferToFile</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::WriteBufferToFile</qualifiedname>
+        <briefdescription>
+<para>Write the buffer to a file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is written in the following format: ItemType,ItemName,PointType,X,Y,Z </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="67" column="14" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="94" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1aa7682a763f102dccaf0a0c434ef87f57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::HoleToolheadAxisExporter::GetCurrentTimestamp</definition>
+        <argsstring>()</argsstring>
+        <name>GetCurrentTimestamp</name>
+        <qualifiedname>AIAC::Utils::HoleToolheadAxisExporter::GetCurrentTimestamp</qualifiedname>
+        <briefdescription>
+<para>Get the current timestamp. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A string representing the current timestamp </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/HoleToolheadAxisExporter.h" line="72" column="21" bodyfile="src/utils/HoleToolheadAxisExporter.cpp" bodystart="109" bodyend="115"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/HoleToolheadAxisExporter.h" line="40" column="5" bodyfile="src/utils/HoleToolheadAxisExporter.h" bodystart="40" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a22834ef1603a53156939c66cd04b6d27" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>ExportCoordinates</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a466566b7dc329ae2198baf990f01da1c" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>ExportHoleAxis</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1aeadf27ae21397556b1e06ef7ee0e2add" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>ExportToolheadAxis</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1aa7682a763f102dccaf0a0c434ef87f57" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>GetCurrentTimestamp</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a007d6d22b09d04abe0f0887d52b67af9" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>HoleToolheadAxisExporter</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a9e2eb33713db9af43929a078a08e3a4b" prot="private" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>m_BasePath</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1aebefb4afba33b12e2d767a5fadb13092" prot="private" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>m_Buffer</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a64b474f831722a434cd727859028fdaa" prot="private" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>m_FileName</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a6734e76cc5d95a4883a59d5461399ffa" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>WriteBufferToFile</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a7ab963fed820aa447d5d1e206a9dbbfb" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>WriteCoordToBuffer</name></member>
+      <member refid="classAIAC_1_1Utils_1_1HoleToolheadAxisExporter_1a7c86edca51043095c8267039faead907" prot="public" virt="non-virtual"><scope>AIAC::Utils::HoleToolheadAxisExporter</scope><name>~HoleToolheadAxisExporter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
