@@ -33,6 +33,11 @@ All these considerations led to the development of the Augmented Carpentry syste
 This can be achieved by embedding ordinary tools with sensors and replacing conventional 2D execution drawings, manual markings, and physical jigs in timber fabrication with a design-to-production digital visual guidance system. Powered by a low-cost monocular camera, familiar interfaces, and a single 3D execution model, the system is designed to integrate with standard woodworking power tools, thus enabling operators to perform manual tasks with digital assistance.
 The produced augmented framework is named **Augmented Carpentry**. The development leading to this release is the result of a research carried on 4 years. The result is a functioning prototype that has been tested in the lab and in the field, and is now available for public use. The system is designed to be used with a variety of woodworking power tools, including chainsaws, circular saws, and routers. It is intended to be used by carpenters, builders, and other professionals in the construction industry and serve as a base for future research and development in the field of augmented reality in open-source digital fabrication.
 
+<br>
+
+
+![TOC><](../assets/images/motivation/P_overview_actions.jpg){ width=90% class="rounded-corners"}
+
 
 
 [^1]: Reference: Number of timber construction employees by company size in Switzerland in 2022. Data from the [Federal Statistical Office STATENT 2022 (Vers. 22.08.2024)](https://www.bfs.admin.ch/bfs/fr/home/actualites/quoi-de-neuf.assetdetail.26665232.html), NOGA categories: 162303 (manufacture of other builders' carpentry and joinery of wood) and 439101 (carpentry, construction framing and joinery work).
