@@ -1,255 +1,255 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0" version="25.0.3">
-  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2353" dy="881" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-      <root>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="sMStKUehqGQMSR1SdG5j-219" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;perimeterSpacing=5;arcSize=3;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-788" y="80" width="460" height="147.14" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-0" value="GOPrimitive.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-298" y="80" width="760" height="570" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-194" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;perimeterSpacing=5;arcSize=3;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="148.06" y="138" width="270" height="490" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-5" value="" style="group" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
-          <mxGeometry x="-257.94" y="153" width="330" height="320" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-6" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPrimitive&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" parent="sMStKUehqGQMSR1SdG5j-5" vertex="1">
-          <mxGeometry width="330" height="283.1939027982327" as="geometry">
-            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-7" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void SetVisibility(boolean)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="30" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-8" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void SetColor(glm::vec4)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="60.15463917525774" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-21" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Translate(glm::vec3)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="90.30927835051548" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-22" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Transform(glm::Mat4x4)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="120.46391752577323" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-23" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void InitGLObject()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="150.61855670103097" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-24" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Draw()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="180.7731958762887" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="210.92783505154642" width="330" height="5.571428571428572" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-31" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;#&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;uint32 ID&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="216.499263622975" width="330" height="30.15463917525774" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-9" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;#&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOTypeFlags Type&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
-          <mxGeometry y="246.65390279823274" width="330" height="36.54" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-33" value="" style="group" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
-          <mxGeometry x="-257.94" y="469.1600000000001" width="160" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-34" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;enum&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOTypeFlags&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" parent="sMStKUehqGQMSR1SdG5j-33" vertex="1">
-          <mxGeometry width="160" height="145.979381443299" as="geometry">
-            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-43" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPrimitive&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
-          <mxGeometry y="30" width="160" height="23.195876288659797" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-46" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPoint&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
-          <mxGeometry y="53.1958762886598" width="160" height="23.195876288659797" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-48" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOLine&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
-          <mxGeometry y="76.3917525773196" width="160" height="23.195876288659797" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-161" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;...&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
-          <mxGeometry y="99.58762886597938" width="160" height="23.195876288659797" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-53" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOText&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
-          <mxGeometry y="122.78350515463919" width="160" height="23.195876288659797" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-54" value="" style="group" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
-          <mxGeometry x="168.06" y="154.15999999999997" width="230" height="190" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-55" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOPoint&lt;/span&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" parent="sMStKUehqGQMSR1SdG5j-54" vertex="1">
-          <mxGeometry width="230" height="163.26702570893025" as="geometry">
-            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-189" value="&lt;u&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;std::shared_ptr&amp;lt;GOPoint&amp;gt; Add(x, y, z)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
-          <mxGeometry y="30" width="230" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-60" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void SetPosition()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
-          <mxGeometry y="70" width="230" height="29.285567010309286" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-61" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void DistanceTo(GOPoint)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
-          <mxGeometry y="99.28556701030928" width="230" height="29.28503454545455" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-62" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
-          <mxGeometry y="128.57060155576383" width="230" height="5.410857142857144" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-63" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;-&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;glm::vec3 Position&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
-          <mxGeometry y="133.98145869862097" width="230" height="29.285567010309286" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-115" value="GORegistry.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-788" y="250" width="460" height="400" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-117" value="" style="group" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
-          <mxGeometry x="-738" y="303.62" width="360" height="300" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-118" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GORegistry&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;" parent="sMStKUehqGQMSR1SdG5j-117" vertex="1">
-          <mxGeometry width="360" height="299.9988070692195" as="geometry">
-            <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-119" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Register(std::shared_ptr&amp;lt;GOPrimitive&amp;gt;)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="30" width="360" height="34.02061855670104" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-120" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Unregister(ID)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="64.02061855670104" width="360" height="34.02061855670104" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-121" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;shared_ptr&amp;lt;T&amp;gt; GetGO(ID)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="98.04123711340208" width="360" height="34.02061855670104" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-122" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; text-align: center;&quot;&gt;void GetAllGos(&amp;amp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; text-align: center;&quot;&gt;std::vector&amp;lt; std::shared_ptr&amp;lt;GLPrimitive&amp;gt;&amp;gt;)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="132.0618556701031" width="360" height="47.94" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-123" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void InitGLObject()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="180.0018556701031" width="360" height="34.02061855670104" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-124" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Draw()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="214.02247422680415" width="360" height="34.02061855670104" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-125" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="248.0430927835052" width="360" height="6.2857142857142865" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-126" value="&lt;u&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;-&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;std::map&amp;lt;uint32_t, std::shared_ptr&amp;lt;GOPrimitive&amp;gt;&amp;gt; m_GOMap&lt;/span&gt;&lt;/font&gt;&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
-          <mxGeometry y="254.32880706921947" width="360" height="45.67" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.12;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-9" target="sMStKUehqGQMSR1SdG5j-34" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-201" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-177" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-177" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOCircle&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="374.15999999999997" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-202" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-179" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-179" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOCylinder&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="414.15999999999997" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-199" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-181" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-181" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOLine&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="333.77" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-203" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-183" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-183" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOPolyline&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="454.15999999999997" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-205" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-184" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-184" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOMesh&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="533.1600000000001" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-204" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-185" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-185" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOTriangle&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="494.1600000000001" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-206" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-186" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-186" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOText&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="168.06" y="574.1599999999999" width="230" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-193" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Use&lt;/font&gt;" style="endArrow=classic;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endFill=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-189" target="sMStKUehqGQMSR1SdG5j-119" edge="1">
-          <mxGeometry x="-0.2066" y="-3" width="160" relative="1" as="geometry">
-            <mxPoint x="22" y="190" as="sourcePoint" />
-            <mxPoint x="182" y="190" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="122" y="204" />
-              <mxPoint x="122" y="130" />
-              <mxPoint x="-268" y="130" />
-              <mxPoint x="-267" y="351" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-200" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-60" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="120" y="239" />
-              <mxPoint x="120" y="349" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-208" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Geometry Object&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="176.99687499999982" y="105" width="160.40625" height="33" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-216" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;AIAC_APP&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-604" y="50" width="73" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-217" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GORegistry&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-731.5" y="113.56999999999994" width="104.04624277456648" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-220" value="Layers" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-524.5" y="128.57000000000016" width="120" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-221" value="Layers" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-514.5" y="138.57000000000016" width="120" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-222" value="Layers" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-504.5" y="148.57000000000016" width="120" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-226" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Read/&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Update&lt;/font&gt;&lt;/div&gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-221" target="sMStKUehqGQMSR1SdG5j-217" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="-692.98" y="73.56999999999994" as="sourcePoint" />
-            <mxPoint x="-532.98" y="73.56999999999994" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sMStKUehqGQMSR1SdG5j-229" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-220" target="sMStKUehqGQMSR1SdG5j-194" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="-528" y="-21" as="sourcePoint" />
-            <mxPoint x="-612" y="-21" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="-421" y="30" />
-              <mxPoint x="353" y="30" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="y6ZGKfWOptIz0bdlFJA0-2" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Create Geometry Objects&lt;/font&gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-221" target="sMStKUehqGQMSR1SdG5j-194" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="-471" y="144" as="sourcePoint" />
-            <mxPoint x="410" y="148" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="-411" y="40" />
-              <mxPoint x="353" y="40" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="y6ZGKfWOptIz0bdlFJA0-3" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-222" target="sMStKUehqGQMSR1SdG5j-194" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="-461" y="154" as="sourcePoint" />
-            <mxPoint x="420" y="158" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="-401" y="50" />
-              <mxPoint x="352" y="50" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e" scale="2" border="0">
+    <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+        <mxGraphModel dx="2845" dy="1226" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="WIyWlLk6GJQsqaUBKTNV-0"/>
+                <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0"/>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-219" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;perimeterSpacing=5;arcSize=3;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-788" y="80" width="460" height="147.14" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-0" value="GOPrimitive.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-298" y="80" width="760" height="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-194" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;strokeWidth=1;perimeterSpacing=5;arcSize=3;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="148.06" y="138" width="270" height="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-5" value="" style="group;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
+                    <mxGeometry x="-257.94" y="153" width="330" height="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-6" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPrimitive&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;fillColor=none;" parent="sMStKUehqGQMSR1SdG5j-5" vertex="1">
+                    <mxGeometry width="330" height="283.1939027982327" as="geometry">
+                        <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-7" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void SetVisibility(boolean)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="30" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-8" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void SetColor(glm::vec4)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="60.15463917525774" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-21" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Translate(glm::vec3)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="90.30927835051548" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-22" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Transform(glm::Mat4x4)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="120.46391752577323" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-23" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void InitGLObject()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="150.61855670103097" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-24" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Draw()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="180.7731958762887" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="210.92783505154642" width="330" height="5.571428571428572" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-31" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;#&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;uint32 ID&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="216.499263622975" width="330" height="30.15463917525774" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-9" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;#&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOTypeFlags Type&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-6" vertex="1">
+                    <mxGeometry y="246.65390279823274" width="330" height="36.54" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-33" value="" style="group" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
+                    <mxGeometry x="-257.94" y="469.1600000000001" width="160" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-34" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;enum&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOTypeFlags&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;fillColor=none;" parent="sMStKUehqGQMSR1SdG5j-33" vertex="1">
+                    <mxGeometry width="160" height="145.979381443299" as="geometry">
+                        <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-43" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPrimitive&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
+                    <mxGeometry y="30" width="160" height="23.195876288659797" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-46" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOPoint&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
+                    <mxGeometry y="53.1958762886598" width="160" height="23.195876288659797" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-48" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOLine&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
+                    <mxGeometry y="76.3917525773196" width="160" height="23.195876288659797" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-161" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;...&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
+                    <mxGeometry y="99.58762886597938" width="160" height="23.195876288659797" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-53" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GOText&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-34" vertex="1">
+                    <mxGeometry y="122.78350515463919" width="160" height="23.195876288659797" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-54" value="" style="group;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
+                    <mxGeometry x="168.06" y="154.15999999999997" width="230" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-55" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOPoint&lt;/span&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;fillColor=none;" parent="sMStKUehqGQMSR1SdG5j-54" vertex="1">
+                    <mxGeometry width="230" height="163.26702570893025" as="geometry">
+                        <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-189" value="&lt;u&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;std::shared_ptr&amp;lt;GOPoint&amp;gt; Add(x, y, z)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
+                    <mxGeometry y="30" width="230" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-60" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void SetPosition()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
+                    <mxGeometry y="70" width="230" height="29.285567010309286" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-61" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void DistanceTo(GOPoint)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
+                    <mxGeometry y="99.28556701030928" width="230" height="29.28503454545455" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-62" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
+                    <mxGeometry y="128.57060155576383" width="230" height="5.410857142857144" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-63" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;-&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;glm::vec3 Position&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-55" vertex="1">
+                    <mxGeometry y="133.98145869862097" width="230" height="29.285567010309286" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-115" value="GORegistry.h/.cpp" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;fillColor=none;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-788" y="250" width="460" height="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-117" value="" style="group" parent="WIyWlLk6GJQsqaUBKTNV-1" connectable="0" vertex="1">
+                    <mxGeometry x="-738" y="303.62" width="360" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-118" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;GORegistry&lt;/span&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=default;rounded=1;arcSize=4;swimlaneLine=1;fillColor=none;" parent="sMStKUehqGQMSR1SdG5j-117" vertex="1">
+                    <mxGeometry width="360" height="299.9988070692195" as="geometry">
+                        <mxRectangle x="878" y="661" width="54" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-119" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Register(std::shared_ptr&amp;lt;GOPrimitive&amp;gt;)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="30" width="360" height="34.02061855670104" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-120" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Unregister(ID)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="64.02061855670104" width="360" height="34.02061855670104" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-121" value="&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: initial;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;shared_ptr&amp;lt;T&amp;gt; GetGO(ID)&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="98.04123711340208" width="360" height="34.02061855670104" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-122" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; text-align: center;&quot;&gt;void GetAllGos(&amp;amp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; text-align: center;&quot;&gt;std::vector&amp;lt; std::shared_ptr&amp;lt;GLPrimitive&amp;gt;&amp;gt;)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="132.0618556701031" width="360" height="47.94" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-123" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void InitGLObject()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="180.0018556701031" width="360" height="34.02061855670104" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-124" value="&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;void Draw()&lt;/span&gt;&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="214.02247422680415" width="360" height="34.02061855670104" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-125" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="248.0430927835052" width="360" height="6.2857142857142865" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-126" value="&lt;u&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;-&lt;/span&gt;&lt;span style=&quot;background-color: initial; text-align: center;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;font face=&quot;Droid Sans Mono, monospace, monospace, UbuntuMono Nerd Font, Consolas, Courier New, monospace&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;std::map&amp;lt;uint32_t, std::shared_ptr&amp;lt;GOPrimitive&amp;gt;&amp;gt; m_GOMap&lt;/span&gt;&lt;/font&gt;&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=default;" parent="sMStKUehqGQMSR1SdG5j-118" vertex="1">
+                    <mxGeometry y="254.32880706921947" width="360" height="45.67" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.12;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-9" target="sMStKUehqGQMSR1SdG5j-34" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-201" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-177" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-177" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOCircle&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="374.15999999999997" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-202" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-179" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-179" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOCylinder&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="414.15999999999997" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-199" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-181" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-181" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOLine&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="333.77" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-203" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-183" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-183" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOPolyline&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="454.15999999999997" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-205" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-184" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-184" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOMesh&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="533.1600000000001" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-204" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-185" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-185" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOTriangle&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="494.1600000000001" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-206" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-186" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-186" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;class&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GOText&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="168.06" y="574.1599999999999" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-193" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Use&lt;/font&gt;" style="endArrow=classic;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endFill=1;labelBackgroundColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-189" target="sMStKUehqGQMSR1SdG5j-119" edge="1">
+                    <mxGeometry x="-0.2066" y="-3" width="160" relative="1" as="geometry">
+                        <mxPoint x="22" y="190" as="sourcePoint"/>
+                        <mxPoint x="182" y="190" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="122" y="204"/>
+                            <mxPoint x="122" y="130"/>
+                            <mxPoint x="-268" y="130"/>
+                            <mxPoint x="-267" y="351"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-200" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;endFill=1;endSize=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-60" target="sMStKUehqGQMSR1SdG5j-24" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="120" y="239"/>
+                            <mxPoint x="120" y="349"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-208" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Geometry Object&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="176.99687499999982" y="105" width="160.40625" height="33" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-216" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;AIAC_APP&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-604" y="50" width="73" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-217" value="&lt;span style=&quot;font-family: &amp;quot;Droid Sans Mono&amp;quot;, monospace, monospace, &amp;quot;UbuntuMono Nerd Font&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px;&quot;&gt;GORegistry&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-731.5" y="113.56999999999994" width="104.04624277456648" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-220" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-521" y="117.00000000000017" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-221" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-514.5" y="138.57000000000016" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-222" value="Layers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="-507" y="161.00000000000017" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-226" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Read/&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Update&lt;/font&gt;&lt;/div&gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;labelBackgroundColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-221" target="sMStKUehqGQMSR1SdG5j-217" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="-692.98" y="73.56999999999994" as="sourcePoint"/>
+                        <mxPoint x="-532.98" y="73.56999999999994" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sMStKUehqGQMSR1SdG5j-229" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-220" target="sMStKUehqGQMSR1SdG5j-194" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="-528" y="-21" as="sourcePoint"/>
+                        <mxPoint x="-612" y="-21" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-421" y="30"/>
+                            <mxPoint x="353" y="30"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="y6ZGKfWOptIz0bdlFJA0-2" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Create Geometry Objects&lt;/font&gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-221" target="sMStKUehqGQMSR1SdG5j-194" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="-471" y="144" as="sourcePoint"/>
+                        <mxPoint x="410" y="148" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-411" y="40"/>
+                            <mxPoint x="353" y="40"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="y6ZGKfWOptIz0bdlFJA0-3" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="sMStKUehqGQMSR1SdG5j-222" target="sMStKUehqGQMSR1SdG5j-194" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="-461" y="154" as="sourcePoint"/>
+                        <mxPoint x="420" y="158" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-401" y="50"/>
+                            <mxPoint x="352" y="50"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>
