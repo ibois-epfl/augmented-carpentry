@@ -90,6 +90,9 @@ libimgui-dev \
 libopencv-dev
 ```
 
+> [!TIP]
+> AC can also be built on Windows os on wsl 2.0, but it hasn't been tested for sensing device compatibility and hardware access.
+
 ### 3 Build & Run
 
 Donwnload the repo first:
