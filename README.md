@@ -116,7 +116,7 @@ That's it your are running Augmented Carpentry🪚!
 
 
 ### 4 How to use
-Follow our [online documentation](missinglink) to learn how to use the AC.
+Follow our [online documentation](https://ibois-epfl.github.io/augmented-carpentry/) to learn how to use the AC.
 
 </br>
 
