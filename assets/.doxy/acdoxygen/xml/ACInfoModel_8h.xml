@@ -1,0 +1,739 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="ACInfoModel_8h" kind="file" language="C++">
+    <compoundname>ACInfoModel.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">map</includes>
+    <includes local="no">set</includes>
+    <includes local="no">string</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includes local="yes">pugixml.hpp</includes>
+    <includes refid="GOPrimitive_8h" local="yes">AIAC/GOSys/GOPrimitive.h</includes>
+    <includes refid="Config_8h" local="yes">AIAC/Config.h</includes>
+    <includedby refid="ACInfoModel_8cpp" local="yes">src/AIAC/ACInfoModel.cpp</includedby>
+    <includedby refid="CutBladeThicknessVisualizer_8h" local="yes">src/AIAC/Feedback/CutBladeThicknessVisualizer.h</includedby>
+    <includedby refid="CutCircularSawFeedback_8h" local="yes">src/AIAC/Feedback/CutCircularSawFeedback.h</includedby>
+    <includedby refid="HoleFeedback_8h" local="yes">src/AIAC/Feedback/HoleFeedback.h</includedby>
+    <includedby refid="LayerFeedback_8h" local="yes">src/AIAC/LayerFeedback.h</includedby>
+    <includedby refid="LayerModel_8h" local="yes">src/AIAC/LayerModel.h</includedby>
+    <includedby refid="HoleToolheadAxisExporter_8cpp" local="yes">src/utils/HoleToolheadAxisExporter.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/AIAC/ACInfoModel.h</label>
+        <link refid="ACInfoModel_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>AIAC/Assert.h</label>
+        <link refid="Assert_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>AIAC/Base.h</label>
+        <link refid="Base_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>AIAC/Config.h</label>
+        <link refid="Config_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>AIAC/GOSys/GOPrimitive.h</label>
+        <link refid="GOPrimitive_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>AIAC/GlHeader.h</label>
+        <link refid="GlHeader_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>AIAC/Log.h</label>
+        <link refid="Log_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>AIAC/Render/GLObject.h</label>
+        <link refid="GLObject_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>utils/Ini.h</label>
+        <link refid="Ini_8h_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>GL/freeglut.h</label>
+      </node>
+      <node id="13">
+        <label>GL/glew.h</label>
+      </node>
+      <node id="15">
+        <label>GL/glut.h</label>
+      </node>
+      <node id="16">
+        <label>GLFW/glfw3.h</label>
+      </node>
+      <node id="33">
+        <label>algorithm</label>
+      </node>
+      <node id="18">
+        <label>backends/imgui_impl_glfw.h</label>
+      </node>
+      <node id="19">
+        <label>backends/imgui_impl_opengl3.h</label>
+      </node>
+      <node id="34">
+        <label>cctype</label>
+      </node>
+      <node id="35">
+        <label>cstdlib</label>
+      </node>
+      <node id="29">
+        <label>ctype.h</label>
+      </node>
+      <node id="36">
+        <label>fstream</label>
+      </node>
+      <node id="6">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="26">
+        <label>glm/gtc/constants.hpp</label>
+      </node>
+      <node id="25">
+        <label>glm/gtx/norm.hpp</label>
+      </node>
+      <node id="17">
+        <label>imgui.h</label>
+      </node>
+      <node id="10">
+        <label>iostream</label>
+      </node>
+      <node id="37">
+        <label>iterator</label>
+      </node>
+      <node id="3">
+        <label>map</label>
+      </node>
+      <node id="7">
+        <label>pugixml.hpp</label>
+      </node>
+      <node id="4">
+        <label>set</label>
+      </node>
+      <node id="23">
+        <label>spdlog/sinks/stdout_color_sinks.h</label>
+      </node>
+      <node id="22">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="38">
+        <label>sstream</label>
+      </node>
+      <node id="30">
+        <label>stdio.h</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="31">
+        <label>string.h</label>
+      </node>
+      <node id="32">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="39">
+        <label>type_traits</label>
+      </node>
+      <node id="40">
+        <label>unordered_map</label>
+      </node>
+      <node id="9">
+        <label>utility</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>src/AIAC.h</label>
+        <link refid="AIAC_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/AIAC/ACInfoModel.h</label>
+        <link refid="ACInfoModel_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/AIAC/Application.h</label>
+        <link refid="Application_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/AIAC/Feedback/CutBladeThicknessVisualizer.h</label>
+        <link refid="CutBladeThicknessVisualizer_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/AIAC/Feedback/CutCircularSawFeedback.h</label>
+        <link refid="CutCircularSawFeedback_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/AIAC/Feedback/HoleFeedback.h</label>
+        <link refid="HoleFeedback_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/AIAC/LayerFeedback.h</label>
+        <link refid="LayerFeedback_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/AIAC/LayerModel.h</label>
+        <link refid="LayerModel_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classAIAC_1_1TimberInfo" prot="public">AIAC::TimberInfo</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Component" prot="public">AIAC::TimberInfo::Component</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Hole" prot="public">AIAC::TimberInfo::Hole</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Cut" prot="public">AIAC::TimberInfo::Cut</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" prot="public">AIAC::TimberInfo::Cut::Face</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" prot="public">AIAC::TimberInfo::Cut::Edge</innerclass>
+    <innerclass refid="classAIAC_1_1ACInfoModel" prot="public">AIAC::ACInfoModel</innerclass>
+    <innernamespace refid="namespaceAIAC">AIAC</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<sp/>BEGINNING<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>source<sp/>file,<sp/>along<sp/>with<sp/>its<sp/>associated<sp/>content,<sp/>was<sp/>authored<sp/>by</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Andrea<sp/>Settimi,<sp/>Hong-Bin<sp/>Yang,<sp/>Naravich<sp/>Chutisilp,<sp/>and<sp/>numerous<sp/>other</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>contributors.<sp/>The<sp/>code<sp/>was<sp/>originally<sp/>developed<sp/>at<sp/>the<sp/>Laboratory<sp/>for</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Timber<sp/>Construction<sp/>(IBOIS,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand)<sp/>at<sp/>the<sp/>School<sp/>of<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Architecture,<sp/>Civil<sp/>and<sp/>Environmental<sp/>Engineering<sp/>(ENAC)<sp/>at<sp/>the<sp/>Swiss</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Federal<sp/>Institute<sp/>of<sp/>Technology<sp/>in<sp/>Lausanne<sp/>(EPFL)<sp/>for<sp/>the<sp/>Doctoral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Research<sp/>&quot;Augmented<sp/>Carpentry&quot;<sp/>(PhD<sp/>researcher:<sp/>Andrea<sp/>Settimi,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>co-director:<sp/>Dr.<sp/>Julien<sp/>Gamerro,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Although<sp/>the<sp/>entire<sp/>repository<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>GPL<sp/>license,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>particular<sp/>source<sp/>files<sp/>may<sp/>also<sp/>be<sp/>used<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MIT<sp/>license.<sp/>By<sp/>accessing<sp/>or<sp/>using<sp/>this<sp/>file,<sp/>you<sp/>agree<sp/>to<sp/>the<sp/>following:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>1.<sp/>You<sp/>may<sp/>reproduce,<sp/>modify,<sp/>and<sp/>distribute<sp/>this<sp/>file<sp/>in<sp/>accordance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>with<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>MIT<sp/>license.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>You<sp/>must<sp/>retain<sp/>this<sp/>legal<sp/>notice<sp/>in<sp/>all<sp/>copies<sp/>or<sp/>substantial</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>portions<sp/>of<sp/>this<sp/>file.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>This<sp/>file<sp/>is<sp/>provided<sp/>&quot;AS<sp/>IS,&quot;<sp/>without<sp/>any<sp/>express<sp/>or<sp/>implied</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>warranties,<sp/>including<sp/>but<sp/>not<sp/>limited<sp/>to<sp/>the<sp/>implied<sp/>warranties<sp/>of</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>merchantability<sp/>and<sp/>fitness<sp/>for<sp/>a<sp/>particular<sp/>purpose.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>you<sp/>cannot<sp/>or<sp/>will<sp/>not<sp/>comply<sp/>with<sp/>the<sp/>above<sp/>conditions,<sp/>you<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>not<sp/>permitted<sp/>to<sp/>use<sp/>this<sp/>file.<sp/>By<sp/>proceeding,<sp/>you<sp/>acknowledge<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>accept<sp/>all<sp/>terms<sp/>and<sp/>conditions<sp/>herein.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<sp/>END<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;set&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pugixml.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/GOSys/GOPrimitive.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Config.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">AIAC{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>ACIMState{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>NOT_DONE,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>CURRENT,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>DONE</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::map&lt;ACIMState,<sp/>glm::vec4&gt;<sp/>HOLE_AXIS_COLOR<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::NOT_DONE,<sp/>glm::vec4(0.1f,<sp/>0.9f,<sp/>0.9f,<sp/>1.0f)},</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::CURRENT,<sp/>glm::vec4(0.1f,<sp/>0.9f,<sp/>0.5f,<sp/>1.0f)},</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::DONE,<sp/>glm::vec4(0.3f,<sp/>0.3f,<sp/>0.3f,<sp/>0.5f)}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::map&lt;ACIMState,<sp/>glm::vec4&gt;<sp/>HOLE_CYLINDER_COLOR<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::NOT_DONE,<sp/>glm::vec4(0.1f,<sp/>0.9f,<sp/>0.9f,<sp/>0.2f)},</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::CURRENT,<sp/>glm::vec4(0.1f,<sp/>0.9f,<sp/>0.5f,<sp/>0.2f)},</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::DONE,<sp/>glm::vec4(0.3f,<sp/>0.3f,<sp/>0.3f,<sp/>0.2f)}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::map&lt;ACIMState,<sp/>glm::vec4&gt;<sp/>CUT_FACE_COLOR<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::NOT_DONE,<sp/>glm::vec4(0.9f,<sp/>0.6f,<sp/>0.2f,<sp/>0.2f)},</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::CURRENT,<sp/>glm::vec4(0.1f,<sp/>0.9f,<sp/>0.5f,<sp/>0.2f)},</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::DONE,<sp/>glm::vec4(0.3f,<sp/>0.3f,<sp/>0.3f,<sp/>0.2f)}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::map&lt;ACIMState,<sp/>glm::vec4&gt;<sp/>CUT_EDGE_COLOR<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::NOT_DONE,<sp/>glm::vec4(0.9f,<sp/>0.6f,<sp/>0.2f,<sp/>1.0f)},</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::CURRENT,<sp/>glm::vec4(0.1f,<sp/>0.9f,<sp/>0.5f,<sp/>1.0f)},</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>{ACIMState::DONE,<sp/>glm::vec4(0.3f,<sp/>0.3f,<sp/>0.3f,<sp/>0.5f)}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>ACIMState<sp/>StringToState(std::string<sp/>m_State);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec3<sp/>StringToVec3(std::string<sp/>str);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;<sp/>StringToTokens(std::string<sp/>str);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::set&lt;std::string&gt;<sp/>StringToSet(std::string<sp/>str);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>StringToBool(std::string<sp/>str);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>Vec3ToString(glm::vec3<sp/>vec3);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119" refid="classAIAC_1_1TimberInfo" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="121" refid="classAIAC_1_1TimberInfo_1_1Component" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref><sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>(std::string<sp/>type)<sp/>:<sp/>m_Type(type)<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>HEADLESS_TEST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Scale<sp/>=<sp/>AIAC::Config::Get&lt;float&gt;(AIAC::Config::SEC_AIAC,<sp/>AIAC::Config::SCALE_FACTOR,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component_1a44747e6cba1e1f5072e0405db0f9c4e6" kindref="member">SetAsCurrent</ref>();</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAsDone();</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAsNotDone();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetVisibility(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>glm::vec3<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component_1ac0771b78b638392d38e98e520dfcc77e" kindref="member">GetCenter</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsMarkedDone;<sp/></highlight><highlight class="comment">//<sp/>This<sp/>one<sp/>is<sp/>for<sp/>UI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/><sp/>__always_inline</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>GetTypeString()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Type;<sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_Scale;<sp/></highlight><highlight class="comment">//<sp/>When<sp/>converting<sp/>to<sp/>SLAM<sp/>world&apos;s<sp/>coordinate,<sp/>multiply<sp/>this<sp/>scale</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ACIMState<sp/>m_State;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>m_Type;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pugi::xml_node<sp/>m_ACIMDocNode;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>m_ID;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Center;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::shared_ptr&lt;GOPrimitive&gt;&gt;<sp/>m_GOPrimitives;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref>;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="classAIAC_1_1TimberInfo_1_1Hole" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo_1_1Hole" kindref="compound">Hole</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Hole" kindref="compound">Hole</ref>()<sp/>:<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>(</highlight><highlight class="stringliteral">&quot;HOLE&quot;</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Hole_1a7b6e314afc600c247cf3440bde014009" kindref="member">SetAsCurrent</ref>();</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAsDone();</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAsNotDone();</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Hole_1a789c8f5e759c2a3467fd1ad3e6f08855" kindref="member">SetVisibility</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible);</highlight></codeline>
+<codeline lineno="162" refid="classAIAC_1_1TimberInfo_1_1Hole_1a73b979c1f9d1f32a3f53fdd611625839" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Hole_1a73b979c1f9d1f32a3f53fdd611625839" kindref="member">GetCenter</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(m_Start<sp/>+<sp/>m_End)<sp/>*<sp/>0.5f;<sp/>};</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SwapStartEnd();</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/><sp/>__always_inline</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOPoint&gt;<sp/>GetStartPointGO()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_StartPointGO;<sp/>}</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOPoint&gt;<sp/>GetEndPointGO()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_EndPointGO;<sp/>}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/><sp/>__always_inline</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>GetRadius()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Radius;<sp/>}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>These<sp/>values<sp/>uses<sp/>original<sp/>coordinate<sp/>in<sp/>xml<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>i.e.<sp/>not<sp/>transformation<sp/>(rotation<sp/>/<sp/>translation)<sp/>is<sp/>applied</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Start;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_StartExposed;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_End;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_EndExposed;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>m_Radius;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_Neighbors;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>GOPrimitives</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOLine&gt;<sp/>m_AxisGO;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOCylinder&gt;<sp/>m_CylinderGO;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOPoint&gt;<sp/>m_StartPointGO;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOPoint&gt;<sp/>m_EndPointGO;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOText&gt;<sp/>m_IDLabelGO;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ACInfoModel;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193" refid="classAIAC_1_1TimberInfo_1_1Cut" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">Cut</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>{</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">Cut</ref>()<sp/>:<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>(</highlight><highlight class="stringliteral">&quot;CUT&quot;</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1a435025e7935649faee71059a4074b8a4" kindref="member">SetAsCurrent</ref>();</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAsDone();</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAsNotDone();</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetVisibility(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible);</highlight></codeline>
+<codeline lineno="201" refid="classAIAC_1_1TimberInfo_1_1Cut_1aacd2d714c4c700fcda3157405d23e40c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1aacd2d714c4c700fcda3157405d23e40c" kindref="member">GetCenter</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Center;<sp/>};</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Sub-class<sp/>Face</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204" refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref>()<sp/>:<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>(</highlight><highlight class="stringliteral">&quot;FACE&quot;</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="207" refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face_1a9b30ef2a2ddcf6cd869d563f53fd54fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face_1a9b30ef2a2ddcf6cd869d563f53fd54fb" kindref="member">GetCenter</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Center;<sp/>};</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsExposed()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Exposed;<sp/>}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>GetNormal()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Normal;<sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;glm::vec3&gt;<sp/>GetCorners()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Corners;<sp/>}</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>GetEdges()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Edges;<sp/>}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>GetNeighbors()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Neighbors;<sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_Exposed;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Normal;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;glm::vec3&gt;<sp/>m_Corners;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_Edges;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_Neighbors;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOMesh&gt;<sp/>m_GO;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Cut;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TimberInfo;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ACInfoModel;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Sub-class<sp/>Edge</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229" refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" kindref="compound">Edge</ref>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>{</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref><sp/>GetStartPt()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_GO-&gt;GetPStart();<sp/>}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref><sp/>GetEndPt()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_GO-&gt;GetPEnd();<sp/>}</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" kindref="compound">Edge</ref>()<sp/>:<sp/><ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref>(</highlight><highlight class="stringliteral">&quot;EDGE&quot;</highlight><highlight class="normal">)<sp/>{}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240" refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ab68fc2030c186a8bed5ee40461fc3492" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1ab68fc2030c186a8bed5ee40461fc3492" kindref="member">SetCotasVisibility</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>cota<sp/>:<sp/>m_Cotas)<sp/>cota-&gt;SetVisibility(visible);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>cotaLine<sp/>:<sp/>m_CotaLines)<sp/>cotaLine-&gt;SetVisibility(visible);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>cotaPt<sp/>:<sp/>m_CotaPts)<sp/>cotaPt-&gt;SetVisibility(visible);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="249" refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a5a820b42f9c456f7432e4151b9ec0f91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge_1a5a820b42f9c456f7432e4151b9ec0f91" kindref="member">ClearCotas</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Cotas.clear();</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_CotaLines.clear();</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_CotaPts.clear();</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>These<sp/>Start<sp/>and<sp/>End<sp/>are<sp/>original<sp/>value<sp/>(not<sp/>transformed)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Start;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_End;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_Neighbors;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOLine&gt;<sp/>m_GO;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::shared_ptr&lt;GOText&gt;&gt;<sp/>m_Cotas;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::shared_ptr&lt;GOLine&gt;&gt;<sp/>m_CotaLines;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::shared_ptr&lt;GOPoint&gt;&gt;<sp/>m_CotaPts;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">Cut</ref>;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref>;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsSingleFace()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_NonExposedFaceIDs.size()<sp/>==<sp/>1;<sp/>}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Face&amp;<sp/>GetFace(std::string<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(m_Faces.count(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>==<sp/>0)<sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Face<sp/>ID<sp/>does<sp/>not<sp/>exist.&quot;</highlight><highlight class="normal">);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Faces[id];<sp/>}</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Edge&amp;<sp/>GetEdge(std::string<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(m_Edges.count(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>==<sp/>0)<sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Edge<sp/>ID<sp/>does<sp/>not<sp/>exist.&quot;</highlight><highlight class="normal">);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Edges[id];<sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::map&lt;std::string,<sp/>Face&gt;&amp;<sp/>GetAllFaces()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Faces;<sp/>}</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::map&lt;std::string,<sp/>Edge&gt;&amp;<sp/>GetAllEdges()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Edges;<sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::set&lt;std::string&gt;&amp;<sp/>GetAllNonExposedFaceIDs()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_NonExposedFaceIDs;<sp/>}</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::set&lt;std::string&gt;&amp;<sp/>GetAllNonExposedEdgeIDs()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_NonExposedEdgeIDs;<sp/>}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>HighlightFace(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>faceId,<sp/>glm::vec4<sp/>color<sp/>=<sp/>glm::vec4(0));</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::string<sp/>GetHighlightedFaceID()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_HighlightedFaceID;<sp/>}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>TimberInfo::Cut::Face<sp/>GetHighlightedFace()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Faces[m_HighlightedFaceID];<sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::map&lt;std::string,<sp/>Face&gt;<sp/>GetFaceNeighbors(std::string<sp/>faceID)<sp/>{</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>Face&gt;<sp/>neighbors;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>neighborID<sp/>:<sp/>m_Faces[faceID].m_Neighbors){</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>neighbors[neighborID]<sp/>=<sp/>m_Faces[neighborID];</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>neighbors;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::map&lt;std::string,<sp/>Face&gt;<sp/>GetHighlightedFaceNeighbors()<sp/>{</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetFaceNeighbors(m_HighlightedFaceID);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetVisibilityAllCotas(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible)<sp/>{</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>edge<sp/>:<sp/>m_Edges){</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>edge.second.SetCotasVisibility(visible);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>m_HighlightedFaceID;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>Face&gt;<sp/>m_Faces;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>Edge&gt;<sp/>m_Edges;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_NonExposedFaceIDs;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_NonExposedEdgeIDs;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;GOText&gt;<sp/>m_IDLabelGO;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ACInfoModel;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::string<sp/>GetID()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ID;<sp/>}</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>GetAllComponentsIDs()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Component*<sp/>GetComponent(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Components[id];<sp/>}</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Component*<sp/>GetCurrentComponent()<sp/>{<sp/></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(m_Components.find(m_CurrentComponentID)<sp/>==<sp/>m_Components.end())</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Components[m_CurrentComponentID];</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>GetCurrentComponentID()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_CurrentComponentID;<sp/>}</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCurrentComponentTo(std::string<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetNextComponentAsCurrent();</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPrevComponentAsCurrent();</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>GetBoundingBox()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Bbox;<sp/>}</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;std::pair&lt;int,<sp/>int&gt;<sp/>&gt;<sp/>GetBboxEdgesIndices()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_BboxEdgesIndices;<sp/>}</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>HideAllComponentsExceptCurrent();</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ShowAllComponents();</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateCotasVisibility(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible);</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:<sp/></highlight></codeline>
+<codeline lineno="335" refid="classAIAC_1_1TimberInfo_1a6dfdb8a8ebe5aa0062118a5e768f2661" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1a6dfdb8a8ebe5aa0062118a5e768f2661" kindref="member">GetFabricatedComponents</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>comp<sp/>:<sp/>m_Components){</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(comp.second-&gt;m_State<sp/>==<sp/>ACIMState::DONE)</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>count++;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>count;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="344" refid="classAIAC_1_1TimberInfo_1ab3d39ebf0d4f826819a8ffb7eccfb966" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1ab3d39ebf0d4f826819a8ffb7eccfb966" kindref="member">GetTotalComponents</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Components.size();<sp/>}</highlight></codeline>
+<codeline lineno="346" refid="classAIAC_1_1TimberInfo_1a07645354e12bee8f4c718ea16350f286" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo_1a07645354e12bee8f4c718ea16350f286" kindref="member">GetFabricationProgress</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)<ref refid="classAIAC_1_1TimberInfo_1a6dfdb8a8ebe5aa0062118a5e768f2661" kindref="member">GetFabricatedComponents</ref>()<sp/>/<sp/><ref refid="classAIAC_1_1TimberInfo_1ab3d39ebf0d4f826819a8ffb7eccfb966" kindref="member">GetTotalComponents</ref>()<sp/>*<sp/>100;</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:<sp/><sp/></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>ShortenComponentID(std::string<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsShowingAllComponents<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsShowingCotas<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>m_ID;</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>bounding<sp/>box<sp/>has<sp/>this<sp/>structure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>(7)------------------------(6)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>/<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>|<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>(4)-----------------------(5)<sp/>|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>|<sp/><sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/><sp/>|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>|<sp/>(3)---------------------|-(2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>|/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>(0)-----------------------(1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;glm::vec3&gt;<sp/>m_Bbox;</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;int,<sp/>int&gt;<sp/>&gt;<sp/>m_BboxEdgesIndices<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{0,<sp/>1},<sp/>{1,<sp/>2},<sp/>{2,<sp/>3},<sp/>{3,<sp/>0},<sp/></highlight><highlight class="comment">//<sp/>bottom</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{4,<sp/>5},<sp/>{5,<sp/>6},<sp/>{6,<sp/>7},<sp/>{7,<sp/>4},<sp/></highlight><highlight class="comment">//<sp/>top</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{0,<sp/>4},<sp/>{1,<sp/>5},<sp/>{2,<sp/>6},<sp/>{3,<sp/>7}<sp/><sp/></highlight><highlight class="comment">//<sp/>vertical</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/>ACIMState<sp/>m_State<sp/>=<sp/>ACIMState::NOT_DONE;<sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>states<sp/>instead<sp/>of<sp/>executed?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>Hole&gt;<sp/>m_Holes;</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>Cut&gt;<sp/>m_Cuts;</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>Component*&gt;<sp/>m_Components;<sp/><sp/></highlight><highlight class="comment">//<sp/>FIXME:<sp/>refactor<sp/>with<sp/>smart<sp/>pointers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>m_CurrentComponentID<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ACInfoModel;</highlight></codeline>
+<codeline lineno="390"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392" refid="classAIAC_1_1ACInfoModel" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref></highlight></codeline>
+<codeline lineno="393"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref>(){</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>HEADLESS_TEST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Scale<sp/>=<sp/>AIAC::Config::Get&lt;float&gt;(AIAC::Config::SEC_AIAC,<sp/>AIAC::Config::SCALE_FACTOR,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">~ACInfoModel</ref>(){};</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"></highlight></codeline>
+<codeline lineno="407"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1a53b0e65ca416b65f99d2f5a756ad772f" kindref="member">Load</ref>(std::string<sp/>path);</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1a06dd8ab818c42649334527dfac25d86e" kindref="member">Save</ref>();</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight></codeline>
+<codeline lineno="417" refid="classAIAC_1_1ACInfoModel_1a438c98f4202777f943b0a37b5f1fc28c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="classAIAC_1_1ACInfoModel_1a438c98f4202777f943b0a37b5f1fc28c" kindref="member">GetFilePath</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_FilePath;<sp/>}</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"></highlight></codeline>
+<codeline lineno="422" refid="classAIAC_1_1ACInfoModel_1a8f5073dc39dccd9a58d2260d7f0c0b56" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/><ref refid="classAIAC_1_1ACInfoModel_1a8f5073dc39dccd9a58d2260d7f0c0b56" kindref="member">GetName</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>nameWithExtension<sp/>=<sp/>m_FilePath.substr(m_FilePath.find_last_of(</highlight><highlight class="stringliteral">&quot;/\\&quot;</highlight><highlight class="normal">)<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="424"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>nameWithoutExtension<sp/>=<sp/>nameWithExtension.substr(0,<sp/>nameWithExtension.find_last_of(</highlight><highlight class="stringliteral">&quot;.&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>nameWithoutExtension;<sp/>}</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="430" refid="classAIAC_1_1ACInfoModel_1a774d68581c2802bcf62c84ea306c1508" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>pugi::xml_document&amp;<sp/><ref refid="classAIAC_1_1ACInfoModel_1a774d68581c2802bcf62c84ea306c1508" kindref="member">GetDoc</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ACIMDoc;<sp/>}</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"></highlight></codeline>
+<codeline lineno="435"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1a0f26180f447c4da62d675eca1088f548" kindref="member">Clear</ref>();</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight></codeline>
+<codeline lineno="440" refid="classAIAC_1_1ACInfoModel_1ab17df54c3abf0ba415e266e6368ff37a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref>&amp;<sp/><ref refid="classAIAC_1_1ACInfoModel_1ab17df54c3abf0ba415e266e6368ff37a" kindref="member">GetTimberInfo</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_TimberInfo;<sp/>}</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1ada6cc5988f62ad1a9e83f40d2a0f3c23" kindref="member">UpdateBboxGOLine</ref>();</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"></highlight></codeline>
+<codeline lineno="447"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>/**</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>*<sp/>@brief<sp/>Update<sp/>the<sp/>cotas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>void<sp/>UpdateCotas();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="451"><highlight class="normal"></highlight></codeline>
+<codeline lineno="456"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1a6831d5df56d42f7b6247b7a611da79c1" kindref="member">Transform</ref>(glm::mat4x4<sp/>transformMat);</highlight></codeline>
+<codeline lineno="457"><highlight class="normal"></highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1ab271d7263b870cde89a7bece0f0c1913" kindref="member">GetLength</ref>();</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"></highlight></codeline>
+<codeline lineno="468" refid="classAIAC_1_1ACInfoModel_1aa63d343a60afa24ea3745ede4cd4e061" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1aa63d343a60afa24ea3745ede4cd4e061" kindref="member">GetRealWorldLength</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1ab271d7263b870cde89a7bece0f0c1913" kindref="member">GetLength</ref>()<sp/>/<sp/>m_Scale;<sp/>}</highlight></codeline>
+<codeline lineno="469"><highlight class="normal"></highlight></codeline>
+<codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1aa8bc64b726d94592e54cdb09eecb371f" kindref="member">SetBboxVisibility</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>visible);</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"></highlight></codeline>
+<codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1a820fb24eda56a2b773102fdc7c926f41" kindref="member">AddMeasuredBboxLength</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>diff);</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight></codeline>
+<codeline lineno="483" refid="classAIAC_1_1ACInfoModel_1a560fe337ea663c091b7acf4b771b3f2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1a560fe337ea663c091b7acf4b771b3f2b" kindref="member">GetMeasuredBboxLength</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_MeasuredBboxLength;<sp/>};</highlight></codeline>
+<codeline lineno="484"><highlight class="normal"></highlight></codeline>
+<codeline lineno="488"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1ACInfoModel_1aaba597673c0d839627a918a98747a4b3" kindref="member">AdjustScale</ref>();</highlight></codeline>
+<codeline lineno="489"><highlight class="normal"></highlight></codeline>
+<codeline lineno="490"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_EdgeWeight<sp/>=<sp/>1.1f;</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_LabelSize<sp/>=<sp/>0.75f;</highlight></codeline>
+<codeline lineno="493"><highlight class="normal"></highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_Scale<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_MeasuredBboxLength;</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"></highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>m_FilePath;</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"><sp/><sp/><sp/><sp/>pugi::xml_document<sp/>m_ACIMDoc;</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"></highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1TimberInfo" kindref="compound">TimberInfo</ref><sp/>m_TimberInfo;</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"></highlight></codeline>
+<codeline lineno="502"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::shared_ptr&lt;GOLine&gt;&gt;<sp/>m_BboxGOLines;</highlight></codeline>
+<codeline lineno="503"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"></highlight></codeline>
+<codeline lineno="505"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/AIAC/ACInfoModel.h"/>
+  </compounddef>
+</doxygen>

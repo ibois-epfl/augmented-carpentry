@@ -1,0 +1,619 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CameraCalibrator" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CameraCalibrator</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3f" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Pattern</name>
+        <qualifiedname>AIAC::CameraCalibrator::Pattern</qualifiedname>
+        <enumvalue id="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fa47b657dc88455b82f93f6ac3fd04f0b5" prot="public">
+          <name>NOT_EXISTING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fa6f2300caccc6eec487d70d40d0548a0d" prot="public">
+          <name>CHESSBOARD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fad94f97aaa71a789a3042eb6335135d0d" prot="public">
+          <name>CIRCLES_GRID</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fac73d210434a5b987f547f75c87635bb1" prot="public">
+          <name>ASYMMETRIC_CIRCLES_GRID</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="53" column="9" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a7e657f9868e53c3957ba8194338a6bc4" prot="public" static="no" mutable="no">
+        <type>cv::Size</type>
+        <definition>cv::Size AIAC::CameraCalibrator::boardSize</definition>
+        <argsstring></argsstring>
+        <name>boardSize</name>
+        <qualifiedname>AIAC::CameraCalibrator::boardSize</qualifiedname>
+        <initializer>= cv::Size(19, 13)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="70" column="18" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a513dabc5c53e83ba17383e0fb27f1509" prot="public" static="no" mutable="no">
+        <type>Pattern</type>
+        <definition>Pattern AIAC::CameraCalibrator::calibrationPattern</definition>
+        <argsstring></argsstring>
+        <name>calibrationPattern</name>
+        <qualifiedname>AIAC::CameraCalibrator::calibrationPattern</qualifiedname>
+        <initializer>= Pattern::CHESSBOARD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="71" column="17" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a9cedb32f9c91f74295b3da2afcd3ecf6" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CameraCalibrator::squareSize</definition>
+        <argsstring></argsstring>
+        <name>squareSize</name>
+        <qualifiedname>AIAC::CameraCalibrator::squareSize</qualifiedname>
+        <initializer>= 20.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="72" column="15" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1ad08c0d1b6af7cd8951f5d8c7e8c22be6" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CameraCalibrator::aspectRatio</definition>
+        <argsstring></argsstring>
+        <name>aspectRatio</name>
+        <qualifiedname>AIAC::CameraCalibrator::aspectRatio</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="73" column="15" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a20432aef18f13e34cfa83f9eba162aa4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::writeExtrinsics</definition>
+        <argsstring></argsstring>
+        <name>writeExtrinsics</name>
+        <qualifiedname>AIAC::CameraCalibrator::writeExtrinsics</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="74" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a9fe435d7f1ce942d587ad5ee37af63fc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::calibZeroTangentDist</definition>
+        <argsstring></argsstring>
+        <name>calibZeroTangentDist</name>
+        <qualifiedname>AIAC::CameraCalibrator::calibZeroTangentDist</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="75" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a478d510f6d7743646bc3c2cd082a3a58" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::calibFixPrincipalPoint</definition>
+        <argsstring></argsstring>
+        <name>calibFixPrincipalPoint</name>
+        <qualifiedname>AIAC::CameraCalibrator::calibFixPrincipalPoint</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="76" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a248e8bc61fa55afde8500905147c839b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::flipVertical</definition>
+        <argsstring></argsstring>
+        <name>flipVertical</name>
+        <qualifiedname>AIAC::CameraCalibrator::flipVertical</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="77" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a67852056d731a829ea8ad5f0037d4a38" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::useFisheye</definition>
+        <argsstring></argsstring>
+        <name>useFisheye</name>
+        <qualifiedname>AIAC::CameraCalibrator::useFisheye</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="78" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a136826e20de2eb0e0f4514b97246211b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::fixDistortion</definition>
+        <argsstring></argsstring>
+        <name>fixDistortion</name>
+        <qualifiedname>AIAC::CameraCalibrator::fixDistortion</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="79" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1add6b860b35f1284e8dc7613f4e9a92ab" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::useFixedPoint</definition>
+        <argsstring></argsstring>
+        <name>useFixedPoint</name>
+        <qualifiedname>AIAC::CameraCalibrator::useFixedPoint</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="81" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1adf49e4913c78302352d640ffbd381b25" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CameraCalibrator::gridWidth</definition>
+        <argsstring></argsstring>
+        <name>gridWidth</name>
+        <qualifiedname>AIAC::CameraCalibrator::gridWidth</qualifiedname>
+        <initializer>= squareSize * (boardSize.width - 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="82" column="15" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a8c38cfbdeb9028a76b9f669439b83639" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::CameraCalibrator::winSize</definition>
+        <argsstring></argsstring>
+        <name>winSize</name>
+        <qualifiedname>AIAC::CameraCalibrator::winSize</qualifiedname>
+        <initializer>= 11</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="83" column="13" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1af35ae5c8ef84645c4026b94a3d862e47" prot="public" static="no" mutable="no">
+        <type>cv::Size</type>
+        <definition>cv::Size AIAC::CameraCalibrator::imageSize</definition>
+        <argsstring></argsstring>
+        <name>imageSize</name>
+        <qualifiedname>AIAC::CameraCalibrator::imageSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="86" column="18" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a081e314b2b2641ddc9119f46ace880e4" prot="public" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::CameraCalibrator::cameraMatrix</definition>
+        <argsstring></argsstring>
+        <name>cameraMatrix</name>
+        <qualifiedname>AIAC::CameraCalibrator::cameraMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="89" column="17" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1abbd1d687463d3f8f01ceb6875e0907be" prot="public" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::CameraCalibrator::distCoeffs</definition>
+        <argsstring></argsstring>
+        <name>distCoeffs</name>
+        <qualifiedname>AIAC::CameraCalibrator::distCoeffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="90" column="17" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1ad16d65ecfe3864b41a108c2c9d85b9e7" prot="public" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::CameraCalibrator::rvecs</definition>
+        <argsstring></argsstring>
+        <name>rvecs</name>
+        <qualifiedname>AIAC::CameraCalibrator::rvecs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="91" column="17" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a5659368037e7c9af7e233def63879c53" prot="public" static="no" mutable="no">
+        <type>cv::Mat</type>
+        <definition>cv::Mat AIAC::CameraCalibrator::tvecs</definition>
+        <argsstring></argsstring>
+        <name>tvecs</name>
+        <qualifiedname>AIAC::CameraCalibrator::tvecs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="91" column="23" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a6445ec68307806b2f22470ba2341b271" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::CameraCalibrator::totalAvgErr</definition>
+        <argsstring></argsstring>
+        <name>totalAvgErr</name>
+        <qualifiedname>AIAC::CameraCalibrator::totalAvgErr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="92" column="16" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a83176710310e9ec227f56134c7707190" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; AIAC::CameraCalibrator::reprojErrs</definition>
+        <argsstring></argsstring>
+        <name>reprojErrs</name>
+        <qualifiedname>AIAC::CameraCalibrator::reprojErrs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="93" column="21" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a45fdcf412ad30844f3788be03f67ca58" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; cv::Mat &gt;</type>
+        <definition>std::vector&lt;cv::Mat&gt; AIAC::CameraCalibrator::imageList</definition>
+        <argsstring></argsstring>
+        <name>imageList</name>
+        <qualifiedname>AIAC::CameraCalibrator::imageList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="96" column="21" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1ab961d5caa96cbe42bcc8e04b4e94ef05" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::goodInput</definition>
+        <argsstring></argsstring>
+        <name>goodInput</name>
+        <qualifiedname>AIAC::CameraCalibrator::goodInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="97" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1af76a901b274792eef7b72eafbfa3a403" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::CameraCalibrator::calibFlag</definition>
+        <argsstring></argsstring>
+        <name>calibFlag</name>
+        <qualifiedname>AIAC::CameraCalibrator::calibFlag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="98" column="13" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CameraCalibrator_1a979b7f955ae663a4f7ee0f7bc589c524" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; cv::Point2f &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;cv::Point2f&gt; &gt; AIAC::CameraCalibrator::imagePoints</definition>
+        <argsstring></argsstring>
+        <name>imagePoints</name>
+        <qualifiedname>AIAC::CameraCalibrator::imagePoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="100" column="21" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1a36de8b7c81c30c7466f400735aed6644" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CameraCalibrator::CameraCalibrator</definition>
+        <argsstring>()</argsstring>
+        <name>CameraCalibrator</name>
+        <qualifiedname>AIAC::CameraCalibrator::CameraCalibrator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="55" column="9" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1ab12ca30eda618d2a3446fbfb94c308ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CameraCalibrator::~CameraCalibrator</definition>
+        <argsstring>()</argsstring>
+        <name>~CameraCalibrator</name>
+        <qualifiedname>AIAC::CameraCalibrator::~CameraCalibrator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="56" column="9" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1a82d0bbe2e5dbef9315e1f1e92268abd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CameraCalibrator::AddImage</definition>
+        <argsstring>(const cv::Mat &amp;image)</argsstring>
+        <name>AddImage</name>
+        <qualifiedname>AIAC::CameraCalibrator::AddImage</qualifiedname>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>image</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="58" column="14" bodyfile="src/AIAC/CameraCalibrator.cpp" bodystart="147" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1a793571565f6ea64ad4fdee3453239fd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::CameraCalibrator::RunCalibration</definition>
+        <argsstring>(cv::Mat *imgForDisplay=nullptr)</argsstring>
+        <name>RunCalibration</name>
+        <qualifiedname>AIAC::CameraCalibrator::RunCalibration</qualifiedname>
+        <param>
+          <type>cv::Mat *</type>
+          <declname>imgForDisplay</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>[board_corners </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>[fixed_aspect]</para>
+<para>[fixed_aspect]</para>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="59" column="14" bodyfile="src/AIAC/CameraCalibrator.cpp" bodystart="62" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1ad2f95127a9b4723b7fd31d912a1c883e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CameraCalibrator::Save</definition>
+        <argsstring>(const std::string &amp;filename)</argsstring>
+        <name>Save</name>
+        <qualifiedname>AIAC::CameraCalibrator::Save</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="60" column="14" bodyfile="src/AIAC/CameraCalibrator.cpp" bodystart="215" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1a3728408da25d867c9948fc9f65037e92" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::CameraCalibrator::GetImageAmount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetImageAmount</name>
+        <qualifiedname>AIAC::CameraCalibrator::GetImageAmount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="61" column="13" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1acd9fe38b9c4f08229c38803a0911337d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CameraCalibrator::ClearImages</definition>
+        <argsstring>()</argsstring>
+        <name>ClearImages</name>
+        <qualifiedname>AIAC::CameraCalibrator::ClearImages</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="62" column="14" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1aa5836a97fb7a3cada345667cc92feb6f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CameraCalibrator::ValidateAndUpdateFlag</definition>
+        <argsstring>()</argsstring>
+        <name>ValidateAndUpdateFlag</name>
+        <qualifiedname>AIAC::CameraCalibrator::ValidateAndUpdateFlag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="65" column="14" bodyfile="src/AIAC/CameraCalibrator.cpp" bodystart="106" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1a4f093aac54ee751340d7a6d67683241b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CameraCalibrator::DetectPattern</definition>
+        <argsstring>(cv::Mat *imgForDisplay=nullptr)</argsstring>
+        <name>DetectPattern</name>
+        <qualifiedname>AIAC::CameraCalibrator::DetectPattern</qualifiedname>
+        <param>
+          <type>cv::Mat *</type>
+          <declname>imgForDisplay</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>[find_pattern]</para>
+<para>[find_pattern] [pattern_found]</para>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="66" column="14" bodyfile="src/AIAC/CameraCalibrator.cpp" bodystart="152" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CameraCalibrator_1a149a4494a3b960aad198e1da698628da" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CameraCalibrator::CalcBoardCornerPositions</definition>
+        <argsstring>(std::vector&lt; cv::Point3f &gt; &amp;corners) const</argsstring>
+        <name>CalcBoardCornerPositions</name>
+        <qualifiedname>AIAC::CameraCalibrator::CalcBoardCornerPositions</qualifiedname>
+        <param>
+          <type>std::vector&lt; cv::Point3f &gt; &amp;</type>
+          <declname>corners</declname>
+        </param>
+        <briefdescription>
+<para>[board_corners] </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/CameraCalibrator.h" line="67" column="14" bodyfile="src/AIAC/CameraCalibrator.cpp" bodystart="38" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/CameraCalibrator.h" line="51" column="5" bodyfile="src/AIAC/CameraCalibrator.h" bodystart="51" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1CameraCalibrator_1a82d0bbe2e5dbef9315e1f1e92268abd8" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>AddImage</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1ad08c0d1b6af7cd8951f5d8c7e8c22be6" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>aspectRatio</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fac73d210434a5b987f547f75c87635bb1" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>ASYMMETRIC_CIRCLES_GRID</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a7e657f9868e53c3957ba8194338a6bc4" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>boardSize</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a149a4494a3b960aad198e1da698628da" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>CalcBoardCornerPositions</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a478d510f6d7743646bc3c2cd082a3a58" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>calibFixPrincipalPoint</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af76a901b274792eef7b72eafbfa3a403" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>calibFlag</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a513dabc5c53e83ba17383e0fb27f1509" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>calibrationPattern</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a9fe435d7f1ce942d587ad5ee37af63fc" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>calibZeroTangentDist</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a36de8b7c81c30c7466f400735aed6644" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>CameraCalibrator</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a081e314b2b2641ddc9119f46ace880e4" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>cameraMatrix</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fa6f2300caccc6eec487d70d40d0548a0d" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>CHESSBOARD</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fad94f97aaa71a789a3042eb6335135d0d" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>CIRCLES_GRID</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1acd9fe38b9c4f08229c38803a0911337d" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>ClearImages</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a4f093aac54ee751340d7a6d67683241b" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>DetectPattern</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1abbd1d687463d3f8f01ceb6875e0907be" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>distCoeffs</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a136826e20de2eb0e0f4514b97246211b" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>fixDistortion</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a248e8bc61fa55afde8500905147c839b" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>flipVertical</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a3728408da25d867c9948fc9f65037e92" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>GetImageAmount</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1ab961d5caa96cbe42bcc8e04b4e94ef05" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>goodInput</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1adf49e4913c78302352d640ffbd381b25" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>gridWidth</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a45fdcf412ad30844f3788be03f67ca58" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>imageList</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a979b7f955ae663a4f7ee0f7bc589c524" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>imagePoints</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af35ae5c8ef84645c4026b94a3d862e47" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>imageSize</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3fa47b657dc88455b82f93f6ac3fd04f0b5" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>NOT_EXISTING</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1af7dd7ed1ae43edd2e4452aeb66e0ec3f" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>Pattern</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a83176710310e9ec227f56134c7707190" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>reprojErrs</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a793571565f6ea64ad4fdee3453239fd0" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>RunCalibration</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1ad16d65ecfe3864b41a108c2c9d85b9e7" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>rvecs</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1ad2f95127a9b4723b7fd31d912a1c883e" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>Save</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a9cedb32f9c91f74295b3da2afcd3ecf6" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>squareSize</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a6445ec68307806b2f22470ba2341b271" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>totalAvgErr</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a5659368037e7c9af7e233def63879c53" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>tvecs</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a67852056d731a829ea8ad5f0037d4a38" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>useFisheye</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1add6b860b35f1284e8dc7613f4e9a92ab" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>useFixedPoint</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1aa5836a97fb7a3cada345667cc92feb6f" prot="private" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>ValidateAndUpdateFlag</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a8c38cfbdeb9028a76b9f669439b83639" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>winSize</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1a20432aef18f13e34cfa83f9eba162aa4" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>writeExtrinsics</name></member>
+      <member refid="classAIAC_1_1CameraCalibrator_1ab12ca30eda618d2a3446fbfb94c308ab" prot="public" virt="non-virtual"><scope>AIAC::CameraCalibrator</scope><name>~CameraCalibrator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

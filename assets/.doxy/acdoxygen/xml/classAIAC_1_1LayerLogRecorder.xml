@@ -1,0 +1,606 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerLogRecorder" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerLogRecorder</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1ae3da53ee66c105af966152eb245637fb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerLogRecorder::m_IsRecording</definition>
+        <argsstring></argsstring>
+        <name>m_IsRecording</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_IsRecording</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="135" column="14" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1aa28bf8231c85b1bb799ce1cb5e6f321f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerLogRecorder::m_IsPaused</definition>
+        <argsstring></argsstring>
+        <name>m_IsPaused</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_IsPaused</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="136" column="14" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a31acdd10318edc0f915c62471647f730" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerLogRecorder::m_LogFolderPath</definition>
+        <argsstring></argsstring>
+        <name>m_LogFolderPath</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_LogFolderPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="137" column="21" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1ad97db30bc55243c5fed98a80f96f5f46" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerLogRecorder::m_LogFilePath</definition>
+        <argsstring></argsstring>
+        <name>m_LogFilePath</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_LogFilePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="138" column="21" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a93aa34900c5cbe643c10393fb6a4d2c0" prot="private" static="no" mutable="no">
+        <type>std::ofstream</type>
+        <definition>std::ofstream AIAC::LayerLogRecorder::m_LogFile</definition>
+        <argsstring></argsstring>
+        <name>m_LogFile</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_LogFile</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="139" column="23" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a5acb7467450420f95e27b112f71532bd" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerLogRecorder::m_FrameCount</definition>
+        <argsstring></argsstring>
+        <name>m_FrameCount</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_FrameCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="140" column="13" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a5cf89cc0aa216a61aec4d7fe7a2db346" prot="private" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; AIAC::LayerLogRecorder::m_TToolStatusToLog</definition>
+        <argsstring></argsstring>
+        <name>m_TToolStatusToLog</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_TToolStatusToLog</qualifiedname>
+        <initializer>= {
+            &quot;PoseInput&quot;,
+            &quot;Tracking&quot;,
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="143" column="18" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="143" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a0597c057e53e170d7a3ea3a38bd86949" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerLogRecorder::m_TToolPreviousToolheadName</definition>
+        <argsstring></argsstring>
+        <name>m_TToolPreviousToolheadName</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_TToolPreviousToolheadName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="147" column="21" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a2bfebeabb6803ee589ec73fab9e13356" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerLogRecorder::m_ACIMPreviousActivatedComponentID</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMPreviousActivatedComponentID</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_ACIMPreviousActivatedComponentID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="150" column="21" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a11c675915cf727fe4fc1dde541f316eb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerLogRecorder::m_IsActivatedComponentDone</definition>
+        <argsstring></argsstring>
+        <name>m_IsActivatedComponentDone</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_IsActivatedComponentDone</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="151" column="14" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a3223fc0f037232dc7e2add4b7bc28c19" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerLogRecorder::m_ACIMOffset</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMOffset</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_ACIMOffset</qualifiedname>
+        <initializer>= INFINITY</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="152" column="16" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a42eba22866b30b6cb8e5e6cfb7ab670a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerLogRecorder::m_ACIMRotation</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMRotation</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_ACIMRotation</qualifiedname>
+        <initializer>= INT_MAX</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="153" column="13" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1ae7a4890979d1c4c805e30710f21a53b3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerLogRecorder::m_ACIMFlip</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMFlip</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_ACIMFlip</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="154" column="14" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerLogRecorder_1a209ad0070186d11c6cf06bb039a23ef7" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, bool &gt;</type>
+        <definition>std::unordered_map&lt;std::string, bool&gt; AIAC::LayerLogRecorder::m_ACIMComponentStatus</definition>
+        <argsstring></argsstring>
+        <name>m_ACIMComponentStatus</name>
+        <qualifiedname>AIAC::LayerLogRecorder::m_ACIMComponentStatus</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="155" column="28" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a766eac8b28bfbe8151780a5077fc2ca0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerLogRecorder::LayerLogRecorder</definition>
+        <argsstring>()=default</argsstring>
+        <name>LayerLogRecorder</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LayerLogRecorder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a712d74bba391148674449063fecc4acf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::LayerLogRecorder::~LayerLogRecorder</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LayerLogRecorder</name>
+        <qualifiedname>AIAC::LayerLogRecorder::~LayerLogRecorder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="46" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1af4d23b446a32c95ab800b93783b659af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::OnAttach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::LayerLogRecorder::OnAttach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073">OnAttach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="48" column="22" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="43" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a5a0b9343246c0dfba898bfb5b8d1bd62" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::OnFrameStart</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::LayerLogRecorder::OnFrameStart</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3">OnFrameStart</reimplements>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="49" column="22" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="49" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a5898d057c70d61b44b49f0dc8f8eefdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::StartRecording</definition>
+        <argsstring>(std::string logRootFolderPath=&quot;&quot;)</argsstring>
+        <name>StartRecording</name>
+        <qualifiedname>AIAC::LayerLogRecorder::StartRecording</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>logRootFolderPath</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Start recording the log to a file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>logRootFolderPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The filename of the log file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="57" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="62" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a35bd814f1ac7a6be43381c866f22e64e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::StopRecording</definition>
+        <argsstring>()</argsstring>
+        <name>StopRecording</name>
+        <qualifiedname>AIAC::LayerLogRecorder::StopRecording</qualifiedname>
+        <briefdescription>
+<para>Stop recording the log to a file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="62" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="120" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1ad044a2956cd0ed32bec8c4a285d4b365" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::PauseRecording</definition>
+        <argsstring>()</argsstring>
+        <name>PauseRecording</name>
+        <qualifiedname>AIAC::LayerLogRecorder::PauseRecording</qualifiedname>
+        <briefdescription>
+<para>Pause recording. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="67" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1aeb7d277305cd3c1c5714af5028e6238d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::ResumeRecording</definition>
+        <argsstring>()</argsstring>
+        <name>ResumeRecording</name>
+        <qualifiedname>AIAC::LayerLogRecorder::ResumeRecording</qualifiedname>
+        <briefdescription>
+<para>Pause recording. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="72" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="149" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a919058cef2ec26725fcccbc09b9ec419" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerLogRecorder::IsRecording</definition>
+        <argsstring>() const</argsstring>
+        <name>IsRecording</name>
+        <qualifiedname>AIAC::LayerLogRecorder::IsRecording</qualifiedname>
+        <briefdescription>
+<para>the recorder is on </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if it&apos;s recording, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="79" column="14" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a3f853d7f5c5171ab68243d8648395f15" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerLogRecorder::IsPaused</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPaused</name>
+        <qualifiedname>AIAC::LayerLogRecorder::IsPaused</qualifiedname>
+        <briefdescription>
+<para>the recoder is paused </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="84" column="15" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a799713bb7f85dc01bb108e7fd83cc7f1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogHeader</definition>
+        <argsstring>()</argsstring>
+        <name>LogHeader</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogHeader</qualifiedname>
+        <briefdescription>
+<para>log header information to the file </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="89" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="154" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1ab0cdc4784757817919c68c6b79b00c06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogSlamStatus</definition>
+        <argsstring>()</argsstring>
+        <name>LogSlamStatus</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogSlamStatus</qualifiedname>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Log" kindref="compound">Log</ref> the SLAM status of the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="94" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="184" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a5f4ffdf64842c972b66ccc3dacd1ace4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogTToolHead</definition>
+        <argsstring>()</argsstring>
+        <name>LogTToolHead</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogTToolHead</qualifiedname>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Log" kindref="compound">Log</ref> the TTool status &amp; pose of the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="99" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="201" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a236968fb1b858a55ef2b40377ee86f17" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogTToolPose</definition>
+        <argsstring>()</argsstring>
+        <name>LogTToolPose</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogTToolPose</qualifiedname>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Log" kindref="compound">Log</ref> the TTool pose. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="104" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="209" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1acc4438f97d840e07ffcfb5e9311fdc4b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::InitTToolStatus</definition>
+        <argsstring>()</argsstring>
+        <name>InitTToolStatus</name>
+        <qualifiedname>AIAC::LayerLogRecorder::InitTToolStatus</qualifiedname>
+        <briefdescription>
+<para>Initialize the variables storing TTool&apos;s state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="109" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="229" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a4c0b7ca222804ea2ba31723ac48e55fa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogTToolTransformation</definition>
+        <argsstring>(const std::string &amp;status)</argsstring>
+        <name>LogTToolTransformation</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogTToolTransformation</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Log" kindref="compound">Log</ref> TTool&apos;s transformation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The status of the TTool </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="116" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="235" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a12f619ac7093b99f172edad64044d6d1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogACIM</definition>
+        <argsstring>()</argsstring>
+        <name>LogACIM</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogACIM</qualifiedname>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Log" kindref="compound">Log</ref> the <ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref> status of the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="121" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="250" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1a382c0b837f1cdd150e9aad6f1d233d30" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::InitACIMStatus</definition>
+        <argsstring>()</argsstring>
+        <name>InitACIMStatus</name>
+        <qualifiedname>AIAC::LayerLogRecorder::InitACIMStatus</qualifiedname>
+        <briefdescription>
+<para>Initialize the variables storing ACIM&apos;s state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="126" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="282" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerLogRecorder_1ac1ac5bbee6e34a6db2fe2e7ced1b496b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerLogRecorder::LogACIMTransformation</definition>
+        <argsstring>()</argsstring>
+        <name>LogACIMTransformation</name>
+        <qualifiedname>AIAC::LayerLogRecorder::LogACIMTransformation</qualifiedname>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1Log" kindref="compound">Log</ref> ACIM&apos;s transformation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerLogRecorder.h" line="131" column="14" bodyfile="src/AIAC/LayerLogRecorder.cpp" bodystart="303" bodyend="312"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerLogRecorder</label>
+        <link refid="classAIAC_1_1LayerLogRecorder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerLogRecorder</label>
+        <link refid="classAIAC_1_1LayerLogRecorder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerLogRecorder.h" line="42" column="5" bodyfile="src/AIAC/LayerLogRecorder.h" bodystart="43" bodyend="156"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a382c0b837f1cdd150e9aad6f1d233d30" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>InitACIMStatus</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1acc4438f97d840e07ffcfb5e9311fdc4b" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>InitTToolStatus</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a3f853d7f5c5171ab68243d8648395f15" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>IsPaused</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a919058cef2ec26725fcccbc09b9ec419" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>IsRecording</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a766eac8b28bfbe8151780a5077fc2ca0" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LayerLogRecorder</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a12f619ac7093b99f172edad64044d6d1" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogACIM</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1ac1ac5bbee6e34a6db2fe2e7ced1b496b" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogACIMTransformation</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a799713bb7f85dc01bb108e7fd83cc7f1" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogHeader</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1ab0cdc4784757817919c68c6b79b00c06" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogSlamStatus</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a5f4ffdf64842c972b66ccc3dacd1ace4" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogTToolHead</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a236968fb1b858a55ef2b40377ee86f17" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogTToolPose</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a4c0b7ca222804ea2ba31723ac48e55fa" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>LogTToolTransformation</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a209ad0070186d11c6cf06bb039a23ef7" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_ACIMComponentStatus</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1ae7a4890979d1c4c805e30710f21a53b3" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_ACIMFlip</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a3223fc0f037232dc7e2add4b7bc28c19" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_ACIMOffset</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a2bfebeabb6803ee589ec73fab9e13356" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_ACIMPreviousActivatedComponentID</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a42eba22866b30b6cb8e5e6cfb7ab670a" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_ACIMRotation</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a5acb7467450420f95e27b112f71532bd" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_FrameCount</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a11c675915cf727fe4fc1dde541f316eb" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_IsActivatedComponentDone</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1aa28bf8231c85b1bb799ce1cb5e6f321f" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_IsPaused</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1ae3da53ee66c105af966152eb245637fb" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_IsRecording</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a93aa34900c5cbe643c10393fb6a4d2c0" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_LogFile</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1ad97db30bc55243c5fed98a80f96f5f46" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_LogFilePath</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a31acdd10318edc0f915c62471647f730" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_LogFolderPath</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a0597c057e53e170d7a3ea3a38bd86949" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_TToolPreviousToolheadName</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a5cf89cc0aa216a61aec4d7fe7a2db346" prot="private" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>m_TToolStatusToLog</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1af4d23b446a32c95ab800b93783b659af" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a5a0b9343246c0dfba898bfb5b8d1bd62" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1ad044a2956cd0ed32bec8c4a285d4b365" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>PauseRecording</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1aeb7d277305cd3c1c5714af5028e6238d" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>ResumeRecording</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a5898d057c70d61b44b49f0dc8f8eefdd" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>StartRecording</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a35bd814f1ac7a6be43381c866f22e64e" prot="public" virt="non-virtual"><scope>AIAC::LayerLogRecorder</scope><name>StopRecording</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>~Layer</name></member>
+      <member refid="classAIAC_1_1LayerLogRecorder_1a712d74bba391148674449063fecc4acf" prot="public" virt="virtual"><scope>AIAC::LayerLogRecorder</scope><name>~LayerLogRecorder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

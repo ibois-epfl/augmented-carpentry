@@ -1,0 +1,1074 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="utils_2GeometryUtils_8h" kind="file" language="C++">
+    <compoundname>GeometryUtils.h</compoundname>
+    <includes local="yes">glm/glm.hpp</includes>
+    <includedby refid="CutBladeThicknessVisualizer_8h" local="yes">src/AIAC/Feedback/CutBladeThicknessVisualizer.h</includedby>
+    <includedby refid="CutChainSawFeedback_8cpp" local="yes">src/AIAC/Feedback/CutChainSawFeedback.cpp</includedby>
+    <includedby refid="CutCircularSawFeedback_8h" local="yes">src/AIAC/Feedback/CutCircularSawFeedback.h</includedby>
+    <includedby refid="CutPlaneVisualizer_8h" local="yes">src/AIAC/Feedback/CutPlaneVisualizer.h</includedby>
+    <includedby refid="HoleFeedback_8h" local="yes">src/AIAC/Feedback/HoleFeedback.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/utils/GeometryUtils.h</label>
+        <link refid="utils_2GeometryUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>glm/glm.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>src/AIAC.h</label>
+        <link refid="AIAC_8h_source"/>
+      </node>
+      <node id="6">
+        <label>src/AIAC/Application.h</label>
+        <link refid="Application_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/AIAC/Feedback/CutBladeThicknessVisualizer.h</label>
+        <link refid="CutBladeThicknessVisualizer_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/AIAC/Feedback/CutChainSawFeedback.h</label>
+        <link refid="CutChainSawFeedback_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/AIAC/Feedback/CutCircularSawFeedback.h</label>
+        <link refid="CutCircularSawFeedback_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/AIAC/Feedback/CutPlaneVisualizer.h</label>
+        <link refid="CutPlaneVisualizer_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/AIAC/Feedback/HoleFeedback.h</label>
+        <link refid="HoleFeedback_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/AIAC/LayerFeedback.h</label>
+        <link refid="LayerFeedback_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/utils/GeometryUtils.h</label>
+        <link refid="utils_2GeometryUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a0bd833b43a429bfc2df52556ec2321dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float GetAngleBetweenVectors</definition>
+        <argsstring>(glm::vec3 v1, glm::vec3 v2, bool useDegree=false)</argsstring>
+        <name>GetAngleBetweenVectors</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>v1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>v2</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>useDegree</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Get the angle between 2 vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>float </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="51" column="14" bodyfile="src/utils/GeometryUtils.h" bodystart="51" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1ae282eb79b961d9404946395e9d92305a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool IsSameDirection</definition>
+        <argsstring>(glm::vec3 v1, glm::vec3 v2)</argsstring>
+        <name>IsSameDirection</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>v1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>v2</declname>
+        </param>
+        <briefdescription>
+<para>Check if 2 vectors are in the same direction (angle &lt; 180 degree) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if in the same direction </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="68" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="68" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1acc0ae8c928f2d1d03c83998df0ccb616" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 GetProjectionPointOnPlane</definition>
+        <argsstring>(glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 pt)</argsstring>
+        <name>GetProjectionPointOnPlane</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>planeNormal</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>planePt</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt</declname>
+        </param>
+        <briefdescription>
+<para>Get the projection point of a point on a plane. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>planeNormal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Normal of the plane </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>planePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A point on the plane </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The point to project </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>glm::vec3 The projection point </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="86" column="18" bodyfile="src/utils/GeometryUtils.h" bodystart="86" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a007eda52e69f5dbb092042c68de7fd79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 GetNearestPtOnLine</definition>
+        <argsstring>(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 pt)</argsstring>
+        <name>GetNearestPtOnLine</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineVec</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>linePt</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt</declname>
+        </param>
+        <briefdescription>
+<para>Get the Nearest Pt On Line object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lineVec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>glm::vec3 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="103" column="18" bodyfile="src/utils/GeometryUtils.h" bodystart="103" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a65a4a44e975d89cc5f6fb5b12b8d9eae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool IsPointBetweenLineSeg</definition>
+        <argsstring>(glm::vec3 pt, glm::vec3 lineSegPt1, glm::vec3 lineSegPt2)</argsstring>
+        <name>IsPointBetweenLineSeg</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineSegPt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineSegPt2</declname>
+        </param>
+        <briefdescription>
+<para>Check if a point is between a line segment, no matter if the point is on the line segment or not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Point to check </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineSegPt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start of the line segment </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineSegPt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>End of the line segment </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the point is between the line segment </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="123" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="123" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a9a406c9fb7f038337c797dde390d4d7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ExtendLineSeg</definition>
+        <argsstring>(glm::vec3 &amp;pt1, glm::vec3 &amp;pt2, float extendLen)</argsstring>
+        <name>ExtendLineSeg</name>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>pt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>pt2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>extendLen</declname>
+        </param>
+        <briefdescription>
+<para>Make a line segment longer by a certain length. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start of the line segment </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>End of the line segment </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extendLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length to extend </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="138" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="138" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a8289caceef246dd22c1a37b9b581930a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool FormLongestLineSeg</definition>
+        <argsstring>(const std::vector&lt; glm::vec3 &gt; &amp;pts, glm::vec3 &amp;pt1, glm::vec3 &amp;pt2)</argsstring>
+        <name>FormLongestLineSeg</name>
+        <param>
+          <type>const std::vector&lt; glm::vec3 &gt; &amp;</type>
+          <declname>pts</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>pt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>pt2</declname>
+        </param>
+        <briefdescription>
+<para>From a list of points, find 2 point that forms the longest line segment. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Candidate points </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start of the line segment </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>End of the line segment </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the line segment is formed successfully </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="153" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="153" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a9e16b995d25c4095c08efed761a9bc47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GetIntersectPointOfLineAndPlane</definition>
+        <argsstring>(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 &amp;intersectPt)</argsstring>
+        <name>GetIntersectPointOfLineAndPlane</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineVec</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>linePt</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>planeNormal</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>planePt</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>intersectPt</declname>
+        </param>
+        <briefdescription>
+<para>Get the Intersect Point Of Line And Plane object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lineVec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>planeNormal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>planePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>intersectPt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if intersect, false if not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="198" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="198" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1a870dde036457b3f65b2552c31d5dfa6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GetIntersectPointOfLineSegAndPlane</definition>
+        <argsstring>(glm::vec3 lineSegPt1, glm::vec3 lineSegPt2, glm::vec3 planeNormal, glm::vec3 planePt, glm::vec3 &amp;intersectPt)</argsstring>
+        <name>GetIntersectPointOfLineSegAndPlane</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineSegPt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineSegPt2</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>planeNormal</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>planePt</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>intersectPt</declname>
+        </param>
+        <briefdescription>
+<para>Get the Intersect Point Of Line Seg And Plane object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lineSegPt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineSegPt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>planeNormal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>planePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>intersectPt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true </para>
+</simplesect>
+<simplesect kind="return"><para>false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="222" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="222" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1aff4e78b5ed3689536bf5d51935ba2fa5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GetIntersectPointOf2Lines</definition>
+        <argsstring>(glm::vec3 dir1, glm::vec3 pt1, glm::vec3 dir2, glm::vec3 pt2, glm::vec3 &amp;pt)</argsstring>
+        <name>GetIntersectPointOf2Lines</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>dir1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>dir2</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt2</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>pt</declname>
+        </param>
+        <briefdescription>
+<para>Get the Intersect Point Of 2 Lines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dir1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dir2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if intersect, false if not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="242" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="242" bodyend="266"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1afc7df65b348cff16dd63f6935e9831f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GetIntersectPointOfLineAndLineSeg</definition>
+        <argsstring>(glm::vec3 lineVec, glm::vec3 linePt, glm::vec3 lineSegPt1, glm::vec3 lineSegPt2, glm::vec3 &amp;ptInLineSeg)</argsstring>
+        <name>GetIntersectPointOfLineAndLineSeg</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineVec</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>linePt</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineSegPt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>lineSegPt2</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>ptInLineSeg</declname>
+        </param>
+        <briefdescription>
+<para>Get the Intersect Point Of Line And Line Seg object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lineVec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineSegPt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineSegPt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ptInLineSeg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if intersect, false if not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="278" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="278" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_2GeometryUtils_8h_1aa25b99795dc5d55ea58ec9aa12cfb119" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GetIntersectLineOf2Planes</definition>
+        <argsstring>(glm::vec3 p1Norm, glm::vec3 pt1, glm::vec3 p2Norm, glm::vec3 pt2, glm::vec3 &amp;lineVec, glm::vec3 &amp;linePt)</argsstring>
+        <name>GetIntersectLineOf2Planes</name>
+        <param>
+          <type>glm::vec3</type>
+          <declname>p1Norm</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt1</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>p2Norm</declname>
+        </param>
+        <param>
+          <type>glm::vec3</type>
+          <declname>pt2</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>lineVec</declname>
+        </param>
+        <param>
+          <type>glm::vec3 &amp;</type>
+          <declname>linePt</declname>
+        </param>
+        <briefdescription>
+<para>Get the Intersect Line Of 2 Planes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p1Norm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2Norm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineVec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linePt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if intersect, false if not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/GeometryUtils.h" line="305" column="13" bodyfile="src/utils/GeometryUtils.h" bodystart="305" bodyend="319"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<sp/>BEGINNING<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>source<sp/>file,<sp/>along<sp/>with<sp/>its<sp/>associated<sp/>content,<sp/>was<sp/>authored<sp/>by</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Andrea<sp/>Settimi,<sp/>Hong-Bin<sp/>Yang,<sp/>Naravich<sp/>Chutisilp,<sp/>and<sp/>numerous<sp/>other</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>contributors.<sp/>The<sp/>code<sp/>was<sp/>originally<sp/>developed<sp/>at<sp/>the<sp/>Laboratory<sp/>for</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Timber<sp/>Construction<sp/>(IBOIS,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand)<sp/>at<sp/>the<sp/>School<sp/>of<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Architecture,<sp/>Civil<sp/>and<sp/>Environmental<sp/>Engineering<sp/>(ENAC)<sp/>at<sp/>the<sp/>Swiss</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Federal<sp/>Institute<sp/>of<sp/>Technology<sp/>in<sp/>Lausanne<sp/>(EPFL)<sp/>for<sp/>the<sp/>Doctoral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Research<sp/>&quot;Augmented<sp/>Carpentry&quot;<sp/>(PhD<sp/>researcher:<sp/>Andrea<sp/>Settimi,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>co-director:<sp/>Dr.<sp/>Julien<sp/>Gamerro,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Although<sp/>the<sp/>entire<sp/>repository<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>GPL<sp/>license,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>particular<sp/>source<sp/>files<sp/>may<sp/>also<sp/>be<sp/>used<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MIT<sp/>license.<sp/>By<sp/>accessing<sp/>or<sp/>using<sp/>this<sp/>file,<sp/>you<sp/>agree<sp/>to<sp/>the<sp/>following:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>1.<sp/>You<sp/>may<sp/>reproduce,<sp/>modify,<sp/>and<sp/>distribute<sp/>this<sp/>file<sp/>in<sp/>accordance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>with<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>MIT<sp/>license.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>You<sp/>must<sp/>retain<sp/>this<sp/>legal<sp/>notice<sp/>in<sp/>all<sp/>copies<sp/>or<sp/>substantial</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>portions<sp/>of<sp/>this<sp/>file.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>This<sp/>file<sp/>is<sp/>provided<sp/>&quot;AS<sp/>IS,&quot;<sp/>without<sp/>any<sp/>express<sp/>or<sp/>implied</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>warranties,<sp/>including<sp/>but<sp/>not<sp/>limited<sp/>to<sp/>the<sp/>implied<sp/>warranties<sp/>of</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>merchantability<sp/>and<sp/>fitness<sp/>for<sp/>a<sp/>particular<sp/>purpose.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>you<sp/>cannot<sp/>or<sp/>will<sp/>not<sp/>comply<sp/>with<sp/>the<sp/>above<sp/>conditions,<sp/>you<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>not<sp/>permitted<sp/>to<sp/>use<sp/>this<sp/>file.<sp/>By<sp/>proceeding,<sp/>you<sp/>acknowledge<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>accept<sp/>all<sp/>terms<sp/>and<sp/>conditions<sp/>herein.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<sp/>END<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#ifndef<sp/>GEOMETRY_UTILS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#define<sp/>GEOMETRY_UTILS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;glm/glm.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Function<sp/>related<sp/>to<sp/>vectors<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>GetAngleBetweenVectors(glm::vec3<sp/>v1,<sp/>glm::vec3<sp/>v2,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useDegree<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">){</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>v1<sp/>=<sp/>glm::normalize(v1);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>v2<sp/>=<sp/>glm::normalize(v2);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rad<sp/>=<sp/>glm::acos(glm::dot(v1,<sp/>v2));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(useDegree){</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>glm::degrees(rad);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rad;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsSameDirection(glm::vec3<sp/>v1,<sp/>glm::vec3<sp/>v2){</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>v1<sp/>=<sp/>glm::normalize(v1);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>v2<sp/>=<sp/>glm::normalize(v2);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>glm::dot(v1,<sp/>v2)<sp/>&gt;<sp/>0;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---------------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Function<sp/>related<sp/>to<sp/>point<sp/>&amp;<sp/>plane<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---------------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>glm::vec3<sp/>GetProjectionPointOnPlane(glm::vec3<sp/>planeNormal,<sp/>glm::vec3<sp/>planePt,<sp/>glm::vec3<sp/>pt)</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>planeNormal<sp/>=<sp/>glm::normalize(planeNormal);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>glm::vec3<sp/>v<sp/>=<sp/>pt<sp/>-<sp/>planePt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>d<sp/>=<sp/>glm::dot(planeNormal,<sp/>v);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pt<sp/>-<sp/>d<sp/>*<sp/>planeNormal;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment">//<sp/>FIXME:<sp/>This<sp/>one<sp/>may<sp/>have<sp/>a<sp/>bug</highlight></codeline>
+<codeline lineno="103"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>glm::vec3<sp/>GetNearestPtOnLine(glm::vec3<sp/>lineVec,<sp/>glm::vec3<sp/>linePt,<sp/>glm::vec3<sp/>pt)</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir<sp/>=<sp/>glm::normalize(lineVec);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pt2LinePt<sp/>=<sp/>pt<sp/>-<sp/>linePt;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>projLen<sp/>=<sp/>glm::dot(pt2LinePt,<sp/>dir);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>linePt<sp/>+<sp/>projLen<sp/>*<sp/>dir;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment">//<sp/>----------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Function<sp/>related<sp/>to<sp/>line<sp/>seg<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">//<sp/>----------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsPointBetweenLineSeg(glm::vec3<sp/>pt,<sp/>glm::vec3<sp/>lineSegPt1,<sp/>glm::vec3<sp/>lineSegPt2)</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir1<sp/>=<sp/>glm::normalize(pt<sp/>-<sp/>lineSegPt1);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir2<sp/>=<sp/>glm::normalize(pt<sp/>-<sp/>lineSegPt2);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir3<sp/>=<sp/>glm::normalize(lineSegPt2<sp/>-<sp/>lineSegPt1);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>glm::dot(dir1,<sp/>dir3)<sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/>glm::dot(dir2,<sp/>dir3)<sp/>&lt;<sp/>0;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ExtendLineSeg(glm::vec3<sp/>&amp;pt1,<sp/>glm::vec3<sp/>&amp;pt2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>extendLen)</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir<sp/>=<sp/>glm::normalize(pt2<sp/>-<sp/>pt1);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>pt1<sp/>-=<sp/>dir<sp/>*<sp/>extendLen;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>pt2<sp/>+=<sp/>dir<sp/>*<sp/>extendLen;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>FormLongestLineSeg(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;pts,<sp/>glm::vec3<sp/>&amp;pt1,<sp/>glm::vec3<sp/>&amp;pt2)</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(pts.size()<sp/>&lt;<sp/>2){</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>initial<sp/>line<sp/>seg</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>pt1<sp/>=<sp/>pts[0];</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>pt2<sp/>=<sp/>pts[1];</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(pts.size()<sp/>==<sp/>2){</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>maxDist<sp/>=<sp/>glm::distance(pt1,<sp/>pt2);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>try<sp/>all<sp/>point<sp/>and<sp/>see<sp/>if<sp/>we<sp/>can<sp/>make<sp/>it<sp/>longer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>2;<sp/>i<sp/>&lt;<sp/>pts.size();<sp/>i++){</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pt<sp/>=<sp/>pts[i];</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dist1<sp/>=<sp/>glm::distance(pt,<sp/>pt1);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dist2<sp/>=<sp/>glm::distance(pt,<sp/>pt2);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(dist1<sp/>&gt;<sp/>maxDist){</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maxDist<sp/>=<sp/>dist1;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pt2<sp/>=<sp/>pt;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(dist2<sp/>&gt;<sp/>maxDist){</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maxDist<sp/>=<sp/>dist2;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pt1<sp/>=<sp/>pt;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Different<sp/>intersection<sp/>methods<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="comment">//<sp/>------------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>GetIntersectPointOfLineAndPlane(glm::vec3<sp/>lineVec,<sp/>glm::vec3<sp/>linePt,<sp/>glm::vec3<sp/>planeNormal,<sp/>glm::vec3<sp/>planePt,<sp/>glm::vec3<sp/>&amp;intersectPt)</highlight></codeline>
+<codeline lineno="199"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>lineVec<sp/>=<sp/>glm::normalize(lineVec);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>planeNormal<sp/>=<sp/>glm::normalize(planeNormal);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(glm::dot(lineVec,<sp/>planeNormal)<sp/>==<sp/>0)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>d<sp/>=<sp/>glm::dot(planeNormal,<sp/>planePt<sp/>-<sp/>linePt);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>t<sp/>=<sp/>d<sp/>/<sp/>glm::dot(planeNormal,<sp/>lineVec);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>intersectPt<sp/>=<sp/>linePt<sp/>+<sp/>t<sp/>*<sp/>lineVec;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>GetIntersectPointOfLineSegAndPlane(glm::vec3<sp/>lineSegPt1,<sp/>glm::vec3<sp/>lineSegPt2,<sp/>glm::vec3<sp/>planeNormal,<sp/>glm::vec3<sp/>planePt,<sp/>glm::vec3<sp/>&amp;intersectPt)</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>lineVec<sp/>=<sp/>lineSegPt2<sp/>-<sp/>lineSegPt1;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(GetIntersectPointOfLineAndPlane(lineVec,<sp/>lineSegPt1,<sp/>planeNormal,<sp/>planePt,<sp/>intersectPt)){</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(IsPointBetweenLineSeg(intersectPt,<sp/>lineSegPt1,<sp/>lineSegPt2)){</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>GetIntersectPointOf2Lines(glm::vec3<sp/>dir1,<sp/>glm::vec3<sp/>pt1,<sp/>glm::vec3<sp/>dir2,<sp/>glm::vec3<sp/>pt2,<sp/>glm::vec3<sp/>&amp;pt)</highlight></codeline>
+<codeline lineno="243"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/>dir1<sp/>=<sp/>glm::normalize(dir1);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>dir2<sp/>=<sp/>glm::normalize(dir2);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir3<sp/>=<sp/>glm::cross(dir1,<sp/>dir2);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir3Len<sp/>=<sp/>glm::length(dir3);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir3Len<sp/>&lt;<sp/>1e-4f)</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir3Norm<sp/>=<sp/>dir3<sp/>/<sp/>dir3Len;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir1Len<sp/>=<sp/>glm::length(dir1);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir2Len<sp/>=<sp/>glm::length(dir2);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir1Norm<sp/>=<sp/>dir1<sp/>/<sp/>dir1Len;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dir2Norm<sp/>=<sp/>dir2<sp/>/<sp/>dir2Len;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>det<sp/>=<sp/>glm::dot(dir3Norm,<sp/>glm::cross(dir1Norm,<sp/>dir2Norm));</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(det<sp/>&lt;<sp/>1e-4f)</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>t1<sp/>=<sp/>glm::dot(dir3Norm,<sp/>glm::cross(pt2<sp/>-<sp/>pt1,<sp/>dir2Norm))<sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>t2<sp/>=<sp/>glm::dot(dir3Norm,<sp/>glm::cross(pt2<sp/>-<sp/>pt1,<sp/>dir1Norm))<sp/>/<sp/>det;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>pt<sp/>=<sp/>pt1<sp/>+<sp/>t1<sp/>*<sp/>dir1;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>GetIntersectPointOfLineAndLineSeg(glm::vec3<sp/>lineVec,<sp/>glm::vec3<sp/>linePt,</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>lineSegPt1,<sp/>glm::vec3<sp/>lineSegPt2,</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3&amp;<sp/>ptInLineSeg)</highlight></codeline>
+<codeline lineno="281"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>lineVec<sp/>=<sp/>glm::normalize(lineVec);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>glm::vec3<sp/>intersectPt;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>lineSegVec<sp/>=<sp/>glm::normalize(lineSegPt2<sp/>-<sp/>lineSegPt1);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(GetIntersectPointOf2Lines(lineVec,<sp/>linePt,<sp/>lineSegVec,<sp/>lineSegPt1,<sp/>intersectPt)){</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(IsPointBetweenLineSeg(intersectPt,<sp/>lineSegPt1,<sp/>lineSegPt2)){</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptInLineSeg<sp/>=<sp/>intersectPt;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>GetIntersectLineOf2Planes(glm::vec3<sp/>p1Norm,<sp/>glm::vec3<sp/>pt1,</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>p2Norm,<sp/>glm::vec3<sp/>pt2,</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>&amp;lineVec,<sp/>glm::vec3<sp/>&amp;linePt){</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>https://math.stackexchange.com/questions/475953/how-to-calculate-the-intersection-of-two-planes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>p1Norm<sp/>=<sp/>glm::normalize(p1Norm);</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/>p2Norm<sp/>=<sp/>glm::normalize(p2Norm);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/>lineVec<sp/>=<sp/>glm::normalize(glm::cross(p1Norm,<sp/>p2Norm));</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>line1Dir<sp/>=<sp/>glm::cross(p1Norm,<sp/>lineVec);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>line2Dir<sp/>=<sp/>glm::cross(p2Norm,<sp/>lineVec);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(GetIntersectPointOf2Lines(line1Dir,<sp/>pt1,<sp/>line2Dir,<sp/>pt2,<sp/>linePt)){</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#endif<sp/>//GEOMETRY_UTILS_H</highlight></codeline>
+    </programlisting>
+    <location file="src/utils/GeometryUtils.h"/>
+  </compounddef>
+</doxygen>

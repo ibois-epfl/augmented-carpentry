@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1HoleFeedback" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::HoleFeedback</compoundname>
+    <basecompoundref refid="classAIAC_1_1FabFeedback" prot="public" virt="non-virtual">AIAC::FabFeedback</basecompoundref>
+    <includes refid="HoleFeedback_8h" local="no">HoleFeedback.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1ab13ea88f3fe995a8d60bd5474d67e4ee" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::HoleFeedback::m_DrillBitLineAxis</definition>
+        <argsstring></argsstring>
+        <name>m_DrillBitLineAxis</name>
+        <qualifiedname>AIAC::HoleFeedback::m_DrillBitLineAxis</qualifiedname>
+        <briefdescription>
+<para>the line axis for the drillbit </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; general data for all feedbacks but not visualized </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="136" column="25" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1a1c713170c1f8c6d2740e6ba38e3a4c20" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::HoleFeedback::m_HoleLineAxis</definition>
+        <argsstring></argsstring>
+        <name>m_HoleLineAxis</name>
+        <qualifiedname>AIAC::HoleFeedback::m_HoleLineAxis</qualifiedname>
+        <briefdescription>
+<para>the line axis for the hole </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="138" column="25" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1acf3b0ec690cd40ae4e85eab8fabfa760" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1HoleFeedbackText" kindref="compound">HoleFeedbackText</ref></type>
+        <definition>HoleFeedbackText AIAC::HoleFeedback::m_VisText</definition>
+        <argsstring></argsstring>
+        <name>m_VisText</name>
+        <qualifiedname>AIAC::HoleFeedback::m_VisText</qualifiedname>
+        <briefdescription>
+<para>the text visualized for numeric values of start, orientation and depth </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; for UI widgets </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="142" column="26" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1af53b1206289ccbcc24e6b479065dfc3d" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1HoleFeedbackPosition" kindref="compound">HoleFeedbackPosition</ref></type>
+        <definition>HoleFeedbackPosition AIAC::HoleFeedback::m_VisPosition</definition>
+        <argsstring></argsstring>
+        <name>m_VisPosition</name>
+        <qualifiedname>AIAC::HoleFeedback::m_VisPosition</qualifiedname>
+        <briefdescription>
+<para>The ui widget for position guidance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="144" column="30" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1a2a1969b97a5d6e993fd7354b36d6ad84" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1HoleFeedbackRotation" kindref="compound">HoleFeedbackRotation</ref></type>
+        <definition>HoleFeedbackRotation AIAC::HoleFeedback::m_VisRotation</definition>
+        <argsstring></argsstring>
+        <name>m_VisRotation</name>
+        <qualifiedname>AIAC::HoleFeedback::m_VisRotation</qualifiedname>
+        <briefdescription>
+<para>The ui widget to guide for the orientation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="146" column="30" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1a670edb547eab3a4738198e89aefe2a7c" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::HoleFeedback::m_InsideOutDetection</definition>
+        <argsstring></argsstring>
+        <name>m_InsideOutDetection</name>
+        <qualifiedname>AIAC::HoleFeedback::m_InsideOutDetection</qualifiedname>
+        <initializer>= 20.f</initializer>
+        <briefdescription>
+<para>the tolerance to detect if the tooltip is inside or outside the hole </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; tolerances for angle and position feedbacks </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="150" column="15" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1HoleFeedback_1a296eb54c78e849f2990c006942e76fbc" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::HoleFeedback::m_OrientationTolerance</definition>
+        <argsstring></argsstring>
+        <name>m_OrientationTolerance</name>
+        <qualifiedname>AIAC::HoleFeedback::m_OrientationTolerance</qualifiedname>
+        <initializer>= 1.1f</initializer>
+        <briefdescription>
+<para>acceptable tolerance for the correct rotation detection </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="152" column="15" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1HoleFeedback_1a518bc2236481a3110932cb44466c90e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::HoleFeedback::HoleFeedback</definition>
+        <argsstring>()</argsstring>
+        <name>HoleFeedback</name>
+        <qualifiedname>AIAC::HoleFeedback::HoleFeedback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="127" column="9" bodyfile="src/AIAC/Feedback/HoleFeedback.cpp" bodystart="105" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1HoleFeedback_1ab13b59c61587b98e06772e6b4b2ff5e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::HoleFeedback::~HoleFeedback</definition>
+        <argsstring>()=default</argsstring>
+        <name>~HoleFeedback</name>
+        <qualifiedname>AIAC::HoleFeedback::~HoleFeedback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="128" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1HoleFeedback_1a2fbd124214d60b5d924c0cfa7ad807f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::HoleFeedback::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>AIAC::HoleFeedback::Update</qualifiedname>
+        <reimplements refid="classAIAC_1_1FabFeedback_1a1bae5586f137d46ad1fea20933e2ee1a">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="130" column="14" bodyfile="src/AIAC/Feedback/HoleFeedback.cpp" bodystart="116" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1HoleFeedback_1af54d978c0aed96b6b58765b23c9cb0f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::HoleFeedback::Activate</definition>
+        <argsstring>() override</argsstring>
+        <name>Activate</name>
+        <qualifiedname>AIAC::HoleFeedback::Activate</qualifiedname>
+        <reimplements refid="classAIAC_1_1FabFeedback_1a48ace70eb7e927228bac3e6e4ef2e41b">Activate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="131" column="14" bodyfile="src/AIAC/Feedback/HoleFeedback.cpp" bodystart="267" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1HoleFeedback_1a711ba27f1a394de775895397d254728f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::HoleFeedback::Deactivate</definition>
+        <argsstring>() override</argsstring>
+        <name>Deactivate</name>
+        <qualifiedname>AIAC::HoleFeedback::Deactivate</qualifiedname>
+        <reimplements refid="classAIAC_1_1FabFeedback_1a973eec8478cc8de2fa8da95c37d372e7">Deactivate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/HoleFeedback.h" line="132" column="14" bodyfile="src/AIAC/Feedback/HoleFeedback.cpp" bodystart="274" bodyend="279"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>The UI widget for providing feedback on orientation Feeds (in chronological order): </para>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>(i) position</para>
+</listitem><listitem><para>(ii) angle</para>
+</listitem><listitem><para>(iii) depth</para>
+<para>x Tb \ \ \ v3 \ \ x Tt .. . .v2 . . . x Hs v1 . / . / . / v4 . / ./ x He </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::FabFeedback</label>
+        <link refid="classAIAC_1_1FabFeedback"/>
+      </node>
+      <node id="1">
+        <label>AIAC::HoleFeedback</label>
+        <link refid="classAIAC_1_1HoleFeedback"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::FabFeedback</label>
+        <link refid="classAIAC_1_1FabFeedback"/>
+      </node>
+      <node id="1">
+        <label>AIAC::HoleFeedback</label>
+        <link refid="classAIAC_1_1HoleFeedback"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/HoleFeedback.h" line="124" column="5" bodyfile="src/AIAC/Feedback/HoleFeedback.h" bodystart="125" bodyend="154"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1HoleFeedback_1af54d978c0aed96b6b58765b23c9cb0f2" prot="public" virt="virtual"><scope>AIAC::HoleFeedback</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a711ba27f1a394de775895397d254728f" prot="public" virt="virtual"><scope>AIAC::HoleFeedback</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1aae983dfcdc6deaf96dd0fd8ab740c2b5" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>FabFeedback</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a518bc2236481a3110932cb44466c90e6" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>HoleFeedback</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1ab13ea88f3fe995a8d60bd5474d67e4ee" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_DrillBitLineAxis</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a1c713170c1f8c6d2740e6ba38e3a4c20" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_HoleLineAxis</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a670edb547eab3a4738198e89aefe2a7c" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_InsideOutDetection</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a296eb54c78e849f2990c006942e76fbc" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_OrientationTolerance</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a9bc2828d9ca75f526bedf6515847a529" prot="protected" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_ScaleFactor</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1af53b1206289ccbcc24e6b479065dfc3d" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_VisPosition</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a2a1969b97a5d6e993fd7354b36d6ad84" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_VisRotation</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1acf3b0ec690cd40ae4e85eab8fabfa760" prot="private" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>m_VisText</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1a2fbd124214d60b5d924c0cfa7ad807f9" prot="public" virt="virtual"><scope>AIAC::HoleFeedback</scope><name>Update</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a22fa06e384ea2b29074ed688793d9ae0" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>~FabFeedback</name></member>
+      <member refid="classAIAC_1_1HoleFeedback_1ab13b59c61587b98e06772e6b4b2ff5e8" prot="public" virt="non-virtual"><scope>AIAC::HoleFeedback</scope><name>~HoleFeedback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1ACInfoToolhead" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::ACInfoToolhead</compoundname>
+    <includes refid="ACInfoToolhead_8h" local="no">ACInfoToolhead.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolhead_1a74b7cb758eb0f59249e4758837446ee1" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::ACInfoToolhead::m_ACITPath</definition>
+        <argsstring></argsstring>
+        <name>m_ACITPath</name>
+        <qualifiedname>AIAC::ACInfoToolhead::m_ACITPath</qualifiedname>
+        <briefdescription>
+<para>the path to the acit file </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="326" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="326" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolhead_1ae1f2f89847d298ab77b7b4492a2fddcb" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::ACInfoToolhead::m_OBJPath</definition>
+        <argsstring></argsstring>
+        <name>m_OBJPath</name>
+        <qualifiedname>AIAC::ACInfoToolhead::m_OBJPath</qualifiedname>
+        <briefdescription>
+<para>the path to the mesh file as obj </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="328" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="328" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolhead_1a198895fc3e6518e269ecba1bbf392e4a" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1ToolHeadData" kindref="compound">ToolHeadData</ref></type>
+        <definition>ToolHeadData AIAC::ACInfoToolhead::m_Data</definition>
+        <argsstring></argsstring>
+        <name>m_Data</name>
+        <qualifiedname>AIAC::ACInfoToolhead::m_Data</qualifiedname>
+        <briefdescription>
+<para>the data loaded from the .acit </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="330" column="26" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolhead_1a6c75eba0c592ff63fc61892f026d1c1a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::ACInfoToolhead::m_ID</definition>
+        <argsstring></argsstring>
+        <name>m_ID</name>
+        <qualifiedname>AIAC::ACInfoToolhead::m_ID</qualifiedname>
+        <briefdescription>
+<para>the id of the object given by its path index position in the config file </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="332" column="17" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="332" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolhead_1a3e6feb6de2b6b9a6a5a3b9edd1335157" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOPrimitive&gt; &gt; AIAC::ACInfoToolhead::m_GOPrimitivesInfo</definition>
+        <argsstring></argsstring>
+        <name>m_GOPrimitivesInfo</name>
+        <qualifiedname>AIAC::ACInfoToolhead::m_GOPrimitivesInfo</qualifiedname>
+        <briefdescription>
+<para>the geometries that defines the hole and used in the feedback layer </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="336" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ACInfoToolhead_1ab059b3b1fc8aece7af6c207355e1a3e8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GOPrimitive&gt; &gt; AIAC::ACInfoToolhead::m_GOPrimitivesInfoOriginal</definition>
+        <argsstring></argsstring>
+        <name>m_GOPrimitivesInfoOriginal</name>
+        <qualifiedname>AIAC::ACInfoToolhead::m_GOPrimitivesInfoOriginal</qualifiedname>
+        <briefdescription>
+<para>the original geometries of GOinfos at loading time </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="338" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="338" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1acce4967fb0aa0c2c18f63566d64e25eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ACInfoToolhead::ACInfoToolhead</definition>
+        <argsstring>()=default</argsstring>
+        <name>ACInfoToolhead</name>
+        <qualifiedname>AIAC::ACInfoToolhead::ACInfoToolhead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="267" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a75b4d1a681f149d7de5b9b9588673f13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ACInfoToolhead::ACInfoToolhead</definition>
+        <argsstring>(std::string acitPath, std::string meshObjPath, int id)</argsstring>
+        <name>ACInfoToolhead</name>
+        <qualifiedname>AIAC::ACInfoToolhead::ACInfoToolhead</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>acitPath</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>meshObjPath</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="268" column="13" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="112" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1af43bd7e53e873d26fe4faeee5e9ff518" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>__always_inline ACToolHeadType</type>
+        <definition>__always_inline ACToolHeadType AIAC::ACInfoToolhead::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <qualifiedname>AIAC::ACInfoToolhead::GetType</qualifiedname>
+        <briefdescription>
+<para>Retrieve the type of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="272" column="28" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="272" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a909535f7c635c995e1463ea1c09ae7d6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::ACInfoToolhead::GetTypeString</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTypeString</name>
+        <qualifiedname>AIAC::ACInfoToolhead::GetTypeString</qualifiedname>
+        <briefdescription>
+<para>Retrieve the type of the toolhead as a string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="274" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="274" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1aa74b72a72ff23806c821c49978f3656d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::ACInfoToolhead::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>AIAC::ACInfoToolhead::GetName</qualifiedname>
+        <briefdescription>
+<para>Get the name of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="276" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="276" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a581e73ab4c7d000e934a856653f318ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::ACInfoToolhead::GetId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetId</name>
+        <qualifiedname>AIAC::ACInfoToolhead::GetId</qualifiedname>
+        <briefdescription>
+<para>Get the id of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="278" column="17" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="278" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1aa27005be2ec91f2166329e3fad57c049" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T AIAC::ACInfoToolhead::GetData</definition>
+        <argsstring>() const</argsstring>
+        <name>GetData</name>
+        <qualifiedname>AIAC::ACInfoToolhead::GetData</qualifiedname>
+        <briefdescription>
+<para>access the data of the toolheads </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="282" column="15" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="282" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1ad4a1dda828918c79cdeddf73b8a320de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::AddGOsInfo</definition>
+        <argsstring>(ToolHeadData &amp;data)</argsstring>
+        <name>AddGOsInfo</name>
+        <qualifiedname>AIAC::ACInfoToolhead::AddGOsInfo</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ToolHeadData" kindref="compound">ToolHeadData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>From the parse data acit, create the corresponding geometries (e.g. <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> for tooltip, toolbase, etc) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="296" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="123" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1accbec1803c952be2ef8e71430c2b2e49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::AddGOsInfoDrillBit</definition>
+        <argsstring>(ToolHeadData &amp;data)</argsstring>
+        <name>AddGOsInfoDrillBit</name>
+        <qualifiedname>AIAC::ACInfoToolhead::AddGOsInfoDrillBit</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ToolHeadData" kindref="compound">ToolHeadData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="297" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="146" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a6a3bfaba6534a35c402c51a778a296da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::AddGOsInfoCircularSaw</definition>
+        <argsstring>(ToolHeadData &amp;data)</argsstring>
+        <name>AddGOsInfoCircularSaw</name>
+        <qualifiedname>AIAC::ACInfoToolhead::AddGOsInfoCircularSaw</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ToolHeadData" kindref="compound">ToolHeadData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="298" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="183" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a6a77232aa78d3a47a23d0a148ebcd33b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::AddGOsInfoChainSaw</definition>
+        <argsstring>(ToolHeadData &amp;data)</argsstring>
+        <name>AddGOsInfoChainSaw</name>
+        <qualifiedname>AIAC::ACInfoToolhead::AddGOsInfoChainSaw</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ToolHeadData" kindref="compound">ToolHeadData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="299" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="205" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1ae5424784dc68cb550e20a0532be4bc82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::AddGOsInfoSaberSaw</definition>
+        <argsstring>(ToolHeadData &amp;data)</argsstring>
+        <name>AddGOsInfoSaberSaw</name>
+        <qualifiedname>AIAC::ACInfoToolhead::AddGOsInfoSaberSaw</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ToolHeadData" kindref="compound">ToolHeadData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="300" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="248" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a9cbd72810cbd44957e23843f50b91d02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::SetVisibility</definition>
+        <argsstring>(bool visible)</argsstring>
+        <name>SetVisibility</name>
+        <qualifiedname>AIAC::ACInfoToolhead::SetVisibility</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+        </param>
+        <briefdescription>
+<para>Set the visibility of the geometries and widgets of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="304" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="283" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a0cee7e4a287cb19105ad7b7caa7df50a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::Transform</definition>
+        <argsstring>(glm::mat4 transform)</argsstring>
+        <name>Transform</name>
+        <qualifiedname>AIAC::ACInfoToolhead::Transform</qualifiedname>
+        <param>
+          <type>glm::mat4</type>
+          <declname>transform</declname>
+        </param>
+        <briefdescription>
+<para>transform all the geometries, widgets and mesh contained in the <ref refid="classAIAC_1_1ACInfoToolhead" kindref="compound">ACInfoToolhead</ref> object </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="308" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="289" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a310c28590dc4046f90c647f3515419d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::TransformGO</definition>
+        <argsstring>(std::shared_ptr&lt; GOPrimitive &gt; goPtr, std::shared_ptr&lt; GOPrimitive &gt; goOriginalPtr, glm::mat4 transform)</argsstring>
+        <name>TransformGO</name>
+        <qualifiedname>AIAC::ACInfoToolhead::TransformGO</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt;</type>
+          <declname>goPtr</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt;</type>
+          <declname>goOriginalPtr</declname>
+        </param>
+        <param>
+          <type>glm::mat4</type>
+          <declname>transform</declname>
+        </param>
+        <briefdescription>
+<para>transform a specific geometry </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="310" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="294" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1adb8d117b4ef459f696c4d42550619bf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::TransformSync</definition>
+        <argsstring>()</argsstring>
+        <name>TransformSync</name>
+        <qualifiedname>AIAC::ACInfoToolhead::TransformSync</qualifiedname>
+        <briefdescription>
+<para>rotate around local x axis of the toolhead 90 degrees to match the AC coordinate system with the TTool coordinate system Should only be called once at loading time </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="315" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="369" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a31f65e231ca538f7235b4e7050fb0f11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ACInfoToolhead::CopyGOsInfoOriginal</definition>
+        <argsstring>()</argsstring>
+        <name>CopyGOsInfoOriginal</name>
+        <qualifiedname>AIAC::ACInfoToolhead::CopyGOsInfoOriginal</qualifiedname>
+        <briefdescription>
+<para>copy the original transform of the GO infos </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="318" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="403" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ACInfoToolhead_1a9e610e1ced306f6d23e96376168998cd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>__always_inline std::string</type>
+        <definition>__always_inline std::string AIAC::ACInfoToolhead::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>AIAC::ACInfoToolhead::ToString</qualifiedname>
+        <briefdescription>
+<para>convert to a string byy getting the name </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="322" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="322" bodyend="322"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the class holding the information of the toolhead (GOs, metadata, etc) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoToolhead.h" line="264" column="5" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="265" bodyend="339"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1ACInfoToolhead_1acce4967fb0aa0c2c18f63566d64e25eb" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>ACInfoToolhead</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a75b4d1a681f149d7de5b9b9588673f13" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>ACInfoToolhead</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1ad4a1dda828918c79cdeddf73b8a320de" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>AddGOsInfo</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a6a77232aa78d3a47a23d0a148ebcd33b" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>AddGOsInfoChainSaw</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a6a3bfaba6534a35c402c51a778a296da" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>AddGOsInfoCircularSaw</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1accbec1803c952be2ef8e71430c2b2e49" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>AddGOsInfoDrillBit</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1ae5424784dc68cb550e20a0532be4bc82" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>AddGOsInfoSaberSaw</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a31f65e231ca538f7235b4e7050fb0f11" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>CopyGOsInfoOriginal</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1aa27005be2ec91f2166329e3fad57c049" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>GetData</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a581e73ab4c7d000e934a856653f318ac" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>GetId</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1aa74b72a72ff23806c821c49978f3656d" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1af43bd7e53e873d26fe4faeee5e9ff518" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a909535f7c635c995e1463ea1c09ae7d6" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>GetTypeString</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a74b7cb758eb0f59249e4758837446ee1" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>m_ACITPath</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a198895fc3e6518e269ecba1bbf392e4a" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>m_Data</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a3e6feb6de2b6b9a6a5a3b9edd1335157" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>m_GOPrimitivesInfo</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1ab059b3b1fc8aece7af6c207355e1a3e8" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>m_GOPrimitivesInfoOriginal</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a6c75eba0c592ff63fc61892f026d1c1a" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>m_ID</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1ae1f2f89847d298ab77b7b4492a2fddcb" prot="private" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>m_OBJPath</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a9cbd72810cbd44957e23843f50b91d02" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a9e610e1ced306f6d23e96376168998cd" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>ToString</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a0cee7e4a287cb19105ad7b7caa7df50a" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>Transform</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1a310c28590dc4046f90c647f3515419d4" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>TransformGO</name></member>
+      <member refid="classAIAC_1_1ACInfoToolhead_1adb8d117b4ef459f696c4d42550619bf0" prot="public" virt="non-virtual"><scope>AIAC::ACInfoToolhead</scope><name>TransformSync</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

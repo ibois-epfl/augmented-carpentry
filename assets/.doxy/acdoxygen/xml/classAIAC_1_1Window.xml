@@ -1,0 +1,387 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Window" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Window</compoundname>
+    <innerclass refid="structAIAC_1_1Window_1_1WindowData" prot="private">AIAC::Window::WindowData</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Window_1aff340c53c9fcd6d6dc0cd9d98bb32f6f" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1TouchMonitor" kindref="compound">AIAC::TouchMonitor</ref> *</type>
+        <definition>AIAC::TouchMonitor* AIAC::Window::m_TouchMonitor</definition>
+        <argsstring></argsstring>
+        <name>m_TouchMonitor</name>
+        <qualifiedname>AIAC::Window::m_TouchMonitor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="91" column="28" bodyfile="src/AIAC/Window.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Window_1aae55be1ba5dd49fe9a19c523e97b4301" prot="private" static="no" mutable="no">
+        <type>GLFWwindow *</type>
+        <definition>GLFWwindow* AIAC::Window::m_GLFWWindow</definition>
+        <argsstring></argsstring>
+        <name>m_GLFWWindow</name>
+        <qualifiedname>AIAC::Window::m_GLFWWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="93" column="20" bodyfile="src/AIAC/Window.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Window_1aee9e7f2eb924943177ea3bcc28a96937" prot="private" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AIAC::Window::m_GlslVersion</definition>
+        <argsstring></argsstring>
+        <name>m_GlslVersion</name>
+        <qualifiedname>AIAC::Window::m_GlslVersion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="94" column="20" bodyfile="src/AIAC/Window.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Window_1a5fbd387caf1ef468823ec6341a39e640" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Window::m_IsWindowOpen</definition>
+        <argsstring></argsstring>
+        <name>m_IsWindowOpen</name>
+        <qualifiedname>AIAC::Window::m_IsWindowOpen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="95" column="14" bodyfile="src/AIAC/Window.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Window_1a0bb00efe0cbaca37ac194cd711cbf263" prot="private" static="no" mutable="no">
+        <type>struct AIAC::Window::WindowData</type>
+        <definition>struct AIAC::Window::WindowData AIAC::Window::m_Data</definition>
+        <argsstring></argsstring>
+        <name>m_Data</name>
+        <qualifiedname>AIAC::Window::m_Data</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="104" column="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Window_1ac1742a8551e4107bb5eaad168efce92c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::Window::m_DisplayW</definition>
+        <argsstring></argsstring>
+        <name>m_DisplayW</name>
+        <qualifiedname>AIAC::Window::m_DisplayW</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="106" column="13" bodyfile="src/AIAC/Window.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Window_1acc0ac8926c661c415ec0c72290d7c010" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::Window::m_DisplayH</definition>
+        <argsstring></argsstring>
+        <name>m_DisplayH</name>
+        <qualifiedname>AIAC::Window::m_DisplayH</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="106" column="24" bodyfile="src/AIAC/Window.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Window_1a755d7983e8107ece0d2486bb3afbd297" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Window::Window</definition>
+        <argsstring>(const WindowProps &amp;props)</argsstring>
+        <name>Window</name>
+        <qualifiedname>AIAC::Window::Window</qualifiedname>
+        <param>
+          <type>const <ref refid="structAIAC_1_1WindowProps" kindref="compound">WindowProps</ref> &amp;</type>
+          <declname>props</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="61" column="9" bodyfile="src/AIAC/Window.cpp" bodystart="55" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a22751db1f5bdc52db690ef101f0e6f1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>AIAC::Window::~Window</definition>
+        <argsstring>()</argsstring>
+        <name>~Window</name>
+        <qualifiedname>AIAC::Window::~Window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="62" column="17" bodyfile="src/AIAC/Window.cpp" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a9bfaf9ae142672db3d1efcd3ca44f4d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::Window::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="64" column="14" bodyfile="src/AIAC/Window.cpp" bodystart="69" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a695cca371a8f1edee52f10f8449d0f6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::OnUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>OnUpdate</name>
+        <qualifiedname>AIAC::Window::OnUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="66" column="14" bodyfile="src/AIAC/Window.cpp" bodystart="151" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1ae5790dbbaa25dc3e20487286435b3e95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::OnBufferSwap</definition>
+        <argsstring>()</argsstring>
+        <name>OnBufferSwap</name>
+        <qualifiedname>AIAC::Window::OnBufferSwap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="67" column="14" bodyfile="src/AIAC/Window.cpp" bodystart="157" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a9ec5935e68bb2c6e2c895c499d44daa7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::Shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>AIAC::Window::Shutdown</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="68" column="14" bodyfile="src/AIAC/Window.cpp" bodystart="136" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1acabe1d355f52f29b484760a9bcc006ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::MakeCurrent</definition>
+        <argsstring>()</argsstring>
+        <name>MakeCurrent</name>
+        <qualifiedname>AIAC::Window::MakeCurrent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a994b9e89332de798ddec044aef1d1ecc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::ReleaseCurrent</definition>
+        <argsstring>()</argsstring>
+        <name>ReleaseCurrent</name>
+        <qualifiedname>AIAC::Window::ReleaseCurrent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a234e3d31f677f0fe0ad368f60c4de54f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::Window::IsOpen</definition>
+        <argsstring>()</argsstring>
+        <name>IsOpen</name>
+        <qualifiedname>AIAC::Window::IsOpen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="72" column="14" bodyfile="src/AIAC/Window.cpp" bodystart="146" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1abbaf27c83f624cf850895a8a8dd82f29" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::Window::GetWidth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWidth</name>
+        <qualifiedname>AIAC::Window::GetWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="74" column="18" bodyfile="src/AIAC/Window.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a8671e3e88978fbd9ab1c87a019e1ab7e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::Window::GetHeight</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHeight</name>
+        <qualifiedname>AIAC::Window::GetHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="75" column="18" bodyfile="src/AIAC/Window.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1aefba885082485c459348c560ac1d3c18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Window::SetVSync</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetVSync</name>
+        <qualifiedname>AIAC::Window::SetVSync</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="77" column="14" bodyfile="src/AIAC/Window.cpp" bodystart="162" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1aac9661286dc6058f4c251ff6147cdc18" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::Window::IsVSync</definition>
+        <argsstring>() const</argsstring>
+        <name>IsVSync</name>
+        <qualifiedname>AIAC::Window::IsVSync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="78" column="21" bodyfile="src/AIAC/Window.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a8d9672d09fae2f0442c9d8f236bf04b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLFWwindow *</type>
+        <definition>GLFWwindow * AIAC::Window::GetGLFWWindow</definition>
+        <argsstring>()</argsstring>
+        <name>GetGLFWWindow</name>
+        <qualifiedname>AIAC::Window::GetGLFWWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="80" column="27" bodyfile="src/AIAC/Window.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1a5a95ed8d557d30ffdfea776d9c575f9c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * AIAC::Window::GetGlslVersion</definition>
+        <argsstring>()</argsstring>
+        <name>GetGlslVersion</name>
+        <qualifiedname>AIAC::Window::GetGlslVersion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="81" column="27" bodyfile="src/AIAC/Window.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1aac5dccf0addb9a299b2db304f898e5c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::Window::GetDisplayW</definition>
+        <argsstring>()</argsstring>
+        <name>GetDisplayW</name>
+        <qualifiedname>AIAC::Window::GetDisplayW</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="83" column="20" bodyfile="src/AIAC/Window.h" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Window_1ac9b1aaa78c335de14c628c4cc7b708ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int AIAC::Window::GetDisplayH</definition>
+        <argsstring>()</argsstring>
+        <name>GetDisplayH</name>
+        <qualifiedname>AIAC::Window::GetDisplayH</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Window.h" line="84" column="20" bodyfile="src/AIAC/Window.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Window.h" line="58" column="5" bodyfile="src/AIAC/Window.h" bodystart="59" bodyend="107"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Window_1ac9b1aaa78c335de14c628c4cc7b708ab" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>GetDisplayH</name></member>
+      <member refid="classAIAC_1_1Window_1aac5dccf0addb9a299b2db304f898e5c4" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>GetDisplayW</name></member>
+      <member refid="classAIAC_1_1Window_1a8d9672d09fae2f0442c9d8f236bf04b1" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>GetGLFWWindow</name></member>
+      <member refid="classAIAC_1_1Window_1a5a95ed8d557d30ffdfea776d9c575f9c" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>GetGlslVersion</name></member>
+      <member refid="classAIAC_1_1Window_1a8671e3e88978fbd9ab1c87a019e1ab7e" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>GetHeight</name></member>
+      <member refid="classAIAC_1_1Window_1abbaf27c83f624cf850895a8a8dd82f29" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>GetWidth</name></member>
+      <member refid="classAIAC_1_1Window_1a9bfaf9ae142672db3d1efcd3ca44f4d7" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1Window_1a234e3d31f677f0fe0ad368f60c4de54f" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>IsOpen</name></member>
+      <member refid="classAIAC_1_1Window_1aac9661286dc6058f4c251ff6147cdc18" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>IsVSync</name></member>
+      <member refid="classAIAC_1_1Window_1a0bb00efe0cbaca37ac194cd711cbf263" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_Data</name></member>
+      <member refid="classAIAC_1_1Window_1acc0ac8926c661c415ec0c72290d7c010" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_DisplayH</name></member>
+      <member refid="classAIAC_1_1Window_1ac1742a8551e4107bb5eaad168efce92c" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_DisplayW</name></member>
+      <member refid="classAIAC_1_1Window_1aae55be1ba5dd49fe9a19c523e97b4301" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_GLFWWindow</name></member>
+      <member refid="classAIAC_1_1Window_1aee9e7f2eb924943177ea3bcc28a96937" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_GlslVersion</name></member>
+      <member refid="classAIAC_1_1Window_1a5fbd387caf1ef468823ec6341a39e640" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_IsWindowOpen</name></member>
+      <member refid="classAIAC_1_1Window_1aff340c53c9fcd6d6dc0cd9d98bb32f6f" prot="private" virt="non-virtual"><scope>AIAC::Window</scope><name>m_TouchMonitor</name></member>
+      <member refid="classAIAC_1_1Window_1acabe1d355f52f29b484760a9bcc006ff" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>MakeCurrent</name></member>
+      <member refid="classAIAC_1_1Window_1ae5790dbbaa25dc3e20487286435b3e95" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>OnBufferSwap</name></member>
+      <member refid="classAIAC_1_1Window_1a695cca371a8f1edee52f10f8449d0f6f" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>OnUpdate</name></member>
+      <member refid="classAIAC_1_1Window_1a994b9e89332de798ddec044aef1d1ecc" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>ReleaseCurrent</name></member>
+      <member refid="classAIAC_1_1Window_1aefba885082485c459348c560ac1d3c18" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>SetVSync</name></member>
+      <member refid="classAIAC_1_1Window_1a9ec5935e68bb2c6e2c895c499d44daa7" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>Shutdown</name></member>
+      <member refid="classAIAC_1_1Window_1a755d7983e8107ece0d2486bb3afbd297" prot="public" virt="non-virtual"><scope>AIAC::Window</scope><name>Window</name></member>
+      <member refid="classAIAC_1_1Window_1a22751db1f5bdc52db690ef101f0e6f1e" prot="public" virt="virtual"><scope>AIAC::Window</scope><name>~Window</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

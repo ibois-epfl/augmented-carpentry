@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1EventPolicy" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::EventPolicy</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structAIAC_1_1EventPolicy_1a697040f07aadf061d2eced6edd982655" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Item</type>
+          </param>
+        </templateparamlist>
+        <type>std::priority_queue&lt; Item, std::vector&lt; Item &gt;, <ref refid="structAIAC_1_1EventCompare" kindref="compound">EventCompare</ref> &gt;</type>
+        <definition>using AIAC::EventPolicy::PrioriQueueListtyQueue =  std::priority_queue&lt;Item, std::vector&lt;Item&gt;, EventCompare&gt;</definition>
+        <argsstring></argsstring>
+        <name>PrioriQueueListtyQueue</name>
+        <qualifiedname>AIAC::EventPolicy::PrioriQueueListtyQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="94" column="9" bodyfile="src/AIAC/EventSys/Event.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structAIAC_1_1EventPolicy_1a5ff2ea90202c8204f04a7d186a0ecb5a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>EventType</type>
+        <definition>static EventType AIAC::EventPolicy::GetEvent</definition>
+        <argsstring>(const EventPointer &amp;event)</argsstring>
+        <name>GetEvent</name>
+        <qualifiedname>AIAC::EventPolicy::GetEvent</qualifiedname>
+        <param>
+          <type>const EventPointer &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="96" column="26" bodyfile="src/AIAC/EventSys/Event.h" bodystart="96" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="structAIAC_1_1EventPolicy_1a534043d8309c00b3e424006ec6c70779" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>EventCategory</type>
+        <definition>static EventCategory AIAC::EventPolicy::GetCategory</definition>
+        <argsstring>(const EventPointer &amp;event)</argsstring>
+        <name>GetCategory</name>
+        <qualifiedname>AIAC::EventPolicy::GetCategory</qualifiedname>
+        <param>
+          <type>const EventPointer &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="100" column="30" bodyfile="src/AIAC/EventSys/Event.h" bodystart="100" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/EventSys/Event.h" line="91" column="5" bodyfile="src/AIAC/EventSys/Event.h" bodystart="92" bodyend="103"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1EventPolicy_1a534043d8309c00b3e424006ec6c70779" prot="public" virt="non-virtual"><scope>AIAC::EventPolicy</scope><name>GetCategory</name></member>
+      <member refid="structAIAC_1_1EventPolicy_1a5ff2ea90202c8204f04a7d186a0ecb5a" prot="public" virt="non-virtual"><scope>AIAC::EventPolicy</scope><name>GetEvent</name></member>
+      <member refid="structAIAC_1_1EventPolicy_1a697040f07aadf061d2eced6edd982655" prot="public" virt="non-virtual"><scope>AIAC::EventPolicy</scope><name>PrioriQueueListtyQueue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

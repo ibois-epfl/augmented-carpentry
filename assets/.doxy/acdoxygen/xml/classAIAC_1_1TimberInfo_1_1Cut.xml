@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1TimberInfo_1_1Cut" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::TimberInfo::Cut</compoundname>
+    <basecompoundref refid="classAIAC_1_1TimberInfo_1_1Component" prot="public" virt="non-virtual">AIAC::TimberInfo::Component</basecompoundref>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" prot="public">AIAC::TimberInfo::Cut::Edge</innerclass>
+    <innerclass refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" prot="public">AIAC::TimberInfo::Cut::Face</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1a42d85f3c6079e903cecb38b8cc899656" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::TimberInfo::Cut::m_HighlightedFaceID</definition>
+        <argsstring></argsstring>
+        <name>m_HighlightedFaceID</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::m_HighlightedFaceID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="302" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1a6b4bfc78629afc84737c213d8abbe6c5" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, <ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref> &gt;</type>
+        <definition>std::map&lt;std::string, Face&gt; AIAC::TimberInfo::Cut::m_Faces</definition>
+        <argsstring></argsstring>
+        <name>m_Faces</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::m_Faces</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="303" column="18" bodyfile="src/AIAC/ACInfoModel.h" bodystart="303" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1acef043722fe8d1249493bcfe91cf1b12" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, <ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" kindref="compound">Edge</ref> &gt;</type>
+        <definition>std::map&lt;std::string, Edge&gt; AIAC::TimberInfo::Cut::m_Edges</definition>
+        <argsstring></argsstring>
+        <name>m_Edges</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::m_Edges</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="304" column="18" bodyfile="src/AIAC/ACInfoModel.h" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1a1b54757d0117a67d8e94ee1d4a7cfc43" prot="private" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; AIAC::TimberInfo::Cut::m_NonExposedFaceIDs</definition>
+        <argsstring></argsstring>
+        <name>m_NonExposedFaceIDs</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::m_NonExposedFaceIDs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="305" column="18" bodyfile="src/AIAC/ACInfoModel.h" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1a9fd2c851516a7b6b91d34bba004e3964" prot="private" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; AIAC::TimberInfo::Cut::m_NonExposedEdgeIDs</definition>
+        <argsstring></argsstring>
+        <name>m_NonExposedEdgeIDs</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::m_NonExposedEdgeIDs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="306" column="18" bodyfile="src/AIAC/ACInfoModel.h" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1TimberInfo_1_1Cut_1aadaf044da70f1e20f85e195b88a3c23c" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOText&gt; AIAC::TimberInfo::Cut::m_IDLabelGO</definition>
+        <argsstring></argsstring>
+        <name>m_IDLabelGO</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::m_IDLabelGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="307" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="307" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1TimberInfo_1_1Cut_1a0ae6dca3a4e8709d4f21d21b69b42018" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ACInfoModel</definition>
+        <argsstring></argsstring>
+        <name>ACInfoModel</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::ACInfoModel</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ACInfoModel" kindref="compound">ACInfoModel</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="309" column="22" bodyfile="src/AIAC/ACInfoModel.h" bodystart="309" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a5273233202849f44eeb01cfb7336da76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::TimberInfo::Cut::Cut</definition>
+        <argsstring>()</argsstring>
+        <name>Cut</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::Cut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="195" column="9" bodyfile="src/AIAC/ACInfoModel.h" bodystart="195" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a435025e7935649faee71059a4074b8a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::SetAsCurrent</definition>
+        <argsstring>()</argsstring>
+        <name>SetAsCurrent</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::SetAsCurrent</qualifiedname>
+        <reimplements refid="classAIAC_1_1TimberInfo_1_1Component_1a44747e6cba1e1f5072e0405db0f9c4e6">SetAsCurrent</reimplements>
+        <briefdescription>
+<para>&lt; Base <ref refid="classAIAC_1_1TimberInfo_1_1Component" kindref="compound">Component</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="197" column="22" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="134" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1ab6a4e3dae5d84d5293b4b9a3246c3c1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::SetAsDone</definition>
+        <argsstring>()</argsstring>
+        <name>SetAsDone</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::SetAsDone</qualifiedname>
+        <reimplements refid="classAIAC_1_1TimberInfo_1_1Component_1aebd3733195cec83c0d8d7cdb6df49dae">SetAsDone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="198" column="22" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="149" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a1669f81e436320318989fff505598b53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::SetAsNotDone</definition>
+        <argsstring>()</argsstring>
+        <name>SetAsNotDone</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::SetAsNotDone</qualifiedname>
+        <reimplements refid="classAIAC_1_1TimberInfo_1_1Component_1a104ac06d411c3273b11d6f8b8a46053a">SetAsNotDone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="199" column="22" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="164" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a9268933a1de8896d04fe1a1193cd4733" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::SetVisibility</definition>
+        <argsstring>(bool visible)</argsstring>
+        <name>SetVisibility</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::SetVisibility</qualifiedname>
+        <reimplements refid="classAIAC_1_1TimberInfo_1_1Component_1ab047a030ce4764a849f7e8cd2dafc964">SetVisibility</reimplements>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="200" column="22" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="179" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1aacd2d714c4c700fcda3157405d23e40c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::TimberInfo::Cut::GetCenter</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetCenter</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetCenter</qualifiedname>
+        <reimplements refid="classAIAC_1_1TimberInfo_1_1Component_1ac0771b78b638392d38e98e520dfcc77e">GetCenter</reimplements>
+        <briefdescription>
+<para><ref refid="classAIAC_1_1TimberInfo_1_1Hole" kindref="compound">Hole</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="201" column="19" bodyfile="src/AIAC/ACInfoModel.h" bodystart="201" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1ab8e8c1aec42190aae4dc406d32c9f5cc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::TimberInfo::Cut::IsSingleFace</definition>
+        <argsstring>() const</argsstring>
+        <name>IsSingleFace</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::IsSingleFace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="272" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="272" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a4a02ead0add556d53c459d23ab345aab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref> &amp;</type>
+        <definition>Face &amp; AIAC::TimberInfo::Cut::GetFace</definition>
+        <argsstring>(std::string id)</argsstring>
+        <name>GetFace</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetFace</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="273" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="273" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a74fc5a3632c97de7e9dd4dbb8d55c006" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" kindref="compound">Edge</ref> &amp;</type>
+        <definition>Edge &amp; AIAC::TimberInfo::Cut::GetEdge</definition>
+        <argsstring>(std::string id)</argsstring>
+        <name>GetEdge</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetEdge</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="274" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="274" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a8b94547694fbfe43469d4daf6c363008" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::map&lt; std::string, <ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref> &gt; &amp;</type>
+        <definition>std::map&lt; std::string, Face &gt; &amp; AIAC::TimberInfo::Cut::GetAllFaces</definition>
+        <argsstring>()</argsstring>
+        <name>GetAllFaces</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetAllFaces</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="275" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="275" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a16a35be4229d3b7d2504e5a54fb74038" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::map&lt; std::string, <ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Edge" kindref="compound">Edge</ref> &gt; &amp;</type>
+        <definition>std::map&lt; std::string, Edge &gt; &amp; AIAC::TimberInfo::Cut::GetAllEdges</definition>
+        <argsstring>()</argsstring>
+        <name>GetAllEdges</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetAllEdges</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="276" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="276" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1ad5661096286a7d725bade55d1350c8d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::set&lt; std::string &gt; &amp;</type>
+        <definition>std::set&lt; std::string &gt; &amp; AIAC::TimberInfo::Cut::GetAllNonExposedFaceIDs</definition>
+        <argsstring>()</argsstring>
+        <name>GetAllNonExposedFaceIDs</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetAllNonExposedFaceIDs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="277" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="277" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1ab5f0dfc8d0f7e9f7d723937ef6a890fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::set&lt; std::string &gt; &amp;</type>
+        <definition>std::set&lt; std::string &gt; &amp; AIAC::TimberInfo::Cut::GetAllNonExposedEdgeIDs</definition>
+        <argsstring>()</argsstring>
+        <name>GetAllNonExposedEdgeIDs</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetAllNonExposedEdgeIDs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="278" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="278" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1aee100e12f52c964dd5fd20f19fe16b79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::HighlightFace</definition>
+        <argsstring>(const std::string &amp;faceId, glm::vec4 color=glm::vec4(0))</argsstring>
+        <name>HighlightFace</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::HighlightFace</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>faceId</declname>
+        </param>
+        <param>
+          <type>glm::vec4</type>
+          <declname>color</declname>
+          <defval>glm::vec4(0)</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="280" column="14" bodyfile="src/AIAC/ACInfoModel.cpp" bodystart="193" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a6de529c7f44882edbfa3deda7f4ac570" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::TimberInfo::Cut::GetHighlightedFaceID</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHighlightedFaceID</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetHighlightedFaceID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="281" column="28" bodyfile="src/AIAC/ACInfoModel.h" bodystart="281" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a39ccf3e6cbcb3c219d1500ad33935ee3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">TimberInfo::Cut::Face</ref></type>
+        <definition>TimberInfo::Cut::Face AIAC::TimberInfo::Cut::GetHighlightedFace</definition>
+        <argsstring>()</argsstring>
+        <name>GetHighlightedFace</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetHighlightedFace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="282" column="38" bodyfile="src/AIAC/ACInfoModel.h" bodystart="282" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a0f1fcd0d5ff9d1fad1f17eaace6b077d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::map&lt; std::string, <ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref> &gt;</type>
+        <definition>std::map&lt; std::string, Face &gt; AIAC::TimberInfo::Cut::GetFaceNeighbors</definition>
+        <argsstring>(std::string faceID)</argsstring>
+        <name>GetFaceNeighbors</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetFaceNeighbors</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>faceID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="284" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="284" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1adddd55da25c7ecfe13ef286ee8e0fa40" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::map&lt; std::string, <ref refid="classAIAC_1_1TimberInfo_1_1Cut_1_1Face" kindref="compound">Face</ref> &gt;</type>
+        <definition>std::map&lt; std::string, Face &gt; AIAC::TimberInfo::Cut::GetHighlightedFaceNeighbors</definition>
+        <argsstring>()</argsstring>
+        <name>GetHighlightedFaceNeighbors</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::GetHighlightedFaceNeighbors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="291" column="25" bodyfile="src/AIAC/ACInfoModel.h" bodystart="291" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1TimberInfo_1_1Cut_1a0d0bcc89770d0b79e799aae22ada394b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::TimberInfo::Cut::SetVisibilityAllCotas</definition>
+        <argsstring>(bool visible)</argsstring>
+        <name>SetVisibilityAllCotas</name>
+        <qualifiedname>AIAC::TimberInfo::Cut::SetVisibilityAllCotas</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoModel.h" line="295" column="21" bodyfile="src/AIAC/ACInfoModel.h" bodystart="295" bodyend="299"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::TimberInfo::Component</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>AIAC::TimberInfo::Cut</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Cut"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::TimberInfo::Component</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>AIAC::TimberInfo::Cut</label>
+        <link refid="classAIAC_1_1TimberInfo_1_1Cut"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/ACInfoModel.h" line="193" column="5" bodyfile="src/AIAC/ACInfoModel.h" bodystart="193" bodyend="310"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a0ae6dca3a4e8709d4f21d21b69b42018" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>ACInfoModel</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a0db2c2480a374d541fa7dbccf59f89da" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>Component</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a5273233202849f44eeb01cfb7336da76" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>Cut</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a16a35be4229d3b7d2504e5a54fb74038" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetAllEdges</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a8b94547694fbfe43469d4daf6c363008" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetAllFaces</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1ab5f0dfc8d0f7e9f7d723937ef6a890fc" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetAllNonExposedEdgeIDs</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1ad5661096286a7d725bade55d1350c8d5" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetAllNonExposedFaceIDs</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1aacd2d714c4c700fcda3157405d23e40c" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetCenter</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a74fc5a3632c97de7e9dd4dbb8d55c006" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetEdge</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a4a02ead0add556d53c459d23ab345aab" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetFace</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a0f1fcd0d5ff9d1fad1f17eaace6b077d" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetFaceNeighbors</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a39ccf3e6cbcb3c219d1500ad33935ee3" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetHighlightedFace</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a6de529c7f44882edbfa3deda7f4ac570" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetHighlightedFaceID</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1adddd55da25c7ecfe13ef286ee8e0fa40" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetHighlightedFaceNeighbors</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1aa3e8010567ba060283925d49f31e7355" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>GetTypeString</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1aee100e12f52c964dd5fd20f19fe16b79" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>HighlightFace</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a6624bad2576016819859dc4265cff0d0" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>IsMarkedDone</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1ab8e8c1aec42190aae4dc406d32c9f5cc" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>IsSingleFace</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a74a50ca5491b30552d3f451556377e66" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_ACIMDocNode</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a319cc30f4d4072e25360d717e4b68ba3" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_Center</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1acef043722fe8d1249493bcfe91cf1b12" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_Edges</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a6b4bfc78629afc84737c213d8abbe6c5" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_Faces</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a1055056358b6578a8c6448bb4abbb6f1" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_GOPrimitives</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a42d85f3c6079e903cecb38b8cc899656" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_HighlightedFaceID</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a9728d55a1a6183d8d1d624691bc3010e" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_ID</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1aadaf044da70f1e20f85e195b88a3c23c" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_IDLabelGO</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a9fd2c851516a7b6b91d34bba004e3964" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_NonExposedEdgeIDs</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a1b54757d0117a67d8e94ee1d4a7cfc43" prot="private" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_NonExposedFaceIDs</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a6a3f941462b260fae60505a34ac35f37" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_Scale</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1ac53c685b518c169b17c05bec17748fd0" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_State</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Component_1a24a4af31a4deaa4b4491e7021badd225" prot="protected" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a435025e7935649faee71059a4074b8a4" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut</scope><name>SetAsCurrent</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1ab6a4e3dae5d84d5293b4b9a3246c3c1e" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut</scope><name>SetAsDone</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a1669f81e436320318989fff505598b53" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut</scope><name>SetAsNotDone</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a9268933a1de8896d04fe1a1193cd4733" prot="public" virt="virtual"><scope>AIAC::TimberInfo::Cut</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1TimberInfo_1_1Cut_1a0d0bcc89770d0b79e799aae22ada394b" prot="public" virt="non-virtual"><scope>AIAC::TimberInfo::Cut</scope><name>SetVisibilityAllCotas</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

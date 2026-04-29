@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1ChainSawCutPlaneVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::ChainSawCutPlaneVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1CutPlaneVisualizer" prot="public" virt="non-virtual">AIAC::CutPlaneVisualizer</basecompoundref>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1ChainSawCutPlaneVisualizer_1a960aac0819ddbb10550c011c787780fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CutChainSawFeedback</definition>
+        <argsstring></argsstring>
+        <name>CutChainSawFeedback</name>
+        <qualifiedname>AIAC::ChainSawCutPlaneVisualizer::CutChainSawFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1CutChainSawFeedback" kindref="compound">CutChainSawFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="112" column="22" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1ChainSawCutPlaneVisualizer_1aa65ef8eb3262ac8cf29ae02285b4b20a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ChainSawCutPlaneVisualizer::ChainSawCutPlaneVisualizer</definition>
+        <argsstring>()=default</argsstring>
+        <name>ChainSawCutPlaneVisualizer</name>
+        <qualifiedname>AIAC::ChainSawCutPlaneVisualizer::ChainSawCutPlaneVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="110" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::ChainSawCutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1ChainSawCutPlaneVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::CutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1CutPlaneVisualizer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::ChainSawCutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1ChainSawCutPlaneVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::CutPlaneVisualizer</label>
+        <link refid="classAIAC_1_1CutPlaneVisualizer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="107" column="5" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="108" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1ae44b896f1f5c97af5c9327e7fda95b75" prot="public" virt="virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1ChainSawCutPlaneVisualizer_1aa65ef8eb3262ac8cf29ae02285b4b20a" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>ChainSawCutPlaneVisualizer</name></member>
+      <member refid="classAIAC_1_1ChainSawCutPlaneVisualizer_1a960aac0819ddbb10550c011c787780fd" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>CutChainSawFeedback</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1a4b3626f83705d7e294f8b29dcefb7511" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>CutPlaneVisualizer</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1ad07c17ed90853fe041e844025f9aa0ad" prot="public" virt="virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1a7c9cfac6f6200125639c37147132d99e" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_LongestIntersectSegmentA1</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1ad629650a9d20f1220a171ae923798790" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_LongestIntersectSegmentA2</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1a2e20f891e73ee4fc79ea8810af8a5ecd" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_LongestIntersectSegmentAppCenterA</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1a703660ef4e39310563eadeaebb0fd4db" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_LongestIntersectSegmentAppCenterB</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1af0733286377b8fd69254df3d8e05b3f6" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_LongestIntersectSegmentB1</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1aadd75566d8e78cc39fc5241635946c23" prot="protected" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>m_LongestIntersectSegmentB2</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1CutPlaneVisualizer_1aced21fba3bc8a5fc68f4c5deff270f0a" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>Update</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::ChainSawCutPlaneVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

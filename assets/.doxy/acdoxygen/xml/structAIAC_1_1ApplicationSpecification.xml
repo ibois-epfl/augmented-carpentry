@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1ApplicationSpecification" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::ApplicationSpecification</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1ApplicationSpecification_1a7aff7eff7b0165840f0c7d498fc8dfeb" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AIAC::ApplicationSpecification::Name</definition>
+        <argsstring></argsstring>
+        <name>Name</name>
+        <qualifiedname>AIAC::ApplicationSpecification::Name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="57" column="24" bodyfile="src/AIAC/Application.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ApplicationSpecification_1a87ea9ee08fd670a4d413d953191ee9aa" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::ApplicationSpecification::WinWidth</definition>
+        <argsstring></argsstring>
+        <name>WinWidth</name>
+        <qualifiedname>AIAC::ApplicationSpecification::WinWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="58" column="22" bodyfile="src/AIAC/Application.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ApplicationSpecification_1a1d23f7a5c8c64583e1119e52f519b838" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t AIAC::ApplicationSpecification::WinHeight</definition>
+        <argsstring></argsstring>
+        <name>WinHeight</name>
+        <qualifiedname>AIAC::ApplicationSpecification::WinHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="59" column="22" bodyfile="src/AIAC/Application.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ApplicationSpecification_1a11a2a3c7e492a06f87efe680cfabd7dd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::ApplicationSpecification::IsResizable</definition>
+        <argsstring></argsstring>
+        <name>IsResizable</name>
+        <qualifiedname>AIAC::ApplicationSpecification::IsResizable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="60" column="18" bodyfile="src/AIAC/Application.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ApplicationSpecification_1a99abb481b0943746ce64e11a2e6454fd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::ApplicationSpecification::VSync</definition>
+        <argsstring></argsstring>
+        <name>VSync</name>
+        <qualifiedname>AIAC::ApplicationSpecification::VSync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="61" column="18" bodyfile="src/AIAC/Application.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ApplicationSpecification_1ae773718e40cbb8f04855bb70f55ce367" prot="public" static="no" mutable="no">
+        <type>ImVec4</type>
+        <definition>ImVec4 AIAC::ApplicationSpecification::WindowBackColor</definition>
+        <argsstring></argsstring>
+        <name>WindowBackColor</name>
+        <qualifiedname>AIAC::ApplicationSpecification::WindowBackColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="62" column="20" bodyfile="src/AIAC/Application.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Application.h" line="55" column="5" bodyfile="src/AIAC/Application.h" bodystart="56" bodyend="63"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1ApplicationSpecification_1a11a2a3c7e492a06f87efe680cfabd7dd" prot="public" virt="non-virtual"><scope>AIAC::ApplicationSpecification</scope><name>IsResizable</name></member>
+      <member refid="structAIAC_1_1ApplicationSpecification_1a7aff7eff7b0165840f0c7d498fc8dfeb" prot="public" virt="non-virtual"><scope>AIAC::ApplicationSpecification</scope><name>Name</name></member>
+      <member refid="structAIAC_1_1ApplicationSpecification_1a99abb481b0943746ce64e11a2e6454fd" prot="public" virt="non-virtual"><scope>AIAC::ApplicationSpecification</scope><name>VSync</name></member>
+      <member refid="structAIAC_1_1ApplicationSpecification_1ae773718e40cbb8f04855bb70f55ce367" prot="public" virt="non-virtual"><scope>AIAC::ApplicationSpecification</scope><name>WindowBackColor</name></member>
+      <member refid="structAIAC_1_1ApplicationSpecification_1a1d23f7a5c8c64583e1119e52f519b838" prot="public" virt="non-virtual"><scope>AIAC::ApplicationSpecification</scope><name>WinHeight</name></member>
+      <member refid="structAIAC_1_1ApplicationSpecification_1a87ea9ee08fd670a4d413d953191ee9aa" prot="public" virt="non-virtual"><scope>AIAC::ApplicationSpecification</scope><name>WinWidth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

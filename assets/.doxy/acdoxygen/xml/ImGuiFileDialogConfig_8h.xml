@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="ImGuiFileDialogConfig_8h" kind="file" language="C++">
+    <compoundname>ImGuiFileDialogConfig.h</compoundname>
+    <includedby refid="ImGuiFileDialog_8h" local="yes">src/AIAC/UI/ImGuiFileDialog.h</includedby>
+    <invincdepgraph>
+      <node id="4">
+        <label>src/AIAC.h</label>
+        <link refid="AIAC_8h_source"/>
+      </node>
+      <node id="3">
+        <label>src/AIAC/LayerUI.h</label>
+        <link refid="LayerUI_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/AIAC/UI/ImGuiFileDialog.h</label>
+        <link refid="ImGuiFileDialog_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/AIAC/UI/ImGuiFileDialogConfig.h</label>
+        <link refid="ImGuiFileDialogConfig_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>uncomment<sp/>and<sp/>modify<sp/>defines<sp/>under<sp/>for<sp/>customize<sp/>ImGuiFileDialog</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//this<sp/>options<sp/>need<sp/>c++17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_STD_FILESYSTEM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>MAX_FILE_DIALOG_NAME_BUFFER<sp/>1024</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>MAX_PATH_BUFFER_SIZE<sp/>1024</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>slash&apos;s<sp/>buttons<sp/>in<sp/>path<sp/>cna<sp/>be<sp/>used<sp/>for<sp/>quick<sp/>select<sp/>parallles<sp/>directories</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_QUICK_PATH_SELECT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>spacing<sp/>between<sp/>button<sp/>path&apos;s<sp/>can<sp/>be<sp/>customized.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>if<sp/>disabled<sp/>the<sp/>spacing<sp/>is<sp/>defined<sp/>by<sp/>the<sp/>imgui<sp/>theme</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>define<sp/>the<sp/>space<sp/>between<sp/>path<sp/>buttons<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>CUSTOM_PATH_SPACING<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_THUMBNAILS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//the<sp/>thumbnail<sp/>generation<sp/>use<sp/>the<sp/>stb_image<sp/>and<sp/>stb_resize<sp/>lib<sp/>who<sp/>need<sp/>to<sp/>define<sp/>the<sp/>implementation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//btw<sp/>if<sp/>you<sp/>already<sp/>use<sp/>them<sp/>in<sp/>your<sp/>app,<sp/>you<sp/>can<sp/>have<sp/>compiler<sp/>error<sp/>due<sp/>to<sp/>&quot;implemntation<sp/>found<sp/>in<sp/>double&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//so<sp/>uncomment<sp/>these<sp/>line<sp/>for<sp/>prevent<sp/>the<sp/>creation<sp/>of<sp/>implementation<sp/>of<sp/>these<sp/>libs<sp/>again</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DONT_DEFINE_AGAIN__STB_IMAGE_IMPLEMENTATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DONT_DEFINE_AGAIN__STB_IMAGE_RESIZE_IMPLEMENTATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IMGUI_RADIO_BUTTON<sp/>RadioButton</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_ThumbailsList_ImageHeight<sp/>32.0f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderFileThumbnailsString<sp/>&quot;Thumbnails&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_FilesList_ButtonString<sp/>&quot;FL&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_FilesList_ButtonHelp<sp/>&quot;File<sp/>List&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_ThumbailsList_ButtonString<sp/>&quot;TL&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_ThumbailsList_ButtonHelp<sp/>&quot;Thumbnails<sp/>List&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>todo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_ThumbailsGrid_ButtonString<sp/>&quot;TG&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DisplayMode_ThumbailsGrid_ButtonHelp<sp/>&quot;Thumbnails<sp/>Grid&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_EXPLORATION_BY_KEYS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">//<sp/>this<sp/>mapping<sp/>by<sp/>default<sp/>is<sp/>for<sp/>GLFW<sp/>but<sp/>you<sp/>can<sp/>use<sp/>another</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//#include<sp/>&lt;GLFW/glfw3.h&gt;<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Up<sp/>key<sp/>for<sp/>explore<sp/>to<sp/>the<sp/>top</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IGFD_KEY_UP<sp/>ImGuiKey_UpArrow</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Down<sp/>key<sp/>for<sp/>explore<sp/>to<sp/>the<sp/>bottom</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IGFD_KEY_DOWN<sp/>ImGuiKey_DownArrow</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Enter<sp/>key<sp/>for<sp/>open<sp/>directory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IGFD_KEY_ENTER<sp/>ImGuiKey_Enter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/>BackSpace<sp/>for<sp/>comming<sp/>back<sp/>to<sp/>the<sp/>last<sp/>directory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IGFD_KEY_BACKSPACE<sp/>ImGuiKey_Backspace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//<sp/>by<sp/>ex<sp/>you<sp/>can<sp/>quit<sp/>the<sp/>dialog<sp/>by<sp/>pressing<sp/>the<sp/>key<sp/>excape</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_DIALOG_EXIT_WITH_KEY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IGFD_EXIT_KEY<sp/>ImGuiKey_Escape</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//<sp/>widget</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">//<sp/>filter<sp/>combobox<sp/>width</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>FILTER_COMBO_WIDTH<sp/>120.0f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">//<sp/>button<sp/>widget<sp/>use<sp/>for<sp/>compose<sp/>path</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IMGUI_PATH_BUTTON<sp/>ImGui::Button</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">//<sp/>standard<sp/>button</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IMGUI_BUTTON<sp/>ImGui::Button</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/>locales<sp/>string</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>createDirButtonString<sp/>&quot;+&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>resetButtonString<sp/>&quot;R&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>drivesButtonString<sp/>&quot;Drives&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>editPathButtonString<sp/>&quot;E&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>searchString<sp/>&quot;Search&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>dirEntryString<sp/>&quot;[DIR]<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>linkEntryString<sp/>&quot;[LINK]<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>fileEntryString<sp/>&quot;[FILE]<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>fileNameString<sp/>&quot;File<sp/>Name<sp/>:<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>dirNameString<sp/>&quot;Directory<sp/>Path<sp/>:&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>buttonResetSearchString<sp/>&quot;Reset<sp/>search&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>buttonDriveString<sp/>&quot;Drives&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>buttonEditPathString<sp/>&quot;Edit<sp/>path\nYou<sp/>can<sp/>also<sp/>right<sp/>click<sp/>on<sp/>path<sp/>buttons&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>buttonResetPathString<sp/>&quot;Reset<sp/>to<sp/>current<sp/>directory&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>buttonCreateDirString<sp/>&quot;Create<sp/>Directory&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>OverWriteDialogTitleString<sp/>&quot;The<sp/>file<sp/>Already<sp/>Exist<sp/>!&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>OverWriteDialogMessageString<sp/>&quot;Would<sp/>you<sp/>like<sp/>to<sp/>OverWrite<sp/>it<sp/>?&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>OverWriteDialogConfirmButtonString<sp/>&quot;Confirm&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>OverWriteDialogCancelButtonString<sp/>&quot;Cancel&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="comment">//Validation<sp/>buttons</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>okButtonString<sp/>&quot;<sp/>OK&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>okButtonWidth<sp/>0.0f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>cancelButtonString<sp/>&quot;<sp/>Cancel&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>cancelButtonWidth<sp/>0.0f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment">//alignement<sp/>[0:1],<sp/>0.0<sp/>is<sp/>left,<sp/>0.5<sp/>middle,<sp/>1.0<sp/>right,<sp/>and<sp/>other<sp/>ratios</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>okCancelButtonAlignement<sp/>0.0f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>invertOkAndCancelButtons<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="comment">//<sp/>DateTimeFormat</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="comment">//<sp/>see<sp/>strftime<sp/>functionin<sp/>&lt;ctime&gt;<sp/>for<sp/>customize</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&quot;%Y/%m/%d<sp/>%H:%M&quot;<sp/>give<sp/>2021:01:22<sp/>11:47</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&quot;%Y/%m/%d<sp/>%i:%M%p&quot;<sp/>give<sp/>2021:01:22<sp/>11:45PM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>DateTimeFormat<sp/>&quot;%Y/%m/%d<sp/>%i:%M%p&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment">//<sp/>theses<sp/>icons<sp/>will<sp/>appear<sp/>in<sp/>table<sp/>headers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_CUSTOM_SORTING_ICON</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderAscendingIcon<sp/>&quot;A|&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderDescendingIcon<sp/>&quot;D|&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderFileNameString<sp/>&quot;<sp/>File<sp/>name&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderFileTypeString<sp/>&quot;<sp/>Type&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderFileSizeString<sp/>&quot;<sp/>Size&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>tableHeaderFileDateTimeString<sp/>&quot;<sp/>Date&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>fileSizeBytes<sp/>&quot;o&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>fileSizeKiloBytes<sp/>&quot;Ko&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>fileSizeMegaBytes<sp/>&quot;Mo&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>fileSizeGigaBytes<sp/>&quot;Go&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="comment">//<sp/>default<sp/>table<sp/>sort<sp/>field<sp/>(must<sp/>be<sp/>FIELD_FILENAME,<sp/>FIELD_TYPE,<sp/>FIELD_SIZE,<sp/>FIELD_DATE<sp/>or<sp/>FIELD_THUMBNAILS)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>defaultSortField<sp/>FIELD_FILENAME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/>default<sp/>table<sp/>sort<sp/>order<sp/>for<sp/>each<sp/>field<sp/>(true<sp/>=&gt;<sp/>Descending,<sp/>false<sp/>=&gt;<sp/>Ascending)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>defaultSortOrderFilename<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>defaultSortOrderType<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>defaultSortOrderSize<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>defaultSortOrderDate<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>defaultSortOrderThumbnails<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>USE_BOOKMARK</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>bookmarkPaneWith<sp/>150.0f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>IMGUI_TOGGLE_BUTTON<sp/>ToggleButton</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>bookmarksButtonString<sp/>&quot;Bookmark&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>bookmarksButtonHelpString<sp/>&quot;Bookmark&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>addBookmarkButtonString<sp/>&quot;+&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>removeBookmarkButtonString<sp/>&quot;-&quot;</highlight></codeline>
+    </programlisting>
+    <location file="src/AIAC/UI/ImGuiFileDialogConfig.h"/>
+  </compounddef>
+</doxygen>

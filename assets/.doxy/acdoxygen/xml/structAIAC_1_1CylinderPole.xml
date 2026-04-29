@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1CylinderPole" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::CylinderPole</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1CylinderPole_1ab5437226f03c060366d057111ed119df" prot="public" static="no" mutable="no">
+        <type>GLfloat</type>
+        <definition>GLfloat AIAC::CylinderPole::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>AIAC::CylinderPole::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="124" column="17" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1CylinderPole_1a0e59716466ec4ec9506c6f853d82f11e" prot="public" static="no" mutable="no">
+        <type>GLfloat</type>
+        <definition>GLfloat AIAC::CylinderPole::z</definition>
+        <argsstring></argsstring>
+        <name>z</name>
+        <qualifiedname>AIAC::CylinderPole::z</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/GLObject.cpp" line="124" column="19" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Render/GLObject.cpp" line="123" column="5" bodyfile="src/AIAC/Render/GLObject.cpp" bodystart="123" bodyend="125"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1CylinderPole_1ab5437226f03c060366d057111ed119df" prot="public" virt="non-virtual"><scope>AIAC::CylinderPole</scope><name>x</name></member>
+      <member refid="structAIAC_1_1CylinderPole_1a0e59716466ec4ec9506c6f853d82f11e" prot="public" virt="non-virtual"><scope>AIAC::CylinderPole</scope><name>z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

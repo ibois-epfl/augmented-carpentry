@@ -1,0 +1,867 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="Application_8h" kind="file" language="C++">
+    <compoundname>Application.h</compoundname>
+    <includes refid="Camera_8h" local="yes">AIAC/Camera.h</includes>
+    <includes refid="Renderer_8h" local="yes">AIAC/Render/Renderer.h</includes>
+    <includes refid="Assert_8h" local="yes">AIAC/Assert.h</includes>
+    <includes refid="Window_8h" local="yes">AIAC/Window.h</includes>
+    <includes refid="Layer_8h" local="yes">AIAC/Layer.h</includes>
+    <includes refid="LayerSlam_8h" local="yes">AIAC/LayerSlam.h</includes>
+    <includes refid="LayerCamera_8h" local="yes">AIAC/LayerCamera.h</includes>
+    <includes refid="LayerModel_8h" local="yes">AIAC/LayerModel.h</includes>
+    <includes refid="LayerToolhead_8h" local="yes">AIAC/LayerToolhead.h</includes>
+    <includes refid="LayerFeedback_8h" local="yes">AIAC/LayerFeedback.h</includes>
+    <includes refid="EventBus_8h" local="yes">AIAC/EventSys/EventBus.h</includes>
+    <includes refid="GO_8h" local="yes">AIAC/GOSys/GO.h</includes>
+    <includedby refid="AIAC_8h" local="yes">src/AIAC.h</includedby>
+    <includedby refid="ACInfoModel_8cpp" local="yes">src/AIAC/ACInfoModel.cpp</includedby>
+    <includedby refid="Application_8cpp" local="yes">src/AIAC/Application.cpp</includedby>
+    <includedby refid="Camera_8cpp" local="yes">src/AIAC/Camera.cpp</includedby>
+    <includedby refid="ApplicationEvent_8cpp" local="yes">src/AIAC/EventSys/ApplicationEvent.cpp</includedby>
+    <includedby refid="CameraEvent_8cpp" local="yes">src/AIAC/EventSys/CameraEvent.cpp</includedby>
+    <includedby refid="SLAMEvent_8cpp" local="yes">src/AIAC/EventSys/SLAMEvent.cpp</includedby>
+    <includedby refid="CutBladeThicknessVisualizer_8cpp" local="yes">src/AIAC/Feedback/CutBladeThicknessVisualizer.cpp</includedby>
+    <includedby refid="CutChainSawFeedback_8cpp" local="yes">src/AIAC/Feedback/CutChainSawFeedback.cpp</includedby>
+    <includedby refid="CutCircularSawFeedback_8cpp" local="yes">src/AIAC/Feedback/CutCircularSawFeedback.cpp</includedby>
+    <includedby refid="CutPlaneVisualizer_8cpp" local="yes">src/AIAC/Feedback/CutPlaneVisualizer.cpp</includedby>
+    <includedby refid="HoleFeedback_8cpp" local="yes">src/AIAC/Feedback/HoleFeedback.cpp</includedby>
+    <includedby refid="GOPrimitive_8cpp" local="yes">src/AIAC/GOSys/GOPrimitive.cpp</includedby>
+    <includedby refid="LayerCamera_8cpp" local="yes">src/AIAC/LayerCamera.cpp</includedby>
+    <includedby refid="LayerCameraCalib_8cpp" local="yes">src/AIAC/LayerCameraCalib.cpp</includedby>
+    <includedby refid="LayerFeedback_8cpp" local="yes">src/AIAC/LayerFeedback.cpp</includedby>
+    <includedby refid="LayerLogRecorder_8cpp" local="yes">src/AIAC/LayerLogRecorder.cpp</includedby>
+    <includedby refid="LayerModel_8cpp" local="yes">src/AIAC/LayerModel.cpp</includedby>
+    <includedby refid="LayerSlam_8cpp" local="yes">src/AIAC/LayerSlam.cpp</includedby>
+    <includedby refid="LayerToolhead_8cpp" local="yes">src/AIAC/LayerToolhead.cpp</includedby>
+    <includedby refid="LayerUI_8cpp" local="yes">src/AIAC/LayerUI.cpp</includedby>
+    <includedby refid="LayerUtils_8cpp" local="yes">src/AIAC/LayerUtils.cpp</includedby>
+    <includedby refid="RenderAPI_8cpp" local="yes">src/AIAC/Render/RenderAPI.cpp</includedby>
+    <includedby refid="Renderer_8cpp" local="yes">src/AIAC/Render/Renderer.cpp</includedby>
+    <includedby refid="HoleToolheadAxisExporter_8cpp" local="yes">src/utils/HoleToolheadAxisExporter.cpp</includedby>
+    <includedby refid="Screenshot_8cpp" local="yes">src/utils/Screenshot.cpp</includedby>
+    <includedby refid="VideoRecorder_8cpp" local="yes">src/utils/VideoRecorder.cpp</includedby>
+    <incdepgraph>
+      <node id="56">
+        <label>ACInfoModel.h</label>
+        <link refid="ACInfoModel_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>AIAC/ACInfoToolhead.h</label>
+        <link refid="ACInfoToolhead_8h_source"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>AIAC/ACInfoToolheadManager.h</label>
+        <link refid="ACInfoToolheadManager_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/AIAC/Application.h</label>
+        <link refid="Application_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>AIAC/Assert.h</label>
+        <link refid="Assert_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>AIAC/Base.h</label>
+        <link refid="Base_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC/Camera.h</label>
+        <link refid="Camera_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>AIAC/Config.h</label>
+        <link refid="Config_8h_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>AIAC/EventSys/ApplicationEvent.h</label>
+        <link refid="ApplicationEvent_8h_source"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>AIAC/EventSys/CameraEvent.h</label>
+        <link refid="CameraEvent_8h_source"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>AIAC/EventSys/Event.h</label>
+        <link refid="Event_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>AIAC/EventSys/EventBus.h</label>
+        <link refid="EventBus_8h_source"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>AIAC/EventSys/SLAMEvent.h</label>
+        <link refid="SLAMEvent_8h_source"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>CutBladeThicknessVisualizer.h</label>
+        <link refid="CutBladeThicknessVisualizer_8h_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>AIAC/Feedback/CutChainSawFeedback.h</label>
+        <link refid="CutChainSawFeedback_8h_source"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>AIAC/Feedback/CutCircularSawFeedback.h</label>
+        <link refid="CutCircularSawFeedback_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>AIAC/Feedback/CutPlaneVisualizer.h</label>
+        <link refid="CutPlaneVisualizer_8h_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>AIAC/Feedback/FabFeedback.h</label>
+        <link refid="FabFeedback_8h_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>FeedbackVisualizer.h</label>
+        <link refid="FeedbackVisualizer_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>AIAC/Feedback/HoleFeedback.h</label>
+        <link refid="HoleFeedback_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>AIAC/GOSys/GO.h</label>
+        <link refid="GO_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>GOSys/GOPrimitive.h</label>
+        <link refid="GOPrimitive_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>AIAC/GOSys/GORegistry.h</label>
+        <link refid="GORegistry_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>GlHeader.h</label>
+        <link refid="GlHeader_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC/Image.h</label>
+        <link refid="Image_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>AIAC/Layer.h</label>
+        <link refid="Layer_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>AIAC/LayerCamera.h</label>
+        <link refid="LayerCamera_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>AIAC/LayerFeedback.h</label>
+        <link refid="LayerFeedback_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>AIAC/LayerModel.h</label>
+        <link refid="LayerModel_8h_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>AIAC/LayerSlam.h</label>
+        <link refid="LayerSlam_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>AIAC/LayerToolhead.h</label>
+        <link refid="LayerToolhead_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>AIAC/Log.h</label>
+        <link refid="Log_8h_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>AIAC/Render/GLObject.h</label>
+        <link refid="GLObject_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>AIAC/Render/Renderer.h</label>
+        <link refid="Renderer_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>AIAC/Render/Viewport.h</label>
+        <link refid="Viewport_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>ScannedModel.h</label>
+        <link refid="ScannedModel_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>AIAC/TouchMonitor.h</label>
+        <link refid="TouchMonitor_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>AIAC/Window.h</label>
+        <link refid="Window_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>utils/CircularBuffer.h</label>
+        <link refid="CircularBuffer_8h_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>utils/GeometryUtils.h</label>
+        <link refid="utils_2GeometryUtils_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>utils/Ini.h</label>
+        <link refid="Ini_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>GL/freeglut.h</label>
+      </node>
+      <node id="6">
+        <label>GL/glew.h</label>
+      </node>
+      <node id="8">
+        <label>GL/glut.h</label>
+      </node>
+      <node id="9">
+        <label>GLFW/glfw3.h</label>
+      </node>
+      <node id="40">
+        <label>algorithm</label>
+      </node>
+      <node id="12">
+        <label>backends/imgui_impl_glfw.h</label>
+      </node>
+      <node id="13">
+        <label>backends/imgui_impl_opengl3.h</label>
+      </node>
+      <node id="41">
+        <label>cctype</label>
+      </node>
+      <node id="42">
+        <label>cstdlib</label>
+      </node>
+      <node id="36">
+        <label>ctype.h</label>
+      </node>
+      <node id="78">
+        <label>eventpp/eventdispatcher.h</label>
+      </node>
+      <node id="79">
+        <label>eventpp/eventpolicies.h</label>
+      </node>
+      <node id="77">
+        <label>eventpp/eventqueue.h</label>
+      </node>
+      <node id="43">
+        <label>fstream</label>
+      </node>
+      <node id="10">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="31">
+        <label>glm/gtc/constants.hpp</label>
+      </node>
+      <node id="27">
+        <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="30">
+        <label>glm/gtx/norm.hpp</label>
+      </node>
+      <node id="59">
+        <label>glm/gtx/string_cast.hpp</label>
+      </node>
+      <node id="11">
+        <label>imgui.h</label>
+      </node>
+      <node id="29">
+        <label>iostream</label>
+      </node>
+      <node id="44">
+        <label>iterator</label>
+      </node>
+      <node id="45">
+        <label>map</label>
+      </node>
+      <node id="52">
+        <label>memory</label>
+      </node>
+      <node id="51">
+        <label>mutex</label>
+      </node>
+      <node id="57">
+        <label>pugixml.hpp</label>
+      </node>
+      <node id="46">
+        <label>set</label>
+      </node>
+      <node id="16">
+        <label>spdlog/sinks/stdout_color_sinks.h</label>
+      </node>
+      <node id="15">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="47">
+        <label>sstream</label>
+      </node>
+      <node id="53">
+        <label>stdexcept</label>
+      </node>
+      <node id="37">
+        <label>stdio.h</label>
+      </node>
+      <node id="34">
+        <label>string</label>
+      </node>
+      <node id="38">
+        <label>string.h</label>
+      </node>
+      <node id="39">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="32">
+        <label>tslam.h</label>
+      </node>
+      <node id="65">
+        <label>ttool.hh</label>
+      </node>
+      <node id="48">
+        <label>type_traits</label>
+      </node>
+      <node id="49">
+        <label>unordered_map</label>
+      </node>
+      <node id="4">
+        <label>utility</label>
+      </node>
+      <node id="18">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/AIAC.h</label>
+        <link refid="AIAC_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/AIAC/Application.h</label>
+        <link refid="Application_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structAIAC_1_1ApplicationSpecification" prot="public">AIAC::ApplicationSpecification</innerclass>
+    <innerclass refid="classAIAC_1_1Application" prot="public">AIAC::Application</innerclass>
+    <innernamespace refid="namespaceAIAC">AIAC</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="Application_8h_1a1938e5a334083e9fdd6b9334e0964210" prot="public" static="no">
+        <name>AIAC_APP</name>
+        <initializer>AIAC::Application::GetInstance()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="127" column="9" bodyfile="src/AIAC/Application.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="Application_8h_1abee9e0b3fa83da81f2182f7a0c42f112" prot="public" static="no">
+        <name>AIAC_EBUS</name>
+        <initializer>AIAC_APP.GetEventBus()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="128" column="9" bodyfile="src/AIAC/Application.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="Application_8h_1a5750c33421656029c3534e0acea3cd03" prot="public" static="no">
+        <name>AIAC_GOREG</name>
+        <initializer>AIAC_APP.GetGORegistry()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="129" column="9" bodyfile="src/AIAC/Application.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<sp/>BEGINNING<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>source<sp/>file,<sp/>along<sp/>with<sp/>its<sp/>associated<sp/>content,<sp/>was<sp/>authored<sp/>by</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Andrea<sp/>Settimi,<sp/>Hong-Bin<sp/>Yang,<sp/>Naravich<sp/>Chutisilp,<sp/>and<sp/>numerous<sp/>other</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>contributors.<sp/>The<sp/>code<sp/>was<sp/>originally<sp/>developed<sp/>at<sp/>the<sp/>Laboratory<sp/>for</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Timber<sp/>Construction<sp/>(IBOIS,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand)<sp/>at<sp/>the<sp/>School<sp/>of<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Architecture,<sp/>Civil<sp/>and<sp/>Environmental<sp/>Engineering<sp/>(ENAC)<sp/>at<sp/>the<sp/>Swiss</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Federal<sp/>Institute<sp/>of<sp/>Technology<sp/>in<sp/>Lausanne<sp/>(EPFL)<sp/>for<sp/>the<sp/>Doctoral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Research<sp/>&quot;Augmented<sp/>Carpentry&quot;<sp/>(PhD<sp/>researcher:<sp/>Andrea<sp/>Settimi,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>co-director:<sp/>Dr.<sp/>Julien<sp/>Gamerro,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Although<sp/>the<sp/>entire<sp/>repository<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>GPL<sp/>license,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>particular<sp/>source<sp/>files<sp/>may<sp/>also<sp/>be<sp/>used<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MIT<sp/>license.<sp/>By<sp/>accessing<sp/>or<sp/>using<sp/>this<sp/>file,<sp/>you<sp/>agree<sp/>to<sp/>the<sp/>following:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>1.<sp/>You<sp/>may<sp/>reproduce,<sp/>modify,<sp/>and<sp/>distribute<sp/>this<sp/>file<sp/>in<sp/>accordance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>with<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>MIT<sp/>license.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>You<sp/>must<sp/>retain<sp/>this<sp/>legal<sp/>notice<sp/>in<sp/>all<sp/>copies<sp/>or<sp/>substantial</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>portions<sp/>of<sp/>this<sp/>file.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>This<sp/>file<sp/>is<sp/>provided<sp/>&quot;AS<sp/>IS,&quot;<sp/>without<sp/>any<sp/>express<sp/>or<sp/>implied</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>warranties,<sp/>including<sp/>but<sp/>not<sp/>limited<sp/>to<sp/>the<sp/>implied<sp/>warranties<sp/>of</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>merchantability<sp/>and<sp/>fitness<sp/>for<sp/>a<sp/>particular<sp/>purpose.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>you<sp/>cannot<sp/>or<sp/>will<sp/>not<sp/>comply<sp/>with<sp/>the<sp/>above<sp/>conditions,<sp/>you<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>not<sp/>permitted<sp/>to<sp/>use<sp/>this<sp/>file.<sp/>By<sp/>proceeding,<sp/>you<sp/>acknowledge<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>accept<sp/>all<sp/>terms<sp/>and<sp/>conditions<sp/>herein.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<sp/>END<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Camera.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Render/Renderer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Assert.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Window.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Layer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/LayerSlam.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/LayerCamera.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/LayerModel.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/LayerToolhead.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/LayerFeedback.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/EventSys/EventBus.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/GOSys/GO.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">AIAC</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55" refid="structAIAC_1_1ApplicationSpecification" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>Name;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>WinWidth;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>WinHeight;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsResizable;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>VSync;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImVec4<sp/>WindowBackColor;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classAIAC_1_1Application" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAIAC_1_1Application" kindref="compound">Application</ref></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1Application" kindref="compound">Application</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref>&amp;<sp/>appSpec);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1Application" kindref="compound">~Application</ref>();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Run();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Close();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PushLayer()</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_base_of&lt;AIAC::Layer,<sp/>T&gt;::value,<sp/></highlight><highlight class="stringliteral">&quot;Pushed<sp/>type<sp/>is<sp/>not<sp/>subclass<sp/>of<sp/>Layer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;T&gt;<sp/>layer<sp/>=<sp/>std::make_shared&lt;T&gt;();</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_LayerMap[</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T)]<sp/>=<sp/>layer;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_LayerStack.emplace_back(layer);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layer-&gt;OnAttach();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;T&gt;<sp/>GetLayer()</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_base_of&lt;AIAC::Layer,<sp/>T&gt;::value,<sp/></highlight><highlight class="stringliteral">&quot;Pushed<sp/>type<sp/>is<sp/>not<sp/>subclass<sp/>of<sp/>Layer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(std::dynamic_pointer_cast&lt;T&gt;(m_LayerMap[</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T)]))</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::dynamic_pointer_cast&lt;T&gt;(m_LayerMap[</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T)]);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AIAC_ERROR(</highlight><highlight class="stringliteral">&quot;Layer<sp/>not<sp/>found!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AIAC_BREAK();</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1Window" kindref="compound">AIAC::Window</ref>*&amp;<sp/>GetWindow()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Window;<sp/>}<sp/><sp/></highlight><highlight class="comment">//FIXME:<sp/>bad<sp/>practice<sp/>to<sp/>return<sp/>reference<sp/>of<sp/>internal<sp/>variable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1Renderer" kindref="compound">Renderer</ref>*&amp;<sp/>GetRenderer()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Renderer;<sp/>}<sp/><sp/></highlight><highlight class="comment">//FIXME:<sp/>bad<sp/>practice<sp/>to<sp/>return<sp/>reference<sp/>of<sp/>internal<sp/>variable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1EventBus" kindref="compound">EventBus</ref>*&amp;<sp/>GetEventBus()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_EventBus;<sp/>}<sp/><sp/></highlight><highlight class="comment">//FIXME:<sp/>bad<sp/>practice<sp/>to<sp/>return<sp/>reference<sp/>of<sp/>internal<sp/>variable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1GORegistry" kindref="compound">GORegistry</ref>*<sp/>GetGORegistry()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_GORegistry;<sp/>}<sp/><sp/></highlight><highlight class="comment">//FIXME:<sp/>bad<sp/>practice<sp/>to<sp/>return<sp/>reference<sp/>of<sp/>internal<sp/>variable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1Application" kindref="compound">Application</ref>&amp;<sp/>GetInstance()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*s_Instance;<sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref>&amp;<sp/>GetSpecification()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_AppSpec;<sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Init();</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Shutdown();</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref><sp/>m_AppSpec;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1Window" kindref="compound">Window</ref>*<sp/>m_Window;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1EventBus" kindref="compound">EventBus</ref>*<sp/>m_EventBus;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1Renderer" kindref="compound">Renderer</ref>*<sp/>m_Renderer;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAIAC_1_1GORegistry" kindref="compound">GORegistry</ref>*<sp/>m_GORegistry;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_IsRunning<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::shared_ptr&lt;AIAC::Layer&gt;&gt;<sp/>m_LayerStack;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::type_index,<sp/>std::shared_ptr&lt;AIAC::Layer&gt;&gt;<sp/>m_LayerMap;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classAIAC_1_1Application" kindref="compound">Application</ref>*<sp/>s_Instance;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_APP<sp/>AIAC::Application::GetInstance()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_EBUS<sp/>AIAC_APP.GetEventBus()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_GOREG<sp/>AIAC_APP.GetGORegistry()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/AIAC/Application.h"/>
+  </compounddef>
+</doxygen>

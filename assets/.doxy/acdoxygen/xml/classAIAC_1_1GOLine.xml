@@ -1,0 +1,636 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GOLine" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::GOLine</compoundname>
+    <basecompoundref refid="classAIAC_1_1GOPrimitive" prot="public" virt="non-virtual">AIAC::GOPrimitive</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GOLine_1ab8d28390ade4b47fff5c4ae3586df7a1" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOLine::m_PStart</definition>
+        <argsstring></argsstring>
+        <name>m_PStart</name>
+        <qualifiedname>AIAC::GOLine::m_PStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="315" column="17" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="315" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOLine_1a6cd6c38c2126c19d07e4c1c04ef9fd51" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOLine::m_PEnd</definition>
+        <argsstring></argsstring>
+        <name>m_PEnd</name>
+        <qualifiedname>AIAC::GOLine::m_PEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="316" column="17" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="316" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1GOLine_1a90732baa5f09060a094a6935f5ad697b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class GOPoint</definition>
+        <argsstring></argsstring>
+        <name>GOPoint</name>
+        <qualifiedname>AIAC::GOLine::GOPoint</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="318" column="18" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="318" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a45bc47769dd448c9879a605bd033ded5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOLine::GOLine</definition>
+        <argsstring>()</argsstring>
+        <name>GOLine</name>
+        <qualifiedname>AIAC::GOLine::GOLine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="237" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="134" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a6dc276bcb2b4aeb84a5819f47b459bce" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOLine::GOLine</definition>
+        <argsstring>(GOPoint p1, GOPoint p2, float weight=GOWeight::Default)</argsstring>
+        <name>GOLine</name>
+        <qualifiedname>AIAC::GOLine::GOLine</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>p2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+          <defval>GOWeight::Default</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="238" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="139" bodyend="144"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a0a5f6e6f5f99f643090d985b865e9e99" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOLine &gt; AIAC::GOLine::Add</definition>
+        <argsstring>()</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOLine::Add</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="241" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="146" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a2304c5308a68a1a4b032c5276f10f005" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOLine &gt; AIAC::GOLine::Add</definition>
+        <argsstring>(GOPoint p1, GOPoint p2, float weight=GOWeight::Default)</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOLine::Add</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>p2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+          <defval>GOWeight::Default</defval>
+        </param>
+        <briefdescription>
+<para>Add <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> to the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First point of the line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second point of the line. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weight of the line. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>uint32_t Id of the line. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="250" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="153" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a0c792c5e2b226f5c2b38cefc16b150b0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOLine &gt; AIAC::GOLine::Get</definition>
+        <argsstring>(const uint32_t &amp;id)</argsstring>
+        <name>Get</name>
+        <qualifiedname>AIAC::GOLine::Get</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="254" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1aaf34915c25d120381a40bc65e97ff9c9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GOLine &gt; &gt; AIAC::GOLine::GetAll</definition>
+        <argsstring>()</argsstring>
+        <name>GetAll</name>
+        <qualifiedname>AIAC::GOLine::GetAll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="255" column="28" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="166" bodyend="169"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a9471281361e03f6ef3cc86d4180ddb51" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::GOLine::~GOLine</definition>
+        <argsstring>()=default</argsstring>
+        <name>~GOLine</name>
+        <qualifiedname>AIAC::GOLine::~GOLine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="252" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a76aa10148cfb24cfeb40bfed899a51c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOLine::GetPStart</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPStart</name>
+        <qualifiedname>AIAC::GOLine::GetPStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="257" column="24" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="257" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a5a647dba162419c4ad520a61873dd5ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOLine::GetPEnd</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPEnd</name>
+        <qualifiedname>AIAC::GOLine::GetPEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="258" column="24" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="258" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a966883fa88e2621e705ec0e5637b03a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::GOLine::GetLength</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLength</name>
+        <qualifiedname>AIAC::GOLine::GetLength</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="260" column="22" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="260" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a7fc76630c9e554c47e7d771470a9b295" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::ExtendFromStart</definition>
+        <argsstring>(float length)</argsstring>
+        <name>ExtendFromStart</name>
+        <qualifiedname>AIAC::GOLine::ExtendFromStart</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="261" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="261" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a8f3233bfbb80f3eafb12ac05b9892c3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::ExtendFromEnd</definition>
+        <argsstring>(float length)</argsstring>
+        <name>ExtendFromEnd</name>
+        <qualifiedname>AIAC::GOLine::ExtendFromEnd</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="262" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="262" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1aacef5d3d6df472a83b9e1817a3a20778" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::ExtendBothEnds</definition>
+        <argsstring>(float length)</argsstring>
+        <name>ExtendBothEnds</name>
+        <qualifiedname>AIAC::GOLine::ExtendBothEnds</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="263" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="263" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1ae2bd08c7e88b96a40c549f3222531156" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::GOLine::GetMidPointValues</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMidPointValues</name>
+        <qualifiedname>AIAC::GOLine::GetMidPointValues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="265" column="26" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="265" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a51d6ea50282cbff3464cd740c1b29c4d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        <definition>GOPoint AIAC::GOLine::GetMidPoint</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMidPoint</name>
+        <qualifiedname>AIAC::GOLine::GetMidPoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="266" column="24" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="266" bodyend="266"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1ab5a031371cbbb8bc710784752f0e38fc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::GOLine::GetNormalValues</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNormalValues</name>
+        <qualifiedname>AIAC::GOLine::GetNormalValues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="268" column="26" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="268" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a80b40a258279bef5ce95cb0285c125a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::SetPStart</definition>
+        <argsstring>(GOPoint pStart)</argsstring>
+        <name>SetPStart</name>
+        <qualifiedname>AIAC::GOLine::SetPStart</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>pStart</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="270" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="270" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a383b8f3e35c0018ec12fa7340871d9f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::SetPEnd</definition>
+        <argsstring>(GOPoint pEnd)</argsstring>
+        <name>SetPEnd</name>
+        <qualifiedname>AIAC::GOLine::SetPEnd</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>pEnd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="271" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="271" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a6fb71dd68b7e1883c8a83934cbe66a47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::SetPts</definition>
+        <argsstring>(GOPoint pStart, GOPoint pEnd)</argsstring>
+        <name>SetPts</name>
+        <qualifiedname>AIAC::GOLine::SetPts</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>pStart</declname>
+        </param>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+          <declname>pEnd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="272" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="272" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a65d93e86b72ec58fa007e92bee518d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::GOLine::ComputeAngle</definition>
+        <argsstring>(std::shared_ptr&lt; GOLine &gt; ptrGO2)</argsstring>
+        <name>ComputeAngle</name>
+        <qualifiedname>AIAC::GOLine::ComputeAngle</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+          <declname>ptrGO2</declname>
+        </param>
+        <briefdescription>
+<para>Compute the angle between the current line object and another one. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptrGO2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the second line </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>float the angle in degrees </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="280" column="15" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="171" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a8c5413ace38ca1b4b197d3c65f326ac9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::GOLine::ComputeSignedAngle</definition>
+        <argsstring>(std::shared_ptr&lt; GOLine &gt; ptrGO2)</argsstring>
+        <name>ComputeSignedAngle</name>
+        <qualifiedname>AIAC::GOLine::ComputeSignedAngle</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+          <declname>ptrGO2</declname>
+        </param>
+        <briefdescription>
+<para>Compute the angle between the current line object and another one with a sign. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptrGO2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the second line </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>float the angle in degrees </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="288" column="15" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="179" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1acb2c1f0b2b32d04e5d5cd54e47e1b511" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::Transform</definition>
+        <argsstring>(const glm::mat4x4 &amp;transformMat)</argsstring>
+        <name>Transform</name>
+        <qualifiedname>AIAC::GOLine::Transform</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1ab285335f31d4c2ddf2046fe6f73b709c">Transform</reimplements>
+        <param>
+          <type>const glm::mat4x4 &amp;</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="290" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="290" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a04fbccfe53381ce3eb703900db47eb27" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::Translate</definition>
+        <argsstring>(const glm::vec3 &amp;translation)</argsstring>
+        <name>Translate</name>
+        <qualifiedname>AIAC::GOLine::Translate</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a8573fe4c64e115849154e927ad15885f">Translate</reimplements>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="296" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="296" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a4c4e4697581029ba47d6ec7a098ecfce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::SetValueFrom</definition>
+        <argsstring>(const std::shared_ptr&lt; GOPrimitive &gt; &amp;ptrGO)</argsstring>
+        <name>SetValueFrom</name>
+        <qualifiedname>AIAC::GOLine::SetValueFrom</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a2d3133021181776c1a451c2ec2d80a8b">SetValueFrom</reimplements>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref> &gt; &amp;</type>
+          <declname>ptrGO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="302" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="302" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOLine_1a7d339e3aee763a11a7fca9bdabdae26a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOLine::InitGLObject</definition>
+        <argsstring>()</argsstring>
+        <name>InitGLObject</name>
+        <qualifiedname>AIAC::GOLine::InitGLObject</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a49f3cf45d5ff50ffad69cc36b14a0e49">InitGLObject</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="312" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="190" bodyend="197"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::GOLine</label>
+        <link refid="classAIAC_1_1GOLine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::GOLine</label>
+        <link refid="classAIAC_1_1GOLine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="234" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="235" bodyend="319"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GOLine_1a0a5f6e6f5f99f643090d985b865e9e99" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOLine_1a2304c5308a68a1a4b032c5276f10f005" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a4aefd9b3b531cf77e3346bda5a4893e9" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>ClearGLObject</name></member>
+      <member refid="classAIAC_1_1GOLine_1a65d93e86b72ec58fa007e92bee518d6f" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>ComputeAngle</name></member>
+      <member refid="classAIAC_1_1GOLine_1a8c5413ace38ca1b4b197d3c65f326ac9" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>ComputeSignedAngle</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa9ddd2c2904d1e9f5e1755c4a58bf6a1" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>Draw</name></member>
+      <member refid="classAIAC_1_1GOLine_1aacef5d3d6df472a83b9e1817a3a20778" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>ExtendBothEnds</name></member>
+      <member refid="classAIAC_1_1GOLine_1a8f3233bfbb80f3eafb12ac05b9892c3d" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>ExtendFromEnd</name></member>
+      <member refid="classAIAC_1_1GOLine_1a7fc76630c9e554c47e7d771470a9b295" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>ExtendFromStart</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a13785fd54f841dae10c39df388038c4d" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GenerateId</name></member>
+      <member refid="classAIAC_1_1GOLine_1a0c792c5e2b226f5c2b38cefc16b150b0" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>Get</name></member>
+      <member refid="classAIAC_1_1GOLine_1aaf34915c25d120381a40bc65e97ff9c9" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetAll</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1af06b5575beccb6332e48b928a287a187" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1472f5ce4a3641dcca7d450c69d70ef8" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetId</name></member>
+      <member refid="classAIAC_1_1GOLine_1a966883fa88e2621e705ec0e5637b03a5" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetLength</name></member>
+      <member refid="classAIAC_1_1GOLine_1a51d6ea50282cbff3464cd740c1b29c4d" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetMidPoint</name></member>
+      <member refid="classAIAC_1_1GOLine_1ae2bd08c7e88b96a40c549f3222531156" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetMidPointValues</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aebac62a9e1b69ec1cfd48644c534aaf2" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1GOLine_1ab5a031371cbbb8bc710784752f0e38fc" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetNormalValues</name></member>
+      <member refid="classAIAC_1_1GOLine_1a5a647dba162419c4ad520a61873dd5ea" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetPEnd</name></member>
+      <member refid="classAIAC_1_1GOLine_1a76aa10148cfb24cfeb40bfed899a51c1" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetPStart</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a80f79bbd88ca3fe21a0f42fb34255477" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetState</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae9f8303699cea4b8428689317591f12f" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aeb1d8413c37e371533623c88f6fdfba3" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa8d20248ffae40c3e3ac38484e40196c" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GetWeight</name></member>
+      <member refid="classAIAC_1_1GOLine_1a45bc47769dd448c9879a605bd033ded5" prot="private" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GOLine</name></member>
+      <member refid="classAIAC_1_1GOLine_1a6dc276bcb2b4aeb84a5819f47b459bce" prot="private" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GOLine</name></member>
+      <member refid="classAIAC_1_1GOLine_1a90732baa5f09060a094a6935f5ad697b" prot="private" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GOPoint</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1e4561ed741888f900532d421054be6b" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>GOPrimitive</name></member>
+      <member refid="classAIAC_1_1GOLine_1a7d339e3aee763a11a7fca9bdabdae26a" prot="public" virt="virtual"><scope>AIAC::GOLine</scope><name>InitGLObject</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a3297dec73761f03389616ecf8499e45f" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>IsVisible</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65d77218ad304b17e54ec2fbc9233f8a" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_Color</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2e707608c9ed77c2f06a643903999460" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_GLObjects</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a50dbae076472c12401fad78575051881" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_Id</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a68c8ba133a8540aa164e5ebc6e6e08f0" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_IsVisible</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae0cb08a0ec3b500e2703b2c77c72f4a2" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_Name</name></member>
+      <member refid="classAIAC_1_1GOLine_1a6cd6c38c2126c19d07e4c1c04ef9fd51" prot="private" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_PEnd</name></member>
+      <member refid="classAIAC_1_1GOLine_1ab8d28390ade4b47fff5c4ae3586df7a1" prot="private" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_PStart</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a18ba99dae0b751e36cde6d65b520c8a4" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_State</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac729389e9458753cf5c6c9f4d32fa4b9" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac1f23dc0823236ae2b364840cae808ed" prot="protected" virt="non-virtual"><scope>AIAC::GOLine</scope><name>m_Weight</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2f842878f11acd94deee26ba899497a5" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac362718e97f2fe212f6d4af92276d773" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aba89b33e74ef2bdec4d8ee1626d8db3d" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a39f1285ba9467e1e7c486eac632bc425" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetName</name></member>
+      <member refid="classAIAC_1_1GOLine_1a383b8f3e35c0018ec12fa7340871d9f7" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetPEnd</name></member>
+      <member refid="classAIAC_1_1GOLine_1a80b40a258279bef5ce95cb0285c125a0" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetPStart</name></member>
+      <member refid="classAIAC_1_1GOLine_1a6fb71dd68b7e1883c8a83934cbe66a47" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetPts</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65a7560b8827c82a121bff95013a2f40" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetState</name></member>
+      <member refid="classAIAC_1_1GOLine_1a4c4e4697581029ba47d6ec7a098ecfce" prot="public" virt="virtual"><scope>AIAC::GOLine</scope><name>SetValueFrom</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a773a24e22df1e14c85c11af52e3b8104" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a641433f07a170345a50809dd9757ad75" prot="public" virt="non-virtual"><scope>AIAC::GOLine</scope><name>SetWeight</name></member>
+      <member refid="classAIAC_1_1GOLine_1acb2c1f0b2b32d04e5d5cd54e47e1b511" prot="public" virt="virtual"><scope>AIAC::GOLine</scope><name>Transform</name></member>
+      <member refid="classAIAC_1_1GOLine_1a04fbccfe53381ce3eb703900db47eb27" prot="public" virt="virtual"><scope>AIAC::GOLine</scope><name>Translate</name></member>
+      <member refid="classAIAC_1_1GOLine_1a9471281361e03f6ef3cc86d4180ddb51" prot="public" virt="virtual"><scope>AIAC::GOLine</scope><name>~GOLine</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a04fbe45113efff131e26fa3701965988" prot="public" virt="virtual"><scope>AIAC::GOLine</scope><name>~GOPrimitive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

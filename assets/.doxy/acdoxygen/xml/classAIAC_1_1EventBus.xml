@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1EventBus" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::EventBus</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1EventBus_1abbf1d3f7a14ef9a551fb22c6ba984765" prot="private" static="no" mutable="no">
+        <type>EQ</type>
+        <definition>EQ AIAC::EventBus::m_EventQueue</definition>
+        <argsstring></argsstring>
+        <name>m_EventQueue</name>
+        <qualifiedname>AIAC::EventBus::m_EventQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="99" column="12" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1EventBus_1aea08f205f02bbf5cc47b24c0bbc391a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::EventBus::~EventBus</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EventBus</name>
+        <qualifiedname>AIAC::EventBus::~EventBus</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="48" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1EventBus_1aaf203ac39d61eeb3ee6f555cd3d7dfb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::EventBus::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::EventBus::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="50" column="14" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="50" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1EventBus_1a91992c4f585b0f54f7e5ab0034a3b9cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::EventBus::EnqueueEvent</definition>
+        <argsstring>(const EventPointer &amp;sharedPtrEvent)</argsstring>
+        <name>EnqueueEvent</name>
+        <qualifiedname>AIAC::EventBus::EnqueueEvent</qualifiedname>
+        <param>
+          <type>const EventPointer &amp;</type>
+          <declname>sharedPtrEvent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="82" column="14" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="82" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1EventBus_1acb55e76d6b5f77f1e945a2af12336087" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::EventBus::ProcessQueue</definition>
+        <argsstring>()</argsstring>
+        <name>ProcessQueue</name>
+        <qualifiedname>AIAC::EventBus::ProcessQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="88" column="14" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1EventBus_1adf751e829778bdafc153c92451bcd231" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::EventBus::DispatchEvent</definition>
+        <argsstring>(const EventPointer &amp;sharedPtrEvent)</argsstring>
+        <name>DispatchEvent</name>
+        <qualifiedname>AIAC::EventBus::DispatchEvent</qualifiedname>
+        <param>
+          <type>const EventPointer &amp;</type>
+          <declname>sharedPtrEvent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="91" column="14" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="91" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1EventBus_1a87d3f2dc88db4696165b1c73c09ec1b7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::EventBus::IsEventQueueEmpty</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEventQueueEmpty</name>
+        <qualifiedname>AIAC::EventBus::IsEventQueueEmpty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/EventBus.h" line="96" column="21" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="96" bodyend="96"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/EventSys/EventBus.h" line="45" column="5" bodyfile="src/AIAC/EventSys/EventBus.h" bodystart="46" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1EventBus_1adf751e829778bdafc153c92451bcd231" prot="public" virt="non-virtual"><scope>AIAC::EventBus</scope><name>DispatchEvent</name></member>
+      <member refid="classAIAC_1_1EventBus_1a91992c4f585b0f54f7e5ab0034a3b9cf" prot="public" virt="non-virtual"><scope>AIAC::EventBus</scope><name>EnqueueEvent</name></member>
+      <member refid="classAIAC_1_1EventBus_1aaf203ac39d61eeb3ee6f555cd3d7dfb8" prot="public" virt="non-virtual"><scope>AIAC::EventBus</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1EventBus_1a87d3f2dc88db4696165b1c73c09ec1b7" prot="public" virt="non-virtual"><scope>AIAC::EventBus</scope><name>IsEventQueueEmpty</name></member>
+      <member refid="classAIAC_1_1EventBus_1abbf1d3f7a14ef9a551fb22c6ba984765" prot="private" virt="non-virtual"><scope>AIAC::EventBus</scope><name>m_EventQueue</name></member>
+      <member refid="classAIAC_1_1EventBus_1acb55e76d6b5f77f1e945a2af12336087" prot="public" virt="non-virtual"><scope>AIAC::EventBus</scope><name>ProcessQueue</name></member>
+      <member refid="classAIAC_1_1EventBus_1aea08f205f02bbf5cc47b24c0bbc391a9" prot="public" virt="non-virtual"><scope>AIAC::EventBus</scope><name>~EventBus</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

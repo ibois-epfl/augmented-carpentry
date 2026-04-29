@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="Assert_8h" kind="file" language="C++">
+    <compoundname>Assert.h</compoundname>
+    <includes refid="Log_8h" local="yes">AIAC/Log.h</includes>
+    <includes refid="Base_8h" local="yes">AIAC/Base.h</includes>
+    <includedby refid="AIAC_8h" local="yes">src/AIAC.h</includedby>
+    <includedby refid="Application_8h" local="yes">src/AIAC/Application.h</includedby>
+    <includedby refid="Base_8h" local="yes">src/AIAC/Base.h</includedby>
+    <includedby refid="Config_8h" local="yes">src/AIAC/Config.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/AIAC/Assert.h</label>
+        <link refid="Assert_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>AIAC/Base.h</label>
+        <link refid="Base_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC/Log.h</label>
+        <link refid="Log_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>spdlog/sinks/stdout_color_sinks.h</label>
+      </node>
+      <node id="3">
+        <label>spdlog/spdlog.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/AIAC.h</label>
+        <link refid="AIAC_8h_source"/>
+      </node>
+      <node id="11">
+        <label>src/AIAC/ACInfoModel.h</label>
+        <link refid="ACInfoModel_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>src/AIAC/ACInfoToolhead.h</label>
+        <link refid="ACInfoToolhead_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>src/AIAC/ACInfoToolheadManager.h</label>
+        <link refid="ACInfoToolheadManager_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/AIAC/Application.h</label>
+        <link refid="Application_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/AIAC/Assert.h</label>
+        <link refid="Assert_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/AIAC/Base.h</label>
+        <link refid="Base_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>src/AIAC/Config.h</label>
+        <link refid="Config_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>src/AIAC/DLoader.h</label>
+        <link refid="DLoader_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/AIAC/EventSys/ApplicationEvent.h</label>
+        <link refid="ApplicationEvent_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/AIAC/EventSys/CameraEvent.h</label>
+        <link refid="CameraEvent_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/AIAC/EventSys/Event.h</label>
+        <link refid="Event_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/AIAC/EventSys/EventBus.h</label>
+        <link refid="EventBus_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/AIAC/EventSys/SLAMEvent.h</label>
+        <link refid="SLAMEvent_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>src/AIAC/Feedback/CutBladeThicknessVisualizer.h</label>
+        <link refid="CutBladeThicknessVisualizer_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>src/AIAC/Feedback/CutChainSawFeedback.h</label>
+        <link refid="CutChainSawFeedback_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>src/AIAC/Feedback/CutCircularSawFeedback.h</label>
+        <link refid="CutCircularSawFeedback_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>src/AIAC/Feedback/CutPlaneVisualizer.h</label>
+        <link refid="CutPlaneVisualizer_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>src/AIAC/Feedback/FabFeedback.h</label>
+        <link refid="FabFeedback_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>src/AIAC/Feedback/FeedbackVisualizer.h</label>
+        <link refid="FeedbackVisualizer_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>src/AIAC/Feedback/HoleFeedback.h</label>
+        <link refid="HoleFeedback_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>src/AIAC/GOSys/GO.h</label>
+        <link refid="GO_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/AIAC/GOSys/GOPrimitive.h</label>
+        <link refid="GOPrimitive_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>src/AIAC/GOSys/GORegistry.h</label>
+        <link refid="GORegistry_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>src/AIAC/LayerFeedback.h</label>
+        <link refid="LayerFeedback_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>src/AIAC/LayerModel.h</label>
+        <link refid="LayerModel_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>src/AIAC/LayerSlam.h</label>
+        <link refid="LayerSlam_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>src/AIAC/LayerToolhead.h</label>
+        <link refid="LayerToolhead_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>src/AIAC/LayerUI.h</label>
+        <link refid="LayerUI_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>src/AIAC/LayerUtils.h</label>
+        <link refid="LayerUtils_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>src/AIAC/Render/RenderAPI.h</label>
+        <link refid="RenderAPI_8h_source"/>
+      </node>
+      <node id="29">
+        <label>src/AIAC/ScannedModel.h</label>
+        <link refid="ScannedModel_8h_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>src/utils/HoleToolheadAxisExporter.h</label>
+        <link refid="HoleToolheadAxisExporter_8h_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="Assert_8h_1a726720a5785e844ef18dd8bf9ee3917d" prot="public" static="no">
+        <name>AIAC_ASSERT</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Assert.h" line="51" column="14" bodyfile="src/AIAC/Assert.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<sp/>BEGINNING<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>source<sp/>file,<sp/>along<sp/>with<sp/>its<sp/>associated<sp/>content,<sp/>was<sp/>authored<sp/>by</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Andrea<sp/>Settimi,<sp/>Hong-Bin<sp/>Yang,<sp/>Naravich<sp/>Chutisilp,<sp/>and<sp/>numerous<sp/>other</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>contributors.<sp/>The<sp/>code<sp/>was<sp/>originally<sp/>developed<sp/>at<sp/>the<sp/>Laboratory<sp/>for</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Timber<sp/>Construction<sp/>(IBOIS,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand)<sp/>at<sp/>the<sp/>School<sp/>of<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Architecture,<sp/>Civil<sp/>and<sp/>Environmental<sp/>Engineering<sp/>(ENAC)<sp/>at<sp/>the<sp/>Swiss</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Federal<sp/>Institute<sp/>of<sp/>Technology<sp/>in<sp/>Lausanne<sp/>(EPFL)<sp/>for<sp/>the<sp/>Doctoral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Research<sp/>&quot;Augmented<sp/>Carpentry&quot;<sp/>(PhD<sp/>researcher:<sp/>Andrea<sp/>Settimi,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>co-director:<sp/>Dr.<sp/>Julien<sp/>Gamerro,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Although<sp/>the<sp/>entire<sp/>repository<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>GPL<sp/>license,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>particular<sp/>source<sp/>files<sp/>may<sp/>also<sp/>be<sp/>used<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MIT<sp/>license.<sp/>By<sp/>accessing<sp/>or<sp/>using<sp/>this<sp/>file,<sp/>you<sp/>agree<sp/>to<sp/>the<sp/>following:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>1.<sp/>You<sp/>may<sp/>reproduce,<sp/>modify,<sp/>and<sp/>distribute<sp/>this<sp/>file<sp/>in<sp/>accordance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>with<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>MIT<sp/>license.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>You<sp/>must<sp/>retain<sp/>this<sp/>legal<sp/>notice<sp/>in<sp/>all<sp/>copies<sp/>or<sp/>substantial</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>portions<sp/>of<sp/>this<sp/>file.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>This<sp/>file<sp/>is<sp/>provided<sp/>&quot;AS<sp/>IS,&quot;<sp/>without<sp/>any<sp/>express<sp/>or<sp/>implied</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>warranties,<sp/>including<sp/>but<sp/>not<sp/>limited<sp/>to<sp/>the<sp/>implied<sp/>warranties<sp/>of</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>merchantability<sp/>and<sp/>fitness<sp/>for<sp/>a<sp/>particular<sp/>purpose.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>you<sp/>cannot<sp/>or<sp/>will<sp/>not<sp/>comply<sp/>with<sp/>the<sp/>above<sp/>conditions,<sp/>you<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>not<sp/>permitted<sp/>to<sp/>use<sp/>this<sp/>file.<sp/>By<sp/>proceeding,<sp/>you<sp/>acknowledge<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>accept<sp/>all<sp/>terms<sp/>and<sp/>conditions<sp/>herein.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<sp/>END<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/Base.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>AIAC_ENABLE_ASSERTS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Alteratively<sp/>we<sp/>could<sp/>use<sp/>the<sp/>same<sp/>&quot;default&quot;<sp/>message<sp/>for<sp/>both<sp/>&quot;WITH_MSG&quot;<sp/>and<sp/>&quot;NO_MSG&quot;<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>provide<sp/>support<sp/>for<sp/>custom<sp/>formatting<sp/>by<sp/>concatenating<sp/>the<sp/>formatting<sp/>string<sp/>instead<sp/>of<sp/>having<sp/>the<sp/>format<sp/>inside<sp/>the<sp/>default<sp/>message</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_INTERNAL_ASSERT_IMPL(type,<sp/>check,<sp/>msg,<sp/>...)<sp/>{<sp/>if(!(check))<sp/>{<sp/>(msg,<sp/>__VA_ARGS__);<sp/>AIAC_BREAK();<sp/>}<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_INTERNAL_ASSERT_WITH_MSG(type,<sp/>check,<sp/>...)<sp/>AIAC_INTERNAL_ASSERT_IMPL(type,<sp/>check,<sp/>&quot;Assertion<sp/>failed:<sp/>{0}&quot;,<sp/>__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_INTERNAL_ASSERT_NO_MSG(type,<sp/>check)<sp/>AIAC_INTERNAL_ASSERT_IMPL(type,<sp/>check,<sp/>&quot;Assertion<sp/>&apos;{0}&apos;<sp/>failed<sp/>at<sp/>{1}:{2}&quot;,<sp/>AIAC_STRINGIFY_MACRO(check),<sp/>std::filesystem::path(__FILE__).filename().string(),<sp/>__LINE__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_INTERNAL_ASSERT_GET_MACRO_NAME(arg1,<sp/>arg2,<sp/>macro,<sp/>...)<sp/>macro</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_INTERNAL_ASSERT_GET_MACRO(...)<sp/>AIAC_EXPAND_MACRO(<sp/>AIAC_INTERNAL_ASSERT_GET_MACRO_NAME(__VA_ARGS__,<sp/>AIAC_INTERNAL_ASSERT_WITH_MSG,<sp/>AIAC_INTERNAL_ASSERT_NO_MSG)<sp/>)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_ASSERT(...)<sp/>AIAC_EXPAND_MACRO(<sp/>AIAC_INTERNAL_ASSERT_GET_MACRO(__VA_ARGS__)(_,<sp/>__VA_ARGS__)<sp/>)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>AIAC_ASSERT(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="src/AIAC/Assert.h"/>
+  </compounddef>
+</doxygen>

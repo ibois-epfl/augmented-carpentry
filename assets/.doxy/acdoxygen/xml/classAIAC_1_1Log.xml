@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Log" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Log</compoundname>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Log_1aa40c7520d792a4514e2d0d418d35f42a" prot="private" static="yes" mutable="no">
+        <type>std::shared_ptr&lt; spdlog::logger &gt;</type>
+        <definition>std::shared_ptr&lt; spdlog::logger &gt; AIAC::Log::s_Logger</definition>
+        <argsstring></argsstring>
+        <name>s_Logger</name>
+        <qualifiedname>AIAC::Log::s_Logger</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Log.h" line="53" column="32" bodyfile="src/AIAC/Log.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1Log_1a4d3ff5a97cb75a03e146d0b5de8cabe0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Log::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::Log::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Log.h" line="47" column="21" bodyfile="src/AIAC/Log.cpp" bodystart="42" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Log_1a034b367162204805c718612ac3a272ac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Log::Shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>AIAC::Log::Shutdown</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Log.h" line="48" column="21" bodyfile="src/AIAC/Log.cpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Log_1aadd6513c1075332daf3aa7d7db3a306c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; spdlog::logger &gt; &amp;</type>
+        <definition>static std::shared_ptr&lt; spdlog::logger &gt; &amp; AIAC::Log::GetLogger</definition>
+        <argsstring>()</argsstring>
+        <name>GetLogger</name>
+        <qualifiedname>AIAC::Log::GetLogger</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Log.h" line="50" column="39" bodyfile="src/AIAC/Log.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Log.h" line="43" column="5" bodyfile="src/AIAC/Log.h" bodystart="44" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Log_1aadd6513c1075332daf3aa7d7db3a306c" prot="public" virt="non-virtual"><scope>AIAC::Log</scope><name>GetLogger</name></member>
+      <member refid="classAIAC_1_1Log_1a4d3ff5a97cb75a03e146d0b5de8cabe0" prot="public" virt="non-virtual"><scope>AIAC::Log</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1Log_1aa40c7520d792a4514e2d0d418d35f42a" prot="private" virt="non-virtual"><scope>AIAC::Log</scope><name>s_Logger</name></member>
+      <member refid="classAIAC_1_1Log_1a034b367162204805c718612ac3a272ac" prot="public" virt="non-virtual"><scope>AIAC::Log</scope><name>Shutdown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

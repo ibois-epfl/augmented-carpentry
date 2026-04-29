@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Event" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Event</compoundname>
+    <derivedcompoundref refid="classAIAC_1_1AppCloseEvent" prot="public" virt="non-virtual">AIAC::AppCloseEvent</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1CameraCalibrationLoadedEvent" prot="public" virt="non-virtual">AIAC::CameraCalibrationLoadedEvent</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1SLAMCombineMapEvent" prot="public" virt="non-virtual">AIAC::SLAMCombineMapEvent</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1SLAMMapLoadedEvent" prot="public" virt="non-virtual">AIAC::SLAMMapLoadedEvent</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1SLAMStartMappingEvent" prot="public" virt="non-virtual">AIAC::SLAMStartMappingEvent</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1SLAMStopMappingEvent" prot="public" virt="non-virtual">AIAC::SLAMStopMappingEvent</derivedcompoundref>
+    <derivedcompoundref refid="classAIAC_1_1SLAMVocabularyLoadedEvent" prot="public" virt="non-virtual">AIAC::SLAMVocabularyLoadedEvent</derivedcompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Event_1a22ff3199929339a65aa644d676000535" prot="private" static="no" mutable="no">
+        <type>EventType</type>
+        <definition>EventType AIAC::Event::m_Type</definition>
+        <argsstring></argsstring>
+        <name>m_Type</name>
+        <qualifiedname>AIAC::Event::m_Type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="75" column="19" bodyfile="src/AIAC/EventSys/Event.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Event_1aee6d0dda671bcbe9d8518832f228200c" prot="private" static="no" mutable="no">
+        <type>EventCategory</type>
+        <definition>EventCategory AIAC::Event::m_Category</definition>
+        <argsstring></argsstring>
+        <name>m_Category</name>
+        <qualifiedname>AIAC::Event::m_Category</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="76" column="23" bodyfile="src/AIAC/EventSys/Event.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Event_1a10bb065afbaf8624179cb3487e6e9dca" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t AIAC::Event::m_Priority</definition>
+        <argsstring></argsstring>
+        <name>m_Priority</name>
+        <qualifiedname>AIAC::Event::m_Priority</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="77" column="17" bodyfile="src/AIAC/EventSys/Event.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Event_1a6cb6fce0f27894b1a82e1c93f348c2ae" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Event::Event</definition>
+        <argsstring>(const EventType type, const EventCategory category=EventCategory::None, int32_t priority=0)</argsstring>
+        <name>Event</name>
+        <qualifiedname>AIAC::Event::Event</qualifiedname>
+        <param>
+          <type>const EventType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const EventCategory</type>
+          <declname>category</declname>
+          <defval>EventCategory::None</defval>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>priority</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="66" column="18" bodyfile="src/AIAC/EventSys/Event.h" bodystart="66" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Event_1a78454dc85c3759d5811f39eff6285728" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::Event::~Event</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Event</name>
+        <qualifiedname>AIAC::Event::~Event</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="69" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Event_1aaf9a9499f1e427a5d7d036675e41469c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>EventType</type>
+        <definition>EventType AIAC::Event::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <qualifiedname>AIAC::Event::GetType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="71" column="19" bodyfile="src/AIAC/EventSys/Event.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Event_1a2532fd6f2cc7a499d5cd79766a5a366d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>EventCategory</type>
+        <definition>EventCategory AIAC::Event::GetCategory</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCategory</name>
+        <qualifiedname>AIAC::Event::GetCategory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/Event.h" line="72" column="23" bodyfile="src/AIAC/EventSys/Event.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::AppCloseEvent</label>
+        <link refid="classAIAC_1_1AppCloseEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AIAC::CameraCalibrationLoadedEvent</label>
+        <link refid="classAIAC_1_1CameraCalibrationLoadedEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="4">
+        <label>AIAC::SLAMCombineMapEvent</label>
+        <link refid="classAIAC_1_1SLAMCombineMapEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>AIAC::SLAMMapLoadedEvent</label>
+        <link refid="classAIAC_1_1SLAMMapLoadedEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>AIAC::SLAMStartMappingEvent</label>
+        <link refid="classAIAC_1_1SLAMStartMappingEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>AIAC::SLAMStopMappingEvent</label>
+        <link refid="classAIAC_1_1SLAMStopMappingEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>AIAC::SLAMVocabularyLoadedEvent</label>
+        <link refid="classAIAC_1_1SLAMVocabularyLoadedEvent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/AIAC/EventSys/Event.h" line="63" column="5" bodyfile="src/AIAC/EventSys/Event.h" bodystart="64" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Event_1a6cb6fce0f27894b1a82e1c93f348c2ae" prot="public" virt="non-virtual"><scope>AIAC::Event</scope><name>Event</name></member>
+      <member refid="classAIAC_1_1Event_1a2532fd6f2cc7a499d5cd79766a5a366d" prot="public" virt="non-virtual"><scope>AIAC::Event</scope><name>GetCategory</name></member>
+      <member refid="classAIAC_1_1Event_1aaf9a9499f1e427a5d7d036675e41469c" prot="public" virt="non-virtual"><scope>AIAC::Event</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1Event_1aee6d0dda671bcbe9d8518832f228200c" prot="private" virt="non-virtual"><scope>AIAC::Event</scope><name>m_Category</name></member>
+      <member refid="classAIAC_1_1Event_1a10bb065afbaf8624179cb3487e6e9dca" prot="private" virt="non-virtual"><scope>AIAC::Event</scope><name>m_Priority</name></member>
+      <member refid="classAIAC_1_1Event_1a22ff3199929339a65aa644d676000535" prot="private" virt="non-virtual"><scope>AIAC::Event</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1Event_1a78454dc85c3759d5811f39eff6285728" prot="public" virt="virtual"><scope>AIAC::Event</scope><name>~Event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

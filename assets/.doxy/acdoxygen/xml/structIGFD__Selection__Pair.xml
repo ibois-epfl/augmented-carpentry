@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIGFD__Selection__Pair" kind="struct" language="C++" prot="public">
+    <compoundname>IGFD_Selection_Pair</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structIGFD__Selection__Pair_1a8293b2262ed4a0ead4201f570086329c" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* IGFD_Selection_Pair::fileName</definition>
+        <argsstring></argsstring>
+        <name>fileName</name>
+        <qualifiedname>IGFD_Selection_Pair::fileName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ImGuiFileDialog.h" line="1719" column="6" bodyfile="src/AIAC/UI/ImGuiFileDialog.h" bodystart="1719" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIGFD__Selection__Pair_1a265c94e47a17bf079c2c66424a3b0f97" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* IGFD_Selection_Pair::filePathName</definition>
+        <argsstring></argsstring>
+        <name>filePathName</name>
+        <qualifiedname>IGFD_Selection_Pair::filePathName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ImGuiFileDialog.h" line="1720" column="6" bodyfile="src/AIAC/UI/ImGuiFileDialog.h" bodystart="1720" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/UI/ImGuiFileDialog.h" line="1717" column="1" bodyfile="src/AIAC/UI/ImGuiFileDialog.h" bodystart="1718" bodyend="1721"/>
+    <listofallmembers>
+      <member refid="structIGFD__Selection__Pair_1a8293b2262ed4a0ead4201f570086329c" prot="public" virt="non-virtual"><scope>IGFD_Selection_Pair</scope><name>fileName</name></member>
+      <member refid="structIGFD__Selection__Pair_1a265c94e47a17bf079c2c66424a3b0f97" prot="public" virt="non-virtual"><scope>IGFD_Selection_Pair</scope><name>filePathName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

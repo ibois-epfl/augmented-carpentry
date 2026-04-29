@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CutOrientationVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CutOrientationVisualizer</compoundname>
+    <basecompoundref refid="classAIAC_1_1FeedbackVisualizer" prot="public" virt="non-virtual">AIAC::FeedbackVisualizer</basecompoundref>
+    <includes refid="CutChainSawFeedback_8h" local="no">CutChainSawFeedback.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1ad2396a7fc1457ccdbbdabe38baf09da2" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineFaceNormal</definition>
+        <argsstring></argsstring>
+        <name>m_LineFaceNormal</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineFaceNormal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="59" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1a530a85d0d8088caa82e94ebb77106733" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineBladeNormal</definition>
+        <argsstring></argsstring>
+        <name>m_LineBladeNormal</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineBladeNormal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="60" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1aafa2e8fa187884cbf0f3ef0485af167a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineDebugA</definition>
+        <argsstring></argsstring>
+        <name>m_LineDebugA</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineDebugA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="62" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1aa26482eddaefa70d604330af355815dc" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineDebugB</definition>
+        <argsstring></argsstring>
+        <name>m_LineDebugB</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineDebugB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="63" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1a16c8de85da1802d3a0479060a958660e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineDebugC</definition>
+        <argsstring></argsstring>
+        <name>m_LineDebugC</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineDebugC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="64" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1a3b99ad064883722935596fe48de27381" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineDebugD</definition>
+        <argsstring></argsstring>
+        <name>m_LineDebugD</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineDebugD</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="65" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1ad8b47fe10dd4a600063b2e494a73b741" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LineDebugE</definition>
+        <argsstring></argsstring>
+        <name>m_LineDebugE</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LineDebugE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="66" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1a21893943294aab744caba0517682d8a4" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOLine" kindref="compound">GOLine</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOLine&gt; AIAC::CutOrientationVisualizer::m_LinePitchFeed</definition>
+        <argsstring></argsstring>
+        <name>m_LinePitchFeed</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_LinePitchFeed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="68" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1a3a551f8bf7fb62069da8e8a0e67d60af" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOText" kindref="compound">GOText</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOText&gt; AIAC::CutOrientationVisualizer::m_GuideTxtRollPitch</definition>
+        <argsstring></argsstring>
+        <name>m_GuideTxtRollPitch</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_GuideTxtRollPitch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="70" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutOrientationVisualizer_1a0995ccdea0d006f9a69e36bfedcead09" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::CutOrientationVisualizer::m_tolAangleAcceptance</definition>
+        <argsstring></argsstring>
+        <name>m_tolAangleAcceptance</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::m_tolAangleAcceptance</qualifiedname>
+        <initializer>= 0.4f</initializer>
+        <briefdescription>
+<para>The angle acceptance for the cut orientation, under this value is conside correct. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="74" column="19" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1CutOrientationVisualizer_1a960aac0819ddbb10550c011c787780fd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class CutChainSawFeedback</definition>
+        <argsstring></argsstring>
+        <name>CutChainSawFeedback</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::CutChainSawFeedback</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1CutChainSawFeedback" kindref="compound">CutChainSawFeedback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="76" column="22" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CutOrientationVisualizer_1aef38df99c0938cc8d82df9234e7765b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CutOrientationVisualizer::CutOrientationVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>CutOrientationVisualizer</name>
+        <qualifiedname>AIAC::CutOrientationVisualizer::CutOrientationVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="56" column="13" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="44" bodyend="81"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>This visualizer gives a bit of guidance on the cut orientation. Although it is not possible to determine the exact orientation of the cut, this visualizer gives a rough idea of the pitch and roll. The way this is done is by projecting the blade normal onto the face normal, and then projecting the resulting vector onto the face normal. If we close the triangle of these two lines we can monitor the angle that must be 45*. This way we can also have the direction towards which the blade needs to be tilted. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::CutOrientationVisualizer</label>
+        <link refid="classAIAC_1_1CutOrientationVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CutOrientationVisualizer</label>
+        <link refid="classAIAC_1_1CutOrientationVisualizer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FeedbackVisualizer</label>
+        <link refid="classAIAC_1_1FeedbackVisualizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="53" column="5" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="54" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0a35d1ff61c75412b2dddb11c6ce7495" prot="public" virt="virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a960aac0819ddbb10550c011c787780fd" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>CutChainSawFeedback</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1aef38df99c0938cc8d82df9234e7765b5" prot="public" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>CutOrientationVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a0fc39d5cdbe84f2b259b6b30b54b410b" prot="public" virt="virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1abdd9eea67d9a2e8ecfbbfdd5b1555ed2" prot="public" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>FeedbackVisualizer</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1aff4b840606029ebfb814a7e1dc9e1d55" prot="protected" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_AllPrimitives</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a3a551f8bf7fb62069da8e8a0e67d60af" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_GuideTxtRollPitch</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a530a85d0d8088caa82e94ebb77106733" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineBladeNormal</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1aafa2e8fa187884cbf0f3ef0485af167a" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineDebugA</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1aa26482eddaefa70d604330af355815dc" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineDebugB</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a16c8de85da1802d3a0479060a958660e" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineDebugC</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a3b99ad064883722935596fe48de27381" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineDebugD</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1ad8b47fe10dd4a600063b2e494a73b741" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineDebugE</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1ad2396a7fc1457ccdbbdabe38baf09da2" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LineFaceNormal</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a21893943294aab744caba0517682d8a4" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_LinePitchFeed</name></member>
+      <member refid="classAIAC_1_1CutOrientationVisualizer_1a0995ccdea0d006f9a69e36bfedcead09" prot="private" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>m_tolAangleAcceptance</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a84968d25ab59b65618861c40300a73d7" prot="public" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>toString</name></member>
+      <member refid="classAIAC_1_1FeedbackVisualizer_1a10d15b7e085de327e0f8e4db48fa8bbf" prot="public" virt="non-virtual"><scope>AIAC::CutOrientationVisualizer</scope><name>~FeedbackVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

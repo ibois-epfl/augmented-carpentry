@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Utils_1_1VideoRecorder" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Utils::VideoRecorder</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1VideoRecorder_1a1923ab3c9e128ae1a4790910097a55e8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::VideoRecorder::m_BasePath</definition>
+        <argsstring></argsstring>
+        <name>m_BasePath</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::m_BasePath</qualifiedname>
+        <briefdescription>
+<para>Base path of utils. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="72" column="21" bodyfile="src/utils/VideoRecorder.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1VideoRecorder_1ad6115efd1b1ecf263ad5b597c274f299" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::VideoRecorder::m_RecorderPath</definition>
+        <argsstring></argsstring>
+        <name>m_RecorderPath</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::m_RecorderPath</qualifiedname>
+        <briefdescription>
+<para>Path to recorder folder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="74" column="21" bodyfile="src/utils/VideoRecorder.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1VideoRecorder_1aac7b8a121fc0b1f883da5d65558e0e87" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::VideoRecorder::m_FramesPath</definition>
+        <argsstring></argsstring>
+        <name>m_FramesPath</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::m_FramesPath</qualifiedname>
+        <briefdescription>
+<para>Path to frames folder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="76" column="21" bodyfile="src/utils/VideoRecorder.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Utils_1_1VideoRecorder_1a4bc021431e3764cebbf56c0fe2b0f72a" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::Utils::VideoRecorder::m_VideoPath</definition>
+        <argsstring></argsstring>
+        <name>m_VideoPath</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::m_VideoPath</qualifiedname>
+        <briefdescription>
+<para>Path to video folder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="78" column="21" bodyfile="src/utils/VideoRecorder.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1a68a25caea24f891c6e562737f1d7d91f" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Utils::VideoRecorder::VideoRecorder</definition>
+        <argsstring>(const std::string &amp;basePath)</argsstring>
+        <name>VideoRecorder</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::VideoRecorder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>basePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="47" column="18" bodyfile="src/utils/VideoRecorder.cpp" bodystart="41" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1ae664407b9b080f88e6ed386592af28bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Utils::VideoRecorder::~VideoRecorder</definition>
+        <argsstring>()</argsstring>
+        <name>~VideoRecorder</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::~VideoRecorder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="48" column="9" bodyfile="src/utils/VideoRecorder.cpp" bodystart="47" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1a51beb85b0be9cb4d8cb147564d5978d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::VideoRecorder::CaptureFrames</definition>
+        <argsstring>()</argsstring>
+        <name>CaptureFrames</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::CaptureFrames</qualifiedname>
+        <briefdescription>
+<para>Capture frames from the window. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="51" column="14" bodyfile="src/utils/VideoRecorder.cpp" bodystart="60" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1a029a097533de46d850fd9697d55908ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::VideoRecorder::SaveFrames</definition>
+        <argsstring>(int height, int width, std::vector&lt; unsigned char &gt; pixels)</argsstring>
+        <name>SaveFrames</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::SaveFrames</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; unsigned char &gt;</type>
+          <declname>pixels</declname>
+        </param>
+        <briefdescription>
+<para>Save frames to the frame folder. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the window </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the window </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pixels</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector to hold the data </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="59" column="14" bodyfile="src/utils/VideoRecorder.cpp" bodystart="74" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1a484a43d16e63614d2ba4ec339f739083" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::VideoRecorder::MakeVideoFromFrames</definition>
+        <argsstring>()</argsstring>
+        <name>MakeVideoFromFrames</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::MakeVideoFromFrames</qualifiedname>
+        <briefdescription>
+<para>Create video from the frames using ffmpeg. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="61" column="14" bodyfile="src/utils/VideoRecorder.cpp" bodystart="89" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1a8fa788d9186d4cc414ccf7554a658c6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::VideoRecorder::InitializeDirectories</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeDirectories</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::InitializeDirectories</qualifiedname>
+        <briefdescription>
+<para>Create folders for captured frames and videos. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="63" column="14" bodyfile="src/utils/VideoRecorder.cpp" bodystart="124" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1aca2413608e7c8ab90d4ad9b1639761af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::VideoRecorder::DeleteFrameFolder</definition>
+        <argsstring>()</argsstring>
+        <name>DeleteFrameFolder</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::DeleteFrameFolder</qualifiedname>
+        <briefdescription>
+<para>Delete the /frames folder. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="65" column="14" bodyfile="src/utils/VideoRecorder.cpp" bodystart="130" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Utils_1_1VideoRecorder_1a624e85b6f04dd7c74af04188135f32f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Utils::VideoRecorder::UpdatePaths</definition>
+        <argsstring>()</argsstring>
+        <name>UpdatePaths</name>
+        <qualifiedname>AIAC::Utils::VideoRecorder::UpdatePaths</qualifiedname>
+        <briefdescription>
+<para>Updates the paths used for video and frame storage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/VideoRecorder.h" line="67" column="14" bodyfile="src/utils/VideoRecorder.cpp" bodystart="51" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/VideoRecorder.h" line="45" column="5" bodyfile="src/utils/VideoRecorder.h" bodystart="45" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a51beb85b0be9cb4d8cb147564d5978d8" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>CaptureFrames</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1aca2413608e7c8ab90d4ad9b1639761af" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>DeleteFrameFolder</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a8fa788d9186d4cc414ccf7554a658c6d" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>InitializeDirectories</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a1923ab3c9e128ae1a4790910097a55e8" prot="private" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>m_BasePath</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1aac7b8a121fc0b1f883da5d65558e0e87" prot="private" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>m_FramesPath</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1ad6115efd1b1ecf263ad5b597c274f299" prot="private" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>m_RecorderPath</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a4bc021431e3764cebbf56c0fe2b0f72a" prot="private" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>m_VideoPath</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a484a43d16e63614d2ba4ec339f739083" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>MakeVideoFromFrames</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a029a097533de46d850fd9697d55908ef" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>SaveFrames</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a624e85b6f04dd7c74af04188135f32f3" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>UpdatePaths</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1a68a25caea24f891c6e562737f1d7d91f" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>VideoRecorder</name></member>
+      <member refid="classAIAC_1_1Utils_1_1VideoRecorder_1ae664407b9b080f88e6ed386592af28bd" prot="public" virt="non-virtual"><scope>AIAC::Utils::VideoRecorder</scope><name>~VideoRecorder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

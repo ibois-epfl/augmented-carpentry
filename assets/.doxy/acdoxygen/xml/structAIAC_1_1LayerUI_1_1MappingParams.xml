@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1LayerUI_1_1MappingParams" kind="struct" language="C++" prot="private">
+    <compoundname>AIAC::LayerUI::MappingParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1MappingParams_1a158e030b5ecee8416aff1270ca6f60e9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::MappingParams::ToOptimizeMap</definition>
+        <argsstring></argsstring>
+        <name>ToOptimizeMap</name>
+        <qualifiedname>AIAC::LayerUI::MappingParams::ToOptimizeMap</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="166" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1MappingParams_1a4999ce81ca3610dfa375b44e9612a4f7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerUI::MappingParams::ToSaveMap</definition>
+        <argsstring></argsstring>
+        <name>ToSaveMap</name>
+        <qualifiedname>AIAC::LayerUI::MappingParams::ToSaveMap</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="167" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1MappingParams_1afa236041cd25b310491a395a0d84a00e" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::MappingParams::MapSavingPath[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>MapSavingPath</name>
+        <qualifiedname>AIAC::LayerUI::MappingParams::MapSavingPath</qualifiedname>
+        <initializer>= &quot;./scanned_map/test.map&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="168" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/LayerUI.h" line="165" column="9" bodyfile="src/AIAC/LayerUI.h" bodystart="165" bodyend="169"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1LayerUI_1_1MappingParams_1afa236041cd25b310491a395a0d84a00e" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::MappingParams</scope><name>MapSavingPath</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1MappingParams_1a158e030b5ecee8416aff1270ca6f60e9" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::MappingParams</scope><name>ToOptimizeMap</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1MappingParams_1a4999ce81ca3610dfa375b44e9612a4f7" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::MappingParams</scope><name>ToSaveMap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

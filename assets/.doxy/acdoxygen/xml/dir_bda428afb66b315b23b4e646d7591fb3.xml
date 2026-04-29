@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_bda428afb66b315b23b4e646d7591fb3" kind="dir">
+    <compoundname>src/AIAC/EventSys</compoundname>
+    <innerfile refid="ApplicationEvent_8cpp">ApplicationEvent.cpp</innerfile>
+    <innerfile refid="ApplicationEvent_8h">ApplicationEvent.h</innerfile>
+    <innerfile refid="CameraEvent_8cpp">CameraEvent.cpp</innerfile>
+    <innerfile refid="CameraEvent_8h">CameraEvent.h</innerfile>
+    <innerfile refid="Event_8h">Event.h</innerfile>
+    <innerfile refid="EventBus_8h">EventBus.h</innerfile>
+    <innerfile refid="SLAMEvent_8cpp">SLAMEvent.cpp</innerfile>
+    <innerfile refid="SLAMEvent_8h">SLAMEvent.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/EventSys/"/>
+  </compounddef>
+</doxygen>

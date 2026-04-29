@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_1ecaf06ce723c740944fb523b6bd2c55" kind="dir">
+    <compoundname>src/AIAC/UI</compoundname>
+    <innerfile refid="ClrPalette_8h">ClrPalette.h</innerfile>
+    <innerfile refid="CustomLogos_8h">CustomLogos.h</innerfile>
+    <innerfile refid="ImGuiFileDialog_8cpp">ImGuiFileDialog.cpp</innerfile>
+    <innerfile refid="ImGuiFileDialog_8h">ImGuiFileDialog.h</innerfile>
+    <innerfile refid="ImGuiFileDialogConfig_8h">ImGuiFileDialogConfig.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/UI/"/>
+  </compounddef>
+</doxygen>

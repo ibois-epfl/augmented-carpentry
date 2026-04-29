@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1SLAMStartMappingEvent" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::SLAMStartMappingEvent</compoundname>
+    <basecompoundref refid="classAIAC_1_1Event" prot="public" virt="non-virtual">AIAC::Event</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1SLAMStartMappingEvent_1a69f7eb8694e8307459776b2205b6c2ba" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::SLAMStartMappingEvent::SLAMStartMappingEvent</definition>
+        <argsstring>()</argsstring>
+        <name>SLAMStartMappingEvent</name>
+        <qualifiedname>AIAC::SLAMStartMappingEvent::SLAMStartMappingEvent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="70" column="18" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1SLAMStartMappingEvent_1adfbb68dcbb944246788cc46e9474a991" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::SLAMStartMappingEvent::OnSLAMStartMapping</definition>
+        <argsstring>()</argsstring>
+        <name>OnSLAMStartMapping</name>
+        <qualifiedname>AIAC::SLAMStartMappingEvent::OnSLAMStartMapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/EventSys/SLAMEvent.h" line="74" column="14" bodyfile="src/AIAC/EventSys/SLAMEvent.cpp" bodystart="90" bodyend="108"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="1">
+        <label>AIAC::SLAMStartMappingEvent</label>
+        <link refid="classAIAC_1_1SLAMStartMappingEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Event</label>
+        <link refid="classAIAC_1_1Event"/>
+      </node>
+      <node id="1">
+        <label>AIAC::SLAMStartMappingEvent</label>
+        <link refid="classAIAC_1_1SLAMStartMappingEvent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/EventSys/SLAMEvent.h" line="67" column="5" bodyfile="src/AIAC/EventSys/SLAMEvent.h" bodystart="68" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Event_1a6cb6fce0f27894b1a82e1c93f348c2ae" prot="public" virt="non-virtual"><scope>AIAC::SLAMStartMappingEvent</scope><name>Event</name></member>
+      <member refid="classAIAC_1_1Event_1a2532fd6f2cc7a499d5cd79766a5a366d" prot="public" virt="non-virtual"><scope>AIAC::SLAMStartMappingEvent</scope><name>GetCategory</name></member>
+      <member refid="classAIAC_1_1Event_1aaf9a9499f1e427a5d7d036675e41469c" prot="public" virt="non-virtual"><scope>AIAC::SLAMStartMappingEvent</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1SLAMStartMappingEvent_1adfbb68dcbb944246788cc46e9474a991" prot="public" virt="non-virtual"><scope>AIAC::SLAMStartMappingEvent</scope><name>OnSLAMStartMapping</name></member>
+      <member refid="classAIAC_1_1SLAMStartMappingEvent_1a69f7eb8694e8307459776b2205b6c2ba" prot="public" virt="non-virtual"><scope>AIAC::SLAMStartMappingEvent</scope><name>SLAMStartMappingEvent</name></member>
+      <member refid="classAIAC_1_1Event_1a78454dc85c3759d5811f39eff6285728" prot="public" virt="virtual"><scope>AIAC::SLAMStartMappingEvent</scope><name>~Event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

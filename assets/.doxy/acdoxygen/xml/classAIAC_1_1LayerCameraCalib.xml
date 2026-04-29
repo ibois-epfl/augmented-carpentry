@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1LayerCameraCalib" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::LayerCameraCalib</compoundname>
+    <basecompoundref refid="classAIAC_1_1Layer" prot="public" virt="non-virtual">AIAC::Layer</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a4d0988438ac0cca9ed79ad182874846d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCameraCalib::AutoCapture</definition>
+        <argsstring></argsstring>
+        <name>AutoCapture</name>
+        <qualifiedname>AIAC::LayerCameraCalib::AutoCapture</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="62" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a6976baa8466a7061b0dd3eac287af5fd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCameraCalib::JustCaptured</definition>
+        <argsstring></argsstring>
+        <name>JustCaptured</name>
+        <qualifiedname>AIAC::LayerCameraCalib::JustCaptured</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="63" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a516249bed26b7a3132657c647bae36d1" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerCameraCalib::Delay</definition>
+        <argsstring></argsstring>
+        <name>Delay</name>
+        <qualifiedname>AIAC::LayerCameraCalib::Delay</qualifiedname>
+        <initializer>= 1500</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="64" column="13" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1aa453c27c2efd020bc163c77260679a82" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerCameraCalib::NumOfFrame</definition>
+        <argsstring></argsstring>
+        <name>NumOfFrame</name>
+        <qualifiedname>AIAC::LayerCameraCalib::NumOfFrame</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="65" column="13" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a6320677d7dd6d3598bdad1c78e896723" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::LayerCameraCalib::SaveFilename</definition>
+        <argsstring></argsstring>
+        <name>SaveFilename</name>
+        <qualifiedname>AIAC::LayerCameraCalib::SaveFilename</qualifiedname>
+        <initializer>= &quot;assets/tslam/calibration.yml&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="66" column="21" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a83256e7627660f231f0140524a9638a9" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1CameraCalibrator" kindref="compound">CameraCalibrator</ref></type>
+        <definition>CameraCalibrator AIAC::LayerCameraCalib::m_CameraCalibrator</definition>
+        <argsstring></argsstring>
+        <name>m_CameraCalibrator</name>
+        <qualifiedname>AIAC::LayerCameraCalib::m_CameraCalibrator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="69" column="26" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a5b010d508dbe6d0a3caaada50be777a5" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCameraCalib::m_IsCalibrating</definition>
+        <argsstring></argsstring>
+        <name>m_IsCalibrating</name>
+        <qualifiedname>AIAC::LayerCameraCalib::m_IsCalibrating</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="70" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1a304b82905daf33a4d071d2b3f54b0162" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCameraCalib::m_IsCapturing</definition>
+        <argsstring></argsstring>
+        <name>m_IsCapturing</name>
+        <qualifiedname>AIAC::LayerCameraCalib::m_IsCapturing</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="71" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1LayerCameraCalib_1abc166053eec6aba9e7e4d6fba0fc26f3" prot="private" static="no" mutable="no">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point AIAC::LayerCameraCalib::prevCaptureTimestamp</definition>
+        <argsstring></argsstring>
+        <name>prevCaptureTimestamp</name>
+        <qualifiedname>AIAC::LayerCameraCalib::prevCaptureTimestamp</qualifiedname>
+        <initializer>= std::chrono::steady_clock::now()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="72" column="47" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1a49bb24f4314803dc72185b940aa3d2fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerCameraCalib::LayerCameraCalib</definition>
+        <argsstring>()=default</argsstring>
+        <name>LayerCameraCalib</name>
+        <qualifiedname>AIAC::LayerCameraCalib::LayerCameraCalib</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="46" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1abbf43b71cc6c559d29b724134820bb19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::LayerCameraCalib::~LayerCameraCalib</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~LayerCameraCalib</name>
+        <qualifiedname>AIAC::LayerCameraCalib::~LayerCameraCalib</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1a979286ea530cbe0fb79f527374673c4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::OnAttach</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttach</name>
+        <qualifiedname>AIAC::LayerCameraCalib::OnAttach</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ad7de0aa4823502f92a2ff04b41275073">OnAttach</reimplements>
+        <briefdescription>
+<para>Is called when the layer is attached to the application. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="49" column="22" bodyfile="src/AIAC/LayerCameraCalib.cpp" bodystart="37" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1a12b4ff49b0023e5730013b41154caa41" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::OnFrameStart</definition>
+        <argsstring>() override</argsstring>
+        <name>OnFrameStart</name>
+        <qualifiedname>AIAC::LayerCameraCalib::OnFrameStart</qualifiedname>
+        <reimplements refid="classAIAC_1_1Layer_1ac7d78e4433a304180fcb9ca23cff4ca3">OnFrameStart</reimplements>
+        <briefdescription>
+<para>Is called when frame starts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="50" column="22" bodyfile="src/AIAC/LayerCameraCalib.cpp" bodystart="41" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1ae7a883dde07c3eea0d563032f55983b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>AIAC::LayerCameraCalib::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="52" column="14" bodyfile="src/AIAC/LayerCameraCalib.cpp" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1aec387a9ba5eca490e871d5de799c6fd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::StartCalibration</definition>
+        <argsstring>()</argsstring>
+        <name>StartCalibration</name>
+        <qualifiedname>AIAC::LayerCameraCalib::StartCalibration</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="53" column="14" bodyfile="src/AIAC/LayerCameraCalib.cpp" bodystart="72" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1ae04c9269141e98a5250b18b7c1f65fe1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::StopCalibration</definition>
+        <argsstring>()</argsstring>
+        <name>StopCalibration</name>
+        <qualifiedname>AIAC::LayerCameraCalib::StopCalibration</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="54" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1afc6055a1f793482c872d11bdb9242b52" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCameraCalib::IsCalibrating</definition>
+        <argsstring>() const</argsstring>
+        <name>IsCalibrating</name>
+        <qualifiedname>AIAC::LayerCameraCalib::IsCalibrating</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="55" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1a9a6070f4caefa0d245416eaf4b6cacfb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::StartCapturing</definition>
+        <argsstring>()</argsstring>
+        <name>StartCapturing</name>
+        <qualifiedname>AIAC::LayerCameraCalib::StartCapturing</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="56" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1a68ed01e67394a53b30672da6beb55ea6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::LayerCameraCalib::IsCapturing</definition>
+        <argsstring>() const</argsstring>
+        <name>IsCapturing</name>
+        <qualifiedname>AIAC::LayerCameraCalib::IsCapturing</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="57" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1a589836504a9d81f709420d9a24b7345f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::LayerCameraCalib::SetSaveFilename</definition>
+        <argsstring>(const std::string &amp;filename)</argsstring>
+        <name>SetSaveFilename</name>
+        <qualifiedname>AIAC::LayerCameraCalib::SetSaveFilename</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="58" column="14" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1LayerCameraCalib_1af0c47f90c84a032e01c51819d1b31806" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1CameraCalibrator" kindref="compound">CameraCalibrator</ref> &amp;</type>
+        <definition>CameraCalibrator &amp; AIAC::LayerCameraCalib::GetCameraCalibrator</definition>
+        <argsstring>()</argsstring>
+        <name>GetCameraCalibrator</name>
+        <qualifiedname>AIAC::LayerCameraCalib::GetCameraCalibrator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerCameraCalib.h" line="59" column="26" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerCameraCalib</label>
+        <link refid="classAIAC_1_1LayerCameraCalib"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>AIAC::Layer</label>
+        <link refid="classAIAC_1_1Layer"/>
+      </node>
+      <node id="1">
+        <label>AIAC::LayerCameraCalib</label>
+        <link refid="classAIAC_1_1LayerCameraCalib"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/LayerCameraCalib.h" line="43" column="5" bodyfile="src/AIAC/LayerCameraCalib.h" bodystart="44" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a4d0988438ac0cca9ed79ad182874846d" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>AutoCapture</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1ae7a883dde07c3eea0d563032f55983b7" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>Clear</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a516249bed26b7a3132657c647bae36d1" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>Delay</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1af0c47f90c84a032e01c51819d1b31806" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>GetCameraCalibrator</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1afc6055a1f793482c872d11bdb9242b52" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>IsCalibrating</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a68ed01e67394a53b30672da6beb55ea6" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>IsCapturing</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a6976baa8466a7061b0dd3eac287af5fd" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>JustCaptured</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a49bb24f4314803dc72185b940aa3d2fe" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>LayerCameraCalib</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a83256e7627660f231f0140524a9638a9" prot="private" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>m_CameraCalibrator</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a5b010d508dbe6d0a3caaada50be777a5" prot="private" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>m_IsCalibrating</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a304b82905daf33a4d071d2b3f54b0162" prot="private" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>m_IsCapturing</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1aa453c27c2efd020bc163c77260679a82" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>NumOfFrame</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a979286ea530cbe0fb79f527374673c4f" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>OnAttach</name></member>
+      <member refid="classAIAC_1_1Layer_1aba22b3f8214648debe0e2011f9b83699" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>OnDetach</name></member>
+      <member refid="classAIAC_1_1Layer_1aa04380c66aa2f394e0d0eb4cceba2e67" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>OnFrameAwake</name></member>
+      <member refid="classAIAC_1_1Layer_1aad2b443820457a024a9927276a559c61" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>OnFrameEnd</name></member>
+      <member refid="classAIAC_1_1Layer_1a51d3c0077fc371e1fcc3a7402d98bd70" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>OnFrameFall</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a12b4ff49b0023e5730013b41154caa41" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>OnFrameStart</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1abc166053eec6aba9e7e4d6fba0fc26f3" prot="private" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>prevCaptureTimestamp</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a6320677d7dd6d3598bdad1c78e896723" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>SaveFilename</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a589836504a9d81f709420d9a24b7345f" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>SetSaveFilename</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1aec387a9ba5eca490e871d5de799c6fd0" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>StartCalibration</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1a9a6070f4caefa0d245416eaf4b6cacfb" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>StartCapturing</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1ae04c9269141e98a5250b18b7c1f65fe1" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>StopCalibration</name></member>
+      <member refid="classAIAC_1_1Layer_1aafccdf37c3349b4e0540fa39f070b857" prot="public" virt="virtual"><scope>AIAC::LayerCameraCalib</scope><name>~Layer</name></member>
+      <member refid="classAIAC_1_1LayerCameraCalib_1abbf43b71cc6c559d29b724134820bb19" prot="public" virt="non-virtual"><scope>AIAC::LayerCameraCalib</scope><name>~LayerCameraCalib</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

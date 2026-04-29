@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="GlUtils_8h" kind="file" language="C++">
+    <compoundname>GlUtils.h</compoundname>
+    <includes refid="GlHeader_8h" local="yes">AIAC/GlHeader.h</includes>
+    <includes local="yes">tslam.h</includes>
+    <includes local="yes">glm/glm.hpp</includes>
+    <includedby refid="GlUtils_8cpp" local="yes">src/AIAC/Render/GlUtils.cpp</includedby>
+    <includedby refid="RenderAPI_8cpp" local="yes">src/AIAC/Render/RenderAPI.cpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>AIAC/GlHeader.h</label>
+        <link refid="GlHeader_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/AIAC/Render/GlUtils.h</label>
+        <link refid="GlUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>GL/freeglut.h</label>
+      </node>
+      <node id="3">
+        <label>GL/glew.h</label>
+      </node>
+      <node id="5">
+        <label>GL/glut.h</label>
+      </node>
+      <node id="6">
+        <label>GLFW/glfw3.h</label>
+      </node>
+      <node id="9">
+        <label>backends/imgui_impl_glfw.h</label>
+      </node>
+      <node id="10">
+        <label>backends/imgui_impl_opengl3.h</label>
+      </node>
+      <node id="7">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="8">
+        <label>imgui.h</label>
+      </node>
+      <node id="11">
+        <label>tslam.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceAIAC">AIAC</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AIAC/GlHeader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tslam.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;glm/glm.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">AIAC<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_BLACK<sp/><sp/><sp/>=<sp/>glm::vec4(0,<sp/>0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_RED<sp/><sp/><sp/><sp/><sp/>=<sp/>glm::vec4(1,<sp/>0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_GREEN<sp/><sp/><sp/>=<sp/>glm::vec4(0,<sp/>1,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_BLUE<sp/><sp/><sp/><sp/>=<sp/>glm::vec4(0,<sp/>0,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_YELLOW<sp/><sp/>=<sp/>glm::vec4(1,<sp/>1,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_MAGENTA<sp/>=<sp/>glm::vec4(1,<sp/>0,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_CYAN<sp/><sp/><sp/><sp/>=<sp/>glm::vec4(0,<sp/>1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>glm::vec4<sp/>OGL_WHITE<sp/><sp/><sp/>=<sp/>glm::vec4(1,<sp/>1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>glDrawPoints3d(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;vertices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec4&gt;<sp/>&amp;colors,<sp/>GLfloat<sp/>pointSize=1.0f);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>glDrawPoints3d(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;vertices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4<sp/>&amp;color,<sp/>GLfloat<sp/>pointSize=1.0f);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>glDrawLines3d(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;edges,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec4&gt;<sp/>&amp;colors);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>glDrawLines3d(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;edges,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4<sp/>&amp;color);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>glDrawTriangles3d(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;vertices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;indices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec4&gt;<sp/>&amp;colors);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>glDrawTriangles3d(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;<sp/>&amp;vertices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;indices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4<sp/>&amp;colors);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawSlamMap(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;tslam::Map&gt;<sp/>&amp;map,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4<sp/>&amp;color,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pointSize=1);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/AIAC/Render/GlUtils.h"/>
+  </compounddef>
+</doxygen>

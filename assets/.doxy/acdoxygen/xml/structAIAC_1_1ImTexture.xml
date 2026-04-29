@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1ImTexture" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::ImTexture</compoundname>
+    <includes refid="Image_8h" local="no">Image.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1ImTexture_1a880ed3adb78d4c61993bd593f52d0ad5" prot="public" static="no" mutable="no">
+        <type>ImTextureID</type>
+        <definition>ImTextureID AIAC::ImTexture::ID</definition>
+        <argsstring></argsstring>
+        <name>ID</name>
+        <qualifiedname>AIAC::ImTexture::ID</qualifiedname>
+        <briefdescription>
+<para>Texture ID. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.h" line="61" column="21" bodyfile="src/AIAC/Image.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1ImTexture_1aa8a6509eb95dd85aab4b13c58e6522a0" prot="public" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 AIAC::ImTexture::Size</definition>
+        <argsstring></argsstring>
+        <name>Size</name>
+        <qualifiedname>AIAC::ImTexture::Size</qualifiedname>
+        <briefdescription>
+<para>Size of the texture. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Image.h" line="62" column="16" bodyfile="src/AIAC/Image.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Structure representing an ImGui texture. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Image.h" line="59" column="5" bodyfile="src/AIAC/Image.h" bodystart="60" bodyend="63"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1ImTexture_1a880ed3adb78d4c61993bd593f52d0ad5" prot="public" virt="non-virtual"><scope>AIAC::ImTexture</scope><name>ID</name></member>
+      <member refid="structAIAC_1_1ImTexture_1aa8a6509eb95dd85aab4b13c58e6522a0" prot="public" virt="non-virtual"><scope>AIAC::ImTexture</scope><name>Size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

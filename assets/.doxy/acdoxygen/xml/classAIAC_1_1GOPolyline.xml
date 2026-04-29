@@ -1,0 +1,481 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1GOPolyline" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::GOPolyline</compoundname>
+    <basecompoundref refid="classAIAC_1_1GOPrimitive" prot="public" virt="non-virtual">AIAC::GOPrimitive</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1GOPolyline_1a56b071b6623d49795d781e5135592912" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::vector&lt;GOPoint&gt; AIAC::GOPolyline::m_Points</definition>
+        <argsstring></argsstring>
+        <name>m_Points</name>
+        <qualifiedname>AIAC::GOPolyline::m_Points</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="598" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="598" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOPolyline_1a04bf78e3f38d273784435b9cdf92d2fc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::GOPolyline::m_IsClosed</definition>
+        <argsstring></argsstring>
+        <name>m_IsClosed</name>
+        <qualifiedname>AIAC::GOPolyline::m_IsClosed</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="599" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="599" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1GOPolyline_1a8a80fedbb533c836e9972a37a73ac610" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::GOPolyline::m_Weight</definition>
+        <argsstring></argsstring>
+        <name>m_Weight</name>
+        <qualifiedname>AIAC::GOPolyline::m_Weight</qualifiedname>
+        <initializer>= GOWeight::Default</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="600" column="15" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="600" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1GOPolyline_1a90732baa5f09060a094a6935f5ad697b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class GOPoint</definition>
+        <argsstring></argsstring>
+        <name>GOPoint</name>
+        <qualifiedname>AIAC::GOPolyline::GOPoint</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="602" column="18" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="602" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1ad96d074d615e626abf90c7a264469dd0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOPolyline::GOPolyline</definition>
+        <argsstring>()</argsstring>
+        <name>GOPolyline</name>
+        <qualifiedname>AIAC::GOPolyline::GOPolyline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="548" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="282" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1aee79d682a663af51ef686a46e05fab49" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::GOPolyline::GOPolyline</definition>
+        <argsstring>(std::vector&lt; GOPoint &gt; points, bool isClosed=false, float weight=GOWeight::Default)</argsstring>
+        <name>GOPolyline</name>
+        <qualifiedname>AIAC::GOPolyline::GOPolyline</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isClosed</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+          <defval>GOWeight::Default</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="549" column="9" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="287" bodyend="291"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a22270ea472918b808a6307a8c726ab4e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOPolyline &gt; AIAC::GOPolyline::Add</definition>
+        <argsstring>()</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOPolyline::Add</qualifiedname>
+        <briefdescription>
+<para>Add <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> to the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points of the polyline. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>uint32_t Id of the polyline. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="558" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="293" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a22f5a519edc2985720264ed6e3374295" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOPolyline &gt; AIAC::GOPolyline::Add</definition>
+        <argsstring>(std::vector&lt; GOPoint &gt; points, bool isClosed=false, float weight=GOWeight::Default)</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOPolyline::Add</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isClosed</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+          <defval>GOWeight::Default</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="559" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="300" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a9ad4b2a64ee2b51b39ff4c0e48f5d0e9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOPolyline &gt; AIAC::GOPolyline::Add</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; points, bool isClosed=false, float weight=GOWeight::Default)</argsstring>
+        <name>Add</name>
+        <qualifiedname>AIAC::GOPolyline::Add</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>points</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isClosed</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+          <defval>GOWeight::Default</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="560" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="308" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a916ec7d46c42f4445dda6207d43279c0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; GOPolyline &gt; AIAC::GOPolyline::Get</definition>
+        <argsstring>(const uint32_t &amp;id)</argsstring>
+        <name>Get</name>
+        <qualifiedname>AIAC::GOPolyline::Get</qualifiedname>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="564" column="32" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="332" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1ade572355bbf38efdda91d6971183aaef" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPolyline" kindref="compound">GOPolyline</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GOPolyline &gt; &gt; AIAC::GOPolyline::GetAll</definition>
+        <argsstring>()</argsstring>
+        <name>GetAll</name>
+        <qualifiedname>AIAC::GOPolyline::GetAll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="565" column="28" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="337" bodyend="340"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1ae1e9ea444569d0045a46740f68b0eb4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::GOPolyline::~GOPolyline</definition>
+        <argsstring>()=default</argsstring>
+        <name>~GOPolyline</name>
+        <qualifiedname>AIAC::GOPolyline::~GOPolyline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="562" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a534596e84923305c85c4f5d68ace729e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt; GOPoint &gt; &amp; AIAC::GOPolyline::GetPoints</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPoints</name>
+        <qualifiedname>AIAC::GOPolyline::GetPoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="567" column="34" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="567" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a72af6e27173f8a0bbd40c46db871907b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOPolyline::SetPoints</definition>
+        <argsstring>(std::vector&lt; glm::vec3 &gt; points)</argsstring>
+        <name>SetPoints</name>
+        <qualifiedname>AIAC::GOPolyline::SetPoints</qualifiedname>
+        <param>
+          <type>std::vector&lt; glm::vec3 &gt;</type>
+          <declname>points</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="568" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="568" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a9947ab97cc558d4c3b4f794fabbf43e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOPolyline::SetPoints</definition>
+        <argsstring>(std::vector&lt; GOPoint &gt; points)</argsstring>
+        <name>SetPoints</name>
+        <qualifiedname>AIAC::GOPolyline::SetPoints</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+          <declname>points</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="575" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="575" bodyend="575"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a0eb4095a9a8dd5251273b0beea915966" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOPolyline::SetClosed</definition>
+        <argsstring>(bool isClosed)</argsstring>
+        <name>SetClosed</name>
+        <qualifiedname>AIAC::GOPolyline::SetClosed</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isClosed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="577" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="577" bodyend="577"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a0c8f7a84e1f577587a20987da9ccee9f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool AIAC::GOPolyline::IsClosed</definition>
+        <argsstring>() const</argsstring>
+        <name>IsClosed</name>
+        <qualifiedname>AIAC::GOPolyline::IsClosed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="578" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="578" bodyend="578"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1ae07cbbb2e8f2dac2a97be9d12eb4645c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::GOPolyline::SetWeight</definition>
+        <argsstring>(float weight)</argsstring>
+        <name>SetWeight</name>
+        <qualifiedname>AIAC::GOPolyline::SetWeight</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>weight</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="580" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="580" bodyend="580"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a31b6e2ef9d729fb67ddd25880e2ead8b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOPolyline::Transform</definition>
+        <argsstring>(const glm::mat4x4 &amp;transformMat)</argsstring>
+        <name>Transform</name>
+        <qualifiedname>AIAC::GOPolyline::Transform</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1ab285335f31d4c2ddf2046fe6f73b709c">Transform</reimplements>
+        <param>
+          <type>const glm::mat4x4 &amp;</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="582" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="582" bodyend="587"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a61b20848202ba84f4605be072dcae5f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GOPrimitive" kindref="compound">GOPrimitive</ref></type>
+        <definition>GOPrimitive AIAC::GOPolyline::operator*</definition>
+        <argsstring>(const glm::mat4x4 &amp;transformMat)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>AIAC::GOPolyline::operator*</qualifiedname>
+        <param>
+          <type>const glm::mat4x4 &amp;</type>
+          <declname>transformMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="589" column="21" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="589" bodyend="594"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1GOPolyline_1a0bec1ecfce52861ecdf585622cd5d708" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::GOPolyline::InitGLObject</definition>
+        <argsstring>()</argsstring>
+        <name>InitGLObject</name>
+        <qualifiedname>AIAC::GOPolyline::InitGLObject</qualifiedname>
+        <reimplements refid="classAIAC_1_1GOPrimitive_1a49f3cf45d5ff50ffad69cc36b14a0e49">InitGLObject</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/GOSys/GOPrimitive.h" line="595" column="14" bodyfile="src/AIAC/GOSys/GOPrimitive.cpp" bodystart="323" bodyend="330"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::GOPolyline</label>
+        <link refid="classAIAC_1_1GOPolyline"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::GOPolyline</label>
+        <link refid="classAIAC_1_1GOPolyline"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::GOPrimitive</label>
+        <link refid="classAIAC_1_1GOPrimitive"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/GOSys/GOPrimitive.h" line="545" column="5" bodyfile="src/AIAC/GOSys/GOPrimitive.h" bodystart="546" bodyend="603"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1GOPolyline_1a22270ea472918b808a6307a8c726ab4e" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a22f5a519edc2985720264ed6e3374295" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a9ad4b2a64ee2b51b39ff4c0e48f5d0e9" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Add</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a4aefd9b3b531cf77e3346bda5a4893e9" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>ClearGLObject</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa9ddd2c2904d1e9f5e1755c4a58bf6a1" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Draw</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a13785fd54f841dae10c39df388038c4d" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GenerateId</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a916ec7d46c42f4445dda6207d43279c0" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Get</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1ade572355bbf38efdda91d6971183aaef" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetAll</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1af06b5575beccb6332e48b928a287a187" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1472f5ce4a3641dcca7d450c69d70ef8" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetId</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aebac62a9e1b69ec1cfd48644c534aaf2" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a534596e84923305c85c4f5d68ace729e" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetPoints</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a80f79bbd88ca3fe21a0f42fb34255477" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetState</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae9f8303699cea4b8428689317591f12f" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aeb1d8413c37e371533623c88f6fdfba3" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aa8d20248ffae40c3e3ac38484e40196c" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GetWeight</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a90732baa5f09060a094a6935f5ad697b" prot="private" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GOPoint</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1ad96d074d615e626abf90c7a264469dd0" prot="private" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GOPolyline</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1aee79d682a663af51ef686a46e05fab49" prot="private" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GOPolyline</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a1e4561ed741888f900532d421054be6b" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>GOPrimitive</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a0bec1ecfce52861ecdf585622cd5d708" prot="public" virt="virtual"><scope>AIAC::GOPolyline</scope><name>InitGLObject</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a0c8f7a84e1f577587a20987da9ccee9f" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>IsClosed</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a3297dec73761f03389616ecf8499e45f" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>IsVisible</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65d77218ad304b17e54ec2fbc9233f8a" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_Color</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2e707608c9ed77c2f06a643903999460" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_GLObjects</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a50dbae076472c12401fad78575051881" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_Id</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a04bf78e3f38d273784435b9cdf92d2fc" prot="private" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_IsClosed</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a68c8ba133a8540aa164e5ebc6e6e08f0" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_IsVisible</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ae0cb08a0ec3b500e2703b2c77c72f4a2" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_Name</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a56b071b6623d49795d781e5135592912" prot="private" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_Points</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a18ba99dae0b751e36cde6d65b520c8a4" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_State</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac729389e9458753cf5c6c9f4d32fa4b9" prot="protected" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a8a80fedbb533c836e9972a37a73ac610" prot="private" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>m_Weight</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a61b20848202ba84f4605be072dcae5f7" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>operator*</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2f842878f11acd94deee26ba899497a5" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1ac362718e97f2fe212f6d4af92276d773" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>Remove</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a0eb4095a9a8dd5251273b0beea915966" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetClosed</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1aba89b33e74ef2bdec4d8ee1626d8db3d" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetColor</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a39f1285ba9467e1e7c486eac632bc425" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetName</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a72af6e27173f8a0bbd40c46db871907b" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetPoints</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a9947ab97cc558d4c3b4f794fabbf43e2" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetPoints</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a65a7560b8827c82a121bff95013a2f40" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetState</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a2d3133021181776c1a451c2ec2d80a8b" prot="public" virt="virtual"><scope>AIAC::GOPolyline</scope><name>SetValueFrom</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a773a24e22df1e14c85c11af52e3b8104" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetVisibility</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1ae07cbbb2e8f2dac2a97be9d12eb4645c" prot="public" virt="non-virtual"><scope>AIAC::GOPolyline</scope><name>SetWeight</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1a31b6e2ef9d729fb67ddd25880e2ead8b" prot="public" virt="virtual"><scope>AIAC::GOPolyline</scope><name>Transform</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a8573fe4c64e115849154e927ad15885f" prot="public" virt="virtual"><scope>AIAC::GOPolyline</scope><name>Translate</name></member>
+      <member refid="classAIAC_1_1GOPolyline_1ae1e9ea444569d0045a46740f68b0eb4a" prot="public" virt="virtual"><scope>AIAC::GOPolyline</scope><name>~GOPolyline</name></member>
+      <member refid="classAIAC_1_1GOPrimitive_1a04fbe45113efff131e26fa3701965988" prot="public" virt="virtual"><scope>AIAC::GOPolyline</scope><name>~GOPrimitive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

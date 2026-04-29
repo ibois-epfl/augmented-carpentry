@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="ClrPalette_8h" kind="file" language="C++">
+    <compoundname>ClrPalette.h</compoundname>
+    <includedby refid="LayerToolhead_8cpp" local="yes">src/AIAC/LayerToolhead.cpp</includedby>
+    <includedby refid="LayerUI_8cpp" local="yes">src/AIAC/LayerUI.cpp</includedby>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="ClrPalette_8h_1a52efc7a0da0ec24135e85f9ef0e9c900" prot="public" static="no">
+        <name>AIAC_UI_RED</name>
+        <initializer>ImVec4(1.0f, 0.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="37" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a1adba3fcfda64bea12236ac921b521e5" prot="public" static="no">
+        <name>AIAC_UI_GREEN</name>
+        <initializer>ImVec4(0.0f, 1.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="38" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a9fd4b74be18a984a015d8f736a84b0e1" prot="public" static="no">
+        <name>AIAC_UI_DARK_GREEN</name>
+        <initializer>ImVec4(0.0f, 0.5f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="39" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a591c7e682398e8cff2e1804dcb533e90" prot="public" static="no">
+        <name>AIAC_UI_BLUE</name>
+        <initializer>ImVec4(0.0f, 0.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="40" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1adb49f952744e1c366d6d128db74f8afb" prot="public" static="no">
+        <name>AIAC_UI_YELLOW</name>
+        <initializer>ImVec4(1.0f, 1.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="41" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a6586087a18a00ee81eac1e8389b2c9eb" prot="public" static="no">
+        <name>AIAC_UI_CYAN</name>
+        <initializer>ImVec4(0.0f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="42" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1ae95e8592357e57b33b8caf11b77a22fb" prot="public" static="no">
+        <name>AIAC_UI_MAGENTA</name>
+        <initializer>ImVec4(1.0f, 0.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="43" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a6ecc4b45a7ca0ac9d9d1d4cc76c51aa0" prot="public" static="no">
+        <name>AIAC_UI_WHITE</name>
+        <initializer>ImVec4(1.0f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="44" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a05993919603d16b458175010205834b5" prot="public" static="no">
+        <name>AIAC_UI_BLACK</name>
+        <initializer>ImVec4(0.0f, 0.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="45" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a24ef31f58b9de6ac63c710240533e3cf" prot="public" static="no">
+        <name>AIAC_UI_GREY</name>
+        <initializer>ImVec4(0.5f, 0.5f, 0.5f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="46" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a617fead9087d9dad38ed0426dcc71452" prot="public" static="no">
+        <name>AIAC_UI_PURPLE</name>
+        <initializer>ImVec4(0.5f, 0.0f, 0.5f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="47" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1ae7e0bf073a43b07ae6abce905d138249" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_GREY</name>
+        <initializer>ImVec4(0.5f, 0.5f, 0.5f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="48" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1af2727a31c485aa6ec91812a9989f3c3c" prot="public" static="no">
+        <name>AIAC_UI_DARK_GREY</name>
+        <initializer>ImVec4(0.2f, 0.2f, 0.2f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="49" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a6f3f9d479f300f4f12a7028f821d72a4" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_RED</name>
+        <initializer>ImVec4(1.0f, 0.4f, 0.4f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="50" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1aab0e38bfd1850c227aa47f037c70065e" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_GREEN</name>
+        <initializer>ImVec4(0.4f, 1.0f, 0.4f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="51" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a70234f6a3edea1bea8d52a48840fed52" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_BLUE</name>
+        <initializer>ImVec4(0.4f, 0.4f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="52" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1af22a56f52dbd70512e273dbfc729892b" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_YELLOW</name>
+        <initializer>ImVec4(1.0f, 1.0f, 0.4f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="53" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a484926861fe13ed82286fda095d8871e" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_CYAN</name>
+        <initializer>ImVec4(0.4f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="54" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1aa3f46b3297186481f7f2431276eeb981" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_MAGENTA</name>
+        <initializer>ImVec4(1.0f, 0.4f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="55" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1afa304259d801d0339e8b5361c141d175" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_WHITE</name>
+        <initializer>ImVec4(1.0f, 1.0f, 1.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="56" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1afcf0f38ed3ca39c28b2a3f70ee8e5a59" prot="public" static="no">
+        <name>AIAC_UI_LIGHT_BLACK</name>
+        <initializer>ImVec4(0.4f, 0.4f, 0.4f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="57" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a0afd116693c33a60ca4652cc33b3a5a1" prot="public" static="no">
+        <name>AIAC_UI_SPARK_ORANGE</name>
+        <initializer>ImVec4(1.0f, 0.2f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="58" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a1342fd383fa532a502dbeb4ae0f73934" prot="public" static="no">
+        <name>AIAC_UI_SEA_GREEN</name>
+        <initializer>ImVec4(0.18f, 0.545f, 0.341f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="59" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a2c363ca7e1685207114e048413441c06" prot="public" static="no">
+        <name>AIAC_UI_GRAPE_PURPLE</name>
+        <initializer>ImVec4(0.56f, 0.35f, 0.62f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="60" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1ad0b35f3a2dccc47b20804c2f338f1de3" prot="public" static="no">
+        <name>AIAC_UI_CARMINE_RED</name>
+        <initializer>ImVec4(0.59f, 0.0f, 0.09f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="61" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1accfc29128bba25fad678165bb7bad135" prot="public" static="no">
+        <name>AIAC_UI_YALE_BLUE</name>
+        <initializer>ImVec4(0.06f, 0.3f, 0.57f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="62" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a71b78bde5ccfce7cb72b49f642da3038" prot="public" static="no">
+        <name>AIAC_UI_HIBISCUS_RED</name>
+        <initializer>ImVec4(0.79f, 0.0f, 0.09f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="63" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a6b1a445e336cf84c1883781f698617d1" prot="public" static="no">
+        <name>AIAC_UI_ROYAL_PURPLE</name>
+        <initializer>ImVec4(0.4f, 0.0f, 0.6f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="64" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1aae70ff7b20f4dd4aee094b47201a6f51" prot="public" static="no">
+        <name>AIAC_UI_LOLLIPOP_PURPLE</name>
+        <initializer>ImVec4(0.6f, 0.0f, 0.6f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="65" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a9fa3da1884b41e61fbb595bff301e462" prot="public" static="no">
+        <name>AIAC_UI_PLUM_PURPLE</name>
+        <initializer>ImVec4(0.56f, 0.27f, 0.52f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="66" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a81f025373fcb4894ef264bad85d07991" prot="public" static="no">
+        <name>AIAC_UI_EGYPTIAN_BLUE</name>
+        <initializer>ImVec4(0.06f, 0.2f, 0.65f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="67" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a417c04569db430151763d327eeeb6955" prot="public" static="no">
+        <name>AIAC_UI_SAPPHIRE_BLUE</name>
+        <initializer>ImVec4(0.06f, 0.32f, 0.73f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="68" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1a9714ae6d6fc4a953a5342f99b361fae2" prot="public" static="no">
+        <name>AIAC_UI_PRUSSIAN_BLUE</name>
+        <initializer>ImVec4(0.0f, 0.19f, 0.33f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="69" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1aef1474db99c49350f074b2db5edf4690" prot="public" static="no">
+        <name>AIAC_UI_CINNAMON_RED</name>
+        <initializer>ImVec4(0.82f, 0.41f, 0.12f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="70" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1adcb551403126f21af974765797d032d1" prot="public" static="no">
+        <name>AIAC_UI_APRICOT_ORANGE</name>
+        <initializer>ImVec4(0.98f, 0.81f, 0.69f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="71" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ClrPalette_8h_1ac262443d7b0e39c7ba066817b2d834b2" prot="public" static="no">
+        <name>AIAC_UI_BRONZE_ORANGE</name>
+        <initializer>ImVec4(0.8f, 0.5f, 0.2f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/UI/ClrPalette.h" line="72" column="9" bodyfile="src/AIAC/UI/ClrPalette.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<sp/>BEGINNING<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>source<sp/>file,<sp/>along<sp/>with<sp/>its<sp/>associated<sp/>content,<sp/>was<sp/>authored<sp/>by</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Andrea<sp/>Settimi,<sp/>Hong-Bin<sp/>Yang,<sp/>Naravich<sp/>Chutisilp,<sp/>and<sp/>numerous<sp/>other</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>contributors.<sp/>The<sp/>code<sp/>was<sp/>originally<sp/>developed<sp/>at<sp/>the<sp/>Laboratory<sp/>for</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Timber<sp/>Construction<sp/>(IBOIS,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand)<sp/>at<sp/>the<sp/>School<sp/>of<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Architecture,<sp/>Civil<sp/>and<sp/>Environmental<sp/>Engineering<sp/>(ENAC)<sp/>at<sp/>the<sp/>Swiss</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Federal<sp/>Institute<sp/>of<sp/>Technology<sp/>in<sp/>Lausanne<sp/>(EPFL)<sp/>for<sp/>the<sp/>Doctoral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Research<sp/>&quot;Augmented<sp/>Carpentry&quot;<sp/>(PhD<sp/>researcher:<sp/>Andrea<sp/>Settimi,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>co-director:<sp/>Dr.<sp/>Julien<sp/>Gamerro,<sp/>director:<sp/>Prof.<sp/>Yves<sp/>Weinand).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Although<sp/>the<sp/>entire<sp/>repository<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>GPL<sp/>license,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>particular<sp/>source<sp/>files<sp/>may<sp/>also<sp/>be<sp/>used<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MIT<sp/>license.<sp/>By<sp/>accessing<sp/>or<sp/>using<sp/>this<sp/>file,<sp/>you<sp/>agree<sp/>to<sp/>the<sp/>following:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>1.<sp/>You<sp/>may<sp/>reproduce,<sp/>modify,<sp/>and<sp/>distribute<sp/>this<sp/>file<sp/>in<sp/>accordance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>with<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>MIT<sp/>license.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>You<sp/>must<sp/>retain<sp/>this<sp/>legal<sp/>notice<sp/>in<sp/>all<sp/>copies<sp/>or<sp/>substantial</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>portions<sp/>of<sp/>this<sp/>file.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>This<sp/>file<sp/>is<sp/>provided<sp/>&quot;AS<sp/>IS,&quot;<sp/>without<sp/>any<sp/>express<sp/>or<sp/>implied</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>warranties,<sp/>including<sp/>but<sp/>not<sp/>limited<sp/>to<sp/>the<sp/>implied<sp/>warranties<sp/>of</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>merchantability<sp/>and<sp/>fitness<sp/>for<sp/>a<sp/>particular<sp/>purpose.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>you<sp/>cannot<sp/>or<sp/>will<sp/>not<sp/>comply<sp/>with<sp/>the<sp/>above<sp/>conditions,<sp/>you<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>not<sp/>permitted<sp/>to<sp/>use<sp/>this<sp/>file.<sp/>By<sp/>proceeding,<sp/>you<sp/>acknowledge<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>accept<sp/>all<sp/>terms<sp/>and<sp/>conditions<sp/>herein.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//######################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<sp/>END<sp/>OF<sp/>LEGAL<sp/>NOTICE<sp/>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>#####################################################################</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//<sp/>define<sp/>macros<sp/>for<sp/>colors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_RED<sp/>ImVec4(1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_GREEN<sp/>ImVec4(0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_DARK_GREEN<sp/>ImVec4(0.0f,<sp/>0.5f,<sp/>0.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_BLUE<sp/>ImVec4(0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_YELLOW<sp/>ImVec4(1.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_CYAN<sp/>ImVec4(0.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_MAGENTA<sp/>ImVec4(1.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_WHITE<sp/>ImVec4(1.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_BLACK<sp/>ImVec4(0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_GREY<sp/>ImVec4(0.5f,<sp/>0.5f,<sp/>0.5f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_PURPLE<sp/>ImVec4(0.5f,<sp/>0.0f,<sp/>0.5f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_GREY<sp/>ImVec4(0.5f,<sp/>0.5f,<sp/>0.5f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_DARK_GREY<sp/>ImVec4(0.2f,<sp/>0.2f,<sp/>0.2f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_RED<sp/>ImVec4(1.0f,<sp/>0.4f,<sp/>0.4f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_GREEN<sp/>ImVec4(0.4f,<sp/>1.0f,<sp/>0.4f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_BLUE<sp/>ImVec4(0.4f,<sp/>0.4f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_YELLOW<sp/>ImVec4(1.0f,<sp/>1.0f,<sp/>0.4f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_CYAN<sp/>ImVec4(0.4f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_MAGENTA<sp/>ImVec4(1.0f,<sp/>0.4f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_WHITE<sp/>ImVec4(1.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LIGHT_BLACK<sp/>ImVec4(0.4f,<sp/>0.4f,<sp/>0.4f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_SPARK_ORANGE<sp/>ImVec4(1.0f,<sp/>0.2f,<sp/>0.0f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_SEA_GREEN<sp/>ImVec4(0.18f,<sp/>0.545f,<sp/>0.341f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_GRAPE_PURPLE<sp/>ImVec4(0.56f,<sp/>0.35f,<sp/>0.62f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_CARMINE_RED<sp/>ImVec4(0.59f,<sp/>0.0f,<sp/>0.09f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_YALE_BLUE<sp/>ImVec4(0.06f,<sp/>0.3f,<sp/>0.57f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_HIBISCUS_RED<sp/>ImVec4(0.79f,<sp/>0.0f,<sp/>0.09f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_ROYAL_PURPLE<sp/>ImVec4(0.4f,<sp/>0.0f,<sp/>0.6f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_LOLLIPOP_PURPLE<sp/>ImVec4(0.6f,<sp/>0.0f,<sp/>0.6f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_PLUM_PURPLE<sp/>ImVec4(0.56f,<sp/>0.27f,<sp/>0.52f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_EGYPTIAN_BLUE<sp/>ImVec4(0.06f,<sp/>0.2f,<sp/>0.65f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_SAPPHIRE_BLUE<sp/>ImVec4(0.06f,<sp/>0.32f,<sp/>0.73f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_PRUSSIAN_BLUE<sp/>ImVec4(0.0f,<sp/>0.19f,<sp/>0.33f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_CINNAMON_RED<sp/>ImVec4(0.82f,<sp/>0.41f,<sp/>0.12f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_APRICOT_ORANGE<sp/>ImVec4(0.98f,<sp/>0.81f,<sp/>0.69f,<sp/>1.0f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AIAC_UI_BRONZE_ORANGE<sp/>ImVec4(0.8f,<sp/>0.5f,<sp/>0.2f,<sp/>1.0f)</highlight></codeline>
+    </programlisting>
+    <location file="src/AIAC/UI/ClrPalette.h"/>
+  </compounddef>
+</doxygen>

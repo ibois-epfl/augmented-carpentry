@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1DrillBitData" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::DrillBitData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1a4f67933a3607531862b1fa1e394798a7" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::DrillBitData::NameACIT</definition>
+        <argsstring></argsstring>
+        <name>NameACIT</name>
+        <qualifiedname>AIAC::DrillBitData::NameACIT</qualifiedname>
+        <briefdescription>
+<para>name of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="59" column="21" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1a73c4054064ff96f9d36e366024eca012" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::DrillBitData::RadiusACIT</definition>
+        <argsstring></argsstring>
+        <name>RadiusACIT</name>
+        <qualifiedname>AIAC::DrillBitData::RadiusACIT</qualifiedname>
+        <briefdescription>
+<para>radius of the drillbit </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="61" column="15" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1a4caa5024f5281daab3c6deb173b94ce8" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::DrillBitData::ToolbaseACIT</definition>
+        <argsstring></argsstring>
+        <name>ToolbaseACIT</name>
+        <qualifiedname>AIAC::DrillBitData::ToolbaseACIT</qualifiedname>
+        <briefdescription>
+<para>original position of the base of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="64" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1aa026eca07eb508699918232306f525aa" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::DrillBitData::TooltipACIT</definition>
+        <argsstring></argsstring>
+        <name>TooltipACIT</name>
+        <qualifiedname>AIAC::DrillBitData::TooltipACIT</qualifiedname>
+        <briefdescription>
+<para>original position of the tip of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="66" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1af0178549827d9299158116a0f7129bab" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::DrillBitData::EattipACIT</definition>
+        <argsstring></argsstring>
+        <name>EattipACIT</name>
+        <qualifiedname>AIAC::DrillBitData::EattipACIT</qualifiedname>
+        <briefdescription>
+<para>original position of the tip of the toolhead eating the material </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="68" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1af97006e5f14fc39d813353f653d307bf" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::DrillBitData::ChucktipACIT</definition>
+        <argsstring></argsstring>
+        <name>ChucktipACIT</name>
+        <qualifiedname>AIAC::DrillBitData::ChucktipACIT</qualifiedname>
+        <briefdescription>
+<para>original position of the end of the drill chuck </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="70" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1ad650aac4b7134fa304ba807aeb2a62ff" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::DrillBitData::ToolbaseGO</definition>
+        <argsstring></argsstring>
+        <name>ToolbaseGO</name>
+        <qualifiedname>AIAC::DrillBitData::ToolbaseGO</qualifiedname>
+        <briefdescription>
+<para>GOPoints equivalent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="72" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1ad2f56534f445d4142870bbc474f06c41" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::DrillBitData::TooltipGO</definition>
+        <argsstring></argsstring>
+        <name>TooltipGO</name>
+        <qualifiedname>AIAC::DrillBitData::TooltipGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="73" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1adf4635cacc2c35fbcc005890bd2ecc94" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::DrillBitData::EattipGO</definition>
+        <argsstring></argsstring>
+        <name>EattipGO</name>
+        <qualifiedname>AIAC::DrillBitData::EattipGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="74" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1DrillBitData_1a57e2d9f05921f3095ef8f8aaf1a11d21" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::DrillBitData::ChucktipGO</definition>
+        <argsstring></argsstring>
+        <name>ChucktipGO</name>
+        <qualifiedname>AIAC::DrillBitData::ChucktipGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="75" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structAIAC_1_1DrillBitData_1abc5af9ba285f6467986caebb9d603a9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::DrillBitData::DrillBitData</definition>
+        <argsstring>()</argsstring>
+        <name>DrillBitData</name>
+        <qualifiedname>AIAC::DrillBitData::DrillBitData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="77" column="9" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="77" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoToolhead.h" line="56" column="5" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="57" bodyend="84"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1DrillBitData_1af97006e5f14fc39d813353f653d307bf" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>ChucktipACIT</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1a57e2d9f05921f3095ef8f8aaf1a11d21" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>ChucktipGO</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1abc5af9ba285f6467986caebb9d603a9a" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>DrillBitData</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1af0178549827d9299158116a0f7129bab" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>EattipACIT</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1adf4635cacc2c35fbcc005890bd2ecc94" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>EattipGO</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1a4f67933a3607531862b1fa1e394798a7" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>NameACIT</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1a73c4054064ff96f9d36e366024eca012" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>RadiusACIT</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1a4caa5024f5281daab3c6deb173b94ce8" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>ToolbaseACIT</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1ad650aac4b7134fa304ba807aeb2a62ff" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>ToolbaseGO</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1aa026eca07eb508699918232306f525aa" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>TooltipACIT</name></member>
+      <member refid="structAIAC_1_1DrillBitData_1ad2f56534f445d4142870bbc474f06c41" prot="public" virt="non-virtual"><scope>AIAC::DrillBitData</scope><name>TooltipGO</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

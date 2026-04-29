@@ -1,0 +1,384 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Application" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Application</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a8cfb7b01d7cbee510db146e4326cbbdf" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref></type>
+        <definition>ApplicationSpecification AIAC::Application::m_AppSpec</definition>
+        <argsstring></argsstring>
+        <name>m_AppSpec</name>
+        <qualifiedname>AIAC::Application::m_AppSpec</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="111" column="34" bodyfile="src/AIAC/Application.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a9bd2da603f19617e2ee0bad32b2f7b21" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Window" kindref="compound">Window</ref> *</type>
+        <definition>Window* AIAC::Application::m_Window</definition>
+        <argsstring></argsstring>
+        <name>m_Window</name>
+        <qualifiedname>AIAC::Application::m_Window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="113" column="16" bodyfile="src/AIAC/Application.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a369788e7991940a6ab2c65c8e8ce3900" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1EventBus" kindref="compound">EventBus</ref> *</type>
+        <definition>EventBus* AIAC::Application::m_EventBus</definition>
+        <argsstring></argsstring>
+        <name>m_EventBus</name>
+        <qualifiedname>AIAC::Application::m_EventBus</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="114" column="18" bodyfile="src/AIAC/Application.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a2f62c8f84adbca0c8837bad19a3419e8" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Renderer" kindref="compound">Renderer</ref> *</type>
+        <definition>Renderer* AIAC::Application::m_Renderer</definition>
+        <argsstring></argsstring>
+        <name>m_Renderer</name>
+        <qualifiedname>AIAC::Application::m_Renderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="115" column="18" bodyfile="src/AIAC/Application.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a82a4f5214ac4e309fb418bcfac016f8a" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1GORegistry" kindref="compound">GORegistry</ref> *</type>
+        <definition>GORegistry* AIAC::Application::m_GORegistry</definition>
+        <argsstring></argsstring>
+        <name>m_GORegistry</name>
+        <qualifiedname>AIAC::Application::m_GORegistry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="116" column="20" bodyfile="src/AIAC/Application.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a2006e6dbf09bd6ddaab148a792c1433f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::Application::m_IsRunning</definition>
+        <argsstring></argsstring>
+        <name>m_IsRunning</name>
+        <qualifiedname>AIAC::Application::m_IsRunning</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="118" column="14" bodyfile="src/AIAC/Application.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1ad065e6ec4085ae72839b4ea56d8c5523" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classAIAC_1_1Layer" kindref="compound">AIAC::Layer</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;AIAC::Layer&gt; &gt; AIAC::Application::m_LayerStack</definition>
+        <argsstring></argsstring>
+        <name>m_LayerStack</name>
+        <qualifiedname>AIAC::Application::m_LayerStack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="120" column="21" bodyfile="src/AIAC/Application.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Application_1a3c6e937abda348cc9feb838fe3329247" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::type_index, std::shared_ptr&lt; <ref refid="classAIAC_1_1Layer" kindref="compound">AIAC::Layer</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::type_index, std::shared_ptr&lt;AIAC::Layer&gt; &gt; AIAC::Application::m_LayerMap</definition>
+        <argsstring></argsstring>
+        <name>m_LayerMap</name>
+        <qualifiedname>AIAC::Application::m_LayerMap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="121" column="28" bodyfile="src/AIAC/Application.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Application_1aaa14cbf3a5b676ee60aad5b8f810593c" prot="private" static="yes" mutable="no">
+        <type><ref refid="classAIAC_1_1Application" kindref="compound">Application</ref> *</type>
+        <definition>Application * AIAC::Application::s_Instance</definition>
+        <argsstring></argsstring>
+        <name>s_Instance</name>
+        <qualifiedname>AIAC::Application::s_Instance</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="123" column="28" bodyfile="src/AIAC/Application.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Application_1a5730eff2290a7b3c4d3f051ed9d49b6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Application::Application</definition>
+        <argsstring>(const ApplicationSpecification &amp;appSpec)</argsstring>
+        <name>Application</name>
+        <qualifiedname>AIAC::Application::Application</qualifiedname>
+        <param>
+          <type>const <ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref> &amp;</type>
+          <declname>appSpec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="68" column="9" bodyfile="src/AIAC/Application.cpp" bodystart="46" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1ab80852ddcd0489493342b106c8805654" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>AIAC::Application::~Application</definition>
+        <argsstring>()</argsstring>
+        <name>~Application</name>
+        <qualifiedname>AIAC::Application::~Application</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="69" column="17" bodyfile="src/AIAC/Application.cpp" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1aa47524f1ac62839f213cb66e877f7fcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Application::Run</definition>
+        <argsstring>()</argsstring>
+        <name>Run</name>
+        <qualifiedname>AIAC::Application::Run</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="71" column="14" bodyfile="src/AIAC/Application.cpp" bodystart="78" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a4fb31d2e33b05061cd226d27174f60d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Application::Close</definition>
+        <argsstring>()</argsstring>
+        <name>Close</name>
+        <qualifiedname>AIAC::Application::Close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="72" column="14" bodyfile="src/AIAC/Application.cpp" bodystart="112" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a76d82d8eb86d66bddf5683367267a163" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void AIAC::Application::PushLayer</definition>
+        <argsstring>()</argsstring>
+        <name>PushLayer</name>
+        <qualifiedname>AIAC::Application::PushLayer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="75" column="14" bodyfile="src/AIAC/Application.h" bodystart="75" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a651d3773d91dbdf50fdc1a6574d99e9b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; T &gt;</type>
+        <definition>std::shared_ptr&lt; T &gt; AIAC::Application::GetLayer</definition>
+        <argsstring>()</argsstring>
+        <name>GetLayer</name>
+        <qualifiedname>AIAC::Application::GetLayer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="85" column="25" bodyfile="src/AIAC/Application.h" bodystart="85" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a2ce955f16c174a57b8228a8c734cb0a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Window" kindref="compound">AIAC::Window</ref> *&amp;</type>
+        <definition>AIAC::Window *&amp; AIAC::Application::GetWindow</definition>
+        <argsstring>()</argsstring>
+        <name>GetWindow</name>
+        <qualifiedname>AIAC::Application::GetWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="97" column="29" bodyfile="src/AIAC/Application.h" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a9b056ce80539cd7625cfc0ced56162c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Renderer" kindref="compound">Renderer</ref> *&amp;</type>
+        <definition>Renderer *&amp; AIAC::Application::GetRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>GetRenderer</name>
+        <qualifiedname>AIAC::Application::GetRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="98" column="25" bodyfile="src/AIAC/Application.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1ac3a0359b3328301b30c0c4d36dfe99cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1EventBus" kindref="compound">EventBus</ref> *&amp;</type>
+        <definition>EventBus *&amp; AIAC::Application::GetEventBus</definition>
+        <argsstring>()</argsstring>
+        <name>GetEventBus</name>
+        <qualifiedname>AIAC::Application::GetEventBus</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="99" column="25" bodyfile="src/AIAC/Application.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a60b18eb389f106b06a9c35bc4d13ee5d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1GORegistry" kindref="compound">GORegistry</ref> *</type>
+        <definition>GORegistry * AIAC::Application::GetGORegistry</definition>
+        <argsstring>()</argsstring>
+        <name>GetGORegistry</name>
+        <qualifiedname>AIAC::Application::GetGORegistry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="100" column="27" bodyfile="src/AIAC/Application.h" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1ad0401ba635fd6437a1af8f16960eb88f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="structAIAC_1_1ApplicationSpecification" kindref="compound">ApplicationSpecification</ref> &amp;</type>
+        <definition>const ApplicationSpecification &amp; AIAC::Application::GetSpecification</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSpecification</name>
+        <qualifiedname>AIAC::Application::GetSpecification</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="104" column="47" bodyfile="src/AIAC/Application.h" bodystart="104" bodyend="104"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classAIAC_1_1Application_1ab73fc3c3098bdd5662987dab3a8ce3c8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classAIAC_1_1Application" kindref="compound">Application</ref> &amp;</type>
+        <definition>static Application &amp; AIAC::Application::GetInstance</definition>
+        <argsstring>()</argsstring>
+        <name>GetInstance</name>
+        <qualifiedname>AIAC::Application::GetInstance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="102" column="35" bodyfile="src/AIAC/Application.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1Application_1a030dfc0e25e79b9bb8ffb78d06ab386e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Application::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::Application::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="107" column="14" bodyfile="src/AIAC/Application.cpp" bodystart="60" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Application_1a7fde11bf4539006a4343d127e3bee16d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Application::Shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>AIAC::Application::Shutdown</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Application.h" line="108" column="14" bodyfile="src/AIAC/Application.cpp" bodystart="118" bodyend="132"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Application.h" line="65" column="5" bodyfile="src/AIAC/Application.h" bodystart="66" bodyend="124"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Application_1a5730eff2290a7b3c4d3f051ed9d49b6c" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>Application</name></member>
+      <member refid="classAIAC_1_1Application_1a4fb31d2e33b05061cd226d27174f60d9" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>Close</name></member>
+      <member refid="classAIAC_1_1Application_1ac3a0359b3328301b30c0c4d36dfe99cd" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetEventBus</name></member>
+      <member refid="classAIAC_1_1Application_1a60b18eb389f106b06a9c35bc4d13ee5d" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetGORegistry</name></member>
+      <member refid="classAIAC_1_1Application_1ab73fc3c3098bdd5662987dab3a8ce3c8" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetInstance</name></member>
+      <member refid="classAIAC_1_1Application_1a651d3773d91dbdf50fdc1a6574d99e9b" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetLayer</name></member>
+      <member refid="classAIAC_1_1Application_1a9b056ce80539cd7625cfc0ced56162c5" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetRenderer</name></member>
+      <member refid="classAIAC_1_1Application_1ad0401ba635fd6437a1af8f16960eb88f" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetSpecification</name></member>
+      <member refid="classAIAC_1_1Application_1a2ce955f16c174a57b8228a8c734cb0a0" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>GetWindow</name></member>
+      <member refid="classAIAC_1_1Application_1a030dfc0e25e79b9bb8ffb78d06ab386e" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1Application_1a8cfb7b01d7cbee510db146e4326cbbdf" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_AppSpec</name></member>
+      <member refid="classAIAC_1_1Application_1a369788e7991940a6ab2c65c8e8ce3900" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_EventBus</name></member>
+      <member refid="classAIAC_1_1Application_1a82a4f5214ac4e309fb418bcfac016f8a" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_GORegistry</name></member>
+      <member refid="classAIAC_1_1Application_1a2006e6dbf09bd6ddaab148a792c1433f" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_IsRunning</name></member>
+      <member refid="classAIAC_1_1Application_1a3c6e937abda348cc9feb838fe3329247" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_LayerMap</name></member>
+      <member refid="classAIAC_1_1Application_1ad065e6ec4085ae72839b4ea56d8c5523" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_LayerStack</name></member>
+      <member refid="classAIAC_1_1Application_1a2f62c8f84adbca0c8837bad19a3419e8" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_Renderer</name></member>
+      <member refid="classAIAC_1_1Application_1a9bd2da603f19617e2ee0bad32b2f7b21" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>m_Window</name></member>
+      <member refid="classAIAC_1_1Application_1a76d82d8eb86d66bddf5683367267a163" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>PushLayer</name></member>
+      <member refid="classAIAC_1_1Application_1aa47524f1ac62839f213cb66e877f7fcd" prot="public" virt="non-virtual"><scope>AIAC::Application</scope><name>Run</name></member>
+      <member refid="classAIAC_1_1Application_1aaa14cbf3a5b676ee60aad5b8f810593c" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>s_Instance</name></member>
+      <member refid="classAIAC_1_1Application_1a7fde11bf4539006a4343d127e3bee16d" prot="private" virt="non-virtual"><scope>AIAC::Application</scope><name>Shutdown</name></member>
+      <member refid="classAIAC_1_1Application_1ab80852ddcd0489493342b106c8805654" prot="public" virt="virtual"><scope>AIAC::Application</scope><name>~Application</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

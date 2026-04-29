@@ -1,0 +1,807 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Renderer" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Renderer</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>StandardView</name>
+        <qualifiedname>AIAC::Renderer::StandardView</qualifiedname>
+        <enumvalue id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3aa6705777b712ee811e76fb07162081d63" prot="public">
+          <name>TOP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3aa1fabf63de5c96c78e2a40805bcdeb73b" prot="public">
+          <name>BOTTOM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3aa7f39ac71e81132daad44925b3bdfde5a" prot="public">
+          <name>NW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3aadc33066c3993e0d50896e533fd692ce0" prot="public">
+          <name>NE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3aa6f56aa4e2561eb66f17f6d8de8070a77" prot="public">
+          <name>SW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3aaf003c44deab679aa2edfaff864c77402" prot="public">
+          <name>SE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="53" column="9" bodyfile="src/AIAC/Render/Renderer.h" bodystart="54" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="enum" id="classAIAC_1_1Renderer_1a71c491418d60d517c642c638d8011da3" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>CameraFrameType</name>
+        <qualifiedname>AIAC::Renderer::CameraFrameType</qualifiedname>
+        <enumvalue id="classAIAC_1_1Renderer_1a71c491418d60d517c642c638d8011da3a633d6abff0a3fc22404347728d195059" prot="public">
+          <name>RAW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a71c491418d60d517c642c638d8011da3a5c72aeb2271b2dbc788bf8f3a74250f7" prot="public">
+          <name>UNDISTORTED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classAIAC_1_1Renderer_1a71c491418d60d517c642c638d8011da3ad66f759f80cdc0b11ce61d9220cf2199" prot="public">
+          <name>SLAM_PROCESSED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="87" column="9" bodyfile="src/AIAC/Render/Renderer.h" bodystart="88" bodyend="92"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a2ee31538d98225339085cf3bd594d9db" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GLObject" kindref="compound">GLObject</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GLObject&gt; AIAC::Renderer::m_TestGLObject</definition>
+        <argsstring></argsstring>
+        <name>m_TestGLObject</name>
+        <qualifiedname>AIAC::Renderer::m_TestGLObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="109" column="25" bodyfile="src/AIAC/Render/Renderer.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a594a37c346d628f1a99820f17910d90c" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::Renderer::m_CamW</definition>
+        <argsstring></argsstring>
+        <name>m_CamW</name>
+        <qualifiedname>AIAC::Renderer::m_CamW</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="111" column="15" bodyfile="src/AIAC/Render/Renderer.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a68958de4c783424abb1db9a96945d631" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::Renderer::m_CamH</definition>
+        <argsstring></argsstring>
+        <name>m_CamH</name>
+        <qualifiedname>AIAC::Renderer::m_CamH</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="111" column="22" bodyfile="src/AIAC/Render/Renderer.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a4886297159ecaaf21bc706a7d3de3682" prot="private" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Renderer::m_BasicShaderProgram</definition>
+        <argsstring></argsstring>
+        <name>m_BasicShaderProgram</name>
+        <qualifiedname>AIAC::Renderer::m_BasicShaderProgram</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="113" column="16" bodyfile="src/AIAC/Render/Renderer.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1ac83cced5b555d7f3ab0ca9078fe42851" prot="private" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Renderer::m_MatrixId</definition>
+        <argsstring></argsstring>
+        <name>m_MatrixId</name>
+        <qualifiedname>AIAC::Renderer::m_MatrixId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="114" column="16" bodyfile="src/AIAC/Render/Renderer.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1aa59df19d299bd6132c8c8f661616f68b" prot="private" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Renderer::m_VAO</definition>
+        <argsstring></argsstring>
+        <name>m_VAO</name>
+        <qualifiedname>AIAC::Renderer::m_VAO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="115" column="16" bodyfile="src/AIAC/Render/Renderer.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1ae837a3d4313e22ed98ea97e9f8bf0d24" prot="private" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 AIAC::Renderer::m_ProjMatrix</definition>
+        <argsstring></argsstring>
+        <name>m_ProjMatrix</name>
+        <qualifiedname>AIAC::Renderer::m_ProjMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="117" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a131be719fe5cacbd4d94dc1a06519315" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Viewport" kindref="compound">Viewport</ref></type>
+        <definition>Viewport AIAC::Renderer::m_GlobalView</definition>
+        <argsstring></argsstring>
+        <name>m_GlobalView</name>
+        <qualifiedname>AIAC::Renderer::m_GlobalView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="120" column="18" bodyfile="src/AIAC/Render/Renderer.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1ab02815e1c615a2dff6fd58bc183b829e" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::Renderer::m_GlobalCamLookAtCenter</definition>
+        <argsstring></argsstring>
+        <name>m_GlobalCamLookAtCenter</name>
+        <qualifiedname>AIAC::Renderer::m_GlobalCamLookAtCenter</qualifiedname>
+        <initializer>= glm::vec3(0, 0, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="121" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1aa90dea71955292fdbf1b8e31572ec4b5" prot="private" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 AIAC::Renderer::m_GlobalCamMatrix</definition>
+        <argsstring></argsstring>
+        <name>m_GlobalCamMatrix</name>
+        <qualifiedname>AIAC::Renderer::m_GlobalCamMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="122" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a0d88b66975db4a0cf4664fb1d6f0efe2" prot="private" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 AIAC::Renderer::m_GlobalProjMatrix</definition>
+        <argsstring></argsstring>
+        <name>m_GlobalProjMatrix</name>
+        <qualifiedname>AIAC::Renderer::m_GlobalProjMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="123" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1aacbce23feb8f9eeedc4bf70ddebd637d" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::Renderer::m_GlobalProjOrthoSize</definition>
+        <argsstring></argsstring>
+        <name>m_GlobalProjOrthoSize</name>
+        <qualifiedname>AIAC::Renderer::m_GlobalProjOrthoSize</qualifiedname>
+        <initializer>= 15.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="124" column="15" bodyfile="src/AIAC/Render/Renderer.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a97d1edf6a66d2b8b1a1fdbe167f5e12c" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Viewport" kindref="compound">Viewport</ref></type>
+        <definition>Viewport AIAC::Renderer::m_MappingView</definition>
+        <argsstring></argsstring>
+        <name>m_MappingView</name>
+        <qualifiedname>AIAC::Renderer::m_MappingView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="127" column="18" bodyfile="src/AIAC/Render/Renderer.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a627df414a9f0113a196cd955139cf514" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1Viewport" kindref="compound">Viewport</ref></type>
+        <definition>Viewport AIAC::Renderer::m_CamCalibView</definition>
+        <argsstring></argsstring>
+        <name>m_CamCalibView</name>
+        <qualifiedname>AIAC::Renderer::m_CamCalibView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="130" column="18" bodyfile="src/AIAC/Render/Renderer.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a8d41be3a54f6f93f578e1375a9d1fa95" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; glm::vec3 &gt;</type>
+        <definition>std::vector&lt;glm::vec3&gt; AIAC::Renderer::m_CamVisualizationEdges</definition>
+        <argsstring></argsstring>
+        <name>m_CamVisualizationEdges</name>
+        <qualifiedname>AIAC::Renderer::m_CamVisualizationEdges</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="132" column="21" bodyfile="src/AIAC/Render/Renderer.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a0762f86aec731dca2d4bb710b924218c" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::Renderer::m_DefaultEdgeColor</definition>
+        <argsstring></argsstring>
+        <name>m_DefaultEdgeColor</name>
+        <qualifiedname>AIAC::Renderer::m_DefaultEdgeColor</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="134" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1aca41377ca29b030102440392b28d712a" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::Renderer::m_PointCloudMapColor</definition>
+        <argsstring></argsstring>
+        <name>m_PointCloudMapColor</name>
+        <qualifiedname>AIAC::Renderer::m_PointCloudMapColor</qualifiedname>
+        <initializer>= glm::vec4(0.9, 0.9, 0.9, 0.2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="135" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a8b28a7e5257f868b3a8acbe1227c6b6a" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::Renderer::m_DigitalModelBoundingBoxColor</definition>
+        <argsstring></argsstring>
+        <name>m_DigitalModelBoundingBoxColor</name>
+        <qualifiedname>AIAC::Renderer::m_DigitalModelBoundingBoxColor</qualifiedname>
+        <initializer>= glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="136" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Renderer_1a3118d9a9250a6fc32f9768d394687b45" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 AIAC::Renderer::m_DigitalModelFaceColor</definition>
+        <argsstring></argsstring>
+        <name>m_DigitalModelFaceColor</name>
+        <qualifiedname>AIAC::Renderer::m_DigitalModelFaceColor</qualifiedname>
+        <initializer>= glm::vec4(0.6, 0.35, 0.2, 0.3)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="137" column="19" bodyfile="src/AIAC/Render/Renderer.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a207036dd0052cfa5885614cbbc5f5636" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Renderer::Renderer</definition>
+        <argsstring>()=default</argsstring>
+        <name>Renderer</name>
+        <qualifiedname>AIAC::Renderer::Renderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="64" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a5635903d9851846bd033816812903419" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual AIAC::Renderer::~Renderer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Renderer</name>
+        <qualifiedname>AIAC::Renderer::~Renderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="65" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1ac55922d0c6d5962ab192d287fd433191" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::Renderer::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="67" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="55" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1aafa5774f9998c2153185c0c58843e6c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::InitProjMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>InitProjMatrix</name>
+        <qualifiedname>AIAC::Renderer::InitProjMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="68" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="83" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a5b481788cc18e8ad9054464d138f88e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::OnRender</definition>
+        <argsstring>()</argsstring>
+        <name>OnRender</name>
+        <qualifiedname>AIAC::Renderer::OnRender</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="69" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="148" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1ac643cab4627a689e4addf6bfbf900d06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Renderer::GetGlobalView</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGlobalView</name>
+        <qualifiedname>AIAC::Renderer::GetGlobalView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="71" column="16" bodyfile="src/AIAC/Render/Renderer.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a215c865aa858e9457cbeb1d0d631437d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::SetGlobalViewSize</definition>
+        <argsstring>(float w, float h)</argsstring>
+        <name>SetGlobalViewSize</name>
+        <qualifiedname>AIAC::Renderer::SetGlobalViewSize</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="72" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="169" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a3d066950fdc0b7574531f0cbcf79b5d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::SetGlobalViewToActivatedComponent</definition>
+        <argsstring>(StandardView standardView)</argsstring>
+        <name>SetGlobalViewToActivatedComponent</name>
+        <qualifiedname>AIAC::Renderer::SetGlobalViewToActivatedComponent</qualifiedname>
+        <param>
+          <type>StandardView</type>
+          <declname>standardView</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="73" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="195" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a5543246f7a77548baf3b57d40bb646a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::UpdateGlobalViewCameraTranslation</definition>
+        <argsstring>(double diffX, double diffY)</argsstring>
+        <name>UpdateGlobalViewCameraTranslation</name>
+        <qualifiedname>AIAC::Renderer::UpdateGlobalViewCameraTranslation</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>diffX</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>diffY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="74" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="181" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1afab0f259ee0674c5ffdcf1bcfac93f23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::UpdateGlobalViewCameraRotation</definition>
+        <argsstring>(double diffX, double diffY)</argsstring>
+        <name>UpdateGlobalViewCameraRotation</name>
+        <qualifiedname>AIAC::Renderer::UpdateGlobalViewCameraRotation</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>diffX</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>diffY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="75" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="173" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a079217b5375ba37993ff0a0852eda2d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::UpdateGlobalViewCameraScale</definition>
+        <argsstring>(double diff)</argsstring>
+        <name>UpdateGlobalViewCameraScale</name>
+        <qualifiedname>AIAC::Renderer::UpdateGlobalViewCameraScale</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>diff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="76" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="186" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a00f001cc2ae2d0b63ebc4ac51e491f44" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Renderer::GetMappingView</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMappingView</name>
+        <qualifiedname>AIAC::Renderer::GetMappingView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="79" column="16" bodyfile="src/AIAC/Render/Renderer.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1afe0c0cc0a020ec2ce423e23b73abf821" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::SetMappingViewSize</definition>
+        <argsstring>(float w, float h)</argsstring>
+        <name>SetMappingViewSize</name>
+        <qualifiedname>AIAC::Renderer::SetMappingViewSize</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a8bcdb4e7c8f8972ba453350096e75688" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Renderer::GetCamCalibView</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCamCalibView</name>
+        <qualifiedname>AIAC::Renderer::GetCamCalibView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="83" column="16" bodyfile="src/AIAC/Render/Renderer.h" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a2b13addfcb2edfa65310ec9586dad7cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::SetCamCalibViewSize</definition>
+        <argsstring>(float w, float h)</argsstring>
+        <name>SetCamCalibViewSize</name>
+        <qualifiedname>AIAC::Renderer::SetCamCalibViewSize</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="84" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a3c808e38bd8e355426376f94255e81f9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::RenderMainView</definition>
+        <argsstring>()</argsstring>
+        <name>RenderMainView</name>
+        <qualifiedname>AIAC::Renderer::RenderMainView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="95" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="286" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1ace1a884530a35469d00a32c097808c48" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::InitGlobalView</definition>
+        <argsstring>()</argsstring>
+        <name>InitGlobalView</name>
+        <qualifiedname>AIAC::Renderer::InitGlobalView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="97" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="115" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a9428050dc05bd505040f3ef85834ea08" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::InitMappingView</definition>
+        <argsstring>()</argsstring>
+        <name>InitMappingView</name>
+        <qualifiedname>AIAC::Renderer::InitMappingView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="98" column="14" bodyfile="src/AIAC/Render/Renderer.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1ad1c1402e507db8b246a1c6e0ed863ef2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::InitCamCalibView</definition>
+        <argsstring>()</argsstring>
+        <name>InitCamCalibView</name>
+        <qualifiedname>AIAC::Renderer::InitCamCalibView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="99" column="14" bodyfile="src/AIAC/Render/Renderer.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1ab55657b864134e968e2f185eab288e5b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::RenderGlobalView</definition>
+        <argsstring>()</argsstring>
+        <name>RenderGlobalView</name>
+        <qualifiedname>AIAC::Renderer::RenderGlobalView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="101" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="238" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1aef249b764118240d6d940348b847fde3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::RenderMappingView</definition>
+        <argsstring>()</argsstring>
+        <name>RenderMappingView</name>
+        <qualifiedname>AIAC::Renderer::RenderMappingView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="102" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="258" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a5333e84e8dbab2da695429e9fd462630" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::RenderCamCalibView</definition>
+        <argsstring>()</argsstring>
+        <name>RenderCamCalibView</name>
+        <qualifiedname>AIAC::Renderer::RenderCamCalibView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="103" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="277" bodyend="284"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Renderer_1a7942163afa946478a8fef9a1ef973b67" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Renderer::RenderCameraFrame</definition>
+        <argsstring>(int w, int h, CameraFrameType frameType=CameraFrameType::UNDISTORTED)</argsstring>
+        <name>RenderCameraFrame</name>
+        <qualifiedname>AIAC::Renderer::RenderCameraFrame</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>CameraFrameType</type>
+          <declname>frameType</declname>
+          <defval>CameraFrameType::UNDISTORTED</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Renderer.h" line="105" column="14" bodyfile="src/AIAC/Render/Renderer.cpp" bodystart="311" bodyend="345"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Render/Renderer.h" line="49" column="5" bodyfile="src/AIAC/Render/Renderer.h" bodystart="50" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Renderer_1a71c491418d60d517c642c638d8011da3" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>CameraFrameType</name></member>
+      <member refid="classAIAC_1_1Renderer_1a8bcdb4e7c8f8972ba453350096e75688" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>GetCamCalibView</name></member>
+      <member refid="classAIAC_1_1Renderer_1ac643cab4627a689e4addf6bfbf900d06" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>GetGlobalView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a00f001cc2ae2d0b63ebc4ac51e491f44" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>GetMappingView</name></member>
+      <member refid="classAIAC_1_1Renderer_1ac55922d0c6d5962ab192d287fd433191" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1Renderer_1ad1c1402e507db8b246a1c6e0ed863ef2" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>InitCamCalibView</name></member>
+      <member refid="classAIAC_1_1Renderer_1ace1a884530a35469d00a32c097808c48" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>InitGlobalView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a9428050dc05bd505040f3ef85834ea08" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>InitMappingView</name></member>
+      <member refid="classAIAC_1_1Renderer_1aafa5774f9998c2153185c0c58843e6c3" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>InitProjMatrix</name></member>
+      <member refid="classAIAC_1_1Renderer_1a4886297159ecaaf21bc706a7d3de3682" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_BasicShaderProgram</name></member>
+      <member refid="classAIAC_1_1Renderer_1a627df414a9f0113a196cd955139cf514" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_CamCalibView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a68958de4c783424abb1db9a96945d631" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_CamH</name></member>
+      <member refid="classAIAC_1_1Renderer_1a8d41be3a54f6f93f578e1375a9d1fa95" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_CamVisualizationEdges</name></member>
+      <member refid="classAIAC_1_1Renderer_1a594a37c346d628f1a99820f17910d90c" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_CamW</name></member>
+      <member refid="classAIAC_1_1Renderer_1a0762f86aec731dca2d4bb710b924218c" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_DefaultEdgeColor</name></member>
+      <member refid="classAIAC_1_1Renderer_1a8b28a7e5257f868b3a8acbe1227c6b6a" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_DigitalModelBoundingBoxColor</name></member>
+      <member refid="classAIAC_1_1Renderer_1a3118d9a9250a6fc32f9768d394687b45" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_DigitalModelFaceColor</name></member>
+      <member refid="classAIAC_1_1Renderer_1ab02815e1c615a2dff6fd58bc183b829e" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_GlobalCamLookAtCenter</name></member>
+      <member refid="classAIAC_1_1Renderer_1aa90dea71955292fdbf1b8e31572ec4b5" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_GlobalCamMatrix</name></member>
+      <member refid="classAIAC_1_1Renderer_1a0d88b66975db4a0cf4664fb1d6f0efe2" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_GlobalProjMatrix</name></member>
+      <member refid="classAIAC_1_1Renderer_1aacbce23feb8f9eeedc4bf70ddebd637d" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_GlobalProjOrthoSize</name></member>
+      <member refid="classAIAC_1_1Renderer_1a131be719fe5cacbd4d94dc1a06519315" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_GlobalView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a97d1edf6a66d2b8b1a1fdbe167f5e12c" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_MappingView</name></member>
+      <member refid="classAIAC_1_1Renderer_1ac83cced5b555d7f3ab0ca9078fe42851" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_MatrixId</name></member>
+      <member refid="classAIAC_1_1Renderer_1aca41377ca29b030102440392b28d712a" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_PointCloudMapColor</name></member>
+      <member refid="classAIAC_1_1Renderer_1ae837a3d4313e22ed98ea97e9f8bf0d24" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_ProjMatrix</name></member>
+      <member refid="classAIAC_1_1Renderer_1a2ee31538d98225339085cf3bd594d9db" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_TestGLObject</name></member>
+      <member refid="classAIAC_1_1Renderer_1aa59df19d299bd6132c8c8f661616f68b" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>m_VAO</name></member>
+      <member refid="classAIAC_1_1Renderer_1a5b481788cc18e8ad9054464d138f88e3" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>OnRender</name></member>
+      <member refid="classAIAC_1_1Renderer_1a5333e84e8dbab2da695429e9fd462630" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>RenderCamCalibView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a7942163afa946478a8fef9a1ef973b67" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>RenderCameraFrame</name></member>
+      <member refid="classAIAC_1_1Renderer_1a207036dd0052cfa5885614cbbc5f5636" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>Renderer</name></member>
+      <member refid="classAIAC_1_1Renderer_1ab55657b864134e968e2f185eab288e5b" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>RenderGlobalView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a3c808e38bd8e355426376f94255e81f9" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>RenderMainView</name></member>
+      <member refid="classAIAC_1_1Renderer_1aef249b764118240d6d940348b847fde3" prot="private" virt="non-virtual"><scope>AIAC::Renderer</scope><name>RenderMappingView</name></member>
+      <member refid="classAIAC_1_1Renderer_1a2b13addfcb2edfa65310ec9586dad7cc" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>SetCamCalibViewSize</name></member>
+      <member refid="classAIAC_1_1Renderer_1a215c865aa858e9457cbeb1d0d631437d" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>SetGlobalViewSize</name></member>
+      <member refid="classAIAC_1_1Renderer_1a3d066950fdc0b7574531f0cbcf79b5d9" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>SetGlobalViewToActivatedComponent</name></member>
+      <member refid="classAIAC_1_1Renderer_1afe0c0cc0a020ec2ce423e23b73abf821" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>SetMappingViewSize</name></member>
+      <member refid="classAIAC_1_1Renderer_1a2d5f24bc7fb92ebb9e3936a51b66cf3a" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>StandardView</name></member>
+      <member refid="classAIAC_1_1Renderer_1afab0f259ee0674c5ffdcf1bcfac93f23" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>UpdateGlobalViewCameraRotation</name></member>
+      <member refid="classAIAC_1_1Renderer_1a079217b5375ba37993ff0a0852eda2d2" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>UpdateGlobalViewCameraScale</name></member>
+      <member refid="classAIAC_1_1Renderer_1a5543246f7a77548baf3b57d40bb646a1" prot="public" virt="non-virtual"><scope>AIAC::Renderer</scope><name>UpdateGlobalViewCameraTranslation</name></member>
+      <member refid="classAIAC_1_1Renderer_1a5635903d9851846bd033816812903419" prot="public" virt="virtual"><scope>AIAC::Renderer</scope><name>~Renderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

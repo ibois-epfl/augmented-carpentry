@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1Viewport" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::Viewport</compoundname>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1Viewport_1a09d67edcf72811725f65b9c7a0217144" prot="protected" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::m_FrameBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_FrameBuffer</name>
+        <qualifiedname>AIAC::Viewport::m_FrameBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="54" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Viewport_1a0b7e6943952396ee5ce810c5edda3f60" prot="protected" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::m_Texture</definition>
+        <argsstring></argsstring>
+        <name>m_Texture</name>
+        <qualifiedname>AIAC::Viewport::m_Texture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="55" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Viewport_1a6d76efb2361a66a8cb0924936a5f95f7" prot="protected" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::m_DepthBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_DepthBuffer</name>
+        <qualifiedname>AIAC::Viewport::m_DepthBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="56" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Viewport_1a2690a782a60de0d7d44d30b5162530cf" prot="protected" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::m_W</definition>
+        <argsstring></argsstring>
+        <name>m_W</name>
+        <qualifiedname>AIAC::Viewport::m_W</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="57" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1Viewport_1a2e3846a5a3bd9021960d21d4209c8790" prot="protected" static="no" mutable="no">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::m_H</definition>
+        <argsstring></argsstring>
+        <name>m_H</name>
+        <qualifiedname>AIAC::Viewport::m_H</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="58" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1af8848e064aef8fdd3137cdeef7517bf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Viewport::Viewport</definition>
+        <argsstring>()=default</argsstring>
+        <name>Viewport</name>
+        <qualifiedname>AIAC::Viewport::Viewport</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="42" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1aee7c5a07b60d73c7b6eef2c8d754c541" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::Viewport::~Viewport</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Viewport</name>
+        <qualifiedname>AIAC::Viewport::~Viewport</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="43" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1a92fdaffd9d78c9ba585aee38cd3106e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Viewport::Init</definition>
+        <argsstring>(int w, int h)</argsstring>
+        <name>Init</name>
+        <qualifiedname>AIAC::Viewport::Init</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="45" column="14" bodyfile="src/AIAC/Render/Viewport.cpp" bodystart="39" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1a45b42b2c89effb29984e71fc6414e456" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Viewport::Activate</definition>
+        <argsstring>()</argsstring>
+        <name>Activate</name>
+        <qualifiedname>AIAC::Viewport::Activate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="46" column="14" bodyfile="src/AIAC/Render/Viewport.cpp" bodystart="73" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1a91d807b9bbc9546d3558247137d5b157" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::GetTexture</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTexture</name>
+        <qualifiedname>AIAC::Viewport::GetTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="47" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1ad0830e9fa9221999a065985ff999935c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::Viewport::SetSize</definition>
+        <argsstring>(int w, int h)</argsstring>
+        <name>SetSize</name>
+        <qualifiedname>AIAC::Viewport::SetSize</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="48" column="14" bodyfile="src/AIAC/Render/Viewport.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1a0ef1a6b8eb7f8e242682fc676dd04881" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::GetW</definition>
+        <argsstring>() const</argsstring>
+        <name>GetW</name>
+        <qualifiedname>AIAC::Viewport::GetW</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="50" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1Viewport_1a1871ca3a68c60415eba4ac46c0481d09" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GLuint</type>
+        <definition>GLuint AIAC::Viewport::GetH</definition>
+        <argsstring>() const</argsstring>
+        <name>GetH</name>
+        <qualifiedname>AIAC::Viewport::GetH</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Render/Viewport.h" line="51" column="16" bodyfile="src/AIAC/Render/Viewport.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/Render/Viewport.h" line="40" column="5" bodyfile="src/AIAC/Render/Viewport.h" bodystart="40" bodyend="59"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1Viewport_1a45b42b2c89effb29984e71fc6414e456" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1Viewport_1a1871ca3a68c60415eba4ac46c0481d09" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>GetH</name></member>
+      <member refid="classAIAC_1_1Viewport_1a91d807b9bbc9546d3558247137d5b157" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>GetTexture</name></member>
+      <member refid="classAIAC_1_1Viewport_1a0ef1a6b8eb7f8e242682fc676dd04881" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>GetW</name></member>
+      <member refid="classAIAC_1_1Viewport_1a92fdaffd9d78c9ba585aee38cd3106e3" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>Init</name></member>
+      <member refid="classAIAC_1_1Viewport_1a6d76efb2361a66a8cb0924936a5f95f7" prot="protected" virt="non-virtual"><scope>AIAC::Viewport</scope><name>m_DepthBuffer</name></member>
+      <member refid="classAIAC_1_1Viewport_1a09d67edcf72811725f65b9c7a0217144" prot="protected" virt="non-virtual"><scope>AIAC::Viewport</scope><name>m_FrameBuffer</name></member>
+      <member refid="classAIAC_1_1Viewport_1a2e3846a5a3bd9021960d21d4209c8790" prot="protected" virt="non-virtual"><scope>AIAC::Viewport</scope><name>m_H</name></member>
+      <member refid="classAIAC_1_1Viewport_1a0b7e6943952396ee5ce810c5edda3f60" prot="protected" virt="non-virtual"><scope>AIAC::Viewport</scope><name>m_Texture</name></member>
+      <member refid="classAIAC_1_1Viewport_1a2690a782a60de0d7d44d30b5162530cf" prot="protected" virt="non-virtual"><scope>AIAC::Viewport</scope><name>m_W</name></member>
+      <member refid="classAIAC_1_1Viewport_1ad0830e9fa9221999a065985ff999935c" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>SetSize</name></member>
+      <member refid="classAIAC_1_1Viewport_1af8848e064aef8fdd3137cdeef7517bf9" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>Viewport</name></member>
+      <member refid="classAIAC_1_1Viewport_1aee7c5a07b60d73c7b6eef2c8d754c541" prot="public" virt="non-virtual"><scope>AIAC::Viewport</scope><name>~Viewport</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

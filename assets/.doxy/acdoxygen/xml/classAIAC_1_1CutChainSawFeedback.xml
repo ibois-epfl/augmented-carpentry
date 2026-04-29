@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1CutChainSawFeedback" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::CutChainSawFeedback</compoundname>
+    <basecompoundref refid="classAIAC_1_1FabFeedback" prot="public" virt="non-virtual">AIAC::FabFeedback</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1aa3e3a639f972d21af0b621efeb727d9d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CutChainSawFeedback::IsRefFacesSelectedManually</definition>
+        <argsstring></argsstring>
+        <name>IsRefFacesSelectedManually</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::IsRefFacesSelectedManually</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="163" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1abc5ec4e6a9310ad231310c79b8920a71" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutChainSawFeedback::m_NormStart</definition>
+        <argsstring></argsstring>
+        <name>m_NormStart</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_NormStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="169" column="23" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1adac19bf4b7df926261b9e49bea85e1bb" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutChainSawFeedback::m_NormEnd</definition>
+        <argsstring></argsstring>
+        <name>m_NormEnd</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_NormEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="170" column="23" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1aafc39d6daf63664f82fdfd2a57617862" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutChainSawFeedback::m_NormalVec</definition>
+        <argsstring></argsstring>
+        <name>m_NormalVec</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_NormalVec</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="171" column="23" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1aeb984e29750fc9cd34dce2f2d25a3791" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutChainSawFeedback::m_ChainBase</definition>
+        <argsstring></argsstring>
+        <name>m_ChainBase</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_ChainBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="172" column="23" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a5fbf512255126895101e2a28e2c96105" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutChainSawFeedback::m_ChainMid</definition>
+        <argsstring></argsstring>
+        <name>m_ChainMid</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_ChainMid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="173" column="23" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a1017cdf3df18783f6b92eca5437585ae" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::CutChainSawFeedback::m_ChainEnd</definition>
+        <argsstring></argsstring>
+        <name>m_ChainEnd</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_ChainEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="174" column="23" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a1905c3349b85ba54d9df4dc96cce9291" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AIAC::CutChainSawFeedback::m_ToShowCutPlane</definition>
+        <argsstring></argsstring>
+        <name>m_ToShowCutPlane</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_ToShowCutPlane</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="176" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a63261e04411cc657d55b1ef45a948f98" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1TimberInfo_1_1Cut" kindref="compound">TimberInfo::Cut</ref> *</type>
+        <definition>TimberInfo::Cut* AIAC::CutChainSawFeedback::m_Cut</definition>
+        <argsstring></argsstring>
+        <name>m_Cut</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_Cut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="179" column="29" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1ade9a8b7e640ee769c0e797220fa87a5d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::CutChainSawFeedback::m_NearestParallelFaceID</definition>
+        <argsstring></argsstring>
+        <name>m_NearestParallelFaceID</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_NearestParallelFaceID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="180" column="25" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1af44acfc3f0cbf8a70fcabbf29f49bc84" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::CutChainSawFeedback::m_NearestPerpendicularFaceID</definition>
+        <argsstring></argsstring>
+        <name>m_NearestPerpendicularFaceID</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_NearestPerpendicularFaceID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="181" column="25" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a853a93c64c85d863e4a4de7f715f26b5" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1CutChainSawFeedVisualizer" kindref="compound">CutChainSawFeedVisualizer</ref></type>
+        <definition>CutChainSawFeedVisualizer AIAC::CutChainSawFeedback::m_Visualizer</definition>
+        <argsstring></argsstring>
+        <name>m_Visualizer</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_Visualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="183" column="39" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a2b1a8636af2405baa0533caf370880c5" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1ChainSawCutPlaneVisualizer" kindref="compound">ChainSawCutPlaneVisualizer</ref></type>
+        <definition>ChainSawCutPlaneVisualizer AIAC::CutChainSawFeedback::m_CutPlaneVisualizer</definition>
+        <argsstring></argsstring>
+        <name>m_CutPlaneVisualizer</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_CutPlaneVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="184" column="40" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1CutChainSawFeedback_1a047ce2a7126f11325958c5e5f7d19177" prot="private" static="no" mutable="no">
+        <type><ref refid="classAIAC_1_1CutOrientationVisualizer" kindref="compound">CutOrientationVisualizer</ref></type>
+        <definition>CutOrientationVisualizer AIAC::CutChainSawFeedback::m_CutOrientationVisualizer</definition>
+        <argsstring></argsstring>
+        <name>m_CutOrientationVisualizer</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::m_CutOrientationVisualizer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="185" column="38" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1a78245b649b33a1f5802c87bb275c481c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::CutChainSawFeedback::CutChainSawFeedback</definition>
+        <argsstring>()=default</argsstring>
+        <name>CutChainSawFeedback</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::CutChainSawFeedback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="142" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1ac7e196f872d9815138bb145f4f8a736f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::Update</qualifiedname>
+        <reimplements refid="classAIAC_1_1FabFeedback_1a1bae5586f137d46ad1fea20933e2ee1a">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="144" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="245" bodyend="564"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1a90f1650c84a33664258c1142ab1d3fa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::Activate</definition>
+        <argsstring>() override</argsstring>
+        <name>Activate</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::Activate</qualifiedname>
+        <reimplements refid="classAIAC_1_1FabFeedback_1a48ace70eb7e927228bac3e6e4ef2e41b">Activate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="145" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="566" bodyend="573"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1a294b0ff112ae5bc2067ad8ba0e7b81d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::Deactivate</definition>
+        <argsstring>() override</argsstring>
+        <name>Deactivate</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::Deactivate</qualifiedname>
+        <reimplements refid="classAIAC_1_1FabFeedback_1a973eec8478cc8de2fa8da95c37d372e7">Deactivate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="146" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="575" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1acb076b0b0d71566dbb5afe83be3963c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::EnableCutPlane</definition>
+        <argsstring>(bool enable)</argsstring>
+        <name>EnableCutPlane</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::EnableCutPlane</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="149" column="25" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="149" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1a1231f1e734d83c5f26093a64aed72dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::ManuallyScrollRefFace</definition>
+        <argsstring>(int scrollDirection)</argsstring>
+        <name>ManuallyScrollRefFace</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::ManuallyScrollRefFace</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scrollDirection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Manually select the reference face (the nearest parallel face) <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scrollDirection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>when &gt; 0, goes to next; &lt;= 0, goes back. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="159" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="225" bodyend="243"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1a9f1363b4db8fb36eaf39dd2719703bad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::UpdateCutPlane</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateCutPlane</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::UpdateCutPlane</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="166" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1CutChainSawFeedback_1a0f273f670d6efd985bdcf914b1011866" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::CutChainSawFeedback::UpdateRefFaces</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateRefFaces</name>
+        <qualifiedname>AIAC::CutChainSawFeedback::UpdateRefFaces</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="167" column="18" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.cpp" bodystart="158" bodyend="223"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AIAC::CutChainSawFeedback</label>
+        <link refid="classAIAC_1_1CutChainSawFeedback"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FabFeedback</label>
+        <link refid="classAIAC_1_1FabFeedback"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AIAC::CutChainSawFeedback</label>
+        <link refid="classAIAC_1_1CutChainSawFeedback"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>AIAC::FabFeedback</label>
+        <link refid="classAIAC_1_1FabFeedback"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/AIAC/Feedback/CutChainSawFeedback.h" line="139" column="5" bodyfile="src/AIAC/Feedback/CutChainSawFeedback.h" bodystart="140" bodyend="186"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a90f1650c84a33664258c1142ab1d3fa8" prot="public" virt="virtual"><scope>AIAC::CutChainSawFeedback</scope><name>Activate</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a78245b649b33a1f5802c87bb275c481c" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>CutChainSawFeedback</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a294b0ff112ae5bc2067ad8ba0e7b81d2" prot="public" virt="virtual"><scope>AIAC::CutChainSawFeedback</scope><name>Deactivate</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1acb076b0b0d71566dbb5afe83be3963c4" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>EnableCutPlane</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1aae983dfcdc6deaf96dd0fd8ab740c2b5" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>FabFeedback</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1aa3e3a639f972d21af0b621efeb727d9d" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>IsRefFacesSelectedManually</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1aeb984e29750fc9cd34dce2f2d25a3791" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_ChainBase</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a1017cdf3df18783f6b92eca5437585ae" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_ChainEnd</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a5fbf512255126895101e2a28e2c96105" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_ChainMid</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a63261e04411cc657d55b1ef45a948f98" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_Cut</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a047ce2a7126f11325958c5e5f7d19177" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_CutOrientationVisualizer</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a2b1a8636af2405baa0533caf370880c5" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_CutPlaneVisualizer</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1ade9a8b7e640ee769c0e797220fa87a5d" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_NearestParallelFaceID</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1af44acfc3f0cbf8a70fcabbf29f49bc84" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_NearestPerpendicularFaceID</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1aafc39d6daf63664f82fdfd2a57617862" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_NormalVec</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1adac19bf4b7df926261b9e49bea85e1bb" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_NormEnd</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1abc5ec4e6a9310ad231310c79b8920a71" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_NormStart</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a9bc2828d9ca75f526bedf6515847a529" prot="protected" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_ScaleFactor</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a1905c3349b85ba54d9df4dc96cce9291" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_ToShowCutPlane</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a853a93c64c85d863e4a4de7f715f26b5" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>m_Visualizer</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a1231f1e734d83c5f26093a64aed72dba" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>ManuallyScrollRefFace</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1ac7e196f872d9815138bb145f4f8a736f" prot="public" virt="virtual"><scope>AIAC::CutChainSawFeedback</scope><name>Update</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a9f1363b4db8fb36eaf39dd2719703bad" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>UpdateCutPlane</name></member>
+      <member refid="classAIAC_1_1CutChainSawFeedback_1a0f273f670d6efd985bdcf914b1011866" prot="private" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>UpdateRefFaces</name></member>
+      <member refid="classAIAC_1_1FabFeedback_1a22fa06e384ea2b29074ed688793d9ae0" prot="public" virt="non-virtual"><scope>AIAC::CutChainSawFeedback</scope><name>~FabFeedback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAIAC_1_1ToolHeadData" kind="class" language="C++" prot="public">
+    <compoundname>AIAC::ToolHeadData</compoundname>
+    <includes refid="ACInfoToolhead_8h" local="no">ACInfoToolhead.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1aeae53791819588b5d2519be3f02ce2ab" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::ToolHeadData::m_ScaleF</definition>
+        <argsstring></argsstring>
+        <name>m_ScaleF</name>
+        <qualifiedname>AIAC::ToolHeadData::m_ScaleF</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Scaling factor from meters to AC scale. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="244" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1a10d1c843995682bd7fb6bab6dbf54e61" prot="private" static="no" mutable="no">
+        <type>ACToolHeadType</type>
+        <definition>ACToolHeadType AIAC::ToolHeadData::m_Type</definition>
+        <argsstring></argsstring>
+        <name>m_Type</name>
+        <qualifiedname>AIAC::ToolHeadData::m_Type</qualifiedname>
+        <briefdescription>
+<para>Type of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="247" column="28" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1acde3156b068f0fb015d2306f0eccd7a5" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::ToolHeadData::m_Name</definition>
+        <argsstring></argsstring>
+        <name>m_Name</name>
+        <qualifiedname>AIAC::ToolHeadData::m_Name</qualifiedname>
+        <briefdescription>
+<para>Type of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="249" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1a25d9dcd0e21ca1fb8b7a882e16f7b06b" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1DrillBitData" kindref="compound">DrillBitData</ref></type>
+        <definition>DrillBitData AIAC::ToolHeadData::m_DrillBitD</definition>
+        <argsstring></argsstring>
+        <name>m_DrillBitD</name>
+        <qualifiedname>AIAC::ToolHeadData::m_DrillBitD</qualifiedname>
+        <briefdescription>
+<para>struct contains info from .acit data for drillbit </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="252" column="26" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1a48215b52cde5f8e260c4e33fa0ed5651" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1CircularSawData" kindref="compound">CircularSawData</ref></type>
+        <definition>CircularSawData AIAC::ToolHeadData::m_CircularSawD</definition>
+        <argsstring></argsstring>
+        <name>m_CircularSawD</name>
+        <qualifiedname>AIAC::ToolHeadData::m_CircularSawD</qualifiedname>
+        <briefdescription>
+<para>struct contains info from .acit data for circularsaw </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="254" column="29" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1a8388bb371caf965379480dcc3072f320" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1ChainSawData" kindref="compound">ChainSawData</ref></type>
+        <definition>ChainSawData AIAC::ToolHeadData::m_ChainSawD</definition>
+        <argsstring></argsstring>
+        <name>m_ChainSawD</name>
+        <qualifiedname>AIAC::ToolHeadData::m_ChainSawD</qualifiedname>
+        <briefdescription>
+<para>struct contains info from .acit data for chainsaw </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="256" column="26" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classAIAC_1_1ToolHeadData_1a53dbb0cce64e2bcf2031bb21c053e90c" prot="private" static="no" mutable="no">
+        <type><ref refid="structAIAC_1_1SaberSawData" kindref="compound">SaberSawData</ref></type>
+        <definition>SaberSawData AIAC::ToolHeadData::m_SaberSawD</definition>
+        <argsstring></argsstring>
+        <name>m_SaberSawD</name>
+        <qualifiedname>AIAC::ToolHeadData::m_SaberSawD</qualifiedname>
+        <briefdescription>
+<para>struct contains info from .acit data for sabersaw </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="258" column="26" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="258" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classAIAC_1_1ToolHeadData_1a1b1c2cf0cdb48fefcc9a209acdab41e5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ACInfoToolhead</definition>
+        <argsstring></argsstring>
+        <name>ACInfoToolhead</name>
+        <qualifiedname>AIAC::ToolHeadData::ACInfoToolhead</qualifiedname>
+        <param>
+          <type><ref refid="classAIAC_1_1ACInfoToolhead" kindref="compound">ACInfoToolhead</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="260" column="26" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="260" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a795cbfbc8aac0347e6783c8ec0b2e49a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ToolHeadData::ToolHeadData</definition>
+        <argsstring>()</argsstring>
+        <name>ToolHeadData</name>
+        <qualifiedname>AIAC::ToolHeadData::ToolHeadData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="183" column="13" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="183" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a244f6f4792c3978c1e7ed93696fe9d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::ToolHeadData::~ToolHeadData</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ToolHeadData</name>
+        <qualifiedname>AIAC::ToolHeadData::~ToolHeadData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="186" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a0bf24484113f464c117f6dd454869eb1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>__always_inline std::string</type>
+        <definition>__always_inline std::string AIAC::ToolHeadData::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>AIAC::ToolHeadData::ToString</qualifiedname>
+        <briefdescription>
+<para>convert to a string </para>
+        </briefdescription>
+        <detaileddescription>
+<para>&lt; utils </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="240" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="240" bodyend="240"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a99fac124b5dcee889bd6d34dc5c3d56f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AIAC::ToolHeadData::LoadACIT</definition>
+        <argsstring>(std::string path)</argsstring>
+        <name>LoadACIT</name>
+        <qualifiedname>AIAC::ToolHeadData::LoadACIT</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Load the .acit file and parse the data into the correct struct member values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the .acit file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="192" column="18" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="42" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a9ebe42dd0594bd800a17119bf701b720" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::ToolHeadData::ParseString2GlmVector</definition>
+        <argsstring>(std::string str)</argsstring>
+        <name>ParseString2GlmVector</name>
+        <qualifiedname>AIAC::ToolHeadData::ParseString2GlmVector</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Parse a string into a glm::vec3. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string to parse </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>glm::vec3: the parsed vector </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="198" column="23" bodyfile="src/AIAC/ACInfoToolhead.cpp" bodystart="104" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a2d1ec7b6a114934a6d9f2a31f7d64fe4" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>__always_inline ACToolHeadType</type>
+        <definition>__always_inline ACToolHeadType AIAC::ToolHeadData::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <qualifiedname>AIAC::ToolHeadData::GetType</qualifiedname>
+        <briefdescription>
+<para>Retrieve the type of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="202" column="28" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="202" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a45427f7185f8a0ceda9ab8fab624d5b9" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::ToolHeadData::GetTypeString</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTypeString</name>
+        <qualifiedname>AIAC::ToolHeadData::GetTypeString</qualifiedname>
+        <briefdescription>
+<para>Retrieve the type of the toolhead as a string. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="204" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="204" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a26ac8d5ec19d527c45773f32f1b83240" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AIAC::ToolHeadData::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>AIAC::ToolHeadData::GetName</qualifiedname>
+        <briefdescription>
+<para>Retrieve the name of the toolhead. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="218" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="218" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1a6270d8b6fca4afe8fe154a54ad06f9ff" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T AIAC::ToolHeadData::GetData</definition>
+        <argsstring>() const</argsstring>
+        <name>GetData</name>
+        <qualifiedname>AIAC::ToolHeadData::GetData</qualifiedname>
+        <briefdescription>
+<para>Retrieve the data of the toolhead+. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the type of the data to retrieve (<ref refid="structAIAC_1_1DrillBitData" kindref="compound">DrillBitData</ref>, <ref refid="structAIAC_1_1CircularSawData" kindref="compound">CircularSawData</ref>, <ref refid="structAIAC_1_1ChainSawData" kindref="compound">ChainSawData</ref>, <ref refid="structAIAC_1_1SaberSawData" kindref="compound">SaberSawData</ref>) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the data of the toolhead struct </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="223" column="15" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="223" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classAIAC_1_1ToolHeadData_1aa6796f3255d0363a9b3bf4ea9e718ced" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float AIAC::ToolHeadData::GetScaleF</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScaleF</name>
+        <qualifiedname>AIAC::ToolHeadData::GetScaleF</qualifiedname>
+        <briefdescription>
+<para>Retrieve scaling factor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="236" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="236" bodyend="236"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class holding and parse and create data from the .acit file of the toolhead. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoToolhead.h" line="180" column="5" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="181" bodyend="261"/>
+    <listofallmembers>
+      <member refid="classAIAC_1_1ToolHeadData_1a1b1c2cf0cdb48fefcc9a209acdab41e5" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>ACInfoToolhead</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a6270d8b6fca4afe8fe154a54ad06f9ff" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>GetData</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a26ac8d5ec19d527c45773f32f1b83240" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>GetName</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1aa6796f3255d0363a9b3bf4ea9e718ced" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>GetScaleF</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a2d1ec7b6a114934a6d9f2a31f7d64fe4" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>GetType</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a45427f7185f8a0ceda9ab8fab624d5b9" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>GetTypeString</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a99fac124b5dcee889bd6d34dc5c3d56f" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>LoadACIT</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a8388bb371caf965379480dcc3072f320" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_ChainSawD</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a48215b52cde5f8e260c4e33fa0ed5651" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_CircularSawD</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a25d9dcd0e21ca1fb8b7a882e16f7b06b" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_DrillBitD</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1acde3156b068f0fb015d2306f0eccd7a5" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_Name</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a53dbb0cce64e2bcf2031bb21c053e90c" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_SaberSawD</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1aeae53791819588b5d2519be3f02ce2ab" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_ScaleF</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a10d1c843995682bd7fb6bab6dbf54e61" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>m_Type</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a9ebe42dd0594bd800a17119bf701b720" prot="private" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>ParseString2GlmVector</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a795cbfbc8aac0347e6783c8ec0b2e49a" prot="public" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>ToolHeadData</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a0bf24484113f464c117f6dd454869eb1" prot="public" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>ToString</name></member>
+      <member refid="classAIAC_1_1ToolHeadData_1a244f6f4792c3978c1e7ed93696fe9d18" prot="public" virt="non-virtual"><scope>AIAC::ToolHeadData</scope><name>~ToolHeadData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

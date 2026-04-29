@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1SaberSawData" kind="struct" language="C++" prot="public">
+    <compoundname>AIAC::SaberSawData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1a7461c170bc18a32ac9ff84f3b8248c10" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string AIAC::SaberSawData::NameACIT</definition>
+        <argsstring></argsstring>
+        <name>NameACIT</name>
+        <qualifiedname>AIAC::SaberSawData::NameACIT</qualifiedname>
+        <briefdescription>
+<para>name of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="154" column="21" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1aa96d5f69da6743baf9f57e5fbbaba7b5" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::SaberSawData::ToolbaseACIT</definition>
+        <argsstring></argsstring>
+        <name>ToolbaseACIT</name>
+        <qualifiedname>AIAC::SaberSawData::ToolbaseACIT</qualifiedname>
+        <briefdescription>
+<para>position of the base of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="157" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1a5f4b2ab6e6906391d0829ddd7b59e757" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::SaberSawData::TooltipACIT</definition>
+        <argsstring></argsstring>
+        <name>TooltipACIT</name>
+        <qualifiedname>AIAC::SaberSawData::TooltipACIT</qualifiedname>
+        <briefdescription>
+<para>position of the tip of the toolhead </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="159" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1ae049e72fc358b7c39152abc0c608e2d9" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::SaberSawData::NormStartACIT</definition>
+        <argsstring></argsstring>
+        <name>NormStartACIT</name>
+        <qualifiedname>AIAC::SaberSawData::NormStartACIT</qualifiedname>
+        <briefdescription>
+<para>start of the normal of the blade plane </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="161" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1ad66dd60650206d4aef2e6eb2618c91b9" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 AIAC::SaberSawData::NormEndACIT</definition>
+        <argsstring></argsstring>
+        <name>NormEndACIT</name>
+        <qualifiedname>AIAC::SaberSawData::NormEndACIT</qualifiedname>
+        <briefdescription>
+<para>end of the normal of the blade plane </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="163" column="19" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1ad82975ab640040d4cc5b0c13f88661b6" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::SaberSawData::ToolbaseGO</definition>
+        <argsstring></argsstring>
+        <name>ToolbaseGO</name>
+        <qualifiedname>AIAC::SaberSawData::ToolbaseGO</qualifiedname>
+        <briefdescription>
+<para>GOPoints equivalent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="165" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1ac945671a9565f3fa1eee89f5f63c5442" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::SaberSawData::TooltipGO</definition>
+        <argsstring></argsstring>
+        <name>TooltipGO</name>
+        <qualifiedname>AIAC::SaberSawData::TooltipGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="166" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1a40b9899ed218f6640a3f8ca9c9d15829" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::SaberSawData::NormStartGO</definition>
+        <argsstring></argsstring>
+        <name>NormStartGO</name>
+        <qualifiedname>AIAC::SaberSawData::NormStartGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="167" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1SaberSawData_1a8e5a3669fb90d179b6139146f38aee46" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classAIAC_1_1GOPoint" kindref="compound">GOPoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;GOPoint&gt; AIAC::SaberSawData::NormEndGO</definition>
+        <argsstring></argsstring>
+        <name>NormEndGO</name>
+        <qualifiedname>AIAC::SaberSawData::NormEndGO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="168" column="25" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structAIAC_1_1SaberSawData_1a399d260d71d1f7bb9d62c7e5a09813ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AIAC::SaberSawData::SaberSawData</definition>
+        <argsstring>()</argsstring>
+        <name>SaberSawData</name>
+        <qualifiedname>AIAC::SaberSawData::SaberSawData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/ACInfoToolhead.h" line="170" column="9" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="170" bodyend="176"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/ACInfoToolhead.h" line="151" column="5" bodyfile="src/AIAC/ACInfoToolhead.h" bodystart="152" bodyend="177"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1SaberSawData_1a7461c170bc18a32ac9ff84f3b8248c10" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>NameACIT</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1ad66dd60650206d4aef2e6eb2618c91b9" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>NormEndACIT</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1a8e5a3669fb90d179b6139146f38aee46" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>NormEndGO</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1ae049e72fc358b7c39152abc0c608e2d9" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>NormStartACIT</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1a40b9899ed218f6640a3f8ca9c9d15829" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>NormStartGO</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1a399d260d71d1f7bb9d62c7e5a09813ca" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>SaberSawData</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1aa96d5f69da6743baf9f57e5fbbaba7b5" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>ToolbaseACIT</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1ad82975ab640040d4cc5b0c13f88661b6" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>ToolbaseGO</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1a5f4b2ab6e6906391d0829ddd7b59e757" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>TooltipACIT</name></member>
+      <member refid="structAIAC_1_1SaberSawData_1ac945671a9565f3fa1eee89f5f63c5442" prot="public" virt="non-virtual"><scope>AIAC::SaberSawData</scope><name>TooltipGO</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

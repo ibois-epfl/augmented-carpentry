@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAIAC_1_1LayerUI_1_1ReconstructParams" kind="struct" language="C++" prot="private">
+    <compoundname>AIAC::LayerUI::ReconstructParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1a1acaa5cf9048d8a60797c493918f8f25" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::ReconstructParams::TagMapPath[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>TagMapPath</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::TagMapPath</qualifiedname>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="172" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="172" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1abf730c8b9893975f3b93daf67d4fffb5" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char AIAC::LayerUI::ReconstructParams::ExportPath[PATH_BUF_SIZE]</definition>
+        <argsstring>[PATH_BUF_SIZE]</argsstring>
+        <name>ExportPath</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::ExportPath</qualifiedname>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="173" column="18" bodyfile="src/AIAC/LayerUI.h" bodystart="173" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1a6e90ad80a6140c6166ea939b648fb31d" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AIAC::LayerUI::ReconstructParams::RadiusSearch</definition>
+        <argsstring></argsstring>
+        <name>RadiusSearch</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::RadiusSearch</qualifiedname>
+        <initializer>= 2.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="174" column="19" bodyfile="src/AIAC/LayerUI.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1a39b169ed213cd9e8d245f4e3015b2621" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerUI::ReconstructParams::CreaseAngleThreshold</definition>
+        <argsstring></argsstring>
+        <name>CreaseAngleThreshold</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::CreaseAngleThreshold</qualifiedname>
+        <initializer>= 5.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="175" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1a6656f7ed365668f2fda3e535be7614fc" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AIAC::LayerUI::ReconstructParams::MinClusterSize</definition>
+        <argsstring></argsstring>
+        <name>MinClusterSize</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::MinClusterSize</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="176" column="17" bodyfile="src/AIAC/LayerUI.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1a37efdbeeeaeacee83132f85b6a539010" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerUI::ReconstructParams::AABBScaleFactor</definition>
+        <argsstring></argsstring>
+        <name>AABBScaleFactor</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::AABBScaleFactor</qualifiedname>
+        <initializer>= 1.1f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="177" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1abe94c22edec50a5f57b21ad557e9a60c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerUI::ReconstructParams::MaxPolyDist</definition>
+        <argsstring></argsstring>
+        <name>MaxPolyDist</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::MaxPolyDist</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="178" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1acc980511ec31f779201351d8bcebbf95" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerUI::ReconstructParams::MaxPlnDist</definition>
+        <argsstring></argsstring>
+        <name>MaxPlnDist</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::MaxPlnDist</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="179" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1ab47776dbfc871c043ed2264a952ff1fb" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerUI::ReconstructParams::MaxPlnAngle</definition>
+        <argsstring></argsstring>
+        <name>MaxPlnAngle</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::MaxPlnAngle</qualifiedname>
+        <initializer>= 5.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="180" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAIAC_1_1LayerUI_1_1ReconstructParams_1a825231c502433545869b0a9a841ac30a" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double AIAC::LayerUI::ReconstructParams::Eps</definition>
+        <argsstring></argsstring>
+        <name>Eps</name>
+        <qualifiedname>AIAC::LayerUI::ReconstructParams::Eps</qualifiedname>
+        <initializer>= 1e-5f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/AIAC/LayerUI.h" line="181" column="20" bodyfile="src/AIAC/LayerUI.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/AIAC/LayerUI.h" line="171" column="9" bodyfile="src/AIAC/LayerUI.h" bodystart="171" bodyend="182"/>
+    <listofallmembers>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1a37efdbeeeaeacee83132f85b6a539010" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>AABBScaleFactor</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1a39b169ed213cd9e8d245f4e3015b2621" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>CreaseAngleThreshold</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1a825231c502433545869b0a9a841ac30a" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>Eps</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1abf730c8b9893975f3b93daf67d4fffb5" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>ExportPath</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1ab47776dbfc871c043ed2264a952ff1fb" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>MaxPlnAngle</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1acc980511ec31f779201351d8bcebbf95" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>MaxPlnDist</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1abe94c22edec50a5f57b21ad557e9a60c" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>MaxPolyDist</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1a6656f7ed365668f2fda3e535be7614fc" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>MinClusterSize</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1a6e90ad80a6140c6166ea939b648fb31d" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>RadiusSearch</name></member>
+      <member refid="structAIAC_1_1LayerUI_1_1ReconstructParams_1a1acaa5cf9048d8a60797c493918f8f25" prot="public" virt="non-virtual"><scope>AIAC::LayerUI::ReconstructParams</scope><name>TagMapPath</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
