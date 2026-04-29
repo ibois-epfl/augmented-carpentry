@@ -45,7 +45,7 @@ For the AC prototype we integrated a monocular camera specifically developed for
 No matter the monocular camera you choose, you will need to calibrate it. A calibration is a process to determine the intrinsic and extrinsic parameters of the camera and it undistort the image feed.
 This is a fundamental step to ensure the accuracy of the system. The better the calibration, the better the precision you will get from the AR system.
 
-Before you start print this [chessboard](../assets/images/Checkerboard-A3-20mm-19x13.pdf) and follow the instructions below.
+Before you start print this [chessboard](https://github.com/ibois-epfl/rgb-camera-calibration/blob/main/Checkerboard-A3-20mm-19x13.pdf) and follow the instructions below.
 
 === ":fontawesome-solid-briefcase:&nbsp;&nbsp; Wearable"
 
