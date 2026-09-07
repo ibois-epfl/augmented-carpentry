@@ -1,4 +1,4 @@
-This folder contains the necessary code and data for the evaluation of the Augmented Carpentry project. The employed dataset can be found in the `test_data` folder. The evaluation is performed by running the `main.py` script, which will generate the necessary plots and metrics to evaluate the performance of the AC system. The dataset is also avaialble in the open sourced [Zenodo repository](https://zenodo.org/record/10.5281/zenodo.14610164).
+This folder contains the necessary code and data for the evaluation of the Augmented Carpentry project. The employed dataset can be found in the `test_data` folder. The evaluation is performed by running the `main.py` script, which will generate the necessary plots and metrics to evaluate the performance of the AC system. The dataset is also available in the open sourced [Zenodo repository](https://zenodo.org/record/10.5281/zenodo.14610164).
 
 To run the analysis, you need to create a specific conda environment with the necessary dependencies. You can do this by running the following command:
 

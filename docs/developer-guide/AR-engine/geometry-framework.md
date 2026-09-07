@@ -97,10 +97,10 @@ std::shared_ptr<GOLine> line = GOLine::Add(p1, p2);
 ```
 
 ## GO Registry
-The system maintains a global registry, [`GORegistry`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/src/AIAC/GOSys/GORegistry.h), to keep track of all GOs. When the `Add()` function of the `GO` is called, it acquires a unique UUID(`m_Id`) and registers itself in the global hash table. Since this table is accessible throughout the entire system, it maximize the accessbility of GOs.
+The system maintains a global registry, [`GORegistry`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/src/AIAC/GOSys/GORegistry.h), to keep track of all GOs. When the `Add()` function of the `GO` is called, it acquires a unique UUID(`m_Id`) and registers itself in the global hash table. Since this table is accessible throughout the entire system, it maximize the accessibility of GOs.
 
 ### Interact with GO Registry
-To access the global registry, one can use the macro `AIAC_GOREG` to get the instance. It provides two APIs to retrive GO(s): either getting one by its UUID or all objects registered in the system.
+To access the global registry, one can use the macro `AIAC_GOREG` to get the instance. It provides two APIs to retrieve GO(s): either getting one by its UUID or all objects registered in the system.
 
 To retrieve a `GO` by its id:
 ```c++

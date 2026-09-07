@@ -17,7 +17,7 @@ For questions send an email [either here](mailto:andrea.settimi@epfl.ch) or [her
 
 ## Contributors
 
-Augmented Carpentry was also possible thanks to the numerous contributions across multiple disciplines of many talented programmers, software engineers, imaging specialist, roboticists, construction assistants and techniciens:
+Augmented Carpentry was also possible thanks to the numerous contributions across multiple disciplines of many talented programmers, software engineers, imaging specialist, roboticists, construction assistants and technicians:
 
 | Role              | Name                                                                 | Contact | Affiliation |
 |-------------------|----------------------------------------------------------------------|---------|-------------|

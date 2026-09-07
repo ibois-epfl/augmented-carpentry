@@ -108,7 +108,7 @@ Adjust now the position (**a**) until the indicator becomes green.
 </div>
 </figure>
 <div class="description" markdown>
-With miter saws the adjustement of the depth can be done on the go. Lower the blade and stop to the right height (**d** `00|00` first value is 0).
+With miter saws the adjustment of the depth can be done on the go. Lower the blade and stop to the right height (**d** `00|00` first value is 0).
 </div>
 </div>
 

@@ -68,7 +68,7 @@ namespace AIAC {
 
 ## `FeedbackVisualizer` widgets
 <!-- TODO: correct this paragraph -->
-Each tool's visual guidance might consists of multiple visual cues, most of which are built on the template [`FeedbackVisualizer.h`](https://github.com/ibois-epfl/augmented-carpentry/tree/main/src/AIAC/Feedback/FeedbackVisualizer.h). All the feedback values are computed but also visualized as GOs, and stored inside (`m_AllPrimitives`). This is convinient as we can easily toggle the visibility of the feedback by calling the `Activate()`/`Deactivate()` functions.
+Each tool's visual guidance might consists of multiple visual cues, most of which are built on the template [`FeedbackVisualizer.h`](https://github.com/ibois-epfl/augmented-carpentry/tree/main/src/AIAC/Feedback/FeedbackVisualizer.h). All the feedback values are computed but also visualized as GOs, and stored inside (`m_AllPrimitives`). This is convenient as we can easily toggle the visibility of the feedback by calling the `Activate()`/`Deactivate()` functions.
 
 ``` cpp title="src/AIAC/Feedback/FeedbackVisualizer.h" linenums="1"  hl_lines="15-19 21-25 30"
 #ifndef AC_FEEDBACKVISUALIZER_H

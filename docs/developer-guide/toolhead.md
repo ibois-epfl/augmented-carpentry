@@ -7,7 +7,7 @@ tags:
 
 # Toolheads
 
-[3D models of each toolhead](../hardware/woodworking-tools.md#available-toolheads) is needed to feed to our 6DoF pose detector. But in the AR instructions we are not using the mesh model of the toolhead itself but rather only points of interest (POIs) on this model. These POIs are used as a convinient data to generate fabrication instructions easly, and they define base points, tips, axis, thickness, etc. Depending on the toolhead type, the file contains different point coordinates important to simplify the digital representation of the toolhead.
+[3D models of each toolhead](../hardware/woodworking-tools.md#available-toolheads) is needed to feed to our 6DoF pose detector. But in the AR instructions we are not using the mesh model of the toolhead itself but rather only points of interest (POIs) on this model. These POIs are used as a convenient data to generate fabrication instructions easly, and they define base points, tips, axis, thickness, etc. Depending on the toolhead type, the file contains different point coordinates important to simplify the digital representation of the toolhead.
 
 In the current version of AC, these POIs are manually defined in the codebase via the addition of a xml-base file `.acit` (Augmented Carpentry Instruction Toolhead).
 
@@ -26,7 +26,7 @@ Each type of toolhead has its own specific POIs. For now the following toolheads
 - `circular saw blade`: the blade is represented by the center 
 - `chainsaw bar`: we track the bottom perimeter of the bar and add the thickness of the sawchain
 
-Let's have a look at the `drillbit` toolhead as an exampel that has `tooltip`, `eattip`, `chucktip`, and `radius` POIs. The `.acit` file is used to store these POIs in a structured way.
+Let's have a look at the `drillbit` toolhead as an example that has `tooltip`, `eattip`, `chucktip`, and `radius` POIs. The `.acit` file is used to store these POIs in a structured way.
 Example of a drillbit toolhead `.acit` file:
 ```xml
 <acit version="0.1.0">

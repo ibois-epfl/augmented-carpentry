@@ -68,7 +68,7 @@ First refresh the package list and install the necessary dependencies:
 ```bash
 apt-get -qq update && apt-get -qq -y install g++ cmake git git-lfs
 ```
-And here's the dependecies for the project:
+And here's the dependencies for the project:
 ```bash
 apt-get -qq update && apt-get -qq -y install \
 wget \
