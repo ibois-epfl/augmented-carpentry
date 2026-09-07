@@ -1,6 +1,6 @@
 # Interface
 
-AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface). This means that it can work with a touch screen (via HDMI) or a laptop. The interface is designed to be simple and intuitive. The main goal is to provide a quick and familiar way to interact with the system where every touch operations is in reality a click operation. This way we can develop our AR software without bodering for dedicated development on more complex [HMDs](https://en.wikipedia.org/wiki/Head-mounted_display) or advanced AR interfaces that would offer more ergonomic value to the cost of an increase complexity during the deployement and a steeper learning curve for the users.
+AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface). This means that it can work with a touch screen (via HDMI) or a laptop. The interface is designed to be simple and intuitive. The main goal is to provide a quick and familiar way to interact with the system where every touch operations is in reality a click operation. This way we can develop our AR software without bodering for dedicated development on more complex [HMDs](https://en.wikipedia.org/wiki/Head-mounted_display) or advanced AR interfaces that would offer more ergonomic value to the cost of an increase complexity during the deployment and a steeper learning curve for the users.
 
 
 
@@ -42,7 +42,7 @@ AC is designed as a console app with a [GUI](https://en.wikipedia.org/wiki/Graph
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/back_screen.dxf`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/back_screen.dxf)
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/screen_board_1.dxf`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/screen_board_1.dxf)
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/screen_board_2.dxf`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/screen_board_2.dxf)
-            * [x] &nbsp;&nbsp; Magnet attachement to the tool
+            * [x] &nbsp;&nbsp; Magnet attachment to the tool
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/magnet_screenside.pdf`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/magnet_screenside.pdf)
                 - x1 [:octicons-file-code-16: `assets/hardware_parts/touchscreen/nucpoite2.stl`](https://github.com/ibois-epfl/augmented-carpentry/blob/main/assets/hardware_parts/touchscreen/nucpoite2.stl)
             * [x] x10 M3x10 threaded inserts

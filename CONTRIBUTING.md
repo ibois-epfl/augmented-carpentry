@@ -2,7 +2,7 @@
 # Guide for contributors
 Here's you can find some documentations and guidelines to contribute to augmented_carpentry.
 
-## GitHub commit convetion
+## GitHub commit convention
 All commits need to be labeled with a tag among these:
 ```
 git commit -m "ADD:<description>"         <--- for adding new elements
@@ -52,7 +52,7 @@ Build the package from the py source code's directory:
 python setup.py sdist bdist_wheel
 ```
 
-Lastly, install the pip pacakge from the repository in editable mode. This way, all the modifications made to the source code of the repository will be reflected in the installed package. Open a terminal and run the following command (replace the path with where you download the repository):
+Lastly, install the pip package from the repository in editable mode. This way, all the modifications made to the source code of the repository will be reflected in the installed package. Open a terminal and run the following command (replace the path with where you download the repository):
 ```terminal
 C:\Users\<your-username>\.rhinocode\py39-rh8\python.exe -m pip install -e "<path-to-repository-root>\src\gh\ACPy"
 ```
@@ -78,7 +78,7 @@ We reccomand to use `VSCode` as IDE for developing the components. This is becau
 4. If you modify the code in `VSCode`, the changes will be reflected in the Grasshopper component as soon as you save in `VSCode` again the `code.py`.
 5. Once your code is working, prepare the code and componentize it.
 
-If you want to use the GHEditor it's ok but everytime you modify the pakcage or the component's code, after any modifications you need to restart the Python interpreter from the ScriptEditor (`Tools > Reload Python3 (CPython) Engine`) and recompute the solution in Grasshopper.
+If you want to use the GHEditor it's ok but every time you modify the package or the component's code, after any modifications you need to restart the Python interpreter from the ScriptEditor (`Tools > Reload Python3 (CPython) Engine`) and recompute the solution in Grasshopper.
 
 ### B.3) Componentize the code
 Prepare your component as explained here. You can componentize it locally and test it in Grasshopper. Here's how to componentize:
@@ -349,9 +349,9 @@ Colors macros can be found/add in the header `ClrPalette.h` with the following d
 ```
 
 #### Panes
-For every new layer you can create a new collapsable pannel in the main UI. To do so follow the next steps.
+For every new layer you can create a new collapsible panel in the main UI. To do so follow the next steps.
 
-Create a new function (declare it in `LayerUI.h > Class LayerUI` and implement it in `LayerUI.cpp`) and start calling `ImGui` methods from there, put everythin you need for the UI there. This is the only place where you will write UI for your pane, like so:
+Create a new function (declare it in `LayerUI.h > Class LayerUI` and implement it in `LayerUI.cpp`) and start calling `ImGui` methods from there, put everything you need for the UI there. This is the only place where you will write UI for your pane, like so:
 ```c++
 void LayerUI::SetPaneUICamera()
     {
@@ -393,7 +393,7 @@ if (ImGui::Button("Open 3dModel"))
 We implement a *bus*-like event system based on the [observer pattern](https://sourcemaking.com/design_patterns/observer/cpp/3) and the [tppevent repo](https://github.com/ibois-epfl/eventpp). It is not *multi-threaded* but it can be modified as such. All the event files are contained in the dir `AIAC/EventSys`.
 
 #### How to raise events
-The event *bus* is stored in the Application. You can raise events from other files in two ways, either *synchronusly*, the event will be fired immediately with:
+The event *bus* is stored in the Application. You can raise events from other files in two ways, either *synchronously*, the event will be fired immediately with:
 ```c++
 AIAC_EBUS->DispatchEvent(std::make_shared<SmtHappenedEvent>(param))
 ```
@@ -428,7 +428,7 @@ enum EventCategory
         /* add event category here */
     };
 ```
-Next, create a new event file with a class that inherits from `class Event`, as an example `ExampleEvent.h`. Remeber to add to the parent constructor *(a)* EventType, *(b)* EventCategory and *(c)* (accessory, by default 0) the prority at which the event needs to be executed, the bigger the number the sooner in the queue it will be fired:
+Next, create a new event file with a class that inherits from `class Event`, as an example `ExampleEvent.h`. Remeber to add to the parent constructor *(a)* EventType, *(b)* EventCategory and *(c)* (accessory, by default 0) the priority at which the event needs to be executed, the bigger the number the sooner in the queue it will be fired:
 ```c++
 namespace AIAC
 {
@@ -503,13 +503,13 @@ float x = pt1copy->X();                                 // access GO properties
 auto pts = GOPoint::GetAll();                           // access all GO of one type
 GOPoint::Remove(pt1copy.GetId());                                 // remove the point from registry
 ```
-Note the the Constructor for each GO is private, the only way to instance it is to use the `Add()` static function. The reason why we decided to adopt this "registry" pattern is because all GO object need to be created as a smart pointer to be copied into a GOregistry. We must be sure that every GOObject is subscribed to the GORegistry. A normal c++ constructor cannot create the smart pointer of the create object, hence the Add() function does this for us.  All the next layers will retrive those smart pointers from the GOregistry and eventually modify them. And finally the render will go through the GOregistry and "bake" (render) all the GO geometries.
+Note the the Constructor for each GO is private, the only way to instance it is to use the `Add()` static function. The reason why we decided to adopt this "registry" pattern is because all GO object need to be created as a smart pointer to be copied into a GOregistry. We must be sure that every GOObject is subscribed to the GORegistry. A normal c++ constructor cannot create the smart pointer of the create object, hence the Add() function does this for us.  All the next layers will retrieve those smart pointers from the GOregistry and eventually modify them. And finally the render will go through the GOregistry and "bake" (render) all the GO geometries.
 
 The **G**eometric **O**bject System allows to add objects to the 3D scene before to render them. Having a geometric entity prior to the OpenGL Render allows to calculates relations between geometries to obtain live feedbacks (e.g. drilling depth). Files can be found in `/GOSys`.
 
 The GOSystem is composed of two components:
 - `GOPrimitives.h/cpp` (a library which stores `GOPoint`, `GOLine`, `GOText`, etc)
-- `GORegistry.h/cpp` (an API which interacts with the map. Note that it has to recive only smart pointers to avoid [object slicing](https://stackoverflow.com/questions/274626/what-is-object-slicing) since we pass heirs of `GOPrimitive`.)
+- `GORegistry.h/cpp` (an API which interacts with the map. Note that it has to receive only smart pointers to avoid [object slicing](https://stackoverflow.com/questions/274626/what-is-object-slicing) since we pass heirs of `GOPrimitive`.)
 
 
 ### Renderer API
@@ -518,7 +518,7 @@ The renderer API is separated into two parts:
 2. `RenderAPI.h`: To render the already exist GO Primitives. When a GO is initialized or update, it creates an OpenGL object and stores in the memory. The functions in this file takes the GO object as the parameter and renders the corresponding OpenGL objects.
 
 #### GlUtils.h
-`GlUtils.h` contains the function to draw the 3 basic material of OpenGL, i.e. point, line, and triangle (mesh). By calling the function, it creates an OpenGL object, render it, and delete instantly. **Since calling these functions continuesly add/delete OpenGL objects, which is not efficient, they should only be used when GO system doesn't fit the scenrio.** (e.g. drawing SLAM tags while mapping, since it changes every frame)
+`GlUtils.h` contains the function to draw the 3 basic material of OpenGL, i.e. point, line, and triangle (mesh). By calling the function, it creates an OpenGL object, render it, and delete instantly. **Since calling these functions continuously add/delete OpenGL objects, which is not efficient, they should only be used when GO system doesn't fit the scenrio.** (e.g. drawing SLAM tags while mapping, since it changes every frame)
 
 ##### Point
 ```c++
@@ -683,7 +683,7 @@ void DrawCylinder(const glm::vec3 &baseCenter, const glm::vec3 &topCenter, GLflo
 * `sectorNum` Number of sectors of the cylinder. Can call `GetSectorNum(radius)` to get the default value. -->
 
 ### CTesting
-When necessary, c++ testing is done by using CTest. Important/critical features (e.g., correcting functioning of graphics with OpenGL and Glfw) needs testing to be written (this is usefull for e.g., GitHub Actions). Such tests can be extracted from the main source code and integrated in a seperate section: cmake testing.
+When necessary, c++ testing is done by using CTest. Important/critical features (e.g., correcting functioning of graphics with OpenGL and Glfw) needs testing to be written (this is useful for e.g., GitHub Actions). Such tests can be extracted from the main source code and integrated in a separate section: cmake testing.
 
 To add a new test do as follow.
 

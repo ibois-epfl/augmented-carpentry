@@ -2,7 +2,7 @@
 
 AC functions on a unique simple [moncoular camera](https://en.wikipedia.org/wiki/Monocular).
 
-We decided to take up the challange to build the entire sensing system to boost the accessibility and the portability of the sensing system. Through the raster feed from the camera, AC is capable of providing all the computed information necessary for the fabrication. Plus, it is compact, lightweight and easy to install on any tool.
+We decided to take up the challenge to build the entire sensing system to boost the accessibility and the portability of the sensing system. Through the raster feed from the camera, AC is capable of providing all the computed information necessary for the fabrication. Plus, it is compact, lightweight and easy to install on any tool.
 Finally, we believe that this can ensure a better future-proofing of any AR system.
 
 /// html | div[style='float: left; width: 60%;']

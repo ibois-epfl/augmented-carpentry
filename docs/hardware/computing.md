@@ -42,7 +42,7 @@ AC's prototype is built for x64 machines running on Ubuntu 22.04 LTS. The system
     We decided such machine for our wearable AR system for the following reasons:
 
     `x64 target machine`
-    :   More importantly, it has the same architecture as a laptop or a desktop, which streamlines the development process (e.g. no `.apk` files to generate and deploy on the device). Additionally, being on UNIX x64 machines, we could leverage all the top notch libraries and dependecies available from robotics and computer vision communities.
+    :   More importantly, it has the same architecture as a laptop or a desktop, which streamlines the development process (e.g. no `.apk` files to generate and deploy on the device). Additionally, being on UNIX x64 machines, we could leverage all the top notch libraries and dependencies available from robotics and computer vision communities.
 
     `Small factor`
     :   It is a small form factor computer that can be easily transported.

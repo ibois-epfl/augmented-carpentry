@@ -40,7 +40,7 @@ Follow these steps to work on PR for AC:
     git checkout -b my-feature
     ```
 
-3. Add the AC repository as a remote for convinience:
+3. Add the AC repository as a remote for convenience:
 
     ```console
     git remote add upstream https://github.com/ibois-epfl/augmented-carpentry

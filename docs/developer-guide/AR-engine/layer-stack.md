@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
     acApp_ptr->PushLayer<AIAC::LayerCameraCalib>();  // calibration
     acApp_ptr->PushLayer<AIAC::LayerSlam>();         // self-localization
     acApp_ptr->PushLayer<AIAC::LayerModel>();        // execution model
-    acApp_ptr->PushLayer<AIAC::LayerToolhead>();     // tools attachement
+    acApp_ptr->PushLayer<AIAC::LayerToolhead>();     // tools attachment
     acApp_ptr->PushLayer<AIAC::LayerFeedback>();     // instructions
     acApp_ptr->PushLayer<AIAC::LayerUI>();           // UI
     acApp_ptr->PushLayer<AIAC::LayerUtils>();        // extra

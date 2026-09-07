@@ -93,7 +93,7 @@ Since the model is referenced to the timber element, moving the piece will not a
 </div>
 
 
-<!-- Overview of the pannel UI + cuts/drill widget on piece -->
+<!-- Overview of the panel UI + cuts/drill widget on piece -->
 <div class="sevinch-display-tutorial" markdown>
 <figure markdown>
 ![Image title](../assets/images/woodworking/acim_lock_overview.png)
